@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+def build(bld):
+	obj = bld.program(features = 'cxx',
+                          source = 'bo_functions.cpp',
+                          includes = '. .. ../../',
+                          target = 'bo_functions',
+                          uselib =  'BOOST EIGEN TBB',
+                          use = 'limbo')
+
+	obj = bld.program(features = 'cxx test',
+													source = 'test_gp.cpp',
+													includes = '. .. ../../',
+													target = 'test_gp',
+													uselib =  'BOOST EIGEN TBB',
+													use = 'limbo')
+	obj = bld.program(features = 'cxx test',
+												source = 'test_gp_auto.cpp',
+												includes = '. .. ../../',
+												target = 'test_gp_auto',
+												uselib =  'BOOST EIGEN TBB',
+												use = 'limbo')
+
+	obj = bld.program(features = 'cxx test',
+										source = 'test_init_functions.cpp',
+										includes = '. .. ../../',
+										target = 'test_init_functions',
+										uselib =  'BOOST EIGEN TBB',
+										use = 'limbo')
