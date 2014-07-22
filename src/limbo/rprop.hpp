@@ -35,12 +35,12 @@ namespace rprop {
       grad_old = grad_old.cwiseProduct(grad);
       for (int j = 0; j < grad_old.size(); ++j) {
         if (grad_old(j) > 0) {
-          delta(j) = std::min(Delta(j) * etaplus, deltamax);
+          delta(j) = std::min(delta(j) * etaplus, deltamax);
         } else if (grad_old(j) < 0) {
-          delta(j) = std::max(Delta(j) * etaminus, deltamin);
+          delta(j) = std::max(delta(j) * etaminus, deltamin);
           grad(j) = 0;
         }
-        params(j) += -boost::math::sign(grad(j)) * Delta(j);
+        params(j) += -boost::math::sign(grad(j)) * delta(j);
       }
       grad_old = grad;
       if (grad_old.norm() < eps_stop) break;
