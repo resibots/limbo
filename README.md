@@ -5,8 +5,8 @@ A lightweight framework for Bayesian and model-based optimisation of black-box f
 
 Authors
 ------
-- Antoine Cully (Pierre & Marie University): http://www.isir.upmc.fr/?op=view_profil&lang=fr&id=278
-- Jean-Baptiste Mouret (Pierre & Marie University): http://pages.isir.upmc.fr/~mouret/website/
+- Antoine Cully (Pierre & Marie Curie University): http://www.isir.upmc.fr/?op=view_profil&lang=fr&id=278
+- Jean-Baptiste Mouret (Pierre & Marie Curie University): http://pages.isir.upmc.fr/~mouret/website/
 
 Main features
 -------------
