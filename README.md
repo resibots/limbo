@@ -14,3 +14,23 @@ Main features
 - Parego (Multi-objective optimization)
 - Generic framework (template-based), which allows easy customization for testing original ideas
 - Can exploit multicore computers
+
+Main references
+---------------
+
+- *General introduction:* Brochu, E., Cora, V. M., & De Freitas, N. (2010). A tutorial on Bayesian optimization of expensive cost functions, with application to active user modeling and hierarchical reinforcement learning. /arXiv preprint arXiv:1012.2599/.
+
+- *Gaussian Processes (GP)*: Rasmussen, C. A, Williams C. K. I. (2006). /Gaussian Processes for Machine Learning./ MIT Press. 
+
+- *Optimizing hyperparameters:* Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian Process Hyperparameters using Rprop. In European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning.
+
+- Parego (Multi-objective optimization): Knowles, J. (2006). ParEGO: A hybrid algorithm with on-line landscape approximation for expensive multiobjective optimization problems. /Evolutionary Computation, IEEE Transactions on/, 10(1), 50-66.
+
+Other libraries
+---------------
+Limbo is a framework for our research that is voluntarily kept small. It is designed to be very fast and flexible, but it does not aim at covering every possible use case for Bayesian optimization.
+
+If you need a more full-featured library, check:
+- BayesOpt: http://rmcantin.bitbucket.org/html/
+- libGP (no optimization): https://github.com/genix/libGP
+
