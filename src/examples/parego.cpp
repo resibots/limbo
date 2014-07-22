@@ -13,7 +13,7 @@ struct Params {
     // knowles : 11 * dim - 1
   };
   struct maxiterations {
-    BO_PARAM(int, n_iterations, 50);
+    BO_PARAM(int, n_iterations, 20);
   };
   struct ucb : public defaults::ucb {};
   struct gp_ucb : public defaults::gp_ucb {};
@@ -68,10 +68,11 @@ int main() {
   // typedef model::GP<Params, kernel_t, mean_t> gp_t;
   // typedef acquisition_functions::UCB<Params, gp_t> ucb_t;
   //Parego<Params, model_fun<gp_t>, acq_fun<ucb_t> > opt;
+  {
   Parego<Params> opt;
   opt.optimize(mop2());
 
-  auto p_model = opt.model_pareto_front(0, 1.0, 0.0025);
+  auto p_model = opt.model_pareto_front(0, 1.0, 0.001);
   auto p_data = opt.data_pareto_front();
 
   std::ofstream pareto_model("mop2_pareto_model.dat"),
@@ -83,6 +84,7 @@ int main() {
                  << std::endl;
   for (auto x : p_data)
     pareto_data << std::get<1>(x).transpose() << std::endl;
+  }
 
   return 0;
 }

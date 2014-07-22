@@ -101,7 +101,6 @@ namespace limbo {
         double a = this->_obs_mean.dot(this->_alpha);
 
         return -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
-
       }
 
       // see Rasmussen and Williams, 2006 (p. 114)

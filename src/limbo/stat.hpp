@@ -42,11 +42,6 @@ namespace limbo {
                              << std::endl;
 
       }
-
-
-     protected:
-
-
     };
 
 
