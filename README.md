@@ -18,15 +18,15 @@ Main features
 Main references
 ---------------
 
-- *General introduction:* Brochu, E., Cora, V. M., & De Freitas, N. (2010). A tutorial on Bayesian optimization of expensive cost functions, with application to active user modeling and hierarchical reinforcement learning. /arXiv preprint arXiv:1012.2599/.
+- **General introduction:** Brochu, E., Cora, V. M., & De Freitas, N. (2010). A tutorial on Bayesian optimization of expensive cost functions, with application to active user modeling and hierarchical reinforcement learning. *arXiv preprint arXiv:1012.2599*.
 
-- *Gaussian Processes (GP)*: Rasmussen, C. A, Williams C. K. I. (2006). /Gaussian Processes for Machine Learning./ MIT Press. 
+- **Gaussian Processes (GP)**: Rasmussen, C. A, Williams C. K. I. (2006). /Gaussian Processes for Machine Learning./ MIT Press. 
 
-- *Optimizing hyperparameters:* Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian Process Hyperparameters using Rprop. In European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning.
+- **Optimizing hyperparameters:** Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian Process Hyperparameters using Rprop. In *European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning*.
 
-- Parego (Multi-objective optimization): Knowles, J. (2006). ParEGO: A hybrid algorithm with on-line landscape approximation for expensive multiobjective optimization problems. /Evolutionary Computation, IEEE Transactions on/, 10(1), 50-66.
+- **Parego (Multi-objective optimization):** Knowles, J. (2006). ParEGO: A hybrid algorithm with on-line landscape approximation for expensive multiobjective optimization problems. *Evolutionary Computation, IEEE Transactions on*, 10(1), 50-66.
 
-- CMA-ES (inner optimization): Auger, A., & Hansen, N. (2005, September). A restart CMA evolution strategy with increasing population size. In /Evolutionary Computation, 2005. The 2005 IEEE Congress on/ (Vol. 2, pp. 1769-1776). IEEE.
+- **CMA-ES (inner optimization):** Auger, A., & Hansen, N. (2005, September). A restart CMA evolution strategy with increasing population size. In *Evolutionary Computation, 2005. The 2005 IEEE Congress on* (Vol. 2, pp. 1769-1776). IEEE.
 
 Other libraries
 ---------------
