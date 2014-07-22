@@ -20,7 +20,7 @@ struct Params {
   struct cmaes : public defaults::cmaes {};
   struct gp_auto : public defaults::gp_auto {};
   struct meanconstant : public defaults::meanconstant {};
-  struct parego : public defaults::parego{};
+  struct parego : public defaults::parego {};
 };
 
 
@@ -63,7 +63,6 @@ struct mop2 {
 
 int main() {
   par::init();
-
   // if you want to use a standard GP & basic UCB:
   // typedef kernel_functions::MaternFiveHalfs<Params> kernel_t;
   // typedef model::GP<Params, kernel_t, mean_t> gp_t;
@@ -75,7 +74,8 @@ int main() {
   auto p_model = opt.model_pareto_front(0, 1.0, 0.0025);
   auto p_data = opt.data_pareto_front();
 
-  std::ofstream pareto_model("pareto_model.dat"), pareto_data("pareto_data.dat");
+  std::ofstream pareto_model("mop2_pareto_model.dat"),
+      pareto_data("mop2_pareto_data.dat");
   for (auto x : p_model)
     pareto_model << std::get<1>(x).transpose() << " "
                  << (std::get<1>(x).array() + std::get<2>(x)).transpose() << " "
@@ -83,5 +83,6 @@ int main() {
                  << std::endl;
   for (auto x : p_data)
     pareto_data << std::get<1>(x).transpose() << std::endl;
+
   return 0;
 }

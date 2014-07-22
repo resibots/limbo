@@ -7,11 +7,11 @@ def build(bld):
                           source = 'mono_dim.cpp',
                           includes = '. .. ../../',
                           target = 'mono_dim',
-                          uselib =  'BOOST EIGEN',
+                          uselib =  'BOOST EIGEN TBB',
                           use = 'limbo')
 	obj = bld.program(features = 'cxx',
-												source = 'parego.cpp',
-												includes = '. .. ../../',
-												target = 'parego',
-												uselib =  'BOOST EIGEN TBB',
-												use = 'limbo')
+                          source = 'parego.cpp',
+                          includes = '. .. ../../',
+                          target = 'parego',
+                          uselib =  'BOOST EIGEN TBB',
+                          use = 'limbo')
