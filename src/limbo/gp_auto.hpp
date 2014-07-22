@@ -91,8 +91,7 @@ namespace limbo {
         if (update_kernel)
           this->_compute_kernel();
         size_t n = this->_obs_mean.size();
-        //  typedef Eigen::Matrix<long double, Eigen::Dynamic, Eigen::Dynamic> MatrixD_t;
-        typedef Eigen::MatrixXd MatrixD_t;
+
         // --- cholesky ---
         // see: http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
         Eigen::MatrixXd l = this->_llt.matrixL();
