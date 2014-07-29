@@ -37,8 +37,8 @@
 
 
 
-#ifndef RAND_HPP_
-#define RAND_HPP_
+#ifndef LIMBO_RAND_HPP_
+#define LIMBO_RAND_HPP_
 
 #include <cstdlib>
 #include <cmath>

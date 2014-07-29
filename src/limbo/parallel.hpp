@@ -1,6 +1,7 @@
-#ifndef PARALLEL_HPP_
-#define PARALLEL_HPP_
+#ifndef LIMBO_PARALLEL_HPP_
+#define LIMBO_PARALLEL_HPP_
 
+#include <vector>
 
 #ifdef USE_TBB
 #include <tbb/concurrent_vector.h>

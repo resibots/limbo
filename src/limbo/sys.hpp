@@ -35,8 +35,8 @@
 
 
 
-#ifndef SYS_HPP_
-#define SYS_HPP_
+#ifndef LIMBO_SYS_HPP_
+#define LIMBO_SYS_HPP_
 
 #include <ctime>
 #include <unistd.h>

@@ -15,6 +15,7 @@ def options(opt):
         opt.load('compiler_c')
         opt.load('eigen')
         opt.load('tbb')
+        opt.load('sferes')
 
 def configure(conf):
     	print("configuring b-optimize")
@@ -22,6 +23,7 @@ def configure(conf):
         conf.load('compiler_c')
         conf.load('eigen')
         conf.load('tbb')
+        conf.load('sferes')
 
 	common_flags = "-Wall -std=c++11 -fcolor-diagnostics"
 
@@ -30,8 +32,12 @@ def configure(conf):
 			 min_version='1.35')
         conf.check_eigen()
         conf.check_tbb()
+        conf.check_sferes()
         if conf.is_defined('USE_TBB'):
                 common_flags += " -DUSE_TBB "
+
+        if conf.is_defined('USE_SFERES'):
+                common_flags += " -DUSE_SFERES "
 
 	# release
         opt_flags = common_flags + ' -O3 -msse2 -ggdb3'

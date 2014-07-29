@@ -8,12 +8,12 @@ struct Params {
     BO_PARAM(int, dump_period, -1);
   };
   struct init {
-    BO_PARAM(int, nb_samples, 10);
+    BO_PARAM(int, nb_samples, 21);
     // calandra: number of dimensions * 5
     // knowles : 11 * dim - 1
   };
   struct maxiterations {
-    BO_PARAM(int, n_iterations, 20);
+    BO_PARAM(int, n_iterations, 30);
   };
   struct ucb : public defaults::ucb {};
   struct gp_ucb : public defaults::gp_ucb {};
@@ -58,7 +58,28 @@ struct mop2 {
   }
 };
 
-// note UCB ne marche pas si fonction positive _ou_ negative?
+struct Pareto {
+  template<typename BO>
+  void operator()(const BO& opt) {
+    if (opt.iteration() % 10 != 0)
+      return;
+    auto p_model = opt.model_pareto_front(0, 1.0, 0.005);
+    auto p_data = opt.data_pareto_front();
+    std::string it = std::to_string(opt.iteration());
+    std::string model = it + "_pareto_model.dat";
+    std::string data = it + "_pareto_data.dat";
+    std::ofstream pareto_model(model.c_str()),
+        pareto_data(data.c_str());
+    for (auto x : p_model)
+      pareto_model << std::get<1>(x).transpose() << " "
+                   << (std::get<1>(x).array() + std::get<2>(x)).transpose() << " "
+                   << (std::get<1>(x).array() - std::get<2>(x)).transpose() << " "
+                   << std::endl;
+    for (auto x : p_data)
+      pareto_data << std::get<1>(x).transpose() << std::endl;
+  }
+};
+
 
 
 int main() {
@@ -68,8 +89,7 @@ int main() {
   // typedef model::GP<Params, kernel_t, mean_t> gp_t;
   // typedef acquisition_functions::UCB<Params, gp_t> ucb_t;
   //Parego<Params, model_fun<gp_t>, acq_fun<ucb_t> > opt;
-  {
-  Parego<Params> opt;
+  Parego<Params, stat_fun<Pareto> > opt;
   opt.optimize(mop2());
 
   auto p_model = opt.model_pareto_front(0, 1.0, 0.001);
@@ -84,7 +104,6 @@ int main() {
                  << std::endl;
   for (auto x : p_data)
     pareto_data << std::get<1>(x).transpose() << std::endl;
-  }
 
   return 0;
 }

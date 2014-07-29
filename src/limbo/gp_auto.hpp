@@ -18,11 +18,13 @@ namespace limbo {
   namespace defaults {
     struct gp_auto {
       BO_PARAM(int, n_rprop, 100);
-      BO_PARAM(int, rprop_restart, 20);
+      BO_PARAM(int, rprop_restart, 100);
     };
   }
   namespace model {
     namespace impl {
+      // launch nprop_restart instances of rprop in parallel
+      // to optimize  the log-likelihood
 #ifdef USE_TBB
       template<typename GP>
       struct RpropOpt {
@@ -48,8 +50,12 @@ namespace limbo {
         void join(const RpropOpt& y) {
           _keep_best(y._best_score, y._best_v);
         }
-        const Eigen::VectorXd& best_v() const { return _best_v; }
-        double best_score() const { return _best_score; }
+        const Eigen::VectorXd& best_v() const {
+          return _best_v;
+        }
+        double best_score() const {
+          return _best_score;
+        }
        protected:
         void _keep_best(float y, const Eigen::VectorXd& v) {
           if (y > _best_score) {
@@ -115,7 +121,6 @@ namespace limbo {
         // Eigen::MatrixXd alpha = this->_inverted_kernel * this->_obs_mean;
         //  Eigen::MatrixXd w = alpha * alpha.transpose() - this->_inverted_kernel;
 
-
         // alpha = K^{-1} * this->_obs_mean;
         Eigen::VectorXd alpha = this->_llt.solve(this->_obs_mean);
         this->_llt.matrixL().adjoint().solveInPlace(alpha);
@@ -145,12 +150,12 @@ namespace limbo {
       }
      protected:
 #ifdef USE_TBB
-       void _optimize_likelihood_tbb() {
-         par::init();
-          impl::RpropOpt<GPAuto> r(*this, Params::gp_auto::n_rprop());
-          tbb::parallel_reduce(tbb::blocked_range<size_t>(0, Params::gp_auto::rprop_restart()), r);
-          this->_kernel_function.set_h_params(r.best_v());
-       }
+      void _optimize_likelihood_tbb() {
+        par::init();
+        impl::RpropOpt<GPAuto> r(*this, Params::gp_auto::n_rprop());
+        tbb::parallel_reduce(tbb::blocked_range<size_t>(0, Params::gp_auto::rprop_restart()), r);
+        this->_kernel_function.set_h_params(r.best_v());
+      }
 #endif
       void _optimize_likelihood() {
         double best_score = -std::numeric_limits<float>::max();

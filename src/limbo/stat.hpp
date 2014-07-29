@@ -1,5 +1,5 @@
-#ifndef STAT_HPP_
-#define STAT_HPP_
+#ifndef LIMBO_STAT_HPP_
+#define LIMBO_STAT_HPP_
 
 #include <fstream>
 #include <string>

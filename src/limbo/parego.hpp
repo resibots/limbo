@@ -2,6 +2,7 @@
 #define PAREGO_HPP_
 
 #include <algorithm>
+#include "limbo.hpp"
 #include "bo_base.hpp"
 #include "pareto.hpp"
 
@@ -98,7 +99,11 @@ namespace limbo {
 
       return pareto::pareto_set(_pack_data(points, objs, sigma));
     }
+
    protected:
+    void _update_stats() {
+      boost::fusion::for_each(this->_stat, RefreshStat_f<Parego>(*this));
+    }
     pareto_t _pack_data(const std::vector<Eigen::VectorXd>& points,
                         const std::vector<Eigen::VectorXd>& objs,
                         const std::vector<double>& sigma) const {
