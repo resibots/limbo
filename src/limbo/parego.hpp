@@ -75,7 +75,7 @@ namespace limbo {
       for (size_t i = 0; i < this->_observations.size(); ++i)
         for (size_t j = 0; j < this->_observations[i].size(); ++j)
           uni_obs[j].push_back(this->_observations[i][j]);
-      std::vector<model_t> models(nb_objs, model_t(nb_objs));
+      std::vector<model_t> models(nb_objs, model_t(dim));
       for (size_t i = 0; i < uni_obs.size(); ++i) {
         for (size_t j = 0; j < uni_obs[i].size(); ++j)
           std::cout << uni_obs[i][j] << " ";

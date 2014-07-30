@@ -93,6 +93,7 @@ namespace limbo {
       this->_init(feval, reset);
 
       size_t nb_objs = this->_observations[0].size();
+      size_t dim = this->_samples[0].size();
 
       using namespace ns_ego;
       typedef sferes::gen::EvoFloat<EvalFunction::dim, SferesParams> gen_t;
@@ -104,7 +105,7 @@ namespace limbo {
 
       while (this->_samples.size() == 0 || this->_pursue()) {
         // compute a model for each dimension
-        std::vector<model_t> models(nb_objs, model_t(nb_objs));
+        std::vector<model_t> models(nb_objs, model_t(dim));
         std::vector<std::vector<double> > uni_obs(nb_objs);
         for (size_t i = 0; i < this->_observations.size(); ++i)
           for (size_t j = 0; j < this->_observations[i].size(); ++j)
