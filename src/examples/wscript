@@ -13,7 +13,7 @@ def build(bld):
                           source = 'parego.cpp',
                           includes = '. .. ../../',
                           target = 'parego',
-                          uselib =  'BOOST EIGEN TBB',
+                          uselib =  'BOOST EIGEN TBB SFERES',
                           use = 'limbo')
 	obj = bld.program(features = 'cxx',
                           source = 'ns_ego.cpp',

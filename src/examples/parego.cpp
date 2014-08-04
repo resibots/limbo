@@ -1,4 +1,5 @@
 #include "limbo/parego.hpp"
+#include "limbo/stat_pareto.hpp"
 
 using namespace limbo;
 
@@ -58,27 +59,6 @@ struct mop2 {
   }
 };
 
-struct Pareto {
-  template<typename BO>
-  void operator()(const BO& opt) {
-    if (opt.iteration() % 10 != 0)
-      return;
-    auto p_model = opt.model_pareto_front(0, 1.0, 0.005);
-    auto p_data = opt.data_pareto_front();
-    std::string it = std::to_string(opt.iteration());
-    std::string model = it + "_pareto_model.dat";
-    std::string data = it + "_pareto_data.dat";
-    std::ofstream pareto_model(model.c_str()),
-        pareto_data(data.c_str());
-    for (auto x : p_model)
-      pareto_model << std::get<1>(x).transpose() << " "
-                   << (std::get<1>(x).array() + std::get<2>(x)).transpose() << " "
-                   << (std::get<1>(x).array() - std::get<2>(x)).transpose() << " "
-                   << std::endl;
-    for (auto x : p_data)
-      pareto_data << std::get<1>(x).transpose() << std::endl;
-  }
-};
 
 
 
@@ -89,18 +69,19 @@ int main() {
   // typedef model::GP<Params, kernel_t, mean_t> gp_t;
   // typedef acquisition_functions::UCB<Params, gp_t> ucb_t;
   //Parego<Params, model_fun<gp_t>, acq_fun<ucb_t> > opt;
-  Parego<Params, stat_fun<Pareto> > opt;
+  Parego<Params> opt;
   opt.optimize(mop2());
 
-  auto p_model = opt.model_pareto_front(0, 1.0, 0.001);
+  std::cout << "modeling pareto front..." << std::endl;
+  auto p_model = opt.model_pareto_front();
+  std::cout << "computing data pareto front" << std::endl;
   auto p_data = opt.data_pareto_front();
 
   std::ofstream pareto_model("mop2_pareto_model.dat"),
       pareto_data("mop2_pareto_data.dat");
+  std::cout << "writing..." << std::endl;
   for (auto x : p_model)
     pareto_model << std::get<1>(x).transpose() << " "
-                 << (std::get<1>(x).array() + std::get<2>(x)).transpose() << " "
-                 << (std::get<1>(x).array() - std::get<2>(x)).transpose() << " "
                  << std::endl;
   for (auto x : p_data)
     pareto_data << std::get<1>(x).transpose() << std::endl;

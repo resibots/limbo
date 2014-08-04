@@ -40,7 +40,7 @@ def configure(conf):
                 common_flags += " -DUSE_SFERES "
 
 	# release
-        opt_flags = common_flags + ' -O3 -msse2 -ggdb3'
+        opt_flags = common_flags + ' -O3 -msse2 -ggdb3 -g'
         conf.env['CXXFLAGS'] = cxxflags + opt_flags.split(' ')
         print conf.env['CXXFLAGS']
 
