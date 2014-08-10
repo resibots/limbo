@@ -117,7 +117,6 @@ namespace limbo {
           Stat,
           boost::fusion::vector<Stat> >::type stat_t;
 
-    // The real code!
     BoBase() {
       _make_res_dir();
     }

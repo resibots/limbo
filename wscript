@@ -48,5 +48,6 @@ def build(bld):
 	bld.recurse('src/limbo')
         bld.recurse('src/examples')
         bld.recurse('src/tests')
+        bld.recurse('src/benchmarks')
         from waflib.Tools import waf_unit_test
         bld.add_post_fun(waf_unit_test.summary)

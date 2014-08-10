@@ -37,6 +37,7 @@ namespace limbo {
         this->add_new_sample(best_v, feval(best_v));
         this->_iteration++;
         std::cout << this->_iteration << " | " << best_v.transpose() << std::endl;
+        _update_stats();
       }
 
     }
