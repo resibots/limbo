@@ -1,0 +1,13 @@
+#! /usr/bin/env python
+import limbo
+
+def build(bld):
+    limbo.create_variants(bld,
+                           source = 'multi.cpp',
+                           uselib_local = 'limbo',
+                           uselib = 'SFERES TBB BOOST EIGEN',
+                           variants = ['PAREGO ZDT2',
+                                       'PAREGO MOP2',
+                                       'NS_EGO ZDT2',
+                                       'NS_EGO MOP2'
+                                       ],)
