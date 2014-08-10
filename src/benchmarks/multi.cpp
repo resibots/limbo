@@ -1,7 +1,6 @@
 #include "limbo/limbo.hpp"
 #include "limbo/ns_ego.hpp"
 #include "limbo/parego.hpp"
-#include "limbo/stat_pareto.hpp"
 
 using namespace limbo;
 

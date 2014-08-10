@@ -1,7 +1,15 @@
 #ifndef BO_MULTI_HPP_
 #define BO_MULTI_HPP_
 
+#define VERSION "xxx"
+#include <sferes/phen/parameters.hpp>
+#include <sferes/gen/evo_float.hpp>
+#include <sferes/eval/parallel.hpp>
+#include <sferes/modif/dummy.hpp>
+#include <sferes/ea/nsga2.hpp>
+
 #include "bo_base.hpp"
+#include "pareto.hpp"
 
 namespace limbo {
   namespace multi {
@@ -82,29 +90,82 @@ namespace limbo {
     size_t nb_objs() const {
       return this->_observations[0].size();
     }
-   protected:
-    void _compute_pareto_model() {
-      typedef sferes::gen::EvoFloat<EvalFunction::dim, multi::SferesParams> gen_t;
-      typedef sferes::phen::Parameters<gen_t, mulit::SferesFit<model_t>, multi::SferesParams> phen_t;
+
+    const pareto_t& pareto_model() const {
+      return _pareto_model;
+    }
+
+    const pareto_t& pareto_data() const {
+      return _pareto_data;
+    }
+
+    // will be automatically called at the end of the algo
+    void update_pareto_data() {
+      std::vector<Eigen::VectorXd> v(this->_samples.size());
+      size_t dim = this->_observations[0].size();
+      std::fill(v.begin(), v.end(), Eigen::VectorXd::Zero(dim));
+      _pareto_data = pareto::pareto_set(_pack_data(this->_samples, this->_observations, v));
+
+  }
+
+    // will be automatically called at the end of the algo
+    template<int D>
+    void update_pareto_model() {
+      this->_update_models();
+      typedef sferes::gen::EvoFloat<D, multi::SferesParams> gen_t;
+      typedef sferes::phen::Parameters<gen_t, multi::SferesFit<model_t>, multi::SferesParams> phen_t;
       typedef sferes::eval::Parallel<multi::SferesParams> eval_t;
       typedef boost::fusion::vector<> stat_t;
       typedef sferes::modif::Dummy<> modifier_t;
       typedef sferes::ea::Nsga2<phen_t, eval_t, stat_t, modifier_t, multi::SferesParams> nsga2_t;
 
       nsga2_t ea;
-      ea.set_fit_proto(SferesFit<model_t>(models));
+      ea.set_fit_proto(multi::SferesFit<model_t>(_models));
       ea.run();
       auto pareto_front = ea.pareto_front();
-      
+      par::sort(pareto_front.begin(), pareto_front.end(),
+        sferes::fit::compare_objs_lex());
+      _pareto_model.resize(pareto_front.size());
+      Eigen::VectorXd point(D),
+            objs(nb_objs()), sigma(nb_objs());
+      for (size_t p = 0; p < pareto_front.size(); ++p) {
+        for (size_t i = 0; i < pareto_front[p]->size(); ++i)
+          point(i) = pareto_front[p]->data(i);
+        for (size_t i = 0; i < nb_objs(); ++i) {
+          objs(i) = pareto_front[p]->fit().obj(i);
+          sigma(i) = _models[i].sigma(point);
+        }
+        _pareto_model[p] = std::make_tuple(point, objs, sigma);
+      }
 
     }
+
+   protected:
+    std::vector<model_t> _models;
+    pareto_t _pareto_model;
+    pareto_t _pareto_data;
+
+    pareto_t _pack_data(const std::vector<Eigen::VectorXd>& points,
+                        const std::vector<Eigen::VectorXd>& objs,
+                        const std::vector<Eigen::VectorXd>& sigma) const {
+      assert(points.size() == objs.size());
+      assert(sigma.size() == objs.size());
+      pareto_t p(points.size());
+      par::loop (0, p.size(), [&](size_t k) {
+        p[k] = std::make_tuple(points[k], objs[k], sigma[k]);
+      });
+      return p;
+    }
+
+
     void _update_models() {
       size_t dim = this->_samples[0].size();
-      std::vector<std::vector<double> > uni_obs(nb_objs);
+      std::vector<std::vector<double> > uni_obs(nb_objs());
       for (size_t i = 0; i < this->_observations.size(); ++i)
         for (size_t j = 0; j < this->_observations[i].size(); ++j)
           uni_obs[j].push_back(this->_observations[i][j]);
       std::vector<model_t> models(nb_objs(), model_t(dim));
+      _models = models;
       for (size_t i = 0; i < uni_obs.size(); ++i)
         _models[i].compute(this->_samples, uni_obs[i], 0.0);
     }

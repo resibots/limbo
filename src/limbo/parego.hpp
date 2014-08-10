@@ -54,7 +54,8 @@ namespace limbo {
 
         this->_iteration++;
       }
-      this->_update_pareto_front(feval);
+      this->template update_pareto_model<EvalFunction::dim>();
+      this->update_pareto_data();
 
     }
    protected:

@@ -17,8 +17,13 @@ def options(opt):
 @conf
 def check_sferes(conf):
 	if conf.options.sferes:
-		conf.env.INCLUDES_EIGEN = [conf.options.sferes]
-		conf.env.LIBPATH_EIGEN = [conf.options.sferes + '/build/default/sferes']
+		conf.env.INCLUDES_SFERES = [conf.options.sferes]
+		conf.env.LIBPATH_SFERES = [conf.options.sferes + '/build/default/sferes']
+        try:
+                res = conf.find_file('sferes/ea/ea.hpp', conf.env.INCLUDES_SFERES)
+                conf.define("USE_SFERES", 1)
+        except:
+                print 'SFERES not found'
 	return 1
 
 

@@ -28,8 +28,10 @@ def configure(conf):
 	common_flags = "-Wall -std=c++11 -fcolor-diagnostics"
 
 	cxxflags = conf.env['CXXFLAGS']
-	conf.check_boost(lib='serialization timer filesystem system unit_test_framework program_options graph mpi python thread',
-			 min_version='1.35')
+	conf.check_boost(lib='serialization timer filesystem \
+            system unit_test_framework program_options \
+            graph mpi python thread',
+            min_version='1.35')
         conf.check_eigen()
         conf.check_tbb()
         conf.check_sferes()

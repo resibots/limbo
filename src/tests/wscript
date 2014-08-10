@@ -8,23 +8,22 @@ def build(bld):
                           target = 'bo_functions',
                           uselib =  'BOOST EIGEN TBB',
                           use = 'limbo')
-
 	obj = bld.program(features = 'cxx test',
-													source = 'test_gp.cpp',
-													includes = '. .. ../../',
-													target = 'test_gp',
-													uselib =  'BOOST EIGEN TBB',
-													use = 'limbo')
+                        source = 'test_gp.cpp',
+                          includes = '. .. ../../',
+                          target = 'test_gp',
+                          uselib =  'BOOST EIGEN TBB',
+                          use = 'limbo')
 	obj = bld.program(features = 'cxx test',
-												source = 'test_gp_auto.cpp',
-												includes = '. .. ../../',
-												target = 'test_gp_auto',
-												uselib =  'BOOST EIGEN TBB',
-												use = 'limbo')
-
+                          source = 'test_gp_auto.cpp',
+                          includes = '. .. ../../',
+                          target = 'test_gp_auto',
+                          uselib =  'BOOST EIGEN TBB',
+                          use = 'limbo')
+        
 	obj = bld.program(features = 'cxx test',
-										source = 'test_init_functions.cpp',
-										includes = '. .. ../../',
-										target = 'test_init_functions',
-										uselib =  'BOOST EIGEN TBB',
-										use = 'limbo')
+                          source = 'test_init_functions.cpp',
+                          includes = '. .. ../../',
+                          target = 'test_init_functions',
+                          uselib =  'BOOST EIGEN TBB',
+                          use = 'limbo')

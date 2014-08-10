@@ -26,9 +26,8 @@ namespace limbo {
       this->_init(feval, reset);
 
       while (this->_samples.size() == 0 || this->_pursue()) {
-        this->_update_models();
-        this->_update_pareto_front(feval);
-        auto pareto = this->model_pareto_front();
+        this->template update_pareto_model<EvalFunction::dim>();
+        auto pareto = this->pareto_model();
         auto best = std::max_element(pareto.begin(), pareto.end(),
         [](const pareto_point_t& x1, const pareto_point_t& x2) {
           return std::get<2>(x1).sum() > std::get<2>(x2).sum();

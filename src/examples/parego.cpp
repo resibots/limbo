@@ -1,5 +1,4 @@
 #include "limbo/parego.hpp"
-#include "limbo/stat_pareto.hpp"
 
 using namespace limbo;
 
@@ -72,10 +71,9 @@ int main() {
   Parego<Params> opt;
   opt.optimize(mop2());
 
-  std::cout << "modeling pareto front..." << std::endl;
-  auto p_model = opt.model_pareto_front();
-  std::cout << "computing data pareto front" << std::endl;
-  auto p_data = opt.data_pareto_front();
+  std::cout << "optimization done" << std::endl;
+  auto p_model = opt.pareto_model();
+  auto p_data = opt.pareto_data();
 
   std::ofstream pareto_model("mop2_pareto_model.dat"),
       pareto_data("mop2_pareto_data.dat");

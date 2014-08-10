@@ -3,7 +3,7 @@
 # JB Mouret - 2009
 
 """
-Quick n dirty eigen2 detection
+Quick n dirty eigen3 detection
 """
 
 import os, glob, types
@@ -21,9 +21,8 @@ def check_eigen(conf):
 		conf.env.LIBPATH_EIGEN = [conf.options.eigen]
 	else:
 		conf.env.INCLUDES_EIGEN = ['/usr/include/eigen2', 
-                                           '/usr/local/include/eigen2', 
+                                           '/usr/local/include/eigen3', 
                                            '/usr/include', '/usr/local/include']
-
 	res = conf.find_file('Eigen/Core', conf.env.INCLUDES_EIGEN)
 	return 1
 
