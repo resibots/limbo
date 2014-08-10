@@ -68,7 +68,6 @@ namespace limbo {
 
   template <
     class Params
-    , class A1 = boost::parameter::void_
     , class A2 = boost::parameter::void_
     , class A3 = boost::parameter::void_
     , class A4 = boost::parameter::void_
@@ -99,16 +98,15 @@ namespace limbo {
       return _pareto_data;
     }
 
-    // will be automatically called at the end of the algo
+    // will be called at the end of the algo
     void update_pareto_data() {
       std::vector<Eigen::VectorXd> v(this->_samples.size());
       size_t dim = this->_observations[0].size();
       std::fill(v.begin(), v.end(), Eigen::VectorXd::Zero(dim));
       _pareto_data = pareto::pareto_set(_pack_data(this->_samples, this->_observations, v));
+    }
 
-  }
-
-    // will be automatically called at the end of the algo
+    // will be called at the end of the algo
     template<int D>
     void update_pareto_model() {
       this->_update_models();

@@ -11,6 +11,8 @@ except:
 
 import glob
 
+def options(opt):
+	opt.add_option('--qsub', type='string', help='json file to submit to torque', dest='qsub')
 
 def create_variants(bld, source, uselib_local,
                     uselib, variants, includes=". ../", 

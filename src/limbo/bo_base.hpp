@@ -10,6 +10,8 @@
 #include <boost/fusion/include/accumulate.hpp>
 #include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/vector.hpp>
+
+#define BOOST_NO_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
 
 #include <Eigen/Core>
@@ -38,9 +40,9 @@ namespace limbo {
 
   template<typename BO>
   struct RefreshStat_f {
-    RefreshStat_f(const BO &bo) : _bo(bo) {
+    RefreshStat_f(BO &bo) : _bo(bo) {
     }
-    const BO& _bo;
+    BO& _bo;
     template<typename T>
     void operator() (T & x) const {
       x(_bo);
@@ -95,7 +97,6 @@ namespace limbo {
       typedef stat::Acquisitions<Params> stat_t; //5
       typedef boost::fusion::vector<stopping_criterion::MaxIterations<Params> > stop_t; //6
       typedef double obs_t; //7
-
     };
 
     // extract the types

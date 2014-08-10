@@ -56,8 +56,8 @@ namespace limbo {
       }
       this->template update_pareto_model<EvalFunction::dim>();
       this->update_pareto_data();
-
     }
+
    protected:
     void _update_stats() {
       boost::fusion::for_each(this->_stat, RefreshStat_f<Parego>(*this));

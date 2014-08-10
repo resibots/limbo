@@ -10,7 +10,11 @@ struct Params {
     BO_PARAM(int, dump_period, 1);
   };
   struct init {
+#ifdef ZDT2
     BO_PARAM(int, nb_samples, 50);
+#else
+    BO_PARAM(int, nb_samples, 10);
+#endif
     // calandra: number of dimensions * 5
     // knowles : 11 * dim - 1
   };
@@ -61,16 +65,17 @@ struct mop2 {
 };
 
 
-
 namespace limbo {
   namespace stat {
     template<typename F>
     struct ParetoBenchmark {
       template<typename BO>
-      void operator()(const BO& opt) {
+      void operator()(BO& opt) {
+	opt.update_pareto_data();
+	opt.template update_pareto_model<2>();//2 = hack..
         auto dir = opt.res_dir() + "/";
-        auto p_model = opt.model_pareto_front();
-        auto p_data = opt.data_pareto_front();
+        auto p_model = opt.pareto_model();
+        auto p_data = opt.pareto_data();
         std::string it = std::to_string(opt.iteration());
         std::string model = dir + "pareto_model_" + it + ".dat";
         std::string model_real = dir + "pareto_model_real_" + it + ".dat";
@@ -106,11 +111,12 @@ int main() {
 # error "unknown function to optimize"
 #endif
 
+  typedef stat::ParetoBenchmark<func_t> stat_t;
 
 #ifdef NS_EGO
-  NsEgo<Params, stat_fun<stat::ParetoBenchmark<func_t> > > opt;
+  NsEgo<Params, stat_fun<stat_t> > opt;
 #else
-  Parego<Params, stat_fun<stat::ParetoBenchmark<func_t> > > opt;
+  Parego<Params, stat_fun<stat_t> > opt;
 #endif
 
   opt.optimize(func_t());

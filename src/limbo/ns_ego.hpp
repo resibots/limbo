@@ -43,6 +43,7 @@ namespace limbo {
 
    protected:
     void _update_stats() {
+      std::cout<<"stats"<<std::endl;
       boost::fusion::for_each(this->_stat, RefreshStat_f<NsEgo>(*this));
     }
 
