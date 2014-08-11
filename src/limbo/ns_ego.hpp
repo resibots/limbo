@@ -30,12 +30,18 @@ namespace limbo {
         auto pareto = this->pareto_model();
         auto best = std::max_element(pareto.begin(), pareto.end(),
         [](const pareto_point_t& x1, const pareto_point_t& x2) {
-          return std::get<2>(x1).sum() > std::get<2>(x2).sum();
+          return std::get<2>(x1).sum() < std::get<2>(x2).sum();
         });
         Eigen::VectorXd best_v = std::get<0>(*best);
         this->add_new_sample(best_v, feval(best_v));
         this->_iteration++;
-        std::cout << this->_iteration << " | " << best_v.transpose() << std::endl;
+        std::cout << this->_iteration << " | " << best_v.transpose()
+                  << "-> " << this->_observations.back().transpose()
+                  << " (expected:"<<this->_models[0].mu(best_v)<<" "
+                  << this->_models[1].mu(best_v)<<")"
+                  << " sigma:"<<this->_models[0].sigma(best_v)
+                  << " " << this->_models[1].sigma(best_v)
+                  << std::endl;
         _update_stats();
       }
 
