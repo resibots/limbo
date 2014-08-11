@@ -71,8 +71,8 @@ namespace limbo {
     struct ParetoBenchmark {
       template<typename BO>
       void operator()(BO& opt) {
-	opt.update_pareto_data();
-	opt.template update_pareto_model<2>();//2 = hack..
+	       opt.update_pareto_data();
+	        opt.template update_pareto_model<F::dim>();//2 = hack..
         auto dir = opt.res_dir() + "/";
         auto p_model = opt.pareto_model();
         auto p_data = opt.pareto_data();
