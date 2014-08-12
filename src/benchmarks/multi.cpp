@@ -86,6 +86,7 @@ namespace limbo {
         F f;
         for (auto x : p_model)
           pareto_model << std::get<1>(x).transpose() << " "
+		       << std::get<2>(x).transpose()
                        << std::endl;
         for (auto x : p_model)
           pareto_model_real << f(std::get<0>(x)).transpose() << " "

@@ -28,6 +28,15 @@ namespace limbo {
       while (this->_samples.size() == 0 || this->_pursue()) {
         this->template update_pareto_model<EvalFunction::dim>();
         auto pareto = this->pareto_model();
+	// this is hack to test wether we need a bound
+	pareto.erase(std::remove_if(pareto.begin(), pareto.end(),
+	   [](const pareto_point_t& x) {
+	     for(size_t i = 0; i < std::get<1>(x).size(); ++i)
+	     if (std::get<1>(x)(i) > 1)
+	       return true;
+	    return false;
+	    }
+        ), pareto.end());
         auto best = std::max_element(pareto.begin(), pareto.end(),
         [](const pareto_point_t& x1, const pareto_point_t& x2) {
           return std::get<2>(x1).sum() < std::get<2>(x2).sum();
