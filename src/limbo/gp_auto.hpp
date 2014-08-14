@@ -17,8 +17,8 @@
 namespace limbo {
   namespace defaults {
     struct gp_auto {
-      BO_PARAM(int, n_rprop, 100);
-      BO_PARAM(int, rprop_restart, 100);
+      BO_PARAM(int, n_rprop, 50);
+      BO_PARAM(int, rprop_restart, 500);
     };
   }
   namespace model {
@@ -140,12 +140,11 @@ namespace limbo {
           for (size_t j = 0; j <= i; ++j) {
             Eigen::VectorXd g = this->_kernel_function.grad(this->_samples[i], this->_samples[j]);
             if (i == j)
-              grad += w(i, j) * g * 0.5; // why 0.5?
+              grad += w(i, j) * g * 0.5;
             else
               grad += w(i, j) * g;
           }
         }
-
         return grad;
       }
      protected:

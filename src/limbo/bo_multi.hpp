@@ -57,7 +57,7 @@ namespace limbo {
         for (size_t j = 0; j < indiv.size(); ++j)
           v[j] = indiv.data(j);
         for (size_t i = 0; i < _models.size(); ++i)
-          this->_objs[i] = _models[i].mu(v);
+          this->_objs[i] = std::min(_models[i].mu(v), 1.0);
       }
      protected:
       std::vector<M> _models;
@@ -122,7 +122,7 @@ namespace limbo {
       ea.run();
       auto pareto_front = ea.pareto_front();
       par::sort(pareto_front.begin(), pareto_front.end(),
-        sferes::fit::compare_objs_lex());
+                sferes::fit::compare_objs_lex());
       _pareto_model.resize(pareto_front.size());
       Eigen::VectorXd point(D),
             objs(nb_objs()), sigma(nb_objs());
@@ -165,7 +165,7 @@ namespace limbo {
       std::vector<model_t> models(nb_objs(), model_t(dim));
       _models = models;
       for (size_t i = 0; i < uni_obs.size(); ++i)
-        _models[i].compute(this->_samples, uni_obs[i], 0.0);
+        _models[i].compute(this->_samples, uni_obs[i], 1e-5);
     }
   };
 

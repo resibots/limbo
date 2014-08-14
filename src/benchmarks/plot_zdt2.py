@@ -17,6 +17,12 @@ sys.argv.pop(0)
 for i in sys.argv:
     data = np.loadtxt(i)
     plot(data[:, 0], data[:, 1], 'o', label=i)
+    if data.shape[1] > 2:
+        plot(data[:,0] - data[:,2]*100000,  data[:,1] - data[:,3]*100000, '-', label='p')
+#    fill_between(data[:,0] + data[:,2], data[:1] + data[:3])
+    
+
+
 
 xt = []
 yt = []

@@ -6,8 +6,16 @@ def build(bld):
                            source = 'multi.cpp',
                            uselib_local = 'limbo',
                            uselib = 'BOOST EIGEN TBB SFERES',
-                           variants = ['PAREGO ZDT2',
-                                       'PAREGO MOP2',
-                                       'NS_EGO ZDT2',
-                                       'NS_EGO MOP2'
+                           variants = ['PAREGO ZDT1 DIM30',
+                                       'PAREGO ZDT2 DIM30',
+                                       'PAREGO ZDT3 DIM30',
+                                       'PAREGO ZDT1 DIM30',
+                                       'PAREGO ZDT2 DIM6',
+                                       'PAREGO ZDT3 DIM6',
+                                       'NS_EGO ZDT1 DIM30',
+                                       'NS_EGO ZDT2 DIM30',
+                                       'NS_EGO ZDT3 DIM30'
+                                       'NS_EGO ZDT1 DIM6',
+                                       'NS_EGO ZDT2 DIM6',
+                                       'NS_EGO ZDT3 DIM6'
                                        ],)

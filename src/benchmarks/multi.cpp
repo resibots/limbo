@@ -10,17 +10,13 @@ struct Params {
     BO_PARAM(int, dump_period, 1);
   };
   struct init {
-#ifdef ZDT2
-    BO_PARAM(int, nb_samples, 50);
-#else
     BO_PARAM(int, nb_samples, 10);
-#endif
     // calandra: number of dimensions * 5
     // knowles : 11 * dim - 1
   };
   struct parego : public defaults::parego {};
   struct maxiterations {
-    BO_PARAM(int, n_iterations, 100);
+    BO_PARAM(int, n_iterations, 40);
   };
   struct ucb : public defaults::ucb {};
   struct gp_ucb : public defaults::gp_ucb {};
@@ -30,8 +26,30 @@ struct Params {
 };
 
 
+#ifdef DIM6
+#define ZDT_DIM 6
+#else
+#define ZDT_DIM 30
+#endif
+
+struct zdt1 {
+  static constexpr size_t dim = ZDT_DIM;
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
+    Eigen::VectorXd res(2);
+    double f1 = x(0);
+    double g = 1.0;
+    for (size_t i = 1; i < x.size(); ++i)
+      g += 9.0 / (x.size() - 1) * x(i);
+    double h = 1.0f - sqrtf(f1 / g);
+    double f2 = g * h;
+    res(0) = 1.0 - f1;
+    res(1) = 1.0 - f2;
+    return res;
+  }
+};
+
 struct zdt2 {
-  static constexpr size_t dim = 30;
+  static constexpr size_t dim = ZDT_DIM;
   Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::VectorXd res(2);
     double f1 = x(0);
@@ -40,11 +58,28 @@ struct zdt2 {
       g += 9.0 / (x.size() - 1) * x(i);
     double h = 1.0f - pow((f1 / g), 2.0);
     double f2 = g * h;
-    res(0) = -f1 + 1;
-    res(1) = -f2 + 1;
+    res(0) = 1.0 - f1;
+    res(1) = 1.0 - f2;
     return res;
   }
 };
+
+struct zdt3 {
+  static constexpr size_t dim = ZDT_DIM;
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
+    Eigen::VectorXd res(2);
+    double f1 = x(0);
+    double g = 1.0;
+    for (size_t i = 1; i < x.size(); ++i)
+      g += 9.0 / (x.size() - 1) * x(i);
+    double h = 1.0f - sqrtf(f1 / g) - f1 / g * sin(10 * M_PI * f1);
+    double f2 = g * h;
+    res(0) = 1.0 - f1;
+    res(1) = 1.0 - f2;
+    return res;
+  }
+};
+
 
 struct mop2 {
   static constexpr size_t dim = 2;
@@ -71,8 +106,8 @@ namespace limbo {
     struct ParetoBenchmark {
       template<typename BO>
       void operator()(BO& opt) {
-	       opt.update_pareto_data();
-	        opt.template update_pareto_model<F::dim>();//2 = hack..
+        opt.update_pareto_data();
+        opt.template update_pareto_model<F::dim>();//2 = hack..
         auto dir = opt.res_dir() + "/";
         auto p_model = opt.pareto_model();
         auto p_data = opt.pareto_data();
@@ -80,20 +115,23 @@ namespace limbo {
         std::string model = dir + "pareto_model_" + it + ".dat";
         std::string model_real = dir + "pareto_model_real_" + it + ".dat";
         std::string data = dir + "pareto_data_" + it + ".dat";
+        std::string obs_f = dir + "obs_" + it + ".dat";
         std::ofstream pareto_model(model.c_str()),
             pareto_data(data.c_str()),
-            pareto_model_real(model_real.c_str());
+            pareto_model_real(model_real.c_str()),
+            obs(obs_f.c_str());
         F f;
         for (auto x : p_model)
           pareto_model << std::get<1>(x).transpose() << " "
-		       << std::get<2>(x).transpose()
+                       << std::get<2>(x).transpose()
                        << std::endl;
         for (auto x : p_model)
           pareto_model_real << f(std::get<0>(x)).transpose() << " "
                             << std::endl;
         for (auto x : p_data)
           pareto_data << std::get<1>(x).transpose() << std::endl;
-
+        for (auto x : opt.observations())
+          obs << x.transpose() << std::endl;
       }
     };
   }
@@ -104,8 +142,12 @@ namespace limbo {
 int main() {
   par::init();
 
-#ifdef ZDT2
+#ifdef ZDT1
+  typedef zdt1 func_t;
+#elif defined ZDT2
   typedef zdt2 func_t;
+#elif defined ZDT3 
+  typedef zdt3 func_t;
 #elif defined MOP2
   typedef mop2 func_t;
 #else
