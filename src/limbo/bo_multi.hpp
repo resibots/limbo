@@ -160,7 +160,7 @@ namespace limbo {
       size_t dim = this->_samples[0].size();
       std::vector<std::vector<double> > uni_obs(nb_objs());
       for (size_t i = 0; i < this->_observations.size(); ++i)
-        for (size_t j = 0; j < this->_observations[i].size(); ++j)
+        for (int j = 0; j < this->_observations[i].size(); ++j)
           uni_obs[j].push_back(this->_observations[i][j]);
       std::vector<model_t> models(nb_objs(), model_t(dim));
       _models = models;

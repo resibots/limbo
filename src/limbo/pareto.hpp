@@ -52,7 +52,7 @@ namespace pareto {
       compare_objs_lex() {}
       template<typename T>
       bool operator()(const T& i1, const T& i2) const {
-        for (size_t i = 0; i < std::get<1>(i1).size(); ++i)
+        for (int i = 0; i < std::get<1>(i1).size(); ++i)
           if (std::get<1>(i1)(i) > std::get<1>(i2)(i))
             return true;
           else if (std::get<1>(i1)(i) < std::get<1>(i2)(i))

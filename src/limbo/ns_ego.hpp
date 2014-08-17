@@ -31,7 +31,7 @@ namespace limbo {
         // this is hack to test wether we need a bound
         pareto.erase(std::remove_if(pareto.begin(), pareto.end(),
         [](const pareto_point_t& x) {
-          for (size_t i = 0; i < std::get<1>(x).size(); ++i)
+          for (int i = 0; i < std::get<1>(x).size(); ++i)
             if (std::get<1>(x)(i) > 1)
               return true;
           return false;

@@ -41,7 +41,7 @@ def configure(conf):
                 common_flags += " -DUSE_TBB "
 
         if conf.is_defined('USE_SFERES'):
-                common_flags += " -DUSE_SFERES "
+                common_flags += " -DUSE_SFERES -DSFERES_FAST_DOMSORT"
 
 	# release
         opt_flags = common_flags + ' -O3 -msse2 -ggdb3 -g'

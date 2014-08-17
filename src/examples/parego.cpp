@@ -30,7 +30,7 @@ struct zdt2 {
     Eigen::VectorXd res(2);
     double f1 = x(0);
     double g = 1.0;
-    for (size_t i = 1; i < x.size(); ++i)
+    for (int i = 1; i < x.size(); ++i)
       g += 9.0 / (x.size() - 1) * x(i) * x(i);
     double h = 1.0f - pow((f1 / g), 2.0);
     double f2 = g * h;

@@ -29,7 +29,7 @@ namespace rprop {
     Eigen::VectorXd best_params = params;
     double best = log(0);
 
-    for (size_t i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) {
       double lik = func(params);
       Eigen::VectorXd grad = -grad_func(params);
       grad_old = grad_old.cwiseProduct(grad);

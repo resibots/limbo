@@ -32,7 +32,7 @@ namespace limbo {
         _observations.resize(observations.size());
         _noise = noise;
 
-        for (size_t i = 0; i < _observations.size(); ++i)
+        for (int i = 0; i < _observations.size(); ++i)
           _observations(i) = observations[i];
 
         _mean_vector.resize(_samples.size());
@@ -93,8 +93,8 @@ namespace limbo {
       void _compute_kernel() {
         // O(n^2) [should be negligible]
         _kernel.resize(_observations.size(), _observations.size());
-        for (size_t i = 0; i < _observations.size(); i++)
-          for (size_t j = 0; j < _observations.size(); ++j)
+        for (int i = 0; i < _observations.size(); i++)
+          for (int j = 0; j < _observations.size(); ++j)
             _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + _noise;
 
         // O(n^3)
@@ -108,19 +108,14 @@ namespace limbo {
       }
 
       double _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
-
-
         return _mean_function(v) + k.transpose() * _alpha;
-
-        return _mean_function(v)
-               + (k.transpose() * _inverted_kernel * (_obs_mean))[0];
+	//        return _mean_function(v)
+	//               + (k.transpose() * _inverted_kernel * (_obs_mean))[0];
       }
       double _sigma(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
         Eigen::VectorXd z = _llt.matrixL().solve(k);
         return  _kernel_function(v, v) - z.dot(z);
-
-
-        return  _kernel_function(v, v) - (k.transpose() * _inverted_kernel * k)[0];
+	//        return  _kernel_function(v, v) - (k.transpose() * _inverted_kernel * k)[0];
       }
       Eigen::VectorXd _compute_k(const Eigen::VectorXd& v) const {
         Eigen::VectorXd k(_samples.size());

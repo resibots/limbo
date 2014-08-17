@@ -61,7 +61,7 @@ namespace limbo {
             for (i = 0; i < cmaes_Get(&evo, "popsize"); ++i) {
               boundary_transformation(&boundaries, pop[i], x_in_bounds, dim);
 
-              for (size_t j = 0; j < v.size(); ++j)
+              for (int j = 0; j < v.size(); ++j)
                 v(j) = x_in_bounds[j];
               fitvals[i] = -acqui(v);
             }
@@ -76,7 +76,7 @@ namespace limbo {
             xbestever = cmaes_GetInto(&evo, "xbestever", xbestever); /* alloc mem if needed */
           }
           const double *xmean = cmaes_GetPtr(&evo, "xmean");
-          for (size_t j = 0; j < v.size(); ++j)
+          for (int j = 0; j < v.size(); ++j)
             v(j) = xmean[j];
 
           if ((fmean =  -acqui(v)) < fbestever) {
