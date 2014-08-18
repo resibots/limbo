@@ -8,7 +8,7 @@ srcdir = '.'
 blddir = 'build'
 
 import copy
-import os, sys
+import os, sys,glob
 import limbo
 
 def options(opt):
@@ -18,14 +18,22 @@ def options(opt):
         opt.load('tbb')
         opt.load('sferes')
 	opt.load('limbo')
-	
+        opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
+        for i in glob.glob('exp/*'):
+                opt.recurse(i)
+
 def configure(conf):
-    	print("configuring b-optimize")
     	conf.load('compiler_cxx boost waf_unit_test')
         conf.load('compiler_c')
         conf.load('eigen')
         conf.load('tbb')
         conf.load('sferes')
+
+        if conf.options.exp:
+                for i in conf.options.exp.split(','):
+                        print 'Building exp: ' + i
+                        conf.recurse('exp/' + i)
+
 
 	common_flags = "-Wall -std=c++11"
 
@@ -53,6 +61,10 @@ def build(bld):
         bld.recurse('src/examples')
         bld.recurse('src/tests')
         bld.recurse('src/benchmarks')
+        if bld.options.exp:
+                for i in bld.options.exp.split(','):
+                        print 'Building exp: ' + i
+                        bld.recurse('exp/' + i)
         from waflib.Tools import waf_unit_test
         bld.add_post_fun(waf_unit_test.summary)
 	
