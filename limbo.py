@@ -2,13 +2,6 @@ import sys, os
 import subprocess
 import commands
 
-json_ok = True
-try:
-   import simplejson
-except:
-   json_ok = False
-   print "WARNING simplejson not found some function may not work"
-
 import glob
 
 def options(opt):

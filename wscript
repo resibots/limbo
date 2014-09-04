@@ -29,12 +29,6 @@ def configure(conf):
         conf.load('tbb')
         conf.load('sferes')
 
-        if conf.options.exp:
-                for i in conf.options.exp.split(','):
-                        print 'Building exp: ' + i
-                        conf.recurse('exp/' + i)
-
-
 	common_flags = "-Wall -std=c++11"
 
 	cxxflags = conf.env['CXXFLAGS']
@@ -51,10 +45,15 @@ def configure(conf):
         if conf.is_defined('USE_SFERES'):
                 common_flags += " -DUSE_SFERES -DSFERES_FAST_DOMSORT"
 
-	# release
         opt_flags = common_flags + ' -O3 -msse2 -ggdb3 -g'
         conf.env['CXXFLAGS'] = cxxflags + opt_flags.split(' ')
         print conf.env['CXXFLAGS']
+
+        if conf.options.exp:
+                for i in conf.options.exp.split(','):
+                        print 'configuring for exp: ' + i
+                        conf.recurse('exp/' + i)
+
 
 def build(bld):
 	bld.recurse('src/limbo')

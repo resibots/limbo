@@ -146,7 +146,7 @@ int main() {
   typedef zdt1 func_t;
 #elif defined ZDT2
   typedef zdt2 func_t;
-#elif defined ZDT3 
+#elif defined ZDT3
   typedef zdt3 func_t;
 #elif defined MOP2
   typedef mop2 func_t;

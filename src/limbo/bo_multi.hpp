@@ -28,7 +28,7 @@ namespace limbo {
       };
       struct pop {
         SFERES_CONST unsigned size = 100;
-        SFERES_CONST unsigned nb_gen = 2000;
+        SFERES_CONST unsigned nb_gen = 1000;
         SFERES_CONST int dump_period = -1;
         SFERES_CONST int initial_aleat = 1;
       };
@@ -109,7 +109,9 @@ namespace limbo {
     // will be called at the end of the algo
     template<int D>
     void update_pareto_model() {
+      std::cout<<"updating models..."; std::cout.flush();
       this->_update_models();
+      std::cout<< "ok" << std::endl;
       typedef sferes::gen::EvoFloat<D, multi::SferesParams> gen_t;
       typedef sferes::phen::Parameters<gen_t, multi::SferesFit<model_t>, multi::SferesParams> phen_t;
       typedef sferes::eval::Parallel<multi::SferesParams> eval_t;

@@ -26,7 +26,9 @@ namespace limbo {
       this->_init(feval, reset);
 
       while (this->_samples.size() == 0 || this->_pursue()) {
+	std::cout<<"updating pareto model..."; std::cout.flush();
         this->template update_pareto_model<EvalFunction::dim>();
+	std::cout<<"ok"<<std::endl;
         auto pareto = this->pareto_model();
         // this is hack to test wether we need a bound
         pareto.erase(std::remove_if(pareto.begin(), pareto.end(),

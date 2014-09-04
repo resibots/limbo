@@ -109,13 +109,13 @@ namespace limbo {
 
       double _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
         return _mean_function(v) + k.transpose() * _alpha;
-	//        return _mean_function(v)
-	//               + (k.transpose() * _inverted_kernel * (_obs_mean))[0];
+        //        return _mean_function(v)
+        //               + (k.transpose() * _inverted_kernel * (_obs_mean))[0];
       }
       double _sigma(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
         Eigen::VectorXd z = _llt.matrixL().solve(k);
         return  _kernel_function(v, v) - z.dot(z);
-	//        return  _kernel_function(v, v) - (k.transpose() * _inverted_kernel * k)[0];
+        //        return  _kernel_function(v, v) - (k.transpose() * _inverted_kernel * k)[0];
       }
       Eigen::VectorXd _compute_k(const Eigen::VectorXd& v) const {
         Eigen::VectorXd k(_samples.size());
