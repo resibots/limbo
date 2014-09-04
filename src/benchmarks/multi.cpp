@@ -28,6 +28,8 @@ struct Params {
 
 #ifdef DIM6
 #define ZDT_DIM 6
+#elif defined (DIM2)
+#define ZDT_DIM 2
 #else
 #define ZDT_DIM 30
 #endif
@@ -132,8 +134,24 @@ namespace limbo {
                             << std::endl;
         for (auto x : p_data)
           pareto_data << std::get<1>(x).transpose() << std::endl;
-        for (auto x : opt.observations())
-          obs << x.transpose() << std::endl;
+        for (int i = 0; i < opt.observations().size(); ++i)
+          obs << opt.observations()[i].transpose() << " "
+              << opt.samples()[i].transpose()
+              << std::endl;
+
+        std::string m1 = "model_" + it + ".dat";
+        std::ofstream m1f(m1.c_str());
+        for (float x = 0; x < 1; x += 0.01)
+          for (float y = 0; y < 1; y += 0.01) {
+            Eigen::VectorXd v(2);
+            v << x, y;
+            m1f << x << " " << y << " "
+                << opt.models()[0].mu(v) << " "
+                << opt.models()[0].sigma(v) << " "
+                << opt.models()[1].mu(v) << " "
+                << opt.models()[1].sigma(v) << std::endl;
+
+          }
       }
     };
   }

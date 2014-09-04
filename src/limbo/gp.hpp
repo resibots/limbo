@@ -72,7 +72,9 @@ namespace limbo {
       const MeanFunction& mean_function() const {
         return _mean_function;
       }
-      double max_observation() const { return _observations.maxCoeff(); }
+      double max_observation() const {
+        return _observations.maxCoeff();
+      }
      protected:
       int _dim;
       KernelFunction _kernel_function;

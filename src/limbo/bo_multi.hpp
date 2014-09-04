@@ -57,8 +57,8 @@ namespace limbo {
           v[j] = indiv.data(j);
         // we protect against overestimation because this has some spurious effect
         for (size_t i = 0; i < _models.size(); ++i)
-            this->_objs[i] = _models[i].mu(v);//std::min(_models[i].mu(v), _models[i].max_observation());
-     }
+          this->_objs[i] = _models[i].mu(v);//std::min(_models[i].mu(v), _models[i].max_observation());
+      }
      protected:
       std::vector<M> _models;
       std::vector<float> _objs;
@@ -97,8 +97,10 @@ namespace limbo {
     const pareto_t& pareto_data() const {
       return _pareto_data;
     }
-    
-    const std::vector<model_t>& models() const { return _models; }
+
+    const std::vector<model_t>& models() const {
+      return _models;
+    }
 
     // will be called at the end of the algo
     void update_pareto_data() {

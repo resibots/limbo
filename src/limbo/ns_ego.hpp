@@ -33,7 +33,7 @@ namespace limbo {
         auto p_variance = pareto::pareto_set<2>(pareto);
         auto best = p_variance[rand() % p_variance.size()];
         Eigen::VectorXd best_v = std::get<0>(best);
-        
+
         this->add_new_sample(best_v, feval(best_v));
         this->_iteration++;
         std::cout << this->_iteration << " | " << best_v.transpose()
