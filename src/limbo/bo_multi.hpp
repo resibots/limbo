@@ -1,6 +1,5 @@
 #ifndef BO_MULTI_HPP_
 #define BO_MULTI_HPP_
-
 #define VERSION "xxx"
 #include <sferes/phen/parameters.hpp>
 #include <sferes/gen/evo_float.hpp>
@@ -56,8 +55,9 @@ namespace limbo {
         Eigen::VectorXd v(indiv.size());
         for (size_t j = 0; j < indiv.size(); ++j)
           v[j] = indiv.data(j);
+        // we protect against overestimation because this has some spurious effect
         for (size_t i = 0; i < _models.size(); ++i)
-          this->_objs[i] = std::min(_models[i].mu(v), 1.0);
+          this->_objs[i] = _models[i].mu(v);//std::min(_models[i].mu(v), _models[i].max_observation());
       }
      protected:
       std::vector<M> _models;
@@ -98,12 +98,16 @@ namespace limbo {
       return _pareto_data;
     }
 
+    const std::vector<model_t>& models() const {
+      return _models;
+    }
+
     // will be called at the end of the algo
     void update_pareto_data() {
       std::vector<Eigen::VectorXd> v(this->_samples.size());
       size_t dim = this->_observations[0].size();
       std::fill(v.begin(), v.end(), Eigen::VectorXd::Zero(dim));
-      _pareto_data = pareto::pareto_set(_pack_data(this->_samples, this->_observations, v));
+      _pareto_data = pareto::pareto_set<1>(_pack_data(this->_samples, this->_observations, v));
     }
 
     // will be called at the end of the algo
