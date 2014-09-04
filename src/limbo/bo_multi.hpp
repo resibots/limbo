@@ -97,6 +97,7 @@ namespace limbo {
     const pareto_t& pareto_data() const {
       return _pareto_data;
     }
+    
     const std::vector<model_t>& models() const { return _models; }
 
     // will be called at the end of the algo
