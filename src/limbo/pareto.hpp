@@ -38,24 +38,25 @@ namespace pareto {
       return (dominate_flag(i1, i2) == 1);
     }
 
-    template<typename T, typename T2>
+    template<int K, typename T, typename T2>
     static bool non_dominated(const T& p_objs, const T2& objs)  {
       for (auto x : objs)
-        if (dominate(std::get<1>(x), p_objs))
+        if (dominate(std::get<K>(x), p_objs))
           return false;
       return true;
     }
 
 
     // lexical order
+    template<int K>
     struct compare_objs_lex {
       compare_objs_lex() {}
       template<typename T>
       bool operator()(const T& i1, const T& i2) const {
-        for (int i = 0; i < std::get<1>(i1).size(); ++i)
-          if (std::get<1>(i1)(i) > std::get<1>(i2)(i))
+        for (int i = 0; i < std::get<K>(i1).size(); ++i)
+          if (std::get<K>(i1)(i) > std::get<K>(i2)(i))
             return true;
-          else if (std::get<1>(i1)(i) < std::get<1>(i2)(i))
+          else if (std::get<K>(i1)(i) < std::get<K>(i2)(i))
             return false;
         return false;
       }
@@ -67,14 +68,15 @@ namespace pareto {
       v.push_back(t);
       return v;
     }
+    template<int K>
     struct comp_fronts {
       // this functor is ONLY for sort2objs
       template<typename T>
       bool operator()(const T& f2, const T& f1) const {
         assert(f1.size() == 1);
-        assert(std::get<1>(f1[0]).size() == 2);
+        assert(std::get<K>(f1[0]).size() == 2);
         // we only need to compare f1 to the value of the last element of f2
-        if (std::get<1>(f1[0])(1) < std::get<1>(f2.back())(1))
+        if (std::get<K>(f1[0])(1) < std::get<K>(f2.back())(1))
           return true;
         else
           return false;
@@ -82,7 +84,7 @@ namespace pareto {
     };
 
     // O(n^2) procedure, for > 2 objectives
-    template<typename T>
+    template<int K, typename T>
     T pareto_set_std(const T& p) {
       par::vector<typename T::value_type> pareto;
       par::loop(0, p.size(), [&](size_t i) {
@@ -90,7 +92,7 @@ namespace pareto {
           std::cout << i << '[' << p.size() << "] ";
           std::cout.flush();
         }
-        if (non_dominated(std::get<1>(p[i]), p))
+        if (non_dominated<K>(std::get<K>(p[i]), p))
           pareto.push_back(p[i]);
       });
       return par::convert_vector(pareto);
@@ -98,10 +100,10 @@ namespace pareto {
 
     // O(n lg n), for 2 objectives ONLY
     // see M. T. Jensen, 2003
-    template<typename T>
+    template<int K, typename T>
     T sort_2objs(const T& v) {
       T p = v;
-      par::sort(p.begin(), p.end(), compare_objs_lex());
+      par::sort(p.begin(), p.end(), compare_objs_lex<K>());
 
       std::vector<T> f;
       f.push_back(impl::new_vector(p[0]));
@@ -111,9 +113,9 @@ namespace pareto {
           std::cout << i << " [" << p.size() << "] ";
           std::cout.flush();
         }
-        if (std::get<1>(p[i])(1) > std::get<1>(f[e].back())(1)) { // !dominate(si, f_e)
+        if (std::get<K>(p[i])(1) > std::get<K>(f[e].back())(1)) { // !dominate(si, f_e)
           auto b = std::lower_bound(f.begin(), f.end(), impl::new_vector(p[i]),
-                                    impl::comp_fronts());
+                                    impl::comp_fronts<K>());
           assert(b != f.end());
           b->push_back(p[i]);
         } else {
@@ -126,16 +128,16 @@ namespace pareto {
   }
 
   // argument vector of P (std::vector<P>)
-  // where P is a tuple with the objective values in std::get<1>(p);
-  template<typename T>
+  // where P is a tuple with the objective values in std::get<K>(p);
+  template<int K, typename T>
   static T pareto_set(const T& v) {
     assert(v.size());
-    size_t nb_objs = std::get<1>(v[0]).size();
+    size_t nb_objs = std::get<K>(v[0]).size();
     assert(nb_objs > 1);
     if (nb_objs == 2)
-      return impl::sort_2objs(v);
+      return impl::sort_2objs<K>(v);
     else
-      return impl::pareto_set_std(v);
+      return impl::pareto_set_std<K>(v);
   }
 }
 

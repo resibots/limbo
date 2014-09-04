@@ -107,7 +107,9 @@ namespace limbo {
       template<typename BO>
       void operator()(BO& opt) {
         opt.update_pareto_data();
-        opt.template update_pareto_model<F::dim>();//2 = hack..
+#ifdef PAREGO // this is already done is NS_EGO
+        opt.template update_pareto_model<F::dim>();
+#endif
         auto dir = opt.res_dir() + "/";
         auto p_model = opt.pareto_model();
         auto p_data = opt.pareto_data();
@@ -146,7 +148,7 @@ int main() {
   typedef zdt1 func_t;
 #elif defined ZDT2
   typedef zdt2 func_t;
-#elif defined ZDT3 
+#elif defined ZDT3
   typedef zdt3 func_t;
 #elif defined MOP2
   typedef mop2 func_t;

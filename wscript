@@ -27,7 +27,7 @@ def configure(conf):
         conf.load('tbb')
         conf.load('sferes')
 
-	common_flags = "-Wall -std=c++11"
+	common_flags = "-Wall -std=c++11 "
 
 	cxxflags = conf.env['CXXFLAGS']
 	conf.check_boost(lib='serialization timer filesystem \
@@ -38,7 +38,7 @@ def configure(conf):
         conf.check_tbb()
         conf.check_sferes()
         if conf.is_defined('USE_TBB'):
-                common_flags += " -DUSE_TBB "
+                common_flags += " -DUSE_TBB"
 
         if conf.is_defined('USE_SFERES'):
                 common_flags += " -DUSE_SFERES -DSFERES_FAST_DOMSORT"
