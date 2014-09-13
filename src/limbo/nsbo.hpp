@@ -1,5 +1,5 @@
-#ifndef NSEGO_HPP_
-#define NSEGO_HPP_
+#ifndef NSBO_HPP_
+#define NSBO_HPP_
 
 #include <algorithm>
 #include "bo_multi.hpp"
@@ -17,7 +17,7 @@ namespace limbo {
     , class A6 = boost::parameter::void_
     , class A7 = boost::parameter::void_
     >
-  class NsEgo : public BoMulti<Params, A2, A3, A4, A5, A6, A7> {
+  class Nsbo : public BoMulti<Params, A2, A3, A4, A5, A6, A7> {
    public:
     typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
 
@@ -52,8 +52,7 @@ namespace limbo {
 
    protected:
     void _update_stats() {
-      std::cout << "stats" << std::endl;
-      boost::fusion::for_each(this->_stat, RefreshStat_f<NsEgo>(*this));
+      boost::fusion::for_each(this->_stat, RefreshStat_f<Nsbo>(*this));
     }
 
   };

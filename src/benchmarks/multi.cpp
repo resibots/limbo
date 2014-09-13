@@ -1,5 +1,5 @@
 #include "limbo/limbo.hpp"
-#include "limbo/ns_ego.hpp"
+#include "limbo/nsbo.hpp"
 #include "limbo/parego.hpp"
 
 using namespace limbo;
@@ -109,7 +109,7 @@ namespace limbo {
       template<typename BO>
       void operator()(BO& opt) {
         opt.update_pareto_data();
-#ifdef PAREGO // this is already done is NS_EGO
+#ifdef PAREGO // this is already done is NSBO
         opt.template update_pareto_model<F::dim>();
 #endif
         auto dir = opt.res_dir() + "/";
@@ -176,8 +176,8 @@ int main() {
 
   typedef stat::ParetoBenchmark<func_t> stat_t;
 
-#ifdef NS_EGO
-  NsEgo<Params, stat_fun<stat_t> > opt;
+#ifdef NSBO
+  Nsbo<Params, stat_fun<stat_t> > opt;
 #else
   Parego<Params, stat_fun<stat_t> > opt;
 #endif
