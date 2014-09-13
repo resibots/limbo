@@ -61,6 +61,20 @@ namespace limbo {
   BOOST_PARAMETER_TEMPLATE_KEYWORD(obs_type)
 
 
+  template<typename T, typename std::enable_if<std::is_arithmetic<T>::value, int>::type = 0>
+  inline bool is_nan_or_inf(T v) {
+    return std::isinf(v) || std::isnan(v);
+  }
+
+  template<typename T, typename std::enable_if<!std::is_arithmetic<T>::value, int>::type = 0>
+  inline bool is_nan_or_inf(const T& v) {
+    for (int i = 0; i < v.size(); ++i)
+	if(std::isinf(v(i)) || std::isnan(v(i)))
+	  return true;
+    return false;
+    }
+
+
   typedef boost::parameter::parameters <
   boost::parameter::optional<tag::inneropt_fun>
   , boost::parameter::optional<tag::stat_fun>
@@ -144,13 +158,11 @@ namespace limbo {
     // does not update the model !
     // we don't add NaN and inf observations
     void add_new_sample(const Eigen::VectorXd& s, const obs_t& v) {
-      for (int i = 0; i < v.size(); ++i)
-	if(std::isinf(v(i)) || std::isnan(v(i)))
-	  return;
+      if (is_nan_or_inf(v))
+	return;
       _samples.push_back(s);
       _observations.push_back(v);
     }
-
    protected:
     template<typename F>
     void _init(const F& feval, bool reset = true) {
