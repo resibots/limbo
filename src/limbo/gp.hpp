@@ -34,10 +34,12 @@ namespace limbo {
 
         for (int i = 0; i < _observations.size(); ++i)
           _observations(i) = observations[i];
+	
+	_mean_observation = _observations.sum() / _observations.size();
 
         _mean_vector.resize(_samples.size());
         for (int i = 0; i < _mean_vector.size(); i++)
-          _mean_vector(i) = _mean_function(_samples[i]);
+          _mean_vector(i) = _mean_function(_samples[i], *this);
         _obs_mean = _observations - _mean_vector;
 
         _compute_kernel();
@@ -46,7 +48,8 @@ namespace limbo {
       // return mu, sigma
       std::tuple<double, double> query(const Eigen::VectorXd& v) const {
         if (_samples.size() == 0)
-          return std::make_tuple(_mean_function(v), sqrt(_kernel_function(v, v)));
+          return std::make_tuple(_mean_function(v, *this), 
+				 sqrt(_kernel_function(v, v)));
 
         Eigen::VectorXd k = _compute_k(v);
         return std::make_tuple(_mu(v, k), _sigma(v, k));
@@ -54,7 +57,7 @@ namespace limbo {
 
       double mu(const Eigen::VectorXd& v) const {
         if (_samples.size() == 0)
-          return _mean_function(v);
+          return _mean_function(v, *this);
         return _mu(v, _compute_k(v));
       }
       double sigma(const Eigen::VectorXd& v) const {
@@ -75,6 +78,9 @@ namespace limbo {
       double max_observation() const {
         return _observations.maxCoeff();
       }
+      double mean_observation() const { 
+	return _mean_observation;
+      }
      protected:
       int _dim;
       KernelFunction _kernel_function;
@@ -86,6 +92,7 @@ namespace limbo {
       Eigen::VectorXd _obs_mean;
       double _noise;
       Eigen::VectorXd _alpha;
+      double _mean_observation;
 
       Eigen::MatrixXd _kernel;
       Eigen::MatrixXd _inverted_kernel;
@@ -110,7 +117,7 @@ namespace limbo {
       }
 
       double _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
-        return _mean_function(v) + k.transpose() * _alpha;
+        return _mean_function(v, *this) + k.transpose() * _alpha;
         //        return _mean_function(v)
         //               + (k.transpose() * _inverted_kernel * (_obs_mean))[0];
       }
