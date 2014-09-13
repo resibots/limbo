@@ -89,7 +89,7 @@ namespace limbo {
       typedef init_functions::RandomSampling<Params> init_t; // 1
       typedef inner_optimization::Cmaes<Params> inneropt_t;  // 2
       typedef kernel_functions::SquaredExpARD<Params> kf_t;
-      typedef mean_functions::MeanConstant<Params> mean_t;
+      typedef mean_functions::MeanData<Params> mean_t;
       typedef model::GPAuto<Params, kf_t, mean_t> model_t; //3
       // WARNING: you have to specify the acquisition  function
       // if you use a custom model
@@ -142,7 +142,11 @@ namespace limbo {
       return _iteration;
     }
     // does not update the model !
+    // we don't add NaN and inf observations
     void add_new_sample(const Eigen::VectorXd& s, const obs_t& v) {
+      for (int i = 0; i < v.size(); ++i)
+	if(std::isinf(v(i)) || std::isnan(v(i)))
+	  return;
       _samples.push_back(s);
       _observations.push_back(v);
     }
