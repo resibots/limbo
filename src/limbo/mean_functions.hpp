@@ -16,7 +16,8 @@ namespace limbo {
     template<typename Params>
     struct NullFunction {
       NullFunction() {}
-      double operator()(const Eigen::VectorXd& v)const {
+      template<typename GP>
+      double operator()(const Eigen::VectorXd& v, const GP&)const {
         return 0;
       }
     };
@@ -25,10 +26,23 @@ namespace limbo {
     struct MeanConstant {
       MeanConstant() {
       }
-      double operator()(const Eigen::VectorXd& v)const {
+      template<typename GP>
+      double operator()(const Eigen::VectorXd& v, const GP&)const {
         return  Params::meanconstant::constant();
       }
     };
+
+    template<typename Params>
+    struct MeanData {
+      MeanData() {
+      }
+      template<typename GP>
+      double operator()(const Eigen::VectorXd& v, const GP& gp)const {
+        return  gp.mean_observation();
+      }
+    };
+
+
 
     template<typename Params>
     struct MeanArchive {
@@ -42,7 +56,8 @@ namespace limbo {
         std::cout << _archive.size() << " elements loaded in the archive" << std::endl;
       }
 
-      double operator()(const Eigen::VectorXd& v)const {
+      template<typename GP>
+      double operator()(const Eigen::VectorXd& v, const GP&)const {
         std::vector<double> key(v.size(), 0);
         for (int i = 0; i < v.size(); i++)
           key[i] = v[i];
