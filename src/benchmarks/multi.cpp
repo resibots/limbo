@@ -1,5 +1,4 @@
 #include "limbo/limbo.hpp"
-#include "limbo/nsbo.hpp"
 #include "limbo/parego.hpp"
 
 using namespace limbo;
@@ -175,12 +174,7 @@ int main() {
 #endif
 
   typedef stat::ParetoBenchmark<func_t> stat_t;
-
-#ifdef NSBO
-  Nsbo<Params, stat_fun<stat_t> > opt;
-#else
   Parego<Params, stat_fun<stat_t> > opt;
-#endif
 
   opt.optimize(func_t());
   return 0;
