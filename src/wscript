@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+def build(bld):
+    bld.recurse('examples')
+    bld.recurse('tests')
+    bld.recurse('benchmarks')
+
+    obj = bld.stlib(source=' \
+    cmaes/cmaes.c \
+    cmaes/boundary_transformation.c \
+    hv/ehvi_calculations.cc \
+    hv/ehvi_montecarlo.cc \
+    hv/ehvi_sliceupdate.cc \
+    hv/ehvi_hvol.cc \
+    hv/ehvi_multi.cc \
+    hv/helper.cc',
+                    target='limbo')

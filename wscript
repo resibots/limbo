@@ -56,10 +56,7 @@ def configure(conf):
 
 
 def build(bld):
-	bld.recurse('src/limbo')
-        bld.recurse('src/examples')
-        bld.recurse('src/tests')
-        bld.recurse('src/benchmarks')
+	bld.recurse('src/')
         if bld.options.exp:
                 for i in bld.options.exp.split(','):
                         print 'Building exp: ' + i
