@@ -1,5 +1,7 @@
 #include "limbo/limbo.hpp"
 #include "limbo/parego.hpp"
+#include "limbo/ehvi.hpp"
+#include "limbo/nsbo.hpp"
 
 using namespace limbo;
 
@@ -108,7 +110,7 @@ namespace limbo {
       template<typename BO>
       void operator()(BO& opt) {
         opt.update_pareto_data();
-#ifdef PAREGO // this is already done is NSBO
+#ifndef NSBO // this is already done is NSBO
         opt.template update_pareto_model<F::dim>();
 #endif
         auto dir = opt.res_dir() + "/";
@@ -137,7 +139,7 @@ namespace limbo {
           obs << opt.observations()[i].transpose() << " "
               << opt.samples()[i].transpose()
               << std::endl;
-
+/*
         std::string m1 = "model_" + it + ".dat";
         std::ofstream m1f(m1.c_str());
         for (float x = 0; x < 1; x += 0.01)
@@ -151,6 +153,8 @@ namespace limbo {
                 << opt.models()[1].sigma(v) << std::endl;
 
           }
+*/
+        std::cout<<"stats done"<<std::endl;
       }
     };
   }
@@ -174,7 +178,13 @@ int main() {
 #endif
 
   typedef stat::ParetoBenchmark<func_t> stat_t;
+#ifdef PAREGO
   Parego<Params, stat_fun<stat_t> > opt;
+#elif defined(NSBO)
+  Nsbo<Params, stat_fun<stat_t> > opt;
+#elif defined(EHVI)
+  Ehvi<Params, stat_fun<stat_t> > opt;
+#endif
 
   opt.optimize(func_t());
   return 0;

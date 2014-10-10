@@ -34,8 +34,8 @@ namespace limbo {
 
         for (int i = 0; i < _observations.size(); ++i)
           _observations(i) = observations[i];
-	
-	_mean_observation = _observations.sum() / _observations.size();
+
+        _mean_observation = _observations.sum() / _observations.size();
 
         _mean_vector.resize(_samples.size());
         for (int i = 0; i < _mean_vector.size(); i++)
@@ -48,8 +48,8 @@ namespace limbo {
       // return mu, sigma
       std::tuple<double, double> query(const Eigen::VectorXd& v) const {
         if (_samples.size() == 0)
-          return std::make_tuple(_mean_function(v, *this), 
-				 sqrt(_kernel_function(v, v)));
+          return std::make_tuple(_mean_function(v, *this),
+                                 sqrt(_kernel_function(v, v)));
 
         Eigen::VectorXd k = _compute_k(v);
         return std::make_tuple(_mu(v, k), _sigma(v, k));
@@ -78,8 +78,8 @@ namespace limbo {
       double max_observation() const {
         return _observations.maxCoeff();
       }
-      double mean_observation() const { 
-	return _mean_observation;
+      double mean_observation() const {
+        return _mean_observation;
       }
      protected:
       int _dim;

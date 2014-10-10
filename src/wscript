@@ -9,10 +9,10 @@ def build(bld):
     obj = bld.stlib(source=' \
     cmaes/cmaes.c \
     cmaes/boundary_transformation.c \
-    hv/ehvi_calculations.cc \
-    hv/ehvi_montecarlo.cc \
-    hv/ehvi_sliceupdate.cc \
-    hv/ehvi_hvol.cc \
-    hv/ehvi_multi.cc \
-    hv/helper.cc',
+    ehvi/ehvi_calculations.cc \
+    ehvi/ehvi_montecarlo.cc \
+    ehvi/ehvi_sliceupdate.cc \
+    ehvi/ehvi_hvol.cc \
+    ehvi/ehvi_multi.cc \
+    ehvi/helper.cc',
                     target='limbo')

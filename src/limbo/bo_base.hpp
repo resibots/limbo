@@ -66,13 +66,13 @@ namespace limbo {
     return std::isinf(v) || std::isnan(v);
   }
 
-  template<typename T, typename std::enable_if<!std::is_arithmetic<T>::value, int>::type = 0>
+  template < typename T, typename std::enable_if < !std::is_arithmetic<T>::value, int >::type = 0 >
   inline bool is_nan_or_inf(const T& v) {
     for (int i = 0; i < v.size(); ++i)
-	if(std::isinf(v(i)) || std::isnan(v(i)))
-	  return true;
+      if (std::isinf(v(i)) || std::isnan(v(i)))
+        return true;
     return false;
-    }
+  }
 
 
   typedef boost::parameter::parameters <
@@ -159,7 +159,7 @@ namespace limbo {
     // we don't add NaN and inf observations
     void add_new_sample(const Eigen::VectorXd& s, const obs_t& v) {
       if (is_nan_or_inf(v))
-	return;
+        return;
       _samples.push_back(s);
       _observations.push_back(v);
     }

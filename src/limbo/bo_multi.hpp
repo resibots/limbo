@@ -57,7 +57,7 @@ namespace limbo {
           v[j] = indiv.data(j);
         // we protect against overestimation because this has some spurious effect
         for (size_t i = 0; i < _models.size(); ++i)
-          this->_objs[i] = _models[i].mu(v);//std::min(_models[i].mu(v), _models[i].max_observation());
+          this->_objs[i] = std::min(_models[i].mu(v), _models[i].max_observation());
       }
      protected:
       std::vector<M> _models;
@@ -83,6 +83,7 @@ namespace limbo {
     typedef typename base_t::model_t model_t;
     typedef typename base_t::inner_optimization_t inner_optimization_t;
     typedef typename base_t::acquisition_function_t acquisition_function_t;
+    // point, obj, sigma
     typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
     typedef std::vector<pareto_point_t> pareto_t;
 
@@ -113,9 +114,10 @@ namespace limbo {
     // will be called at the end of the algo
     template<int D>
     void update_pareto_model() {
-      std::cout<<"updating models..."; std::cout.flush();
+      std::cout << "updating models...";
+      std::cout.flush();
       this->_update_models();
-      std::cout<< "ok" << std::endl;
+      std::cout << "ok" << std::endl;
       typedef sferes::gen::EvoFloat<D, multi::SferesParams> gen_t;
       typedef sferes::phen::Parameters<gen_t, multi::SferesFit<model_t>, multi::SferesParams> phen_t;
       typedef sferes::eval::Parallel<multi::SferesParams> eval_t;
