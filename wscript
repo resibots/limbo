@@ -45,7 +45,7 @@ def configure(conf):
         if conf.is_defined('USE_SFERES'):
                 common_flags += " -DUSE_SFERES -DSFERES_FAST_DOMSORT"
 
-        opt_flags = common_flags + ' -O3 -msse2 -ggdb3 -g'
+        opt_flags = common_flags + ' -O3 -msse2  -g'
         conf.env['CXXFLAGS'] = cxxflags + opt_flags.split(' ')
         print conf.env['CXXFLAGS']
 
@@ -63,7 +63,7 @@ def build(bld):
                         bld.recurse('exp/' + i)
         from waflib.Tools import waf_unit_test
         bld.add_post_fun(waf_unit_test.summary)
-	
+
 
 def shutdown (ctx):
     if ctx.options.qsub:

@@ -26,16 +26,15 @@ namespace limbo {
         double r[3] = { _ref_point(0), _ref_point(1), _ref_point(2) };
         double mu[3] = { _models[0].mu(v), _models[1].mu(v), 0 };
         double s[3] = { _models[0].sigma(v), _models[1].sigma(v), 0 };
-        for (size_t i = 0; i < _models.size(); ++i)
-          mu[i] = std::min(_models[i].mu(v), _models[i].max_observation());
-
-        double ehvi = ehvi2d(_pop, r, mu, s);
+        //for (size_t i = 0; i < _models.size(); ++i)
+//          mu[i] = std::min(_models[i].mu(v), _models[i].max_observation());
+          double ehvi = ehvi2d(_pop, r, mu, s);
         return ehvi;
       }
      protected:
       const std::vector<Model>& _models;
       const std::deque<individual*>& _pop;
-      const Eigen::VectorXd& _ref_point;
+      Eigen::VectorXd _ref_point;
     };
   }
 
@@ -68,7 +67,6 @@ namespace limbo {
         this->update_pareto_data();
         std::cout << "ok" << std::endl;
 
-        std::cout<<"copying pop...("<<this->pareto_data().size()<<")"<<std::endl;;
         // copy in the ehvi structure to compute expected improvement
         std::deque<individual*> pop;
         for (auto x : this->pareto_data()) {
@@ -83,22 +81,24 @@ namespace limbo {
         std::cout << "optimizing ehvi" << std::endl;
 
           auto acqui =
-            acquisition_functions::Ehvi<Params, model_t>(this->_models, pop,
-                                                        Eigen::Vector3d(-11, -11, 0));
+            acquisition_functions::Ehvi<Params, model_t>
+              (this->_models, pop,
+              Eigen::Vector3d(Params::ehvi::x_ref(), Params::ehvi::y_ref(), 0));
 
         double best_hv = -1;
         Eigen::VectorXd best_s;
         for (auto x : this->pareto_data()) {
           Eigen::VectorXd s = inner_opt(acqui, acqui.dim(), std::get<0>(x));
           double hv = acqui(s);
-          if (hv > best_hv && this->_models[0].mu(s) <= 1)
+          if (hv > best_hv)
             {
               best_s = s;
               best_hv = hv;
             }
-
         }
+        std::cout<<"sample selected" << std::endl;
         Eigen::VectorXd new_sample = best_s;
+        std::cout<<"new sample:"<<new_sample.transpose()<<std::endl;
 
         std::cout<<"expected improvement: "<<acqui(new_sample)<<std::endl;
         std::cout<<"expected value: "<<this->_models[0].mu(new_sample)

@@ -30,7 +30,7 @@ namespace limbo {
       Cmaes() {}
       template <typename AcquisitionFunction>
       Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim) const {
-          return this->operator()(acqui, dim, Eigen::VectorXd::Constant(dim, 0.5));
+        return this->operator()(acqui, dim, Eigen::VectorXd::Constant(dim, 0.5));
       }
       template <typename AcquisitionFunction>
       Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim, const Eigen::VectorXd& init) const {
@@ -53,7 +53,7 @@ namespace limbo {
         double init_point[dim];
         for (int i = 0; i < dim; ++i)
           init_point[i] = init(i);
-         for (irun = 0; irun < nrestarts + 1; ++irun) {
+        for (irun = 0; irun < nrestarts + 1; ++irun) {
           fitvals = cmaes_init(&evo, acqui.dim(), init_point, NULL, 0, lambda, NULL);
           evo.countevals = countevals;
           evo.sp.stopMaxFunEvals =

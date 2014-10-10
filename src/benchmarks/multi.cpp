@@ -24,6 +24,10 @@ struct Params {
   struct cmaes : public defaults::cmaes {};
   struct gp_auto : public defaults::gp_auto {};
   struct meanconstant : public defaults::meanconstant {};
+  struct ehvi {
+    BO_PARAM(double, x_ref, -11);
+    BO_PARAM(double, y_ref, -11);
+  };
 };
 
 
@@ -139,22 +143,22 @@ namespace limbo {
           obs << opt.observations()[i].transpose() << " "
               << opt.samples()[i].transpose()
               << std::endl;
-/*
-        std::string m1 = "model_" + it + ".dat";
-        std::ofstream m1f(m1.c_str());
-        for (float x = 0; x < 1; x += 0.01)
-          for (float y = 0; y < 1; y += 0.01) {
-            Eigen::VectorXd v(2);
-            v << x, y;
-            m1f << x << " " << y << " "
-                << opt.models()[0].mu(v) << " "
-                << opt.models()[0].sigma(v) << " "
-                << opt.models()[1].mu(v) << " "
-                << opt.models()[1].sigma(v) << std::endl;
+        /*
+                std::string m1 = "model_" + it + ".dat";
+                std::ofstream m1f(m1.c_str());
+                for (float x = 0; x < 1; x += 0.01)
+                  for (float y = 0; y < 1; y += 0.01) {
+                    Eigen::VectorXd v(2);
+                    v << x, y;
+                    m1f << x << " " << y << " "
+                        << opt.models()[0].mu(v) << " "
+                        << opt.models()[0].sigma(v) << " "
+                        << opt.models()[1].mu(v) << " "
+                        << opt.models()[1].sigma(v) << std::endl;
 
-          }
-*/
-        std::cout<<"stats done"<<std::endl;
+                  }
+        */
+        std::cout << "stats done" << std::endl;
       }
     };
   }
