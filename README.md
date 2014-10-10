@@ -26,7 +26,10 @@ Main references
 
 - **Parego (Multi-objective optimization):** Knowles, J. (2006). ParEGO: A hybrid algorithm with on-line landscape approximation for expensive multiobjective optimization problems. *Evolutionary Computation, IEEE Transactions on*, 10(1), 50-66.
 
-- **CMA-ES (inner optimization):** Auger, A., & Hansen, N. (2005, September). A restart CMA evolution strategy with increasing population size. In *Evolutionary Computation, 2005. The 2005 IEEE Congress on* (Vol. 2, pp. 1769-1776). IEEE.
+- **CMA-ES (inner optimization):** Auger, A., & Hansen, N. (2005). A restart CMA evolution strategy with increasing population size. In *Evolutionary Computation, 2005. The 2005 IEEE Congress on* (Vol. 2, pp. 1769-1776). IEEE.
+
+- **Expected hypervolume improvement (multi-objective optimization):** Hupkens, I., Emmerich, M. T. M., Deutz A. H. (2014). Faster Computation of Expected Hypervolume Improvement. arXiv: http://arxiv.org/abs/1408.7114
+
 
 Other libraries
 ---------------
