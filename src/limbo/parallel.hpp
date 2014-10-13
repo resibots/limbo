@@ -56,7 +56,7 @@ namespace par {
 
   template<typename T, typename F, typename C>
   T max(const T& init, int num_steps, const F& f, const C& comp) {
-#ifdef _USE_TBB
+#ifdef USE_TBB
     auto body = [&](const tbb::blocked_range<size_t>& r, T current_max) -> T {
       for (size_t i = r.begin(); i != r.end(); ++i) {
         T v = f(i);

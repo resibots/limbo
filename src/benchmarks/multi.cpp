@@ -7,7 +7,7 @@ using namespace limbo;
 
 struct Params {
   struct boptimizer {
-    BO_PARAM(double, noise, 0.0);
+    BO_PARAM(double, noise, 0.01);
     BO_PARAM(int, dump_period, 1);
   };
   struct init {
@@ -17,7 +17,7 @@ struct Params {
   };
   struct parego : public defaults::parego {};
   struct maxiterations {
-    BO_PARAM(int, n_iterations, 40);
+    BO_PARAM(int, n_iterations, 30);
   };
   struct ucb : public defaults::ucb {};
   struct gp_ucb : public defaults::gp_ucb {};

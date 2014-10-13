@@ -17,8 +17,8 @@
 namespace limbo {
   namespace defaults {
     struct gp_auto {
-      BO_PARAM(int, n_rprop, 50);
-      BO_PARAM(int, rprop_restart, 500);
+      BO_PARAM(int, n_rprop, 100);
+      BO_PARAM(int, rprop_restart, 100);
     };
   }
   namespace model {
@@ -98,12 +98,14 @@ namespace limbo {
       void _optimize_likelihood() {
         par::init();
         typedef std::pair<Eigen::VectorXd, double> pair_t;
-        auto body = [&](int i) {
+        auto body = [=](int i) {
+          // we need a copy because each thread should touch a copy of the GP!
+          auto gp = *this;
           Eigen::VectorXd v = rprop::optimize([&](const Eigen::VectorXd & v) {
-            return this->log_likelihood(v);
+            return gp.log_likelihood(v);
           },
           [&](const Eigen::VectorXd & v) {
-            return this->log_likelihood_grad(v, false);
+            return gp.log_likelihood_grad(v, false);
           },
           this->kernel_function().h_params_size(), Params::gp_auto::n_rprop());
           double lik = this->log_likelihood(v);
@@ -114,6 +116,7 @@ namespace limbo {
         };
         pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
         auto m = par::max(init, Params::gp_auto::rprop_restart(), body, comp);
+        std::cout<<"likelihood:"<<m.second<<std::endl;
         this->_kernel_function.set_h_params(m.first);
 
       }
