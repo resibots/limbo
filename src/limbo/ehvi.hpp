@@ -28,7 +28,7 @@ namespace limbo {
         double s[3] = { _models[0].sigma(v), _models[1].sigma(v), 0 };
         //for (size_t i = 0; i < _models.size(); ++i)
 //          mu[i] = std::min(_models[i].mu(v), _models[i].max_observation());
-          double ehvi = ehvi2d(_pop, r, mu, s);
+        double ehvi = ehvi2d(_pop, r, mu, s);
         return ehvi;
       }
      protected:
@@ -61,11 +61,9 @@ namespace limbo {
       inner_optimization_t inner_opt;
 
       while (this->_samples.size() == 0 || this->_pursue()) {
-        std::cout << "updating models...";
         std::cout.flush();
-        this->_update_models();
+        this->template update_pareto_model<EvalFunction::dim>();
         this->update_pareto_data();
-        std::cout << "ok" << std::endl;
 
         // copy in the ehvi structure to compute expected improvement
         std::deque<individual*> pop;
@@ -78,34 +76,51 @@ namespace limbo {
         }
 
         // optimize ehvi
-        std::cout << "optimizing ehvi" << std::endl;
+        std::cout << "optimizing ehvi (" << this-> pareto_data().size() << ")" << std::endl;
 
-          auto acqui =
-            acquisition_functions::Ehvi<Params, model_t>
-              (this->_models, pop,
-              Eigen::Vector3d(Params::ehvi::x_ref(), Params::ehvi::y_ref(), 0));
+        auto acqui = acquisition_functions::Ehvi<Params, model_t>
+                     (this->_models, pop,
+                      Eigen::Vector3d(Params::ehvi::x_ref(), Params::ehvi::y_ref(), 0));
 
-        double best_hv = -1;
-        Eigen::VectorXd best_s;
-        for (auto x : this->pareto_data()) {
+        // maximize with CMA-ES
+        typedef std::pair<Eigen::VectorXd, double> pair_t;
+        pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
+        auto body = [&](int i) -> pair_t {
+          auto x = this->pareto_data()[i];
           Eigen::VectorXd s = inner_opt(acqui, acqui.dim(), std::get<0>(x));
           double hv = acqui(s);
-          if (hv > best_hv)
-            {
-              best_s = s;
-              best_hv = hv;
-            }
-        }
-        std::cout<<"sample selected" << std::endl;
-        Eigen::VectorXd new_sample = best_s;
-        std::cout<<"new sample:"<<new_sample.transpose()<<std::endl;
+          return std::make_pair(s, hv);
+        };
+        auto comp = [](const pair_t& v1, const pair_t& v2) {
+          return v1.second > v2.second;
+        };
+        auto m = par::max(init, this->pareto_data().size(), body, comp);
 
-        std::cout<<"expected improvement: "<<acqui(new_sample)<<std::endl;
-        std::cout<<"expected value: "<<this->_models[0].mu(new_sample)
-                <<" "<<this->_models[1].mu(new_sample)
-                <<" "<<this->_models[0].sigma(new_sample)
-                <<" "<<this->_models[1].sigma(new_sample)
-                 << std::endl;
+        // maximize with NSGA-II
+        auto body2 = [&](int i) {
+          auto x = std::get<0>(this->pareto_model()[i]);
+          float hv = acqui(x);
+          return std::make_pair(x, hv);
+        };
+        auto m2 = par::max(init, this->pareto_model().size(), body2, comp);
+
+        // take the best
+        std::cout << "best (cmaes):" << m.second << std::endl;
+        std::cout << "best (NSGA-II):" << m2.second << std::endl;
+        if (m2.second > m.second)
+          m = m2;
+
+
+        std::cout << "sample selected" << std::endl;
+        Eigen::VectorXd new_sample = m2.first;
+        std::cout << "new sample:" << new_sample.transpose() << std::endl;
+
+        std::cout << "expected improvement: " << acqui(new_sample) << std::endl;
+        std::cout << "expected value: " << this->_models[0].mu(new_sample)
+                  << " " << this->_models[1].mu(new_sample)
+                  << " " << this->_models[0].sigma(new_sample)
+                  << " " << this->_models[1].sigma(new_sample)
+                  << std::endl;
         std::cout << "opt done" << std::endl;
 
 

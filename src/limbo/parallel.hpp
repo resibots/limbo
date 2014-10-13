@@ -26,7 +26,7 @@ namespace par {
   using vector = std::vector<X>;
 
   template<typename V>
-  V convert_vector(const V& v) {
+  V& convert_vector(const V& v) {
     return v;
   }
 
@@ -53,6 +53,37 @@ namespace par {
     for (size_t i = begin; i < end; ++i) f(i);
 #endif
   }
+
+  template<typename T, typename F, typename C>
+  T max(const T& init, int num_steps, const F& f, const C& comp) {
+#ifdef USE_TBB
+    auto body = [&](const tbb::blocked_range<size_t>& r, T current_max) -> T {
+      for (size_t i = r.begin(); i != r.end(); ++i) {
+        T v = f(i);
+        if (comp(v, current_max))
+          current_max = v;
+      }
+      return current_max;
+    };
+    auto joint = [&](const T & p1, const T & p2) -> T {
+      if (comp(p1, p2))
+        return p1;
+      return p2;
+    };
+    return tbb::parallel_reduce(tbb::blocked_range<size_t>(0, num_steps),
+                                init, body, joint);
+#else
+    T current_max = init;
+    for (size_t i = 0; i < r.begin(); ++i) {
+      T v = f(i);
+      if (comp(v, current_max))
+        current_max = v;
+    }
+    return current_max;
+  }
+#endif
+  }
+
 
   template<typename T1, typename T2, typename T3>
   inline void sort(T1 i1, T2 i2, T3 comp) {

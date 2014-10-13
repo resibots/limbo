@@ -22,55 +22,6 @@ namespace limbo {
     };
   }
   namespace model {
-    namespace impl {
-      // launch nprop_restart instances of rprop in parallel
-      // to optimize  the log-likelihood
-#ifdef USE_TBB
-      template<typename GP>
-      struct RpropOpt {
-        RpropOpt(const GP& gp, int n_rprop) : _gp(gp), _n_rprop(n_rprop) {}
-        void operator()(const tbb::blocked_range<size_t>& r) {
-          size_t end = r.end();
-          for ( size_t i = r.begin(); i != end; ++i ) {
-            Eigen::VectorXd v = rprop::optimize([&](const Eigen::VectorXd & v) {
-              return _gp.log_likelihood(v);
-            },
-            [&](const Eigen::VectorXd & v) {
-              return _gp.log_likelihood_grad(v, false);
-            },
-            _gp.kernel_function().h_params_size(), _n_rprop);
-            double lik = _gp.log_likelihood(v);
-            _keep_best(lik, v);
-          }
-        }
-        RpropOpt(RpropOpt& x, tbb::split) :
-          _gp(x._gp),
-          _best_score(x._best_score),
-          _best_v(x._best_v) {}
-        void join(const RpropOpt& y) {
-          _keep_best(y._best_score, y._best_v);
-        }
-        const Eigen::VectorXd& best_v() const {
-          return _best_v;
-        }
-        double best_score() const {
-          return _best_score;
-        }
-       protected:
-        void _keep_best(float y, const Eigen::VectorXd& v) {
-          if (y > _best_score) {
-            _best_score = y;
-            _best_v = v;
-          }
-        }
-        GP _gp;
-        double _best_score = -std::numeric_limits<float>::max();
-        Eigen::VectorXd _best_v;
-        int _n_rprop;
-      };
-    }
-#endif
-
     template<typename Params, typename KernelFunction, typename MeanFunction>
     class GPAuto : public GP<Params, KernelFunction, MeanFunction> {
      public:
@@ -82,11 +33,7 @@ namespace limbo {
                    double noise) {
 
         GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise);
-#ifdef USE_TBB
-        _optimize_likelihood_tbb();
-#else
         _optimize_likelihood();
-#endif
         this->_compute_kernel();
       }
 
@@ -148,33 +95,27 @@ namespace limbo {
         return grad;
       }
      protected:
-#ifdef USE_TBB
-      void _optimize_likelihood_tbb() {
-        par::init();
-        impl::RpropOpt<GPAuto> r(*this, Params::gp_auto::n_rprop());
-        tbb::parallel_reduce(tbb::blocked_range<size_t>(0, Params::gp_auto::rprop_restart()), r);
-        this->_kernel_function.set_h_params(r.best_v());
-      }
-#endif
       void _optimize_likelihood() {
-        double best_score = -std::numeric_limits<float>::max();
-        Eigen::VectorXd best_v;
-        for (size_t i = 0; i < Params::gp_auto::rprop_restart(); ++i) {
+        par::init();
+        typedef std::pair<Eigen::VectorXd, double> pair_t;
+        auto body = [&](int i) {
           Eigen::VectorXd v = rprop::optimize([&](const Eigen::VectorXd & v) {
-            return log_likelihood(v);
+            return this->log_likelihood(v);
           },
           [&](const Eigen::VectorXd & v) {
-            return log_likelihood_grad(v, false);
+            return this->log_likelihood_grad(v, false);
           },
-          this->_kernel_function.h_params_size(), Params::gp_auto::n_rprop());
-          double lik = log_likelihood(v);
-          if (lik > best_score) {
-            best_score = lik;
-            best_v = v;
-          }
-        }
-        std::cout << "Best lik:" << best_score << std::endl;
-        this->_kernel_function.set_h_params(best_v);
+          this->kernel_function().h_params_size(), Params::gp_auto::n_rprop());
+          double lik = this->log_likelihood(v);
+          return std::make_pair(v, lik);
+        };
+        auto comp = [](const pair_t& v1, const pair_t& v2) {
+          return v1.second > v2.second;
+        };
+        pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
+        auto m = par::max(init, Params::gp_auto::rprop_restart(), body, comp);
+        this->_kernel_function.set_h_params(m.first);
+
       }
     };
   }
