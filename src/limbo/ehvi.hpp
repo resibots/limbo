@@ -112,7 +112,7 @@ namespace limbo {
 
 
         std::cout << "sample selected" << std::endl;
-        Eigen::VectorXd new_sample = m2.first;
+        Eigen::VectorXd new_sample = m.first;
         std::cout << "new sample:" << new_sample.transpose() << std::endl;
 
         std::cout << "expected improvement: " << acqui(new_sample) << std::endl;
