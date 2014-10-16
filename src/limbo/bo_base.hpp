@@ -60,7 +60,6 @@ namespace limbo {
   BOOST_PARAMETER_TEMPLATE_KEYWORD(stop_fun)
   BOOST_PARAMETER_TEMPLATE_KEYWORD(obs_type)
 
-
   template<typename T, typename std::enable_if<std::is_arithmetic<T>::value, int>::type = 0>
   inline bool is_nan_or_inf(T v) {
     return std::isinf(v) || std::isnan(v);

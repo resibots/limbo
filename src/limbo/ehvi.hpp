@@ -26,8 +26,6 @@ namespace limbo {
         double r[3] = { _ref_point(0), _ref_point(1), _ref_point(2) };
         double mu[3] = { _models[0].mu(v), _models[1].mu(v), 0 };
         double s[3] = { _models[0].sigma(v), _models[1].sigma(v), 0 };
-        //for (size_t i = 0; i < _models.size(); ++i)
-//          mu[i] = std::min(_models[i].mu(v), _models[i].max_observation());
         double ehvi = ehvi2d(_pop, r, mu, s);
         return ehvi;
       }

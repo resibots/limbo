@@ -98,7 +98,7 @@ namespace limbo {
       void _optimize_likelihood() {
         par::init();
         typedef std::pair<Eigen::VectorXd, double> pair_t;
-        auto body = [=](int i) {
+        auto body = [ = ](int i) {
           // we need a copy because each thread should touch a copy of the GP!
           auto gp = *this;
           Eigen::VectorXd v = rprop::optimize([&](const Eigen::VectorXd & v) {
@@ -116,7 +116,7 @@ namespace limbo {
         };
         pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
         auto m = par::max(init, Params::gp_auto::rprop_restart(), body, comp);
-        std::cout<<"likelihood:"<<m.second<<std::endl;
+        std::cout << "likelihood:" << m.second << std::endl;
         this->_kernel_function.set_h_params(m.first);
 
       }
