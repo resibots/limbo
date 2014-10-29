@@ -13,7 +13,7 @@
 
 #include "cmaes/cmaes_interface.h"
 #include "cmaes/boundary_transformation.h"
-
+#include "limbo/parallel.hpp"
 
 namespace limbo {
 
@@ -61,18 +61,24 @@ namespace limbo {
             (900.0 * (dim + 3.0) * (dim + 3.0))
             : Params::cmaes::max_fun_evals();
 
-          Eigen::VectorXd v(acqui.dim());
+          int pop_size =  cmaes_Get(&evo, "popsize");
+          double** all_x_in_bounds = new double*[pop_size];
+          for (int i = 0; i < pop_size; ++i)
+            all_x_in_bounds[i] = cmaes_NewDouble(dim);
+          std::vector<Eigen::VectorXd> pop_eigen(pop_size, Eigen::VectorXd(dim));
+
           while (!(stop = cmaes_TestForTermination(&evo))) {
             pop = cmaes_SamplePopulation(&evo);
-            for (i = 0; i < cmaes_Get(&evo, "popsize"); ++i) {
-              boundary_transformation(&boundaries, pop[i], x_in_bounds, dim);
-
-              for (int j = 0; j < v.size(); ++j)
-                v(j) = x_in_bounds[j];
-              fitvals[i] = -acqui(v);
-            }
+            par::loop(0, pop_size, [&](int i) {
+              boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim);
+              for (int j = 0; j < dim; ++j)
+                pop_eigen[i](j) = x_in_bounds[j];
+              fitvals[i] = -acqui(pop_eigen[i]);
+            });
             cmaes_UpdateDistribution(&evo, fitvals);
           }
+          for (int i = 0; i < pop_size; ++i)
+            free(all_x_in_bounds[i]);
 
           lambda = incpopsize * cmaes_Get(&evo, "lambda");
           countevals = cmaes_Get(&evo, "eval");
@@ -82,6 +88,7 @@ namespace limbo {
             xbestever = cmaes_GetInto(&evo, "xbestever", xbestever); /* alloc mem if needed */
           }
           const double *xmean = cmaes_GetPtr(&evo, "xmean");
+          Eigen::VectorXd v(acqui.dim());
           for (int j = 0; j < v.size(); ++j)
             v(j) = xmean[j];
 
@@ -106,6 +113,8 @@ namespace limbo {
           result(i) = x_in_bounds[i];
         free(xbestever);
         boundary_transformation_exit(&boundaries);
+
+        free(x_in_bounds);
 
         return result;
 

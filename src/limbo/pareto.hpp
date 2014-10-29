@@ -95,6 +95,7 @@ namespace pareto {
         if (non_dominated<K>(std::get<K>(p[i]), p))
           pareto.push_back(p[i]);
       });
+      std::sort(pareto.begin(), pareto.end(), compare_objs_lex<K>());
       return par::convert_vector(pareto);
     }
 
@@ -134,10 +135,10 @@ namespace pareto {
     assert(v.size());
     size_t nb_objs = std::get<K>(v[0]).size();
     assert(nb_objs > 1);
-    if (nb_objs == 2)
-      return impl::sort_2objs<K>(v);
-    else
-      return impl::pareto_set_std<K>(v);
+    /*  if (nb_objs == 2)
+        return impl::sort_2objs<K>(v);
+      else*/
+    return impl::pareto_set_std<K>(v);
   }
 }
 

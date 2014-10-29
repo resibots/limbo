@@ -83,6 +83,9 @@ namespace limbo {
         double z = (x1 - x2).cwiseQuotient(_ell).squaredNorm();
         return _sf2 * exp(-0.5 * z);
       }
+      const Eigen::VectorXd& ell() const {
+        return _ell;
+      }
      protected:
       double _sf2;
       Eigen::VectorXd _ell;

@@ -8,6 +8,7 @@
 #include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>
 #include <tbb/parallel_sort.h>
+#include <tbb/parallel_reduce.h>
 #endif
 
 namespace par {

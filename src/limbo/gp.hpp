@@ -34,7 +34,6 @@ namespace limbo {
 
         for (int i = 0; i < _observations.size(); ++i)
           _observations(i) = observations[i];
-
         _mean_observation = _observations.sum() / _observations.size();
 
         _mean_vector.resize(_samples.size());
@@ -45,7 +44,7 @@ namespace limbo {
         _compute_kernel();
       }
 
-      // return mu, sigma
+      // return mu, sigma (unormaliz)
       std::tuple<double, double> query(const Eigen::VectorXd& v) const {
         if (_samples.size() == 0)
           return std::make_tuple(_mean_function(v, *this),
@@ -90,6 +89,7 @@ namespace limbo {
       Eigen::VectorXd _observations;
       Eigen::VectorXd _mean_vector;
       Eigen::VectorXd _obs_mean;
+
       double _noise;
       Eigen::VectorXd _alpha;
       double _mean_observation;
@@ -107,7 +107,7 @@ namespace limbo {
             _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + _noise;
 
         // O(n^3)
-        _inverted_kernel = _kernel.inverse();
+        //  _inverted_kernel = _kernel.inverse();
 
         _llt = Eigen::LLT<Eigen::MatrixXd>(this->_kernel);
 
