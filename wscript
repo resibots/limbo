@@ -29,7 +29,10 @@ def configure(conf):
         conf.load('tbb')
         conf.load('sferes')
 
-	common_flags = "-Wall -std=c++11 "
+	if int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1])<47:
+                common_flags = "-Wall -std=c++0x "
+        else:
+                common_flags = "-Wall -std=c++11 "
 
 	cxxflags = conf.env['CXXFLAGS']
 	conf.check_boost(lib='serialization timer filesystem \
