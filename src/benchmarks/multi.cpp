@@ -139,7 +139,7 @@ namespace limbo {
                             << std::endl;
         for (auto x : p_data)
           pareto_data << std::get<1>(x).transpose() << std::endl;
-        for (int i = 0; i < opt.observations().size(); ++i)
+        for (size_t i = 0; i < opt.observations().size(); ++i)
           obs << opt.observations()[i].transpose() << " "
               << opt.samples()[i].transpose()
               << std::endl;

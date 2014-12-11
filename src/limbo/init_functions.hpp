@@ -46,7 +46,7 @@ namespace limbo {
       void operator()(const F& feval, Opt& opt) const {
         for (int i = 0; i < Params::init::nb_samples(); i++) {
           Eigen::VectorXd new_sample(F::dim);
-          for (int i = 0; i < F::dim; i++)
+          for (size_t i = 0; i < F::dim; i++)
             new_sample[i] =
               int(((double) (Params::init::nb_bins() + 1) * rand())
                   / (RAND_MAX + 1.0)) / double(Params::init::nb_bins());

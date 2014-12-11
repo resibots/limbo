@@ -41,7 +41,7 @@ namespace limbo {
         double *fitvals;
         double fbestever = 0, *xbestever = NULL;
         double fmean;
-        int i, irun, lambda = 0, countevals = 0;
+        int irun, lambda = 0, countevals = 0;
         char const * stop;
         boundary_transformation_t boundaries;
         double lowerBounds[] = {0.0}; // TODO  put this into params?

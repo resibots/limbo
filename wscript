@@ -37,7 +37,7 @@ def configure(conf):
 	cxxflags = conf.env['CXXFLAGS']
 	conf.check_boost(lib='serialization timer filesystem \
             system unit_test_framework program_options \
-            graph mpi thread',
+            graph thread',
             min_version='1.35')
         conf.check_eigen()
         conf.check_tbb()

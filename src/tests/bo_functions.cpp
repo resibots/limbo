@@ -56,7 +56,7 @@ inline double c2(double x) {
 
 inline Eigen::VectorXd t_osz(const Eigen::VectorXd& x) {
   Eigen::VectorXd r = x;
-  for (size_t i = 0; i < x.size(); i++)
+  for (int i = 0; i < x.size(); i++)
     r(i) =  sign(x(i)) * exp(hat(x(i)) + 0.049 * sin(c1(x(i)) * hat(x(i)))
                              + sin(c2(x(i)) * hat(x(i))));
   return r;
@@ -87,7 +87,7 @@ struct Rastrigin {
   static constexpr size_t dim = 4;
   double operator()(const Eigen::VectorXd& x) const {
     double f = 10 * x.size();
-    for (size_t i = 0; i < x.size(); ++i)
+    for (int i = 0; i < x.size(); ++i)
       f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));
     return -f;
   }
@@ -318,7 +318,7 @@ int main(int argc, char **argv) {
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
     opt.optimize(GoldenPrice());
-    double s_max = -log(3);
+    //    double s_max = -log(3);
     Eigen::Vector2d s_val(0.5, 0.25);
     double x_opt = GoldenPrice()(s_val);
     add_to_results("Golden Price", results, std::make_pair(x_opt, opt.best_observation()));
