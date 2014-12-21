@@ -154,6 +154,16 @@ namespace limbo {
     int iteration() const {
       return _iteration;
     }
+    const obs_t& best_observation() const {
+      return *std::max_element(this->_observations.begin(), this->_observations.end());
+    }
+    const Eigen::VectorXd& best_sample() const {
+      auto max_e = std::max_element(this->_observations.begin(), this->_observations.end());
+      return this->_samples[std::distance(this->_observations.begin(), max_e)];
+    }
+
+
+
     // does not update the model !
     // we don't add NaN and inf observations
     void add_new_sample(const Eigen::VectorXd& s, const obs_t& v) {
@@ -182,7 +192,6 @@ namespace limbo {
     void _update_stats() {
       boost::fusion::for_each(_stat, RefreshStat_f<BoBase>(*this));
     }
-
     void _make_res_dir() {
       if (Params::boptimizer::dump_period() <= 0)
         return;

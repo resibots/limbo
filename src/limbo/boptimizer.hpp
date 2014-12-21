@@ -51,14 +51,6 @@ namespace limbo {
         this->_iteration++;
       }
     }
-    const obs_t& best_observation() const {
-      return *std::max_element(this->_observations.begin(), this->_observations.end());
-    }
-    const Eigen::VectorXd& best_sample() const {
-      auto max_e = std::max_element(this->_observations.begin(), this->_observations.end());
-      return this->_samples[std::distance(this->_observations.begin(), max_e)];
-    }
-
   };
 
 
