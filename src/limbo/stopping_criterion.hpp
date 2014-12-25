@@ -61,7 +61,7 @@ namespace limbo {
       template <typename  BO>
       struct GPMean
       {
-	GPMean(const BO& bo):_model()
+	GPMean(const BO& bo):_model(bo.samples()[0].size()) //should have at least one sample
 	{
 	  _model.compute(bo.samples(),bo.observations(),BO::params_t::boptimizer::noise());
 	}
