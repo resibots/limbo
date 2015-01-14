@@ -162,9 +162,9 @@ class PBXLegacyTarget(XCodeNode):
 		XCodeNode.__init__(self)
 		self.buildConfigurationList = XCConfigurationList([XCBuildConfiguration('waf', {})])
 		if not target:
-			self.buildArgumentsString = "%s %s" % ("waf_xcode.sh", action)
+			self.buildArgumentsString = "%s %s" % ("waf_xcode.sh")
 		else:
-			self.buildArgumentsString = "%s %s --targets=%s" % ("waf_xcode.sh", action, target)
+			self.buildArgumentsString = "%s --targets=%s" % ("waf_xcode.sh", target)
 		self.buildPhases = []
 		self.buildToolPath = "/bin/bash" #sys.executable
 		self.buildWorkingDirectory = ""

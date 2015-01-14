@@ -18,12 +18,19 @@ def create_variants(bld, source, uselib_local,
    #   tgt.uselib_local = uselib_local
    #   tgt.uselib = uselib
    # the variants
+   # we create a basic file
+   tmp = source.replace('.cpp', '')
+   tgt = bld.program(features = 'cxx',
+                     source = source,
+                     target = tmp,
+                     includes = includes,
+                     uselib = uselib,
+                     use = uselib_local)
    c_src = bld.path.abspath() + '/'
    for v in variants:
       # create file
       suff = ''
       for d in v.split(' '): suff += d.lower() + '_'
-      tmp = source.replace('.cpp', '')
       src_fname = tmp + '_' + suff[0:len(suff) - 1] + '.cpp'
       bin_fname = tmp + '_' + suff[0:len(suff) - 1]
       f = open(c_src + src_fname, 'w')
@@ -41,7 +48,7 @@ def create_variants(bld, source, uselib_local,
                         includes = includes,
                         uselib = uselib,
                         use = uselib_local)
-   
+
 def qsub(conf_file):
    tpl = """
 #! /bin/sh

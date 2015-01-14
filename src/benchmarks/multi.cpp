@@ -178,7 +178,7 @@ int main() {
 #elif defined MOP2
   typedef mop2 func_t;
 #else
-# error "unknown function to optimize"
+  typedef mop2 func_t;
 #endif
 
   typedef stat::ParetoBenchmark<func_t> stat_t;
@@ -186,7 +186,7 @@ int main() {
   Parego<Params, stat_fun<stat_t> > opt;
 #elif defined(NSBO)
   Nsbo<Params, stat_fun<stat_t> > opt;
-#elif defined(EHVI)
+#else
   Ehvi<Params, stat_fun<stat_t> > opt;
 #endif
 

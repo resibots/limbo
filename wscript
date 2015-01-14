@@ -19,6 +19,7 @@ def options(opt):
         opt.load('sferes')
 	opt.load('limbo')
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
+        opt.load('xcode')
         for i in glob.glob('exp/*'):
                 opt.recurse(i)
 
@@ -28,6 +29,7 @@ def configure(conf):
         conf.load('eigen')
         conf.load('tbb')
         conf.load('sferes')
+        conf.load('xcode')
 
 	common_flags = "-Wall -std=c++11 "
 
