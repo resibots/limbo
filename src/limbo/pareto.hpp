@@ -86,7 +86,11 @@ namespace pareto {
     // O(n^2) procedure, for > 2 objectives
     template<int K, typename T>
     T pareto_set_std(const T& p) {
-      par::vector<typename T::value_type> pareto;
+#ifdef __GXX_EXPERIMENTAL_CXX0X__
+      typename par::vector<typename T::value_type>::type pareto; // old fashion way to create template alias (for GCC 4.6...)
+#else
+      par::vector<typename T::value_type> pareto; // Using Template alias (for GCC 4.7 and later)
+#endif
       par::loop(0, p.size(), [&](size_t i) {
         if (i % 10000 == 0) {
           std::cout << i << '[' << p.size() << "] ";

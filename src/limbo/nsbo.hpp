@@ -25,7 +25,7 @@ namespace limbo {
     void optimize(const EvalFunction& feval, bool reset = true) {
       this->_init(feval, reset);
 
-      while (this->_samples.size() == 0 || this->_pursue()) {
+      while (this->_samples.size() == 0 || this->_pursue(*this)) {
         std::cout << "updating pareto model...";
         std::cout.flush();
         this->template update_pareto_model<EvalFunction::dim>();
@@ -46,15 +46,16 @@ namespace limbo {
                   << " sigma:" << this->_models[0].sigma(best_v)
                   << " " << this->_models[1].sigma(best_v)
                   << std::endl;
-        _update_stats();
+        _update_stats(*this); // with the *this, nolonger need to redeclare the _update_stats() for each class.
       }
 
     }
 
    protected:
-    void _update_stats() {
+    // former way to deal with the template of RefreshStat
+    /*    void _update_stats() {
       boost::fusion::for_each(this->_stat, RefreshStat_f<Nsbo>(*this));
-    }
+      }*/
 
   };
 

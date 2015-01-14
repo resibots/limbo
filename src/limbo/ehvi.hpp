@@ -58,7 +58,7 @@ namespace limbo {
 
       inner_optimization_t inner_opt;
 
-      while (this->_samples.size() == 0 || this->_pursue()) {
+      while (this->_samples.size() == 0 || this->_pursue(*this)) {
         std::cout.flush();
         this->template update_pareto_model<EvalFunction::dim>();
         this->update_pareto_data();
@@ -134,16 +134,19 @@ namespace limbo {
                   << this->_observations[this->_observations.size() - 1].transpose()
                   << std::endl;
 
-        _update_stats();
+        _update_stats(*this); // with the *this, nolonger need to redeclare the _update_stats() for each class.
         this->_iteration++;
       }
 
     }
 
    protected:
-    void _update_stats() {
-      boost::fusion::for_each(this->_stat, RefreshStat_f<Ehvi>(*this));
-    }
+    // former way to deal with the template of RefreshStat
+    /*    void _update_stats() {
+      boost::fusion::for_each(this->_stat, RefreshStat_f<Nsbo>(*this));
+      }*/
+
+
   };
 
 }

@@ -31,12 +31,15 @@ def configure(conf):
         conf.load('sferes')
         conf.load('xcode')
 
-	common_flags = "-Wall -std=c++11 "
+	if int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1])<47:
+                common_flags = "-Wall -std=c++0x "
+        else:
+                common_flags = "-Wall -std=c++11 "
 
 	cxxflags = conf.env['CXXFLAGS']
 	conf.check_boost(lib='serialization timer filesystem \
             system unit_test_framework program_options \
-            graph mpi thread',
+            graph thread',
             min_version='1.35')
         conf.check_eigen()
         conf.check_tbb()

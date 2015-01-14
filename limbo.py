@@ -2,6 +2,13 @@ import sys, os
 import subprocess
 import commands
 
+json_ok = True
+try:
+   import simplejson
+except:
+   json_ok = False
+   print "WARNING simplejson not found some function may not work"
+
 import glob
 
 def options(opt):
@@ -93,28 +100,38 @@ exec @exec
       mpirun = 'mpirun'
    else:
       nb_cores = 1; 
-      ppn = '8'
+      try: ppn = str(conf['ppn'])
+      except: ppn='8'
       mpirun = ''
    
    for i in range(0, nb_runs):
       for e in exps:
-         directory = res_dir + "/" + e + "/exp_" + str(i) 
+         if " " in e:
+            e_arg=e.replace(" ","_")
+            e, arg=e.split(' ',1)
+         else:
+            e_arg=e
+            arg=""
+         print e
+         print arg
+
+         directory = res_dir + "/" + e_arg + "/exp_" + str(i)
          try:
             os.makedirs(directory)
          except:
             print "WARNING, dir:" + directory + " not be created"
          subprocess.call('cp ' + bin_dir + '/' + e + ' ' + directory, shell=True)
-         fname = home + "/tmp/" + e + "_" + str(i) + ".job"
+         fname = home + "/tmp/" + e_arg + "_" + str(i) + ".job"
          f = open(fname, "w")
          f.write(tpl
-                 .replace("@exp", e)
+                 .replace("@exp", e_arg)
                  .replace("@email", email)
                  .replace("@ld_lib_path", ld_lib_path)
                  .replace("@wall_time", wall_time)
                  .replace("@dir", directory)
                  .replace("@nb_cores", str(nb_cores))
                  .replace("@ppn", ppn)
-                 .replace("@exec", mpirun + ' ' + directory + '/' + e + ' ' + args))
+                 .replace("@exec", mpirun + ' ' + directory + '/' + e + ' ' + args + ' ' + arg))
          f.close()
          s = "qsub -d " + directory + " " + fname
          print "executing:" + s

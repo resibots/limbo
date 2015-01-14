@@ -40,7 +40,7 @@ namespace limbo {
 
   template<typename BO>
   struct RefreshStat_f {
-    RefreshStat_f(BO &bo) : _bo(bo) {
+    RefreshStat_f(BO &bo) : _bo(bo) {// not const, because some stat class modify the optimizer....
     }
     BO& _bo;
     template<typename T>
@@ -154,6 +154,9 @@ namespace limbo {
     int iteration() const {
       return _iteration;
     }
+
+
+
     // does not update the model !
     // we don't add NaN and inf observations
     void add_new_sample(const Eigen::VectorXd& s, const obs_t& v) {
@@ -174,15 +177,15 @@ namespace limbo {
       if (this->_samples.empty())
         init_function_t()(feval, *this);
     }
-    bool _pursue() {
-      stopping_criterion::ChainCriteria<BoBase> truc(*this);
-      return boost::fusion::accumulate(_stopping_criteria, true, truc);
+    template<typename BO>
+    bool _pursue(const BO& bo) const {
+      stopping_criterion::ChainCriteria<BO> chain(bo); 
+      return boost::fusion::accumulate(_stopping_criteria, true, chain);
     }
-
-    void _update_stats() {
-      boost::fusion::for_each(_stat, RefreshStat_f<BoBase>(*this));
+    template<typename BO>
+    void _update_stats(BO& bo) { // not const, because some stat class modify the optimizer....
+      boost::fusion::for_each(_stat, RefreshStat_f<BO>(bo));
     }
-
     void _make_res_dir() {
       if (Params::boptimizer::dump_period() <= 0)
         return;

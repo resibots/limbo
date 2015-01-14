@@ -40,7 +40,7 @@ namespace limbo {
 
       inner_optimization_t inner_optimization;
 
-      while (this->_samples.size() == 0 || this->_pursue()) {
+      while (this->_samples.size() == 0 || this->_pursue(*this)) {
         acquisition_function_t acqui(model, this->_iteration);
 
         Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim());
@@ -50,7 +50,7 @@ namespace limbo {
                   << " => " << feval(new_sample).transpose() << std::endl;
         scalarized = _scalarize_obs();
         model.compute(this->_samples, scalarized, Params::boptimizer::noise());
-        this->_update_stats();
+        _update_stats(*this); // with the *this, nolonger need to redeclare the _update_stats() for each class.
 
         this->_iteration++;
       }
@@ -59,9 +59,10 @@ namespace limbo {
     }
 
    protected:
-    void _update_stats() {
-      boost::fusion::for_each(this->_stat, RefreshStat_f<Parego>(*this));
-    }
+    // former way to deal with the template of RefreshStat
+    /*    void _update_stats() {
+      boost::fusion::for_each(this->_stat, RefreshStat_f<Nsbo>(*this));
+      }*/
 
     std::vector<double> _scalarize_obs() {
       assert(this->_observations.size() != 0);
