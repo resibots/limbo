@@ -32,13 +32,13 @@ namespace limbo {
       }
     };
 
-    template<typename Params>
+    template<typename Params, typename ObsType=Eigen::VectorXd>
     struct MeanData {
       MeanData() {
       }
       template<typename GP>
-      double operator()(const Eigen::VectorXd& v, const GP& gp)const {
-        return  gp.mean_observation();
+      ObsType operator()(const Eigen::VectorXd& v, const GP& gp)const {
+        return  gp.mean_observation().array();
       }
     };
 

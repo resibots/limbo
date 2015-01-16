@@ -109,7 +109,7 @@ namespace limbo {
       typedef acquisition_functions::GP_UCB<Params, model_t> acqui_t; //4
       typedef stat::Acquisitions<Params> stat_t; //5
       typedef boost::fusion::vector<stopping_criterion::MaxIterations<Params> > stop_t; //6
-      typedef double obs_t; //7
+      typedef Eigen::VectorXd obs_t; //7
     };
 
     // extract the types

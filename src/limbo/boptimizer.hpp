@@ -7,6 +7,8 @@
 
 namespace limbo {
 
+  bool compareVectorXd(Eigen::VectorXd i, Eigen::VectorXd j) { return i(0)<j(0); }
+
   template <
     class Params
     , class A1 = boost::parameter::void_
@@ -27,9 +29,11 @@ namespace limbo {
 
     template<typename EvalFunction>
     void optimize(const EvalFunction& feval, bool reset = true) {
-      static_assert(std::is_floating_point<obs_t>::value, "BOptimizer wants double/double for obs");
+      //      static_assert(std::is_floating_point<obs_t>::value, "BOptimizer wants double/double for obs");
       this->_init(feval, reset);
+
       model_t model(EvalFunction::dim);
+      model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
 
       inner_optimization_t inner_optimization;
 
@@ -37,6 +41,7 @@ namespace limbo {
         acquisition_function_t acqui(model, this->_iteration);
 
         Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim());
+
         this->add_new_sample(new_sample, feval(new_sample));
 
         model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
@@ -44,8 +49,8 @@ namespace limbo {
 
         std::cout << this->_iteration << " new point: "
                   << this->_samples[this->_samples.size() - 1].transpose()
-                  << " value: " << this->_observations[this->_observations.size() - 1]
-                  << " best:" << this->best_observation()
+                  << " value: " << this->_observations[this->_observations.size() - 1].transpose()
+                  << " best:" << this->best_observation().transpose()
                   << std::endl;
 	
         this->_iteration++;
@@ -53,11 +58,11 @@ namespace limbo {
     }
 
     const obs_t& best_observation() const {
-      return *std::max_element(this->_observations.begin(), this->_observations.end());
+      return *std::max_element(this->_observations.begin(), this->_observations.end(),compareVectorXd);
     }
 
     const Eigen::VectorXd& best_sample() const {
-      auto max_e = std::max_element(this->_observations.begin(), this->_observations.end());
+      auto max_e = std::max_element(this->_observations.begin(), this->_observations.end(),compareVectorXd);
       return this->_samples[std::distance(this->_observations.begin(), max_e)];
     }
 

@@ -22,14 +22,14 @@ namespace limbo {
     };
   }
   namespace model {
-    template<typename Params, typename KernelFunction, typename MeanFunction>
+    template<typename Params, typename KernelFunction, typename MeanFunction, typename ObsType=Eigen::VectorXd>
     class GPAuto : public GP<Params, KernelFunction, MeanFunction> {
      public:
       // TODO : init KernelFunction with dim in GP
       GPAuto(int d) : GP<Params, KernelFunction, MeanFunction>(d) {}
 
       void compute(const std::vector<Eigen::VectorXd>& samples,
-                   const std::vector<double>& observations,
+                   const std::vector<ObsType>& observations,
                    double noise) {
 
         GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise);
@@ -43,7 +43,7 @@ namespace limbo {
         this->_kernel_function.set_h_params(h_params);
         if (update_kernel)
           this->_compute_kernel();
-        size_t n = this->_obs_mean.size();
+        size_t n = this->_obs_mean.rows();
 
         // --- cholesky ---
         // see: http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
@@ -52,7 +52,6 @@ namespace limbo {
 
         // alpha = K^{-1} * this->_obs_mean;
         double a = this->_obs_mean.dot(this->_alpha);
-
         return -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
       }
 

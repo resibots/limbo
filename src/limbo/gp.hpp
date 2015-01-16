@@ -1,3 +1,4 @@
+
 #ifndef GP_HPP_
 #define GP_HPP_
 
@@ -6,22 +7,24 @@
 #include <Eigen/LU>
 #include <Eigen/Cholesky>
 
-
 #include "kernel_functions.hpp"
 #include "mean_functions.hpp"
 
 namespace limbo {
   namespace model {
-    template<typename Params, typename KernelFunction, typename MeanFunction>
+
+
+    template<typename Params, typename KernelFunction, typename MeanFunction, typename ObsType= Eigen::VectorXd>
     class GP {
      public:
       GP() : _dim(-1) {}
-      // useful because the model might created  before having samples
+      // useful because the model might be created  before having samples
       GP(int d) : _dim(d), _kernel_function(d) {}
 
       void compute(const std::vector<Eigen::VectorXd>& samples,
-                   const std::vector<double>& observations,
+                   const std::vector<ObsType>& observations,
                    double noise) {
+
         if (_dim == -1) {
           assert(samples.size() != 0);
           assert(observations.size() != 0);
@@ -29,23 +32,29 @@ namespace limbo {
           _dim = samples[0].size();
         }
         _samples = samples;
-        _observations.resize(observations.size());
+        _observations.resize(observations.size(),observations[0].size());
         _noise = noise;
 
-        for (int i = 0; i < _observations.size(); ++i)
-          _observations(i) = observations[i];
-        _mean_observation = _observations.sum() / _observations.size();
+	int obs_dim=observations[0].size();
 
-        _mean_vector.resize(_samples.size());
-        for (int i = 0; i < _mean_vector.size(); i++)
-          _mean_vector(i) = _mean_function(_samples[i], *this);
+        for (int i = 0; i < _observations.rows(); ++i) 
+          _observations.row(i) = observations[i];
+	_mean_observation.resize(obs_dim);
+	for(int i=0; i< _observations.cols(); i++)
+	  _mean_observation(i) = _observations.col(i).sum() / _observations.rows();
+
+        _mean_vector.resize(_samples.size(),obs_dim);
+        for (int i = 0; i < _mean_vector.rows(); i++)
+	  _mean_vector.row(i) = ObsType::Zero(obs_dim)+_mean_function(_samples[i], *this); // small trick to accept either Double or Vector
         _obs_mean = _observations - _mean_vector;
 
+
         _compute_kernel();
+
       }
 
       // return mu, sigma (unormaliz)
-      std::tuple<double, double> query(const Eigen::VectorXd& v) const {
+      std::tuple<ObsType, double> query(const Eigen::VectorXd& v) const {
         if (_samples.size() == 0)
           return std::make_tuple(_mean_function(v, *this),
                                  sqrt(_kernel_function(v, v)));
@@ -54,7 +63,7 @@ namespace limbo {
         return std::make_tuple(_mu(v, k), _sigma(v, k));
       }
 
-      double mu(const Eigen::VectorXd& v) const {
+      ObsType mu(const Eigen::VectorXd& v) const {
         if (_samples.size() == 0)
           return _mean_function(v, *this);
         return _mu(v, _compute_k(v));
@@ -74,10 +83,12 @@ namespace limbo {
       const MeanFunction& mean_function() const {
         return _mean_function;
       }
-      double max_observation() const {
+      ObsType max_observation() const {  
+	if(_observations.cols()>1)
+	  std::cout<<"WARNING max_observation with multi dimensional observations doesn't make sense"<<std::endl;
         return _observations.maxCoeff();
       }
-      double mean_observation() const {
+      ObsType mean_observation() const {
         return _mean_observation;
       }
      protected:
@@ -86,13 +97,13 @@ namespace limbo {
       MeanFunction _mean_function;
 
       std::vector<Eigen::VectorXd> _samples;
-      Eigen::VectorXd _observations;
-      Eigen::VectorXd _mean_vector;
-      Eigen::VectorXd _obs_mean;
+      Eigen::MatrixXd _observations;
+      Eigen::MatrixXd _mean_vector;
+      Eigen::MatrixXd _obs_mean;
 
       double _noise;
-      Eigen::VectorXd _alpha;
-      double _mean_observation;
+      Eigen::MatrixXd _alpha;
+      ObsType _mean_observation;
 
       Eigen::MatrixXd _kernel;
       Eigen::MatrixXd _inverted_kernel;
@@ -101,9 +112,9 @@ namespace limbo {
 
       void _compute_kernel() {
         // O(n^2) [should be negligible]
-        _kernel.resize(_observations.size(), _observations.size());
-        for (int i = 0; i < _observations.size(); i++)
-          for (int j = 0; j < _observations.size(); ++j)
+        _kernel.resize(_samples.size(), _samples.size());
+        for (size_t i = 0; i < _samples.size(); i++)
+          for (size_t j = 0; j < _samples.size(); ++j)
             _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + _noise;
 
         // O(n^3)
@@ -114,10 +125,11 @@ namespace limbo {
         // alpha = K^{-1} * this->_obs_mean;
         _alpha = _llt.matrixL().solve(this->_obs_mean);
         _llt.matrixL().adjoint().solveInPlace(_alpha);
+
       }
 
-      double _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
-        return _mean_function(v, *this) + k.transpose() * _alpha;
+      ObsType _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
+        return  (k.transpose() * _alpha) + _mean_function(v, *this);
         //        return _mean_function(v)
         //               + (k.transpose() * _inverted_kernel * (_obs_mean))[0];
       }

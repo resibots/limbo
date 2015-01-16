@@ -31,9 +31,11 @@ namespace limbo {
         return _model.dim();
       }
       double operator()(const Eigen::VectorXd& v) const {
-        double mu, sigma;
-        std::tie(mu, sigma) = _model.query(v);
-        return (mu + Params::ucb::alpha() * sqrt(sigma));
+        //double mu, sigma;
+        //std::tie(mu, sigma) = _model.query(v);
+        //return (mu + Params::ucb::alpha() * sqrt(sigma));
+
+	return (_model.mu(v)(0) + Params::ucb::alpha() * sqrt(_model.sigma(v)));
       }
      protected:
       const Model& _model;
@@ -55,9 +57,10 @@ namespace limbo {
         return _model.dim();
       }
       double operator()(const Eigen::VectorXd& v) const {
-        double mu, sigma;
-        std::tie(mu, sigma) = _model.query(v);
-        return (mu + _beta * sqrt(sigma));
+        //double mu, sigma;
+        //std::tie(mu, sigma) = _model.query(v);
+        //return (mu + _beta * sqrt(sigma));
+	return (_model.mu(v)(0) + _beta * sqrt(_model.sigma(v)));
       }
      protected:
       const Model& _model;

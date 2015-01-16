@@ -60,7 +60,7 @@ def qsub(conf_file):
 # maximum execution time
 #PBS -l walltime=@wall_time
 # mail parameters
-#PBS -m abe
+
 # number of nodes
 #PBS -l nodes=@nb_cores:ppn=@ppn
 #PBS -l pmem=5200mb -l mem=5200mb

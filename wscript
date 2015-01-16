@@ -18,6 +18,7 @@ def options(opt):
         opt.load('tbb')
         opt.load('sferes')
 	opt.load('limbo')
+	opt.load('ode')
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         for i in glob.glob('exp/*'):
                 opt.recurse(i)
@@ -42,14 +43,18 @@ def configure(conf):
         conf.check_eigen()
         conf.check_tbb()
         conf.check_sferes()
+	conf.check_ode()
         if conf.is_defined('USE_TBB'):
                 common_flags += " -DUSE_TBB"
 
         if conf.is_defined('USE_SFERES'):
                 common_flags += " -DUSE_SFERES -DSFERES_FAST_DOMSORT"
 
+        if conf.env['CXXFLAGS_ODE']:
+                common_flags += ' '+ conf.env['CXXFLAGS_ODE']
+
         opt_flags = common_flags + ' -O3 -msse2  -g'
-        conf.env['CXXFLAGS'] = cxxflags + opt_flags.split(' ')
+        conf.env['CXXFLAGS']= cxxflags + opt_flags.split(' ')
         print conf.env['CXXFLAGS']
 
         if conf.options.exp:

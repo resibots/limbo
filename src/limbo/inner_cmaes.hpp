@@ -30,13 +30,13 @@ namespace limbo {
       Cmaes() {}
       template <typename AcquisitionFunction>
       Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim) const {
-        return this->operator()(acqui, dim, Eigen::VectorXd::Constant(dim, 0.5));
+	return this->operator()(acqui, dim, Eigen::VectorXd::Constant(dim, 0.5));
       }
       template <typename AcquisitionFunction>
       Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim, const Eigen::VectorXd& init) const {
         int nrestarts = Params::cmaes::nrestarts();
         double incpopsize = 2;
-        cmaes_t evo;
+	cmaes_t evo;        
         double *const*pop;
         double *fitvals;
         double fbestever = 0, *xbestever = NULL;
@@ -53,8 +53,11 @@ namespace limbo {
         double init_point[dim];
         for (int i = 0; i < dim; ++i)
           init_point[i] = init(i);
+
         for (irun = 0; irun < nrestarts + 1; ++irun) {
+
           fitvals = cmaes_init(&evo, acqui.dim(), init_point, NULL, 0, lambda, NULL);
+
           evo.countevals = countevals;
           evo.sp.stopMaxFunEvals =
             Params::cmaes::max_fun_evals() < 0 ?
@@ -70,13 +73,14 @@ namespace limbo {
           while (!(stop = cmaes_TestForTermination(&evo))) {
             pop = cmaes_SamplePopulation(&evo);
             par::loop(0, pop_size, [&](int i) {
-              boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim);
-              for (int j = 0; j < dim; ++j)
-                pop_eigen[i](j) = x_in_bounds[j];
-              fitvals[i] = -acqui(pop_eigen[i]);
-            });
+		boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim);
+		for (int j = 0; j < dim; ++j)
+		  pop_eigen[i](j) = x_in_bounds[j];
+		fitvals[i] = -acqui(pop_eigen[i]);
+	      });
             cmaes_UpdateDistribution(&evo, fitvals);
           }
+
           for (int i = 0; i < pop_size; ++i)
             free(all_x_in_bounds[i]);
 
@@ -97,7 +101,7 @@ namespace limbo {
             xbestever = cmaes_GetInto(&evo, "xmean", xbestever);
           }
 
-          cmaes_exit(&evo);
+	  cmaes_exit(&evo);
 
           if (stop) {
             if (strncmp(stop, "Fitness", 7) == 0 || strncmp(stop, "MaxFunEvals", 11) == 0) {
