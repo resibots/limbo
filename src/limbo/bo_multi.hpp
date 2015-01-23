@@ -125,6 +125,8 @@ namespace limbo {
       typedef sferes::modif::Dummy<> modifier_t;
       typedef sferes::ea::Nsga2<phen_t, eval_t, stat_t, modifier_t, multi::SferesParams> nsga2_t;
 
+      // commented to remove a dependency to a particular version of sferes
+      /*
       nsga2_t ea;
       ea.set_fit_proto(multi::SferesFit<model_t>(_models));
       ea.run();
@@ -142,7 +144,7 @@ namespace limbo {
           sigma(i) = _models[i].sigma(point);
         }
         _pareto_model[p] = std::make_tuple(point, objs, sigma);
-      }
+      }*/
 
     }
 

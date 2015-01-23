@@ -25,7 +25,7 @@ namespace rprop {
 
     Eigen::VectorXd delta = Eigen::VectorXd::Ones(param_dim) * delta0;
     Eigen::VectorXd grad_old = Eigen::VectorXd::Zero(param_dim);
-    Eigen::VectorXd params = (Eigen::VectorXd::Random(param_dim).array() + 1);
+    Eigen::VectorXd params = (Eigen::VectorXd::Random(param_dim).array() + 1) / 10.0;
     Eigen::VectorXd best_params = params;
     double best = log(0);
 
