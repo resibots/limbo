@@ -56,7 +56,7 @@ namespace limbo {
     template<typename Params>
     struct SquaredExpARD {
       SquaredExpARD(int dim) : _sf2(0), _ell(dim), _input_dim(dim){
-	this->set_h_params(Eigen::VectorXd::Ones(_ell.size()+1));
+        this->set_h_params(Eigen::VectorXd::Ones(_ell.size()+1)*-1);        
       }
       size_t h_params_size() const {
         return _ell.size() + 1;

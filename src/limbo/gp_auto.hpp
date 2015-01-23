@@ -108,7 +108,7 @@ namespace limbo {
             return gp.log_likelihood_grad(v, false);
           },
           this->kernel_function().h_params_size(), Params::gp_auto::n_rprop());
-          double lik = this->log_likelihood(v);
+          double lik = gp.log_likelihood(v);
           return std::make_pair(v, lik);
         };
         auto comp = [](const pair_t& v1, const pair_t& v2) {
