@@ -69,7 +69,7 @@ namespace limbo {
         //  Eigen::MatrixXd w = alpha * alpha.transpose() - this->_inverted_kernel;
 
         // alpha = K^{-1} * this->_obs_mean;
-        Eigen::VectorXd alpha = this->_llt.solve(this->_obs_mean);
+        Eigen::VectorXd alpha = this->_llt.matrixL().solve(this->_obs_mean);
         this->_llt.matrixL().adjoint().solveInPlace(alpha);
 
         // K^{-1} using Cholesky decomposition
