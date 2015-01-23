@@ -33,27 +33,38 @@ namespace limbo {
       this->_init(feval, reset);
 
       model_t model(EvalFunction::dim);
-      model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
+      if(this->_observations.size())
+	 model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
 
       inner_optimization_t inner_optimization;
 
       while (this->_samples.size() == 0 || this->_pursue(*this)) {
+
+	
         acquisition_function_t acqui(model, this->_iteration);
 
-        Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim());
+	Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim());
 
         this->add_new_sample(new_sample, feval(new_sample));
-
-        model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
-        this->_update_stats(*this);
+	
 
         std::cout << this->_iteration << " new point: "
                   << this->_samples[this->_samples.size() - 1].transpose()
                   << " value: " << this->_observations[this->_observations.size() - 1].transpose()
+	  //	  << " mu: "<< model.mu(this->_samples[this->_samples.size() - 1]).transpose()
+	  //	  << " sigma: "<< model.sigma(this->_samples[this->_samples.size() - 1])
+	  //	  << " acqui: "<< acqui(this->_samples[this->_samples.size() - 1])
                   << " best:" << this->best_observation().transpose()
                   << std::endl;
+
+
+        model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
+
+        this->_update_stats(*this);
+
 	
         this->_iteration++;
+
       }
     }
 

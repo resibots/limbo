@@ -33,10 +33,16 @@ namespace limbo {
                    double noise) {
 
         GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise);
-        _optimize_likelihood();
+	  _optimize_likelihood();
+
+
         this->_compute_kernel();
       }
 
+      Eigen::VectorXd check_inverse(){
+
+	return this->_kernel*this->_alpha.col(0) - this->_obs_mean;
+      }
       // see Rasmussen and Williams, 2006 (p. 113)
       double log_likelihood(const Eigen::VectorXd& h_params,
                             bool update_kernel = true) {
@@ -51,8 +57,12 @@ namespace limbo {
         long double det = 2 * l.diagonal().array().log().sum();
 
         // alpha = K^{-1} * this->_obs_mean;
-        double a = this->_obs_mean.dot(this->_alpha);
-        return -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
+
+	//        double a = this->_obs_mean.col(0).dot(this->_alpha.col(0));
+        double a = (this->_obs_mean.transpose() * this->_alpha).trace();  // generalization for multi dimensional observation
+	//	std::cout<<" a: "<<a <<" det: "<< det<<std::endl;
+	double lik= -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
+        return lik;
       }
 
       // see Rasmussen and Williams, 2006 (p. 114)
@@ -61,14 +71,14 @@ namespace limbo {
         this->_kernel_function.set_h_params(h_params);
         if (update_kernel)
           this->_compute_kernel();
-        size_t n = this->_observations.size();
+        size_t n = this->_observations.rows();
 
         /// what we should write, but it is less numerically stable than using the Cholesky decomposition
         // Eigen::MatrixXd alpha = this->_inverted_kernel * this->_obs_mean;
         //  Eigen::MatrixXd w = alpha * alpha.transpose() - this->_inverted_kernel;
 
         // alpha = K^{-1} * this->_obs_mean;
-        Eigen::VectorXd alpha = this->_llt.solve(this->_obs_mean);
+        Eigen::MatrixXd alpha = this->_llt.matrixL().solve(this->_obs_mean);
         this->_llt.matrixL().adjoint().solveInPlace(alpha);
 
         // K^{-1} using Cholesky decomposition
@@ -107,7 +117,8 @@ namespace limbo {
             return gp.log_likelihood_grad(v, false);
           },
           this->kernel_function().h_params_size(), Params::gp_auto::n_rprop());
-          double lik = this->log_likelihood(v);
+
+          double lik = gp.log_likelihood(v);//this->log_likelihood(v);
           return std::make_pair(v, lik);
         };
         auto comp = [](const pair_t& v1, const pair_t& v2) {

@@ -243,7 +243,7 @@ cmaes_init(cmaes_t *t, /* "this" */
   double dtest, trace;
   static const char * version = "3.11.02.beta";
 
-  /*   if (t->version && strcmp(version, t->version) == 0) {
+  /*if (t->version!=NULL && strcmp(version, t->version) == 0) {
     ERRORMESSAGE("cmaes_init called twice, which will lead to a memory leak, use cmaes_exit first",0,0,0);
     printf("Warning: cmaes_init called twice, which will lead to a memory leak, use cmaes_exit first\n");
     }*/

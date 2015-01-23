@@ -19,7 +19,7 @@ namespace limbo {
 
   namespace defaults {
     struct cmaes {
-      BO_PARAM(int, nrestarts, 10);
+      BO_PARAM(int, nrestarts, 1);
       BO_PARAM(double, max_fun_evals, -1);
     };
   }
@@ -34,6 +34,8 @@ namespace limbo {
       }
       template <typename AcquisitionFunction>
       Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim, const Eigen::VectorXd& init) const {
+
+
         int nrestarts = Params::cmaes::nrestarts();
         double incpopsize = 2;
 	cmaes_t evo;        
@@ -72,10 +74,10 @@ namespace limbo {
 
           while (!(stop = cmaes_TestForTermination(&evo))) {
             pop = cmaes_SamplePopulation(&evo);
-            par::loop(0, pop_size, [&](int i) {
+	    par::loop(0, pop_size, [&](int i){
 		boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim);
 		for (int j = 0; j < dim; ++j)
-		  pop_eigen[i](j) = x_in_bounds[j];
+		  pop_eigen[i](j) = all_x_in_bounds[i][j];
 		fitvals[i] = -acqui(pop_eigen[i]);
 	      });
             cmaes_UpdateDistribution(&evo, fitvals);

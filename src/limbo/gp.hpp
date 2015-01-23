@@ -6,6 +6,7 @@
 #include <Eigen/Core>
 #include <Eigen/LU>
 #include <Eigen/Cholesky>
+#include <limits>
 
 #include "kernel_functions.hpp"
 #include "mean_functions.hpp"
@@ -25,12 +26,14 @@ namespace limbo {
                    const std::vector<ObsType>& observations,
                    double noise) {
 
+
         if (_dim == -1) {
           assert(samples.size() != 0);
           assert(observations.size() != 0);
           assert(samples.size() == observations.size());
           _dim = samples[0].size();
         }
+
         _samples = samples;
         _observations.resize(observations.size(),observations[0].size());
         _noise = noise;
@@ -45,7 +48,7 @@ namespace limbo {
 
         _mean_vector.resize(_samples.size(),obs_dim);
         for (int i = 0; i < _mean_vector.rows(); i++)
-	  _mean_vector.row(i) = ObsType::Zero(obs_dim)+_mean_function(_samples[i], *this); // small trick to accept either Double or Vector
+	  _mean_vector.row(i) = _mean_function(_samples[i], *this); 
         _obs_mean = _observations - _mean_vector;
 
 
@@ -91,6 +94,8 @@ namespace limbo {
       ObsType mean_observation() const {
         return _mean_observation;
       }
+
+      const Eigen::MatrixXd& mean_vector() const{return _mean_vector;}
      protected:
       int _dim;
       KernelFunction _kernel_function;
@@ -111,11 +116,13 @@ namespace limbo {
       Eigen::LLT<Eigen::MatrixXd> _llt;
 
       void _compute_kernel() {
+
         // O(n^2) [should be negligible]
         _kernel.resize(_samples.size(), _samples.size());
         for (size_t i = 0; i < _samples.size(); i++)
           for (size_t j = 0; j < _samples.size(); ++j)
-            _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + _noise;
+            _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i==j)?_noise:0);
+
 
         // O(n^3)
         //  _inverted_kernel = _kernel.inverse();
@@ -129,16 +136,20 @@ namespace limbo {
       }
 
       ObsType _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
-        return  (k.transpose() * _alpha) + _mean_function(v, *this);
+        return  (k.transpose() * _alpha) + _mean_function(v, *this).transpose();
+
         //        return _mean_function(v)
         //               + (k.transpose() * _inverted_kernel * (_obs_mean))[0];
       }
       double _sigma(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
         Eigen::VectorXd z = _llt.matrixL().solve(k);
-        return  _kernel_function(v, v) - z.dot(z);
+	double res= _kernel_function(v, v) - z.dot(z);
+	return (res<=std::numeric_limits<double>::epsilon())?0:res;
+
         //        return  _kernel_function(v, v) - (k.transpose() * _inverted_kernel * k)[0];
       }
       Eigen::VectorXd _compute_k(const Eigen::VectorXd& v) const {
+
         Eigen::VectorXd k(_samples.size());
         for (int i = 0; i < k.size(); i++)
           k[i] = _kernel_function(_samples[i], v);
