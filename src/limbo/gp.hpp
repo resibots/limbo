@@ -104,7 +104,8 @@ namespace limbo {
         _kernel.resize(_observations.size(), _observations.size());
         for (int i = 0; i < _observations.size(); i++)
           for (int j = 0; j < _observations.size(); ++j)
-            _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + _noise;
+            _kernel(i, j) = _kernel_function(_samples[i], _samples[j])
+                  +  ( (i==j) ? _noise : 0); // noise only on the diagonal
 
         // O(n^3)
         //  _inverted_kernel = _kernel.inverse();
