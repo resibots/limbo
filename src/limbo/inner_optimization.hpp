@@ -10,6 +10,17 @@
 namespace limbo {
   namespace inner_optimization {
     template <typename Params>
+    struct Random {
+      
+      Random() {}
+      
+      template <typename AcquisitionFunction>
+      Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim) const {
+        return Eigen::VectorXd::Random(dim);
+      }
+    };
+
+    template <typename Params>
     struct ExhaustiveSearch {
 
       ExhaustiveSearch() {
