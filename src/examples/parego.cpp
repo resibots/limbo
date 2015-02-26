@@ -25,7 +25,8 @@ struct Params {
 
 
 struct zdt2 {
-  static constexpr size_t dim = 30;
+  static constexpr size_t dim_in = 30;
+  static constexpr size_t dim_out = 2;
   Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::VectorXd res(2);
     double f1 = x(0);
@@ -41,7 +42,8 @@ struct zdt2 {
 };
 
 struct mop2 {
-  static constexpr size_t dim = 2;
+  static constexpr size_t dim_in = 2;
+  static constexpr size_t dim_out = 2;
   Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::VectorXd res(2);
     // scale to [-2, 2]

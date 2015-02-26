@@ -29,11 +29,11 @@ namespace limbo {
     struct Cmaes {
       Cmaes() {}
       template <typename AcquisitionFunction>
-      Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim) const {
-	return this->operator()(acqui, dim, Eigen::VectorXd::Constant(dim, 0.5));
+      Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in) const {
+	return this->operator()(acqui, dim_in, Eigen::VectorXd::Constant(dim_in, 0.5));
       }
       template <typename AcquisitionFunction>
-      Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim, const Eigen::VectorXd& init) const {
+      Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const Eigen::VectorXd& init) const {
 
 
         int nrestarts = Params::cmaes::nrestarts();
@@ -51,32 +51,32 @@ namespace limbo {
         int nb_bounds = 1; /* numbers used from lower and upperBounds */
 
         boundary_transformation_init(&boundaries, lowerBounds, upperBounds, nb_bounds);
-        double* x_in_bounds = cmaes_NewDouble(dim);
-        double init_point[dim];
-        for (int i = 0; i < dim; ++i)
+        double* x_in_bounds = cmaes_NewDouble(dim_in);
+        double init_point[dim_in];
+        for (int i = 0; i < dim_in; ++i)
           init_point[i] = init(i);
 
         for (irun = 0; irun < nrestarts + 1; ++irun) {
 
-          fitvals = cmaes_init(&evo, acqui.dim(), init_point, NULL, 0, lambda, NULL);
+          fitvals = cmaes_init(&evo, acqui.dim_in(), init_point, NULL, 0, lambda, NULL);
 
           evo.countevals = countevals;
           evo.sp.stopMaxFunEvals =
             Params::cmaes::max_fun_evals() < 0 ?
-            (900.0 * (dim + 3.0) * (dim + 3.0))
+            (900.0 * (dim_in + 3.0) * (dim_in + 3.0))
             : Params::cmaes::max_fun_evals();
 
           int pop_size =  cmaes_Get(&evo, "popsize");
           double** all_x_in_bounds = new double*[pop_size];
           for (int i = 0; i < pop_size; ++i)
-            all_x_in_bounds[i] = cmaes_NewDouble(dim);
-          std::vector<Eigen::VectorXd> pop_eigen(pop_size, Eigen::VectorXd(dim));
+            all_x_in_bounds[i] = cmaes_NewDouble(dim_in);
+          std::vector<Eigen::VectorXd> pop_eigen(pop_size, Eigen::VectorXd(dim_in));
 
           while (!(stop = cmaes_TestForTermination(&evo))) {
             pop = cmaes_SamplePopulation(&evo);
 	    par::loop(0, pop_size, [&](int i){
-		boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim);
-		for (int j = 0; j < dim; ++j)
+		boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim_in);
+		for (int j = 0; j < dim_in; ++j)
 		  pop_eigen[i](j) = all_x_in_bounds[i][j];
 		fitvals[i] = -acqui(pop_eigen[i]);
 	      });
@@ -94,7 +94,7 @@ namespace limbo {
             xbestever = cmaes_GetInto(&evo, "xbestever", xbestever); /* alloc mem if needed */
           }
           const double *xmean = cmaes_GetPtr(&evo, "xmean");
-          Eigen::VectorXd v(acqui.dim());
+          Eigen::VectorXd v(acqui.dim_in());
           for (int j = 0; j < v.size(); ++j)
             v(j) = xmean[j];
 
@@ -112,10 +112,10 @@ namespace limbo {
             }
           }
         }
-        boundary_transformation(&boundaries, xbestever, x_in_bounds, dim);
+        boundary_transformation(&boundaries, xbestever, x_in_bounds, dim_in);
 
-        Eigen::VectorXd result = Eigen::VectorXd::Zero(acqui.dim());
-        for (size_t i = 0; i < acqui.dim(); ++i)
+        Eigen::VectorXd result = Eigen::VectorXd::Zero(acqui.dim_in());
+        for (size_t i = 0; i < acqui.dim_in(); ++i)
           result(i) = x_in_bounds[i];
         free(xbestever);
         boundary_transformation_exit(&boundaries);

@@ -27,8 +27,11 @@ namespace limbo {
      public:
       UCB(const Model& model, int iteration = 0) : _model(model) {
       }
-      size_t dim() const {
-        return _model.dim();
+      size_t dim_in() const {
+        return _model.dim_in();
+      }
+      size_t dim_out() const {
+        return _model.dim_out();
       }
       double operator()(const Eigen::VectorXd& v) const {
         //double mu, sigma;
@@ -53,8 +56,11 @@ namespace limbo {
         static constexpr double pi2 = M_PI * M_PI;
         _beta = sqrtf(2.0 * log(t3 * pi2 / delta3));
       }
-      size_t dim() const {
-        return _model.dim();
+      size_t dim_in() const {
+        return _model.dim_in();
+      }
+      size_t dim_out() const {
+        return _model.dim_out();
       }
       double operator()(const Eigen::VectorXd& v) const {
         //double mu, sigma;

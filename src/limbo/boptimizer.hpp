@@ -32,10 +32,9 @@ namespace limbo {
       //      static_assert(std::is_floating_point<obs_t>::value, "BOptimizer wants double/double for obs");
       this->_init(feval, reset);
 
-      model_t model(EvalFunction::dim);
+      model_t model(EvalFunction::dim_in, EvalFunction::dim_out);
       if(this->_observations.size())
 	 model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
-
       inner_optimization_t inner_optimization;
 
       while (this->_samples.size() == 0 || this->_pursue(*this)) {
@@ -43,7 +42,7 @@ namespace limbo {
 	
         acquisition_function_t acqui(model, this->_iteration);
 
-	Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim());
+	Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in());
 
         this->add_new_sample(new_sample, feval(new_sample));
 	

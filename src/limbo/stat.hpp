@@ -38,7 +38,7 @@ namespace limbo {
         if (bo.dump_enabled())
           (*this->_log_file) << bo.iteration() << " new point: "
                              << bo.samples()[bo.samples().size() - 1].transpose()
-                             << " value: " << bo.observations()[bo.observations().size() - 1]
+                             << " value: " << bo.observations()[bo.observations().size() - 1].transpose()
                              << std::endl;
 
       }

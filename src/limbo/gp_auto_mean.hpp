@@ -1,5 +1,5 @@
-#ifndef GP_AUTO_HPP_
-#define GP_AUTO_HPP_
+#ifndef GP_AUTO_MEAN_HPP_
+#define GP_AUTO_MEAN_HPP_
 
 #include <limits>
 #include <cassert>
@@ -16,17 +16,17 @@
 
 namespace limbo {
   namespace defaults {
-    struct gp_auto {
+    struct gp_auto_mean {
       BO_PARAM(int, n_rprop, 100);
       BO_PARAM(int, rprop_restart, 100);
     };
   }
   namespace model {
     template<typename Params, typename KernelFunction, typename MeanFunction, typename ObsType=Eigen::VectorXd>
-    class GPAuto : public GP<Params, KernelFunction, MeanFunction> {
+    class GPAutoMean : public GP<Params, KernelFunction, MeanFunction> {
      public:
       // TODO : init KernelFunction with dim in GP
-      GPAuto(int dim_in, int dim_out) : GP<Params, KernelFunction, MeanFunction>(dim_in, dim_out) {}
+      GPAutoMean(int dim_in, int dim_out) : GP<Params, KernelFunction, MeanFunction>(dim_in, dim_out) {std::cout<<" H PARAMS SIZE: "<<this->_kernel_function.h_params_size()<<std::endl;}
 
       void compute(const std::vector<Eigen::VectorXd>& samples,
                    const std::vector<ObsType>& observations,
@@ -34,7 +34,8 @@ namespace limbo {
 
         GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise);
 	  _optimize_likelihood();
-
+	  //	  std::cout<<"kernel params: "<<this->_kernel_function.h_params().transpose()<<std::endl;
+	  //      std::cout<<"mean params: "<<this->_mean_function.h_params().transpose()<<std::endl;
 
         this->_compute_kernel();
       }
@@ -46,9 +47,12 @@ namespace limbo {
       // see Rasmussen and Williams, 2006 (p. 113)
       virtual double log_likelihood(const Eigen::VectorXd& h_params,
                             bool update_kernel = true) {
-        this->_kernel_function.set_h_params(h_params);
-        if (update_kernel)
+        this->_kernel_function.set_h_params(h_params.head(this->_kernel_function.h_params_size()));
+	this->_mean_function.set_h_params(h_params.tail(this->_mean_function.h_params_size()));
+        if (update_kernel){
           this->_compute_kernel();
+	  this->_compute_obs_mean();
+	}
         size_t n = this->_obs_mean.rows();
 
         // --- cholesky ---
@@ -68,7 +72,9 @@ namespace limbo {
       // see Rasmussen and Williams, 2006 (p. 114)
       virtual Eigen::VectorXd log_likelihood_grad(const Eigen::VectorXd& h_params,
                                           bool update_kernel = true) {
-        this->_kernel_function.set_h_params(h_params);
+        this->_kernel_function.set_h_params(h_params.head(this->_kernel_function.h_params_size()));
+	this->_mean_function.set_h_params(h_params.tail(this->_mean_function.h_params_size()));
+
         if (update_kernel)
           this->_compute_kernel();
         size_t n = this->_observations.rows();
@@ -82,26 +88,32 @@ namespace limbo {
         this->_llt.matrixL().adjoint().solveInPlace(alpha);
 
         // K^{-1} using Cholesky decomposition
-        Eigen::MatrixXd w = Eigen::MatrixXd::Identity(n, n);
-        this->_llt.matrixL().solveInPlace(w);
-        this->_llt.matrixL().transpose().solveInPlace(w);
-
+        Eigen::MatrixXd K = Eigen::MatrixXd::Identity(n, n);
+        this->_llt.matrixL().solveInPlace(K);
+        this->_llt.matrixL().transpose().solveInPlace(K);
+	
         // alpha * alpha.transpose() - K^{-1}
-        w = alpha * alpha.transpose() - w;
+	Eigen::MatrixXd w = alpha * alpha.transpose() - K;
 
         // only compute half of the matrix (symmetrical matrix)
         Eigen::VectorXd grad =
-          Eigen::VectorXd::Zero(this->_kernel_function.h_params_size());
+          Eigen::VectorXd::Zero(this->_kernel_function.h_params_size()+this->_mean_function.h_params_size());
         for (size_t i = 0; i < n; ++i) {
           for (size_t j = 0; j <= i; ++j) {
             Eigen::VectorXd g = this->_kernel_function.grad(this->_samples[i], this->_samples[j]);
             if (i == j)
-              grad += w(i, j) * g * 0.5;
+              grad.head(this->_kernel_function.h_params_size()) += w(i, j) * g * 0.5;
             else
-              grad += w(i, j) * g;
+              grad.head(this->_kernel_function.h_params_size()) += w(i, j) * g;
           }
         }
-        return grad;
+	for (int i_obs = 0; i_obs < this->_dim_out; ++i_obs)
+	  for (size_t n_obs=0;n_obs< n;n_obs++)
+	    {
+	      //std::cout<<"mean grad for "<<this->_samples[n_obs].transpose()<<std::endl<<this->_mean_function.grad(this->_samples[n_obs],*this)<<std::endl;
+	      grad.tail(this->_mean_function.h_params_size())+=this->_obs_mean.col(i_obs).transpose() * K.col(n_obs) * this->_mean_function.grad(this->_samples[n_obs],*this).row(i_obs);
+	    }
+	return grad;
       }
      protected:
       virtual void _optimize_likelihood() {
@@ -116,7 +128,7 @@ namespace limbo {
           [&](const Eigen::VectorXd & v) {
             return gp.log_likelihood_grad(v, false);
           },
-          this->kernel_function().h_params_size(), Params::gp_auto::n_rprop());
+	    this->kernel_function().h_params_size()+this->_mean_function.h_params_size(), Params::gp_auto_mean::n_rprop());
 
           double lik = gp.log_likelihood(v);//this->log_likelihood(v);
           return std::make_pair(v, lik);
@@ -125,9 +137,10 @@ namespace limbo {
           return v1.second > v2.second;
         };
         pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
-        auto m = par::max(init, Params::gp_auto::rprop_restart(), body, comp);
+        auto m = par::max(init, Params::gp_auto_mean::rprop_restart(), body, comp);
         std::cout << "likelihood:" << m.second << std::endl;
-        this->_kernel_function.set_h_params(m.first);
+        this->_kernel_function.set_h_params(m.first.head(this->_kernel_function.h_params_size()));
+        this->_mean_function.set_h_params(m.first.tail(this->_mean_function.h_params_size()));
 
       }
     };

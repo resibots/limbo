@@ -41,8 +41,11 @@ class UCB_multi {
 public:
   UCB_multi(const Model& model, int iteration = 0) : _model(model) {
   }
-  size_t dim() const {
-    return _model.dim();
+  size_t dim_in() const {
+    return _model.dim_in();
+  }
+  size_t dim_out() const {
+    return _model.dim_out();
   }
   double operator()(const Eigen::VectorXd& v) const {
     //double mu, sigma;
@@ -59,7 +62,8 @@ protected:
 
 
 struct fit_eval {
-  static constexpr size_t dim = 2;
+  static constexpr size_t dim_in = 2;
+  static constexpr size_t dim_out = 2;
   Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::VectorXd res(2);
     res(0) = 0;

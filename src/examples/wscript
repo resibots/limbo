@@ -16,6 +16,12 @@ def build(bld):
                           uselib =  'BOOST EIGEN TBB',
                           use = 'limbo')
 	obj = bld.program(features = 'cxx',
+                          source = 'obs_multi_auto_mean.cpp',
+                          includes = '. .. ../../',
+                          target = 'obs_multi_auto_mean',
+                          uselib =  'BOOST EIGEN TBB',
+                          use = 'limbo')
+	obj = bld.program(features = 'cxx',
                           source = 'parego.cpp',
                           includes = '. .. ../../',
                           target = 'parego',

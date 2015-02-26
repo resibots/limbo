@@ -18,43 +18,38 @@ namespace limbo {
     template<typename Params, typename KernelFunction, typename MeanFunction, typename ObsType= Eigen::VectorXd>
     class GP {
      public:
-      GP() : _dim(-1) {}
+      GP() : _dim_in(-1), _dim_out(-1) {}
       // useful because the model might be created  before having samples
-      GP(int d) : _dim(d), _kernel_function(d) {}
+      GP(int dim_in, int dim_out) : _dim_in(dim_in),_dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
       void compute(const std::vector<Eigen::VectorXd>& samples,
                    const std::vector<ObsType>& observations,
                    double noise) {
 
 
-        if (_dim == -1) {
+        if (_dim_in == -1) {
           assert(samples.size() != 0);
           assert(observations.size() != 0);
           assert(samples.size() == observations.size());
-          _dim = samples[0].size();
+          _dim_in = samples[0].size();
+	  _dim_out= observations[0].size();
         }
 
         _samples = samples;
         _observations.resize(observations.size(),observations[0].size());
         _noise = noise;
 
-	int obs_dim=observations[0].size();
-
         for (int i = 0; i < _observations.rows(); ++i) 
           _observations.row(i) = observations[i];
-	_mean_observation.resize(obs_dim);
+	_mean_observation.resize(_dim_out);
 	for(int i=0; i< _observations.cols(); i++)
 	  _mean_observation(i) = _observations.col(i).sum() / _observations.rows();
 
-        _mean_vector.resize(_samples.size(),obs_dim);
-        for (int i = 0; i < _mean_vector.rows(); i++)
-	  _mean_vector.row(i) = _mean_function(_samples[i], *this); 
-        _obs_mean = _observations - _mean_vector;
-
-
+	_compute_obs_mean();
         _compute_kernel();
 
       }
+
 
       // return mu, sigma (unormaliz)
       std::tuple<ObsType, double> query(const Eigen::VectorXd& v) const {
@@ -76,9 +71,13 @@ namespace limbo {
           return sqrt(_kernel_function(v, v));
         return _sigma(v, _compute_k(v));
       }
-      int dim() const {
-        assert(_dim != -1);//need to compute first !
-        return _dim;
+      int dim_in() const {
+        assert(_dim_in != -1);//need to compute first !
+        return _dim_in;
+      }
+      int dim_out() const {
+        assert(_dim_out != -1);//need to compute first !
+        return _dim_out;
       }
       const KernelFunction& kernel_function() const {
         return _kernel_function;
@@ -88,7 +87,7 @@ namespace limbo {
       }
       ObsType max_observation() const {  
 	if(_observations.cols()>1)
-	  std::cout<<"WARNING max_observation with multi dimensional observations doesn't make sense"<<std::endl;
+	  std::cout<<"WARNING max_observation with multi dim_inensional observations doesn't make sense"<<std::endl;
         return _observations.maxCoeff();
       }
       ObsType mean_observation() const {
@@ -97,7 +96,8 @@ namespace limbo {
 
       const Eigen::MatrixXd& mean_vector() const{return _mean_vector;}
      protected:
-      int _dim;
+      int _dim_in;
+      int _dim_out;
       KernelFunction _kernel_function;
       MeanFunction _mean_function;
 
@@ -111,9 +111,16 @@ namespace limbo {
       ObsType _mean_observation;
 
       Eigen::MatrixXd _kernel;
-      Eigen::MatrixXd _inverted_kernel;
+      //      Eigen::MatrixXd _inverted_kernel;
       Eigen::MatrixXd _l_matrix;
       Eigen::LLT<Eigen::MatrixXd> _llt;
+
+      void _compute_obs_mean(){
+	_mean_vector.resize(_samples.size(),_dim_out);
+        for (int i = 0; i < _mean_vector.rows(); i++)
+	  _mean_vector.row(i) = _mean_function(_samples[i], *this); 
+        _obs_mean = _observations - _mean_vector;
+      }
 
       void _compute_kernel() {
 

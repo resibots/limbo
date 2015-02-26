@@ -37,7 +37,8 @@ struct Params {
 };
 
 struct fit_eval {
-  static constexpr size_t dim = 2;
+  static constexpr size_t dim_in = 2;
+  static constexpr size_t dim_out = 1;
   Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::VectorXd res(1);
     res(0) = 0;
