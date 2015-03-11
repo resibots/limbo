@@ -25,8 +25,9 @@ namespace limbo {
     template<typename Params, typename KernelFunction, typename MeanFunction, typename ObsType=Eigen::VectorXd>
     class GPAutoMean : public GP<Params, KernelFunction, MeanFunction> {
      public:
+      GPAutoMean(): GP<Params, KernelFunction, MeanFunction>() {}
       // TODO : init KernelFunction with dim in GP
-      GPAutoMean(int dim_in, int dim_out) : GP<Params, KernelFunction, MeanFunction>(dim_in, dim_out) {std::cout<<" H PARAMS SIZE: "<<this->_kernel_function.h_params_size()<<std::endl;}
+      GPAutoMean(int dim_in, int dim_out) : GP<Params, KernelFunction, MeanFunction>(dim_in, dim_out) {}
 
       void compute(const std::vector<Eigen::VectorXd>& samples,
                    const std::vector<ObsType>& observations,
@@ -37,7 +38,9 @@ namespace limbo {
 	  //	  std::cout<<"kernel params: "<<this->_kernel_function.h_params().transpose()<<std::endl;
 	  //      std::cout<<"mean params: "<<this->_mean_function.h_params().transpose()<<std::endl;
 
-        this->_compute_kernel();
+	  this->_compute_obs_mean(); // ORDER MATTERS
+	  this->_compute_kernel();
+
       }
 
       Eigen::VectorXd check_inverse(){
@@ -50,8 +53,8 @@ namespace limbo {
         this->_kernel_function.set_h_params(h_params.head(this->_kernel_function.h_params_size()));
 	this->_mean_function.set_h_params(h_params.tail(this->_mean_function.h_params_size()));
         if (update_kernel){
-          this->_compute_kernel();
 	  this->_compute_obs_mean();
+          this->_compute_kernel();
 	}
         size_t n = this->_obs_mean.rows();
 
@@ -64,8 +67,9 @@ namespace limbo {
 
 	//        double a = this->_obs_mean.col(0).dot(this->_alpha.col(0));
         double a = (this->_obs_mean.transpose() * this->_alpha).trace();  // generalization for multi dimensional observation
-	//	std::cout<<" a: "<<a <<" det: "<< det<<std::endl;
+	//std::cout<<" a: "<<a <<" det: "<< det<<std::endl;
 	double lik= -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
+	//std::cout<<h_params.transpose()<<"   "<<lik<<std::endl;
         return lik;
       }
 
@@ -75,8 +79,10 @@ namespace limbo {
         this->_kernel_function.set_h_params(h_params.head(this->_kernel_function.h_params_size()));
 	this->_mean_function.set_h_params(h_params.tail(this->_mean_function.h_params_size()));
 
-        if (update_kernel)
+        if (update_kernel){
+	  this->_compute_obs_mean(); //ORDER MATTERS
           this->_compute_kernel();
+	}
         size_t n = this->_observations.rows();
 
         /// what we should write, but it is less numerically stable than using the Cholesky decomposition
@@ -115,7 +121,10 @@ namespace limbo {
 	    }
 	return grad;
       }
+
+      float get_lik()const{return _lik;}
      protected:
+      float _lik;
       virtual void _optimize_likelihood() {
         par::init();
         typedef std::pair<Eigen::VectorXd, double> pair_t;
@@ -139,9 +148,10 @@ namespace limbo {
         pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
         auto m = par::max(init, Params::gp_auto_mean::rprop_restart(), body, comp);
         std::cout << "likelihood:" << m.second << std::endl;
+	
         this->_kernel_function.set_h_params(m.first.head(this->_kernel_function.h_params_size()));
         this->_mean_function.set_h_params(m.first.tail(this->_mean_function.h_params_size()));
-
+	this->_lik=m.second;
       }
     };
   }

@@ -42,8 +42,8 @@ namespace limbo {
       ObsType operator()(const Eigen::VectorXd& v, const GP& gp)const {
         return  gp.mean_observation().array();
       }
+     
     };
-
 
 
     template<typename Params,typename ObsType=Eigen::VectorXd>
@@ -85,7 +85,7 @@ namespace limbo {
 
     template<typename Params,typename MeanFunction,typename ObsType=Eigen::VectorXd>
     struct MeanFunctionARD {
-      MeanFunctionARD(size_t dim_out):_mean_function(dim_out), _tr(dim_out,dim_out+1) {
+      MeanFunctionARD(size_t dim_out=1):_mean_function(dim_out), _tr(dim_out,dim_out+1) {
 	Eigen::VectorXd h=Eigen::VectorXd::Zero(dim_out*(dim_out+1));
 	for(size_t i=0;i<dim_out;i++)
 	  h[i*(dim_out+2)]=1;
@@ -129,7 +129,7 @@ namespace limbo {
 
 
     };
-    
+
 
 
   }

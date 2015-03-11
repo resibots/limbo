@@ -28,7 +28,7 @@ namespace limbo {
       void operator()(const F& feval, Opt& opt) const {
         for (int i = 0; i < Params::init::nb_samples(); i++) {
           Eigen::VectorXd new_sample(F::dim_in);
-          for (size_t i = 0; i < F::dim_in; i++)
+          for (int i = 0; i < F::dim_in; i++)
             new_sample[i] = misc::rand<double>(0, 1);
           std::cout << "random sample:" << new_sample.transpose() << std::endl;
           opt.add_new_sample(new_sample, feval(new_sample));

@@ -25,6 +25,7 @@ namespace limbo {
     template<typename Params, typename KernelFunction, typename MeanFunction, typename ObsType=Eigen::VectorXd>
     class GPAuto : public GP<Params, KernelFunction, MeanFunction> {
      public:
+      GPAuto():GP<Params, KernelFunction, MeanFunction>() {}
       // TODO : init KernelFunction with dim in GP
       GPAuto(int dim_in, int dim_out) : GP<Params, KernelFunction, MeanFunction>(dim_in, dim_out) {}
 
@@ -35,8 +36,9 @@ namespace limbo {
         GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise);
 	  _optimize_likelihood();
 
+	  this->_compute_obs_mean(); //ORDER MATTERS
+	  this->_compute_kernel();
 
-        this->_compute_kernel();
       }
 
       Eigen::VectorXd check_inverse(){
@@ -47,8 +49,11 @@ namespace limbo {
       virtual double log_likelihood(const Eigen::VectorXd& h_params,
                             bool update_kernel = true) {
         this->_kernel_function.set_h_params(h_params);
-        if (update_kernel)
-          this->_compute_kernel();
+        if (update_kernel){
+	  this->_compute_obs_mean();        // ORDER MATTERS
+	  this->_compute_kernel();
+	}
+	  
         size_t n = this->_obs_mean.rows();
 
         // --- cholesky ---
@@ -69,8 +74,10 @@ namespace limbo {
       virtual Eigen::VectorXd log_likelihood_grad(const Eigen::VectorXd& h_params,
                                           bool update_kernel = true) {
         this->_kernel_function.set_h_params(h_params);
-        if (update_kernel)
+        if (update_kernel){
+	  this->_compute_obs_mean();
           this->_compute_kernel();
+	}
         size_t n = this->_observations.rows();
 
         /// what we should write, but it is less numerically stable than using the Cholesky decomposition
@@ -103,7 +110,11 @@ namespace limbo {
         }
         return grad;
       }
+
+      float get_lik()const{return _lik;}
      protected:
+      float _lik;
+
       virtual void _optimize_likelihood() {
         par::init();
         typedef std::pair<Eigen::VectorXd, double> pair_t;
@@ -128,7 +139,7 @@ namespace limbo {
         auto m = par::max(init, Params::gp_auto::rprop_restart(), body, comp);
         std::cout << "likelihood:" << m.second << std::endl;
         this->_kernel_function.set_h_params(m.first);
-
+	this->_lik=m.second;
       }
     };
   }

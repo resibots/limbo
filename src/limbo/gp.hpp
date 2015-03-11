@@ -98,6 +98,7 @@ namespace limbo {
      protected:
       int _dim_in;
       int _dim_out;
+
       KernelFunction _kernel_function;
       MeanFunction _mean_function;
 
