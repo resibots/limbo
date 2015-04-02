@@ -11,7 +11,7 @@ Authors
 Main features
 -------------
 - Bayesian optimisation based on Gaussian processes
-- Parego (Multi-objective optimization)
+- Parego (Multi-objective optimization), experimental support for other multi-objective algorithms
 - Generic framework (template-based), which allows easy customization for testing original ideas
 - Can exploit multicore computers
 
