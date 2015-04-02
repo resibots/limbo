@@ -18,7 +18,7 @@ namespace limbo {
     , class A7 = boost::parameter::void_
     >
   class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6, A7> {
-  public:
+   public:
     typedef BoBase<Params, A1, A2, A3, A4, A5, A6, A7> base_t;
     typedef typename base_t::obs_t obs_t;
     typedef typename base_t::model_t model_t;
@@ -47,7 +47,7 @@ namespace limbo {
                   << " value: " << this->_observations[this->_observations.size() - 1]
                   << " best:" << this->best_observation()
                   << std::endl;
-	
+
         this->_iteration++;
       }
     }

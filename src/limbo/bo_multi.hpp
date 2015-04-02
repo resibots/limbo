@@ -69,7 +69,7 @@ namespace limbo {
       std::vector<M> _models;
       std::vector<float> _objs;
     };
-    #endif
+#endif
 
   }
 

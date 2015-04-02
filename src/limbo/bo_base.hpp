@@ -179,7 +179,7 @@ namespace limbo {
     }
     template<typename BO>
     bool _pursue(const BO& bo) const {
-      stopping_criterion::ChainCriteria<BO> chain(bo); 
+      stopping_criterion::ChainCriteria<BO> chain(bo);
       return boost::fusion::accumulate(_stopping_criteria, true, chain);
     }
     template<typename BO>

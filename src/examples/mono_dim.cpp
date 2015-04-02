@@ -18,7 +18,7 @@ struct Params {
     BO_PARAM(int, dump_period, 1);
   };
   struct init {
-       BO_PARAM(int, nb_samples, 5);
+    BO_PARAM(int, nb_samples, 5);
   };
   struct maxiterations {
     BO_PARAM(int, n_iterations, 20);
