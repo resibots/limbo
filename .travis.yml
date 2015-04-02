@@ -2,7 +2,7 @@ language: cpp
 compiler:
   - gcc
   - clang
-
+sudo: required
 install: sudo apt-get update -qq && sudo apt-get install -qq libboost-dev libboost-test-dev libeigen3-dev libtbb-dev
 
 # Change this to your needs
