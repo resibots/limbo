@@ -2,8 +2,9 @@
 #define BO_MULTI_HPP_
 #define VERSION "xxx"
 
-#ifdef USE_SFERES
+#ifndef USE_SFERES
 #warning No sferes
+#else
 #include <sferes/phen/parameters.hpp>
 #include <sferes/gen/evo_float.hpp>
 #include <sferes/eval/parallel.hpp>
