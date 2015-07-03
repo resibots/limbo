@@ -1,6 +1,6 @@
 #ifndef BO_BASE_HPP_
 #define BO_BASE_HPP_
-
+#define BOOST_PARAMETER_MAX_ARITY 7
 #include <vector>
 #include <iostream>
 #include <boost/parameter.hpp>
