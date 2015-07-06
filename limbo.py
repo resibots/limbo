@@ -17,7 +17,8 @@ def options(opt):
 def create_variants(bld, source, uselib_local,
                     uselib, variants, includes=". ../", 
                     cxxflags='',
-                    json=''):
+                    json='',
+                    target=''):
    # the basic one
    #   tgt = bld.new_task_gen('cxx', 'program')
    #   tgt.source = source
@@ -26,7 +27,10 @@ def create_variants(bld, source, uselib_local,
    #   tgt.uselib = uselib
    # the variants
    # we create a basic file
-   tmp = source.replace('.cpp', '')
+   if not target: 
+      tmp = source.replace('.cpp', '')
+   else:
+      tmp=target
    tgt = bld.program(features = 'cxx',
                      source = source,
                      target = tmp,
