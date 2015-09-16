@@ -7,7 +7,7 @@ Documentation
 -------------
 A minimal documentation is (will be?) available on the wiki: https://github.com/resibots/limbo/wiki
 
-Many mechanisms are inspired by [http://github.com/sferes2/sferes2](sferes2): looking at the documentation of sferes2 might help.
+Many mechanisms are inspired by [sferes2](http://github.com/sferes2/sferes2): looking at the documentation of sferes2 might help.
 
 Authors
 ------
