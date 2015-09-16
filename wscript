@@ -19,6 +19,8 @@ def options(opt):
         opt.load('sferes')
 	opt.load('limbo')
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
+        opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
+        opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
         opt.load('xcode')
         for i in glob.glob('exp/*'):
                 opt.recurse(i)
@@ -73,3 +75,6 @@ def build(bld):
 def shutdown (ctx):
     if ctx.options.qsub:
         limbo.qsub(ctx.options.qsub)
+    if ctx.options.oar:
+        limbo.oar(ctx.options.oar)
+

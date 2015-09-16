@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, stat
 import subprocess
 import commands
 
@@ -60,24 +60,7 @@ def create_variants(bld, source, uselib_local,
                         uselib = uselib,
                         use = uselib_local)
 
-def qsub(conf_file):
-   tpl = """
-#! /bin/sh
-#? nom du job affiche
-#PBS -N @exp
-#PBS -o stdout
-#PBS -b stderr
-#PBS -M @email
-# maximum execution time
-#PBS -l walltime=@wall_time
-# mail parameters
-#PBS -m abe
-# number of nodes
-#PBS -l nodes=@nb_cores:ppn=@ppn
-#PBS -l pmem=5200mb -l mem=5200mb
-export LD_LIBRARY_PATH=@ld_lib_path
-exec @exec
-"""
+def _sub_script(tpl, conf_file):
    if os.environ.has_key('LD_LIBRARY_PATH'):
       ld_lib_path = os.environ['LD_LIBRARY_PATH']
    else:
@@ -103,42 +86,74 @@ exec @exec
       ppn = '1'
       mpirun = 'mpirun'
    else:
-      nb_cores = 1; 
-      try: ppn = str(conf['ppn'])
-      except: ppn='8'
+#      nb_cores = 1; 
+      ppn = "8"
       mpirun = ''
-   
+
+   fnames = []
    for i in range(0, nb_runs):
       for e in exps:
-         if " " in e:
-            e_arg=e.replace(" ","_")
-            e, arg=e.split(' ',1)
-         else:
-            e_arg=e
-            arg=""
-         print e
-         print arg
-
-         directory = res_dir + "/" + e_arg + "/exp_" + str(i)
+         directory = res_dir + "/" + e + "/exp_" + str(i) 
          try:
             os.makedirs(directory)
          except:
             print "WARNING, dir:" + directory + " not be created"
          subprocess.call('cp ' + bin_dir + '/' + e + ' ' + directory, shell=True)
-         fname = home + "/tmp/" + e_arg + "_" + str(i) + ".job"
+         fname = directory + "/" + e + "_" + str(i) + ".job"
          f = open(fname, "w")
          f.write(tpl
-                 .replace("@exp", e_arg)
+                 .replace("@exp", e)
                  .replace("@email", email)
                  .replace("@ld_lib_path", ld_lib_path)
                  .replace("@wall_time", wall_time)
                  .replace("@dir", directory)
                  .replace("@nb_cores", str(nb_cores))
                  .replace("@ppn", ppn)
-                 .replace("@exec", mpirun + ' ' + directory + '/' + e + ' ' + args + ' ' + arg))
+                 .replace("@exec", mpirun + ' ' + directory + '/' + e + ' ' + args))
          f.close()
-         s = "qsub -d " + directory + " " + fname
-         print "executing:" + s
-         retcode = subprocess.call(s, shell=True, env=None)
-         print "qsub returned:" + str(retcode)
+         os.chmod(fname, stat.S_IEXEC | stat.S_IREAD | stat.S_IWRITE)
+         fnames += [(fname, directory)]
+   return fnames
 
+def qsub(conf_file):
+   tpl = """#!/bin/sh
+#? nom du job affiche
+#PBS -N @exp
+#PBS -o stdout
+#PBS -b stderr
+#PBS -M @email
+# maximum execution time
+#PBS -l walltime=@wall_time
+# mail parameters
+#PBS -m abe
+# number of nodes
+#PBS -l nodes=@nb_cores:ppn=@ppn
+#PBS -l pmem=5200mb -l mem=5200mb
+export LD_LIBRARY_PATH=@ld_lib_path
+exec @exec
+"""
+   fnames = _sub_script(tpl, conf_file)
+   for (fname, directory) in fnames:
+      s = "qsub -d " + directory + " " + fname
+      print "executing:" + s
+      retcode = subprocess.call(s, shell=True, env=None)
+      print "qsub returned:" + str(retcode)
+
+
+
+def oar(conf_file):
+   tpl = """#!/bin/bash
+#OAR -l /core=@nb_cores/nodes=1,walltime=@wall_time
+#OAR -n @exp
+#OAR -O stdout.%jobid%.log
+#OAR -E stderr.%jobid%.log
+export LD_LIBRARY_PATH=@ld_lib_path
+exec @exec
+"""
+   print 'WARNING [oar]: MPI not supported yet'
+   fnames = _sub_script(tpl, conf_file)
+   for (fname,directory) in fnames:
+      s = "oarsub -d " + directory + " -S " + fname
+      print "executing:" + s
+      retcode = subprocess.call(s, shell=True, env=None)
+      print "oarsub returned:" + str(retcode)
