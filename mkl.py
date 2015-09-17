@@ -34,7 +34,7 @@ def check_mkl(conf):
         return
     conf.env.LIB_MKL_SEQ = ["mkl_intel_lp64", "mkl_core", "mkl_sequential", "pthread", "m"]    
     conf.env.LIB_MKL_TBB = ["mkl_intel_lp64", "mkl_core", "mkl_tbb_thread", "tbb", "stdc++", "pthread", "m"]   
-    if conf.enf.CXX_NAME in ["icc", "icpc"]: 
+    if conf.env.CXX_NAME in ["icc", "icpc"]: 
         conf.env.LIB_MKL_OMP = ["mkl_intel_lp64", "mkl_core", "mkl_intel_thread", "pthread", "m"]
     else:
         conf.env.LIB_MKL_OMP = ["mkl_intel_lp64", "mkl_core", "mkl_gnu_thread", "dl", "pthread", "m"]
