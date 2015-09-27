@@ -51,7 +51,7 @@ namespace limbo {
     template<typename Params>
     struct SquaredExpARD {
       SquaredExpARD(int dim = 1) : _sf2(0), _ell(dim), _input_dim(dim) {
-        ->set_h_params(Eigen::VectorXd::Ones(_ell.size() + 1) * -1);
+        this->set_h_params(Eigen::VectorXd::Ones(_ell.size() + 1) * -1);
       }
 
       size_t h_params_size() const {
@@ -83,9 +83,11 @@ namespace limbo {
         double z = (x1 - x2).cwiseQuotient(_ell).squaredNorm();
         return _sf2 * exp(-0.5 * z);
       }
+
       const Eigen::VectorXd& ell() const {
         return _ell;
       }
+
      protected:
       double _sf2;
       Eigen::VectorXd _ell;

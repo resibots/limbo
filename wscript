@@ -16,11 +16,11 @@ def options(opt):
         opt.load('compiler_c')
         opt.load('eigen')
         opt.load('tbb')
-        opt.load('omp')
         opt.load('mkl')
         opt.load('sferes')
         opt.load('limbo')
-        opt.load('ode')
+        opt.load('openmp')
+        #opt.load('ode')
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
@@ -34,7 +34,9 @@ def configure(conf):
         conf.load('compiler_c')
         conf.load('eigen')
         conf.load('tbb')
+        conf.load('mkl')
         conf.load('sferes')
+        conf.load('openmp')
         conf.load('xcode')
 
         if conf.env.CXX_NAME in ["icc", "icpc"]:
@@ -55,7 +57,7 @@ def configure(conf):
         conf.check_openmp()
         conf.check_mkl()
         conf.check_sferes()
-        conf.check_ode()
+        #conf.check_ode()
         if conf.is_defined('USE_TBB'):
                 common_flags += " -DUSE_TBB"
 
