@@ -94,7 +94,7 @@ namespace limbo {
       }
 
       ObsType mean_observation() const {
-        return _mean_observation;
+        return _samples.size() > 0 ? _mean_observation : Eigen::VectorXd::Zero(_dim_in);
       }
 
       const Eigen::MatrixXd& mean_vector() const {

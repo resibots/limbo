@@ -7,6 +7,11 @@
 
 using namespace limbo;
 
+Eigen::VectorXd make_v1(double x) {
+  Eigen::VectorXd v1(1);
+  v1 << x;
+  return v1;
+}
 
 struct Params {
   struct boptimizer {
@@ -23,23 +28,27 @@ struct Params {
   struct ucb : public defaults::ucb {};
   struct gp_ucb : public defaults::gp_ucb {};
   struct gp_auto : public defaults::gp_auto {};
-  struct meanconstant : public defaults::meanconstant {};
+  struct meanconstant {
+    static Eigen::VectorXd constant() { return make_v1(0.0); };
+  };
   struct cmaes : public defaults::cmaes {};
 };
 
 struct fit_eval {
-  static constexpr size_t dim = 2;
-  double operator()(const Eigen::VectorXd& x) const {
+  static constexpr size_t dim_in = 2;
+  static constexpr size_t dim_out = 1;
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     double res = 0;
     for (int i = 0; i < x.size(); i++)
       res += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
-    return res;
+    return make_v1(res);
   }
 };
 
 
 BOOST_AUTO_TEST_CASE(no_init) {
-  typedef init_functions::NoInit<Params> Init_t;
+  std::cout << "NoInit" << std::endl;
+  typedef init_functions::NoInit<Params> Init_t;  
   typedef BOptimizer<Params, init_fun<Init_t> > Opt_t;
 
   Opt_t opt;
@@ -50,7 +59,7 @@ BOOST_AUTO_TEST_CASE(no_init) {
 
 
 BOOST_AUTO_TEST_CASE(random_sampling) {
-
+  std::cout << "RandomSampling" << std::endl;
   struct MyParams : public Params {
     struct init {
       BO_PARAM(int, nb_samples, 10);
@@ -84,7 +93,7 @@ BOOST_AUTO_TEST_CASE(random_sampling_grid) {
     };
   };
 
-  typedef init_functions::RandomSamplingGrid<MyParams> Init_t;
+  typedef init_functions::RandomSamplingGrid<MyParams> Init_t;  
   typedef BOptimizer<MyParams, init_fun<Init_t> > Opt_t;
 
   Opt_t opt;
@@ -105,7 +114,7 @@ BOOST_AUTO_TEST_CASE(random_sampling_grid) {
 
 
 BOOST_AUTO_TEST_CASE(grid_sampling) {
-  std::cout << "GirSampling" << std::endl;
+  std::cout << "GridSampling" << std::endl;
   struct MyParams : public Params {
     struct init {
       BO_PARAM(int, nb_bins, 4);
@@ -113,7 +122,7 @@ BOOST_AUTO_TEST_CASE(grid_sampling) {
     };
   };
 
-  typedef init_functions::GridSampling<MyParams> Init_t;
+  typedef init_functions::GridSampling<MyParams> Init_t;  
   typedef BOptimizer<MyParams, init_fun<Init_t> > Opt_t;
 
   Opt_t opt;
