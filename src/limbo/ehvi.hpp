@@ -108,7 +108,6 @@ namespace limbo {
         if (m2.second > m.second)
           m = m2;
 
-
         std::cout << "sample selected" << std::endl;
         Eigen::VectorXd new_sample = m.first;
         std::cout << "new sample:" << new_sample.transpose() << std::endl;
@@ -134,7 +133,7 @@ namespace limbo {
                   << this->_observations[this->_observations.size() - 1].transpose()
                   << std::endl;
 
-        _update_stats(*this); // with the *this, nolonger need to redeclare the _update_stats() for each class.
+        this->_update_stats(*this);
         this->_iteration++;
       }
 

@@ -1,16 +1,13 @@
 #ifndef KERNEL_FUNCTIONS_HPP_
 #define KERNEL_FUNCTIONS_HPP_
 
-
-
-
 #include <Eigen/Core>
 
 namespace limbo {
   namespace kernel_functions {
     template<typename Params>
     struct Exp {
-      Exp(size_t dim = 1) { }
+      Exp(size_t dim = 1) {}
       double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const {
         double _sigma = Params::kf_exp::sigma;
         return (exp(-(1 / (2 * pow(_sigma, 2))) * pow((v1 - v2).norm(), 2)));
@@ -19,8 +16,7 @@ namespace limbo {
 
     template<typename Params>
     struct MaternThreeHalfs {
-      MaternThreeHalfs(size_t dim = 1) {
-      }
+      MaternThreeHalfs(size_t dim = 1) {}
 
       double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const {
         double d = (v1 - v2).norm();
@@ -32,8 +28,7 @@ namespace limbo {
 
     template<typename Params>
     struct MaternFiveHalfs {
-      MaternFiveHalfs(size_t dim = 1) {
-      }
+      MaternFiveHalfs(size_t dim = 1) {}
 
       double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const {
         double d = (v1 - v2).norm();
@@ -55,15 +50,18 @@ namespace limbo {
     */
     template<typename Params>
     struct SquaredExpARD {
-      SquaredExpARD(int dim=1) : _sf2(0), _ell(dim), _input_dim(dim){
-	this->set_h_params(Eigen::VectorXd::Ones(_ell.size()+1)*-1);
+      SquaredExpARD(int dim = 1) : _sf2(0), _ell(dim), _input_dim(dim) {
+        ->set_h_params(Eigen::VectorXd::Ones(_ell.size() + 1) * -1);
       }
+
       size_t h_params_size() const {
         return _ell.size() + 1;
       }
+
       const Eigen::VectorXd& h_params() const {
         return _h_params;
       }
+
       void set_h_params(const Eigen::VectorXd& p) {
         _h_params = p;
         for (size_t i = 0; i < _input_dim; ++i)
@@ -97,4 +95,5 @@ namespace limbo {
     };
   }
 }
+
 #endif

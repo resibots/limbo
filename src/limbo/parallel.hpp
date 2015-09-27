@@ -15,13 +15,12 @@ namespace par {
 #ifdef USE_TBB
 #ifdef __GXX_EXPERIMENTAL_CXX0X__
   template <typename X>// old fashion way to create template alias (for GCC 4.6...)
-  struct vector
-  {
+  struct vector {
     typedef tbb::concurrent_vector<X> type;
   };
 #else
   template <typename X>
-  using vector = tbb::concurrent_vector<X>; // Template alias (for GCC 4.7 and later) 
+  using vector = tbb::concurrent_vector<X>; // Template alias (for GCC 4.7 and later)
 #endif
   template<typename V>
   std::vector<typename V::value_type> convert_vector(const V& v) {
@@ -32,13 +31,12 @@ namespace par {
 #else
 #ifdef __GXX_EXPERIMENTAL_CXX0X__
   template <typename X>  // old fashion way to create template alias (for GCC 4.6...)
-  struct vector
-  {
+  struct vector {
     typedef std::vector<X> type;
   };
 #else
   template <typename X>
-  using vector = std::vector<X>;  // Template alias (for GCC 4.7 and later) 
+  using vector = std::vector<X>;  // Template alias (for GCC 4.7 and later)
 #endif
 
   template<typename V>

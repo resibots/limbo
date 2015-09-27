@@ -46,7 +46,7 @@ namespace limbo {
                   << " sigma:" << this->_models[0].sigma(best_v)
                   << " " << this->_models[1].sigma(best_v)
                   << std::endl;
-        _update_stats(*this); // with the *this, nolonger need to redeclare the _update_stats() for each class.
+        this->_update_stats(*this); // with the *this, nolonger need to redeclare the _update_stats() for each class.
       }
 
     }

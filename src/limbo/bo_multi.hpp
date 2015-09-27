@@ -1,17 +1,24 @@
 #ifndef BO_MULTI_HPP_
 #define BO_MULTI_HPP_
 #define VERSION "xxx"
+
+#ifndef USE_SFERES
+#warning No sferes
+#else
 #include <sferes/phen/parameters.hpp>
 #include <sferes/gen/evo_float.hpp>
 #include <sferes/eval/parallel.hpp>
 #include <sferes/modif/dummy.hpp>
 #include <sferes/ea/nsga2.hpp>
+#endif
 
 #include "bo_base.hpp"
 #include "pareto.hpp"
 
 namespace limbo {
   namespace multi {
+#ifdef USE_SFERES
+
     struct SferesParams {
       struct evo_float {
         typedef sferes::gen::evo_float::mutation_t mutation_t;
@@ -63,8 +70,9 @@ namespace limbo {
       std::vector<M> _models;
       std::vector<float> _objs;
     };
-  }
+#endif
 
+  }
 
   template <
     class Params
@@ -118,12 +126,16 @@ namespace limbo {
       std::cout.flush();
       this->_update_models();
       std::cout << "ok" << std::endl;
+#ifdef USE_SFERES
+
       typedef sferes::gen::EvoFloat<D, multi::SferesParams> gen_t;
       typedef sferes::phen::Parameters<gen_t, multi::SferesFit<model_t>, multi::SferesParams> phen_t;
       typedef sferes::eval::Parallel<multi::SferesParams> eval_t;
       typedef boost::fusion::vector<> stat_t;
       typedef sferes::modif::Dummy<> modifier_t;
       typedef sferes::ea::Nsga2<phen_t, eval_t, stat_t, modifier_t, multi::SferesParams> nsga2_t;
+
+      // commented to remove a dependency to a particular version of sferes
 
       nsga2_t ea;
       ea.set_fit_proto(multi::SferesFit<model_t>(_models));
@@ -143,7 +155,7 @@ namespace limbo {
         }
         _pareto_model[p] = std::make_tuple(point, objs, sigma);
       }
-
+#endif
     }
 
    protected:

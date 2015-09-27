@@ -3,6 +3,12 @@ limbo
 
 A lightweight framework for Bayesian and model-based optimisation of black-box functions (C++11).
 
+Documentation
+-------------
+A minimal documentation is (will be?) available on the wiki: https://github.com/resibots/limbo/wiki
+
+Many mechanisms are inspired by [sferes2](http://github.com/sferes2/sferes2): looking at the documentation of sferes2 might help.
+
 Authors
 ------
 - Antoine Cully (Pierre & Marie Curie University): http://www.isir.upmc.fr/?op=view_profil&lang=fr&id=278
@@ -11,7 +17,7 @@ Authors
 Main features
 -------------
 - Bayesian optimisation based on Gaussian processes
-- Parego (Multi-objective optimization)
+- Parego (Multi-objective optimization), experimental support for other multi-objective algorithms
 - Generic framework (template-based), which allows easy customization for testing original ideas
 - Can exploit multicore computers
 

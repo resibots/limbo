@@ -55,6 +55,7 @@ BOOST_TOOLSETS = {
 	'edg':	  'edg',
 	'g++':	  detect_mingw,
 	'gcc':	  detect_mingw,
+	'icc': detect_intel,
 	'icpc':	 detect_intel,
 	'intel':	detect_intel,
 	'kcc':	  'kcc',

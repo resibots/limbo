@@ -1,6 +1,6 @@
 #ifndef BO_BASE_HPP_
 #define BO_BASE_HPP_
-
+#define BOOST_PARAMETER_MAX_ARITY 7
 #include <vector>
 #include <iostream>
 #include <boost/parameter.hpp>
@@ -179,7 +179,7 @@ namespace limbo {
     }
     template<typename BO>
     bool _pursue(const BO& bo) const {
-      stopping_criterion::ChainCriteria<BO> chain(bo); 
+      stopping_criterion::ChainCriteria<BO> chain(bo);
       return boost::fusion::accumulate(_stopping_criteria, true, chain);
     }
     template<typename BO>
