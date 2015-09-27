@@ -7,8 +7,7 @@ APPNAME = 'limbo'
 srcdir = '.'
 blddir = 'build'
 
-import copy
-import os, sys, glob
+import glob
 import limbo
 
 
@@ -17,10 +16,10 @@ def options(opt):
         opt.load('compiler_c')
         opt.load('eigen')
         opt.load('tbb')
-        opt.load('omp')
         opt.load('mkl')
         opt.load('sferes')
         opt.load('limbo')
+        opt.load('openmp')
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
@@ -34,7 +33,9 @@ def configure(conf):
         conf.load('compiler_c')
         conf.load('eigen')
         conf.load('tbb')
+        conf.load('mkl')
         conf.load('sferes')
+        conf.load('openmp')
         conf.load('xcode')
 
         if conf.env.CXX_NAME in ["icc", "icpc"]:
@@ -49,8 +50,7 @@ def configure(conf):
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \
-            graph thread',
-            min_version='1.39')
+            graph thread', min_version='1.39')
         conf.check_eigen()
         conf.check_tbb()
         conf.check_openmp()
