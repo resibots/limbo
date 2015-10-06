@@ -4,9 +4,7 @@
 #include <Eigen/Core>
 #include <boost/math/special_functions/sign.hpp>
 
-
 namespace rprop {
-
   // partly inspired by libgp: https://github.com/mblum/libgp
   // reference :
   // Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian
@@ -25,7 +23,7 @@ namespace rprop {
 
     Eigen::VectorXd delta = Eigen::VectorXd::Ones(param_dim) * delta0;
     Eigen::VectorXd grad_old = Eigen::VectorXd::Zero(param_dim);
-    Eigen::VectorXd params = (Eigen::VectorXd::Random(param_dim).array() -1);
+    Eigen::VectorXd params = (Eigen::VectorXd::Random(param_dim).array() - 1);
     Eigen::VectorXd best_params = params;
     double best = log(0);
 
@@ -33,6 +31,7 @@ namespace rprop {
       double lik = func(params);
       Eigen::VectorXd grad = -grad_func(params);
       grad_old = grad_old.cwiseProduct(grad);
+
       for (int j = 0; j < grad_old.size(); ++j) {
         if (grad_old(j) > 0) {
           delta(j) = std::min(delta(j) * etaplus, deltamax);
@@ -42,6 +41,7 @@ namespace rprop {
         }
         params(j) += -boost::math::sign(grad(j)) * delta(j);
       }
+
       grad_old = grad;
       if (grad_old.norm() < eps_stop) break;
 
@@ -50,8 +50,9 @@ namespace rprop {
         best_params = params;
       }
     }
+
     return best_params;
   }
-
 }
+
 #endif

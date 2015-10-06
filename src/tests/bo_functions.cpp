@@ -63,7 +63,8 @@ inline Eigen::VectorXd t_osz(const Eigen::VectorXd& x) {
 }
 
 struct Sphere {
-  static constexpr size_t dim = 2;
+  static constexpr size_t dim_in = 2;
+  static constexpr size_t dim_out = 1;
   double operator()(const Eigen::VectorXd& x) const {
     Eigen::Vector2d opt(0.5, 0.5);
     return -(x - opt).squaredNorm();
@@ -72,19 +73,21 @@ struct Sphere {
 
 
 struct Ellipsoid {
-  static constexpr size_t dim = 2;
+  static constexpr size_t dim_in = 2;
+  static constexpr size_t dim_out = 1;
   double operator()(const Eigen::VectorXd& x) const {
     Eigen::Vector2d opt(0.5, 0.5);
     Eigen::Vector2d z = t_osz(x - opt);
     double r = 0;
-    for (size_t i = 0; i < dim; ++i)
-      r += std::pow(10, ((double)i)  / (dim - 1.0)) * z(i) * z(i) + 1;
+    for (size_t i = 0; i < dim_in; ++i)
+      r += std::pow(10, ((double)i)  / (dim_in - 1.0)) * z(i) * z(i) + 1;
     return -r;
   }
 };
 
 struct Rastrigin {
-  static constexpr size_t dim = 4;
+  static constexpr size_t dim_in = 4;
+  static constexpr size_t dim_out = 1;
   double operator()(const Eigen::VectorXd& x) const {
     double f = 10 * x.size();
     for (int i = 0; i < x.size(); ++i)
@@ -99,7 +102,8 @@ struct Rastrigin {
 
 // see : http://www.sfu.ca/~ssurjano/hart3.html
 struct Hartman3 {
-  static constexpr size_t dim = 3;
+  static constexpr size_t dim_in = 3;
+  static constexpr size_t dim_out = 1;
   double operator()(const Eigen::VectorXd& x) const {
     Eigen::Matrix<double, 4, 3> a, p;
     a <<
@@ -129,7 +133,8 @@ struct Hartman3 {
 
 // see : http://www.sfu.ca/~ssurjano/hart6.html
 struct Hartman6 {
-  static constexpr size_t dim = 6;
+  static constexpr size_t dim_in = 6;
+  static constexpr size_t dim_out = 1;
   double operator()(const Eigen::VectorXd& x) const {
     Eigen::Matrix<double, 4, 6> a, p;
     a <<
@@ -161,7 +166,8 @@ struct Hartman6 {
 // see : http://www.sfu.ca/~ssurjano/goldpr.html
 // (with ln, as suggested in Jones et al.)
 struct GoldenPrice {
-  static constexpr size_t dim = 2;
+  static constexpr size_t dim_in = 2;
+  static constexpr size_t dim_out = 1;
   double operator()(const Eigen::VectorXd& xx) const {
     Eigen::VectorXd x = (4.0 * xx).array() - 2.0;
     double r = (1 + (x(0) + x(1) + 1) * (x(0) + x(1) + 1)

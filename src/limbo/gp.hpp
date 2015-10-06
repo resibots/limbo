@@ -1,4 +1,3 @@
-
 #ifndef GP_HPP_
 #define GP_HPP_
 
@@ -13,8 +12,6 @@
 
 namespace limbo {
   namespace model {
-
-
     template<typename Params, typename KernelFunction, typename MeanFunction, typename ObsType= Eigen::VectorXd>
     class GP {
      public:
@@ -50,7 +47,6 @@ namespace limbo {
 
       }
 
-
       // return mu, sigma (unormaliz)
       std::tuple<ObsType, double> query(const Eigen::VectorXd& v) const {
         if (_samples.size() == 0)
@@ -66,35 +62,45 @@ namespace limbo {
           return _mean_function(v, *this);
         return _mu(v, _compute_k(v));
       }
+
       double sigma(const Eigen::VectorXd& v) const {
         if (_samples.size() == 0)
           return sqrt(_kernel_function(v, v));
         return _sigma(v, _compute_k(v));
       }
+
       int dim_in() const {
         assert(_dim_in != -1);//need to compute first !
         return _dim_in;
       }
+
       int dim_out() const {
         assert(_dim_out != -1);//need to compute first !
         return _dim_out;
       }
+
       const KernelFunction& kernel_function() const {
         return _kernel_function;
       }
+
       const MeanFunction& mean_function() const {
         return _mean_function;
       }
-      ObsType max_observation() const {  
-	if(_observations.cols()>1)
-	  std::cout<<"WARNING max_observation with multi dim_inensional observations doesn't make sense"<<std::endl;
-        return _observations.maxCoeff();
-      }
-      ObsType mean_observation() const {
-        return _mean_observation;
+
+      ObsType max_observation() const {
+      	 if(_observations.cols()>1)
+	 std::cout<<"WARNING max_observation with multi dim_inensional observations doesn't make sense"<<std::endl;
+       return _observations.maxCoeff();
       }
 
-      const Eigen::MatrixXd& mean_vector() const{return _mean_vector;}
+      ObsType mean_observation() const {
+        return _samples.size() > 0 ? _mean_observation : Eigen::VectorXd::Zero(_dim_in);
+      }
+
+      const Eigen::MatrixXd& mean_vector() const {
+       return _mean_vector; 
+     }
+
      protected:
       int _dim_in;
       int _dim_out;
@@ -112,25 +118,24 @@ namespace limbo {
       ObsType _mean_observation;
 
       Eigen::MatrixXd _kernel;
-      //      Eigen::MatrixXd _inverted_kernel;
+      // Eigen::MatrixXd _inverted_kernel;
       Eigen::MatrixXd _l_matrix;
       Eigen::LLT<Eigen::MatrixXd> _llt;
 
-      void _compute_obs_mean(){
-	_mean_vector.resize(_samples.size(),_dim_out);
+      void _compute_obs_mean() {
+        _mean_vector.resize(_samples.size(), _dim_out);
         for (int i = 0; i < _mean_vector.rows(); i++)
-	  _mean_vector.row(i) = _mean_function(_samples[i], *this); 
+          _mean_vector.row(i) = _mean_function(_samples[i], *this); 
         _obs_mean = _observations - _mean_vector;
       }
 
       void _compute_kernel() {
-
         // O(n^2) [should be negligible]
-        _kernel.resize(_samples.size(), _samples.size());
-        for (size_t i = 0; i < _samples.size(); i++)
-          for (size_t j = 0; j < _samples.size(); ++j)
-            _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i==j)?_noise:0);
-
+        _kernel.resize(_observations.size(), _observations.size());
+        for (int i = 0; i < _observations.size(); i++)
+          for (int j = 0; j < _observations.size(); ++j)
+            _kernel(i, j) = _kernel_function(_samples[i], _samples[j])
+                            +  ( (i == j) ? _noise : 0); // noise only on the diagonal
 
         // O(n^3)
         //  _inverted_kernel = _kernel.inverse();
@@ -140,30 +145,27 @@ namespace limbo {
         // alpha = K^{-1} * this->_obs_mean;
         _alpha = _llt.matrixL().solve(this->_obs_mean);
         _llt.matrixL().adjoint().solveInPlace(_alpha);
-
       }
 
       ObsType _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
         return  (k.transpose() * _alpha) + _mean_function(v, *this).transpose();
-
-        //        return _mean_function(v)
-        //               + (k.transpose() * _inverted_kernel * (_obs_mean))[0];
       }
+
       double _sigma(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const {
         Eigen::VectorXd z = _llt.matrixL().solve(k);
-	double res= _kernel_function(v, v) - z.dot(z);
-	return (res<=std::numeric_limits<double>::epsilon())?0:res;
-
-        //        return  _kernel_function(v, v) - (k.transpose() * _inverted_kernel * k)[0];
+        double res= _kernel_function(v, v) - z.dot(z);
+        return (res<=std::numeric_limits<double>::epsilon()) ? 0 : res;
       }
-      Eigen::VectorXd _compute_k(const Eigen::VectorXd& v) const {
 
+      Eigen::VectorXd _compute_k(const Eigen::VectorXd& v) const {
         Eigen::VectorXd k(_samples.size());
         for (int i = 0; i < k.size(); i++)
           k[i] = _kernel_function(_samples[i], v);
         return k;
       }
+
     };
   }
 }
+
 #endif

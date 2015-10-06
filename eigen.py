@@ -20,7 +20,7 @@ def check_eigen(conf):
 		conf.env.INCLUDES_EIGEN = [conf.options.eigen]
 		conf.env.LIBPATH_EIGEN = [conf.options.eigen]
 	else:
-		conf.env.INCLUDES_EIGEN = ['/usr/include/eigen2', 
+		conf.env.INCLUDES_EIGEN = ['/usr/include/eigen3', 
                                            '/usr/local/include/eigen3', 
                                            '/usr/include', '/usr/local/include']
 	res = conf.find_file('Eigen/Core', conf.env.INCLUDES_EIGEN)

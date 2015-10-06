@@ -50,8 +50,7 @@ namespace limbo {
                   << " => " << feval(new_sample).transpose() << std::endl;
         scalarized = _scalarize_obs();
         model.compute(this->_samples, scalarized, Params::boptimizer::noise());
-        _update_stats(*this); // with the *this, nolonger need to redeclare the _update_stats() for each class.
-
+        this->_update_stats(*this);
         this->_iteration++;
       }
       this->template update_pareto_model<EvalFunction::dim>();
@@ -59,10 +58,6 @@ namespace limbo {
     }
 
    protected:
-    // former way to deal with the template of RefreshStat
-    /*    void _update_stats() {
-      boost::fusion::for_each(this->_stat, RefreshStat_f<Nsbo>(*this));
-      }*/
 
     std::vector<double> _scalarize_obs() {
       assert(this->_observations.size() != 0);

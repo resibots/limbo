@@ -21,9 +21,9 @@ def build(bld):
                           target = 'obs_multi_auto_mean',
                           uselib =  'BOOST EIGEN TBB',
                           use = 'limbo')
-	obj = bld.program(features = 'cxx',
-                          source = 'parego.cpp',
-                          includes = '. .. ../../',
-                          target = 'parego',
-                          uselib =  'BOOST EIGEN TBB SFERES',
-                          use = 'limbo')
+	# obj = bld.program(features = 'cxx',
+ #                          source = 'parego.cpp',
+ #                          includes = '. .. ../../',
+ #                          target = 'parego',
+ #                          uselib =  'BOOST EIGEN TBB SFERES',
+ #                          use = 'limbo')
