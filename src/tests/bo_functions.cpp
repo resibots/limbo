@@ -62,12 +62,18 @@ inline Eigen::VectorXd t_osz(const Eigen::VectorXd& x) {
   return r;
 }
 
+Eigen::VectorXd make_v1(double x) {
+  Eigen::VectorXd v1(1);
+  v1 << x;
+  return v1;
+}
+
 struct Sphere {
   static constexpr size_t dim_in = 2;
   static constexpr size_t dim_out = 1;
-  double operator()(const Eigen::VectorXd& x) const {
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::Vector2d opt(0.5, 0.5);
-    return -(x - opt).squaredNorm();
+    return make_v1(-(x - opt).squaredNorm());
   }
 };
 
@@ -75,24 +81,24 @@ struct Sphere {
 struct Ellipsoid {
   static constexpr size_t dim_in = 2;
   static constexpr size_t dim_out = 1;
-  double operator()(const Eigen::VectorXd& x) const {
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::Vector2d opt(0.5, 0.5);
     Eigen::Vector2d z = t_osz(x - opt);
     double r = 0;
     for (size_t i = 0; i < dim_in; ++i)
       r += std::pow(10, ((double)i)  / (dim_in - 1.0)) * z(i) * z(i) + 1;
-    return -r;
+    return make_v1(-r);
   }
 };
 
 struct Rastrigin {
   static constexpr size_t dim_in = 4;
   static constexpr size_t dim_out = 1;
-  double operator()(const Eigen::VectorXd& x) const {
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     double f = 10 * x.size();
     for (int i = 0; i < x.size(); ++i)
       f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));
-    return -f;
+    return make_v1(-f);
   }
 };
 
@@ -104,7 +110,7 @@ struct Rastrigin {
 struct Hartman3 {
   static constexpr size_t dim_in = 3;
   static constexpr size_t dim_out = 1;
-  double operator()(const Eigen::VectorXd& x) const {
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::Matrix<double, 4, 3> a, p;
     a <<
       3.0, 10, 30,
@@ -127,7 +133,7 @@ struct Hartman3 {
       }
       res += alpha(i) * exp(-s);
     }
-    return res;
+    return make_v1(res);
   }
 };
 
@@ -135,7 +141,7 @@ struct Hartman3 {
 struct Hartman6 {
   static constexpr size_t dim_in = 6;
   static constexpr size_t dim_out = 1;
-  double operator()(const Eigen::VectorXd& x) const {
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const {
     Eigen::Matrix<double, 4, 6> a, p;
     a <<
       10, 3, 17, 3.5, 1.7, 8,
@@ -159,7 +165,7 @@ struct Hartman6 {
       }
       res += alpha(i) * exp(-s);
     }
-    return res;
+    return make_v1(res);
   }
 };
 
@@ -168,7 +174,7 @@ struct Hartman6 {
 struct GoldenPrice {
   static constexpr size_t dim_in = 2;
   static constexpr size_t dim_out = 1;
-  double operator()(const Eigen::VectorXd& xx) const {
+  Eigen::VectorXd operator()(const Eigen::VectorXd& xx) const {
     Eigen::VectorXd x = (4.0 * xx).array() - 2.0;
     double r = (1 + (x(0) + x(1) + 1) * (x(0) + x(1) + 1)
                 * (19 - 14 * x(0) + 3 * x(0) * x(0) - 14 * x(1)
@@ -177,7 +183,7 @@ struct GoldenPrice {
                   * (18 - 32 * x(0) + 12 * x(0) * x(0) + 48 * x(1)
                      - 36 * x(0) * x(1) + 27 * x(1) * x(1)));
 
-    return -log(r) + 5;
+    return make_v1(-log(r) + 5);
   }
 };
 
@@ -210,24 +216,24 @@ void print_res(const T& r) {
   for (auto x : r) {
     for (auto y : x.second) {
       std::cout << x.first << "\t =>"
-                << " found :" << y.second
-                << " expected " << y.first
+                << " found :" << y.second(0)
+                << " expected " << y.first(0)
                 << std::endl;
 
     }
-    std::vector<std::pair<double, double> >& v = x.second;
+    std::vector<std::pair<Eigen::VectorXd, Eigen::VectorXd> >& v = x.second;
     std::sort(v.begin(), v.end(),
-    [](const std::pair<double, double>& x1, const std::pair<double, double>& x2) {
-      return x1.second < x2.second;
+    [](const std::pair<Eigen::VectorXd, Eigen::VectorXd>& x1, const std::pair<Eigen::VectorXd, Eigen::VectorXd>& x2) {
+      return x1.second(0) < x2.second(0);
     });
-    double med = v[v.size() / 2].second;
-    if (fabs(v[0].first - med) < 0.05)
+    double med = v[v.size() / 2].second(0);
+    if (fabs(v[0].first(0) - med) < 0.05)
       std:: cout << "[" << colors::green << "OK" << colors::reset << "] ";
     else
       std:: cout << "[" << colors::red << "ERROR" << colors::reset << "] ";
     std::cout << colors::yellow << colors::bold << " -- " << x.first << colors::reset << " ";
     std::cout << "Median: " << med
-              << " error :" << fabs(v[0].first - med)
+              << " error :" << fabs(v[0].first(0) - med)
               << std::endl;
   }
 
@@ -266,49 +272,49 @@ int main(int argc, char **argv) {
   typedef BOptimizer<Params> Opt_t;
 
 #ifdef USE_TBB
-  typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double> > > res_t;
+  typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<Eigen::VectorXd, Eigen::VectorXd> > > res_t;
 #else
-  typedef std::map<std::string, std::vector<std::pair<double, double> > > res_t;
+  typedef std::map<std::string, std::vector<std::pair<Eigen::VectorXd, Eigen::VectorXd> > > res_t;
 #endif
   res_t results;
-
+  std::cout << "Sphere" << std::endl;
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
     opt.optimize(Sphere());
     Eigen::Vector2d s_val(0.5, 0.5);
-    double x_opt = Sphere()(s_val);
+    Eigen::VectorXd x_opt = Sphere()(s_val);
     add_to_results("Sphere", results, std::make_pair(x_opt, opt.best_observation()));
   });
-
+  std::cout << "Ellipsoid" << std::endl;
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
     opt.optimize(Ellipsoid());
     Eigen::Vector2d s_val(0.5, 0.5);
-    double x_opt = Ellipsoid()(s_val);
+    Eigen::VectorXd x_opt = Ellipsoid()(s_val);
     add_to_results("Ellipsoid", results, std::make_pair(x_opt, opt.best_observation()));
   });
-
+  std::cout << "Rastrigin" << std::endl;
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
     opt.optimize(Rastrigin());
     Eigen::Vector4d s_val(0, 0, 0, 0);
-    double x_opt = Rastrigin()(s_val);
+    Eigen::VectorXd x_opt = Rastrigin()(s_val);
     add_to_results("Rastrigin", results, std::make_pair(x_opt, opt.best_observation()));
   });
-
+  std::cout << "Hartman3" << std::endl;
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
     opt.optimize(Hartman3());
     // double s_max = 3.86278;
     Eigen::Vector3d s_val(0.114614, 0.555549, 0.852547);
-    double x_opt = Hartman3()(s_val);
+    Eigen::VectorXd x_opt = Hartman3()(s_val);
     add_to_results("Hartman 3", results, std::make_pair(x_opt, opt.best_observation()));
   });
-
+  std::cout << "Hartman6" << std::endl;
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
@@ -316,17 +322,17 @@ int main(int argc, char **argv) {
     Eigen::Matrix<double, 6, 1> s_val;
     s_val << 0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573;
     //double s_max = 3.32237;
-    double x_opt = Hartman6()(s_val);
+    Eigen::VectorXd x_opt = Hartman6()(s_val);
     add_to_results("Hartman 6", results, std::make_pair(x_opt, opt.best_observation()));
   });
-
+  std::cout << "GoldenPrice" << std::endl;
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
     opt.optimize(GoldenPrice());
     //    double s_max = -log(3);
     Eigen::Vector2d s_val(0.5, 0.25);
-    double x_opt = GoldenPrice()(s_val);
+    Eigen::VectorXd x_opt = GoldenPrice()(s_val);
     add_to_results("Golden Price", results, std::make_pair(x_opt, opt.best_observation()));
   });
 
