@@ -277,7 +277,7 @@ int main(int argc, char **argv) {
   typedef std::map<std::string, std::vector<std::pair<Eigen::VectorXd, Eigen::VectorXd> > > res_t;
 #endif
   res_t results;
-  std::cout << "Sphere" << std::endl;
+  
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
@@ -286,7 +286,7 @@ int main(int argc, char **argv) {
     Eigen::VectorXd x_opt = Sphere()(s_val);
     add_to_results("Sphere", results, std::make_pair(x_opt, opt.best_observation()));
   });
-  std::cout << "Ellipsoid" << std::endl;
+  
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
@@ -295,7 +295,7 @@ int main(int argc, char **argv) {
     Eigen::VectorXd x_opt = Ellipsoid()(s_val);
     add_to_results("Ellipsoid", results, std::make_pair(x_opt, opt.best_observation()));
   });
-  std::cout << "Rastrigin" << std::endl;
+  
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
@@ -304,7 +304,7 @@ int main(int argc, char **argv) {
     Eigen::VectorXd x_opt = Rastrigin()(s_val);
     add_to_results("Rastrigin", results, std::make_pair(x_opt, opt.best_observation()));
   });
-  std::cout << "Hartman3" << std::endl;
+  
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
@@ -314,7 +314,7 @@ int main(int argc, char **argv) {
     Eigen::VectorXd x_opt = Hartman3()(s_val);
     add_to_results("Hartman 3", results, std::make_pair(x_opt, opt.best_observation()));
   });
-  std::cout << "Hartman6" << std::endl;
+  
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
@@ -325,7 +325,7 @@ int main(int argc, char **argv) {
     Eigen::VectorXd x_opt = Hartman6()(s_val);
     add_to_results("Hartman 6", results, std::make_pair(x_opt, opt.best_observation()));
   });
-  std::cout << "GoldenPrice" << std::endl;
+  
   if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
     par::replicate(nb_replicates, [&] () {
     Opt_t opt;
