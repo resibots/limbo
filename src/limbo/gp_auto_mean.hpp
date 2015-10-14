@@ -31,9 +31,9 @@ namespace limbo {
 
       void compute(const std::vector<Eigen::VectorXd>& samples,
                    const std::vector<ObsType>& observations,
-                   double noise) {
+                   double noise, const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>()) {
 
-        GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise);
+        GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise, bl_samples);
 	  _optimize_likelihood();
 	  //	  std::cout<<"kernel params: "<<this->_kernel_function.h_params().transpose()<<std::endl;
 	  //      std::cout<<"mean params: "<<this->_mean_function.h_params().transpose()<<std::endl;

@@ -32,8 +32,8 @@ namespace limbo {
 
       void compute(const std::vector<Eigen::VectorXd>& samples,
                    const std::vector<ObsType>& observations,
-                   double noise) {
-        GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise);
+                   double noise, const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>()) {
+        GP<Params, KernelFunction, MeanFunction>::compute(samples, observations, noise, bl_samples);
 	  _optimize_likelihood();
 
 	  this->_compute_obs_mean(); //ORDER MATTERS
