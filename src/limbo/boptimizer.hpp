@@ -47,7 +47,7 @@ namespace limbo {
         }
 
         _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
-        this->_update_stats(*this);
+        this->_update_stats(*this, blacklisted);
 
         std::cout << this->_iteration << " new point: " << (blacklisted ? this->_bl_samples.back() : this->_samples.back()).transpose();
         if (blacklisted)

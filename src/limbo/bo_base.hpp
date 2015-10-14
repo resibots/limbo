@@ -40,12 +40,13 @@ namespace limbo {
 
   template<typename BO>
   struct RefreshStat_f {
-    RefreshStat_f(BO &bo) : _bo(bo) {// not const, because some stat class modify the optimizer....
+    RefreshStat_f(BO &bo, bool blacklisted) : _bo(bo), _blacklisted(blacklisted) {// not const, because some stat class modify the optimizer....
     }
     BO& _bo;
+    bool _blacklisted;
     template<typename T>
     void operator() (T & x) const {
-      x(_bo);
+      x(_bo, _blacklisted);
     }
   };
 
@@ -191,8 +192,8 @@ namespace limbo {
       return boost::fusion::accumulate(_stopping_criteria, true, chain);
     }
     template<typename BO>
-    void _update_stats(BO& bo) { // not const, because some stat class modify the optimizer....
-      boost::fusion::for_each(_stat, RefreshStat_f<BO>(bo));
+    void _update_stats(BO& bo, bool blacklisted) { // not const, because some stat class modify the optimizer....
+      boost::fusion::for_each(_stat, RefreshStat_f<BO>(bo, blacklisted));
     }
     void _make_res_dir() {
       if (Params::boptimizer::dump_period() <= 0)
