@@ -64,3 +64,36 @@ BOOST_AUTO_TEST_CASE(test_gp) {
   }
 
 }
+
+BOOST_AUTO_TEST_CASE(test_blacklist) {
+
+  using namespace limbo;
+
+  typedef kernel_functions::MaternFiveHalfs<Params> KF_t;
+  typedef mean_functions::MeanConstant<Params> Mean_t;
+  typedef model::GP<Params, KF_t, Mean_t> GP_t;
+
+  GP_t gp;
+  std::vector<Eigen::VectorXd> samples = { make_v1(1) };
+  std::vector<Eigen::VectorXd> observations = { make_v1(5) };  
+  std::vector<Eigen::VectorXd> bl_samples = { make_v1(2) };
+
+  gp.compute(samples, observations, 0.0);
+
+  Eigen::VectorXd prev_mu1, mu1, prev_mu2, mu2;
+  double prev_sigma1, sigma1, prev_sigma2, sigma2;
+
+  std::tie(prev_mu1, prev_sigma1) = gp.query(make_v1(1));
+  std::tie(prev_mu2, prev_sigma2) = gp.query(make_v1(2));
+
+  gp.compute(samples, observations, 0.0, bl_samples);
+
+  std::tie(mu1, sigma1) = gp.query(make_v1(1));
+  std::tie(mu2, sigma2) = gp.query(make_v1(2));
+
+  BOOST_CHECK(prev_mu1 == mu1);
+  BOOST_CHECK(prev_sigma1 == sigma1);
+  BOOST_CHECK(prev_mu2 == mu2);
+  BOOST_CHECK(prev_sigma2 > sigma2);
+  BOOST_CHECK(sigma2 == 0);
+}
