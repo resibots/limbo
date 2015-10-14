@@ -50,7 +50,7 @@ namespace limbo {
                   << " => " << feval(new_sample).transpose() << std::endl;
         scalarized = _scalarize_obs();
         model.compute(this->_samples, scalarized, Params::boptimizer::noise());
-        this->_update_stats(*this);
+        this->_update_stats(*this, false);
         this->_iteration++;
       }
       this->template update_pareto_model<EvalFunction::dim>();

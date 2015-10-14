@@ -40,12 +40,13 @@ namespace limbo {
 
   template<typename BO>
   struct RefreshStat_f {
-    RefreshStat_f(BO &bo) : _bo(bo) {// not const, because some stat class modify the optimizer....
+    RefreshStat_f(BO &bo, bool blacklisted) : _bo(bo), _blacklisted(blacklisted) {// not const, because some stat class modify the optimizer....
     }
     BO& _bo;
+    bool _blacklisted;
     template<typename T>
     void operator() (T & x) const {
-      x(_bo);
+      x(_bo, _blacklisted);
     }
   };
 
@@ -151,6 +152,9 @@ namespace limbo {
     const std::vector<Eigen::VectorXd>& samples() const {
       return _samples;
     }
+    const std::vector<Eigen::VectorXd>& bl_samples() const {
+      return _bl_samples;
+    }
     int iteration() const {
       return _iteration;
     }
@@ -165,6 +169,10 @@ namespace limbo {
       _samples.push_back(s);
       _observations.push_back(v);
     }
+
+    void add_new_bl_sample(const Eigen::VectorXd& s) {
+      _bl_samples.push_back(s);
+    }
    protected:
     template<typename F>
     void _init(const F& feval, bool reset = true) {
@@ -172,9 +180,10 @@ namespace limbo {
       if (reset) {
         this->_samples.clear();
         this->_observations.clear();
+        this->_bl_samples.clear();
       }
 
-      if (this->_samples.empty())
+      if (this->_samples.empty() && this->_bl_samples.empty())
         init_function_t()(feval, *this);
     }
     template<typename BO>
@@ -183,8 +192,8 @@ namespace limbo {
       return boost::fusion::accumulate(_stopping_criteria, true, chain);
     }
     template<typename BO>
-    void _update_stats(BO& bo) { // not const, because some stat class modify the optimizer....
-      boost::fusion::for_each(_stat, RefreshStat_f<BO>(bo));
+    void _update_stats(BO& bo, bool blacklisted) { // not const, because some stat class modify the optimizer....
+      boost::fusion::for_each(_stat, RefreshStat_f<BO>(bo, blacklisted));
     }
     void _make_res_dir() {
       if (Params::boptimizer::dump_period() <= 0)
@@ -201,6 +210,7 @@ namespace limbo {
 
     std::vector<obs_t> _observations;
     std::vector<Eigen::VectorXd> _samples;
+    std::vector<Eigen::VectorXd> _bl_samples;
   };
 
 

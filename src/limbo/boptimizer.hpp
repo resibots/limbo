@@ -37,20 +37,30 @@ namespace limbo {
         acquisition_function_t acqui(_model, this->_iteration);
 
         Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in());
-        this->add_new_sample(new_sample, feval(new_sample));	
+        bool blacklisted = false;
+        try {
+          this->add_new_sample(new_sample, feval(new_sample));
+        }
+        catch(...) {
+          this->add_new_bl_sample(new_sample);
+          blacklisted = true;
+        }
 
-        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
-        this->_update_stats(*this);
+        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
+        this->_update_stats(*this, blacklisted);
 
-        std::cout << this->_iteration << " new point: "
-                        << this->_samples[this->_samples.size() - 1].transpose()
-                        << " value: " << this->_observations[this->_observations.size() - 1].transpose()
-                        //<< " mu: "<< _model.mu(this->_samples[this->_samples.size() - 1]).transpose()
-                        //<< " mean: " << _model.mean_function()(new_sample,_model).transpose()
-                        //<< " sigma: "<< _model.sigma(this->_samples[this->_samples.size() - 1])
-                        //<< " acqui: "<< acqui(this->_samples[this->_samples.size() - 1])
-                        << " best:" << this->best_observation().transpose()
-                        << std::endl;
+        std::cout << this->_iteration << " new point: " << (blacklisted ? this->_bl_samples.back() : this->_samples.back()).transpose();
+        if (blacklisted)
+          std::cout << " value: " << "No data, blacklisted";
+        else
+          std::cout << " value: " << this->_observations.back().transpose();
+
+        //std::cout << " mu: "<< _model.mu(blacklisted ? this->_bl_samples.back() : this->_samples.back()).transpose()
+        //<< " mean: " << _model.mean_function()(new_sample, _model).transpose()
+        //<< " sigma: "<< _model.sigma(blacklisted ? this->_bl_samples.back() : this->_samples.back())
+        //<< " acqui: "<< acqui(blacklisted ? this->_bl_samples.back() : this->_samples.back())
+        std::cout << " best:" << this->best_observation().transpose()
+        << std::endl;
 
         this->_iteration++;
       }
@@ -70,7 +80,7 @@ namespace limbo {
     }
 
   protected: 
-    model_t _model;
+    model_t _model;    
 
   };
 }

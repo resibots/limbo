@@ -133,7 +133,7 @@ namespace limbo {
                   << this->_observations[this->_observations.size() - 1].transpose()
                   << std::endl;
 
-        this->_update_stats(*this);
+        this->_update_stats(*this, false);
         this->_iteration++;
       }
 
