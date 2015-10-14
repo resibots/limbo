@@ -46,7 +46,7 @@ namespace limbo {
           blacklisted = true;
         }
 
-        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise());
+        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
         this->_update_stats(*this);
 
         std::cout << this->_iteration << " new point: " << (blacklisted ? this->_bl_samples.back() : this->_samples.back()).transpose();
@@ -54,7 +54,7 @@ namespace limbo {
           std::cout << " value: " << "No data, blacklisted";
         else
           std::cout << " value: " << this->_observations.back().transpose();
-        
+
         //std::cout << " mu: "<< _model.mu(blacklisted ? this->_bl_samples.back() : this->_samples.back()).transpose()
         //<< " mean: " << _model.mean_function()(new_sample, _model).transpose()
         //<< " sigma: "<< _model.sigma(blacklisted ? this->_bl_samples.back() : this->_samples.back())
