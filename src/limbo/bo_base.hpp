@@ -151,6 +151,9 @@ namespace limbo {
     const std::vector<Eigen::VectorXd>& samples() const {
       return _samples;
     }
+    const std::vector<Eigen::VectorXd>& bl_samples() const {
+      return _bl_samples;
+    }
     int iteration() const {
       return _iteration;
     }
@@ -165,6 +168,10 @@ namespace limbo {
       _samples.push_back(s);
       _observations.push_back(v);
     }
+
+    void add_new_bl_sample(const Eigen::VectorXd& s) {
+      _bl_samples.push_back(s);
+    }
    protected:
     template<typename F>
     void _init(const F& feval, bool reset = true) {
@@ -172,9 +179,10 @@ namespace limbo {
       if (reset) {
         this->_samples.clear();
         this->_observations.clear();
+        this->_bl_samples.clear();
       }
 
-      if (this->_samples.empty())
+      if (this->_samples.empty() && this->_bl_samples.empty())
         init_function_t()(feval, *this);
     }
     template<typename BO>
@@ -201,6 +209,7 @@ namespace limbo {
 
     std::vector<obs_t> _observations;
     std::vector<Eigen::VectorXd> _samples;
+    std::vector<Eigen::VectorXd> _bl_samples;
   };
 
 
