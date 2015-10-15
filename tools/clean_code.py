@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from subprocess import call
 import fnmatch
 import os
