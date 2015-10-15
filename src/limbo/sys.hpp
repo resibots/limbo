@@ -32,9 +32,6 @@
 //| The fact that you are presently reading this means that you have
 //| had knowledge of the CeCILL license and that you accept its terms.
 
-
-
-
 #ifndef LIMBO_SYS_HPP_
 #define LIMBO_SYS_HPP_
 
@@ -42,28 +39,33 @@
 #include <unistd.h>
 #include <boost/lexical_cast.hpp>
 
-namespace limbo {
-  namespace misc {
-    inline std::string date() {
-      char date[30];
-      time_t date_time;
-      time(&date_time);
-      strftime(date, 30, "%Y-%m-%d_%H_%M_%S", localtime(&date_time));
-      return date;
-    }
+namespace limbo
+{
+    namespace misc
+    {
+        inline std::string date()
+        {
+            char date[30];
+            time_t date_time;
+            time(&date_time);
+            strftime(date, 30, "%Y-%m-%d_%H_%M_%S", localtime(&date_time));
+            return date;
+        }
 
-    inline std::string hostname() {
-      char hostname[30];
-      int res = gethostname(hostname, 30);
-      assert(res == 0);
-      res = 0; // avoid a warning in opt mode
-      return std::string(hostname);
-    }
+        inline std::string hostname()
+        {
+            char hostname[30];
+            int res = gethostname(hostname, 30);
+            assert(res == 0);
+            res = 0; // avoid a warning in opt mode
+            return std::string(hostname);
+        }
 
-    inline std::string getpid() {
-      return boost::lexical_cast<std::string>(::getpid());
+        inline std::string getpid()
+        {
+            return boost::lexical_cast<std::string>(::getpid());
+        }
     }
-  }
 }
 
 #endif
