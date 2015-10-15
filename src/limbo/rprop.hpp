@@ -29,6 +29,10 @@ namespace rprop {
 
     for (int i = 0; i < n; ++i) {
       double lik = func(params);
+      if (lik > best) {
+        best = lik;
+        best_params = params;
+      }
       Eigen::VectorXd grad = -grad_func(params);
       grad_old = grad_old.cwiseProduct(grad);
 
@@ -44,11 +48,6 @@ namespace rprop {
 
       grad_old = grad;
       if (grad_old.norm() < eps_stop) break;
-
-      if (lik > best) {
-        best = lik;
-        best_params = params;
-      }
     }
 
     return best_params;
