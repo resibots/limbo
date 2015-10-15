@@ -152,7 +152,7 @@ exec @exec
 
 def oar(conf_file):
     tpl = """#!/bin/bash
-#OAR -l /core=@nb_cores/nodes=1,walltime=@wall_time
+#OAR -l /nodes=1/core=@nb_cores,walltime=@wall_time
 #OAR -n @exp
 #OAR -O stdout.%jobid%.log
 #OAR -E stderr.%jobid%.log
