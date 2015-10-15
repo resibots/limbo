@@ -25,12 +25,17 @@ namespace rprop {
 
     Eigen::VectorXd delta = Eigen::VectorXd::Ones(param_dim) * delta0;
     Eigen::VectorXd grad_old = Eigen::VectorXd::Zero(param_dim);
-    Eigen::VectorXd params = (Eigen::VectorXd::Random(param_dim).array() - 1);
+    Eigen::VectorXd params = Eigen::VectorXd::Ones(param_dim);
+//(Eigen::VectorXd::Random(param_dim).array() - 1);
     Eigen::VectorXd best_params = params;
     double best = log(0);
 
     for (int i = 0; i < n; ++i) {
       double lik = func(params);
+      if (lik > best) {
+        best = lik;
+        best_params = params;
+      }
       Eigen::VectorXd grad = -grad_func(params);
       grad_old = grad_old.cwiseProduct(grad);
       for (int j = 0; j < grad_old.size(); ++j) {
@@ -45,10 +50,7 @@ namespace rprop {
       grad_old = grad;
       if (grad_old.norm() < eps_stop) break;
 
-      if (lik > best) {
-        best = lik;
-        best_params = params;
-      }
+    
     }
     return best_params;
   }
