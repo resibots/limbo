@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-from subprocess import call
+from subprocess import call, check_output
 import fnmatch
 import os
 import sys
+
+clang_format = "clang-format"
 
 # Format directories and all subfolders using clang-format
 def format_dir(folder, extensions):
@@ -21,6 +23,18 @@ exts = ['.h', '.c', '.hpp', '.cpp', '.hh', '.cc']
 if __name__ == "__main__":
 	if len(sys.argv) < 1:
 		print "Usage: clean_code.py folder1 [folder2] ..."
+
+	try:
+		check_output(["clang-format", "-help"])
+		clang_format = "clang-format"
+	except:
+		try:
+			check_output(["clang-format-3.6", "-help"])
+			clang_format = "clang-format-3.6"
+		except:
+			print "[ERROR]: You must have clang-format installed to run this script"
+			sys.exit()
+
 
 	# config file
 	curr_dir = os.getcwd()
