@@ -15,7 +15,7 @@ def format_dir(folder, extensions):
 				matches.append(os.path.join(root, filename))
 
 	for filename in matches:
-		call(["clang-format-3.6", "-i", filename])
+		call([clang_format, "-i", filename])
 
 # possible extensions
 exts = ['.h', '.c', '.hpp', '.cpp', '.hh', '.cc']
