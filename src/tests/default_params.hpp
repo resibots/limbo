@@ -1,14 +1,10 @@
 #ifndef BO_DEFAULT_PARAMS_HPP
 #define BO_DEFAULT_PARAMS_HPP
 
-namespace limbo
-{
-    namespace tests
-    {
-        namespace def
-        {
-            struct cmaes
-            {
+namespace limbo {
+    namespace tests {
+        namespace def {
+            struct cmaes {
                 BO_PARAM(double, stopMaxFunEvals, 1e5);
                 BO_PARAM(double, stopMaxIter, 1e5);
                 BO_PARAM(double, stopTolFun, 1e-5);

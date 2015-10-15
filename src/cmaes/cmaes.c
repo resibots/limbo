@@ -312,8 +312,7 @@ use cmaes_exit first\n");
     t->arFuncValueHist[0] = (double)(10 + (int)ceil(3. * 10. * N / t->sp.lambda));
     t->arFuncValueHist++;
 
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         t->C[i] = new_double(i + 1);
         t->B[i] = new_double(N);
     }
@@ -321,8 +320,7 @@ use cmaes_exit first\n");
     for (i = 0; i < t->sp.lambda; ++i)
         t->index[i] = i; /* should not be necessary */
     t->rgrgx = (double**)new_void(t->sp.lambda, sizeof(double*));
-    for (i = 0; i < t->sp.lambda; ++i)
-    {
+    for (i = 0; i < t->sp.lambda; ++i) {
         t->rgrgx[i] = new_double(N + 2);
         t->rgrgx[i][0] = N;
         t->rgrgx[i]++;
@@ -334,8 +332,7 @@ use cmaes_exit first\n");
         for (j = 0; j < i; ++j)
             t->C[i][j] = t->B[i][j] = t->B[j][i] = 0.;
 
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         t->B[i][i] = 1.;
         t->C[i][i] = t->rgD[i] = t->sp.rgInitialStds[i] * sqrt(N / trace);
         t->C[i][i] *= t->C[i][i];
@@ -379,8 +376,7 @@ void cmaes_resume_distribution(cmaes_t* t, char* filename)
     int i, j, res, n;
     double d;
     FILE* fp = fopen(filename, "r");
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         ERRORMESSAGE("cmaes_resume_distribution(): could not open '", filename, "'",
             0);
         return;
@@ -388,8 +384,7 @@ void cmaes_resume_distribution(cmaes_t* t, char* filename)
     /* count number of "resume" entries */
     i = 0;
     res = 0;
-    while (1)
-    {
+    while (1) {
         if ((res = fscanf(fp, " resume %lg", &d)) == EOF)
             break;
         else if (res == 0)
@@ -403,8 +398,7 @@ void cmaes_resume_distribution(cmaes_t* t, char* filename)
     i = 0;
     res = 0;
     rewind(fp);
-    while (i < n)
-    {
+    while (i < n) {
         if ((res = fscanf(fp, " resume %lg", &d)) == EOF)
             FATAL("cmaes_resume_distribution(): Unexpected error, bug", 0, 0, 0);
         else if (res == 0)
@@ -417,8 +411,7 @@ void cmaes_resume_distribution(cmaes_t* t, char* filename)
             0);
 
     /* find next "xmean" entry */
-    while (1)
-    {
+    while (1) {
         if ((res = fscanf(fp, " xmean %lg", &d)) == EOF)
             FATAL("cmaes_resume_distribution(): 'xmean' not found", 0, 0, 0);
         else if (res == 0)
@@ -436,8 +429,7 @@ void cmaes_resume_distribution(cmaes_t* t, char* filename)
         FATAL("cmaes_resume_distribution(): xmean: dimensions differ", 0, 0, 0);
 
     /* find next "path for sigma" entry */
-    while (1)
-    {
+    while (1) {
         if ((res = fscanf(fp, " path for sigma %lg", &d)) == EOF)
             FATAL("cmaes_resume_distribution(): 'path for sigma' not found", 0, 0, 0);
         else if (res == 0)
@@ -455,8 +447,7 @@ void cmaes_resume_distribution(cmaes_t* t, char* filename)
         FATAL("cmaes_resume_distribution(): ps: dimensions differ", 0, 0, 0);
 
     /* find next "path for C" entry */
-    while (1)
-    {
+    while (1) {
         if ((res = fscanf(fp, " path for C %lg", &d)) == EOF)
             FATAL("cmaes_resume_distribution(): 'path for C' not found", 0, 0, 0);
         else if (res == 0)
@@ -473,8 +464,7 @@ void cmaes_resume_distribution(cmaes_t* t, char* filename)
         FATAL("cmaes_resume_distribution(): pc: dimensions differ", 0, 0, 0);
 
     /* find next "sigma" entry */
-    while (1)
-    {
+    while (1) {
         if ((res = fscanf(fp, " sigma %lg", &d)) == EOF)
             FATAL("cmaes_resume_distribution(): 'sigma' not found", 0, 0, 0);
         else if (res == 0)
@@ -485,8 +475,7 @@ void cmaes_resume_distribution(cmaes_t* t, char* filename)
     t->sigma = d;
 
     /* find next entry "covariance matrix" */
-    while (1)
-    {
+    while (1) {
         if ((res = fscanf(fp, " covariance matrix %lg", &d)) == EOF)
             FATAL("cmaes_resume_distribution(): 'covariance matrix' not found", 0, 0,
                 0);
@@ -528,8 +517,7 @@ void cmaes_exit(cmaes_t* t)
     free(--t->rgxbestever);
     free(--t->rgout);
     free(t->rgD);
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         free(t->C[i]);
         free(t->B[i]);
     }
@@ -581,12 +569,10 @@ double* const* cmaes_SamplePopulation(cmaes_t* t)
     /* cmaes_SetMean(t, xmean); * xmean could be changed at this point */
 
     /* calculate eigensystem  */
-    if (!t->flgEigensysIsUptodate)
-    {
+    if (!t->flgEigensysIsUptodate) {
         if (!flgdiag)
             cmaes_UpdateEigensystem(t, 0);
-        else
-        {
+        else {
             for (i = 0; i < N; ++i)
                 t->rgD[i] = sqrt(t->C[i][i]);
             t->minEW = douSquare(rgdouMin(t->rgD, N));
@@ -599,8 +585,7 @@ double* const* cmaes_SamplePopulation(cmaes_t* t)
     /* treat minimal standard deviations and numeric problems */
     TestMinStdDevs(t);
 
-    for (iNk = 0; iNk < t->sp.lambda; ++iNk)
-    {
+    for (iNk = 0; iNk < t->sp.lambda; ++iNk) {
         /* generate scaled random vector (D * z)    */
         for (i = 0; i < N; ++i)
             if (flgdiag)
@@ -609,8 +594,7 @@ double* const* cmaes_SamplePopulation(cmaes_t* t)
                 t->rgdTmp[i] = t->rgD[i] * random_Gauss(&t->rand);
         if (!flgdiag)
             /* add mutation (sigma * B * (D*z)) */
-            for (i = 0; i < N; ++i)
-            {
+            for (i = 0; i < N; ++i) {
                 for (j = 0, sum = 0.; j < N; ++j)
                     sum += t->B[i][j] * t->rgdTmp[j];
                 t->rgrgx[iNk][i] = xmean[i] + t->sigma * sum;
@@ -636,8 +620,7 @@ double const* cmaes_ReSampleSingle_old(cmaes_t* t, double* rgx)
     for (i = 0; i < N; ++i)
         t->rgdTmp[i] = t->rgD[i] * random_Gauss(&t->rand);
     /* add mutation (sigma * B * (D*z)) */
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         for (j = 0, sum = 0.; j < N; ++j)
             sum += t->B[i][j] * t->rgdTmp[j];
         rgx[i] = t->rgxmean[i] + t->sigma * sum;
@@ -654,8 +637,7 @@ double* const* cmaes_ReSampleSingle(cmaes_t* t, int iindex)
     double sum;
     static char s[99];
 
-    if (iindex < 0 || iindex >= t->sp.lambda)
-    {
+    if (iindex < 0 || iindex >= t->sp.lambda) {
         sprintf(s, "index==%d must be between 0 and %d", iindex, t->sp.lambda);
         FATAL("cmaes_ReSampleSingle(): Population member ", s, 0, 0);
     }
@@ -664,8 +646,7 @@ double* const* cmaes_ReSampleSingle(cmaes_t* t, int iindex)
     for (i = 0; i < N; ++i)
         t->rgdTmp[i] = t->rgD[i] * random_Gauss(&t->rand);
     /* add mutation (sigma * B * (D*z)) */
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         for (j = 0, sum = 0.; j < N; ++j)
             sum += t->B[i][j] * t->rgdTmp[j];
         rgx[i] = t->rgxmean[i] + t->sigma * sum;
@@ -686,8 +667,7 @@ double* cmaes_SampleSingleInto(cmaes_t* t, double* rgx)
     for (i = 0; i < N; ++i)
         t->rgdTmp[i] = t->rgD[i] * random_Gauss(&t->rand);
     /* add mutation (sigma * B * (D*z)) */
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         for (j = 0, sum = 0.; j < N; ++j)
             sum += t->B[i][j] * t->rgdTmp[j];
         rgx[i] = t->rgxmean[i] + t->sigma * sum;
@@ -711,8 +691,7 @@ double* cmaes_PerturbSolutionInto(cmaes_t* t, double* rgx, double const* xmean,
     for (i = 0; i < N; ++i)
         t->rgdTmp[i] = t->rgD[i] * random_Gauss(&t->rand);
     /* add mutation (sigma * B * (D*z)) */
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         for (j = 0, sum = 0.; j < N; ++j)
             sum += t->B[i][j] * t->rgdTmp[j];
         rgx[i] = xmean[i] + eps * t->sigma * sum;
@@ -733,14 +712,12 @@ const double* cmaes_Optimize(cmaes_t* evo,
     int i;
     long startiter = evo->gen;
 
-    while (!(stop = cmaes_TestForTermination(evo)) && (evo->gen < startiter + iterations || !iterations))
-    {
+    while (!(stop = cmaes_TestForTermination(evo)) && (evo->gen < startiter + iterations || !iterations)) {
         /* Generate population of new candidate solutions */
         pop = cmaes_SamplePopulation(evo); /* do not change content of pop */
 
         /* Compute fitness value for each candidate solution */
-        for (i = 0; i < cmaes_Get(evo, "popsize"); ++i)
-        {
+        for (i = 0; i < cmaes_Get(evo, "popsize"); ++i) {
             evo->publicFitness[i] = (*pFun)(pop[i], evo->sp.N);
         }
 
@@ -788,8 +765,7 @@ double* cmaes_UpdateDistribution(cmaes_t* t, const double* rgFunVal)
     Sorted_index(rgFunVal, t->index, t->sp.lambda);
 
     /* Test if function values are identical, escape flat fitness */
-    if (t->rgFuncValue[t->index[0]] == t->rgFuncValue[t->index[(int)t->sp.lambda / 2]])
-    {
+    if (t->rgFuncValue[t->index[0]] == t->rgFuncValue[t->index[(int)t->sp.lambda / 2]]) {
         t->sigma *= exp(0.2 + t->sp.cs / t->sp.damps);
         ERRORMESSAGE("Warning: sigma increased due to equal function values\n",
             "   Reconsider the formulation of the objective function", 0,
@@ -804,15 +780,13 @@ double* cmaes_UpdateDistribution(cmaes_t* t, const double* rgFunVal)
 
     /* update xbestever */
     if (t->rgxbestever[N] > t->rgrgx[t->index[0]][N] || t->gen == 1)
-        for (i = 0; i <= N; ++i)
-        {
+        for (i = 0; i <= N; ++i) {
             t->rgxbestever[i] = t->rgrgx[t->index[0]][i];
             t->rgxbestever[N + 1] = t->countevals;
         }
 
     /* calculate xmean and rgBDz~N(0,C) */
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         t->rgxold[i] = t->rgxmean[i];
         t->rgxmean[i] = 0.;
         for (iNk = 0; iNk < t->sp.mu; ++iNk)
@@ -821,8 +795,7 @@ double* cmaes_UpdateDistribution(cmaes_t* t, const double* rgFunVal)
     }
 
     /* calculate z := D^(-1) * B^(-1) * rgBDz into rgdTmp */
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         if (!flgdiag)
             for (j = 0, sum = 0.; j < N; ++j)
                 sum += t->B[j][i] * t->rgBDz[j];
@@ -845,8 +818,7 @@ double* cmaes_UpdateDistribution(cmaes_t* t, const double* rgFunVal)
 */
 
     /* cumulation for sigma (ps) using B*z */
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         if (!flgdiag)
             for (j = 0, sum = 0.; j < N; ++j)
                 sum += t->B[i][j] * t->rgdTmp[j];
@@ -861,14 +833,12 @@ double* cmaes_UpdateDistribution(cmaes_t* t, const double* rgFunVal)
 
     /* cumulation for covariance matrix (pc) using B*D*z~N(0,C) */
     hsig = sqrt(psxps) / sqrt(1. - pow(1. - t->sp.cs, 2 * t->gen)) / t->chiN < 1.4 + 2. / (N + 1);
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         t->rgpc[i] = (1. - t->sp.ccumcov) * t->rgpc[i] + hsig * sqrt(t->sp.ccumcov * (2. - t->sp.ccumcov)) * t->rgBDz[i];
     }
 
     /* stop initial phase */
-    if (t->flgIniphase && t->gen > douMin(1 / t->sp.cs, 1 + N / t->sp.mucov))
-    {
+    if (t->flgIniphase && t->gen > douMin(1 / t->sp.cs, 1 + N / t->sp.mucov)) {
         if (psxps / t->sp.damps / (1. - pow((1. - t->sp.cs), t->gen)) < N * 1.05)
             t->flgIniphase = 0;
     }
@@ -930,8 +900,7 @@ static void Adapt_C2(cmaes_t* t, int hsig)
     int i, j, k, N = t->sp.N;
     int flgdiag = ((t->sp.diagonalCov == 1) || (t->sp.diagonalCov >= t->gen));
 
-    if (t->sp.ccov != 0. && t->flgIniphase == 0)
-    {
+    if (t->sp.ccov != 0. && t->flgIniphase == 0) {
 
         /* definitions for speeding up inner-most loop */
         double ccov1 = douMin(
@@ -944,18 +913,15 @@ static void Adapt_C2(cmaes_t* t, int hsig)
 
         /* update covariance matrix */
         for (i = 0; i < N; ++i)
-            for (j = flgdiag ? i : 0; j <= i; ++j)
-            {
+            for (j = flgdiag ? i : 0; j <= i; ++j) {
                 t->C[i][j] = (1 - ccov1 - ccovmu) * t->C[i][j] + ccov1 * (t->rgpc[i] * t->rgpc[j] + (1 - hsig) * t->sp.ccumcov * (2. - t->sp.ccumcov) * t->C[i][j]);
-                for (k = 0; k < t->sp.mu; ++k)
-                { /* additional rank mu update */
+                for (k = 0; k < t->sp.mu; ++k) { /* additional rank mu update */
                     t->C[i][j] += ccovmu * t->sp.weights[k] * (t->rgrgx[t->index[k]][i] - t->rgxold[i]) * (t->rgrgx[t->index[k]][j] - t->rgxold[j]) / sigmasquare;
                 }
             }
         /* update maximal and minimal diagonal value */
         t->maxdiagC = t->mindiagC = t->C[0][0];
-        for (i = 1; i < N; ++i)
-        {
+        for (i = 1; i < N; ++i) {
             if (t->maxdiagC < t->C[i][i])
                 t->maxdiagC = t->C[i][i];
             else if (t->mindiagC > t->C[i][i])
@@ -999,15 +965,13 @@ void cmaes_WriteToFileAW(cmaes_t* t, const char* key, const char* name,
 
     fp = fopen(name, appendwrite);
 
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         ERRORMESSAGE("cmaes_WriteToFile(): could not open '", name, "' with flag ",
             appendwrite);
         return;
     }
 
-    if (appendwrite[0] == 'w')
-    {
+    if (appendwrite[0] == 'w') {
         /* write a header line, very rudimentary */
         fprintf(fp, "%% # %s (randomSeed=%d, %s)\n", key, t->sp.seed, getTimeStr());
     }
@@ -1037,17 +1001,14 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
     /* keystart = key; for debugging purpose */
     keyend = key + strlen(key);
 
-    while (key < keyend)
-    {
-        if (strncmp(key, "axisratio", 9) == 0)
-        {
+    while (key < keyend) {
+        if (strncmp(key, "axisratio", 9) == 0) {
             fprintf(fp, "%.2e", sqrt(t->maxEW / t->minEW));
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "idxminSD", 8) == 0)
-        {
+        if (strncmp(key, "idxminSD", 8) == 0) {
             int mini = 0;
             for (i = N - 1; i > 0; --i)
                 if (t->mindiagC == t->C[i][i])
@@ -1057,8 +1018,7 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "idxmaxSD", 8) == 0)
-        {
+        if (strncmp(key, "idxmaxSD", 8) == 0) {
             int maxi = 0;
             for (i = N - 1; i > 0; --i)
                 if (t->maxdiagC == t->C[i][i])
@@ -1069,8 +1029,7 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
         /* new coordinate system == all eigenvectors */
-        if (strncmp(key, "B", 1) == 0)
-        {
+        if (strncmp(key, "B", 1) == 0) {
             /* int j, index[N]; */
             int j, * iindex = (int*)(new_void(N, sizeof(int))); /* MT */
             Sorted_index(t->rgD, iindex,
@@ -1084,8 +1043,7 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
             free(iindex); /* MT */
         }
         /* covariance matrix */
-        if (strncmp(key, "C", 1) == 0)
-        {
+        if (strncmp(key, "C", 1) == 0) {
             int j;
             for (i = 0; i < N; ++i)
                 for (j = 0; j <= i; ++j)
@@ -1093,8 +1051,7 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
             ++key;
         }
         /* (processor) time (used) since begin of execution */
-        if (strncmp(key, "clock", 4) == 0)
-        {
+        if (strncmp(key, "clock", 4) == 0) {
             timings_update(&t->eigenTimings);
             fprintf(fp, "%.1f %.1f", t->eigenTimings.totaltotaltime,
                 t->eigenTimings.tictoctime);
@@ -1103,16 +1060,14 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
         /* ratio between largest and smallest standard deviation */
-        if (strncmp(key, "stddevratio", 11) == 0)
-        { /* std dev in coordinate axes */
+        if (strncmp(key, "stddevratio", 11) == 0) { /* std dev in coordinate axes */
             fprintf(fp, "%g", sqrt(t->maxdiagC / t->mindiagC));
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
         /* standard deviations in coordinate directions (sigma*sqrt(C[i,i])) */
-        if (strncmp(key, "coorstddev", 10) == 0 || strncmp(key, "stddev", 6) == 0)
-        { /* std dev in coordinate axes */
+        if (strncmp(key, "coorstddev", 10) == 0 || strncmp(key, "stddev", 6) == 0) { /* std dev in coordinate axes */
             for (i = 0; i < N; ++i)
                 fprintf(fp, "%s%g", (i == 0) ? "" : "\t", t->sigma * sqrt(t->C[i][i]));
             while (*key != '+' && *key != '\0' && key < keyend)
@@ -1120,8 +1075,7 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
         /* diagonal of D == roots of eigenvalues, sorted */
-        if (strncmp(key, "diag(D)", 7) == 0)
-        {
+        if (strncmp(key, "diag(D)", 7) == 0) {
             for (i = 0; i < N; ++i)
                 t->rgdTmp[i] = t->rgD[i];
             qsort(t->rgdTmp, (unsigned)N, sizeof(double),
@@ -1132,22 +1086,19 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "dim", 3) == 0)
-        {
+        if (strncmp(key, "dim", 3) == 0) {
             fprintf(fp, "%d", N);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "eval", 4) == 0)
-        {
+        if (strncmp(key, "eval", 4) == 0) {
             fprintf(fp, "%.0f", t->countevals);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "few(diag(D))", 12) == 0)
-        { /* between four and six axes */
+        if (strncmp(key, "few(diag(D))", 12) == 0) { /* between four and six axes */
             int add = (int)(0.5 + (N + 1.) / 5.);
             for (i = 0; i < N; ++i)
                 t->rgdTmp[i] = t->rgD[i];
@@ -1157,15 +1108,13 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
             fprintf(fp, "\t%g\n", t->rgdTmp[0]); /* and smallest */
             break; /* number of printed values is not determined */
         }
-        if (strncmp(key, "fewinfo", 7) == 0)
-        {
+        if (strncmp(key, "fewinfo", 7) == 0) {
             fprintf(fp, " Iter Fevals  Function Value         Sigma   ");
             fprintf(fp, "MaxCoorDev MinCoorDev AxisRatio   MinDii   Time in eig\n");
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
         }
-        if (strncmp(key, "few", 3) == 0)
-        {
+        if (strncmp(key, "few", 3) == 0) {
             fprintf(fp, " %4.0f ", t->gen);
             fprintf(fp, " %5.0f ", t->countevals);
             fprintf(fp, "%.15e", t->rgFuncValue[t->index[0]]);
@@ -1176,36 +1125,31 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "funval", 6) == 0 || strncmp(key, "fitness", 6) == 0)
-        {
+        if (strncmp(key, "funval", 6) == 0 || strncmp(key, "fitness", 6) == 0) {
             fprintf(fp, "%.15e", t->rgFuncValue[t->index[0]]);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "fbestever", 9) == 0)
-        {
+        if (strncmp(key, "fbestever", 9) == 0) {
             fprintf(fp, "%.15e", t->rgxbestever[N]); /* f-value */
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "fmedian", 7) == 0)
-        {
+        if (strncmp(key, "fmedian", 7) == 0) {
             fprintf(fp, "%.15e", t->rgFuncValue[t->index[(int)(t->sp.lambda / 2)]]);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "fworst", 6) == 0)
-        {
+        if (strncmp(key, "fworst", 6) == 0) {
             fprintf(fp, "%.15e", t->rgFuncValue[t->index[t->sp.lambda - 1]]);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "arfunval", 8) == 0 || strncmp(key, "arfitness", 8) == 0)
-        {
+        if (strncmp(key, "arfunval", 8) == 0 || strncmp(key, "arfitness", 8) == 0) {
             for (i = 0; i < N; ++i)
                 fprintf(fp, "%s%.10e", (i == 0) ? "" : "\t",
                     t->rgFuncValue[t->index[i]]);
@@ -1213,69 +1157,59 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "gen", 3) == 0)
-        {
+        if (strncmp(key, "gen", 3) == 0) {
             fprintf(fp, "%.0f", t->gen);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "iter", 4) == 0)
-        {
+        if (strncmp(key, "iter", 4) == 0) {
             fprintf(fp, "%.0f", t->gen);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "sigma", 5) == 0)
-        {
+        if (strncmp(key, "sigma", 5) == 0) {
             fprintf(fp, "%.4e", t->sigma);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "minSD", 5) == 0)
-        { /* minimal standard deviation */
+        if (strncmp(key, "minSD", 5) == 0) { /* minimal standard deviation */
             fprintf(fp, "%.4e", sqrt(t->mindiagC));
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "maxSD", 5) == 0)
-        {
+        if (strncmp(key, "maxSD", 5) == 0) {
             fprintf(fp, "%.4e", sqrt(t->maxdiagC));
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "mindii", 6) == 0)
-        {
+        if (strncmp(key, "mindii", 6) == 0) {
             fprintf(fp, "%.4e", sqrt(t->minEW));
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "0", 1) == 0)
-        {
+        if (strncmp(key, "0", 1) == 0) {
             fprintf(fp, "0");
             ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "lambda", 6) == 0 || strncmp(key, "popsi", 5) == 0 || strncmp(key, "populationsi", 12) == 0)
-        {
+        if (strncmp(key, "lambda", 6) == 0 || strncmp(key, "popsi", 5) == 0 || strncmp(key, "populationsi", 12) == 0) {
             fprintf(fp, "%d", t->sp.lambda);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "N", 1) == 0)
-        {
+        if (strncmp(key, "N", 1) == 0) {
             fprintf(fp, "%d", N);
             ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "resume", 6) == 0)
-        {
+        if (strncmp(key, "resume", 6) == 0) {
             fprintf(fp, "\n# resume %d\n", N);
             fprintf(fp, "xmean\n");
             cmaes_WriteToFilePtr(t, "xmean", fp);
@@ -1292,24 +1226,21 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
         }
-        if (strncmp(key, "xbest", 5) == 0)
-        { /* best x in recent generation */
+        if (strncmp(key, "xbest", 5) == 0) { /* best x in recent generation */
             for (i = 0; i < N; ++i)
                 fprintf(fp, "%s%g", (i == 0) ? "" : "\t", t->rgrgx[t->index[0]][i]);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "xmean", 5) == 0)
-        {
+        if (strncmp(key, "xmean", 5) == 0) {
             for (i = 0; i < N; ++i)
                 fprintf(fp, "%s%g", (i == 0) ? "" : "\t", t->rgxmean[i]);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
             fprintf(fp, "%c", (*key == '+') ? '\t' : '\n');
         }
-        if (strncmp(key, "all", 3) == 0)
-        {
+        if (strncmp(key, "all", 3) == 0) {
             time_t ti = time(NULL);
             fprintf(fp, "\n# --------- %s\n", asctime(localtime(&ti)));
             fprintf(fp, " N %d\n", N);
@@ -1375,8 +1306,7 @@ void cmaes_WriteToFilePtr(cmaes_t* t, const char* key, FILE* fp)
 
         if (*key == '\0')
             break;
-        else if (*key != '+')
-        { /* last key was not recognized */
+        else if (*key != '+') { /* last key was not recognized */
             ERRORMESSAGE("cmaes_t:WriteToFilePtr(): unrecognized key '", key, "'", 0);
             while (*key != '+' && *key != '\0' && key < keyend)
                 ++key;
@@ -1395,62 +1325,48 @@ double cmaes_Get(cmaes_t* t, char const* s)
 {
     int N = t->sp.N;
 
-    if (strncmp(s, "axisratio", 5) == 0)
-    { /* between lengths of longest and
+    if (strncmp(s, "axisratio", 5) == 0) { /* between lengths of longest and
                                             shortest principal axis of the
                                             distribution ellipsoid */
         return (rgdouMax(t->rgD, N) / rgdouMin(t->rgD, N));
     }
-    else if (strncmp(s, "eval", 4) == 0)
-    { /* number of function evaluations */
+    else if (strncmp(s, "eval", 4) == 0) { /* number of function evaluations */
         return (t->countevals);
     }
-    else if (strncmp(s, "fctvalue", 6) == 0 || strncmp(s, "funcvalue", 6) == 0 || strncmp(s, "funvalue", 6) == 0 || strncmp(s, "fitness", 3) == 0)
-    { /* recent best function value */
+    else if (strncmp(s, "fctvalue", 6) == 0 || strncmp(s, "funcvalue", 6) == 0 || strncmp(s, "funvalue", 6) == 0 || strncmp(s, "fitness", 3) == 0) { /* recent best function value */
         return (t->rgFuncValue[t->index[0]]);
     }
-    else if (strncmp(s, "fbestever", 7) == 0)
-    { /* ever best function value */
+    else if (strncmp(s, "fbestever", 7) == 0) { /* ever best function value */
         return (t->rgxbestever[N]);
     }
-    else if (strncmp(s, "generation", 3) == 0 || strncmp(s, "iteration", 4) == 0)
-    {
+    else if (strncmp(s, "generation", 3) == 0 || strncmp(s, "iteration", 4) == 0) {
         return (t->gen);
     }
-    else if (strncmp(s, "maxeval", 4) == 0 || strncmp(s, "MaxFunEvals", 8) == 0 || strncmp(s, "stopMaxFunEvals", 12) == 0)
-    { /* maximal number of function evaluations */
+    else if (strncmp(s, "maxeval", 4) == 0 || strncmp(s, "MaxFunEvals", 8) == 0 || strncmp(s, "stopMaxFunEvals", 12) == 0) { /* maximal number of function evaluations */
         return (t->sp.stopMaxFunEvals);
     }
-    else if (strncmp(s, "maxgen", 4) == 0 || strncmp(s, "MaxIter", 7) == 0 || strncmp(s, "stopMaxIter", 11) == 0)
-    { /* maximal number of generations */
+    else if (strncmp(s, "maxgen", 4) == 0 || strncmp(s, "MaxIter", 7) == 0 || strncmp(s, "stopMaxIter", 11) == 0) { /* maximal number of generations */
         return (ceil(t->sp.stopMaxIter));
     }
-    else if (strncmp(s, "maxaxislength", 5) == 0)
-    { /* sigma * max(diag(D)) */
+    else if (strncmp(s, "maxaxislength", 5) == 0) { /* sigma * max(diag(D)) */
         return (t->sigma * sqrt(t->maxEW));
     }
-    else if (strncmp(s, "minaxislength", 5) == 0)
-    { /* sigma * min(diag(D)) */
+    else if (strncmp(s, "minaxislength", 5) == 0) { /* sigma * min(diag(D)) */
         return (t->sigma * sqrt(t->minEW));
     }
-    else if (strncmp(s, "maxstddev", 4) == 0)
-    { /* sigma * sqrt(max(diag(C))) */
+    else if (strncmp(s, "maxstddev", 4) == 0) { /* sigma * sqrt(max(diag(C))) */
         return (t->sigma * sqrt(t->maxdiagC));
     }
-    else if (strncmp(s, "minstddev", 4) == 0)
-    { /* sigma * sqrt(min(diag(C))) */
+    else if (strncmp(s, "minstddev", 4) == 0) { /* sigma * sqrt(min(diag(C))) */
         return (t->sigma * sqrt(t->mindiagC));
     }
-    else if (strncmp(s, "N", 1) == 0 || strcmp(s, "n") == 0 || strncmp(s, "dimension", 3) == 0)
-    {
+    else if (strncmp(s, "N", 1) == 0 || strcmp(s, "n") == 0 || strncmp(s, "dimension", 3) == 0) {
         return (N);
     }
-    else if (strncmp(s, "lambda", 3) == 0 || strncmp(s, "samplesize", 8) == 0 || strncmp(s, "popsize", 7) == 0)
-    { /* sample size, offspring population size */
+    else if (strncmp(s, "lambda", 3) == 0 || strncmp(s, "samplesize", 8) == 0 || strncmp(s, "popsize", 7) == 0) { /* sample size, offspring population size */
         return (t->sp.lambda);
     }
-    else if (strncmp(s, "sigma", 3) == 0)
-    {
+    else if (strncmp(s, "sigma", 3) == 0) {
         return (t->sigma);
     }
     FATAL("cmaes_Get(cmaes_t, char const * s): No match found for s='", s, "'",
@@ -1482,20 +1398,17 @@ const double* cmaes_GetPtr(cmaes_t* t, char const* s)
     int i, N = t->sp.N;
 
     /* diagonal of covariance matrix */
-    if (strncmp(s, "diag(C)", 7) == 0)
-    {
+    if (strncmp(s, "diag(C)", 7) == 0) {
         for (i = 0; i < N; ++i)
             t->rgout[i] = t->C[i][i];
         return (t->rgout);
     }
     /* diagonal of axis lengths matrix */
-    else if (strncmp(s, "diag(D)", 7) == 0)
-    {
+    else if (strncmp(s, "diag(D)", 7) == 0) {
         return (t->rgD);
     }
     /* vector of standard deviations sigma*sqrt(diag(C)) */
-    else if (strncmp(s, "stddev", 3) == 0)
-    {
+    else if (strncmp(s, "stddev", 3) == 0) {
         for (i = 0; i < N; ++i)
             t->rgout[i] = t->sigma * sqrt(t->C[i][i]);
         return (t->rgout);
@@ -1540,16 +1453,14 @@ const char* cmaes_TestForTermination(cmaes_t* t)
                                                                      (int)douMin(t->gen, *(t->arFuncValueHist - 1))),
                                                               rgdouMin(t->rgFuncValue, t->sp.lambda));
 
-    if (t->gen > 0 && range <= t->sp.stopTolFun)
-    {
+    if (t->gen > 0 && range <= t->sp.stopTolFun) {
         cp += sprintf(
             cp, "TolFun: function value differences %7.2e < stopTolFun=%7.2e\n",
             range, t->sp.stopTolFun);
     }
 
     /* TolFunHist */
-    if (t->gen > *(t->arFuncValueHist - 1))
-    {
+    if (t->gen > *(t->arFuncValueHist - 1)) {
         range = rgdouMax(t->arFuncValueHist, (int)*(t->arFuncValueHist - 1)) - rgdouMin(t->arFuncValueHist, (int)*(t->arFuncValueHist - 1));
         if (range <= t->sp.stopTolFunHist)
             cp += sprintf(cp, "TolFunHist: history of function value changes %7.2e "
@@ -1558,33 +1469,28 @@ const char* cmaes_TestForTermination(cmaes_t* t)
     }
 
     /* TolX */
-    for (i = 0, cTemp = 0; i < N; ++i)
-    {
+    for (i = 0, cTemp = 0; i < N; ++i) {
         cTemp += (t->sigma * sqrt(t->C[i][i]) < t->sp.stopTolX) ? 1 : 0;
         cTemp += (t->sigma * t->rgpc[i] < t->sp.stopTolX) ? 1 : 0;
     }
-    if (cTemp == 2 * N)
-    {
+    if (cTemp == 2 * N) {
         cp += sprintf(cp, "TolX: object variable changes below %7.2e \n",
             t->sp.stopTolX);
     }
 
     /* TolUpX */
-    for (i = 0; i < N; ++i)
-    {
+    for (i = 0; i < N; ++i) {
         if (t->sigma * sqrt(t->C[i][i]) > t->sp.stopTolUpXFactor * t->sp.rgInitialStds[i])
             break;
     }
-    if (i < N)
-    {
+    if (i < N) {
         cp += sprintf(cp, "TolUpX: standard deviation increased by more than "
                           "%7.2e, larger initial standard deviation recommended \n",
             t->sp.stopTolUpXFactor);
     }
 
     /* Condition of C greater than dMaxSignifKond */
-    if (t->maxEW >= t->minEW * t->dMaxSignifKond)
-    {
+    if (t->maxEW >= t->minEW * t->dMaxSignifKond) {
         cp += sprintf(
             cp, "ConditionNumber: maximal condition number %7.2e reached. "
                 "maxEW=%7.2e,minEW=%7.2e,maxdiagC=%7.2e,mindiagC=%7.2e\n",
@@ -1593,18 +1499,14 @@ const char* cmaes_TestForTermination(cmaes_t* t)
 
     /* Principal axis i has no effect on xmean, ie.
    x == x + 0.1 * sigma * rgD[i] * B[i] */
-    if (!flgdiag)
-    {
-        for (iAchse = 0; iAchse < N; ++iAchse)
-        {
+    if (!flgdiag) {
+        for (iAchse = 0; iAchse < N; ++iAchse) {
             fac = 0.1 * t->sigma * t->rgD[iAchse];
-            for (iKoo = 0; iKoo < N; ++iKoo)
-            {
+            for (iKoo = 0; iKoo < N; ++iKoo) {
                 if (t->rgxmean[iKoo] != t->rgxmean[iKoo] + fac * t->B[iKoo][iAchse])
                     break;
             }
-            if (iKoo == N)
-            {
+            if (iKoo == N) {
                 /* t->sigma *= exp(0.2+t->sp.cs/t->sp.damps); */
                 cp += sprintf(cp, "NoEffectAxis: standard deviation 0.1*%7.2e in "
                                   "principal axis %d without effect\n",
@@ -1614,10 +1516,8 @@ const char* cmaes_TestForTermination(cmaes_t* t)
         } /* for iAchse             */
     } /* if flgdiag */
     /* Component of xmean is not changed anymore */
-    for (iKoo = 0; iKoo < N; ++iKoo)
-    {
-        if (t->rgxmean[iKoo] == t->rgxmean[iKoo] + 0.2 * t->sigma * sqrt(t->C[iKoo][iKoo]))
-        {
+    for (iKoo = 0; iKoo < N; ++iKoo) {
+        if (t->rgxmean[iKoo] == t->rgxmean[iKoo] + 0.2 * t->sigma * sqrt(t->C[iKoo][iKoo])) {
             /* t->C[iKoo][iKoo] *= (1 + t->sp.ccov); */
             /* flg = 1; */
             cp += sprintf(cp, "NoEffectCoordinate: standard deviation 0.2*%7.2e in "
@@ -1652,8 +1552,7 @@ const char* cmaes_TestForTermination(cmaes_t* t)
     if (cp - sTestOutString > 320)
         ERRORMESSAGE("Bug in cmaes_t:Test(): sTestOutString too short", 0, 0, 0);
 
-    if (cp != sTestOutString)
-    {
+    if (cp != sTestOutString) {
         return sTestOutString;
     }
 
@@ -1670,8 +1569,7 @@ void cmaes_ReadSignals(cmaes_t* t, char const* filename)
         filename = s;
     /* if (filename) assign_string(&(t->signalsFilename), filename)*/
     fp = fopen(filename, "r");
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         return;
     }
     cmaes_ReadFromFilePtr(t, fp);
@@ -1698,8 +1596,7 @@ void cmaes_ReadFromFilePtr(cmaes_t* t, FILE* fp)
         ? time(NULL) - t->firstprinttime
         : 0; /* time is in seconds!? */
     double deltawritetimefirst = t->firstwritetime ? time(NULL) - t->firstwritetime : 0;
-    if (countiterlastwritten > t->gen)
-    { /* probably restarted */
+    if (countiterlastwritten > t->gen) { /* probably restarted */
         maxdiffitertowrite = 0;
         countiterlastwritten = 0;
     }
@@ -1713,60 +1610,47 @@ void cmaes_ReadFromFilePtr(cmaes_t* t, FILE* fp)
     ckeys = 5;
     strcpy(sin2, "tmpcmaes.dat");
 
-    if (cmaes_TestForTermination(t))
-    {
+    if (cmaes_TestForTermination(t)) {
         deltaprinttime = time(NULL); /* forces printing */
         deltawritetime = time(NULL);
     }
-    while (fgets(s, sizeof(s), fp) != NULL)
-    {
+    while (fgets(s, sizeof(s), fp) != NULL) {
         if (s[0] == '#' || s[0] == '%') /* skip comments  */
             continue;
         sin1[0] = sin2[0] = sin3[0] = sin4[0] = '\0';
-        for (ikey = 0; ikey < ckeys; ++ikey)
-        {
-            if ((nb = sscanf(s, keys[ikey], sin1, sin2, sin3, sin4)) >= 1)
-            {
-                switch (ikey)
-                {
+        for (ikey = 0; ikey < ckeys; ++ikey) {
+            if ((nb = sscanf(s, keys[ikey], sin1, sin2, sin3, sin4)) >= 1) {
+                switch (ikey) {
                 case 0: /* "stop", reads "stop now" or eg. stopMaxIter */
                     if (strncmp(sin1, "now", 3) == 0)
                         t->flgStop = 1;
-                    else if (strncmp(sin1, "MaxFunEvals", 11) == 0)
-                    {
+                    else if (strncmp(sin1, "MaxFunEvals", 11) == 0) {
                         if (sscanf(sin2, " %lg", &d) == 1)
                             t->sp.stopMaxFunEvals = d;
                     }
-                    else if (strncmp(sin1, "MaxIter", 4) == 0)
-                    {
+                    else if (strncmp(sin1, "MaxIter", 4) == 0) {
                         if (sscanf(sin2, " %lg", &d) == 1)
                             t->sp.stopMaxIter = d;
                     }
-                    else if (strncmp(sin1, "Fitness", 7) == 0)
-                    {
-                        if (sscanf(sin2, " %lg", &d) == 1)
-                        {
+                    else if (strncmp(sin1, "Fitness", 7) == 0) {
+                        if (sscanf(sin2, " %lg", &d) == 1) {
                             t->sp.stStopFitness.flg = 1;
                             t->sp.stStopFitness.val = d;
                         }
                     }
-                    else if (strncmp(sin1, "TolFunHist", 10) == 0)
-                    {
+                    else if (strncmp(sin1, "TolFunHist", 10) == 0) {
                         if (sscanf(sin2, " %lg", &d) == 1)
                             t->sp.stopTolFunHist = d;
                     }
-                    else if (strncmp(sin1, "TolFun", 6) == 0)
-                    {
+                    else if (strncmp(sin1, "TolFun", 6) == 0) {
                         if (sscanf(sin2, " %lg", &d) == 1)
                             t->sp.stopTolFun = d;
                     }
-                    else if (strncmp(sin1, "TolX", 4) == 0)
-                    {
+                    else if (strncmp(sin1, "TolX", 4) == 0) {
                         if (sscanf(sin2, " %lg", &d) == 1)
                             t->sp.stopTolX = d;
                     }
-                    else if (strncmp(sin1, "TolUpXFactor", 4) == 0)
-                    {
+                    else if (strncmp(sin1, "TolUpXFactor", 4) == 0) {
                         if (sscanf(sin2, " %lg", &d) == 1)
                             t->sp.stopTolUpXFactor = d;
                     }
@@ -1775,8 +1659,7 @@ void cmaes_ReadFromFilePtr(cmaes_t* t, FILE* fp)
                     d = 1; /* default */
                     if (sscanf(sin2, "%lg", &d) < 1 && deltaprinttimefirst < 1)
                         d = 0; /* default at first time */
-                    if (deltaprinttime >= d && !flglockprint)
-                    {
+                    if (deltaprinttime >= d && !flglockprint) {
                         cmaes_WriteToFilePtr(t, sin1, stdout);
                         flgprinted = 1;
                     }
@@ -1792,25 +1675,20 @@ void cmaes_ReadFromFilePtr(cmaes_t* t, FILE* fp)
                         d = 0; /* default is zero for the first second */
                     if (d < 0)
                         flglockwrite += 2;
-                    if (!flglockwrite)
-                    {
-                        if (deltawritetime >= d)
-                        {
+                    if (!flglockwrite) {
+                        if (deltawritetime >= d) {
                             cmaes_WriteToFile(t, sin1, sin2);
                             flgwritten = 1;
                         }
-                        else if (d < 1 && t->gen - countiterlastwritten > maxdiffitertowrite)
-                        {
+                        else if (d < 1 && t->gen - countiterlastwritten > maxdiffitertowrite) {
                             cmaes_WriteToFile(t, sin1, sin2);
                             flgwritten = 1;
                         }
                     }
                     break;
                 case 3: /* check, checkeigen 1 or check eigen 1 */
-                    if (strncmp(sin1, "eigen", 5) == 0)
-                    {
-                        if (sscanf(sin2, " %lg", &d) == 1)
-                        {
+                    if (strncmp(sin1, "eigen", 5) == 0) {
+                        if (sscanf(sin2, " %lg", &d) == 1) {
                             if (d > 0)
                                 t->flgCheckEigen = 1;
                             else
@@ -1838,8 +1716,7 @@ void cmaes_ReadFromFilePtr(cmaes_t* t, FILE* fp)
 
     if (flgprinted)
         t->printtime = time(NULL);
-    if (flgwritten)
-    {
+    if (flgwritten) {
         t->writetime = time(NULL);
         if (t->gen - countiterlastwritten > maxdiffitertowrite)
             ++maxdiffitertowrite; /* smooth prolongation of writing gaps/intervals */
@@ -1867,24 +1744,20 @@ static int Check_Eigen(int N, double** C, double* diag, double** Q)
     static char s[324];
 
     for (i = 0; i < N; ++i)
-        for (j = 0; j < N; ++j)
-        {
-            for (cc = 0., dd = 0., k = 0; k < N; ++k)
-            {
+        for (j = 0; j < N; ++j) {
+            for (cc = 0., dd = 0., k = 0; k < N; ++k) {
                 cc += diag[k] * Q[i][k] * Q[j][k];
                 dd += Q[i][k] * Q[j][k];
             }
             /* check here, is the normalization the right one? */
-            if (fabs(cc - C[i > j ? i : j][i > j ? j : i]) / sqrt(C[i][i] * C[j][j]) > 1e-10 && fabs(cc - C[i > j ? i : j][i > j ? j : i]) > 3e-14)
-            {
+            if (fabs(cc - C[i > j ? i : j][i > j ? j : i]) / sqrt(C[i][i] * C[j][j]) > 1e-10 && fabs(cc - C[i > j ? i : j][i > j ? j : i]) > 3e-14) {
                 sprintf(s, "%d %d: %.17e %.17e, %e", i, j, cc,
                     C[i > j ? i : j][i > j ? j : i],
                     cc - C[i > j ? i : j][i > j ? j : i]);
                 ERRORMESSAGE("cmaes_t:Eigen(): imprecise result detected ", s, 0, 0);
                 ++res;
             }
-            if (fabs(dd - (i == j)) > 1e-10)
-            {
+            if (fabs(dd - (i == j)) > 1e-10) {
                 sprintf(s, "%d %d %.17e ", i, j, dd);
                 ERRORMESSAGE(
                     "cmaes_t:Eigen(): imprecise result detected (Q not orthog.)", s, 0,
@@ -1903,8 +1776,7 @@ void cmaes_UpdateEigensystem(cmaes_t* t, int flgforce)
 
     timings_update(&t->eigenTimings);
 
-    if (flgforce == 0)
-    {
+    if (flgforce == 0) {
         if (t->flgEigensysIsUptodate == 1)
             return;
 
@@ -1980,8 +1852,7 @@ static void Eigen(int N, double** C, double* diag, double** Q, double* rgtmp)
             0, 0);
 
     /* copy C to Q */
-    if (C != Q)
-    {
+    if (C != Q) {
         for (i = 0; i < N; ++i)
             for (j = 0; j <= i; ++j)
                 Q[i][j] = Q[j][i] = C[i][j];
@@ -2020,24 +1891,20 @@ static void QLalgo2(int n, double* d, double* e, double** V)
     double eps = 2.22e-16; /* Math.pow(2.0,-52.0);  == 2.22e-16 */
 
     /* shift input e */
-    for (i = 1; i < n; i++)
-    {
+    for (i = 1; i < n; i++) {
         e[i - 1] = e[i];
     }
     e[n - 1] = 0.0; /* never changed again */
 
-    for (l = 0; l < n; l++)
-    {
+    for (l = 0; l < n; l++) {
 
         /* Find small subdiagonal element */
 
         if (tst1 < fabs(d[l]) + fabs(e[l]))
             tst1 = fabs(d[l]) + fabs(e[l]);
         m = l;
-        while (m < n)
-        {
-            if (fabs(e[m]) <= eps * tst1)
-            {
+        while (m < n) {
+            if (fabs(e[m]) <= eps * tst1) {
                 /* if (fabs(e[m]) + fabs(d[m]+d[m+1]) == fabs(d[m]+d[m+1])) { */
                 break;
             }
@@ -2047,11 +1914,9 @@ static void QLalgo2(int n, double* d, double* e, double** V)
         /* If m == l, d[l] is an eigenvalue, */
         /* otherwise, iterate. */
 
-        if (m > l)
-        { /* TODO: check the case m == n, should be rejected here!? */
+        if (m > l) { /* TODO: check the case m == n, should be rejected here!? */
             int iter = 0;
-            do
-            { /* while (fabs(e[l]) > eps*tst1); */
+            do { /* while (fabs(e[l]) > eps*tst1); */
                 double dl1, h;
                 double g = d[l];
                 double p = (d[l + 1] - g) / (2.0 * e[l]);
@@ -2061,16 +1926,14 @@ static void QLalgo2(int n, double* d, double* e, double** V)
 
                 /* Compute implicit shift */
 
-                if (p < 0)
-                {
+                if (p < 0) {
                     r = -r;
                 }
                 d[l] = e[l] / (p + r);
                 d[l + 1] = e[l] * (p + r);
                 dl1 = d[l + 1];
                 h = g - d[l];
-                for (i = l + 2; i < n; i++)
-                {
+                for (i = l + 2; i < n; i++) {
                     d[i] -= h;
                 }
                 f = f + h;
@@ -2085,8 +1948,7 @@ static void QLalgo2(int n, double* d, double* e, double** V)
                     double el1 = e[l + 1];
                     double s = 0.0;
                     double s2 = 0.0;
-                    for (i = m - 1; i >= l; i--)
-                    {
+                    for (i = m - 1; i >= l; i--) {
                         c3 = c2;
                         c2 = c;
                         s2 = s;
@@ -2101,8 +1963,7 @@ static void QLalgo2(int n, double* d, double* e, double** V)
 
                         /* Accumulate transformation. */
 
-                        for (k = 0; k < n; k++)
-                        {
+                        for (k = 0; k < n; k++) {
                             h = V[k][i + 1];
                             V[k][i + 1] = s * V[k][i] + c * h;
                             V[k][i] = c * V[k][i] - s * h;
@@ -2127,24 +1988,19 @@ static void QLalgo2(int n, double* d, double* e, double** V)
     {
         int j;
         double p;
-        for (i = 0; i < n - 1; i++)
-        {
+        for (i = 0; i < n - 1; i++) {
             k = i;
             p = d[i];
-            for (j = i + 1; j < n; j++)
-            {
-                if (d[j] < p)
-                {
+            for (j = i + 1; j < n; j++) {
+                if (d[j] < p) {
                     k = j;
                     p = d[j];
                 }
             }
-            if (k != i)
-            {
+            if (k != i) {
                 d[k] = d[i];
                 d[i] = p;
-                for (j = 0; j < n; j++)
-                {
+                for (j = 0; j < n; j++) {
                     p = V[j][i];
                     V[j][i] = V[j][k];
                     V[j][k] = p;
@@ -2173,91 +2029,76 @@ static void Householder2(int n, double** V, double* d, double* e)
 
     int i, j, k;
 
-    for (j = 0; j < n; j++)
-    {
+    for (j = 0; j < n; j++) {
         d[j] = V[n - 1][j];
     }
 
     /* Householder reduction to tridiagonal form */
 
-    for (i = n - 1; i > 0; i--)
-    {
+    for (i = n - 1; i > 0; i--) {
 
         /* Scale to avoid under/overflow */
 
         double scale = 0.0;
         double h = 0.0;
-        for (k = 0; k < i; k++)
-        {
+        for (k = 0; k < i; k++) {
             scale = scale + fabs(d[k]);
         }
-        if (scale == 0.0)
-        {
+        if (scale == 0.0) {
             e[i] = d[i - 1];
-            for (j = 0; j < i; j++)
-            {
+            for (j = 0; j < i; j++) {
                 d[j] = V[i - 1][j];
                 V[i][j] = 0.0;
                 V[j][i] = 0.0;
             }
         }
-        else
-        {
+        else {
 
             /* Generate Householder vector */
 
             double f, g, hh;
 
-            for (k = 0; k < i; k++)
-            {
+            for (k = 0; k < i; k++) {
                 d[k] /= scale;
                 h += d[k] * d[k];
             }
             f = d[i - 1];
             g = sqrt(h);
-            if (f > 0)
-            {
+            if (f > 0) {
                 g = -g;
             }
             e[i] = scale * g;
             h = h - f * g;
             d[i - 1] = f - g;
-            for (j = 0; j < i; j++)
-            {
+            for (j = 0; j < i; j++) {
                 e[j] = 0.0;
             }
 
             /* Apply similarity transformation to remaining columns */
 
-            for (j = 0; j < i; j++)
-            {
+            for (j = 0; j < i; j++) {
                 f = d[j];
                 V[j][i] = f;
                 g = e[j] + V[j][j] * f;
-                for (k = j + 1; k <= i - 1; k++)
-                {
+                for (k = j + 1; k <= i - 1; k++) {
                     g += V[k][j] * d[k];
                     e[k] += V[k][j] * f;
                 }
                 e[j] = g;
             }
             f = 0.0;
-            for (j = 0; j < i; j++)
-            {
+            for (j = 0; j < i; j++) {
                 e[j] /= h;
                 f += e[j] * d[j];
             }
             hh = f / (h + h);
-            for (j = 0; j < i; j++)
-            {
+            for (j = 0; j < i; j++) {
                 e[j] -= hh * d[j];
             }
-            for (j = 0; j < i; j++)
-            {
+            for (j = 0; j < i; j++) {
                 f = d[j];
                 g = e[j];
-                for (k = j; k <= i - 1; k++)
-                {
+                for (k = j; k <= i - 1; k++) {
                     V[k][j] -= (f * e[k] + g * d[k]);
                 }
                 d[j] = V[i - 1][j];
@@ -2269,38 +2110,30 @@ static void Householder2(int n, double** V, double* d, double* e)
 
     /* Accumulate transformations */
 
-    for (i = 0; i < n - 1; i++)
-    {
+    for (i = 0; i < n - 1; i++) {
         double h;
         V[n - 1][i] = V[i][i];
         V[i][i] = 1.0;
         h = d[i + 1];
-        if (h != 0.0)
-        {
-            for (k = 0; k <= i; k++)
-            {
+        if (h != 0.0) {
+            for (k = 0; k <= i; k++) {
                 d[k] = V[k][i + 1] / h;
             }
-            for (j = 0; j <= i; j++)
-            {
+            for (j = 0; j <= i; j++) {
                 double g = 0.0;
-                for (k = 0; k <= i; k++)
-                {
+                for (k = 0; k <= i; k++) {
                     g += V[k][i + 1] * V[k][j];
                 }
-                for (k = 0; k <= i; k++)
-                {
+                for (k = 0; k <= i; k++) {
                     V[k][j] -= g * d[k];
                 }
             }
         }
-        for (k = 0; k <= i; k++)
-        {
+        for (k = 0; k <= i; k++) {
             V[k][i + 1] = 0.0;
         }
     }
-    for (j = 0; j < n; j++)
-    {
+    for (j = 0; j < n; j++) {
         d[j] = V[n - 1][j];
         V[n - 1][j] = 0.0;
     }
@@ -2399,8 +2232,7 @@ double timings_update(timings_t* t)
 
     t->totaltime += t->lastdiff;
     t->totaltotaltime += t->lastdiff;
-    if (t->istic)
-    {
+    if (t->istic) {
         t->tictoczwischensumme += t->lastdiff;
         t->tictoctime += t->lastdiff;
     }
@@ -2410,8 +2242,7 @@ double timings_update(timings_t* t)
 
 void timings_tic(timings_t* t)
 {
-    if (t->istic)
-    { /* message not necessary ? */
+    if (t->istic) { /* message not necessary ? */
         ERRORMESSAGE("Warning: timings_tic called twice without toc", 0, 0, 0);
         return;
     }
@@ -2421,8 +2252,7 @@ void timings_tic(timings_t* t)
 
 double timings_toc(timings_t* t)
 {
-    if (!t->istic)
-    {
+    if (!t->istic) {
         ERRORMESSAGE("Warning: timings_toc called without tic", 0, 0, 0);
         return -1;
     }
@@ -2454,8 +2284,7 @@ long random_init(random_t* t, long unsigned inseed)
 
     t->flgstored = 0;
     t->rgrand = (long*)new_void(32, sizeof(long));
-    if (inseed < 1)
-    {
+    if (inseed < 1) {
         while ((long)(cloc - clock()) == 0)
             ; /* TODO: remove this for time critical applications? */
         inseed = (long unsigned)abs((long)(100 * time(NULL) + clock()));
@@ -2478,8 +2307,7 @@ long random_Start(random_t* t, long unsigned inseed)
     if (inseed < 1)
         inseed = 1;
     t->aktseed = inseed;
-    for (i = 39; i >= 0; --i)
-    {
+    for (i = 39; i >= 0; --i) {
         tmp = t->aktseed / 127773;
         t->aktseed = 16807 * (t->aktseed - tmp * 127773) - 2836 * tmp;
         if (t->aktseed < 0)
@@ -2496,13 +2324,11 @@ double random_Gauss(random_t* t)
 {
     double x1, x2, rquad, fac;
 
-    if (t->flgstored)
-    {
+    if (t->flgstored) {
         t->flgstored = 0;
         return t->hold;
     }
-    do
-    {
+    do {
         x1 = 2.0 * random_Uniform(t) - 1.0;
         x2 = 2.0 * random_Uniform(t) - 1.0;
         rquad = x1 * x1 + x2 * x2;
@@ -2655,14 +2481,12 @@ void readpara_init(readpara_t* t, int dim, int inseed, const double* inxstart,
     if (N == 0)
         FATAL("readpara_readpara_t(): problem dimension N undefined.\n",
             "  (no default value available).", 0, 0);
-    if (t->xstart == NULL && inxstart == NULL && t->typicalX == NULL)
-    {
+    if (t->xstart == NULL && inxstart == NULL && t->typicalX == NULL) {
         ERRORMESSAGE("Warning: initialX undefined. typicalX = 0.5...0.5 used.", "",
             "", "");
         // printf("\nWarning: initialX undefined. typicalX = 0.5...0.5 used.\n");
     }
-    if (t->rgInitialStds == NULL && inrgsigma == NULL)
-    {
+    if (t->rgInitialStds == NULL && inrgsigma == NULL) {
         /* FATAL("initialStandardDeviations undefined","","",""); */
         ERRORMESSAGE(
             "Warning: initialStandardDeviations undefined. 0.3...0.3 used.", "", "",
@@ -2670,27 +2494,23 @@ void readpara_init(readpara_t* t, int dim, int inseed, const double* inxstart,
         // printf("\nWarning: initialStandardDeviations. 0.3...0.3 used.\n");
     }
 
-    if (t->xstart == NULL)
-    {
+    if (t->xstart == NULL) {
         t->xstart = new_double(N);
 
         /* put inxstart into xstart */
-        if (inxstart != NULL)
-        {
+        if (inxstart != NULL) {
             for (i = 0; i < N; ++i)
                 t->xstart[i] = inxstart[i];
         }
         /* otherwise use typicalX or default */
-        else
-        {
+        else {
             t->typicalXcase = 1;
             for (i = 0; i < N; ++i)
                 t->xstart[i] = (t->typicalX == NULL) ? 0.5 : t->typicalX[i];
         }
     } /* xstart == NULL */
 
-    if (t->rgInitialStds == NULL)
-    {
+    if (t->rgInitialStds == NULL) {
         t->rgInitialStds = new_double(N);
         for (i = 0; i < N; ++i)
             t->rgInitialStds[i] = (inrgsigma == NULL) ? 0.3 : inrgsigma[i];
@@ -2734,27 +2554,22 @@ void readpara_ReadFromFile(readpara_t* t, const char* filename)
     int ipara, i;
     int size;
     FILE* fp;
-    if (filename == NULL)
-    {
+    if (filename == NULL) {
         filename = ss;
     }
     t->filename = NULL; /* nothing read so far */
     fp = fopen(filename, "r");
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         ERRORMESSAGE("cmaes_ReadFromFile(): could not open '", filename, "'", 0);
         return;
     }
-    for (ipara = 0; ipara < t->n1para; ++ipara)
-    {
+    for (ipara = 0; ipara < t->n1para; ++ipara) {
         rewind(fp);
-        while (fgets(s, sizeof(s), fp) != NULL)
-        {
+        while (fgets(s, sizeof(s), fp) != NULL) {
             /* skip comments  */
             if (s[0] == '#' || s[0] == '%')
                 continue;
-            if (sscanf(s, t->rgsformat[ipara], t->rgpadr[ipara]) == 1)
-            {
+            if (sscanf(s, t->rgsformat[ipara], t->rgpadr[ipara]) == 1) {
                 if (strncmp(t->rgsformat[ipara], " stopFitness ", 13) == 0)
                     t->stStopFitness.flg = 1;
                 break;
@@ -2763,24 +2578,19 @@ void readpara_ReadFromFile(readpara_t* t, const char* filename)
     } /* for */
     if (t->N <= 0)
         FATAL("readpara_ReadFromFile(): No valid dimension N", 0, 0, 0);
-    for (ipara = 0; ipara < t->n2para; ++ipara)
-    {
+    for (ipara = 0; ipara < t->n2para; ++ipara) {
         rewind(fp);
-        while (fgets(s, sizeof(s), fp) != NULL)
-        { /* read one line */
+        while (fgets(s, sizeof(s), fp) != NULL) { /* read one line */
             /* skip comments  */
             if (s[0] == '#' || s[0] == '%')
                 continue;
-            if (sscanf(s, t->rgskeyar[ipara], &size) == 1)
-            { /* size==number of values to be read */
-                if (size > 0)
-                {
+            if (sscanf(s, t->rgskeyar[ipara], &size) == 1) { /* size==number of values to be read */
+                if (size > 0) {
                     *t->rgp2adr[ipara] = new_double(t->N);
                     for (i = 0; i < size && i < t->N; ++i) /* start reading next line */
                         if (fscanf(fp, " %lf", &(*t->rgp2adr[ipara])[i]) != 1)
                             break;
-                    if (i < size && i < t->N)
-                    {
+                    if (i < size && i < t->N) {
                         ERRORMESSAGE("readpara_ReadFromFile ", filename, ": ", 0);
                         FATAL("'", t->rgskeyar[ipara], "' not enough values found.\n",
                             "   Remove all comments between numbers.");
@@ -2804,20 +2614,17 @@ void readpara_WriteToFile(readpara_t* t, const char* filenamedest)
     size_t len;
     time_t ti = time(NULL);
     FILE* fp = fopen(filenamedest, "a");
-    if (fp == NULL)
-    {
+    if (fp == NULL) {
         ERRORMESSAGE("cmaes_WriteToFile(): could not open '", filenamedest, "'", 0);
         return;
     }
     fprintf(fp, "\n# Read from %s at %s\n", t->filename ? t->filename : "",
         asctime(localtime(&ti))); /* == ctime() */
-    for (ipara = 0; ipara < 1; ++ipara)
-    {
+    for (ipara = 0; ipara < 1; ++ipara) {
         fprintf(fp, t->rgsformat[ipara], *(int*)t->rgpadr[ipara]);
         fprintf(fp, "\n");
     }
-    for (ipara = 0; ipara < t->n2para; ++ipara)
-    {
+    for (ipara = 0; ipara < t->n2para; ++ipara) {
         if (*t->rgp2adr[ipara] == NULL)
             continue;
         fprintf(fp, t->rgskeyar[ipara], t->N);
@@ -2827,11 +2634,9 @@ void readpara_WriteToFile(readpara_t* t, const char* filenamedest)
                 (i % 5 == 4) ? '\n' : ' ');
         fprintf(fp, "\n");
     }
-    for (ipara = 1; ipara < t->n1outpara; ++ipara)
-    {
+    for (ipara = 1; ipara < t->n1outpara; ++ipara) {
         if (strncmp(t->rgsformat[ipara], " stopFitness ", 13) == 0)
-            if (t->stStopFitness.flg == 0)
-            {
+            if (t->stStopFitness.flg == 0) {
                 fprintf(fp, " stopFitness\n");
                 continue;
             }
@@ -2840,10 +2645,8 @@ void readpara_WriteToFile(readpara_t* t, const char* filenamedest)
             fprintf(fp, t->rgsformat[ipara], *(int*)t->rgpadr[ipara]);
         else if (t->rgsformat[ipara][len - 1] == 's') /* read string */
             fprintf(fp, t->rgsformat[ipara], (char*)t->rgpadr[ipara]);
-        else
-        {
-            if (strncmp(" fac*", t->rgsformat[ipara], 5) == 0)
-            {
+        else {
+            if (strncmp(" fac*", t->rgsformat[ipara], 5) == 0) {
                 fprintf(fp, " ");
                 fprintf(fp, t->rgsformat[ipara] + 5, *(double*)t->rgpadr[ipara]);
             }
@@ -2864,8 +2667,7 @@ void readpara_SupplementDefaults(readpara_t* t)
     int N = t->N;
     clock_t cloc = clock();
 
-    if (t->seed < 1)
-    {
+    if (t->seed < 1) {
         while ((int)(cloc - clock()) == 0)
             ; /* TODO: remove this for time critical applications!? */
         t->seed = (unsigned int)abs((long)(100 * time(NULL) + clock()));
@@ -2876,8 +2678,7 @@ void readpara_SupplementDefaults(readpara_t* t)
 
     if (t->lambda < 2)
         t->lambda = 4 + (int)(3 * log((double)N));
-    if (t->mu == -1)
-    {
+    if (t->mu == -1) {
         t->mu = t->lambda / 2;
         readpara_SetWeights(t, t->weigkey);
     }
@@ -2892,8 +2693,7 @@ void readpara_SupplementDefaults(readpara_t* t)
     if (t->ccumcov <= 0 || t->ccumcov > 1)
         t->ccumcov = 4. / (N + 4);
 
-    if (t->mucov < 1)
-    {
+    if (t->mucov < 1) {
         t->mucov = t->mueff;
     }
     t1 = 2. / ((N + 1.4142) * (N + 1.4142));
@@ -2955,8 +2755,7 @@ void readpara_SetWeights(readpara_t* t, const char* mode)
             t->weights[i] = log(t->mu + 1.) - log(i + 1.);
 
     /* normalize weights vector and set mueff */
-    for (i = 0, s1 = 0, s2 = 0; i < t->mu; ++i)
-    {
+    for (i = 0, s1 = 0, s2 = 0; i < t->mu; ++i) {
         s1 += t->weights[i];
         s2 += t->weights[i] * t->weights[i];
     }
@@ -3024,13 +2823,11 @@ static double myhypot(double a, double b)
 /* sqrt(a^2 + b^2) numerically stable. */
 {
     double r = 0;
-    if (fabs(a) > fabs(b))
-    {
+    if (fabs(a) > fabs(b)) {
         r = b / a;
         r = fabs(a) * sqrt(1 + r * r);
     }
-    else if (b != 0)
-    {
+    else if (b != 0) {
         r = a / b;
         r = fabs(b) * sqrt(1 + r * r);
     }
@@ -3047,10 +2844,8 @@ static int SignOfDiff(const void* d1, const void* d2)
 static void Sorted_index(const double* rgFunVal, int* iindex, int n)
 {
     int i, j;
-    for (i = 1, iindex[0] = 0; i < n; ++i)
-    {
-        for (j = i; j > 0; --j)
-        {
+    for (i = 1, iindex[0] = 0; i < n; ++i) {
+        for (j = i; j > 0; --j) {
             if (rgFunVal[iindex[j - 1]] < rgFunVal[i])
                 break;
             iindex[j] = iindex[j - 1]; /* shift up */
@@ -3064,8 +2859,7 @@ static void* new_void(int n, size_t size)
 {
     static char s[70];
     void* p = calloc((unsigned)n, size);
-    if (p == NULL)
-    {
+    if (p == NULL) {
         sprintf(s, "new_void(): calloc(%ld,%ld) failed", (long)n, (long)size);
         FATAL(s, 0, 0, 0);
     }
@@ -3078,8 +2872,7 @@ static double* new_double(int n)
 {
     static char s[170];
     double* p = (double*)calloc((unsigned)n, sizeof(double));
-    if (p == NULL)
-    {
+    if (p == NULL) {
         sprintf(s, "new_double(): calloc(%ld,%ld) failed", (long)n,
             (long)sizeof(double));
         FATAL(s, 0, 0, 0);
@@ -3093,15 +2886,13 @@ static char* new_string(const char* ins)
     unsigned i;
     char* p;
     unsigned len = (unsigned)strlen(ins);
-    if (len > 1000)
-    {
+    if (len > 1000) {
         FATAL("new_string(): input string length was larger then 1000 ",
             "(possibly due to uninitialized char *filename)", 0, 0);
     }
 
     p = (char*)calloc(len + 1, sizeof(char));
-    if (p == NULL)
-    {
+    if (p == NULL) {
         sprintf(s, "new_string(): calloc(%ld,%ld) failed", (long)len,
             (long)sizeof(char));
         FATAL(s, 0, 0, 0);
@@ -3150,8 +2941,7 @@ void ERRORMESSAGE(char const* s1, char const* s2, char const* s3,
 */
     time_t t = time(NULL);
     FILE* fp = fopen("errcmaes.err", "a");
-    if (!fp)
-    {
+    if (!fp) {
         printf("\nFATAL ERROR: %s\n", s2 ? szCat(s1, s2, s3, s4) : s1);
         printf("cmaes_t could not open file 'errcmaes.err'.");
         printf("\n *** CMA-ES ABORTED *** ");

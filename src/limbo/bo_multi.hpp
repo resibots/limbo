@@ -15,16 +15,12 @@
 #include "bo_base.hpp"
 #include "pareto.hpp"
 
-namespace limbo
-{
-    namespace multi
-    {
+namespace limbo {
+    namespace multi {
 #ifdef USE_SFERES
 
-        struct SferesParams
-        {
-            struct evo_float
-            {
+        struct SferesParams {
+            struct evo_float {
                 typedef sferes::gen::evo_float::mutation_t mutation_t;
                 typedef sferes::gen::evo_float::cross_over_t cross_over_t;
                 SFERES_CONST float cross_rate = 0.5f;
@@ -35,24 +31,21 @@ namespace limbo
                 SFERES_CONST cross_over_t cross_over_type = sferes::gen::evo_float::sbx;
             };
 
-            struct pop
-            {
+            struct pop {
                 SFERES_CONST unsigned size = 100;
                 SFERES_CONST unsigned nb_gen = 1000;
                 SFERES_CONST int dump_period = -1;
                 SFERES_CONST int initial_aleat = 1;
             };
 
-            struct parameters
-            {
+            struct parameters {
                 SFERES_CONST float min = 0.0f;
                 SFERES_CONST float max = 1.0f;
             };
         };
 
         template <typename M>
-        class SferesFit
-        {
+        class SferesFit {
         public:
             SferesFit(const std::vector<M>& models) : _models(models) {}
             SferesFit() {}
@@ -85,8 +78,7 @@ namespace limbo
         class A5 = boost::parameter::void_, class A6 = boost::parameter::void_,
         class A7 = boost::parameter::void_>
     class BoMulti
-        : public BoBase<Params, obs_type<Eigen::VectorXd>, A2, A3, A4, A5, A6, A7>
-    {
+        : public BoBase<Params, obs_type<Eigen::VectorXd>, A2, A3, A4, A5, A6, A7> {
     public:
         typedef BoBase<Params, obs_type<Eigen::VectorXd>, A2, A3, A4, A5, A6, A7> base_t;
         typedef typename base_t::obs_t obs_t;
@@ -140,12 +132,10 @@ namespace limbo
             par::sort(pareto_front.begin(), pareto_front.end(), sferes::fit::compare_objs_lex());
             _pareto_model.resize(pareto_front.size());
             Eigen::VectorXd point(D), objs(nb_objs()), sigma(nb_objs());
-            for (size_t p = 0; p < pareto_front.size(); ++p)
-            {
+            for (size_t p = 0; p < pareto_front.size(); ++p) {
                 for (size_t i = 0; i < pareto_front[p]->size(); ++i)
                     point(i) = pareto_front[p]->data(i);
-                for (size_t i = 0; i < nb_objs(); ++i)
-                {
+                for (size_t i = 0; i < nb_objs(); ++i) {
                     objs(i) = pareto_front[p]->fit().obj(i);
                     sigma(i) = _models[i].sigma(point);
                 }
@@ -166,12 +156,11 @@ namespace limbo
             assert(points.size() == objs.size());
             assert(sigma.size() == objs.size());
             pareto_t p(points.size());
-            par::loop(0, p.size(), [&](size_t k)
-                {
+            par::loop(0, p.size(), [&](size_t k) {
                     // clang-format off
                     p[k] = std::make_tuple(points[k], objs[k], sigma[k]);
-                    // clang-format on
-                });
+                // clang-format on
+            });
             return p;
         }
 

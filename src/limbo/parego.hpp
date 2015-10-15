@@ -5,12 +5,9 @@
 #include "limbo.hpp"
 #include "bo_multi.hpp"
 
-namespace limbo
-{
-    namespace defaults
-    {
-        struct parego
-        {
+namespace limbo {
+    namespace defaults {
+        struct parego {
             BO_PARAM(double, rho, 0.05);
         };
     }
@@ -18,8 +15,7 @@ namespace limbo
     template <class Params, class A3 = boost::parameter::void_,
         class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
         class A6 = boost::parameter::void_, class A7 = boost::parameter::void_>
-    class Parego : public BoMulti<Params, A3, A4, A5, A6, A7>
-    {
+    class Parego : public BoMulti<Params, A3, A4, A5, A6, A7> {
     public:
         typedef BoBase<Params, obs_type<Eigen::VectorXd>, A3, A4, A5, A6, A7> base_t;
         typedef typename base_t::obs_t obs_t;
@@ -40,8 +36,7 @@ namespace limbo
 
             inner_optimization_t inner_optimization;
 
-            while (this->_samples.size() == 0 || this->_pursue(*this))
-            {
+            while (this->_samples.size() == 0 || this->_pursue(*this)) {
                 acquisition_function_t acqui(model, this->_iteration);
 
                 Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim());
@@ -69,8 +64,7 @@ namespace limbo
             lambda = lambda / sum;
             // scalarize (Tchebycheff)
             std::vector<double> scalarized;
-            for (auto x : this->_observations)
-            {
+            for (auto x : this->_observations) {
                 double y = (lambda.array() * x.array()).maxCoeff();
                 double s = (lambda.array() * x.array()).sum();
                 scalarized.push_back(y + Params::parego::rho() * s);

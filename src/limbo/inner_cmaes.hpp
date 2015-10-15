@@ -14,23 +14,18 @@
 #include "cmaes/boundary_transformation.h"
 #include "limbo/parallel.hpp"
 
-namespace limbo
-{
+namespace limbo {
 
-    namespace defaults
-    {
-        struct cmaes
-        {
+    namespace defaults {
+        struct cmaes {
             BO_PARAM(int, nrestarts, 1);
             BO_PARAM(double, max_fun_evals, -1);
         };
     }
 
-    namespace inner_optimization
-    {
+    namespace inner_optimization {
         template <typename Params>
-        struct Cmaes
-        {
+        struct Cmaes {
             Cmaes() {}
 
             template <typename AcquisitionFunction>
@@ -65,8 +60,7 @@ namespace limbo
                 for (int i = 0; i < dim_in; ++i)
                     init_point[i] = init(i);
 
-                for (irun = 0; irun < nrestarts + 1; ++irun)
-                {
+                for (irun = 0; irun < nrestarts + 1; ++irun) {
 
                     fitvals = cmaes_init(&evo, acqui.dim_in(), init_point, NULL, 0, lambda, NULL);
 
@@ -81,18 +75,16 @@ namespace limbo
                         all_x_in_bounds[i] = cmaes_NewDouble(dim_in);
                     std::vector<Eigen::VectorXd> pop_eigen(pop_size, Eigen::VectorXd(dim_in));
 
-                    while (!(stop = cmaes_TestForTermination(&evo)))
-                    {
+                    while (!(stop = cmaes_TestForTermination(&evo))) {
                         pop = cmaes_SamplePopulation(&evo);
-                        par::loop(0, pop_size, [&](int i)
-                            {
+                        par::loop(0, pop_size, [&](int i) {
                                 // clang-format off
                                 boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim_in);
                                 for (int j = 0; j < dim_in; ++j)
                                   pop_eigen[i](j) = all_x_in_bounds[i][j];
                                 fitvals[i] = -acqui(pop_eigen[i]);
-                                // clang-format on
-                            });
+                            // clang-format on
+                        });
                         cmaes_UpdateDistribution(&evo, fitvals);
                     }
 
@@ -102,8 +94,7 @@ namespace limbo
                     lambda = incpopsize * cmaes_Get(&evo, "lambda");
                     countevals = cmaes_Get(&evo, "eval");
 
-                    if (irun == 0 || cmaes_Get(&evo, "fbestever") < fbestever)
-                    {
+                    if (irun == 0 || cmaes_Get(&evo, "fbestever") < fbestever) {
                         fbestever = cmaes_Get(&evo, "fbestever");
                         xbestever = cmaes_GetInto(&evo, "xbestever",
                             xbestever); /* alloc mem if needed */
@@ -113,18 +104,15 @@ namespace limbo
                     for (int j = 0; j < v.size(); ++j)
                         v(j) = xmean[j];
 
-                    if ((fmean = -acqui(v)) < fbestever)
-                    {
+                    if ((fmean = -acqui(v)) < fbestever) {
                         fbestever = fmean;
                         xbestever = cmaes_GetInto(&evo, "xmean", xbestever);
                     }
 
                     cmaes_exit(&evo);
 
-                    if (stop)
-                    {
-                        if (strncmp(stop, "Fitness", 7) == 0 || strncmp(stop, "MaxFunEvals", 11) == 0)
-                        {
+                    if (stop) {
+                        if (strncmp(stop, "Fitness", 7) == 0 || strncmp(stop, "MaxFunEvals", 11) == 0) {
                             //    printf("stop: %s", stop);
                             break;
                         }

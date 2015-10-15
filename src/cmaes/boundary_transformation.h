@@ -26,7 +26,7 @@ extern "C" {
  */
 
 typedef struct
-{
+    {
     double const* lower_bounds; /* array of size len_of_bounds */
     double const* upper_bounds; /* array of size len_of_bounds */
     unsigned long len_of_bounds; /* in case, last value is recycled */

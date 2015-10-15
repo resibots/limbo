@@ -45,10 +45,8 @@
 #include <random>
 
 // someday we will have a real thread-safe random number generator...
-namespace limbo
-{
-    namespace misc
-    {
+namespace limbo {
+    namespace misc {
         // NOT Thread-safe !
         template <typename T>
         inline T rand(T max = 1.0)
@@ -84,8 +82,7 @@ namespace limbo
             a1.resize(size);
             for (size_t i = 0; i < a1.size(); ++i)
                 a1[i] = i;
-            for (size_t i = 0; i < a1.size(); ++i)
-            {
+            for (size_t i = 0; i < a1.size(); ++i) {
                 size_t k = rand(i, a1.size());
                 assert(k < a1.size());
                 boost::swap(a1[i], a1[k]);

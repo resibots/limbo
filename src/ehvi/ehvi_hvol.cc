@@ -18,8 +18,7 @@ using namespace std;
 // Some prototypes:
 struct avlnode;
 
-struct point
-{
+struct point {
     // the data for a single point in the set + links to its AVL trees
     double x;
     double y;
@@ -27,8 +26,7 @@ struct point
     avlnode* xnode;
 };
 
-struct avlnode
-{
+struct avlnode {
     // an AVL tree node
     avlnode* left;
     avlnode* right;
@@ -37,8 +35,7 @@ struct avlnode
     point* data;
 };
 
-class bitree
-{
+class bitree {
     // Implementation of the AVL tree
 public:
     // stats treestats;
@@ -92,19 +89,16 @@ avlnode* bitree::getprevious(avlnode* start)
     // Returns the previous node in the sort order, or NULL if there is no
     // previous node
     avlnode* answer;
-    if (start == NULL)
-    {
+    if (start == NULL) {
         return NULL;
     }
-    if (start->left)
-    { // return rightmost left child
+    if (start->left) { // return rightmost left child
         answer = start->left;
         while (answer->right != NULL)
             answer = answer->right;
         return answer;
     }
-    else
-    {
+    else {
         answer = start;
         while (answer->parent != NULL && answer->parent->right != answer)
             answer = answer->parent;
@@ -117,21 +111,17 @@ avlnode* bitree::getnext(avlnode* start)
 {
     // Returns the next node in the sort order, or NULL if there is no next node
     avlnode* answer;
-    if (start == NULL)
-    {
+    if (start == NULL) {
         return NULL;
     }
-    if (start->right)
-    { // return leftmost right child
+    if (start->right) { // return leftmost right child
         answer = start->right;
-        while (answer->left != NULL)
-        {
+        while (answer->left != NULL) {
             answer = answer->left;
         }
         return answer;
     }
-    else
-    {
+    else {
         answer = start;
         while (answer->parent != NULL && answer->parent->left != answer)
             answer = answer->parent;
@@ -147,17 +137,14 @@ point* bitree::removenode(avlnode* node)
     point* returnvalue;
     if (!node)
         return NULL;
-    if (node->parent)
-    {
+    if (node->parent) {
         if (node->parent->left == node)
             change = -1;
         else
             change = 1;
     }
-    if (node->left == NULL)
-    {
-        if (node->right == NULL)
-        {
+    if (node->left == NULL) {
+        if (node->right == NULL) {
             // leaf node, easy deletion
             if (node->parent == NULL)
                 root = NULL;
@@ -166,42 +153,34 @@ point* bitree::removenode(avlnode* node)
             else
                 node->parent->right = NULL;
         }
-        else if (node->parent == NULL)
-        {
+        else if (node->parent == NULL) {
             root = node->right;
             node->right->parent = NULL;
         }
-        else if (node->parent->left == node)
-        {
+        else if (node->parent->left == node) {
             node->parent->left = node->right;
             node->right->parent = node->parent;
         }
-        else
-        {
+        else {
             node->parent->right = node->right;
             node->right->parent = node->parent;
         }
     }
-    else if (node->right == NULL)
-    {
-        if (node->parent == NULL)
-        {
+    else if (node->right == NULL) {
+        if (node->parent == NULL) {
             root = node->left;
             node->left->parent = NULL;
         }
-        else if (node->parent->left == node)
-        {
+        else if (node->parent->left == node) {
             node->parent->left = node->left;
             node->left->parent = node->parent;
         }
-        else
-        {
+        else {
             node->parent->right = node->left;
             node->left->parent = node->parent;
         }
     }
-    else
-    { // node with two children
+    else { // node with two children
         // we replace it with the next node and delete that one.
         // IMPORTANT: this magic trick causes getnext to not
         // work as expected when used in combination with
@@ -216,8 +195,7 @@ point* bitree::removenode(avlnode* node)
     }
     // Everything's set up to actually delete the node, but first
     // we should update the balance information for its parent.
-    if (node->parent != NULL)
-    {
+    if (node->parent != NULL) {
         deleterebalance(node->parent, change);
     }
     returnvalue = node->data;
@@ -233,8 +211,7 @@ avlnode* bitree::attemptcandidate(double x, double y)
     avlnode* temp = root;
     avlnode* closest = NULL; // pointers used for all the tree stuff
     // treestats.inserting = true;
-    if (!root)
-    {
+    if (!root) {
         // If this is the first candidate, it can always be inserted.
         root = new avlnode;
         root->left = NULL;
@@ -254,31 +231,26 @@ avlnode* bitree::attemptcandidate(double x, double y)
     // This can be done by finding the point closest but not lower in x value,
     // and seeing if it is higher in y value.
     bool found = false;
-    while (!found)
-    {
-        if (temp->data->x < x)
-        {
+    while (!found) {
+        if (temp->data->x < x) {
             if (temp->right != NULL)
                 temp = temp->right;
             else
                 found = true;
         }
-        else if (temp->data->x > x)
-        {
+        else if (temp->data->x > x) {
             closest = temp;
             if (temp->left != NULL)
                 temp = temp->left;
             else
                 found = true;
         }
-        else
-        {
+        else {
             closest = temp;
             found = true;
         }
     }
-    if (closest == NULL)
-    { // There is no point with higher x
+    if (closest == NULL) { // There is no point with higher x
         temp->right = new avlnode;
         temp->right->left = NULL;
         temp->right->right = NULL;
@@ -292,13 +264,11 @@ avlnode* bitree::attemptcandidate(double x, double y)
         temp = temp->right;
         insertrebalance(temp, 0);
     }
-    else
-    {
+    else {
         if (closest->data->y >= y) // Candidate is dominated or the same point
             return NULL;
         // Else candidate isn't dominated. Insert as child of temp.
-        if (temp->data->x < x)
-        {
+        if (temp->data->x < x) {
             temp->right = new avlnode;
             temp->right->left = NULL;
             temp->right->right = NULL;
@@ -312,8 +282,7 @@ avlnode* bitree::attemptcandidate(double x, double y)
             temp = temp->right;
             insertrebalance(temp, 0);
         }
-        else if (temp->data->x > x)
-        {
+        else if (temp->data->x > x) {
             temp->left = new avlnode;
             temp->left->left = NULL;
             temp->left->right = NULL;
@@ -327,8 +296,7 @@ avlnode* bitree::attemptcandidate(double x, double y)
             temp = temp->left;
             insertrebalance(temp, 0);
         }
-        else
-        {
+        else {
             // Special situation: temp is replaced by the candidate
             temp->data->x = x;
             temp->data->y = y;
@@ -351,8 +319,7 @@ void bitree::removedominated(avlnode* node)
     // recalculated.
     // Dominated points are deleted.
     avlnode* previous = getprevious(node);
-    while (previous != NULL && previous->data->y <= node->data->y)
-    {
+    while (previous != NULL && previous->data->y <= node->data->y) {
         avlnode* goner = previous;
         previous = getprevious(previous);
         point* magic;
@@ -394,12 +361,10 @@ void bitree::calculateS(avlnode* node)
     avlnode* next = getnext(node);
     totalS -= node->data->S;
     node->data->S = node->data->x - xmin;
-    if (next == NULL)
-    {
+    if (next == NULL) {
         node->data->S *= node->data->y - ymin;
     }
-    else
-    {
+    else {
         node->data->S *= (node->data->y - next->data->y);
     }
     totalS += node->data->S;
@@ -414,41 +379,32 @@ void bitree::deleterebalance(avlnode* node, int change)
     node->balance += change;
     // If balance is 1 or -1 then everything is fine.
     // We only need to do something if balance is -2, 0 or 2.
-    if (node->balance == 0)
-    {
+    if (node->balance == 0) {
         // subtree has shrunk by 1 so we need to update the parent
-        if (node->parent)
-        {
+        if (node->parent) {
             if (node->parent->left == node)
                 deleterebalance(node->parent, -1);
             else
                 deleterebalance(node->parent, 1);
         }
     }
-    else
-    {
+    else {
         // Tree is unbalanced. Fix it.
-        if (node->balance == 2)
-        {
-            if (node->left->balance >= 0)
-            {
+        if (node->balance == 2) {
+            if (node->left->balance >= 0) {
                 rotateright(node);
             }
-            else
-            {
+            else {
                 rotateleft(node->left);
                 rotateright(node);
             }
             deleterebalance(node->parent, 0);
         }
-        else if (node->balance == -2)
-        {
-            if (node->right->balance <= 0)
-            {
+        else if (node->balance == -2) {
+            if (node->right->balance <= 0) {
                 rotateleft(node);
             }
-            else
-            {
+            else {
                 rotateright(node->right);
                 rotateleft(node);
             }
@@ -462,42 +418,33 @@ void bitree::insertrebalance(avlnode* node, int change)
     // Change balance factors and perform necessary rotations.
     // Calling insertrebalance(node,0) on the new node recursively
     // fixes the balance of the whole tree.
-    if (change == 0 || node->balance == 0)
-    {
+    if (change == 0 || node->balance == 0) {
         // node was perfectly balanced
         node->balance = change;
-        if (node->parent)
-        {
+        if (node->parent) {
             if (node->parent->left == node)
                 insertrebalance(node->parent, 1);
             else
                 insertrebalance(node->parent, -1);
         }
     }
-    else
-    {
+    else {
         node->balance += change;
         // Perform necessary rotations if tree has become unbalanced
-        if (node->balance == 2)
-        {
-            if (node->left->balance > 0)
-            {
+        if (node->balance == 2) {
+            if (node->left->balance > 0) {
                 rotateright(node);
             }
-            else
-            {
+            else {
                 rotateleft(node->left);
                 rotateright(node);
             }
         }
-        else if (node->balance == -2)
-        {
-            if (node->right->balance < 0)
-            {
+        else if (node->balance == -2) {
+            if (node->right->balance < 0) {
                 rotateleft(node);
             }
-            else
-            {
+            else {
                 rotateright(node->right);
                 rotateleft(node);
             }
@@ -512,8 +459,7 @@ void bitree::rotateleft(avlnode* node)
     // first let's update the balance.
     node->balance = node->balance + 1 - (rightchild->balance < 0 ? rightchild->balance : 0);
     rightchild->balance = rightchild->balance + 1 + (node->balance > 0 ? node->balance : 0);
-    if (node->parent == NULL)
-    { // root
+    if (node->parent == NULL) { // root
         root = rightchild;
         node->right = rightchild->left;
         if (node->right)
@@ -522,8 +468,7 @@ void bitree::rotateleft(avlnode* node)
         node->parent = root;
         root->left = node;
     }
-    else
-    {
+    else {
         if (node->parent->left == node)
             node->parent->left = rightchild;
         else
@@ -543,8 +488,7 @@ void bitree::rotateright(avlnode* node)
     avlnode* leftchild = node->left;
     node->balance = node->balance - 1 - (leftchild->balance > 0 ? leftchild->balance : 0);
     leftchild->balance = leftchild->balance - 1 + (node->balance < 0 ? node->balance : 0);
-    if (node->parent == NULL)
-    { // root
+    if (node->parent == NULL) { // root
         root = leftchild;
         node->left = leftchild->right;
         if (node->left)
@@ -553,8 +497,7 @@ void bitree::rotateright(avlnode* node)
         node->parent = root;
         root->right = node;
     }
-    else
-    {
+    else {
         if (node->parent->left == node)
             node->parent->left = leftchild;
         else
@@ -584,18 +527,14 @@ double hvol3d(deque<individual*> P, double cl[DIMENSIONS],
         tree.attemptcandidate(min(fmax[0], P[P.size() - 1]->f[0]),
             min(fmax[1], P[P.size() - 1]->f[1]));
     oldz = P[P.size() - 1]->f[2];
-    for (i = P.size() - 2; i >= 0; i--)
-    {
-        if (P[i]->f[2] <= cl[2])
-        { // done, let's calculate the last slice
+    for (i = P.size() - 2; i >= 0; i--) {
+        if (P[i]->f[2] <= cl[2]) { // done, let's calculate the last slice
             break;
         }
-        if (P[i]->f[2] < fmax[2])
-        {
+        if (P[i]->f[2] < fmax[2]) {
             answer += (min(fmax[2], oldz) - P[i]->f[2]) * tree.totalS;
         }
-        if (P[i]->f[0] > cl[0] && P[i]->f[1] > cl[1])
-        {
+        if (P[i]->f[0] > cl[0] && P[i]->f[1] > cl[1]) {
             tree.attemptcandidate(min(fmax[0], P[i]->f[0]), min(fmax[1], P[i]->f[1]));
         }
         oldz = P[i]->f[2];
@@ -620,8 +559,7 @@ double calculateslice(deque<individual*> P, double r[DIMENSIONS],
     if (fmax[x] <= r[x] || fmax[y] <= r[y])
         return 0;
     bitree tree(r[x], r[y]);
-    for (int i = P.size() - 1; i >= 0; i--)
-    {
+    for (int i = P.size() - 1; i >= 0; i--) {
         if (P[i]->f[dimension] <= fmax[dimension])
             break;
         if (P[i]->f[x] > r[x] && P[i]->f[y] > r[y])
@@ -636,11 +574,9 @@ double calculateS(deque<individual*> P, double r[])
 {
     double answer = 0;
     sort(P.begin(), P.end(), xcomparator);
-    if (P.size())
-    {
+    if (P.size()) {
         answer += (P[P.size() - 1]->f[0] - r[0]) * (P[P.size() - 1]->f[1] - r[1]);
-        for (int i = P.size() - 2; i >= 0; i--)
-        {
+        for (int i = P.size() - 2; i >= 0; i--) {
             answer += (P[i]->f[0] - r[0]) * (P[i]->f[1] - P[i + 1]->f[1]);
         }
     }

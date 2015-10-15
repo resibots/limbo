@@ -33,12 +33,10 @@
 #include "gp_auto.hpp"
 #include "init_functions.hpp"
 
-namespace limbo
-{
+namespace limbo {
 
     template <typename BO>
-    struct RefreshStat_f
-    {
+    struct RefreshStat_f {
         RefreshStat_f(BO& bo, bool blacklisted)
             : _bo(bo), _blacklisted(blacklisted) {}
 
@@ -88,13 +86,11 @@ namespace limbo
         class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
         class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
         class A6 = boost::parameter::void_, class A7 = boost::parameter::void_>
-    class BoBase
-    {
+    class BoBase {
     public:
         typedef Params params_t;
         // defaults
-        struct defaults
-        {
+        struct defaults {
             typedef init_functions::RandomSampling<Params> init_t; // 1
             typedef inner_optimization::Cmaes<Params> inneropt_t; // 2
             typedef kernel_functions::SquaredExpARD<Params> kf_t;
@@ -156,8 +152,7 @@ namespace limbo
         void _init(const F& feval, bool reset = true)
         {
             this->_iteration = 0;
-            if (reset)
-            {
+            if (reset) {
                 this->_samples.clear();
                 this->_observations.clear();
                 this->_bl_samples.clear();

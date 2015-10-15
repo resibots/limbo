@@ -8,8 +8,7 @@
 #include <vector>
 using namespace std;
 
-struct mus
-{ // Holds mean & variance for a Gaussian distribution
+struct mus { // Holds mean & variance for a Gaussian distribution
     double mu[DIMENSIONS];
     double s[DIMENSIONS];
 };

@@ -10,14 +10,11 @@
 #include "kernel_functions.hpp"
 #include "mean_functions.hpp"
 
-namespace limbo
-{
-    namespace model
-    {
+namespace limbo {
+    namespace model {
         template <typename Params, typename KernelFunction, typename MeanFunction,
             typename ObsType = Eigen::VectorXd>
-        class GP
-        {
+        class GP {
         public:
             GP() : _dim_in(-1), _dim_out(-1) {}
             // useful because the model might be created  before having samples
@@ -28,8 +25,7 @@ namespace limbo
                 const std::vector<ObsType>& observations, double noise,
                 const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
             {
-                if (_dim_in == -1)
-                {
+                if (_dim_in == -1) {
                     assert(samples.size() != 0);
                     assert(observations.size() != 0);
                     assert(samples.size() == observations.size());
@@ -211,13 +207,11 @@ namespace limbo
             double _sigma(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const
             {
                 double res;
-                if (_bl_samples.size() == 0)
-                {
+                if (_bl_samples.size() == 0) {
                     Eigen::VectorXd z = _llt.matrixL().solve(k);
                     res = _kernel_function(v, v) - z.dot(z);
                 }
-                else
-                {
+                else {
                     res = _kernel_function(v, v) - k.transpose() * _inv_bl_kernel * k;
                 }
 
@@ -235,8 +229,7 @@ namespace limbo
             Eigen::VectorXd _compute_k_bl(const Eigen::VectorXd& v,
                 const Eigen::VectorXd& k) const
             {
-                if (_bl_samples.size() == 0)
-                {
+                if (_bl_samples.size() == 0) {
                     return k;
                 }
 

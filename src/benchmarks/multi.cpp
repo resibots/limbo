@@ -5,43 +5,41 @@
 
 using namespace limbo;
 
-struct Params
-{
-    struct boptimizer
-    {
+struct Params {
+    struct boptimizer {
         BO_PARAM(double, noise, 0.01);
         BO_PARAM(int, dump_period, 1);
     };
-    struct init
-    {
+
+    struct init {
         BO_PARAM(int, nb_samples, 10);
         // calandra: number of dimensions * 5
         // knowles : 11 * dim - 1
     };
-    struct parego : public defaults::parego
-    {
+
+    struct parego : public defaults::parego {
     };
-    struct maxiterations
-    {
+
+    struct maxiterations {
         BO_PARAM(int, n_iterations, 30);
     };
-    struct ucb : public defaults::ucb
-    {
+
+    struct ucb : public defaults::ucb {
     };
-    struct gp_ucb : public defaults::gp_ucb
-    {
+
+    struct gp_ucb : public defaults::gp_ucb {
     };
-    struct cmaes : public defaults::cmaes
-    {
+
+    struct cmaes : public defaults::cmaes {
     };
-    struct gp_auto : public defaults::gp_auto
-    {
+
+    struct gp_auto : public defaults::gp_auto {
     };
-    struct meanconstant : public defaults::meanconstant
-    {
+
+    struct meanconstant : public defaults::meanconstant {
     };
-    struct ehvi
-    {
+
+    struct ehvi {
         BO_PARAM(double, x_ref, -11);
         BO_PARAM(double, y_ref, -11);
     };
@@ -55,8 +53,7 @@ struct Params
 #define ZDT_DIM 30
 #endif
 
-struct zdt1
-{
+struct zdt1 {
     static constexpr size_t dim = ZDT_DIM;
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -73,8 +70,7 @@ struct zdt1
     }
 };
 
-struct zdt2
-{
+struct zdt2 {
     static constexpr size_t dim = ZDT_DIM;
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -91,8 +87,7 @@ struct zdt2
     }
 };
 
-struct zdt3
-{
+struct zdt3 {
     static constexpr size_t dim = ZDT_DIM;
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -109,8 +104,7 @@ struct zdt3
     }
 };
 
-struct mop2
-{
+struct mop2 {
     static constexpr size_t dim = 2;
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -129,13 +123,12 @@ struct mop2
     }
 };
 
-namespace limbo
-{
-    namespace stat
-    {
+namespace limbo {
+    namespace stat {
+
         template <typename F>
-        struct ParetoBenchmark
-        {
+        struct ParetoBenchmark {
+
             template <typename BO>
             void operator()(BO& opt)
             {

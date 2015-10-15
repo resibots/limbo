@@ -11,14 +11,12 @@
 #include <tbb/parallel_reduce.h>
 #endif
 
-namespace par
-{
+namespace par {
 #ifdef USE_TBB
 #ifdef __GXX_EXPERIMENTAL_CXX0X__
     template <typename X> // old fashion way to create template alias (for GCC
     // 4.6...)
-    struct vector
-    {
+    struct vector {
         typedef tbb::concurrent_vector<X> type;
     };
 #else
@@ -36,8 +34,7 @@ namespace par
 #ifdef __GXX_EXPERIMENTAL_CXX0X__
     template <typename X> // old fashion way to create template alias (for GCC
     // 4.6...)
-    struct vector
-    {
+    struct vector {
         typedef std::vector<X> type;
     };
 #else
@@ -69,12 +66,11 @@ namespace par
     inline void loop(size_t begin, size_t end, const F& f)
     {
 #ifdef USE_TBB
-        tbb::parallel_for(size_t(begin), end, size_t(1), [&](size_t i)
-            {
+        tbb::parallel_for(size_t(begin), end, size_t(1), [&](size_t i) {
     // clang-format off
                 f(i);
-                // clang-format on
-            });
+            // clang-format on
+        });
 #else
         for (size_t i = begin; i < end; ++i)
             f(i);
@@ -85,8 +81,7 @@ namespace par
     T max(const T& init, int num_steps, const F& f, const C& comp)
     {
 #ifdef USE_TBB
-        auto body = [&](const tbb::blocked_range<size_t>& r, T current_max) -> T
-        {
+        auto body = [&](const tbb::blocked_range<size_t>& r, T current_max) -> T {
     // clang-format off
             for (size_t i = r.begin(); i != r.end(); ++i)
             {
@@ -97,8 +92,7 @@ namespace par
             return current_max;
             // clang-format on
         };
-        auto joint = [&](const T& p1, const T& p2) -> T
-        {
+        auto joint = [&](const T& p1, const T& p2) -> T {
     // clang-format off
             if (comp(p1, p2))
                 return p1;
@@ -109,8 +103,7 @@ namespace par
             body, joint);
 #else
         T current_max = init;
-        for (size_t i = 0; i < num_steps; ++i)
-        {
+        for (size_t i = 0; i < num_steps; ++i) {
             T v = f(i);
             if (comp(v, current_max))
                 current_max = v;
@@ -134,12 +127,11 @@ namespace par
     inline void replicate(size_t nb, const F& f)
     {
 #ifdef USE_TBB
-        tbb::parallel_for(size_t(0), nb, size_t(1), [&](size_t i)
-            {
+        tbb::parallel_for(size_t(0), nb, size_t(1), [&](size_t i) {
     // clang-format off
                 f();
-                // clang-format on
-            });
+            // clang-format on
+        });
 #else
         for (size_t i = 0; i < nb; ++i)
             f();

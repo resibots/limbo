@@ -7,22 +7,17 @@
 
 // USING_PART_OF_NAMESPACE_EIGEN
 
-namespace limbo
-{
+namespace limbo {
 
-    namespace defaults
-    {
-        struct maxpredictedvalue
-        {
+    namespace defaults {
+        struct maxpredictedvalue {
             BO_PARAM(float, ratio, 0.9);
         };
     }
 
-    namespace stopping_criterion
-    {
+    namespace stopping_criterion {
         template <typename Params>
-        struct MaxIterations
-        {
+        struct MaxIterations {
             MaxIterations() { iteration = 0; }
 
             template <typename BO>
@@ -36,8 +31,7 @@ namespace limbo
         };
 
         template <typename Params>
-        struct MaxPredictedValue
-        {
+        struct MaxPredictedValue {
 
             MaxPredictedValue() {}
 
@@ -50,8 +44,7 @@ namespace limbo
 
                 if (bo.observations().size() == 0 || bo.best_observation() <= Params::maxpredictedvalue::ratio() * val)
                     return true;
-                else
-                {
+                else {
                     std::cout << "stop caused by Max predicted value reached. Thresold: "
                               << Params::maxpredictedvalue::ratio() * val
                               << " max observations: " << bo.best_observation() << std::endl;
@@ -61,8 +54,7 @@ namespace limbo
 
         protected:
             template <typename BO>
-            struct GPMean
-            {
+            struct GPMean {
                 GPMean(const BO& bo)
                     : _model(bo.samples()[0].size())
                 { // should have at least one sample
@@ -78,8 +70,7 @@ namespace limbo
         };
 
         template <typename BO>
-        struct ChainCriteria
-        {
+        struct ChainCriteria {
             typedef bool result_type;
             ChainCriteria(const BO& bo) : _bo(bo) {}
 

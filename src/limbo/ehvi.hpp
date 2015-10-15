@@ -6,14 +6,11 @@
 #include "ehvi/ehvi_calculations.h"
 #include "ehvi/ehvi_sliceupdate.h"
 
-namespace limbo
-{
-    namespace acquisition_functions
-    {
+namespace limbo {
+    namespace acquisition_functions {
         // only work in 2D for now
         template <typename Params, typename Model>
-        class Ehvi
-        {
+        class Ehvi {
         public:
             Ehvi(const std::vector<Model>& models, const std::deque<individual*>& pop,
                 const Eigen::VectorXd& ref_point)
@@ -45,8 +42,7 @@ namespace limbo
         class A3 = boost::parameter::void_, class A4 = boost::parameter::void_,
         class A5 = boost::parameter::void_, class A6 = boost::parameter::void_,
         class A7 = boost::parameter::void_>
-    class Ehvi : public BoMulti<Params, A2, A3, A4, A5, A6, A7>
-    {
+    class Ehvi : public BoMulti<Params, A2, A3, A4, A5, A6, A7> {
     public:
         typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
         typedef BoBase<Params, obs_type<Eigen::VectorXd>, A3, A4, A5, A6, A7> base_t;
@@ -60,16 +56,14 @@ namespace limbo
 
             inner_optimization_t inner_opt;
 
-            while (this->_samples.size() == 0 || this->_pursue(*this))
-            {
+            while (this->_samples.size() == 0 || this->_pursue(*this)) {
                 std::cout.flush();
                 this->template update_pareto_model<EvalFunction::dim>();
                 this->update_pareto_data();
 
                 // copy in the ehvi structure to compute expected improvement
                 std::deque<individual*> pop;
-                for (auto x : this->pareto_data())
-                {
+                for (auto x : this->pareto_data()) {
                     individual* ind = new individual;
                     ind->f[0] = std::get<1>(x)(0);
                     ind->f[1] = std::get<1>(x)(1);
@@ -88,8 +82,7 @@ namespace limbo
                 // maximize with CMA-ES
                 typedef std::pair<Eigen::VectorXd, double> pair_t;
                 pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
-                auto body = [&](int i) -> pair_t
-                {
+                auto body = [&](int i) -> pair_t {
                     // clang-format off
                     auto x = this->pareto_data()[i];
                     Eigen::VectorXd s = inner_opt(acqui, acqui.dim(), std::get<0>(x));
@@ -97,8 +90,7 @@ namespace limbo
                     return std::make_pair(s, hv);
                     // clang-format on
                 };
-                auto comp = [](const pair_t& v1, const pair_t& v2)
-                {
+                auto comp = [](const pair_t& v1, const pair_t& v2) {
                     // clang-format off
                     return v1.second > v2.second;
                     // clang-format on
@@ -106,8 +98,7 @@ namespace limbo
                 auto m = par::max(init, this->pareto_data().size(), body, comp);
 
                 // maximize with NSGA-II
-                auto body2 = [&](int i)
-                {
+                auto body2 = [&](int i) {
                     // clang-format off
                     auto x = std::get<0>(this->pareto_model()[i]);
                     float hv = acqui(x);

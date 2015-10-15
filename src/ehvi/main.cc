@@ -20,39 +20,33 @@ void doscheme(char* schemename, deque<individual*>& testcase, double r[],
     double answer;
     vector<double> answervector;
     if (pdf.size() == 1)
-        if (strcmp(schemename, "sliceupdate") == 0)
-        {
+        if (strcmp(schemename, "sliceupdate") == 0) {
             cerr << "Calculating with slice-update scheme..." << endl;
             answer = ehvi3d_sliceupdate(testcase, r, pdf[0]->mu, pdf[0]->s);
             cout << answer << endl;
         }
-        else if (strcmp(schemename, "2term") == 0)
-        {
+        else if (strcmp(schemename, "2term") == 0) {
             cerr << "Calculating with 2-term scheme..." << endl;
             answer = ehvi3d_2term(testcase, r, pdf[0]->mu, pdf[0]->s);
             cout << answer << endl;
         }
-        else if (strcmp(schemename, "5term") == 0)
-        {
+        else if (strcmp(schemename, "5term") == 0) {
             cerr << "Calculating with 5-term scheme..." << endl;
             answer = ehvi3d_5term(testcase, r, pdf[0]->mu, pdf[0]->s);
             cout << answer << endl;
         }
-        else if (strcmp(schemename, "8term") == 0)
-        {
+        else if (strcmp(schemename, "8term") == 0) {
             cerr << "Calculating with 8-term scheme..." << endl;
             answer = ehvi3d_8term(testcase, r, pdf[0]->mu, pdf[0]->s);
             cout << answer << endl;
         }
-        else if (strcmp(schemename, "montecarlo") == 0)
-        {
+        else if (strcmp(schemename, "montecarlo") == 0) {
             cerr << "Calculating with Monte Carlo scheme (" << MONTECARLOS
                  << " iterations)..." << endl;
             answer = ehvi3d_montecarlo(testcase, r, pdf[0]->mu, pdf[0]->s);
             cout << answer << endl;
         }
-        else
-        {
+        else {
             cerr << "Scheme " << schemename
                  << " does not exist. Proper options are:" << endl
                  << "2term" << endl
@@ -61,24 +55,20 @@ void doscheme(char* schemename, deque<individual*>& testcase, double r[],
                  << "sliceupdate" << endl
                  << "montecarlo" << endl;
         }
-    else
-    {
-        if (strcmp(schemename, "sliceupdate") == 0)
-        {
+    else {
+        if (strcmp(schemename, "sliceupdate") == 0) {
             cerr << "Calculating with slice-update scheme (multi-version)..." << endl;
             answervector = ehvi3d_sliceupdate(testcase, r, pdf);
             for (int i = 0; i < answervector.size(); i++)
                 cout << answervector[i] << endl;
         }
-        else if (strcmp(schemename, "5term") == 0)
-        {
+        else if (strcmp(schemename, "5term") == 0) {
             cerr << "Calculating with 5-term scheme (multi-version)..." << endl;
             answervector = ehvi3d_5term(testcase, r, pdf);
             for (int i = 0; i < answervector.size(); i++)
                 cout << answervector[i] << endl;
         }
-        else
-        {
+        else {
             cerr << "Scheme " << schemename << " does not exist." << endl
                  << "Multi-versions have only been implemented for the 5-term and "
                     "slice-update schemes!" << endl;
@@ -91,10 +81,8 @@ void doscheme(char* schemename, deque<individual*>& testcase, double r[],
 int checkdominance(deque<individual*>& P, individual* p)
 {
     int nr = 0;
-    for (int i = P.size() - 1; i >= 0; i--)
-    {
-        if (p->f[0] >= P[i]->f[0] && p->f[1] >= P[i]->f[1] && p->f[2] >= P[i]->f[2])
-        {
+    for (int i = P.size() - 1; i >= 0; i--) {
+        if (p->f[0] >= P[i]->f[0] && p->f[1] >= P[i]->f[1] && p->f[2] >= P[i]->f[2]) {
             cerr << "Individual " << (i + 1)
                  << " is dominated or the same as another point; removing." << endl;
             P.erase(P.begin() + i);
@@ -112,8 +100,7 @@ void loadtestcase(char* filename, deque<individual*>& testcase, double r[],
     int n, inds = 0;
     file.open(filename, ios::in);
     file >> n;
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         individual* tempvidual = new individual;
         file >> tempvidual->f[0] >> tempvidual->f[1] >> tempvidual->f[2];
         tempvidual->f[0] = tempvidual->f[0];
@@ -123,14 +110,12 @@ void loadtestcase(char* filename, deque<individual*>& testcase, double r[],
         testcase.push_back(tempvidual);
     }
     file >> r[0] >> r[1] >> r[2];
-    while (!file.eof())
-    {
+    while (!file.eof()) {
         if (inds > 0)
             pdf.push_back(new mus);
         file >> pdf[inds]->mu[0] >> pdf[inds]->mu[1] >> pdf[inds]->mu[2];
         file >> pdf[inds]->s[0] >> pdf[inds]->s[1] >> pdf[inds]->s[2];
-        if (file.fail())
-        {
+        if (file.fail()) {
             // We discover this while trying to read an individual and will end it
             // here.
             pdf.pop_back();
@@ -153,36 +138,30 @@ int main(int argc, char* argv[])
     mus* tempmus = new mus;
     pdf.push_back(tempmus);
     cout << setprecision(10);
-    if (argc > 1)
-    {
+    if (argc > 1) {
         cerr << "Loading testcase from file..." << endl;
         loadtestcase(argv[1], testcase, r, pdf);
-        if (argc == 2)
-        {
+        if (argc == 2) {
             cerr << "No scheme specified, defaulting to slice-update..." << endl;
-            if (pdf.size() == 1)
-            {
+            if (pdf.size() == 1) {
                 cout << "===>" << ehvi2d(testcase, r, pdf[0]->mu, pdf[0]->s)
                      << std::endl;
 
                 cout << ehvi3d_sliceupdate(testcase, r, pdf[0]->mu, pdf[0]->s) << endl;
             }
-            else
-            {
+            else {
                 vector<double> answer = ehvi3d_sliceupdate(testcase, r, pdf);
                 for (int i = 0; i < answer.size(); i++)
                     cout << answer[i] << endl;
             }
         }
         else
-            for (int i = 2; i < argc; i++)
-            {
+            for (int i = 2; i < argc; i++) {
                 doscheme(argv[i], testcase, r, pdf);
             }
         return 0;
     }
-    else
-    {
+    else {
         cerr << "Welcome to the EHVI calculator. Please create a testcase to try "
                 "out " << endl
              << " the available calculation schemes." << endl;
@@ -192,8 +171,7 @@ int main(int argc, char* argv[])
         cin >> n;
         cerr << "Enter their x, y and z coordinates. They will be tested for "
                 "mutual non-dominance." << endl;
-        for (int i = 1; i <= n; i++)
-        {
+        for (int i = 1; i <= n; i++) {
             individual* tempvidual = new individual;
             cerr << "Individual " << i << " of " << n << ": ";
             cin >> tempvidual->f[0] >> tempvidual->f[1] >> tempvidual->f[2];

@@ -3,13 +3,10 @@
 
 #include <Eigen/Core>
 
-namespace limbo
-{
-    namespace kernel_functions
-    {
+namespace limbo {
+    namespace kernel_functions {
         template <typename Params>
-        struct Exp
-        {
+        struct Exp {
             Exp(size_t dim = 1) {}
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
@@ -19,8 +16,7 @@ namespace limbo
         };
 
         template <typename Params>
-        struct MaternThreeHalfs
-        {
+        struct MaternThreeHalfs {
             MaternThreeHalfs(size_t dim = 1) {}
 
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
@@ -31,8 +27,7 @@ namespace limbo
         };
 
         template <typename Params>
-        struct MaternFiveHalfs
-        {
+        struct MaternFiveHalfs {
             MaternFiveHalfs(size_t dim = 1) {}
 
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
@@ -51,8 +46,7 @@ namespace limbo
         * in this order in the parameter array.
         */
         template <typename Params>
-        struct SquaredExpARD
-        {
+        struct SquaredExpARD {
             SquaredExpARD(int dim = 1) : _sf2(0), _ell(dim), _input_dim(dim)
             {
                 this->set_h_params(Eigen::VectorXd::Ones(_ell.size() + 1) * -1);

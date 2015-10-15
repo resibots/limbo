@@ -4,10 +4,8 @@
 #include <algorithm>
 #include "limbo/parallel.hpp"
 
-namespace pareto
-{
-    namespace impl
-    {
+namespace pareto {
+    namespace impl {
         // returns :
         //  1 if i1 dominates i2
         // -1 if i2 dominates i1
@@ -20,8 +18,7 @@ namespace pareto
             assert(nb_objs);
 
             bool flag1 = false, flag2 = false;
-            for (unsigned i = 0; i < nb_objs; ++i)
-            {
+            for (unsigned i = 0; i < nb_objs; ++i) {
                 if (i1(i) > i2(i))
                     flag1 = true;
                 else if (i2(i) > i1(i))
@@ -53,8 +50,7 @@ namespace pareto
 
         // lexical order
         template <int K>
-        struct compare_objs_lex
-        {
+        struct compare_objs_lex {
             compare_objs_lex() {}
             template <typename T>
             bool operator()(const T& i1, const T& i2) const
@@ -77,8 +73,7 @@ namespace pareto
         }
 
         template <int K>
-        struct comp_fronts
-        {
+        struct comp_fronts {
             // this functor is ONLY for sort2objs
             template <typename T>
             bool operator()(const T& f2, const T& f1) const
@@ -104,8 +99,7 @@ namespace pareto
             par::vector<typename T::value_type>
                 pareto; // Using Template alias (for GCC 4.7 and later)
 #endif
-            par::loop(0, p.size(), [&](size_t i)
-                {
+            par::loop(0, p.size(), [&](size_t i) {
                     // clang-format off
                     if (i % 10000 == 0)
                     {
@@ -114,8 +108,8 @@ namespace pareto
                     }
                     if (non_dominated<K>(std::get<K>(p[i]), p))
                         pareto.push_back(p[i]);
-                    // clang-format on
-                });
+                // clang-format on
+            });
             std::sort(pareto.begin(), pareto.end(), compare_objs_lex<K>());
             return par::convert_vector(pareto);
         }
@@ -131,22 +125,18 @@ namespace pareto
             std::vector<T> f;
             f.push_back(impl::new_vector(p[0]));
             size_t e = 0;
-            for (size_t i = 1; i < p.size(); ++i)
-            {
-                if (i % 10000 == 0)
-                {
+            for (size_t i = 1; i < p.size(); ++i) {
+                if (i % 10000 == 0) {
                     std::cout << i << " [" << p.size() << "] ";
                     std::cout.flush();
                 }
-                if (std::get<K>(p[i])(1) > std::get<K>(f[e].back())(1))
-                { // !dominate(si, f_e)
+                if (std::get<K>(p[i])(1) > std::get<K>(f[e].back())(1)) { // !dominate(si, f_e)
                     auto b = std::lower_bound(f.begin(), f.end(), impl::new_vector(p[i]),
                         impl::comp_fronts<K>());
                     assert(b != f.end());
                     b->push_back(p[i]);
                 }
-                else
-                {
+                else {
                     ++e;
                     f.push_back(impl::new_vector(p[i]));
                 }

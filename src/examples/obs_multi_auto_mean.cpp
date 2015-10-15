@@ -8,54 +8,44 @@
 
 using namespace limbo;
 
-struct Params
-{
+struct Params {
     //  struct gp_ucb : public defaults::gp_ucb {};
-    struct gp_auto_mean
-    {
+    struct gp_auto_mean {
         BO_PARAM(int, n_rprop, 100);
         BO_PARAM(int, rprop_restart, 10);
     };
 
-    struct cmaes : public defaults::cmaes
-    {
+    struct cmaes : public defaults::cmaes {
     };
 
-    struct meanconstant : public defaults::meanconstant
-    {
+    struct meanconstant : public defaults::meanconstant {
     };
 
-    struct ucb
-    {
+    struct ucb {
         BO_PARAM(float, alpha, 0.1);
     };
 
-    struct kf_maternfivehalfs
-    {
+    struct kf_maternfivehalfs {
         BO_PARAM(float, sigma, 1);
         BO_PARAM(float, l, 0.2);
     };
 
-    struct boptimizer
-    {
+    struct boptimizer {
         BO_PARAM(double, noise, 0.001);
         BO_PARAM(int, dump_period, 1);
     };
 
-    struct init
-    {
+    struct init {
         BO_PARAM(int, nb_samples, 5);
     };
 
-    struct maxiterations
-    {
+    struct maxiterations {
         BO_PARAM(int, n_iterations, 100);
     };
 };
 
 template <typename Params, typename Model>
-class UCB_multi
-{
+class UCB_multi {
 public:
     UCB_multi(const Model& model, int iteration = 0) : _model(model) {}
 
@@ -77,8 +67,7 @@ protected:
 };
 
 template <typename Params, typename ObsType = Eigen::VectorXd>
-struct MeanOffset
-{
+struct MeanOffset {
     MeanOffset(size_t dim_out = 1) {}
 
     template <typename GP>
@@ -88,8 +77,7 @@ struct MeanOffset
         res(0) = 2; // constant overestimation
         res(1) = 2; // constant overestimation
 
-        for (int i = 0; i < x.size(); i++)
-        {
+        for (int i = 0; i < x.size(); i++) {
             res(0) += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
             res(1) += 1 - (x[i] - 0.3) * (x[i] - 0.3) * 0.4;
         }
@@ -98,8 +86,7 @@ struct MeanOffset
 };
 
 template <typename Params, typename ObsType = Eigen::VectorXd>
-struct MeanRotation
-{
+struct MeanRotation {
     MeanRotation(size_t dim_out = 1) {}
 
     template <typename GP>
@@ -108,8 +95,7 @@ struct MeanRotation
         Eigen::VectorXd res(2);
         res(0) = 0; // constant overestimation
         res(1) = 0; // constant overestimation
-        for (int i = 0; i < x.size(); i++)
-        {
+        for (int i = 0; i < x.size(); i++) {
             res(0) += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
             res(1) += 1 - (x[i] - 0.3) * (x[i] - 0.3) * 0.4;
         }
@@ -124,8 +110,7 @@ struct MeanRotation
 };
 
 template <typename Params, typename ObsType = Eigen::VectorXd>
-struct MeanComplet
-{
+struct MeanComplet {
     MeanComplet(size_t dim_out = 1) {}
 
     template <typename GP>
@@ -134,8 +119,7 @@ struct MeanComplet
         Eigen::VectorXd res(2);
         res(0) = 2; // constant overestimation
         res(1) = 2; // constant overestimation
-        for (int i = 0; i < x.size(); i++)
-        {
+        for (int i = 0; i < x.size(); i++) {
             res(0) += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
             res(1) += 1 - (x[i] - 0.3) * (x[i] - 0.3) * 0.4;
         }
@@ -149,8 +133,7 @@ struct MeanComplet
     }
 };
 
-struct fit_eval
-{
+struct fit_eval {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 2;
 
@@ -159,8 +142,7 @@ struct fit_eval
         Eigen::VectorXd res(dim_out);
         res(0) = 0;
         res(1) = 0;
-        for (int i = 0; i < x.size(); i++)
-        {
+        for (int i = 0; i < x.size(); i++) {
             res(0) += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
             res(1) += 1 - (x[i] - 0.3) * (x[i] - 0.3) * 0.4;
         }

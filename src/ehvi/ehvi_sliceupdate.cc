@@ -22,14 +22,12 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
     deque<specialind*> Px, Py,
         Pz; // P sorted by x/y/z coordinate with extra information.
     double cellength[3] = {0};
-    try
-    {
+    try {
         // Create sorted arrays which also contain extra information allowing the
         // location in
         // the other sorting orders to be ascertained in O(1).
         sort(P.begin(), P.end(), xcomparator);
-        for (unsigned int i = 0; i < n; i++)
-        {
+        for (unsigned int i = 0; i < n; i++) {
             newind = new specialind;
             newind->point = P[i];
             newind->xorder = i;
@@ -38,19 +36,16 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
             Pz.push_back(newind);
         }
         sort(Py.begin(), Py.end(), specialycomparator);
-        for (unsigned int i = 0; i < n; i++)
-        {
+        for (unsigned int i = 0; i < n; i++) {
             Py[i]->yorder = i;
         }
         sort(Pz.begin(), Pz.end(), specialzcomparator);
-        for (unsigned int i = 0; i < n; i++)
-        {
+        for (unsigned int i = 0; i < n; i++) {
             Pz[i]->zorder = i;
         }
         // Then also reserve memory for the structure array.
         Pstruct = new thingy[n * n];
-        for (int k = 0; k < n * n; k++)
-        {
+        for (int k = 0; k < n * n; k++) {
             Pstruct[k].slice = 0;
             Pstruct[k].chunk = 0;
             Pstruct[k].highestdominator = -1;
@@ -58,8 +53,7 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
             Pstruct[k].ylim = 0;
         }
     }
-    catch (...)
-    {
+    catch (...) {
         cout << "An exception was thrown. There probably isn't enough memory "
                 "available." << endl;
         cout << "-1 will be returned." << endl;
@@ -68,67 +62,52 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
     // Now we establish dominance in the 2-dimensional slices. Note: it is assumed
     // that
     // P is mutually nondominated. This implementation of that step is O(n^3).
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         for (int j = Pz[i]->yorder; j >= 0; j--)
-            for (int k = Pz[i]->xorder; k >= 0; k--)
-            {
+            for (int k = Pz[i]->xorder; k >= 0; k--) {
                 Pstruct[k + j * n].highestdominator = i;
             }
         for (int j = Px[i]->zorder; j >= 0; j--)
-            for (int k = Px[i]->yorder; k >= 0; k--)
-            {
+            for (int k = Px[i]->yorder; k >= 0; k--) {
                 Pstruct[k + j * n].xlim = Px[i]->point->f[0] - r[0];
             }
         for (int j = Py[i]->zorder; j >= 0; j--)
-            for (int k = Py[i]->xorder; k >= 0; k--)
-            {
+            for (int k = Py[i]->xorder; k >= 0; k--) {
                 Pstruct[k + j * n].ylim = Py[i]->point->f[1] - r[1];
             }
     }
     // And now for the actual EHVI calculations.
-    for (int z = 0; z <= n; z++)
-    {
+    for (int z = 0; z <= n; z++) {
         // Recalculate Pstruct for the next 2D slice.
         if (z > 0)
-            for (int i = 0; i < n * n; i++)
-            {
+            for (int i = 0; i < n * n; i++) {
                 Pstruct[i].chunk += Pstruct[i].slice * cellength[2];
             }
         // This step is O(n^2).
-        for (int y = 0; y < n; y++)
-        {
-            for (int x = 0; x < n; x++)
-            {
-                if (Pstruct[x + y * n].highestdominator < z)
-                { // cell is not dominated
+        for (int y = 0; y < n; y++) {
+            for (int x = 0; x < n; x++) {
+                if (Pstruct[x + y * n].highestdominator < z) { // cell is not dominated
 
-                    if (x > 0 && y > 0)
-                    {
+                    if (x > 0 && y > 0) {
                         Pstruct[x + y * n].slice = (Pstruct[x + (y - 1) * n].slice - Pstruct[(x - 1) + (y - 1) * n].slice) + Pstruct[(x - 1) + y * n].slice;
                     }
-                    else if (y > 0)
-                    {
+                    else if (y > 0) {
                         Pstruct[x + y * n].slice = Pstruct[x + (y - 1) * n].slice;
                     }
-                    else if (x > 0)
-                    {
+                    else if (x > 0) {
                         Pstruct[x + y * n].slice = Pstruct[(x - 1) + y * n].slice;
                     }
                     else
                         Pstruct[x + y * n].slice = 0;
                 }
-                else
-                {
+                else {
                     Pstruct[x + y * n].slice = (Px[x]->point->f[0] - r[0]) * (Py[y]->point->f[1] - r[1]);
                 }
             }
         }
         // Okay, now we are going to calculate the EHVI, for real.
-        for (int y = 0; y <= n; y++)
-        {
-            for (int x = 0; x <= n; x++)
-            {
+        for (int y = 0; y <= n; y++) {
+            for (int x = 0; x <= n; x++) {
                 double cl[3], cu[3]; // Boundaries of grid cells
                 cl[0] = (x == 0 ? r[0] : Px[x - 1]->point->f[0]);
                 cl[1] = (y == 0 ? r[1] : Py[y - 1]->point->f[1]);
@@ -145,15 +124,13 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
                 // Pstruct.
                 // xslice and yslice can be calculated from Pstruct->chunk.
                 double slice[3], Sminus, v[3];
-                if (x > 0 && y > 0)
-                {
+                if (x > 0 && y > 0) {
                     Sminus = Pstruct[(x - 1) + (y - 1) * n].chunk;
                     slice[0] = (x == n ? 0 : (Pstruct[x + (y - 1) * n].chunk - Sminus) / cellength[0]);
                     slice[1] = (y == n ? 0 : (Pstruct[(x - 1) + y * n].chunk - Sminus) / cellength[1]);
                     slice[2] = Pstruct[(x - 1) + (y - 1) * n].slice;
                 }
-                else
-                {
+                else {
                     Sminus = 0;
                     slice[0] = ((y == 0 || x == n)
                             ? 0

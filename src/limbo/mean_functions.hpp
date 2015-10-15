@@ -6,20 +6,15 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-namespace limbo
-{
-    namespace defaults
-    {
-        struct meanconstant
-        {
+namespace limbo {
+    namespace defaults {
+        struct meanconstant {
             BO_PARAM(double, constant, 0.0);
         };
     }
-    namespace mean_functions
-    {
+    namespace mean_functions {
         template <typename Params, typename ObsType = Eigen::VectorXd>
-        struct NullFunction
-        {
+        struct NullFunction {
             NullFunction(size_t dim_out = 1) : _dim_out(dim_out) {}
 
             template <typename GP>
@@ -33,8 +28,7 @@ namespace limbo
         };
 
         template <typename Params, typename ObsType = Eigen::VectorXd>
-        struct MeanConstant
-        {
+        struct MeanConstant {
             MeanConstant(size_t dim_out = 1) {}
 
             template <typename GP>
@@ -45,8 +39,7 @@ namespace limbo
         };
 
         template <typename Params, typename ObsType = Eigen::VectorXd>
-        struct MeanData
-        {
+        struct MeanData {
             MeanData(size_t dim_out = 1) {}
 
             template <typename GP>
@@ -57,8 +50,7 @@ namespace limbo
         };
 
         template <typename Params, typename ObsType = Eigen::VectorXd>
-        struct MeanArchive
-        {
+        struct MeanArchive {
             MeanArchive(size_t dim_out = 1)
             {
                 // create and open an archive for input
@@ -81,8 +73,7 @@ namespace limbo
             }
 
         protected:
-            struct classcomp
-            {
+            struct classcomp {
                 bool operator()(const std::vector<double>& lhs, const std::vector<double>& rhs) const
                 {
                     assert(lhs.size() == 6 && rhs.size() == 6);
@@ -97,8 +88,7 @@ namespace limbo
         };
 
         template <typename Params, typename MeanFunction, typename ObsType = Eigen::VectorXd>
-        struct MeanFunctionARD
-        {
+        struct MeanFunctionARD {
             MeanFunctionARD(size_t dim_out = 1)
                 : _mean_function(dim_out), _tr(dim_out, dim_out + 1)
             {
@@ -125,8 +115,7 @@ namespace limbo
             {
                 Eigen::MatrixXd grad = Eigen::MatrixXd::Zero(_tr.rows(), _h_params.size());
                 Eigen::VectorXd m = _mean_function(x, gp);
-                for (int i = 0; i < _tr.rows(); i++)
-                {
+                for (int i = 0; i < _tr.rows(); i++) {
                     grad.block(i, i * _tr.cols(), 1, _tr.cols() - 1) = m.transpose();
                     grad(i, (i + 1) * _tr.cols() - 1) = 1;
                 }

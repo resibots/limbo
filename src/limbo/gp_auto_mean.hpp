@@ -14,21 +14,16 @@
 #include "rprop.hpp"
 #include "parallel.hpp"
 
-namespace limbo
-{
-    namespace defaults
-    {
-        struct gp_auto_mean
-        {
+namespace limbo {
+    namespace defaults {
+        struct gp_auto_mean {
             BO_PARAM(int, n_rprop, 100);
             BO_PARAM(int, rprop_restart, 100);
         };
     }
-    namespace model
-    {
+    namespace model {
         template <typename Params, typename KernelFunction, typename MeanFunction, typename ObsType = Eigen::VectorXd>
-        class GPAutoMean : public GP<Params, KernelFunction, MeanFunction>
-        {
+        class GPAutoMean : public GP<Params, KernelFunction, MeanFunction> {
         public:
             GPAutoMean() : GP<Params, KernelFunction, MeanFunction>() {}
             // TODO : init KernelFunction with dim in GP
@@ -65,8 +60,7 @@ namespace limbo
                     h_params.head(this->_kernel_function.h_params_size()));
                 this->_mean_function.set_h_params(
                     h_params.tail(this->_mean_function.h_params_size()));
-                if (update_kernel)
-                {
+                if (update_kernel) {
                     this->_compute_obs_mean();
                     this->_compute_kernel();
                 }
@@ -97,8 +91,7 @@ namespace limbo
                 this->_mean_function.set_h_params(
                     h_params.tail(this->_mean_function.h_params_size()));
 
-                if (update_kernel)
-                {
+                if (update_kernel) {
                     this->_compute_obs_mean(); // ORDER MATTERS
                     this->_compute_kernel();
                 }
@@ -123,10 +116,8 @@ namespace limbo
 
                 // only compute half of the matrix (symmetrical matrix)
                 Eigen::VectorXd grad = Eigen::VectorXd::Zero(this->_kernel_function.h_params_size() + this->_mean_function.h_params_size());
-                for (size_t i = 0; i < n; ++i)
-                {
-                    for (size_t j = 0; j <= i; ++j)
-                    {
+                for (size_t i = 0; i < n; ++i) {
+                    for (size_t j = 0; j <= i; ++j) {
                         Eigen::VectorXd g = this->_kernel_function.grad(this->_samples[i], this->_samples[j]);
                         if (i == j)
                             grad.head(this->_kernel_function.h_params_size()) += w(i, j) * g * 0.5;
@@ -135,8 +126,7 @@ namespace limbo
                     }
                 }
                 for (int i_obs = 0; i_obs < this->_dim_out; ++i_obs)
-                    for (size_t n_obs = 0; n_obs < n; n_obs++)
-                    {
+                    for (size_t n_obs = 0; n_obs < n; n_obs++) {
                         // std::cout<<"mean grad for
                         // "<<this->_samples[n_obs].transpose()<<std::endl<<this->_mean_function.grad(this->_samples[n_obs],*this)<<std::endl;
                         grad.tail(this->_mean_function.h_params_size()) += this->_obs_mean.col(i_obs).transpose() * K.col(n_obs) * this->_mean_function.grad(this->_samples[n_obs], *this).row(i_obs);
@@ -153,8 +143,7 @@ namespace limbo
             {
                 par::init();
                 typedef std::pair<Eigen::VectorXd, double> pair_t;
-                auto body = [=](int i)
-                {
+                auto body = [=](int i) {
                     // clang-format off
                     // we need a copy because each thread should touch a copy of the GP!
                     auto gp = *this;
@@ -170,8 +159,7 @@ namespace limbo
                     return std::make_pair(v, lik);
                     // clang-format on
                 };
-                auto comp = [](const pair_t& v1, const pair_t& v2)
-                {
+                auto comp = [](const pair_t& v1, const pair_t& v2) {
                     // clang-format off
                     return v1.second > v2.second;
                     // clang-format on

@@ -4,15 +4,13 @@
 #include <algorithm>
 #include "bo_multi.hpp"
 
-namespace limbo
-{
+namespace limbo {
 
     template <class Params, class A2 = boost::parameter::void_,
         class A3 = boost::parameter::void_, class A4 = boost::parameter::void_,
         class A5 = boost::parameter::void_, class A6 = boost::parameter::void_,
         class A7 = boost::parameter::void_>
-    class Nsbo : public BoMulti<Params, A2, A3, A4, A5, A6, A7>
-    {
+    class Nsbo : public BoMulti<Params, A2, A3, A4, A5, A6, A7> {
     public:
         typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>
             pareto_point_t;
@@ -22,8 +20,7 @@ namespace limbo
         {
             this->_init(feval, reset);
 
-            while (this->_samples.size() == 0 || this->_pursue(*this))
-            {
+            while (this->_samples.size() == 0 || this->_pursue(*this)) {
                 std::cout << "updating pareto model...";
                 std::cout.flush();
                 this->template update_pareto_model<EvalFunction::dim>();

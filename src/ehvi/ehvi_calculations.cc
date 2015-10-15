@@ -25,31 +25,25 @@ double ehvi2d(deque<individual*> P, double r[], double mu[], double s[])
     int Sstart = k - 1, Shorizontal = 0;
     // See thesis for explanation of how the O(1) iteration complexity
     // is reached. NOTE: i = y = f[1], j = x = f[0]
-    for (int i = 0; i <= k; i++)
-    {
+    for (int i = 0; i <= k; i++) {
         Sminus = 0;
         Shorizontal = Sstart;
-        for (int j = k - i; j <= k; j++)
-        {
+        for (int j = k - i; j <= k; j++) {
             double fmax[2]; // staircase width and height
             double cl1, cl2, cu1, cu2; // Boundaries of grid cells
-            if (j == k)
-            {
+            if (j == k) {
                 fmax[1] = r[1];
                 cu1 = INFINITY;
             }
-            else
-            {
+            else {
                 fmax[1] = P[j]->f[1];
                 cu1 = P[j]->f[0];
             }
-            if (i == k)
-            {
+            if (i == k) {
                 fmax[0] = r[0];
                 cu2 = INFINITY;
             }
-            else
-            {
+            else {
                 fmax[0] = P[k - i - 1]->f[0];
                 cu2 = P[k - i - 1]->f[1];
             }
@@ -58,17 +52,14 @@ double ehvi2d(deque<individual*> P, double r[], double mu[], double s[])
 // Cell boundaries have been decided. Determine Sminus.
 #ifdef NAIVE_DOMPOINTS
             dompoints.clear();
-            for (int m = 0; m < k; m++)
-            {
-                if (cl1 >= P[m]->f[0] && cl2 >= P[m]->f[1])
-                {
+            for (int m = 0; m < k; m++) {
+                if (cl1 >= P[m]->f[0] && cl2 >= P[m]->f[1]) {
                     dompoints.push_back(P[m]);
                 }
             }
             Sminus = calculateS(dompoints, fmax);
 #else
-            if (Shorizontal > Sstart)
-            {
+            if (Shorizontal > Sstart) {
                 Sminus += (P[Shorizontal]->f[0] - fmax[0]) * (P[Shorizontal]->f[1] - fmax[1]);
             }
             Shorizontal++;
@@ -97,22 +88,17 @@ double ehvi3d_2term(deque<individual*> P, double r[], double mu[],
     double Sminus; // Correction term for the integral.
     deque<individual*> Py, Pz; // P sorted by y/z coordinate
     sort(P.begin(), P.end(), ycomparator);
-    for (int i = 0; i < P.size(); i++)
-    {
+    for (int i = 0; i < P.size(); i++) {
         Py.push_back(P[i]);
     }
     sort(P.begin(), P.end(), zcomparator);
-    for (unsigned int i = 0; i < P.size(); i++)
-    {
+    for (unsigned int i = 0; i < P.size(); i++) {
         Pz.push_back(P[i]);
     }
     sort(P.begin(), P.end(), xcomparator);
-    for (int z = 0; z <= n; z++)
-    {
-        for (int y = 0; y <= n; y++)
-        {
-            for (int x = 0; x <= n; x++)
-            {
+    for (int z = 0; z <= n; z++) {
+        for (int y = 0; y <= n; y++) {
+            for (int x = 0; x <= n; x++) {
                 double fmax[3]; // upper corner of hypervolume improvement box
                 double cl[3], cu[3]; // Boundaries of grid cells
                 cl[0] = (x == 0 ? r[0] : P[x - 1]->f[0]);
@@ -159,22 +145,17 @@ double ehvi3d_5term(deque<individual*> P, double r[], double mu[],
     double Sminus; // Correction term for the integral.
     deque<individual*> Py, Pz; // P sorted by y/z coordinate
     sort(P.begin(), P.end(), ycomparator);
-    for (int i = 0; i < P.size(); i++)
-    {
+    for (int i = 0; i < P.size(); i++) {
         Py.push_back(P[i]);
     }
     sort(P.begin(), P.end(), zcomparator);
-    for (unsigned int i = 0; i < P.size(); i++)
-    {
+    for (unsigned int i = 0; i < P.size(); i++) {
         Pz.push_back(P[i]);
     }
     sort(P.begin(), P.end(), xcomparator);
-    for (int z = 0; z <= n; z++)
-    {
-        for (int y = 0; y <= n; y++)
-        {
-            for (int x = 0; x <= n; x++)
-            {
+    for (int z = 0; z <= n; z++) {
+        for (int y = 0; y <= n; y++) {
+            for (int x = 0; x <= n; x++) {
                 double v[3]; // upper corner of hypervolume improvement box
                 double cl[3], cu[3]; // Boundaries of grid cells
                 cl[0] = (x == 0 ? r[0] : P[x - 1]->f[0]);
@@ -188,25 +169,20 @@ double ehvi3d_5term(deque<individual*> P, double r[], double mu[],
                 v[1] = r[1];
                 v[2] = r[2];
                 bool dominated = false;
-                for (unsigned int i = 0; i < P.size(); i++)
-                {
-                    if (P[i]->f[0] >= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] >= cu[2])
-                    {
+                for (unsigned int i = 0; i < P.size(); i++) {
+                    if (P[i]->f[0] >= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] >= cu[2]) {
                         dominated = true;
                         break;
                     }
-                    else if (P[i]->f[0] <= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] >= cu[2])
-                    {
+                    else if (P[i]->f[0] <= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] >= cu[2]) {
                         if (P[i]->f[0] > v[0])
                             v[0] = P[i]->f[0];
                     }
-                    else if (P[i]->f[0] >= cu[0] && P[i]->f[1] <= cu[1] && P[i]->f[2] >= cu[2])
-                    {
+                    else if (P[i]->f[0] >= cu[0] && P[i]->f[1] <= cu[1] && P[i]->f[2] >= cu[2]) {
                         if (P[i]->f[1] > v[1])
                             v[1] = P[i]->f[1];
                     }
-                    else if (P[i]->f[0] >= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] <= cu[2])
-                    {
+                    else if (P[i]->f[0] >= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] <= cu[2]) {
                         if (P[i]->f[2] > v[2])
                             v[2] = P[i]->f[2];
                     }
@@ -255,22 +231,17 @@ double ehvi3d_8term(deque<individual*> P, double r[], double mu[],
         tempimp; // Correction term, rectangular volume, temp. improvement
     deque<individual*> Py, Pz; // P sorted by y/z coordinate
     sort(P.begin(), P.end(), ycomparator);
-    for (int i = 0; i < P.size(); i++)
-    {
+    for (int i = 0; i < P.size(); i++) {
         Py.push_back(P[i]);
     }
     sort(P.begin(), P.end(), zcomparator);
-    for (unsigned int i = 0; i < P.size(); i++)
-    {
+    for (unsigned int i = 0; i < P.size(); i++) {
         Pz.push_back(P[i]);
     }
     sort(P.begin(), P.end(), xcomparator);
-    for (int z = 0; z <= n; z++)
-    {
-        for (int y = 0; y <= n; y++)
-        {
-            for (int x = 0; x <= n; x++)
-            {
+    for (int z = 0; z <= n; z++) {
+        for (int y = 0; y <= n; y++) {
+            for (int x = 0; x <= n; x++) {
                 double v[3]; // upper corner of hypervolume improvement box
                 double cl[3], cu[3]; // Boundaries of grid cell
                 cl[0] = (x == 0 ? r[0] : P[x - 1]->f[0]);
@@ -284,25 +255,20 @@ double ehvi3d_8term(deque<individual*> P, double r[], double mu[],
                 v[1] = r[1];
                 v[2] = r[2];
                 bool dominated = false;
-                for (unsigned int i = 0; i < P.size(); i++)
-                {
-                    if (P[i]->f[0] >= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] >= cu[2])
-                    {
+                for (unsigned int i = 0; i < P.size(); i++) {
+                    if (P[i]->f[0] >= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] >= cu[2]) {
                         dominated = true;
                         break;
                     }
-                    else if (P[i]->f[0] <= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] >= cu[2])
-                    {
+                    else if (P[i]->f[0] <= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] >= cu[2]) {
                         if (P[i]->f[0] > v[0])
                             v[0] = P[i]->f[0];
                     }
-                    else if (P[i]->f[0] >= cu[0] && P[i]->f[1] <= cu[1] && P[i]->f[2] >= cu[2])
-                    {
+                    else if (P[i]->f[0] >= cu[0] && P[i]->f[1] <= cu[1] && P[i]->f[2] >= cu[2]) {
                         if (P[i]->f[1] > v[1])
                             v[1] = P[i]->f[1];
                     }
-                    else if (P[i]->f[0] >= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] <= cu[2])
-                    {
+                    else if (P[i]->f[0] >= cu[0] && P[i]->f[1] >= cu[1] && P[i]->f[2] <= cu[2]) {
                         if (P[i]->f[2] > v[2])
                             v[2] = P[i]->f[2];
                     }

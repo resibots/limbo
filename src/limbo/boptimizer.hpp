@@ -3,8 +3,7 @@
 
 #include "bo_base.hpp"
 
-namespace limbo
-{
+namespace limbo {
     bool compareVectorXd(Eigen::VectorXd i, Eigen::VectorXd j)
     {
         return i(0) < j(0);
@@ -14,8 +13,7 @@ namespace limbo
         class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
         class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
         class A6 = boost::parameter::void_, class A7 = boost::parameter::void_>
-    class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6, A7>
-    {
+    class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6, A7> {
     public:
         typedef BoBase<Params, A1, A2, A3, A4, A5, A6, A7> base_t;
         typedef typename base_t::obs_t obs_t;
@@ -34,18 +32,15 @@ namespace limbo
                     Params::boptimizer::noise());
             inner_optimization_t inner_optimization;
 
-            while (this->_samples.size() == 0 || this->_pursue(*this))
-            {
+            while (this->_samples.size() == 0 || this->_pursue(*this)) {
                 acquisition_function_t acqui(_model, this->_iteration);
 
                 Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in());
                 bool blacklisted = false;
-                try
-                {
+                try {
                     this->add_new_sample(new_sample, feval(new_sample));
                 }
-                catch (...)
-                {
+                catch (...) {
                     this->add_new_bl_sample(new_sample);
                     blacklisted = true;
                 }

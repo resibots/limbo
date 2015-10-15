@@ -2,53 +2,42 @@
 
 using namespace limbo;
 
-struct Params
-{
-    struct boptimizer
-    {
+struct Params {
+    struct boptimizer {
         BO_PARAM(double, noise, 0.005);
         BO_PARAM(int, dump_period, -1);
     };
 
-    struct init
-    {
+    struct init {
         BO_PARAM(int, nb_samples, 21);
         // calandra: number of dimensions * 5
         // knowles : 11 * dim - 1
     };
 
-    struct maxiterations
-    {
+    struct maxiterations {
         BO_PARAM(int, n_iterations, 30);
     };
 
-    struct ucb : public defaults::ucb
-    {
+    struct ucb : public defaults::ucb {
     };
 
-    struct gp_ucb : public defaults::gp_ucb
-    {
+    struct gp_ucb : public defaults::gp_ucb {
     };
 
-    struct cmaes : public defaults::cmaes
-    {
+    struct cmaes : public defaults::cmaes {
     };
 
-    struct gp_auto : public defaults::gp_auto
-    {
+    struct gp_auto : public defaults::gp_auto {
     };
 
-    struct meanconstant : public defaults::meanconstant
-    {
+    struct meanconstant : public defaults::meanconstant {
     };
 
-    struct parego : public defaults::parego
-    {
+    struct parego : public defaults::parego {
     };
 };
 
-struct zdt2
-{
+struct zdt2 {
     static constexpr size_t dim_in = 30;
     static constexpr size_t dim_out = 2;
 
@@ -67,8 +56,7 @@ struct zdt2
     }
 };
 
-struct mop2
-{
+struct mop2 {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 2;
 

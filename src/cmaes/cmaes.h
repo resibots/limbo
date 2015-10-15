@@ -18,10 +18,10 @@
 #include <time.h>
 
 typedef struct
-/* random_t
+    /* random_t
      * sets up a pseudo random number generator instance
      */
-{
+    {
     /* Variables for Uniform() */
     long int startseed;
     long int aktseed;
@@ -34,10 +34,10 @@ typedef struct
 } random_t;
 
 typedef struct
-/* timings_t
+    /* timings_t
      * time measurement, used to time eigendecomposition
      */
-{
+    {
     /* for outside use */
     double totaltime; /* zeroed by calling re-calling timings_start */
     double totaltotaltime;
@@ -57,11 +57,11 @@ typedef struct
 } timings_t;
 
 typedef struct
-/* readpara_t
+    /* readpara_t
      * collects all parameters, in particular those that are read from
      * a file before to start. This should split in future?
      */
-{
+    {
     char*
         filename; /* keep record of the file that was taken to read parameters */
 
@@ -80,7 +80,7 @@ typedef struct
     double facmaxeval;
     double stopMaxIter;
     struct
-    {
+        {
         int flg;
         double val;
     } stStopFitness;
@@ -100,7 +100,7 @@ typedef struct
     double ccov; /* <- mucov, <- N */
     double diagonalCov; /* number of initial iterations */
     struct
-    {
+        {
         int flgalways;
         double modulo;
         double maxtime;
@@ -120,10 +120,10 @@ typedef struct
 } readpara_t;
 
 typedef struct
-/* cmaes_t
+    /* cmaes_t
      * CMA-ES "object"
      */
-{
+    {
     const char* version;
     /* char *signalsFilename; */
     readpara_t sp;

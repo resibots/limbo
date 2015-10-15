@@ -39,10 +39,8 @@
 #include <unistd.h>
 #include <boost/lexical_cast.hpp>
 
-namespace limbo
-{
-    namespace misc
-    {
+namespace limbo {
+    namespace misc {
         inline std::string date()
         {
             char date[30];

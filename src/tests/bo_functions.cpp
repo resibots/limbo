@@ -18,8 +18,7 @@ using namespace tests;
 
 static constexpr int nb_replicates = 4;
 
-namespace colors
-{
+namespace colors {
     static const char* red = "\33[31m";
     static const char* green = "\33[32m";
     static const char* yellow = "\33[33m";
@@ -73,8 +72,7 @@ Eigen::VectorXd make_v1(double x)
     return v1;
 }
 
-struct Sphere
-{
+struct Sphere {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 1;
 
@@ -85,8 +83,7 @@ struct Sphere
     }
 };
 
-struct Ellipsoid
-{
+struct Ellipsoid {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 1;
 
@@ -101,8 +98,7 @@ struct Ellipsoid
     }
 };
 
-struct Rastrigin
-{
+struct Rastrigin {
     static constexpr size_t dim_in = 4;
     static constexpr size_t dim_out = 1;
 
@@ -116,8 +112,7 @@ struct Rastrigin
 };
 
 // see : http://www.sfu.ca/~ssurjano/hart3.html
-struct Hartman3
-{
+struct Hartman3 {
     static constexpr size_t dim_in = 3;
     static constexpr size_t dim_out = 1;
 
@@ -131,11 +126,9 @@ struct Hartman3
         alpha << 1.0, 1.2, 3.0, 3.2;
 
         double res = 0;
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             double s = 0.0f;
-            for (size_t j = 0; j < 3; j++)
-            {
+            for (size_t j = 0; j < 3; j++) {
                 s += a(i, j) * (x(j) - p(i, j)) * (x(j) - p(i, j));
             }
             res += alpha(i) * exp(-s);
@@ -145,8 +138,7 @@ struct Hartman3
 };
 
 // see : http://www.sfu.ca/~ssurjano/hart6.html
-struct Hartman6
-{
+struct Hartman6 {
     static constexpr size_t dim_in = 6;
     static constexpr size_t dim_out = 1;
 
@@ -163,11 +155,9 @@ struct Hartman6
         alpha << 1.0, 1.2, 3.0, 3.2;
 
         double res = 0;
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             double s = 0.0f;
-            for (size_t j = 0; j < 6; j++)
-            {
+            for (size_t j = 0; j < 6; j++) {
                 s += a(i, j) * (x(j) - p(i, j)) * (x(j) - p(i, j));
             }
             res += alpha(i) * exp(-s);
@@ -178,8 +168,7 @@ struct Hartman6
 
 // see : http://www.sfu.ca/~ssurjano/goldpr.html
 // (with ln, as suggested in Jones et al.)
-struct GoldenPrice
-{
+struct GoldenPrice {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 1;
 
@@ -192,38 +181,30 @@ struct GoldenPrice
     }
 };
 
-struct Params
-{
-    struct boptimizer
-    {
+struct Params {
+    struct boptimizer {
         BO_PARAM(double, noise, 0.0);
         BO_PARAM(int, dump_period, -1);
     };
 
-    struct init
-    {
+    struct init {
         BO_PARAM(int, nb_samples, 10);
     };
 
-    struct maxiterations
-    {
+    struct maxiterations {
         BO_PARAM(int, n_iterations, 40);
     };
 
-    struct gp_ucb : public defaults::gp_ucb
-    {
+    struct gp_ucb : public defaults::gp_ucb {
     };
 
-    struct gp_auto : public defaults::gp_auto
-    {
+    struct gp_auto : public defaults::gp_auto {
     };
 
-    struct cmaes : public defaults::cmaes
-    {
+    struct cmaes : public defaults::cmaes {
     };
 
-    struct meanconstant : public defaults::meanconstant
-    {
+    struct meanconstant : public defaults::meanconstant {
     };
 };
 
@@ -233,10 +214,8 @@ template <typename T>
 void print_res(const T& r)
 {
     std::cout << "====== RESULTS ======" << std::endl;
-    for (auto x : r)
-    {
-        for (auto y : x.second)
-        {
+    for (auto x : r) {
+        for (auto y : x.second) {
             std::cout << x.first << "\t =>"
                       << " found :" << y.second(0) << " expected " << y.first(0)
                       << std::endl;
@@ -244,8 +223,7 @@ void print_res(const T& r)
         std::vector<std::pair<Eigen::VectorXd, Eigen::VectorXd>>& v = x.second;
         std::sort(v.begin(), v.end(),
             [](const std::pair<Eigen::VectorXd, Eigen::VectorXd>& x1,
-                      const std::pair<Eigen::VectorXd, Eigen::VectorXd>& x2)
-            {
+                      const std::pair<Eigen::VectorXd, Eigen::VectorXd>& x2) {
                 // clang-format off
                 return x1.second(0) < x2.second(0);
                 // clang-format on
@@ -265,8 +243,7 @@ void print_res(const T& r)
 bool is_in_argv(int argc, char** argv, const char* needle)
 {
     auto it = std::find_if(argv, argv + argc,
-        [=](const char* s)
-        {
+        [=](const char* s) {
             // clang-format off
             return strcmp(needle, s) == 0;
             // clang-format on
@@ -279,12 +256,11 @@ void replicate(const F& f, size_t nb)
 {
 #ifdef USE_TBB
     static tbb::task_scheduler_init init;
-    tbb::parallel_for(size_t(0), nb, size_t(1), [&](size_t i)
-        {
+    tbb::parallel_for(size_t(0), nb, size_t(1), [&](size_t i) {
             // clang-format off
             f();
-            // clang-format on
-        });
+        // clang-format on
+    });
 #else
     for (size_t i = 0; i < nb; i++)
         f();
@@ -316,44 +292,40 @@ int main(int argc, char** argv)
     res_t results;
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
-        par::replicate(nb_replicates, [&]()
-            {
+        par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Sphere());
                 Eigen::Vector2d s_val(0.5, 0.5);
                 Eigen::VectorXd x_opt = Sphere()(s_val);
                 add_to_results("Sphere", results, std::make_pair(x_opt, opt.best_observation()));
-                // clang-format on
-            });
+            // clang-format on
+        });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
-        par::replicate(nb_replicates, [&]()
-            {
+        par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
                 Eigen::Vector2d s_val(0.5, 0.5);
                 Eigen::VectorXd x_opt = Ellipsoid()(s_val);
                 add_to_results("Ellipsoid", results, std::make_pair(x_opt, opt.best_observation()));
-                // clang-format on
-            });
+            // clang-format on
+        });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
-        par::replicate(nb_replicates, [&]()
-            {
+        par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Rastrigin());
                 Eigen::Vector4d s_val(0, 0, 0, 0);
                 Eigen::VectorXd x_opt = Rastrigin()(s_val);
                 add_to_results("Rastrigin", results, std::make_pair(x_opt, opt.best_observation()));
-                // clang-format on
-            });
+            // clang-format on
+        });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
-        par::replicate(nb_replicates, [&]()
-            {
+        par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman3());
@@ -361,12 +333,11 @@ int main(int argc, char** argv)
                 Eigen::Vector3d s_val(0.114614, 0.555549, 0.852547);
                 Eigen::VectorXd x_opt = Hartman3()(s_val);
                 add_to_results("Hartman 3", results, std::make_pair(x_opt, opt.best_observation()));
-                // clang-format on
-            });
+            // clang-format on
+        });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
-        par::replicate(nb_replicates, [&]()
-            {
+        par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman6());
@@ -375,12 +346,11 @@ int main(int argc, char** argv)
                 //double s_max = 3.32237;
                 Eigen::VectorXd x_opt = Hartman6()(s_val);
                 add_to_results("Hartman 6", results, std::make_pair(x_opt, opt.best_observation()));
-                // clang-format on
-            });
+            // clang-format on
+        });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
-        par::replicate(nb_replicates, [&]()
-            {
+        par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(GoldenPrice());
@@ -388,8 +358,8 @@ int main(int argc, char** argv)
                 Eigen::Vector2d s_val(0.5, 0.25);
                 Eigen::VectorXd x_opt = GoldenPrice()(s_val);
                 add_to_results("Golden Price", results, std::make_pair(x_opt, opt.best_observation()));
-                // clang-format on
-            });
+            // clang-format on
+        });
 
     std::cout << "Benchmark finished." << std::endl;
 

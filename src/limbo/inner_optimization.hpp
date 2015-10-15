@@ -6,13 +6,10 @@
 #include <Eigen/Core>
 #include <limits>
 
-namespace limbo
-{
-    namespace inner_optimization
-    {
+namespace limbo {
+    namespace inner_optimization {
         template <typename Params>
-        struct Random
-        {
+        struct Random {
             Random() {}
 
             template <typename AcquisitionFunction>
@@ -23,8 +20,7 @@ namespace limbo
         };
 
         template <typename Params>
-        struct ExhaustiveSearch
-        {
+        struct ExhaustiveSearch {
             ExhaustiveSearch() { nb_pts = Params::exhaustivesearch::nb_pts; }
 
             template <typename AcquisitionFunction>
@@ -43,26 +39,21 @@ namespace limbo
                 double best_fit = -std::numeric_limits<double>::max();
 
                 Eigen::VectorXd current_result(result.size());
-                for (double x = 0; x <= 1; x += 1 / (double)nb_pts)
-                {
+                for (double x = 0; x <= 1; x += 1 / (double)nb_pts) {
                     Eigen::VectorXd point = current;
                     point[dim_in] = x;
                     double val;
-                    if (dim_in == current.size() - 1)
-                    {
+                    if (dim_in == current.size() - 1) {
                         val = acqui(point);
-                        if (val > best_fit)
-                        {
+                        if (val > best_fit) {
                             best_fit = val;
                             current_result = point;
                         }
                     }
-                    else
-                    {
+                    else {
                         Eigen::VectorXd temp_result = current_result;
                         std::tie(temp_result, val) = explore(dim_in + 1, acqui, point, temp_result);
-                        if (val > best_fit)
-                        {
+                        if (val > best_fit) {
                             best_fit = val;
                             current_result = temp_result;
                         }

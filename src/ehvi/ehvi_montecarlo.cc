@@ -11,8 +11,7 @@ using namespace std;
 const double TWOPI = 6.28318530718;
 
 // Box-Muller transform using a Mersenne Twister.
-class RNG
-{
+class RNG {
 public:
     mt19937 twister;
     RNG()
@@ -23,8 +22,7 @@ public:
 
     double getnumber(double mu, double s)
     {
-        if (saved)
-        {
+        if (saved) {
             saved = false;
             return (s * savednumber) + mu;
         }
@@ -51,8 +49,7 @@ double ehvi3d_montecarlo(deque<individual*> P, double r[], double mu[],
     double answer = 0;
     individual candidate;
     sort(P.begin(), P.end(), zcomparator);
-    for (int i = 1; i <= MONTECARLOS; i++)
-    {
+    for (int i = 1; i <= MONTECARLOS; i++) {
         // Generate new candidate individual. If it fails to dominate r, we discard
         // it.
         candidate.f[0] = rng.getnumber(mu[0], s[0]);

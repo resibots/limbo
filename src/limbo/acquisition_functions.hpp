@@ -6,27 +6,21 @@
 #include <Eigen/Core>
 #include <limits>
 
-namespace limbo
-{
+namespace limbo {
 
-    namespace defaults
-    {
-        struct gp_ucb
-        {
+    namespace defaults {
+        struct gp_ucb {
             BO_PARAM(float, delta, 0.001);
         };
 
-        struct ucb
-        {
+        struct ucb {
             BO_PARAM(float, alpha, 0.5);
         };
     }
 
-    namespace acquisition_functions
-    {
+    namespace acquisition_functions {
         template <typename Params, typename Model>
-        class UCB
-        {
+        class UCB {
         public:
             UCB(const Model& model, int iteration = 0) : _model(model) {}
 
@@ -47,8 +41,7 @@ namespace limbo
         };
 
         template <typename Params, typename Model>
-        class GP_UCB
-        {
+        class GP_UCB {
         public:
             GP_UCB(const Model& model, int iteration) : _model(model)
             {

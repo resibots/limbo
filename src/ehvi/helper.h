@@ -5,8 +5,7 @@
 // Also contains the individual struct.
 
 // Individual struct. Holds one individual.
-struct individual
-{
+struct individual {
     double f[DIMENSIONS];
 };
 
@@ -14,8 +13,7 @@ struct individual
 // used in the cell calculations for the current z value.
 // To update chunk, all values of slice are multiplied by height
 // and added to it. Updating slice uses some geometry, see paper.
-struct thingy
-{
+struct thingy {
     double slice; // area covered by z-slice
     double chunk; // S^-
     int highestdominator; // highest z coordinate of point dominating the point.
@@ -24,8 +22,7 @@ struct thingy
 };
 
 // for convenient calculation of height maps.
-struct specialind
-{
+struct specialind {
     individual* point; // the individual's basic stats.
     int xorder, yorder,
         zorder; // Position of the individual in its respective sorting lists

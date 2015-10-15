@@ -28,8 +28,7 @@ void boundary_transformation_init(boundary_transformation_t* t,
         t->lower_bounds = default_lower;
     if (upper_bounds == NULL && len_of_bounds <= 1)
         t->upper_bounds = default_upper;
-    if (len_of_bounds == 0)
-    {
+    if (len_of_bounds == 0) {
         t->lower_bounds = default_lower;
         t->upper_bounds = default_upper;
         t->len_of_bounds = 1;
@@ -47,8 +46,7 @@ void boundary_transformation_init(boundary_transformation_t* t,
 
     lb = t->lower_bounds;
     ub = t->upper_bounds;
-    for (i = 0; i < t->len_of_bounds; ++i)
-    {
+    for (i = 0; i < t->len_of_bounds; ++i) {
         if (lb[i] == ub[i])
             _FatalError("in _init: lower and upper bounds must be different in all "
                         "variables");
@@ -71,8 +69,7 @@ void boundary_transformation(boundary_transformation_t* t, double const* x,
     double lb, ub, al, au;
     unsigned long i;
     boundary_transformation_shift_into_feasible_preimage(t, x, y, len);
-    for (i = 0; i < len; ++i)
-    {
+    for (i = 0; i < len; ++i) {
         lb = t->lower_bounds[_index(t, i)];
         ub = t->upper_bounds[_index(t, i)];
         al = t->al[_index(t, i)];
@@ -92,8 +89,7 @@ void boundary_transformation_discrete(boundary_transformation_t* t,
     unsigned long i;
 
     // boundary_transformation_shift_into_feasible_preimage(t, x, y, len);
-    for (i = 0; i < len; ++i)
-    {
+    for (i = 0; i < len; ++i) {
         lb = t->lower_bounds[_index(t, i)];
         ub = t->upper_bounds[_index(t, i)];
         al = t->al[_index(t, i)];
@@ -114,8 +110,7 @@ void boundary_transformation_shift_into_feasible_preimage(
     double lb, ub, al, au, r, xlow, xup;
     unsigned long i;
 
-    for (i = 0; i < len; ++i)
-    {
+    for (i = 0; i < len; ++i) {
         lb = t->lower_bounds[_index(t, i)];
         ub = t->upper_bounds[_index(t, i)];
         al = t->al[_index(t, i)];
@@ -126,12 +121,10 @@ void boundary_transformation_shift_into_feasible_preimage(
 
         y[i] = x[i];
 
-        if (y[i] < xlow)
-        { /* shift up */
+        if (y[i] < xlow) { /* shift up */
             y[i] += r * (1 + (int)((xlow - y[i]) / r));
         }
-        if (y[i] > xup)
-        { /* shift down */
+        if (y[i] > xup) { /* shift down */
             y[i] -= r * (1 + (int)((y[i] - xup) / r));
             /* printf(" \n%f\n", fmod(y[i] - ub - au, r)); */
         }
@@ -140,8 +133,7 @@ void boundary_transformation_shift_into_feasible_preimage(
         if (y[i] > ub + au)
             y[i] -= 2 * (y[i] - ub - au);
 
-        if ((y[i] < lb - al - 1e-15) || (y[i] > ub + au + 1e-15))
-        {
+        if ((y[i] < lb - al - 1e-15) || (y[i] > ub + au + 1e-15)) {
             printf("BUG in boundary_transformation_shift_into_feasible_preimage: "
                    "lb=%f, ub=%f, al=%f au=%f, y=%f\n",
                 lb, ub, al, au, y[i]);
@@ -156,8 +148,7 @@ void boundary_transformation_inverse(boundary_transformation_t* t,
     double lb, ub, al, au;
     unsigned long i;
 
-    for (i = 0; i < len; ++i)
-    {
+    for (i = 0; i < len; ++i) {
         lb = t->lower_bounds[_index(t, i)];
         ub = t->upper_bounds[_index(t, i)];
         al = t->al[_index(t, i)];
@@ -168,8 +159,7 @@ void boundary_transformation_inverse(boundary_transformation_t* t,
         else if (y[i] > ub - au)
             y[i] = (ub + au) - 2 * sqrt(au * (ub - y[i]));
     }
-    if (11 < 3 || do_assertions)
-    {
+    if (11 < 3 || do_assertions) {
         double* z = calloc(len, sizeof(double));
         for (i = 0; i < len; ++i)
             z[i] = y[i];

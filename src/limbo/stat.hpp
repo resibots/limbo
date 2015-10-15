@@ -5,14 +5,11 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 
-namespace limbo
-{
-    namespace stat
-    {
+namespace limbo {
+    namespace stat {
 
         template <typename Params>
-        struct Stat
-        {
+        struct Stat {
             Stat() {}
 
             template <typename BO>
@@ -27,8 +24,7 @@ namespace limbo
             template <typename BO>
             void _create_log_file(const BO& bo, const std::string& name)
             {
-                if (!_log_file && bo.dump_enabled())
-                {
+                if (!_log_file && bo.dump_enabled()) {
                     std::string log = bo.res_dir() + "/" + name;
                     _log_file = boost::shared_ptr<std::ofstream>(new std::ofstream(log.c_str()));
                 }
@@ -36,8 +32,7 @@ namespace limbo
         };
 
         template <typename Params>
-        struct Acquisitions : public Stat<Params>
-        {
+        struct Acquisitions : public Stat<Params> {
             Acquisitions() {}
 
             template <typename BO>

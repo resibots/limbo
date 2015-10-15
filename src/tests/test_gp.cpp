@@ -16,16 +16,13 @@ Eigen::VectorXd make_v1(double x)
     return v1;
 }
 
-struct Params
-{
-    struct kf_maternfivehalfs
-    {
+struct Params {
+    struct kf_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.25);
     };
 
-    struct meanconstant
-    {
+    struct meanconstant {
         static Eigen::VectorXd constant() { return make_v1(0.0); };
     };
 };
@@ -59,8 +56,7 @@ BOOST_AUTO_TEST_CASE(test_gp)
     BOOST_CHECK(abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 
-    for (double x = 0; x < 4; x += 0.05)
-    {
+    for (double x = 0; x < 4; x += 0.05) {
         Eigen::VectorXd mu;
         double sigma;
         std::tie(mu, sigma) = gp.query(make_v1(x));

@@ -16,15 +16,12 @@ Eigen::VectorXd make_v1(double x)
     return v1;
 }
 
-struct Params
-{
-    struct meanconstant
-    {
+struct Params {
+    struct meanconstant {
         static Eigen::VectorXd constant() { return make_v1(0.0); };
     };
 
-    struct gp_auto : public defaults::gp_auto
-    {
+    struct gp_auto : public defaults::gp_auto {
     };
 };
 
@@ -58,8 +55,7 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
               << std::endl;
 
     std::ofstream ofs("gp.dat");
-    for (double x = 0; x < 6; x += 0.05)
-    {
+    for (double x = 0; x < 6; x += 0.05) {
         Eigen::VectorXd mu;
         double sigma;
         std::tie(mu, sigma) = gp.query(make_v1(x));

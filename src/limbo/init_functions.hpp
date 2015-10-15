@@ -7,16 +7,13 @@
 
 #include <limits>
 
-namespace limbo
-{
-    namespace init_functions
-    {
+namespace limbo {
+    namespace init_functions {
 
         // params is here only to make it easy to switch
         // from/to the other init functions
         template <typename Params>
-        struct NoInit
-        {
+        struct NoInit {
             template <typename F, typename Opt>
             void operator()(const F& f, Opt& opt) const {}
         };
@@ -24,13 +21,11 @@ namespace limbo
         // initialize in [0,1] !
         // params: init::nb_samples
         template <typename Params>
-        struct RandomSampling
-        {
+        struct RandomSampling {
             template <typename F, typename Opt>
             void operator()(const F& feval, Opt& opt) const
             {
-                for (int i = 0; i < Params::init::nb_samples(); i++)
-                {
+                for (int i = 0; i < Params::init::nb_samples(); i++) {
                     Eigen::VectorXd new_sample(F::dim_in);
                     for (int i = 0; i < F::dim_in; i++)
                         new_sample[i] = misc::rand<double>(0, 1);
@@ -44,13 +39,11 @@ namespace limbo
         //  -init::nb_bins
         //  - init::nb_samples
         template <typename Params>
-        struct RandomSamplingGrid
-        {
+        struct RandomSamplingGrid {
             template <typename F, typename Opt>
             void operator()(const F& feval, Opt& opt) const
             {
-                for (int i = 0; i < Params::init::nb_samples(); i++)
-                {
+                for (int i = 0; i < Params::init::nb_samples(); i++) {
                     Eigen::VectorXd new_sample(F::dim_in);
                     for (size_t i = 0; i < F::dim_in; i++)
                         new_sample[i] = int(((double)(Params::init::nb_bins() + 1) * rand()) / (RAND_MAX + 1.0)) / double(Params::init::nb_bins());
@@ -62,8 +55,7 @@ namespace limbo
         // params:
         //  -init::nb_bins
         template <typename Params>
-        struct GridSampling
-        {
+        struct GridSampling {
             template <typename F, typename Opt>
             void operator()(const F& feval, Opt& opt) const
             {
@@ -76,16 +68,13 @@ namespace limbo
             void _explore(int dim_in, const F& feval, const Eigen::VectorXd& current,
                 Opt& opt) const
             {
-                for (double x = 0; x <= 1.0f; x += 1.0f / (double)Params::init::nb_bins())
-                {
+                for (double x = 0; x <= 1.0f; x += 1.0f / (double)Params::init::nb_bins()) {
                     Eigen::VectorXd point = current;
                     point[dim_in] = x;
-                    if (dim_in == current.size() - 1)
-                    {
+                    if (dim_in == current.size() - 1) {
                         opt.add_new_sample(point, feval(point));
                     }
-                    else
-                    {
+                    else {
                         _explore(dim_in + 1, feval, point, opt);
                     }
                 }
