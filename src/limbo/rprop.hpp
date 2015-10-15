@@ -28,31 +28,33 @@ namespace rprop {
         Eigen::VectorXd best_params = params;
         double best = log(0);
 
-    for (int i = 0; i < n; ++i) {
-      double lik = func(params);
-      if (lik > best) {
-        best = lik;
-        best_params = params;
-      }
-      Eigen::VectorXd grad = -grad_func(params);
-      grad_old = grad_old.cwiseProduct(grad);
+        for (int i = 0; i < n; ++i) {
+            double lik = func(params);
+            if (lik > best) {
+                best = lik;
+                best_params = params;
+            }
+            Eigen::VectorXd grad = -grad_func(params);
+            grad_old = grad_old.cwiseProduct(grad);
 
-      for (int j = 0; j < grad_old.size(); ++j) {
-        if (grad_old(j) > 0) {
-          delta(j) = std::min(delta(j) * etaplus, deltamax);
-        } else if (grad_old(j) < 0) {
-          delta(j) = std::max(delta(j) * etaminus, deltamin);
-          grad(j) = 0;
+            for (int j = 0; j < grad_old.size(); ++j) {
+                if (grad_old(j) > 0) {
+                    delta(j) = std::min(delta(j) * etaplus, deltamax);
+                }
+                else if (grad_old(j) < 0) {
+                    delta(j) = std::max(delta(j) * etaminus, deltamin);
+                    grad(j) = 0;
+                }
+                params(j) += -boost::math::sign(grad(j)) * delta(j);
+            }
+
+            grad_old = grad;
+            if (grad_old.norm() < eps_stop)
+                break;
         }
-        params(j) += -boost::math::sign(grad(j)) * delta(j);
-      }
 
-      grad_old = grad;
-      if (grad_old.norm() < eps_stop) break;
+        return best_params;
     }
-
-    return best_params;
-  }
 }
 
 #endif
