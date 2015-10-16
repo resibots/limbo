@@ -20,7 +20,7 @@ def check_openmp(self, **kw):
             self.define(kw['define_name'], 1)
         self.end_msg('None')
     except ConfigurationError:
-        for flag in ('-qopenmp', '-fopenmp', '-xopenmp', '-openmp', '-mp', '-omp', '-qsmp=omp'):
+        for flag in ('-qopenmp', '-fopenmp', '-xopenmp', '-openmp', '-mp', '-omp', '-qsmp=omp', '-fopenmp=libomp'):        
             try:
                 self.validate_c(kw) #refresh env
                 if kw['compiler'] == 'c':
@@ -44,5 +44,5 @@ def check_openmp(self, **kw):
         self.end_msg('Not supported')
         if 'define_name' in kw:
             self.undefine(kw['define_name'])
-        if kw.get('mandatory', True):
+        if 'mandatory' in kw and kw.get('mandatory', True):
             self.fatal('OpenMP is not supported')
