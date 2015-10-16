@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
+import sys
+sys.path.insert(0, './waf_tools')
 
 VERSION = '0.0.1'
 APPNAME = 'limbo'
