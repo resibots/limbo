@@ -45,5 +45,5 @@ Limbo is a framework for our research that is voluntarily kept small. It is desi
 
 If you need a more full-featured library, check:
 - BayesOpt: http://rmcantin.bitbucket.org/html/
-- libGP (no optimization): https://github.com/genix/libGP
+- libGP (no optimization): https://github.com/mblum/libgp
 
