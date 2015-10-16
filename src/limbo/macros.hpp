@@ -17,4 +17,21 @@
     static void set_##Name(const Type& v) { _##Name = v; }
 
 #define BO_DECLARE_DYN_PARAM(Type, Namespace, Name) Type Namespace::_##Name;
+
+#define BO_PARAM_ARRAY(Type, Name, ...)                  \
+    static Type Name(size_t i)                           \
+    {                                                    \
+        assert(i < Name##_size());                       \
+        static constexpr Type _##Name[] = {__VA_ARGS__}; \
+        return _##Name[i];                               \
+    }                                                    \
+    static size_t Name##_size()                          \
+    {                                                    \
+        static constexpr Type _##Name[] = {__VA_ARGS__}; \
+        return sizeof(_##Name) / sizeof(Type);           \
+    }                                                    \
+    typedef Type Name##_t;
+
+#define BO_STRING(N, V) static constexpr const char* N() { return V; }
+
 #endif
