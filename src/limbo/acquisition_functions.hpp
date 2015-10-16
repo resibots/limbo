@@ -28,12 +28,13 @@ namespace limbo {
 
             size_t dim_out() const { return _model.dim_out(); }
 
-            double operator()(const Eigen::VectorXd& v) const
+            template<typename RewardFunction>
+            double operator()(const Eigen::VectorXd& v, const RewardFunction& rfun) const
             {
                 // double mu, sigma;
                 // std::tie(mu, sigma) = _model.query(v);
                 // return (mu + Params::ucb::alpha() * sqrt(sigma));
-                return (_model.mu(v)(0) + Params::ucb::alpha() * sqrt(_model.sigma(v)));
+                return (rfun(_model.mu(v)) + Params::ucb::alpha() * sqrt(_model.sigma(v)));
             }
 
         protected:
@@ -55,12 +56,13 @@ namespace limbo {
 
             size_t dim_out() const { return _model.dim_out(); }
 
-            double operator()(const Eigen::VectorXd& v) const
+            template<typename RewardFunction>
+            double operator()(const Eigen::VectorXd& v, const RewardFunction& rfun) const
             {
                 // double mu, sigma;
                 // std::tie(mu, sigma) = _model.query(v);
                 // return (mu + _beta * sqrt(sigma));
-                return (_model.mu(v)(0) + _beta * sqrt(_model.sigma(v)));
+                return (rfun(_model.mu(v)) + _beta * sqrt(_model.sigma(v)));
             }
 
         protected:

@@ -28,15 +28,15 @@ namespace limbo {
         struct Cmaes {
             Cmaes() {}
 
-            template <typename AcquisitionFunction>
-            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in) const
+            template <typename AcquisitionFunction, typename RewardFunction >
+            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const RewardFunction& rfun) const
             {
                 return this->operator()(acqui, dim_in,
-                    Eigen::VectorXd::Constant(dim_in, 0.5));
+                    Eigen::VectorXd::Constant(dim_in, 0.5), rfun);
             }
 
-            template <typename AcquisitionFunction>
-            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const Eigen::VectorXd& init) const
+            template <typename AcquisitionFunction, typename RewardFunction>
+            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const Eigen::VectorXd& init, const RewardFunction& rfun) const
             {
 
                 int nrestarts = Params::cmaes::nrestarts();
@@ -82,7 +82,7 @@ namespace limbo {
                                 boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim_in);
                                 for (int j = 0; j < dim_in; ++j)
                                   pop_eigen[i](j) = all_x_in_bounds[i][j];
-                                fitvals[i] = -acqui(pop_eigen[i]);
+                                fitvals[i] = -acqui(pop_eigen[i], rfun);
                             // clang-format on
                         });
                         cmaes_UpdateDistribution(&evo, fitvals);
@@ -104,7 +104,7 @@ namespace limbo {
                     for (int j = 0; j < v.size(); ++j)
                         v(j) = xmean[j];
 
-                    if ((fmean = -acqui(v)) < fbestever) {
+                    if ((fmean = -acqui(v, rfun)) < fbestever) {
                         fbestever = fmean;
                         xbestever = cmaes_GetInto(&evo, "xmean", xbestever);
                     }

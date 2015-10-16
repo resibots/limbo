@@ -217,25 +217,25 @@ void print_res(const T& r)
     for (auto x : r) {
         for (auto y : x.second) {
             std::cout << x.first << "\t =>"
-                      << " found :" << y.second(0) << " expected " << y.first(0)
+                      << " found :" << y.second << " expected " << y.first
                       << std::endl;
         }
-        std::vector<std::pair<Eigen::VectorXd, Eigen::VectorXd>>& v = x.second;
+        std::vector<std::pair<double, double>>& v = x.second;
         std::sort(v.begin(), v.end(),
-            [](const std::pair<Eigen::VectorXd, Eigen::VectorXd>& x1,
-                      const std::pair<Eigen::VectorXd, Eigen::VectorXd>& x2) {
+            [](const std::pair<double, double>& x1,
+                      const std::pair<double, double>& x2) {
                 // clang-format off
-                return x1.second(0) < x2.second(0);
+                return x1.second < x2.second;
                 // clang-format on
             });
-        double med = v[v.size() / 2].second(0);
-        if (fabs(v[0].first(0) - med) < 0.05)
+        double med = v[v.size() / 2].second;
+        if (fabs(v[0].first - med) < 0.05)
             std::cout << "[" << colors::green << "OK" << colors::reset << "] ";
         else
             std::cout << "[" << colors::red << "ERROR" << colors::reset << "] ";
         std::cout << colors::yellow << colors::bold << " -- " << x.first
                   << colors::reset << " ";
-        std::cout << "Median: " << med << " error :" << fabs(v[0].first(0) - med)
+        std::cout << "Median: " << med << " error :" << fabs(v[0].first - med)
                   << std::endl;
     }
 }
@@ -282,11 +282,11 @@ int main(int argc, char** argv)
     typedef BOptimizer<Params> Opt_t;
 
 #ifdef USE_TBB
-    typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<Eigen::VectorXd, Eigen::VectorXd>>>
+    typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>
         res_t;
 #else
     typedef std::map<std::string,
-        std::vector<std::pair<Eigen::VectorXd, Eigen::VectorXd>>>
+        std::vector<std::pair<double, double>>>
         res_t;
 #endif
     res_t results;
@@ -297,7 +297,7 @@ int main(int argc, char** argv)
                 Opt_t opt;
                 opt.optimize(Sphere());
                 Eigen::Vector2d s_val(0.5, 0.5);
-                Eigen::VectorXd x_opt = Sphere()(s_val);
+                double x_opt = NoReward()(Sphere()(s_val));
                 add_to_results("Sphere", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -308,7 +308,7 @@ int main(int argc, char** argv)
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
                 Eigen::Vector2d s_val(0.5, 0.5);
-                Eigen::VectorXd x_opt = Ellipsoid()(s_val);
+                double x_opt = NoReward()(Ellipsoid()(s_val));
                 add_to_results("Ellipsoid", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -319,7 +319,7 @@ int main(int argc, char** argv)
                 Opt_t opt;
                 opt.optimize(Rastrigin());
                 Eigen::Vector4d s_val(0, 0, 0, 0);
-                Eigen::VectorXd x_opt = Rastrigin()(s_val);
+                double x_opt = NoReward()(Rastrigin()(s_val));
                 add_to_results("Rastrigin", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -331,7 +331,7 @@ int main(int argc, char** argv)
                 opt.optimize(Hartman3());
                 // double s_max = 3.86278;
                 Eigen::Vector3d s_val(0.114614, 0.555549, 0.852547);
-                Eigen::VectorXd x_opt = Hartman3()(s_val);
+                double x_opt = NoReward()(Hartman3()(s_val));
                 add_to_results("Hartman 3", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -344,7 +344,7 @@ int main(int argc, char** argv)
                 Eigen::Matrix<double, 6, 1> s_val;
                 s_val << 0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573;
                 //double s_max = 3.32237;
-                Eigen::VectorXd x_opt = Hartman6()(s_val);
+                double x_opt = NoReward()(Hartman6()(s_val));
                 add_to_results("Hartman 6", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -356,7 +356,7 @@ int main(int argc, char** argv)
                 opt.optimize(GoldenPrice());
                 //    double s_max = -log(3);
                 Eigen::Vector2d s_val(0.5, 0.25);
-                Eigen::VectorXd x_opt = GoldenPrice()(s_val);
+                double x_opt = NoReward()(GoldenPrice()(s_val));
                 add_to_results("Golden Price", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });

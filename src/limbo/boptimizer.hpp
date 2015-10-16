@@ -2,12 +2,16 @@
 #define BOPTIMIZER_HPP_
 
 #include "bo_base.hpp"
+#include <boost/range/adaptor/transformed.hpp>
 
 namespace limbo {
-    bool compareVectorXd(Eigen::VectorXd i, Eigen::VectorXd j)
-    {
-        return i(0) < j(0);
-    }
+    struct NoReward {
+        typedef double result_type;
+        double operator()(const Eigen::VectorXd& x) const
+        {            
+            return x(0);
+        }
+    };
 
     template <class Params, class A1 = boost::parameter::void_,
         class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
@@ -21,12 +25,12 @@ namespace limbo {
         typedef typename base_t::inner_optimization_t inner_optimization_t;
         typedef typename base_t::acquisition_function_t acquisition_function_t;
 
-        template <typename EvalFunction>
-        void optimize(const EvalFunction& feval, bool reset = true)
+        template <typename StateFunction, typename RewardFunction = NoReward>
+        void optimize(const StateFunction& sfun, const RewardFunction& rfun = RewardFunction(), bool reset = true)
         {
-            this->_init(feval, reset);
+            this->_init(sfun, reset);
 
-            _model = model_t(EvalFunction::dim_in, EvalFunction::dim_out);
+            _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
             if (this->_observations.size())
                 _model.compute(this->_samples, this->_observations,
                     Params::boptimizer::noise());
@@ -35,10 +39,10 @@ namespace limbo {
             while (this->_samples.size() == 0 || this->_pursue(*this)) {
                 acquisition_function_t acqui(_model, this->_iteration);
 
-                Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in());
+                Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in(), rfun);
                 bool blacklisted = false;
                 try {
-                    this->add_new_sample(new_sample, feval(new_sample));
+                    this->add_new_sample(new_sample, sfun(new_sample));
                 }
                 catch (...) {
                     this->add_new_bl_sample(new_sample);
@@ -65,24 +69,25 @@ namespace limbo {
                 //this->_samples.back())
                 //<< " acqui: "<< acqui(blacklisted ? this->_bl_samples.back() :
                 //this->_samples.back())
-                std::cout << " best:" << this->best_observation().transpose()
-                          << std::endl;
+                std::cout << " best:" << this->best_observation(rfun) << std::endl;
 
                 this->_iteration++;
             }
         }
 
-        const obs_t& best_observation() const
+        template <typename RewardFunction = NoReward>
+        typename RewardFunction::result_type best_observation(const RewardFunction& rfun = RewardFunction()) const
         {
-            return *std::max_element(this->_observations.begin(),
-                       this->_observations.end(), compareVectorXd);
+            auto rewards = boost::adaptors::transform(this->_observations, rfun);
+            return *std::max_element(rewards.begin(), rewards.end());
         }
 
-        const Eigen::VectorXd& best_sample() const
+        template <typename RewardFunction = NoReward>
+        const Eigen::VectorXd& best_sample(const RewardFunction& rfun = RewardFunction()) const
         {
-            auto max_e = std::max_element(this->_observations.begin(),
-                this->_observations.end(), compareVectorXd);
-            return this->_samples[std::distance(this->_observations.begin(), max_e)];
+            auto rewards = boost::adaptors::transform(this->_observations, rfun);
+            auto max_e = std::max_element(rewards.begin(), rewards.end());
+            return this->_samples[std::distance(rewards.begin(), max_e)];
         }
 
         const model_t& model() const { return _model; }
