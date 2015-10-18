@@ -20,8 +20,8 @@ namespace limbo {
         struct MaxIterations {
             MaxIterations() { iteration = 0; }
 
-            template <typename BO>
-            bool operator()(const BO& bo)
+            template <typename BO, typename RewardFunction>
+            bool operator()(const BO& bo, const RewardFunction&)
             {
                 return bo.iteration() <= Params::maxiterations::n_iterations();
             }
@@ -35,19 +35,19 @@ namespace limbo {
 
             MaxPredictedValue() {}
 
-            template <typename BO>
-            bool operator()(const BO& bo)
+            template <typename BO, typename RewardFunction>
+            bool operator()(const BO& bo, const RewardFunction& rfun)
             {
                 GPMean<BO> gpmean(bo);
                 typename BO::inner_optimization_t opti;
-                double val = gpmean(opti(gpmean, 0));
+                double val = rfun(gpmean(opti(gpmean, 0, rfun)));
 
-                if (bo.observations().size() == 0 || bo.best_observation() <= Params::maxpredictedvalue::ratio() * val)
+                if (bo.observations().size() == 0 || bo.best_observation(rfun) <= Params::maxpredictedvalue::ratio() * val)
                     return true;
                 else {
                     std::cout << "stop caused by Max predicted value reached. Thresold: "
                               << Params::maxpredictedvalue::ratio() * val
-                              << " max observations: " << bo.best_observation() << std::endl;
+                              << " max observations: " << bo.best_observation(rfun) << std::endl;
                     return false;
                 }
             }
@@ -62,26 +62,27 @@ namespace limbo {
                         BO::params_t::boptimizer::noise());
                 }
 
-                double operator()(const Eigen::VectorXd& v) const { return _model.mu(v); }
+                Eigen::VectorXd operator()(const Eigen::VectorXd& v) const { return _model.mu(v); }
 
             protected:
                 typename BO::model_t _model;
             };
         };
 
-        template <typename BO>
+        template <typename BO, typename RewardFunction>
         struct ChainCriteria {
             typedef bool result_type;
-            ChainCriteria(const BO& bo) : _bo(bo) {}
+            ChainCriteria(const BO& bo, const RewardFunction& rfun) : _bo(bo), _rfun(rfun) {}
 
             template <typename stopping_criterion>
             bool operator()(bool state, stopping_criterion stop) const
             {
-                return state && stop(_bo);
+                return state && stop(_bo, _rfun);
             }
 
         protected:
             const BO& _bo;
+            const RewardFunction& _rfun;
         };
     }
 }

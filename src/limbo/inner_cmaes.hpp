@@ -28,7 +28,7 @@ namespace limbo {
         struct Cmaes {
             Cmaes() {}
 
-            template <typename AcquisitionFunction, typename RewardFunction >
+            template <typename AcquisitionFunction, typename RewardFunction>
             Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const RewardFunction& rfun) const
             {
                 return this->operator()(acqui, dim_in,

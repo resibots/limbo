@@ -47,6 +47,14 @@ namespace limbo {
         void operator()(T& x) const { x(_bo, _blacklisted); }
     };
 
+    struct NoReward {
+        typedef double result_type;
+        double operator()(const Eigen::VectorXd& x) const
+        {
+            return x(0);
+        }
+    };
+
     // we use optimal named template parameters
     // see:
     // http://www.boost.org/doc/libs/1_55_0/libs/parameter/doc/html/index.html#parameter-enabled-class-templates
@@ -162,10 +170,10 @@ namespace limbo {
                 init_function_t()(feval, *this);
         }
 
-        template <typename BO>
-        bool _pursue(const BO& bo) const
+        template <typename BO, typename RewardFunction>
+        bool _pursue(const BO& bo, const RewardFunction& rfun) const
         {
-            stopping_criterion::ChainCriteria<BO> chain(bo);
+            stopping_criterion::ChainCriteria<BO, RewardFunction> chain(bo, rfun);
             return boost::fusion::accumulate(_stopping_criteria, true, chain);
         }
 

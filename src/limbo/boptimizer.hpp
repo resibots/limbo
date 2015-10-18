@@ -5,14 +5,6 @@
 #include <boost/range/adaptor/transformed.hpp>
 
 namespace limbo {
-    struct NoReward {
-        typedef double result_type;
-        double operator()(const Eigen::VectorXd& x) const
-        {            
-            return x(0);
-        }
-    };
-
     template <class Params, class A1 = boost::parameter::void_,
         class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
         class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
@@ -36,7 +28,7 @@ namespace limbo {
                     Params::boptimizer::noise());
             inner_optimization_t inner_optimization;
 
-            while (this->_samples.size() == 0 || this->_pursue(*this)) {
+            while (this->_samples.size() == 0 || this->_pursue(*this, rfun)) {
                 acquisition_function_t acqui(_model, this->_iteration);
 
                 Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in(), rfun);

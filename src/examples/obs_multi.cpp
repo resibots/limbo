@@ -49,7 +49,7 @@ public:
 
     size_t dim_out() const { return _model.dim_out(); }
 
-    template<typename RewardFunction>
+    template <typename RewardFunction>
     double operator()(const Eigen::VectorXd& v, const RewardFunction& rfun) const
     {
         // double mu, sigma;
