@@ -21,8 +21,9 @@ def format_dir(folder, extensions):
 exts = ['.h', '.c', '.hpp', '.cpp', '.hh', '.cc']
 
 if __name__ == "__main__":
-	if len(sys.argv) < 1:
+	if len(sys.argv) <= 1:
 		print "Usage: clean_code.py folder1 [folder2] ..."
+		sys.exit()
 
 	try:
 		check_output(["clang-format", "-help"])
