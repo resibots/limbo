@@ -36,10 +36,10 @@ namespace limbo {
 
             inner_optimization_t inner_optimization;
 
-            while (this->_samples.size() == 0 || this->_pursue(*this, NoReward())) {
+            while (this->_samples.size() == 0 || this->_pursue(*this, FirstElem())) {
                 acquisition_function_t acqui(model, this->_iteration);
 
-                Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim(), NoReward());
+                Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim(), FirstElem());
                 this->add_new_sample(new_sample, feval(new_sample));
                 std::cout << this->_iteration
                           << " | new sample:" << new_sample.transpose() << " => "

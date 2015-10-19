@@ -56,7 +56,7 @@ namespace limbo {
 
             inner_optimization_t inner_opt;
 
-            while (this->_samples.size() == 0 || this->_pursue(*this, NoReward())) {
+            while (this->_samples.size() == 0 || this->_pursue(*this, FirstElem())) {
                 std::cout.flush();
                 this->template update_pareto_model<EvalFunction::dim>();
                 this->update_pareto_data();
@@ -85,7 +85,7 @@ namespace limbo {
                 auto body = [&](int i) -> pair_t {
                     // clang-format off
                     auto x = this->pareto_data()[i];
-                    Eigen::VectorXd s = inner_opt(acqui, acqui.dim(), std::get<0>(x), NoReward());
+                    Eigen::VectorXd s = inner_opt(acqui, acqui.dim(), std::get<0>(x), FirstElem());
                     double hv = acqui(s);
                     return std::make_pair(s, hv);
                     // clang-format on

@@ -17,8 +17,8 @@ namespace limbo {
         typedef typename base_t::inner_optimization_t inner_optimization_t;
         typedef typename base_t::acquisition_function_t acquisition_function_t;
 
-        template <typename StateFunction, typename RewardFunction = NoReward>
-        void optimize(const StateFunction& sfun, const RewardFunction& rfun = RewardFunction(), bool reset = true)
+        template <typename StateFunction, typename AggregatorFunction = FirstElem>
+        void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
         {
             this->_init(sfun, reset);
 
@@ -28,10 +28,10 @@ namespace limbo {
                     Params::boptimizer::noise());
             inner_optimization_t inner_optimization;
 
-            while (this->_samples.size() == 0 || this->_pursue(*this, rfun)) {
+            while (this->_samples.size() == 0 || this->_pursue(*this, afun)) {
                 acquisition_function_t acqui(_model, this->_iteration);
 
-                Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in(), rfun);
+                Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in(), afun);
                 bool blacklisted = false;
                 try {
                     this->add_new_sample(new_sample, sfun(new_sample));
@@ -61,23 +61,23 @@ namespace limbo {
                 //this->_samples.back())
                 //<< " acqui: "<< acqui(blacklisted ? this->_bl_samples.back() :
                 //this->_samples.back())
-                std::cout << " best:" << this->best_observation(rfun) << std::endl;
+                std::cout << " best:" << this->best_observation(afun) << std::endl;
 
                 this->_iteration++;
             }
         }
 
-        template <typename RewardFunction = NoReward>
-        typename RewardFunction::result_type best_observation(const RewardFunction& rfun = RewardFunction()) const
+        template <typename AggregatorFunction = FirstElem>
+        typename AggregatorFunction::result_type best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
         {
-            auto rewards = boost::adaptors::transform(this->_observations, rfun);
+            auto rewards = boost::adaptors::transform(this->_observations, afun);
             return *std::max_element(rewards.begin(), rewards.end());
         }
 
-        template <typename RewardFunction = NoReward>
-        const Eigen::VectorXd& best_sample(const RewardFunction& rfun = RewardFunction()) const
+        template <typename AggregatorFunction = FirstElem>
+        const Eigen::VectorXd& best_sample(const AggregatorFunction& afun = AggregatorFunction()) const
         {
-            auto rewards = boost::adaptors::transform(this->_observations, rfun);
+            auto rewards = boost::adaptors::transform(this->_observations, afun);
             auto max_e = std::max_element(rewards.begin(), rewards.end());
             return this->_samples[std::distance(rewards.begin(), max_e)];
         }

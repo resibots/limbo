@@ -28,13 +28,13 @@ namespace limbo {
 
             size_t dim_out() const { return _model.dim_out(); }
 
-            template <typename RewardFunction>
-            double operator()(const Eigen::VectorXd& v, const RewardFunction& rfun) const
+            template <typename AggregatorFunction>
+            double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
             {
-                // double mu, sigma;
-                // std::tie(mu, sigma) = _model.query(v);
-                // return (mu + Params::ucb::alpha() * sqrt(sigma));
-                return (rfun(_model.mu(v)) + Params::ucb::alpha() * sqrt(_model.sigma(v)));
+                Eigen::VectorXd mu;
+                double sigma;
+                std::tie(mu, sigma) = _model.query(v);
+                return (afun(mu) + Params::ucb::alpha() * sqrt(sigma));                
             }
 
         protected:
@@ -56,13 +56,13 @@ namespace limbo {
 
             size_t dim_out() const { return _model.dim_out(); }
 
-            template <typename RewardFunction>
-            double operator()(const Eigen::VectorXd& v, const RewardFunction& rfun) const
+            template <typename AggregatorFunction>
+            double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
             {
-                // double mu, sigma;
-                // std::tie(mu, sigma) = _model.query(v);
-                // return (mu + _beta * sqrt(sigma));
-                return (rfun(_model.mu(v)) + _beta * sqrt(_model.sigma(v)));
+                Eigen::VectorXd mu;
+                double sigma;
+                std::tie(mu, sigma) = _model.query(v);
+                return (afun(mu) + _beta * sqrt(sigma));
             }
 
         protected:

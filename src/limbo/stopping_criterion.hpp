@@ -20,8 +20,8 @@ namespace limbo {
         struct MaxIterations {
             MaxIterations() { iteration = 0; }
 
-            template <typename BO, typename RewardFunction>
-            bool operator()(const BO& bo, const RewardFunction&)
+            template <typename BO, typename AggregatorFunction>
+            bool operator()(const BO& bo, const AggregatorFunction&)
             {
                 return bo.iteration() <= Params::maxiterations::n_iterations();
             }
@@ -35,19 +35,19 @@ namespace limbo {
 
             MaxPredictedValue() {}
 
-            template <typename BO, typename RewardFunction>
-            bool operator()(const BO& bo, const RewardFunction& rfun)
+            template <typename BO, typename AggregatorFunction>
+            bool operator()(const BO& bo, const AggregatorFunction& afun)
             {
                 GPMean<BO> gpmean(bo);
                 typename BO::inner_optimization_t opti;
-                double val = rfun(gpmean(opti(gpmean, 0, rfun)));
+                double val = afun(gpmean(opti(gpmean, 0, afun)));
 
-                if (bo.observations().size() == 0 || bo.best_observation(rfun) <= Params::maxpredictedvalue::ratio() * val)
+                if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::maxpredictedvalue::ratio() * val)
                     return true;
                 else {
                     std::cout << "stop caused by Max predicted value reached. Thresold: "
                               << Params::maxpredictedvalue::ratio() * val
-                              << " max observations: " << bo.best_observation(rfun) << std::endl;
+                              << " max observations: " << bo.best_observation(afun) << std::endl;
                     return false;
                 }
             }
@@ -69,20 +69,20 @@ namespace limbo {
             };
         };
 
-        template <typename BO, typename RewardFunction>
+        template <typename BO, typename AggregatorFunction>
         struct ChainCriteria {
             typedef bool result_type;
-            ChainCriteria(const BO& bo, const RewardFunction& rfun) : _bo(bo), _rfun(rfun) {}
+            ChainCriteria(const BO& bo, const AggregatorFunction& afun) : _bo(bo), _afun(afun) {}
 
             template <typename stopping_criterion>
             bool operator()(bool state, stopping_criterion stop) const
             {
-                return state && stop(_bo, _rfun);
+                return state && stop(_bo, _afun);
             }
 
         protected:
             const BO& _bo;
-            const RewardFunction& _rfun;
+            const AggregatorFunction& _afun;
         };
     }
 }

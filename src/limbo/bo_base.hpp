@@ -47,7 +47,7 @@ namespace limbo {
         void operator()(T& x) const { x(_bo, _blacklisted); }
     };
 
-    struct NoReward {
+    struct FirstElem {
         typedef double result_type;
         double operator()(const Eigen::VectorXd& x) const
         {
@@ -170,10 +170,10 @@ namespace limbo {
                 init_function_t()(feval, *this);
         }
 
-        template <typename BO, typename RewardFunction>
-        bool _pursue(const BO& bo, const RewardFunction& rfun) const
+        template <typename BO, typename AggregatorFunction>
+        bool _pursue(const BO& bo, const AggregatorFunction& afun) const
         {
-            stopping_criterion::ChainCriteria<BO, RewardFunction> chain(bo, rfun);
+            stopping_criterion::ChainCriteria<BO, AggregatorFunction> chain(bo, afun);
             return boost::fusion::accumulate(_stopping_criteria, true, chain);
         }
 

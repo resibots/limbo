@@ -297,7 +297,7 @@ int main(int argc, char** argv)
                 Opt_t opt;
                 opt.optimize(Sphere());
                 Eigen::Vector2d s_val(0.5, 0.5);
-                double x_opt = NoReward()(Sphere()(s_val));
+                double x_opt = FirstElem()(Sphere()(s_val));
                 add_to_results("Sphere", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -308,7 +308,7 @@ int main(int argc, char** argv)
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
                 Eigen::Vector2d s_val(0.5, 0.5);
-                double x_opt = NoReward()(Ellipsoid()(s_val));
+                double x_opt = FirstElem()(Ellipsoid()(s_val));
                 add_to_results("Ellipsoid", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -319,7 +319,7 @@ int main(int argc, char** argv)
                 Opt_t opt;
                 opt.optimize(Rastrigin());
                 Eigen::Vector4d s_val(0, 0, 0, 0);
-                double x_opt = NoReward()(Rastrigin()(s_val));
+                double x_opt = FirstElem()(Rastrigin()(s_val));
                 add_to_results("Rastrigin", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -331,7 +331,7 @@ int main(int argc, char** argv)
                 opt.optimize(Hartman3());
                 // double s_max = 3.86278;
                 Eigen::Vector3d s_val(0.114614, 0.555549, 0.852547);
-                double x_opt = NoReward()(Hartman3()(s_val));
+                double x_opt = FirstElem()(Hartman3()(s_val));
                 add_to_results("Hartman 3", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -344,7 +344,7 @@ int main(int argc, char** argv)
                 Eigen::Matrix<double, 6, 1> s_val;
                 s_val << 0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573;
                 //double s_max = 3.32237;
-                double x_opt = NoReward()(Hartman6()(s_val));
+                double x_opt = FirstElem()(Hartman6()(s_val));
                 add_to_results("Hartman 6", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });
@@ -356,7 +356,7 @@ int main(int argc, char** argv)
                 opt.optimize(GoldenPrice());
                 //    double s_max = -log(3);
                 Eigen::Vector2d s_val(0.5, 0.25);
-                double x_opt = NoReward()(GoldenPrice()(s_val));
+                double x_opt = FirstElem()(GoldenPrice()(s_val));
                 add_to_results("Golden Price", results, std::make_pair(x_opt, opt.best_observation()));
             // clang-format on
         });

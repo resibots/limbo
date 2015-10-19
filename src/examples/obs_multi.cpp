@@ -49,8 +49,8 @@ public:
 
     size_t dim_out() const { return _model.dim_out(); }
 
-    template <typename RewardFunction>
-    double operator()(const Eigen::VectorXd& v, const RewardFunction& rfun) const
+    template <typename AggregatorFunction>
+    double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
     {
         // double mu, sigma;
         // std::tie(mu, sigma) = _model.query(v);

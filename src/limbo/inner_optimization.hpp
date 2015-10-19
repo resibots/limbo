@@ -12,8 +12,8 @@ namespace limbo {
         struct Random {
             Random() {}
 
-            template <typename AcquisitionFunction, typename RewardFunction>
-            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const RewardFunction& rfun) const
+            template <typename AcquisitionFunction, typename AggregatorFunction>
+            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const AggregatorFunction& afun) const
             {
                 return Eigen::VectorXd::Random(dim_in);
             }
@@ -23,16 +23,16 @@ namespace limbo {
         struct ExhaustiveSearch {
             ExhaustiveSearch() { nb_pts = Params::exhaustivesearch::nb_pts; }
 
-            template <typename AcquisitionFunction, typename RewardFunction>
-            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const RewardFunction& rfun) const
+            template <typename AcquisitionFunction, typename AggregatorFunction>
+            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const AggregatorFunction& afun) const
             {
-                return explore(0, acqui, rfun, Eigen::VectorXd::Constant(dim_in, 0));
+                return explore(0, acqui, afun, Eigen::VectorXd::Constant(dim_in, 0));
             }
 
         private:
             // recursive exploration
-            template <typename AcquisitionFunction, typename RewardFunction>
-            Eigen::VectorXd explore(int dim_in, const AcquisitionFunction& acqui, const RewardFunction& rfun,
+            template <typename AcquisitionFunction, typename AggregatorFunction>
+            Eigen::VectorXd explore(int dim_in, const AcquisitionFunction& acqui, const AggregatorFunction& afun,
                 const Eigen::VectorXd& current,
                 Eigen::VectorXd& result) const
             {
@@ -44,7 +44,7 @@ namespace limbo {
                     point[dim_in] = x;
                     double val;
                     if (dim_in == current.size() - 1) {
-                        val = acqui(point, rfun);
+                        val = acqui(point, afun);
                         if (val > best_fit) {
                             best_fit = val;
                             current_result = point;
@@ -52,7 +52,7 @@ namespace limbo {
                     }
                     else {
                         Eigen::VectorXd temp_result = current_result;
-                        std::tie(temp_result, val) = explore(dim_in + 1, acqui, rfun, point, temp_result);
+                        std::tie(temp_result, val) = explore(dim_in + 1, acqui, afun, point, temp_result);
                         if (val > best_fit) {
                             best_fit = val;
                             current_result = temp_result;
