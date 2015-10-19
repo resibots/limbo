@@ -97,22 +97,13 @@ namespace limbo {
                 }
                 size_t n = this->_observations.rows();
 
-                /// what we should write, but it is less numerically stable than using the
-                /// Cholesky decomposition
-                // Eigen::MatrixXd alpha = this->_inverted_kernel * this->_obs_mean;
-                //  Eigen::MatrixXd w = alpha * alpha.transpose() - this->_inverted_kernel;
-
-                // alpha = K^{-1} * this->_obs_mean;
-                Eigen::MatrixXd alpha = this->_llt.matrixL().solve(this->_obs_mean);
-                this->_llt.matrixL().adjoint().solveInPlace(alpha);
-
                 // K^{-1} using Cholesky decomposition
                 Eigen::MatrixXd K = Eigen::MatrixXd::Identity(n, n);
                 this->_llt.matrixL().solveInPlace(K);
                 this->_llt.matrixL().transpose().solveInPlace(K);
 
                 // alpha * alpha.transpose() - K^{-1}
-                Eigen::MatrixXd w = alpha * alpha.transpose() - K;
+                Eigen::MatrixXd w = this->_alpha * this->_alpha.transpose() - K;
 
                 // only compute half of the matrix (symmetrical matrix)
                 Eigen::VectorXd grad = Eigen::VectorXd::Zero(this->_kernel_function.h_params_size() + this->_mean_function.h_params_size());
