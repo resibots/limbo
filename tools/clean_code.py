@@ -49,7 +49,7 @@ if __name__ == "__main__":
 		os.chdir(curr_dir)
 
 	# format directories specified by the user
-	for arg in sys.argv:
+	for arg in sys.argv[1:]:
 		format_dir(arg, exts)
 
 	# remove copied file if needed
