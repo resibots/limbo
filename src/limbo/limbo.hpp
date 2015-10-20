@@ -12,6 +12,8 @@
 #include "mean_functions.hpp"
 #include "inner_optimization.hpp"
 #include "gp.hpp"
+#include "gp_auto.hpp"
+#include "gp_auto_mean.hpp"
 #include "init_functions.hpp"
 
 #endif
