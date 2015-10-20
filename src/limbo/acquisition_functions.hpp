@@ -34,7 +34,7 @@ namespace limbo {
                 Eigen::VectorXd mu;
                 double sigma;
                 std::tie(mu, sigma) = _model.query(v);
-                return (afun(mu) + Params::ucb::alpha() * sqrt(sigma));                
+                return (afun(mu) + Params::ucb::alpha() * sqrt(sigma));
             }
 
         protected:

@@ -60,7 +60,7 @@ namespace limbo {
                 //<< " sigma: "<< _model.sigma(blacklisted ? this->_bl_samples.back() :
                 //this->_samples.back())
                 //<< " acqui: "<< acqui(blacklisted ? this->_bl_samples.back() :
-                //this->_samples.back())
+                //this->_samples.back(), afun)
                 std::cout << " best:" << this->best_observation(afun) << std::endl;
 
                 this->_iteration++;

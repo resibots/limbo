@@ -60,5 +60,5 @@
     }
 
 #define BO_STRING(Name, Value) static constexpr const char* Name() { return Value; }
-// clang-format on
+         // clang-format on
 #endif

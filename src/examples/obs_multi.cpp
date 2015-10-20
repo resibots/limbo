@@ -40,41 +40,32 @@ struct Params {
     };
 };
 
-template <typename Params, typename Model>
-class UCB_multi {
-public:
-    UCB_multi(const Model& model, int iteration = 0) : _model(model) {}
-
-    size_t dim_in() const { return _model.dim_in(); }
-
-    size_t dim_out() const { return _model.dim_out(); }
-
-    template <typename AggregatorFunction>
-    double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
-    {
-        // double mu, sigma;
-        // std::tie(mu, sigma) = _model.query(v);
-        // return (mu + Params::ucb::alpha() * sqrt(sigma));
-
-        return (sqrt(_model.sigma(v)));
-    }
-
-protected:
-    const Model& _model;
-};
-
-struct fit_eval {
+struct StateEval {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 2;
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd res(2);
-        res(0) = 0;
-        for (int i = 0; i < x.size(); i++)
-            res(0) += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
-        res(1) = res(0);
+        res(0) = 3 * x(0) + 5;
+        res(1) = -5 * x(1) + 2;
         return res;
+    }
+};
+
+struct Average {
+    typedef double result_type;
+    double operator()(const Eigen::VectorXd& x) const
+    {
+        return (x(0) + x(1)) / 2;
+    }
+};
+
+struct SecondElem {
+    typedef double result_type;
+    double operator()(const Eigen::VectorXd& x) const
+    {
+        return x(1);
     }
 };
 
@@ -83,11 +74,14 @@ int main()
     typedef kernel_functions::MaternFiveHalfs<Params> Kernel_t;
     typedef mean_functions::MeanData<Params> Mean_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
-    typedef UCB_multi<Params, GP_t> Acqui_t;
+    typedef acquisition_functions::GP_UCB<Params, GP_t> Acqui_t;
 
     BOptimizer<Params, model_fun<GP_t>, acq_fun<Acqui_t>> opt;
-    opt.optimize(fit_eval());
-    std::cout << opt.best_observation() << " res  "
-              << opt.best_sample().transpose() << std::endl;
+
+    std::cout << "Optimize using  Average aggregator" << std::endl;
+    opt.optimize(StateEval(), Average());
+    std::cout << "best obs based on Average aggregator: " << opt.best_observation(Average()) << " res  " << opt.best_sample(Average()).transpose() << std::endl;
+    std::cout << "best obs based on FirstElem aggregator: " << opt.best_observation(FirstElem()) << " res  " << opt.best_sample(FirstElem()).transpose() << std::endl;
+    std::cout << "best obs based on SecondElem aggregator: " << opt.best_observation(SecondElem()) << " res  " << opt.best_sample(SecondElem()).transpose() << std::endl;
     return 0;
 }
