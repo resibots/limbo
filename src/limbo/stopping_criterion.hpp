@@ -38,13 +38,13 @@ namespace limbo {
             template <typename BO, typename AggregatorFunction>
             bool operator()(const BO& bo, const AggregatorFunction& afun)
             {
-                // Prevent instantiation of GPMean if there are no observed samples
+                // Prevent instantiation of GPMean if there are no observed samplesgit
                 if (bo.observations().size() == 0)
                     return true;
 
                 GPMean<BO> gpmean(bo);
                 typename BO::inner_optimization_t opti;
-                double val = afun(gpmean(opti(gpmean, 0, afun)));
+                double val = gpmean(opti(gpmean, 0, afun), afun);
 
                 if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::maxpredictedvalue::ratio() * val)
                     return true;
@@ -66,7 +66,13 @@ namespace limbo {
                         BO::params_t::boptimizer::noise());
                 }
 
-                Eigen::VectorXd operator()(const Eigen::VectorXd& v) const { return _model.mu(v); }
+                template <typename AggregatorFunction>
+                double operator()(const Eigen::VectorXd& v, const AggregatorFunction afun) const { return afun(_model.mu(v)); }
+
+                int dim_in() const
+                {                    
+                    return _model.dim_in();
+                }
 
             protected:
                 typename BO::model_t _model;

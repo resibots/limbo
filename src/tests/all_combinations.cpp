@@ -231,5 +231,13 @@ int main()
     opt_1.best_observation(Average());
     opt_1.best_sample(Average());
 
+    BOptimizer<Params, model_fun<GPAutoMean_sqexpard_ard_t>, acq_fun<Acqui_gp_ucb_GPAutoMean_sqexpard_ard_t>, inneropt_fun<In_opt_cmaes_t>, init_fun<Init_random_grid_init_t>, stat_fun<Stat_t>, stop_fun<Stop_t>> opt_2;
+    opt_2.optimize(StateEval());
+    opt_2.best_observation();
+    opt_2.best_sample();
+    opt_2.optimize(StateEval(), Average(), true);
+    opt_2.best_observation(Average());
+    opt_2.best_sample(Average());
+
     return 0;
 }
