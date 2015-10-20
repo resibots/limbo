@@ -38,6 +38,10 @@ namespace limbo {
             template <typename BO, typename AggregatorFunction>
             bool operator()(const BO& bo, const AggregatorFunction& afun)
             {
+                // Prevent instantiation of GPMean if there are no observed samples
+                if (bo.observations().size() == 0)
+                    return true;
+
                 GPMean<BO> gpmean(bo);
                 typename BO::inner_optimization_t opti;
                 double val = afun(gpmean(opti(gpmean, 0, afun)));
@@ -56,7 +60,7 @@ namespace limbo {
             template <typename BO>
             struct GPMean {
                 GPMean(const BO& bo)
-                    : _model(bo.samples()[0].size())
+                    : _model(bo.samples()[0].size(), bo.observations()[0].size())
                 { // should have at least one sample
                     _model.compute(bo.samples(), bo.observations(),
                         BO::params_t::boptimizer::noise());
