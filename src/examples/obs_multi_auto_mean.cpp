@@ -18,9 +18,6 @@ struct Params {
     struct cmaes : public defaults::cmaes {
     };
 
-    struct meanconstant : public defaults::meanconstant {
-    };
-
     struct ucb {
         BO_PARAM(float, alpha, 0.1);
     };

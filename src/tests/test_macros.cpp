@@ -11,7 +11,7 @@ struct Params {
         BO_DYN_PARAM(int, b);
         BO_PARAM_ARRAY(double, c, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
         BO_PARAM_VECTOR(double, d, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
-        BO_STRING(e, "e");
+        BO_PARAM_STRING(e, "e");
     };
 };
 

@@ -7,9 +7,9 @@
     static constexpr Type Name() { return Value; }
 
 #define BO_REQUIRED_PARAM(Type, Name) \
-    static constexpr Type Name() \
+    static const Type Name() \
     { \
-        static_assert(false, "You need to define the parameter:"##Name##" !"); \
+        static_assert(false, "You need to define the parameter:" #Name " !"); \
         return Type(); \
     }
 
@@ -59,6 +59,6 @@
         return Eigen::Map<const Eigen::Matrix<Type, __VA_NARG__(__VA_ARGS__), 1>>(_##Name); \
     }
 
-#define BO_STRING(Name, Value) static constexpr const char* Name() { return Value; }
+#define BO_PARAM_STRING(Name, Value) static constexpr const char* Name() { return Value; }
          // clang-format on
 #endif

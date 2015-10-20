@@ -203,9 +203,6 @@ struct Params {
 
     struct cmaes : public defaults::cmaes {
     };
-
-    struct meanconstant : public defaults::meanconstant {
-    };
 };
 
 // BO_DECLARE_DYN_PARAM(double, Params::meanconstant, constant);

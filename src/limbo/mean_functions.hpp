@@ -6,12 +6,7 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-namespace limbo {
-    namespace defaults {
-        struct meanconstant {
-            BO_PARAM(double, constant, 0.0);
-        };
-    }
+namespace limbo {    
     namespace mean_functions {
         template <typename Params, typename ObsType = Eigen::VectorXd>
         struct NullFunction {
@@ -20,7 +15,7 @@ namespace limbo {
             template <typename GP>
             ObsType operator()(const Eigen::VectorXd& v, const GP&) const
             {
-                return ObsType::Zeros(_dim_out);
+                return ObsType::Zero(_dim_out);
             }
 
         protected:
