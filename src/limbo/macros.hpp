@@ -2,7 +2,7 @@
 #define _BO_MACROS_HPP_
 
 #include <Eigen/Core>
-
+// clang-format off
 #define BO_PARAM(Type, Name, Value) \
     static constexpr Type Name() { return Value; }
 
@@ -60,5 +60,5 @@
     }
 
 #define BO_STRING(Name, Value) static constexpr const char* Name() { return Value; }
-
+// clang-format on
 #endif
