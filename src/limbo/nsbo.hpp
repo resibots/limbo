@@ -20,7 +20,7 @@ namespace limbo {
         {
             this->_init(feval, reset);
 
-            while (this->_samples.size() == 0 || this->_pursue(*this)) {
+            while (this->_samples.size() == 0 || this->_pursue(*this, FirstElem())) {
                 std::cout << "updating pareto model...";
                 std::cout.flush();
                 this->template update_pareto_model<EvalFunction::dim>();

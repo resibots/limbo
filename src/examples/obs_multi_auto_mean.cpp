@@ -18,9 +18,6 @@ struct Params {
     struct cmaes : public defaults::cmaes {
     };
 
-    struct meanconstant : public defaults::meanconstant {
-    };
-
     struct ucb {
         BO_PARAM(float, alpha, 0.1);
     };
@@ -53,7 +50,8 @@ public:
 
     size_t dim_out() const { return _model.dim_out(); }
 
-    double operator()(const Eigen::VectorXd& v) const
+    template <typename AggregatorFunction>
+    double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
     {
         // double mu, sigma;
         // std::tie(mu, sigma) = _model.query(v);
@@ -160,7 +158,7 @@ int main()
     BOptimizer<Params, model_fun<GP_t>, acq_fun<Acqui_t>> opt;
     opt.optimize(fit_eval());
 
-    std::cout << opt.best_observation().transpose() << " res  "
+    std::cout << opt.best_observation() << " res  "
               << opt.best_sample().transpose() << std::endl;
     return 0;
 }
