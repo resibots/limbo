@@ -42,7 +42,7 @@ struct Params {
     struct gp_ucb : public defaults::gp_ucb {
     };
 
-    struct exhaustivesearch {
+    struct exhaustive_search {
         BO_PARAM(int, nb_pts, 20);
     };
 
@@ -230,13 +230,37 @@ int main()
     opt_1.best_observation(Average());
     opt_1.best_sample(Average());
 
-    BOptimizer<Params, model_fun<GPAutoMean_sqexpard_ard_t>, acq_fun<Acqui_gp_ucb_GPAutoMean_sqexpard_ard_t>, inneropt_fun<In_opt_cmaes_t>, init_fun<Init_random_grid_init_t>, stat_fun<Stat_t>, stop_fun<Stop_t>> opt_2;
+    BOptimizer<Params, model_fun<GP_exp_const_t>, acq_fun<Acqui_ucb_GP_exp_const_t>, inneropt_fun<In_opt_random_t>, init_fun<Init_no_init_t>, stat_fun<Stat_t>, stop_fun<Stop_t>> opt_2;
     opt_2.optimize(StateEval());
     opt_2.best_observation();
     opt_2.best_sample();
     opt_2.optimize(StateEval(), Average(), true);
     opt_2.best_observation(Average());
     opt_2.best_sample(Average());
+
+    BOptimizer<Params, model_fun<GP_exp_data_t>, acq_fun<Acqui_gp_ucb_GP_exp_data_t>, inneropt_fun<In_opt_random_t>, init_fun<Init_no_init_t>, stat_fun<Stat_t>, stop_fun<Stop_t>> opt_3;
+    opt_3.optimize(StateEval());
+    opt_3.best_observation();
+    opt_3.best_sample();
+    opt_3.optimize(StateEval(), Average(), true);
+    opt_3.best_observation(Average());
+    opt_3.best_sample(Average());
+
+    BOptimizer<Params, model_fun<GP_exp_const_t>, acq_fun<Acqui_ucb_GP_exp_const_t>, inneropt_fun<In_opt_ex_search_t>, init_fun<Init_no_init_t>, stat_fun<Stat_t>, stop_fun<Stop_t>> opt_4;
+    opt_4.optimize(StateEval());
+    opt_4.best_observation();
+    opt_4.best_sample();
+    opt_4.optimize(StateEval(), Average(), true);
+    opt_4.best_observation(Average());
+    opt_4.best_sample(Average());
+
+    BOptimizer<Params, model_fun<GPAutoMean_sqexpard_ard_t>, acq_fun<Acqui_gp_ucb_GPAutoMean_sqexpard_ard_t>, inneropt_fun<In_opt_cmaes_t>, init_fun<Init_random_grid_init_t>, stat_fun<Stat_t>, stop_fun<Stop_t>> opt_100;
+    opt_100.optimize(StateEval());
+    opt_100.best_observation();
+    opt_100.best_sample();
+    opt_100.optimize(StateEval(), Average(), true);
+    opt_100.best_observation(Average());
+    opt_100.best_sample(Average());
 
     return 0;
 }

@@ -21,48 +21,56 @@ namespace limbo {
 
         template <typename Params>
         struct ExhaustiveSearch {
-            ExhaustiveSearch() { nb_pts = Params::exhaustivesearch::nb_pts; }
+            ExhaustiveSearch() 
+            {
+                _step_size = 1.0 / (double)Params::exhaustive_search::nb_pts();
+                _upper_lim = 1.0 + _step_size;
+            }
 
             template <typename AcquisitionFunction, typename AggregatorFunction>
             Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const AggregatorFunction& afun) const
             {
-                return explore(0, acqui, afun, Eigen::VectorXd::Constant(dim_in, 0));
+                Eigen::VectorXd result(dim_in);
+                _explore(acqui, afun, 0, Eigen::VectorXd::Zero(dim_in), result);
+                return result;
             }
 
         private:
+            double _step_size;
+            double _upper_lim;
+
             // recursive exploration
             template <typename AcquisitionFunction, typename AggregatorFunction>
-            Eigen::VectorXd explore(int dim_in, const AcquisitionFunction& acqui, const AggregatorFunction& afun,
-                const Eigen::VectorXd& current,
+            double _explore(const AcquisitionFunction& acqui, const AggregatorFunction& afun, int curr_dim,
+                const Eigen::VectorXd& current_point,
                 Eigen::VectorXd& result) const
             {
                 double best_fit = -std::numeric_limits<double>::max();
 
                 Eigen::VectorXd current_result(result.size());
-                for (double x = 0; x <= 1; x += 1 / (double)nb_pts) {
-                    Eigen::VectorXd point = current;
-                    point[dim_in] = x;
+                for (double x = 0; x < _upper_lim; x += _step_size) {
+                    Eigen::VectorXd new_point = current_point;
+                    new_point[curr_dim] = x;
                     double val;
-                    if (dim_in == current.size() - 1) {
-                        val = acqui(point, afun);
+                    if (curr_dim == current_point.size() - 1) {
+                        val = acqui(new_point, afun);
                         if (val > best_fit) {
                             best_fit = val;
-                            current_result = point;
+                            current_result = new_point;
                         }
                     }
                     else {
                         Eigen::VectorXd temp_result = current_result;
-                        std::tie(temp_result, val) = explore(dim_in + 1, acqui, afun, point, temp_result);
+                        val = _explore(acqui, afun, curr_dim + 1, new_point, temp_result);
                         if (val > best_fit) {
                             best_fit = val;
                             current_result = temp_result;
                         }
                     }
                 }
-                return current_result;
+                result = current_result;
+                return best_fit;
             }
-
-            int nb_pts;
         };
     }
 }
