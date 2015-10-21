@@ -8,7 +8,7 @@ using namespace limbo;
 
 struct Params {
 
-   struct kf_exp {
+    struct kf_exp {
         BO_PARAM(double, sigma, 1);
     };
 
@@ -22,11 +22,11 @@ struct Params {
         BO_PARAM(double, l, 0.2);
     };
 
-     struct meanconstant {
+    struct meanconstant {
         BO_PARAM_VECTOR(double, constant, 0, 0);
     };
 
-    struct meanarchive{
+    struct meanarchive {
         BO_PARAM_STRING(filename, "missing");
     };
 
@@ -67,8 +67,7 @@ struct Params {
     };
 };
 
-struct MeanEval
-{
+struct MeanEval {
     MeanEval(size_t dim_out = 1) {}
 
     template <typename GP>
@@ -146,7 +145,7 @@ int main()
     typedef model::GPAuto<Params, Kernel_sq_exp_ard_t, Mean_ard_t> GPAuto_sqexpard_ard_t;
 
     typedef model::GPAutoMean<Params, Kernel_sq_exp_ard_t, Mean_ard_t> GPAutoMean_sqexpard_ard_t;
-    
+
     typedef acquisition_functions::UCB<Params, GP_exp_null_t> Acqui_ucb_GP_exp_null_t;
     typedef acquisition_functions::UCB<Params, GP_exp_const_t> Acqui_ucb_GP_exp_const_t;
     typedef acquisition_functions::UCB<Params, GP_exp_data_t> Acqui_ucb_GP_exp_data_t;
@@ -170,7 +169,7 @@ int main()
     typedef acquisition_functions::UCB<Params, GP_sqexpard_data_t> Acqui_ucb_GP_sqexpard_data_t;
     typedef acquisition_functions::UCB<Params, GP_sqexpard_arch_t> Acqui_ucb_GP_sqexpard_arch_t;
     typedef acquisition_functions::UCB<Params, GP_sqexpard_ard_t> Acqui_ucb_GP_sqexpard_ard_t;
-    
+
     typedef acquisition_functions::UCB<Params, GPAuto_sqexpard_null_t> Acqui_ucb_GPAuto_sqexpard_null_t;
     typedef acquisition_functions::UCB<Params, GPAuto_sqexpard_const_t> Acqui_ucb_GPAuto_sqexpard_const_t;
     typedef acquisition_functions::UCB<Params, GPAuto_sqexpard_data_t> Acqui_ucb_GPAuto_sqexpard_data_t;
@@ -202,7 +201,7 @@ int main()
     typedef acquisition_functions::GP_UCB<Params, GP_sqexpard_data_t> Acqui_gp_ucb_GP_sqexpard_data_t;
     typedef acquisition_functions::GP_UCB<Params, GP_sqexpard_arch_t> Acqui_gp_ucb_GP_sqexpard_arch_t;
     typedef acquisition_functions::GP_UCB<Params, GP_sqexpard_ard_t> Acqui_gp_ucb_GP_sqexpard_ard_t;
-    
+
     typedef acquisition_functions::GP_UCB<Params, GPAuto_sqexpard_null_t> Acqui_gp_ucb_GPAuto_sqexpard_null_t;
     typedef acquisition_functions::GP_UCB<Params, GPAuto_sqexpard_const_t> Acqui_gp_ucb_GPAuto_sqexpard_const_t;
     typedef acquisition_functions::GP_UCB<Params, GPAuto_sqexpard_data_t> Acqui_gp_ucb_GPAuto_sqexpard_data_t;

@@ -70,7 +70,7 @@ namespace limbo {
                 double operator()(const Eigen::VectorXd& v, const AggregatorFunction afun) const { return afun(_model.mu(v)); }
 
                 int dim_in() const
-                {                    
+                {
                     return _model.dim_in();
                 }
 
