@@ -64,10 +64,12 @@ namespace limbo {
                 std::vector<double> key(v.size(), 0);
                 for (int i = 0; i < v.size(); i++)
                     key[i] = v[i];
-                return _archive.at(key);
+                Eigen::VectorXd res(1);
+                res(0) = _archive.at(key);
+                return res;
             }
 
-        protected:
+        protected:            
             struct classcomp {
                 bool operator()(const std::vector<double>& lhs, const std::vector<double>& rhs) const
                 {
