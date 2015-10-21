@@ -54,7 +54,7 @@ struct Average {
     typedef double result_type;
     double operator()(const Eigen::VectorXd& x) const
     {
-        return (x(0) + x(1)) / 2;
+        return x.sum() / x.size();
     }
 };
 
