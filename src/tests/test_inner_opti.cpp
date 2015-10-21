@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE parallel
+#define BOOST_TEST_MODULE inner_optimization
 
 #include <boost/test/unit_test.hpp>
 
@@ -19,8 +19,7 @@ struct Params {
         BO_PARAM(int, nb_pts, 20);
     };
 
-    struct meanconstant {
-        static Eigen::VectorXd constant() { return make_v1(0.0); };
+    struct cmaes : public defaults::cmaes {
     };
 };
 
@@ -37,19 +36,6 @@ struct FakeAcquiMono {
     }
 };
 
-BOOST_AUTO_TEST_CASE(test_exhaustive_search_mono_dim)
-{
-    using namespace limbo;
-
-    typedef inner_optimization::ExhaustiveSearch<Params> ex_search_t;
-    ex_search_t inner_optimization;
-
-    FakeAcquiMono f;
-    Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());
-
-    BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
-    BOOST_CHECK_EQUAL(monodim_calls, Params::exhaustive_search::nb_pts() + 1);
-}
 
 int bidim_calls = 0;
 
@@ -64,17 +50,56 @@ struct FakeAcquiBi {
     }
 };
 
+BOOST_AUTO_TEST_CASE(test_exhaustive_search_mono_dim)
+{
+    using namespace limbo;
+
+    inner_optimization::ExhaustiveSearch<Params> inner_optimization;
+
+    FakeAcquiMono f;
+    monodim_calls = 0;
+    Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());
+
+    BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
+    BOOST_CHECK_EQUAL(monodim_calls, Params::exhaustive_search::nb_pts() + 1);
+}
+
 BOOST_AUTO_TEST_CASE(test_exhaustive_search_bi_dim)
 {
     using namespace limbo;
 
-    typedef inner_optimization::ExhaustiveSearch<Params> ex_search_t;
-    ex_search_t inner_optimization;
+    inner_optimization::ExhaustiveSearch<Params> inner_optimization;
+
+    FakeAcquiBi f;
+    bidim_calls = 0;
+    Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());
+
+    BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
+    BOOST_CHECK_SMALL(best_point(1), 0.000001);
+    BOOST_CHECK_EQUAL(bidim_calls, (Params::exhaustive_search::nb_pts() + 1) * (Params::exhaustive_search::nb_pts() + 1));
+}
+
+BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)
+{
+    using namespace limbo;
+
+    inner_optimization::Cmaes<Params> inner_optimization;
+
+    FakeAcquiMono f;
+    Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());
+
+    BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001); 
+}
+
+BOOST_AUTO_TEST_CASE(test_cmaes_bi_dim)
+{
+    using namespace limbo;
+
+    inner_optimization::Cmaes<Params> inner_optimization;
 
     FakeAcquiBi f;
     Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());
 
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
-    BOOST_CHECK_CLOSE(best_point(1), 0, 0.0001);
-    BOOST_CHECK_EQUAL(bidim_calls, (Params::exhaustive_search::nb_pts() + 1) * (Params::exhaustive_search::nb_pts() + 1));
+    BOOST_CHECK_SMALL(best_point(1), 0.000001);
 }
