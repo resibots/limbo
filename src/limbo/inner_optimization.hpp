@@ -15,7 +15,7 @@ namespace limbo {
             template <typename AcquisitionFunction, typename AggregatorFunction>
             Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const AggregatorFunction&) const
             {
-                return Eigen::VectorXd::Random(dim_in);
+                return (Eigen::VectorXd::Random(dim_in).array() + 1) / 2;
             }
         };
 
