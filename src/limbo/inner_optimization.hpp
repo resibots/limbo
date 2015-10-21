@@ -21,7 +21,7 @@ namespace limbo {
 
         template <typename Params>
         struct ExhaustiveSearch {
-            ExhaustiveSearch() 
+            ExhaustiveSearch()
             {
                 _step_size = 1.0 / (double)Params::exhaustive_search::nb_pts();
                 _upper_lim = 1.0 + _step_size;
