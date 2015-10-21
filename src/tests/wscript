@@ -132,8 +132,7 @@ def create_all_combinations_test(bld):
     stops = ['MaxIterations', 'MaxPredictedValue']
 
     final_code = all_combinations_init_code + '    typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats]) + '> stats_t;\n'
-    final_code = final_code + '    typedef boost::fusion::vector<' + ', '.join(['stopping_criterion::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
-    f = open(bld.path.abspath() + '/combinations.cpp', 'w')
+    final_code = final_code + '    typedef boost::fusion::vector<' + ', '.join(['stopping_criterion::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'    
     i = 0
     for kernel in kernels:
         for mean in means:
@@ -158,17 +157,17 @@ def create_all_combinations_test(bld):
                             code = code + '    opt_' + str(i) + '.optimize(StateEval(), Average(), true);\n'
                             code = code + '    opt_' + str(i) + '.best_observation(Average());\n'
                             code = code + '    opt_' + str(i) + '.best_sample(Average());\n\n'
-                            final_code = final_code + code
+                            code = final_code + code + '}'
+                            f = open(bld.path.abspath() + '/combinations/combinations_' + str(i) + '.cpp', 'w')
+                            f.write("// THIS IS A GENERATED FILE - DO NOT EDIT\n")
+                            f.write(code)
+                            bld.program(features='cxx',
+                                        source='/combinations/combinations_' + str(i) + '.cpp',
+                                        includes='. .. ../../',
+                                        target='/combinations/combinations_' + str(i),
+                                        uselib='BOOST EIGEN TBB',
+                                        use='limbo')
                             i = i + 1
-    final_code = final_code + '}'
-    f.write("// THIS IS A GENERATED FILE - DO NOT EDIT\n")
-    f.write(final_code)
-    bld.program(features='cxx',
-                source='combinations.cpp',
-                includes='. .. ../../',
-                target='combinations',
-                uselib='BOOST EIGEN TBB',
-                use='limbo')
 
 
 def build(bld):
