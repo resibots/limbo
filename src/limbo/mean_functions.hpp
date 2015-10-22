@@ -64,8 +64,12 @@ namespace limbo {
                 std::vector<double> key(v.size(), 0);
                 for (int i = 0; i < v.size(); i++)
                     key[i] = v[i];
-                Eigen::VectorXd res(1);
-                res(0) = _archive.at(key);
+                const std::vector<double>& arch = _archive.at(key);
+                Eigen::VectorXd res(arch.size());
+
+                for (int i = 0; i < arch.size(); i++)
+                    res[i] = arch[i];
+
                 return res;
             }
 
@@ -73,15 +77,15 @@ namespace limbo {
             struct classcomp {
                 bool operator()(const std::vector<double>& lhs, const std::vector<double>& rhs) const
                 {
-                    assert(lhs.size() == 6 && rhs.size() == 6);
+                    assert(lhs.size() == rhs.size());
                     int i = 0;
-                    while (i < 5 && lhs[i] == rhs[i])
+                    while (i < lhs.size() - 1 && lhs[i] == rhs[i])
                         i++;
                     return lhs[i] < rhs[i];
                 }
             };
 
-            std::map<std::vector<double>, double, classcomp> _archive;
+            std::map<std::vector<double>, std::vector<double>, classcomp> _archive;
         };
 
         template <typename Params, typename MeanFunction, typename ObsType = Eigen::VectorXd>
