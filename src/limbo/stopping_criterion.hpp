@@ -44,7 +44,7 @@ namespace limbo {
 
                 GPMean<BO> gpmean(bo);
                 typename BO::inner_optimization_t opti;
-                double val = gpmean(opti(gpmean, 0, afun), afun);
+                double val = gpmean(opti(gpmean, gpmean.dim_in(), afun), afun);
 
                 if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::maxpredictedvalue::ratio() * val)
                     return true;
