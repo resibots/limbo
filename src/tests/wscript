@@ -28,10 +28,6 @@ struct Params {
         BO_PARAM_VECTOR(double, constant, 0, 0);
     };
 
-    struct meanarchive {
-        BO_PARAM_STRING(filename, "archive.out");
-    };
-
     struct gp_auto : defaults::gp_auto {
     };
 
@@ -116,14 +112,13 @@ def create_all_combinations_test(bld):
     kernel_incompatibility['MaternThreeHalfs'] = ['GPAuto', 'GPAutoMean']
     kernel_incompatibility['MaternFiveHalfs'] = ['GPAuto', 'GPAutoMean']
 
-    means = ['NullFunction', 'MeanConstant', 'MeanData', 'MeanArchive', 'MeanFunctionARD']
+    means = ['NullFunction', 'MeanConstant', 'MeanData', 'MeanFunctionARD']
     mean_additional_params = {}
     mean_additional_params['MeanFunctionARD'] = ['MeanEval']
     mean_incompatibiliy = {}
     mean_incompatibiliy['NullFunction'] = ['GPAutoMean']
     mean_incompatibiliy['MeanConstant'] = ['GPAutoMean']
     mean_incompatibiliy['MeanData'] = ['GPAutoMean']
-    mean_incompatibiliy['MeanArchive'] = ['GPAutoMean']
 
     models = ['GP', 'GPAuto', 'GPAutoMean']
     acquisitions = ['UCB', 'GP_UCB']
@@ -133,7 +128,7 @@ def create_all_combinations_test(bld):
     stops = ['MaxIterations', 'MaxPredictedValue']
 
     final_code = all_combinations_init_code + '    typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats]) + '> stats_t;\n'
-    final_code = final_code + '    typedef boost::fusion::vector<' + ', '.join(['stopping_criterion::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'    
+    final_code = final_code + '    typedef boost::fusion::vector<' + ', '.join(['stopping_criterion::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
     i = 0
     for kernel in kernels:
         for mean in means:

@@ -44,50 +44,6 @@ namespace limbo {
             }
         };
 
-        template <typename Params, typename ObsType = Eigen::VectorXd>
-        struct MeanArchive {
-            MeanArchive(size_t dim_out = 1)
-            {
-                // create and open an archive for input
-                std::ifstream ifs(Params::meanarchive::filename());
-                assert(ifs.good());
-                boost::archive::text_iarchive ia(ifs);
-                // read class state from archive
-                ia >> _archive;
-                std::cout << _archive.size() << " elements loaded in the archive"
-                          << std::endl;
-            }
-
-            template <typename GP>
-            ObsType operator()(const Eigen::VectorXd& v, const GP&) const
-            {
-                std::vector<double> key(v.size(), 0);
-                for (int i = 0; i < v.size(); i++)
-                    key[i] = v[i];
-                const std::vector<double>& arch = _archive.at(key);
-                Eigen::VectorXd res(arch.size());
-
-                for (int i = 0; i < arch.size(); i++)
-                    res[i] = arch[i];
-
-                return res;
-            }
-
-        protected:            
-            struct classcomp {
-                bool operator()(const std::vector<double>& lhs, const std::vector<double>& rhs) const
-                {
-                    assert(lhs.size() == rhs.size());
-                    int i = 0;
-                    while (i < lhs.size() - 1 && lhs[i] == rhs[i])
-                        i++;
-                    return lhs[i] < rhs[i];
-                }
-            };
-
-            std::map<std::vector<double>, std::vector<double>, classcomp> _archive;
-        };
-
         template <typename Params, typename MeanFunction, typename ObsType = Eigen::VectorXd>
         struct MeanFunctionARD {
             MeanFunctionARD(size_t dim_out = 1)
