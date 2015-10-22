@@ -60,7 +60,8 @@ struct Params {
         BO_PARAM(int, n_iterations, 20);
     };
 
-    struct maxpredictedvalue : public defaults::maxpredictedvalue {
+    struct maxpredictedvalue {
+        BO_PARAM(double, ratio, 2);
     };
 
     struct boptimizer {
