@@ -93,6 +93,7 @@ def build(bld):
 
 
 def build_extensive_tests(ctx):
+    ctx.recurse('src/')
     ctx.recurse('src/tests')
 
 
