@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import subprocess
+import os
+
 all_combinations_init_code = """#include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/vector.hpp>
 
@@ -129,6 +132,13 @@ def create_all_combinations_test(bld):
 
     final_code = all_combinations_init_code + '    typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats]) + '> stats_t;\n'
     final_code = final_code + '    typedef boost::fusion::vector<' + ', '.join(['stopping_criterion::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
+
+    src_path = bld.path.abspath() + '/combinations'
+    if not os.path.exists(src_path):
+        os.makedirs(src_path)
+
+    bld.add_post_fun(lambda ctx: subprocess.call('rm -rf ' + src_path, shell=True))
+
     i = 0
     for kernel in kernels:
         for mean in means:
@@ -154,9 +164,8 @@ def create_all_combinations_test(bld):
                             code = code + '    opt_' + str(i) + '.best_observation(Average());\n'
                             code = code + '    opt_' + str(i) + '.best_sample(Average());\n\n'
                             code = final_code + code + '}'
-                            f = open(bld.path.abspath() + '/combinations/combinations_' + str(i) + '.cpp', 'w')
-                            f.write("// THIS IS A GENERATED FILE - DO NOT EDIT\n")
-                            f.write(code)
+                            with open(bld.path.abspath() + '/combinations/combinations_' + str(i) + '.cpp', 'w') as f:
+                                f.write(code)
                             bld.program(features='cxx',
                                         source='/combinations/combinations_' + str(i) + '.cpp',
                                         includes='. .. ../../',
@@ -164,6 +173,8 @@ def create_all_combinations_test(bld):
                                         uselib='BOOST EIGEN TBB',
                                         use='limbo')
                             i = i + 1
+                            if i == 3:
+                                return
 
 
 def build(bld):
