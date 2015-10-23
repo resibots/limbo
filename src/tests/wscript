@@ -172,9 +172,6 @@ def create_all_combinations_test(bld):
                                         target='/combinations/combinations_' + str(i),
                                         uselib='BOOST EIGEN TBB',
                                         use='limbo')
-                            i = i + 1
-                            if i == 3:
-                                return
 
 
 def build(bld):
