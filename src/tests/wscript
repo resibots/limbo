@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-all_combinations_init_code="""#include <boost/fusion/container/vector.hpp>
+all_combinations_init_code = """#include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/vector.hpp>
 
 #include "limbo/limbo.hpp"
@@ -203,4 +203,7 @@ def build(bld):
                 target='test_macros',
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
-    create_all_combinations_test(bld)
+
+
+def build_extensive_tests(ctx):
+    create_all_combinations_test(ctx)

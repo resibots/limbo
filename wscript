@@ -11,6 +11,7 @@ blddir = 'build'
 
 import glob
 import limbo
+from waflib.Build import BuildContext
 
 
 def options(opt):
@@ -89,8 +90,17 @@ def build(bld):
         bld.add_post_fun(waf_unit_test.summary)
 
 
+def build_extensive_tests(ctx):
+    ctx.recurse('src/tests')
+
+
 def shutdown(ctx):
     if ctx.options.qsub:
         limbo.qsub(ctx.options.qsub)
     if ctx.options.oar:
         limbo.oar(ctx.options.oar)
+
+
+class BuildExtensiveTestsContext(BuildContext):
+    cmd = 'build_extensive_tests'
+    fun = 'build_extensive_tests'
