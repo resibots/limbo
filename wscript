@@ -10,6 +10,8 @@ srcdir = '.'
 blddir = 'build'
 
 import glob
+import os
+import subprocess
 import limbo
 from waflib.Build import BuildContext
 
@@ -92,6 +94,15 @@ def build(bld):
 
 def build_extensive_tests(ctx):
     ctx.recurse('src/tests')
+
+
+def submit_extensive_tests(ctx):
+    for fullname in glob.glob('build/src/tests/combinations/*'):
+        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
+            fpath, fname = os.path.split(fullname)
+            s = "oarsub -d build/src/tests/combinations/ -l /nodes=1/core=2,walltime=00:15:00 -n " + fname + " -O " + fname + ".stdout.%jobid%.log -E " + fname + ".stderr.%jobid%.log " + fpath + '/' + fname
+            retcode = subprocess.call(s, shell=True, env=None)
+            print "oarsub returned:" + str(retcode)
 
 
 def shutdown(ctx):
