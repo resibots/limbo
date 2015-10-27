@@ -12,7 +12,7 @@
 
 #include <cmaes/cmaes_interface.h>
 #include <cmaes/boundary_transformation.h>
-#include <limbo/parallel.hpp>
+#include <limbo/parallel/parallel.hpp>
 
 namespace limbo {
 

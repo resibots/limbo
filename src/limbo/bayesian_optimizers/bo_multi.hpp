@@ -13,7 +13,7 @@
 #endif
 
 #include <limbo/bayesian_optimizers/bo_base.hpp>
-#include <limbo/pareto.hpp>
+#include <limbo/bayesian_optimizers/pareto.hpp>
 
 namespace limbo {
     namespace multi {

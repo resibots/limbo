@@ -9,7 +9,7 @@
 
 #include <limbo/limbo.hpp>
 #include <limbo/inner_optimization/cmaes.hpp>
-#include <limbo/parallel.hpp>
+#include <limbo/parallel/parallel.hpp>
 
 #include "default_params.hpp"
 

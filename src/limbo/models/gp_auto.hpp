@@ -12,7 +12,7 @@
 
 #include <limbo/models/gp.hpp>
 #include <limbo/optimizers/rprop.hpp>
-#include <limbo/parallel.hpp>
+#include <limbo/parallel/parallel.hpp>
 
 namespace limbo {
     namespace defaults {
