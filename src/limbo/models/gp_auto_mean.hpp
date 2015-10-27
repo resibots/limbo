@@ -10,9 +10,9 @@
 #include <Eigen/Cholesky>
 #include <Eigen/LU>
 
-#include "gp.hpp"
-#include "rprop.hpp"
-#include "parallel.hpp"
+#include <limbo/models/gp.hpp>
+#include <limbo/optimizers/rprop.hpp>
+#include <limbo/parallel.hpp>
 
 namespace limbo {
     namespace defaults {

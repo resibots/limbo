@@ -2,7 +2,7 @@
 #define PARETO_HPP
 
 #include <algorithm>
-#include "limbo/parallel.hpp"
+#include <limbo/parallel.hpp>
 
 namespace pareto {
     namespace impl {

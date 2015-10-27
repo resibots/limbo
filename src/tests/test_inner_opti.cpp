@@ -3,7 +3,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "limbo/limbo.hpp"
+#include <limbo/limbo.hpp>
 
 using namespace limbo;
 

@@ -12,8 +12,8 @@
 #include <sferes/ea/nsga2.hpp>
 #endif
 
-#include "bo_base.hpp"
-#include "pareto.hpp"
+#include <limbo/bayesian_optimizers/bo_base.hpp>
+#include <limbo/pareto.hpp>
 
 namespace limbo {
     namespace multi {

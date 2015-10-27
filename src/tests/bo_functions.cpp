@@ -7,9 +7,9 @@
 #include <tbb/concurrent_hash_map.h>
 #endif
 
-#include "limbo/limbo.hpp"
-#include "limbo/inner_cmaes.hpp"
-#include "limbo/parallel.hpp"
+#include <limbo/limbo.hpp>
+#include <limbo/inner_optimization/inner_cmaes.hpp>
+#include <limbo/parallel.hpp>
 
 #include "default_params.hpp"
 

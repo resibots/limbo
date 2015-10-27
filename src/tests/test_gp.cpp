@@ -4,8 +4,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "limbo/macros.hpp"
-#include "limbo/gp.hpp"
+#include <limbo/misc/macros.hpp>
+#include <limbo/models/gp.hpp>
 
 using namespace limbo;
 

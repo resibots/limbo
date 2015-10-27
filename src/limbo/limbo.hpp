@@ -1,19 +1,19 @@
 #ifndef LIMBO_HPP_
 #define LIMBO_HPP_
 
-#include "macros.hpp"
-#include "stopping_criterion.hpp"
-#include "stat.hpp"
-#include "sys.hpp"
-#include "rand.hpp"
-#include "boptimizer.hpp"
-#include "kernel_functions.hpp"
-#include "acquisition_functions.hpp"
-#include "mean_functions.hpp"
-#include "inner_optimization.hpp"
-#include "gp.hpp"
-#include "gp_auto.hpp"
-#include "gp_auto_mean.hpp"
-#include "init_functions.hpp"
+#include <limbo/misc/macros.hpp>
+#include <limbo/stopping_criteria/stopping_criterion.hpp>
+#include <limbo/statistics/stat.hpp>
+#include <limbo/misc/sys.hpp>
+#include <limbo/misc/rand.hpp>
+#include <limbo/bayesian_optimizers/boptimizer.hpp>
+#include <limbo/kernel_functions/kernel_functions.hpp>
+#include <limbo/acquisition_functions/acquisition_functions.hpp>
+#include <limbo/mean_functions/mean_functions.hpp>
+#include <limbo/inner_optimization/inner_optimization.hpp>
+#include <limbo/models/gp.hpp>
+#include <limbo/models/gp_auto.hpp>
+#include <limbo/models/gp_auto_mean.hpp>
+#include <limbo/initilization_functions/init_functions.hpp>
 
 #endif

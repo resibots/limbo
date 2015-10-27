@@ -2,9 +2,9 @@
 #include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/vector.hpp>
 
-#include "limbo/limbo.hpp"
-#include "limbo/inner_cmaes.hpp"
-#include "limbo/gp_auto_mean.hpp"
+#include <limbo/limbo.hpp>
+#include <limbo/inner_optimization/inner_cmaes.hpp>
+#include <limbo/models/gp_auto_mean.hpp>
 
 using namespace limbo;
 

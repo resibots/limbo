@@ -2,8 +2,8 @@
 #define BOOST_TEST_MODULE init_functions
 
 #include <boost/test/unit_test.hpp>
-#include "limbo/limbo.hpp"
-#include "limbo/inner_cmaes.hpp"
+#include <limbo/limbo.hpp>
+#include <limbo/inner_optimization/inner_cmaes.hpp>
 
 using namespace limbo;
 

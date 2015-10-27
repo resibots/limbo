@@ -10,9 +10,9 @@
 #include <stdlib.h> /* free() */
 #include <stddef.h> /* NULL */
 
-#include "cmaes/cmaes_interface.h"
-#include "cmaes/boundary_transformation.h"
-#include "limbo/parallel.hpp"
+#include <cmaes/cmaes_interface.h>
+#include <cmaes/boundary_transformation.h>
+#include <limbo/parallel.hpp>
 
 namespace limbo {
 

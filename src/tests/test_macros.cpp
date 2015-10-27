@@ -3,7 +3,7 @@
 
 #include <boost/test/unit_test.hpp>
 #include <cstring>
-#include "limbo/macros.hpp"
+#include <limbo/misc/macros.hpp>
 
 struct Params {
     struct test {

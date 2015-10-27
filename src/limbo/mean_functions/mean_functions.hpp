@@ -6,6 +6,7 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+
 namespace limbo {
     namespace mean_functions {
         template <typename Params, typename ObsType = Eigen::VectorXd>

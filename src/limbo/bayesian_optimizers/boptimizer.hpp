@@ -1,7 +1,7 @@
 #ifndef BOPTIMIZER_HPP_
 #define BOPTIMIZER_HPP_
 
-#include "bo_base.hpp"
+#include <limbo/bayesian_optimizers/bo_base.hpp>
 #include <boost/range/adaptor/transformed.hpp>
 
 namespace limbo {

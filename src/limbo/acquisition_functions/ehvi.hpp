@@ -2,9 +2,9 @@
 #define EHVI_HPP_
 
 #include <algorithm>
-#include "bo_multi.hpp"
-#include "ehvi/ehvi_calculations.h"
-#include "ehvi/ehvi_sliceupdate.h"
+#include <limbo/bayesian_optimizers/bo_multi.hpp>
+#include <ehvi/ehvi_calculations.h>
+#include <ehvi/ehvi_sliceupdate.h>
 
 namespace limbo {
     namespace acquisition_functions {
