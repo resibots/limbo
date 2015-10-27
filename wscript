@@ -10,7 +10,10 @@ srcdir = '.'
 blddir = 'build'
 
 import glob
+import os
+import subprocess
 import limbo
+from waflib.Build import BuildContext
 
 
 def options(opt):
@@ -89,8 +92,27 @@ def build(bld):
         bld.add_post_fun(waf_unit_test.summary)
 
 
+def build_extensive_tests(ctx):
+    ctx.recurse('src/')
+    ctx.recurse('src/tests')
+
+
+def submit_extensive_tests(ctx):
+    for fullname in glob.glob('build/src/tests/combinations/*'):
+        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
+            fpath, fname = os.path.split(fullname)
+            s = "cd " + fpath + ";oarsub -l /nodes=1/core=2,walltime=00:15:00 -n " + fname + " -O " + fname + ".stdout.%jobid%.log -E " + fname + ".stderr.%jobid%.log ./" + fname
+            retcode = subprocess.call(s, shell=True, env=None)
+            print "oarsub returned:" + str(retcode)
+
+
 def shutdown(ctx):
     if ctx.options.qsub:
         limbo.qsub(ctx.options.qsub)
     if ctx.options.oar:
         limbo.oar(ctx.options.oar)
+
+
+class BuildExtensiveTestsContext(BuildContext):
+    cmd = 'build_extensive_tests'
+    fun = 'build_extensive_tests'

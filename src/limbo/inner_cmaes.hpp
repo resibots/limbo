@@ -50,7 +50,7 @@ namespace limbo {
                 char const* stop;
                 boundary_transformation_t boundaries;
                 double lowerBounds[] = {0.0}; // TODO  put this into params?
-                double upperBounds[] = {1.0};
+                double upperBounds[] = {1.006309}; // Allows solution to be pretty close to 1
                 int nb_bounds = 1; /* numbers used from lower and upperBounds */
 
                 boundary_transformation_init(&boundaries, lowerBounds, upperBounds,
