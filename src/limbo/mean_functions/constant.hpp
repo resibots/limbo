@@ -1,20 +1,17 @@
-#ifndef MEAN_FUNCTIONS_NULL_HPP_
-#define MEAN_FUNCTIONS_NULL_HPP_
+#ifndef MEAN_FUNCTIONS_CONSTANT_HPP_
+#define MEAN_FUNCTIONS_CONSTANT_HPP_
 
 namespace limbo {
     namespace mean_functions {
         template <typename Params, typename ObsType = Eigen::VectorXd>
-        struct NullFunction {
-            NullFunction(size_t dim_out = 1) : _dim_out(dim_out) {}
+        struct Constant {
+            Constant(size_t dim_out = 1) {}
 
             template <typename GP>
             ObsType operator()(const Eigen::VectorXd& v, const GP&) const
             {
-                return ObsType::Zero(_dim_out);
+                return Params::meanconstant::constant();
             }
-
-        protected:
-            size_t _dim_out;
         };
     }
 }

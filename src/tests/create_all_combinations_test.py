@@ -12,13 +12,13 @@ def create(bld):
     kernel_incompatibility['MaternThreeHalfs'] = ['GPAuto', 'GPAutoMean']
     kernel_incompatibility['MaternFiveHalfs'] = ['GPAuto', 'GPAutoMean']
 
-    means = ['NullFunction', 'MeanConstant', 'MeanData', 'MeanFunctionARD']
+    means = ['NullFunction', 'Constant', 'Data', 'FunctionARD']
     mean_additional_params = {}
-    mean_additional_params['MeanFunctionARD'] = ['MeanEval']
+    mean_additional_params['FunctionARD'] = ['MeanEval']
     mean_incompatibiliy = {}
     mean_incompatibiliy['NullFunction'] = ['GPAutoMean']
-    mean_incompatibiliy['MeanConstant'] = ['GPAutoMean']
-    mean_incompatibiliy['MeanData'] = ['GPAutoMean']
+    mean_incompatibiliy['Constant'] = ['GPAutoMean']
+    mean_incompatibiliy['Data'] = ['GPAutoMean']
 
     models = ['GP', 'GPAuto', 'GPAutoMean']
     acquisitions = ['UCB', 'GP_UCB']

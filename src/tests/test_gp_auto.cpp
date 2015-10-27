@@ -29,7 +29,7 @@ struct Params {
 BOOST_AUTO_TEST_CASE(test_gp_auto)
 {
     typedef kernel_functions::SquaredExpARD<Params> KF_t;
-    typedef mean_functions::MeanConstant<Params> Mean_t;
+    typedef mean_functions::Constant<Params> Mean_t;
     typedef models::GPAuto<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp(1, 1);

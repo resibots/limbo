@@ -152,7 +152,7 @@ int main()
 {
 
     typedef kernel_functions::SquaredExpARD<Params> Kernel_t;
-    typedef mean_functions::MeanFunctionARD<Params, MeanComplet<Params>> Mean_t;
+    typedef mean_functions::FunctionARD<Params, MeanComplet<Params>> Mean_t;
     typedef models::GPAutoMean<Params, Kernel_t, Mean_t> GP_t;
     typedef UCB_multi<Params, GP_t> Acqui_t;
     BOptimizer<Params, model_fun<GP_t>, acq_fun<Acqui_t>> opt;

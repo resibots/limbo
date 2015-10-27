@@ -69,7 +69,7 @@ struct SecondElem {
 int main()
 {
     typedef kernel_functions::MaternFiveHalfs<Params> Kernel_t;
-    typedef mean_functions::MeanData<Params> Mean_t;
+    typedef mean_functions::Data<Params> Mean_t;
     typedef models::GP<Params, Kernel_t, Mean_t> GP_t;
     typedef acquisition_functions::GP_UCB<Params, GP_t> Acqui_t;
 

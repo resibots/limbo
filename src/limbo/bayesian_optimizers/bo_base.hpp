@@ -102,7 +102,7 @@ namespace limbo {
             typedef initialization_functions::RandomSampling<Params> init_t; // 1
             typedef inner_optimization::Cmaes<Params> inneropt_t; // 2
             typedef kernel_functions::SquaredExpARD<Params> kf_t;
-            typedef mean_functions::MeanData<Params> mean_t;
+            typedef mean_functions::Data<Params> mean_t;
             typedef models::GPAuto<Params, kf_t, mean_t> model_t; // 3
             // WARNING: you have to specify the acquisition  function
             // if you use a custom model
