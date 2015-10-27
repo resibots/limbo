@@ -20,18 +20,18 @@
 
 // we need everything to have the defaults
 #include <limbo/misc/macros.hpp>
-#include <limbo/stopping_criteria/stopping_criterion.hpp>
-#include <limbo/statistics/stat.hpp>
+#include <limbo/stopping_criteria/stopping_criteria.hpp>
+#include <limbo/statistics/stats.hpp>
 #include <limbo/misc/sys.hpp>
 #include <limbo/misc/rand.hpp>
 #include <limbo/kernel_functions/kernel_functions.hpp>
 #include <limbo/acquisition_functions/acquisition_functions.hpp>
 #include <limbo/mean_functions/mean_functions.hpp>
 #include <limbo/inner_optimization/inner_optimization.hpp>
-#include <limbo/inner_optimization/inner_cmaes.hpp>
+#include <limbo/inner_optimization/cmaes.hpp>
 #include <limbo/models/gp.hpp>
 #include <limbo/models/gp_auto.hpp>
-#include <limbo/initilization_functions/init_functions.hpp>
+#include <limbo/initialization_functions/initialization_functions.hpp>
 
 namespace limbo {
 
@@ -99,16 +99,16 @@ namespace limbo {
         typedef Params params_t;
         // defaults
         struct defaults {
-            typedef init_functions::RandomSampling<Params> init_t; // 1
+            typedef initialization_functions::RandomSampling<Params> init_t; // 1
             typedef inner_optimization::Cmaes<Params> inneropt_t; // 2
             typedef kernel_functions::SquaredExpARD<Params> kf_t;
             typedef mean_functions::MeanData<Params> mean_t;
-            typedef model::GPAuto<Params, kf_t, mean_t> model_t; // 3
+            typedef models::GPAuto<Params, kf_t, mean_t> model_t; // 3
             // WARNING: you have to specify the acquisition  function
             // if you use a custom model
             typedef acquisition_functions::GP_UCB<Params, model_t> acqui_t; // 4
-            typedef stat::Acquisitions<Params> stat_t; // 5
-            typedef boost::fusion::vector<stopping_criterion::MaxIterations<Params>> stop_t; // 6
+            typedef statistics::Acquisitions<Params> stat_t; // 5
+            typedef boost::fusion::vector<stopping_criteria::MaxIterations<Params>> stop_t; // 6
             typedef Eigen::VectorXd obs_t; // 7
         };
 
@@ -173,7 +173,7 @@ namespace limbo {
         template <typename BO, typename AggregatorFunction>
         bool _pursue(const BO& bo, const AggregatorFunction& afun) const
         {
-            stopping_criterion::ChainCriteria<BO, AggregatorFunction> chain(bo, afun);
+            stopping_criteria::ChainCriteria<BO, AggregatorFunction> chain(bo, afun);
             return boost::fusion::accumulate(_stopping_criteria, true, chain);
         }
 

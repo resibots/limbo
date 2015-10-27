@@ -1,11 +1,7 @@
-#ifndef STOPPING_CRITERION_HPP_
-#define STOPPING_CRITERION_HPP_
+#ifndef STOPPING_CRITERIA_MAX_PREDICTED_VALUE_HPP_
+#define STOPPING_CRITERIA_MAX_PREDICTED_VALUE_HPP_
 
 #include <iostream>
-#include <Eigen/Core>
-#include <vector>
-
-// USING_PART_OF_NAMESPACE_EIGEN
 
 namespace limbo {
 
@@ -15,21 +11,7 @@ namespace limbo {
         };
     }
 
-    namespace stopping_criterion {
-        template <typename Params>
-        struct MaxIterations {
-            MaxIterations() { iteration = 0; }
-
-            template <typename BO, typename AggregatorFunction>
-            bool operator()(const BO& bo, const AggregatorFunction&)
-            {
-                return bo.iteration() <= Params::maxiterations::n_iterations();
-            }
-
-        protected:
-            int iteration;
-        };
-
+    namespace stopping_criteria {
         template <typename Params>
         struct MaxPredictedValue {
 
@@ -77,22 +59,6 @@ namespace limbo {
             protected:
                 typename BO::model_t _model;
             };
-        };
-
-        template <typename BO, typename AggregatorFunction>
-        struct ChainCriteria {
-            typedef bool result_type;
-            ChainCriteria(const BO& bo, const AggregatorFunction& afun) : _bo(bo), _afun(afun) {}
-
-            template <typename stopping_criterion>
-            bool operator()(bool state, stopping_criterion stop) const
-            {
-                return state && stop(_bo, _afun);
-            }
-
-        protected:
-            const BO& _bo;
-            const AggregatorFunction& _afun;
         };
     }
 }

@@ -3,7 +3,7 @@
 #include <boost/fusion/include/vector.hpp>
 
 #include <limbo/limbo.hpp>
-#include <limbo/inner_optimization/inner_cmaes.hpp>
+#include <limbo/inner_optimization/cmaes.hpp>
 
 using namespace limbo;
 
@@ -70,7 +70,7 @@ int main()
 {
     typedef kernel_functions::MaternFiveHalfs<Params> Kernel_t;
     typedef mean_functions::MeanData<Params> Mean_t;
-    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
+    typedef models::GP<Params, Kernel_t, Mean_t> GP_t;
     typedef acquisition_functions::GP_UCB<Params, GP_t> Acqui_t;
 
     BOptimizer<Params, model_fun<GP_t>, acq_fun<Acqui_t>> opt;

@@ -21,7 +21,7 @@ namespace limbo {
             BO_PARAM(int, rprop_restart, 100);
         };
     }
-    namespace model {
+    namespace models {
         template <typename Params, typename KernelFunction, typename MeanFunction, typename ObsType = Eigen::VectorXd>
         class GPAutoMean : public GP<Params, KernelFunction, MeanFunction> {
         public:

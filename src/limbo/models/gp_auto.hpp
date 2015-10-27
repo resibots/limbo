@@ -22,7 +22,7 @@ namespace limbo {
         };
     }
 
-    namespace model {
+    namespace models {
         template <typename Params, typename KernelFunction, typename MeanFunction,
             typename ObsType = Eigen::VectorXd>
         class GPAuto : public GP<Params, KernelFunction, MeanFunction> {

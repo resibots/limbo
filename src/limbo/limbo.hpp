@@ -2,8 +2,8 @@
 #define LIMBO_HPP_
 
 #include <limbo/misc/macros.hpp>
-#include <limbo/stopping_criteria/stopping_criterion.hpp>
-#include <limbo/statistics/stat.hpp>
+#include <limbo/stopping_criteria/stopping_criteria.hpp>
+#include <limbo/statistics/stats.hpp>
 #include <limbo/misc/sys.hpp>
 #include <limbo/misc/rand.hpp>
 #include <limbo/bayesian_optimizers/boptimizer.hpp>
@@ -14,6 +14,6 @@
 #include <limbo/models/gp.hpp>
 #include <limbo/models/gp_auto.hpp>
 #include <limbo/models/gp_auto_mean.hpp>
-#include <limbo/initilization_functions/init_functions.hpp>
+#include <limbo/initialization_functions/initialization_functions.hpp>
 
 #endif

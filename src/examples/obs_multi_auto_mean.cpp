@@ -3,7 +3,7 @@
 #include <boost/fusion/include/vector.hpp>
 
 #include <limbo/limbo.hpp>
-#include <limbo/inner_optimization/inner_cmaes.hpp>
+#include <limbo/inner_optimization/cmaes.hpp>
 #include <limbo/models/gp_auto_mean.hpp>
 
 using namespace limbo;
@@ -153,7 +153,7 @@ int main()
 
     typedef kernel_functions::SquaredExpARD<Params> Kernel_t;
     typedef mean_functions::MeanFunctionARD<Params, MeanComplet<Params>> Mean_t;
-    typedef model::GPAutoMean<Params, Kernel_t, Mean_t> GP_t;
+    typedef models::GPAutoMean<Params, Kernel_t, Mean_t> GP_t;
     typedef UCB_multi<Params, GP_t> Acqui_t;
     BOptimizer<Params, model_fun<GP_t>, acq_fun<Acqui_t>> opt;
     opt.optimize(fit_eval());

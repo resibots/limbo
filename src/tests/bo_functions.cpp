@@ -8,7 +8,7 @@
 #endif
 
 #include <limbo/limbo.hpp>
-#include <limbo/inner_optimization/inner_cmaes.hpp>
+#include <limbo/inner_optimization/cmaes.hpp>
 #include <limbo/parallel.hpp>
 
 #include "default_params.hpp"

@@ -3,7 +3,7 @@
 
 #include <boost/test/unit_test.hpp>
 #include <limbo/limbo.hpp>
-#include <limbo/inner_optimization/inner_cmaes.hpp>
+#include <limbo/inner_optimization/cmaes.hpp>
 
 using namespace limbo;
 
@@ -62,7 +62,7 @@ struct fit_eval {
 BOOST_AUTO_TEST_CASE(no_init)
 {
     std::cout << "NoInit" << std::endl;
-    typedef init_functions::NoInit<Params> Init_t;
+    typedef initialization_functions::NoInit<Params> Init_t;
     typedef BOptimizer<Params, init_fun<Init_t>> Opt_t;
 
     Opt_t opt;
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(random_sampling)
         };
     };
 
-    typedef init_functions::RandomSampling<MyParams> Init_t;
+    typedef initialization_functions::RandomSampling<MyParams> Init_t;
     typedef BOptimizer<MyParams, init_fun<Init_t>> Opt_t;
 
     Opt_t opt;
@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_CASE(random_sampling_grid)
         };
     };
 
-    typedef init_functions::RandomSamplingGrid<MyParams> Init_t;
+    typedef initialization_functions::RandomSamplingGrid<MyParams> Init_t;
     typedef BOptimizer<MyParams, init_fun<Init_t>> Opt_t;
 
     Opt_t opt;
@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(grid_sampling)
         };
     };
 
-    typedef init_functions::GridSampling<MyParams> Init_t;
+    typedef initialization_functions::GridSampling<MyParams> Init_t;
     typedef BOptimizer<MyParams, init_fun<Init_t>> Opt_t;
 
     Opt_t opt;

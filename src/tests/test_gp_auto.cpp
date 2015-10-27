@@ -6,6 +6,7 @@
 
 #include <limbo/misc/macros.hpp>
 #include <limbo/models/gp_auto.hpp>
+#include <fstream>
 
 using namespace limbo;
 
@@ -29,7 +30,7 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
 {
     typedef kernel_functions::SquaredExpARD<Params> KF_t;
     typedef mean_functions::MeanConstant<Params> Mean_t;
-    typedef model::GPAuto<Params, KF_t, Mean_t> GP_t;
+    typedef models::GPAuto<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp(1, 1);
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10), make_v1(5)};

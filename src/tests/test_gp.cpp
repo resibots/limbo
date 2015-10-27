@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(test_gp)
 
     typedef kernel_functions::MaternFiveHalfs<Params> KF_t;
     typedef mean_functions::MeanConstant<Params> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t> GP_t;
+    typedef models::GP<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp;
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10),
@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE(test_blacklist)
 
     typedef kernel_functions::MaternFiveHalfs<Params> KF_t;
     typedef mean_functions::MeanConstant<Params> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t> GP_t;
+    typedef models::GP<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp;
     std::vector<Eigen::VectorXd> samples = {make_v1(1)};

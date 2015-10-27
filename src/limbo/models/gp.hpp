@@ -11,7 +11,7 @@
 #include <limbo/mean_functions/mean_functions.hpp>
 
 namespace limbo {
-    namespace model {
+    namespace models {
         template <typename Params, typename KernelFunction, typename MeanFunction,
             typename ObsType = Eigen::VectorXd>
         class GP {

@@ -1,13 +1,12 @@
-#ifndef LIMBO_STAT_HPP_
-#define LIMBO_STAT_HPP_
+#ifndef LIMBO_STATISTICS_STAT_HPP_
+#define LIMBO_STATISTICS_STAT_HPP_
 
 #include <fstream>
 #include <string>
 #include <boost/shared_ptr.hpp>
 
 namespace limbo {
-    namespace stat {
-
+    namespace statistics {
         template <typename Params>
         struct Stat {
             Stat() {}
@@ -28,24 +27,6 @@ namespace limbo {
                     std::string log = bo.res_dir() + "/" + name;
                     _log_file = boost::shared_ptr<std::ofstream>(new std::ofstream(log.c_str()));
                 }
-            }
-        };
-
-        template <typename Params>
-        struct Acquisitions : public Stat<Params> {
-            Acquisitions() {}
-
-            template <typename BO>
-            void operator()(const BO& bo, bool blacklisted)
-            {
-                this->_create_log_file(bo, "acquisitions.dat");
-                if (bo.dump_enabled() && !blacklisted)
-                    (*this->_log_file)
-                        << bo.iteration()
-                        << " new point: " << bo.samples()[bo.samples().size() - 1].transpose()
-                        << " value: "
-                        << bo.observations()[bo.observations().size() - 1].transpose()
-                        << std::endl;
             }
         };
     }

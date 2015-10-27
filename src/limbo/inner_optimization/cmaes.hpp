@@ -1,5 +1,5 @@
-#ifndef INNER_CMAES_HPP_
-#define INNER_CMAES_HPP_
+#ifndef INNER_OPTIMIZATION_CMAES_HPP_
+#define INNER_OPTIMIZATION_CMAES_HPP_
 
 #include <vector>
 #include <iostream>
