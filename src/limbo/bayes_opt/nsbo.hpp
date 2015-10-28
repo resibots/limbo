@@ -1,5 +1,5 @@
-#ifndef NSBO_HPP_
-#define NSBO_HPP_
+#ifndef LIMBO_BAYES_OPT_NSBO_HPP
+#define LIMBO_BAYES_OPT_NSBO_HPP
 
 #include <algorithm>
 #include <limbo/bayes_opt/bo_multi.hpp>
