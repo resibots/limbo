@@ -4,34 +4,27 @@
 #include <vector>
 #include <iostream>
 #include <boost/parameter.hpp>
-#include <boost/progress.hpp>
-#include <boost/fusion/algorithm.hpp>
-#include <boost/fusion/algorithm/iteration/accumulate.hpp>
-#include <boost/fusion/include/accumulate.hpp>
-#include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/vector.hpp>
+#include <boost/fusion/include/accumulate.hpp>
+#include <boost/fusion/include/for_each.hpp>
 
 #define BOOST_NO_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
 
 #include <Eigen/Core>
-#include <Eigen/LU>
 #include <limits>
 
 // we need everything to have the defaults
-#include <limbo/misc/macros.hpp>
-#include <limbo/stop_crit/stopping_criteria.hpp>
-#include <limbo/stats/stats.hpp>
+#include <limbo/stopping_crit/chain_criteria.hpp>
+#include <limbo/stopping_crit/max_iterations.hpp>
+#include <limbo/stats/acquisitions.hpp>
 #include <limbo/misc/sys.hpp>
-#include <limbo/misc/rand.hpp>
-#include <limbo/kernel_fun/kernel_functions.hpp>
-#include <limbo/acqui_fun/acquisition_functions.hpp>
-#include <limbo/mean_fun/mean_functions.hpp>
-#include <limbo/inner_opt/inner_optimization.hpp>
+#include <limbo/kernel_fun/squared_exp_ard.hpp>
+#include <limbo/acqui_fun/gp_ucb.hpp>
+#include <limbo/mean_fun/data.hpp>
 #include <limbo/inner_opt/cmaes.hpp>
-#include <limbo/models/gp.hpp>
 #include <limbo/models/gp_auto.hpp>
-#include <limbo/init_fun/initialization_functions.hpp>
+#include <limbo/init_fun/random_sampling.hpp>
 
 namespace limbo {
 
