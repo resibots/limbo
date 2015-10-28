@@ -1,5 +1,5 @@
-#ifndef INITIALIZATION_FUNCTIONS_NO_INIT_HPP_
-#define INITIALIZATION_FUNCTIONS_NO_INIT_HPP_
+#ifndef LIMBO_INIT_NO_INIT_HPP
+#define LIMBO_INIT_NO_INIT_HPP
 
 namespace limbo {
     namespace init {
@@ -12,4 +12,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
