@@ -2,7 +2,8 @@
 #define EHVI_HPP_
 
 #include <algorithm>
-#include <limbo/bayesian_optimizers/bo_multi.hpp>
+#include <limbo/bayes_opt/bo_multi.hpp>
+#include <limbo/acqui_fun/ehvi.hpp>
 #include <ehvi/ehvi_calculations.h>
 #include <ehvi/ehvi_sliceupdate.h>
 
@@ -45,7 +46,7 @@ namespace limbo {
                     std::cout << "optimizing ehvi (" << this->pareto_data().size() << ")"
                               << std::endl;
 
-                    auto acqui = acquisition_functions::Ehvi<Params, model_t>(
+                    auto acqui = acqui_fun::Ehvi<Params, model_t>(
                         this->_models, pop,
                         Eigen::Vector3d(Params::ehvi::x_ref(), Params::ehvi::y_ref(), 0));
 

@@ -2,7 +2,7 @@
 #define NSBO_HPP_
 
 #include <algorithm>
-#include <limbo/bayesian_optimizers/bo_multi.hpp>
+#include <limbo/bayes_opt/bo_multi.hpp>
 
 namespace limbo {
     namespace bayes_opt {

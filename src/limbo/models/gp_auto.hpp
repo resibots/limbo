@@ -123,7 +123,7 @@ namespace limbo {
                     // clang-format off
                     // we need a copy because each thread should touch a copy of the GP!
                     auto gp = *this;
-                    Eigen::VectorXd v = opti::rprop([&](const Eigen::VectorXd & v) {
+                    Eigen::VectorXd v = opt::rprop([&](const Eigen::VectorXd & v) {
                       return gp.log_likelihood(v);
                     },
                     [&](const Eigen::VectorXd & v) {

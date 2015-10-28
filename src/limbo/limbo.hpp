@@ -7,6 +7,9 @@
 #include <limbo/misc/sys.hpp>
 #include <limbo/misc/rand.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/bayes_opt/ehvi.hpp>
+#include <limbo/bayes_opt/nsbo.hpp>
+#include <limbo/bayes_opt/parego.hpp>
 #include <limbo/kernel_fun/kernel_functions.hpp>
 #include <limbo/acqui_fun/acquisition_functions.hpp>
 #include <limbo/mean_fun/mean_functions.hpp>
@@ -15,5 +18,7 @@
 #include <limbo/models/gp_auto.hpp>
 #include <limbo/models/gp_auto_mean.hpp>
 #include <limbo/init_fun/initialization_functions.hpp>
+#include <limbo/par/parallel.hpp>
+#include <limbo/opt/rprop.hpp>
 
 #endif

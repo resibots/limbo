@@ -4,7 +4,7 @@
 #include <Eigen/Core>
 #include <boost/math/special_functions/sign.hpp>
 
-namespace opti {
+namespace opt {
     // partly inspired by libgp: https://github.com/mblum/libgp
     // reference :
     // Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian

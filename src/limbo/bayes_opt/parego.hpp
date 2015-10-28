@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include <limbo/limbo.hpp>
-#include <limbo/bayesian_optimizers/bo_multi.hpp>
+#include <limbo/bayes_opt/bo_multi.hpp>
 
 namespace limbo {
     namespace defaults {
