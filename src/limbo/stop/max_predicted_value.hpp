@@ -1,5 +1,5 @@
-#ifndef STOPPING_CRITERIA_MAX_PREDICTED_VALUE_HPP_
-#define STOPPING_CRITERIA_MAX_PREDICTED_VALUE_HPP_
+#ifndef LIMBO_STOP_MAX_PREDICTED_VALUE_HPP
+#define LIMBO_STOP_MAX_PREDICTED_VALUE_HPP
 
 #include <iostream>
 
@@ -62,4 +62,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
