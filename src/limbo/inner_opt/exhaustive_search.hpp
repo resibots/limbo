@@ -1,5 +1,5 @@
-#ifndef INNER_OPTIMIZATION_EXHAUSTIVE_SEARCH_HPP_
-#define INNER_OPTIMIZATION_EXHAUSTIVE_SEARCH_HPP_
+#ifndef LIMBO_INNER_OPTI_EXHAUSTIVE_SEARCH_HPP
+#define LIMBO_INNER_OPTI_EXHAUSTIVE_SEARCH_HPP
 
 #include <Eigen/Core>
 #include <limits>
@@ -61,4 +61,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
