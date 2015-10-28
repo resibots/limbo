@@ -1,5 +1,5 @@
-#ifndef INITIALIZATION_FUNCTIONS_RANDOM_SAMPLING_GRID_HPP_
-#define INITIALIZATION_FUNCTIONS_RANDOM_SAMPLING_GRID_HPP_
+#ifndef LIMBO_INIT_RANDOM_SAMPLING_GRID_HPP
+#define LIMBO_INIT_RANDOM_SAMPLING_GRID_HPP
 
 #include <Eigen/Core>
 
@@ -24,4 +24,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
