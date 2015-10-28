@@ -1,5 +1,5 @@
-#ifndef INITIALIZATION_FUNCTIONS_RANDOM_SAMPLING_HPP_
-#define INITIALIZATION_FUNCTIONS_RANDOM_SAMPLING_HPP_
+#ifndef LIMBO_INIT_RANDOM_SAMPLING_HPP
+#define LIMBO_INIT_RANDOM_SAMPLING_HPP
 
 #include <Eigen/Core>
 #include <limbo/tools/rand.hpp>
@@ -24,4 +24,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
