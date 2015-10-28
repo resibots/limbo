@@ -1,5 +1,5 @@
-#ifndef LIMBO_PARALLEL_HPP_
-#define LIMBO_PARALLEL_HPP_
+#ifndef LIMBO_TOOLS_PARALLEL_HPP
+#define LIMBO_TOOLS_PARALLEL_HPP
 
 #include <vector>
 
