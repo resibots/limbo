@@ -15,8 +15,8 @@
 #include <limits>
 
 // we need everything to have the defaults
-#include <limbo/stopping_crit/chain_criteria.hpp>
-#include <limbo/stopping_crit/max_iterations.hpp>
+#include <limbo/stop_crit/chain_criteria.hpp>
+#include <limbo/stop_crit/max_iterations.hpp>
 #include <limbo/stats/acquisitions.hpp>
 #include <limbo/misc/sys.hpp>
 #include <limbo/kernel_fun/squared_exp_ard.hpp>
