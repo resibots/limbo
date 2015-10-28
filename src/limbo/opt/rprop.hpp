@@ -1,5 +1,5 @@
-#ifndef RPROP_HPP_
-#define RPROP_HPP_
+#ifndef LIMBO_OPT_RPROP_HPP
+#define LIMBO_OPT_RPROP_HPP
 
 #include <Eigen/Core>
 #include <boost/math/special_functions/sign.hpp>
