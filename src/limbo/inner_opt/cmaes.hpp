@@ -1,5 +1,5 @@
-#ifndef INNER_OPTIMIZATION_CMAES_HPP_
-#define INNER_OPTIMIZATION_CMAES_HPP_
+#ifndef LIMBO_INNER_OPT_CMAES_HPP
+#define LIMBO_INNER_OPT_CMAES_HPP
 
 #include <vector>
 #include <iostream>
@@ -138,4 +138,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
