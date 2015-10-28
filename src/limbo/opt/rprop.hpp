@@ -4,7 +4,7 @@
 #include <Eigen/Core>
 #include <boost/math/special_functions/sign.hpp>
 
-namespace rprop {
+namespace opti {
     // partly inspired by libgp: https://github.com/mblum/libgp
     // reference :
     // Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian
@@ -12,7 +12,7 @@ namespace rprop {
     // on Artificial Neural Networks, Computational Intelligence
     // and Machine Learning.
     template <typename F1, typename F2>
-    Eigen::VectorXd optimize(const F1& func, const F2& grad_func, int param_dim, int n)
+    Eigen::VectorXd rprop(const F1& func, const F2& grad_func, int param_dim, int n)
     {
         // params
         double delta0 = 0.1;
