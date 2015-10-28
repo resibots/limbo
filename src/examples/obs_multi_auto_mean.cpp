@@ -4,7 +4,7 @@
 
 #include <limbo/limbo.hpp>
 #include <limbo/inner_opt/cmaes.hpp>
-#include <limbo/models/gp_auto_mean.hpp>
+#include <limbo/model/gp_auto_mean.hpp>
 
 using namespace limbo;
 
@@ -151,9 +151,9 @@ struct fit_eval {
 int main()
 {
 
-    typedef kernel_fun::SquaredExpARD<Params> Kernel_t;
-    typedef mean_fun::FunctionARD<Params, MeanComplet<Params>> Mean_t;
-    typedef models::GPAutoMean<Params, Kernel_t, Mean_t> GP_t;
+    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    typedef mean::FunctionARD<Params, MeanComplet<Params>> Mean_t;
+    typedef model::GPAutoMean<Params, Kernel_t, Mean_t> GP_t;
     typedef UCB_multi<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;

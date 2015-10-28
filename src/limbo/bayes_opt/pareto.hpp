@@ -2,7 +2,7 @@
 #define PARETO_HPP
 
 #include <algorithm>
-#include <limbo/par/parallel.hpp>
+#include <limbo/tools/parallel.hpp>
 
 namespace pareto {
     namespace impl {
@@ -93,13 +93,13 @@ namespace pareto {
         T pareto_set_std(const T& p)
         {
 #ifdef __GXX_EXPERIMENTAL_CXX0X__
-            typename par::vector<typename T::value_type>::type
+            typename limbo::tools::par::vector<typename T::value_type>::type
                 pareto; // old fashion way to create template alias (for GCC 4.6...)
 #else
-            par::vector<typename T::value_type>
+            limbo::tools::par::vector<typename T::value_type>
                 pareto; // Using Template alias (for GCC 4.7 and later)
 #endif
-            par::loop(0, p.size(), [&](size_t i) {
+            limbo::tools::par::loop(0, p.size(), [&](size_t i) {
                     // clang-format off
                     if (i % 10000 == 0)
                     {
@@ -111,7 +111,7 @@ namespace pareto {
                 // clang-format on
             });
             std::sort(pareto.begin(), pareto.end(), compare_objs_lex<K>());
-            return par::convert_vector(pareto);
+            return limbo::tools::par::convert_vector(pareto);
         }
 
         // O(n lg n), for 2 objectives ONLY
@@ -120,7 +120,7 @@ namespace pareto {
         T sort_2objs(const T& v)
         {
             T p = v;
-            par::sort(p.begin(), p.end(), compare_objs_lex<K>());
+            limbo::tools::par::sort(p.begin(), p.end(), compare_objs_lex<K>());
 
             std::vector<T> f;
             f.push_back(impl::new_vector(p[0]));

@@ -4,8 +4,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <limbo/misc/macros.hpp>
-#include <limbo/models/gp_auto.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/model/gp_auto.hpp>
 #include <fstream>
 
 using namespace limbo;
@@ -28,9 +28,9 @@ struct Params {
 
 BOOST_AUTO_TEST_CASE(test_gp_auto)
 {
-    typedef kernel_fun::SquaredExpARD<Params> KF_t;
-    typedef mean_fun::Constant<Params> Mean_t;
-    typedef models::GPAuto<Params, KF_t, Mean_t> GP_t;
+    typedef kernel::SquaredExpARD<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
+    typedef model::GPAuto<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp(1, 1);
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10), make_v1(5)};

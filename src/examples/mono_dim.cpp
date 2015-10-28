@@ -54,10 +54,10 @@ struct fit_eval {
 int main()
 {
 
-    typedef kernel_fun::MaternFiveHalfs<Params> Kernel_t;
-    typedef mean_fun::Data<Params> Mean_t;
-    typedef models::GP<Params, Kernel_t, Mean_t> GP_t;
-    typedef acqui_fun::UCB<Params, GP_t> Acqui_t;
+    typedef kernel::MaternFiveHalfs<Params> Kernel_t;
+    typedef mean::Data<Params> Mean_t;
+    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
+    typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
     opt.optimize(fit_eval());

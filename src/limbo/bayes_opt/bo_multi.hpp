@@ -130,7 +130,7 @@ namespace limbo {
                 ea.set_fit_proto(multi::SferesFit<model_t>(_models));
                 ea.run();
                 auto pareto_front = ea.pareto_front();
-                par::sort(pareto_front.begin(), pareto_front.end(), sferes::fit::compare_objs_lex());
+                tools::par::sort(pareto_front.begin(), pareto_front.end(), sferes::fit::compare_objs_lex());
                 _pareto_model.resize(pareto_front.size());
                 Eigen::VectorXd point(D), objs(nb_objs()), sigma(nb_objs());
                 for (size_t p = 0; p < pareto_front.size(); ++p) {
@@ -157,7 +157,7 @@ namespace limbo {
                 assert(points.size() == objs.size());
                 assert(sigma.size() == objs.size());
                 pareto_t p(points.size());
-                par::loop(0, p.size(), [&](size_t k) {
+                tools::par::loop(0, p.size(), [&](size_t k) {
                     // clang-format off
                     p[k] = std::make_tuple(points[k], objs[k], sigma[k]);
                     // clang-format on

@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include <limbo/bayes_opt/bo_multi.hpp>
-#include <limbo/acqui_fun/ehvi.hpp>
+#include <limbo/acqui/ehvi.hpp>
 #include <ehvi/ehvi_calculations.h>
 #include <ehvi/ehvi_sliceupdate.h>
 
@@ -46,7 +46,7 @@ namespace limbo {
                     std::cout << "optimizing ehvi (" << this->pareto_data().size() << ")"
                               << std::endl;
 
-                    auto acqui = acqui_fun::Ehvi<Params, model_t>(
+                    auto acqui = acqui::Ehvi<Params, model_t>(
                         this->_models, pop,
                         Eigen::Vector3d(Params::ehvi::x_ref(), Params::ehvi::y_ref(), 0));
 
@@ -66,7 +66,7 @@ namespace limbo {
                     return v1.second > v2.second;
                         // clang-format on
                     };
-                    auto m = par::max(init, this->pareto_data().size(), body, comp);
+                    auto m = tools::par::max(init, this->pareto_data().size(), body, comp);
 
                     // maximize with NSGA-II
                     auto body2 = [&](int i) {
@@ -76,7 +76,7 @@ namespace limbo {
                     return std::make_pair(x, hv);
                         // clang-format on
                     };
-                    auto m2 = par::max(init, this->pareto_model().size(), body2, comp);
+                    auto m2 = tools::par::max(init, this->pareto_model().size(), body2, comp);
 
                     // take the best
                     std::cout << "best (cmaes):" << m.second << std::endl;

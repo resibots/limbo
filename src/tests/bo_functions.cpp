@@ -9,7 +9,7 @@
 
 #include <limbo/limbo.hpp>
 #include <limbo/inner_opt/cmaes.hpp>
-#include <limbo/par/parallel.hpp>
+#include <limbo/tools/parallel.hpp>
 
 #include "default_params.hpp"
 
@@ -275,7 +275,7 @@ void add_to_results(const char* key, T1& map, const T2& p)
 
 int main(int argc, char** argv)
 {
-    par::init();
+    tools::par::init();
     typedef bayes_opt::BOptimizer<Params> Opt_t;
 
 #ifdef USE_TBB
@@ -289,7 +289,7 @@ int main(int argc, char** argv)
     res_t results;
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Sphere());
@@ -300,7 +300,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
@@ -311,7 +311,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Rastrigin());
@@ -322,7 +322,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman3());
@@ -334,7 +334,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman6());
@@ -347,7 +347,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(GoldenPrice());

@@ -12,7 +12,7 @@
 
 #include <cmaes/cmaes_interface.h>
 #include <cmaes/boundary_transformation.h>
-#include <limbo/par/parallel.hpp>
+#include <limbo/tools/parallel.hpp>
 
 namespace limbo {
 
@@ -77,7 +77,7 @@ namespace limbo {
 
                     while (!(stop = cmaes_TestForTermination(&evo))) {
                         pop = cmaes_SamplePopulation(&evo);
-                        par::loop(0, pop_size, [&](int i) {
+                        tools::par::loop(0, pop_size, [&](int i) {
                                 // clang-format off
                                 boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim_in);
                                 for (int j = 0; j < dim_in; ++j)

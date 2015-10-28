@@ -4,8 +4,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <limbo/misc/macros.hpp>
-#include <limbo/models/gp.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/model/gp.hpp>
 
 using namespace limbo;
 
@@ -31,9 +31,9 @@ BOOST_AUTO_TEST_CASE(test_gp)
 {
     using namespace limbo;
 
-    typedef kernel_fun::MaternFiveHalfs<Params> KF_t;
-    typedef mean_fun::Constant<Params> Mean_t;
-    typedef models::GP<Params, KF_t, Mean_t> GP_t;
+    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
+    typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp;
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10),
@@ -71,9 +71,9 @@ BOOST_AUTO_TEST_CASE(test_blacklist)
 {
     using namespace limbo;
 
-    typedef kernel_fun::MaternFiveHalfs<Params> KF_t;
-    typedef mean_fun::Constant<Params> Mean_t;
-    typedef models::GP<Params, KF_t, Mean_t> GP_t;
+    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
+    typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp;
     std::vector<Eigen::VectorXd> samples = {make_v1(1)};
