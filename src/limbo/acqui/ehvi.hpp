@@ -1,5 +1,5 @@
-#ifndef ACQUISITION_FUNCTIONS_EHVI_HPP_
-#define ACQUISITION_FUNCTIONS_EHVI_HPP_
+#ifndef LIMBO_ACQUI_EHVI_HPP
+#define LIMBO_ACQUI_EHVI_HPP
 
 #include <ehvi/ehvi_calculations.h>
 
