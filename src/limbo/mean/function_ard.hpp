@@ -1,6 +1,8 @@
 #ifndef LIMBO_MEAN_FUNCTION_ARD_HPP
 #define LIMBO_MEAN_FUNCTION_ARD_HPP
 
+#include <Eigen/Core>
+
 namespace limbo {
     namespace mean {
         template <typename Params, typename MeanFunction, typename ObsType = Eigen::VectorXd>
