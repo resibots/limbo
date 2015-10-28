@@ -34,8 +34,8 @@
 //| The fact that you are presently reading this means that you have
 //| had knowledge of the CeCILL license and that you accept its terms.
 
-#ifndef LIMBO_RAND_HPP_
-#define LIMBO_RAND_HPP_
+#ifndef LIMBO_TOOLS_RAND_HPP
+#define LIMBO_TOOLS_RAND_HPP
 
 #include <cstdlib>
 #include <cmath>
@@ -53,7 +53,7 @@ namespace limbo {
         {
             assert(max > 0);
             static std::mt19937 twister(std::time(0));
-            static std::uniform_real_distribution<double> distr(0.0, 1.0);
+            static std::uniform_real_distribution<double> distr(0.0, max);
             return distr(twister);
         }
 
@@ -113,4 +113,5 @@ namespace limbo {
         }
     }
 }
+
 #endif
