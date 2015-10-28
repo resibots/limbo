@@ -1,5 +1,5 @@
-#ifndef GP_AUTO_HPP_
-#define GP_AUTO_HPP_
+#ifndef LIMBO_MODEL_GP_AUTO_HPP
+#define LIMBO_MODEL_GP_AUTO_HPP
 
 #include <limits>
 #include <cassert>
