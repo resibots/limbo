@@ -1,5 +1,5 @@
-#ifndef BOPTIMIZER_HPP_
-#define BOPTIMIZER_HPP_
+#ifndef LIMBO_BAYES_OPT_BOPTIMIZER_HPP
+#define LIMBO_BAYES_OPT_BOPTIMIZER_HPP
 
 #include <limbo/bayes_opt/bo_base.hpp>
 #include <boost/range/adaptor/transformed.hpp>
