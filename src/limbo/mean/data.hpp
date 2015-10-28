@@ -1,5 +1,7 @@
-#ifndef MEAN_FUNCTIONS_DATA_HPP_
-#define MEAN_FUNCTIONS_DATA_HPP_
+#ifndef LIMBO_MEAN_DATA_HPP
+#define LIMBO_MEAN_DATA_HPP
+
+#include <Eigen/Core>
 
 namespace limbo {
     namespace mean {
@@ -15,4 +17,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
