@@ -1,5 +1,5 @@
-#ifndef PAREGO_HPP_
-#define PAREGO_HPP_
+#ifndef LIMBO_BAYES_OPT_PAREGO_HPP
+#define LIMBO_BAYES_OPT_PAREGO_HPP
 
 #include <algorithm>
 #include <limbo/limbo.hpp>
