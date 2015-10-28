@@ -1,7 +1,7 @@
 #include <limbo/limbo.hpp>
-#include <limbo/bayesian_optimizers/parego.hpp>
-#include <limbo/acquisition_functions/ehvi.hpp>
-#include <limbo/bayesian_optimizers/nsbo.hpp>
+#include <limbo/bayes_opt/parego.hpp>
+#include <limbo/acqui_fun/ehvi.hpp>
+#include <limbo/bayes_opt/nsbo.hpp>
 
 using namespace limbo;
 
