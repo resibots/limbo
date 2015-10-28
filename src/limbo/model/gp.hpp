@@ -1,5 +1,5 @@
-#ifndef GP_HPP_
-#define GP_HPP_
+#ifndef LIMBO_MODEL_GP_HPP
+#define LIMBO_MODEL_GP_HPP
 
 #include <cassert>
 #include <Eigen/Core>
