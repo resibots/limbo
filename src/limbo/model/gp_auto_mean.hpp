@@ -1,5 +1,5 @@
-#ifndef GP_AUTO_MEAN_HPP_
-#define GP_AUTO_MEAN_HPP_
+#ifndef LIMBO_MODEL_GP_AUTO_MEAN_HPP
+#define LIMBO_MODEL_GP_AUTO_MEAN_HPP
 
 #include <limits>
 #include <cassert>
@@ -168,4 +168,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
