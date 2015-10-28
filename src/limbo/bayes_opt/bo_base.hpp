@@ -1,5 +1,5 @@
-#ifndef BO_BASE_HPP_
-#define BO_BASE_HPP_
+#ifndef LIMBO_BAYES_OPT_BO_BASE_HPP
+#define LIMBO_BAYES_OPT_BO_BASE_HPP
 #define BOOST_PARAMETER_MAX_ARITY 7
 #include <vector>
 #include <iostream>
