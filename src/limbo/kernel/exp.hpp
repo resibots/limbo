@@ -1,5 +1,5 @@
-#ifndef KERNEL_FUNCTIONS_EXP_HPP_
-#define KERNEL_FUNCTIONS_EXP_HPP_
+#ifndef LIMBO_KERNEL_EXP_HPP
+#define LIMBO_KERNEL_EXP_HPP
 
 #include <Eigen/Core>
 
