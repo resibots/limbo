@@ -1,5 +1,5 @@
-#ifndef KERNEL_FUNCTIONS_HPP_
-#define KERNEL_FUNCTIONS_HPP_
+#ifndef LIMBO_KERNEL_KERNEL_FUNCTIONS_HPP
+#define LIMBO_KERNEL_KERNEL_FUNCTIONS_HPP
 
 #include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/matern_three_halfs.hpp>
