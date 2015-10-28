@@ -32,8 +32,8 @@
 //| The fact that you are presently reading this means that you have
 //| had knowledge of the CeCILL license and that you accept its terms.
 
-#ifndef LIMBO_SYS_HPP_
-#define LIMBO_SYS_HPP_
+#ifndef LIMBO_TOOLS_SYS_HPP
+#define LIMBO_TOOLS_SYS_HPP
 
 #include <ctime>
 #include <unistd.h>
