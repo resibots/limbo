@@ -1,5 +1,5 @@
-#ifndef LIMBO_HPP_
-#define LIMBO_HPP_
+#ifndef LIMBO_HPP
+#define LIMBO_HPP
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/stop/stopping_criteria.hpp>
