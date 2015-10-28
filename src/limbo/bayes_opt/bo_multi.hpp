@@ -1,5 +1,5 @@
-#ifndef BO_MULTI_HPP_
-#define BO_MULTI_HPP_
+#ifndef LIMBO_BAYES_OPT_BO_MULTI_HPP
+#define LIMBO_BAYES_OPT_BO_MULTI_HPP
 #define VERSION "xxx"
 
 #ifndef USE_SFERES
