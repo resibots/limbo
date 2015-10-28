@@ -1,5 +1,5 @@
-#ifndef INNER_OPTIMIZATION_RANDOM_HPP_
-#define INNER_OPTIMIZATION_RANDOM_HPP_
+#ifndef LIMBO_INNER_OPTI_RANDOM_HPP
+#define LIMBO_INNER_OPTI_RANDOM_HPP
 
 #include <Eigen/Core>
 
@@ -17,4 +17,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
