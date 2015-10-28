@@ -1,5 +1,5 @@
-#ifndef STOPPING_CRITERIA_MAX_ITERATIONS_HPP_
-#define STOPPING_CRITERIA_MAX_ITERATIONS_HPP_
+#ifndef LIMBO_STOP_MAX_ITERATIONS_HPP
+#define LIMBO_STOP_MAX_ITERATIONS_HPP
 
 namespace limbo {
     namespace stop {
@@ -15,4 +15,5 @@ namespace limbo {
         };
     }
 }
+
 #endif
