@@ -11,8 +11,8 @@
 #include <Eigen/LU>
 
 #include <limbo/models/gp.hpp>
-#include <limbo/optimizers/rprop.hpp>
-#include <limbo/parallel/parallel.hpp>
+#include <limbo/opt/rprop.hpp>
+#include <limbo/par/parallel.hpp>
 
 namespace limbo {
     namespace defaults {

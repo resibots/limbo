@@ -7,8 +7,8 @@
 #include <Eigen/Cholesky>
 #include <limits>
 
-#include <limbo/kernel_functions/kernel_functions.hpp>
-#include <limbo/mean_functions/mean_functions.hpp>
+#include <limbo/kernel_fun/kernel_functions.hpp>
+#include <limbo/mean_fun/mean_functions.hpp>
 
 namespace limbo {
     namespace models {

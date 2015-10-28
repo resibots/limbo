@@ -27,8 +27,8 @@ def create(bld):
     stats = ['Acquisitions']
     stops = ['MaxIterations', 'MaxPredictedValue']
 
-    stats = 'typedef boost::fusion::vector<' + ', '.join(['statistics::' + stat + '<Params>' for stat in stats]) + '> stats_t;\n'
-    stops = '    typedef boost::fusion::vector<' + ', '.join(['stopping_criteria::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
+    stats = 'typedef boost::fusion::vector<' + ', '.join(['stats::' + stat + '<Params>' for stat in stats]) + '> stats_t;\n'
+    stops = '    typedef boost::fusion::vector<' + ', '.join(['stop_crit::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
 
     src_path = bld.path.abspath() + '/combinations'
     if not os.path.exists(src_path):
@@ -49,13 +49,13 @@ def create(bld):
                     for inner_opt in inner_optis:
                         for init in inits:
                             declarations = stats + stops
-                            declarations = declarations + '    typedef kernel_functions::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
-                            declarations = declarations + '    typedef mean_functions::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
+                            declarations = declarations + '    typedef kernel_fun::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
+                            declarations = declarations + '    typedef mean_fun::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
                             declarations = declarations + '    typedef models::' + model + '<Params, kernel_' + str(i) + '_t, mean_' + str(i) + '_t> model_' + str(i) + '_t;\n'
-                            declarations = declarations + '    typedef acquisition_functions::' + acqui + '<Params, model_' + str(i) + '_t> acqui_' + str(i) + '_t;\n'
-                            declarations = declarations + '    typedef inner_optimization::' + inner_opt + '<Params> inner_opt_' + str(i) + '_t;\n'
-                            declarations = declarations + '    typedef initialization_functions::' + init + '<Params> init_' + str(i) + '_t;\n'
-                            declarations = declarations + '    BOptimizer<Params, model_fun<model_' + str(i) + '_t>, acq_fun<acqui_' + str(i) + '_t>, inneropt_fun<inner_opt_' + str(i) + '_t>, init_fun<init_' + str(i) + '_t>, stat_fun<stats_t>, stop_fun<stops_t>> opt_' + str(i) + ';\n'
+                            declarations = declarations + '    typedef acqui_fun::' + acqui + '<Params, model_' + str(i) + '_t> acqui_' + str(i) + '_t;\n'
+                            declarations = declarations + '    typedef inner_opt::' + inner_opt + '<Params> inner_opt_' + str(i) + '_t;\n'
+                            declarations = declarations + '    typedef init_fun::' + init + '<Params> init_' + str(i) + '_t;\n'
+                            declarations = declarations + '    bayes_opt::BOptimizer<Params, modelfun<model_' + str(i) + '_t>, acquifun<acqui_' + str(i) + '_t>, inneropt<inner_opt_' + str(i) + '_t>, initfun<init_' + str(i) + '_t>, statsfun<stats_t>, stopcrit<stops_t>> opt_' + str(i) + ';\n'
                             with open(bld.path.abspath() + '/combinations/combinations_' + str(i) + '.cpp', 'w') as f:
                                 f.write(template.replace('@declarations', declarations).replace('@optimizer', 'opt_' + str(i)))
                             bld.program(features='cxx',

@@ -3,7 +3,7 @@
 #include <boost/fusion/include/vector.hpp>
 
 #include <limbo/limbo.hpp>
-#include <limbo/inner_optimization/cmaes.hpp>
+#include <limbo/inner_opt/cmaes.hpp>
 
 using namespace limbo;
 
@@ -68,12 +68,12 @@ struct SecondElem {
 
 int main()
 {
-    typedef kernel_functions::MaternFiveHalfs<Params> Kernel_t;
-    typedef mean_functions::Data<Params> Mean_t;
+    typedef kernel_fun::MaternFiveHalfs<Params> Kernel_t;
+    typedef mean_fun::Data<Params> Mean_t;
     typedef models::GP<Params, Kernel_t, Mean_t> GP_t;
-    typedef acquisition_functions::GP_UCB<Params, GP_t> Acqui_t;
+    typedef acqui_fun::GP_UCB<Params, GP_t> Acqui_t;
 
-    BOptimizer<Params, model_fun<GP_t>, acq_fun<Acqui_t>> opt;
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
 
     std::cout << "Optimize using  Average aggregator" << std::endl;
     opt.optimize(StateEval(), Average());

@@ -31,8 +31,8 @@ BOOST_AUTO_TEST_CASE(test_gp)
 {
     using namespace limbo;
 
-    typedef kernel_functions::MaternFiveHalfs<Params> KF_t;
-    typedef mean_functions::Constant<Params> Mean_t;
+    typedef kernel_fun::MaternFiveHalfs<Params> KF_t;
+    typedef mean_fun::Constant<Params> Mean_t;
     typedef models::GP<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp;
@@ -71,8 +71,8 @@ BOOST_AUTO_TEST_CASE(test_blacklist)
 {
     using namespace limbo;
 
-    typedef kernel_functions::MaternFiveHalfs<Params> KF_t;
-    typedef mean_functions::Constant<Params> Mean_t;
+    typedef kernel_fun::MaternFiveHalfs<Params> KF_t;
+    typedef mean_fun::Constant<Params> Mean_t;
     typedef models::GP<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp;

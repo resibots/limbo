@@ -8,8 +8,8 @@
 #endif
 
 #include <limbo/limbo.hpp>
-#include <limbo/inner_optimization/cmaes.hpp>
-#include <limbo/parallel/parallel.hpp>
+#include <limbo/inner_opt/cmaes.hpp>
+#include <limbo/par/parallel.hpp>
 
 #include "default_params.hpp"
 
@@ -276,7 +276,7 @@ void add_to_results(const char* key, T1& map, const T2& p)
 int main(int argc, char** argv)
 {
     par::init();
-    typedef BOptimizer<Params> Opt_t;
+    typedef bayes_opt::BOptimizer<Params> Opt_t;
 
 #ifdef USE_TBB
     typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>
