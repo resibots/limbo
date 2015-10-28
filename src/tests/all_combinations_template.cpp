@@ -99,6 +99,7 @@ struct StateEval {
 
 int main()
 {
+    // clang-format off
     @declarations
     @optimizer.optimize(StateEval());
     @optimizer.best_observation();
@@ -106,4 +107,5 @@ int main()
     @optimizer.optimize(StateEval(), Average(), true);
     @optimizer.best_observation(Average());
     @optimizer.best_sample(Average());
+    // clang-format on
 }
