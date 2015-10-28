@@ -1,5 +1,5 @@
-#ifndef ACQUISITION_FUNCTIONS_UCB_HPP_
-#define ACQUISITION_FUNCTIONS_UCB_HPP_
+#ifndef LIMBO_ACQUI_UCB_HPP
+#define LIMBO_ACQUI_UCB_HPP
 
 #include <Eigen/Core>
 
