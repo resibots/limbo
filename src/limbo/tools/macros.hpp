@@ -1,5 +1,5 @@
-#ifndef _BO_MACROS_HPP_
-#define _BO_MACROS_HPP_
+#ifndef LIMBO_TOOLS_MACROS_HPP
+#define LIMBO_TOOLS_MACROS_HPP
 
 #include <Eigen/Core>
 
