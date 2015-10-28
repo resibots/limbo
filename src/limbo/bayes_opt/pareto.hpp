@@ -1,5 +1,5 @@
-#ifndef PARETO_HPP
-#define PARETO_HPP
+#ifndef LIMBO_BAYES_OPT_PARETO_HPP
+#define LIMBO_BAYES_OPT_PARETO_HPP
 
 #include <algorithm>
 #include <limbo/tools/parallel.hpp>
