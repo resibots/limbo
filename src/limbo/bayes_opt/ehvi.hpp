@@ -1,5 +1,5 @@
-#ifndef EHVI_HPP_
-#define EHVI_HPP_
+#ifndef LIMBO_BAYES_OPT_EHVI_HPP
+#define LIMBO_BAYES_OPT_EHVI_HPP
 
 #include <algorithm>
 #include <limbo/bayes_opt/bo_multi.hpp>
