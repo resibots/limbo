@@ -39,6 +39,7 @@
 
 #include <cstdlib>
 #include <cmath>
+#include <ctime>
 #include <list>
 #include <stdlib.h>
 #include <boost/swap.hpp>

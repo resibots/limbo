@@ -1,9 +1,11 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE initctions
+#define BOOST_TEST_MODULE init_functions
 
 #include <boost/test/unit_test.hpp>
-#include <limbo/limbo.hpp>
-#include <limbo/inner_opt/cmaes.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/init.hpp>
+#include <limbo/acqui.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 
 using namespace limbo;
 

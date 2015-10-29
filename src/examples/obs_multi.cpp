@@ -1,9 +1,9 @@
-//#define SHOW_TIMER
-#include <boost/fusion/container/vector.hpp>
-#include <boost/fusion/include/vector.hpp>
-
-#include <limbo/limbo.hpp>
-#include <limbo/inner_opt/cmaes.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/matern_five_halfs.hpp>
+#include <limbo/mean/data.hpp>
+#include <limbo/model/gp.hpp>
+#include <limbo/acqui/gp_ucb.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 
 using namespace limbo;
 
@@ -12,10 +12,6 @@ struct Params {
     };
 
     struct cmaes : public defaults::cmaes {
-    };
-
-    struct ucb {
-        BO_PARAM(float, alpha, 0.1);
     };
 
     struct kf_maternfivehalfs {

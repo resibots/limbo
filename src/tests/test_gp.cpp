@@ -1,10 +1,11 @@
-
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE parallel
+#define BOOST_TEST_MODULE gp
 
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/tools/macros.hpp>
+#include <limbo/kernel/matern_five_halfs.hpp>
+#include <limbo/mean/constant.hpp>
 #include <limbo/model/gp.hpp>
 
 using namespace limbo;

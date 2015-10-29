@@ -3,7 +3,9 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <limbo/limbo.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/inner_opt.hpp>
+#include <limbo/bayes_opt/bo_base.hpp>
 
 using namespace limbo;
 

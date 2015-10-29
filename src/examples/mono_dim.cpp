@@ -1,9 +1,9 @@
-//#define SHOW_TIMER
-#include <boost/fusion/container/vector.hpp>
-#include <boost/fusion/include/vector.hpp>
-
-#include <limbo/limbo.hpp>
-#include <limbo/inner_opt/cmaes.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/matern_five_halfs.hpp>
+#include <limbo/mean/data.hpp>
+#include <limbo/model/gp.hpp>
+#include <limbo/acqui/ucb.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 
 using namespace limbo;
 
@@ -53,7 +53,6 @@ struct fit_eval {
 
 int main()
 {
-
     typedef kernel::MaternFiveHalfs<Params> Kernel_t;
     typedef mean::Data<Params> Mean_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;

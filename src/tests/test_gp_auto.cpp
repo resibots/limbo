@@ -1,10 +1,10 @@
-
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE parallel
+#define BOOST_TEST_MODULE gp_auto
 
 #include <boost/test/unit_test.hpp>
 
-#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/squared_exp_ard.hpp>
+#include <limbo/mean/constant.hpp>
 #include <limbo/model/gp_auto.hpp>
 #include <fstream>
 

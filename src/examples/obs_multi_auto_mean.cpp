@@ -1,25 +1,18 @@
-//#define SHOW_TIMER
-#include <boost/fusion/container/vector.hpp>
-#include <boost/fusion/include/vector.hpp>
-
-#include <limbo/limbo.hpp>
-#include <limbo/inner_opt/cmaes.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/squared_exp_ard.hpp>
+#include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp_auto_mean.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 
 using namespace limbo;
 
-struct Params {
-    //  struct gp_ucb : public defaults::gp_ucb {};
+struct Params {    
     struct gp_auto_mean {
         BO_PARAM(int, n_rprop, 100);
         BO_PARAM(int, rprop_restart, 10);
     };
 
     struct cmaes : public defaults::cmaes {
-    };
-
-    struct ucb {
-        BO_PARAM(float, alpha, 0.1);
     };
 
     struct kf_maternfivehalfs {
