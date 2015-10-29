@@ -6,7 +6,7 @@
 
 using namespace limbo;
 
-struct Params {    
+struct Params {
     struct gp_auto_mean {
         BO_PARAM(int, n_rprop, 100);
         BO_PARAM(int, rprop_restart, 10);

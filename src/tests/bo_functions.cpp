@@ -260,12 +260,12 @@ void add_to_results(const char* key, T1& map, const T2& p)
 }
 
 int main(int argc, char** argv)
-{    
+{
     tools::par::init();
 
 #ifdef USE_TBB
     typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>
-       res_t;
+        res_t;
 #else
     typedef std::map<std::string,
         std::vector<std::pair<double, double>>>
