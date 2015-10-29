@@ -1,5 +1,5 @@
-#ifndef LIMBO_STAT_HPP
-#define LIMBO_STAT_HPP
+#ifndef LIMBO_MODEL_HPP
+#define LIMBO_MODEL_HPP
 
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp_auto.hpp>

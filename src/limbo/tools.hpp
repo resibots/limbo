@@ -1,5 +1,5 @@
-#ifndef LIMBO_STAT_HPP
-#define LIMBO_STAT_HPP
+#ifndef LIMBO_TOOLS_HPP
+#define LIMBO_TOOLS_HPP
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
