@@ -1,5 +1,5 @@
-#ifndef LIMBO_STOP_STOPPING_CRITERIA_HPP
-#define LIMBO_STOP_STOPPING_CRITERIA_HPP
+#ifndef LIMBO_STOP_FUN_HPP
+#define LIMBO_STOP_FUN_HPP
 
 #include <limbo/stop/max_iterations.hpp>
 #include <limbo/stop/max_predicted_value.hpp>
