@@ -6,29 +6,31 @@
 Quick n dirty tbb detection
 """
 
-import os, glob, types
 from waflib.Configure import conf
 
+
 def options(opt):
-	opt.add_option('--tbb', type='string', help='path to Intel TBB', dest='tbb')
+    opt.add_option('--tbb', type='string', help='path to Intel TBB', dest='tbb')
 
 
 @conf
-def check_tbb(conf):
-        conf.env.LIB_TBB = ['tbb']
-	if conf.options.tbb:
-		conf.env.INCLUDES_TBB = [conf.options.tbb + '/include']
-		conf.env.LIBPATH_TBB = [conf.options.tbb + '/lib']
-	else:
-		conf.env.INCLUDES_TBB = ['/usr/local/include',
-                                           '/usr/include']
-		conf.env.LIBPATH_TBB = ['/usr/local/lib/',
-                                           '/usr/lib']
+def check_tbb(self, *k, **kw):
+    if self.options.tbb:
+        includes_tbb = [self.options.tbb + '/include']
+        libpath_tbb = [self.options.tbb + '/lib']
+    else:
+        includes_tbb = ['/usr/local/include', '/usr/include', '/opt/intel/tbb/include']
+        libpath_tbb = ['/usr/local/lib/', '/usr/lib', '/opt/intel/tbb/lib']
 
-        try:
-                res = conf.find_file('tbb/parallel_for.h', conf.env.INCLUDES_TBB)
-                conf.define("USE_TBB", 1)
-        except:
-                print 'TBB not found'
+    self.start_msg('Checking Intel Tbb includes')
+    try:
+        self.find_file('tbb/parallel_for.h', includes_tbb)
+        self.end_msg('ok')
+    except:
+        self.end_msg('not found', 'YELLOW')
+        return
 
-
+    self.env.LIBPATH_TBB = libpath_tbb
+    self.env.LIB_TBB = ['tbb']
+    self.env.INCLUDES_TBB = includes_tbb
+    self.env.DEFINES_TBB = ['USE_TBB']
