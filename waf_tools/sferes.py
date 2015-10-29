@@ -24,20 +24,20 @@ def check_sferes(self, *k, **kw):
     self.start_msg('Checking sferes includes')
     try:
         self.find_file('sferes/ea/ea.hpp', includes_sferes)
-        self.end_msg('ok')
+        self.end_msg(True)
     except:
-        self.end_msg('not found', 'YELLOW')
+        self.end_msg(False)
         return
 
     self.start_msg('Checking sferes libs')
     try:
         self.find_file('libsferes2.a', libpath_sferes)
-        self.end_msg('ok')
+        self.end_msg(True)
     except:
-        self.end_msg('not found', 'YELLOW')
+        self.end_msg(False)
         return
 
-    self.env.STLIPATH_SFERES = libpath_sferes
-    self.env.STLIB_SFERES = ["libsferes2"]
+    self.env.STLIBPATH_SFERES = libpath_sferes
+    self.env.STLIB_SFERES = ["sferes2"]
     self.env.INCLUDES_SFERES = includes_sferes
     self.env.DEFINES_SFERES = ["USE_SFERES", "SFERES_FAST_DOMSORT"]
