@@ -1,5 +1,5 @@
-#ifndef LIMBO_INIT_FUN_HPP
-#define LIMBO_INIT_FUN_HPP
+#ifndef LIMBO_INIT_HPP
+#define LIMBO_INIT_HPP
 
 #include <limbo/init/no_init.hpp>
 #include <limbo/init/random_sampling.hpp>
