@@ -3,16 +3,17 @@
 
 #include <vector>
 #include <iostream>
-#include <Eigen/Core>
 #include <limits>
-
 #include <stdio.h>
 #include <stdlib.h> /* free() */
 #include <stddef.h> /* NULL */
 
+#include <Eigen/Core>
+
+#include <limbo/tools/parallel.hpp>
+
 #include <cmaes/cmaes_interface.h>
 #include <cmaes/boundary_transformation.h>
-#include <limbo/tools/parallel.hpp>
 
 namespace limbo {
 

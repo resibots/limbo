@@ -3,6 +3,8 @@
 
 #include <Eigen/Core>
 
+#include <limbo/tools/macros.hpp>
+
 namespace limbo {
 
     namespace defaults {

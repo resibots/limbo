@@ -3,13 +3,11 @@
 
 #include <iostream>
 #include <cassert>
+#include <limits>
+
 #include <Eigen/Core>
 #include <Eigen/LU>
 #include <Eigen/Cholesky>
-#include <limits>
-
-#include <limbo/kernel_fun.hpp>
-#include <limbo/mean_fun.hpp>
 
 namespace limbo {
     namespace model {

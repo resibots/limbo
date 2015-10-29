@@ -2,6 +2,8 @@
 #define LIMBO_BAYES_OPT_BO_MULTI_HPP
 #define VERSION "xxx"
 
+#include <Eigen/Core>
+
 #ifndef USE_SFERES
 #warning No sferes
 #else

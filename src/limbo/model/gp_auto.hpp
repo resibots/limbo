@@ -1,15 +1,15 @@
 #ifndef LIMBO_MODEL_GP_AUTO_HPP
 #define LIMBO_MODEL_GP_AUTO_HPP
 
-#include <limits>
+#include <iostream>
 #include <cassert>
-#include <tbb/parallel_reduce.h>
+#include <limits>
+
 #include <Eigen/Core>
 #include <Eigen/LU>
-#include <Eigen/Dense>
 #include <Eigen/Cholesky>
-#include <Eigen/LU>
 
+#include <limbo/tools/macros.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/opt/rprop.hpp>
 #include <limbo/tools/parallel.hpp>

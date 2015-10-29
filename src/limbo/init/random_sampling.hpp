@@ -2,6 +2,7 @@
 #define LIMBO_INIT_RANDOM_SAMPLING_HPP
 
 #include <Eigen/Core>
+
 #include <limbo/tools/rand.hpp>
 
 namespace limbo {

@@ -3,16 +3,16 @@
 #define BOOST_PARAMETER_MAX_ARITY 7
 #include <vector>
 #include <iostream>
+#include <limits>
+
 #include <boost/parameter.hpp>
 #include <boost/fusion/include/vector.hpp>
 #include <boost/fusion/include/accumulate.hpp>
 #include <boost/fusion/include/for_each.hpp>
-
 #define BOOST_NO_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
 
 #include <Eigen/Core>
-#include <limits>
 
 // we need everything to have the defaults
 #include <limbo/stop/chain_criteria.hpp>

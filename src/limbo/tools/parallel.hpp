@@ -2,6 +2,7 @@
 #define LIMBO_TOOLS_PARALLEL_HPP
 
 #include <vector>
+#include <algorithm>
 
 #ifdef USE_TBB
 #include <tbb/concurrent_vector.h>
@@ -9,6 +10,7 @@
 #include <tbb/parallel_for.h>
 #include <tbb/parallel_sort.h>
 #include <tbb/parallel_reduce.h>
+#include <tbb/blocked_range.h>
 #endif
 
 namespace limbo {

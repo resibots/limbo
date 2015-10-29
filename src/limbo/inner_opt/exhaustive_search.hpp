@@ -1,8 +1,9 @@
 #ifndef LIMBO_INNER_OPTI_EXHAUSTIVE_SEARCH_HPP
 #define LIMBO_INNER_OPTI_EXHAUSTIVE_SEARCH_HPP
 
-#include <Eigen/Core>
 #include <limits>
+
+#include <Eigen/Core>
 
 namespace limbo {
     namespace inner_opt {

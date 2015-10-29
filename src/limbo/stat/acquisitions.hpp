@@ -1,8 +1,6 @@
 #ifndef LIMBO_STAT_ACQUISITIONS_HPP
 #define LIMBO_STAT_ACQUISITIONS_HPP
 
-#include <fstream>
-#include <string>
 #include <limbo/stat/stat.hpp>
 
 namespace limbo {

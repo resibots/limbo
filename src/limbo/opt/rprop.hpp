@@ -1,8 +1,11 @@
 #ifndef LIMBO_OPT_RPROP_HPP
 #define LIMBO_OPT_RPROP_HPP
 
-#include <Eigen/Core>
+#include <algorithm>
+
 #include <boost/math/special_functions/sign.hpp>
+
+#include <Eigen/Core>
 
 namespace opt {
     // partly inspired by libgp: https://github.com/mblum/libgp

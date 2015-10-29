@@ -1,8 +1,15 @@
 #ifndef LIMBO_BAYES_OPT_BOPTIMIZER_HPP
 #define LIMBO_BAYES_OPT_BOPTIMIZER_HPP
 
-#include <limbo/bayes_opt/bo_base.hpp>
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <boost/parameter/aux_/void.hpp>
 #include <boost/range/adaptor/transformed.hpp>
+
+#include <Eigen/Core>
+
+#include <limbo/bayes_opt/bo_base.hpp>
 
 namespace limbo {
     namespace bayes_opt {

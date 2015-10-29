@@ -3,6 +3,11 @@
 
 #include <iostream>
 
+#include <Eigen/Core>
+
+#include <limbo/tools/macros.hpp>
+#include <limbo/stat/stat.hpp>
+
 namespace limbo {
 
     namespace defaults {

@@ -2,6 +2,7 @@
 #define LIMBO_BAYES_OPT_PARETO_HPP
 
 #include <algorithm>
+
 #include <limbo/tools/parallel.hpp>
 
 namespace pareto {

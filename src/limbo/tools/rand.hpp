@@ -42,8 +42,9 @@
 #include <ctime>
 #include <list>
 #include <stdlib.h>
-#include <boost/swap.hpp>
 #include <random>
+
+#include <boost/swap.hpp>
 
 // someday we will have a real thread-safe random number generator...
 namespace limbo {
