@@ -1,6 +1,7 @@
 #ifndef LIMBO_MODEL_GP_HPP
 #define LIMBO_MODEL_GP_HPP
 
+#include <iostream>
 #include <cassert>
 #include <Eigen/Core>
 #include <Eigen/LU>
