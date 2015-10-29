@@ -1,5 +1,5 @@
-#ifndef LIMBO_STAT_STAT_HPP
-#define LIMBO_STAT_STAT_HPP
+#ifndef LIMBO_STAT_STAT_BASE_HPP
+#define LIMBO_STAT_STAT_BASE_HPP
 
 #include <fstream>
 #include <string>
@@ -9,8 +9,8 @@
 namespace limbo {
     namespace stat {
         template <typename Params>
-        struct Stat {
-            Stat() {}
+        struct StatBase {
+            StatBase() {}
 
             template <typename BO>
             void operator()(const BO& bo, bool blacklisted)

@@ -1,12 +1,12 @@
 #ifndef LIMBO_STAT_ACQUISITIONS_HPP
 #define LIMBO_STAT_ACQUISITIONS_HPP
 
-#include <limbo/stat/stat.hpp>
+#include <limbo/stat/stat_base.hpp>
 
 namespace limbo {
     namespace stat {
         template <typename Params>
-        struct Acquisitions : public Stat<Params> {
+        struct Acquisitions : public StatBase<Params> {
             Acquisitions() {}
 
             template <typename BO>
