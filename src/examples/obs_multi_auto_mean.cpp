@@ -1,25 +1,18 @@
-//#define SHOW_TIMER
-#include <boost/fusion/container/vector.hpp>
-#include <boost/fusion/include/vector.hpp>
-
-#include "limbo/limbo.hpp"
-#include "limbo/inner_cmaes.hpp"
-#include "limbo/gp_auto_mean.hpp"
+#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/squared_exp_ard.hpp>
+#include <limbo/mean/function_ard.hpp>
+#include <limbo/model/gp_auto_mean.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 
 using namespace limbo;
 
 struct Params {
-    //  struct gp_ucb : public defaults::gp_ucb {};
     struct gp_auto_mean {
         BO_PARAM(int, n_rprop, 100);
         BO_PARAM(int, rprop_restart, 10);
     };
 
     struct cmaes : public defaults::cmaes {
-    };
-
-    struct ucb {
-        BO_PARAM(float, alpha, 0.1);
     };
 
     struct kf_maternfivehalfs {
@@ -151,11 +144,12 @@ struct fit_eval {
 int main()
 {
 
-    typedef kernel_functions::SquaredExpARD<Params> Kernel_t;
-    typedef mean_functions::MeanFunctionARD<Params, MeanComplet<Params>> Mean_t;
+    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    typedef mean::FunctionARD<Params, MeanComplet<Params>> Mean_t;
     typedef model::GPAutoMean<Params, Kernel_t, Mean_t> GP_t;
     typedef UCB_multi<Params, GP_t> Acqui_t;
-    BOptimizer<Params, model_fun<GP_t>, acq_fun<Acqui_t>> opt;
+
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
     opt.optimize(fit_eval());
 
     std::cout << opt.best_observation() << " res  "

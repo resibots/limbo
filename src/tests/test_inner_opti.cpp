@@ -3,7 +3,9 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "limbo/limbo.hpp"
+#include <limbo/tools/macros.hpp>
+#include <limbo/inner_opt.hpp>
+#include <limbo/bayes_opt/bo_base.hpp>
 
 using namespace limbo;
 
@@ -53,7 +55,7 @@ BOOST_AUTO_TEST_CASE(test_random_mono_dim)
 {
     using namespace limbo;
 
-    inner_optimization::Random<Params> inner_optimization;
+    inner_opt::Random<Params> inner_optimization;
 
     FakeAcquiMono f;
     monodim_calls = 0;
@@ -69,7 +71,7 @@ BOOST_AUTO_TEST_CASE(test_random_bi_dim)
 {
     using namespace limbo;
 
-    inner_optimization::ExhaustiveSearch<Params> inner_optimization;
+    inner_opt::ExhaustiveSearch<Params> inner_optimization;
 
     FakeAcquiBi f;
     bidim_calls = 0;
@@ -89,7 +91,7 @@ BOOST_AUTO_TEST_CASE(test_exhaustive_search_mono_dim)
 {
     using namespace limbo;
 
-    inner_optimization::ExhaustiveSearch<Params> inner_optimization;
+    inner_opt::ExhaustiveSearch<Params> inner_optimization;
 
     FakeAcquiMono f;
     monodim_calls = 0;
@@ -104,7 +106,7 @@ BOOST_AUTO_TEST_CASE(test_exhaustive_search_bi_dim)
 {
     using namespace limbo;
 
-    inner_optimization::ExhaustiveSearch<Params> inner_optimization;
+    inner_opt::ExhaustiveSearch<Params> inner_optimization;
 
     FakeAcquiBi f;
     bidim_calls = 0;
@@ -120,7 +122,7 @@ BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)
 {
     using namespace limbo;
 
-    inner_optimization::Cmaes<Params> inner_optimization;
+    inner_opt::Cmaes<Params> inner_optimization;
 
     FakeAcquiMono f;
     Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());
@@ -133,7 +135,7 @@ BOOST_AUTO_TEST_CASE(test_cmaes_bi_dim)
 {
     using namespace limbo;
 
-    inner_optimization::Cmaes<Params> inner_optimization;
+    inner_opt::Cmaes<Params> inner_optimization;
 
     FakeAcquiBi f;
     Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());

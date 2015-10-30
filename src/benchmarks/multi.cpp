@@ -1,7 +1,7 @@
-#include "limbo/limbo.hpp"
-#include "limbo/parego.hpp"
-#include "limbo/ehvi.hpp"
-#include "limbo/nsbo.hpp"
+#include <limbo/limbo.hpp>
+#include <limbo/bayes_opt/parego.hpp>
+#include <limbo/acqui_fun/ehvi.hpp>
+#include <limbo/bayes_opt/nsbo.hpp>
 
 using namespace limbo;
 

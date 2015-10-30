@@ -1,9 +1,9 @@
-//#define SHOW_TIMER
-#include <boost/fusion/container/vector.hpp>
-#include <boost/fusion/include/vector.hpp>
-
-#include "limbo/limbo.hpp"
-#include "limbo/inner_cmaes.hpp"
+#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/matern_five_halfs.hpp>
+#include <limbo/mean/data.hpp>
+#include <limbo/model/gp.hpp>
+#include <limbo/acqui/gp_ucb.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 
 using namespace limbo;
 
@@ -12,10 +12,6 @@ struct Params {
     };
 
     struct cmaes : public defaults::cmaes {
-    };
-
-    struct ucb {
-        BO_PARAM(float, alpha, 0.1);
     };
 
     struct kf_maternfivehalfs {
@@ -68,12 +64,12 @@ struct SecondElem {
 
 int main()
 {
-    typedef kernel_functions::MaternFiveHalfs<Params> Kernel_t;
-    typedef mean_functions::MeanData<Params> Mean_t;
+    typedef kernel::MaternFiveHalfs<Params> Kernel_t;
+    typedef mean::Data<Params> Mean_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
-    typedef acquisition_functions::GP_UCB<Params, GP_t> Acqui_t;
+    typedef acqui::GP_UCB<Params, GP_t> Acqui_t;
 
-    BOptimizer<Params, model_fun<GP_t>, acq_fun<Acqui_t>> opt;
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
 
     std::cout << "Optimize using  Average aggregator" << std::endl;
     opt.optimize(StateEval(), Average());

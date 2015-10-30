@@ -1,20 +1,26 @@
-//#define SHOW_TIMER
 #include <cmath>
 #include <algorithm>
+#include <string>
+#include <vector>
+#include <utility>
+#include <iostream>
+
+#include <Eigen/Core>
+
 #ifdef USE_TBB
+#include <map>
+
 #include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>
 #include <tbb/concurrent_hash_map.h>
+#else
 #endif
 
-#include "limbo/limbo.hpp"
-#include "limbo/inner_cmaes.hpp"
-#include "limbo/parallel.hpp"
-
-#include "default_params.hpp"
+#include <limbo/tools/macros.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/tools/parallel.hpp>
 
 using namespace limbo;
-using namespace tests;
 
 static constexpr int nb_replicates = 4;
 
@@ -205,8 +211,6 @@ struct Params {
     };
 };
 
-// BO_DECLARE_DYN_PARAM(double, Params::meanconstant, constant);
-
 template <typename T>
 void print_res(const T& r)
 {
@@ -248,22 +252,6 @@ bool is_in_argv(int argc, char** argv, const char* needle)
     return !(it == argv + argc);
 }
 
-template <typename F>
-void replicate(const F& f, size_t nb)
-{
-#ifdef USE_TBB
-    static tbb::task_scheduler_init init;
-    tbb::parallel_for(size_t(0), nb, size_t(1), [&](size_t i) {
-            // clang-format off
-            f();
-        // clang-format on
-    });
-#else
-    for (size_t i = 0; i < nb; i++)
-        f();
-#endif
-}
-
 template <typename T1, typename T2>
 void add_to_results(const char* key, T1& map, const T2& p)
 {
@@ -275,8 +263,7 @@ void add_to_results(const char* key, T1& map, const T2& p)
 
 int main(int argc, char** argv)
 {
-    par::init();
-    typedef BOptimizer<Params> Opt_t;
+    tools::par::init();
 
 #ifdef USE_TBB
     typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>
@@ -288,8 +275,10 @@ int main(int argc, char** argv)
 #endif
     res_t results;
 
+    typedef bayes_opt::BOptimizer<Params> Opt_t;
+
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Sphere());
@@ -300,7 +289,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
@@ -311,7 +300,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Rastrigin());
@@ -322,7 +311,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman3());
@@ -334,7 +323,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman6());
@@ -347,7 +336,7 @@ int main(int argc, char** argv)
         });
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
-        par::replicate(nb_replicates, [&]() {
+        tools::par::replicate(nb_replicates, [&]() {
                 // clang-format off
                 Opt_t opt;
                 opt.optimize(GoldenPrice());

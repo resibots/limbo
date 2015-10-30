@@ -1,11 +1,12 @@
-
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE parallel
+#define BOOST_TEST_MODULE gp
 
 #include <boost/test/unit_test.hpp>
 
-#include "limbo/macros.hpp"
-#include "limbo/gp.hpp"
+#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/matern_five_halfs.hpp>
+#include <limbo/mean/constant.hpp>
+#include <limbo/model/gp.hpp>
 
 using namespace limbo;
 
@@ -31,8 +32,8 @@ BOOST_AUTO_TEST_CASE(test_gp)
 {
     using namespace limbo;
 
-    typedef kernel_functions::MaternFiveHalfs<Params> KF_t;
-    typedef mean_functions::MeanConstant<Params> Mean_t;
+    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
     typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp;
@@ -71,8 +72,8 @@ BOOST_AUTO_TEST_CASE(test_blacklist)
 {
     using namespace limbo;
 
-    typedef kernel_functions::MaternFiveHalfs<Params> KF_t;
-    typedef mean_functions::MeanConstant<Params> Mean_t;
+    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
     typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp;

@@ -39,9 +39,9 @@ def configure(conf):
         conf.load('compiler_c')
         conf.load('eigen')
         conf.load('tbb')
-        conf.load('mkl')
         conf.load('sferes')
         conf.load('openmp')
+        conf.load('mkl')
         conf.load('xcode')
 
         if conf.env.CXX_NAME in ["icc", "icpc"]:
@@ -59,15 +59,10 @@ def configure(conf):
             graph thread', min_version='1.39')
         conf.check_eigen()
         conf.check_tbb()
+        conf.check_sferes()
         conf.check_openmp()
         conf.check_mkl()
-        conf.check_sferes()
         #conf.check_ode()
-        if conf.is_defined('USE_TBB'):
-                common_flags += " -DUSE_TBB"
-
-        if conf.is_defined('USE_SFERES'):
-                common_flags += " -DUSE_SFERES -DSFERES_FAST_DOMSORT"
 
         if conf.env['CXXFLAGS_ODE']:
                 common_flags += ' ' + conf.env['CXXFLAGS_ODE']

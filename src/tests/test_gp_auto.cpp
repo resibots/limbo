@@ -1,11 +1,13 @@
-
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE parallel
+#define BOOST_TEST_MODULE gp_auto
+
+#include <fstream>
 
 #include <boost/test/unit_test.hpp>
 
-#include "limbo/macros.hpp"
-#include "limbo/gp_auto.hpp"
+#include <limbo/kernel/squared_exp_ard.hpp>
+#include <limbo/mean/constant.hpp>
+#include <limbo/model/gp_auto.hpp>
 
 using namespace limbo;
 
@@ -27,8 +29,8 @@ struct Params {
 
 BOOST_AUTO_TEST_CASE(test_gp_auto)
 {
-    typedef kernel_functions::SquaredExpARD<Params> KF_t;
-    typedef mean_functions::MeanConstant<Params> Mean_t;
+    typedef kernel::SquaredExpARD<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
     typedef model::GPAuto<Params, KF_t, Mean_t> GP_t;
 
     GP_t gp(1, 1);

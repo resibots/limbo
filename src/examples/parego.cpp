@@ -1,4 +1,4 @@
-#include "limbo/parego.hpp"
+#include <limbo/bayes_opt/parego.hpp>
 
 using namespace limbo;
 

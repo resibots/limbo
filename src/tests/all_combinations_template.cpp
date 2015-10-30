@@ -1,7 +1,7 @@
 #include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/vector.hpp>
 
-#include "limbo/limbo.hpp"
+#include <limbo/limbo.hpp>
 
 using namespace limbo;
 
@@ -99,6 +99,7 @@ struct StateEval {
 
 int main()
 {
+    // clang-format off
     @declarations
     @optimizer.optimize(StateEval());
     @optimizer.best_observation();
@@ -106,4 +107,5 @@ int main()
     @optimizer.optimize(StateEval(), Average(), true);
     @optimizer.best_observation(Average());
     @optimizer.best_sample(Average());
+    // clang-format on
 }
