@@ -2,6 +2,7 @@
 #define BOOST_TEST_MODULE init_functions
 
 #include <boost/test/unit_test.hpp>
+
 #include <limbo/tools/macros.hpp>
 #include <limbo/init.hpp>
 #include <limbo/acqui.hpp>

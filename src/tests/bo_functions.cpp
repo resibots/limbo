@@ -4,15 +4,17 @@
 #include <vector>
 #include <utility>
 #include <iostream>
+
+#include <Eigen/Core>
+
 #ifdef USE_TBB
+#include <map>
+
 #include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>
 #include <tbb/concurrent_hash_map.h>
-#include <map>
 #else
 #endif
-
-#include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>

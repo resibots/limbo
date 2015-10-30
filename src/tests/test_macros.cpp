@@ -1,8 +1,10 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE macros
 
-#include <boost/test/unit_test.hpp>
 #include <cstring>
+
+#include <boost/test/unit_test.hpp>
+
 #include <limbo/tools/macros.hpp>
 
 struct Params {

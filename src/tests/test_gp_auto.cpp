@@ -1,12 +1,13 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE gp_auto
 
+#include <fstream>
+
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
 #include <limbo/model/gp_auto.hpp>
-#include <fstream>
 
 using namespace limbo;
 

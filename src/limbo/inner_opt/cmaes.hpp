@@ -10,10 +10,10 @@
 
 #include <Eigen/Core>
 
-#include <limbo/tools/parallel.hpp>
-
 #include <cmaes/cmaes_interface.h>
 #include <cmaes/boundary_transformation.h>
+
+#include <limbo/tools/parallel.hpp>
 
 namespace limbo {
 
