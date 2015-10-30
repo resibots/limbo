@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cassert>
 #include <limits>
+#include <vector>
 
 #include <Eigen/Core>
 #include <Eigen/LU>
