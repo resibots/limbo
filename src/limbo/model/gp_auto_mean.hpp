@@ -22,7 +22,7 @@ namespace limbo {
         };
     }
     namespace model {
-        template <typename Params, typename KernelFunction, typename MeanFunction, typename ObsType = Eigen::VectorXd>
+        template <typename Params, typename KernelFunction, typename MeanFunction>
         class GPAutoMean : public GP<Params, KernelFunction, MeanFunction> {
         public:
             GPAutoMean() : GP<Params, KernelFunction, MeanFunction>() {}
@@ -31,7 +31,7 @@ namespace limbo {
                 : GP<Params, KernelFunction, MeanFunction>(dim_in, dim_out) {}
 
             void compute(const std::vector<Eigen::VectorXd>& samples,
-                const std::vector<ObsType>& observations, double noise,
+                const std::vector<Eigen::VectorXd>& observations, double noise,
                 const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
             {
 

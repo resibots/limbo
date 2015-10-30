@@ -11,8 +11,7 @@
 
 namespace limbo {
     namespace model {
-        template <typename Params, typename KernelFunction, typename MeanFunction,
-            typename ObsType = Eigen::VectorXd>
+        template <typename Params, typename KernelFunction, typename MeanFunction>
         class GP {
         public:
             GP() : _dim_in(-1), _dim_out(-1) {}
@@ -21,7 +20,7 @@ namespace limbo {
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
             void compute(const std::vector<Eigen::VectorXd>& samples,
-                const std::vector<ObsType>& observations, double noise,
+                const std::vector<Eigen::VectorXd>& observations, double noise,
                 const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
             {
                 if (_dim_in == -1) {
@@ -51,7 +50,7 @@ namespace limbo {
             }
 
             // return mu, sigma (unormaliz)
-            std::tuple<ObsType, double> query(const Eigen::VectorXd& v) const
+            std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0 && _bl_samples.size() == 0)
                     return std::make_tuple(_mean_function(v, *this),
@@ -65,7 +64,7 @@ namespace limbo {
                 return std::make_tuple(_mu(v, k), _sigma(v, _compute_k_bl(v, k)));
             }
 
-            ObsType mu(const Eigen::VectorXd& v) const
+            Eigen::VectorXd mu(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
                     return _mean_function(v, *this);
@@ -95,7 +94,7 @@ namespace limbo {
 
             const MeanFunction& mean_function() const { return _mean_function; }
 
-            ObsType max_observation() const
+            Eigen::VectorXd max_observation() const
             {
                 if (_observations.cols() > 1)
                     std::cout << "WARNING max_observation with multi dim_inensional "
@@ -103,7 +102,7 @@ namespace limbo {
                 return _observations.maxCoeff();
             }
 
-            ObsType mean_observation() const
+            Eigen::VectorXd mean_observation() const
             {
                 return _samples.size() > 0 ? _mean_observation
                                            : Eigen::VectorXd::Zero(_dim_in);
@@ -130,7 +129,7 @@ namespace limbo {
 
             double _noise;
             Eigen::MatrixXd _alpha;
-            ObsType _mean_observation;
+            Eigen::VectorXd _mean_observation;
 
             Eigen::MatrixXd _kernel;
             // Eigen::MatrixXd _inverted_kernel;
@@ -198,7 +197,7 @@ namespace limbo {
                     _bl_samples.size()) = comA1;
             }
 
-            ObsType _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const
+            Eigen::VectorXd _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const
             {
                 return (k.transpose() * _alpha) + _mean_function(v, *this).transpose();
             }
