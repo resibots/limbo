@@ -5,12 +5,12 @@
 
 namespace limbo {
     namespace mean {
-        template <typename Params, typename ObsType = Eigen::VectorXd>
+        template <typename Params>
         struct Data {
             Data(size_t dim_out = 1) {}
 
             template <typename GP>
-            ObsType operator()(const Eigen::VectorXd& v, const GP& gp) const
+            Eigen::VectorXd operator()(const Eigen::VectorXd& v, const GP& gp) const
             {
                 return gp.mean_observation().array();
             }

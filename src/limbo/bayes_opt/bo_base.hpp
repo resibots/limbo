@@ -1,6 +1,6 @@
 #ifndef LIMBO_BAYES_OPT_BO_BASE_HPP
 #define LIMBO_BAYES_OPT_BO_BASE_HPP
-#define BOOST_PARAMETER_MAX_ARITY 7
+#define BOOST_PARAMETER_MAX_ARITY 6
 #include <vector>
 #include <iostream>
 #include <limits>
@@ -58,7 +58,6 @@ namespace limbo {
     BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(statsfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(stopcrit)
-    BOOST_PARAMETER_TEMPLATE_KEYWORD(obs_type)
 
     template <typename T, typename std::enable_if<std::is_arithmetic<T>::value, int>::type = 0>
     inline bool is_nan_or_inf(T v)
@@ -82,13 +81,12 @@ namespace limbo {
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
-            boost::parameter::optional<tag::modelfun>,
-            boost::parameter::optional<tag::obs_type>> class_signature;
+            boost::parameter::optional<tag::modelfun>> class_signature;
 
         template <class Params, class A1 = boost::parameter::void_,
             class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
             class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
-            class A6 = boost::parameter::void_, class A7 = boost::parameter::void_>
+            class A6 = boost::parameter::void_>
         class BoBase {
         public:
             typedef Params params_t;
@@ -104,18 +102,16 @@ namespace limbo {
                 typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
                 typedef stat::Acquisitions<Params> stat_t; // 5
                 typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 6
-                typedef Eigen::VectorXd obs_t; // 7
             };
 
             // extract the types
-            typedef typename class_signature::bind<A1, A2, A3, A4, A5, A6, A7>::type args;
+            typedef typename class_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
             typedef typename boost::parameter::binding<args, tag::inneropt, typename defaults::inneropt_t>::type inner_optimization_t;
             typedef typename boost::parameter::binding<args, tag::initfun, typename defaults::init_t>::type init_function_t;
             typedef typename boost::parameter::binding<args, tag::acquifun, typename defaults::acqui_t>::type acquisition_function_t;
             typedef typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type model_t;
             typedef typename boost::parameter::binding<args, tag::statsfun, typename defaults::stat_t>::type Stat;
             typedef typename boost::parameter::binding<args, tag::stopcrit, typename defaults::stop_t>::type StoppingCriteria;
-            typedef typename boost::parameter::binding<args, tag::obs_type, typename defaults::obs_t>::type obs_t;
 
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<StoppingCriteria>, StoppingCriteria, boost::fusion::vector<StoppingCriteria>>::type stopping_criteria_t;
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<Stat>, Stat, boost::fusion::vector<Stat>>::type stat_t;
@@ -130,7 +126,7 @@ namespace limbo {
 
             const std::string& res_dir() const { return _res_dir; }
 
-            const std::vector<obs_t>& observations() const { return _observations; }
+            const std::vector<Eigen::VectorXd>& observations() const { return _observations; }
 
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
@@ -140,7 +136,7 @@ namespace limbo {
 
             // does not update the model !
             // we don't add NaN and inf observations
-            void add_new_sample(const Eigen::VectorXd& s, const obs_t& v)
+            void add_new_sample(const Eigen::VectorXd& s, const Eigen::VectorXd& v)
             {
                 if (is_nan_or_inf(v))
                     return;
@@ -193,7 +189,7 @@ namespace limbo {
             stopping_criteria_t _stopping_criteria;
             stat_t _stat;
 
-            std::vector<obs_t> _observations;
+            std::vector<Eigen::VectorXd> _observations;
             std::vector<Eigen::VectorXd> _samples;
             std::vector<Eigen::VectorXd> _bl_samples;
         };

@@ -17,11 +17,10 @@ namespace limbo {
 
         template <class Params, class A3 = boost::parameter::void_,
             class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
-            class A6 = boost::parameter::void_, class A7 = boost::parameter::void_>
-        class Parego : public BoMulti<Params, A3, A4, A5, A6, A7> {
+            class A6 = boost::parameter::void_>
+        class Parego : public BoMulti<Params, A3, A4, A5, A6> {
         public:
-            typedef BoBase<Params, obs_type<Eigen::VectorXd>, A3, A4, A5, A6, A7> base_t;
-            typedef typename base_t::obs_t obs_t;
+            typedef BoBase<Params, A3, A4, A5, A6> base_t;
             typedef typename base_t::model_t model_t;
             typedef typename base_t::inner_optimization_t inner_optimization_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;

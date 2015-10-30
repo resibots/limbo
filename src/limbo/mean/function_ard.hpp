@@ -5,7 +5,7 @@
 
 namespace limbo {
     namespace mean {
-        template <typename Params, typename MeanFunction, typename ObsType = Eigen::VectorXd>
+        template <typename Params, typename MeanFunction>
         struct FunctionARD {
             FunctionARD(size_t dim_out = 1)
                 : _mean_function(dim_out), _tr(dim_out, dim_out + 1)
@@ -41,7 +41,7 @@ namespace limbo {
             }
 
             template <typename GP>
-            ObsType operator()(const Eigen::VectorXd& x, const GP& gp) const
+            Eigen::VectorXd operator()(const Eigen::VectorXd& x, const GP& gp) const
             {
                 Eigen::VectorXd m = _mean_function(x, gp);
                 Eigen::VectorXd m_1(m.size() + 1);

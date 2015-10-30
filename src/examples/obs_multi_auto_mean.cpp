@@ -57,12 +57,12 @@ protected:
     const Model& _model;
 };
 
-template <typename Params, typename ObsType = Eigen::VectorXd>
+template <typename Params>
 struct MeanOffset {
     MeanOffset(size_t dim_out = 1) {}
 
     template <typename GP>
-    ObsType operator()(const Eigen::VectorXd& x, const GP& gp) const
+    Eigen::VectorXd operator()(const Eigen::VectorXd& x, const GP& gp) const
     {
         Eigen::VectorXd res(2);
         res(0) = 2; // constant overestimation
@@ -76,12 +76,12 @@ struct MeanOffset {
     }
 };
 
-template <typename Params, typename ObsType = Eigen::VectorXd>
+template <typename Params>
 struct MeanRotation {
     MeanRotation(size_t dim_out = 1) {}
 
     template <typename GP>
-    ObsType operator()(const Eigen::VectorXd& x, const GP& gp) const
+    Eigen::VectorXd operator()(const Eigen::VectorXd& x, const GP& gp) const
     {
         Eigen::VectorXd res(2);
         res(0) = 0; // constant overestimation
@@ -100,12 +100,12 @@ struct MeanRotation {
     }
 };
 
-template <typename Params, typename ObsType = Eigen::VectorXd>
+template <typename Params>
 struct MeanComplet {
     MeanComplet(size_t dim_out = 1) {}
 
     template <typename GP>
-    ObsType operator()(const Eigen::VectorXd& x, const GP& gp) const
+    Eigen::VectorXd operator()(const Eigen::VectorXd& x, const GP& gp) const
     {
         Eigen::VectorXd res(2);
         res(0) = 2; // constant overestimation
