@@ -1,6 +1,7 @@
 #ifndef LIMBO_INIT_RANDOM_SAMPLING_HPP
 #define LIMBO_INIT_RANDOM_SAMPLING_HPP
 
+#include <iostream>
 #include <Eigen/Core>
 
 #include <limbo/tools/rand.hpp>
