@@ -70,7 +70,6 @@
             static std::string __params = #P;                 \
             boost::replace_all(__params, ";", ";\n");         \
             boost::replace_all(__params, "{", "{\n");         \
-            boost::replace_all(__params, "SFERES_CONST", ""); \
             Stream << "Parameters:" << __params << std::endl; \
         }                                                     \
     };                                                        \
