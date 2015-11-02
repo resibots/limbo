@@ -7,35 +7,36 @@
 
 using namespace limbo;
 
-struct Params {
-    struct gp_ucb : public defaults::gp_ucb {
-    };
+BO_PARAMS(
+    struct Params {
+        struct gp_ucb : public defaults::gp_ucb {
+        };
 
-    struct cmaes : public defaults::cmaes {
-    };
+        struct cmaes : public defaults::cmaes {
+        };
 
-    struct ucb {
-        BO_PARAM(float, alpha, 0.1);
-    };
+        struct ucb {
+            BO_PARAM(float, alpha, 0.1);
+        };
 
-    struct kf_maternfivehalfs {
-        BO_PARAM(float, sigma, 1);
-        BO_PARAM(float, l, 0.2);
-    };
+        struct kf_maternfivehalfs {
+            BO_PARAM(float, sigma, 1);
+            BO_PARAM(float, l, 0.2);
+        };
 
-    struct boptimizer {
-        BO_PARAM(double, noise, 0.001);
-        BO_PARAM(int, dump_period, 1);
-    };
+        struct boptimizer {
+            BO_PARAM(double, noise, 0.001);
+            BO_PARAM(int, dump_period, 1);
+        };
 
-    struct init {
-        BO_PARAM(int, nb_samples, 5);
-    };
+        struct init {
+            BO_PARAM(int, nb_samples, 5);
+        };
 
-    struct maxiterations {
-        BO_PARAM(int, n_iterations, 20);
-    };
-};
+        struct maxiterations {
+            BO_PARAM(int, n_iterations, 20);
+        };
+    };)
 
 struct fit_eval {
     static constexpr size_t dim_in = 2;

@@ -1,6 +1,7 @@
 #ifndef LIMBO_TOOLS_MACROS_HPP
 #define LIMBO_TOOLS_MACROS_HPP
 
+#include <boost/algorithm/string.hpp>
 #include <Eigen/Core>
 
 #define BO_PARAM(Type, Name, Value) \
@@ -62,17 +63,18 @@
 #define BO_PARAM_STRING(Name, Value) \
     static constexpr const char* Name() { return Value; }
 
-
-#define BO_PARAMS(P)                                                    \
-  struct Ps__ { Ps__() {                                                    \
-                  static std::string __params = #P;                        \
-                  boost::replace_all(__params, ";", ";\n");                 \
-                  boost::replace_all(__params, "{", "{\n");                 \
-                  boost::replace_all(__params, "SFERES_CONST", "");         \
-                  std::cout << "Parameters:" << __params << std::endl; } }; \
-  P;                                                                        \
-  static Ps__ ____p;
-
-
+#define BO_PARAMS(P)                                             \
+    struct Ps__ {                                                \
+        Ps__()                                                   \
+        {                                                        \
+            static std::string __params = #P;                    \
+            boost::replace_all(__params, ";", ";\n");            \
+            boost::replace_all(__params, "{", "{\n");            \
+            boost::replace_all(__params, "SFERES_CONST", "");    \
+            std::cout << "Parameters:" << __params << std::endl; \
+        }                                                        \
+    };                                                           \
+    P;                                                           \
+    static Ps__ ____p;
 
 #endif
