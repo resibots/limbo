@@ -63,18 +63,18 @@
 #define BO_PARAM_STRING(Name, Value) \
     static constexpr const char* Name() { return Value; }
 
-#define BO_PARAMS(P)                                             \
-    struct Ps__ {                                                \
-        Ps__()                                                   \
-        {                                                        \
-            static std::string __params = #P;                    \
-            boost::replace_all(__params, ";", ";\n");            \
-            boost::replace_all(__params, "{", "{\n");            \
-            boost::replace_all(__params, "SFERES_CONST", "");    \
-            std::cout << "Parameters:" << __params << std::endl; \
-        }                                                        \
-    };                                                           \
-    P;                                                           \
+#define BO_PARAMS(Stream, P)                                  \
+    struct Ps__ {                                             \
+        Ps__()                                                \
+        {                                                     \
+            static std::string __params = #P;                 \
+            boost::replace_all(__params, ";", ";\n");         \
+            boost::replace_all(__params, "{", "{\n");         \
+            boost::replace_all(__params, "SFERES_CONST", ""); \
+            Stream << "Parameters:" << __params << std::endl; \
+        }                                                     \
+    };                                                        \
+    P;                                                        \
     static Ps__ ____p;
 
 #endif
