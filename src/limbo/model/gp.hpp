@@ -93,7 +93,11 @@ namespace limbo {
 
             const KernelFunction& kernel_function() const { return _kernel_function; }
 
+            KernelFunction& kernel_function() { return _kernel_function; }
+
             const MeanFunction& mean_function() const { return _mean_function; }
+
+            MeanFunction& mean_function() { return _mean_function; }
 
             Eigen::VectorXd max_observation() const
             {
@@ -111,9 +115,27 @@ namespace limbo {
 
             const Eigen::MatrixXd& mean_vector() const { return _mean_vector; }
 
+            const Eigen::MatrixXd& obs_mean() { return _obs_mean; }
+
             int nb_samples() const { return _samples.size(); }
 
             int nb_bl_samples() const { return _bl_samples.size(); }
+
+            void update()
+            {
+                this->_compute_obs_mean(); // ORDER MATTERS
+                this->_compute_kernel();
+            }
+
+            float get_lik() const { return _lik; }
+
+            void set_lik(const float& lik) { _lik = lik; }
+
+            Eigen::LLT<Eigen::MatrixXd> llt() { return _llt; }
+
+            Eigen::MatrixXd alpha() { return _alpha; }
+
+            std::vector<Eigen::VectorXd> samples() { return _samples; }
 
         protected:
             int _dim_in;
@@ -137,6 +159,8 @@ namespace limbo {
             Eigen::MatrixXd _l_matrix;
             Eigen::LLT<Eigen::MatrixXd> _llt;
             Eigen::MatrixXd _inv_bl_kernel;
+
+            float _lik;
 
             void _compute_obs_mean()
             {

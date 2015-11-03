@@ -38,9 +38,6 @@ struct Params {
     struct gp_ucb : public defaults::gp_ucb {
     };
 
-    struct gp_auto : public defaults::gp_auto {
-    };
-
     struct meanconstant {
         static Eigen::VectorXd constant() { return make_v1(0.0); };
     };

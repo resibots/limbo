@@ -1,6 +1,6 @@
 #ifndef LIMBO_BAYES_OPT_BO_BASE_HPP
 #define LIMBO_BAYES_OPT_BO_BASE_HPP
-#define BOOST_PARAMETER_MAX_ARITY 6
+#define BOOST_PARAMETER_MAX_ARITY 7
 #include <vector>
 #include <iostream>
 #include <limits>
@@ -22,8 +22,8 @@
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/mean/data.hpp>
-#include <limbo/inner_opt/cmaes.hpp>
-#include <limbo/model/gp_auto.hpp>
+#include <limbo/opt/cmaes_structs.hpp>
+#include <limbo/model/gp.hpp>
 #include <limbo/init/random_sampling.hpp>
 
 namespace limbo {
@@ -48,6 +48,48 @@ namespace limbo {
         }
     };
 
+    template <typename Params>
+    struct NoOpt {
+        template <typename Opt>
+        void operator()(Opt& opt, const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, double noise,
+            const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
+        {
+            opt.compute(samples, observations, noise, bl_samples);
+        }
+    };
+
+    template <typename Params, typename AcquisitionFunction, typename AggregatorFunction>
+    struct InnerOptStruct
+    {
+    public:
+        InnerOptStruct(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init)
+        {
+            _acqui = std::make_shared<AcquisitionFunction>(acqui);
+            _afun = std::make_shared<AggregatorFunction>(afun);
+            _init = init;
+        }
+
+        double utility(const Eigen::VectorXd& params)
+        {
+            return (*_acqui)(params, *_afun);
+        }
+
+        size_t param_size()
+        {
+            return _acqui->dim_in();
+        }
+
+        Eigen::VectorXd init()
+        {
+            return _init;
+        }
+
+    protected:
+        std::shared_ptr<AcquisitionFunction> _acqui;
+        std::shared_ptr<AggregatorFunction> _afun;
+        Eigen::VectorXd _init;
+    };
+
     // we use optimal named template parameters
     // see:
     // http://www.boost.org/doc/libs/1_55_0/libs/parameter/doc/html/index.html#parameter-enabled-class-templates
@@ -58,6 +100,7 @@ namespace limbo {
     BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(statsfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(stopcrit)
+    BOOST_PARAMETER_TEMPLATE_KEYWORD(optfun)
 
     template <typename T, typename std::enable_if<std::is_arithmetic<T>::value, int>::type = 0>
     inline bool is_nan_or_inf(T v)
@@ -81,27 +124,29 @@ namespace limbo {
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
-            boost::parameter::optional<tag::modelfun>> class_signature;
+            boost::parameter::optional<tag::modelfun>,
+            boost::parameter::optional<tag::optfun>> class_signature;
 
         template <class Params, class A1 = boost::parameter::void_,
             class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
             class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
-            class A6 = boost::parameter::void_>
+            class A6 = boost::parameter::void_, class A7 = boost::parameter::void_>
         class BoBase {
         public:
             typedef Params params_t;
             // defaults
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
-                typedef inner_opt::Cmaes<Params> inneropt_t; // 2
+                typedef opt::Cmaes<Params> inneropt_t; // 2
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
-                typedef model::GPAuto<Params, kf_t, mean_t> model_t; // 3
+                typedef model::GP<Params, kf_t, mean_t> model_t; // 3
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
                 typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
                 typedef stat::Acquisitions<Params> stat_t; // 5
                 typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 6
+                typedef NoOpt<Params> opt_t; // 7
             };
 
             // extract the types
@@ -112,6 +157,7 @@ namespace limbo {
             typedef typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type model_t;
             typedef typename boost::parameter::binding<args, tag::statsfun, typename defaults::stat_t>::type Stat;
             typedef typename boost::parameter::binding<args, tag::stopcrit, typename defaults::stop_t>::type StoppingCriteria;
+            typedef typename boost::parameter::binding<args, tag::optfun, typename defaults::opt_t>::type opt_t;
 
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<StoppingCriteria>, StoppingCriteria, boost::fusion::vector<StoppingCriteria>>::type stopping_criteria_t;
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<Stat>, Stat, boost::fusion::vector<Stat>>::type stat_t;

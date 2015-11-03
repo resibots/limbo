@@ -21,6 +21,30 @@ namespace limbo {
             BO_PARAM(int, rprop_restart, 100);
         };
     }
+
+    template <typename Params, typename Model>
+    struct LikelihoodKernelMean {
+        LikelihoodKernelMean(Model& model) : _model(model) {}
+
+        std::pair<double, Eigen::VectorXd> utility_and_grad(const Eigen::VectorXd& params)
+        {
+            return std::make_pair(_model.log_likelihood(params, true), _model.log_likelihood_grad(params));
+        }
+
+        double utility(const Eigen::VectorXd& params)
+        {
+            return _model.log_likelihood(params, true);
+        }
+
+        size_t param_size()
+        {
+            return _model.kernel_function().h_params_size()+_model.mean_function().h_params_size();
+        }
+
+    private:
+        Model _model;
+    };
+
     namespace model {
         template <typename Params, typename KernelFunction, typename MeanFunction>
         class GPAutoMean : public GP<Params, KernelFunction, MeanFunction> {
@@ -132,38 +156,16 @@ namespace limbo {
 
             virtual void _optimize_likelihood()
             {
-                tools::par::init();
-                typedef std::pair<Eigen::VectorXd, double> pair_t;
-                auto body = [=](int i) {
-                    // clang-format off
-                    // we need a copy because each thread should touch a copy of the GP!
-                    auto gp = *this;
-                    Eigen::VectorXd v = opt::rprop([&](const Eigen::VectorXd & v) {
-                      return gp.log_likelihood(v);
-                    },
-                    [&](const Eigen::VectorXd & v) {
-                      return gp.log_likelihood_grad(v, false);
-                    },
-          	        this->kernel_function().h_params_size()+this->_mean_function.h_params_size(), Params::gp_auto_mean::n_rprop());
+                LikelihoodKernelMean<Params, GPAutoMean<Params, KernelFunction, MeanFunction>> kk(*this);
+                auto bp = opt::par::rprop<Params>(kk);
+                double lik = kk.utility(bp);
 
-                    double lik = gp.log_likelihood(v);//this->log_likelihood(v);
-                    return std::make_pair(v, lik);
-                    // clang-format on
-                };
-                auto comp = [](const pair_t& v1, const pair_t& v2) {
-                    // clang-format off
-                    return v1.second > v2.second;
-                    // clang-format on
-                };
-                pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
-                auto m = tools::par::max(init, Params::gp_auto_mean::rprop_restart(), body, comp);
-                std::cout << "likelihood:" << m.second << std::endl;
-
+                std::cout << "likelihood:" << lik << std::endl;
                 this->_kernel_function.set_h_params(
-                    m.first.head(this->_kernel_function.h_params_size()));
+                    bp.head(this->_kernel_function.h_params_size()));
                 this->_mean_function.set_h_params(
-                    m.first.tail(this->_mean_function.h_params_size()));
-                this->_lik = m.second;
+                    bp.tail(this->_mean_function.h_params_size()));
+                this->_lik = lik;
             }
         };
     }

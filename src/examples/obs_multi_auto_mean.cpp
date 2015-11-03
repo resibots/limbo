@@ -15,6 +15,9 @@ struct Params {
     struct cmaes : public defaults::cmaes {
     };
 
+    struct rprop : public defaults::rprop {
+    };
+
     struct kf_maternfivehalfs {
         BO_PARAM(float, sigma, 1);
         BO_PARAM(float, l, 0.2);

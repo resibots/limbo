@@ -25,6 +25,9 @@ struct Params {
 
     struct gp_auto : public defaults::gp_auto {
     };
+
+    struct rprop : public defaults::rprop {
+    };
 };
 
 BOOST_AUTO_TEST_CASE(test_gp_auto)

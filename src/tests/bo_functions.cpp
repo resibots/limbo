@@ -204,9 +204,6 @@ struct Params {
     struct gp_ucb : public defaults::gp_ucb {
     };
 
-    struct gp_auto : public defaults::gp_auto {
-    };
-
     struct cmaes : public defaults::cmaes {
     };
 };

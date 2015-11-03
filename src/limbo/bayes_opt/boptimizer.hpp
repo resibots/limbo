@@ -18,13 +18,14 @@ namespace limbo {
         template <class Params, class A1 = boost::parameter::void_,
             class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
             class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
-            class A6 = boost::parameter::void_>
-        class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6> {
+            class A6 = boost::parameter::void_, class A7 = boost::parameter::void_>
+        class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6, A7> {
         public:
-            typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
+            typedef BoBase<Params, A1, A2, A3, A4, A5, A6, A7> base_t;
             typedef typename base_t::model_t model_t;
             typedef typename base_t::inner_optimization_t inner_optimization_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
+            typedef typename base_t::opt_t opt_t;
 
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
@@ -35,6 +36,7 @@ namespace limbo {
                 if (this->_observations.size())
                     _model.compute(this->_samples, this->_observations,
                         Params::boptimizer::noise());
+                
                 inner_optimization_t inner_optimization;
 
                 while (this->_samples.size() == 0 || this->_pursue(*this, afun)) {
@@ -50,8 +52,9 @@ namespace limbo {
                         blacklisted = true;
                     }
 
-                    _model.compute(this->_samples, this->_observations,
-                        Params::boptimizer::noise(), this->_bl_samples);
+                    opt_t()(_model, this->_samples, this->_observations,
+                    Params::boptimizer::noise(), this->_bl_samples);
+
                     this->_update_stats(*this, blacklisted);
 
                     std::cout << this->_iteration << " new point: "
