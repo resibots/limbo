@@ -44,6 +44,9 @@ struct Params {
     struct cmaes : public defaults::cmaes {
     };
 
+    struct rprop : public defaults::rprop {
+    };
+
     struct init {
         BO_PARAM(int, nb_samples, 5);
         BO_PARAM(int, nb_bins, 5);

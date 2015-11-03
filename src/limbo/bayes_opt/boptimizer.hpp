@@ -42,7 +42,7 @@ namespace limbo {
                 while (this->_samples.size() == 0 || this->_pursue(*this, afun)) {
                     acquisition_function_t acqui(_model, this->_iteration);
 
-                    Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in(), afun);
+                    Eigen::VectorXd new_sample = inner_optimization(acqui, afun);
                     bool blacklisted = false;
                     try {
                         this->add_new_sample(new_sample, sfun(new_sample));

@@ -22,8 +22,7 @@
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/mean/data.hpp>
-#include <limbo/opt/inner_structs.hpp>
-#include <limbo/opt/cmaes.hpp>
+#include <limbo/opt/impl/inner_cmaes.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/init/random_sampling.hpp>
 
@@ -56,25 +55,6 @@ namespace limbo {
             const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
         {
             opt.compute(samples, observations, noise, bl_samples);
-        }
-    };
-
-    template <typename Params>
-    struct Cmaes {
-        Cmaes() {}
-
-        template <typename AcquisitionFunction, typename AggregatorFunction>
-        Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const AggregatorFunction& afun) const
-        {
-            return this->operator()(acqui, dim_in,
-                Eigen::VectorXd::Constant(dim_in, 0.5), afun);
-        }
-
-        template <typename AcquisitionFunction, typename AggregatorFunction>
-        Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const Eigen::VectorXd& init, const AggregatorFunction& afun) const
-        {
-            opt::InnerOptimization<Params, AcquisitionFunction, AggregatorFunction> util(acqui, afun, init);
-            return opt::cmaes<Params>(util);
         }
     };
 
@@ -125,7 +105,7 @@ namespace limbo {
             // defaults
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
-                typedef Cmaes<Params> inneropt_t; // 2
+                typedef opt::impl::InnerCmaes<Params> inneropt_t; // 2
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
                 typedef model::GP<Params, kf_t, mean_t> model_t; // 3
