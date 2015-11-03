@@ -38,7 +38,7 @@ namespace limbo {
 
         size_t param_size()
         {
-            return _model.kernel_function().h_params_size()+_model.mean_function().h_params_size();
+            return _model.kernel_function().h_params_size() + _model.mean_function().h_params_size();
         }
 
     private:

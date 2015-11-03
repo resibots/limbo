@@ -5,22 +5,21 @@
 #include <limbo/opt/impl/inner_struct.hpp>
 
 namespace limbo {
-	namespace opt {
-		namespace impl {
-			template <typename Params>
-		    struct InnerExhaustiveSearch {
-		        InnerExhaustiveSearch() {}
+    namespace opt {
+        namespace impl {
+            template <typename Params>
+            struct InnerExhaustiveSearch {
+                InnerExhaustiveSearch() {}
 
-		        template <typename AcquisitionFunction, typename AggregatorFunction>
-	            Eigen::VectorXd operator()(const AcquisitionFunction& acqui, const AggregatorFunction& afun) const
-	            {
-	                InnerOptimization<Params, AcquisitionFunction, AggregatorFunction> util(acqui, afun, Eigen::VectorXd::Zero(acqui.dim_in()));
-	                return opt::exhaustive_search<Params>(util);
-	            }
-		    };
-		}
-	}
+                template <typename AcquisitionFunction, typename AggregatorFunction>
+                Eigen::VectorXd operator()(const AcquisitionFunction& acqui, const AggregatorFunction& afun) const
+                {
+                    InnerOptimization<Params, AcquisitionFunction, AggregatorFunction> util(acqui, afun, Eigen::VectorXd::Zero(acqui.dim_in()));
+                    return opt::exhaustive_search<Params>(util);
+                }
+            };
+        }
+    }
 }
-
 
 #endif

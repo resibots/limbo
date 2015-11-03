@@ -36,7 +36,7 @@ namespace limbo {
                 if (this->_observations.size())
                     _model.compute(this->_samples, this->_observations,
                         Params::boptimizer::noise());
-                
+
                 inner_optimization_t inner_optimization;
 
                 while (this->_samples.size() == 0 || this->_pursue(*this, afun)) {
@@ -53,7 +53,7 @@ namespace limbo {
                     }
 
                     opt_t()(_model, this->_samples, this->_observations,
-                    Params::boptimizer::noise(), this->_bl_samples);
+                        Params::boptimizer::noise(), this->_bl_samples);
 
                     this->_update_stats(*this, blacklisted);
 

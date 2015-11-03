@@ -10,8 +10,7 @@ namespace limbo {
         namespace impl {
 
             template <typename Params, typename AcquisitionFunction, typename AggregatorFunction>
-            struct InnerOptimization
-            {
+            struct InnerOptimization {
             public:
                 InnerOptimization(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init)
                 {
