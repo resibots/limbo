@@ -22,7 +22,8 @@
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/mean/data.hpp>
-#include <limbo/opt/cmaes_structs.hpp>
+#include <limbo/opt/inner_structs.hpp>
+#include <limbo/opt/cmaes.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/init/random_sampling.hpp>
 
@@ -58,36 +59,23 @@ namespace limbo {
         }
     };
 
-    template <typename Params, typename AcquisitionFunction, typename AggregatorFunction>
-    struct InnerOptStruct
-    {
-    public:
-        InnerOptStruct(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init)
+    template <typename Params>
+    struct Cmaes {
+        Cmaes() {}
+
+        template <typename AcquisitionFunction, typename AggregatorFunction>
+        Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const AggregatorFunction& afun) const
         {
-            _acqui = std::make_shared<AcquisitionFunction>(acqui);
-            _afun = std::make_shared<AggregatorFunction>(afun);
-            _init = init;
+            return this->operator()(acqui, dim_in,
+                Eigen::VectorXd::Constant(dim_in, 0.5), afun);
         }
 
-        double utility(const Eigen::VectorXd& params)
+        template <typename AcquisitionFunction, typename AggregatorFunction>
+        Eigen::VectorXd operator()(const AcquisitionFunction& acqui, int dim_in, const Eigen::VectorXd& init, const AggregatorFunction& afun) const
         {
-            return (*_acqui)(params, *_afun);
+            opt::InnerOptimization<Params, AcquisitionFunction, AggregatorFunction> util(acqui, afun, init);
+            return opt::cmaes<Params>(util);
         }
-
-        size_t param_size()
-        {
-            return _acqui->dim_in();
-        }
-
-        Eigen::VectorXd init()
-        {
-            return _init;
-        }
-
-    protected:
-        std::shared_ptr<AcquisitionFunction> _acqui;
-        std::shared_ptr<AggregatorFunction> _afun;
-        Eigen::VectorXd _init;
     };
 
     // we use optimal named template parameters
@@ -137,7 +125,7 @@ namespace limbo {
             // defaults
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
-                typedef opt::Cmaes<Params> inneropt_t; // 2
+                typedef Cmaes<Params> inneropt_t; // 2
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
                 typedef model::GP<Params, kf_t, mean_t> model_t; // 3

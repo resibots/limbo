@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)
 {
     using namespace limbo;
 
-    opt::Cmaes<Params> inner_optimization;
+    Cmaes<Params> inner_optimization;
 
     FakeAcquiMono f;
     Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());
@@ -135,7 +135,7 @@ BOOST_AUTO_TEST_CASE(test_cmaes_bi_dim)
 {
     using namespace limbo;
 
-    opt::Cmaes<Params> inner_optimization;
+    Cmaes<Params> inner_optimization;
 
     FakeAcquiBi f;
     Eigen::VectorXd best_point = inner_optimization(f, f.dim_in(), FirstElem());
