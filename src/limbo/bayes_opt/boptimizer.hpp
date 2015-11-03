@@ -29,7 +29,7 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
-                this->_init(sfun, reset);
+                this->_init(sfun, afun, reset);
 
                 _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
                 if (this->_observations.size())
@@ -52,7 +52,7 @@ namespace limbo {
 
                     _model.compute(this->_samples, this->_observations,
                         Params::boptimizer::noise(), this->_bl_samples);
-                    this->_update_stats(*this, blacklisted);
+                    this->_update_stats(*this, afun, blacklisted);
 
                     std::cout << this->_iteration << " new point: "
                               << (blacklisted ? this->_bl_samples.back()

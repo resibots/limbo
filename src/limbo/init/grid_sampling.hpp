@@ -9,26 +9,26 @@ namespace limbo {
         //  -init::nb_bins
         template <typename Params>
         struct GridSampling {
-            template <typename F, typename Opt>
-            void operator()(const F& feval, Opt& opt) const
+            template <typename StateFunction, typename AggregatorFunction, typename Opt>
+            void operator()(const StateFunction& seval, const AggregatorFunction&, Opt& opt) const
             {
-                _explore(0, feval, Eigen::VectorXd::Constant(F::dim_in, 0), opt);
+                _explore(0, seval, Eigen::VectorXd::Constant(StateFunction::dim_in, 0), opt);
             }
 
         private:
             // recursively explore all the dim_inensions
-            template <typename F, typename Opt>
-            void _explore(int dim_in, const F& feval, const Eigen::VectorXd& current,
+            template <typename StateFunction, typename Opt>
+            void _explore(int dim_in, const StateFunction& seval, const Eigen::VectorXd& current,
                 Opt& opt) const
             {
                 for (double x = 0; x <= 1.0f; x += 1.0f / (double)Params::init::nb_bins()) {
                     Eigen::VectorXd point = current;
                     point[dim_in] = x;
                     if (dim_in == current.size() - 1) {
-                        opt.add_new_sample(point, feval(point));
+                        opt.add_new_sample(point, seval(point));
                     }
                     else {
-                        _explore(dim_in + 1, feval, point, opt);
+                        _explore(dim_in + 1, seval, point, opt);
                     }
                 }
             }

@@ -30,7 +30,7 @@ namespace limbo {
             template <typename EvalFunction>
             void optimize(const EvalFunction& feval, bool reset = true)
             {
-                this->_init(feval, reset);
+                this->_init(feval, FirstElem(), reset);
 
                 std::vector<double> scalarized = _scalarize_obs();
                 model_t model(EvalFunction::dim);
@@ -48,7 +48,7 @@ namespace limbo {
                               << feval(new_sample).transpose() << std::endl;
                     scalarized = _scalarize_obs();
                     model.compute(this->_samples, scalarized, Params::boptimizer::noise());
-                    this->_update_stats(*this, false);
+                    this->_update_stats(*this, FirstElem(), false);
                     this->_iteration++;
                 }
                 this->template update_pareto_model<EvalFunction::dim>();
