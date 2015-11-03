@@ -41,6 +41,11 @@ namespace limbo {
             return _model.kernel_function().h_params_size();
         }
 
+        Eigen::VectorXd init()
+        {
+            return (Eigen::VectorXd::Random(param_size()).array() - 1);
+        }
+
     private:
         Model _model;
     };
