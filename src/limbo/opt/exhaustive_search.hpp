@@ -20,7 +20,7 @@ namespace limbo {
                 Eigen::VectorXd new_point = f.init();
                 new_point[depth] = x;
                 double val;
-                if (depth == f.init().size() - 1) {
+                if (depth == (f.init().size() - 1)) {
                     val = f.utility(new_point);
                     if (val > best_fit) {
                         best_fit = val;

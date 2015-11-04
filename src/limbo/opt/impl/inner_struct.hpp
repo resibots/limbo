@@ -1,8 +1,6 @@
 #ifndef LIMBO_OPT_INNER_STRUCT_HPP
 #define LIMBO_OPT_INNER_STRUCT_HPP
 
-#include <iostream>
-
 #include <Eigen/Core>
 
 namespace limbo {

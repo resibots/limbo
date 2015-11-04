@@ -18,12 +18,6 @@ def build(bld):
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
     bld.program(features='cxx test',
-                source='test_gp_auto.cpp',
-                includes='. .. ../../',
-                target='test_gp_auto',
-                uselib='BOOST EIGEN TBB',
-                use='limbo')
-    bld.program(features='cxx test',
                 source='test_init_functions.cpp',
                 includes='. .. ../../',
                 target='test_init_functions',
@@ -39,6 +33,12 @@ def build(bld):
                 source='test_macros.cpp',
                 includes='. .. ../../',
                 target='test_macros',
+                uselib='BOOST EIGEN TBB',
+                use='limbo')
+    bld.program(features='cxx test',
+                source='test_boptimizer.cpp',
+                includes='. .. ../../',
+                target='test_boptimizer',
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
 

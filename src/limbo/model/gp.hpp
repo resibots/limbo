@@ -109,8 +109,9 @@ namespace limbo {
 
             Eigen::VectorXd mean_observation() const
             {
+                // TO-DO: Check if _dim_out is correct?!
                 return _samples.size() > 0 ? _mean_observation
-                                           : Eigen::VectorXd::Zero(_dim_in);
+                                           : Eigen::VectorXd::Zero(_dim_out);
             }
 
             const Eigen::MatrixXd& mean_vector() const { return _mean_vector; }
