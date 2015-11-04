@@ -11,11 +11,11 @@
 
 namespace limbo {
     namespace defaults {
-        struct parallel_repeater {            
+        struct parallel_repeater {
             BO_PARAM(int, repeats, 10);
         };
     }
-    namespace opt {  
+    namespace opt {
         template <typename Params, typename Optimizer>
         struct ParallelRepeater {
             template <typename F>
@@ -29,19 +29,20 @@ namespace limbo {
 
                 double lik = f_copy.utility(v);
                 return std::make_pair(v, lik);
-                // clang-format on
+                    // clang-format on
                 };
 
                 auto comp = [](const pair_t& v1, const pair_t& v2) {
                 // clang-format off
                 return v1.second > v2.second;
-                // clang-format on
+                    // clang-format on
                 };
 
                 pair_t init(f.init(), -std::numeric_limits<float>::max());
                 auto m = tools::par::max(init, Params::parallel_opti::repeats(), body, comp);
 
                 return m.first;
+            };
         };
     }
 }

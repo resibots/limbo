@@ -53,7 +53,7 @@ struct FakeAcquiBi {
 template <typename Functor>
 struct FunctorOptimization {
 public:
-    FunctorOptimization(const Functor& f, const Eigen::VectorXd& init) : _f(f), _init(init) { }
+    FunctorOptimization(const Functor& f, const Eigen::VectorXd& init) : _f(f), _init(init) {}
 
     double utility(const Eigen::VectorXd& params) const
     {
@@ -71,13 +71,13 @@ public:
     }
 
 protected:
-
     const Functor& _f;
     const Eigen::VectorXd& _init;
 };
 
 template <typename Functor>
-FunctorOptimization<Functor> make_functor_optimization(const Functor& f) {
+FunctorOptimization<Functor> make_functor_optimization(const Functor& f)
+{
     return FunctorOptimization<Functor>(f, Eigen::VectorXd::Constant(f.dim_in(), 0.5));
 }
 

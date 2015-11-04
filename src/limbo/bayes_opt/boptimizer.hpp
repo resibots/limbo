@@ -24,13 +24,13 @@ namespace limbo {
             typedef BoBase<Params, A1, A2, A3, A4, A5, A6, A7> base_t;
             typedef typename base_t::model_t model_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
-            typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;            
+            typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
             typedef typename base_t::opt_t opt_t;
 
-        template <typename AcquisitionFunction, typename AggregatorFunction>
-        struct AcquiOptimization {
+            template <typename AcquisitionFunction, typename AggregatorFunction>
+            struct AcquiOptimization {
             public:
-                AcquiOptimization(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _acqui(acqui), _afun(afun), _init(init) { }
+                AcquiOptimization(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _acqui(acqui), _afun(afun), _init(init) {}
 
                 double utility(const Eigen::VectorXd& params) const
                 {
