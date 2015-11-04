@@ -25,12 +25,6 @@ struct Params {
         BO_PARAM_VECTOR(double, constant, 0, 0);
     };
 
-    struct gp_auto : defaults::gp_auto {
-    };
-
-    struct gp_auto_mean : defaults::gp_auto_mean {
-    };
-
     struct ucb : public defaults::ucb {
     };
 

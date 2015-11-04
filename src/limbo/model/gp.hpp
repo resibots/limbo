@@ -109,8 +109,9 @@ namespace limbo {
 
             Eigen::VectorXd mean_observation() const
             {
+                // TO-DO: Check if _dim_out is correct?!
                 return _samples.size() > 0 ? _mean_observation
-                                           : Eigen::VectorXd::Zero(_dim_in);
+                                           : Eigen::VectorXd::Zero(_dim_out);
             }
 
             const Eigen::MatrixXd& mean_vector() const { return _mean_vector; }
@@ -131,11 +132,11 @@ namespace limbo {
 
             void set_lik(const float& lik) { _lik = lik; }
 
-            Eigen::LLT<Eigen::MatrixXd> llt() { return _llt; }
+            const Eigen::LLT<Eigen::MatrixXd>& llt() const { return _llt; }
 
-            Eigen::MatrixXd alpha() { return _alpha; }
+            const Eigen::MatrixXd& alpha() const { return _alpha; }
 
-            std::vector<Eigen::VectorXd> samples() { return _samples; }
+            const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
         protected:
             int _dim_in;

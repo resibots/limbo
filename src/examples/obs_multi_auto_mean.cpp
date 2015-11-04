@@ -1,7 +1,8 @@
 #include <limbo/tools/macros.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/function_ard.hpp>
-#include <limbo/model/gp_auto_mean.hpp>
+#include <limbo/model/gp.hpp>
+#include <limbo/opt/impl/gp_kernel_mean_lf_opt.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
 
 using namespace limbo;
@@ -149,10 +150,11 @@ int main()
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
     typedef mean::FunctionARD<Params, MeanComplet<Params>> Mean_t;
-    typedef model::GPAutoMean<Params, Kernel_t, Mean_t> GP_t;
+    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
     typedef UCB_multi<Params, GP_t> Acqui_t;
+    typedef opt::impl::GPKernelMeanLFOpt<Params> opt_t;
 
-    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>, optfun<opt_t>> opt;
     opt.optimize(fit_eval());
 
     std::cout << opt.best_observation() << " res  "

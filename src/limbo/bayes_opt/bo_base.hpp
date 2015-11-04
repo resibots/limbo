@@ -24,6 +24,7 @@
 #include <limbo/mean/data.hpp>
 #include <limbo/opt/cmaes.hpp>
 #include <limbo/model/gp.hpp>
+#include <limbo/opt/impl/model_no_opt.hpp>
 #include <limbo/init/random_sampling.hpp>
 
 namespace limbo {
@@ -45,16 +46,6 @@ namespace limbo {
         double operator()(const Eigen::VectorXd& x) const
         {
             return x(0);
-        }
-    };
-
-    template <typename Params>
-    struct NoOpt {
-        template <typename Opt>
-        void operator()(Opt& opt, const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, double noise,
-            const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
-        {
-            opt.compute(samples, observations, noise, bl_samples);
         }
     };
 
@@ -114,7 +105,7 @@ namespace limbo {
                 typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
                 typedef stat::Acquisitions<Params> stat_t; // 5
                 typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 6
-                typedef NoOpt<Params> opt_t; // 7
+                typedef opt::impl::ModelNoOpt<Params> opt_t; // 7
             };
 
             // extract the types
