@@ -19,11 +19,11 @@ namespace limbo {
         template <typename Params, typename Optimizer>
         struct ParallelRepeater {
             template <typename F>
-            Eigen::VectorXd operator()(F& f)
+            Eigen::VectorXd operator()(F&& f)
             {
                 tools::par::init();
                 typedef std::pair<Eigen::VectorXd, double> pair_t;
-                auto body = [=](int i) {
+                auto body = [&](int i) {
                 // clang-format off
                 // we need a copy because each thread should touch a copy of the struct!
                 F f_copy = f;

@@ -84,12 +84,12 @@ namespace limbo {
                     return std::make_pair(lik, grad);
                 }
 
-                size_t param_size()
+                size_t param_size() const
                 {
                     return this->_model.kernel_function().h_params_size();
                 }
 
-                Eigen::VectorXd init()
+                Eigen::VectorXd init() const
                 {
                     return (Eigen::VectorXd::Random(param_size()).array() - 1);
                 }

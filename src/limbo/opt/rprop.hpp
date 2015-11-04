@@ -25,7 +25,7 @@ namespace limbo {
         template <typename Params>
         struct Rprop {
             template <typename F>
-            Eigen::VectorXd operator()(F& f)
+            Eigen::VectorXd operator()(F&& f)
             {
                 // params
                 size_t param_dim = f.param_size();

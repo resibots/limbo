@@ -88,10 +88,9 @@ BOOST_AUTO_TEST_CASE(test_random_mono_dim)
     opt::RandomPoint<Params> optimizer;
 
     FakeAcquiMono f;
-    auto f_optimization = make_functor_optimization(f);
     monodim_calls = 0;
     for (int i = 0; i < 1000; i++) {
-        Eigen::VectorXd best_point = optimizer(f_optimization);
+        Eigen::VectorXd best_point = optimizer(make_functor_optimization(f));
         BOOST_CHECK_EQUAL(best_point.size(), 1);
         BOOST_CHECK(best_point(0) > 0 || std::abs(best_point(0)) < 1e-7);
         BOOST_CHECK(best_point(0) < 1 || std::abs(best_point(0) - 1) < 1e-7);
@@ -124,9 +123,8 @@ BOOST_AUTO_TEST_CASE(test_grid_search_mono_dim)
     opt::GridSearch<Params> optimizer;
 
     FakeAcquiMono f;
-    auto f_optimization = make_functor_optimization(f);
     monodim_calls = 0;
-    Eigen::VectorXd best_point = optimizer(f_optimization);
+    Eigen::VectorXd best_point = optimizer(make_functor_optimization(f));
 
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
@@ -158,8 +156,7 @@ BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)
     opt::Cmaes<Params> optimizer;
 
     FakeAcquiMono f;
-    auto f_optimization = make_functor_optimization(f);
-    Eigen::VectorXd best_point = optimizer(f_optimization);
+    Eigen::VectorXd best_point = optimizer(make_functor_optimization(f));
 
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
