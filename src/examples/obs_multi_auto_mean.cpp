@@ -36,6 +36,9 @@ struct Params {
     struct maxiterations {
         BO_PARAM(int, n_iterations, 100);
     };
+
+    struct parallel_repeater : defaults::parallel_repeater {
+    };
 };
 
 template <typename Params, typename Model>

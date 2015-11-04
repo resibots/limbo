@@ -8,6 +8,7 @@
 #include <Eigen/Cholesky>
 
 #include <limbo/opt/rprop.hpp>
+#include <limbo/opt/parallel_repeater.hpp>
 
 namespace limbo {
     namespace opt {
@@ -113,7 +114,8 @@ namespace limbo {
                 {
                     opt.compute(samples, observations, noise, bl_samples);
                     GPKernelMeanLFOptStruct<Params, Opt> util(opt);
-                    auto params = opt::par::rprop<Params>(util);
+                    ParallelRepeater<Params, Rprop<Params>> par_rprop;
+                    auto params = par_rprop(util);
                     opt.kernel_function().set_h_params(params.head(opt.kernel_function().h_params_size()));
                     opt.mean_function().set_h_params(params.tail(opt.mean_function().h_params_size()));
                     opt.set_lik(util.utility(params));

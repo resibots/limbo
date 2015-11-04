@@ -41,6 +41,9 @@ struct Params {
     struct rprop : public defaults::rprop {
     };
 
+    struct parallel_repeater : public defaults::parallel_repeater {
+    };
+
     struct init {
         BO_PARAM(int, nb_samples, 5);
         BO_PARAM(int, nb_bins, 5);

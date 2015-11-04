@@ -34,6 +34,9 @@ struct Params {
     struct init {
         BO_PARAM(int, nb_samples, 5);
     };
+
+    struct parallel_repeater : defaults::parallel_repeater {
+    };
 };
 
 template <typename Params, int obs_size = 1>

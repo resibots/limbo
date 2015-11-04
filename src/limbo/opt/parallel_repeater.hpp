@@ -25,6 +25,7 @@ namespace limbo {
                 typedef std::pair<Eigen::VectorXd, double> pair_t;
                 auto body = [=](int i) {
                 // clang-format off
+                // we need a copy because each thread should touch a copy of the struct!
                 F f_copy = f;
                 Eigen::VectorXd v = Optimizer()(f_copy);
 
@@ -40,7 +41,7 @@ namespace limbo {
                 };
 
                 pair_t init(f.init(), -std::numeric_limits<float>::max());
-                auto m = tools::par::max(init, Params::parallel_opti::repeats(), body, comp);
+                auto m = tools::par::max(init, Params::parallel_repeater::repeats(), body, comp);
 
                 return m.first;
             };

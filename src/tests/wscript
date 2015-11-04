@@ -26,7 +26,7 @@ def build(bld):
     bld.program(features='cxx test',
                 source='test_optimizers.cpp',
                 includes='. .. ../../',
-                target='test_inner_opti',
+                target='test_optimizers',
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
     bld.program(features='cxx test',
