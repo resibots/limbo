@@ -116,7 +116,7 @@ namespace limbo {
 
             const Eigen::MatrixXd& mean_vector() const { return _mean_vector; }
 
-            const Eigen::MatrixXd& obs_mean() { return _obs_mean; }
+            const Eigen::MatrixXd& obs_mean() const { return _obs_mean; }
 
             int nb_samples() const { return _samples.size(); }
 
