@@ -31,7 +31,7 @@ struct Params {
     struct gp_ucb : public defaults::gp_ucb {
     };
 
-    struct exhaustive_search {
+    struct grid_search {
         BO_PARAM(int, nb_pts, 20);
     };
 

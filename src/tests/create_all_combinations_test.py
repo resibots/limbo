@@ -23,7 +23,7 @@ def create(bld):
     models = ['GP']
     opt_models = ['ModelNoOpt', 'GPKernelLFOpt', 'GPKernelMeanLFOpt', 'GPMeanLFOpt']
     acquisitions = ['UCB', 'GP_UCB']
-    optimizers = ['RandomPoint', 'ExhaustiveSearch', 'Cmaes']
+    optimizers = ['RandomPoint', 'GridSearch', 'Cmaes']
     inits = ['NoInit', 'RandomSampling', 'RandomSamplingGrid', 'GridSampling']
     stats = ['Acquisitions']
     stops = ['MaxIterations', 'MaxPredictedValue']

@@ -5,7 +5,7 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/opt/cmaes.hpp>
-#include <limbo/opt/exhaustive_search.hpp>
+#include <limbo/opt/grid_search.hpp>
 #include <limbo/opt/random_point.hpp>
 
 using namespace limbo;
@@ -18,7 +18,7 @@ Eigen::VectorXd make_v1(double x)
 }
 
 struct Params {
-    struct exhaustive_search {
+    struct grid_search {
         BO_PARAM(int, nb_pts, 20);
     };
 
@@ -116,11 +116,11 @@ BOOST_AUTO_TEST_CASE(test_random_bi_dim)
     }
 }
 
-BOOST_AUTO_TEST_CASE(test_exhaustive_search_mono_dim)
+BOOST_AUTO_TEST_CASE(test_grid_search_mono_dim)
 {
     using namespace limbo;
 
-    opt::ExhaustiveSearch<Params> optimizer;
+    opt::GridSearch<Params> optimizer;
 
     FakeAcquiMono f;
     monodim_calls = 0;
@@ -128,14 +128,14 @@ BOOST_AUTO_TEST_CASE(test_exhaustive_search_mono_dim)
 
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
-    BOOST_CHECK_EQUAL(monodim_calls, Params::exhaustive_search::nb_pts() + 1);
+    BOOST_CHECK_EQUAL(monodim_calls, Params::grid_search::nb_pts() + 1);
 }
 
-BOOST_AUTO_TEST_CASE(test_exhaustive_search_bi_dim)
+BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
 {
     using namespace limbo;
 
-    opt::ExhaustiveSearch<Params> optimizer;
+    opt::GridSearch<Params> optimizer;
 
     FakeAcquiBi f;
     bidim_calls = 0;
@@ -144,8 +144,8 @@ BOOST_AUTO_TEST_CASE(test_exhaustive_search_bi_dim)
     BOOST_CHECK_EQUAL(best_point.size(), 2);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
     BOOST_CHECK_SMALL(best_point(1), 0.000001);
-    // TO-DO: Maybe alter a little exhaustive search so not to call more times the utility function
-    BOOST_CHECK_EQUAL(bidim_calls, (Params::exhaustive_search::nb_pts() + 1) * (Params::exhaustive_search::nb_pts() + 1) + 21);
+    // TO-DO: Maybe alter a little grid search so not to call more times the utility function
+    BOOST_CHECK_EQUAL(bidim_calls, (Params::grid_search::nb_pts() + 1) * (Params::grid_search::nb_pts() + 1) + 21);
 }
 
 BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)

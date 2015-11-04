@@ -13,7 +13,7 @@ struct Params {
         BO_PARAM(int, n_rprop, 300);
         BO_PARAM(int, rprop_restart, 10);
     };
-    struct exhaustive_search {
+    struct grid_search {
         BO_PARAM(int, nb_pts, 10);
     };
     struct boptimizer {
@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     using namespace limbo;
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::ExhaustiveSearch<Params> AcquiOpt_t;
+    typedef opt::GridSearch<Params> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
     typedef mean::Data<Params> Mean_t;
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     using namespace limbo;
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::ExhaustiveSearch<Params> AcquiOpt_t;
+    typedef opt::GridSearch<Params> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::Data<Params> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto_mean)
     using namespace limbo;
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::ExhaustiveSearch<Params> AcquiOpt_t;
+    typedef opt::GridSearch<Params> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     using namespace limbo;
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::ExhaustiveSearch<Params> AcquiOpt_t;
+    typedef opt::GridSearch<Params> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;

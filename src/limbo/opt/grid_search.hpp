@@ -1,5 +1,5 @@
-#ifndef LIMBO_OPT_EXHAUSTIVE_SEARCH_HPP
-#define LIMBO_OPT_EXHAUSTIVE_SEARCH_HPP
+#ifndef LIMBO_OPT_GRID_SEARCH_HPP
+#define LIMBO_OPT_GRID_SEARCH_HPP
 
 #include <limits>
 
@@ -8,7 +8,7 @@
 namespace limbo {
     namespace opt {
         template <typename Params>
-        struct ExhaustiveSearch {
+        struct GridSearch {
         public:
             template <typename F>
             Eigen::VectorXd operator()(const F& f)
@@ -20,7 +20,7 @@ namespace limbo {
             template <typename F>
             Eigen::VectorXd _inner_search(const F& f, int depth, const Eigen::VectorXd& current)
             {
-                double step_size = 1.0 / (double)Params::exhaustive_search::nb_pts();
+                double step_size = 1.0 / (double)Params::grid_search::nb_pts();
                 double upper_lim = 1.0 + step_size;
 
                 double best_fit = -std::numeric_limits<double>::max();
