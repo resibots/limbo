@@ -19,14 +19,14 @@ namespace limbo {
             typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
             typedef BoBase<Params, A3, A4, A5, A6> base_t;
             typedef typename base_t::model_t model_t;
-            typedef typename base_t::inner_optimization_t inner_optimization_t;
+            typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
 
             template <typename EvalFunction>
             void optimize(const EvalFunction& feval, bool reset = true)
             {
                 this->_init(feval, reset);
 
-                inner_optimization_t inner_opt;
+                acqui_optimizer_t inner_opt;
 
                 while (this->_samples.size() == 0 || this->_pursue(*this, FirstElem())) {
                     std::cout.flush();

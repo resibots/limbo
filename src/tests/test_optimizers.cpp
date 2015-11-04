@@ -1,14 +1,12 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE inner_optimization
+#define BOOST_TEST_MODULE optimizers
 
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/tools/macros.hpp>
-#include <limbo/opt/impl/inner_cmaes.hpp>
-#include <limbo/opt/impl/inner_exhaustive_search.hpp>
-#include <limbo/opt/impl/inner_random.hpp>
-
-#include <limbo/bayes_opt/bo_base.hpp>
+#include <limbo/opt/cmaes.hpp>
+#include <limbo/opt/exhaustive_search.hpp>
+#include <limbo/opt/random_point.hpp>
 
 using namespace limbo;
 
@@ -33,11 +31,10 @@ int monodim_calls = 0;
 struct FakeAcquiMono {
     size_t dim_in() const { return 1; }
 
-    template <typename AggregatorFunction>
-    double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+    double operator()(const Eigen::VectorXd& v) const
     {
         monodim_calls++;
-        return 3 * afun(v) + 5;
+        return 3 * v(0) + 5;
     }
 };
 
@@ -46,24 +43,54 @@ int bidim_calls = 0;
 struct FakeAcquiBi {
     size_t dim_in() const { return 2; }
 
-    template <typename AggregatorFunction>
-    double operator()(const Eigen::VectorXd& v, const AggregatorFunction&) const
+    double operator()(const Eigen::VectorXd& v) const
     {
         bidim_calls++;
         return 3 * v(0) + 5 - 2 * v(1) - 5 * v(1) + 2;
     }
 };
 
+template <typename Functor>
+struct FunctorOptimization {
+public:
+    FunctorOptimization(const Functor& f, const Eigen::VectorXd& init) : _f(f), _init(init) { }
+
+    double utility(const Eigen::VectorXd& params) const
+    {
+        return _f(params);
+    }
+
+    size_t param_size() const
+    {
+        return _f.dim_in();
+    }
+
+    const Eigen::VectorXd& init() const
+    {
+        return _init;
+    }
+
+protected:
+
+    const Functor& _f;
+    const Eigen::VectorXd& _init;
+};
+
+template <typename Functor>
+FunctorOptimization<Functor> make_functor_optimization(const Functor& f) {
+    return FunctorOptimization<Functor>(f, Eigen::VectorXd::Constant(f.dim_in(), 0.5));
+}
+
 BOOST_AUTO_TEST_CASE(test_random_mono_dim)
 {
     using namespace limbo;
 
-    opt::impl::InnerRandom<Params> inner_optimization;
+    opt::RandomPoint<Params> optimizer;
 
     FakeAcquiMono f;
     monodim_calls = 0;
     for (int i = 0; i < 1000; i++) {
-        Eigen::VectorXd best_point = inner_optimization(f, FirstElem());
+        Eigen::VectorXd best_point = optimizer(make_functor_optimization(f));
         BOOST_CHECK_EQUAL(best_point.size(), 1);
         BOOST_CHECK(best_point(0) > 0 || std::abs(best_point(0)) < 1e-7);
         BOOST_CHECK(best_point(0) < 1 || std::abs(best_point(0) - 1) < 1e-7);
@@ -74,14 +101,13 @@ BOOST_AUTO_TEST_CASE(test_random_bi_dim)
 {
     using namespace limbo;
 
-    opt::impl::InnerExhaustiveSearch<Params> inner_optimization;
+    opt::RandomPoint<Params> optimizer;
 
     FakeAcquiBi f;
+    auto fopti = FunctorOptimization<FakeAcquiBi>(f, Eigen::VectorXd::Constant(f.dim_in(), 0.5));
     bidim_calls = 0;
-    Eigen::VectorXd best_point = inner_optimization(f, FirstElem());
-
     for (int i = 0; i < 1000; i++) {
-        Eigen::VectorXd best_point = inner_optimization(f, FirstElem());
+        Eigen::VectorXd best_point = optimizer(fopti);
         BOOST_CHECK_EQUAL(best_point.size(), 2);
         BOOST_CHECK(best_point(0) > 0 || std::abs(best_point(0)) < 1e-7);
         BOOST_CHECK(best_point(0) < 1 || std::abs(best_point(0) - 1) < 1e-7);
@@ -94,11 +120,11 @@ BOOST_AUTO_TEST_CASE(test_exhaustive_search_mono_dim)
 {
     using namespace limbo;
 
-    opt::impl::InnerExhaustiveSearch<Params> inner_optimization;
+    opt::ExhaustiveSearch<Params> optimizer;
 
     FakeAcquiMono f;
     monodim_calls = 0;
-    Eigen::VectorXd best_point = inner_optimization(f, FirstElem());
+    Eigen::VectorXd best_point = optimizer(FunctorOptimization<FakeAcquiMono>(f, Eigen::VectorXd::Constant(f.dim_in(), 0.5)));
 
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
@@ -109,11 +135,11 @@ BOOST_AUTO_TEST_CASE(test_exhaustive_search_bi_dim)
 {
     using namespace limbo;
 
-    opt::impl::InnerExhaustiveSearch<Params> inner_optimization;
+    opt::ExhaustiveSearch<Params> optimizer;
 
     FakeAcquiBi f;
     bidim_calls = 0;
-    Eigen::VectorXd best_point = inner_optimization(f, FirstElem());
+    Eigen::VectorXd best_point = optimizer(FunctorOptimization<FakeAcquiBi>(f, Eigen::VectorXd::Constant(f.dim_in(), 0.5)));
 
     BOOST_CHECK_EQUAL(best_point.size(), 2);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
@@ -126,10 +152,10 @@ BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)
 {
     using namespace limbo;
 
-    opt::impl::InnerCmaes<Params> inner_optimization;
+    opt::Cmaes<Params> optimizer;
 
     FakeAcquiMono f;
-    Eigen::VectorXd best_point = inner_optimization(f, FirstElem());
+    Eigen::VectorXd best_point = optimizer(FunctorOptimization<FakeAcquiMono>(f, Eigen::VectorXd::Constant(f.dim_in(), 0.5)));
 
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
@@ -139,10 +165,10 @@ BOOST_AUTO_TEST_CASE(test_cmaes_bi_dim)
 {
     using namespace limbo;
 
-    opt::impl::InnerCmaes<Params> inner_optimization;
+    opt::Cmaes<Params> optimizer;
 
     FakeAcquiBi f;
-    Eigen::VectorXd best_point = inner_optimization(f, FirstElem());
+    Eigen::VectorXd best_point = optimizer(FunctorOptimization<FakeAcquiBi>(f, Eigen::VectorXd::Constant(f.dim_in(), 0.5)));
 
     BOOST_CHECK_EQUAL(best_point.size(), 2);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);

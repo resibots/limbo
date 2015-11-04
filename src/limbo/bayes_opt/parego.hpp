@@ -22,7 +22,7 @@ namespace limbo {
         public:
             typedef BoBase<Params, A3, A4, A5, A6> base_t;
             typedef typename base_t::model_t model_t;
-            typedef typename base_t::inner_optimization_t inner_optimization_t;
+            typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
             typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, double> pareto_point_t;
             typedef std::vector<pareto_point_t> pareto_t;
@@ -36,7 +36,7 @@ namespace limbo {
                 model_t model(EvalFunction::dim);
                 model.compute(this->_samples, scalarized, Params::boptimizer::noise());
 
-                inner_optimization_t inner_optimization;
+                acqui_optimizer_t inner_optimization;
 
                 while (this->_samples.size() == 0 || this->_pursue(*this, FirstElem())) {
                     acquisition_function_t acqui(model, this->_iteration);

@@ -22,7 +22,7 @@
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/mean/data.hpp>
-#include <limbo/opt/impl/inner_cmaes.hpp>
+#include <limbo/opt/cmaes.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/init/random_sampling.hpp>
 
@@ -62,7 +62,7 @@ namespace limbo {
     // see:
     // http://www.boost.org/doc/libs/1_55_0/libs/parameter/doc/html/index.html#parameter-enabled-class-templates
 
-    BOOST_PARAMETER_TEMPLATE_KEYWORD(inneropt)
+    BOOST_PARAMETER_TEMPLATE_KEYWORD(acquiopt)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(initfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(acquifun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)
@@ -87,7 +87,7 @@ namespace limbo {
 
     namespace bayes_opt {
 
-        typedef boost::parameter::parameters<boost::parameter::optional<tag::inneropt>,
+        typedef boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>,
             boost::parameter::optional<tag::statsfun>,
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
@@ -105,7 +105,7 @@ namespace limbo {
             // defaults
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
-                typedef opt::impl::InnerCmaes<Params> inneropt_t; // 2
+                typedef opt::Cmaes<Params> acquiopt_t; // 2
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
                 typedef model::GP<Params, kf_t, mean_t> model_t; // 3
@@ -119,13 +119,14 @@ namespace limbo {
 
             // extract the types
             typedef typename class_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
-            typedef typename boost::parameter::binding<args, tag::inneropt, typename defaults::inneropt_t>::type inner_optimization_t;
+            typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
             typedef typename boost::parameter::binding<args, tag::initfun, typename defaults::init_t>::type init_function_t;
             typedef typename boost::parameter::binding<args, tag::acquifun, typename defaults::acqui_t>::type acquisition_function_t;
             typedef typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type model_t;
             typedef typename boost::parameter::binding<args, tag::statsfun, typename defaults::stat_t>::type Stat;
             typedef typename boost::parameter::binding<args, tag::stopcrit, typename defaults::stop_t>::type StoppingCriteria;
             typedef typename boost::parameter::binding<args, tag::optfun, typename defaults::opt_t>::type opt_t;
+
 
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<StoppingCriteria>, StoppingCriteria, boost::fusion::vector<StoppingCriteria>>::type stopping_criteria_t;
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<Stat>, Stat, boost::fusion::vector<Stat>>::type stat_t;

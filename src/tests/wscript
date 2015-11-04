@@ -30,7 +30,7 @@ def build(bld):
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
     bld.program(features='cxx test',
-                source='test_inner_opti.cpp',
+                source='test_optimizers.cpp',
                 includes='. .. ../../',
                 target='test_inner_opti',
                 uselib='BOOST EIGEN TBB',

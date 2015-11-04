@@ -22,7 +22,7 @@ def create(bld):
 
     models = ['GP', 'GPAuto', 'GPAutoMean']
     acquisitions = ['UCB', 'GP_UCB']
-    inner_optis = ['InnerRandom', 'InnerExhaustiveSearch', 'InnerCmaes']
+    optimizers = ['RandomPoint', 'ExhaustiveSearch', 'Cmaes']
     inits = ['NoInit', 'RandomSampling', 'RandomSamplingGrid', 'GridSampling']
     stats = ['Acquisitions']
     stops = ['MaxIterations', 'MaxPredictedValue']
@@ -46,14 +46,14 @@ def create(bld):
                 if (kernel in kernel_incompatibility and model in kernel_incompatibility[kernel]) or (mean in mean_incompatibiliy and model in mean_incompatibiliy[mean]):
                     continue
                 for acqui in acquisitions:
-                    for inner_opt in inner_optis:
+                    for acqui_opt in optimizers:
                         for init in inits:
                             declarations = stats + stops
                             declarations = declarations + '    typedef kernel::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
                             declarations = declarations + '    typedef mean::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
                             declarations = declarations + '    typedef model::' + model + '<Params, kernel_' + str(i) + '_t, mean_' + str(i) + '_t> model_' + str(i) + '_t;\n'
                             declarations = declarations + '    typedef acqui::' + acqui + '<Params, model_' + str(i) + '_t> acqui_' + str(i) + '_t;\n'
-                            declarations = declarations + '    typedef opt::impl::' + inner_opt + '<Params> inner_opt_' + str(i) + '_t;\n'
+                            declarations = declarations + '    typedef opt::' + acqui_opt + '<Params> inner_opt_' + str(i) + '_t;\n'
                             declarations = declarations + '    typedef init::' + init + '<Params> init_' + str(i) + '_t;\n'
                             declarations = declarations + '    bayes_opt::BOptimizer<Params, modelfun<model_' + str(i) + '_t>, acquifun<acqui_' + str(i) + '_t>, inneropt<inner_opt_' + str(i) + '_t>, initfun<init_' + str(i) + '_t>, statsfun<stats_t>, stopcrit<stops_t>> opt_' + str(i) + ';\n'
                             with open(bld.path.abspath() + '/combinations/combinations_' + str(i) + '.cpp', 'w') as f:
