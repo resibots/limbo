@@ -32,7 +32,7 @@ namespace limbo {
             public:
                 AcquiOptimization(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _acqui(acqui), _afun(afun), _init(init) {}
 
-                double utility(const Eigen::VectorXd& params) const
+                double utility(const Eigen::VectorXd& params)
                 {
                     return _acqui(params, _afun);
                 }
@@ -69,7 +69,8 @@ namespace limbo {
                     acquisition_function_t acqui(_model, this->_iteration);
 
                     Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
-                    Eigen::VectorXd new_sample = acqui_optimizer(AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point));
+                    auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
+                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization);
                     bool blacklisted = false;
                     try {
                         this->add_new_sample(new_sample, sfun(new_sample));

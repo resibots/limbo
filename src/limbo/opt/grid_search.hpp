@@ -11,14 +11,14 @@ namespace limbo {
         struct GridSearch {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f)
+            Eigen::VectorXd operator()(F& f)
             {
                 return _inner_search(f, 0, f.init());
             }
 
         protected:
             template <typename F>
-            Eigen::VectorXd _inner_search(const F& f, int depth, const Eigen::VectorXd& current)
+            Eigen::VectorXd _inner_search(F& f, int depth, const Eigen::VectorXd& current)
             {
                 double step_size = 1.0 / (double)Params::grid_search::nb_pts();
                 double upper_lim = 1.0 + step_size;
