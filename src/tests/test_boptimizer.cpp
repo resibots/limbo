@@ -13,8 +13,7 @@ struct Params {
         BO_PARAM(int, n_rprop, 300);
         BO_PARAM(int, rprop_restart, 10);
     };
-    struct exhaustive_search
-    {
+    struct exhaustive_search {
         BO_PARAM(int, nb_pts, 10);
     };
     struct boptimizer {
@@ -32,11 +31,9 @@ struct Params {
     struct ucb {
         BO_PARAM(float, alpha, 0.125);
     };
-    struct init
-    {
+    struct init {
         BO_PARAM(int, nb_samples, 5);
     };
-
 };
 
 template <typename Params, int obs_size = 1>
@@ -45,15 +42,16 @@ struct fit_eval_map {
     BOOST_STATIC_CONSTEXPR int dim_in = 3;
 
     BOOST_STATIC_CONSTEXPR int dim_out = obs_size;
-    fit_eval_map()
-    {}
+    fit_eval_map() {}
 
     Eigen::VectorXd operator()(Eigen::VectorXd x) const
     {
         Eigen::VectorXd v(1);
         Eigen::VectorXd t(3);
-        t(0) = 0.1; t(1) = 0.2; t(2) = 0.3; //t(3) = 0.4; t(4) = 0.5; t(5) = 0.6;
-        double y = (x-t).norm();
+        t(0) = 0.1;
+        t(1) = 0.2;
+        t(2) = 0.3; //t(3) = 0.4; t(4) = 0.5; t(5) = 0.6;
+        double y = (x - t).norm();
         v(0) = -y;
         return v;
     }

@@ -13,15 +13,14 @@ namespace limbo {
     namespace opt {
         namespace impl {
             template <typename Params, typename Model>
-            struct GPMeanLFOptStruct
-            {
+            struct GPMeanLFOptStruct {
             public:
                 GPMeanLFOptStruct(const Model& model) : _model(model) {}
 
                 double utility(const Eigen::VectorXd& params)
                 {
                     this->_model.mean_function().set_h_params(params);
-                    
+
                     this->_model.update();
 
                     size_t n = this->_model.obs_mean().rows();
@@ -45,7 +44,7 @@ namespace limbo {
                 std::pair<double, Eigen::VectorXd> utility_and_grad(const Eigen::VectorXd& params)
                 {
                     this->_model.mean_function().set_h_params(params);
-                    
+
                     this->_model.update();
 
                     size_t n = this->_model.obs_mean().rows();
@@ -68,9 +67,9 @@ namespace limbo {
 
                     Eigen::VectorXd grad = Eigen::VectorXd::Zero(this->param_size());
                     for (int i_obs = 0; i_obs < this->_model.dim_out(); ++i_obs)
-                    for (size_t n_obs = 0; n_obs < n; n_obs++) {
-                        grad.tail(this->_model.mean_function().h_params_size()) += this->_model.obs_mean().col(i_obs).transpose() * K.col(n_obs) * this->_model.mean_function().grad(this->_model.samples()[n_obs], this->_model).row(i_obs);
-                    }
+                        for (size_t n_obs = 0; n_obs < n; n_obs++) {
+                            grad.tail(this->_model.mean_function().h_params_size()) += this->_model.obs_mean().col(i_obs).transpose() * K.col(n_obs) * this->_model.mean_function().grad(this->_model.samples()[n_obs], this->_model).row(i_obs);
+                        }
 
                     return std::make_pair(lik, grad);
                 }
@@ -84,6 +83,7 @@ namespace limbo {
                 {
                     return (Eigen::VectorXd::Random(param_size()).array() - 1);
                 }
+
             protected:
                 Model _model;
                 Eigen::VectorXd _init;

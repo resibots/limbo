@@ -13,15 +13,14 @@ namespace limbo {
     namespace opt {
         namespace impl {
             template <typename Params, typename Model>
-            struct GPKernelLFOptStruct
-            {
+            struct GPKernelLFOptStruct {
             public:
                 GPKernelLFOptStruct(const Model& model) : _model(model) {}
 
                 double utility(const Eigen::VectorXd& params)
                 {
                     this->_model.kernel_function().set_h_params(params);
-                    
+
                     this->_model.update();
 
                     size_t n = this->_model.obs_mean().rows();
@@ -45,7 +44,7 @@ namespace limbo {
                 std::pair<double, Eigen::VectorXd> utility_and_grad(const Eigen::VectorXd& params)
                 {
                     this->_model.kernel_function().set_h_params(params);
-                    
+
                     this->_model.update();
 
                     size_t n = this->_model.obs_mean().rows();
@@ -93,6 +92,7 @@ namespace limbo {
                 {
                     return (Eigen::VectorXd::Random(param_size()).array() - 1);
                 }
+
             protected:
                 Model _model;
                 Eigen::VectorXd _init;
