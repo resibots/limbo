@@ -206,6 +206,12 @@ struct Params {
 
     struct cmaes : public defaults::cmaes {
     };
+
+    struct rprop : public defaults::rprop {
+    };
+
+    struct parallel_repeater : public defaults::parallel_repeater {
+    };
 };
 
 template <typename T>

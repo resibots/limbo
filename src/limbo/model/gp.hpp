@@ -6,33 +6,18 @@
 #include <limits>
 #include <vector>
 
-#include <boost/parameter.hpp>
-
 #include <Eigen/Core>
 #include <Eigen/LU>
 #include <Eigen/Cholesky>
 
-#include <limbo/opt/impl/model_no_opt.hpp>
+#include <limbo/model/gp/no_lf_opt.hpp>
 
 namespace limbo {
-
-    BOOST_PARAMETER_TEMPLATE_KEYWORD(optfun)
-
     namespace model {
 
-        typedef boost::parameter::parameters<boost::parameter::optional<tag::optfun>> gp_signature;
-
-        template <typename Params, typename KernelFunction, typename MeanFunction, class OptFun = boost::parameter::void_>
+        template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = gp::NoLFOpt<Params>>
         class GP {
         public:
-            // defaults
-            struct defaults {
-                typedef opt::impl::ModelNoOpt<Params> opt_t; // 1
-            };
-
-            typedef typename gp_signature::bind<OptFun>::type args;
-            typedef typename boost::parameter::binding<args, tag::optfun, typename defaults::opt_t>::type opt_t;
-
             GP() : _dim_in(-1), _dim_out(-1) {}
             // useful because the model might be created  before having samples
             GP(int dim_in, int dim_out)
@@ -67,7 +52,7 @@ namespace limbo {
                 _compute_obs_mean();
                 _compute_kernel();
 
-                opt_t()(*this);
+                HyperParamsOptimizer()(*this);
             }
 
             // return mu, sigma (unormaliz)
@@ -122,7 +107,7 @@ namespace limbo {
             Eigen::VectorXd max_observation() const
             {
                 if (_observations.cols() > 1)
-                    std::cout << "WARNING max_observation with multi dim_inensional "
+                    std::cout << "WARNING max_observation with multi dimensional "
                                  "observations doesn't make sense" << std::endl;
                 return _observations.maxCoeff();
             }

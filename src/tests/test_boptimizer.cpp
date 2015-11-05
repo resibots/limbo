@@ -91,8 +91,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     typedef mean::Data<Params> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
     typedef init::NoInit<Params> Init_t;
-    typedef opt::impl::GPKernelLFOpt<Params> opt_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, optfun<opt_t>> GP_t;
+    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
@@ -113,8 +112,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto_mean)
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
     typedef init::NoInit<Params> Init_t;
-    typedef opt::impl::GPKernelMeanLFOpt<Params> opt_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, optfun<opt_t>> GP_t;
+    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
@@ -135,8 +133,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
     typedef init::NoInit<Params> Init_t;
-    typedef opt::impl::GPMeanLFOpt<Params> opt_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, optfun<opt_t>> GP_t;
+    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::MeanLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
