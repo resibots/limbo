@@ -29,8 +29,11 @@ namespace limbo {
                     return true;
 
                 GPMean<BO> gpmean(bo);
-                typename BO::inner_optimization_t opti;
-                double val = gpmean(opti(gpmean, afun), afun);
+                typename BO::acqui_optimizer_t opti;
+                typename BO::acquisition_function_t acqui(bo.model(), bo.iteration());
+                Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(acqui.dim_in()).array() + 1) / 2;
+                auto acqui_optimization = typename BO::template AcquiOptimization<typename BO::acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
+                double val = gpmean(opti(acqui_optimization), afun);
 
                 if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::maxpredictedvalue::ratio() * val)
                     return true;

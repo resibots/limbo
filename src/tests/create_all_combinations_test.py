@@ -53,12 +53,12 @@ def create(bld):
                                 declarations = stats + stops
                                 declarations = declarations + '    typedef kernel::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef mean::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef model::' + model + '<Params, kernel_' + str(i) + '_t, mean_' + str(i) + '_t> model_' + str(i) + '_t;\n'
+                                declarations = declarations + '    typedef opt::impl::' + opt_model + '<Params> model_opt_' + str(i) + '_t;\n'
+                                declarations = declarations + '    typedef model::' + model + '<Params, kernel_' + str(i) + '_t, mean_' + str(i) + '_t, optfun<model_opt_' + str(i) + '_t>> model_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef acqui::' + acqui + '<Params, model_' + str(i) + '_t> acqui_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef opt::' + acqui_opt + '<Params> acqui_opt_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef init::' + init + '<Params> init_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef opt::impl::' + opt_model + '<Params> model_opt_' + str(i) + '_t;\n'
-                                declarations = declarations + '    bayes_opt::BOptimizer<Params, modelfun<model_' + str(i) + '_t>, acquifun<acqui_' + str(i) + '_t>, acquiopt<acqui_opt_' + str(i) + '_t>, initfun<init_' + str(i) + '_t>, optfun<model_opt_' + str(i) + '_t>, statsfun<stats_t>, stopcrit<stops_t>> opt_' + str(i) + ';\n'
+                                declarations = declarations + '    bayes_opt::BOptimizer<Params, modelfun<model_' + str(i) + '_t>, acquifun<acqui_' + str(i) + '_t>, acquiopt<acqui_opt_' + str(i) + '_t>, initfun<init_' + str(i) + '_t>, statsfun<stats_t>, stopcrit<stops_t>> opt_' + str(i) + ';\n'
                                 with open(bld.path.abspath() + '/combinations/combinations_' + str(i) + '.cpp', 'w') as f:
                                     f.write(template.replace('@declarations', declarations).replace('@optimizer', 'opt_' + str(i)))
                                 bld.program(features='cxx',
