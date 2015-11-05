@@ -1,6 +1,6 @@
 #ifndef LIMBO_BAYES_OPT_BO_BASE_HPP
 #define LIMBO_BAYES_OPT_BO_BASE_HPP
-#define BOOST_PARAMETER_MAX_ARITY 7
+
 #include <vector>
 #include <iostream>
 #include <limits>
@@ -24,7 +24,6 @@
 #include <limbo/mean/data.hpp>
 #include <limbo/opt/cmaes.hpp>
 #include <limbo/model/gp.hpp>
-#include <limbo/opt/impl/model_no_opt.hpp>
 #include <limbo/init/random_sampling.hpp>
 
 namespace limbo {
@@ -59,7 +58,6 @@ namespace limbo {
     BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(statsfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(stopcrit)
-    BOOST_PARAMETER_TEMPLATE_KEYWORD(optfun)
 
     template <typename T, typename std::enable_if<std::is_arithmetic<T>::value, int>::type = 0>
     inline bool is_nan_or_inf(T v)
@@ -83,13 +81,12 @@ namespace limbo {
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
-            boost::parameter::optional<tag::modelfun>,
-            boost::parameter::optional<tag::optfun>> class_signature;
+            boost::parameter::optional<tag::modelfun>> class_signature;
 
         template <class Params, class A1 = boost::parameter::void_,
             class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
             class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
-            class A6 = boost::parameter::void_, class A7 = boost::parameter::void_>
+            class A6 = boost::parameter::void_>
         class BoBase {
         public:
             typedef Params params_t;
@@ -105,7 +102,6 @@ namespace limbo {
                 typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
                 typedef stat::Acquisitions<Params> stat_t; // 5
                 typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 6
-                typedef opt::impl::ModelNoOpt<Params> opt_t; // 7
             };
 
             // extract the types
@@ -116,7 +112,6 @@ namespace limbo {
             typedef typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type model_t;
             typedef typename boost::parameter::binding<args, tag::statsfun, typename defaults::stat_t>::type Stat;
             typedef typename boost::parameter::binding<args, tag::stopcrit, typename defaults::stop_t>::type StoppingCriteria;
-            typedef typename boost::parameter::binding<args, tag::optfun, typename defaults::opt_t>::type opt_t;
 
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<StoppingCriteria>, StoppingCriteria, boost::fusion::vector<StoppingCriteria>>::type stopping_criteria_t;
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<Stat>, Stat, boost::fusion::vector<Stat>>::type stat_t;

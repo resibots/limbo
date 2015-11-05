@@ -102,10 +102,8 @@ namespace limbo {
             template <typename Params>
             struct GPKernelLFOpt {
                 template <typename Opt>
-                void operator()(Opt& opt, const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, double noise,
-                    const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
+                void operator()(Opt& opt)
                 {
-                    opt.compute(samples, observations, noise, bl_samples);
                     GPKernelLFOptStruct<Params, Opt> util(opt);
                     ParallelRepeater<Params, Rprop<Params>> par_rprop;
                     auto params = par_rprop(util);
