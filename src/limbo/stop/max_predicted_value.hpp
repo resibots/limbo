@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include <boost/parameter/aux_/void.hpp>
+
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
@@ -10,62 +12,82 @@
 namespace limbo {
 
     namespace defaults {
-        struct maxpredictedvalue {
-            BO_PARAM(float, ratio, 0.9);
+        struct max_predicted_value {
+            BO_PARAM(double, ratio, 0.9);
         };
     }
 
     namespace stop {
-        template <typename Params>
+        template <typename Params, typename Optimizer = boost::parameter::void_>
         struct MaxPredictedValue {
 
             MaxPredictedValue() {}
 
             template <typename BO, typename AggregatorFunction>
-            bool operator()(const BO& bo, const AggregatorFunction& afun)
+            bool operator()(const BO& bo, const AggregatorFunction& afun) const
             {
                 // Prevent instantiation of GPMean if there are no observed samplesgit
                 if (bo.observations().size() == 0)
                     return true;
+                
+                auto optimizer = _get_optimizer(typename BO::acqui_optimizer_t(), Optimizer());
+                Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(bo.model().dim_in()).array() + 1) / 2;
+                double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point))));
 
-                GPMean<BO> gpmean(bo);
-                typename BO::acqui_optimizer_t opti;
-                typename BO::acquisition_function_t acqui(bo.model(), bo.iteration());
-                Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(acqui.dim_in()).array() + 1) / 2;
-                auto acqui_optimization = typename BO::template AcquiOptimization<typename BO::acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
-                double val = gpmean(opti(acqui_optimization), afun);
-
-                if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::maxpredictedvalue::ratio() * val)
+                if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::max_predicted_value::ratio() * val)
                     return true;
                 else {
                     std::cout << "stop caused by Max predicted value reached. Thresold: "
-                              << Params::maxpredictedvalue::ratio() * val
+                              << Params::max_predicted_value::ratio() * val
                               << " max observations: " << bo.best_observation(afun) << std::endl;
                     return false;
                 }
             }
 
         protected:
-            template <typename BO>
-            struct GPMean {
-                GPMean(const BO& bo)
-                    : _model(bo.samples()[0].size(), bo.observations()[0].size())
-                { // should have at least one sample
-                    _model.compute(bo.samples(), bo.observations(),
-                        BO::params_t::boptimizer::noise());
+            template <typename Model, typename AggregatorFunction>
+            struct ModelMeanOptimization {
+            public:
+                ModelMeanOptimization(const Model& model, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _model(model), _afun(afun), _init(init) {}
+
+                double utility(const Eigen::VectorXd& v)
+                {
+                    return _afun(_model.mu(v));
                 }
 
-                template <typename AggregatorFunction>
-                double operator()(const Eigen::VectorXd& v, const AggregatorFunction afun) const { return afun(_model.mu(v)); }
-
-                int dim_in() const
+                size_t param_size() const
                 {
                     return _model.dim_in();
                 }
 
+                const Eigen::VectorXd& init() const
+                {
+                    return _init;
+                }
+
             protected:
-                typename BO::model_t _model;
+                const Model& _model;
+                const AggregatorFunction& _afun;
+                const Eigen::VectorXd _init;
             };
+
+            template <typename Model, typename AggregatorFunction>
+            inline ModelMeanOptimization<Model, AggregatorFunction> _make_model_mean_optimization(const Model& model, const AggregatorFunction& afun, const Eigen::VectorXd& init) const
+            {
+                return ModelMeanOptimization<Model, AggregatorFunction>(model, afun, init);
+            }
+
+            template<typename BoAcquiOpt>
+            inline BoAcquiOpt _get_optimizer(const BoAcquiOpt& bo_acqui_opt, boost::parameter::void_)  const
+            {
+                return bo_acqui_opt;
+            }
+
+            template<typename BoAcquiOpt, typename CurrentOpt>
+            inline CurrentOpt _get_optimizer(const BoAcquiOpt&, const CurrentOpt& current_opt) const
+            {
+                return current_opt;
+            }
         };
     }
 }

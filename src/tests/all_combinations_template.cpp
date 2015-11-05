@@ -53,7 +53,7 @@ struct Params {
         BO_PARAM(int, n_iterations, 20);
     };
 
-    struct maxpredictedvalue {
+    struct max_predicted_value {
         BO_PARAM(double, ratio, 2);
     };
 
