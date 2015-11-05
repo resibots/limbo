@@ -26,19 +26,19 @@ namespace limbo {
             {
                 // Prevent instantiation of GPMean if there are no observed samplesgit
                 if (bo.observations().size() == 0)
-                    return true;
+                    return false;
 
                 GPMean<BO> gpmean(bo);
                 typename BO::inner_optimization_t opti;
                 double val = gpmean(opti(gpmean, gpmean.dim_in(), afun), afun);
 
                 if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::maxpredictedvalue::ratio() * val)
-                    return true;
+                    return false;
                 else {
                     std::cout << "stop caused by Max predicted value reached. Thresold: "
                               << Params::maxpredictedvalue::ratio() * val
                               << " max observations: " << bo.best_observation(afun) << std::endl;
-                    return false;
+                    return true;
                 }
             }
 

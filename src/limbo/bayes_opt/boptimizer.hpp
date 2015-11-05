@@ -37,7 +37,7 @@ namespace limbo {
                         Params::boptimizer::noise());
                 inner_optimization_t inner_optimization;
 
-                while (this->_samples.size() == 0 || this->_pursue(*this, afun)) {
+                while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
                     acquisition_function_t acqui(_model, this->_iteration);
 
                     Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in(), afun);

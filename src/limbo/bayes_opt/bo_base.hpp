@@ -162,10 +162,10 @@ namespace limbo {
             }
 
             template <typename BO, typename AggregatorFunction>
-            bool _pursue(const BO& bo, const AggregatorFunction& afun) const
+            bool _stop(const BO& bo, const AggregatorFunction& afun) const
             {
                 stop::ChainCriteria<BO, AggregatorFunction> chain(bo, afun);
-                return boost::fusion::accumulate(_stopping_criteria, true, chain);
+                return boost::fusion::accumulate(_stopping_criteria, false, chain);
             }
 
             template <typename BO>
