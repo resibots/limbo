@@ -8,20 +8,20 @@ import os
 def create(bld):
     kernels = ['Exp', 'MaternThreeHalfs', 'MaternFiveHalfs', 'SquaredExpARD']
     kernel_incompatibility = {}
-    kernel_incompatibility['Exp'] = ['GPKernelLFOpt', 'GPKernelMeanLFOpt', 'GPMeanLFOpt']
-    kernel_incompatibility['MaternThreeHalfs'] = ['GPKernelLFOpt', 'GPKernelMeanLFOpt', 'GPMeanLFOpt']
-    kernel_incompatibility['MaternFiveHalfs'] = ['GPKernelLFOpt', 'GPKernelMeanLFOpt', 'GPMeanLFOpt']
+    kernel_incompatibility['Exp'] = ['KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
+    kernel_incompatibility['MaternThreeHalfs'] = ['KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
+    kernel_incompatibility['MaternFiveHalfs'] = ['KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
 
     means = ['NullFunction', 'Constant', 'Data', 'FunctionARD']
     mean_additional_params = {}
     mean_additional_params['FunctionARD'] = ['MeanEval']
     mean_incompatibiliy = {}
-    mean_incompatibiliy['NullFunction'] = ['GPKernelMeanLFOpt', 'GPMeanLFOpt']
-    mean_incompatibiliy['Constant'] = ['GPKernelMeanLFOpt', 'GPMeanLFOpt']
-    mean_incompatibiliy['Data'] = ['GPKernelMeanLFOpt', 'GPMeanLFOpt']
+    mean_incompatibiliy['NullFunction'] = ['KernelMeanLFOpt', 'MeanLFOpt']
+    mean_incompatibiliy['Constant'] = ['KernelMeanLFOpt', 'MeanLFOpt']
+    mean_incompatibiliy['Data'] = ['KernelMeanLFOpt', 'MeanLFOpt']
 
     models = ['GP']
-    opt_models = ['ModelNoOpt', 'GPKernelLFOpt', 'GPKernelMeanLFOpt', 'GPMeanLFOpt']
+    gp_lf_optimizations = ['NoLFOpt', 'KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
     acquisitions = ['UCB', 'GP_UCB']
     optimizers = ['RandomPoint', 'GridSearch', 'Cmaes']
     inits = ['NoInit', 'RandomSampling', 'RandomSamplingGrid', 'GridSampling']
@@ -44,8 +44,8 @@ def create(bld):
     for kernel in kernels:
         for mean in means:
             for model in models:
-                for opt_model in opt_models:
-                    if (kernel in kernel_incompatibility and opt_model in kernel_incompatibility[kernel]) or (mean in mean_incompatibiliy and opt_model in mean_incompatibiliy[mean]):
+                for gp_lf_opt in gp_lf_optimizations:
+                    if (kernel in kernel_incompatibility and gp_lf_opt in kernel_incompatibility[kernel]) or (mean in mean_incompatibiliy and gp_lf_opt in mean_incompatibiliy[mean]):
                         continue
                     for acqui in acquisitions:
                         for acqui_opt in optimizers:
@@ -53,8 +53,8 @@ def create(bld):
                                 declarations = stats + stops
                                 declarations = declarations + '    typedef kernel::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef mean::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef opt::impl::' + opt_model + '<Params> model_opt_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef model::' + model + '<Params, kernel_' + str(i) + '_t, mean_' + str(i) + '_t, optfun<model_opt_' + str(i) + '_t>> model_' + str(i) + '_t;\n'
+                                declarations = declarations + '    typedef model::gp::' + gp_lf_opt + '<Params> gp_lf_opt_' + str(i) + '_t;\n'
+                                declarations = declarations + '    typedef model::' + model + '<Params, kernel_' + str(i) + '_t, mean_' + str(i) + '_t, gp_lf_opt_' + str(i) + '_t> model_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef acqui::' + acqui + '<Params, model_' + str(i) + '_t> acqui_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef opt::' + acqui_opt + '<Params> acqui_opt_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef init::' + init + '<Params> init_' + str(i) + '_t;\n'
