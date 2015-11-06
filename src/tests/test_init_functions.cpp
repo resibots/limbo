@@ -91,8 +91,8 @@ BOOST_AUTO_TEST_CASE(random_sampling)
 
     Opt_t opt;
     opt.optimize(fit_eval());
-    BOOST_CHECK(opt.observations().size() == 11);
-    BOOST_CHECK(opt.samples().size() == 11);
+    BOOST_CHECK(opt.observations().size() == 10);
+    BOOST_CHECK(opt.samples().size() == 10);
     for (size_t j = 0; j < opt.samples().size() - 1; ++j) {
         const Eigen::VectorXd& x = opt.samples()[j];
         std::cout << x.transpose() << std::endl;
@@ -118,8 +118,8 @@ BOOST_AUTO_TEST_CASE(random_sampling_grid)
 
     Opt_t opt;
     opt.optimize(fit_eval());
-    BOOST_CHECK(opt.observations().size() == 10 + 1);
-    BOOST_CHECK(opt.samples().size() == 10 + 1);
+    BOOST_CHECK(opt.observations().size() == 10);
+    BOOST_CHECK(opt.samples().size() == 10);
     for (size_t j = 0; j < opt.samples().size() - 1; ++j) {
         const Eigen::VectorXd& x = opt.samples()[j];
         std::cout << x.transpose() << std::endl;
@@ -146,8 +146,8 @@ BOOST_AUTO_TEST_CASE(grid_sampling)
     Opt_t opt;
     opt.optimize(fit_eval());
     std::cout << opt.observations().size() << std::endl;
-    BOOST_CHECK(opt.observations().size() == 25 + 1);
-    BOOST_CHECK(opt.samples().size() == 25 + 1);
+    BOOST_CHECK(opt.observations().size() == 25);
+    BOOST_CHECK(opt.samples().size() == 25);
     for (size_t j = 0; j < opt.samples().size() - 1; ++j) {
         const Eigen::VectorXd& x = opt.samples()[j];
         std::cout << x.transpose() << std::endl;

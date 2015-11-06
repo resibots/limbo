@@ -50,7 +50,7 @@ namespace limbo {
             public:
                 ModelMeanOptimization(const Model& model, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _model(model), _afun(afun), _init(init) {}
 
-                double utility(const Eigen::VectorXd& v)
+                double utility(const Eigen::VectorXd& v) const
                 {
                     return _afun(_model.mu(v));
                 }
