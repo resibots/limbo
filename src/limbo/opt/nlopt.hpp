@@ -17,7 +17,7 @@ namespace limbo {
             {
               nlopt::opt opt(Algorithm, f.param_size());
 
-              opt.set_min_objective(this->nlopt_func, NULL);
+              opt.set_min_objective(this->nlopt_func<F>, (void*)&f);
 
               std::vector<double> x(f.init().size());
               for(int i=0;i<f.init().size();i++)
@@ -33,15 +33,24 @@ namespace limbo {
             }
 
           protected:
+            template<typename F>
             static double nlopt_func(const std::vector<double> &x, std::vector<double> &grad, void *my_func_data)
             {
+              F* f = (F*)(my_func_data);
               Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());
-              double v = x[0]*x[0]+x[1]*x[1];
+              double v;
               if(!grad.empty())
               {
                 Eigen::VectorXd g;
-                grad[0] = 2*x[0];
-                grad[1] = 2*x[1];
+                auto p = f->utility_and_grad(params);
+                v = std::get<0>(p);
+                g = std::get<1>(p);
+                for(int i=0;i<g.size();i++)
+                  grad[i] = g(i);
+              }
+              else
+              {
+                v = f->utility(params);
               }
               return v;
             }
