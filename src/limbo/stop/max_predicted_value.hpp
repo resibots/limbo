@@ -28,19 +28,19 @@ namespace limbo {
             {
                 // Prevent instantiation of GPMean if there are no observed samplesgit
                 if (bo.observations().size() == 0)
-                    return true;
+                    return false;
 
                 auto optimizer = _get_optimizer(typename BO::acqui_optimizer_t(), Optimizer());
                 Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(bo.model().dim_in()).array() + 1) / 2;
                 double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point))));
 
                 if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::max_predicted_value::ratio() * val)
-                    return true;
+                    return false;
                 else {
                     std::cout << "stop caused by Max predicted value reached. Thresold: "
                               << Params::max_predicted_value::ratio() * val
                               << " max observations: " << bo.best_observation(afun) << std::endl;
-                    return false;
+                    return true;
                 }
             }
 

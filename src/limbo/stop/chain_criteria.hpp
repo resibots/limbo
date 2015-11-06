@@ -11,7 +11,7 @@ namespace limbo {
             template <typename stopping_criterion>
             bool operator()(bool state, stopping_criterion stop) const
             {
-                return state && stop(_bo, _afun);
+                return state || stop(_bo, _afun);
             }
 
         protected:

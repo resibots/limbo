@@ -28,7 +28,7 @@ namespace limbo {
 
                 acqui_optimizer_t inner_opt;
 
-                while (this->_samples.size() == 0 || this->_pursue(*this, FirstElem())) {
+                while (this->_samples.size() == 0 || !this->_stop(*this, FirstElem())) {
                     std::cout.flush();
                     this->template update_pareto_model<EvalFunction::dim>();
                     this->update_pareto_data();
