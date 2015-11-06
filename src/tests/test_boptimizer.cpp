@@ -59,6 +59,25 @@ struct fit_eval_map {
     }
 };
 
+template <typename Params, int obs_size = 1>
+struct fit_eval_map_simple {
+
+    BOOST_STATIC_CONSTEXPR int dim_in = 1;
+
+    BOOST_STATIC_CONSTEXPR int dim_out = obs_size;
+    fit_eval_map_simple() {}
+
+    Eigen::VectorXd operator()(Eigen::VectorXd x) const
+    {
+        Eigen::VectorXd v(1);
+        Eigen::VectorXd t(1);
+        t(0) = 0.1;
+        double y = (x - t).norm();
+        v(0) = -y;
+        return v;
+    }
+};
+
 BOOST_AUTO_TEST_CASE(test_bo_gp)
 {
     using namespace limbo;
@@ -90,16 +109,14 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::Data<Params> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
-    typedef init::NoInit<Params> Init_t;
+    typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
-    opt.optimize(fit_eval_map<Params>());
+    opt.optimize(fit_eval_map_simple<Params>());
 
     BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.1, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.2, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(2), 0.3, 0.000001);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_auto_mean)
@@ -111,16 +128,14 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto_mean)
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
-    typedef init::NoInit<Params> Init_t;
+    typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
-    opt.optimize(fit_eval_map<Params>());
+    opt.optimize(fit_eval_map_simple<Params>());
 
     BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.1, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.2, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(2), 0.3, 0.000001);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
@@ -132,7 +147,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
     typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
-    typedef init::NoInit<Params> Init_t;
+    typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t, model::gp::MeanLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
