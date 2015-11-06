@@ -17,13 +17,13 @@ namespace limbo {
             {
               nlopt::opt opt(Algorithm, f.param_size());
 
-              opt.set_min_objective(this->nlopt_func<F>, (void*)&f);
+              opt.set_max_objective(this->nlopt_func<F>, (void*)&f);
 
               std::vector<double> x(f.init().size());
               for(int i=0;i<f.init().size();i++)
                 x[i] = f.init()(i);
 
-              opt.set_ftol_rel(1e-4);
+              opt.set_ftol_rel(1e-8);
 
               double min;
 
