@@ -19,9 +19,9 @@ namespace limbo {
 
               opt.set_max_objective(this->nlopt_func<F>, (void*)&f);
 
-              std::vector<double> x(f.init().size());
-              for(int i=0;i<f.init().size();i++)
-                x[i] = f.init()(i);
+              std::vector<double> x;
+              x.resize(f.init().size());
+              Eigen::VectorXd::Map(&x[0], f.init().size()) = f.init();
 
               opt.set_ftol_rel(1e-8);
 
@@ -45,8 +45,7 @@ namespace limbo {
                 auto p = f->utility_and_grad(params);
                 v = std::get<0>(p);
                 g = std::get<1>(p);
-                for(int i=0;i<g.size();i++)
-                  grad[i] = g(i);
+                Eigen::VectorXd::Map(&grad[0], g.size()) = g;
               }
               else
               {
