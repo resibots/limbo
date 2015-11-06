@@ -25,11 +25,9 @@ namespace limbo {
                 typedef std::pair<Eigen::VectorXd, double> pair_t;
                 auto body = [&](int i) {
                     // clang-format off
-                    // we need a copy because each thread should touch a copy of the struct!
-                    F f_copy = f;
-                    Eigen::VectorXd v = Optimizer()(f_copy);
+                    Eigen::VectorXd v = Optimizer()(f);
 
-                    double lik = f_copy.utility(v);
+                    double lik = f.utility(v);
                     return std::make_pair(v, lik);
                     // clang-format on
                 };
