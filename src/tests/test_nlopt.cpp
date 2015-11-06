@@ -1,0 +1,47 @@
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MODULE nlopt_test
+
+#include <boost/test/unit_test.hpp>
+
+#include <limbo/limbo.hpp>
+#include <limbo/opt/nlopt.hpp>
+
+struct Params {
+
+};
+
+struct TestOpt {
+public:
+    TestOpt() {}
+
+    double utility(const Eigen::VectorXd& params) const
+    {
+        return params(0)*params(0)+params(1)*params(1);
+    }
+
+    std::pair<double, Eigen::VectorXd> utility_and_grad(const Eigen::VectorXd& params) const
+    {
+        double v = params(0)*params(0)+params(1)*params(1);
+        Eigen::VectorXd grad(2);
+        grad(0) = 2*params(0);
+        grad(1) = 2*params(1);
+        return std::make_pair(v,grad);
+    }
+
+    size_t param_size() const
+    {
+        return 2;
+    }
+
+    Eigen::VectorXd init() const
+    {
+        return (Eigen::VectorXd::Random(param_size()).array() - 1);
+    }
+};
+
+BOOST_AUTO_TEST_CASE(test_nlopt_simple)
+{
+  TestOpt util;
+  Eigen::VectorXd g = limbo::opt::NLOpt<Params>()(util);
+  std::cout<<g<<std::endl;
+}
