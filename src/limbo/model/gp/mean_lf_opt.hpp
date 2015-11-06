@@ -100,7 +100,6 @@ namespace limbo {
 
                 protected:
                     const GP& _original_gp;
-                    Eigen::VectorXd _init;
                 };
             };
         }
