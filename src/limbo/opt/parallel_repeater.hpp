@@ -24,23 +24,23 @@ namespace limbo {
                 tools::par::init();
                 typedef std::pair<Eigen::VectorXd, double> pair_t;
                 auto body = [&](int i) {
-                // clang-format off
-                // we need a copy because each thread should touch a copy of the struct!
-                F f_copy = f;
-                Eigen::VectorXd v = Optimizer()(f_copy);
+                    // clang-format off
+                    // we need a copy because each thread should touch a copy of the struct!
+                    F f_copy = f;
+                    Eigen::VectorXd v = Optimizer()(f_copy);
 
-                double lik = f_copy.utility(v);
-                return std::make_pair(v, lik);
+                    double lik = f_copy.utility(v);
+                    return std::make_pair(v, lik);
                     // clang-format on
                 };
 
                 auto comp = [](const pair_t& v1, const pair_t& v2) {
-                // clang-format off
-                return v1.second > v2.second;
+                    // clang-format off
+                    return v1.second > v2.second;
                     // clang-format on
                 };
 
-                pair_t init(f.init(), -std::numeric_limits<float>::max());
+                pair_t init = std::make_pair(f.init(), -std::numeric_limits<float>::max());
                 auto m = tools::par::max(init, Params::parallel_repeater::repeats(), body, comp);
 
                 return m.first;

@@ -29,7 +29,7 @@ namespace limbo {
                 // Prevent instantiation of GPMean if there are no observed samplesgit
                 if (bo.observations().size() == 0)
                     return true;
-                
+
                 auto optimizer = _get_optimizer(typename BO::acqui_optimizer_t(), Optimizer());
                 Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(bo.model().dim_in()).array() + 1) / 2;
                 double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point))));
@@ -77,13 +77,13 @@ namespace limbo {
                 return ModelMeanOptimization<Model, AggregatorFunction>(model, afun, init);
             }
 
-            template<typename BoAcquiOpt>
-            inline BoAcquiOpt _get_optimizer(const BoAcquiOpt& bo_acqui_opt, boost::parameter::void_)  const
+            template <typename BoAcquiOpt>
+            inline BoAcquiOpt _get_optimizer(const BoAcquiOpt& bo_acqui_opt, boost::parameter::void_) const
             {
                 return bo_acqui_opt;
             }
 
-            template<typename BoAcquiOpt, typename CurrentOpt>
+            template <typename BoAcquiOpt, typename CurrentOpt>
             inline CurrentOpt _get_optimizer(const BoAcquiOpt&, const CurrentOpt& current_opt) const
             {
                 return current_opt;
