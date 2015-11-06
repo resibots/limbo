@@ -204,10 +204,13 @@ struct Params {
     struct gp_ucb : public defaults::gp_ucb {
     };
 
-    struct gp_auto : public defaults::gp_auto {
+    struct cmaes : public defaults::cmaes {
     };
 
-    struct cmaes : public defaults::cmaes {
+    struct rprop : public defaults::rprop {
+    };
+
+    struct parallel_repeater : public defaults::parallel_repeater {
     };
 };
 

@@ -1,6 +1,6 @@
 #ifndef LIMBO_BAYES_OPT_BO_BASE_HPP
 #define LIMBO_BAYES_OPT_BO_BASE_HPP
-#define BOOST_PARAMETER_MAX_ARITY 6
+
 #include <vector>
 #include <iostream>
 #include <limits>
@@ -22,8 +22,9 @@
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/mean/data.hpp>
-#include <limbo/inner_opt/cmaes.hpp>
-#include <limbo/model/gp_auto.hpp>
+#include <limbo/opt/cmaes.hpp>
+#include <limbo/model/gp.hpp>
+#include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/init/random_sampling.hpp>
 
 namespace limbo {
@@ -52,7 +53,7 @@ namespace limbo {
     // see:
     // http://www.boost.org/doc/libs/1_55_0/libs/parameter/doc/html/index.html#parameter-enabled-class-templates
 
-    BOOST_PARAMETER_TEMPLATE_KEYWORD(inneropt)
+    BOOST_PARAMETER_TEMPLATE_KEYWORD(acquiopt)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(initfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(acquifun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)
@@ -76,7 +77,7 @@ namespace limbo {
 
     namespace bayes_opt {
 
-        typedef boost::parameter::parameters<boost::parameter::optional<tag::inneropt>,
+        typedef boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>,
             boost::parameter::optional<tag::statsfun>,
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
@@ -93,10 +94,10 @@ namespace limbo {
             // defaults
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
-                typedef inner_opt::Cmaes<Params> inneropt_t; // 2
+                typedef opt::Cmaes<Params> acquiopt_t; // 2
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
-                typedef model::GPAuto<Params, kf_t, mean_t> model_t; // 3
+                typedef model::GP<Params, kf_t, mean_t, model::gp::KernelLFOpt<Params>> model_t; // 3
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
                 typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
@@ -106,7 +107,7 @@ namespace limbo {
 
             // extract the types
             typedef typename class_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
-            typedef typename boost::parameter::binding<args, tag::inneropt, typename defaults::inneropt_t>::type inner_optimization_t;
+            typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
             typedef typename boost::parameter::binding<args, tag::initfun, typename defaults::init_t>::type init_function_t;
             typedef typename boost::parameter::binding<args, tag::acquifun, typename defaults::acqui_t>::type acquisition_function_t;
             typedef typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type model_t;

@@ -10,9 +10,12 @@
 #include <Eigen/LU>
 #include <Eigen/Cholesky>
 
+#include <limbo/model/gp/no_lf_opt.hpp>
+
 namespace limbo {
     namespace model {
-        template <typename Params, typename KernelFunction, typename MeanFunction>
+
+        template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = gp::NoLFOpt<Params>>
         class GP {
         public:
             GP() : _dim_in(-1), _dim_out(-1) {}
@@ -48,6 +51,8 @@ namespace limbo {
 
                 _compute_obs_mean();
                 _compute_kernel();
+
+                HyperParamsOptimizer()(*this);
             }
 
             // return mu, sigma (unormaliz)
@@ -93,27 +98,50 @@ namespace limbo {
 
             const KernelFunction& kernel_function() const { return _kernel_function; }
 
+            KernelFunction& kernel_function() { return _kernel_function; }
+
             const MeanFunction& mean_function() const { return _mean_function; }
+
+            MeanFunction& mean_function() { return _mean_function; }
 
             Eigen::VectorXd max_observation() const
             {
                 if (_observations.cols() > 1)
-                    std::cout << "WARNING max_observation with multi dim_inensional "
+                    std::cout << "WARNING max_observation with multi dimensional "
                                  "observations doesn't make sense" << std::endl;
                 return _observations.maxCoeff();
             }
 
             Eigen::VectorXd mean_observation() const
             {
+                // TO-DO: Check if _dim_out is correct?!
                 return _samples.size() > 0 ? _mean_observation
-                                           : Eigen::VectorXd::Zero(_dim_in);
+                                           : Eigen::VectorXd::Zero(_dim_out);
             }
 
             const Eigen::MatrixXd& mean_vector() const { return _mean_vector; }
 
+            const Eigen::MatrixXd& obs_mean() const { return _obs_mean; }
+
             int nb_samples() const { return _samples.size(); }
 
             int nb_bl_samples() const { return _bl_samples.size(); }
+
+            void update()
+            {
+                this->_compute_obs_mean(); // ORDER MATTERS
+                this->_compute_kernel();
+            }
+
+            float get_lik() const { return _lik; }
+
+            void set_lik(const float& lik) { _lik = lik; }
+
+            const Eigen::LLT<Eigen::MatrixXd>& llt() const { return _llt; }
+
+            const Eigen::MatrixXd& alpha() const { return _alpha; }
+
+            const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
         protected:
             int _dim_in;
@@ -137,6 +165,8 @@ namespace limbo {
             Eigen::MatrixXd _l_matrix;
             Eigen::LLT<Eigen::MatrixXd> _llt;
             Eigen::MatrixXd _inv_bl_kernel;
+
+            float _lik;
 
             void _compute_obs_mean()
             {

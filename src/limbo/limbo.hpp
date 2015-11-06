@@ -4,7 +4,6 @@
 #include <limbo/acqui.hpp>
 #include <limbo/bayes_opt.hpp>
 #include <limbo/init.hpp>
-#include <limbo/inner_opt.hpp>
 #include <limbo/kernel.hpp>
 #include <limbo/mean.hpp>
 #include <limbo/model.hpp>

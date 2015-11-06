@@ -5,8 +5,10 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/kernel/matern_five_halfs.hpp>
+#include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
 #include <limbo/model/gp.hpp>
+#include <limbo/model/gp/kernel_lf_opt.hpp>
 
 using namespace limbo;
 
@@ -25,6 +27,12 @@ struct Params {
 
     struct meanconstant {
         static Eigen::VectorXd constant() { return make_v1(0.0); };
+    };
+
+    struct rprop : public defaults::rprop {
+    };
+
+    struct parallel_repeater : public defaults::parallel_repeater {
     };
 };
 
@@ -68,7 +76,7 @@ BOOST_AUTO_TEST_CASE(test_gp)
     }
 }
 
-BOOST_AUTO_TEST_CASE(test_blacklist)
+BOOST_AUTO_TEST_CASE(test_gp_blacklist)
 {
     using namespace limbo;
 
@@ -99,4 +107,31 @@ BOOST_AUTO_TEST_CASE(test_blacklist)
     BOOST_CHECK(prev_mu2 == mu2);
     BOOST_CHECK(prev_sigma2 > sigma2);
     BOOST_CHECK(sigma2 == 0);
+}
+
+BOOST_AUTO_TEST_CASE(test_gp_auto)
+{
+    typedef kernel::SquaredExpARD<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
+    typedef model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>> GP_t;
+
+    GP_t gp(1, 1);
+    std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10), make_v1(5)};
+    std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
+
+    gp.compute(samples, observations, 0.0);
+
+    Eigen::VectorXd mu;
+    double sigma;
+    std::tie(mu, sigma) = gp.query(make_v1(1));
+    BOOST_CHECK(abs((mu(0) - 5)) < 1);
+    BOOST_CHECK(sigma < 1e-5);
+
+    std::tie(mu, sigma) = gp.query(make_v1(2));
+    BOOST_CHECK(abs((mu(0) - 10)) < 1);
+    BOOST_CHECK(sigma < 1e-5);
+
+    std::tie(mu, sigma) = gp.query(make_v1(3));
+    BOOST_CHECK(abs((mu(0) - 5)) < 1);
+    BOOST_CHECK(sigma < 1e-5);
 }
