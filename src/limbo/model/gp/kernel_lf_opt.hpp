@@ -27,64 +27,66 @@ namespace limbo {
                 template <typename GP>
                 struct KernelLFOptimization {
                 public:
-                    KernelLFOptimization(const GP& gp) : _gp(gp) {}
+                    KernelLFOptimization(const GP& gp) : _original_gp(gp) {}
 
-                    double utility(const Eigen::VectorXd& params)
+                    double utility(const Eigen::VectorXd& params) const
                     {
-                        this->_gp.kernel_function().set_h_params(params);
+                        GP gp(this->_original_gp);
+                        gp.kernel_function().set_h_params(params);
 
-                        this->_gp.update();
+                        gp.update();
 
-                        size_t n = this->_gp.obs_mean().rows();
+                        size_t n = gp.obs_mean().rows();
 
                         // --- cholesky ---
                         // see:
                         // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
-                        Eigen::MatrixXd l = this->_gp.llt().matrixL();
+                        Eigen::MatrixXd l = gp.llt().matrixL();
                         long double det = 2 * l.diagonal().array().log().sum();
 
                         // alpha = K^{-1} * this->_obs_mean;
 
                         // double a = this->_obs_mean.col(0).dot(this->_alpha.col(0));
-                        double a = (this->_gp.obs_mean().transpose() * this->_gp.alpha())
+                        double a = (gp.obs_mean().transpose() * gp.alpha())
                                        .trace(); // generalization for multi dimensional observation
                         // std::cout<<" a: "<<a <<" det: "<< det<<std::endl;
                         double lik = -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
                         return lik;
                     }
 
-                    std::pair<double, Eigen::VectorXd> utility_and_grad(const Eigen::VectorXd& params)
+                    std::pair<double, Eigen::VectorXd> utility_and_grad(const Eigen::VectorXd& params) const
                     {
-                        this->_gp.kernel_function().set_h_params(params);
+                        GP gp(this->_original_gp);
+                        gp.kernel_function().set_h_params(params);
 
-                        this->_gp.update();
+                        gp.update();
 
-                        size_t n = this->_gp.obs_mean().rows();
+                        size_t n = gp.obs_mean().rows();
 
                         // --- cholesky ---
                         // see:
                         // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
-                        Eigen::MatrixXd l = this->_gp.llt().matrixL();
+                        Eigen::MatrixXd l = gp.llt().matrixL();
                         long double det = 2 * l.diagonal().array().log().sum();
 
-                        double a = (this->_gp.obs_mean().transpose() * this->_gp.alpha())
+                        double a = (gp.obs_mean().transpose() * gp.alpha())
                                        .trace(); // generalization for multi dimensional observation
                         // std::cout<<" a: "<<a <<" det: "<< det<<std::endl;
                         double lik = -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
 
                         // K^{-1} using Cholesky decomposition
                         Eigen::MatrixXd w = Eigen::MatrixXd::Identity(n, n);
-                        this->_gp.llt().matrixL().solveInPlace(w);
-                        this->_gp.llt().matrixL().transpose().solveInPlace(w);
+                        gp.llt().matrixL().solveInPlace(w);
+                        gp.llt().matrixL().transpose().solveInPlace(w);
 
                         // alpha * alpha.transpose() - K^{-1}
-                        w = this->_gp.alpha() * this->_gp.alpha().transpose() - w;
+                        w = gp.alpha() * gp.alpha().transpose() - w;
 
                         // only compute half of the matrix (symmetrical matrix)
                         Eigen::VectorXd grad = Eigen::VectorXd::Zero(this->param_size());
                         for (size_t i = 0; i < n; ++i) {
                             for (size_t j = 0; j <= i; ++j) {
-                                Eigen::VectorXd g = this->_gp.kernel_function().grad(this->_gp.samples()[i], this->_gp.samples()[j]);
+                                Eigen::VectorXd g = gp.kernel_function().grad(gp.samples()[i], gp.samples()[j]);
                                 if (i == j)
                                     grad += w(i, j) * g * 0.5;
                                 else
@@ -97,7 +99,7 @@ namespace limbo {
 
                     size_t param_size() const
                     {
-                        return this->_gp.kernel_function().h_params_size();
+                        return this->_original_gp.kernel_function().h_params_size();
                     }
 
                     Eigen::VectorXd init() const
@@ -106,7 +108,7 @@ namespace limbo {
                     }
 
                 protected:
-                    GP _gp;
+                    const GP& _original_gp;
                     Eigen::VectorXd _init;
                 };
             };

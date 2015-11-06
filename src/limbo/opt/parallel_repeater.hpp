@@ -19,7 +19,7 @@ namespace limbo {
         template <typename Params, typename Optimizer>
         struct ParallelRepeater {
             template <typename F>
-            Eigen::VectorXd operator()(F&& f)
+            Eigen::VectorXd operator()(const F& f) const
             {
                 tools::par::init();
                 typedef std::pair<Eigen::VectorXd, double> pair_t;

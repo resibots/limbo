@@ -8,7 +8,7 @@ namespace limbo {
         template <typename Params>
         struct RandomPoint {
             template <typename F>
-            Eigen::VectorXd operator()(F&& f)
+            Eigen::VectorXd operator()(const F& f) const
             {
                 return (Eigen::VectorXd::Random(f.param_size()).array() + 1) / 2;
             }

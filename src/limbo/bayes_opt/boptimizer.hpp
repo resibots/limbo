@@ -31,7 +31,7 @@ namespace limbo {
             public:
                 AcquiOptimization(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _acqui(acqui), _afun(afun), _init(init) {}
 
-                double utility(const Eigen::VectorXd& params)
+                double utility(const Eigen::VectorXd& params) const
                 {
                     return _acqui(params, _afun);
                 }
