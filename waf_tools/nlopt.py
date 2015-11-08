@@ -17,8 +17,8 @@ def options(opt):
 @conf
 def check_nlopt(conf):
 	if conf.options.nlopt:
-		conf.env.INCLUDES_NLOPT = [conf.options.nlopt]
-		conf.env.LIBPATH_NLOPT = [conf.options.nlopt]
+		conf.env.INCLUDES_NLOPT = [conf.options.nlopt + '/include']
+		conf.env.LIBPATH_NLOPT = [conf.options.nlopt + '/lib']
 		conf.env.LIB_NLOPT = ['nlopt_cxx']
 	else:
 		conf.env.INCLUDES_NLOPT = [os.environ['RESIBOTS_DIR'] + '/include', '/usr/local/include']
