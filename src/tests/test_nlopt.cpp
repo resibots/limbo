@@ -40,9 +40,11 @@ public:
 
 BOOST_AUTO_TEST_CASE(test_nlopt_simple)
 {
+#ifdef USE_NLOPT
     TestOpt util;
     Eigen::VectorXd g = limbo::opt::NLOpt<Params>()(util);
 
     BOOST_CHECK_SMALL(g(0), 0.00000001);
     BOOST_CHECK_SMALL(g(1), 0.00000001);
+#endif
 }

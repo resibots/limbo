@@ -28,7 +28,7 @@ def check_nlopt(conf):
 
 	try:
 		res = conf.find_file('nlopt.hpp', conf.env.INCLUDES_NLOPT)
-		conf.define("USE_NLOPT", 1)
+		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
 		conf.end_msg('ok')
 	except:
 		conf.end_msg('Not found', 'RED')
