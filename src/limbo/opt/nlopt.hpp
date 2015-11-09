@@ -19,8 +19,7 @@ namespace limbo {
 
                 opt.set_max_objective(this->nlopt_func<F>, (void*)&f);
 
-                std::vector<double> x;
-                x.resize(f.init().size());
+                std::vector<double> x(f.init().size());
                 Eigen::VectorXd::Map(&x[0], f.init().size()) = f.init();
 
                 opt.set_ftol_rel(1e-8);
