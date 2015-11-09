@@ -5,6 +5,10 @@
 
 #include <vector>
 
+#ifndef USE_NLOPT
+#warning No NLOpt
+#else
+
 #include <nlopt.hpp>
 
 namespace limbo {
@@ -54,4 +58,5 @@ namespace limbo {
     }
 }
 
+#endif
 #endif

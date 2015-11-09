@@ -3,6 +3,7 @@
 
 #include <limbo/opt/cmaes.hpp>
 #include <limbo/opt/grid_search.hpp>
+#include <limbo/opt/nlopt.hpp>
 #include <limbo/opt/parallel_repeater.hpp>
 #include <limbo/opt/random_point.hpp>
 #include <limbo/opt/rprop.hpp>

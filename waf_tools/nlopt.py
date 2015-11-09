@@ -24,5 +24,10 @@ def check_nlopt(conf):
 		conf.env.INCLUDES_NLOPT = [os.environ['RESIBOTS_DIR'] + '/include', '/usr/local/include']
         conf.env.LIBPATH_NLOPT = [os.environ['RESIBOTS_DIR'] + '/lib', '/usr/local/lib']
         conf.env.LIB_NLOPT = ['nlopt_cxx']
-	res = conf.find_file('nlopt.hpp', conf.env.INCLUDES_NLOPT)
+
+	try:
+		res = conf.find_file('nlopt.hpp', conf.env.INCLUDES_NLOPT)
+		conf.define("USE_NLOPT", 1)
+	except:
+		print 'NLOpt not found'
 	return 1
