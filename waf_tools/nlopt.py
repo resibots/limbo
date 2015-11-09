@@ -6,7 +6,7 @@
 Quick n dirty nlopt detection
 """
 
-import os, glob, types, sys
+import os, glob, types
 from waflib.Configure import conf
 
 
