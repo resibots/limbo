@@ -6,7 +6,7 @@
 Quick n dirty nlopt detection
 """
 
-import os, glob, types
+import os, glob, types, sys
 from waflib.Configure import conf
 
 
@@ -16,6 +16,7 @@ def options(opt):
 
 @conf
 def check_nlopt(conf):
+	conf.start_msg('Checking for NLOpt')
 	if conf.options.nlopt:
 		conf.env.INCLUDES_NLOPT = [conf.options.nlopt + '/include']
 		conf.env.LIBPATH_NLOPT = [conf.options.nlopt + '/lib']
@@ -28,6 +29,8 @@ def check_nlopt(conf):
 	try:
 		res = conf.find_file('nlopt.hpp', conf.env.INCLUDES_NLOPT)
 		conf.define("USE_NLOPT", 1)
+		conf.end_msg('ok')
 	except:
-		print 'NLOpt not found'
+		conf.end_msg('Not found', 'RED')
+		return
 	return 1

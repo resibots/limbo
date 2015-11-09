@@ -8,17 +8,22 @@
 #ifndef USE_NLOPT
 #warning No NLOpt
 #else
-
 #include <nlopt.hpp>
+#endif
 
 namespace limbo {
     namespace opt {
+#ifdef USE_NLOPT
         template <typename Params, nlopt::algorithm Algorithm = nlopt::LD_MMA>
+#else
+        template <typename Params>
+#endif
         struct NLOpt {
         public:
             template <typename F>
             Eigen::VectorXd operator()(const F& f) const
             {
+#ifdef USE_NLOPT
                 nlopt::opt opt(Algorithm, f.param_size());
 
                 opt.set_max_objective(this->nlopt_func<F>, (void*)&f);
@@ -33,8 +38,11 @@ namespace limbo {
                 opt.optimize(x, min);
 
                 return Eigen::VectorXd::Map(x.data(), x.size());
+#else
+                return Eigen::VectorXd::Constant(f.param_size(), 0);
+#endif
             }
-
+#ifdef USE_NLOPT
         protected:
             template <typename F>
             static double nlopt_func(const std::vector<double>& x, std::vector<double>& grad, void* my_func_data)
@@ -54,9 +62,9 @@ namespace limbo {
                 }
                 return v;
             }
+#endif
         };
     }
 }
 
-#endif
 #endif
