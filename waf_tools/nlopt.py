@@ -16,7 +16,6 @@ def options(opt):
 
 @conf
 def check_nlopt(conf):
-	conf.start_msg('Checking for NLOpt')
 	if conf.options.nlopt:
 		conf.env.INCLUDES_NLOPT = [conf.options.nlopt + '/include']
 		conf.env.LIBPATH_NLOPT = [conf.options.nlopt + '/lib']
@@ -27,9 +26,13 @@ def check_nlopt(conf):
         conf.env.LIB_NLOPT = ['nlopt_cxx']
 
 	try:
+		conf.start_msg('Checking for NLOpt includes')
 		res = conf.find_file('nlopt.hpp', conf.env.INCLUDES_NLOPT)
-		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
 		conf.end_msg('ok')
+		conf.start_msg('Checking for NLOpt libs')
+		res = res and conf.find_file('libnlopt_cxx.so', conf.env.LIBPATH_NLOPT)
+		conf.end_msg('ok')
+		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
 	except:
 		conf.end_msg('Not found', 'RED')
 		return
