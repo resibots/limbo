@@ -23,8 +23,34 @@ namespace limbo {
         public:
             typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
             typedef typename base_t::model_t model_t;
-            typedef typename base_t::inner_optimization_t inner_optimization_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
+            typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
+
+            template <typename AcquisitionFunction, typename AggregatorFunction>
+            struct AcquiOptimization {
+            public:
+                AcquiOptimization(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _acqui(acqui), _afun(afun), _init(init) {}
+
+                double utility(const Eigen::VectorXd& params) const
+                {
+                    return _acqui(params, _afun);
+                }
+
+                size_t param_size() const
+                {
+                    return _acqui.dim_in();
+                }
+
+                const Eigen::VectorXd& init() const
+                {
+                    return _init;
+                }
+
+            protected:
+                const AcquisitionFunction& _acqui;
+                const AggregatorFunction& _afun;
+                const Eigen::VectorXd _init;
+            };
 
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
@@ -35,12 +61,15 @@ namespace limbo {
                 if (this->_observations.size())
                     _model.compute(this->_samples, this->_observations,
                         Params::boptimizer::noise());
-                inner_optimization_t inner_optimization;
+
+                acqui_optimizer_t acqui_optimizer;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
                     acquisition_function_t acqui(_model, this->_iteration);
 
-                    Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim_in(), afun);
+                    Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
+                    auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
+                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization);
                     bool blacklisted = false;
                     try {
                         this->add_new_sample(new_sample, sfun(new_sample));

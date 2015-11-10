@@ -84,7 +84,7 @@ namespace limbo {
         public:
             typedef BoBase<Params, A2, A3, A4, A5, A6> base_t;
             typedef typename base_t::model_t model_t;
-            typedef typename base_t::inner_optimization_t inner_optimization_t;
+            typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
             // point, obj, sigma
             typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;

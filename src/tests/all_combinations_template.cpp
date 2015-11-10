@@ -25,23 +25,23 @@ struct Params {
         BO_PARAM_VECTOR(double, constant, 0, 0);
     };
 
-    struct gp_auto : defaults::gp_auto {
-    };
-
-    struct gp_auto_mean : defaults::gp_auto_mean {
-    };
-
     struct ucb : public defaults::ucb {
     };
 
     struct gp_ucb : public defaults::gp_ucb {
     };
 
-    struct exhaustive_search {
+    struct grid_search {
         BO_PARAM(int, nb_pts, 20);
     };
 
     struct cmaes : public defaults::cmaes {
+    };
+
+    struct rprop : public defaults::rprop {
+    };
+
+    struct parallel_repeater : public defaults::parallel_repeater {
     };
 
     struct init {
@@ -53,7 +53,7 @@ struct Params {
         BO_PARAM(int, n_iterations, 20);
     };
 
-    struct maxpredictedvalue {
+    struct max_predicted_value {
         BO_PARAM(double, ratio, 2);
     };
 
