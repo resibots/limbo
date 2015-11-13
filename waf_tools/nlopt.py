@@ -27,7 +27,7 @@ def check_nlopt(conf):
 		conf.env.LIBPATH_NLOPT = [conf.options.nlopt + '/lib']
 	else:
 		conf.env.INCLUDES_NLOPT = includes_check
-        conf.env.LIBPATH_NLOPT = libs_check
+		conf.env.LIBPATH_NLOPT = libs_check
 
 	try:
 		conf.start_msg('Checking for NLOpt includes')
