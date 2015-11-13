@@ -16,8 +16,8 @@ def options(opt):
 
 @conf
 def check_nlopt(conf):
-	includes_check = ['/usr/local/include/robdyn']
-	libs_check = ['/usr/local/lib']
+	includes_check = ['/usr/local/include', '/usr/include']
+	libs_check = ['/usr/local/lib', '/usr/lib']
 	if 'RESIBOTS_DIR' in os.environ:
 		includes_check = [os.environ['RESIBOTS_DIR'] + '/include'] + includes_check
 		libs_check = [os.environ['RESIBOTS_DIR'] + '/lib'] + libs_check
