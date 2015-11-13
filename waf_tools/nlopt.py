@@ -16,14 +16,18 @@ def options(opt):
 
 @conf
 def check_nlopt(conf):
+	includes_check = ['/usr/local/include/robdyn']
+	libs_check = ['/usr/local/lib']
+	if 'RESIBOTS_DIR' in os.environ:
+		includes_check = [os.environ['RESIBOTS_DIR'] + '/include'] + includes_check
+		libs_check = [os.environ['RESIBOTS_DIR'] + '/lib'] + libs_check
+
 	if conf.options.nlopt:
 		conf.env.INCLUDES_NLOPT = [conf.options.nlopt + '/include']
 		conf.env.LIBPATH_NLOPT = [conf.options.nlopt + '/lib']
-		conf.env.LIB_NLOPT = ['nlopt_cxx']
 	else:
-		conf.env.INCLUDES_NLOPT = [os.environ['RESIBOTS_DIR'] + '/include', '/usr/local/include']
-        conf.env.LIBPATH_NLOPT = [os.environ['RESIBOTS_DIR'] + '/lib', '/usr/local/lib']
-        conf.env.LIB_NLOPT = ['nlopt_cxx']
+		conf.env.INCLUDES_NLOPT = includes_check
+        conf.env.LIBPATH_NLOPT = libs_check
 
 	try:
 		conf.start_msg('Checking for NLOpt includes')
@@ -33,6 +37,7 @@ def check_nlopt(conf):
 		res = res and conf.find_file('libnlopt_cxx.so', conf.env.LIBPATH_NLOPT)
 		conf.end_msg('ok')
 		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
+		conf.env.LIB_NLOPT = ['nlopt_cxx']
 	except:
 		conf.end_msg('Not found', 'RED')
 		return
