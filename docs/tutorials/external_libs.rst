@@ -26,7 +26,9 @@ To add an external library to your experiment, we need to modify our experiment'
 
 Where we replace the ``check_if_libname_exists`` with logic to find our library. If we want the library to be optional, we omit the ``conf.fatal`` part.
 
-Then in our ``wscript`` we add the following lines: ::
+Then in our ``wscript`` we add the following lines:
+
+.. code:: python
 
     # imports, etc, ...
 
@@ -46,7 +48,9 @@ In general, library has the headers and the lib files separated or it's a header
 Check for headers
 ^^^^^^^^^^^^^^^^^
 
-To check for the headers of the library, we add the following code to the ``check_libname`` function: ::
+To check for the headers of the library, we add the following code to the ``check_libname`` function:
+
+.. code:: python
 
     # previous code
 
@@ -72,7 +76,9 @@ To check for the headers of the library, we add the following code to the ``chec
 Check for lib files
 ^^^^^^^^^^^^^^^^^^^^
 
-To check for the lib files of the library, we add the following code to the ``check_libname`` function: ::
+To check for the lib files of the library, we add the following code to the ``check_libname`` function:
+
+.. code:: python
 
     # previous code
 
@@ -100,7 +106,9 @@ To check for the lib files of the library, we add the following code to the ``ch
 Add options
 ^^^^^^^^^^^^
 
-Many times we may need specific options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is very easy: we only need to add a new function named ``options`` in our ``wscript`` and another one in the library configuration file: ::
+Many times we may need specific options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is very easy: we only need to add a new function named ``options`` in our ``wscript`` and another one in the library configuration file:
+
+.. code:: python
 
     #imports, etc, ...
 
@@ -119,7 +127,9 @@ The options in the waf build system are using the python's ``optparse``. Check t
 
 .. _optparse: https://docs.python.org/2/library/optparse.html
 
-Then in our ``wscript`` we add the following lines: ::
+Then in our ``wscript`` we add the following lines:
+
+.. code:: python
 
     # imports, etc, ...
 
@@ -146,7 +156,9 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
             +-- ros.py
             +-- main.cpp
 
-**wscript:** ::
+**wscript:**
+
+.. code:: python
 
     #! /usr/bin/env python
 
@@ -170,7 +182,9 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
                   uselib =  libs,
                   use = 'limbo')
 
-**ros.py:** ::
+**ros.py:**
+
+.. code:: python
 
     #! /usr/bin/env python
     # encoding: utf-8
