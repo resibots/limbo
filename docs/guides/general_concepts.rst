@@ -6,7 +6,9 @@ Class Structure
 
 .. figure:: ../pics/limbo_uml.png
    :alt: UML class diagram
+   :target: ../_images/limbo_uml.png
 
+   Click on the image to see it bigger.
 
 Acquisition Functions
 --------------------------------
