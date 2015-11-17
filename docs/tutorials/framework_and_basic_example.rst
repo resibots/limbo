@@ -15,7 +15,16 @@ Let's say we want to create an experiment called "test". The first thing to do i
 * the ``main.cpp`` file
 * a pyhton file called ``wscript``, which will be used by WAF to register the executable for building
 
-The ``wscript`` file has to have the following content: ::
+The file structure should look like this: ::
+
+  limbo
+  |-- exp
+       |-- example
+            +-- wscript
+            +-- ros.py
+            +-- main.cpp
+
+Next, copy the following content to the ``wscript`` file: ::
 
     def options(opt):
         pass
@@ -30,7 +39,8 @@ The ``wscript`` file has to have the following content: ::
             use='limbo') 
 
 For this example, we will optimize a simple function: :math:`-{(5*x - 2.5)}^2 + 5`, using all default values and settings.
-To start, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``: ::
+
+To begin, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``: ::
 
     #include <iostream>
     #include <limbo/bayes_opt/boptimizer.hpp>
