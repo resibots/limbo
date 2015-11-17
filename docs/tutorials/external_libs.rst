@@ -4,10 +4,15 @@ Add External Library
 Add external library to experiment's wscript
 --------------------------------------------
 
-
 To add an external library to your experiment, we need to modify our experiment's ``wscript``. The stantard way to do this, is to create a new configuration file for the dependency we want. In the ``waf`` build system, we do this by creating a python script(`.py`). The configuration file should have the following structure:
 
 .. code:: python
+
+To add an external library to your experiment, we need to modify our experiment's ``wscript``. The stantard way to do this is to create a new configuration file for the dependency we want. In the ``waf`` build system, we do this by creating a python script(`.py`), usually called ``libname.py`` (where ``libname`` is the name of the library), in the same directory as your experiment.
+
+**Warning** to activate this script, you need to activate your experiment **when configuring limbo**:  ``./waf configure --your_exp``
+
+This new file should have the following structure: ::
 
     #! /usr/bin/env python
     # encoding: utf-8
@@ -43,7 +48,7 @@ Then in our ``wscript`` we add the following lines:
     # rest of code
 
 
-In general, library has the headers and the lib files separated or it's a header only library and does not have any libraries.
+Libraries usually have the headers and the lib files in two different directories. Header-only libraries only have includes.
 
 Check for headers
 ^^^^^^^^^^^^^^^^^
@@ -106,7 +111,7 @@ To check for the lib files of the library, we add the following code to the ``ch
 Add options
 ^^^^^^^^^^^^
 
-Many times we may need specific options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is very easy: we only need to add a new function named ``options`` in our ``wscript`` and another one in the library configuration file:
+We often need specific options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to add a new function named ``options`` in our ``wscript`` and another one in the library configuration file:
 
 .. code:: python
 
@@ -152,7 +157,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
   limbo
   |-- exp
        |-- example
-            +-- wscript 
+            +-- wscript
             +-- ros.py
             +-- main.cpp
 
@@ -208,7 +213,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
           return
         conf.env.INCLUDES_ROS = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/include']
         conf.env.LIBPATH_ROS = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/lib']
-      
+
       try:
         conf.start_msg('Checking for ROS includes')
         res = conf.find_file('ros/ros.h', conf.env.INCLUDES_ROS)
@@ -224,7 +229,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
         return
       return 1
 
-Assuming we are at limbo root, we run the following to compile our experiment: ::
+Assuming we are at **limbo** root, we run the following to compile our experiment: ::
 
   ./waf configure --exp example
   ./waf --exp example
