@@ -12,6 +12,10 @@ Bayesian optimization is a model-based, black-box optimization algorithm that is
 
    **Bayesian Optimization of a toy problem.** (A) The goal of this toy prob- lem is to find the maximum of the unknown objective function. (B) The Gaussian process is initialized, as it is customary, with a constant mean and a constant vari- ance. (C) The next potential solution is selected and evaluated. The model is then updated according to the acquired data. (D) Based on the new model, another potential solution is selected and evaluated. (E-G) This process repeats until the maximum is reached.
 
+.. _gaussian-process:
+
+Gaussian Process
+^^^^^^^^^^^^^^^^^
 
 Here we use Gaussian process regression to find a model :cite:`Rasmussen2006`, which is a common choice for Bayesian optimization :cite:`brochu2010tutorial`. Gaussian processes are particularly interesting for regression because they not only model the cost function, but also the uncertainty associated with each prediction. For a cost function :math:`f`, usually unknown, a Gaussian process defines the probability distribution of the possible values :math:`f(\mathbf{x})` for each point :math:`\mathbf{x}`. These probability distributions are Gaussian, and are therefore defined by a mean (:math:`\mu`) and a standard deviation (:math:`\sigma`). However, :math:`\mu` and :math:`\sigma` can be different for each :math:`\mathbf{x}`; we therefore define a probability distribution *over functions*:
 
@@ -45,9 +49,10 @@ Our implementation of Bayesian optimization uses this Gaussian process model to 
 
 
 
+.. _kernel-functions:
 
 Kernel function
----------------
+^^^^^^^^^^^^^^^^^
 
 The kernel function is the covariance function of the Gaussian
 process. It defines the influence of a solution's performance on the performance and confidence estimations of
@@ -63,9 +68,11 @@ The Matern kernel function is computed as follows :cite:`matern1960spatial,stein
   \textrm{where }d(\mathbf{x}_1,\mathbf{x}_2) \textrm{ is the Euclidean distance.}
   \end{array}
 
+.. _acqui-functions:
 
 Acquisition function
----------------------
+^^^^^^^^^^^^^^^^^^^^^
+
 The selection of the next solution to evaluate is made by
 finding the solution that maximizes the acquisition function. This
 step is another optimization problem, but does not require testing the controller in simulation or reality. In
@@ -91,6 +98,11 @@ exploitation/exploration trade-off of the algorithm.
 
 Limbo-specific concepts
 -----------------------
+
+.. _mean-functions:
+
+Mean function
+^^^^^^^^^^^^^
 
 Black lists
 ^^^^^^^^^^^^
