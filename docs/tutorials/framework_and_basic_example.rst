@@ -13,7 +13,7 @@ Create directories and files
 Let's say we want to create an experiment called "test". The first thing to do is to create the folder ``exp/test`` under the limbo root. Then add two files:
 
 * the ``main.cpp`` file
-* a pyhton file called ``wscript``, which will be used by WAF to register the executable for building
+* a pyhton file called ``wscript``, which will be used by ``waf`` to register the executable for building
 
 The file structure should look like this: ::
 
@@ -77,8 +77,8 @@ To begin, the ``main`` file has to include the necessary files, and declare the 
         };
     };
 
-Here we are stating that the samples are observed without noise(which makes sense, because we are going to evaluate the function),
-that we don't want to output any stats(by setting the dump period to -1), that the model has to be initialized with 10 samples (that will be
+Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function),
+that we don't want to output any stats (by setting the dump period to -1), that the model has to be initialized with 10 samples (that will be
 selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults.
 
 Then, we have to define the evaluation function for the optimizer to call: ::

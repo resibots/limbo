@@ -24,16 +24,16 @@ Optional
 Compilation
 ----------------------------
 
-We use  the `WAF <https://waf.io>`_  build system, which is provided with the **limbo** source code.
+We use  the `waf <https://waf.io>`_  build system, which is provided with the **limbo** source code.
 
 Configuration
 ~~~~~~~~~~~~~
 
-The first step is to configure your waf environment. For this, assuming that you are in the main limbo directory, you have to run the command: ::
+The first step is to configure your ``waf`` environment. For this, assuming that you are in the root limbo directory, you have to run the command: ::
 
     ./waf configure
 
-Make sure that the waf file has execution rights.
+Make sure that the ``waf`` file has execution rights.
 If everything is okay, you should expect an output like this: ::
 
     Setting top to                           : /path/to/limbo
@@ -49,7 +49,7 @@ If everything is okay, you should expect an output like this: ::
 
 The actual ouput may differ, depending on your configuration and installed libraries.
 
-Waf should automatically detect Intel's TBB and MKL, if they where installed in the default folders, but if it doesn't,
+``waf`` should automatically detect Intel's TBB and MKL, if they where installed in the default folders, but if it doesn't,
 you can use the following command-line options to indicate where they are:
 
 * ``--tbb /path/to/tbb``
