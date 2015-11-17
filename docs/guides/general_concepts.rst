@@ -162,11 +162,11 @@ We can change which ``Statistics`` our ``BOptimizer`` outputs, using the ``statf
 Parameters
 -----------
 
-Bayesian Optimization algorithms, acquisition functions, etc. all have many parameters. The traditionnal approach is to use a configuration file (e.g. XML, or json, .ini, ...). However,  each time a developper adds a parameter, some code has to be added to parse the configuration file: there is often more code to parse and check the configuration file than *real code* (that is, code that actually does something). As a result, scientists often either skip this part until they have  "final" version of their code (often, never), or do it in a "quick and dirty way" (e.g. without checking the syntax, without checking that the parameter value is in the right range, etc.).
+Bayesian Optimization algorithms, acquisition functions, etc. all have many parameters. The traditionnal approach is to use a configuration file (e.g. XML, or json, .ini, ...). However,  each time a developer adds a parameter, some code has to be added to parse the configuration file: there is often more code to parse and check the configuration file than *real code* (that is, code that actually does something). As a result, scientists often either skip this part until they have  "final" version of their code (often, never), or do it in a "quick and dirty way" (e.g. without checking the syntax, without checking that the parameter value is in the right range, etc.).
 
-Put differently, using a configuration file is nice for the user, but not for the developper. Since Limbo is targeted to scientists who want to *easily* test  new code, we need a way to separate parameters from code that do not require any boilerplate code.
+Put differently, using a configuration file is nice for the user, but not for the developer. Since **limbo** is targeted to scientists who want to *easily* test  new code, we need a way to separate parameters from code that do not require any boilerplate code.
 
-In limbo, every class takes a structure name (usually called ``Params``) that contains the parameters. By doing so, we rely on the compiler to check the types, and we require very little work to separate parameters values from algorithms.
+In **limbo**, every class takes a structure name (usually called ``Params``) that contains the parameters. By doing so, we rely on the compiler to check the types, and we require very little work to separate parameters values from algorithms.
 
 From the user's point of view, this looks like this:
 
