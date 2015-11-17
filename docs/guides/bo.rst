@@ -93,7 +93,7 @@ Limbo-specific concepts
 -----------------------
 
 Black lists
-ˆˆˆˆˆˆˆˆˆˆˆˆ
+^^^^^^^^^^^^
 
 When performing physical experiments, it is possible that some solutions cannot be properly evaluated. For example, this situation happens often with a physical robot, typically because (1) The robot may be outside the sensor’s range, for example when the robot is not visible from the camera’s point of view, making it impossible to assess its performance. (2) The sensor may return intractable values (infinity, NaN,...).
 
@@ -106,7 +106,7 @@ Thanks to this distinction between valid samples and blacklisted ones, the algor
 
 
 State-based optimization
-ˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆˆ
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In many applications, the tasks can be expressed according to the robot’s state. For example, reaching a target with a robotics arm means to place the robot’s end effector at a particular location and walking forward can be expressed as moving the center of mass of the robot. For robotics manipulation, the state of the robot can be extended with the state of the manipulated object. In the same way, all the observations can be expressed as a part of the robot’s state (the observable part).
 
