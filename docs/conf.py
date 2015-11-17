@@ -54,7 +54,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'limbo'
-copyright = u'2015, Jean-Baptiste Mouret, Antoine Cully'
+copyright = u'2014-2015, UPMC/Inria'
 author = u'Jean-Baptiste Mouret, Antoine Cully'
 
 # The version info for the project you're documenting, acts as replacement for
