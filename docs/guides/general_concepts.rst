@@ -1,6 +1,13 @@
 General Concepts
 ======================
 
+Class Structure
+---------------
+
+.. figure:: ../pics/limbo_uml.png
+   :alt: UML class diagram
+
+
 Acquisition Functions
 --------------------------------
 
@@ -45,7 +52,7 @@ Each model should have implemented the following functions:
 - Should have constructor of the form:
     - ``ModelName(int dim_in, int dim_out)``
 - ``void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, double noise, const std::vector<Eigen::VectorXd>& bl_samples)``
- 
+
 
 **limbo** provides only a **Gaussian Process** model for now. See :ref:`here <gaussian-process>` for more details.
 
@@ -105,5 +112,3 @@ The mean functions provided by **limbo** are the following (see :ref:`here <mean
     - No params needed
     - Used for mean's hyperparameters optimization
     - It takes as a template parameter the mean function to use
-
-
