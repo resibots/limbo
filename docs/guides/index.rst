@@ -1,5 +1,5 @@
-limbo - Guides
-=================================
+Guides
+=======
 
 .. toctree::
    :maxdepth: 2
