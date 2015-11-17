@@ -10,7 +10,7 @@ Bayesian optimization is a model-based, black-box optimization algorithm that is
 .. figure:: ../pics/bo_concept.png
    :alt: concept of Bayesian optimization
 
-   **Bayesian Optimization of a toy problem.** (A) The goal of this toy prob- lem is to find the maximum of the unknown objective function. (B) The Gaussian process is initialized, as it is customary, with a constant mean and a constant vari- ance. (C) The next potential solution is selected and evaluated. The model is then updated according to the acquired data. (D) Based on the new model, another potential solution is selected and evaluated. (E-G) This process repeats until the maximum is reached.
+   **Bayesian Optimization of a toy problem.** (A) The goal of this toy prob- lem is to find the maximum of the unknown objective function. (B) The Gaussian process is initialized, as it is customary, with a constant mean and a constant variance. (C) The next potential solution is selected and evaluated. The model is then updated according to the acquired data. (D) Based on the new model, another potential solution is selected and evaluated. (E-G) This process repeats until the maximum is reached.
 
 .. _gaussian-process:
 
@@ -122,7 +122,7 @@ State-based optimization
 
 In many applications, the tasks can be expressed according to the robot’s state. For example, reaching a target with a robotics arm means to place the robot’s end effector at a particular location and walking forward can be expressed as moving the center of mass of the robot. For robotics manipulation, the state of the robot can be extended with the state of the manipulated object. In the same way, all the observations can be expressed as a part of the robot’s state (the observable part).
 
-Instead of modeling the performance function, it is sometimes more effective to use n Gaussian processes to model the state, and then combine these values into a single one for the acquisition function, using an **agregator**.
+Instead of modeling the performance function, it is sometimes more effective to use n Gaussian processes to model the state, and then combine these values into a single one for the acquisition function, using an **aggregator**.
 
 Limbo implements this concept.
 
