@@ -23,7 +23,9 @@ The file structure should look like this: ::
             +-- wscript
             +-- main.cpp
 
-Next, copy the following content to the ``wscript`` file: ::
+Next, copy the following content to the ``wscript`` file: 
+
+.. code:: python
 
     def options(opt):
         pass
@@ -38,6 +40,8 @@ Next, copy the following content to the ``wscript`` file: ::
             use='limbo') 
 
 For this example, we will optimize a simple function: :math:`-{(5*x - 2.5)}^2 + 5`, using all default values and settings.
+
+.. highlight:: c++
 
 To begin, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``: ::
 
