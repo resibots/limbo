@@ -10,6 +10,37 @@ Class Structure
 
    Click on the image to see it bigger.
 
+File Structure
+--------------
+(see below for a short explanation of the concepts)
+
+::
+
+  src
+  +-- benchmarks: a few benchmark functions
+  |-- cmaes: the CMA-ES library, used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
+  |-- ehvi: the Expected HyperVolume Improvement, used for Multi-Objective Optimization
+  |-- examples: a few examples
+  |-- limbo
+       +-- acqui: acquisition functions
+       |-- bayes_opt: bayesian optimizers
+       |-- init: initialization functions
+       |-- kernel: kernel functions
+       |-- mean: mean functions
+       |-- model: models (Gaussian Processes)
+       |-- opt: optimizers (Rprop, CMA-ES, etc.)
+       |-- stat: statistics (to dump data)
+       |-- stop: stopping criteria
+       |-- tools: useful macros & small functions
+  |-- tests: unit tests
+
+
+Each directory in the `limbo` directory corresponds to a namespace with the same name. There is also a file for each directory called "directory.hpp" (e.g. `acqui.hpp`) that includes the whole namespace.
+
+
+
+
+
 Acquisition Functions
 --------------------------------
 
