@@ -19,9 +19,8 @@ The file structure should look like this: ::
 
   limbo
   |-- exp
-       |-- example
+       |-- test
             +-- wscript
-            +-- ros.py
             +-- main.cpp
 
 Next, copy the following content to the ``wscript`` file: ::
