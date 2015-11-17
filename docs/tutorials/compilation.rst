@@ -59,9 +59,14 @@ you can use the following command-line options to indicate where they are:
 Note that Sferes2 won't be used unless you specify it's installation folder.
 You can also specify a different compiler than the default, setting the environment variables ``CC`` and ``CXX``.
 
-A full example: ::
+Some examples: ::
 
-    CC=icc CXX=icpc ./waf configure --sferes ~/sferes2 --mkl ~/intel/mkl --tbb ~/intel/tbb
+    CC=icc CXX=icpc ./waf configure --sferes /path/to/sferes2 --mkl /path/to/mkl --tbb /path/to/tbb
+
+
+::
+
+   CC=clang-3.6 CXX=clang++-3.6 ./waf configure --sferes /path/to/sferes2
 
 Build
 ~~~~~~~~~~~~~
@@ -74,8 +79,8 @@ Depending on your compiler, there may be some warnings, but the output should en
 
     execution summary 
       tests that pass 5/5 
-        /home/fallocat/limbo_git/build/src/tests/test_macros
-        /home/fallocat/limbo_git/build/src/tests/test_optimizers
-        /home/fallocat/limbo_git/build/src/tests/test_init_functions
-        /home/fallocat/limbo_git/build/src/tests/test_gp
-        /home/fallocat/limbo_git/build/src/tests/test_boptimizer
+        /path/to/limbo/build/src/tests/test_macros
+        /path/to/limbo/build/src/tests/test_optimizers
+        /path/to/limbo/build/src/tests/test_init_functions
+        /path/to/limbo/build/src/tests/test_gp
+        /path/to/limbo/build/src/tests/test_boptimizer
