@@ -29,10 +29,48 @@ The ``wscript`` file has to have the following content: ::
             uselib='BOOST EIGEN TBB',
             use='limbo') 
 
-For this example, we will optimize a simple function: :math:`-{(5*x - 2.5)}^2 + 5`.
-To do it, we have to define the evaluation function for the optimizer to call: ::
+For this example, we will optimize a simple function: :math:`-{(5*x - 2.5)}^2 + 5`, using all default values and settings.
+To start, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``: ::
 
-    struct eval {
+    #include <iostream>
+    #include <limbo/bayes_opt/boptimizer.hpp>
+
+    using namespace limbo;
+
+    struct Params {
+        struct boptimizer {
+            BO_PARAM(double, noise, 0.0);
+            BO_PARAM(int, dump_period, -1);
+        };
+
+        struct init {
+            BO_PARAM(int, nb_samples, 10);
+        };
+
+        struct maxiterations {
+            BO_PARAM(int, n_iterations, 40);
+        };
+
+        struct gp_ucb : public defaults::gp_ucb {
+        };
+
+        struct cmaes : public defaults::cmaes {
+        };
+
+        struct rprop : public defaults::rprop {
+        };
+
+        struct parallel_repeater : public defaults::parallel_repeater {
+        };
+    };
+
+Here we are stating that the samples are observed without noise(which makes sense, because we are going to evaluate the function),
+that we don't want to output any stats(by setting the dump period to -1), that the model has to be initialized with 10 samples (that will be
+selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults.
+
+Then, we have to define the evaluation function for the optimizer to call: ::
+
+    struct Eval {
         static constexpr size_t dim_in = 1;
         static constexpr size_t dim_out = 1;
 
@@ -42,6 +80,23 @@ To do it, we have to define the evaluation function for the optimizer to call: :
             res(0) = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
             return res;
         }
+    };
+
+It is required that the evaluation struct has the static members ``dim_in`` and ``dim_out``, specifying the input and output dimension.
+Also, it should have the ``operator()`` expecting a ``const Eigen::VectorXd&`` of size ``dim_in``, and return another one, of size ``dim_out``.
+
+With this, we can declare the main function: ::
+
+    int main() {
+        bayes_opt::BOptimizer<Params> boptimizer;
+        Eval eval;
+        boptimizer.optimize(eval);
+        std::cout << "Best sample: " << boptimizer.best_sample()(0) << " - Best observation: " << boptimizer.best_observation() << std::endl;
+        return 0;
     }
 
-It is required that the evaluation struct has 
+Finally, from the root of limbo, run a build command, with the additional switch ``--exp test``: ::
+
+    ./waf build --exp test
+
+Then, an executable named ``test`` should be produced under the folder ``build/exp/test``.
