@@ -114,3 +114,16 @@ The mean functions provided by **limbo** are the following (see :ref:`here <mean
     - No params needed
     - Used for mean's hyperparameters optimization
     - It takes as a template parameter the mean function to use
+
+Statistics
+-----------------
+
+We can change which ``Statistics`` our ``BOptimizer`` outputs, using the ``statfun`` templated parameter. Every statistic takes as template parameters the ``Params`` and optionally some more. All statistics should inherit from ``StatBase`` class.
+
+::
+
+    typedef StatName<Params> stat_t;
+
+    BOptimizer<Params, statfun<stat_t>> boptimizer;
+
+**limbo** provides only **Acquisitions** statistics for now.
