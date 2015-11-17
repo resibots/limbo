@@ -1,13 +1,13 @@
 Add External Library
 ====================
 
-.. highlight:: python
-
 Add external library to experiment's wscript
 --------------------------------------------
 
 
-To add an external library to your experiment, we need to modify our experiment's ``wscript``. The stantard way to do this, is to create a new configuration file for the dependency we want. In the ``waf`` build system, we do this by creating a python script(`.py`). The configuration file should have the following structure: ::
+To add an external library to your experiment, we need to modify our experiment's ``wscript``. The stantard way to do this, is to create a new configuration file for the dependency we want. In the ``waf`` build system, we do this by creating a python script(`.py`). The configuration file should have the following structure:
+
+.. code:: python
 
     #! /usr/bin/env python
     # encoding: utf-8
