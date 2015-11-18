@@ -38,9 +38,6 @@ File Structure
 Each directory in the `limbo` directory corresponds to a namespace with the same name. There is also a file for each directory called "directory.hpp" (e.g. `acqui.hpp`) that includes the whole namespace.
 
 
-
-
-
 Acquisition Functions
 --------------------------------
 
@@ -93,7 +90,7 @@ Each model should have implemented the following functions:
 Kernel Functions in GP model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We can change which ``Kernel Function`` our ``GP`` uses, using the second template parameter of the GP class. Every kernel function takes as template parameters only the ``Params``.
+We can change which ``Kernel Function`` our ``GP`` uses, using the second template parameter of the GP class. Every kernel function takes as template parameters the ``Params`` and optionally some more.
 
 ::
 
@@ -201,10 +198,10 @@ Many limbo classes provide default parameters. To use them, the parameter sub-st
       };
     };
 
-That way, the ucb::alpha() exists, but it has its default value/
+That way, the ``ucb::alpha()`` exists, but it has its default value.
 
 
-Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a ``BO_DYN_PARAM()`` instead of a ``BO_PARAM``:
+Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a ``BO_DYN_PARAM`` instead of a ``BO_PARAM``:
 
 ::
 
