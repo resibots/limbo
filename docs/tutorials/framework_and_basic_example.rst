@@ -102,8 +102,7 @@ With this, we can declare the main function: ::
 
     int main() {
         bayes_opt::BOptimizer<Params> boptimizer;
-        Eval eval;
-        boptimizer.optimize(eval);
+        boptimizer.optimize(Eval());
         std::cout << "Best sample: " << boptimizer.best_sample()(0) << " - Best observation: " << boptimizer.best_observation() << std::endl;
         return 0;
     }
