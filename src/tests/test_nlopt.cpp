@@ -7,6 +7,10 @@
 #include <limbo/opt/nlopt.hpp>
 
 struct Params {
+    struct nlopt {
+        BO_PARAM(float, epsilon, 1e-8);
+        BO_PARAM(int, iters, 30);
+    };
 };
 
 struct TestOpt {
