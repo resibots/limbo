@@ -26,7 +26,6 @@ namespace limbo {
                 Eigen::VectorXd::Map(&x[0], f.init().size()) = f.init();
 
                 opt.set_ftol_rel(Params::nlopt::epsilon());
-
                 opt.set_maxeval(Params::nlopt::iters());
 
                 double min;
