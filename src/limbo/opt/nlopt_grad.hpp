@@ -20,7 +20,7 @@ namespace limbo {
             {
                 nlopt::opt opt(Algorithm, f.param_size());
 
-                opt.set_max_objective(this->nlopt_func<F>, (void*)&f);
+                opt.set_max_objective(nlopt_func<F>, (void*)&f);
 
                 std::vector<double> x(f.init().size());
                 Eigen::VectorXd::Map(&x[0], f.init().size()) = f.init();

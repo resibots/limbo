@@ -16,26 +16,25 @@ def options(opt):
 
 @conf
 def check_nlopt(conf):
-	includes_check = ['/usr/local/include', '/usr/include']
-	libs_check = ['/usr/local/lib', '/usr/lib']
-	if 'RESIBOTS_DIR' in os.environ:
-		includes_check = [os.environ['RESIBOTS_DIR'] + '/include'] + includes_check
-		libs_check = [os.environ['RESIBOTS_DIR'] + '/lib'] + libs_check
-
 	if conf.options.nlopt:
-		conf.env.INCLUDES_NLOPT = [conf.options.nlopt + '/include']
-		conf.env.LIBPATH_NLOPT = [conf.options.nlopt + '/lib']
+		includes_check = [conf.options.nlopt + '/include']
+		libs_check = [conf.options.nlopt + '/lib']
 	else:
-		conf.env.INCLUDES_NLOPT = includes_check
-		conf.env.LIBPATH_NLOPT = libs_check
+		includes_check = ['/usr/local/include', '/usr/include']
+		libs_check = ['/usr/local/lib', '/usr/lib']
+		if 'RESIBOTS_DIR' in os.environ:
+			includes_check = [os.environ['RESIBOTS_DIR'] + '/include'] + includes_check
+			libs_check = [os.environ['RESIBOTS_DIR'] + '/lib'] + libs_check
 
 	try:
 		conf.start_msg('Checking for NLOpt includes')
-		res = conf.find_file('nlopt.hpp', conf.env.INCLUDES_NLOPT)
+		res = conf.find_file('nlopt.hpp', includes_check)
 		conf.end_msg('ok')
 		conf.start_msg('Checking for NLOpt libs')
-		res = res and (conf.find_file('libnlopt_cxx.so', conf.env.LIBPATH_NLOPT) or conf.find_file('libnlopt_cxx.a', conf.env.LIBPATH_NLOPT))
+		res = res and conf.find_file('libnlopt_cxx.so', libs_check)
 		conf.end_msg('ok')
+		conf.env.INCLUDES_NLOPT = includes_check
+		conf.env.LIBPATH_NLOPT = libs_check
 		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
 		conf.env.LIB_NLOPT = ['nlopt_cxx']
 	except:
