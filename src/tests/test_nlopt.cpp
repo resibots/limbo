@@ -4,12 +4,13 @@
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/limbo.hpp>
-#include <limbo/opt/nlopt.hpp>
+#include <limbo/opt/nlopt_grad.hpp>
+#include <limbo/opt/nlopt_no_grad.hpp>
 
 struct Params {
     struct nlopt {
         BO_PARAM(float, epsilon, 1e-8);
-        BO_PARAM(int, iters, 30);
+        BO_PARAM(int, iters, 80);
     };
 };
 
@@ -19,7 +20,7 @@ public:
 
     double utility(const Eigen::VectorXd& params) const
     {
-        return params(0) * params(0) + params(1) * params(1);
+        return -params(0) * params(0) - params(1) * params(1);
     }
 
     std::pair<double, Eigen::VectorXd> utility_and_grad(const Eigen::VectorXd& params) const
@@ -42,11 +43,22 @@ public:
     }
 };
 
-BOOST_AUTO_TEST_CASE(test_nlopt_simple)
+BOOST_AUTO_TEST_CASE(test_nlopt_grad_simple)
 {
 #ifdef USE_NLOPT
     TestOpt util;
-    Eigen::VectorXd g = limbo::opt::NLOpt<Params>()(util);
+    Eigen::VectorXd g = limbo::opt::NLOptGrad<Params>()(util);
+
+    BOOST_CHECK_SMALL(g(0), 0.00000001);
+    BOOST_CHECK_SMALL(g(1), 0.00000001);
+#endif
+}
+
+BOOST_AUTO_TEST_CASE(test_nlopt_no_grad_simple)
+{
+#ifdef USE_NLOPT
+    TestOpt util;
+    Eigen::VectorXd g = limbo::opt::NLOptNoGrad<Params>()(util);
 
     BOOST_CHECK_SMALL(g(0), 0.00000001);
     BOOST_CHECK_SMALL(g(1), 0.00000001);

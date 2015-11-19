@@ -1,5 +1,5 @@
-#ifndef LIMBO_OPT_NLOPT_HPP
-#define LIMBO_OPT_NLOPT_HPP
+#ifndef LIMBO_OPT_NLOPT_NO_GRAD_HPP
+#define LIMBO_OPT_NLOPT_NO_GRAD_HPP
 
 #ifndef USE_NLOPT
 #warning No NLOpt
@@ -12,12 +12,18 @@
 
 namespace limbo {
     namespace opt {
-        template <typename Params, nlopt::algorithm Algorithm = nlopt::LD_MMA>
-        struct NLOpt {
+        template <typename Params, nlopt::algorithm Algorithm = nlopt::LN_COBYLA>
+        struct NLOptNoGrad {
         public:
             template <typename F>
             Eigen::VectorXd operator()(const F& f) const
             {
+                // Assert that the algorithm is non-gradient
+                assert(Algorithm == nlopt::LN_COBYLA || Algorithm == nlopt::LN_BOBYQA || 
+                    Algorithm == nlopt::LN_NEWUOA || Algorithm == nlopt::LN_NEWUOA_BOUND || 
+                    Algorithm == nlopt::LN_PRAXIS || Algorithm == nlopt::LN_NELDERMEAD ||
+                    Algorithm == nlopt::LN_SBPLX);
+
                 nlopt::opt opt(Algorithm, f.param_size());
 
                 opt.set_max_objective(this->nlopt_func<F>, (void*)&f);
@@ -41,17 +47,7 @@ namespace limbo {
             {
                 F* f = (F*)(my_func_data);
                 Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());
-                double v;
-                if (!grad.empty()) {
-                    Eigen::VectorXd g;
-                    auto p = f->utility_and_grad(params);
-                    v = std::get<0>(p);
-                    g = std::get<1>(p);
-                    Eigen::VectorXd::Map(&grad[0], g.size()) = g;
-                }
-                else {
-                    v = f->utility(params);
-                }
+                double v = f->utility(params);
                 return v;
             }
         };
