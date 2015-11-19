@@ -34,7 +34,7 @@ def check_nlopt(conf):
 		res = conf.find_file('nlopt.hpp', conf.env.INCLUDES_NLOPT)
 		conf.end_msg('ok')
 		conf.start_msg('Checking for NLOpt libs')
-		res = res and conf.find_file('libnlopt_cxx.so', conf.env.LIBPATH_NLOPT)
+		res = res and (conf.find_file('libnlopt_cxx.so', conf.env.LIBPATH_NLOPT) or conf.find_file('libnlopt_cxx.a', conf.env.LIBPATH_NLOPT))
 		conf.end_msg('ok')
 		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
 		conf.env.LIB_NLOPT = ['nlopt_cxx']
