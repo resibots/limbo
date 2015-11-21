@@ -1,7 +1,7 @@
 Frequently Asked Questions
 ==========================
 
-Why using waf (and not Cmake, or <insert your favorite build system>)?
+Why waf (and not Cmake, or <insert your favorite build system>)?
 --------------------------------------------------------------------------
 
 Short answer: because we used it in `Sferes2 <http://www.github.com/sferes2/sferes>`_ and we liked it!
@@ -24,7 +24,7 @@ Waf has all the advantages of Scons but the learning curve is less steep. It is 
 
 Overall, it seems that cmake won the "war" in the free software world, mainly because a few high-profile projects chose it instead of Scons or Waf -- the most prominent (and "contagious") project is most probably QT. However, the battle was tough. For instance, I remember that no build system was perfect for QT and someone even made a waf-based version of QT. Also, keep in mind that QT needs a build system that works very well on MS Windows, while we do not care (we have no Windows-based clusters and no Windows-based robots...): they had different goals. In robotics, ROS heavily relies on Cmake, but one could wonder if Catkin would have been faster/nicer/better if it had been based on waf or scons. Last, a few high profile projects chose waf. For instance, `Pebble <http://www.pebble.com>`_, the smart watches, or `Samba <http://www.samba.org>`_, the Windows-compatible file sharing system for Unix.
 
-Wny do you choose to not use configuration files?
+Why do you choose to not use configuration files?
 --------------------------------------------------
 
 Short answer: because we target developpers/researchers who want to write the smallest amount of code when they add a new functionnality/concept, and not "end-users" who want an external optimizer that they can easily call on their problem.
