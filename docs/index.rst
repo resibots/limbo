@@ -13,7 +13,7 @@ Contents:
 
    tutorials/index
    guides/index
-
+   faq
 
 
 Indices and tables
@@ -22,4 +22,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

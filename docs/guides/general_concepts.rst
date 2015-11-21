@@ -1,5 +1,5 @@
-General Concepts
-======================
+Implementation & customization
+========================================
 
 Class Structure
 ---------------
@@ -38,8 +38,11 @@ File Structure
 Each directory in the `limbo` directory corresponds to a namespace with the same name. There is also a file for each directory called "directory.hpp" (e.g. `acqui.hpp`) that includes the whole namespace.
 
 
+.. _acquisition-guide:
+
 Acquisition Functions
 --------------------------------
+
 
 We can change which ``Acquisition Function`` our ``BOptimizer`` uses, using the ``acquifun`` templated parameter. Every acquisition function takes as template parameters the ``Params`` and a ``Model``.
 
@@ -86,6 +89,7 @@ Each model should have implemented the following functions:
 
 **limbo** provides only a **Gaussian Process** model for now. See :ref:`here <gaussian-process>` for more details.
 
+.. _kernel-guide:
 
 Kernel Functions in GP model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -113,6 +117,8 @@ The kernel functions provided by **limbo** are the following (see :ref:`here <ke
     - No params needed
     - Used for kernel's hyperparameters optimization
 
+
+.. _mean-guide:
 
 Mean Functions in GP model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -155,6 +161,9 @@ We can change which ``Statistics`` our ``BOptimizer`` outputs, using the ``statf
     BOptimizer<Params, statfun<stat_t>> boptimizer;
 
 **limbo** provides only **Acquisitions** statistics for now.
+
+
+.. _params-guide:
 
 Parameters
 -----------

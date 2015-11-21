@@ -1,8 +1,8 @@
-A quick introduction to Bayesian Optimization (BO)
-==================================================
+Introduction to Bayesian Optimization (BO) and to Limbo-specific concepts
+==========================================================================
 
-General concepts
-----------------
+General concepts of Bayesian optimization
+-----------------------------------------
 
 Bayesian optimization is a model-based, black-box optimization algorithm that is tailored for very expensive objective functions (a.k.a. cost functions) :cite:`brochu2010tutorial,Mockus2013`. As a black-box optimization algorithm, Bayesian optimization searches for the maximum of an unknown objective function from which samples can be obtained (e.g., by measuring the performance of a robot). Like all model-based optimization algorithms (e.g. surrogate-based algorithms, kriging, or DACE), Bayesian optimization creates a model of the objective function with a regression method, uses this model to select the next point to acquire, then updates the model, etc. It is called *Bayesian* because, in its general formulation :cite:`Mockus2013`, this algorithm chooses the next point by computing a posterior distribution of the objective function using the likelihood of the data already acquired and a prior on the type of function.
 
@@ -47,7 +47,8 @@ Given a set of observations :math:`\mathbf{P}_{1:t}=f(\mathbf{\chi}_{1:t})` and 
 
 Our implementation of Bayesian optimization uses this Gaussian process model to search for the maximum of the objective function :math:`f(\mathbf{x})`, :math:`f(\mathbf{x})` being unknown. It selects the next :math:`\chi` to test by selecting the maximum of the *acquisition function*, which balances exploration -- improving the model in the less explored parts of the search space -- and exploitation -- favoring parts that the models predicts as promising. Here, we use the "Upper Confidence Bound" acquisition function (see the "information acquisition function" section below). Once the observation is made, the algorithm updates the Gaussian process to take the new data into account. In classic Bayesian optimization, the Gaussian process is initialized with a constant mean because it is assumed that all the points of the search space are equally likely to be good. The model is then progressively refined after each observation.
 
-
+Optimizing the hyper-parameters of a Gaussian process
+......................................................
 
 .. _kernel-functions:
 
@@ -69,6 +70,9 @@ The Matern kernel function is computed as follows :cite:`matern1960spatial,stein
   \end{array}
 
 .. _acqui-functions:
+
+
+There are other kernel functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <kernel-guide>` for more details.
 
 Acquisition function
 ^^^^^^^^^^^^^^^^^^^^^
@@ -95,6 +99,7 @@ The acquisition function handles the exploitation/exploration trade-off. In the 
 :math:`\kappa` factor enables fine adjustments to the
 exploitation/exploration trade-off of the algorithm.
 
+There are other acquisition functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <acquisition-guide>` for more details.
 
 Limbo-specific concepts
 -----------------------
@@ -103,6 +108,8 @@ Limbo-specific concepts
 
 Mean function
 ^^^^^^^^^^^^^
+
+
 
 Black lists
 ^^^^^^^^^^^^
