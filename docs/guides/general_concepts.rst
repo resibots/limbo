@@ -17,11 +17,7 @@ File Structure
 ::
 
   src
-  +-- benchmarks: a few benchmark functions
-  |-- cmaes: the CMA-ES library, used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
-  |-- ehvi: the Expected HyperVolume Improvement, used for Multi-Objective Optimization
-  |-- examples: a few examples
-  |-- limbo
+  +-- limbo:
        +-- acqui: acquisition functions
        |-- bayes_opt: bayesian optimizers
        |-- init: initialization functions
@@ -33,6 +29,10 @@ File Structure
        |-- stop: stopping criteria
        |-- tools: useful macros & small functions
   |-- tests: unit tests
+  |-- benchmarks: a few benchmark functions
+  |-- examples: a few examples
+  |-- cmaes: [external] the CMA-ES library, used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
+  |-- ehvi: [external] the Expected HyperVolume Improvement, used for Multi-Objective Optimization -- by Iris Hupkens
 
 
 Each directory in the `limbo` directory corresponds to a namespace with the same name. There is also a file for each directory called "directory.hpp" (e.g. `acqui.hpp`) that includes the whole namespace.
@@ -130,7 +130,7 @@ We can change which ``Mean Function`` our ``GP`` uses, using the third template 
     typedef MeanName<Params> mean_t;
     typedef GP<Params, ..., mean_t, ...> gp_t;
 
-    BOptimizer<Params, modelfun<gp_t>> boptimizer;
+    BOptimizer<Params, modelfun<gp_t>> boptimizer;:ref:`here <mean-functions>`
 
 The mean functions provided by **limbo** are the following (see :ref:`here <mean-functions>` for more details):
 

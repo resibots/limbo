@@ -22,7 +22,7 @@ Scons is nice because it is based on Python, a nice, general purpose language th
 
 Waf has all the advantages of Scons but the learning curve is less steep. It is based on Python, it has a nice modern feel, it is fast, and it parallelizes the builds by default. Using python also allows us to easily add services that is not typically part of a build system, for instance, to submit jobs to a cluster (we have to parse a JSON file, etc., which is trivial in python, but not in Cmake!).
 
-Overall, it seems that cmake won the "war" in the free software world, mainly because a few high-profile projects chose it instead of Scons or Waf -- the most prominent (and "contagious") project is most probably QT. However, the battle was tough. For instance, I remember that no build system was perfect for QT and someone even made a waf-based version of QT. Also, keep in mind that QT needs a build system that works very well on MS Windows, while we do not care (we have no Windows-based clusters and no Windows-based robots...): they had different goals. In robotics, ROS heavily relies on Cmake, but one could wonder if Catkin would have been faster/nicer/better if it had been based on waf or scons. Last, a few high profile projects chose waf. For instance, `Pebble <http://www.pebble.com>`_, the smart watches, or `Samba <http://www.samba.org>`_, the Windows-compatible file sharing system for Unix.
+Overall, it seems that cmake won the "war" in the free software world, mainly because a few high-profile projects chose it instead of Scons or Waf -- the most prominent (and "contagious") project is most probably QT. However, the battle was tough. For instance, I remember that no build system was perfect for QT and someone even made a waf-based version of QT. Also, keep in mind that QT needs a build system that works very well on MS Windows, while we do not care (we have no Windows-based clusters and no Windows-based robots...): they have different goals. In robotics, ROS heavily relies on Cmake, but one could wonder if Catkin would have been faster/nicer/better if it had been based on waf or scons. Last, a few high profile projects chose waf. For instance, `Pebble <http://www.pebble.com>`_, the smart watches, or `Samba <http://www.samba.org>`_, the Windows-compatible file sharing system for Unix.
 
 Why do you choose to not use configuration files?
 --------------------------------------------------
@@ -31,5 +31,18 @@ Short answer: because we target developpers/researchers who want to write the sm
 
 Long answer is :ref:`here <params-guide>`.
 
-Why C++? (and not <insert your favorite language>)?
+Why C++11? (and not <insert your favorite language>)?
 ---------------------------------------------------
+We have specific needs that mainly revolve around high-performance, minimzing boilerplate code, and easy interface with hardware and existing libraries:
+
+- Easy interface with high-performance libraries (Intel MKL, multi-core parallelization, MPI, etc.), with hardware (robots, ROS, etc.), and with our existing code (e.g. Sferes2): we want to focus on the 'real code', and avoid writing interface code as much as possible;
+
+- High-efficiency: template-based C++ provides a way to write algorithms in a very abstract way with zero or almost zero overhead (abstraction without the cost!);
+
+- Static typing: we need as much help as possible from the compiler to avoid bugs in scientific code;
+
+- Easy to install on remote clusters;
+
+- Long-term use: our libraries will be used for at least 10 years in our group, therefore we want to use a language that will still exist in 10 years and that is not moving too fast (we do not want to rewrite our code every other month).
+
+Modern C++11 appears to be a good choice to fulfill all these criteria: it is reasonably easy to use, very easy to interface with everything, and very high-performance... but we keep a close eye on `Julia <julialang.org>`_, `Scala <www.scala-lang.org>`_, and `Rust <www.rust-lang.org>`_!
