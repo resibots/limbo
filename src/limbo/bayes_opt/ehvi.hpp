@@ -24,7 +24,7 @@ namespace limbo {
             template <typename EvalFunction>
             void optimize(const EvalFunction& feval, bool reset = true)
             {
-                this->_init(feval, reset);
+                this->_init(feval, FirstElem(), reset);
 
                 acqui_optimizer_t inner_opt;
 
@@ -108,7 +108,7 @@ namespace limbo {
                         << this->_observations[this->_observations.size() - 1].transpose()
                         << std::endl;
 
-                    this->_update_stats(*this, false);
+                    this->_update_stats(*this, FirstElem(), false);
                     this->_iteration++;
                 }
             }

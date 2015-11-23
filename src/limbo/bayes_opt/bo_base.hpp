@@ -29,16 +29,17 @@
 
 namespace limbo {
 
-    template <typename BO>
+    template <typename BO, typename AggregatorFunction>
     struct RefreshStat_f {
-        RefreshStat_f(BO& bo, bool blacklisted)
-            : _bo(bo), _blacklisted(blacklisted) {}
+        RefreshStat_f(BO& bo, const AggregatorFunction& afun, bool blacklisted)
+            : _bo(bo), _afun(afun), _blacklisted(blacklisted) {}
 
         BO& _bo;
+        const AggregatorFunction& _afun;
         bool _blacklisted;
 
         template <typename T>
-        void operator()(T& x) const { x(_bo, _blacklisted); }
+        void operator()(T& x) const { x(_bo, _afun, _blacklisted); }
     };
 
     struct FirstElem {
@@ -148,8 +149,8 @@ namespace limbo {
             void add_new_bl_sample(const Eigen::VectorXd& s) { _bl_samples.push_back(s); }
 
         protected:
-            template <typename F>
-            void _init(const F& feval, bool reset = true)
+            template <typename StateFunction, typename AggregatorFunction>
+            void _init(const StateFunction& seval, const AggregatorFunction& afun, bool reset = true)
             {
                 this->_iteration = 0;
                 if (reset) {
@@ -159,7 +160,7 @@ namespace limbo {
                 }
 
                 if (this->_samples.empty() && this->_bl_samples.empty())
-                    init_function_t()(feval, *this);
+                    init_function_t()(seval, afun, *this);
             }
 
             template <typename BO, typename AggregatorFunction>
@@ -169,11 +170,11 @@ namespace limbo {
                 return boost::fusion::accumulate(_stopping_criteria, false, chain);
             }
 
-            template <typename BO>
-            void _update_stats(BO& bo, bool blacklisted)
+            template <typename BO, typename AggregatorFunction>
+            void _update_stats(BO& bo, const AggregatorFunction& afun, bool blacklisted)
             { // not const, because some stat class
                 // modify the optimizer....
-                boost::fusion::for_each(_stat, RefreshStat_f<BO>(bo, blacklisted));
+                boost::fusion::for_each(_stat, RefreshStat_f<BO, AggregatorFunction>(bo, afun, blacklisted));
             }
 
             void _make_res_dir()
