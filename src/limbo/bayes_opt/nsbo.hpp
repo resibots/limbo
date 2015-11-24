@@ -19,7 +19,7 @@ namespace limbo {
             template <typename EvalFunction>
             void optimize(const EvalFunction& feval, bool reset = true)
             {
-                this->_init(feval, reset);
+                this->_init(feval, FirstElem(), reset);
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, FirstElem())) {
                     std::cout << "updating pareto model...";
@@ -41,7 +41,7 @@ namespace limbo {
                               << this->_models[1].mu(best_v) << ")"
                               << " sigma:" << this->_models[0].sigma(best_v) << " "
                               << this->_models[1].sigma(best_v) << std::endl;
-                    this->_update_stats(*this, false); // with the *this, nolonger need to
+                    this->_update_stats(*this, FirstElem(),  false); // with the *this, nolonger need to
                     // redeclare the _update_stats() for
                     // each class.
                 }

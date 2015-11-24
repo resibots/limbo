@@ -7,8 +7,8 @@ namespace limbo {
         // from/to the other init functions
         template <typename Params>
         struct NoInit {
-            template <typename F, typename Opt>
-            void operator()(const F& f, Opt& opt) const {}
+            template <typename StateFunction, typename AggregatorFunction, typename Opt>
+            void operator()(const StateFunction&, const AggregatorFunction&, Opt&) const {}
         };
     }
 }

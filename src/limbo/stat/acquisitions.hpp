@@ -9,8 +9,8 @@ namespace limbo {
         struct Acquisitions : public StatBase<Params> {
             Acquisitions() {}
 
-            template <typename BO>
-            void operator()(const BO& bo, bool blacklisted)
+            template <typename BO, typename AggregatorFunction>
+            void operator()(const BO& bo, const AggregatorFunction&, bool blacklisted)
             {
                 this->_create_log_file(bo, "acquisitions.dat");
                 if (bo.dump_enabled() && !blacklisted)
