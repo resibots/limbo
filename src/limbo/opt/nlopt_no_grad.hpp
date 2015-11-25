@@ -12,7 +12,7 @@
 
 namespace limbo {
     namespace opt {
-        template <typename Params, nlopt::algorithm Algorithm = nlopt::LN_COBYLA>
+        template <typename Params, nlopt::algorithm Algorithm>
         struct NLOptNoGrad {
         public:
             template <typename F>
