@@ -26,18 +26,24 @@ def check_nlopt(conf):
 			includes_check = [os.environ['RESIBOTS_DIR'] + '/include'] + includes_check
 			libs_check = [os.environ['RESIBOTS_DIR'] + '/lib'] + libs_check
 
-	try:
-		conf.start_msg('Checking for NLOpt includes')
-		res = conf.find_file('nlopt.hpp', includes_check)
-		conf.end_msg('ok')
-		conf.start_msg('Checking for NLOpt libs')
-		res = res and conf.find_file('libnlopt_cxx.so', libs_check)
+	conf.start_msg('Checking for NLOpt includes')
+	res = conf.find_file('nlopt.hpp', includes_check)
+	conf.end_msg('ok')
+	conf.start_msg('Checking for NLOpt libs')
+	found = False
+	for lib in ['libnlopt_cxx.so', 'libnlopt_cxx.a', 'libnlopt_cxx.dylib']:
+		try:
+			found = found or conf.find_file(lib, libs_check)
+		except:
+			continue
+	if not found:
+		conf.end_msg('Not found', 'RED')
+		return 0
+	else:
 		conf.end_msg('ok')
 		conf.env.INCLUDES_NLOPT = includes_check
 		conf.env.LIBPATH_NLOPT = libs_check
 		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
 		conf.env.LIB_NLOPT = ['nlopt_cxx']
-	except:
-		conf.end_msg('Not found', 'RED')
-		return
+		print conf.env.DEFINES_NLOPT 
 	return 1
