@@ -45,5 +45,4 @@ def check_nlopt(conf):
 		conf.env.LIBPATH_NLOPT = libs_check
 		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
 		conf.env.LIB_NLOPT = ['nlopt_cxx']
-		print conf.env.DEFINES_NLOPT 
 	return 1
