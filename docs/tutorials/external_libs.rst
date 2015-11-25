@@ -8,7 +8,9 @@ To add an external library to your experiment, we need to modify our experiment'
 
 **Warning** to activate this script, you need to activate your experiment **when configuring limbo**:  ``./waf configure --exp your_exp``
 
-This new file should have the following structure: ::
+This new file should have the following structure:
+
+.. code:: python
 
     #! /usr/bin/env python
     # encoding: utf-8

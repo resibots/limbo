@@ -72,7 +72,7 @@ The Matern kernel function is computed as follows :cite:`matern1960spatial,stein
 .. _acqui-functions:
 
 
-There are other kernel functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <kernel-guide>` for more details.
+There are other kernel functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <kernel-guide>` for the available kernel functions.
 
 Acquisition function
 ^^^^^^^^^^^^^^^^^^^^^
@@ -99,7 +99,7 @@ The acquisition function handles the exploitation/exploration trade-off. In the 
 :math:`\kappa` factor enables fine adjustments to the
 exploitation/exploration trade-off of the algorithm.
 
-There are other acquisition functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <acquisition-guide>` for more details.
+There are other acquisition functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <acquisition-guide>` for the available acquisition functions.
 
 Limbo-specific concepts
 -----------------------
@@ -117,15 +117,15 @@ Nevertheless, it can be useful to use more complex priors. This is, for instance
   \mu_{t}(\mathbf{x})= \mathcal{P}(\mathbf{x}) + \mathbf{k}^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t}))
 
 
-where :math:`\mathcal{P}(\mathbf{x})` is the performance of :math:`\mathbf{x}` according to the simulation and :math:`\mathcal{P}(\mathbf{\chi}_{1:t})` is the performance of all the previous observations, also according to the simulation. Replacing :math:`\mathbf{P}_{1:t}$` by :math:`\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t})`means that the Gaussian process models the difference between the actual performance :math:`$\mathbf{P}_{1:t}` and the performance from the behavior-performance map :math:`\mathcal{P}(\mathbf{\chi}_{1:t})`. The term :math:`\mathcal{P}(\mathbf{x})` is the prediction given by the mean function (the behavior-performance map in :cite:`cully_robots_2015`).
+where :math:`\mathcal{P}(\mathbf{x})` is the performance of :math:`\mathbf{x}` according to the simulation and :math:`\mathcal{P}(\mathbf{\chi}_{1:t})` is the performance of all the previous observations, also according to the simulation. Replacing :math:`\mathbf{P}_{1:t}` by :math:`\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t})` means that the Gaussian process models the difference between the actual performance :math:`\mathbf{P}_{1:t}` and the performance from the behavior-performance map :math:`\mathcal{P}(\mathbf{\chi}_{1:t})`. The term :math:`\mathcal{P}(\mathbf{x})` is the prediction given by the mean function (the behavior-performance map in :cite:`cully_robots_2015`).
 
-See :ref:`the Limbo implementation guide <mean-guide>` for more details.
+See :ref:`the Limbo implementation guide <mean-guide>` for the available mean functions.
 
 
 Black lists
 ^^^^^^^^^^^^
 
-When performing physical experiments, it is possible that some solutions cannot be properly evaluated. For example, this situation happens often with a physical robot, typically because (1) The robot may be outside the sensor’s range, for example when the robot is not visible from the camera’s point of view, making it impossible to assess its performance. (2) The sensor may return intractable values (infinity, NaN,...).
+When performing physical experiments, it is possible that some solutions cannot be properly evaluated. For example, this situation happens often with a physical robot, typically because (1) The robot may be outside the sensor’s range, for example when the robot is not visible from the camera’s point of view, making it impossible to assess its performance and (2) The sensor may return intractable values (infinity, NaN,...).
 
 Different solutions exist to deal with missing data. The simplest way consists in redoing the evaluation. This may work, but only if the problem is not deterministic, otherwise the algorithm will be continuously redoing the same, not working, evaluation. A second solution consists in assigning a very low value to the behavior’s performance, like a punishment. This approach will work with evolutionary algorithms because the corresponding individual will very likely be removed from the population in the next generation. By contrast, this approach will have a dramatic effect on algorithms using models of the reward function, like Bayesian Optimization, as the models will be completely distorted.
 

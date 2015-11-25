@@ -4,6 +4,8 @@ Frequently Asked Questions
 Why waf (and not Cmake, or <insert your favorite build system>)?
 --------------------------------------------------------------------------
 
+.. _faq-waf:
+
 Short answer: because we used it in `Sferes2 <http://www.github.com/sferes2/sferes>`_ and we liked it!
 
 Here is the longer answer. When we started Sferes2, around 2007, the free software community was starting to be tired of Automake/Autoconf (the *de facto* standard at that time) and it was looking for more modern alternatives. Two/Three software had some tractions:
