@@ -44,22 +44,18 @@ public:
 
 BOOST_AUTO_TEST_CASE(test_nlopt_grad_simple)
 {
-#ifdef USE_NLOPT
     TestOpt util;
-    Eigen::VectorXd g = limbo::opt::NLOptGrad<Params>()(util);
+    Eigen::VectorXd g = limbo::opt::NLOptGrad<Params, nlopt::LD_MMA>()(util);
 
     BOOST_CHECK_SMALL(g(0), 0.00000001);
     BOOST_CHECK_SMALL(g(1), 0.00000001);
-#endif
 }
 
 BOOST_AUTO_TEST_CASE(test_nlopt_no_grad_simple)
 {
-#ifdef USE_NLOPT
     TestOpt util;
-    Eigen::VectorXd g = limbo::opt::NLOptNoGrad<Params>()(util);
+    Eigen::VectorXd g = limbo::opt::NLOptNoGrad<Params, nlopt::LN_COBYLA>()(util);
 
     BOOST_CHECK_SMALL(g(0), 0.00000001);
     BOOST_CHECK_SMALL(g(1), 0.00000001);
-#endif
 }
