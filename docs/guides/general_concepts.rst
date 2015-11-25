@@ -130,7 +130,7 @@ We can change which ``Mean Function`` our ``GP`` uses, using the third template 
     typedef MeanName<Params> mean_t;
     typedef GP<Params, ..., mean_t, ...> gp_t;
 
-    BOptimizer<Params, modelfun<gp_t>> boptimizer;:ref:`here <mean-functions>`
+    BOptimizer<Params, modelfun<gp_t>> boptimizer;
 
 The mean functions provided by **limbo** are the following (see :ref:`here <mean-functions>` for more details):
 
