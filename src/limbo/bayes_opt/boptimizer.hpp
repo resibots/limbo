@@ -57,13 +57,13 @@ namespace limbo {
             {
                 _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
                 this->_init(sfun, afun, reset);
+
+                if (!this->_observations.empty())
+                        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
                 
                 acqui_optimizer_t acqui_optimizer;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
-                    if (!this->_observations.empty())
-                        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
-
                     acquisition_function_t acqui(_model, this->_iteration);
 
                     Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
@@ -96,6 +96,9 @@ namespace limbo {
                     //<< " acqui: "<< acqui(blacklisted ? this->_bl_samples.back() :
                     //this->_samples.back(), afun)
                     std::cout << " best:" << this->best_observation(afun) << std::endl;
+
+                    if (!this->_observations.empty())
+                        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
 
                     this->_iteration++;
                 }
