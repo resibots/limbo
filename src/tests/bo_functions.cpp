@@ -190,7 +190,7 @@ struct GoldenPrice {
 struct Params {
     struct boptimizer {
         BO_PARAM(double, noise, 0.0);
-        BO_PARAM(int, dump_period, -1);
+        BO_PARAM(bool, stats_enabled, false);
     };
 
     struct init {

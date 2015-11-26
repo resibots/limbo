@@ -17,7 +17,7 @@
 // we need everything to have the defaults
 #include <limbo/stop/chain_criteria.hpp>
 #include <limbo/stop/max_iterations.hpp>
-#include <limbo/stat/acquisitions.hpp>
+#include <limbo/stat/samples.hpp>
 #include <limbo/tools/sys.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
@@ -102,7 +102,7 @@ namespace limbo {
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
                 typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
-                typedef stat::Acquisitions<Params> stat_t; // 5
+                typedef stat::Samples<Params> stat_t; // 5
                 typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 6
             };
 
@@ -124,7 +124,7 @@ namespace limbo {
             BoBase(const BoBase& other) = delete;
             BoBase& operator=(const BoBase& other) = delete;
 
-            bool dump_enabled() const { return Params::boptimizer::dump_period() > 0; }
+            bool stats_enabled() const { return Params::boptimizer::stats_enabled(); }
 
             const std::string& res_dir() const { return _res_dir; }
 
@@ -179,7 +179,7 @@ namespace limbo {
 
             void _make_res_dir()
             {
-                if (Params::boptimizer::dump_period() <= 0)
+                if (!Params::boptimizer::stats_enabled())
                     return;
                 _res_dir = tools::hostname() + "_" + tools::date() + "_" + tools::getpid();
                 boost::filesystem::path my_path(_res_dir);
