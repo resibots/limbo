@@ -25,11 +25,11 @@ namespace limbo {
 
                 if (!blacklisted && !bo.samples().empty()) {
                     std::tie(mu, sigma) = bo.model().query(bo.samples().back());
-                    acqui = BO::acquisition_function_t(bo.model(), bo.iteration())(bo.samples().back(), afun);
+                    acqui = BO::acquisition_function_t(bo.model(), bo.current_iteration())(bo.samples().back(), afun);
                 }
                 else if (!bo.bl_samples().empty()) {
                     std::tie(mu, sigma) = bo.model().query(bo.bl_samples().back());
-                    acqui = BO::acquisition_function_t(bo.model(), bo.iteration())(bo.bl_samples().back(), afun);
+                    acqui = BO::acquisition_function_t(bo.model(), bo.current_iteration())(bo.bl_samples().back(), afun);
                 }
                 else
                     return;
