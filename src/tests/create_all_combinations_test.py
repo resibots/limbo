@@ -49,12 +49,12 @@ def create(bld):
                     for acqui in acquisitions:
                         for acqui_opt in optimizers:
                             for init in inits:
-                                total_stats = stats
+                                additional_stats = []
                                 if kernel == 'SquaredExpARD':
-                                    total_stats.append('GPKernelHParams')
+                                    additional_stats.append('GPKernelHParams')
                                 if mean == 'FunctionARD':
-                                    total_stats.append('GPMeanHParams')
-                                declarations = 'typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in total_stats]) + '> stats_t;\n'
+                                    additional_stats.append('GPMeanHParams')
+                                declarations = 'typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in total_stats + additional_stats]) + '> stats_t;\n'
                                 declarations = declarations + '    typedef boost::fusion::vector<' + ', '.join(['stop::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
                                 declarations = declarations + '    typedef kernel::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef mean::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
