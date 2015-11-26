@@ -30,7 +30,7 @@ namespace limbo {
                     Algorithm == nlopt::GN_DIRECT_L_RAND_NOSCAL || Algorithm == nlopt::GN_ORIG_DIRECT ||
                     Algorithm == nlopt::GN_ORIG_DIRECT_L || Algorithm == nlopt::GN_CRS2_LM ||
                     Algorithm == nlopt::GD_STOGO || Algorithm == nlopt::GD_STOGO_RAND ||
-                    Algorithm == nlopt::GN_ISRES || Algorithm == nlopt::GN_ESCH);
+                    Algorithm == nlopt::GN_ISRES || Algorithm == nlopt::GN_ESCH, "NLOptNoGrad accepts gradient free nlopt algorithms only");
 
                 nlopt::opt opt(Algorithm, f.param_size());
 
