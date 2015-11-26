@@ -7,6 +7,7 @@
 #include <limbo/stat/bl_samples.hpp>
 #include <limbo/stat/aggregated_observations.hpp>
 #include <limbo/stat/observations.hpp>
+#include <limbo/stat/gp_acquisitions.hpp>
 #include <limbo/stat/gp_prediction_differences.hpp>
 #include <limbo/stat/samples.hpp>
 
