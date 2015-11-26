@@ -107,10 +107,11 @@ namespace limbo {
             }
 
             template <typename AggregatorFunction = FirstElem>
-            typename AggregatorFunction::result_type best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
+            const Eigen::VectorXd& best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
             {
                 auto rewards = boost::adaptors::transform(this->_observations, afun);
-                return *std::max_element(rewards.begin(), rewards.end());
+                auto max_e = std::max_element(rewards.begin(), rewards.end());
+                return this->_observations[std::distance(rewards.begin(), max_e)];
             }
 
             template <typename AggregatorFunction = FirstElem>
