@@ -15,7 +15,7 @@ namespace limbo {
                 if (!bo.stats_enabled() || bo.observations().empty() || blacklisted)
                     return;
 
-                this->_create_log_file(bo, "prediction_differences.dat");
+                this->_create_log_file(bo, "gp_prediction_differences.dat");
 
                 if (bo.total_iterations() == 0)
                     std::cout << "#iteration predicted observed difference" << std::endl;
