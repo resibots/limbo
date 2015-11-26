@@ -21,7 +21,7 @@ namespace limbo {
                 // Assert that the algorithm is non-gradient
                 // TO-DO: Add support for MLSL (Multi-Level Single-Linkage)
                 // TO-DO: Add better support for ISRES (Improved Stochastic Ranking Evolution Strategy)
-                assert(Algorithm == nlopt::LN_COBYLA || Algorithm == nlopt::LN_BOBYQA || 
+                static_assert(Algorithm == nlopt::LN_COBYLA || Algorithm == nlopt::LN_BOBYQA || 
                     Algorithm == nlopt::LN_NEWUOA || Algorithm == nlopt::LN_NEWUOA_BOUND || 
                     Algorithm == nlopt::LN_PRAXIS || Algorithm == nlopt::LN_NELDERMEAD ||
                     Algorithm == nlopt::LN_SBPLX || Algorithm == nlopt::GN_DIRECT ||
