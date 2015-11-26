@@ -55,21 +55,21 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
-                this->_init(sfun, afun, reset);
-
                 _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
-                if (this->_observations.size())
-                    _model.compute(this->_samples, this->_observations,
-                        Params::boptimizer::noise());
-
+                this->_init(sfun, afun, reset);
+                
                 acqui_optimizer_t acqui_optimizer;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
+                    if (!this->_observations.empty())
+                        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
+
                     acquisition_function_t acqui(_model, this->_iteration);
 
                     Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
                     auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
                     Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization);
+
                     bool blacklisted = false;
                     try {
                         this->add_new_sample(new_sample, sfun(new_sample));
@@ -79,18 +79,14 @@ namespace limbo {
                         blacklisted = true;
                     }
 
-                    _model.compute(this->_samples, this->_observations,
-                        Params::boptimizer::noise(), this->_bl_samples);
                     this->_update_stats(*this, afun, blacklisted);
 
-                    std::cout << this->_iteration << " new point: "
-                              << (blacklisted ? this->_bl_samples.back()
-                                              : this->_samples.back()).transpose();
+                    std::cout << this->_iteration << " new point: " << (blacklisted ? this->_bl_samples.back() : this->_samples.back()).transpose();
+
                     if (blacklisted)
-                        std::cout << " value: "
-                                  << "No data, blacklisted";
+                        std::cout << " value: " << "No data, blacklisted";
                     else
-                        std::cout << " value: " << this->_observations.back().transpose();
+                        std::cout << " value: " << afun(this->_observations.back());
 
                     // std::cout << " mu: "<< _model.mu(blacklisted ? this->_bl_samples.back()
                     // : this->_samples.back()).transpose()
