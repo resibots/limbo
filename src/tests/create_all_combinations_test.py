@@ -54,7 +54,7 @@ def create(bld):
                                     additional_stats.append('GPKernelHParams')
                                 if mean == 'FunctionARD':
                                     additional_stats.append('GPMeanHParams')
-                                declarations = 'typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in total_stats + additional_stats]) + '> stats_t;\n'
+                                declarations = 'typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats + additional_stats]) + '> stats_t;\n'
                                 declarations = declarations + '    typedef boost::fusion::vector<' + ', '.join(['stop::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
                                 declarations = declarations + '    typedef kernel::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef mean::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
