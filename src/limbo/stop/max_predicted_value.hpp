@@ -32,7 +32,7 @@ namespace limbo {
 
                 auto optimizer = _get_optimizer(typename BO::acqui_optimizer_t(), Optimizer());
                 Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(bo.model().dim_in()).array() + 1) / 2;
-                double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point))));
+                double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point), true)));
 
                 if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::max_predicted_value::ratio() * val)
                     return false;
