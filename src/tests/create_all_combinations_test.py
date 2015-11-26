@@ -26,7 +26,7 @@ def create(bld):
     optimizers = ['RandomPoint', 'GridSearch', 'Cmaes']
     inits = ['NoInit', 'RandomSampling', 'RandomSamplingGrid', 'GridSampling']
     stats = ['Samples', 'Observations', 'AggregatedObservations', 'BestSamples', 'BestObservations', 'BestAggregatedObservations',
-             'BlSamples', 'GPPredictionDifferences', 'GPAcquisitions']
+             'BlSamples', 'GPPredictionDifferences', 'GPAcquisitions', 'GPLikelihood']
     stops = ['MaxIterations', 'MaxPredictedValue']
 
     stats = 'typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats]) + '> stats_t;\n'
