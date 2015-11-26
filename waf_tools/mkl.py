@@ -52,5 +52,4 @@ def check_mkl(conf):
         conf.env.CXXFLAGS_MKL_OMP = ["-qopenmp", "-m64",  "-DEIGEN_USE_MKL_ALL", "-DMKL_BLAS=MKL_DOMAIN_BLAS" ]
     else:
         conf.env.CXXFLAGS_MKL_OMP = ["-fopenmp", "-m64",  "-DEIGEN_USE_MKL_ALL", "-DMKL_BLAS=MKL_DOMAIN_BLAS"]
-    conf.end_msg('ok')
     conf.env.LINKFLAGS_MKL_OMP = [ "-Wl,--no-as-needed" ]
