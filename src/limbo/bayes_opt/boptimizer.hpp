@@ -65,7 +65,7 @@ namespace limbo {
                 acqui_optimizer_t acqui_optimizer;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
-                    acquisition_function_t acqui(_model, this->_iteration);
+                    acquisition_function_t acqui(_model, this->_current_iteration);
 
                     Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
                     auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
@@ -83,7 +83,7 @@ namespace limbo {
                         Params::boptimizer::noise(), this->_bl_samples);
                     this->_update_stats(*this, afun, blacklisted);
 
-                    std::cout << this->_iteration << " new point: "
+                    std::cout << this->_current_iteration << " new point: "
                               << (blacklisted ? this->_bl_samples.back()
                                               : this->_samples.back()).transpose();
                     if (blacklisted)
@@ -101,7 +101,8 @@ namespace limbo {
                     //this->_samples.back(), afun)
                     std::cout << " best:" << this->best_observation(afun) << std::endl;
 
-                    this->_iteration++;
+                    this->_current_iteration++;
+                    this->_total_iterations++;
                 }
             }
 

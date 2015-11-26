@@ -15,13 +15,13 @@ namespace limbo {
 
                 this->_create_log_file(bo, "samples.dat");
 
-                if (bo.iteration() == 0) {
+                if (bo.total_iterations() == 0) {
                     for (size_t i = 0; i < bo.samples().size() -1; i++)
                         (*this->_log_file) << "-1 " << bo.samples()[i].transpose() << std::endl;
                 }
 
                 if (!blacklisted)
-                    (*this->_log_file) << bo.iteration() << " " << bo.samples().back().transpose() << std::endl;
+                    (*this->_log_file) << bo.total_iterations() << " " << bo.samples().back().transpose() << std::endl;
             }
         };
     }

@@ -118,7 +118,7 @@ namespace limbo {
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<StoppingCriteria>, StoppingCriteria, boost::fusion::vector<StoppingCriteria>>::type stopping_criteria_t;
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<Stat>, Stat, boost::fusion::vector<Stat>>::type stat_t;
 
-            BoBase() { _make_res_dir(); }
+            BoBase() : _total_iterations(0) { _make_res_dir(); }
 
             // disable copy (dangerous and useless)
             BoBase(const BoBase& other) = delete;
@@ -134,7 +134,9 @@ namespace limbo {
 
             const std::vector<Eigen::VectorXd>& bl_samples() const { return _bl_samples; }
 
-            int iteration() const { return _iteration; }
+            int current_iteration() const { return _current_iteration; }
+
+            int total_iterations() const { return _total_iterations; }
 
             // does not update the model !
             // we don't add NaN and inf observations
@@ -152,14 +154,15 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction>
             void _init(const StateFunction& seval, const AggregatorFunction& afun, bool reset = true)
             {
-                this->_iteration = 0;
+                this->_current_iteration = 0;
                 if (reset) {
+                    this->_total_iterations = 0;
                     this->_samples.clear();
                     this->_observations.clear();
-                    this->_bl_samples.clear();
+                    this->_bl_samples.clear();                    
                 }
 
-                if (this->_samples.empty() && this->_bl_samples.empty())
+                if (this->_total_iterations == 0)
                     init_function_t()(seval, afun, *this);
             }
 
@@ -187,7 +190,8 @@ namespace limbo {
             }
 
             std::string _res_dir;
-            int _iteration;
+            int _current_iteration;
+            int _total_iterations;
             stopping_criteria_t _stopping_criteria;
             stat_t _stat;
 
