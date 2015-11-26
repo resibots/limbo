@@ -11,8 +11,10 @@ namespace limbo {
         struct GridSearch {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f) const
+            Eigen::VectorXd operator()(const F& f, bool bounded) const
             {
+                // Grid search does not support unbounded search
+                assert(bounded);
                 return _inner_search(f, 0, f.init());
             }
 

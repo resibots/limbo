@@ -69,7 +69,7 @@ namespace limbo {
 
                     Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
                     auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
-                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization);
+                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, true);
                     bool blacklisted = false;
                     try {
                         this->add_new_sample(new_sample, sfun(new_sample));

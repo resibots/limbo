@@ -17,7 +17,7 @@ namespace limbo {
                 {
                     KernelLFOptimization<GP> optimization(gp);
                     opt::ParallelRepeater<Params, opt::Rprop<Params>> par_rprop;
-                    auto params = par_rprop(optimization);
+                    auto params = par_rprop(optimization, false);
                     gp.kernel_function().set_h_params(params);
                     gp.set_lik(optimization.utility(params));
                     gp.update();

@@ -28,8 +28,10 @@ namespace limbo {
         struct Cmaes {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f) const
+            Eigen::VectorXd operator()(const F& f, double bounded) const
             {
+                // Currrently cmaes does not support unbounded search
+                assert(bounded);
                 int nrestarts = Params::cmaes::nrestarts();
                 size_t dim = f.param_size();
                 double incpopsize = 2;
@@ -41,12 +43,12 @@ namespace limbo {
                 int irun, lambda = 0, countevals = 0;
                 char const* stop;
                 boundary_transformation_t boundaries;
-                double lowerBounds[] = {0.0}; // TODO  put this into params?
+                double lowerBounds[] = {0.0}; 
                 double upperBounds[] = {1.006309}; // Allows solution to be pretty close to 1
                 int nb_bounds = 1; /* numbers used from lower and upperBounds */
 
-                boundary_transformation_init(&boundaries, lowerBounds, upperBounds,
-                    nb_bounds);
+                boundary_transformation_init(&boundaries, lowerBounds, upperBounds, nb_bounds);
+
                 double* x_in_bounds = cmaes_NewDouble(dim);
                 double init_point[dim];
                 for (int i = 0; i < dim; ++i)
