@@ -41,6 +41,13 @@ def build(bld):
                 target='test_boptimizer',
                 uselib='BOOST EIGEN TBB SFERES',
                 use='limbo')
+    if bld.env.DEFINES_NLOPT:
+        bld.program(features='cxx test',
+                    source='test_nlopt.cpp',
+                    includes='. .. ../../',
+                    target='test_nlopt',
+                    uselib='BOOST EIGEN TBB NLOPT',
+                    use='limbo')
 
 
 def build_extensive_tests(ctx):

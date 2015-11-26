@@ -25,6 +25,7 @@ def options(opt):
         opt.load('sferes')
         opt.load('limbo')
         opt.load('openmp')
+        opt.load('nlopt')
         #opt.load('ode')
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
@@ -43,6 +44,7 @@ def configure(conf):
         conf.load('openmp')
         conf.load('mkl')
         conf.load('xcode')
+        conf.load('nlopt')
 
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
@@ -62,6 +64,7 @@ def configure(conf):
         conf.check_sferes()
         conf.check_openmp()
         conf.check_mkl()
+        conf.check_nlopt()
         #conf.check_ode()
 
         if conf.env['CXXFLAGS_ODE']:
