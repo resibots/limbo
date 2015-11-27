@@ -146,7 +146,7 @@ Then in our ``wscript`` we add the following lines:
 Example: Add ROS as external library
 -------------------------------------
 
-Here's a small and quick example to add `ROS`_ as an external library to our experiment. We assume the following file structure:
+Here's a small and quick example to add `ROS`_ as an external library to our experiment. We assume the following file structure (where ``main.cpp`` is C++ source code using **limbo** and **ROS**):
 
 .. _ROS: http://www.ros.org/
 
@@ -202,29 +202,32 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
     @conf
     def check_ros(conf):
       if conf.options.ros:
-        conf.env.INCLUDES_ROS = [conf.options.ros + '/include']
-        conf.env.LIBPATH_ROS = [conf.options.ros + '/lib']
+        includes_check = [conf.options.ros + '/include']
+        libs_check = [conf.options.ros + '/lib']
       else:
         if 'ROS_DISTRO' not in os.environ:
           conf.start_msg('Checking for ROS')
           conf.end_msg('ROS_DISTRO not in environmental variables', 'RED')
-          return
-        conf.env.INCLUDES_ROS = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/include']
-        conf.env.LIBPATH_ROS = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/lib']
+          return 1
+        includes_check = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/include']
+        libs_check = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/lib/']
 
       try:
         conf.start_msg('Checking for ROS includes')
-        res = conf.find_file('ros/ros.h', conf.env.INCLUDES_ROS)
+        res = conf.find_file('ros/ros.h', includes_check)
         conf.end_msg('ok')
-        conf.env.LIB_ROS = ['roscpp','rosconsole','roscpp_serialization','rostime', 'xmlrpcpp','rosconsole_log4cxx', 'rosconsole_backend_interface']
+        libs = ['roscpp','rosconsole','roscpp_serialization','rostime', 'xmlrpcpp','rosconsole_log4cxx', 'rosconsole_backend_interface']
         conf.start_msg('Checking for ROS libs')
-        for lib in conf.env.LIB_ROS:
-          res = res and conf.find_file('lib'+lib+'.so', conf.env.LIBPATH_ROS)
+        for lib in libs:
+          res = res and conf.find_file('lib'+lib+'.so', libs_check)
         conf.end_msg('ok')
+        conf.env.INCLUDES_ROS = includes_check
+        conf.env.LIBPATH_ROS = libs_check
+        conf.env.LIB_ROS = libs
         conf.env.DEFINES_ROS = ['USE_ROS']
       except:
         conf.end_msg('Not found', 'RED')
-        return
+        return 1
       return 1
 
 Assuming we are at **limbo** root, we run the following to compile our experiment: ::
