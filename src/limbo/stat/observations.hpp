@@ -16,7 +16,7 @@ namespace limbo {
                 this->_create_log_file(bo, "observations.dat");
 
                 if (bo.total_iterations() == 0) {
-                    std::cout << "#iteration observation" << std::endl;
+                    (*this->_log_file) << "#iteration observation" << std::endl;
                     for (size_t i = 0; i < bo.observations().size() -1; i++)
                         (*this->_log_file) << "-1 " << bo.observations()[i].transpose() << std::endl;
                 }

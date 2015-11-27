@@ -18,7 +18,7 @@ namespace limbo {
                 this->_create_log_file(bo, "gp_kernel_hparams.dat");
 
                 if (bo.total_iterations() == 0)
-                    std::cout << "#iteration gp_kernel_hparams" << std::endl;
+                    (*this->_log_file) << "#iteration gp_kernel_hparams" << std::endl;
 
                 (*this->_log_file) << bo.total_iterations() << " " << bo.model().kernel_function().h_params().transpose() << std::endl;
             }

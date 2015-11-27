@@ -18,7 +18,7 @@ namespace limbo {
                 this->_create_log_file(bo, "gp_mean_hparams.dat");
 
                 if (bo.total_iterations() == 0)
-                    std::cout << "#iteration gp_mean_hparams" << std::endl;
+                    (*this->_log_file) << "#iteration gp_mean_hparams" << std::endl;
 
                 (*this->_log_file) << bo.total_iterations() << " " << bo.model().mean_function().h_params().transpose() << std::endl;
             }

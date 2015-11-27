@@ -16,7 +16,7 @@ namespace limbo {
                 this->_create_log_file(bo, "aggregated_observations.dat");
 
                 if (bo.total_iterations() == 0) {
-                    std::cout << "#iteration aggregated_observation" << std::endl;
+                    (*this->_log_file) << "#iteration aggregated_observation" << std::endl;
                     for (size_t i = 0; i < bo.observations().size() -1; i++)
                         (*this->_log_file) << "-1 " << afun(bo.observations()[i]) << std::endl;
                 }

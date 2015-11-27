@@ -18,7 +18,7 @@ namespace limbo {
                 this->_create_log_file(bo, "gp_acquisitions.dat");
 
                 if (bo.total_iterations() == 0)
-                    std::cout << "#iteration mu sigma acquisition" << std::endl;
+                    (*this->_log_file) << "#iteration mu sigma acquisition" << std::endl;
 
                 Eigen::VectorXd mu;
                 double sigma, acqui;

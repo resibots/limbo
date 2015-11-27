@@ -18,7 +18,7 @@ namespace limbo {
                 this->_create_log_file(bo, "gp_likelihood.dat");
 
                 if (bo.total_iterations() == 0)
-                    std::cout << "#iteration gp_likelihood" << std::endl;
+                    (*this->_log_file) << "#iteration gp_likelihood" << std::endl;
 
                 (*this->_log_file) << bo.total_iterations() << " " << bo.model().get_lik() << std::endl;
             }

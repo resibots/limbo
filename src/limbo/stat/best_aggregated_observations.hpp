@@ -16,7 +16,7 @@ namespace limbo {
                 this->_create_log_file(bo, "best_aggregated_observations.dat");
 
                 if (bo.total_iterations() == 0)
-                    std::cout << "#iteration best_aggregated_observation" << std::endl;
+                    (*this->_log_file) << "#iteration best_aggregated_observation" << std::endl;
 
                 if (!blacklisted)
                     (*this->_log_file) << bo.total_iterations() << " " << afun(bo.best_observation(afun)) << std::endl;

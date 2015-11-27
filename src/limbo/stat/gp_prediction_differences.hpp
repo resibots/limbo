@@ -18,7 +18,7 @@ namespace limbo {
                 this->_create_log_file(bo, "gp_prediction_differences.dat");
 
                 if (bo.total_iterations() == 0)
-                    std::cout << "#iteration predicted observed difference" << std::endl;
+                    (*this->_log_file) << "#iteration predicted observed difference" << std::endl;
 
                 double pred = afun(bo.model().mu(bo.samples().back()));
                 double obs = afun(bo.observations().back());
