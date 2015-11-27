@@ -10,7 +10,7 @@ namespace limbo {
             template <typename BO, typename AggregatorFunction>
             bool operator()(const BO& bo, const AggregatorFunction&)
             {
-                return bo.iteration() >= Params::maxiterations::n_iterations();
+                return bo.current_iteration() >= Params::maxiterations::n_iterations();
             }
         };
     }

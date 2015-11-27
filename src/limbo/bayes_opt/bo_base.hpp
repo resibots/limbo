@@ -17,7 +17,8 @@
 // we need everything to have the defaults
 #include <limbo/stop/chain_criteria.hpp>
 #include <limbo/stop/max_iterations.hpp>
-#include <limbo/stat/acquisitions.hpp>
+#include <limbo/stat/samples.hpp>
+#include <limbo/stat/aggregated_observations.hpp>
 #include <limbo/tools/sys.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
@@ -102,7 +103,7 @@ namespace limbo {
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
                 typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
-                typedef stat::Acquisitions<Params> stat_t; // 5
+                typedef boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>> stat_t; // 5
                 typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 6
             };
 
@@ -118,13 +119,13 @@ namespace limbo {
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<StoppingCriteria>, StoppingCriteria, boost::fusion::vector<StoppingCriteria>>::type stopping_criteria_t;
             typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<Stat>, Stat, boost::fusion::vector<Stat>>::type stat_t;
 
-            BoBase() { _make_res_dir(); }
+            BoBase() : _total_iterations(0) { _make_res_dir(); }
 
             // disable copy (dangerous and useless)
             BoBase(const BoBase& other) = delete;
             BoBase& operator=(const BoBase& other) = delete;
 
-            bool dump_enabled() const { return Params::boptimizer::dump_period() > 0; }
+            bool stats_enabled() const { return Params::boptimizer::stats_enabled(); }
 
             const std::string& res_dir() const { return _res_dir; }
 
@@ -134,7 +135,9 @@ namespace limbo {
 
             const std::vector<Eigen::VectorXd>& bl_samples() const { return _bl_samples; }
 
-            int iteration() const { return _iteration; }
+            int current_iteration() const { return _current_iteration; }
+
+            int total_iterations() const { return _total_iterations; }
 
             // does not update the model !
             // we don't add NaN and inf observations
@@ -152,14 +155,15 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction>
             void _init(const StateFunction& seval, const AggregatorFunction& afun, bool reset = true)
             {
-                this->_iteration = 0;
+                this->_current_iteration = 0;
                 if (reset) {
+                    this->_total_iterations = 0;
                     this->_samples.clear();
                     this->_observations.clear();
-                    this->_bl_samples.clear();
+                    this->_bl_samples.clear();                    
                 }
 
-                if (this->_samples.empty() && this->_bl_samples.empty())
+                if (this->_total_iterations == 0)
                     init_function_t()(seval, afun, *this);
             }
 
@@ -179,7 +183,7 @@ namespace limbo {
 
             void _make_res_dir()
             {
-                if (Params::boptimizer::dump_period() <= 0)
+                if (!Params::boptimizer::stats_enabled())
                     return;
                 _res_dir = tools::hostname() + "_" + tools::date() + "_" + tools::getpid();
                 boost::filesystem::path my_path(_res_dir);
@@ -187,7 +191,8 @@ namespace limbo {
             }
 
             std::string _res_dir;
-            int _iteration;
+            int _current_iteration;
+            int _total_iterations;
             stopping_criteria_t _stopping_criteria;
             stat_t _stat;
 

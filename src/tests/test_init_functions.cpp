@@ -20,7 +20,7 @@ Eigen::VectorXd make_v1(double x)
 struct Params {
     struct boptimizer {
         BO_PARAM(double, noise, 0.01);
-        BO_PARAM(int, dump_period, -1);
+        BO_PARAM(bool, stats_enabled, false);
     };
 
     struct maxiterations {
