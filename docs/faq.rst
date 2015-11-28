@@ -31,7 +31,7 @@ Why do you choose to not use configuration files?
 
 Short answer: because we target developpers/researchers who want to write the smallest amount of code when they add a new functionnality/concept, and not "end-users" who want an external optimizer that they can easily call on their problem.
 
-Long answer is :ref:`here <params-guide>`.
+Long answer is in the :ref:`Parameters guide <params-guide>`.
 
 Why C++11? (and not <insert your favorite language>)?
 ---------------------------------------------------

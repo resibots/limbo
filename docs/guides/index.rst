@@ -5,5 +5,7 @@ Guides
    :maxdepth: 2
 
    bo
-   general_concepts
+   limbo_concepts
    framework
+   parameters
+   general_concepts

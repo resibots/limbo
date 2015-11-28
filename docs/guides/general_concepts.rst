@@ -1,5 +1,5 @@
-Implementation & customization
-========================================
+Implementation details & customization of algorithms
+====================================================
 
 Class Structure
 ---------------
@@ -87,7 +87,7 @@ Each model should have implemented the following functions:
 - ``void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, double noise, const std::vector<Eigen::VectorXd>& bl_samples)``
 
 
-**limbo** provides only a **Gaussian Process** model for now. See :ref:`here <gaussian-process>` for more details.
+**limbo** provides only a **Gaussian Process** model for now. See :ref:`gaussian process section of the BO guide <gaussian-process>` for more details.
 
 .. _kernel-guide:
 
@@ -103,7 +103,7 @@ We can change which ``Kernel Function`` our ``GP`` uses, using the second templa
 
     BOptimizer<Params, modelfun<gp_t>> boptimizer;
 
-The kernel functions provided by **limbo** are the following (see :ref:`here <kernel-functions>` for more details):
+The kernel functions provided by **limbo** are the following (see :ref:`kernel function section of the BO guide <kernel-functions>` for more details):
 
 - Exp
     - ``Params::kf_exp::sigma`` should be available and a float.
@@ -132,7 +132,7 @@ We can change which ``Mean Function`` our ``GP`` uses, using the third template 
 
     BOptimizer<Params, modelfun<gp_t>> boptimizer;
 
-The mean functions provided by **limbo** are the following (see :ref:`here <mean-functions>` for more details):
+The mean functions provided by **limbo** are the following (see :ref:`the mean function section of the BO guide <mean-functions>` for more details):
 
 - NullFunction
     - No params needed
@@ -161,88 +161,3 @@ We can change which ``Statistics`` our ``BOptimizer`` outputs, using the ``statf
     BOptimizer<Params, statfun<stat_t>> boptimizer;
 
 **limbo** provides only **Acquisitions** statistics for now.
-
-
-.. _params-guide:
-
-Parameters
------------
-
-Bayesian Optimization algorithms, acquisition functions, etc. all have many parameters. The traditionnal approach is to use a configuration file (e.g. XML, or json, .ini, ...). However,  each time a developer adds a parameter, some code has to be added to parse the configuration file: there is often more code to parse and check the configuration file than *real code* (that is, code that actually does something). As a result, scientists often either skip this part until they have  "final" version of their code (often, never), or do it in a "quick and dirty way" (e.g. without checking the syntax, without checking that the parameter value is in the right range, etc.).
-
-Put differently, using a configuration file is nice for the user, but not for the developer. Since **limbo** is targeted to scientists who want to *easily* test  new code, we need a way to separate parameters from code that do not require any boilerplate code.
-
-In **limbo**, every class takes a structure name (usually called ``Params``) that contains the parameters. By doing so, we rely on the compiler to check the types, and we require very little work to separate parameters values from algorithms.
-
-From the user's point of view, this looks like this:
-
-::
-
-    struct Params {
-      struct ucb {
-        BO_PARAM(float, alpha, 0.1);
-      };
-    };
-    // ...
-    // ... instantiate an optimizer:
-    bayes_opt::BOptimizer<Params> opt;
-
-
-(do not forget the semi-colons!). This structure says that the value of the parameter ``alpha`` for the class "UCB" is ``0.1``.
-
-In the UCB class, the value can be accessed like this:
-
-::
-
-    float x = Params::ucb::alpha();
-
-No need to write any parsing code!
-
-Many limbo classes provide default parameters. To use them, the parameter sub-structure has to inherit from the default structure:
-
-::
-
-    struct Params {
-      struct ucb : public defaults::ucb {
-      };
-    };
-
-That way, the ``ucb::alpha()`` exists, but it has its default value.
-
-
-Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a ``BO_DYN_PARAM`` instead of a ``BO_PARAM``:
-
-::
-
-    struct Params {
-      struct ucb {
-        BO_DYN_PARAM(float, alpha, 0.1);
-      };
-    };
-
-
-However, for dynamic parameters, we need to call ``BO_DECLARE_DYN_PARAM`` in our ``.cpp`` file (typically, just before the main function):
-
-::
-
-    BO_DECLARE_DYN_PARAM(int, Params::ucb, alpha);
-
-**Warning!** Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead -- they are equivalent to writing a constant).
-
-Last, we can also use arrays, vectors, and strings as follows:
-
-::
-
-
-    struct Params {
-        struct test {
-            BO_PARAM(double, a, 1);
-            BO_DYN_PARAM(int, b);
-            BO_PARAM_ARRAY(double, c, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
-            BO_PARAM_VECTOR(double, d, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
-            BO_PARAM_STRING(e, "e");
-        };
-    };
-    BO_DECLARE_DYN_PARAM(int, Params::test, b);
-
-All these macros are defined in ``tools/macros.hpp``.
