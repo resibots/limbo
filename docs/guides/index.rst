@@ -6,3 +6,4 @@ Guides
 
    bo
    general_concepts
+   framework
