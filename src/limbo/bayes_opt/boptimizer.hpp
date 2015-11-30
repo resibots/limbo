@@ -90,7 +90,7 @@ namespace limbo {
                         std::cout << " value: "
                                   << "No data, blacklisted";
                     else
-                        std::cout << " value: " << this->_observations.back().transpose();
+                        std::cout << " value: " << afun(this->_observations.back());
 
                     // std::cout << " mu: "<< _model.mu(blacklisted ? this->_bl_samples.back()
                     // : this->_samples.back()).transpose()
@@ -99,7 +99,7 @@ namespace limbo {
                     //this->_samples.back())
                     //<< " acqui: "<< acqui(blacklisted ? this->_bl_samples.back() :
                     //this->_samples.back(), afun)
-                    std::cout << " best:" << this->best_observation(afun) << std::endl;
+                    std::cout << " best:" << afun(this->best_observation(afun)) << std::endl;
 
                     this->_current_iteration++;
                     this->_total_iterations++;
