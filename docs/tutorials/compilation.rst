@@ -1,10 +1,10 @@
-Installation and Compilation
+Download and Compilation
 =================================================
 
-Installation
+Download
 ----------------------------
 
-To install **limbo**, simply clone the source code from https://github.com/resibots/limbo with git, or download it
+To get **limbo**, simply clone the source code from https://github.com/resibots/limbo with git, or download it
 as a zip.
 
 Dependencies
