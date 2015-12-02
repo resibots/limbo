@@ -9,15 +9,15 @@
 namespace limbo {
     namespace model {
         namespace gp {
-            template <typename Params>
+            template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
             struct KernelLFOpt {
             public:
                 template <typename GP>
                 void operator()(GP& gp) const
                 {
                     KernelLFOptimization<GP> optimization(gp);
-                    opt::ParallelRepeater<Params, opt::Rprop<Params>> par_rprop;
-                    auto params = par_rprop(optimization);
+                    Optimizer optimizer;
+                    auto params = optimizer(optimization);
                     gp.kernel_function().set_h_params(params);
                     gp.set_lik(optimization.utility(params));
                     gp.update();
