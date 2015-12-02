@@ -71,9 +71,10 @@ The json file should look like this (for both OAR or Torque):
     }
 
 Explanations:
-- exps is the list of the experiments; these are binary names that will be found in bin_dir; this is an array: you can have as many binary names as you want (separate with a comma)
-- bin_dir is the directory that contains the binaries that correspond to the experiments; be careful that the directory needs to be reachable from all the nodes (typically, it should be on NFS)
-- res_dir is where to store the results. Limbo will create a directory for each experiments. For instance, here is the directory structure for this json:
+
+- ``exps`` is the list of the experiments; these are binary names that will be found in ``bin_dir``; this is an array: you can have as many binary names as you want (separate with a comma)
+- ``bin_dir`` is the directory that contains the binaries that correspond to the experiments; be careful that the directory needs to be reachable from all the nodes (typically, it should be on NFS)
+- ``res_dir`` is where to store the results. Limbo will create a directory for each experiments. For instance, here is the directory structure for this json:
 
 
 ::
@@ -84,10 +85,10 @@ Explanations:
     +-- exp_1/
 
 
-- email could be your e-mail (to receive an e-mail when the job is finished). It is currently not supported for OAR;
-- wall_time is the number of hours for your job (be careful that your job will be killed at the end of this time; however, if you put a number to high, your job will be redirected to low-priority queues)
-- nb_runs is the number of replicates of each experiment;
-- nb_cores is the number of cores for a single experiment (MPI is currently not supported in limbo).
+- ``email`` could be your e-mail (to receive an e-mail when the job is finished). It is currently not supported for OAR;
+- ``wall_time`` is the number of hours for each replicate of each experiment (be careful that your job will be killed at the end of this time; however, if you put a number to high, your job will be redirected to low-priority queues)
+- ``nb_runs`` is the number of replicates of each experiment;
+- ``nb_cores`` is the number of cores for a single experiment (MPI is currently not supported in limbo).
 
 Variants
 --------
