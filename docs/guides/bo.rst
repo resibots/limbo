@@ -76,7 +76,7 @@ Acquisition function
 
 The selection of the next solution to evaluate is made by
 finding the solution that maximizes the acquisition function. This
-step is another optimization problem, but does not require testing the controller in simulation or reality. In
+step is another optimization problem, but does not require evaluating the objective function. In
 general, for this optimization problem we can derive the exact
 equation and find a solution with gradient-based optimization, or use any other optimizer (e.g. CMA-ES)
 
@@ -92,7 +92,7 @@ equation for the UCB is:
 
 where :math:`\kappa` is a user-defined parameter that tunes the tradeoff between exploration and exploitation.
 
-The acquisition function handles the exploitation/exploration trade-off. In the UCB function, the emphasis on exploitation vs. exploration is explicit and easy to adjust. The UCB function can be seen as the maximum value (argmax) across all solutions of the weighted sum of the expected performance (mean of the Gaussian, :math:`\mu_{t}(\mathbf{x})`) and of the uncertainty (standard deviation of the Gaussian, :math:`\sigma_t(\mathbf{x})`) of each solution. This sum is weighted by the :math:`\kappa` factor. With a low :math:`\kappa`, the algorithm will choose solutions that are expected to be high-performing. Conversely, with a high :math:`\kappa`, the algorithm will focus its search on unexplored areas of the search space that may have high-performing solutions. The
+Here, the emphasis on exploitation vs. exploration is explicit and easy to adjust. The UCB function can be seen as the maximum value (argmax) across all solutions of the weighted sum of the expected performance (mean of the Gaussian, :math:`\mu_{t}(\mathbf{x})`) and of the uncertainty (standard deviation of the Gaussian, :math:`\sigma_t(\mathbf{x})`) of each solution. This sum is weighted by the :math:`\kappa` factor. With a low :math:`\kappa`, the algorithm will choose solutions that are expected to be high-performing. Conversely, with a high :math:`\kappa`, the algorithm will focus its search on unexplored areas of the search space that may have high-performing solutions. The
 :math:`\kappa` factor enables fine adjustments to the
 exploitation/exploration trade-off of the algorithm.
 
