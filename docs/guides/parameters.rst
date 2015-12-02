@@ -64,7 +64,7 @@ However, for dynamic parameters, we need to call ``BO_DECLARE_DYN_PARAM`` in our
 
 **Warning!** Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead -- they are equivalent to writing a constant).
 
-Last, we can also use arrays, vectors, and strings as follows:
+Last, we can also use arrays, Eigen vectors, and strings as follows:
 
 ::
 
@@ -81,3 +81,39 @@ Last, we can also use arrays, vectors, and strings as follows:
     BO_DECLARE_DYN_PARAM(int, Params::test, b);
 
 All these macros are defined in ``tools/macros.hpp``.
+
+In some rare cases, you may have 2 different instances of the same algorithm, for example, if you choose to use the same optimizer for the acquisition optimization and the GP hyperparametrs optimization.  In such cases, you may also wish to set different parameters for each instance. This can be easily accomplished in the following way: 
+
+::
+
+    struct Params {
+      // All the other parameters
+    }
+
+    struct ParamsAcquiOpt {
+        struct cmaes {
+            BO_PARAM(int, nrestarts, 10);
+            BO_PARAM(int, max_fun_evals, 500);
+        };
+    };
+
+    struct ParamsGPOpt {
+        struct cmaes {
+            BO_PARAM(int, nrestarts, 1);
+            BO_PARAM(int, max_fun_evals, 200);
+        };
+    };
+
+Then, when declaring the types to use:
+
+::
+
+    typedef opt::Cmaes<ParamsAcquiOpt> Acqui_opt_t;
+    typedef opt::Cmaes<ParamsGPOpt> Gp_opt_t;
+
+    typedef kernel::MaternFiveHalfs<Params> Kernel_t;
+    typedef mean::Data<Params> Mean_t;
+    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params, Gp_opt_t>> GP_t;
+    typedef acqui::UCB<Params, GP_t> Acqui_t;
+
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>, acquiopt<Acqui_opt_t>> opt;
