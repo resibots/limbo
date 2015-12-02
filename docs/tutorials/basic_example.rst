@@ -1,8 +1,5 @@
-Limbo Framework and Basic Example
+Basic Example
 =================================================
-
-Limbo Framework
-----------------------------
 
 Basic Example
 ----------------------------
@@ -103,7 +100,7 @@ With this, we can declare the main function: ::
     int main() {
         bayes_opt::BOptimizer<Params> boptimizer;
         boptimizer.optimize(Eval());
-        std::cout << "Best sample: " << boptimizer.best_sample()(0) << " - Best observation: " << boptimizer.best_observation() << std::endl;
+        std::cout << "Best sample: " << boptimizer.best_sample()(0) << " - Best observation: " << boptimizer.best_observation()(0) << std::endl;
         return 0;
     }
 
@@ -112,3 +109,56 @@ Finally, from the root of limbo, run a build command, with the additional switch
     ./waf build --exp test
 
 Then, an executable named ``test`` should be produced under the folder ``build/exp/test``.
+
+Full ``main.cpp``::
+
+    #include <iostream>
+    #include <limbo/bayes_opt/boptimizer.hpp>
+
+    using namespace limbo;
+
+    struct Params {
+        struct boptimizer {
+            BO_PARAM(double, noise, 0.0);
+            BO_PARAM(int, dump_period, -1);
+        };
+
+        struct init {
+            BO_PARAM(int, nb_samples, 10);
+        };
+
+        struct maxiterations {
+            BO_PARAM(int, n_iterations, 40);
+        };
+
+        struct gp_ucb : public defaults::gp_ucb {
+        };
+
+        struct cmaes : public defaults::cmaes {
+        };
+
+        struct rprop : public defaults::rprop {
+        };
+
+        struct parallel_repeater : public defaults::parallel_repeater {
+        };
+    };
+
+     struct Eval {
+        static constexpr size_t dim_in = 1;
+        static constexpr size_t dim_out = 1;
+
+        Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
+        {
+            Eigen::VectorXd res(1);
+            res(0) = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
+            return res;
+        }
+    };
+
+    int main() {
+        bayes_opt::BOptimizer<Params> boptimizer;
+        boptimizer.optimize(Eval());
+        std::cout << "Best sample: " << boptimizer.best_sample()(0) << " - Best observation: " << boptimizer.best_observation()(0) << std::endl;
+        return 0;
+    }
