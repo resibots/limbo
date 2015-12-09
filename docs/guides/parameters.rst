@@ -82,7 +82,7 @@ Last, we can also use arrays, Eigen vectors, and strings as follows:
 
 All these macros are defined in ``tools/macros.hpp``.
 
-In some rare cases, you may have 2 different instances of the same algorithm, for example, if you choose to use the same optimizer for the acquisition optimization and the GP hyperparametrs optimization.  In such cases, you may also wish to set different parameters for each instance. This can be easily accomplished in the following way: 
+In some rare cases, you may have 2 different instances of the same algorithm, for example, if you choose to use the same optimizer for the acquisition optimization and the GP hyperparametrs optimization.  In such cases, you may also wish to set different parameters for each instance. This can be easily accomplished in the following way:
 
 ::
 
