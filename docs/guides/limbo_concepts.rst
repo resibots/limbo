@@ -17,14 +17,11 @@ Nevertheless, it can be useful to use more complex priors. This is, for instance
   \mu_{t}(\mathbf{x})= \mathcal{P}(\mathbf{x}) + \mathbf{k}^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t}))
 
 
-where :math:`\mathcal{P}(\mathbf{x})` is the performance of :math:`\mathbf{x}` according to the simulation and :math:`\mathcal{P}(\mathbf{\chi}_{1:t})` is the performance of all the previous observations, also according to the simulation. Replacing :math:`\mathbf{P}_{1:t}` by :math:`\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t})` means that the Gaussian process models the difference between the actual performance :math:`\mathbf{P}_{1:t}` and the performance from the behavior-performance map :math:`\mathcal{P}(\mathbf{\chi}_{1:t})`. The term :math:`\mathcal{P}(\mathbf{x})` is the prediction given by the mean function (the behavior-performance map in :cite:`cully_robots_2015`).
+where :math:`\mathcal{P}(\mathbf{x})` is the performance of :math:`\mathbf{x}` according to the mean function (*the prior*) and :math:`\mathcal{P}(\mathbf{\chi}_{1:t})` is the performance of all the previous observations, also according to the mean function (prior).
+
+Replacing :math:`\mathbf{P}_{1:t}` by :math:`\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t})` means that the Gaussian process models the difference between the actual performance :math:`\mathbf{P}_{1:t}` and the performance from the behavior-performance map :math:`\mathcal{P}(\mathbf{\chi}_{1:t})`. The term :math:`\mathcal{P}(\mathbf{x})` is the prediction given by the mean function (the behavior-performance map in :cite:`cully_robots_2015`).
 
 See :ref:`the Limbo implementation guide <mean-guide>` for the available mean functions.
-
-.. todo::
-
-  Mean function: be less focused on robotics (removed references to behavior-performance maps)
-
 
 Black lists
 -----------
