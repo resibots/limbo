@@ -16,12 +16,12 @@ BO_PARAMS(std::cout,
               };
 
               struct ucb {
-                  BO_PARAM(float, alpha, 0.1);
+                  BO_PARAM(double, alpha, 0.1);
               };
 
               struct kf_maternfivehalfs {
-                  BO_PARAM(float, sigma, 1);
-                  BO_PARAM(float, l, 0.2);
+                  BO_PARAM(double, sigma, 1);
+                  BO_PARAM(double, l, 0.2);
               };
 
               struct boptimizer {

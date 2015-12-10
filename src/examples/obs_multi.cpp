@@ -15,8 +15,8 @@ struct Params {
     };
 
     struct kf_maternfivehalfs {
-        BO_PARAM(float, sigma, 1);
-        BO_PARAM(float, l, 0.2);
+        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, l, 0.2);
     };
 
     struct boptimizer {

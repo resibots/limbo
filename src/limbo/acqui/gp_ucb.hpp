@@ -9,7 +9,7 @@ namespace limbo {
 
     namespace defaults {
         struct gp_ucb {
-            BO_PARAM(float, delta, 0.001);
+            BO_PARAM(double, delta, 0.001);
         };
     }
 
