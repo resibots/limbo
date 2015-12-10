@@ -68,8 +68,7 @@ namespace limbo {
 
                     Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
                     auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
-                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization);
-
+                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, true);
                     bool blacklisted = false;
                     try {
                         this->add_new_sample(new_sample, sfun(new_sample));
@@ -107,10 +106,11 @@ namespace limbo {
             }
 
             template <typename AggregatorFunction = FirstElem>
-            typename AggregatorFunction::result_type best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
+            const Eigen::VectorXd& best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
             {
                 auto rewards = boost::adaptors::transform(this->_observations, afun);
-                return *std::max_element(rewards.begin(), rewards.end());
+                auto max_e = std::max_element(rewards.begin(), rewards.end());
+                return this->_observations[std::distance(rewards.begin(), max_e)];
             }
 
             template <typename AggregatorFunction = FirstElem>

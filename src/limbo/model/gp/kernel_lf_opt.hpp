@@ -17,7 +17,7 @@ namespace limbo {
                 {
                     KernelLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
-                    auto params = optimizer(optimization);
+                    auto params = optimizer(optimization, false);
                     gp.kernel_function().set_h_params(params);
                     gp.set_lik(optimization.utility(params));
                     gp.update();

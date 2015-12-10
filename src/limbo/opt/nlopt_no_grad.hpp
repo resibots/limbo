@@ -16,7 +16,7 @@ namespace limbo {
         struct NLOptNoGrad {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f) const
+            Eigen::VectorXd operator()(const F& f, bool bounded) const
             {
                 // Assert that the algorithm is non-gradient
                 // TO-DO: Add support for MLSL (Multi-Level Single-Linkage)
@@ -41,9 +41,14 @@ namespace limbo {
 
                 opt.set_maxeval(Params::nlopt::iters());
 
-                double min;
+                if (bounded) {
+                    opt.set_lower_bounds(std::vector<double>(f.param_size(), 0));
+                    opt.set_upper_bounds(std::vector<double>(f.param_size(), 1));
+                }
 
-                opt.optimize(x, min);
+                double max;
+
+                opt.optimize(x, max);
 
                 return Eigen::VectorXd::Map(x.data(), x.size());
             }
