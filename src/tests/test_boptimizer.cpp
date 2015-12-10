@@ -17,7 +17,7 @@ struct Params {
     };
     struct boptimizer {
         BO_PARAM(double, noise, 0.0001);
-        BO_PARAM(int, dump_period, 1);
+        BO_PARAM(bool, stats_enabled, true);
     };
     struct maxiterations {
         BO_PARAM(int, n_iterations, 30);
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
     typedef mean::Data<Params> Mean_t;
-    typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
+    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
     typedef init::NoInit<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     typedef opt::GridSearch<Params> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::Data<Params> Mean_t;
-    typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
+    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
     typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
@@ -127,7 +127,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto_mean)
     typedef opt::GridSearch<Params> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
-    typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
+    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
     typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     typedef opt::GridSearch<Params> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
-    typedef boost::fusion::vector<stat::Acquisitions<Params>> Stat_t;
+    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
     typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t, model::gp::MeanLFOpt<Params>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;

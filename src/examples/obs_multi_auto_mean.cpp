@@ -26,7 +26,7 @@ struct Params {
 
     struct boptimizer {
         BO_PARAM(double, noise, 0.001);
-        BO_PARAM(int, dump_period, 1);
+        BO_PARAM(bool, stats_enabled, true);
     };
 
     struct init {
@@ -153,10 +153,10 @@ int main()
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
     typedef mean::FunctionARD<Params, MeanComplet<Params>> Mean_t;
-    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
+    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>> GP_t;
     typedef UCB_multi<Params, GP_t> Acqui_t;
 
-    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>, model::gp::KernelMeanLFOpt<Params>> opt;
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
     opt.optimize(fit_eval());
 
     std::cout << opt.best_observation() << " res  "

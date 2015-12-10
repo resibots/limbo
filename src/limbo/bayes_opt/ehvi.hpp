@@ -103,13 +103,14 @@ namespace limbo {
                     // add sample
                     this->add_new_sample(new_sample, feval(new_sample));
                     std::cout
-                        << this->_iteration << " | new sample:" << new_sample.transpose()
+                        << this->_current_iteration << " | new sample:" << new_sample.transpose()
                         << " => "
                         << this->_observations[this->_observations.size() - 1].transpose()
                         << std::endl;
 
                     this->_update_stats(*this, FirstElem(), false);
-                    this->_iteration++;
+                    this->_current_iteration++;
+                    this->_total_iterations++;
                 }
             }
 

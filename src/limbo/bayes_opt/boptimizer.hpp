@@ -55,17 +55,16 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
+                _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
                 this->_init(sfun, afun, reset);
 
-                _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
-                if (this->_observations.size())
-                    _model.compute(this->_samples, this->_observations,
-                        Params::boptimizer::noise());
-
+                if (!this->_observations.empty())
+                        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
+                
                 acqui_optimizer_t acqui_optimizer;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
-                    acquisition_function_t acqui(_model, this->_iteration);
+                    acquisition_function_t acqui(_model, this->_current_iteration);
 
                     Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
                     auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
@@ -79,18 +78,15 @@ namespace limbo {
                         blacklisted = true;
                     }
 
-                    _model.compute(this->_samples, this->_observations,
-                        Params::boptimizer::noise(), this->_bl_samples);
                     this->_update_stats(*this, afun, blacklisted);
 
-                    std::cout << this->_iteration << " new point: "
+                    std::cout << this->_current_iteration << " new point: "
                               << (blacklisted ? this->_bl_samples.back()
                                               : this->_samples.back()).transpose();
                     if (blacklisted)
-                        std::cout << " value: "
-                                  << "No data, blacklisted";
+                        std::cout << " value: " << "No data, blacklisted";
                     else
-                        std::cout << " value: " << this->_observations.back().transpose();
+                        std::cout << " value: " << afun(this->_observations.back());
 
                     // std::cout << " mu: "<< _model.mu(blacklisted ? this->_bl_samples.back()
                     // : this->_samples.back()).transpose()
@@ -99,17 +95,22 @@ namespace limbo {
                     //this->_samples.back())
                     //<< " acqui: "<< acqui(blacklisted ? this->_bl_samples.back() :
                     //this->_samples.back(), afun)
-                    std::cout << " best:" << this->best_observation(afun) << std::endl;
+                    std::cout << " best:" << afun(this->best_observation(afun)) << std::endl;
 
-                    this->_iteration++;
+                    if (!this->_observations.empty())
+                        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
+
+                    this->_current_iteration++;
+                    this->_total_iterations++;
                 }
             }
 
             template <typename AggregatorFunction = FirstElem>
-            typename AggregatorFunction::result_type best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
+            const Eigen::VectorXd& best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
             {
                 auto rewards = boost::adaptors::transform(this->_observations, afun);
-                return *std::max_element(rewards.begin(), rewards.end());
+                auto max_e = std::max_element(rewards.begin(), rewards.end());
+                return this->_observations[std::distance(rewards.begin(), max_e)];
             }
 
             template <typename AggregatorFunction = FirstElem>

@@ -139,7 +139,7 @@ namespace limbo {
                 auto dir = opt.res_dir() + "/";
                 auto p_model = opt.pareto_model();
                 auto p_data = opt.pareto_data();
-                std::string it = std::to_string(opt.iteration());
+                std::string it = std::to_string(opt.current_iteration());
                 std::string model = dir + "pareto_model_" + it + ".dat";
                 std::string model_real = dir + "pareto_model_real_" + it + ".dat";
                 std::string data = dir + "pareto_data_" + it + ".dat";

@@ -34,12 +34,12 @@ namespace limbo {
                 Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(bo.model().dim_in()).array() + 1) / 2;
                 double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point), true)));
 
-                if (bo.observations().size() == 0 || bo.best_observation(afun) <= Params::max_predicted_value::ratio() * val)
+                if (bo.observations().size() == 0 || afun(bo.best_observation(afun)) <= Params::max_predicted_value::ratio() * val)
                     return false;
                 else {
                     std::cout << "stop caused by Max predicted value reached. Thresold: "
                               << Params::max_predicted_value::ratio() * val
-                              << " max observations: " << bo.best_observation(afun) << std::endl;
+                              << " max observations: " << afun(bo.best_observation(afun)) << std::endl;
                     return true;
                 }
             }

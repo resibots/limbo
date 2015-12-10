@@ -25,11 +25,10 @@ def create(bld):
     acquisitions = ['UCB', 'GP_UCB']
     optimizers = ['RandomPoint', 'GridSearch', 'Cmaes']
     inits = ['NoInit', 'RandomSampling', 'RandomSamplingGrid', 'GridSampling']
-    stats = ['Acquisitions']
-    stops = ['MaxIterations', 'MaxPredictedValue']
+    stats = ['Samples', 'Observations', 'AggregatedObservations', 'BestSamples', 'BestObservations', 'BestAggregatedObservations',
+             'BlSamples', 'GPPredictionDifferences', 'GPAcquisitions', 'GPLikelihood']
 
-    stats = 'typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats]) + '> stats_t;\n'
-    stops = '    typedef boost::fusion::vector<' + ', '.join(['stop::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
+    stops = ['MaxIterations', 'MaxPredictedValue']
 
     src_path = bld.path.abspath() + '/combinations'
     if not os.path.exists(src_path):
@@ -50,7 +49,13 @@ def create(bld):
                     for acqui in acquisitions:
                         for acqui_opt in optimizers:
                             for init in inits:
-                                declarations = stats + stops
+                                additional_stats = []
+                                if kernel == 'SquaredExpARD':
+                                    additional_stats.append('GPKernelHParams')
+                                if mean == 'FunctionARD':
+                                    additional_stats.append('GPMeanHParams')
+                                declarations = 'typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats + additional_stats]) + '> stats_t;\n'
+                                declarations = declarations + '    typedef boost::fusion::vector<' + ', '.join(['stop::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
                                 declarations = declarations + '    typedef kernel::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef mean::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
                                 declarations = declarations + '    typedef model::gp::' + gp_lf_opt + '<Params> gp_lf_opt_' + str(i) + '_t;\n'

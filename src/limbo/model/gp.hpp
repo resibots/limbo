@@ -133,9 +133,9 @@ namespace limbo {
                 this->_compute_kernel();
             }
 
-            float get_lik() const { return _lik; }
+            double get_lik() const { return _lik; }
 
-            void set_lik(const float& lik) { _lik = lik; }
+            void set_lik(const double& lik) { _lik = lik; }
 
             const Eigen::LLT<Eigen::MatrixXd>& llt() const { return _llt; }
 
@@ -166,7 +166,7 @@ namespace limbo {
             Eigen::LLT<Eigen::MatrixXd> _llt;
             Eigen::MatrixXd _inv_bl_kernel;
 
-            float _lik;
+            double _lik;
 
             void _compute_obs_mean()
             {

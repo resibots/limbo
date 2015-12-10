@@ -1,3 +1,4 @@
+#define FUSION_MAX_VECTOR_SIZE 20
 #include <boost/fusion/container/vector.hpp>
 #include <boost/fusion/include/vector.hpp>
 
@@ -59,7 +60,7 @@ struct Params {
 
     struct boptimizer {
         BO_PARAM(double, noise, 0.001);
-        BO_PARAM(int, dump_period, 1);
+        BO_PARAM(bool, stats_enabled, true);
     };
 };
 

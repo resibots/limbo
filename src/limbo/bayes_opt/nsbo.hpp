@@ -34,16 +34,15 @@ namespace limbo {
                     Eigen::VectorXd best_v = std::get<0>(best);
 
                     this->add_new_sample(best_v, feval(best_v));
-                    this->_iteration++;
-                    std::cout << this->_iteration << " | " << best_v.transpose() << "-> "
+                    std::cout << this->_current_iteration << " | " << best_v.transpose() << "-> "
                               << this->_observations.back().transpose()
                               << " (expected:" << this->_models[0].mu(best_v) << " "
                               << this->_models[1].mu(best_v) << ")"
                               << " sigma:" << this->_models[0].sigma(best_v) << " "
                               << this->_models[1].sigma(best_v) << std::endl;
-                    this->_update_stats(*this, FirstElem(),  false); // with the *this, nolonger need to
-                    // redeclare the _update_stats() for
-                    // each class.
+                    this->_update_stats(*this, FirstElem(),  false);
+                    this->_current_iteration++;
+                    this->_total_iterations++;
                 }
             }
 

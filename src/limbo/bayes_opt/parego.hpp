@@ -39,17 +39,18 @@ namespace limbo {
                 acqui_optimizer_t inner_optimization;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, FirstElem())) {
-                    acquisition_function_t acqui(model, this->_iteration);
+                    acquisition_function_t acqui(model, this->_current_iteration);
 
                     Eigen::VectorXd new_sample = inner_optimization(acqui, acqui.dim(), FirstElem());
                     this->add_new_sample(new_sample, feval(new_sample));
-                    std::cout << this->_iteration
+                    std::cout << this->_current_iteration
                               << " | new sample:" << new_sample.transpose() << " => "
                               << feval(new_sample).transpose() << std::endl;
                     scalarized = _scalarize_obs();
                     model.compute(this->_samples, scalarized, Params::boptimizer::noise());
                     this->_update_stats(*this, FirstElem(), false);
-                    this->_iteration++;
+                    this->_current_iteration++;
+                    this->_total_iterations++;
                 }
                 this->template update_pareto_model<EvalFunction::dim>();
                 this->update_pareto_data();

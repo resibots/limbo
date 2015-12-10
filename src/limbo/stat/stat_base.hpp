@@ -24,7 +24,7 @@ namespace limbo {
             template <typename BO>
             void _create_log_file(const BO& bo, const std::string& name)
             {
-                if (!_log_file && bo.dump_enabled()) {
+                if (!_log_file && bo.stats_enabled()) {
                     std::string log = bo.res_dir() + "/" + name;
                     _log_file = boost::shared_ptr<std::ofstream>(new std::ofstream(log.c_str()));
                 }

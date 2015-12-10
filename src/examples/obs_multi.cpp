@@ -21,7 +21,7 @@ struct Params {
 
     struct boptimizer {
         BO_PARAM(double, noise, 0.001);
-        BO_PARAM(int, dump_period, 1);
+        BO_PARAM(bool, stats_enabled, true);
     };
 
     struct init {
