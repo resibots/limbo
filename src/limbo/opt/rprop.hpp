@@ -7,12 +7,12 @@
 
 #include <Eigen/Core>
 
-#include <limbo/tools/parallel.hpp>
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
-    namespace defaults {
-        struct rprop {
-            BO_PARAM(int, iters, 300);
+   namespace defaults {
+        struct opt_rprop {
+            BO_PARAM(int, iterations, 300);
         };
     }
     namespace opt {
@@ -52,7 +52,7 @@ namespace limbo {
                 Eigen::VectorXd best_params = params;
                 double best = log(0);
 
-                for (int i = 0; i < Params::rprop::iters(); ++i) {
+                for (int i = 0; i < Params::opt_rprop::iterations(); ++i) {
                     auto perf = f.utility_and_grad(params);
                     double lik = std::get<0>(perf);
                     if (lik > best) {

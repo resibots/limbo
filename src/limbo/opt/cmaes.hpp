@@ -13,16 +13,16 @@
 #include <cmaes/cmaes_interface.h>
 #include <cmaes/boundary_transformation.h>
 
+#include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
 
 namespace limbo {
     namespace defaults {
-        struct cmaes {
-            BO_PARAM(int, nrestarts, 1);
+        struct opt_cmaes {
+            BO_PARAM(int, restarts, 1);
             BO_PARAM(double, max_fun_evals, -1);
         };
     }
-
     namespace opt {
         template <typename Params>
         struct Cmaes {
@@ -32,7 +32,7 @@ namespace limbo {
             {
                 // Currrently cmaes does not support unbounded search
                 assert(bounded);
-                int nrestarts = Params::cmaes::nrestarts();
+                int nrestarts = Params::opt_cmaes::restarts();
                 size_t dim = f.param_size();
                 double incpopsize = 2;
                 cmaes_t evo;
@@ -59,9 +59,9 @@ namespace limbo {
                     fitvals = cmaes_init(&evo, dim, init_point, NULL, 0, lambda, NULL);
 
                     evo.countevals = countevals;
-                    evo.sp.stopMaxFunEvals = Params::cmaes::max_fun_evals() < 0
+                    evo.sp.stopMaxFunEvals = Params::opt_cmaes::max_fun_evals() < 0
                         ? (900.0 * (dim + 3.0) * (dim + 3.0))
-                        : Params::cmaes::max_fun_evals();
+                        : Params::opt_cmaes::max_fun_evals();
 
                     int pop_size = cmaes_Get(&evo, "popsize");
                     double** all_x_in_bounds = new double* [pop_size];

@@ -18,11 +18,11 @@ Eigen::VectorXd make_v1(double x)
 }
 
 struct Params {
-    struct grid_search {
-        BO_PARAM(int, nb_pts, 20);
+    struct opt_gridsearch {
+        BO_PARAM(int, bins, 20);
     };
 
-    struct cmaes : public defaults::cmaes {
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 };
 
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_CASE(test_grid_search_mono_dim)
 
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
-    BOOST_CHECK_EQUAL(monodim_calls, Params::grid_search::nb_pts() + 1);
+    BOOST_CHECK_EQUAL(monodim_calls, Params::opt_gridsearch::bins() + 1);
 }
 
 BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
     BOOST_CHECK_SMALL(best_point(1), 0.000001);
     // TO-DO: Maybe alter a little grid search so not to call more times the utility function
-    BOOST_CHECK_EQUAL(bidim_calls, (Params::grid_search::nb_pts() + 1) * (Params::grid_search::nb_pts() + 1) + 21);
+    BOOST_CHECK_EQUAL(bidim_calls, (Params::opt_gridsearch::bins() + 1) * (Params::opt_gridsearch::bins() + 1) + 21);
 }
 
 BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)

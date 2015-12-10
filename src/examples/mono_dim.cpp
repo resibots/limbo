@@ -9,32 +9,35 @@ using namespace limbo;
 
 BO_PARAMS(std::cout,
           struct Params {
-              struct gp_ucb : public defaults::gp_ucb {
+              struct acqui_gpucb : public defaults::acqui_gpucb {
               };
 
-              struct cmaes : public defaults::cmaes {
+              struct opt_cmaes : public defaults::opt_cmaes {
               };
 
-              struct ucb {
+              struct acqui_ucb {
                   BO_PARAM(double, alpha, 0.1);
               };
 
-              struct kf_maternfivehalfs {
+              struct kernel_maternfivehalfs {
                   BO_PARAM(double, sigma, 1);
                   BO_PARAM(double, l, 0.2);
               };
 
-              struct boptimizer {
-                  BO_PARAM(double, noise, 0.001);
-                  BO_PARAM(bool, stats_enabled, true);
+              struct bayes_opt_bobase {
+                BO_PARAM(bool, stats_enabled, true);
               };
 
-              struct init {
-                  BO_PARAM(int, nb_samples, 5);
+              struct bayes_opt_boptimizer {
+                  BO_PARAM(double, noise, 0.001);                  
               };
 
-              struct maxiterations {
-                  BO_PARAM(int, n_iterations, 20);
+              struct init_randomsampling {
+                  BO_PARAM(int, samples, 5);
+              };
+
+              struct stop_maxiterations {
+                  BO_PARAM(int, iterations, 20);
               };
           };)
 

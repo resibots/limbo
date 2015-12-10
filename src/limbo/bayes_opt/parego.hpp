@@ -3,16 +3,16 @@
 
 #include <algorithm>
 
-#include <limbo/limbo.hpp>
+#include <limbo/tools/macros.hpp>
 #include <limbo/bayes_opt/bo_multi.hpp>
 
 namespace limbo {
     namespace defaults {
-        struct parego {
+        struct bayes_opt_parego {
+            BO_PARAM(double, noise, 1e-6);
             BO_PARAM(double, rho, 0.05);
         };
     }
-
     namespace bayes_opt {
 
         template <class Params, class A3 = boost::parameter::void_,
@@ -34,7 +34,7 @@ namespace limbo {
 
                 std::vector<double> scalarized = _scalarize_obs();
                 model_t model(EvalFunction::dim);
-                model.compute(this->_samples, scalarized, Params::boptimizer::noise());
+                model.compute(this->_samples, scalarized, Params::bayes_opt_parego::noise());
 
                 acqui_optimizer_t inner_optimization;
 
@@ -47,7 +47,7 @@ namespace limbo {
                               << " | new sample:" << new_sample.transpose() << " => "
                               << feval(new_sample).transpose() << std::endl;
                     scalarized = _scalarize_obs();
-                    model.compute(this->_samples, scalarized, Params::boptimizer::noise());
+                    model.compute(this->_samples, scalarized, Params::bayes_opt_parego::noise());
                     this->_update_stats(*this, FirstElem(), false);
                     this->_current_iteration++;
                     this->_total_iterations++;
@@ -70,7 +70,7 @@ namespace limbo {
                 for (auto x : this->_observations) {
                     double y = (lambda.array() * x.array()).maxCoeff();
                     double s = (lambda.array() * x.array()).sum();
-                    scalarized.push_back(y + Params::parego::rho() * s);
+                    scalarized.push_back(y + Params::bayes_opt_parego::rho() * s);
                 }
                 return scalarized;
             }

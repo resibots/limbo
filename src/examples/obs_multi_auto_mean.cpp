@@ -8,36 +8,35 @@
 using namespace limbo;
 
 struct Params {
-    struct gp_auto_mean {
-        BO_PARAM(int, n_rprop, 100);
-        BO_PARAM(int, rprop_restart, 10);
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 
-    struct cmaes : public defaults::cmaes {
+    struct opt_rprop : public defaults::opt_rprop {
     };
 
-    struct rprop : public defaults::rprop {
-    };
-
-    struct kf_maternfivehalfs {
+    struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.2);
     };
 
-    struct boptimizer {
+    struct bayes_opt_bobase {
+        BO_PARAM(bool, stats_enabled, true);
+    };
+
+    struct bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.001);
         BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct init {
-        BO_PARAM(int, nb_samples, 5);
+    struct init_randomsampling {
+        BO_PARAM(int, samples, 5);
     };
 
-    struct maxiterations {
-        BO_PARAM(int, n_iterations, 100);
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 100);
     };
 
-    struct parallel_repeater : defaults::parallel_repeater {
+    struct opt_parallelrepeater : defaults::opt_parallelrepeater {
     };
 };
 

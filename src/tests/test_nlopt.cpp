@@ -8,8 +8,12 @@
 #include <limbo/opt/nlopt_no_grad.hpp>
 
 struct Params {
-    struct nlopt {
-        BO_PARAM(int, iters, 80);
+    struct opt_nloptgrad {
+        BO_PARAM(int, iterations, 80);
+    };
+
+    struct opt_nloptnograd {
+        BO_PARAM(int, iterations, 80);
     };
 };
 

@@ -18,37 +18,36 @@ Eigen::VectorXd make_v1(double x)
 }
 
 struct Params {
-    struct boptimizer {
-        BO_PARAM(double, noise, 0.01);
+    struct bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct maxiterations {
-        BO_PARAM(int, n_iterations, 0);
+    struct bayes_opt_boptimizer {
+        BO_PARAM(double, noise, 0.01);
     };
 
-    struct kf_maternfivehalfs {
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 0);
+    };
+
+    struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.25);
     };
 
-    struct ucb : public defaults::ucb {
+    struct acqui_ucb : public defaults::acqui_ucb {
     };
 
-    struct gp_ucb : public defaults::gp_ucb {
+    struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
-    struct meanconstant {
-        static Eigen::VectorXd constant() { return make_v1(0.0); };
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 
-    struct cmaes : public defaults::cmaes {
+    struct opt_rprop : public defaults::opt_rprop {
     };
 
-    struct rprop : public defaults::rprop {
-    };
-
-    struct parallel_repeater : public defaults::parallel_repeater {
+    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
 };
 
@@ -81,8 +80,8 @@ BOOST_AUTO_TEST_CASE(random_sampling)
 {
     std::cout << "RandomSampling" << std::endl;
     struct MyParams : public Params {
-        struct init {
-            BO_PARAM(int, nb_samples, 10);
+        struct init_randomsampling {
+            BO_PARAM(int, samples, 10);
         };
     };
 
@@ -107,9 +106,9 @@ BOOST_AUTO_TEST_CASE(random_sampling_grid)
 {
     std::cout << "RandomSamplingGrid" << std::endl;
     struct MyParams : public Params {
-        struct init {
-            BO_PARAM(int, nb_samples, 10);
-            BO_PARAM(int, nb_bins, 4);
+        struct init_randomsamplinggrid {
+            BO_PARAM(int, samples, 10);
+            BO_PARAM(int, bins, 4);
         };
     };
 
@@ -135,8 +134,8 @@ BOOST_AUTO_TEST_CASE(grid_sampling)
 {
     std::cout << "GridSampling" << std::endl;
     struct MyParams : public Params {
-        struct init {
-            BO_PARAM(int, nb_bins, 4);
+        struct init_gridsampling {
+            BO_PARAM(int, bins, 4);
         };
     };
 

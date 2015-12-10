@@ -3,10 +3,15 @@
 
 #include <Eigen/Core>
 
+#include <limbo/tools/macros.hpp>
+
 namespace limbo {
+    namespace defaults {
+        struct init_gridsampling {
+            BO_PARAM(int, bins, 5);
+        };
+    }
     namespace init {
-        // params:
-        //  -init::nb_bins
         template <typename Params>
         struct GridSampling {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>
@@ -16,12 +21,12 @@ namespace limbo {
             }
 
         private:
-            // recursively explore all the dim_inensions
+            // recursively explore all the dimensions
             template <typename StateFunction, typename Opt>
             void _explore(int dim_in, const StateFunction& seval, const Eigen::VectorXd& current,
                 Opt& opt) const
             {
-                for (double x = 0; x <= 1.0f; x += 1.0f / (double)Params::init::nb_bins()) {
+                for (double x = 0; x <= 1.0f; x += 1.0f / (double)Params::init_gridsampling::bins()) {
                     Eigen::VectorXd point = current;
                     point[dim_in] = x;
                     if (dim_in == current.size() - 1) {

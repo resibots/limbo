@@ -3,7 +3,15 @@
 
 #include <Eigen/Core>
 
+#include <limbo/tools/macros.hpp>
+
 namespace limbo {
+    namespace defaults {
+        struct kernel_maternfivehalfs {
+            BO_PARAM(double, sigma, 1);
+            BO_PARAM(double, l, 1);
+        };
+    }
     namespace kernel {
         template <typename Params>
         struct MaternFiveHalfs {
@@ -12,7 +20,7 @@ namespace limbo {
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double d = (v1 - v2).norm();
-                return Params::kf_maternfivehalfs::sigma() * (1 + sqrt(5) * d / Params::kf_maternfivehalfs::l() + 5 * d * d / (3 * Params::kf_maternfivehalfs::l() * Params::kf_maternfivehalfs::l())) * exp(-sqrt(5) * d / Params::kf_maternfivehalfs::l());
+                return Params::kernel_maternfivehalfs::sigma() * (1 + sqrt(5) * d / Params::kernel_maternfivehalfs::l() + 5 * d * d / (3 * Params::kernel_maternfivehalfs::l() * Params::kernel_maternfivehalfs::l())) * exp(-sqrt(5) * d / Params::kernel_maternfivehalfs::l());
             }
         };
     }

@@ -6,13 +6,11 @@
 #include <limbo/tools/macros.hpp>
 
 namespace limbo {
-
     namespace defaults {
-        struct ucb {
+        struct acqui_ucb {
             BO_PARAM(double, alpha, 0.5);
         };
     }
-
     namespace acqui {
         template <typename Params, typename Model>
         class UCB {
@@ -29,7 +27,7 @@ namespace limbo {
                 Eigen::VectorXd mu;
                 double sigma;
                 std::tie(mu, sigma) = _model.query(v);
-                return (afun(mu) + Params::ucb::alpha() * sqrt(sigma));
+                return (afun(mu) + Params::acqui_ucb::alpha() * sqrt(sigma));
             }
 
         protected:

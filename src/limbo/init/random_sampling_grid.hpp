@@ -3,21 +3,25 @@
 
 #include <Eigen/Core>
 
+#include <limbo/tools/macros.hpp>
+
 namespace limbo {
+    namespace defaults {
+        struct init_randomsamplinggrid {
+            BO_PARAM(int, samples, 10);
+            BO_PARAM(int, bins, 5);
+        };
+    }
     namespace init {
-        // initialize in [0,1] !
-        // params:
-        //  -init::nb_bins
-        //  - init::nb_samples
         template <typename Params>
         struct RandomSamplingGrid {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>
             void operator()(const StateFunction& seval, const AggregatorFunction&, Opt& opt) const
             {
-                for (int i = 0; i < Params::init::nb_samples(); i++) {
+                for (int i = 0; i < Params::init_randomsamplinggrid::samples(); i++) {
                     Eigen::VectorXd new_sample(StateFunction::dim_in);
                     for (size_t i = 0; i < StateFunction::dim_in; i++)
-                        new_sample[i] = int(((double)(Params::init::nb_bins() + 1) * rand()) / (RAND_MAX + 1.0)) / double(Params::init::nb_bins());
+                        new_sample[i] = int(((double)(Params::init_randomsamplinggrid::bins() + 1) * rand()) / (RAND_MAX + 1.0)) / double(Params::init_randomsamplinggrid::bins());
                     opt.add_new_sample(new_sample, seval(new_sample));
                 }
             }
