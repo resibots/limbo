@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Download and Compilation &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Add External Library" href="external_libs.html"/>
+        <link rel="prev" title="Tutorials" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+  
+    <a href="../index.html" class="icon icon-home"> limbo
+  
+
+  
+  </a>
+
+  
+    
+    
+      <div class="version">
+        0.0
+      </div>
+    
+  
+
+  
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  <ul>
+    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
+    
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Download and Compilation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#download">Download</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compilation">Compilation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build">Build</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+          
+  </ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+      
+    <li>Download and Compilation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/tutorials/compilation.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="download-and-compilation">
+<h1>Download and Compilation<a class="headerlink" href="#download-and-compilation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p>To get <strong>limbo</strong>, simply clone the source code from <a class="reference external" href="https://github.com/resibots/limbo">https://github.com/resibots/limbo</a> with git, or download it
+as a zip.</p>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="required">
+<h4>Required<a class="headerlink" href="#required" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference external" href="http://www.boost.org">Boost</a> , with the following libraries: filesystem, system, unit_test_framework, program_options, and thread; <cite>Boost</cite> is mainly used for the interaction with the system.</li>
+<li><a class="reference external" href="http://eigen.tuxfamily.org">Eigen 3</a>, Eigen3 is a highly-efficient, templated-based C++ library for linear algebra.</li>
+</ul>
+</div>
+<div class="section" id="optional">
+<h4>Optional<a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference external" href="https://www.threadingbuildingblocks.org">Intel TBB</a> is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.</li>
+<li><a class="reference external" href="https://software.intel.com/en-us/intel-mkl">Intel MKL</a> is supported as backend for Eigen. In our experience, it provided best results when compiling with Intel&#8217;s Compiler (ICC)</li>
+<li><a class="reference external" href="https://github.com/sferes2/sferes2">Sferes2</a> if you plan to use the multi-objective bayesian optimization algorithms (experimental).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="compilation">
+<h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
+<p>We use  the <a class="reference external" href="https://waf.io">WAF</a>  build system, which is provided with the <strong>limbo</strong> source code. To know why we use waf (and not CMAKE, SCONS, traditional makefiles, etc.), see the <a class="reference internal" href="../faq.html#faq-waf"><span>FAQ</span></a>.</p>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to configure your waf environment. For this, assuming that you are in the main limbo directory, you have to run the command:</p>
+<div class="highlight-python"><div class="highlight"><pre>./waf configure
+</pre></div>
+</div>
+<p>Make sure that the waf file has execution rights.
+If everything is okay, you should expect an output like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>Setting top to                           : /path/to/limbo
+Setting out to                           : /path/to/limbo/build
+Checking for &#39;g++&#39; (c++ compiler)        : /usr/bin/g++
+Checking for &#39;gcc&#39; (c compiler)          : /usr/bin/gcc
+Checking boost includes                  : 1_55
+Checking boost libs                      : ok
+Checking Intel TBB includes              : not found
+Checking for compiler option to support OpenMP : -fopenmp
+Checking Intel MKL includes                    : not found
+[&#39;-Wall&#39;, &#39;-std=c++11&#39;, &#39;-O3&#39;, &#39;-march=native&#39;, &#39;-g&#39;]
+</pre></div>
+</div>
+<p>The actual ouput may differ, depending on your configuration and installed libraries.</p>
+<p>Waf should automatically detect Intel&#8217;s TBB and MKL, if they where installed in the default folders, but if it doesn&#8217;t,
+you can use the following command-line options to indicate where they are:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--tbb</span> <span class="pre">/path/to/tbb</span></code></li>
+<li><code class="docutils literal"><span class="pre">--mkl</span> <span class="pre">/path/to/mkl</span></code></li>
+<li><code class="docutils literal"><span class="pre">--sferes</span> <span class="pre">/path/to/sferes2</span></code></li>
+</ul>
+<p>Note that Sferes2 won&#8217;t be used unless you specify it&#8217;s installation folder.
+You can also specify a different compiler than the default, setting the environment variables <code class="docutils literal"><span class="pre">CC</span></code> and <code class="docutils literal"><span class="pre">CXX</span></code>.</p>
+<p>A full example:</p>
+<div class="highlight-python"><div class="highlight"><pre>CC=icc CXX=icpc ./waf configure --sferes ~/sferes2 --mkl ~/intel/mkl --tbb ~/intel/tbb
+</pre></div>
+</div>
+</div>
+<div class="section" id="build">
+<h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
+<p>The second step is to run the build command::</p>
+<div class="highlight-python"><div class="highlight"><pre>./waf build
+</pre></div>
+</div>
+<p>Depending on your compiler, there may be some warnings, but the output should end with the following lines:</p>
+<div class="highlight-python"><div class="highlight"><pre>execution summary
+  tests that pass 5/5
+    /home/fallocat/limbo_git/build/src/tests/test_macros
+    /home/fallocat/limbo_git/build/src/tests/test_optimizers
+    /home/fallocat/limbo_git/build/src/tests/test_init_functions
+    /home/fallocat/limbo_git/build/src/tests/test_gp
+    /home/fallocat/limbo_git/build/src/tests/test_boptimizer
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="external_libs.html" class="btn btn-neutral float-right" title="Add External Library" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2015, UPMC/Inria.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

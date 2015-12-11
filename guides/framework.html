@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using Limbo as an environment for experiments &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Guides" href="index.html"/>
+        <link rel="next" title="Parameters" href="parameters.html"/>
+        <link rel="prev" title="Limbo-specific concepts" href="limbo_concepts.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+  
+    <a href="../index.html" class="icon icon-home"> limbo
+  
+
+  
+  </a>
+
+  
+    
+    
+      <div class="version">
+        0.0
+      </div>
+    
+  
+
+  
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  <ul>
+    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
+    
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bo.html">Introduction to Bayesian Optimization (BO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limbo_concepts.html">Limbo-specific concepts</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Using Limbo as an environment for experiments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-add-compile-your-experiment">How to add / compile your experiment?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-submit-jobs-with-limbo-on-clusters">How to submit jobs with limbo on clusters?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variants">Variants</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_concepts.html">Implementation details &amp; customization of algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+          
+  </ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Guides</a> &raquo;</li>
+      
+    <li>Using Limbo as an environment for experiments</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/guides/framework.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-limbo-as-an-environment-for-experiments">
+<h1>Using Limbo as an environment for experiments<a class="headerlink" href="#using-limbo-as-an-environment-for-experiments" title="Permalink to this headline">¶</a></h1>
+<p>The typical use case of Limbo for research in Bayesian Optimization is:</p>
+<ul class="simple">
+<li>we design an experiment that uses some components of Limbo</li>
+<li>we want to compare if variant X of the experiment (e.g. with kernel XXX) is better than variant Y (e.g. with kernel YYY)</li>
+<li>because the algorithms that we use have some stochastic components (initialization, inner optimization, ...), we usually need to replicate each experiment (typically, we use 30 replicates) in order to do some statistics (see  <a class="reference external" href="http://www.github.com/jbmouret/matplotlib_for_papers">Matplotlib for Papers</a> for a tutorial about how to draw nice box plots with these statistics).</li>
+</ul>
+<p>Limbo provides basics tools to make these steps easier. They are mostly additions to <code class="docutils literal"><span class="pre">waf</span></code>.</p>
+<div class="section" id="how-to-add-compile-your-experiment">
+<h2>How to add / compile your experiment?<a class="headerlink" href="#how-to-add-compile-your-experiment" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>add a directory called <code class="docutils literal"><span class="pre">exp</span></code> at the root the limbo tree</li>
+<li>add a directory for your experiment (e.g. <code class="docutils literal"><span class="pre">my_experiment</span></code>)</li>
+<li>add a <code class="docutils literal"><span class="pre">wscript</span></code> in this directory:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="c"># encoding: utf-8</span>
+
+<span class="kn">import</span> <span class="nn">limbo</span>
+<span class="kn">import</span> <span class="nn">commands</span>
+
+<span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+  <span class="c"># you add command line options here</span>
+  <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
+    <span class="c"># you can add configurations here</span>
+    <span class="c"># for instance, to link with ncurses:</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&#39;LIB_NCURSE&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="s">&#39;ncurses&#39;</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">bld</span><span class="o">.</span><span class="n">program</span><span class="p">(</span><span class="n">features</span> <span class="o">=</span> <span class="s">&#39;cxx&#39;</span><span class="p">,</span>
+                      <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;my_file1.cpp my_file2.cpp&#39;</span><span class="p">,</span><span class="c"># separate with spaces</span>
+                      <span class="n">includes</span> <span class="o">=</span> <span class="s">&#39;. ../../src/&#39;</span><span class="p">,</span>
+                      <span class="n">target</span> <span class="o">=</span> <span class="s">&#39;belty&#39;</span><span class="p">,</span>
+                      <span class="n">uselib</span> <span class="o">=</span>  <span class="s">&#39;BOOST EIGEN TBB NCURSE&#39;</span><span class="p">,</span> <span class="c"># add NCURSE here to actually link with it</span>
+                      <span class="n">use</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>compile with: <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--exp</span> <span class="pre">my_experiment</span></code></li>
+<li>if you added configure options, you need to do a <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">configure</span> <span class="pre">--exp</span> <span class="pre">my_experiment</span></code> first</li>
+</ul>
+</div>
+<div class="section" id="how-to-submit-jobs-with-limbo-on-clusters">
+<h2>How to submit jobs with limbo on clusters?<a class="headerlink" href="#how-to-submit-jobs-with-limbo-on-clusters" title="Permalink to this headline">¶</a></h2>
+<p>OAR (<code class="docutils literal"><span class="pre">oarsub</span></code>) and Torque (<code class="docutils literal"><span class="pre">qsub</span></code>) are supported. The system is very similar to the system used in <a class="reference external" href="http://github.com/sferes2/sferes2">Sferes2</a>, therefore if you know Sferes2, it will be easy for you.</p>
+<p>Depending on the scheduler, we have to commands:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--qsub=your_json_file.json</span></code></li>
+<li><code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--oar=your_json_file.json</span></code></li>
+</ul>
+<p>The json file should look like this (for both OAR or Torque):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+ <span class="s2">&quot;exps&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;hexa_duty_text&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;bin_dir&quot;</span> <span class="o">:</span> <span class="s2">&quot;/nfs/hal01/jmouret/git/sferes2/build/default/exp/hexa_duty_cycle&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;res_dir&quot;</span> <span class="o">:</span> <span class="s2">&quot;/nfs/hal01/jmouret/data/maps_hexapod-slippy/&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;email&quot;</span> <span class="o">:</span> <span class="s2">&quot;JBM&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;wall_time&quot;</span> <span class="o">:</span> <span class="s2">&quot;270:00:00&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;nb_runs&quot;</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+ <span class="s2">&quot;nb_cores&quot;</span> <span class="o">:</span> <span class="mi">24</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Explanations:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">exps</span></code> is the list of the experiments; these are binary names that will be found in <code class="docutils literal"><span class="pre">bin_dir</span></code>; this is an array: you can have as many binary names as you want (separate with a comma)</li>
+<li><code class="docutils literal"><span class="pre">bin_dir</span></code> is the directory that contains the binaries that correspond to the experiments; be careful that the directory needs to be reachable from all the nodes (typically, it should be on NFS)</li>
+<li><code class="docutils literal"><span class="pre">res_dir</span></code> is where to store the results. Limbo will create a directory for each experiments. For instance, here is the directory structure for this json:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>data/
++-- hexa_duty_text/
+  +-- exp_0/
+  +-- exp_1/
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">email</span></code> could be your e-mail (to receive an e-mail when the job is finished). It is currently not supported for OAR;</li>
+<li><code class="docutils literal"><span class="pre">wall_time</span></code> is the number of hours for each replicate of each experiment (be careful that your job will be killed at the end of this time; however, if you put a number to high, your job will be redirected to low-priority queues)</li>
+<li><code class="docutils literal"><span class="pre">nb_runs</span></code> is the number of replicates of each experiment;</li>
+<li><code class="docutils literal"><span class="pre">nb_cores</span></code> is the number of cores for a single experiment (MPI is currently not supported in limbo).</li>
+</ul>
+</div>
+<div class="section" id="variants">
+<h2>Variants<a class="headerlink" href="#variants" title="Permalink to this headline">¶</a></h2>
+<p>A very common use case is to compare variant XX to variant YY of an algorithm. Usually, only a few lines of code are different (like, calling kernel X or kernel Y). Limbo is designed to create a binary for each variant by defining a few constant at the beginning of a source file.</p>
+<p>For instance, let&#8217;s say we have a file called <code class="docutils literal"><span class="pre">multi.cpp</span></code> for which we want to compare two algorithms, <code class="docutils literal"><span class="pre">Parego</span></code> and <code class="docutils literal"><span class="pre">EHVI</span></code>:</p>
+<p>We can create two variants in the <code class="docutils literal"><span class="pre">wscript</span></code>, as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">limbo</span>
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
+
+  <span class="n">limbo</span><span class="o">.</span><span class="n">create_variants</span><span class="p">(</span><span class="n">bld</span><span class="p">,</span>
+                      <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;multi.cpp&#39;</span><span class="p">,</span>
+                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">,</span>
+                      <span class="n">uselib</span> <span class="o">=</span> <span class="s">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
+                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;PAREGO&#39;</span><span class="p">,</span>
+                                  <span class="s">&#39;EHVI&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Limbo will create two files:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">multi_parego.cpp</span></code>, which is the <code class="docutils literal"><span class="pre">multi.cpp</span></code> file with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">PAREGO</span></code> at the first line</li>
+<li><code class="docutils literal"><span class="pre">multi_ehvi.cpp</span></code>, which is the <code class="docutils literal"><span class="pre">multi.cpp</span></code> file with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">EHVI</span></code> at the first line</li>
+</ul>
+<p><strong>You should never edit these files</strong>: they will be re-generated each time you will compile.</p>
+<p>You can add as many defines as you like (or even generate them with python code), for instance:</p>
+<p>Using <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--exp</span> <span class="pre">your_experiment</span></code> will compile all the corresponding libraries.</p>
+<p>If you have more than one file, you will need to first compile a static library, then link with it in the variant.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">limbo</span>
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
+
+  <span class="n">limbo</span><span class="o">.</span><span class="n">create_variants</span><span class="p">(</span><span class="n">bld</span><span class="p">,</span>
+                      <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;multi.cpp&#39;</span><span class="p">,</span>
+                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">,</span>
+                      <span class="n">uselib</span> <span class="o">=</span> <span class="s">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
+                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;PAREGO MOP2 DIM2&#39;</span><span class="p">,</span>
+                                  <span class="s">&#39;EHVI ZDT2 DIM6&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This will create <code class="docutils literal"><span class="pre">multi_parego_mop2_dim2</span></code> and <code class="docutils literal"><span class="pre">multi_ehvi_zdt2_dim6</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="parameters.html" class="btn btn-neutral float-right" title="Parameters" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="limbo_concepts.html" class="btn btn-neutral" title="Limbo-specific concepts" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2015, UPMC/Inria.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

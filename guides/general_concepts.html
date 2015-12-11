@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Implementation details &amp; customization of algorithms &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Guides" href="index.html"/>
+        <link rel="next" title="Frequently Asked Questions" href="../faq.html"/>
+        <link rel="prev" title="Parameters" href="parameters.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+  
+    <a href="../index.html" class="icon icon-home"> limbo
+  
+
+  
+  </a>
+
+  
+    
+    
+      <div class="version">
+        0.0
+      </div>
+    
+  
+
+  
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  <ul>
+    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
+    
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bo.html">Introduction to Bayesian Optimization (BO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limbo_concepts.html">Limbo-specific concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework.html">Using Limbo as an environment for experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Implementation details &amp; customization of algorithms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#class-structure">Class Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-structure">File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acquisition-functions">Acquisition Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models">Models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-functions-in-gp-model">Kernel Functions in GP model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mean-functions-in-gp-model">Mean Functions in GP model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#statistics">Statistics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+          
+  </ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Guides</a> &raquo;</li>
+      
+    <li>Implementation details &amp; customization of algorithms</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/guides/general_concepts.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="implementation-details-customization-of-algorithms">
+<h1>Implementation details &amp; customization of algorithms<a class="headerlink" href="#implementation-details-customization-of-algorithms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-structure">
+<h2>Class Structure<a class="headerlink" href="#class-structure" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id1">
+<a class="reference external image-reference" href="../_images/limbo_uml.png"><img alt="UML class diagram" src="../_images/limbo_uml.png" /></a>
+<p class="caption"><span class="caption-text">Click on the image to see it bigger.</span></p>
+</div>
+</div>
+<div class="section" id="file-structure">
+<h2>File Structure<a class="headerlink" href="#file-structure" title="Permalink to this headline">¶</a></h2>
+<p>(see below for a short explanation of the concepts)</p>
+<div class="highlight-python"><div class="highlight"><pre>src
++-- limbo:
+     +-- acqui: acquisition functions
+     |-- bayes_opt: bayesian optimizers
+     |-- init: initialization functions
+     |-- kernel: kernel functions
+     |-- mean: mean functions
+     |-- model: models (Gaussian Processes)
+     |-- opt: optimizers (Rprop, CMA-ES, etc.)
+     |-- stat: statistics (to dump data)
+     |-- stop: stopping criteria
+     |-- tools: useful macros &amp; small functions
+|-- tests: unit tests
+|-- benchmarks: a few benchmark functions
+|-- examples: a few examples
+|-- cmaes: [external] the CMA-ES library, used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
+|-- ehvi: [external] the Expected HyperVolume Improvement, used for Multi-Objective Optimization -- by Iris Hupkens
+</pre></div>
+</div>
+<p>Each directory in the <cite>limbo</cite> directory corresponds to a namespace with the same name. There is also a file for each directory called &#8220;directory.hpp&#8221; (e.g. <cite>acqui.hpp</cite>) that includes the whole namespace.</p>
+</div>
+<div class="section" id="acquisition-functions">
+<span id="acquisition-guide"></span><h2>Acquisition Functions<a class="headerlink" href="#acquisition-functions" title="Permalink to this headline">¶</a></h2>
+<p>We can change which <code class="docutils literal"><span class="pre">Acquisition</span> <span class="pre">Function</span></code> our <code class="docutils literal"><span class="pre">BOptimizer</span></code> uses, using the <code class="docutils literal"><span class="pre">acquifun</span></code> templated parameter. Every acquisition function takes as template parameters the <code class="docutils literal"><span class="pre">Params</span></code> and a <code class="docutils literal"><span class="pre">Model</span></code>.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">AcquiName</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Model</span><span class="o">&gt;</span> <span class="kt">acqui_t</span><span class="p">;</span>
+
+<span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="kt">acqui_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The acquisition functions provided by <strong>limbo</strong> are the following (see <a class="reference internal" href="bo.html#acqui-functions"><span>here</span></a> for more details):</p>
+<ul>
+<li><dl class="first docutils">
+<dt>UCB</dt>
+<dd><ul class="first last">
+<li><p class="first"><code class="docutils literal"><span class="pre">Params::ucb::alpha</span></code> should be available and a float.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Model needs to have the following functions implemented:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">dim_in()</span> <span class="pre">const</span></code> - returns the dimension of input data</li>
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">dim_out()</span> <span class="pre">const</span></code> - return the dimension of the output data</li>
+<li><code class="docutils literal"><span class="pre">std::tuple&lt;Eigen::VectorXd,</span> <span class="pre">double&gt;</span> <span class="pre">query(const</span> <span class="pre">Eigen::VectorXd&amp;</span> <span class="pre">v)</span> <span class="pre">const</span></code> - returns mean and sigma at the point v</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>GP_UCB</dt>
+<dd><ul class="first last">
+<li><p class="first"><code class="docutils literal"><span class="pre">Params::gp_ucb::delta</span></code> should be available and a float.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Model needs to have the following functions implemented:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">dim_in()</span> <span class="pre">const</span></code> - returns the dimension of input data</li>
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">dim_out()</span> <span class="pre">const</span></code> - return the dimension of the output data</li>
+<li><code class="docutils literal"><span class="pre">std::tuple&lt;Eigen::VectorXd,</span> <span class="pre">double&gt;</span> <span class="pre">query(const</span> <span class="pre">Eigen::VectorXd&amp;</span> <span class="pre">v)</span> <span class="pre">const</span></code> - returns mean and sigma at the point v</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<p>We can change which <code class="docutils literal"><span class="pre">Model</span></code> our <code class="docutils literal"><span class="pre">BOptimizer</span></code> uses, using the <code class="docutils literal"><span class="pre">modelfun</span></code> templated parameter. Each model should take as the first template parameter the <code class="docutils literal"><span class="pre">Params</span></code> and could optionally have more.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">ModelName</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="p">...</span><span class="o">&gt;</span> <span class="kt">model_t</span><span class="p">;</span>
+
+<span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="kt">model_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Each model should have implemented the following functions:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Should have constructor of the form:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">ModelName(int</span> <span class="pre">dim_in,</span> <span class="pre">int</span> <span class="pre">dim_out)</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">void</span> <span class="pre">compute(const</span> <span class="pre">std::vector&lt;Eigen::VectorXd&gt;&amp;</span> <span class="pre">samples,</span> <span class="pre">const</span> <span class="pre">std::vector&lt;Eigen::VectorXd&gt;&amp;</span> <span class="pre">observations,</span> <span class="pre">double</span> <span class="pre">noise,</span> <span class="pre">const</span> <span class="pre">std::vector&lt;Eigen::VectorXd&gt;&amp;</span> <span class="pre">bl_samples)</span></code></p>
+</li>
+</ul>
+<p><strong>limbo</strong> provides only a <strong>Gaussian Process</strong> model for now. See <a class="reference internal" href="bo.html#gaussian-process"><span>gaussian process section of the BO guide</span></a> for more details.</p>
+<div class="section" id="kernel-functions-in-gp-model">
+<span id="kernel-guide"></span><h3>Kernel Functions in GP model<a class="headerlink" href="#kernel-functions-in-gp-model" title="Permalink to this headline">¶</a></h3>
+<p>We can change which <code class="docutils literal"><span class="pre">Kernel</span> <span class="pre">Function</span></code> our <code class="docutils literal"><span class="pre">GP</span></code> uses, using the second template parameter of the GP class. Every kernel function takes as template parameters the <code class="docutils literal"><span class="pre">Params</span></code> and optionally some more.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">KernelName</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="kt">kernel_t</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="kt">kernel_t</span><span class="p">,</span> <span class="p">...</span><span class="o">&gt;</span> <span class="kt">gp_t</span><span class="p">;</span>
+
+<span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="kt">gp_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The kernel functions provided by <strong>limbo</strong> are the following (see <a class="reference internal" href="bo.html#kernel-functions"><span>kernel function section of the BO guide</span></a> for more details):</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Exp</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">Params::kf_exp::sigma</span></code> should be available and a float.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>MaternFiveHalfs</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">Params::kf_maternfivehalfs::sigma</span></code> should be available and a float.</li>
+<li><code class="docutils literal"><span class="pre">Params::kf_maternfivehalfs::l</span></code> should be available and a float.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>MaternThreeHalfs</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">Params::kf_maternthreehalfs::sigma</span></code> should be available and a float.</li>
+<li><code class="docutils literal"><span class="pre">Params::kf_maternthreehalfs::l</span></code> should be available and a float.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SquaredExpARD</dt>
+<dd><ul class="first last simple">
+<li>No params needed</li>
+<li>Used for kernel&#8217;s hyperparameters optimization</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="mean-functions-in-gp-model">
+<span id="mean-guide"></span><h3>Mean Functions in GP model<a class="headerlink" href="#mean-functions-in-gp-model" title="Permalink to this headline">¶</a></h3>
+<p>We can change which <code class="docutils literal"><span class="pre">Mean</span> <span class="pre">Function</span></code> our <code class="docutils literal"><span class="pre">GP</span></code> uses, using the third template parameter of the GP class. Every mean function takes as template parameters the <code class="docutils literal"><span class="pre">Params</span></code> and optionally some more.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">MeanName</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="kt">mean_t</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="p">...,</span> <span class="kt">mean_t</span><span class="p">,</span> <span class="p">...</span><span class="o">&gt;</span> <span class="kt">gp_t</span><span class="p">;</span>
+
+<span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="kt">gp_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The mean functions provided by <strong>limbo</strong> are the following (see <a class="reference internal" href="limbo_concepts.html#mean-functions"><span>the mean function section of the BO guide</span></a> for more details):</p>
+<ul>
+<li><dl class="first docutils">
+<dt>NullFunction</dt>
+<dd><ul class="first last simple">
+<li>No params needed</li>
+<li>Zero mean</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Constant</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">Params::meanconstant::constant</span></code> should be available and a <code class="docutils literal"><span class="pre">Eigen::VectorXd</span></code> with size same as <code class="docutils literal"><span class="pre">GP::dim_out</span></code>.</li>
+<li>Constant mean</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Data</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>GP needs to have the following functions implemented:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">Eigen::VectorXd</span> <span class="pre">mean_observation()</span></code> - returns the mean observation</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Mean of actual data</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>FunctionARD</dt>
+<dd><ul class="first last simple">
+<li>No params needed</li>
+<li>Used for mean&#8217;s hyperparameters optimization</li>
+<li>It takes as a template parameter the mean function to use</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="statistics">
+<h2>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h2>
+<p>We can change which <code class="docutils literal"><span class="pre">Statistics</span></code> our <code class="docutils literal"><span class="pre">BOptimizer</span></code> outputs, using the <code class="docutils literal"><span class="pre">statfun</span></code> templated parameter. Every statistic takes as template parameters the <code class="docutils literal"><span class="pre">Params</span></code> and optionally some more. All statistics should inherit from <code class="docutils literal"><span class="pre">StatBase</span></code> class.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">StatName</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="kt">stat_t</span><span class="p">;</span>
+
+<span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">statfun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>limbo</strong> provides only <strong>Acquisitions</strong> statistics for now.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="parameters.html" class="btn btn-neutral" title="Parameters" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2015, UPMC/Inria.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
