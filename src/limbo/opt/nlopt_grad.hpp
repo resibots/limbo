@@ -10,7 +10,14 @@
 
 #include <nlopt.hpp>
 
+#include <limbo/tools/macros.hpp>
+
 namespace limbo {
+   namespace defaults {
+        struct opt_nloptgrad {
+            BO_PARAM(int, iterations, 500);
+        };
+    }
     namespace opt {
         template <typename Params, nlopt::algorithm Algorithm>
         struct NLOptGrad {
@@ -25,7 +32,7 @@ namespace limbo {
                 std::vector<double> x(f.init().size());
                 Eigen::VectorXd::Map(&x[0], f.init().size()) = f.init();
 
-                opt.set_maxeval(Params::nlopt::iters());
+                opt.set_maxeval(Params::opt_nloptgrad::iterations());
 
                 if (bounded) {
                     opt.set_lower_bounds(std::vector<double>(f.param_size(), 0));

@@ -5,7 +5,14 @@
 
 #include <Eigen/Core>
 
+#include <limbo/tools/macros.hpp>
+
 namespace limbo {
+   namespace defaults {
+        struct opt_gridsearch {
+            BO_PARAM(int, bins, 5);
+        };
+    }    
     namespace opt {
         template <typename Params>
         struct GridSearch {
@@ -22,7 +29,7 @@ namespace limbo {
             template <typename F>
             Eigen::VectorXd _inner_search(const F& f, int depth, const Eigen::VectorXd& current) const
             {
-                double step_size = 1.0 / (double)Params::grid_search::nb_pts();
+                double step_size = 1.0 / (double)Params::opt_gridsearch::bins();
                 double upper_lim = 1.0 + step_size;
 
                 double best_fit = -std::numeric_limits<double>::max();

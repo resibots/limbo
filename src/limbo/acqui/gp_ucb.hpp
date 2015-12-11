@@ -6,13 +6,11 @@
 #include <limbo/tools/macros.hpp>
 
 namespace limbo {
-
     namespace defaults {
-        struct gp_ucb {
-            BO_PARAM(float, delta, 0.001);
+        struct acqui_gpucb {
+            BO_PARAM(double, delta, 0.001);
         };
     }
-
     namespace acqui {
         template <typename Params, typename Model>
         class GP_UCB {
@@ -20,7 +18,7 @@ namespace limbo {
             GP_UCB(const Model& model, int iteration) : _model(model)
             {
                 double t3 = pow(iteration, 3.0);
-                static constexpr double delta3 = Params::gp_ucb::delta() * 3;
+                static constexpr double delta3 = Params::acqui_gpucb::delta() * 3;
                 static constexpr double pi2 = M_PI * M_PI;
                 _beta = sqrtf(2.0 * log(t3 * pi2 / delta3));
             }

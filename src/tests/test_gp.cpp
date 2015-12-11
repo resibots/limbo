@@ -20,19 +20,18 @@ Eigen::VectorXd make_v1(double x)
 }
 
 struct Params {
-    struct kf_maternfivehalfs {
+    struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.25);
     };
 
-    struct meanconstant {
-        static Eigen::VectorXd constant() { return make_v1(0.0); };
+    struct mean_constant : public defaults::mean_constant {
     };
 
-    struct rprop : public defaults::rprop {
+    struct opt_rprop : public defaults::opt_rprop {
     };
 
-    struct parallel_repeater : public defaults::parallel_repeater {
+    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
 };
 

@@ -15,6 +15,7 @@
 #include <Eigen/Core>
 
 // we need everything to have the defaults
+#include <limbo/tools/macros.hpp>
 #include <limbo/stop/chain_criteria.hpp>
 #include <limbo/stop/max_iterations.hpp>
 #include <limbo/stat/samples.hpp>
@@ -29,7 +30,11 @@
 #include <limbo/init/random_sampling.hpp>
 
 namespace limbo {
-
+    namespace defaults {
+        struct bayes_opt_bobase {
+            BO_PARAM(bool, stats_enabled, true);            
+        };
+    }
     template <typename BO, typename AggregatorFunction>
     struct RefreshStat_f {
         RefreshStat_f(BO& bo, const AggregatorFunction& afun, bool blacklisted)
@@ -125,7 +130,7 @@ namespace limbo {
             BoBase(const BoBase& other) = delete;
             BoBase& operator=(const BoBase& other) = delete;
 
-            bool stats_enabled() const { return Params::boptimizer::stats_enabled(); }
+            bool stats_enabled() const { return Params::bayes_opt_bobase::stats_enabled(); }
 
             const std::string& res_dir() const { return _res_dir; }
 
@@ -183,7 +188,7 @@ namespace limbo {
 
             void _make_res_dir()
             {
-                if (!Params::boptimizer::stats_enabled())
+                if (!Params::bayes_opt_bobase::stats_enabled())
                     return;
                 _res_dir = tools::hostname() + "_" + tools::date() + "_" + tools::getpid();
                 boost::filesystem::path my_path(_res_dir);
