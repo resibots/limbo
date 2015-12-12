@@ -39,7 +39,7 @@ def build(bld):
                 source='test_boptimizer.cpp',
                 includes='. .. ../../',
                 target='test_boptimizer',
-                uselib='BOOST EIGEN TBB SFERES',
+                uselib='BOOST EIGEN TBB SFERES LIBCMAES',
                 use='limbo')
     if bld.env.DEFINES_NLOPT:
         bld.program(features='cxx test',

@@ -5,17 +5,12 @@
 #include <iostream>
 #include <Eigen/Core>
 
-<<<<<<< HEAD
 #ifdef USE_LIBCMAES
 # include <libcmaes/cmaes.h>
 #endif
-=======
-#include <cmaes/cmaes_interface.h>
-#include <cmaes/boundary_transformation.h>
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
->>>>>>> gp_multi
 
 namespace limbo {
     namespace defaults {
@@ -59,11 +54,11 @@ namespace limbo {
                 // [see: https://github.com/beniz/libcmaes/wiki/Practical-hints ]
                 // but we want the restart -> aIPOP_CMAES
                 cmaparams.set_algo(aIPOP_CMAES);
-                cmaparams.set_restarts(Params::cmaes::nrestarts());
+                cmaparams.set_restarts(Params::opt_cmaes::restarts());
                 // if no max fun evals provided, we compute a recommended value
-                size_t max_evals = Params::cmaes::max_fun_evals() < 0
+                size_t max_evals = Params::opt_cmaes::max_fun_evals() < 0
                     ? (900.0 * (dim + 3.0) * (dim + 3.0))
-                    : Params::cmaes::max_fun_evals();
+                    : Params::opt_cmaes::max_fun_evals();
                 cmaparams.set_max_fevals(max_evals);
                 // max iteration is here only for security
                 cmaparams.set_max_iter(100000);

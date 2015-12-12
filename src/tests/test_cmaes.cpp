@@ -7,7 +7,7 @@
 #include <limbo/opt/cmaes.hpp>
 
 struct Params {
-    struct cmaes : public limbo::defaults::cmaes {
+    struct opt_cmaes : public limbo::defaults::opt_cmaes {
     };
 };
 
