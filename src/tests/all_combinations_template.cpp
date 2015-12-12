@@ -8,59 +8,70 @@ using namespace limbo;
 
 struct Params {
 
-    struct kf_exp {
+    struct kernel_exp {
         BO_PARAM(double, sigma, 1);
     };
 
-    struct kf_maternthreehalfs {
-        BO_PARAM(double, sigma, 1);
-        BO_PARAM(double, l, 0.2);
-    };
-
-    struct kf_maternfivehalfs {
+    struct kernel_maternthreehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.2);
     };
 
-    struct meanconstant {
-        BO_PARAM_VECTOR(double, constant, 0, 0);
+    struct kernel_maternfivehalfs {
+        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, l, 0.2);
     };
 
-    struct ucb : public defaults::ucb {
+    struct mean_constant {
+        BO_PARAM(double, constant, 0);
     };
 
-    struct gp_ucb : public defaults::gp_ucb {
+    struct acqui_ucb : public defaults::acqui_ucb {
     };
 
-    struct grid_search {
-        BO_PARAM(int, nb_pts, 20);
+    struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
-    struct cmaes : public defaults::cmaes {
+    struct opt_gridsearch {
+        BO_PARAM(int, bins, 20);
     };
 
-    struct rprop : public defaults::rprop {
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 
-    struct parallel_repeater : public defaults::parallel_repeater {
+    struct opt_rprop : public defaults::opt_rprop {
     };
 
-    struct init {
-        BO_PARAM(int, nb_samples, 5);
-        BO_PARAM(int, nb_bins, 5);
+    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
 
-    struct maxiterations {
-        BO_PARAM(int, n_iterations, 20);
+    struct init_gridsampling {
+            BO_PARAM(int, bins, 5);
     };
 
-    struct max_predicted_value {
+    struct init_randomsampling {
+        BO_PARAM(int, samples, 5);
+    };
+
+    struct init_randomsamplinggrid {
+        BO_PARAM(int, samples, 5);
+        BO_PARAM(int, bins, 5);
+    };
+
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 20);
+    };
+
+    struct stop_maxpredictedvalue {
         BO_PARAM(double, ratio, 2);
     };
 
-    struct boptimizer {
-        BO_PARAM(double, noise, 0.001);
+    struct bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, true);
+    };
+
+    struct bayes_opt_boptimizer {
+        BO_PARAM(double, noise, 0.001);
     };
 };
 

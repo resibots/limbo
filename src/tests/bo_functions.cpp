@@ -188,29 +188,32 @@ struct GoldenPrice {
 };
 
 struct Params {
-    struct boptimizer {
-        BO_PARAM(double, noise, 0.0);
+    struct bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct init {
-        BO_PARAM(int, nb_samples, 10);
+    struct bayes_opt_boptimizer {
+        BO_PARAM(double, noise, 0.0);
     };
 
-    struct maxiterations {
-        BO_PARAM(int, n_iterations, 40);
+    struct init_randomsampling {
+        BO_PARAM(int, samples, 10);
     };
 
-    struct gp_ucb : public defaults::gp_ucb {
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 40);
     };
 
-    struct cmaes : public defaults::cmaes {
+    struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
-    struct rprop : public defaults::rprop {
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 
-    struct parallel_repeater : public defaults::parallel_repeater {
+    struct opt_rprop : public defaults::opt_rprop {
+    };
+
+    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
 };
 

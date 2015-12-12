@@ -7,11 +7,12 @@
 
 #include <Eigen/Core>
 
+#include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
 
 namespace limbo {
     namespace defaults {
-        struct parallel_repeater {
+        struct opt_parallelrepeater {
             BO_PARAM(int, repeats, 10);
         };
     }
@@ -39,7 +40,7 @@ namespace limbo {
                 };
 
                 pair_t init = std::make_pair(f.init(), -std::numeric_limits<float>::max());
-                auto m = tools::par::max(init, Params::parallel_repeater::repeats(), body, comp);
+                auto m = tools::par::max(init, Params::opt_parallelrepeater::repeats(), body, comp);
 
                 return m.first;
             };

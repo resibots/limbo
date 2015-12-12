@@ -3,37 +3,34 @@
 using namespace limbo;
 
 struct Params {
-    struct boptimizer {
-        BO_PARAM(double, noise, 0.005);
-        BO_PARAM(bool, stats_enabled, true);
-    };
-
-    struct init {
-        BO_PARAM(int, nb_samples, 21);
+    struct init_randomsampling {
+        BO_PARAM(int, samples, 21);
         // calandra: number of dimensions * 5
         // knowles : 11 * dim - 1
     };
 
-    struct maxiterations {
-        BO_PARAM(int, n_iterations, 30);
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 30);
     };
 
-    struct ucb : public defaults::ucb {
+    struct acqui_ucb : public defaults::acqui_ucb {
     };
 
-    struct gp_ucb : public defaults::gp_ucb {
+    struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
-    struct cmaes : public defaults::cmaes {
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 
-    struct gp_auto : public defaults::gp_auto {
+    struct mean_constant : public defaults::mean_constant {
     };
 
-    struct meanconstant : public defaults::meanconstant {
+    struct bayes_opt_bobase {
+        BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct parego : public defaults::parego {
+    struct bayes_opt_parego : public defaults::bayes_opt_parego {
+        BO_PARAM(double, noise, 0.005);
     };
 };
 
@@ -85,7 +82,7 @@ int main()
     // typedef model::GP<Params, kernel_t, mean_t> gp_t;
     // typedef acquisition_functions::UCB<Params, gp_t> ucb_t;
     // Parego<Params, model_fun<gp_t>, acq_fun<ucb_t> > opt;
-    Parego<Params> opt;
+    bayes_opt::Parego<Params> opt;
     opt.optimize(mop2());
 
     std::cout << "optimization done" << std::endl;

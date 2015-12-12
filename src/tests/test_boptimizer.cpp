@@ -9,32 +9,39 @@ using namespace limbo;
 
 struct Params {
 
-    struct rprop : public defaults::rprop {
+    struct opt_rprop : public defaults::opt_rprop {
     };
 
-    struct grid_search {
-        BO_PARAM(int, nb_pts, 10);
+    struct opt_gridsearch {
+        BO_PARAM(int, bins, 10);
     };
-    struct boptimizer {
+
+    struct bayes_opt_bobase {
+        BO_PARAM(bool, stats_enabled, false);
+    };
+
+    struct bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.0001);
-        BO_PARAM(bool, stats_enabled, true);
-    };
-    struct maxiterations {
-        BO_PARAM(int, n_iterations, 30);
     };
 
-    struct kf_maternfivehalfs {
-        BO_PARAM(float, sigma, 1);
-        BO_PARAM(float, l, 0.4);
-    };
-    struct ucb {
-        BO_PARAM(float, alpha, 0.125);
-    };
-    struct init {
-        BO_PARAM(int, nb_samples, 5);
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 30);
     };
 
-    struct parallel_repeater : defaults::parallel_repeater {
+    struct kernel_maternfivehalfs {
+        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, l, 0.4);
+    };
+
+    struct acqui_ucb {
+        BO_PARAM(double, alpha, 0.125);
+    };
+
+    struct init_randomsampling {
+        BO_PARAM(int, samples, 5);
+    };
+
+    struct opt_parallelrepeater : defaults::opt_parallelrepeater {
     };
 };
 

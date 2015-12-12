@@ -10,9 +10,15 @@
 
 #include <Eigen/Core>
 
+#include <limbo/tools/macros.hpp>
 #include <limbo/bayes_opt/bo_base.hpp>
 
 namespace limbo {
+    namespace defaults {
+        struct bayes_opt_boptimizer {
+            BO_PARAM(double, noise, 1e-6);
+        };
+    }
     namespace bayes_opt {
 
         template <class Params, class A1 = boost::parameter::void_,
@@ -59,7 +65,7 @@ namespace limbo {
                 this->_init(sfun, afun, reset);
 
                 if (!this->_observations.empty())
-                        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
+                        _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
                 
                 acqui_optimizer_t acqui_optimizer;
 
@@ -98,7 +104,7 @@ namespace limbo {
                     std::cout << " best:" << afun(this->best_observation(afun)) << std::endl;
 
                     if (!this->_observations.empty())
-                        _model.compute(this->_samples, this->_observations, Params::boptimizer::noise(), this->_bl_samples);
+                        _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
 
                     this->_current_iteration++;
                     this->_total_iterations++;

@@ -5,18 +5,25 @@
 #include <iostream>
 #include <Eigen/Core>
 
+<<<<<<< HEAD
 #ifdef USE_LIBCMAES
 # include <libcmaes/cmaes.h>
 #endif
+=======
+#include <cmaes/cmaes_interface.h>
+#include <cmaes/boundary_transformation.h>
+
+#include <limbo/tools/macros.hpp>
+#include <limbo/tools/parallel.hpp>
+>>>>>>> gp_multi
 
 namespace limbo {
     namespace defaults {
-        struct cmaes {
-            BO_PARAM(int, nrestarts, 1);
+        struct opt_cmaes {
+            BO_PARAM(int, restarts, 1);
             BO_PARAM(double, max_fun_evals, -1);
         };
     }
-
     namespace opt {
         template <typename Params>
         struct Cmaes {
@@ -27,7 +34,6 @@ namespace limbo {
                 size_t dim = f.param_size();
 #ifdef USE_LIBCMAES
                 using namespace libcmaes;
-
                 // create the parameter object
                 // boundary_transformation
                 double lbounds[dim],ubounds[dim]; // arrays for lower and upper parameter bounds, respectively

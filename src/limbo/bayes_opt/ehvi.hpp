@@ -6,10 +6,17 @@
 #include <ehvi/ehvi_calculations.h>
 #include <ehvi/ehvi_sliceupdate.h>
 
+#include <limbo/tools/macros.hpp>
 #include <limbo/bayes_opt/bo_multi.hpp>
 #include <limbo/acqui/ehvi.hpp>
 
 namespace limbo {
+    namespace defaults {
+        struct bayes_opt_ehvi {
+            BO_PARAM(double, x_ref, -11);
+            BO_PARAM(double, y_ref, -11);
+        };
+    }
     namespace bayes_opt {
         template <class Params, class A2 = boost::parameter::void_,
             class A3 = boost::parameter::void_, class A4 = boost::parameter::void_,
@@ -49,7 +56,7 @@ namespace limbo {
 
                     auto acqui = acqui::Ehvi<Params, model_t>(
                         this->_models, pop,
-                        Eigen::Vector3d(Params::ehvi::x_ref(), Params::ehvi::y_ref(), 0));
+                        Eigen::Vector3d(Params::bayes_opt_ehvi::x_ref(), Params::bayes_opt_ehvi::y_ref(), 0));
 
                     // maximize with CMA-ES
                     typedef std::pair<Eigen::VectorXd, double> pair_t;
