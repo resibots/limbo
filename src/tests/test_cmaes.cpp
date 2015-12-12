@@ -22,7 +22,17 @@ public:
     }
 };
 
-BOOST_AUTO_TEST_CASE(test_cmaes)
+BOOST_AUTO_TEST_CASE(test_cmaes_unbounded)
+{
+    TestOpt util;
+    Eigen::VectorXd g = limbo::opt::Cmaes<Params>()(util, false);
+
+    BOOST_CHECK_SMALL(g(0), 0.00000001);
+    BOOST_CHECK_SMALL(g(1), 0.00000001);
+}
+
+
+BOOST_AUTO_TEST_CASE(test_cmaes_bounded)
 {
     TestOpt util;
     Eigen::VectorXd g = limbo::opt::Cmaes<Params>()(util, true);

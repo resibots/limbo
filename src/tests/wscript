@@ -15,13 +15,13 @@ def build(bld):
                 source='test_gp.cpp',
                 includes='. .. ../../',
                 target='test_gp',
-                uselib='BOOST EIGEN TBB',
+                uselib='BOOST EIGEN TBB LIBCMAES',
                 use='limbo')
     bld.program(features='cxx test',
                 source='test_init_functions.cpp',
                 includes='. .. ../../',
                 target='test_init_functions',
-                uselib='BOOST EIGEN TBB',
+                uselib='BOOST EIGEN TBB LIBCMAES',
                 use='limbo')
     bld.program(features='cxx test',
                 source='test_optimizers.cpp',
@@ -33,7 +33,7 @@ def build(bld):
                 source='test_macros.cpp',
                 includes='. .. ../../',
                 target='test_macros',
-                uselib='BOOST EIGEN TBB',
+                uselib='BOOST EIGEN TBB LIBCMAES',
                 use='limbo')
     bld.program(features='cxx test',
                 source='test_boptimizer.cpp',
@@ -46,7 +46,7 @@ def build(bld):
                     source='test_nlopt.cpp',
                     includes='. .. ../../',
                     target='test_nlopt',
-                    uselib='BOOST EIGEN TBB NLOPT',
+                    uselib='BOOST EIGEN TBB NLOPT LIBCMAES',
                     use='limbo')
     if bld.env.DEFINES_NLOPT:
         bld.program(features='cxx test',
