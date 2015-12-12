@@ -8,11 +8,11 @@
 #include <limbo/tools/macros.hpp>
 
 namespace limbo {
-   namespace defaults {
+    namespace defaults {
         struct opt_gridsearch {
             BO_PARAM(int, bins, 5);
         };
-    }    
+    }
     namespace opt {
         template <typename Params>
         struct GridSearch {

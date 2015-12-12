@@ -13,7 +13,7 @@
 #include <limbo/tools/macros.hpp>
 
 namespace limbo {
-   namespace defaults {
+    namespace defaults {
         struct opt_nloptgrad {
             BO_PARAM(int, iterations, 500);
         };

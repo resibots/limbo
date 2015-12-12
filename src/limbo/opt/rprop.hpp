@@ -10,7 +10,7 @@
 #include <limbo/tools/macros.hpp>
 
 namespace limbo {
-   namespace defaults {
+    namespace defaults {
         struct opt_rprop {
             BO_PARAM(int, iterations, 300);
         };
