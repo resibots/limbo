@@ -3,17 +3,11 @@
 
 #include <vector>
 #include <iostream>
-#include <limits>
-#include <stdio.h>
-#include <stdlib.h> /* free() */
-#include <stddef.h> /* NULL */
-
 #include <Eigen/Core>
 
-#include <cmaes/cmaes_interface.h>
-#include <cmaes/boundary_transformation.h>
-
-#include <limbo/tools/parallel.hpp>
+#ifdef USE_LIBCMAES
+# include <libcmaes/cmaes.h>
+#endif
 
 namespace limbo {
     namespace defaults {
@@ -30,99 +24,65 @@ namespace limbo {
             template <typename F>
             Eigen::VectorXd operator()(const F& f, double bounded) const
             {
-                // Currrently cmaes does not support unbounded search
-                assert(bounded);
-                int nrestarts = Params::cmaes::nrestarts();
                 size_t dim = f.param_size();
-                double incpopsize = 2;
-                cmaes_t evo;
-                double* const* pop;
-                double* fitvals;
-                double fbestever = 0, * xbestever = NULL;
-                double fmean;
-                int irun, lambda = 0, countevals = 0;
-                char const* stop;
-                boundary_transformation_t boundaries;
-                double lowerBounds[] = {0.0}; 
-                double upperBounds[] = {1.006309}; // Allows solution to be pretty close to 1
-                int nb_bounds = 1; /* numbers used from lower and upperBounds */
+#ifdef USE_LIBCMAES
+                using namespace libcmaes;
 
-                boundary_transformation_init(&boundaries, lowerBounds, upperBounds, nb_bounds);
-
-                double* x_in_bounds = cmaes_NewDouble(dim);
-                double init_point[dim];
-                for (int i = 0; i < dim; ++i)
-                    init_point[i] = f.init()(i);
-
-                for (irun = 0; irun < nrestarts + 1; ++irun) {
-
-                    fitvals = cmaes_init(&evo, dim, init_point, NULL, 0, lambda, NULL);
-
-                    evo.countevals = countevals;
-                    evo.sp.stopMaxFunEvals = Params::cmaes::max_fun_evals() < 0
-                        ? (900.0 * (dim + 3.0) * (dim + 3.0))
-                        : Params::cmaes::max_fun_evals();
-
-                    int pop_size = cmaes_Get(&evo, "popsize");
-                    double** all_x_in_bounds = new double* [pop_size];
-                    for (int i = 0; i < pop_size; ++i)
-                        all_x_in_bounds[i] = cmaes_NewDouble(dim);
-                    std::vector<Eigen::VectorXd> pop_eigen(pop_size, Eigen::VectorXd(dim));
-
-                    while (!(stop = cmaes_TestForTermination(&evo))) {
-                        pop = cmaes_SamplePopulation(&evo);
-                        tools::par::loop(0, pop_size, [&](int i) {
-                            // clang-format off
-                            boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim);
-                            for (int j = 0; j < dim; ++j)
-                              pop_eigen[i](j) = all_x_in_bounds[i][j];
-                            fitvals[i] = -f.utility(pop_eigen[i]);
-                            // clang-format on
-                        });
-                        cmaes_UpdateDistribution(&evo, fitvals);
-                    }
-
-                    for (int i = 0; i < pop_size; ++i)
-                        free(all_x_in_bounds[i]);
-
-                    lambda = incpopsize * cmaes_Get(&evo, "lambda");
-                    countevals = cmaes_Get(&evo, "eval");
-
-                    if (irun == 0 || cmaes_Get(&evo, "fbestever") < fbestever) {
-                        fbestever = cmaes_Get(&evo, "fbestever");
-                        xbestever = cmaes_GetInto(&evo, "xbestever",
-                            xbestever); /* alloc mem if needed */
-                    }
-                    const double* xmean = cmaes_GetPtr(&evo, "xmean");
-                    Eigen::VectorXd v(dim);
-                    for (int j = 0; j < v.size(); ++j)
-                        v(j) = xmean[j];
-
-                    if ((fmean = -f.utility(v)) < fbestever) {
-                        fbestever = fmean;
-                        xbestever = cmaes_GetInto(&evo, "xmean", xbestever);
-                    }
-
-                    cmaes_exit(&evo);
-
-                    if (stop) {
-                        if (strncmp(stop, "Fitness", 7) == 0 || strncmp(stop, "MaxFunEvals", 11) == 0) {
-                            //    printf("stop: %s", stop);
-                            break;
-                        }
-                    }
+                // create the parameter object
+                // boundary_transformation
+                double lbounds[dim],ubounds[dim]; // arrays for lower and upper parameter bounds, respectively
+                for (int i = 0; i < dim; i++) {
+                  lbounds[i] = 0.0;
+                  ubounds[i] = 1.005;
                 }
-                boundary_transformation(&boundaries, xbestever, x_in_bounds, dim);
+                GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
+                // initial step-size, i.e. estimated initial parameter error.
+                // we suppose we are optimizing on [0, 1], but we have no idea where to start
+                double sigma = 0.5;
+                // initialize x0 as 0.50 in all 10 dimensions
+                // WARNING: we ignore the init() of the function to optimize!
+                // (because CMA-ES will perform its own random initialization)
+                std::vector<double> x0(dim, 0.5);
+                // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
+                CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, -1 , 0, gp);
+                cmaparams.set_x0(0, 1.0);
 
-                Eigen::VectorXd result = Eigen::VectorXd::Zero(dim);
-                for (size_t i = 0; i < dim; ++i)
-                    result(i) = x_in_bounds[i];
-                free(xbestever);
-                boundary_transformation_exit(&boundaries);
+                // set multi-threading to true
+                cmaparams.set_mt_feval(true);
+                // aCMAES should be the best choice
+                // [see: https://github.com/beniz/libcmaes/wiki/Practical-hints ]
+                // but we want the restart -> aIPOP_CMAES
+                cmaparams.set_algo(aIPOP_CMAES);
+                cmaparams.set_restarts(Params::cmaes::nrestarts());
+                // if no max fun evals provided, we compute a recommended value
+                size_t max_evals = Params::cmaes::max_fun_evals() < 0
+                    ? (900.0 * (dim + 3.0) * (dim + 3.0))
+                    : Params::cmaes::max_fun_evals();
+                cmaparams.set_max_fevals(max_evals);
+                // max iteration is here only for security
+                cmaparams.set_max_iter(100000);
+                // we do not know if what is the actual maximum / minimum of the function
+                // therefore we deactivate this stopping criterion
+                cmaparams.set_stopping_criteria(FTARGET, false);
 
-                free(x_in_bounds);
+                // wrap the function
+                FitFunc f_cmaes = [&](const double *x, const int n) {
+                  Eigen::Map<const Eigen::VectorXd> m(x, n);
+                  // remember that our optimizers maximize
+                  return -f.utility(m);
+                };
 
-                return result;
+                // the optimization itself
+                CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(f_cmaes, cmaparams);
+                //cmasols.print(std::cout, 1, gp);
+                //to_f_representation
+                return gp.pheno(cmasols.get_best_seen_candidate().get_x_dvec());
+#else
+#warning NO libcmaes
+                assert(0);
+                return Eigen::VectorXd::Zero(dim);
+#endif
+
             }
         };
     }
