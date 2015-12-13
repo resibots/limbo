@@ -13,11 +13,18 @@ struct Params {
 
 struct TestOpt {
 public:
-    double utility(const Eigen::VectorXd& params) const {
+    double utility(const Eigen::VectorXd& params) const
+    {
         return -params(0) * params(0) - params(1) * params(1);
     }
 
-    size_t param_size() const {
+    Eigen::VectorXd init() const
+    {
+      return Eigen::VectorXd::Zero(param_size());
+    }
+
+    size_t param_size() const
+    {
           return 2;
     }
 };

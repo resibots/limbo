@@ -37,23 +37,21 @@ namespace limbo {
                 };
 
                 if (bounded)
-                    return _opt_bounded(f_cmaes, dim);
+                    return _opt_bounded(f_cmaes, dim, f.init());
                 else
-                    return _opt_unbounded(f_cmaes, dim);
+                    return _opt_unbounded(f_cmaes, dim, f.init());
             }
 
         private:
             // F is a CMA-ES style function, not our function
             template <typename F>
-            Eigen::VectorXd _opt_unbounded(F& f_cmaes, int dim) const
+            Eigen::VectorXd _opt_unbounded(F& f_cmaes, int dim, const Eigen::VectorXd& init) const
             {
                 using namespace libcmaes;
                 // initial step-size, i.e. estimated initial parameter error.
                 double sigma = 0.5;
-                // initialize x0 as 0.50 in all 10 dimensions
-                // WARNING: we ignore the init() of the function to optimize!
-                // (because CMA-ES will perform its own random initialization)
-                std::vector<double> x0(dim, 0); // center on 0 if unbounded
+                std::vector<double> x0(init.data(), init.data() + init.size());
+
                 // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
                 CMAParameters<> cmaparams(x0, sigma);
                 _set_common_params(cmaparams, dim);
@@ -67,7 +65,7 @@ namespace limbo {
 
             // F is a CMA-ES style function, not our function
             template <typename F>
-            Eigen::VectorXd _opt_bounded(F& f_cmaes, int dim) const
+            Eigen::VectorXd _opt_bounded(F& f_cmaes, int dim, const Eigen::VectorXd& init) const
             {
                 using namespace libcmaes;
                 // create the parameter object
@@ -81,10 +79,7 @@ namespace limbo {
                 // initial step-size, i.e. estimated initial parameter error.
                 // we suppose we are optimizing on [0, 1], but we have no idea where to start
                 double sigma = 0.5;
-                // initialize x0 as 0.50 in all dimensions
-                // WARNING: we ignore the init() of the function to optimize!
-                // (because CMA-ES will perform its own random initialization)
-                std::vector<double> x0(dim, 0.5);
+                std::vector<double> x0(init.data(), init.data() + init.size());
                 // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
                 CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, -1, 0, gp);
                 _set_common_params(cmaparams, dim);
