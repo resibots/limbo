@@ -20,11 +20,15 @@ namespace limbo {
         };
     }
     namespace bayes_opt {
-
-        template <class Params, class A1 = boost::parameter::void_,
-            class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
-            class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
-            class A6 = boost::parameter::void_>
+        // clang-format off
+        template <class Params,
+          class A1 = boost::parameter::void_,
+          class A2 = boost::parameter::void_,
+          class A3 = boost::parameter::void_,
+          class A4 = boost::parameter::void_,
+          class A5 = boost::parameter::void_,
+          class A6 = boost::parameter::void_>
+        // clang-format on
         class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6> {
         public:
             typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
@@ -66,7 +70,7 @@ namespace limbo {
 
                 if (!this->_observations.empty())
                         _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
-                
+
                 acqui_optimizer_t acqui_optimizer;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {

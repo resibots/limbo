@@ -72,6 +72,7 @@ def configure(conf):
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
+        conf.env['CXXFLAGS'] += ['-fdiagnostics-color']
         print conf.env['CXXFLAGS']
 
         if conf.options.exp:

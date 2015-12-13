@@ -101,7 +101,7 @@ namespace pareto {
                 pareto; // Using Template alias (for GCC 4.7 and later)
 #endif
             limbo::tools::par::loop(0, p.size(), [&](size_t i) {
-                    // clang-format off
+                // clang-format off
                     if (i % 10000 == 0)
                     {
                         std::cout << i << '[' << p.size() << "] ";
