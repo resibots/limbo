@@ -16,9 +16,9 @@ def options(opt):
 
 @conf
 def check_libcmaes(conf):
-	if conf.options.nlopt:
-		includes_check = [conf.options.nlopt + '/include']
-		libs_check = [conf.options.nlopt + '/lib']
+	if conf.options.libcmaes:
+		includes_check = [conf.options.libcmaes + '/include']
+		libs_check = [conf.options.libcmaes + '/lib']
 	else:
 		includes_check = ['/usr/local/include', '/usr/include']
 		libs_check = ['/usr/local/lib', '/usr/lib']
