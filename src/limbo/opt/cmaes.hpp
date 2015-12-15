@@ -73,7 +73,7 @@ namespace limbo {
                 double lbounds[dim], ubounds[dim]; // arrays for lower and upper parameter bounds, respectively
                 for (int i = 0; i < dim; i++) {
                     lbounds[i] = 0.0;
-                    ubounds[i] = 1.005;
+                    ubounds[i] = 1.0;
                 }
                 GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
                 // initial step-size, i.e. estimated initial parameter error.
