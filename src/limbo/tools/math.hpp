@@ -43,8 +43,7 @@
 #include <list>
 #include <stdlib.h>
 #include <random>
-
-#include <boost/swap.hpp>
+#include <utility>
 
 // someday we will have a real thread-safe random number generator...
 namespace limbo {
@@ -87,7 +86,7 @@ namespace limbo {
             for (size_t i = 0; i < a1.size(); ++i) {
                 size_t k = rand(i, a1.size());
                 assert(k < a1.size());
-                boost::swap(a1[i], a1[k]);
+                std::swap(a1[i], a1[k]);
             }
         }
 
