@@ -9,6 +9,7 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/math.hpp>
+#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -54,7 +55,7 @@ namespace limbo {
                 double best = log(0);
 
                 for (int i = 0; i < Params::opt_rprop::iterations(); ++i) {
-                    auto perf = f.utility_and_grad(params);
+                    auto perf = opt::eval_grad(f, params);
                     double lik = opt::fun(perf);
                     if (lik > best) {
                         best = lik;

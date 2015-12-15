@@ -1,6 +1,7 @@
 #ifndef LIMBO_OPT_HPP
 #define LIMBO_OPT_HPP
 
+#include <limbo/opt/optimizer.hpp>
 #include <limbo/opt/cmaes.hpp>
 #include <limbo/opt/grid_search.hpp>
 #ifdef USE_NLOPT

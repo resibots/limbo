@@ -7,6 +7,7 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
+#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -26,7 +27,7 @@ namespace limbo {
                     // clang-format off
                     Eigen::VectorXd r_init = tools::rand_vec(init.size());
                     Eigen::VectorXd v = Optimizer()(f, init, bounded);
-                    double lik = f.utility(v);
+                    double lik = opt::eval(f, v);
                     return std::make_pair(v, lik);
                     // clang-format on
                 };

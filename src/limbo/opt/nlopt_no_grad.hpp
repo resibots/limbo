@@ -11,8 +11,7 @@
 #include <nlopt.hpp>
 
 #include <limbo/tools/macros.hpp>
-
-#include "optimizer.hpp"
+#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {

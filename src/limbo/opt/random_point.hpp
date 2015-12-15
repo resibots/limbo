@@ -3,7 +3,7 @@
 
 #include <Eigen/Core>
 
-#include "optimizer.hpp"
+#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace opt {
