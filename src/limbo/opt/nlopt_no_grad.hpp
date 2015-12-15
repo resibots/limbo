@@ -12,6 +12,8 @@
 
 #include <limbo/tools/macros.hpp>
 
+#include "optimizer.hpp"
+
 namespace limbo {
     namespace defaults {
         struct opt_nloptnograd {
@@ -23,13 +25,13 @@ namespace limbo {
         struct NLOptNoGrad {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f, bool bounded) const
+            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
                 // Assert that the algorithm is non-gradient
                 // TO-DO: Add support for MLSL (Multi-Level Single-Linkage)
                 // TO-DO: Add better support for ISRES (Improved Stochastic Ranking Evolution Strategy)
-                static_assert(Algorithm == nlopt::LN_COBYLA || Algorithm == nlopt::LN_BOBYQA || 
-                    Algorithm == nlopt::LN_NEWUOA || Algorithm == nlopt::LN_NEWUOA_BOUND || 
+                static_assert(Algorithm == nlopt::LN_COBYLA || Algorithm == nlopt::LN_BOBYQA ||
+                    Algorithm == nlopt::LN_NEWUOA || Algorithm == nlopt::LN_NEWUOA_BOUND ||
                     Algorithm == nlopt::LN_PRAXIS || Algorithm == nlopt::LN_NELDERMEAD ||
                     Algorithm == nlopt::LN_SBPLX || Algorithm == nlopt::GN_DIRECT ||
                     Algorithm == nlopt::GN_DIRECT_L || Algorithm == nlopt::GN_DIRECT_L_RAND ||
@@ -39,18 +41,19 @@ namespace limbo {
                     Algorithm == nlopt::GD_STOGO || Algorithm == nlopt::GD_STOGO_RAND ||
                     Algorithm == nlopt::GN_ISRES || Algorithm == nlopt::GN_ESCH, "NLOptNoGrad accepts gradient free nlopt algorithms only");
 
-                nlopt::opt opt(Algorithm, f.param_size());
+                int dim = init.size();
+                nlopt::opt opt(Algorithm, dim);
 
                 opt.set_max_objective(nlopt_func<F>, (void*)&f);
 
-                std::vector<double> x(f.init().size());
-                Eigen::VectorXd::Map(&x[0], f.init().size()) = f.init();
+                std::vector<double> x(dim);
+                Eigen::VectorXd::Map(&x[0], dim) = init;
 
                 opt.set_maxeval(Params::opt_nloptnograd::iterations());
 
                 if (bounded) {
-                    opt.set_lower_bounds(std::vector<double>(f.param_size(), 0));
-                    opt.set_upper_bounds(std::vector<double>(f.param_size(), 1));
+                    opt.set_lower_bounds(std::vector<double>(dim, 0));
+                    opt.set_upper_bounds(std::vector<double>(dim, 1));
                 }
 
                 double max;
@@ -64,9 +67,10 @@ namespace limbo {
             template <typename F>
             static double nlopt_func(const std::vector<double>& x, std::vector<double>& grad, void* my_func_data)
             {
+                std::cout<<"func" <<std::endl;
                 F* f = (F*)(my_func_data);
                 Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());
-                double v = f->utility(params);
+                double v = eval(f, params);
                 return v;
             }
         };

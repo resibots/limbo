@@ -12,6 +12,8 @@
 
 #include <limbo/tools/macros.hpp>
 
+#include "optimizer.hpp"
+
 namespace limbo {
    namespace defaults {
         struct opt_nloptgrad {
@@ -23,20 +25,21 @@ namespace limbo {
         struct NLOptGrad {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f, bool bounded) const
+            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
-                nlopt::opt opt(Algorithm, f.param_size());
+                int dim = init.size();
+                nlopt::opt opt(Algorithm, dim);
 
                 opt.set_max_objective(nlopt_func<F>, (void*)&f);
 
-                std::vector<double> x(f.init().size());
-                Eigen::VectorXd::Map(&x[0], f.init().size()) = f.init();
+                std::vector<double> x(dim);
+                Eigen::VectorXd::Map(&x[0], dim) = init;
 
                 opt.set_maxeval(Params::opt_nloptgrad::iterations());
 
                 if (bounded) {
-                    opt.set_lower_bounds(std::vector<double>(f.param_size(), 0));
-                    opt.set_upper_bounds(std::vector<double>(f.param_size(), 1));
+                    opt.set_lower_bounds(std::vector<double>(dim, 0));
+                    opt.set_upper_bounds(std::vector<double>(dim, 1));
                 }
 
                 double max;
@@ -54,14 +57,13 @@ namespace limbo {
                 Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());
                 double v;
                 if (!grad.empty()) {
-                    Eigen::VectorXd g;
-                    auto p = f->utility_and_grad(params);
-                    v = std::get<0>(p);
-                    g = std::get<1>(p);
+                    auto r = eval_grad(f, params);
+                    v = opt::fun(r);
+                    Eigen::VectorXd g = opt::grad(r);
                     Eigen::VectorXd::Map(&grad[0], g.size()) = g;
                 }
                 else {
-                    v = f->utility(params);
+                    v = eval(f, params);
                 }
                 return v;
             }
