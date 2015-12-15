@@ -6,7 +6,6 @@
 #include <iterator>
 
 #include <boost/parameter/aux_/void.hpp>
-#include <boost/range/adaptor/transformed.hpp>
 
 #include <Eigen/Core>
 
@@ -97,7 +96,8 @@ namespace limbo {
             template <typename AggregatorFunction = FirstElem>
             const Eigen::VectorXd& best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
             {
-                auto rewards = boost::adaptors::transform(this->_observations, afun);
+                auto rewards = std::vector<double>(this->_observations.size());
+                std::transform(this->_observations.begin(), this->_observations.end(), rewards.begin(), afun);
                 auto max_e = std::max_element(rewards.begin(), rewards.end());
                 return this->_observations[std::distance(rewards.begin(), max_e)];
             }
@@ -105,7 +105,8 @@ namespace limbo {
             template <typename AggregatorFunction = FirstElem>
             const Eigen::VectorXd& best_sample(const AggregatorFunction& afun = AggregatorFunction()) const
             {
-                auto rewards = boost::adaptors::transform(this->_observations, afun);
+                auto rewards = std::vector<double>(this->_observations.size());
+                std::transform(this->_observations.begin(), this->_observations.end(), rewards.begin(), afun);
                 auto max_e = std::max_element(rewards.begin(), rewards.end());
                 return this->_samples[std::distance(rewards.begin(), max_e)];
             }

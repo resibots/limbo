@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace limbo {
     namespace stat {
@@ -19,14 +19,14 @@ namespace limbo {
             }
 
         protected:
-            boost::shared_ptr<std::ofstream> _log_file;
+            std::shared_ptr<std::ofstream> _log_file;
 
             template <typename BO>
             void _create_log_file(const BO& bo, const std::string& name)
             {
                 if (!_log_file && bo.stats_enabled()) {
                     std::string log = bo.res_dir() + "/" + name;
-                    _log_file = boost::shared_ptr<std::ofstream>(new std::ofstream(log.c_str()));
+                    _log_file = std::make_shared<std::ofstream>(log.c_str());
                 }
             }
         };

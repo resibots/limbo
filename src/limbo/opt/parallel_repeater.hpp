@@ -3,8 +3,6 @@
 
 #include <algorithm>
 
-#include <boost/math/special_functions/sign.hpp>
-
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>

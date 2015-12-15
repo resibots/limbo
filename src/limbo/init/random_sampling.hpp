@@ -4,7 +4,7 @@
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
-#include <limbo/tools/rand.hpp>
+#include <limbo/tools/math.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -20,8 +20,8 @@ namespace limbo {
             {
                 for (int i = 0; i < Params::init_randomsampling::samples(); i++) {
                     Eigen::VectorXd new_sample(StateFunction::dim_in);
-                    for (int i = 0; i < StateFunction::dim_in; i++)
-                        new_sample[i] = tools::rand<double>(0, 1);                 
+                    for (size_t j = 0; j < StateFunction::dim_in; j++)
+                        new_sample[j] = tools::rand<double>(0, 1);
                     opt.add_new_sample(new_sample, seval(new_sample));
                 }
             }

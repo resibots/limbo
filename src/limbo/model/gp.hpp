@@ -180,8 +180,8 @@ namespace limbo {
             {
                 // O(n^2) [should be negligible]
                 _kernel.resize(_samples.size(), _samples.size());
-                for (int i = 0; i < _samples.size(); i++)
-                    for (int j = 0; j < _samples.size(); ++j)
+                for (size_t i = 0; i < _samples.size(); i++)
+                    for (size_t j = 0; j < _samples.size(); ++j)
                         _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noise : 0); // noise only on the diagonal
 
                 // O(n^3)
