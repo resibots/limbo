@@ -3,7 +3,7 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
-#include <limbo/tools/rand.hpp>
+#include <limbo/tools/math.hpp>
 #include <limbo/tools/sys.hpp>
 
 #endif

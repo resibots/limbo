@@ -8,9 +8,10 @@
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
+#include <limbo/tools/math.hpp>
 
 namespace limbo {
-   namespace defaults {
+    namespace defaults {
         struct opt_rprop {
             BO_PARAM(int, iterations, 300);
         };
@@ -70,7 +71,7 @@ namespace limbo {
                             delta(j) = std::max(delta(j) * etaminus, deltamin);
                             grad(j) = 0;
                         }
-                        params(j) += -boost::math::sign(grad(j)) * delta(j);
+                        params(j) += -tools::signum(grad(j)) * delta(j);
 
                         if (bounded && params(j) < 0)
                             params(j) = 0;
