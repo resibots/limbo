@@ -23,7 +23,8 @@ namespace limbo {
             {
                 // Grid search does not support unbounded search
                 assert(bounded);
-                return _inner_search(f, 0, init);
+                int dim = init.size();
+                return _inner_search(f, 0, Eigen::VectorXd::Constant(dim, 0.5));
             }
 
         protected:

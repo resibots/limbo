@@ -15,6 +15,7 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
+#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -28,12 +29,12 @@ namespace limbo {
         struct Cmaes {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f, double bounded) const
+            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, double bounded) const
             {
                 // Currrently cmaes does not support unbounded search
                 assert(bounded);
                 int nrestarts = Params::opt_cmaes::restarts();
-                size_t dim = f.param_size();
+                size_t dim = init.size();
                 double incpopsize = 2;
                 cmaes_t evo;
                 double* const* pop;
@@ -52,7 +53,7 @@ namespace limbo {
                 double* x_in_bounds = cmaes_NewDouble(dim);
                 double init_point[dim];
                 for (size_t i = 0; i < dim; ++i)
-                    init_point[i] = f.init()(i);
+                    init_point[i] = init(i);
 
                 for (irun = 0; irun < nrestarts + 1; ++irun) {
 
@@ -76,7 +77,7 @@ namespace limbo {
                             boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim);
                             for (size_t j = 0; j < dim; ++j)
                               pop_eigen[i](j) = all_x_in_bounds[i][j];
-                            fitvals[i] = -f.utility(pop_eigen[i]);
+                            fitvals[i] = - opt::eval(f, pop_eigen[i]);
                             // clang-format on
                         });
                         cmaes_UpdateDistribution(&evo, fitvals);
@@ -98,7 +99,7 @@ namespace limbo {
                     for (int j = 0; j < v.size(); ++j)
                         v(j) = xmean[j];
 
-                    if ((fmean = -f.utility(v)) < fbestever) {
+                    if ((fmean = -opt::eval(f, v)) < fbestever) {
                         fbestever = fmean;
                         xbestever = cmaes_GetInto(&evo, "xmean", xbestever);
                     }
