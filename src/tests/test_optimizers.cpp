@@ -117,6 +117,9 @@ BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
     BOOST_CHECK_EQUAL(bidim_calls, (Params::opt_gridsearch::bins() + 1) * (Params::opt_gridsearch::bins() + 1) + 21);
 }
 
+// TODO test parallel repeater
+// TODO test rprop
+
 /*
 BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)
 {

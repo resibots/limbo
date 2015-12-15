@@ -26,10 +26,10 @@ namespace limbo {
         template <typename Params>
         struct Rprop {
             template <typename F>
-            Eigen::VectorXd operator()(const F& f, bool bounded) const
+            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
                 // params
-                size_t param_dim = f.param_size();
+                size_t param_dim = init.size();
                 double delta0 = 0.1;
                 double deltamin = 1e-6;
                 double deltamax = 50;
@@ -39,7 +39,7 @@ namespace limbo {
 
                 Eigen::VectorXd delta = Eigen::VectorXd::Ones(param_dim) * delta0;
                 Eigen::VectorXd grad_old = Eigen::VectorXd::Zero(param_dim);
-                Eigen::VectorXd params = f.init();
+                Eigen::VectorXd params = init;
 
                 if (bounded) {
                     for (int j = 0; j < params.size(); j++) {
@@ -55,12 +55,12 @@ namespace limbo {
 
                 for (int i = 0; i < Params::opt_rprop::iterations(); ++i) {
                     auto perf = f.utility_and_grad(params);
-                    double lik = std::get<0>(perf);
+                    double lik = opt::fun(perf);
                     if (lik > best) {
                         best = lik;
                         best_params = params;
                     }
-                    Eigen::VectorXd grad = -std::get<1>(perf);
+                    Eigen::VectorXd grad = -opt::grad(perf);
                     grad_old = grad_old.cwiseProduct(grad);
 
                     for (int j = 0; j < grad_old.size(); ++j) {

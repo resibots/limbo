@@ -18,14 +18,14 @@ namespace limbo {
         template <typename Params, typename Optimizer>
         struct ParallelRepeater {
             template <typename F>
-            Eigen::VectorXd operator()(const F& f, bool bounded) const
+            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
                 tools::par::init();
                 typedef std::pair<Eigen::VectorXd, double> pair_t;
                 auto body = [&](int i) {
                     // clang-format off
-                    Eigen::VectorXd v = Optimizer()(f, bounded);
-
+                    Eigen::VectorXd r_init = tools::rand_vec(init.size());
+                    Eigen::VectorXd v = Optimizer()(f, init, bounded);
                     double lik = f.utility(v);
                     return std::make_pair(v, lik);
                     // clang-format on
@@ -37,8 +37,8 @@ namespace limbo {
                     // clang-format on
                 };
 
-                pair_t init = std::make_pair(f.init(), -std::numeric_limits<float>::max());
-                auto m = tools::par::max(init, Params::opt_parallelrepeater::repeats(), body, comp);
+                pair_t init_v = std::make_pair(init, -std::numeric_limits<float>::max());
+                auto m = tools::par::max(init_v, Params::opt_parallelrepeater::repeats(), body, comp);
 
                 return m.first;
             };
