@@ -31,32 +31,6 @@ namespace limbo {
             typedef typename base_t::acquisition_function_t acquisition_function_t;
             typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
 
-            template <typename AcquisitionFunction, typename AggregatorFunction>
-            struct AcquiOptimization {
-            public:
-                AcquiOptimization(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _acqui(acqui), _afun(afun), _init(init) {}
-
-                double utility(const Eigen::VectorXd& params) const
-                {
-                    return _acqui(params, _afun);
-                }
-
-                size_t param_size() const
-                {
-                    return _acqui.dim_in();
-                }
-
-                const Eigen::VectorXd& init() const
-                {
-                    return _init;
-                }
-
-            protected:
-                const AcquisitionFunction& _acqui;
-                const AggregatorFunction& _afun;
-                const Eigen::VectorXd _init;
-            };
-
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
