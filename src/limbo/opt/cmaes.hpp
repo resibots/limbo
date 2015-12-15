@@ -25,7 +25,7 @@ namespace limbo {
         struct Cmaes {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f, double bounded) const
+            Eigen::VectorXd operator()(const F& f, bool bounded) const
             {
                 size_t dim = f.param_size();
 
