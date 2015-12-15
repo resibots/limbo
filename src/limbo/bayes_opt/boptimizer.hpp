@@ -6,7 +6,6 @@
 #include <iterator>
 
 #include <boost/parameter/aux_/void.hpp>
-#include <boost/range/adaptor/transformed.hpp>
 
 #include <Eigen/Core>
 
@@ -65,8 +64,8 @@ namespace limbo {
                 this->_init(sfun, afun, reset);
 
                 if (!this->_observations.empty())
-                        _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
-                
+                    _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
+
                 acqui_optimizer_t acqui_optimizer;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
@@ -90,7 +89,8 @@ namespace limbo {
                               << (blacklisted ? this->_bl_samples.back()
                                               : this->_samples.back()).transpose();
                     if (blacklisted)
-                        std::cout << " value: " << "No data, blacklisted";
+                        std::cout << " value: "
+                                  << "No data, blacklisted";
                     else
                         std::cout << " value: " << afun(this->_observations.back());
 
@@ -114,7 +114,8 @@ namespace limbo {
             template <typename AggregatorFunction = FirstElem>
             const Eigen::VectorXd& best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
             {
-                auto rewards = boost::adaptors::transform(this->_observations, afun);
+                auto rewards = std::vector<double>(this->_observations.size());
+                std::transform(this->_observations.begin(), this->_observations.end(), rewards.begin(), afun);
                 auto max_e = std::max_element(rewards.begin(), rewards.end());
                 return this->_observations[std::distance(rewards.begin(), max_e)];
             }
@@ -122,7 +123,8 @@ namespace limbo {
             template <typename AggregatorFunction = FirstElem>
             const Eigen::VectorXd& best_sample(const AggregatorFunction& afun = AggregatorFunction()) const
             {
-                auto rewards = boost::adaptors::transform(this->_observations, afun);
+                auto rewards = std::vector<double>(this->_observations.size());
+                std::transform(this->_observations.begin(), this->_observations.end(), rewards.begin(), afun);
                 auto max_e = std::max_element(rewards.begin(), rewards.end());
                 return this->_samples[std::distance(rewards.begin(), max_e)];
             }
