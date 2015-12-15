@@ -43,7 +43,7 @@ namespace limbo {
                 int irun, lambda = 0, countevals = 0;
                 char const* stop;
                 boundary_transformation_t boundaries;
-                double lowerBounds[] = {0.0}; 
+                double lowerBounds[] = {0.0};
                 double upperBounds[] = {1.006309}; // Allows solution to be pretty close to 1
                 int nb_bounds = 1; /* numbers used from lower and upperBounds */
 
@@ -51,7 +51,7 @@ namespace limbo {
 
                 double* x_in_bounds = cmaes_NewDouble(dim);
                 double init_point[dim];
-                for (int i = 0; i < dim; ++i)
+                for (size_t i = 0; i < dim; ++i)
                     init_point[i] = f.init()(i);
 
                 for (irun = 0; irun < nrestarts + 1; ++irun) {
@@ -74,7 +74,7 @@ namespace limbo {
                         tools::par::loop(0, pop_size, [&](int i) {
                             // clang-format off
                             boundary_transformation(&boundaries, pop[i], all_x_in_bounds[i], dim);
-                            for (int j = 0; j < dim; ++j)
+                            for (size_t j = 0; j < dim; ++j)
                               pop_eigen[i](j) = all_x_in_bounds[i][j];
                             fitvals[i] = -f.utility(pop_eigen[i]);
                             // clang-format on

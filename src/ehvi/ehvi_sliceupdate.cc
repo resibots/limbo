@@ -27,7 +27,7 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
         // location in
         // the other sorting orders to be ascertained in O(1).
         sort(P.begin(), P.end(), xcomparator);
-        for (unsigned int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             newind = new specialind;
             newind->point = P[i];
             newind->xorder = i;
@@ -36,11 +36,11 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
             Pz.push_back(newind);
         }
         sort(Py.begin(), Py.end(), specialycomparator);
-        for (unsigned int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             Py[i]->yorder = i;
         }
         sort(Pz.begin(), Pz.end(), specialzcomparator);
-        for (unsigned int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             Pz[i]->zorder = i;
         }
         // Then also reserve memory for the structure array.
