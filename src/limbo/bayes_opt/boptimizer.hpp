@@ -85,24 +85,6 @@ namespace limbo {
 
                     this->_update_stats(*this, afun, blacklisted);
 
-                    std::cout << this->_current_iteration << " new point: "
-                              << (blacklisted ? this->_bl_samples.back()
-                                              : this->_samples.back()).transpose();
-                    if (blacklisted)
-                        std::cout << " value: "
-                                  << "No data, blacklisted";
-                    else
-                        std::cout << " value: " << afun(this->_observations.back());
-
-                    // std::cout << " mu: "<< _model.mu(blacklisted ? this->_bl_samples.back()
-                    // : this->_samples.back()).transpose()
-                    //<< " mean: " << _model.mean_function()(new_sample, _model).transpose()
-                    //<< " sigma: "<< _model.sigma(blacklisted ? this->_bl_samples.back() :
-                    //this->_samples.back())
-                    //<< " acqui: "<< acqui(blacklisted ? this->_bl_samples.back() :
-                    //this->_samples.back(), afun)
-                    std::cout << " best:" << afun(this->best_observation(afun)) << std::endl;
-
                     if (!this->_observations.empty())
                         _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
 
