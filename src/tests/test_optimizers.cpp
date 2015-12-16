@@ -72,7 +72,7 @@ public:
 
 protected:
     const Functor& _f;
-    const Eigen::VectorXd& _init;
+    Eigen::VectorXd _init;
 };
 
 template <typename Functor>

@@ -34,8 +34,8 @@
 //| The fact that you are presently reading this means that you have
 //| had knowledge of the CeCILL license and that you accept its terms.
 
-#ifndef LIMBO_TOOLS_RAND_HPP
-#define LIMBO_TOOLS_RAND_HPP
+#ifndef LIMBO_TOOLS_MATH_HPP
+#define LIMBO_TOOLS_MATH_HPP
 
 #include <cstdlib>
 #include <cmath>
@@ -43,8 +43,7 @@
 #include <list>
 #include <stdlib.h>
 #include <random>
-
-#include <boost/swap.hpp>
+#include <utility>
 
 // someday we will have a real thread-safe random number generator...
 namespace limbo {
@@ -87,7 +86,7 @@ namespace limbo {
             for (size_t i = 0; i < a1.size(); ++i) {
                 size_t k = rand(i, a1.size());
                 assert(k < a1.size());
-                boost::swap(a1[i], a1[k]);
+                std::swap(a1[i], a1[k]);
             }
         }
 
@@ -112,6 +111,25 @@ namespace limbo {
             for (size_t i = 0; i < k; ++i)
                 ++it;
             return it;
+        }
+
+        // get sign of number
+        template <typename T>
+        inline constexpr int signum(T x, std::false_type is_signed)
+        {
+            return T(0) < x;
+        }
+
+        template <typename T>
+        inline constexpr int signum(T x, std::true_type is_signed)
+        {
+            return (T(0) < x) - (x < T(0));
+        }
+
+        template <typename T>
+        inline constexpr int signum(T x)
+        {
+            return signum(x, std::is_signed<T>());
         }
     }
 }
