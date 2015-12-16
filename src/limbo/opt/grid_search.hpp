@@ -23,7 +23,7 @@ namespace limbo {
             {
                 // Grid search does not support unbounded search
                 assert(bounded);
-                int dim = init.size();
+                size_t dim = init.size();
                 return _inner_search(f, 0, Eigen::VectorXd::Constant(dim, 0.5));
             }
 
@@ -31,7 +31,7 @@ namespace limbo {
             template <typename F>
             Eigen::VectorXd _inner_search(const F& f, size_t depth, const Eigen::VectorXd& current) const
             {
-                int dim = current.size();
+                size_t dim = current.size();
                 double step_size = 1.0 / (double)Params::opt_gridsearch::bins();
                 double upper_lim = 1.0 + step_size;
                 double best_fit = -std::numeric_limits<double>::max();
