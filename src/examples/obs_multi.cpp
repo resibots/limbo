@@ -11,9 +11,16 @@ struct Params {
     struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
-
+#ifdef USE_LIBCMAES
+              struct opt_cmaes : public defaults::opt_cmaes {
+	      };
+#elif defined(USE_NLOPT)
+	      struct opt_nloptnograd : public defaults::opt_nloptnograd {
+	      };
+#else
+	      struct opt_gridsearch : public defaults::opt_gridsearch {
+	      };
+#endif
     struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.2);

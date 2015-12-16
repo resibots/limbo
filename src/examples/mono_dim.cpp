@@ -12,9 +12,16 @@ BO_PARAMS(std::cout,
               struct acqui_gpucb : public defaults::acqui_gpucb {
               };
 
+#ifdef USE_LIBCMAES
               struct opt_cmaes : public defaults::opt_cmaes {
-              };
-
+	      };
+#elif defined(USE_NLOPT)
+	      struct opt_nloptnograd : public defaults::opt_nloptnograd {
+	      };
+#else
+	      struct opt_gridsearch : public defaults::opt_gridsearch {
+	      };
+#endif
               struct acqui_ucb {
                   BO_PARAM(double, alpha, 0.1);
               };

@@ -1,15 +1,16 @@
 #ifndef LIMBO_OPT_CMAES_HPP
 #define LIMBO_OPT_CMAES_HPP
 
-#ifndef USE_LIBCMAES
-#warning NO libcmaes support
-#else
 #include <vector>
 #include <iostream>
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
+
+#ifndef USE_LIBCMAES
+#warning NO libcmaes support
+#else
 
 #include <libcmaes/cmaes.h>
 
@@ -52,7 +53,6 @@ namespace limbo {
                 double sigma = 0.5;
                 std::vector<double> x0(init.data(), init.data() + init.size());
 
-                // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
                 CMAParameters<> cmaparams(x0, sigma);
                 _set_common_params(cmaparams, dim);
                 // used by restart I think
