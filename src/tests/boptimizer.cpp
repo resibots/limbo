@@ -25,7 +25,7 @@ struct Params {
     };
 
     struct stop_maxiterations {
-        BO_PARAM(int, iterations, 30);
+        BO_PARAM(int, iterations, 50);
     };
 
     struct kernel_maternfivehalfs {
@@ -38,7 +38,7 @@ struct Params {
     };
 
     struct init_randomsampling {
-        BO_PARAM(int, samples, 5);
+        BO_PARAM(int, samples, 20);
     };
 
     struct opt_parallelrepeater : defaults::opt_parallelrepeater {
