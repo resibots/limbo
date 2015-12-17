@@ -1,7 +1,9 @@
 #ifndef LIMBO_OPT_HPP
 #define LIMBO_OPT_HPP
 
+#ifdef USE_LIBCMAES
 #include <limbo/opt/cmaes.hpp>
+#endif
 #include <limbo/opt/grid_search.hpp>
 #ifdef USE_NLOPT
 #include <limbo/opt/nlopt_grad.hpp>
