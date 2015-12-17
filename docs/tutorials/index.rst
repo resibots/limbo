@@ -5,5 +5,5 @@ Tutorials
    :maxdepth: 2
 
    compilation
-   framework_and_basic_example
+   basic_example
    external_libs

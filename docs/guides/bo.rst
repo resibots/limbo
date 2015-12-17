@@ -98,7 +98,7 @@ The Matern kernel function is computed as follows :cite:`matern1960spatial,stein
 There are other kernel functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <kernel-guide>` for the available kernel functions.
 
 Acquisition function
--------------------
+--------------------
 
 The selection of the next solution to evaluate is made by
 finding the solution that maximizes the acquisition function. This

@@ -116,16 +116,30 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #html_theme = 'alabaster'
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinx_resibots_theme'
 
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #html_theme_options = {}
+html_theme_options = {
+    "logo_only": True,
+    "logo_url": "https://resibots.eu",
+    'breadcrumb_root': 'Limbo', # set a custom name to the breacumb root
+    'contact_url': 'mailto:jean-baptiste.mouret@inria.fr', # add a "Contact us link" at the bottom with URL
+    'toc_befores': [('ResiBots', 'http://www.resilient-robots.net')]
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = ['/Library/Python/2.7/site-packages']
+# html_theme_path = ['_theme']
+# Detect if there is an environment variable locating the theeme and use it there is
+if 'SPHINX_RESIBOTS_THEME' in os.environ:
+    default_theme_path = os.environ['SPHINX_RESIBOTS_THEME']
+else:
+    default_theme_path = '_theme'
+
+html_theme_path = [default_theme_path]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -137,6 +151,7 @@ html_theme_path = ['/Library/Python/2.7/site-packages']
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 #html_logo = None
+html_logo = "pics/resibots_logo.png"
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -294,4 +309,7 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/', None),
+    'resibots': ('file:///home/dorian/Documents/Website/_build/html/', None),
+}
