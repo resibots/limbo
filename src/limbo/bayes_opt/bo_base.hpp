@@ -25,7 +25,9 @@
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/mean/data.hpp>
+#include <limbo/opt/grid_search.hpp>
 #include <limbo/opt/cmaes.hpp>
+#include <limbo/opt/nlopt_no_grad.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/init/random_sampling.hpp>
@@ -102,7 +104,15 @@ namespace limbo {
             // defaults
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
+#ifdef USE_LIBCMAES
                 typedef opt::Cmaes<Params> acquiopt_t; // 2
+#elif defined(USE_NLOPT)
+  	        typedef opt::NLOptNoGrad<Params, NLOPT_GLOBAL_DIRECT_L_RAND> aquiopt_t;
+#else
+#warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
+	      typedef opt::GridSearch<Params> acquiopt_t;
+#endif
+	      
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
                 typedef model::GP<Params, kf_t, mean_t, model::gp::KernelLFOpt<Params>> model_t; // 3

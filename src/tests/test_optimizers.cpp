@@ -21,9 +21,6 @@ struct Params {
     struct opt_gridsearch {
         BO_PARAM(int, bins, 20);
     };
-
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
 };
 
 int monodim_calls = 0;
@@ -149,11 +146,17 @@ BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
     BOOST_CHECK_EQUAL(bidim_calls, (Params::opt_gridsearch::bins() + 1) * (Params::opt_gridsearch::bins() + 1) + 21);
 }
 
+#ifdef USE_LIBCMAES
+struct Params2 {
+    struct opt_cmaes : public defaults::opt_cmaes {
+    };
+};
+
 BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)
 {
     using namespace limbo;
 
-    opt::Cmaes<Params> optimizer;
+    opt::Cmaes<Params2> optimizer;
 
     FakeAcquiMono f;
     Eigen::VectorXd best_point = optimizer(make_functor_optimization(f), true);
@@ -166,7 +169,7 @@ BOOST_AUTO_TEST_CASE(test_cmaes_bi_dim)
 {
     using namespace limbo;
 
-    opt::Cmaes<Params> optimizer;
+    opt::Cmaes<Params2> optimizer;
 
     FakeAcquiBi f;
     auto f_optimization = make_functor_optimization(f);
@@ -176,3 +179,4 @@ BOOST_AUTO_TEST_CASE(test_cmaes_bi_dim)
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
     BOOST_CHECK_SMALL(best_point(1), 0.000001);
 }
+#endif

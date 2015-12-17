@@ -35,10 +35,13 @@ struct Params {
     struct opt_gridsearch {
         BO_PARAM(int, bins, 20);
     };
-
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
-
+#ifdef USE_LIBCMAES
+  struct opt_cmaes : public defaults::opt_cmaes {
+  };
+#elif defined(USE_NLOPT)
+  struct opt_nloptnograd : public defaults::opt_nloptnograd {
+  };
+#endif
     struct opt_rprop : public defaults::opt_rprop {
     };
 
