@@ -1,6 +1,8 @@
 #ifndef LIMBO_ACQUI_EHVI_HPP
 #define LIMBO_ACQUI_EHVI_HPP
 
+#include <vector>
+
 #include <Eigen/Core>
 
 #include <ehvi/ehvi_calculations.h>
