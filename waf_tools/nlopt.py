@@ -21,7 +21,7 @@ def check_nlopt(conf):
 		libs_check = [conf.options.nlopt + '/lib']
 	else:
 		includes_check = ['/usr/local/include', '/usr/include']
-		libs_check = ['/usr/local/lib', '/usr/lib']
+		libs_check = ['/usr/local/lib', '/usr/lib', '/usr/lib/x86_64-linux-gnu/']
 		if 'RESIBOTS_DIR' in os.environ:
 			includes_check = [os.environ['RESIBOTS_DIR'] + '/include'] + includes_check
 			libs_check = [os.environ['RESIBOTS_DIR'] + '/lib'] + libs_check
