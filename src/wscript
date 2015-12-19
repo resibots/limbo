@@ -8,8 +8,6 @@ def build(bld):
     bld.recurse('benchmarks')
 
     bld.stlib(source=' \
-              cmaes/cmaes.c \
-              cmaes/boundary_transformation.c \
               ehvi/ehvi_calculations.cc \
               ehvi/ehvi_montecarlo.cc \
               ehvi/ehvi_sliceupdate.cc \
@@ -21,8 +19,6 @@ def build(bld):
 
 def build_extensive_tests(bld):
     bld.stlib(source=' \
-              cmaes/cmaes.c \
-              cmaes/boundary_transformation.c \
               ehvi/ehvi_calculations.cc \
               ehvi/ehvi_montecarlo.cc \
               ehvi/ehvi_sliceupdate.cc \

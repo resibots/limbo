@@ -7,19 +7,19 @@ def build(bld):
                       source='mono_dim.cpp',
                       includes='. .. ../../',
                       target='mono_dim',
-                      uselib='BOOST EIGEN TBB',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
     obj = bld.program(features='cxx',
                       source='obs_multi.cpp',
                       includes='. .. ../../',
                       target='obs_multi',
-                      uselib='BOOST EIGEN TBB',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
     obj = bld.program(features='cxx',
                       source='obs_multi_auto_mean.cpp',
                       includes='. .. ../../',
                       target='obs_multi_auto_mean',
-                      uselib='BOOST EIGEN TBB',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
  #   obj = bld.program(features = 'cxx',
  #                          source = 'parego.cpp',

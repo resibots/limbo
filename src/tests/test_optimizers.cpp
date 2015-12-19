@@ -21,9 +21,6 @@ struct Params {
     struct opt_gridsearch {
         BO_PARAM(int, bins, 20);
     };
-
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
 };
 
 
@@ -117,34 +114,3 @@ BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
     BOOST_CHECK_EQUAL(bidim_calls, (Params::opt_gridsearch::bins() + 1) * (Params::opt_gridsearch::bins() + 1) + 21);
 }
 
-// TODO test parallel repeater
-// TODO test rprop
-
-/*
-BOOST_AUTO_TEST_CASE(test_cmaes_mono_dim)
-{
-    using namespace limbo;
-
-    opt::Cmaes<Params> optimizer;
-
-    FakeAcquiMono f;
-    Eigen::VectorXd best_point = optimizer(f, Eigen::VectorXd::Constant(1, 0.5), true);
-
-    BOOST_CHECK_EQUAL(best_point.size(), 1);
-    BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
-}
-
-BOOST_AUTO_TEST_CASE(test_cmaes_bi_dim)
-{
-    using namespace limbo;
-
-    opt::Cmaes<Params> optimizer;
-
-    FakeAcquiBi f;
-    Eigen::VectorXd best_point = optimizer(f, Eigen::VectorXd::Constant(2, 0.5), true);
-
-    BOOST_CHECK_EQUAL(best_point.size(), 2);
-    BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
-    BOOST_CHECK_SMALL(best_point(1), 0.000001);
-}
-*/

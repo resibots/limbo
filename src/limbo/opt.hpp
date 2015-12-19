@@ -2,7 +2,9 @@
 #define LIMBO_OPT_HPP
 
 #include <limbo/opt/optimizer.hpp>
+#ifdef USE_LIBCMAES
 #include <limbo/opt/cmaes.hpp>
+#endif
 #include <limbo/opt/grid_search.hpp>
 #ifdef USE_NLOPT
 #include <limbo/opt/nlopt_grad.hpp>
