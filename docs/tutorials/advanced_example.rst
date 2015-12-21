@@ -8,15 +8,17 @@ Problem Statement
    :alt: 6-DOF planar arm
    :target: ../_images/arm.svg
 
-Let's say we have a planar 6-DOF arm manipulator and we want its end-effector to reach a target position (i.e. catch an object). We will use the following:
+Let's say we have a planar 6-DOF arm manipulator and we want its end-effector to reach a target position (i.e. catch an object). Now, imagine that a joint is broken (or not working properly). We want to use Bayesian Optimization to learn a compensatory behavior that will allow our arm to reach the target in spite of damage. Now, assume that once we have learned how to reach one target, we want to reach another (different) one. We will use state-based bayesian optimization to transfer knowledge between the two tasks. We will use the following:
 
 - The forward kinematic model as prior knowledge (mean of GP).
 - The ``Squared exponential covariance function with automatic relevance detection`` as kernel of the GP.
-- Optimize the hyperparameters of the kernel using likelihood optimization.
+- Optimize the hyperparameters of the GP kernel using likelihood optimization.
 - Custom output statistics.
 - Use different optimizer for the acquisition optimization.
 - Initialize the GP with random samples.
-- Create a custom stopping criterion and using it in the bayesian optimizer.
+- Custom stopping criterion.
+
+Also, we assume that all of our arm's links have **length of 1cm**.
 
 Basic Layout
 -----------------------------------
