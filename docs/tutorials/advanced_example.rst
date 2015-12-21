@@ -254,6 +254,9 @@ Setting the parameter structure
   };
   struct opt_gridsearch {
   };
+  struct Target {
+    BO_PARAM_VECTOR(double, point, 1.5, 1.5);
+  };
 
 Creating and running the Bayesian Optimizer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
