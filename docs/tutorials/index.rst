@@ -7,3 +7,4 @@ Tutorials
    compilation
    basic_example
    external_libs
+   advanced_example
