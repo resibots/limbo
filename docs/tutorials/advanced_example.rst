@@ -213,7 +213,7 @@ Acquisition, Initialization and other aliases
 **Acquisition alias:** ::
 
   using acqui_t = acqui::UCB<Params, gp_t>;
-  using acqui_opt_t = opt::GridSearch<Params>;
+  using acqui_opt_t = opt::Cmaes<Params>;
 
 **Initialization alias:** ::
 
@@ -249,17 +249,18 @@ Setting the parameter structure
         BO_PARAM(double, alpha, 0.4);
     };
     struct init_randomsampling {
-          BO_PARAM(int, samples, 10);
+        BO_PARAM(int, samples, 10);
     };
     struct opt_rprop : public defaults::opt_rprop {
     };
     struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
-    struct opt_gridsearch {
-      BO_PARAM(int, bins, 5);
+    struct opt_cmaes {
+        BO_PARAM(int, restarts, 1);
+        BO_PARAM(int, max_fun_evals, -1);
     };
     struct Target {
-      BO_PARAM_VECTOR(double, point, 1.5, 1.5);
+        BO_PARAM_VECTOR(double, point, 1.5, 1.5);
     };
   };
 
@@ -321,8 +322,9 @@ The whole ``main.cpp`` file: ::
       };
       struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
       };
-      struct opt_gridsearch {
-          BO_PARAM(int, bins, 5);
+      struct opt_cmaes {
+          BO_PARAM(int, restarts, 1);
+          BO_PARAM(int, max_fun_evals, -1);
       };
       struct Target {
           BO_PARAM_VECTOR(double, point, 1.5, 1.5);
@@ -410,13 +412,20 @@ The whole ``main.cpp`` file: ::
   int main()
   {
       using kernel_t = kernel::SquaredExpARD<Params>;
+
       using mean_t = MeanFWModel<Params>;
+
       using gp_opt_t = model::gp::KernelLFOpt<Params>;
+
       using gp_t = model::GP<Params, kernel_t, mean_t, gp_opt_t>;
+
       using acqui_t = acqui::UCB<Params, gp_t>;
-      using acqui_opt_t = opt::GridSearch<Params>;
+      using acqui_opt_t = opt::Cmaes<Params>;
+
       using init_t = init::RandomSampling<Params>;
+
       using stop_t = boost::fusion::vector<stop::MaxIterations<Params>, MinTolerance<Params>>;
+
       using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>, stat::Samples<Params>, stat::Observations<Params>, stat::AggregatedObservations<Params>, stat::GPAcquisitions<Params>, stat::BestAggregatedObservations<Params>, stat::GPKernelHParams<Params>>;
 
       bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>, acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>, stopcrit<stop_t>> boptimizer;
