@@ -131,6 +131,27 @@ To make this forward kinematic model useful to our GP, we need to create a mean 
       }
   };
 
+Using State-based bayesian optimization
+-----------------------------------------
+
+Creating an Aggregator: ::
+
+  template <typename Params>
+  struct DistanceToTarget {
+    typedef double result_type;
+    DistanceToTarget(const Eigen::Vector2d& target) : _target(target) {}
+
+    double operator()(const Eigen::VectorXd& x) const
+    {
+        return -(x - _target).norm();
+    }
+
+  protected:
+    Eigen::Vector2d _target;
+  };
+
+Here, we are using a very simple aggregator that simply computes the distance between the end-effector and the target position.
+
 Adding custom stop criterion
 -------------------------------
 
@@ -146,22 +167,6 @@ When our bayesian optimizer finds a solution that the end-effector of the arm is
           return afun(bo.best_observation(afun)) > Params::stop_mintolerance::tolerance();
       }
   };
-
-Using State-based bayesian optimization
------------------------------------------
-
-Creating an Aggregator: ::
-
-  template<typename Params>
-  struct DistanceToTarget {
-      typedef double result_type;
-      double operator()(const Eigen::VectorXd& x) const
-      {
-          return -(x - Params::Target::point()).norm();
-      }
-  };
-
-Here, we are using a very simple aggregator that simply computes the distance between the end-effector and the target position.
 
 Creating the evaluation function
 -----------------------------------------
@@ -197,9 +202,9 @@ Creating the GP model
 
 **Mean alias:** ::
 
-  using mean_t = MeanFWModel;
+  using mean_t = MeanFWModel<Params>;
 
-**Likelihood optimization:** ::
+**Likelihood optimization alias:** ::
 
   using gp_opt_t = model::gp::KernelLFOpt<Params>;
 
@@ -210,7 +215,7 @@ Creating the GP model
 Acquisition, Initialization and other aliases
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Acquisition alias:** ::
+**Acquisition aliases:** ::
 
   using acqui_t = acqui::UCB<Params, gp_t>;
   using acqui_opt_t = opt::Cmaes<Params>;
@@ -219,11 +224,11 @@ Acquisition, Initialization and other aliases
 
   using init_t = init::RandomSampling<Params>;
 
-**Stopping criteria:** ::
+**Stopping criteria alias:** ::
 
   using stop_t = boost::fusion::vector<stop::MaxIterations<Params>, MinTolerance<Params>>;
 
-**Statistics:** ::
+**Statistics alias:** ::
 
   using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>, stat::Samples<Params>, stat::Observations<Params>, stat::AggregatedObservations<Params>, stat::GPAcquisitions<Params>, stat::BestAggregatedObservations<Params>, stat::GPKernelHParams<Params>>;
 
@@ -243,7 +248,7 @@ Setting the parameter structure
         BO_PARAM(int, iterations, 100);
     };
     struct stop_mintolerance {
-          BO_PARAM(double, tolerance, -0.025);
+          BO_PARAM(double, tolerance, -0.02);
     };
     struct acqui_ucb {
         BO_PARAM(double, alpha, 0.4);
@@ -258,9 +263,6 @@ Setting the parameter structure
     struct opt_cmaes {
         BO_PARAM(int, restarts, 1);
         BO_PARAM(int, max_fun_evals, -1);
-    };
-    struct Target {
-        BO_PARAM_VECTOR(double, point, 1.5, 1.5);
     };
   };
 
@@ -277,8 +279,11 @@ In your main function, you need to have something like the following: ::
     // aliases
     bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>, acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>, stopcrit<stop_t>> boptimizer;
     // Instantiate aggregator
-    DistanceToTarget<Params> aggregator;
+    DistanceToTarget<Params> aggregator({-1.5, -1.5});
     boptimizer.optimize(eval_func(), aggregator);
+    // Adding new target
+    aggregator = DistanceToTarget<Params>({3, 1.5});
+    boptimizer.optimize(eval_func<Params>(), aggregator);
     // rest of code
   }
 
@@ -291,7 +296,21 @@ Finally, from the root of limbo, run a build command, with the additional switch
     ./waf configure --exp arm_example
     ./waf build --exp arm_example
 
-Then, an executable named ``arm_example`` should be produced under the folder ``build/exp/arm_example``.
+Then, an executable named ``arm_example`` should be produced under the folder ``build/exp/arm_example``. When running the experiment, you should expect something like the following: ::
+
+  0 new point:    0.131781    0.554741     0.43973    0.448952    0.551195 0.000187801 value: -2.21293 best:-1.24215
+  1 new point:  0.125424 0.0152663  0.999616  0.523596  0.832982  0.513717 value: -0.0971545 best:-0.0971545
+  2 new point: 7.72149e-05    0.305844    0.707572    0.281713    0.662167    0.594993 value: -2.44114 best:-0.0971545
+  3 new point: 0.161434 0.900689 0.999596 0.378527 0.538626 0.576684 value: -0.718139 best:-0.0971545
+  4 new point:  0.157492  0.658696 0.0234359  0.344446  0.995436  0.212072 value: -2.0776 best:-0.0971545
+  5 new point:  0.902813  0.227166 0.0309232   0.98105  0.543195   0.70282 value: -2.86496 best:-0.0971545
+  6 new point: 0.0149745  0.096635 0.0331401  0.567209  0.776161  0.708063 value: -0.864753 best:-0.0971545
+  7 new point:  0.0791348 0.00053872   0.633395   0.811948   0.599573  0.0847644 value: -0.00412038 best:-0.00412038
+  New target!
+  0 new point: 0.00159966   0.968279   0.332128   0.858613   0.999992   0.633525 value: -0.496254 best:-0.494746
+  1 new point: 0.000264513     0.99999  0.00765048     0.94105    0.379622    0.999865 value: -0.000907635 best:-0.000907635
+
+Using state-based bayesian optimization, we can transfer what we learned doing one task to learn faster new tasks.
 
 The whole ``main.cpp`` file: ::
 
@@ -310,7 +329,7 @@ The whole ``main.cpp`` file: ::
           BO_PARAM(int, iterations, 100);
       };
       struct stop_mintolerance {
-          BO_PARAM(double, tolerance, -0.025);
+          BO_PARAM(double, tolerance, -0.02);
       };
       struct acqui_ucb {
           BO_PARAM(double, alpha, 0.4);
@@ -325,9 +344,6 @@ The whole ``main.cpp`` file: ::
       struct opt_cmaes {
           BO_PARAM(int, restarts, 1);
           BO_PARAM(int, max_fun_evals, -1);
-      };
-      struct Target {
-          BO_PARAM_VECTOR(double, point, 1.5, 1.5);
       };
   };
 
@@ -386,10 +402,15 @@ The whole ``main.cpp`` file: ::
   template <typename Params>
   struct DistanceToTarget {
       typedef double result_type;
+      DistanceToTarget(const Eigen::Vector2d& target) : _target(target) {}
+
       double operator()(const Eigen::VectorXd& x) const
       {
-          return -(x - Params::Target::point()).norm();
+          return -(x - _target).norm();
       }
+
+  protected:
+      Eigen::Vector2d _target;
   };
 
   template <typename Params>
@@ -430,7 +451,10 @@ The whole ``main.cpp`` file: ::
 
       bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>, acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>, stopcrit<stop_t>> boptimizer;
       // Instantiate aggregator
-      DistanceToTarget<Params> aggregator;
+      DistanceToTarget<Params> aggregator({1.5, 1.5});
+      boptimizer.optimize(eval_func<Params>(), aggregator);
+      std::cout << "New target!" << std::endl;
+      aggregator = DistanceToTarget<Params>({3, 1.5});
       boptimizer.optimize(eval_func<Params>(), aggregator);
       return 1;
   }
