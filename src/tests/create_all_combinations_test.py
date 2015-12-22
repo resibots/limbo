@@ -25,10 +25,10 @@ def create(bld):
     acquisitions = ['UCB', 'GP_UCB']
     optimizers = ['RandomPoint', 'GridSearch']
     if bld.env.DEFINES_NLOPT:
-        optimizers += ['NLOptNoGrad', 'NLOptGrad']
+        optimizers += ['NLOptNoGrad']
     if bld.env.DEFINES_LIBCMAES:
         optimizers += ['Cmaes']
-    
+
     inits = ['NoInit', 'RandomSampling', 'RandomSamplingGrid', 'GridSampling']
     stats = ['Samples', 'Observations', 'AggregatedObservations', 'BestSamples', 'BestObservations', 'BestAggregatedObservations',
              'BlSamples', 'GPPredictionDifferences', 'GPAcquisitions', 'GPLikelihood']
