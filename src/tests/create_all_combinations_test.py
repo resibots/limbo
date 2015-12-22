@@ -75,6 +75,6 @@ def create(bld):
                                             source='/combinations/combinations_' + str(i) + '.cpp',
                                             includes='. .. ../../',
                                             target='/combinations/combinations_' + str(i),
-                                            uselib='BOOST EIGEN TBB SFERES LIBCMAES',
+                                            uselib='BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
                                             use='limbo')
                                 i = i + 1
