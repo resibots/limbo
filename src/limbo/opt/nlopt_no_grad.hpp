@@ -20,7 +20,7 @@ namespace limbo {
         };
     }
     namespace opt {
-        template <typename Params, nlopt::algorithm Algorithm>
+        template <typename Params, nlopt::algorithm Algorithm = nlopt::GN_DIRECT_L_RAND>
         struct NLOptNoGrad {
         public:
             template <typename F>
