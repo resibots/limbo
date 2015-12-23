@@ -1,6 +1,31 @@
 Implementation details & customization of algorithms
 ====================================================
 
+.. highlight:: c++
+
+Limbo follows a  `policy-based design <https://en.wikipedia.org/wiki/Policy-based_design>`_, which allows users to combine high flexibility (almost every part of Limbo can be substituted by a user-defined part) with high performance (the abstraction do not add any overhead, contrary to classic OOP design). These two features are critical for researchers who want to experiment new ideas in Bayesian optimization. This means that changing a part of limbo (e.g. changing the kernel functions) corresponds to changing a template parameter of the optimizer.
+
+For the parameters of the algorithms themselves (e.g. an epsilon), all the classes in Limbo they are given by a template class (usually called Params in our code, and always the first argument). See :doc:`parameters` for details.
+
+To avoid defining each component of an optimizer manually, Limbo provides sensible defaults. In addition, Limbo relies on `Boost.Parameter <http://www.boost.org/doc/libs/1_60_0/libs/parameter/doc/html/index.html>`  to make it easy to customize a single part. This Boost library allows us to write classes that accept template argument (user-defined custom classes) by name. For instance, to customize the stopping criteria:
+
+
+::
+
+  using namespace limbo;
+
+  // here stop_t is a user-defined list of stopping criteria
+  bayes_opt::BOptimizer<Params, stopcrit<stop_t>> boptimizer;
+
+Or to define a custom acquisition function:
+
+::
+
+  using namespace limbo;
+
+  // here acqui_t is a user-defined acquisition function
+  bayes_opt::BOptimizer<Params, acquifun<acqui_t>> boptimizer;
+
 Class Structure
 ---------------
 
@@ -9,6 +34,17 @@ Class Structure
    :target: ../_images/limbo_uml.png
 
    Click on the image to see it bigger.
+
+
+Sequence graph
+---------------
+.. figure:: ../pics/limbo_call_graph.png
+   :alt: Sequence diagram
+   :target: ../_images/limbo_call_graph.png
+
+   Click on the image to see it bigger.
+
+
 
 File Structure
 --------------
@@ -40,13 +76,12 @@ Each directory in the `limbo` directory corresponds to a namespace with the same
 
 .. _acquisition-guide:
 
-Acquisition Functions
+Acquisition Functions (acqui::)
 --------------------------------
 
 
 We can change which ``Acquisition Function`` our ``BOptimizer`` uses, using the ``acquifun`` templated parameter. Every acquisition function takes as template parameters the ``Params`` and a ``Model``.
 
-.. highlight:: c++
 
 ::
 
@@ -69,7 +104,7 @@ The acquisition functions provided by **limbo** are the following (see :ref:`her
         - ``int dim_out() const`` - return the dimension of the output data
         - ``std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const`` - returns mean and sigma at the point v
 
-Models
+Models (model::)
 -----------------
 
 We can change which ``Model`` our ``BOptimizer`` uses, using the ``modelfun`` templated parameter. Each model should take as the first template parameter the ``Params`` and could optionally have more.
@@ -91,7 +126,7 @@ Each model should have implemented the following functions:
 
 .. _kernel-guide:
 
-Kernel Functions in GP model
+Kernel Functions in GP model (kernel::)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We can change which ``Kernel Function`` our ``GP`` uses, using the second template parameter of the GP class. Every kernel function takes as template parameters the ``Params`` and optionally some more.
@@ -120,7 +155,7 @@ The kernel functions provided by **limbo** are the following (see :ref:`kernel f
 
 .. _mean-guide:
 
-Mean Functions in GP model
+Mean Functions in GP model (mean::)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We can change which ``Mean Function`` our ``GP`` uses, using the third template parameter of the GP class. Every mean function takes as template parameters the ``Params`` and optionally some more.
@@ -149,7 +184,10 @@ The mean functions provided by **limbo** are the following (see :ref:`the mean f
     - Used for mean's hyperparameters optimization
     - It takes as a template parameter the mean function to use
 
-Statistics
+Optimizers (opt::)
+------------------
+
+Statistics (stat::)
 -----------------
 
 We can change which ``Statistics`` our ``BOptimizer`` outputs, using the ``statfun`` templated parameter. Every statistic takes as template parameters the ``Params`` and optionally some more. All statistics should inherit from ``StatBase`` class.
