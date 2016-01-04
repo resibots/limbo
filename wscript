@@ -26,7 +26,8 @@ def options(opt):
         opt.load('limbo')
         opt.load('openmp')
         opt.load('nlopt')
-        #opt.load('ode')
+        opt.load('libcmaes')
+
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
@@ -45,6 +46,7 @@ def configure(conf):
         conf.load('mkl')
         conf.load('xcode')
         conf.load('nlopt')
+        conf.load('libcmaes')
 
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
@@ -65,7 +67,7 @@ def configure(conf):
         conf.check_openmp()
         conf.check_mkl()
         conf.check_nlopt()
-        #conf.check_ode()
+        conf.check_libcmaes()
 
         if conf.env['CXXFLAGS_ODE']:
                 common_flags += ' ' + conf.env['CXXFLAGS_ODE']

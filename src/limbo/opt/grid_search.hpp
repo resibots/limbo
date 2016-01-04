@@ -27,7 +27,7 @@ namespace limbo {
 
         protected:
             template <typename F>
-            Eigen::VectorXd _inner_search(const F& f, int depth, const Eigen::VectorXd& current) const
+            Eigen::VectorXd _inner_search(const F& f, size_t depth, const Eigen::VectorXd& current) const
             {
                 double step_size = 1.0 / (double)Params::opt_gridsearch::bins();
                 double upper_lim = 1.0 + step_size;

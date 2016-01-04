@@ -88,7 +88,7 @@ double ehvi3d_2term(deque<individual*> P, double r[], double mu[],
     double Sminus; // Correction term for the integral.
     deque<individual*> Py, Pz; // P sorted by y/z coordinate
     sort(P.begin(), P.end(), ycomparator);
-    for (int i = 0; i < P.size(); i++) {
+    for (size_t i = 0; i < P.size(); i++) {
         Py.push_back(P[i]);
     }
     sort(P.begin(), P.end(), zcomparator);
@@ -145,7 +145,7 @@ double ehvi3d_5term(deque<individual*> P, double r[], double mu[],
     double Sminus; // Correction term for the integral.
     deque<individual*> Py, Pz; // P sorted by y/z coordinate
     sort(P.begin(), P.end(), ycomparator);
-    for (int i = 0; i < P.size(); i++) {
+    for (size_t i = 0; i < P.size(); i++) {
         Py.push_back(P[i]);
     }
     sort(P.begin(), P.end(), zcomparator);
@@ -231,7 +231,7 @@ double ehvi3d_8term(deque<individual*> P, double r[], double mu[],
         tempimp; // Correction term, rectangular volume, temp. improvement
     deque<individual*> Py, Pz; // P sorted by y/z coordinate
     sort(P.begin(), P.end(), ycomparator);
-    for (int i = 0; i < P.size(); i++) {
+    for (size_t i = 0; i < P.size(); i++) {
         Py.push_back(P[i]);
     }
     sort(P.begin(), P.end(), zcomparator);

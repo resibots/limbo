@@ -39,8 +39,6 @@
 #include <unistd.h>
 #include <string>
 
-#include <boost/lexical_cast.hpp>
-
 namespace limbo {
     namespace tools {
         inline std::string date()
@@ -49,7 +47,7 @@ namespace limbo {
             time_t date_time;
             time(&date_time);
             strftime(date, 30, "%Y-%m-%d_%H_%M_%S", localtime(&date_time));
-            return date;
+            return std::string(date);
         }
 
         inline std::string hostname()
@@ -63,7 +61,7 @@ namespace limbo {
 
         inline std::string getpid()
         {
-            return boost::lexical_cast<std::string>(::getpid());
+            return std::to_string(::getpid());
         }
     }
 }

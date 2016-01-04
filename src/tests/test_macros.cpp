@@ -28,7 +28,6 @@ BOOST_AUTO_TEST_CASE(test_macros)
     Params::test::set_b(3);
     BOOST_CHECK(Params::test::b() == 3);
 
-    BOOST_CHECK(__VA_NARG__() == 0);
     BOOST_CHECK(__VA_NARG__(1) == 1);
     BOOST_CHECK(__VA_NARG__(10, 11, 12, 13) == 4);
 

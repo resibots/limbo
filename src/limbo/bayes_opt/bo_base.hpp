@@ -20,11 +20,18 @@
 #include <limbo/stop/max_iterations.hpp>
 #include <limbo/stat/samples.hpp>
 #include <limbo/stat/aggregated_observations.hpp>
+#include <limbo/stat/console_summary.hpp>
 #include <limbo/tools/sys.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/mean/data.hpp>
+#ifdef USE_LIBCMAES
 #include <limbo/opt/cmaes.hpp>
+#elif defined USE_NLOPT
+#include <limbo/opt/nlopt_no_grad.hpp>
+#else
+#include <limbo/opt/grid_search.hpp>
+#endif
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/init/random_sampling.hpp>
@@ -32,7 +39,7 @@
 namespace limbo {
     namespace defaults {
         struct bayes_opt_bobase {
-            BO_PARAM(bool, stats_enabled, true);            
+            BO_PARAM(bool, stats_enabled, true);
         };
     }
     template <typename BO, typename AggregatorFunction>
@@ -101,14 +108,22 @@ namespace limbo {
             // defaults
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
+#ifdef USE_LIBCMAES
                 typedef opt::Cmaes<Params> acquiopt_t; // 2
+#elif defined(USE_NLOPT)
+  	        typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+#else
+#warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
+	      typedef opt::GridSearch<Params> acquiopt_t;
+#endif
+	      
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
                 typedef model::GP<Params, kf_t, mean_t, model::gp::KernelLFOpt<Params>> model_t; // 3
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
                 typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
-                typedef boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>> stat_t; // 5
+                typedef boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>> stat_t; // 5
                 typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 6
             };
 
@@ -165,7 +180,7 @@ namespace limbo {
                     this->_total_iterations = 0;
                     this->_samples.clear();
                     this->_observations.clear();
-                    this->_bl_samples.clear();                    
+                    this->_bl_samples.clear();
                 }
 
                 if (this->_total_iterations == 0)

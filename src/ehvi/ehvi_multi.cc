@@ -20,15 +20,15 @@ vector<double> ehvi3d_5term(deque<individual*> P, double r[],
     double Sminus; // Correction term for the integral.
     deque<individual*> Py, Pz; // P sorted by y/z coordinate
     sort(P.begin(), P.end(), ycomparator);
-    for (int i = 0; i < P.size(); i++) {
+    for (size_t i = 0; i < P.size(); i++) {
         Py.push_back(P[i]);
     }
     sort(P.begin(), P.end(), zcomparator);
-    for (unsigned int i = 0; i < P.size(); i++) {
+    for (size_t i = 0; i < P.size(); i++) {
         Pz.push_back(P[i]);
     }
     sort(P.begin(), P.end(), xcomparator);
-    for (int i = 0; i < pdf.size(); i++) {
+    for (size_t i = 0; i < pdf.size(); i++) {
         answer.push_back(0);
     }
     for (int z = 0; z <= n; z++) {
@@ -72,7 +72,7 @@ vector<double> ehvi3d_5term(deque<individual*> P, double r[],
                 double yslice = calculateslice(Py, v, cl, 1);
                 double zslice = calculateslice(Pz, v, cl, 2);
                 // And then we integrate.
-                for (int i = 0; i < pdf.size(); i++) {
+                for (size_t i = 0; i < pdf.size(); i++) {
                     double psi1 = exipsi(v[0], cl[0], pdf[i]->mu[0], pdf[i]->s[0]) - exipsi(v[0], cu[0], pdf[i]->mu[0], pdf[i]->s[0]);
                     double psi2 = exipsi(v[1], cl[1], pdf[i]->mu[1], pdf[i]->s[1]) - exipsi(v[1], cu[1], pdf[i]->mu[1], pdf[i]->s[1]);
                     double psi3 = exipsi(v[2], cl[2], pdf[i]->mu[2], pdf[i]->s[2]) - exipsi(v[2], cu[2], pdf[i]->mu[2], pdf[i]->s[2]);
@@ -116,7 +116,7 @@ vector<double> ehvi3d_sliceupdate(deque<individual*> P, double r[DIMENSIONS],
         // location in
         // the other sorting orders to be ascertained in O(1).
         sort(P.begin(), P.end(), xcomparator);
-        for (unsigned int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             newind = new specialind;
             newind->point = P[i];
             newind->xorder = i;
@@ -125,11 +125,11 @@ vector<double> ehvi3d_sliceupdate(deque<individual*> P, double r[DIMENSIONS],
             Pz.push_back(newind);
         }
         sort(Py.begin(), Py.end(), specialycomparator);
-        for (unsigned int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             Py[i]->yorder = i;
         }
         sort(Pz.begin(), Pz.end(), specialzcomparator);
-        for (unsigned int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             Pz[i]->zorder = i;
         }
         // Then also reserve memory for the structure array.
@@ -244,7 +244,7 @@ vector<double> ehvi3d_sliceupdate(deque<individual*> P, double r[DIMENSIONS],
                     v[2] = (Pstruct[x + y * n].highestdominator == -1
                             ? 0
                             : (Pz[Pstruct[x + y * n].highestdominator]->point->f[2] - r[2]));
-                for (int i = 0; i < pdf.size(); i++) {
+                for (size_t i = 0; i < pdf.size(); i++) {
                     double psi1 = exipsi(r[0], cl[0], pdf[i]->mu[0], pdf[i]->s[0]) - exipsi(r[0], cu[0], pdf[i]->mu[0], pdf[i]->s[0]);
                     double psi2 = exipsi(r[1], cl[1], pdf[i]->mu[1], pdf[i]->s[1]) - exipsi(r[1], cu[1], pdf[i]->mu[1], pdf[i]->s[1]);
                     double psi3 = exipsi(r[2], cl[2], pdf[i]->mu[2], pdf[i]->s[2]) - exipsi(r[2], cu[2], pdf[i]->mu[2], pdf[i]->s[2]);

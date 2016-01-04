@@ -53,15 +53,15 @@ BOOST_AUTO_TEST_CASE(test_gp)
     Eigen::VectorXd mu;
     double sigma;
     std::tie(mu, sigma) = gp.query(make_v1(1));
-    BOOST_CHECK(abs((mu(0) - 5)) < 1);
+    BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 
     std::tie(mu, sigma) = gp.query(make_v1(2));
-    BOOST_CHECK(abs((mu(0) - 10)) < 1);
+    BOOST_CHECK(std::abs((mu(0) - 10)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 
     std::tie(mu, sigma) = gp.query(make_v1(3));
-    BOOST_CHECK(abs((mu(0) - 5)) < 1);
+    BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 
     for (double x = 0; x < 4; x += 0.05) {
@@ -123,14 +123,14 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     Eigen::VectorXd mu;
     double sigma;
     std::tie(mu, sigma) = gp.query(make_v1(1));
-    BOOST_CHECK(abs((mu(0) - 5)) < 1);
+    BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 
     std::tie(mu, sigma) = gp.query(make_v1(2));
-    BOOST_CHECK(abs((mu(0) - 10)) < 1);
+    BOOST_CHECK(std::abs((mu(0) - 10)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 
     std::tie(mu, sigma) = gp.query(make_v1(3));
-    BOOST_CHECK(abs((mu(0) - 5)) < 1);
+    BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 }
