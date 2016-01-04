@@ -7,7 +7,7 @@ The typical use case of Limbo for research in Bayesian Optimization is:
 - we want to compare if variant X of the experiment (e.g. with kernel XXX) is better than variant Y (e.g. with kernel YYY)
 - because the algorithms that we use have some stochastic components (initialization, inner optimization, ...), we usually need to replicate each experiment (typically, we use 30 replicates) in order to do some statistics (see  `Matplotlib for Papers <http://www.github.com/jbmouret/matplotlib_for_papers>`_ for a tutorial about how to draw nice box plots with these statistics).
 
-Limbo provides basics tools to make these steps easier. They are mostly additions to ``waf`` (see our :ref:`FAQ about waf <faq-waf>`).
+Limbo provides basics tools to make these steps easier. They are mostly additions to ``waf`` (see our :ref:`FAQ about waf <faq-waf>`). For users who are used to ROS, you can see these additions as our 'catkin for Bayesian optimization'.
 
 How to add / compile your experiment?
 -------------------------------------
@@ -131,9 +131,6 @@ Limbo will create two files:
 
 You can add as many defines as you like (or even generate them with python code), for instance:
 
-Using ``./waf --exp your_experiment`` will compile all the corresponding libraries.
-
-If you have more than one file, you will need to first compile a static library, then link with it in the variant.
 
 .. code-block:: python
 
@@ -150,3 +147,7 @@ If you have more than one file, you will need to first compile a static library,
 
 
 This will create ``multi_parego_mop2_dim2`` and ``multi_ehvi_zdt2_dim6``.
+
+Using ``./waf --exp your_experiment`` will compile all the corresponding libraries. If you want to compile a single variant, you can use the ``--target`` option: ``./waf --exp your_experiment --target parego_mop2_dim2`.
+
+If you have more than one file, you will need to first compile a static library, then link with it in the variant.
