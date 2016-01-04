@@ -1,10 +1,11 @@
 Frequently Asked Questions
 ==========================
 
+.. _faq-waf:
+
 Why waf (and not Cmake, or <insert your favorite build system>)?
 --------------------------------------------------------------------------
 
-.. _faq-waf:
 
 Short answer: because we used it in `Sferes2 <http://www.github.com/sferes2/sferes>`_ and we liked it!
 
