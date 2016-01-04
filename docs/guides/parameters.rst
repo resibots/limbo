@@ -1,5 +1,8 @@
 .. _params-guide:
 
+.. highlight:: c++
+
+
 Parameters
 ===========
 
