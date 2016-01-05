@@ -95,6 +95,7 @@ namespace limbo {
 
                     Eigen::VectorXd init() const
                     {
+                      // Bug ?? used??
                         return (Eigen::VectorXd::Random(param_size()).array() - 1);
                     }
 

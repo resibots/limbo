@@ -8,6 +8,7 @@
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
+#include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -29,7 +30,7 @@ namespace limbo {
                     return false;
 
                 auto optimizer = _get_optimizer(typename BO::acqui_optimizer_t(), Optimizer());
-                Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(bo.model().dim_in()).array() + 1) / 2;
+                auto starting_point = tools::random_vector(bo.model());
                 double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point), true)));
 
                 if (bo.observations().size() == 0 || afun(bo.best_observation(afun)) <= Params::stop_maxpredictedvalue::ratio() * val)

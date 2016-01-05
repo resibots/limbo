@@ -71,7 +71,7 @@ namespace limbo {
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
                     acquisition_function_t acqui(_model, this->_current_iteration);
 
-                    Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
+                    auto starting_point = tools::random_vector(StateFunction::dim_in);
                     auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
                     Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, true);
                     bool blacklisted = false;
