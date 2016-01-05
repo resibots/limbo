@@ -1,6 +1,5 @@
 //| This file is a part of the limbo framework.
-//| Copyright 2009, ISIR / Universite Pierre et Marie Curie (UPMC)
-//| Main contributor(s): Jean-Baptiste Mouret, mouret@isir.fr
+//| Copyright 2014,  Universite Pierre et Marie Curie (UPMC) / Inria
 //|
 //| This software is a computer program whose purpose is to facilitate
 //| experiments in evolutionary computation and evolutionary robotics.
@@ -32,8 +31,8 @@
 //| The fact that you are presently reading this means that you have
 //| had knowledge of the CeCILL license and that you accept its terms.
 
-#ifndef LIMBO_TOOLS_MATH_HPP
-#define LIMBO_TOOLS_MATH_HPP
+#ifndef LIMBO_TOOLS_RANDOM_GENERATOR_HPP
+#define LIMBO_TOOLS_RANDOM_GENERATOR_HPP
 
 #include <cstdlib>
 #include <cmath>
@@ -46,24 +45,30 @@
 
 namespace limbo {
     namespace tools {
-        // get sign of number
-        template <typename T>
-        inline constexpr int signum(T x, std::false_type is_signed)
-        {
-            return T(0) < x;
-        }
+        // usage :
+        // rgen_double_t(0.0, 1.0);
+        // double r = rgen.rand();
+        template<typename D>
+        class RandomGenerator {
+        public:
+          using result_type = typename D::result_type;
+          RandomGenerator(result_type min, result_type max) :
+            _dist(min, max), _rgen(std::random_device()()) {}
+          result_type rand()
+          {
+            std::lock_guard<std::mutex> lock(_mutex);
+            return _dist(_rgen);
+          }
+        private:
+          D _dist;
+          std::mt19937 _rgen;
+          std::mutex _mutex;
+        };
+        using rdist_double_t = std::uniform_real_distribution<double>;
+        using rdist_int_t = std::uniform_int_distribution<int>;
 
-        template <typename T>
-        inline constexpr int signum(T x, std::true_type is_signed)
-        {
-            return (T(0) < x) - (x < T(0));
-        }
-
-        template <typename T>
-        inline constexpr int signum(T x)
-        {
-            return signum(x, std::is_signed<T>());
-        }
+        using rgen_double_t = RandomGenerator<rdist_double_t>;
+        using rgen_int_t = RandomGenerator<rdist_int_t>;
     }
 }
 

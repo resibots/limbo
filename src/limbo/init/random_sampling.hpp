@@ -4,7 +4,7 @@
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
-#include <limbo/tools/math.hpp>
+#include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
     namespace defaults {
