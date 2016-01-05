@@ -30,7 +30,7 @@ namespace limbo {
                     return false;
 
                 auto optimizer = _get_optimizer(typename BO::acqui_optimizer_t(), Optimizer());
-                auto starting_point = tools::random_vector(bo.model());
+                auto starting_point = tools::random_vector(bo.model().dim_in());
                 double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point), true)));
 
                 if (bo.observations().size() == 0 || afun(bo.best_observation(afun)) <= Params::stop_maxpredictedvalue::ratio() * val)
