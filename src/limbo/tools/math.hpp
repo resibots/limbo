@@ -48,22 +48,25 @@
 namespace limbo {
     namespace tools {
         // usage :
-        // auto rgen = make_rgen();
-        // double r = rand_double(rgen);
-        using rand_gen_t = std::mt19937;
-        using uniform_dist_t = std::uniform_real_distribution<double>;
-        using rdist_t = std::pair<rand_gen_t, uniform_dist_t>;
-        inline rdist_t make_rgen(double min, double max)
-        {
-          std::random_device rd;
-          return std::make_pair(std::mt19937(rd()), std::uniform_real_distribution<double>(min, max));
-        }
-        inline double rand_double(rdist_t& rgen)
-        {
-          rand_gen_t& gen = std::get<0>(rgen);
-          uniform_dist_t& dist = std::get<1>(rgen);
-          return dist(gen);
-        }
+        // rgen_double_t(0.0, 1.0);
+        // double r = rgen.rand();
+        template<typename D>
+        class RandomGenerator {
+        public:
+          using result_type = typename D::result_type;
+          RandomGenerator(result_type min, result_type max) :
+            _dist(min, max), _rgen(std::random_device()()) {}
+          result_type rand() { return _dist(_rgen); }
+        private:
+          D _dist;
+          std::mt19937 _rgen;
+        };
+        using rdist_double_t = std::uniform_real_distribution<double>;
+        using rdist_int_t = std::uniform_int_distribution<int>;
+
+        using rgen_double_t = RandomGenerator<rdist_double_t>;
+        using rgen_int_t = RandomGenerator<rdist_int_t>;
+
 
         // get sign of number
         template <typename T>

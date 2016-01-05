@@ -18,11 +18,11 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>
             void operator()(const StateFunction& seval, const AggregatorFunction&, Opt& opt) const
             {
-                auto rgen = tools::make_rgen(0.0, 1.0);
+                tools::rgen_double_t rgen(0.0, 1.0);
                 for (int i = 0; i < Params::init_randomsampling::samples(); i++) {
                     Eigen::VectorXd new_sample(StateFunction::dim_in);
                     for (size_t j = 0; j < StateFunction::dim_in; j++)
-                        new_sample[j] = tools::rand_double(rgen);
+                        new_sample[j] = rgen.rand();
                     opt.add_new_sample(new_sample, seval(new_sample));
                 }
             }
