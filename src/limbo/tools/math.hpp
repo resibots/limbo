@@ -44,6 +44,7 @@
 #include <stdlib.h>
 #include <random>
 #include <utility>
+#include <mutex>
 
 namespace limbo {
     namespace tools {
@@ -56,10 +57,15 @@ namespace limbo {
           using result_type = typename D::result_type;
           RandomGenerator(result_type min, result_type max) :
             _dist(min, max), _rgen(std::random_device()()) {}
-          result_type rand() { return _dist(_rgen); }
+          result_type rand()
+          {
+            std::lock_guard<std::mutex> lock(_mutex);
+            return _dist(_rgen);
+          }
         private:
           D _dist;
           std::mt19937 _rgen;
+          std::mutex _mutex;
         };
         using rdist_double_t = std::uniform_real_distribution<double>;
         using rdist_int_t = std::uniform_int_distribution<int>;
