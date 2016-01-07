@@ -12,6 +12,12 @@ Limbo is a lightweight framework for Bayesian Optimization, a powerful approach 
 
 Limbo is primarily designed for *researchers* who needs to experiment with novel ideas / algorithms. It is not designed for end-users who need a "black-box" to optimize a function (although Limbo can be used for this).
 
+Limbo has been used in several scientific publications, in particular:
+
+- Cully A, Clune J, Tarapore DT, Mouret J-B. Robots that can adapt like animals. Nature, 2015. 521.7553.
+
+The development of Limbo is funded by the `ERC project ResiBots <http://www.resibots.eu>`_.
+
 Main features
 --------------
 
