@@ -78,7 +78,7 @@ namespace limbo {
                     try {
                         this->add_new_sample(new_sample, sfun(new_sample));
                     }
-                    catch (EvaluationError& e) {
+                    catch (const EvaluationError& e) {
                         this->add_new_bl_sample(new_sample);
                         blacklisted = true;
                     }
