@@ -36,8 +36,11 @@ Contents:
 -----------
 
 .. toctree::
-   :maxdepth: 2
+   :hidden:
    :caption: Limbo (BO library)
+
+.. toctree::
+   :maxdepth: 2
 
    self
    tutorials/index
@@ -45,12 +48,12 @@ Contents:
    faq
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. Indices and tables
+.. ==================
+..
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
 
 
 TODO list
