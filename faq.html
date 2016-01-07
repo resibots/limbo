@@ -105,13 +105,15 @@
             
             
                 <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
+<ul class="simple">
+</ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#why-waf-and-not-cmake-or-insert-your-favorite-build-system">Why waf (and not Cmake, or &lt;insert your favorite build system&gt;)?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#why-do-you-choose-to-not-use-configuration-files">Why do you choose to not use configuration files?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-is-the-configuration-file">Where is the configuration file?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-c-11-and-not-insert-your-favorite-language">Why C++11? (and not &lt;insert your favorite language&gt;)?</a></li>
 </ul>
 </li>
@@ -169,8 +171,8 @@
   <div class="section" id="frequently-asked-questions">
 <h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="why-waf-and-not-cmake-or-insert-your-favorite-build-system">
-<h2>Why waf (and not Cmake, or &lt;insert your favorite build system&gt;)?<a class="headerlink" href="#why-waf-and-not-cmake-or-insert-your-favorite-build-system" title="Permalink to this headline">¶</a></h2>
-<p id="faq-waf">Short answer: because we used it in <a class="reference external" href="http://www.github.com/sferes2/sferes">Sferes2</a> and we liked it!</p>
+<span id="faq-waf"></span><h2>Why waf (and not Cmake, or &lt;insert your favorite build system&gt;)?<a class="headerlink" href="#why-waf-and-not-cmake-or-insert-your-favorite-build-system" title="Permalink to this headline">¶</a></h2>
+<p>Short answer: because we used it in <a class="reference external" href="http://www.github.com/sferes2/sferes">Sferes2</a> and we liked it!</p>
 <p>Here is the longer answer. When we started Sferes2, around 2007, the free software community was starting to be tired of Automake/Autoconf (the <em>de facto</em> standard at that time) and it was looking for more modern alternatives. Two/Three software had some tractions:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://www.cmake.org">Cmake</a>, which generates makefiles (like Autoconf / Automake), uses a custom language, and emphasizes Windows/Unix portability;</li>
@@ -178,14 +180,14 @@
 <li><a class="reference external" href="http://www.waf.org">Waf</a>, which was a bit like &#8220;a simpler scons&#8221;</li>
 </ul>
 <p>We tried all of them.</p>
-<p>Cmake uses a custom language that is not especially well designed in our opinion (it looks like a language from the 70s and it ignores most of the research in computer languages of the last 30 years). Generating makefiles is nice, but (1) it is slow (because generating files is slow), (2) it is a 40 year old syntax (which does the job, OK), and (3) it is not designed for parallel build (whereas all our computers are now multi-core). Compiling on both Unix and MS Windows is easy, but Windows is not our target platform. On the contrary, cross-compiling for embedded platforms (e.g. am ARM-based Raspberry Pi or a robot) was very hard with the first version of Cmake (whereas it was easy with Autoconf / Automake !).</p>
+<p>Cmake uses a custom language that is not especially well designed in our opinion (it looks like a language from the 70s and it ignores most of the research in computer languages of the last 30 years). Generating makefiles is nice, but (1) it is slow (because generating files is slow), (2) it is a 40 year old syntax (which does the job, OK), and (3) it is not designed for parallel build (whereas all our computers are now multi-core). Compiling on both Unix and MS Windows is easy, but Windows is not our target platform. On the contrary, cross-compiling for embedded platforms (e.g. am ARM-based Raspberry Pi or a robot) was very hard with the first versions of Cmake (whereas it was easy with Autoconf / Automake!).</p>
 <p>Scons is nice because it is based on Python, a nice, general purpose language that almost everybody know. It makes it easy to build complex build frameworks, but simple things can be not-that-simple to do (at least, in 2007, it probably improved since then). In addition, Scons does not generate makefiles, which makes it faster and more adapted to parallel builds.</p>
-<p>Waf has all the advantages of Scons but the learning curve is less steep. It is based on Python, it has a nice modern feel, it is fast, and it parallelizes the builds by default. Using python also allows us to easily add services that is not typically part of a build system, for instance, to submit jobs to a cluster (we have to parse a JSON file, etc., which is trivial in python, but not in Cmake!).</p>
+<p>Waf has all the advantages of Scons but the learning curve was less steep. It is based on Python, it has a nice modern feel, it is fast, and it parallelizes the builds by default. More importantly, using python also allows us to easily add services that is not typically part of a build system, for instance, to submit jobs to a cluster (we have to parse a JSON file, etc., which is trivial in python, but not in Cmake!). See <a class="reference internal" href="guides/framework.html"><em>Using Limbo as an environment for experiments</em></a>.</p>
 <p>Overall, it seems that cmake won the &#8220;war&#8221; in the free software world, mainly because a few high-profile projects chose it instead of Scons or Waf &#8211; the most prominent (and &#8220;contagious&#8221;) project is most probably QT. However, the battle was tough. For instance, I remember that no build system was perfect for QT and someone even made a waf-based version of QT. Also, keep in mind that QT needs a build system that works very well on MS Windows, while we do not care (we have no Windows-based clusters and no Windows-based robots...): they have different goals. In robotics, ROS heavily relies on Cmake, but one could wonder if Catkin would have been faster/nicer/better if it had been based on waf or scons. Last, a few high profile projects chose waf. For instance, <a class="reference external" href="http://www.pebble.com">Pebble</a>, the smart watches, or <a class="reference external" href="http://www.samba.org">Samba</a>, the Windows-compatible file sharing system for Unix.</p>
 </div>
-<div class="section" id="why-do-you-choose-to-not-use-configuration-files">
-<h2>Why do you choose to not use configuration files?<a class="headerlink" href="#why-do-you-choose-to-not-use-configuration-files" title="Permalink to this headline">¶</a></h2>
-<p>Short answer: because we target developpers/researchers who want to write the smallest amount of code when they add a new functionnality/concept, and not &#8220;end-users&#8221; who want an external optimizer that they can easily call on their problem.</p>
+<div class="section" id="where-is-the-configuration-file">
+<h2>Where is the configuration file?<a class="headerlink" href="#where-is-the-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>Short answer: There is no configuration file because we target developpers/researchers who want to write the smallest amount of code when they add a new functionnality/concept, and not &#8220;end-users&#8221; who want an external optimizer that they can easily call on their problem.</p>
 <p>Long answer is in the <a class="reference internal" href="guides/parameters.html#params-guide"><span>Parameters guide</span></a>.</p>
 </div>
 <div class="section" id="why-c-11-and-not-insert-your-favorite-language">

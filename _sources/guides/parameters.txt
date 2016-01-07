@@ -1,5 +1,8 @@
 .. _params-guide:
 
+.. highlight:: c++
+
+
 Parameters
 ===========
 
@@ -62,7 +65,7 @@ However, for dynamic parameters, we need to call ``BO_DECLARE_DYN_PARAM`` in our
 
     BO_DECLARE_DYN_PARAM(int, Params::ucb, alpha);
 
-**Warning!** Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead -- they are equivalent to writing a constant).
+.. warning:: Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead -- they are equivalent to writing a constant).
 
 Last, we can also use arrays, Eigen vectors, and strings as follows:
 

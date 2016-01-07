@@ -107,6 +107,8 @@
             
             
                 <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
+<ul class="simple">
+</ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
@@ -174,92 +176,95 @@
            <div itemprop="articleBody">
             
   <div class="section" id="parameters">
-<span id="params-guide"></span><h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
+<h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
 <p>Bayesian Optimization algorithms, acquisition functions, etc. all have many parameters. The traditionnal approach is to use a configuration file (e.g. XML, or json, .ini, ...). However,  each time a developer adds a parameter, some code has to be added to parse the configuration file: there is often more code to parse and check the configuration file than <em>real code</em> (that is, code that actually does something). As a result, scientists often either skip this part until they have  &#8220;final&#8221; version of their code (often, never), or do it in a &#8220;quick and dirty way&#8221; (e.g. without checking the syntax, without checking that the parameter value is in the right range, etc.).</p>
 <p>Put differently, using a configuration file is nice for the user, but not for the developer. Since <strong>limbo</strong> is targeted to scientists who want to <em>easily</em> test  new code, we need a way to separate parameters from code that do not require any boilerplate code.</p>
 <p>In <strong>limbo</strong>, every class takes a structure name (usually called <code class="docutils literal"><span class="pre">Params</span></code>) that contains the parameters. By doing so, we rely on the compiler to check the types, and we require very little work to separate parameters values from algorithms.</p>
 <p>From the user&#8217;s point of view, this looks like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>struct Params {
-  struct ucb {
-    BO_PARAM(float, alpha, 0.1);
-  };
-};
-// ...
-// ... instantiate an optimizer:
-bayes_opt::BOptimizer&lt;Params&gt; opt;
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="n">ucb</span> <span class="p">{</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+<span class="c1">// ...</span>
+<span class="c1">// ... instantiate an optimizer:</span>
+<span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">opt</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>(do not forget the semi-colons!). This structure says that the value of the parameter <code class="docutils literal"><span class="pre">alpha</span></code> for the class &#8220;UCB&#8221; is <code class="docutils literal"><span class="pre">0.1</span></code>.</p>
 <p>In the UCB class, the value can be accessed like this:</p>
-<div class="highlight-python"><div class="highlight"><pre>float x = Params::ucb::alpha();
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Params</span><span class="o">::</span><span class="n">ucb</span><span class="o">::</span><span class="n">alpha</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>No need to write any parsing code!</p>
 <p>Many limbo classes provide default parameters. To use them, the parameter sub-structure has to inherit from the default structure:</p>
-<div class="highlight-python"><div class="highlight"><pre>struct Params {
-  struct ucb : public defaults::ucb {
-  };
-};
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="nl">ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">ucb</span> <span class="p">{</span>
+  <span class="p">};</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>That way, the <code class="docutils literal"><span class="pre">ucb::alpha()</span></code> exists, but it has its default value.</p>
 <p>Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a <code class="docutils literal"><span class="pre">BO_DYN_PARAM</span></code> instead of a <code class="docutils literal"><span class="pre">BO_PARAM</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre>struct Params {
-  struct ucb {
-    BO_DYN_PARAM(float, alpha, 0.1);
-  };
-};
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="n">ucb</span> <span class="p">{</span>
+    <span class="n">BO_DYN_PARAM</span><span class="p">(</span><span class="kt">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>However, for dynamic parameters, we need to call <code class="docutils literal"><span class="pre">BO_DECLARE_DYN_PARAM</span></code> in our <code class="docutils literal"><span class="pre">.cpp</span></code> file (typically, just before the main function):</p>
-<div class="highlight-python"><div class="highlight"><pre>BO_DECLARE_DYN_PARAM(int, Params::ucb, alpha);
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">BO_DECLARE_DYN_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">Params</span><span class="o">::</span><span class="n">ucb</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
 </pre></div>
 </div>
-<p><strong>Warning!</strong> Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead &#8211; they are equivalent to writing a constant).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead &#8211; they are equivalent to writing a constant).</p>
+</div>
 <p>Last, we can also use arrays, Eigen vectors, and strings as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre>struct Params {
-    struct test {
-        BO_PARAM(double, a, 1);
-        BO_DYN_PARAM(int, b);
-        BO_PARAM_ARRAY(double, c, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
-        BO_PARAM_VECTOR(double, d, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
-        BO_PARAM_STRING(e, &quot;e&quot;);
-    };
-};
-BO_DECLARE_DYN_PARAM(int, Params::test, b);
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">test</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">BO_DYN_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+        <span class="n">BO_PARAM_ARRAY</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">);</span>
+        <span class="n">BO_PARAM_VECTOR</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">);</span>
+        <span class="n">BO_PARAM_STRING</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s">&quot;e&quot;</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="n">BO_DECLARE_DYN_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">Params</span><span class="o">::</span><span class="n">test</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>All these macros are defined in <code class="docutils literal"><span class="pre">tools/macros.hpp</span></code>.</p>
 <p>In some rare cases, you may have 2 different instances of the same algorithm, for example, if you choose to use the same optimizer for the acquisition optimization and the GP hyperparametrs optimization.  In such cases, you may also wish to set different parameters for each instance. This can be easily accomplished in the following way:</p>
-<div class="highlight-python"><div class="highlight"><pre>struct Params {
-  // All the other parameters
-}
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="c1">// All the other parameters</span>
+<span class="p">}</span>
 
-struct ParamsAcquiOpt {
-    struct cmaes {
-        BO_PARAM(int, nrestarts, 10);
-        BO_PARAM(int, max_fun_evals, 500);
-    };
-};
+<span class="k">struct</span> <span class="n">ParamsAcquiOpt</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">cmaes</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">nrestarts</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
 
-struct ParamsGPOpt {
-    struct cmaes {
-        BO_PARAM(int, nrestarts, 1);
-        BO_PARAM(int, max_fun_evals, 200);
-    };
-};
+<span class="k">struct</span> <span class="n">ParamsGPOpt</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">cmaes</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">nrestarts</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>Then, when declaring the types to use:</p>
-<div class="highlight-python"><div class="highlight"><pre>typedef opt::Cmaes&lt;ParamsAcquiOpt&gt; Acqui_opt_t;
-typedef opt::Cmaes&lt;ParamsGPOpt&gt; Gp_opt_t;
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsAcquiOpt</span><span class="o">&gt;</span> <span class="n">Acqui_opt_t</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsGPOpt</span><span class="o">&gt;</span> <span class="n">Gp_opt_t</span><span class="p">;</span>
 
-typedef kernel::MaternFiveHalfs&lt;Params&gt; Kernel_t;
-typedef mean::Data&lt;Params&gt; Mean_t;
-typedef model::GP&lt;Params, Kernel_t, Mean_t, model::gp::KernelLFOpt&lt;Params, Gp_opt_t&gt;&gt; GP_t;
-typedef acqui::UCB&lt;Params, GP_t&gt; Acqui_t;
+<span class="k">typedef</span> <span class="n">kernel</span><span class="o">::</span><span class="n">MaternFiveHalfs</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">Kernel_t</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">mean</span><span class="o">::</span><span class="n">Data</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">Mean_t</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Kernel_t</span><span class="p">,</span> <span class="n">Mean_t</span><span class="p">,</span> <span class="n">model</span><span class="o">::</span><span class="n">gp</span><span class="o">::</span><span class="n">KernelLFOpt</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Gp_opt_t</span><span class="o">&gt;&gt;</span> <span class="n">GP_t</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">acqui</span><span class="o">::</span><span class="n">UCB</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">GP_t</span><span class="o">&gt;</span> <span class="n">Acqui_t</span><span class="p">;</span>
 
-bayes_opt::BOptimizer&lt;Params, modelfun&lt;GP_t&gt;, acquifun&lt;Acqui_t&gt;, acquiopt&lt;Acqui_opt_t&gt;&gt; opt;
+<span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="n">GP_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="n">Acqui_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquiopt</span><span class="o">&lt;</span><span class="n">Acqui_opt_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>

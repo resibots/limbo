@@ -107,6 +107,8 @@
             
             
                 <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
+<ul class="simple">
+</ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
@@ -186,7 +188,7 @@
 <li>we want to compare if variant X of the experiment (e.g. with kernel XXX) is better than variant Y (e.g. with kernel YYY)</li>
 <li>because the algorithms that we use have some stochastic components (initialization, inner optimization, ...), we usually need to replicate each experiment (typically, we use 30 replicates) in order to do some statistics (see  <a class="reference external" href="http://www.github.com/jbmouret/matplotlib_for_papers">Matplotlib for Papers</a> for a tutorial about how to draw nice box plots with these statistics).</li>
 </ul>
-<p>Limbo provides basics tools to make these steps easier. They are mostly additions to <code class="docutils literal"><span class="pre">waf</span></code>.</p>
+<p>Limbo provides basics tools to make these steps easier. They are mostly additions to <code class="docutils literal"><span class="pre">waf</span></code> (see our <a class="reference internal" href="../faq.html#faq-waf"><span>FAQ about waf</span></a>). For users who are used to ROS, you can see these additions as our &#8216;catkin for Bayesian optimization&#8217;.</p>
 <div class="section" id="how-to-add-compile-your-experiment">
 <h2>How to add / compile your experiment?<a class="headerlink" href="#how-to-add-compile-your-experiment" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -296,8 +298,6 @@
 </ul>
 <p><strong>You should never edit these files</strong>: they will be re-generated each time you will compile.</p>
 <p>You can add as many defines as you like (or even generate them with python code), for instance:</p>
-<p>Using <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--exp</span> <span class="pre">your_experiment</span></code> will compile all the corresponding libraries.</p>
-<p>If you have more than one file, you will need to first compile a static library, then link with it in the variant.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
@@ -311,6 +311,8 @@
 </pre></div>
 </div>
 <p>This will create <code class="docutils literal"><span class="pre">multi_parego_mop2_dim2</span></code> and <code class="docutils literal"><span class="pre">multi_ehvi_zdt2_dim6</span></code>.</p>
+<p>Using <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--exp</span> <span class="pre">your_experiment</span></code> will compile all the corresponding libraries. If you want to compile a single variant, you can use the <code class="docutils literal"><span class="pre">--target</span></code> option: <a href="#id1"><span class="problematic" id="id2">``</span></a>./waf &#8211;exp your_experiment &#8211;target parego_mop2_dim2`.</p>
+<p>If you have more than one file, you will need to first compile a static library, then link with it in the variant.</p>
 </div>
 </div>
 

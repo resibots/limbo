@@ -29,7 +29,7 @@
   
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
-        <link rel="next" title="Guides" href="../guides/index.html"/>
+        <link rel="next" title="Advanced Example" href="advanced_example.html"/>
         <link rel="prev" title="Basic Example" href="basic_example.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
@@ -107,6 +107,8 @@
             
             
                 <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
+<ul class="simple">
+</ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
@@ -123,6 +125,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#example-add-ros-as-external-library">Example: Add ROS as external library</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
@@ -185,7 +188,10 @@
 <div class="section" id="add-external-library-to-experiment-s-wscript">
 <h2>Add external library to experiment&#8217;s wscript<a class="headerlink" href="#add-external-library-to-experiment-s-wscript" title="Permalink to this headline">¶</a></h2>
 <p>To add an external library to your experiment, we need to modify our experiment&#8217;s <code class="docutils literal"><span class="pre">wscript</span></code>. The stantard way to do this is to create a new configuration file for the dependency we want. In the <code class="docutils literal"><span class="pre">waf</span></code> build system, we do this by creating a python script(<cite>.py</cite>), usually called <code class="docutils literal"><span class="pre">libname.py</span></code> (where <code class="docutils literal"><span class="pre">libname</span></code> is the name of the library), in the same directory as your experiment.</p>
-<p><strong>Warning</strong> to activate this script, you need to activate your experiment <strong>when configuring limbo</strong>:  <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">configure</span> <span class="pre">--exp</span> <span class="pre">your_exp</span></code></p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">to activate this script, you need to activate your experiment <strong>when configuring limbo</strong>:  <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">configure</span> <span class="pre">--exp</span> <span class="pre">your_exp</span></code></p>
+</div>
 <p>This new file should have the following structure:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
 <span class="c"># encoding: utf-8</span>
@@ -396,7 +402,7 @@ def check_libname(conf):
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../guides/index.html" class="btn btn-neutral float-right" title="Guides" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="advanced_example.html" class="btn btn-neutral float-right" title="Advanced Example" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="basic_example.html" class="btn btn-neutral" title="Basic Example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

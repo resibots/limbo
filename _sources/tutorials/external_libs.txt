@@ -6,7 +6,7 @@ Add external library to experiment's wscript
 
 To add an external library to your experiment, we need to modify our experiment's ``wscript``. The stantard way to do this is to create a new configuration file for the dependency we want. In the ``waf`` build system, we do this by creating a python script(`.py`), usually called ``libname.py`` (where ``libname`` is the name of the library), in the same directory as your experiment.
 
-**Warning** to activate this script, you need to activate your experiment **when configuring limbo**:  ``./waf configure --exp your_exp``
+.. warning:: to activate this script, you need to activate your experiment **when configuring limbo**:  ``./waf configure --exp your_exp``
 
 This new file should have the following structure:
 

@@ -105,6 +105,8 @@
             
             
                 <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
+<ul class="simple">
+</ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
@@ -163,8 +165,31 @@
             
   <div class="section" id="limbo-s-documentation">
 <span id="limbo-doc"></span><h1>Limbo&#8217;s documentation<a class="headerlink" href="#limbo-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions.</p>
+<p>Limbo is primarily designed for <em>researchers</em> who need to experiment with novel ideas / algorithms. It is not designed for end-users who need a &#8220;black-box&#8221; to optimize a function (although Limbo can be used for this).</p>
+<p>Limbo has been used in several scientific publications, in particular:</p>
+<ul class="simple">
+<li>Cully A, Clune J, Tarapore DT, Mouret J-B. Robots that can adapt like animals. Nature, 2015. 521.7553.</li>
+</ul>
+<p>The development of Limbo is funded by the <a class="reference external" href="http://www.resibots.eu">ERC project ResiBots</a>.</p>
+<p>Limbo shares many ideas with <a class="reference external" href="http://github.com/sferes2">Sferes2</a>, a similar framework for evolutionary computation.</p>
+<div class="section" id="main-features">
+<h2>Main features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Bayesian optimisation based on Gaussian processes</li>
+<li>Generic framework (template-based / policy-based design), which allows easy customization for testing novel ideas</li>
+<li>Programming / experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters, etc.</li>
+<li>High performance (in particular, Limbo can exploit multicore computers via Intel TBB and vectorize some operations via Eigen3)</li>
+<li>Purposely small to be easily maintained and quickly understood</li>
+<li>Modern C++-11</li>
+<li>Experimental support for multi-objective optimization</li>
+</ul>
+</div>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound" id="limbo-bo-library">
-<p class="caption"><span class="caption-text">Limbo (BO library)</span><a class="headerlink" href="#limbo-bo-library" title="Permalink to this toctree">¶</a></p>
+</div>
+<div class="toctree-wrapper compound">
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
@@ -172,6 +197,7 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorials/compilation.html">Download and Compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/basic_example.html">Basic Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/advanced_example.html">Advanced Example</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a><ul>
@@ -185,20 +211,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-waf-and-not-cmake-or-insert-your-favorite-build-system">Why waf (and not Cmake, or &lt;insert your favorite build system&gt;)?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#why-do-you-choose-to-not-use-configuration-files">Why do you choose to not use configuration files?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#where-is-the-configuration-file">Where is the configuration file?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-c-11-and-not-insert-your-favorite-language">Why C++11? (and not &lt;insert your favorite language&gt;)?</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
-</ul>
 </div>
 <div class="section" id="todo-list">
 <h1>TODO list<a class="headerlink" href="#todo-list" title="Permalink to this headline">¶</a></h1>
