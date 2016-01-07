@@ -22,10 +22,7 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
 
@@ -33,7 +30,21 @@
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Guides" href="index.html"/>
         <link rel="next" title="Using Limbo as an environment for experiments" href="framework.html"/>
-        <link rel="prev" title="Introduction to Bayesian Optimization (BO)" href="bo.html"/> 
+        <link rel="prev" title="Introduction to Bayesian Optimization (BO)" href="bo.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -49,43 +60,58 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search">
           
-  
-    <a href="../index.html" class="icon icon-home"> limbo
-  
 
-  
-  </a>
+          
+          
 
-  
-    
-    
-      <div class="version">
-        0.0
-      </div>
-    
-  
+          
+            <a href="https://resibots.eu">
+          
 
-  
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
 
+          
         </div>
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-  <ul>
-    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
-    
             
             
-                <ul class="current">
+              
+                  <a class="caption" href="http://www.resilient-robots.net">Project's website</a>
+              
+            
+
+            
+            
+                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bo.html">Introduction to Bayesian Optimization (BO)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Limbo-specific concepts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#mean-function">Mean function</a></li>
@@ -102,9 +128,14 @@
 </ul>
 
             
-          
-  </ul>
 
+            
+            
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
         </div>
       </div>
     </nav>
@@ -129,18 +160,18 @@
 
 <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
-          <li><a href="index.html">Guides</a> &raquo;</li>
-      
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Guides</a> &raquo;</li>
+    
     <li>Limbo-specific concepts</li>
-      <li class="wy-breadcrumbs-aside">
+    <li class="wy-breadcrumbs-aside">
+      
         
-          
-            <a href="../_sources/guides/limbo_concepts.txt" rel="nofollow"> View page source</a>
-          
+          <a href="../_sources/guides/limbo_concepts.txt" rel="nofollow"> View page source</a>
         
-      </li>
+      
+    </li>
   </ul>
   <hr/>
 </div>
@@ -156,7 +187,8 @@
 <p>Nevertheless, it can be useful to use more complex priors. This is, for instance, the case when we can use a low-fidelity simulator as a prior for physical experiments with a robot <a class="reference internal" href="#cully-robots-2015" id="id2">[2]</a>. To incorporate this idea into the Bayesian optimization, <em>limbo</em> models the <em>difference</em> between the prediction of the behavior-performance map and the actual performance on the real robot, instead of directly modeling the objective function. This idea is incorporated into the Gaussian process by modifying the update equation for the mean function (<span class="math">\(\mu_t(\mathbf{x})\)</span>):</p>
 <div class="math">
 \[\mu_{t}(\mathbf{x})= \mathcal{P}(\mathbf{x}) + \mathbf{k}^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t}))\]</div>
-<p>where <span class="math">\(\mathcal{P}(\mathbf{x})\)</span> is the performance of <span class="math">\(\mathbf{x}\)</span> according to the simulation and <span class="math">\(\mathcal{P}(\mathbf{\chi}_{1:t})\)</span> is the performance of all the previous observations, also according to the simulation. Replacing <span class="math">\(\mathbf{P}_{1:t}\)</span> by <span class="math">\(\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t})\)</span> means that the Gaussian process models the difference between the actual performance <span class="math">\(\mathbf{P}_{1:t}\)</span> and the performance from the behavior-performance map <span class="math">\(\mathcal{P}(\mathbf{\chi}_{1:t})\)</span>. The term <span class="math">\(\mathcal{P}(\mathbf{x})\)</span> is the prediction given by the mean function (the behavior-performance map in <a class="reference internal" href="#cully-robots-2015" id="id3">[2]</a>).</p>
+<p>where <span class="math">\(\mathcal{P}(\mathbf{x})\)</span> is the performance of <span class="math">\(\mathbf{x}\)</span> according to the mean function (<em>the prior</em>) and <span class="math">\(\mathcal{P}(\mathbf{\chi}_{1:t})\)</span> is the performance of all the previous observations, also according to the mean function (prior).</p>
+<p>Replacing <span class="math">\(\mathbf{P}_{1:t}\)</span> by <span class="math">\(\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t})\)</span> means that the Gaussian process models the difference between the actual performance <span class="math">\(\mathbf{P}_{1:t}\)</span> and the performance from the behavior-performance map <span class="math">\(\mathcal{P}(\mathbf{\chi}_{1:t})\)</span>. The term <span class="math">\(\mathcal{P}(\mathbf{x})\)</span> is the prediction given by the mean function (the behavior-performance map in <a class="reference internal" href="#cully-robots-2015" id="id3">[2]</a>).</p>
 <p>See <a class="reference internal" href="general_concepts.html#mean-guide"><span>the Limbo implementation guide</span></a> for the available mean functions.</p>
 </div>
 <div class="section" id="black-lists">
@@ -235,13 +267,32 @@ Thanks to this distinction between valid samples and blacklisted ones, the algor
 
   <hr/>
 
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 2014-2015, UPMC/Inria.
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
 
-    </p>
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
 
 </footer>
 
@@ -272,16 +323,13 @@ Thanks to this distinction between valid samples and blacklisted ones, the algor
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   
   
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxResibotsTheme.StickyNav.enable();
       });
   </script>
    

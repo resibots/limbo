@@ -22,10 +22,7 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
 
@@ -33,7 +30,21 @@
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Guides" href="index.html"/>
         <link rel="next" title="Parameters" href="parameters.html"/>
-        <link rel="prev" title="Limbo-specific concepts" href="limbo_concepts.html"/> 
+        <link rel="prev" title="Limbo-specific concepts" href="limbo_concepts.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -49,43 +60,58 @@
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search">
           
-  
-    <a href="../index.html" class="icon icon-home"> limbo
-  
 
-  
-  </a>
+          
+          
 
-  
-    
-    
-      <div class="version">
-        0.0
-      </div>
-    
-  
+          
+            <a href="https://resibots.eu">
+          
 
-  
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
 
+          
         </div>
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-  <ul>
-    <li><a href="http://project.invalid/">Project Homepage</a> &raquo;</li>
-    
             
             
-                <ul class="current">
+              
+                  <a class="caption" href="http://www.resilient-robots.net">Project's website</a>
+              
+            
+
+            
+            
+                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bo.html">Introduction to Bayesian Optimization (BO)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="limbo_concepts.html">Limbo-specific concepts</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Using Limbo as an environment for experiments</a><ul>
@@ -102,9 +128,14 @@
 </ul>
 
             
-          
-  </ul>
 
+            
+            
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
         </div>
       </div>
     </nav>
@@ -129,18 +160,18 @@
 
 <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
-          <li><a href="index.html">Guides</a> &raquo;</li>
-      
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Guides</a> &raquo;</li>
+    
     <li>Using Limbo as an environment for experiments</li>
-      <li class="wy-breadcrumbs-aside">
+    <li class="wy-breadcrumbs-aside">
+      
         
-          
-            <a href="../_sources/guides/framework.txt" rel="nofollow"> View page source</a>
-          
+          <a href="../_sources/guides/framework.txt" rel="nofollow"> View page source</a>
         
-      </li>
+      
+    </li>
   </ul>
   <hr/>
 </div>
@@ -236,6 +267,15 @@
 <h2>Variants<a class="headerlink" href="#variants" title="Permalink to this headline">¶</a></h2>
 <p>A very common use case is to compare variant XX to variant YY of an algorithm. Usually, only a few lines of code are different (like, calling kernel X or kernel Y). Limbo is designed to create a binary for each variant by defining a few constant at the beginning of a source file.</p>
 <p>For instance, let&#8217;s say we have a file called <code class="docutils literal"><span class="pre">multi.cpp</span></code> for which we want to compare two algorithms, <code class="docutils literal"><span class="pre">Parego</span></code> and <code class="docutils literal"><span class="pre">EHVI</span></code>:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//.... code</span>
+<span class="cp">#ifdef PAREGO</span>
+  <span class="n">Parego</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">stat_fun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
+<span class="cp">#else</span>
+  <span class="n">Ehvi</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">stat_fun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
+<span class="cp">#endif</span>
+<span class="c1">// ...</span>
+</pre></div>
+</div>
 <p>We can create two variants in the <code class="docutils literal"><span class="pre">wscript</span></code>, as follows:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
@@ -291,13 +331,32 @@
 
   <hr/>
 
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 2014-2015, UPMC/Inria.
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
 
-    </p>
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
 
 </footer>
 
@@ -328,16 +387,13 @@
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
   
   
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxResibotsTheme.StickyNav.enable();
       });
   </script>
    

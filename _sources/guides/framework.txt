@@ -97,6 +97,7 @@ A very common use case is to compare variant XX to variant YY of an algorithm. U
 For instance, let's say we have a file called ``multi.cpp`` for which we want to compare two algorithms, ``Parego`` and ``EHVI``:
 
 .. code-block:: cpp
+
   //.... code
   #ifdef PAREGO
     Parego<Params, stat_fun<stat_t>> opt;

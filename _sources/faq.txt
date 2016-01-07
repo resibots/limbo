@@ -34,7 +34,7 @@ Short answer: because we target developpers/researchers who want to write the sm
 Long answer is in the :ref:`Parameters guide <params-guide>`.
 
 Why C++11? (and not <insert your favorite language>)?
----------------------------------------------------
+-----------------------------------------------------
 We have specific needs that mainly revolve around high-performance, minimzing boilerplate code, and easy interface with hardware and existing libraries:
 
 - Easy interface with high-performance libraries (Intel MKL, multi-core parallelization, MPI, etc.), with hardware (robots, ROS, etc.), and with our existing code (e.g. Sferes2): we want to focus on the 'real code', and avoid writing interface code as much as possible;

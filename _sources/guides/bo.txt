@@ -14,7 +14,7 @@ Bayesian optimization is a model-based, black-box optimization algorithm that is
 Gaussian Process
 ----------------
 
-Here we use Gaussian process regression to find a model :cite:`Rasmussen2006`, which is a common choice for Bayesian optimization :cite:`brochu2010tutorial`. Gaussian processes are particularly interesting for regression because they not only model the cost function, but also the uncertainty associated with each prediction. For a cost function :math:`f`, usually unknown, a Gaussian process defines the probability distribution of the possible values :math:`f(\mathbf{x})` for each point :math:`\mathbf{x}`. These probability distributions are Gaussian, and are therefore defined by a mean (:math:`\mu`) and a standard deviation (:math:`\sigma`). However, :math:`\mu` and :math:`\sigma` can be different for each :math:`\mathbf{x}`; we therefore define a probability distribution *over functions*:
+Limbo uses Gaussian process regression to find a model :cite:`Rasmussen2006`, which is a common choice for Bayesian optimization :cite:`brochu2010tutorial`. Gaussian processes are particularly interesting for regression because they not only model the cost function, but also the uncertainty associated with each prediction. For a cost function :math:`f`, usually unknown, a Gaussian process defines the probability distribution of the possible values :math:`f(\mathbf{x})` for each point :math:`\mathbf{x}`. These probability distributions are Gaussian, and are therefore defined by a mean (:math:`\mu`) and a standard deviation (:math:`\sigma`). However, :math:`\mu` and :math:`\sigma` can be different for each :math:`\mathbf{x}`; we therefore define a probability distribution *over functions*:
 
 .. math::
   P(f(\mathbf{x})|\mathbf{x}) = \mathcal{N}(\mu(\mathbf{x}), \sigma^2(\mathbf{x}))
@@ -45,7 +45,33 @@ Given a set of observations :math:`\mathbf{P}_{1:t}=f(\mathbf{\chi}_{1:t})` and 
 Our implementation of Bayesian optimization uses this Gaussian process model to search for the maximum of the objective function :math:`f(\mathbf{x})`, :math:`f(\mathbf{x})` being unknown. It selects the next :math:`\chi` to test by selecting the maximum of the *acquisition function*, which balances exploration -- improving the model in the less explored parts of the search space -- and exploitation -- favoring parts that the models predicts as promising. Here, we use the "Upper Confidence Bound" acquisition function (see the "information acquisition function" section below). Once the observation is made, the algorithm updates the Gaussian process to take the new data into account. In classic Bayesian optimization, the Gaussian process is initialized with a constant mean because it is assumed that all the points of the search space are equally likely to be good. The model is then progressively refined after each observation.
 
 Optimizing the hyper-parameters of a Gaussian process
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------------
+
+A GP is fully specified by its mean function :math:`\mu(\mathbf{x})` and covariance function :math:`k(\chi_1, \chi_2)`. Nevertheless, the kernel function often includes some parameters, called *hyperparameters*, that need to be tuned. For instance, one of the most common kernel is the squared exponential covariance function:
+
+.. math::
+
+    k_{SE}(\chi_1, \chi_2) = \sigma_f^2 \cdot \exp\left( \frac{\left|\left|\chi_1, \chi_2\right|\right|^2}{2 l^2}  \right)
+
+For some datasets, it makes sense to hand-tune these parameters (e.g., when there are very few samples). Ideally, our objective should be to learn :math:`l^2` (characteristic length scale) and :math:`\sigma_f^2` (overall variance).
+
+A classic way to do so is to maximize the probability of the data given the hyper-parameters :math:`\mathbf{\vartheta}` (there are other ways, e.g. cross-validation). We use a log because it makes the optimization simpler and does not change the result.
+
+The marginal likelihood can be computed as follows:
+
+.. math::
+
+
+  \log p(\mathbf{P}_{1:t}\mid\boldsymbol{\chi}_{1:t},\boldsymbol{\theta})= -\frac{1}{2}(\mathbf{P}_{1:t}-\mu_0)^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mu_0) - \frac{1}{2}\log\mid\mathbf{K}\mid - \frac{n}{2}\log2\pi
+
+
+where :math:`\mu_0` is the mean function (prior).
+
+Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop).
+
+For more details, see :cite:`Rasmussen2006` (chapter 5).
+
+.. todo:: list the optimization algorithms
 
 .. _kernel-functions:
 
@@ -72,7 +98,7 @@ The Matern kernel function is computed as follows :cite:`matern1960spatial,stein
 There are other kernel functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <kernel-guide>` for the available kernel functions.
 
 Acquisition function
--------------------
+--------------------
 
 The selection of the next solution to evaluate is made by
 finding the solution that maximizes the acquisition function. This
