@@ -8,7 +8,24 @@
 Welcome to limbo's documentation!
 =================================
 
+Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions.
+
+Limbo is primarily designed for *researchers* who needs to experiment with novel ideas / algorithms. It is not designed for end-users who need a "black-box" to optimize a function (although Limbo can be used for this).
+
+Main features
+--------------
+
+- Bayesian optimisation based on Gaussian processes
+- Generic framework (template-based / policy-based design), which allows easy customization for testing novel ideas
+- Programming / experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters, etc.
+- High performance (in particular, Limbo can exploit multicore computers via Intel TBB and vectorize some operations via Eigen3)
+- Purposely small to be easily maintained and quickly understood
+- Modern C++-11
+- Experimental support for multi-objective optimization
+
+
 Contents:
+-----------
 
 .. toctree::
    :maxdepth: 2
