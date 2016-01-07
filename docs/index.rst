@@ -18,6 +18,8 @@ Limbo has been used in several scientific publications, in particular:
 
 The development of Limbo is funded by the `ERC project ResiBots <http://www.resibots.eu>`_.
 
+Limbo shares many ideas with `Sferes2 <http://github.com/sferes2>`_, a similar framework for evolutionary computation.
+
 Main features
 --------------
 
