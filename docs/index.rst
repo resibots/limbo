@@ -10,7 +10,7 @@ Welcome to limbo's documentation!
 
 Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions.
 
-Limbo is primarily designed for *researchers* who needs to experiment with novel ideas / algorithms. It is not designed for end-users who need a "black-box" to optimize a function (although Limbo can be used for this).
+Limbo is primarily designed for *researchers* who need to experiment with novel ideas / algorithms. It is not designed for end-users who need a "black-box" to optimize a function (although Limbo can be used for this).
 
 Limbo has been used in several scientific publications, in particular:
 
