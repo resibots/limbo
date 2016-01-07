@@ -5,7 +5,7 @@
 
 .. _limbo_doc:
 
-Welcome to limbo's documentation!
+Limbo's documentation
 =================================
 
 Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions.
@@ -37,7 +37,9 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+   :caption: Limbo (BO library)
 
+   self
    tutorials/index
    guides/index
    faq
