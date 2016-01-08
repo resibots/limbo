@@ -65,7 +65,7 @@
           
 
           
-            <a href="https://resibots.eu">
+            <a href="http://www.resibots.eu">
           
 
           
@@ -183,19 +183,19 @@
             
   <div class="section" id="introduction-to-bayesian-optimization-bo">
 <h1>Introduction to Bayesian Optimization (BO)<a class="headerlink" href="#introduction-to-bayesian-optimization-bo" title="Permalink to this headline">¶</a></h1>
-<p>Bayesian optimization is a model-based, black-box optimization algorithm that is tailored for very expensive objective functions (a.k.a. cost functions) <a class="reference internal" href="limbo_concepts.html#brochu2010tutorial" id="id1">[1]</a><a class="reference internal" href="limbo_concepts.html#mockus2013" id="id2">[3]</a>. As a black-box optimization algorithm, Bayesian optimization searches for the maximum of an unknown objective function from which samples can be obtained (e.g., by measuring the performance of a robot). Like all model-based optimization algorithms (e.g. surrogate-based algorithms, kriging, or DACE), Bayesian optimization creates a model of the objective function with a regression method, uses this model to select the next point to acquire, then updates the model, etc. It is called <em>Bayesian</em> because, in its general formulation <a class="reference internal" href="limbo_concepts.html#mockus2013" id="id3">[3]</a>, this algorithm chooses the next point by computing a posterior distribution of the objective function using the likelihood of the data already acquired and a prior on the type of function.</p>
+<p>Bayesian optimization is a model-based, black-box optimization algorithm that is tailored for very expensive objective functions (a.k.a. cost functions) <a class="reference internal" href="limbo_concepts.html#brochu2010tutorial" id="id1">[1]</a><a class="reference internal" href="limbo_concepts.html#mockus2013" id="id2">[5]</a>. As a black-box optimization algorithm, Bayesian optimization searches for the maximum of an unknown objective function from which samples can be obtained (e.g., by measuring the performance of a robot). Like all model-based optimization algorithms (e.g. surrogate-based algorithms, kriging, or DACE), Bayesian optimization creates a model of the objective function with a regression method, uses this model to select the next point to acquire, then updates the model, etc. It is called <em>Bayesian</em> because, in its general formulation <a class="reference internal" href="limbo_concepts.html#mockus2013" id="id3">[5]</a>, this algorithm chooses the next point by computing a posterior distribution of the objective function using the likelihood of the data already acquired and a prior on the type of function.</p>
 <div class="figure" id="id15">
 <img alt="concept of Bayesian optimization" src="../_images/bo_concept.png" />
 <p class="caption"><span class="caption-text"><strong>Bayesian Optimization of a toy problem.</strong> (A) The goal of this toy prob- lem is to find the maximum of the unknown objective function. (B) The Gaussian process is initialized, as it is customary, with a constant mean and a constant variance. (C) The next potential solution is selected and evaluated. The model is then updated according to the acquired data. (D) Based on the new model, another potential solution is selected and evaluated. (E-G) This process repeats until the maximum is reached.</span></p>
 </div>
 <div class="section" id="gaussian-process">
 <span id="id4"></span><h2>Gaussian Process<a class="headerlink" href="#gaussian-process" title="Permalink to this headline">¶</a></h2>
-<p>Limbo uses Gaussian process regression to find a model <a class="reference internal" href="limbo_concepts.html#rasmussen2006" id="id5">[4]</a>, which is a common choice for Bayesian optimization <a class="reference internal" href="limbo_concepts.html#brochu2010tutorial" id="id6">[1]</a>. Gaussian processes are particularly interesting for regression because they not only model the cost function, but also the uncertainty associated with each prediction. For a cost function <span class="math">\(f\)</span>, usually unknown, a Gaussian process defines the probability distribution of the possible values <span class="math">\(f(\mathbf{x})\)</span> for each point <span class="math">\(\mathbf{x}\)</span>. These probability distributions are Gaussian, and are therefore defined by a mean (<span class="math">\(\mu\)</span>) and a standard deviation (<span class="math">\(\sigma\)</span>). However, <span class="math">\(\mu\)</span> and <span class="math">\(\sigma\)</span> can be different for each <span class="math">\(\mathbf{x}\)</span>; we therefore define a probability distribution <em>over functions</em>:</p>
+<p>Limbo uses Gaussian process regression to find a model <a class="reference internal" href="limbo_concepts.html#rasmussen2006" id="id5">[6]</a>, which is a common choice for Bayesian optimization <a class="reference internal" href="limbo_concepts.html#brochu2010tutorial" id="id6">[1]</a>. Gaussian processes are particularly interesting for regression because they not only model the cost function, but also the uncertainty associated with each prediction. For a cost function <span class="math">\(f\)</span>, usually unknown, a Gaussian process defines the probability distribution of the possible values <span class="math">\(f(\mathbf{x})\)</span> for each point <span class="math">\(\mathbf{x}\)</span>. These probability distributions are Gaussian, and are therefore defined by a mean (<span class="math">\(\mu\)</span>) and a standard deviation (<span class="math">\(\sigma\)</span>). However, <span class="math">\(\mu\)</span> and <span class="math">\(\sigma\)</span> can be different for each <span class="math">\(\mathbf{x}\)</span>; we therefore define a probability distribution <em>over functions</em>:</p>
 <div class="math">
 \[P(f(\mathbf{x})|\mathbf{x}) = \mathcal{N}(\mu(\mathbf{x}), \sigma^2(\mathbf{x}))\]</div>
 <p>where <span class="math">\(\mathcal{N}\)</span> denotes the standard normal distribution.</p>
 <p>To estimate <span class="math">\(\mu(\mathbf{x})\)</span> and <span class="math">\(\sigma(\mathbf{x})\)</span>, we need to fit the Gaussian process to the data. To do so, we assume that each observation <span class="math">\(f(\mathbf{\chi})\)</span> is a sample from a normal distribution. If we have a data set made of several observations, that is, <span class="math">\(f(\mathbf{\chi}_1), f(\mathbf{\chi}_2), ..., f(\mathbf{\chi}_t)\)</span>, then the vector <span class="math">\(\left[f(\mathbf{\chi}_1), f(\mathbf{\chi}_2), ..., f(\mathbf{\chi}_t)\right]\)</span> is a sample from a <em>multivariate</em> normal distribution, which is defined by a mean vector and a covariance matrix. A Gaussian process is therefore a generalization of a <span class="math">\(n\)</span>-variate normal distribution, where <span class="math">\(n\)</span> is the number of observations. The covariance matrix is what relates one observation to another: two observations that correspond to nearby values of <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> are likely to be correlated (this is a prior assumption based on the fact that functions tend to be smooth, and is injected into the algorithm via a prior on the likelihood of functions), two observations that correspond to distant values of <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> should not influence each other (i.e. their distributions are not correlated). Put differently, the covariance matrix represents that distant samples are almost uncorrelated and nearby samples are strongly correlated. This covariance matrix is defined via a <em>kernel function</em>, called <span class="math">\(k(\chi_1, \chi_2)\)</span>, which is usually based on the Euclidean distance between <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> (see the &#8220;kernel function&#8221; sub-section below).</p>
-<p>Given a set of observations <span class="math">\(\mathbf{P}_{1:t}=f(\mathbf{\chi}_{1:t})\)</span> and a sampling noise <span class="math">\(\sigma^2_{noise}\)</span> (which is a user-specified parameter), the Gaussian process is computed as follows <a class="reference internal" href="limbo_concepts.html#brochu2010tutorial" id="id7">[1]</a><a class="reference internal" href="limbo_concepts.html#rasmussen2006" id="id8">[4]</a>:</p>
+<p>Given a set of observations <span class="math">\(\mathbf{P}_{1:t}=f(\mathbf{\chi}_{1:t})\)</span> and a sampling noise <span class="math">\(\sigma^2_{noise}\)</span> (which is a user-specified parameter), the Gaussian process is computed as follows <a class="reference internal" href="limbo_concepts.html#brochu2010tutorial" id="id7">[1]</a><a class="reference internal" href="limbo_concepts.html#rasmussen2006" id="id8">[6]</a>:</p>
 <div class="math">
 \[\begin{split}\begin{gathered}
  P(f(\mathbf{x})|\mathbf{P}_{1:t},\mathbf{x}) = \mathcal{N}(\mu_{t}(\mathbf{x}), \sigma_{t}^2(\mathbf{x}))\\
@@ -225,7 +225,7 @@
 \[\log p(\mathbf{P}_{1:t}\mid\boldsymbol{\chi}_{1:t},\boldsymbol{\theta})= -\frac{1}{2}(\mathbf{P}_{1:t}-\mu_0)^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mu_0) - \frac{1}{2}\log\mid\mathbf{K}\mid - \frac{n}{2}\log2\pi\]</div>
 <p>where <span class="math">\(\mu_0\)</span> is the mean function (prior).</p>
 <p>Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop).</p>
-<p>For more details, see <a class="reference internal" href="limbo_concepts.html#rasmussen2006" id="id9">[4]</a> (chapter 5).</p>
+<p>For more details, see <a class="reference internal" href="limbo_concepts.html#rasmussen2006" id="id9">[6]</a> (chapter 5).</p>
 <div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
 <p class="last">list the optimization algorithms</p>
@@ -236,8 +236,8 @@
 <p>The kernel function is the covariance function of the Gaussian
 process. It defines the influence of a solution&#8217;s performance on the performance and confidence estimations of
 not-yet-tested solutions that are nearby.</p>
-<p>The Squared Exponential covariance function and the Matern kernel are the most common kernels for Gaussian processes <a class="reference internal" href="limbo_concepts.html#brochu2010tutorial" id="id10">[1]</a><a class="reference internal" href="limbo_concepts.html#rasmussen2006" id="id11">[4]</a>. Both kernels are variants of the &#8220;bell curve&#8221;. The Matern kernel is more general (it includes the Squared Exponential function as a special case) and  allows us to control not only the distance at which effects become nearly zero (as a function of parameter <span class="math">\(\rho\)</span>), but also the rate at which distance effects decrease (as a function of parameter <span class="math">\(\nu\)</span>).</p>
-<p>The Matern kernel function is computed as follows <a class="reference internal" href="limbo_concepts.html#matern1960spatial" id="id12">[2]</a><a class="reference internal" href="limbo_concepts.html#stein1999interpolation" id="id13">[5]</a> (with <span class="math">\(\nu=5/2\)</span>):</p>
+<p>The Squared Exponential covariance function and the Matern kernel are the most common kernels for Gaussian processes <a class="reference internal" href="limbo_concepts.html#brochu2010tutorial" id="id10">[1]</a><a class="reference internal" href="limbo_concepts.html#rasmussen2006" id="id11">[6]</a>. Both kernels are variants of the &#8220;bell curve&#8221;. The Matern kernel is more general (it includes the Squared Exponential function as a special case) and  allows us to control not only the distance at which effects become nearly zero (as a function of parameter <span class="math">\(\rho\)</span>), but also the rate at which distance effects decrease (as a function of parameter <span class="math">\(\nu\)</span>).</p>
+<p>The Matern kernel function is computed as follows <a class="reference internal" href="limbo_concepts.html#matern1960spatial" id="id12">[4]</a><a class="reference internal" href="limbo_concepts.html#stein1999interpolation" id="id13">[7]</a> (with <span class="math">\(\nu=5/2\)</span>):</p>
 <div class="math">
 \[\begin{split}\begin{array}{l}
 k(\mathbf{x}_1,\mathbf{x}_2)=\left(1+ \frac{\sqrt{5}d(\mathbf{x}_1,\mathbf{x}_2)}{\rho}+\frac{5d(\mathbf{x}_1,\mathbf{x}_2)^2}{3\rho^2}\right)\exp\left(-\frac{\sqrt{5}d(\mathbf{x}_1,\mathbf{x}_2)}{\rho}\right)\\
@@ -270,28 +270,40 @@ exploitation/exploration trade-off of the algorithm.</p>
 <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id7">3</a>, <a class="fn-backref" href="#id10">4</a>, <a class="fn-backref" href="#id14">5</a>)</em> Eric Brochu, Vlad&nbsp;M Cora, and Nando De&nbsp;Freitas. A tutorial on bayesian optimization of expensive cost functions, with application to active user modeling and hierarchical reinforcement learning. <em>arXiv preprint arXiv:1012.2599</em>, 2010.</td></tr>
 </tbody>
 </table>
+<table class="docutils citation" frame="void" id="cully-robots-2015" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Antoine Cully, Jeff Clune, Danesh Tarapore, and Jean-Baptiste Mouret. Robots that can adapt like animals. <em>Nature</em>, 521(7553):503–507, May 2015. <a class="reference external" href="http://www.nature.com/doifinder/10.1038/nature14422">URL: http://www.nature.com/doifinder/10.1038/nature14422</a>, <a class="reference external" href="http://dx.doi.org/10.1038/nature14422">doi:10.1038/nature14422</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="lizotte2007automatic" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Daniel&nbsp;J Lizotte, Tao Wang, Michael&nbsp;H Bowling, and Dale Schuurmans. Automatic gait optimization with gaussian process regression. In <em>Proceedings of the the International Joint Conference on Artificial Intelligence (IJCAI)</em>, volume 7, 944–949. 2007.</td></tr>
+</tbody>
+</table>
 <table class="docutils citation" frame="void" id="matern1960spatial" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id12">[2]</a></td><td>Bertil Matérn and others. Spatial variation. stochastic models and their application to some problems in forest surveys and other sampling investigations. <em>Meddelanden fran statens Skogsforskningsinstitut</em>, 1960.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id12">[4]</a></td><td>Bertil Matérn and others. Spatial variation. stochastic models and their application to some problems in forest surveys and other sampling investigations. <em>Meddelanden fran statens Skogsforskningsinstitut</em>, 1960.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="mockus2013" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> J.&nbsp;Mockus. <em>Bayesian approach to global optimization: theory and applications</em>. Kluwer Academic, 2013.</td></tr>
+<tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> J.&nbsp;Mockus. <em>Bayesian approach to global optimization: theory and applications</em>. Kluwer Academic, 2013.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="rasmussen2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id9">3</a>, <a class="fn-backref" href="#id11">4</a>)</em> C.&nbsp;E. Rasmussen and C.&nbsp;K.&nbsp;I. Williams. <em>Gaussian processes for machine learning</em>. MIT Press, 2006.</td></tr>
+<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id9">3</a>, <a class="fn-backref" href="#id11">4</a>)</em> C.&nbsp;E. Rasmussen and C.&nbsp;K.&nbsp;I. Williams. <em>Gaussian processes for machine learning</em>. MIT Press, 2006.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="stein1999interpolation" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id13">[5]</a></td><td>Michael&nbsp;L Stein. <em>Interpolation of spatial data: some theory for kriging</em>. Springer, 1999.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id13">[7]</a></td><td>Michael&nbsp;L Stein. <em>Interpolation of spatial data: some theory for kriging</em>. Springer, 1999.</td></tr>
 </tbody>
 </table>
 </p>
