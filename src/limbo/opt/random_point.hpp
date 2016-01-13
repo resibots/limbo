@@ -9,7 +9,7 @@ namespace limbo {
         template <typename Params>
         struct RandomPoint {
             template <typename F>
-            Eigen::VectorXd operator()(const F& f, bool bounded) const
+            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
                 // Random point does not support unbounded search
                 assert(bounded);

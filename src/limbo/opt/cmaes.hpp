@@ -7,6 +7,7 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
+#include <limbo/opt/optimizer.hpp>
 
 #ifndef USE_LIBCMAES
 #warning NO libcmaes support
@@ -26,23 +27,22 @@ namespace limbo {
         struct Cmaes {
         public:
             template <typename F>
-            Eigen::VectorXd operator()(const F& f, bool bounded) const
+            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, double bounded) const
             {
-                size_t dim = f.param_size();
+	      size_t dim = init.size();
 
-                // wrap the function
-                libcmaes::FitFunc f_cmaes = [&](const double* x, const int n) {
-                    Eigen::Map<const Eigen::VectorXd> m(x, n);
-                    // remember that our optimizers maximize
-                    return -f.utility(m);
-                };
-
-                if (bounded)
-                    return _opt_bounded(f_cmaes, dim, f.init());
-                else
-                    return _opt_unbounded(f_cmaes, dim, f.init());
+	      // wrap the function
+	      libcmaes::FitFunc f_cmaes = [&](const double* x, const int n) {
+		Eigen::Map<const Eigen::VectorXd> m(x, n);
+		// remember that our optimizers maximize
+		return -eval(f, m);
+	      };
+	      
+	      if (bounded)
+		return _opt_bounded(f_cmaes, dim, init);
+	      else
+		return _opt_unbounded(f_cmaes, dim, init);
             }
-
         private:
             // F is a CMA-ES style function, not our function
             template <typename F>

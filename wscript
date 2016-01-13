@@ -96,6 +96,13 @@ def build_extensive_tests(ctx):
     ctx.recurse('src/')
     ctx.recurse('src/tests')
 
+def run_extensive_tests(ctx):
+    for fullname in glob.glob('build/src/tests/combinations/*'):
+        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
+            fpath, fname = os.path.split(fullname)
+            print "Running: " + fname
+            s = "cd " + fpath + "; ./" + fname
+            retcode = subprocess.call(s, shell=True, env=None)
 
 def submit_extensive_tests(ctx):
     for fullname in glob.glob('build/src/tests/combinations/*'):

@@ -30,13 +30,16 @@ namespace limbo {
                     return false;
 
                 auto optimizer = _get_optimizer(typename BO::acqui_optimizer_t(), Optimizer());
-                auto starting_point = tools::random_vector(bo.model().dim_in());
-                double val = afun(bo.model().mu(optimizer(_make_model_mean_optimization(bo.model(), afun, starting_point), true)));
+                Eigen::VectorXd starting_point = tools::rand_vec(bo.model().dim_in());
+                auto model_optimization =
+                  [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(afun(bo.model().mu(x))); };
+                auto x = optimizer(model_optimization, starting_point, true);
+                double val = afun(bo.model().mu(x));
 
                 if (bo.observations().size() == 0 || afun(bo.best_observation(afun)) <= Params::stop_maxpredictedvalue::ratio() * val)
                     return false;
                 else {
-                    std::cout << "stop caused by Max predicted value reached. Thresold: "
+                    std::cout << "stop caused by Max predicted value reached. Threshold: "
                               << Params::stop_maxpredictedvalue::ratio() * val
                               << " max observations: " << afun(bo.best_observation(afun)) << std::endl;
                     return true;

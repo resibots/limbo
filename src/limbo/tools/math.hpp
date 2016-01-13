@@ -1,4 +1,6 @@
-//| This file is a part of the limbo framework.
+
+
+//| This file is a part of the sferes2 framework.
 //| Copyright 2009, ISIR / Universite Pierre et Marie Curie (UPMC)
 //| Main contributor(s): Jean-Baptiste Mouret, mouret@isir.fr
 //|

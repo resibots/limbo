@@ -38,7 +38,8 @@ struct Params {
 #ifdef USE_LIBCMAES
   struct opt_cmaes : public defaults::opt_cmaes {
   };
-#elif defined(USE_NLOPT)
+#endif
+#ifdef USE_NLOPT
   struct opt_nloptnograd : public defaults::opt_nloptnograd {
   };
 #endif

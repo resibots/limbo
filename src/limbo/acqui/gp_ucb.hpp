@@ -17,10 +17,10 @@ namespace limbo {
         public:
             GP_UCB(const Model& model, int iteration) : _model(model)
             {
-                double t3 = pow(iteration, 3.0);
+                double t3 = std::pow(iteration, 3.0);
                 static constexpr double delta3 = Params::acqui_gpucb::delta() * 3;
                 static constexpr double pi2 = M_PI * M_PI;
-                _beta = sqrtf(2.0 * log(t3 * pi2 / delta3));
+                _beta = std::sqrt(2.0 * std::log(t3 * pi2 / delta3));
             }
 
             size_t dim_in() const { return _model.dim_in(); }
@@ -33,7 +33,7 @@ namespace limbo {
                 Eigen::VectorXd mu;
                 double sigma;
                 std::tie(mu, sigma) = _model.query(v);
-                return (afun(mu) + _beta * sqrt(sigma));
+                return (afun(mu) + _beta * std::sqrt(sigma));
             }
 
         protected:

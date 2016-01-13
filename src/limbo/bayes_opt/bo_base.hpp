@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <limits>
+#include <exception>
 
 #include <boost/parameter.hpp>
 #include <boost/fusion/include/vector.hpp>
@@ -62,6 +63,7 @@ namespace limbo {
             return x(0);
         }
     };
+    class EvaluationError : public std::exception {};
 
     // we use optimal named template parameters
     // see:
@@ -111,12 +113,12 @@ namespace limbo {
 #ifdef USE_LIBCMAES
                 typedef opt::Cmaes<Params> acquiopt_t; // 2
 #elif defined(USE_NLOPT)
-  	        typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+                typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-	      typedef opt::GridSearch<Params> acquiopt_t;
+                typedef opt::GridSearch<Params> acquiopt_t;
 #endif
-	      
+
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
                 typedef model::GP<Params, kf_t, mean_t, model::gp::KernelLFOpt<Params>> model_t; // 3

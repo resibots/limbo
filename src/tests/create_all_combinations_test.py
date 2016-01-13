@@ -25,10 +25,10 @@ def create(bld):
     acquisitions = ['UCB', 'GP_UCB']
     optimizers = ['RandomPoint', 'GridSearch']
     if bld.env.DEFINES_NLOPT:
-        optimizers += ['NLOptNoGrad', 'NLOptGrad']
+        optimizers += ['NLOptNoGrad']
     if bld.env.DEFINES_LIBCMAES:
         optimizers += ['Cmaes']
-    
+
     inits = ['NoInit', 'RandomSampling', 'RandomSamplingGrid', 'GridSampling']
     stats = ['Samples', 'Observations', 'AggregatedObservations', 'BestSamples', 'BestObservations', 'BestAggregatedObservations',
              'BlSamples', 'GPPredictionDifferences', 'GPAcquisitions', 'GPLikelihood']
@@ -75,6 +75,6 @@ def create(bld):
                                             source='/combinations/combinations_' + str(i) + '.cpp',
                                             includes='. .. ../../',
                                             target='/combinations/combinations_' + str(i),
-                                            uselib='BOOST EIGEN TBB SFERES LIBCMAES',
+                                            uselib='BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
                                             use='limbo')
                                 i = i + 1
