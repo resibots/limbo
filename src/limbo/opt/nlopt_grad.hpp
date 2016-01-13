@@ -14,7 +14,7 @@
 #include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
-   namespace defaults {
+    namespace defaults {
         struct opt_nloptgrad {
             BO_PARAM(int, iterations, 500);
         };
@@ -52,17 +52,17 @@ namespace limbo {
             template <typename F>
             static double nlopt_func(const std::vector<double>& x, std::vector<double>& grad, void* my_func_data)
             {
-                F& f = (F&)(my_func_data);
+                F* f = (F*)(my_func_data);
                 Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());
                 double v;
                 if (!grad.empty()) {
-                    auto r = eval_grad(f, params);
+                    auto r = eval_grad(*f, params);
                     v = opt::fun(r);
                     Eigen::VectorXd g = opt::grad(r);
                     Eigen::VectorXd::Map(&grad[0], g.size()) = g;
                 }
                 else {
-                    v = eval(f, params);
+                    v = eval(*f, params);
                 }
                 return v;
             }

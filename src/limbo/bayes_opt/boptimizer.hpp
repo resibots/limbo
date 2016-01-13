@@ -47,7 +47,7 @@ namespace limbo {
 
                     // we do not have gradient in our current acquisition function
                     auto acqui_optimization =
-                      [&](const Eigen::VectorXd& x, bool g) { return  opt::no_grad(acqui(x, afun)); };
+                        [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(acqui(x, afun)); };
                     Eigen::VectorXd starting_point = tools::rand_vec(StateFunction::dim_in);
                     Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, true);
                     bool blacklisted = false;

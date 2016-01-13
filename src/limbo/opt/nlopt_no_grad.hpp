@@ -29,6 +29,7 @@ namespace limbo {
                 // Assert that the algorithm is non-gradient
                 // TO-DO: Add support for MLSL (Multi-Level Single-Linkage)
                 // TO-DO: Add better support for ISRES (Improved Stochastic Ranking Evolution Strategy)
+                // clang-format off
                 static_assert(Algorithm == nlopt::LN_COBYLA || Algorithm == nlopt::LN_BOBYQA ||
                     Algorithm == nlopt::LN_NEWUOA || Algorithm == nlopt::LN_NEWUOA_BOUND ||
                     Algorithm == nlopt::LN_PRAXIS || Algorithm == nlopt::LN_NELDERMEAD ||
@@ -39,6 +40,7 @@ namespace limbo {
                     Algorithm == nlopt::GN_ORIG_DIRECT_L || Algorithm == nlopt::GN_CRS2_LM ||
                     Algorithm == nlopt::GD_STOGO || Algorithm == nlopt::GD_STOGO_RAND ||
                     Algorithm == nlopt::GN_ISRES || Algorithm == nlopt::GN_ESCH, "NLOptNoGrad accepts gradient free nlopt algorithms only");
+                // clang-format on
 
                 int dim = init.size();
                 nlopt::opt opt(Algorithm, dim);
@@ -66,9 +68,9 @@ namespace limbo {
             template <typename F>
             static double nlopt_func(const std::vector<double>& x, std::vector<double>& grad, void* my_func_data)
             {
-                F& f = (F&)(my_func_data);
+                F* f = (F*)(my_func_data);
                 Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());
-                double v = eval(f, params);
+                double v = eval(*f, params);
                 return v;
             }
         };
