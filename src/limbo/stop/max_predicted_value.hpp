@@ -30,9 +30,9 @@ namespace limbo {
                     return false;
 
                 auto optimizer = _get_optimizer(typename BO::acqui_optimizer_t(), Optimizer());
-                Eigen::VectorXd starting_point = tools::rand_vec(bo.model().dim_in());
+                Eigen::VectorXd starting_point = tools::random_vector(bo.model().dim_in());
                 auto model_optimization =
-                  [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(afun(bo.model().mu(x))); };
+                    [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(afun(bo.model().mu(x))); };
                 auto x = optimizer(model_optimization, starting_point, true);
                 double val = afun(bo.model().mu(x));
 

@@ -23,7 +23,7 @@ opt::eval_t my_function(const Eigen::VectorXd& params, bool eval_grad)
 {
     double v = -params(0) * params(0) - params(1) * params(1);
     if (!eval_grad)
-      return opt::no_grad(v);
+        return opt::no_grad(v);
     Eigen::VectorXd grad(2);
     grad(0) = -2 * params(0);
     grad(1) = -2 * params(1);
@@ -33,7 +33,7 @@ opt::eval_t my_function(const Eigen::VectorXd& params, bool eval_grad)
 BOOST_AUTO_TEST_CASE(test_nlopt_grad_simple)
 {
     opt::NLOptGrad<Params, nlopt::LD_MMA> optimizer;
-    Eigen::VectorXd g = optimizer(my_function, tools::rand_vec(2), false);
+    Eigen::VectorXd g = optimizer(my_function, tools::random_vector(2), false);
 
     BOOST_CHECK_SMALL(g(0), 0.00000001);
     BOOST_CHECK_SMALL(g(1), 0.00000001);
@@ -41,8 +41,8 @@ BOOST_AUTO_TEST_CASE(test_nlopt_grad_simple)
 
 BOOST_AUTO_TEST_CASE(test_nlopt_no_grad_simple)
 {
-  opt::NLOptGrad<Params, nlopt::LN_COBYLA> optimizer;
-  Eigen::VectorXd g = optimizer(my_function, tools::rand_vec(2), false);
+    opt::NLOptGrad<Params, nlopt::LN_COBYLA> optimizer;
+    Eigen::VectorXd g = optimizer(my_function, tools::random_vector(2), false);
 
     BOOST_CHECK_SMALL(g(0), 0.00000001);
     BOOST_CHECK_SMALL(g(1), 0.00000001);

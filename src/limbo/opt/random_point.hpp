@@ -13,7 +13,7 @@ namespace limbo {
             {
                 // Random point does not support unbounded search
                 assert(bounded);
-                return tools::random_vector(f.param_size());
+                return tools::random_vector(init.size());
             }
         };
     }
