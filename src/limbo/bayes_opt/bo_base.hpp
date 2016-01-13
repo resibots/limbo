@@ -113,10 +113,10 @@ namespace limbo {
 #ifdef USE_LIBCMAES
                 typedef opt::Cmaes<Params> acquiopt_t; // 2
 #elif defined(USE_NLOPT)
-  	        typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+                typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-	      typedef opt::GridSearch<Params> acquiopt_t;
+                typedef opt::GridSearch<Params> acquiopt_t;
 #endif
 
                 typedef kernel::SquaredExpARD<Params> kf_t;

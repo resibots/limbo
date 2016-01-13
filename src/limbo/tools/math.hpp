@@ -48,6 +48,13 @@
 // someday we will have a real thread-safe random number generator...
 namespace limbo {
     namespace tools {
+
+        // return a random vector in [0, 1]
+        inline Eigen::VectorXd rand_vec(size_t size)
+        {
+            return (Eigen::VectorXd::Random(size).array() + 1) / 2.0;
+        }
+
         // NOT Thread-safe !
         template <typename T>
         inline T rand(T max = 1.0)

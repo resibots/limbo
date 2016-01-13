@@ -31,32 +31,6 @@ namespace limbo {
             typedef typename base_t::acquisition_function_t acquisition_function_t;
             typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
 
-            template <typename AcquisitionFunction, typename AggregatorFunction>
-            struct AcquiOptimization {
-            public:
-                AcquiOptimization(const AcquisitionFunction& acqui, const AggregatorFunction& afun, const Eigen::VectorXd& init) : _acqui(acqui), _afun(afun), _init(init) {}
-
-                double utility(const Eigen::VectorXd& params) const
-                {
-                    return _acqui(params, _afun);
-                }
-
-                size_t param_size() const
-                {
-                    return _acqui.dim_in();
-                }
-
-                const Eigen::VectorXd& init() const
-                {
-                    return _init;
-                }
-
-            protected:
-                const AcquisitionFunction& _acqui;
-                const AggregatorFunction& _afun;
-                const Eigen::VectorXd _init;
-            };
-
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
@@ -71,9 +45,11 @@ namespace limbo {
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
                     acquisition_function_t acqui(_model, this->_current_iteration);
 
-                    Eigen::VectorXd starting_point = (Eigen::VectorXd::Random(StateFunction::dim_in).array() + 1) / 2;
-                    auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
-                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, true);
+                    // we do not have gradient in our current acquisition function
+                    auto acqui_optimization =
+                        [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(acqui(x, afun)); };
+                    Eigen::VectorXd starting_point = tools::rand_vec(StateFunction::dim_in);
+                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, true);
                     bool blacklisted = false;
                     try {
                         this->add_new_sample(new_sample, sfun(new_sample));
