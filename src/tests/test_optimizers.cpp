@@ -23,7 +23,6 @@ struct Params {
     };
 };
 
-
 // test with a standard function
 int monodim_calls = 0;
 opt::eval_t acqui_mono(const Eigen::VectorXd& v, bool eval_grad)
@@ -44,8 +43,6 @@ struct FakeAcquiBi {
     }
 };
 
-
-
 BOOST_AUTO_TEST_CASE(test_random_mono_dim)
 {
     using namespace limbo;
@@ -54,8 +51,7 @@ BOOST_AUTO_TEST_CASE(test_random_mono_dim)
 
     monodim_calls = 0;
     for (int i = 0; i < 1000; i++) {
-        Eigen::VectorXd best_point =
-          optimizer(acqui_mono, Eigen::VectorXd::Constant(1, 0.5), true);
+        Eigen::VectorXd best_point = optimizer(acqui_mono, Eigen::VectorXd::Constant(1, 0.5), true);
         BOOST_CHECK_EQUAL(best_point.size(), 1);
         BOOST_CHECK(best_point(0) > 0 || std::abs(best_point(0)) < 1e-7);
         BOOST_CHECK(best_point(0) < 1 || std::abs(best_point(0) - 1) < 1e-7);
@@ -70,8 +66,7 @@ BOOST_AUTO_TEST_CASE(test_random_bi_dim)
 
     bidim_calls = 0;
     for (int i = 0; i < 1000; i++) {
-        Eigen::VectorXd best_point =
-          optimizer(FakeAcquiBi(), Eigen::VectorXd::Constant(2, 0.5), true);
+        Eigen::VectorXd best_point = optimizer(FakeAcquiBi(), Eigen::VectorXd::Constant(2, 0.5), true);
         BOOST_CHECK_EQUAL(best_point.size(), 2);
         BOOST_CHECK(best_point(0) > 0 || std::abs(best_point(0)) < 1e-7);
         BOOST_CHECK(best_point(0) < 1 || std::abs(best_point(0) - 1) < 1e-7);
@@ -87,9 +82,7 @@ BOOST_AUTO_TEST_CASE(test_grid_search_mono_dim)
     opt::GridSearch<Params> optimizer;
 
     monodim_calls = 0;
-    Eigen::VectorXd best_point =
-      optimizer(acqui_mono, Eigen::VectorXd::Constant(1, 0.5), true);
-
+    Eigen::VectorXd best_point = optimizer(acqui_mono, Eigen::VectorXd::Constant(1, 0.5), true);
 
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
@@ -103,9 +96,7 @@ BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
     opt::GridSearch<Params> optimizer;
 
     bidim_calls = 0;
-    Eigen::VectorXd best_point =
-      optimizer(FakeAcquiBi(), Eigen::VectorXd::Constant(2, 0.5), true);
-
+    Eigen::VectorXd best_point = optimizer(FakeAcquiBi(), Eigen::VectorXd::Constant(2, 0.5), true);
 
     BOOST_CHECK_EQUAL(best_point.size(), 2);
     BOOST_CHECK_CLOSE(best_point(0), 1, 0.0001);
@@ -113,4 +104,3 @@ BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
     // TO-DO: Maybe alter a little grid search so not to call more times the utility function
     BOOST_CHECK_EQUAL(bidim_calls, (Params::opt_gridsearch::bins() + 1) * (Params::opt_gridsearch::bins() + 1) + 21);
 }
-

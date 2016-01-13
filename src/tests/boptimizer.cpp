@@ -68,8 +68,9 @@ struct eval3_blacklist {
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const throw(limbo::EvaluationError)
     {
-        if (tools::rand<double>() < 0.1)
-          throw limbo::EvaluationError();
+        tools::rgen_double_t rgen(0, 1);
+        if (rgen.rand() < 0.1)
+            throw limbo::EvaluationError();
         Eigen::VectorXd v(1);
         Eigen::VectorXd t(3);
         t << 0.1, 0.2, 0.3;
@@ -78,7 +79,6 @@ struct eval3_blacklist {
         return v;
     }
 };
-
 
 template <typename Params, int obs_size = 1>
 struct eval1 {
@@ -95,7 +95,6 @@ struct eval1 {
         return v;
     }
 };
-
 
 BOOST_AUTO_TEST_CASE(test_bo_gp)
 {
@@ -118,8 +117,6 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.2, 0.000001);
     BOOST_CHECK_CLOSE(opt.best_sample()(2), 0.3, 0.000001);
 }
-
-
 
 BOOST_AUTO_TEST_CASE(test_bo_blacklist)
 {

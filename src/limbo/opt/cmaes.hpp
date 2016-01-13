@@ -29,20 +29,21 @@ namespace limbo {
             template <typename F>
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, double bounded) const
             {
-	      size_t dim = init.size();
+                size_t dim = init.size();
 
-	      // wrap the function
-	      libcmaes::FitFunc f_cmaes = [&](const double* x, const int n) {
+                // wrap the function
+                libcmaes::FitFunc f_cmaes = [&](const double* x, const int n) {
 		Eigen::Map<const Eigen::VectorXd> m(x, n);
 		// remember that our optimizers maximize
 		return -eval(f, m);
-	      };
-	      
-	      if (bounded)
-		return _opt_bounded(f_cmaes, dim, init);
-	      else
-		return _opt_unbounded(f_cmaes, dim, init);
+                };
+
+                if (bounded)
+                    return _opt_bounded(f_cmaes, dim, init);
+                else
+                    return _opt_unbounded(f_cmaes, dim, init);
             }
+
         private:
             // F is a CMA-ES style function, not our function
             template <typename F>

@@ -5,6 +5,7 @@
 
 #include <limbo/opt/rprop.hpp>
 #include <limbo/opt/parallel_repeater.hpp>
+#include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
     namespace model {
@@ -18,7 +19,7 @@ namespace limbo {
                     MeanLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
                     int dim = gp.mean_function().h_params_size();
-                    auto params = optimizer(optimization, tools::rand_vec(dim), false);
+                    auto params = optimizer(optimization, tools::random_vector(dim), false);
                     gp.mean_function().set_h_params(params);
                     gp.set_lik(opt::eval(optimization, params));
                     gp.update();
@@ -51,7 +52,7 @@ namespace limbo {
                         double lik = -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
 
                         if (!compute_grad)
-                          return opt::no_grad(lik);
+                            return opt::no_grad(lik);
 
                         // K^{-1} using Cholesky decomposition
                         Eigen::MatrixXd K = Eigen::MatrixXd::Identity(n, n);
@@ -64,7 +65,7 @@ namespace limbo {
                                 grad.tail(gp.mean_function().h_params_size()) += gp.obs_mean().col(i_obs).transpose() * K.col(n_obs) * gp.mean_function().grad(gp.samples()[n_obs], gp).row(i_obs);
                             }
 
-                        return std::make_pair(lik, grad);
+                        return {lik, grad};
                     }
 
                 protected:

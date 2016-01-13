@@ -7,6 +7,7 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
+#include <limbo/tools/random_generator.hpp>
 #include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
@@ -25,7 +26,7 @@ namespace limbo {
                 typedef std::pair<Eigen::VectorXd, double> pair_t;
                 auto body = [&](int i) {
                     // clang-format off
-                    Eigen::VectorXd r_init = tools::rand_vec(init.size());
+                    Eigen::VectorXd r_init = tools::random_vector(init.size());
                     Eigen::VectorXd v = Optimizer()(f, init, bounded);
                     double lik = opt::eval(f, v);
                     return std::make_pair(v, lik);

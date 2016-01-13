@@ -12,14 +12,14 @@ struct Params {
     };
 
 #ifdef USE_LIBCMAES
-              struct opt_cmaes : public defaults::opt_cmaes {
-	      };
+    struct opt_cmaes : public defaults::opt_cmaes {
+    };
 #elif defined(USE_NLOPT)
-	      struct opt_nloptnograd : public defaults::opt_nloptnograd {
-	      };
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
+    };
 #else
-	      struct opt_gridsearch : public defaults::opt_gridsearch {
-	      };
+    struct opt_gridsearch : public defaults::opt_gridsearch {
+    };
 #endif
     struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);

@@ -2,8 +2,7 @@
 #define LIMBO_OPT_RANDOM_POINT_HPP
 
 #include <Eigen/Core>
-
-#include <limbo/opt/optimizer.hpp>
+#include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
     namespace opt {
@@ -14,7 +13,7 @@ namespace limbo {
             {
                 // Random point does not support unbounded search
                 assert(bounded);
-                return (Eigen::VectorXd::Random(init.size()).array() + 1) / 2;
+                return tools::random_vector(init.size());
             }
         };
     }
