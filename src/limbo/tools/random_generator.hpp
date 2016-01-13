@@ -48,28 +48,28 @@ namespace limbo {
         // random vector in [0, 1]
         Eigen::VectorXd random_vector(int size)
         {
-          // Eigen returns in [-1:1] (??)
-          return ((Eigen::VectorXd::Random(size)).array() + 1.0) / 2.0;
+            // Eigen returns in [-1:1] (??)
+            return ((Eigen::VectorXd::Random(size)).array() + 1.0) / 2.0;
         }
 
         // usage :
         // rgen_double_t(0.0, 1.0);
         // double r = rgen.rand();
-        template<typename D>
+        template <typename D>
         class RandomGenerator {
         public:
-          using result_type = typename D::result_type;
-          RandomGenerator(result_type min, result_type max) :
-            _dist(min, max), _rgen(std::random_device()()) {}
-          result_type rand()
-          {
-            std::lock_guard<std::mutex> lock(_mutex);
-            return _dist(_rgen);
-          }
+            using result_type = typename D::result_type;
+            RandomGenerator(result_type min, result_type max) : _dist(min, max), _rgen(std::random_device()()) {}
+            result_type rand()
+            {
+                std::lock_guard<std::mutex> lock(_mutex);
+                return _dist(_rgen);
+            }
+
         private:
-          D _dist;
-          std::mt19937 _rgen;
-          std::mutex _mutex;
+            D _dist;
+            std::mt19937 _rgen;
+            std::mutex _mutex;
         };
         using rdist_double_t = std::uniform_real_distribution<double>;
         using rdist_int_t = std::uniform_int_distribution<int>;
