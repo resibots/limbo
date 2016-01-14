@@ -26,7 +26,7 @@ def check_openmp(self, **kw):
                 if kw['compiler'] == 'c':
                     kw['ccflags'] = kw['cflags'] = flag
                 elif kw['compiler'] == 'cxx':
-                    kw['cxxflags'] = flag
+                    kw['cxxflags'] = flag   
                 else:
                     self.fatal('Compiler has to be "c" or "cxx"')
                 kw['linkflags'] = flag
