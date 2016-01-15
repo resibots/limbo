@@ -20,7 +20,7 @@ namespace limbo {
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double d = (v1 - v2).norm();
-                return Params::kernel_maternthreehalfs::sigma() * (1 + sqrt(3) * d / Params::kernel_maternthreehalfs::l()) * exp(-sqrt(3) * d / Params::kernel_maternthreehalfs::l());
+                return Params::kernel_maternthreehalfs::sigma() * (1 + std::sqrt(3) * d / Params::kernel_maternthreehalfs::l()) * std::exp(-std::sqrt(3) * d / Params::kernel_maternthreehalfs::l());
             }
         };
     }
