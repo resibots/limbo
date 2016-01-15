@@ -17,7 +17,7 @@ namespace limbo {
 
                 if (bo.total_iterations() == 0) {
                     (*this->_log_file) << "#iteration bl_sample" << std::endl;
-                    for (size_t i = 0; i < bo.bl_samples().size() -1; i++)
+                    for (size_t i = 0; i < bo.bl_samples().size() - 1; i++)
                         (*this->_log_file) << "-1 " << bo.bl_samples()[i].transpose() << std::endl;
                 }
 

@@ -36,11 +36,12 @@ struct Params {
         BO_PARAM(int, bins, 20);
     };
 #ifdef USE_LIBCMAES
-  struct opt_cmaes : public defaults::opt_cmaes {
-  };
-#elif defined(USE_NLOPT)
-  struct opt_nloptnograd : public defaults::opt_nloptnograd {
-  };
+    struct opt_cmaes : public defaults::opt_cmaes {
+    };
+#endif
+#ifdef USE_NLOPT
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
+    };
 #endif
     struct opt_rprop : public defaults::opt_rprop {
     };
@@ -49,7 +50,7 @@ struct Params {
     };
 
     struct init_gridsampling {
-            BO_PARAM(int, bins, 5);
+        BO_PARAM(int, bins, 5);
     };
 
     struct init_randomsampling {

@@ -44,75 +44,10 @@
 #include <stdlib.h>
 #include <random>
 #include <utility>
+#include <mutex>
 
-// someday we will have a real thread-safe random number generator...
 namespace limbo {
     namespace tools {
-        // NOT Thread-safe !
-        template <typename T>
-        inline T rand(T max = 1.0)
-        {
-            assert(max > 0);
-            static std::mt19937 twister(std::time(0));
-            static std::uniform_real_distribution<double> distr(0.0, max);
-            return distr(twister);
-        }
-
-        template <typename T>
-        inline T rand(T min, T max)
-        {
-            assert(max != min);
-            assert(max > min);
-            T res = T(rand<double>() * ((long int)max - (long int)min) + min);
-            assert(res >= min);
-            assert(res < max);
-            return res;
-        }
-
-        template <typename T>
-        inline T gaussian_rand(T m = 0.0, T v = 1.0)
-        {
-            double facteur = sqrt(-2.0f * log(rand<double>()));
-            double trigo = 2.0f * M_PI * rand<double>();
-
-            return T(m + v * facteur * cos(trigo));
-        }
-
-        inline void rand_ind(std::vector<size_t>& a1, size_t size)
-        {
-            a1.resize(size);
-            for (size_t i = 0; i < a1.size(); ++i)
-                a1[i] = i;
-            for (size_t i = 0; i < a1.size(); ++i) {
-                size_t k = rand(i, a1.size());
-                assert(k < a1.size());
-                std::swap(a1[i], a1[k]);
-            }
-        }
-
-        /// return a random it in the list
-        template <typename T>
-        inline typename std::list<T>::iterator rand_in_list(std::list<T>& l)
-        {
-            int n = rand(l.size());
-            typename std::list<T>::iterator it = l.begin();
-            for (int i = 0; i < n; ++i)
-                ++it;
-            return it;
-        }
-
-        inline bool flip_coin() { return rand<double>() < 0.5f; }
-
-        template <typename L>
-        inline typename L::iterator rand_l(L& l)
-        {
-            size_t k = rand(l.size());
-            typename L::iterator it = l.begin();
-            for (size_t i = 0; i < k; ++i)
-                ++it;
-            return it;
-        }
-
         // get sign of number
         template <typename T>
         inline constexpr int signum(T x, std::false_type is_signed)
