@@ -21,4 +21,4 @@ def build(bld):
                       target='obs_multi_auto_mean',
                       uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
-    bld.recurse('exp/')
+    bld.recurse('experimental/')

@@ -3,10 +3,10 @@
 
 #include <algorithm>
 
-#include "bo_multi.hpp"
+#include <limbo/experimental/bayes_opt/bo_multi.hpp>
 
 namespace limbo {
-    namespace exp {
+    namespace experimental {
         namespace bayes_opt {
 
             template <class Params,

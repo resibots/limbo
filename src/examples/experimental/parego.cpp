@@ -1,4 +1,5 @@
-#include <limbo/exp/bayes_opt/parego.hpp>
+#include <limbo/limbo.hpp>
+#include <limbo/experimental/bayes_opt/parego.hpp>
 
 using namespace limbo;
 
@@ -76,13 +77,13 @@ struct mop2 {
 
 int main()
 {
-    par::init();
+    tools::par::init();
     // if you want to use a standard GP & basic UCB:
     // typedef kernel_functions::MaternFiveHalfs<Params> kernel_t;
     // typedef model::GP<Params, kernel_t, mean_t> gp_t;
     // typedef acquisition_functions::UCB<Params, gp_t> ucb_t;
     // Parego<Params, model_fun<gp_t>, acq_fun<ucb_t> > opt;
-    bayes_opt::Parego<Params> opt;
+    experimental::bayes_opt::Parego<Params> opt;
     opt.optimize(mop2());
 
     std::cout << "optimization done" << std::endl;

@@ -4,7 +4,7 @@
 #include <algorithm>
 
 #include <limbo/tools/macros.hpp>
-#include "bo_multi.hpp"
+#include <limbo/experimental/bayes_opt/bo_multi.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -13,7 +13,7 @@ namespace limbo {
             BO_PARAM(double, rho, 0.05);
         };
     }
-    namespace exp {
+    namespace experimental {
         namespace bayes_opt {
             // clang-format off
             template <class Params,

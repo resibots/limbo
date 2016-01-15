@@ -8,17 +8,17 @@
 
 #include <limbo/tools/macros.hpp>
 
-#include "bo_multi.hpp"
-#include "../acqui/ehvi.hpp"
+#include <limbo/experimental/bayes_opt/bo_multi.hpp>
+#include <limbo/experimental/acqui/ehvi.hpp>
 
 namespace limbo {
-  namespace defaults {
-      struct bayes_opt_ehvi {
-          BO_PARAM(double, x_ref, -11);
-          BO_PARAM(double, y_ref, -11);
-      };
-  }
-  namespace exp {
+    namespace defaults {
+        struct bayes_opt_ehvi {
+            BO_PARAM(double, x_ref, -11);
+            BO_PARAM(double, y_ref, -11);
+        };
+    }
+    namespace experimental {
         namespace bayes_opt {
             // clang-format off
             template <class Params,
@@ -87,10 +87,8 @@ namespace limbo {
                         };
                         auto m = tools::par::max(init, this->pareto_data().size(), body, comp);
 
-
                         // take the best
                         std::cout << "best (cmaes):" << m.second << std::endl;
-
 
                         std::cout << "sample selected" << std::endl;
                         Eigen::VectorXd new_sample = m.first;

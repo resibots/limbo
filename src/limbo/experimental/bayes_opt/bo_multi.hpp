@@ -15,10 +15,10 @@
 #endif
 
 #include <limbo/bayes_opt/bo_base.hpp>
-#include "pareto.hpp"
+#include <limbo/experimental/bayes_opt/pareto.hpp>
 
 namespace limbo {
-    namespace exp {
+    namespace experimental {
         namespace bayes_opt {
             namespace multi {
 #ifdef USE_SFERES
