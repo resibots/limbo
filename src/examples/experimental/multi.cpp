@@ -1,10 +1,10 @@
 #include <limbo/limbo.hpp>
-#include <limbo/exp/bayes_opt/parego.hpp>
-#include <limbo/exp/bayes_opt/nsbo.hpp>
-#include <limbo/exp/bayes_opt/ehvi.hpp>
+#include <limbo/experimental/bayes_opt/parego.hpp>
+#include <limbo/experimental/bayes_opt/nsbo.hpp>
+#include <limbo/experimental/bayes_opt/ehvi.hpp>
 
 using namespace limbo;
-using namespace limbo::exp;
+using namespace limbo::experimental;
 
 struct Params {
     struct boptimizer {
@@ -37,7 +37,6 @@ struct Params {
 
     struct opt_cmaes : public defaults::opt_cmaes {
     };
-
 
     struct mean_constant : public defaults::mean_constant {
     };
