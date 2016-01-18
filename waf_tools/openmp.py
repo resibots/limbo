@@ -15,22 +15,22 @@ def check_openmp(self, **kw):
     kw.update({'fragment': OPENMP_CODE})
     try:
         self.validate_c(kw)
-        self.run_c_code(**kw)
+        self.run_build(**kw)
         if 'define_name' in kw:
             self.define(kw['define_name'], 1)
         self.end_msg('None')
     except ConfigurationError:
-        for flag in ('-qopenmp', '-fopenmp', '-xopenmp', '-openmp', '-mp', '-omp', '-qsmp=omp', '-fopenmp=libomp'):        
+        for flag in ('-qopenmp', '-fopenmp', '-xopenmp', '-openmp', '-mp', '-omp', '-qsmp=omp', '-fopenmp=libomp'):
             try:
                 self.validate_c(kw) #refresh env
                 if kw['compiler'] == 'c':
                     kw['ccflags'] = kw['cflags'] = flag
                 elif kw['compiler'] == 'cxx':
-                    kw['cxxflags'] = flag   
+                    kw['cxxflags'] = flag
                 else:
                     self.fatal('Compiler has to be "c" or "cxx"')
                 kw['linkflags'] = flag
-                kw['success'] = self.run_c_code(**kw)
+                kw['success'] = self.run_build(**kw)
                 self.post_check(**kw)
                 self.env.CCFLAGS_OMP =  [ flag ]
                 self.env.CXXFLAGS_OMP = [ flag ]
