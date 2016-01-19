@@ -1,8 +1,6 @@
 limbo
 =====
 
-**Limbo is under heavy development and re-factoring** The master is not the most-up-to date version (we have corrected some bugs in gp_multi) and may be buggy right now. We are mostly working in "gp_multi" and will merge to the master soon.
-
 A lightweight framework for Bayesian and model-based optimisation of black-box functions (C++11).
 
 Documentation
