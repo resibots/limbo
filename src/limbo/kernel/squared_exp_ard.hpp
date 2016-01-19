@@ -28,7 +28,7 @@ namespace limbo {
             {
                 _h_params = p;
                 for (size_t i = 0; i < _input_dim; ++i)
-                    _ell(i) = exp(p(i));
+                    _ell(i) = std::exp(p(i));
                 _sf2 = 1; // exp(2 * p(_input_dim));
             }
 
@@ -36,7 +36,7 @@ namespace limbo {
             {
                 Eigen::VectorXd grad(_input_dim + 1);
                 Eigen::VectorXd z = (x1 - x2).cwiseQuotient(_ell).array().square();
-                double k = _sf2 * exp(-0.5 * z.sum());
+                double k = _sf2 * std::exp(-0.5 * z.sum());
                 grad.head(_input_dim) = z * k;
                 grad(_input_dim) = 0; // 2.0 * k;
                 return grad;
@@ -46,7 +46,7 @@ namespace limbo {
             {
                 assert(x1.size() == _ell.size());
                 double z = (x1 - x2).cwiseQuotient(_ell).squaredNorm();
-                return _sf2 * exp(-0.5 * z);
+                return _sf2 * std::exp(-0.5 * z);
             }
 
             const Eigen::VectorXd& ell() const { return _ell; }

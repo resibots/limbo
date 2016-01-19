@@ -1,9 +1,10 @@
 #include <limbo/limbo.hpp>
-#include <limbo/bayes_opt/parego.hpp>
-#include <limbo/acqui_fun/ehvi.hpp>
-#include <limbo/bayes_opt/nsbo.hpp>
+#include <limbo/experimental/bayes_opt/parego.hpp>
+#include <limbo/experimental/bayes_opt/nsbo.hpp>
+#include <limbo/experimental/bayes_opt/ehvi.hpp>
 
 using namespace limbo;
+using namespace limbo::experimental;
 
 struct Params {
     struct boptimizer {
@@ -17,29 +18,30 @@ struct Params {
         // knowles : 11 * dim - 1
     };
 
-    struct parego : public defaults::parego {
+    struct bayes_opt_bobase {
+        BO_PARAM(bool, stats_enabled, false);
+    };
+
+    struct bayes_opt_parego : public defaults::bayes_opt_parego {
     };
 
     struct maxiterations {
         BO_PARAM(int, n_iterations, 30);
     };
 
-    struct ucb : public defaults::ucb {
+    struct acqui_ucb : public defaults::acqui_ucb {
     };
 
-    struct gp_ucb : public defaults::gp_ucb {
+    struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
-    struct cmaes : public defaults::cmaes {
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 
-    struct gp_auto : public defaults::gp_auto {
+    struct mean_constant : public defaults::mean_constant {
     };
 
-    struct meanconstant : public defaults::meanconstant {
-    };
-
-    struct ehvi {
+    struct bayes_opt_ehvi {
         BO_PARAM(double, x_ref, -11);
         BO_PARAM(double, y_ref, -11);
     };
@@ -114,8 +116,8 @@ struct mop2 {
         // f1, f2
         Eigen::VectorXd v1 = (xx.array() - 1.0 / sqrt(xx.size())).array().square();
         Eigen::VectorXd v2 = (xx.array() + 1.0 / sqrt(xx.size())).array().square();
-        double f1 = 1.0 - exp(-v1.sum());
-        double f2 = 1.0 - exp(-v2.sum());
+        double f1 = 1.0 - ::exp(-v1.sum());
+        double f2 = 1.0 - ::exp(-v2.sum());
         // we _maximize in [0:1]
         res(0) = -f1 + 1;
         res(1) = -f2 + 1;
@@ -180,7 +182,7 @@ namespace limbo {
 
 int main()
 {
-    par::init();
+    tools::par::init();
 
 #ifdef ZDT1
     typedef zdt1 func_t;
@@ -196,11 +198,11 @@ int main()
 
     typedef stat::ParetoBenchmark<func_t> stat_t;
 #ifdef PAREGO
-    Parego<Params, stat_fun<stat_t>> opt;
+    Parego<Params, statsfun<stat_t>> opt;
 #elif defined(NSBO)
-    Nsbo<Params, stat_fun<stat_t>> opt;
+    Nsbo<Params, statsfun<stat_t>> opt;
 #else
-    Ehvi<Params, stat_fun<stat_t>> opt;
+    exp::bayes_opt::Ehvi<Params, statsfun<stat_t>> opt;
 #endif
 
     opt.optimize(func_t());

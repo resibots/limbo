@@ -31,6 +31,7 @@ def options(opt):
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
+        opt.add_option('--experimental', type='string', help='experimental should be compiled? (yes/no)', dest='experimental')
         opt.load('xcode')
         for i in glob.glob('exp/*'):
                 opt.recurse(i)
@@ -74,12 +75,16 @@ def configure(conf):
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
+        conf.env['CXXFLAGS'] += ['-fdiagnostics-color']
         print conf.env['CXXFLAGS']
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
+
+        if conf.options.experimental and conf.options.experimental == "yes":
+            conf.env['BUILD_EXPERIMENTAL'] = True
 
 
 def build(bld):
