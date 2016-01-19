@@ -188,7 +188,7 @@ Optimizers (opt::)
 ------------------
 
 Statistics (stat::)
------------------
+-------------------
 
 We can change which ``Statistics`` our ``BOptimizer`` outputs, using the ``statfun`` templated parameter. Every statistic takes as template parameters the ``Params`` and optionally some more. All statistics should inherit from ``StatBase`` class.
 
