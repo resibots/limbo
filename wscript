@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
+import sys
+sys.path.insert(0, './waf_tools')
 
 VERSION = '0.0.1'
 APPNAME = 'limbo'
@@ -8,7 +10,10 @@ srcdir = '.'
 blddir = 'build'
 
 import glob
+import os
+import subprocess
 import limbo
+from waflib.Build import BuildContext
 
 
 def options(opt):
@@ -20,9 +25,13 @@ def options(opt):
         opt.load('sferes')
         opt.load('limbo')
         opt.load('openmp')
+        opt.load('nlopt')
+        opt.load('libcmaes')
+
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
+        opt.add_option('--experimental', type='string', help='experimental should be compiled? (yes/no)', dest='experimental')
         opt.load('xcode')
         for i in glob.glob('exp/*'):
                 opt.recurse(i)
@@ -33,10 +42,12 @@ def configure(conf):
         conf.load('compiler_c')
         conf.load('eigen')
         conf.load('tbb')
-        conf.load('mkl')
         conf.load('sferes')
         conf.load('openmp')
+        conf.load('mkl')
         conf.load('xcode')
+        conf.load('nlopt')
+        conf.load('libcmaes')
 
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
@@ -53,23 +64,27 @@ def configure(conf):
             graph thread', min_version='1.39')
         conf.check_eigen()
         conf.check_tbb()
+        conf.check_sferes()
         conf.check_openmp()
         conf.check_mkl()
-        conf.check_sferes()
-        if conf.is_defined('USE_TBB'):
-                common_flags += " -DUSE_TBB"
+        conf.check_nlopt()
+        conf.check_libcmaes()
 
-        if conf.is_defined('USE_SFERES'):
-                common_flags += " -DUSE_SFERES -DSFERES_FAST_DOMSORT"
+        if conf.env['CXXFLAGS_ODE']:
+                common_flags += ' ' + conf.env['CXXFLAGS_ODE']
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
+        conf.env['CXXFLAGS'] += ['-fdiagnostics-color']
         print conf.env['CXXFLAGS']
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
+
+        if conf.options.experimental and conf.options.experimental == "yes":
+            conf.env['BUILD_EXPERIMENTAL'] = True
 
 
 def build(bld):
@@ -82,8 +97,34 @@ def build(bld):
         bld.add_post_fun(waf_unit_test.summary)
 
 
+def build_extensive_tests(ctx):
+    ctx.recurse('src/')
+    ctx.recurse('src/tests')
+
+def run_extensive_tests(ctx):
+    for fullname in glob.glob('build/src/tests/combinations/*'):
+        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
+            fpath, fname = os.path.split(fullname)
+            print "Running: " + fname
+            s = "cd " + fpath + "; ./" + fname
+            retcode = subprocess.call(s, shell=True, env=None)
+
+def submit_extensive_tests(ctx):
+    for fullname in glob.glob('build/src/tests/combinations/*'):
+        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
+            fpath, fname = os.path.split(fullname)
+            s = "cd " + fpath + ";oarsub -l /nodes=1/core=2,walltime=00:15:00 -n " + fname + " -O " + fname + ".stdout.%jobid%.log -E " + fname + ".stderr.%jobid%.log ./" + fname
+            retcode = subprocess.call(s, shell=True, env=None)
+            print "oarsub returned:" + str(retcode)
+
+
 def shutdown(ctx):
     if ctx.options.qsub:
         limbo.qsub(ctx.options.qsub)
     if ctx.options.oar:
         limbo.oar(ctx.options.oar)
+
+
+class BuildExtensiveTestsContext(BuildContext):
+    cmd = 'build_extensive_tests'
+    fun = 'build_extensive_tests'

@@ -1,0 +1,13 @@
+{% extends "!footer.html" %}
+{% block extrafooter %}
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="{{ pathto('_static/logos/logo_eu.png', 1) }}"/></div>
+  <div class="wy-footer-logo"><img src="{{ pathto('_static/logos/logo_erc_nonofficial.svg', 1) }}"/></div>
+  <div class="wy-footer-logo"><img src="{{ pathto('_static/logos/logo_loria.jpg', 1) }}"/></div>
+  <div class="wy-footer-logo"><img src="{{ pathto('_static/logos/logo-inria.svg', 1) }}"/></div>
+  <div class="wy-footer-logo"><img src="{{ pathto('_static/logos/logo_cnrs.png', 1) }}"/></div>
+  <div class="wy-footer-logo"><img src="{{ pathto('_static/logos/logo_universite_lorraine.jpg', 1) }}"/></div>
+</div>
+{% endblock %}
+
+{{ super() }}

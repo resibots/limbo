@@ -1,17 +1,15 @@
-#ifndef LIMBO_HPP_
-#define LIMBO_HPP_
+#ifndef LIMBO_HPP
+#define LIMBO_HPP
 
-#include "macros.hpp"
-#include "stopping_criterion.hpp"
-#include "stat.hpp"
-#include "sys.hpp"
-#include "rand.hpp"
-#include "boptimizer.hpp"
-#include "kernel_functions.hpp"
-#include "acquisition_functions.hpp"
-#include "mean_functions.hpp"
-#include "inner_optimization.hpp"
-#include "gp.hpp"
-#include "init_functions.hpp"
+#include <limbo/acqui.hpp>
+#include <limbo/bayes_opt.hpp>
+#include <limbo/init.hpp>
+#include <limbo/kernel.hpp>
+#include <limbo/mean.hpp>
+#include <limbo/model.hpp>
+#include <limbo/opt.hpp>
+#include <limbo/stat.hpp>
+#include <limbo/stop.hpp>
+#include <limbo/tools.hpp>
 
 #endif
