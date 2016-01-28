@@ -15,6 +15,8 @@ import subprocess
 import limbo
 from waflib.Build import BuildContext
 
+import inspect
+
 
 def options(opt):
         opt.load('compiler_cxx boost waf_unit_test')
@@ -34,7 +36,8 @@ def options(opt):
         opt.add_option('--experimental', type='string', help='experimental should be compiled? (yes/no)', dest='experimental')
         opt.load('xcode')
         for i in glob.glob('exp/*'):
-                opt.recurse(i)
+                if os.path.isdir(i):
+                    opt.recurse(i)
 
 
 def configure(conf):
@@ -69,6 +72,8 @@ def configure(conf):
         conf.check_mkl()
         conf.check_nlopt()
         conf.check_libcmaes()
+
+        conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
 
         if conf.env['CXXFLAGS_ODE']:
                 common_flags += ' ' + conf.env['CXXFLAGS_ODE']

@@ -48,29 +48,29 @@ To begin, the ``main`` file has to include the necessary files, and declare the 
     using namespace limbo;
 
     struct Params {
-        struct boptimizer {
+        struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 0.0);
-            BO_PARAM(int, dump_period, -1);
         };
 
-        struct init {
+        struct bayes_opt_bobase {
+            BO_PARAM(int, stats_enabled, false);
+        };
+
+        struct init_randomsampling {
             BO_PARAM(int, nb_samples, 10);
         };
 
-        struct maxiterations {
+        struct stop_maxiterations {
             BO_PARAM(int, n_iterations, 40);
         };
 
-        struct gp_ucb : public defaults::gp_ucb {
+        struct opt_cmaes : public defaults::opt_cmaes {
         };
 
-        struct cmaes : public defaults::cmaes {
+        struct opt_rprop : public defaults::opt_rprop {
         };
 
-        struct rprop : public defaults::rprop {
-        };
-
-        struct parallel_repeater : public defaults::parallel_repeater {
+        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
         };
     };
 
@@ -118,29 +118,29 @@ Full ``main.cpp``::
     using namespace limbo;
 
     struct Params {
-        struct boptimizer {
+        struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 0.0);
-            BO_PARAM(int, dump_period, -1);
         };
 
-        struct init {
+        struct bayes_opt_bobase {
+            BO_PARAM(int, stats_enabled, false);
+        };
+
+        struct init_randomsampling {
             BO_PARAM(int, nb_samples, 10);
         };
 
-        struct maxiterations {
+        struct stop_maxiterations {
             BO_PARAM(int, n_iterations, 40);
         };
 
-        struct gp_ucb : public defaults::gp_ucb {
+        struct opt_cmaes : public defaults::opt_cmaes {
         };
 
-        struct cmaes : public defaults::cmaes {
+        struct opt_rprop : public defaults::opt_rprop {
         };
 
-        struct rprop : public defaults::rprop {
-        };
-
-        struct parallel_repeater : public defaults::parallel_repeater {
+        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
         };
     };
 
