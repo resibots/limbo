@@ -39,10 +39,11 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
-                size_t h_max = 1000;
+                this->_init(sfun, afun, reset);
+                size_t hh_max = 1000;
                 // Init tree
                 if (this->_total_iterations == 0)
-                    _init_tree(h_max);
+                    _init_tree(hh_max);
 
                 // Init model
                 _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
@@ -50,26 +51,24 @@ namespace limbo {
                 // Init root
                 _tree[0].x_max.push_back(Eigen::VectorXd::Ones(StateFunction::dim_in));
                 _tree[0].x_min.push_back(Eigen::VectorXd::Zero(StateFunction::dim_in));
-                _tree[0].x.push_back(tools::random_vector(StateFunction::dim_in));
+                _tree[0].x.push_back(Eigen::VectorXd::Ones(StateFunction::dim_in) * 0.5);
                 _tree[0].f.push_back(sfun(_tree[0].x[0]));
                 _tree[0].leaf.push_back(true);
                 _tree[0].samp.push_back(true);
 
-                std::vector<Eigen::VectorXd> X_sample;
-                X_sample.push_back(_tree[0].x[0]);
-                std::vector<Eigen::VectorXd> F_sample;
-                F_sample.push_back(_tree[0].f[0]);
-                double LB = F_sample[0].maxCoeff();
+                this->add_new_sample(_tree[0].x[0], _tree[0].f[0]);
+                double LB = _tree[0].f[0].maxCoeff();
                 double inf = std::numeric_limits<double>::infinity();
 
-                size_t depth_T = 1, M = 1;
+                size_t depth_T = 0, M = 1;
                 double rho_avg = 0, rho_bar = 0;
                 size_t xi_max = 0, XI = 1, t = 0, XI_max = 3, split_n = 0;
                 double LB_old = LB;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
-                    std::vector<size_t> i_max(depth_T, 0);
-                    std::vector<double> b_max(depth_T, -inf);
+                    std::vector<int> i_max(depth_T + 1, -1);
+                    std::vector<double> b_max(depth_T + 1, -inf);
+                    size_t h_max = depth_T + 1;
                     double b_hi_max = -inf;
                     t = t + 1;
 
@@ -89,23 +88,23 @@ namespace limbo {
                                         b_max[h] = b_hi;
                                     }
                                 }
-                                if (i_max[h] == 0)
-                                    break;
+                            }
+                            if (i_max[h] == -1)
+                                break;
 
-                                if (_tree[h].samp[i_max[h]] == true)
-                                    gp_label = false;
-                                else {
-                                    Eigen::VectorXd xxx = _tree[h].x[i_max[h]];
+                            if (_tree[h].samp[i_max[h]] == true) {
+                                gp_label = false;
+                            }
+                            else {
+                                Eigen::VectorXd xxx = _tree[h].x[i_max[h]];
 
-                                    auto tmp_sample = sfun(xxx);
-                                    _tree[h].samp[i_max[h]] = true;
-                                    X_sample.push_back(xxx);
-                                    F_sample.push_back(tmp_sample);
+                                auto tmp_sample = sfun(xxx);
+                                _tree[h].samp[i_max[h]] = true;
+                                this->add_new_sample(xxx, tmp_sample);
 
-                                    // N = N+1
-                                    this->_current_iteration++;
-                                    this->_total_iterations++;
-                                }
+                                // N = N+1
+                                this->_current_iteration++;
+                                this->_total_iterations++;
                             }
                         }
                     }
@@ -114,10 +113,10 @@ namespace limbo {
                     for (size_t h = 0; h <= depth_T; h++) {
                         if (h >= h_max)
                             break;
-                        if (i_max[h] != 0) {
-                            size_t xi = 0;
+                        if (i_max[h] != -1) {
+                            int xi = -1;
                             for (size_t h2 = h + 1; h2 < std::min(depth_T, h + std::min((size_t)std::ceil(XI), XI_max)); h2++) {
-                                if (i_max[h2] != 0) {
+                                if (i_max[h2] != -1) {
                                     xi = h2 - h;
                                     break;
                                 }
@@ -125,25 +124,25 @@ namespace limbo {
 
                             double z_max = -inf;
                             size_t M2 = M;
-                            if (xi != 0) {
+                            if (xi != -1) {
                                 std::vector<TreeNode> tmp_tree = std::vector<TreeNode>(h_max);
                                 tmp_tree[h].x_max.push_back(_tree[h].x_max[i_max[h]]);
                                 tmp_tree[h].x_min.push_back(_tree[h].x_min[i_max[h]]);
                                 tmp_tree[h].x.push_back(_tree[h].x[i_max[h]]);
 
                                 M2 = M;
-                                for (size_t h2 = h; h2 <= h + xi - 1; h2++) {
-                                    for (size_t ii = 0; ii < std::pow(3, h2 - h); ii++) {
+                                for (size_t h2 = h; h2 < h + xi - 1; h2++) {
+                                    for (size_t ii = 0; ii < std::pow(3, h2 - h) - 1; ii++) {
                                         auto xx = tmp_tree[h].x[ii];
-                                        auto to_split = tmp_tree[h2].x_max[ii] - tmp_tree[h2].x_min[ii];
+                                        Eigen::VectorXd to_split = tmp_tree[h2].x_max[ii].array() - tmp_tree[h2].x_min[ii].array();
                                         size_t tmp, splitd;
-                                        to_split.maxCoeff(&tmp, &splitd);
+                                        to_split.maxCoeff(&splitd, &tmp);
                                         auto x_g = xx, x_d = xx;
                                         x_g(splitd) = (5 * tmp_tree[h2].x_min[ii](splitd) + tmp_tree[h2].x_max[ii](splitd)) / 6.0;
                                         x_d(splitd) = (tmp_tree[h2].x_min[ii](splitd) + 5 * tmp_tree[h2].x_max[ii](splitd)) / 6.0;
 
                                         // TO-DO: Properly handle bl_samples etc
-                                        _model.compute(F_sample, X_sample, 0.0, this->_bl_samples);
+                                        _model.compute(this->_samples, this->_observations, 0.0, this->_bl_samples);
                                         auto tmp_tuple = _model.query(x_g);
                                         // UCB - nu = 0.05
                                         // sqrt(2*log(pi^2*M^2/(12*nu)))
@@ -153,7 +152,7 @@ namespace limbo {
                                         z_max = std::max(z_max, m_g[0] + gp_varsigma * sqrt(s2_g));
                                         M2++;
 
-                                        _model.compute(F_sample, X_sample, 0.0, this->_bl_samples);
+                                        _model.compute(this->_samples, this->_observations, 0.0, this->_bl_samples);
                                         auto tmp_tuple2 = _model.query(x_g);
                                         // UCB - nu = 0.05
                                         // sqrt(2*log(pi^2*M^2/(12*nu)))
@@ -193,10 +192,10 @@ namespace limbo {
                                 }
                             }
 
-                            if (xi != 0 && z_max < b_max[h + xi]) {
+                            if (xi != -1 && z_max < b_max[h + xi]) {
                                 M = M2;
-                                i_max[h] = 0;
-                                xi_max = std::max(xi, xi_max);
+                                i_max[h] = -1;
+                                xi_max = std::max(xi, (int)xi_max);
                             }
                         }
                     }
@@ -206,16 +205,16 @@ namespace limbo {
                     for (size_t h = 0; h <= depth_T; h++) {
                         if (h >= h_max)
                             break;
-                        if (i_max[h] != 0 && b_max[h] > b_hi_max_2) {
+                        if (i_max[h] != -1 && b_max[h] > b_hi_max_2) {
                             rho_t += 1.0;
                             depth_T = std::max(depth_T, h + 1);
                             split_n++;
                             _tree[h].leaf[i_max[h]] = 0;
 
                             auto xx = _tree[h].x[i_max[h]];
-                            auto to_split = _tree[h].x_max[i_max[h]] - _tree[h].x_min[i_max[h]];
+                            Eigen::VectorXd to_split = _tree[h].x_max[i_max[h]].array() - _tree[h].x_min[i_max[h]].array();
                             size_t tmp, splitd;
-                            to_split.maxCoeff(&tmp, &splitd);
+                            to_split.maxCoeff(&splitd, &tmp);
                             auto x_g = xx, x_d = xx;
                             x_g(splitd) = (5 * _tree[h].x_min[i_max[h]](splitd) + _tree[h].x_max[i_max[h]](splitd)) / 6.0;
                             x_d(splitd) = (_tree[h].x_min[i_max[h]](splitd) + 5 * _tree[h].x_max[i_max[h]](splitd)) / 6.0;
@@ -223,7 +222,7 @@ namespace limbo {
                             // left node
                             _tree[h + 1].x.push_back(x_g);
                             // TO-DO: Properly handle bl_samples etc
-                            _model.compute(F_sample, X_sample, 0.0, this->_bl_samples);
+                            _model.compute(this->_samples, this->_observations, 0.0, this->_bl_samples);
                             auto tmp_tuple = _model.query(x_g);
                             // UCB - nu = 0.05
                             // sqrt(2*log(pi^2*M^2/(12*nu)))
@@ -242,8 +241,7 @@ namespace limbo {
                                 fsample_g = sfun(x_g);
                                 _tree[h + 1].samp.push_back(true);
 
-                                X_sample.push_back(x_g);
-                                F_sample.push_back(fsample_g);
+                                this->add_new_sample(x_g, fsample_g);
 
                                 b_hi_max_2 = std::max(b_hi_max_2, fsample_g(0));
 
@@ -264,7 +262,7 @@ namespace limbo {
                             // right node
                             _tree[h + 1].x.push_back(x_d);
                             // TO-DO: Properly handle bl_samples etc
-                            _model.compute(F_sample, X_sample, 0.0, this->_bl_samples);
+                            _model.compute(this->_samples, this->_observations, 0.0, this->_bl_samples);
                             auto tmp_tuple2 = _model.query(x_d);
                             // UCB - nu = 0.05
                             // sqrt(2*log(pi^2*M^2/(12*nu)))
@@ -283,8 +281,7 @@ namespace limbo {
                                 fsample_d = sfun(x_d);
                                 _tree[h + 1].samp.push_back(true);
 
-                                X_sample.push_back(x_d);
-                                F_sample.push_back(fsample_d);
+                                this->add_new_sample(x_d, fsample_d);
 
                                 b_hi_max_2 = std::max(b_hi_max_2, fsample_d(0));
 

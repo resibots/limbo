@@ -57,6 +57,6 @@ int main()
 
     std::cout << "Optimize using IMGPO" << std::endl;
     opt.optimize(FuncEval());
-    // std::cout << "best obs: " << opt.best_observation() << " res  " << opt.best_sample().transpose() << std::endl;
+    std::cout << "best obs: " << opt.best_observation() << " res  " << opt.best_sample().transpose() << std::endl;
     return 0;
 }
