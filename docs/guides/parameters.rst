@@ -17,8 +17,8 @@ From the user's point of view, this looks like this:
 ::
 
     struct Params {
-      struct ucb {
-        BO_PARAM(float, alpha, 0.1);
+      struct acqui_ucb {
+        BO_PARAM(double, alpha, 0.1);
       };
     };
     // ...
@@ -32,7 +32,7 @@ In the UCB class, the value can be accessed like this:
 
 ::
 
-    float x = Params::ucb::alpha();
+    float x = Params::acqui_ucb::alpha();
 
 No need to write any parsing code!
 
@@ -41,11 +41,11 @@ Many limbo classes provide default parameters. To use them, the parameter sub-st
 ::
 
     struct Params {
-      struct ucb : public defaults::ucb {
+      struct acqui_ucb : public defaults::acqui_ucb {
       };
     };
 
-That way, the ``ucb::alpha()`` exists, but it has its default value.
+That way, the ``acqui_ucb::alpha()`` exists, but it has its default value.
 
 
 Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a ``BO_DYN_PARAM`` instead of a ``BO_PARAM``:
@@ -53,8 +53,8 @@ Sometimes, we need to define parameters that can be changed at runtime. In that 
 ::
 
     struct Params {
-      struct ucb {
-        BO_DYN_PARAM(float, alpha, 0.1);
+      struct acqui_ucb {
+        BO_DYN_PARAM(double, alpha);
       };
     };
 
@@ -63,7 +63,7 @@ However, for dynamic parameters, we need to call ``BO_DECLARE_DYN_PARAM`` in our
 
 ::
 
-    BO_DECLARE_DYN_PARAM(int, Params::ucb, alpha);
+    BO_DECLARE_DYN_PARAM(int, Params::acqui_ucb, alpha);
 
 .. warning:: Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead -- they are equivalent to writing a constant).
 
@@ -94,15 +94,15 @@ In some rare cases, you may have 2 different instances of the same algorithm, fo
     }
 
     struct ParamsAcquiOpt {
-        struct cmaes {
-            BO_PARAM(int, nrestarts, 10);
+        struct opt_cmaes {
+            BO_PARAM(int, restarts, 10);
             BO_PARAM(int, max_fun_evals, 500);
         };
     };
 
     struct ParamsGPOpt {
-        struct cmaes {
-            BO_PARAM(int, nrestarts, 1);
+        struct opt_cmaes {
+            BO_PARAM(int, restarts, 1);
             BO_PARAM(int, max_fun_evals, 200);
         };
     };

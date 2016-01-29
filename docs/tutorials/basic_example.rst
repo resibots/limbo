@@ -57,14 +57,17 @@ To begin, the ``main`` file has to include the necessary files, and declare the 
         };
 
         struct init_randomsampling {
-            BO_PARAM(int, nb_samples, 10);
+            BO_PARAM(int, samples, 10);
         };
 
         struct stop_maxiterations {
-            BO_PARAM(int, n_iterations, 40);
+            BO_PARAM(int, iterations, 40);
         };
 
-        struct opt_cmaes : public defaults::opt_cmaes {
+        struct acqui_gpucb : public defaults::acqui_gpucb {
+        };
+
+        struct opt_gridsearch : public defaults::opt_gridsearch {
         };
 
         struct opt_rprop : public defaults::opt_rprop {
@@ -127,14 +130,17 @@ Full ``main.cpp``::
         };
 
         struct init_randomsampling {
-            BO_PARAM(int, nb_samples, 10);
+            BO_PARAM(int, samples, 10);
         };
 
         struct stop_maxiterations {
-            BO_PARAM(int, n_iterations, 40);
+            BO_PARAM(int, iterations, 40);
         };
 
-        struct opt_cmaes : public defaults::opt_cmaes {
+        struct acqui_gpucb : public defaults::acqui_gpucb {
+        };
+
+        struct opt_gridsearch : public defaults::opt_gridsearch {
         };
 
         struct opt_rprop : public defaults::opt_rprop {
