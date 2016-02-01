@@ -62,8 +62,12 @@ namespace limbo {
 
                 size_t depth_T = 0, M = 1;
                 double rho_avg = 0, rho_bar = 0;
-                size_t xi_max = 0, XI = 1, t = 0, XI_max = 3, split_n = 0;
+                size_t xi_max = 0, t = 0, XI_max = 3, split_n = 1;
+                double XI = 1;
                 double LB_old = LB;
+                // N = N+1
+                this->_current_iteration++;
+                this->_total_iterations++;
 
                 while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
                     std::vector<int> i_max(depth_T + 1, -1);
@@ -79,7 +83,7 @@ namespace limbo {
 
                         bool gp_label = true;
                         while (gp_label) {
-                            for (size_t i = 0; i < _tree[0].x.size(); i++) {
+                            for (size_t i = 0; i < _tree[h].x.size(); i++) {
                                 if (_tree[h].leaf[i] == true) {
                                     double b_hi = _tree[h].f[i][0];
                                     if (b_hi > b_hi_max) {
@@ -114,8 +118,8 @@ namespace limbo {
                         if (h >= h_max)
                             break;
                         if (i_max[h] != -1) {
-                            int xi = -1;
-                            for (size_t h2 = h + 1; h2 < std::min(depth_T, h + std::min((size_t)std::ceil(XI), XI_max)); h2++) {
+                            int xi = 0;
+                            for (size_t h2 = h + 1; h2 <= std::min(depth_T, h + std::min((size_t)std::ceil(XI), XI_max)); h2++) {
                                 if (i_max[h2] != -1) {
                                     xi = h2 - h;
                                     break;
@@ -124,15 +128,17 @@ namespace limbo {
 
                             double z_max = -inf;
                             size_t M2 = M;
-                            if (xi != -1) {
-                                std::vector<TreeNode> tmp_tree = std::vector<TreeNode>(h_max);
+                            if (xi != 0) {
+                                std::vector<TreeNode> tmp_tree = std::vector<TreeNode>(h + xi + 1);
                                 tmp_tree[h].x_max.push_back(_tree[h].x_max[i_max[h]]);
                                 tmp_tree[h].x_min.push_back(_tree[h].x_min[i_max[h]]);
                                 tmp_tree[h].x.push_back(_tree[h].x[i_max[h]]);
 
                                 M2 = M;
-                                for (size_t h2 = h; h2 < h + xi - 1; h2++) {
-                                    for (size_t ii = 0; ii < std::pow(3, h2 - h) - 1; ii++) {
+                                for (size_t h2 = h; h2 <= h + xi - 1; h2++) {
+                                    for (size_t ii = 0; ii < std::pow(3, h2 - h); ii++) {
+                                        if (ii >= tmp_tree[h].x.size())
+                                            break;
                                         auto xx = tmp_tree[h].x[ii];
                                         Eigen::VectorXd to_split = tmp_tree[h2].x_max[ii].array() - tmp_tree[h2].x_min[ii].array();
                                         size_t tmp, splitd;
@@ -192,7 +198,7 @@ namespace limbo {
                                 }
                             }
 
-                            if (xi != -1 && z_max < b_max[h + xi]) {
+                            if (xi != 0 && z_max < b_max[h + xi]) {
                                 M = M2;
                                 i_max[h] = -1;
                                 xi_max = std::max(xi, (int)xi_max);
@@ -231,7 +237,7 @@ namespace limbo {
                             double gp_varsigma = std::sqrt(2 * std::log(std::pow(M_PI, 2) * std::pow(M, 2) / (12 * 0.05)));
                             double UCB = m_g[0] + (gp_varsigma + 0.2) * sqrt(s2_g);
                             Eigen::VectorXd fsample_g;
-                            if (UCB <= LB) {
+                            if ((UCB - LB) < 1e-6) {
                                 M++;
                                 fsample_g = Eigen::VectorXd(1);
                                 fsample_g(0) = UCB;
@@ -271,7 +277,7 @@ namespace limbo {
                             double gp_varsigma2 = std::sqrt(2 * std::log(std::pow(M_PI, 2) * std::pow(M, 2) / (12 * 0.05)));
                             double UCB2 = m_g[0] + (gp_varsigma2 + 0.2) * sqrt(s2_g2);
                             Eigen::VectorXd fsample_d;
-                            if (UCB2 <= LB) {
+                            if ((UCB2 - LB) < 1e-6) {
                                 M++;
                                 fsample_d = Eigen::VectorXd(1);
                                 fsample_d(0) = UCB2;
@@ -310,6 +316,12 @@ namespace limbo {
                             _tree[h + 1].x_min.push_back(newmin3);
                             _tree[h + 1].x_max.push_back(newmax3);
                             _tree[h + 1].leaf.push_back(true);
+
+                            // update LB
+                            Eigen::VectorXd tmp_lb = this->best_observation();
+                            LB = tmp_lb(0);
+
+                            // std::cout << t << " N= " << this->_current_iteration << " n= " << split_n << " fmax_hat= " << LB << " rho= " << rho_bar << " xi= " << xi_max << " h= " << depth_T << std::endl;
                         }
                     }
 
@@ -318,9 +330,9 @@ namespace limbo {
                     rho_bar = std::max(rho_bar, rho_avg);
                     // update XI
                     if (std::abs(LB_old - LB) < 1e-6)
-                        XI = std::max((int)(XI - std::pow(2, -1)), 1);
+                        XI = std::max(XI - 0.5, 1.0);
                     else
-                        XI = XI + std::pow(2, 2);
+                        XI = XI + 4.0;
                     LB_old = LB;
                 }
             }
