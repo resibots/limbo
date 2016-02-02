@@ -36,6 +36,9 @@ namespace limbo {
           class A5 = boost::parameter::void_,
           class A6 = boost::parameter::void_>
             // clang-format on
+            // Bayesian Optimization with Exponential Convergence (NIPS 2015 paper)
+            // Kenji Kawaguchi, Leslie Pack Kaelbling, Tomás Lozano-Pérez
+            // http://papers.nips.cc/paper/5715-bayesian-optimization-with-exponential-convergence
             class IMGPO : public limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> {
             public:
                 typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
