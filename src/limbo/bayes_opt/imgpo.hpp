@@ -62,7 +62,8 @@ namespace limbo {
 
                 size_t depth_T = 0, M = 1;
                 double rho_avg = 0, rho_bar = 0;
-                size_t xi_max = 0, t = 0, XI_max = 3, split_n = 1;
+                size_t t = 0, XI_max = 3, split_n = 1;
+                int xi_max = 0;
                 double XI = 1;
                 double LB_old = LB;
                 // N = N+1
@@ -118,7 +119,7 @@ namespace limbo {
                         if (h >= h_max)
                             break;
                         if (i_max[h] != -1) {
-                            int xi = 0;
+                            int xi = -1;
                             for (size_t h2 = h + 1; h2 <= std::min(depth_T, h + std::min((size_t)std::ceil(XI), XI_max)); h2++) {
                                 if (i_max[h2] != -1) {
                                     xi = h2 - h;
@@ -128,7 +129,7 @@ namespace limbo {
 
                             double z_max = -inf;
                             size_t M2 = M;
-                            if (xi != 0) {
+                            if (xi != -1) {
                                 std::vector<TreeNode> tmp_tree = std::vector<TreeNode>(h + xi + 1);
                                 tmp_tree[h].x_max.push_back(_tree[h].x_max[i_max[h]]);
                                 tmp_tree[h].x_min.push_back(_tree[h].x_min[i_max[h]]);
@@ -198,10 +199,10 @@ namespace limbo {
                                 }
                             }
 
-                            if (xi != 0 && z_max < b_max[h + xi]) {
+                            if (xi != -1 && z_max < b_max[h + xi]) {
                                 M = M2;
                                 i_max[h] = -1;
-                                xi_max = std::max(xi, (int)xi_max);
+                                xi_max = std::max(xi, xi_max);
                             }
                         }
                     }
@@ -272,10 +273,10 @@ namespace limbo {
                             auto tmp_tuple2 = _model.query(x_d);
                             // UCB - nu = 0.05
                             // sqrt(2*log(pi^2*M^2/(12*nu)))
-                            Eigen::VectorXd m_g2 = std::get<0>(tmp_tuple);
-                            double s2_g2 = std::get<1>(tmp_tuple);
+                            Eigen::VectorXd m_d = std::get<0>(tmp_tuple);
+                            double s2_d = std::get<1>(tmp_tuple);
                             double gp_varsigma2 = std::sqrt(2 * std::log(std::pow(M_PI, 2) * std::pow(M, 2) / (12 * 0.05)));
-                            double UCB2 = m_g[0] + (gp_varsigma2 + 0.2) * sqrt(s2_g2);
+                            double UCB2 = m_d[0] + (gp_varsigma2 + 0.2) * sqrt(s2_d);
                             Eigen::VectorXd fsample_d;
                             if ((UCB2 - LB) < 1e-6) {
                                 M++;
