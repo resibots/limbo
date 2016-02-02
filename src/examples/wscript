@@ -16,12 +16,6 @@ def build(bld):
                       uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
     obj = bld.program(features='cxx',
-                      source='imgpo.cpp',
-                      includes='. .. ../../',
-                      target='imgpo',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                      use='limbo')
-    obj = bld.program(features='cxx',
                       source='obs_multi_auto_mean.cpp',
                       includes='. .. ../../',
                       target='obs_multi_auto_mean',

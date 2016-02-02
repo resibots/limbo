@@ -17,7 +17,7 @@
 #endif
 
 #include <limbo/tools/macros.hpp>
-#include <limbo/bayes_opt/imgpo.hpp>
+#include <limbo/experimental/bayes_opt/imgpo.hpp>
 #include <limbo/tools/parallel.hpp>
 #include <limbo/mean/constant.hpp>
 #include <limbo/init/no_init.hpp>
@@ -295,7 +295,7 @@ int main(int argc, char** argv)
     typedef model::GP<Params, kf_t, mean_t> model_t;
     typedef init::NoInit<Params> init_t;
 
-    typedef bayes_opt::IMGPO<Params, modelfun<model_t>, initfun<init_t>> Opt_t;
+    typedef bayes_opt::experimental::IMGPO<Params, modelfun<model_t>, initfun<init_t>> Opt_t;
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {
