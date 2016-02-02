@@ -19,10 +19,12 @@
 #include <limbo/tools/macros.hpp>
 #include <limbo/bayes_opt/imgpo.hpp>
 #include <limbo/tools/parallel.hpp>
+#include <limbo/mean/constant.hpp>
+#include <limbo/init/no_init.hpp>
 
 using namespace limbo;
 
-static constexpr int nb_replicates = 1;
+static constexpr int nb_replicates = 4;
 
 namespace colors {
     static const char* red = "\33[31m";
@@ -193,15 +195,11 @@ struct Params {
     };
 
     struct bayes_opt_imgpo {
-        BO_PARAM(double, noise, 0.0);
-    };
-
-    struct init_randomsampling {
-        BO_PARAM(int, samples, 0);
+        BO_PARAM(double, noise, 1e-6);
     };
 
     struct stop_maxiterations {
-        BO_PARAM(int, iterations, 50);
+        BO_PARAM(int, iterations, 100);
     };
 
     struct acqui_gpucb : public defaults::acqui_gpucb {
@@ -221,6 +219,10 @@ struct Params {
     };
 
     struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
+    };
+
+    struct mean_constant {
+        BO_PARAM(double, constant, 0);
     };
 };
 
@@ -288,7 +290,12 @@ int main(int argc, char** argv)
 #endif
     res_t results;
 
-    typedef bayes_opt::IMGPO<Params> Opt_t;
+    typedef kernel::SquaredExpARD<Params> kf_t;
+    typedef mean::Constant<Params> mean_t;
+    typedef model::GP<Params, kf_t, mean_t> model_t;
+    typedef init::NoInit<Params> init_t;
+
+    typedef bayes_opt::IMGPO<Params, modelfun<model_t>, initfun<init_t>> Opt_t;
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {
