@@ -33,18 +33,16 @@ namespace limbo {
           class A2 = boost::parameter::void_,
           class A3 = boost::parameter::void_,
           class A4 = boost::parameter::void_,
-          class A5 = boost::parameter::void_,
-          class A6 = boost::parameter::void_>
+          class A5 = boost::parameter::void_>
             // clang-format on
             // Bayesian Optimization with Exponential Convergence (NIPS 2015 paper)
             // Kenji Kawaguchi, Leslie Pack Kaelbling, Tomás Lozano-Pérez
             // http://papers.nips.cc/paper/5715-bayesian-optimization-with-exponential-convergence
-            class IMGPO : public limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> {
+            class IMGPO : public limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5> {
             public:
-                typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
+                typedef BoBase<Params, A1, A2, A3, A4, A5> base_t;
                 typedef typename base_t::model_t model_t;
                 typedef typename base_t::acquisition_function_t acquisition_function_t;
-                typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
 
                 template <typename StateFunction, typename AggregatorFunction = FirstElem>
                 void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)

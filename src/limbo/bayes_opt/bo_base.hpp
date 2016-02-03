@@ -70,7 +70,6 @@ namespace limbo {
     // see:
     // http://www.boost.org/doc/libs/1_55_0/libs/parameter/doc/html/index.html#parameter-enabled-class-templates
 
-    BOOST_PARAMETER_TEMPLATE_KEYWORD(acquiopt)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(initfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(acquifun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)
@@ -94,45 +93,39 @@ namespace limbo {
 
     namespace bayes_opt {
 
-        typedef boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>,
-            boost::parameter::optional<tag::statsfun>,
+        typedef boost::parameter::parameters<boost::parameter::optional<tag::statsfun>,
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
             boost::parameter::optional<tag::modelfun>> class_signature;
 
-        template <class Params, class A1 = boost::parameter::void_,
-            class A2 = boost::parameter::void_, class A3 = boost::parameter::void_,
-            class A4 = boost::parameter::void_, class A5 = boost::parameter::void_,
-            class A6 = boost::parameter::void_>
+        // clang-format off
+        template <class Params,
+          class A1 = boost::parameter::void_,
+          class A2 = boost::parameter::void_,
+          class A3 = boost::parameter::void_,
+          class A4 = boost::parameter::void_,
+          class A5 = boost::parameter::void_>
+        // clang-format on
         class BoBase {
         public:
             typedef Params params_t;
             // defaults
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
-#ifdef USE_LIBCMAES
-                typedef opt::Cmaes<Params> acquiopt_t; // 2
-#elif defined(USE_NLOPT)
-                typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
-#else
-#warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-                typedef opt::GridSearch<Params> acquiopt_t;
-#endif
 
                 typedef kernel::SquaredExpARD<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
-                typedef model::GP<Params, kf_t, mean_t, model::gp::KernelLFOpt<Params>> model_t; // 3
+                typedef model::GP<Params, kf_t, mean_t, model::gp::KernelLFOpt<Params>> model_t; // 2
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
-                typedef acqui::GP_UCB<Params, model_t> acqui_t; // 4
-                typedef boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>> stat_t; // 5
-                typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 6
+                typedef acqui::GP_UCB<Params, model_t> acqui_t; // 3
+                typedef boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>> stat_t; // 4
+                typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 5
             };
 
             // extract the types
-            typedef typename class_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
-            typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+            typedef typename class_signature::bind<A1, A2, A3, A4, A5>::type args;
             typedef typename boost::parameter::binding<args, tag::initfun, typename defaults::init_t>::type init_function_t;
             typedef typename boost::parameter::binding<args, tag::acquifun, typename defaults::acqui_t>::type acquisition_function_t;
             typedef typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type model_t;

@@ -19,7 +19,18 @@ namespace limbo {
             BO_PARAM(double, noise, 1e-6);
         };
     }
+
+    BOOST_PARAMETER_TEMPLATE_KEYWORD(acquiopt)
+
     namespace bayes_opt {
+
+        typedef boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>,
+            boost::parameter::optional<tag::statsfun>,
+            boost::parameter::optional<tag::initfun>,
+            boost::parameter::optional<tag::acquifun>,
+            boost::parameter::optional<tag::stopcrit>,
+            boost::parameter::optional<tag::modelfun>> boptimizer_signature;
+
         // clang-format off
         template <class Params,
           class A1 = boost::parameter::void_,
@@ -29,12 +40,26 @@ namespace limbo {
           class A5 = boost::parameter::void_,
           class A6 = boost::parameter::void_>
         // clang-format on
-        class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6> {
+        class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5> {
         public:
-            typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
+            // defaults
+            struct defaults {
+#ifdef USE_LIBCMAES
+                typedef opt::Cmaes<Params> acquiopt_t; // 2
+#elif defined(USE_NLOPT)
+                typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+#else
+#warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
+                typedef opt::GridSearch<Params> acquiopt_t;
+#endif
+            };
+
+            typedef BoBase<Params, A1, A2, A3, A4, A5> base_t;
             typedef typename base_t::model_t model_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
-            typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
+            // extract the types
+            typedef typename boptimizer_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
+            typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
 
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
