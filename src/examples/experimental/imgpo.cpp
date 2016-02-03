@@ -196,7 +196,7 @@ struct Params {
     };
 
     struct bayes_opt_imgpo {
-        BO_PARAM(double, noise, 1e-6);
+        BO_PARAM(double, noise, 0.0);
     };
 
     struct stop_maxiterations {
