@@ -50,10 +50,10 @@ namespace limbo {
                 void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
                 {
                     this->_init(sfun, afun, reset);
-                    size_t hh_max = 1000;
+                    size_t h_upper = 1000;
                     // Init tree
                     if (this->_total_iterations == 0)
-                        _init_tree(hh_max);
+                        _init_tree(h_upper);
 
                     // Init model
                     _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
@@ -67,7 +67,7 @@ namespace limbo {
                     _tree[0].samp.push_back(true);
 
                     this->add_new_sample(_tree[0].x[0], _tree[0].f[0]);
-                    double LB = _tree[0].f[0].maxCoeff();
+                    double LB = afun(_tree[0].f[0]);
                     double inf = std::numeric_limits<double>::infinity();
 
                     size_t depth_T = 0, M = 1;
@@ -95,7 +95,7 @@ namespace limbo {
                             while (true) {
                                 for (size_t i = 0; i < _tree[h].x.size(); i++) {
                                     if (_tree[h].leaf[i] == true) {
-                                        double b_hi = _tree[h].f[i][0];
+                                        double b_hi = afun(_tree[h].f[i]);
                                         if (b_hi > b_hi_max) {
                                             b_hi_max = b_hi;
                                             i_max[h] = i;
@@ -162,20 +162,20 @@ namespace limbo {
                                             auto tmp_tuple = _model.query(x_g);
                                             // UCB - nu = 0.05
                                             // sqrt(2*log(pi^2*M^2/(12*nu)))
-                                            Eigen::VectorXd m_g = std::get<0>(tmp_tuple);
+                                            double m_g = afun(std::get<0>(tmp_tuple));
                                             double s2_g = std::get<1>(tmp_tuple);
                                             double gp_varsigma = std::sqrt(2 * std::log(M_PI * M_PI * M2 * M2 / (12.0 * 0.05)));
-                                            z_max = std::max(z_max, m_g[0] + gp_varsigma * std::sqrt(s2_g));
+                                            z_max = std::max(z_max, m_g + gp_varsigma * std::sqrt(s2_g));
                                             M2++;
 
                                             _model.compute(this->_samples, this->_observations, Params::bayes_opt_imgpo::noise(), this->_bl_samples);
                                             auto tmp_tuple2 = _model.query(x_g);
                                             // UCB - nu = 0.05
                                             // sqrt(2*log(pi^2*M^2/(12*nu)))
-                                            Eigen::VectorXd m_d = std::get<0>(tmp_tuple2);
+                                            double m_d = afun(std::get<0>(tmp_tuple2));
                                             double s2_d = std::get<1>(tmp_tuple2);
                                             double gp_varsigma2 = std::sqrt(2 * std::log(M_PI * M_PI * M2 * M2 / (12.0 * 0.05)));
-                                            z_max = std::max(z_max, m_d[0] + gp_varsigma2 * std::sqrt(s2_d));
+                                            z_max = std::max(z_max, m_d + gp_varsigma2 * std::sqrt(s2_d));
                                             M2++;
 
                                             if (z_max >= b_max[h + xi])
@@ -245,12 +245,12 @@ namespace limbo {
                                 Eigen::VectorXd m_g = std::get<0>(tmp_tuple);
                                 double s2_g = std::get<1>(tmp_tuple);
                                 double gp_varsigma = std::sqrt(2 * std::log(std::pow(M_PI, 2) * std::pow(M, 2) / (12 * 0.05)));
-                                double UCB = m_g[0] + (gp_varsigma + 0.2) * sqrt(s2_g);
+                                double var_g = (gp_varsigma + 0.2) * sqrt(s2_g);
+                                double UCB = afun(m_g) + var_g;
                                 Eigen::VectorXd fsample_g;
                                 if ((UCB - LB) < 1e-6) {
                                     M++;
-                                    fsample_g = Eigen::VectorXd(1);
-                                    fsample_g(0) = UCB;
+                                    fsample_g = m_g.array() + var_g;
                                     _tree[h + 1].samp.push_back(false);
                                 }
                                 else {
@@ -285,12 +285,12 @@ namespace limbo {
                                 Eigen::VectorXd m_d = std::get<0>(tmp_tuple);
                                 double s2_d = std::get<1>(tmp_tuple);
                                 double gp_varsigma2 = std::sqrt(2 * std::log(std::pow(M_PI, 2) * std::pow(M, 2) / (12 * 0.05)));
-                                double UCB2 = m_d[0] + (gp_varsigma2 + 0.2) * sqrt(s2_d);
+                                double var_d = (gp_varsigma2 + 0.2) * sqrt(s2_d);
+                                double UCB2 = afun(m_d) + var_d;
                                 Eigen::VectorXd fsample_d;
                                 if ((UCB2 - LB) < 1e-6) {
                                     M++;
-                                    fsample_d = Eigen::VectorXd(1);
-                                    fsample_d(0) = UCB2;
+                                    fsample_d = m_d.array() + var_d;
                                     _tree[h + 1].samp.push_back(false);
                                 }
                                 else {
@@ -329,7 +329,7 @@ namespace limbo {
 
                                 // update LB
                                 Eigen::VectorXd tmp_lb = this->best_observation();
-                                LB = tmp_lb(0);
+                                LB = afun(tmp_lb);
 
                                 // std::cout << t << " N= " << this->_current_iteration << " n= " << split_n << " fmax_hat= " << LB << " rho= " << rho_bar << " xi= " << xi_max << " h= " << depth_T << std::endl;
                             }
