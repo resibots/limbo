@@ -23,32 +23,20 @@ namespace limbo {
                 size_t dim_out() const { return _model.dim_out(); }
 
                 template <typename AggregatorFunction>
-                double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun)
+                double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
                 {
+                    Eigen::VectorXd mu;
                     double sigma;
-                    std::tie(_mu, sigma) = _model.query(v);
+                    std::tie(mu, sigma) = _model.query(v);
                     // UCB - nu = 0.05
                     // sqrt(2*log(pi^2*M^2/(12*nu)))
                     double gp_varsigma = std::sqrt(2.0 * std::log(std::pow(M_PI, 2.0) * std::pow(_M, 2.0) / (12.0 * Params::acqui_ucb_imgpo::nu())));
-                    _var = (gp_varsigma + 0.2) * sqrt(sigma);
-                    return (afun(_mu) + _var);
-                }
-
-                double var() const
-                {
-                    return _var;
-                }
-
-                Eigen::VectorXd mu() const
-                {
-                    return _mu;
+                    return (afun(mu) + (gp_varsigma + 0.2) * std::sqrt(sigma));
                 }
 
             protected:
                 const Model& _model;
                 size_t _M;
-                double _var;
-                Eigen::VectorXd _mu;
             };
         }
     }

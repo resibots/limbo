@@ -231,11 +231,15 @@ namespace limbo {
                                 _model.compute(this->_samples, this->_observations, Params::bayes_opt_imgpo::noise(), this->_bl_samples);
                                 acquisition_function_t acqui_g(_model, M);
                                 double UCB = acqui_g(x_g, afun);
-                                double var_g = acqui_g.var();
                                 Eigen::VectorXd fsample_g;
                                 if ((UCB - LB) < 1e-6) {
+                                    Eigen::VectorXd mu;
+                                    double sigma;
+                                    std::tie(mu, sigma) = _model.query(x_g);
+                                    // TO-DO: we should fix this somehow for general acquis
+                                    double var = (std::sqrt(2.0 * std::log(std::pow(M_PI, 2.0) * std::pow(M, 2.0) / (12.0 * 0.05))) + 0.2) * std::sqrt(sigma);
                                     M++;
-                                    fsample_g = acqui_g.mu().array() + var_g;
+                                    fsample_g = mu.array() + var;
                                     _tree[h + 1].samp.push_back(false);
                                 }
                                 else {
@@ -266,11 +270,15 @@ namespace limbo {
                                 _model.compute(this->_samples, this->_observations, Params::bayes_opt_imgpo::noise(), this->_bl_samples);
                                 acquisition_function_t acqui_d(_model, M);
                                 double UCB2 = acqui_d(x_d, afun);
-                                double var_d = acqui_d.var();
                                 Eigen::VectorXd fsample_d;
                                 if ((UCB2 - LB) < 1e-6) {
+                                    Eigen::VectorXd mu;
+                                    double sigma;
+                                    std::tie(mu, sigma) = _model.query(x_d);
+                                    // TO-DO: we should fix this somehow for general acquis
+                                    double var = (std::sqrt(2.0 * std::log(std::pow(M_PI, 2.0) * std::pow(M, 2.0) / (12.0 * 0.05))) + 0.2) * std::sqrt(sigma);
                                     M++;
-                                    fsample_d = acqui_d.mu().array() + var_d;
+                                    fsample_d = mu.array() + var;
                                     _tree[h + 1].samp.push_back(false);
                                 }
                                 else {
