@@ -159,23 +159,13 @@ namespace limbo {
 
                                             // TO-DO: Properly handle bl_samples etc
                                             _model.compute(this->_samples, this->_observations, Params::bayes_opt_imgpo::noise(), this->_bl_samples);
-                                            auto tmp_tuple = _model.query(x_g);
-                                            // UCB - nu = 0.05
-                                            // sqrt(2*log(pi^2*M^2/(12*nu)))
-                                            double m_g = afun(std::get<0>(tmp_tuple));
-                                            double s2_g = std::get<1>(tmp_tuple);
-                                            double gp_varsigma = std::sqrt(2 * std::log(M_PI * M_PI * M2 * M2 / (12.0 * 0.05)));
-                                            z_max = std::max(z_max, m_g + gp_varsigma * std::sqrt(s2_g));
+                                            acquisition_function_t acqui_g(_model, M2);
+                                            z_max = std::max(z_max, acqui_g(x_g, afun));
                                             M2++;
 
                                             _model.compute(this->_samples, this->_observations, Params::bayes_opt_imgpo::noise(), this->_bl_samples);
-                                            auto tmp_tuple2 = _model.query(x_g);
-                                            // UCB - nu = 0.05
-                                            // sqrt(2*log(pi^2*M^2/(12*nu)))
-                                            double m_d = afun(std::get<0>(tmp_tuple2));
-                                            double s2_d = std::get<1>(tmp_tuple2);
-                                            double gp_varsigma2 = std::sqrt(2 * std::log(M_PI * M_PI * M2 * M2 / (12.0 * 0.05)));
-                                            z_max = std::max(z_max, m_d + gp_varsigma2 * std::sqrt(s2_d));
+                                            acquisition_function_t acqui_d(_model, M2);
+                                            z_max = std::max(z_max, acqui_d(x_d, afun));
                                             M2++;
 
                                             if (z_max >= b_max[h + xi])
@@ -239,18 +229,13 @@ namespace limbo {
                                 _tree[h + 1].x.push_back(x_g);
                                 // TO-DO: Properly handle bl_samples etc
                                 _model.compute(this->_samples, this->_observations, Params::bayes_opt_imgpo::noise(), this->_bl_samples);
-                                auto tmp_tuple = _model.query(x_g);
-                                // UCB - nu = 0.05
-                                // sqrt(2*log(pi^2*M^2/(12*nu)))
-                                Eigen::VectorXd m_g = std::get<0>(tmp_tuple);
-                                double s2_g = std::get<1>(tmp_tuple);
-                                double gp_varsigma = std::sqrt(2 * std::log(std::pow(M_PI, 2) * std::pow(M, 2) / (12 * 0.05)));
-                                double var_g = (gp_varsigma + 0.2) * sqrt(s2_g);
-                                double UCB = afun(m_g) + var_g;
+                                acquisition_function_t acqui_g(_model, M);
+                                double UCB = acqui_g(x_g, afun);
+                                double var_g = acqui_g.var();
                                 Eigen::VectorXd fsample_g;
                                 if ((UCB - LB) < 1e-6) {
                                     M++;
-                                    fsample_g = m_g.array() + var_g;
+                                    fsample_g = acqui_g.mu().array() + var_g;
                                     _tree[h + 1].samp.push_back(false);
                                 }
                                 else {
@@ -279,18 +264,13 @@ namespace limbo {
                                 _tree[h + 1].x.push_back(x_d);
                                 // TO-DO: Properly handle bl_samples etc
                                 _model.compute(this->_samples, this->_observations, Params::bayes_opt_imgpo::noise(), this->_bl_samples);
-                                auto tmp_tuple2 = _model.query(x_d);
-                                // UCB - nu = 0.05
-                                // sqrt(2*log(pi^2*M^2/(12*nu)))
-                                Eigen::VectorXd m_d = std::get<0>(tmp_tuple);
-                                double s2_d = std::get<1>(tmp_tuple);
-                                double gp_varsigma2 = std::sqrt(2 * std::log(std::pow(M_PI, 2) * std::pow(M, 2) / (12 * 0.05)));
-                                double var_d = (gp_varsigma2 + 0.2) * sqrt(s2_d);
-                                double UCB2 = afun(m_d) + var_d;
+                                acquisition_function_t acqui_d(_model, M);
+                                double UCB2 = acqui_d(x_d, afun);
+                                double var_d = acqui_d.var();
                                 Eigen::VectorXd fsample_d;
                                 if ((UCB2 - LB) < 1e-6) {
                                     M++;
-                                    fsample_d = m_d.array() + var_d;
+                                    fsample_d = acqui_d.mu().array() + var_d;
                                     _tree[h + 1].samp.push_back(false);
                                 }
                                 else {
@@ -328,8 +308,7 @@ namespace limbo {
                                 _tree[h + 1].leaf.push_back(true);
 
                                 // update LB
-                                Eigen::VectorXd tmp_lb = this->best_observation();
-                                LB = afun(tmp_lb);
+                                LB = afun(this->best_observation());
 
                                 // std::cout << t << " N= " << this->_current_iteration << " n= " << split_n << " fmax_hat= " << LB << " rho= " << rho_bar << " xi= " << xi_max << " h= " << depth_T << std::endl;
                             }

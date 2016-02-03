@@ -18,6 +18,7 @@
 
 #include <limbo/tools/macros.hpp>
 #include <limbo/experimental/bayes_opt/imgpo.hpp>
+#include <limbo/experimental/acqui/ucb_imgpo.hpp>
 #include <limbo/tools/parallel.hpp>
 #include <limbo/mean/constant.hpp>
 #include <limbo/init/no_init.hpp>
@@ -202,7 +203,7 @@ struct Params {
         BO_PARAM(int, iterations, 100);
     };
 
-    struct acqui_gpucb : public defaults::acqui_gpucb {
+    struct acqui_ucb_imgpo : public defaults::acqui_ucb_imgpo {
     };
 
 #ifdef USE_LIBCMAES
@@ -294,8 +295,9 @@ int main(int argc, char** argv)
     typedef mean::Constant<Params> mean_t;
     typedef model::GP<Params, kf_t, mean_t> model_t;
     typedef init::NoInit<Params> init_t;
+    typedef acqui::experimental::UCB_IMGPO<Params, model_t> acqui_t;
 
-    typedef bayes_opt::experimental::IMGPO<Params, modelfun<model_t>, initfun<init_t>> Opt_t;
+    typedef bayes_opt::experimental::IMGPO<Params, modelfun<model_t>, initfun<init_t>, acquifun<acqui_t>> Opt_t;
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {
