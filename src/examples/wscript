@@ -21,5 +21,6 @@ def build(bld):
                       target='obs_multi_auto_mean',
                       uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
-    if bld.env['BUILD_EXPERIMENTAL'] and bld.env['BUILD_EXPERIMENTAL'] == True:
-        bld.recurse('experimental/')
+
+    if bld.options.experimental:
+            bld.recurse('experimental/')
