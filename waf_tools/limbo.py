@@ -36,6 +36,7 @@ def create_variants(bld, source, uselib_local,
                 target=tmp,
                 includes=includes,
                 uselib=uselib,
+                cxxflags=cxxflags,
                 use=uselib_local)
     c_src = bld.path.abspath() + '/'
     for v in variants:
@@ -61,6 +62,7 @@ def create_variants(bld, source, uselib_local,
                     target=bin_fname,
                     includes=includes,
                     uselib=uselib,
+                    cxxflags=cxxflags,
                     use=uselib_local)
 
 
