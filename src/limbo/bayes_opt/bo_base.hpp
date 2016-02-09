@@ -76,21 +76,6 @@ namespace limbo {
     BOOST_PARAMETER_TEMPLATE_KEYWORD(statsfun)
     BOOST_PARAMETER_TEMPLATE_KEYWORD(stopcrit)
 
-    template <typename T, typename std::enable_if<std::is_arithmetic<T>::value, int>::type = 0>
-    inline bool is_nan_or_inf(T v)
-    {
-        return std::isinf(v) || std::isnan(v);
-    }
-
-    template <typename T, typename std::enable_if<!std::is_arithmetic<T>::value, int>::type = 0>
-    inline bool is_nan_or_inf(const T& v)
-    {
-        for (int i = 0; i < v.size(); ++i)
-            if (std::isinf(v(i)) || std::isnan(v(i)))
-                return true;
-        return false;
-    }
-
     namespace bayes_opt {
 
         typedef boost::parameter::parameters<boost::parameter::optional<tag::statsfun>,
@@ -159,8 +144,8 @@ namespace limbo {
             // we don't add NaN and inf observations
             void add_new_sample(const Eigen::VectorXd& s, const Eigen::VectorXd& v)
             {
-                if (is_nan_or_inf(v))
-                    return;
+                if (tools::is_nan_or_inf(v))
+                    throw EvaluationError();
                 _samples.push_back(s);
                 _observations.push_back(v);
             }
