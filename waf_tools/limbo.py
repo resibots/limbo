@@ -71,57 +71,59 @@ def _sub_script(tpl, conf_file):
         ld_lib_path = "''"
     print 'LD_LIBRARY_PATH=' + ld_lib_path
      # parse conf
-    conf = simplejson.load(open(conf_file))
-    exps = conf['exps']
-    nb_runs = conf['nb_runs']
-    res_dir = conf['res_dir']
-    bin_dir = conf['bin_dir']
-    wall_time = conf['wall_time']
-    use_mpi = "false"
-    try:
-        use_mpi = conf['use_mpi']
-    except:
-        use_mpi = "false"
-    try:
-        nb_cores = conf['nb_cores']
-    except:
-        nb_cores = 1
-    try:
-        args = conf['args']
-    except:
-        args = ''
-    email = conf['email']
-    if (use_mpi == "true"):
-        ppn = '1'
-        mpirun = 'mpirun'
-    else:
- #      nb_cores = 1;
-        ppn = "8"
-        mpirun = ''
-
+    list_exps = simplejson.load(open(conf_file))
     fnames = []
-    for i in range(0, nb_runs):
-        for e in exps:
-            directory = res_dir + "/" + e + "/exp_" + str(i)
-            try:
-                os.makedirs(directory)
-            except:
-                print "WARNING, dir:" + directory + " not be created"
-            subprocess.call('cp ' + bin_dir + '/' + e + ' ' + directory, shell=True)
-            fname = directory + "/" + e + "_" + str(i) + ".job"
-            f = open(fname, "w")
-            f.write(tpl
-                    .replace("@exp", e)
-                    .replace("@email", email)
-                    .replace("@ld_lib_path", ld_lib_path)
-                    .replace("@wall_time", wall_time)
-                    .replace("@dir", directory)
-                    .replace("@nb_cores", str(nb_cores))
-                    .replace("@ppn", ppn)
-                    .replace("@exec", mpirun + ' ' + directory + '/' + e + ' ' + args))
-            f.close()
-            os.chmod(fname, stat.S_IEXEC | stat.S_IREAD | stat.S_IWRITE)
-            fnames += [(fname, directory)]
+    for conf in list_exps:
+        exps = conf['exps']
+        nb_runs = conf['nb_runs']
+        res_dir = conf['res_dir']
+        bin_dir = conf['bin_dir']
+        wall_time = conf['wall_time']
+        use_mpi = "false"
+        try:
+            use_mpi = conf['use_mpi']
+        except:
+            use_mpi = "false"
+        try:
+            nb_cores = conf['nb_cores']
+        except:
+            nb_cores = 1
+        try:
+            args = conf['args']
+        except:
+            args = ''
+        email = conf['email']
+        if (use_mpi == "true"):
+            ppn = '1'
+            mpirun = 'mpirun'
+        else:
+     #      nb_cores = 1;
+            ppn = "8"
+            mpirun = ''
+
+        #fnames = []
+        for i in range(0, nb_runs):
+            for e in exps:
+                directory = res_dir + "/" + e + "/exp_" + str(i)
+                try:
+                    os.makedirs(directory)
+                except:
+                    print "WARNING, dir:" + directory + " not be created"
+                subprocess.call('cp ' + bin_dir + '/' + e + ' ' + directory, shell=True)
+                fname = directory + "/" + e + "_" + str(i) + ".job"
+                f = open(fname, "w")
+                f.write(tpl
+                        .replace("@exp", e)
+                        .replace("@email", email)
+                        .replace("@ld_lib_path", ld_lib_path)
+                        .replace("@wall_time", wall_time)
+                        .replace("@dir", directory)
+                        .replace("@nb_cores", str(nb_cores))
+                        .replace("@ppn", ppn)
+                        .replace("@exec", mpirun + ' ' + directory + '/' + e + ' ' + args))
+                f.close()
+                os.chmod(fname, stat.S_IEXEC | stat.S_IREAD | stat.S_IWRITE)
+                fnames += [(fname, directory)]
     return fnames
 
 
