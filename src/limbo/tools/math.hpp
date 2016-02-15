@@ -66,6 +66,22 @@ namespace limbo {
         {
             return signum(x, std::is_signed<T>());
         }
+
+        // inf or NAN checks
+        template <typename T, typename std::enable_if<std::is_arithmetic<T>::value, int>::type = 0>
+        inline bool is_nan_or_inf(T v)
+        {
+            return std::isinf(v) || std::isnan(v);
+        }
+
+        template <typename T, typename std::enable_if<!std::is_arithmetic<T>::value, int>::type = 0>
+        inline bool is_nan_or_inf(const T& v)
+        {
+            for (int i = 0; i < v.size(); ++i)
+                if (std::isinf(v(i)) || std::isnan(v(i)))
+                    return true;
+            return false;
+        }
     }
 }
 
