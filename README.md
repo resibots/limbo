@@ -5,21 +5,22 @@ A lightweight framework for Bayesian and model-based optimisation of black-box f
 
 Documentation
 -------------
-A minimal documentation is (will be?) available on the wiki: https://github.com/resibots/limbo/wiki
+Documentation is available here: http://www.resibots.eu/limbo
 
-Many mechanisms are inspired by [sferes2](http://github.com/sferes2/sferes2): looking at the documentation of sferes2 might help.
 
 Authors
 ------
-- Antoine Cully (Pierre & Marie Curie University): http://www.isir.upmc.fr/?op=view_profil&lang=fr&id=278
-- Jean-Baptiste Mouret (Pierre & Marie Curie University): http://pages.isir.upmc.fr/~mouret/website/
-
+- Antoine Cully (Imperial College): http://www.isir.upmc.fr/?op=view_profil&lang=fr&id=278
+- Jean-Baptiste Mouret (Inria): http://pages.isir.upmc.fr/~mouret/website/
+- Konstantinos Chatzilygeroudis (Inria)
+- Federico Allocai (Inria)
+- 
 Main features
 -------------
 - Bayesian optimisation based on Gaussian processes
-- Parego (Multi-objective optimization), experimental support for other multi-objective algorithms
 - Generic framework (template-based), which allows easy customization for testing original ideas
 - Can exploit multicore computers
+- Experimental support for some multi-objective algorithms
 
 Main references
 ---------------
