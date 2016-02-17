@@ -80,14 +80,7 @@ namespace limbo {
                         [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(acqui(x, afun)); };
                     Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in);
                     Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, true);
-                    bool blacklisted = false;
-                    try {
-                        this->add_new_sample(new_sample, sfun(new_sample));
-                    }
-                    catch (const EvaluationError& e) {
-                        this->add_new_bl_sample(new_sample);
-                        blacklisted = true;
-                    }
+                    bool blacklisted = !this->eval_and_add(sfun, new_sample);
 
                     this->_update_stats(*this, afun, blacklisted);
 

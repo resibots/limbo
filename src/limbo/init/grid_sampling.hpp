@@ -30,7 +30,7 @@ namespace limbo {
                     Eigen::VectorXd point = current;
                     point[dim_in] = x;
                     if (dim_in == current.size() - 1) {
-                        opt.add_new_sample(point, seval(point));
+                        opt.eval_and_add(seval, point);
                     }
                     else {
                         _explore(dim_in + 1, seval, point, opt);

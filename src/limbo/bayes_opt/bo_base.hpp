@@ -152,6 +152,20 @@ namespace limbo {
 
             void add_new_bl_sample(const Eigen::VectorXd& s) { _bl_samples.push_back(s); }
 
+            template <typename StateFunction>
+            bool eval_and_add(const StateFunction& seval, const Eigen::VectorXd& sample)
+            {
+                try {
+                    this->add_new_sample(sample, seval(sample));
+                }
+                catch (const EvaluationError& e) {
+                    this->add_new_bl_sample(sample);
+                    return false;
+                }
+
+                return true;
+            }
+
         protected:
             template <typename StateFunction, typename AggregatorFunction>
             void _init(const StateFunction& seval, const AggregatorFunction& afun, bool reset = true)
