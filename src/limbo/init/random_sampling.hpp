@@ -20,7 +20,7 @@ namespace limbo {
             {
                 for (int i = 0; i < Params::init_randomsampling::samples(); i++) {
                     auto new_sample = tools::random_vector(StateFunction::dim_in);
-                    opt.add_new_sample(new_sample, seval(new_sample));
+                    opt.eval_and_add(seval, new_sample);
                 }
             }
         };

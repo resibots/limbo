@@ -24,7 +24,7 @@ namespace limbo {
                     Eigen::VectorXd new_sample(StateFunction::dim_in);
                     for (size_t i = 0; i < StateFunction::dim_in; i++)
                         new_sample[i] = rgen.rand() / double(Params::init_randomsamplinggrid::bins());
-                    opt.add_new_sample(new_sample, seval(new_sample));
+                    opt.eval_and_add(seval, new_sample);
                 }
             }
         };
