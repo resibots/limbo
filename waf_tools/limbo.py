@@ -17,53 +17,26 @@ def options(opt):
 def create_variants(bld, source, uselib_local,
                     uselib, variants, includes=". ../",
                     cxxflags='',
-                    json='',
                     target=''):
-    # the basic one
-    #   tgt = bld.new_task_gen('cxx', 'program')
-    #   tgt.source = source
-    #   tgt.includes = includes
-    #   tgt.uselib_local = uselib_local
-    #   tgt.uselib = uselib
-    # the variants
-    # we create a basic file
     if not target:
         tmp = source.replace('.cpp', '')
     else:
         tmp = target
-    bld.program(features='cxx',
-                source=source,
-                target=tmp,
-                includes=includes,
-                uselib=uselib,
-                cxxflags=cxxflags,
-                use=uselib_local)
-    c_src = bld.path.abspath() + '/'
     for v in variants:
-        # create file
+        deff = []
         suff = ''
         for d in v.split(' '):
             suff += d.lower() + '_'
-        src_fname = tmp + '_' + suff[0:len(suff) - 1] + '.cpp'
+            deff.append(d)
         bin_fname = tmp + '_' + suff[0:len(suff) - 1]
-        f = open(c_src + src_fname, 'w')
-        f.write("// THIS IS A GENERATED FILE - DO NOT EDIT\n")
-        for d in v.split(' '):
-            f.write("#define " + d + "\n")
-        f.write("#line 1 \"" + c_src + source + "\"\n")
-        code = open(c_src + source, 'r')
-        for line in code:
-            f.write(line)
-        bin_name = src_fname.replace('.cpp', '')
-        bin_name = os.path.basename(bin_name)
-        # create build
         bld.program(features='cxx',
-                    source=src_fname,
+                    source=source,
                     target=bin_fname,
                     includes=includes,
                     uselib=uselib,
                     cxxflags=cxxflags,
-                    use=uselib_local)
+                    use=uselib_local,
+                    defines=deff)
 
 
 def _sub_script(tpl, conf_file):
