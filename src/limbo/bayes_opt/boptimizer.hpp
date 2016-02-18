@@ -72,7 +72,7 @@ namespace limbo {
 
                 acqui_optimizer_t acqui_optimizer;
 
-                while (this->_samples.size() == 0 || !this->_stop(*this, afun)) {
+                while (!this->_stop(*this, afun)) {
                     acquisition_function_t acqui(_model, this->_current_iteration);
 
                     // we do not have gradient in our current acquisition function
