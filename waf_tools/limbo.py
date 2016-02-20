@@ -18,8 +18,9 @@ def create_variants(bld, source, uselib_local,
                     uselib, variants, includes=". ../",
                     cxxflags='',
                     target=''):
+    source_list = source.split()
     if not target:
-        tmp = source.replace('.cpp', '')
+        tmp = source_list[0].replace('.cpp', '')
     else:
         tmp = target
     for v in variants:
