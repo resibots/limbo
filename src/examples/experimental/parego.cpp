@@ -1,6 +1,6 @@
 #include <limbo/limbo.hpp>
 #include <limbo/experimental/bayes_opt/parego.hpp>
-using namespace limbo;
+#include <limbo/experimental/stat/pareto_front.hpp>
 
 using namespace limbo;
 
@@ -90,26 +90,13 @@ struct mop2 {
 
 int main()
 {
-    tools::par::init();
-    // if you want to use a standard GP & basic UCB:
-    // typedef kernel_functions::MaternFiveHalfs<Params> kernel_t;
-    // typedef model::GP<Params, kernel_t, mean_t> gp_t;
-    // typedef acquisition_functions::UCB<Params, gp_t> ucb_t;
-    // Parego<Params, model_fun<gp_t>, acq_fun<ucb_t> > opt;
-    experimental::bayes_opt::Parego<Params> opt;
+    using stat_t =
+      boost::fusion::vector<
+        experimental::stat::ParetoFront<Params>,
+        stat::ConsoleSummary<Params>>;
+    using opt_t = experimental::bayes_opt::Parego<Params, statsfun<stat_t> >;
+    opt_t opt;
     opt.optimize(mop2());
-/*
-    std::cout << "optimization done" << std::endl;
-    auto p_model = opt.pareto_model();
-    auto p_data = opt.pareto_data();
 
-    std::ofstream pareto_model("mop2_pareto_model.dat"),
-        pareto_data("mop2_pareto_data.dat");
-    std::cout << "writing..." << std::endl;
-    for (auto x : p_model)
-        pareto_model << std::get<1>(x).transpose() << " " << std::endl;
-    for (auto x : p_data)
-        pareto_data << std::get<1>(x).transpose() << std::endl;
-*/
     return 0;
 }
