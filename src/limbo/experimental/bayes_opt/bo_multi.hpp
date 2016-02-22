@@ -76,8 +76,27 @@ namespace limbo {
 #endif
             }
 
+            // to removed once moved out of experimental?
+            BOOST_PARAMETER_TEMPLATE_KEYWORD(initfun)
+            BOOST_PARAMETER_TEMPLATE_KEYWORD(acquifun)
+            BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)
+            BOOST_PARAMETER_TEMPLATE_KEYWORD(statsfun)
+            BOOST_PARAMETER_TEMPLATE_KEYWORD(stopcrit)
+
+            // algo-specific ?
+            BOOST_PARAMETER_TEMPLATE_KEYWORD(acquiopt)
+
+            typedef boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>,
+                boost::parameter::optional<tag::statsfun>,
+                boost::parameter::optional<tag::initfun>,
+                boost::parameter::optional<tag::acquifun>,
+                boost::parameter::optional<tag::stopcrit>,
+                boost::parameter::optional<tag::modelfun>> bo_multi_signature;
+
+
             // clang-format off
             template <class Params,
+              class A1 = boost::parameter::void_,
               class A2 = boost::parameter::void_,
               class A3 = boost::parameter::void_,
               class A4 = boost::parameter::void_,
@@ -86,9 +105,21 @@ namespace limbo {
             // clang-format on
             class BoMulti : public limbo::bayes_opt::BoBase<Params, A2, A3, A4, A5, A6> {
             public:
+              struct defaults {
+#ifdef USE_LIBCMAES
+                  typedef opt::Cmaes<Params> acquiopt_t;
+#elif defined(USE_NLOPT)
+                  typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+#else
+#warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
+                  typedef opt::GridSearch<Params> acquiopt_t;
+#endif
+              };
+              typedef typename bo_multi_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
+              typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+
                 typedef limbo::bayes_opt::BoBase<Params, A2, A3, A4, A5, A6> base_t;
                 typedef typename base_t::model_t model_t;
-                typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
                 typedef typename base_t::acquisition_function_t acquisition_function_t;
                 // point, obj, sigma
                 typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
@@ -163,7 +194,7 @@ namespace limbo {
                     pareto_t p(points.size());
                     tools::par::loop(0, p.size(), [&](size_t k) {
                         // clang-format off
-                    p[k] = std::make_tuple(points[k], objs[k], sigma[k]);
+                        p[k] = std::make_tuple(points[k], objs[k], sigma[k]);
                         // clang-format on
                     });
                     return p;

@@ -1,40 +1,53 @@
 #include <limbo/limbo.hpp>
 #include <limbo/experimental/bayes_opt/parego.hpp>
+using namespace limbo;
 
 using namespace limbo;
 
 struct Params {
-    struct init_randomsampling {
-        BO_PARAM(int, samples, 21);
-        // calandra: number of dimensions * 5
-        // knowles : 11 * dim - 1
-    };
-
-    struct stop_maxiterations {
-        BO_PARAM(int, iterations, 30);
-    };
-
-    struct acqui_ucb : public defaults::acqui_ucb {
-    };
-
-    struct acqui_gpucb : public defaults::acqui_gpucb {
-    };
-
+#ifdef USE_LIBCMAES
     struct opt_cmaes : public defaults::opt_cmaes {
     };
+#elif defined(USE_NLOPT)
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
+    };
+#else
+    struct opt_gridsearch : public defaults::opt_gridsearch {
+    };
+#endif
+    struct opt_rprop : public defaults::opt_rprop {
+    };
 
-    struct mean_constant : public defaults::mean_constant {
+    struct kernel_maternfivehalfs {
+        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, l, 0.2);
     };
 
     struct bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct bayes_opt_parego : public defaults::bayes_opt_parego {
-        BO_PARAM(double, noise, 0.005);
+    struct bayes_opt_boptimizer {
+        BO_PARAM(double, noise, 0.001);
+        BO_PARAM(bool, stats_enabled, true);
+    };
+
+    struct init_randomsampling {
+        BO_PARAM(int, samples, 5);
+    };
+
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 100);
+    };
+
+    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
+    };
+    struct model_gp_parego : public experimental::defaults::model_gp_parego {
+    };
+
+    struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 };
-
 struct zdt2 {
     static constexpr size_t dim_in = 30;
     static constexpr size_t dim_out = 2;
@@ -85,7 +98,7 @@ int main()
     // Parego<Params, model_fun<gp_t>, acq_fun<ucb_t> > opt;
     experimental::bayes_opt::Parego<Params> opt;
     opt.optimize(mop2());
-
+/*
     std::cout << "optimization done" << std::endl;
     auto p_model = opt.pareto_model();
     auto p_data = opt.pareto_data();
@@ -97,6 +110,6 @@ int main()
         pareto_model << std::get<1>(x).transpose() << " " << std::endl;
     for (auto x : p_data)
         pareto_data << std::get<1>(x).transpose() << std::endl;
-
+*/
     return 0;
 }
