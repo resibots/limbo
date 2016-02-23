@@ -13,7 +13,8 @@ def build(bld):
               ehvi/ehvi_sliceupdate.cc \
               ehvi/ehvi_hvol.cc \
               ehvi/ehvi_multi.cc \
-              ehvi/helper.cc',
+              ehvi/helper.cc \
+              hv/hypervol.c',
               target='limbo')
 
 
@@ -24,5 +25,6 @@ def build_extensive_tests(bld):
               ehvi/ehvi_sliceupdate.cc \
               ehvi/ehvi_hvol.cc \
               ehvi/ehvi_multi.cc \
-              ehvi/helper.cc',
+              ehvi/helper.cc \
+              hv/hypervol.c',
               target='limbo')

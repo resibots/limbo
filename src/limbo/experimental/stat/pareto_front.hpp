@@ -19,7 +19,6 @@ namespace limbo {
                 if (!bo.stats_enabled() || bo.observations().empty())
                     return;
                 std::string fname = bo.res_dir() + "/" + "pareto_front_" + std::to_string(bo.current_iteration()) + ".dat";
-                std::cout << "writing:" << fname << std::endl;
                 std::ofstream ofs(fname.c_str());
                 auto pareto = _pareto_data(bo);
                 for (auto x : pareto) {

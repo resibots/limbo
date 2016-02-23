@@ -1,6 +1,7 @@
 #include <limbo/limbo.hpp>
 #include <limbo/experimental/bayes_opt/parego.hpp>
 #include <limbo/experimental/stat/pareto_front.hpp>
+#include <limbo/experimental/stat/hyper_volume.hpp>
 
 using namespace limbo;
 
@@ -47,7 +48,16 @@ struct Params {
 
     struct acqui_gpucb : public defaults::acqui_gpucb {
     };
+    struct stat_hyper_volume {
+       BO_PARAM_ARRAY(double, ref, 10, 10);
+    };
 };
+
+// http://www.tik.ee.ethz.ch/sop/download/supplementary/testproblems/zdt2/
+// hypervolume : 120,3333 (ref: (11,11))
+// see also : https://en.wikipedia.org/wiki/Test_functions_for_optimization
+// original is mimimization, objectives in [0,1], we transform it to max
+// ref point should be 10, 10 (same hypervolume)
 struct zdt2 {
     static constexpr size_t dim_in = 30;
     static constexpr size_t dim_out = 2;
@@ -58,11 +68,11 @@ struct zdt2 {
         double f1 = x(0);
         double g = 1.0;
         for (int i = 1; i < x.size(); ++i)
-            g += 9.0 / (x.size() - 1) * x(i) * x(i);
+            g += 9.0 / (x.size() - 1) * x(i);
         double h = 1.0f - pow((f1 / g), 2.0);
         double f2 = g * h;
-        res(0) = -f1;
-        res(1) = -f2;
+        res(0) = - f1;
+        res(1) = - f2;
         return res;
     }
 };
@@ -82,8 +92,8 @@ struct mop2 {
         double f1 = 1.0 - exp(-v1.sum());
         double f2 = 1.0 - exp(-v2.sum());
         // we _maximize in [0:1]
-        res(0) = -f1 + 1;
-        res(1) = -f2 + 1;
+        res(0) = 1 -f1;
+        res(1) = 1 -f2;
         return res;
     }
 };
@@ -93,6 +103,7 @@ int main()
     using stat_t =
       boost::fusion::vector<
         experimental::stat::ParetoFront<Params>,
+        experimental::stat::HyperVolume<Params>,
         stat::ConsoleSummary<Params>>;
     using opt_t = experimental::bayes_opt::Parego<Params, statsfun<stat_t> >;
     opt_t opt;
