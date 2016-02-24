@@ -19,10 +19,7 @@ namespace limbo {
         class GP {
         public:
             GP() : _dim_in(-1), _dim_out(-1) {}
-            // useful because the model might be created  before having samples
-	  //GP(int dim_in, int dim_out)
-	  //    : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
-
+            
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations, double noise,
                 const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
