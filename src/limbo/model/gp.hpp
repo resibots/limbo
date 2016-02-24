@@ -20,24 +20,32 @@ namespace limbo {
         public:
             GP() : _dim_in(-1), _dim_out(-1) {}
             // useful because the model might be created  before having samples
-            GP(int dim_in, int dim_out)
-                : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
+	  //GP(int dim_in, int dim_out)
+	  //    : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations, double noise,
                 const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
             {
-                if (_dim_in == -1) {
-                    assert(samples.size() != 0);
-                    assert(observations.size() != 0);
-                    assert(samples.size() == observations.size());
-                    _dim_in = samples[0].size();
-                    _dim_out = observations[0].size();
-                }
+	      //should be checked each time! not only the first time
+	      assert(samples.size() != 0); 
+	      assert(observations.size() != 0);
+	      assert(samples.size() == observations.size());
+	                    
+	      if(_dim_in != samples[0].size())
+		{
+		  _dim_in = samples[0].size();
+		  _kernel_function=KernelFunction(_dim_in);   // the cost of building a functor should be relatively low
+		}
 
+	      if(_dim_out != observations[0].size())
+		{
+		  _dim_out = observations[0].size(); 
+		  _mean_function = MeanFunction(_dim_out);  // the cost of building a functor should be relatively low
+		}
+	      
                 _samples = samples;
-
-                _observations.resize(observations.size(), observations[0].size());
+                _observations.resize(observations.size(), _dim_out);
                 for (int i = 0; i < _observations.rows(); ++i)
                     _observations.row(i) = observations[i];
 
