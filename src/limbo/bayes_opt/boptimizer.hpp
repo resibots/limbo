@@ -64,7 +64,7 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
-                _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
+	      
                 this->_init(sfun, afun, reset);
 
                 if (!this->_observations.empty())

@@ -19,6 +19,13 @@ Eigen::VectorXd make_v1(double x)
     return v1;
 }
 
+Eigen::VectorXd make_v2(double x1, double x2)
+{
+  Eigen::VectorXd v2(2);
+  v2 << x1,x2;
+  return v2;
+}
+
 struct Params {
     struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
@@ -34,6 +41,33 @@ struct Params {
     struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
 };
+
+BOOST_AUTO_TEST_CASE(test_gp_dim)
+{
+  using namespace limbo;
+  
+  typedef kernel::MaternFiveHalfs<Params> KF_t;
+  typedef mean::Constant<Params> Mean_t;
+  typedef model::GP<Params, KF_t, Mean_t> GP_t;
+  
+  GP_t gp; // no init with dim
+  
+  std::vector<Eigen::VectorXd> observations = {make_v2(5,5), make_v2(10,10),
+					       make_v2(5,5)};
+  std::vector<Eigen::VectorXd> samples = {make_v2(1,1), make_v2(2,2), make_v2(3,3)};
+  
+  gp.compute(samples, observations, 0.0);
+  
+  Eigen::VectorXd mu;
+  double sigma;
+  std::tie(mu, sigma) = gp.query(make_v2(1,1));
+  BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
+  BOOST_CHECK(std::abs((mu(1) - 5)) < 1);
+
+  BOOST_CHECK(sigma < 1e-5);
+
+   
+}
 
 BOOST_AUTO_TEST_CASE(test_gp)
 {
@@ -114,7 +148,7 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     typedef mean::Constant<Params> Mean_t;
     typedef model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>> GP_t;
 
-    GP_t gp(1, 1);
+    GP_t gp;
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10), make_v1(5)};
     std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
 
