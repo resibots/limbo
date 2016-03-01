@@ -286,7 +286,7 @@ In your main function, you need to have something like the following: ::
     std::cout << "New target!" << std::endl;
     // Adding new target
     aggregator = DistanceToTarget<Params>({2, 1.5});
-    boptimizer.optimize(eval_func<Params>(), aggregator, true);
+    boptimizer.optimize(eval_func<Params>(), aggregator, false);
     // rest of code
   }
 
@@ -456,6 +456,6 @@ The whole ``main.cpp`` file: ::
       boptimizer.optimize(eval_func<Params>(), aggregator);
       std::cout << "New target!" << std::endl;
       aggregator = DistanceToTarget<Params>({2, 1.5});
-      boptimizer.optimize(eval_func<Params>(), aggregator, true);
+      boptimizer.optimize(eval_func<Params>(), aggregator, false);
       return 1;
   }
