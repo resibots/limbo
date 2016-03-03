@@ -9,6 +9,8 @@
 #include <limbo/mean/constant.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
+#include <limbo/acqui/ucb.hpp>
+#include <limbo/opt/grid_search.hpp>
 
 using namespace limbo;
 
@@ -21,9 +23,9 @@ Eigen::VectorXd make_v1(double x)
 
 Eigen::VectorXd make_v2(double x1, double x2)
 {
-  Eigen::VectorXd v2(2);
-  v2 << x1,x2;
-  return v2;
+    Eigen::VectorXd v2(2);
+    v2 << x1, x2;
+    return v2;
 }
 
 struct Params {
@@ -40,33 +42,37 @@ struct Params {
 
     struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
+
+    struct acqui_ucb : public defaults::acqui_ucb {
+    };
+
+    struct opt_gridsearch : public defaults::opt_gridsearch {
+    };
 };
 
 BOOST_AUTO_TEST_CASE(test_gp_dim)
 {
-  using namespace limbo;
-  
-  typedef kernel::MaternFiveHalfs<Params> KF_t;
-  typedef mean::Constant<Params> Mean_t;
-  typedef model::GP<Params, KF_t, Mean_t> GP_t;
-  
-  GP_t gp; // no init with dim
-  
-  std::vector<Eigen::VectorXd> observations = {make_v2(5,5), make_v2(10,10),
-					       make_v2(5,5)};
-  std::vector<Eigen::VectorXd> samples = {make_v2(1,1), make_v2(2,2), make_v2(3,3)};
-  
-  gp.compute(samples, observations, 0.0);
-  
-  Eigen::VectorXd mu;
-  double sigma;
-  std::tie(mu, sigma) = gp.query(make_v2(1,1));
-  BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-  BOOST_CHECK(std::abs((mu(1) - 5)) < 1);
+    using namespace limbo;
 
-  BOOST_CHECK(sigma < 1e-5);
+    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
+    typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
-   
+    GP_t gp; // no init with dim
+
+    std::vector<Eigen::VectorXd> observations = {make_v2(5, 5), make_v2(10, 10),
+        make_v2(5, 5)};
+    std::vector<Eigen::VectorXd> samples = {make_v2(1, 1), make_v2(2, 2), make_v2(3, 3)};
+
+    gp.compute(samples, observations, 0.0);
+
+    Eigen::VectorXd mu;
+    double sigma;
+    std::tie(mu, sigma) = gp.query(make_v2(1, 1));
+    BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
+    BOOST_CHECK(std::abs((mu(1) - 5)) < 1);
+
+    BOOST_CHECK(sigma < 1e-5);
 }
 
 BOOST_AUTO_TEST_CASE(test_gp)
@@ -107,6 +113,39 @@ BOOST_AUTO_TEST_CASE(test_gp)
         std::cout << x << " " << mu << " " << mu.array() - sigma << " "
                   << mu.array() + sigma << std::endl;
     }
+}
+
+BOOST_AUTO_TEST_CASE(test_gp_no_samples_acqui_opt)
+{
+    using namespace limbo;
+
+    struct FirstElem {
+        typedef double result_type;
+        double operator()(const Eigen::VectorXd& x) const
+        {
+            return x(0);
+        }
+    };
+
+    typedef opt::GridSearch<Params> acquiopt_t;
+
+    typedef kernel::SquaredExpARD<Params> KF_t;
+    typedef mean::Constant<Params> Mean_t;
+    typedef model::GP<Params, KF_t, Mean_t> GP_t;
+    typedef acqui::UCB<Params, GP_t> acquisition_function_t;
+
+    GP_t gp(2, 2);
+
+    acquisition_function_t acqui(gp, 0);
+    acquiopt_t acqui_optimizer;
+
+    // we do not have gradient in our current acquisition function
+    auto acqui_optimization =
+        [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(acqui(x, FirstElem())); };
+    Eigen::VectorXd starting_point = tools::random_vector(2);
+    Eigen::VectorXd test = acqui_optimizer(acqui_optimization, starting_point, true);
+    BOOST_CHECK(test(0) < 1e-5);
+    BOOST_CHECK(test(1) < 1e-5);
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_blacklist)

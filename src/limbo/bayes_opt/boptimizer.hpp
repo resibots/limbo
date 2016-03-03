@@ -64,11 +64,13 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
-	      
+
                 this->_init(sfun, afun, reset);
 
                 if (!this->_observations.empty())
                     _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
+                else
+                    _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
 
                 acqui_optimizer_t acqui_optimizer;
 
