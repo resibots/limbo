@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+import create_all_combinations_test
+
+
+def build(bld):
+    bld.program(features='cxx',
+                source='bo_functions.cpp',
+                includes='. .. ../../',
+                target='bo_functions',
+                uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                use='limbo')
+    bld.program(features='cxx test',
+                source='test_gp.cpp',
+                includes='. .. ../../',
+                target='test_gp',
+                uselib='BOOST EIGEN TBB',
+                use='limbo')
+    bld.program(features='cxx test',
+                source='test_init_functions.cpp',
+                includes='. .. ../../',
+                target='test_init_functions',
+                uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                use='limbo')
+    bld.program(features='cxx test',
+                source='test_optimizers.cpp',
+                includes='. .. ../../',
+                target='test_optimizers',
+                uselib='BOOST EIGEN TBB LIBCMAES',
+                use='limbo')
+    bld.program(features='cxx test',
+                source='test_macros.cpp',
+                includes='. .. ../../',
+                target='test_macros',
+                uselib='BOOST EIGEN TBB',
+                use='limbo')
+    bld.program(features='cxx',
+                source='boptimizer.cpp',
+                includes='. .. ../../',
+                target='boptimizer',
+                uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                use='limbo')
+    if bld.env.DEFINES_NLOPT:
+        bld.program(features='cxx test',
+                    source='test_nlopt.cpp',
+                    includes='. .. ../../',
+                    target='test_nlopt',
+                    uselib='BOOST EIGEN TBB NLOPT',
+                    use='limbo')
+    if bld.env.DEFINES_LIBCMAES:
+        bld.program(features='cxx test',
+                    source='test_cmaes.cpp',
+                    includes='. .. ../../',
+                    target='test_cmaes',
+                    uselib='BOOST EIGEN TBB LIBCMAES',
+                    use='limbo')
+
+
+def build_extensive_tests(ctx):
+    create_all_combinations_test.create(ctx)

@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+
+def build(bld):
+    obj = bld.program(features='cxx',
+                      source='imgpo.cpp',
+                      includes='. .. ../../',
+                      target='imgpo',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      use='limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'parego.cpp',
+                      includes = '.. ../.. ../../../',
+                      target = 'parego',
+                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      use = 'limbo')

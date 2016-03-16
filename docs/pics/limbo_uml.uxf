@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>7</x>
+      <y>525</y>
+      <w>336</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>BoOptimizer&lt;Params, ...&gt;
+--
+
+--
+&lt;StateFunction, AggregatorFunction&gt; 
++optimize(sfun: const StateFunction&amp;,
+			                afun: const AggregatorFunction&amp;  = AggregatorFunction(),
+			                bool reset = true): void
+layer=1
+bg=white
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>231</y>
+      <w>350</w>
+      <h>406</h>
+    </coordinates>
+    <panel_attributes>bayes_opt
+--
+bg=#aaaaaa
+layer=-2
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>7</x>
+      <y>252</y>
+      <w>336</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>BoBase&lt;Params, ...&gt;
+--
+-- types
+init_function_t
+acquisition_function_t
+acqui_optimizer_t
+model_t
+stopping_criteria_t
+stat_t
+
+-- data
+# _observations: std::vector&lt;Eigen::VectorXd&gt;
+# _samples: std::vector&lt;Eigen::VectorXd&gt;
+# _bl_samples: std::vector&lt;Eigen::VectorXd&gt; 
+--
++ add_new_sample(s: const Eigen::VectorXd&amp;, 
+                               v: const Eigen::VectorXd&amp;): void
++ add_new_bl_sample(s: const Eigen::VectorXd&amp;): void
+
+&lt;StateFunction, AggregatorFunction&gt; 
+/+optimize(sfun: const StateFunction&amp;,/
+/			                afun: const AggregatorFunction&amp;  = AggregatorFunction(),/
+/			                bool reset = true): void /
+
+bg=#ffffff
+layer=1
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>161</x>
+      <y>497</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+group=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>448</x>
+      <y>140</y>
+      <w>301</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>acqui
+--
+bg=#aaaaaa
+layer=-2
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>161</y>
+      <w>287</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>[Acqui]&lt;Params,Model&gt;
+--
+--
++ [Acqui](model: const Model&amp; model, iteration:int = 0)
++ size_t dim_in() const
++ size_t dim_out() const
++ &lt;AggregatorFunction&gt;
++ operator()(v: const Eigen::VectorXd&amp;, 
+           afun: const AggregatorFunction&amp;) const : double
+bg=white
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>448</x>
+      <y>0</y>
+      <w>315</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>init
+--
+bg=#aaaaaa
+layer=-2
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>21</y>
+      <w>301</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>[Init]&lt;Param&gt;
+--
++ &lt;F, Opt&gt; operator()(feval: const F&amp;, opt: Opt&amp; ) const: void
+layer=1
+bg=white
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>875</x>
+      <y>427</y>
+      <w>448</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>kernel
+--
+bg=#aaaaaa
+layer=-2
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>882</x>
+      <y>448</y>
+      <w>434</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>[Kernel]&lt;Param&gt;
+--
++ operator()(v1:const Eigen::VectorXd&amp;, v2: const Eigen::VectorXd&amp; ) const: double
+layer=1
+bg=white
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>882</x>
+      <y>259</y>
+      <w>441</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>[Mean]&lt;Param&gt;
+--
+&lt;GP&gt;
++ operator()(v: const Eigen::VectorXd&amp;, gp: const GP&amp;) const : Eigen::VectorXd 
+layer=1
+bg=white
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>875</x>
+      <y>231</y>
+      <w>455</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>mean
+--
+bg=#aaaaaa
+layer=-2
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>455</x>
+      <y>63</y>
+      <w>126</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>RandomSampling
+RandomSamplingGrid
+GridSampling
+NoInit
+bg=#aaaaff
+layer=1
+group=3</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>882</x>
+      <y>490</y>
+      <w>98</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Exp
+MaternFiveHalfs
+MaternThreeHalfs
+SquaredExpARD
+
+bg=#aaaaff
+group=2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>455</x>
+      <y>280</y>
+      <w>154</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>UCB
+GP_UCB
+bg=#aaaaff
+group=5</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>882</x>
+      <y>308</y>
+      <w>98</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Constant
+Data
+FunctionARD
+NullFunction
+
+bg=#aaaaff
+group=4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>350</y>
+      <w>385</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>GP	&lt;KernelFunction, MeanFunctionParam, HyperParamsOptimizer&gt;
+--
++ compute(samples: const std::vector&lt;Eigen::VectorXd&gt;&amp;,
+                  observations: const std::vector&lt;Eigen::VectorXd&gt;&amp;, 
+                  noise: double,
+                  bl_samples:  const std::vector&lt;Eigen::VectorXd&gt;&amp;)
+bg=white
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>448</x>
+      <y>329</y>
+      <w>399</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>model
+--
+bg=#aaaaaa
+layer=-2
+group=6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>315</y>
+      <w>49</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;100.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>399</y>
+      <w>49</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>462</y>
+      <w>301</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>[Opt]&lt;Param&gt;
+--
++ &lt;F&gt; operator()(feval: const F&amp;, bounded: bool) const: Eigen::VectorXd
+layer=1
+bg=white
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>455</x>
+      <y>504</y>
+      <w>126</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>Cmaes
+GridSearch
+ParallelRepeater
+Random_point
+Rprop
+NLOptGrad
+NLOptNoGrad
+NoInit
+
+bg=#aaaaff
+layer=1
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>448</x>
+      <y>441</y>
+      <w>315</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>opt
+--
+bg=#aaaaaa
+layer=-2
+group=7</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>448</x>
+      <y>623</y>
+      <w>560</w>
+      <h>231</h>
+    </coordinates>
+    <panel_attributes>stat
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>644</y>
+      <w>546</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>StatBase&lt;Param&gt;
+--
+layer=1
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>700</y>
+      <w>546</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>[Stat]&lt;Param&gt;
+--
++&lt;BO,AggregatorFunction&gt; operator()(bo: const BO&amp;, afun: const AggregatorFunction&amp;, bool blacklisted): void
+
+layer=1
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>707</x>
+      <y>672</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>455</x>
+      <y>742</y>
+      <w>98</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>AggregatedObservations
+BestAggregatedObservations
+BestObservations
+BestSamples
+BlSamples
+GPAcquisitions
+
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>882</y>
+      <w>455</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>[Stop]&lt;Param&gt;
+--
++ &lt;BO, AggregatorFunction&gt; operator()(bo: const BO&amp;, f: const AggregatorFunction&amp;): bool
+layer=1
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>455</x>
+      <y>924</y>
+      <w>98</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>ChainCriteria
+MaxIterations
+PredictedValue
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>448</x>
+      <y>861</y>
+      <w>469</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>stop
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>35</y>
+      <w>126</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;300.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>217</y>
+      <w>119</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;70.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>371</y>
+      <w>119</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>462</y>
+      <w>119</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>539</y>
+      <w>119</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>343</x>
+      <y>602</y>
+      <w>119</w>
+      <h>322</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;440.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>560</x>
+      <y>742</y>
+      <w>98</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>GPKernelHParams
+GPLikelihood
+GPMeanHParams
+GPPredictionDifferences
+Observations
+Sample
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
