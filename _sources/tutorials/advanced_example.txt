@@ -281,11 +281,12 @@ In your main function, you need to have something like the following: ::
     // aliases
     bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>, acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>, stopcrit<stop_t>> boptimizer;
     // Instantiate aggregator
-    DistanceToTarget<Params> aggregator({-1.5, -1.5});
+    DistanceToTarget<Params> aggregator({1.5, 1.5});
     boptimizer.optimize(eval_func(), aggregator);
+    std::cout << "New target!" << std::endl;
     // Adding new target
-    aggregator = DistanceToTarget<Params>({3, 1.5});
-    boptimizer.optimize(eval_func<Params>(), aggregator);
+    aggregator = DistanceToTarget<Params>({2, 1.5});
+    boptimizer.optimize(eval_func<Params>(), aggregator, false);
     // rest of code
   }
 
@@ -300,17 +301,15 @@ Finally, from the root of limbo, run a build command, with the additional switch
 
 Then, an executable named ``arm_example`` should be produced under the folder ``build/exp/arm_example``. When running the experiment, you should expect something like the following: ::
 
-  0 new point:    0.131781    0.554741     0.43973    0.448952    0.551195 0.000187801 value: -2.21293 best:-1.24215
-  1 new point:  0.125424 0.0152663  0.999616  0.523596  0.832982  0.513717 value: -0.0971545 best:-0.0971545
-  2 new point: 7.72149e-05    0.305844    0.707572    0.281713    0.662167    0.594993 value: -2.44114 best:-0.0971545
-  3 new point: 0.161434 0.900689 0.999596 0.378527 0.538626 0.576684 value: -0.718139 best:-0.0971545
-  4 new point:  0.157492  0.658696 0.0234359  0.344446  0.995436  0.212072 value: -2.0776 best:-0.0971545
-  5 new point:  0.902813  0.227166 0.0309232   0.98105  0.543195   0.70282 value: -2.86496 best:-0.0971545
-  6 new point: 0.0149745  0.096635 0.0331401  0.567209  0.776161  0.708063 value: -0.864753 best:-0.0971545
-  7 new point:  0.0791348 0.00053872   0.633395   0.811948   0.599573  0.0847644 value: -0.00412038 best:-0.00412038
+  0 new point:   0.105457   0.984803   0.999724   0.397681 0.00178646   0.472922 value: -2.05529 best:-0.50564
+  1 new point: 0.0418376  0.211166  0.610741   0.97042   0.49975  0.932997 value: -0.420461 best:-0.420461
+  2 new point: 0.0499932  0.809128  0.647616  0.607996   0.98363  0.263471 value: -1.47844 best:-0.420461
+  3 new point: 0.926947 0.304285 0.962505 0.923134 0.340676 0.352674 value: -1.77912 best:-0.420461
+  4 new point:    0.139309  0.00337038   0.0725873     0.98806     0.52506 0.000522096 value: -0.000876567 best:-0.000876567
   New target!
-  0 new point: 0.00159966   0.968279   0.332128   0.858613   0.999992   0.633525 value: -0.496254 best:-0.494746
-  1 new point: 0.000264513     0.99999  0.00765048     0.94105    0.379622    0.999865 value: -0.000907635 best:-0.000907635
+  5 new point: 0.0632575  0.981795  0.347888  0.342065   0.51396  0.785025 value: -1.26196 best:-0.50006
+  6 new point:  0.455737  0.978531   0.55947 0.0435089 0.0143673  0.999978 value: -0.0113502 best:-0.0113502
+
 
 Using state-based bayesian optimization, we can transfer what we learned doing one task to learn faster new tasks.
 
@@ -456,7 +455,7 @@ The whole ``main.cpp`` file: ::
       DistanceToTarget<Params> aggregator({1.5, 1.5});
       boptimizer.optimize(eval_func<Params>(), aggregator);
       std::cout << "New target!" << std::endl;
-      aggregator = DistanceToTarget<Params>({3, 1.5});
-      boptimizer.optimize(eval_func<Params>(), aggregator);
+      aggregator = DistanceToTarget<Params>({2, 1.5});
+      boptimizer.optimize(eval_func<Params>(), aggregator, false);
       return 1;
   }

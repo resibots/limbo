@@ -282,18 +282,18 @@
 <div class="section" id="add-options">
 <h3>Add options<a class="headerlink" href="#add-options" title="Permalink to this headline">¶</a></h3>
 <p>We often need specific options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to add a new function named <code class="docutils literal"><span class="pre">options</span></code> in our <code class="docutils literal"><span class="pre">wscript</span></code> and another one in the library configuration file:</p>
-<div class="code python highlight-python"><div class="highlight"><pre>#imports, etc, ...
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#imports, etc, ...</span>
 
-def options(opt):
-    # add options to the configuration
-    opt.add_option(&#39;cmd_option&#39;, type=&#39;option_type&#39;, help=&#39;info message&#39;, dest=&#39;destination_variable&#39;)
+<span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+    <span class="c"># add options to the configuration</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;cmd_option&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;option_type&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;info message&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;destination_variable&#39;</span><span class="p">)</span>
 
-@conf
-def check_libname(conf):
-    # access options
-    if conf.options.destination_variable == &#39;yes&#39;:
-      print &#39;destination_variable found&#39;
-    # rest of check_libname
+<span class="nd">@conf</span>
+<span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
+    <span class="c"># access options</span>
+    <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">destination_variable</span> <span class="o">==</span> <span class="s">&#39;yes&#39;</span><span class="p">:</span>
+      <span class="k">print</span> <span class="s">&#39;destination_variable found&#39;</span>
+    <span class="c"># rest of check_libname</span>
 </pre></div>
 </div>
 <p>The options in the waf build system are using the python&#8217;s <code class="docutils literal"><span class="pre">optparse</span></code>. Check the official <a class="reference external" href="https://docs.python.org/2/library/optparse.html">optparse</a> documentation for more information.</p>

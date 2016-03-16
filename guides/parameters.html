@@ -182,8 +182,8 @@
 <p>In <strong>limbo</strong>, every class takes a structure name (usually called <code class="docutils literal"><span class="pre">Params</span></code>) that contains the parameters. By doing so, we rely on the compiler to check the types, and we require very little work to separate parameters values from algorithms.</p>
 <p>From the user&#8217;s point of view, this looks like this:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-  <span class="k">struct</span> <span class="n">ucb</span> <span class="p">{</span>
-    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+  <span class="k">struct</span> <span class="n">acqui_ucb</span> <span class="p">{</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
   <span class="p">};</span>
 <span class="p">};</span>
 <span class="c1">// ...</span>
@@ -193,28 +193,28 @@
 </div>
 <p>(do not forget the semi-colons!). This structure says that the value of the parameter <code class="docutils literal"><span class="pre">alpha</span></code> for the class &#8220;UCB&#8221; is <code class="docutils literal"><span class="pre">0.1</span></code>.</p>
 <p>In the UCB class, the value can be accessed like this:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Params</span><span class="o">::</span><span class="n">ucb</span><span class="o">::</span><span class="n">alpha</span><span class="p">();</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Params</span><span class="o">::</span><span class="n">acqui_ucb</span><span class="o">::</span><span class="n">alpha</span><span class="p">();</span>
 </pre></div>
 </div>
 <p>No need to write any parsing code!</p>
 <p>Many limbo classes provide default parameters. To use them, the parameter sub-structure has to inherit from the default structure:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-  <span class="k">struct</span> <span class="nl">ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">ucb</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="nl">acqui_ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_ucb</span> <span class="p">{</span>
   <span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>That way, the <code class="docutils literal"><span class="pre">ucb::alpha()</span></code> exists, but it has its default value.</p>
+<p>That way, the <code class="docutils literal"><span class="pre">acqui_ucb::alpha()</span></code> exists, but it has its default value.</p>
 <p>Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a <code class="docutils literal"><span class="pre">BO_DYN_PARAM</span></code> instead of a <code class="docutils literal"><span class="pre">BO_PARAM</span></code>:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-  <span class="k">struct</span> <span class="n">ucb</span> <span class="p">{</span>
-    <span class="n">BO_DYN_PARAM</span><span class="p">(</span><span class="kt">float</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+  <span class="k">struct</span> <span class="n">acqui_ucb</span> <span class="p">{</span>
+    <span class="n">BO_DYN_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
   <span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
 </div>
 <p>However, for dynamic parameters, we need to call <code class="docutils literal"><span class="pre">BO_DECLARE_DYN_PARAM</span></code> in our <code class="docutils literal"><span class="pre">.cpp</span></code> file (typically, just before the main function):</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="n">BO_DECLARE_DYN_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">Params</span><span class="o">::</span><span class="n">ucb</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">BO_DECLARE_DYN_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">Params</span><span class="o">::</span><span class="n">acqui_ucb</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -241,15 +241,15 @@
 <span class="p">}</span>
 
 <span class="k">struct</span> <span class="n">ParamsAcquiOpt</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">cmaes</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">nrestarts</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="k">struct</span> <span class="n">opt_cmaes</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">restarts</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
     <span class="p">};</span>
 <span class="p">};</span>
 
 <span class="k">struct</span> <span class="n">ParamsGPOpt</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">cmaes</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">nrestarts</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">struct</span> <span class="n">opt_cmaes</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">restarts</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
     <span class="p">};</span>
 <span class="p">};</span>
