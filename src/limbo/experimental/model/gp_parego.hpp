@@ -21,10 +21,15 @@ namespace limbo {
       }
       namespace model {
 
-            // this is the model used in Parego (see ??)
+            // this is the model used in Parego
+            // reference: Knowles, J. (2006). ParEGO: A hybrid algorithm
+            // with on-line landscape approximation for expensive multiobjective
+            // optimization problems.
+            // IEEE Transactions On Evolutionary Computation, 10(1), 50-66.
+            // Main idea:
             // - this models aggregates all the objective values with the Tchebycheff distance
             // - objectives are weighted using a random vector
-            // - single model is built
+            // - a single model is built
             template <typename Params, typename Model>
             class GPParego : public Model {
             public:
