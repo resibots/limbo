@@ -8,6 +8,7 @@
 #include <tbb/concurrent_vector.h>
 #include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>
+#include <tbb/parallel_for_each.h>
 #include <tbb/parallel_sort.h>
 #include <tbb/parallel_reduce.h>
 #include <tbb/blocked_range.h>
@@ -78,6 +79,18 @@ namespace limbo {
 #else
                 for (size_t i = begin; i < end; ++i)
                     f(i);
+#endif
+            }
+
+            // parallel for_each
+            template <typename Iterator, typename F>
+            inline void for_each(Iterator begin, Iterator end, const F& f)
+            {
+#ifdef USE_TBB
+                tbb::parallel_for_each(begin, end, f);
+#else
+                for (Iterator i = begin; i != end; ++i)
+                    f(*i);
 #endif
             }
 
