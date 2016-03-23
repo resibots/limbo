@@ -2,6 +2,7 @@
 #define LIMBO_OPT_HPP
 
 #include <limbo/opt/optimizer.hpp>
+#include <limbo/opt/chained.hpp>
 #ifdef USE_LIBCMAES
 #include <limbo/opt/cmaes.hpp>
 #endif
