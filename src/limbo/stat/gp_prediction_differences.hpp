@@ -7,6 +7,8 @@
 
 namespace limbo {
     namespace stat {
+        ///@ingroup stat
+        ///filename: `gp_prediction_differences.dat`
         template <typename Params>
         struct GPPredictionDifferences : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>

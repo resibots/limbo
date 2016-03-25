@@ -8,11 +8,13 @@
 namespace limbo {
     namespace defaults {
         struct kernel_exp {
-          /// \ingroup defaults
+            /// @ingroup kernel_defaults
             BO_PARAM(double, sigma, 1);
         };
     }
     namespace kernel {
+        /// @ingroup kernel
+        /// Exponential kernel (TODO: formula)
         template <typename Params>
         struct Exp {
             Exp(size_t dim = 1) {}

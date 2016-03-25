@@ -13,10 +13,15 @@
 namespace limbo {
     namespace defaults {
         struct stop_maxpredictedvalue {
+            ///@ingroup stop_defaults
             BO_PARAM(double, ratio, 0.9);
         };
     }
     namespace stop {
+        ///@ingroup stop
+        ///Stop once the value for the best sample is above (ratio * best value predicted by the model
+        ///
+        ///Paramter: double ratio
         template <typename Params, typename Optimizer = boost::parameter::void_>
         struct MaxPredictedValue {
 
@@ -25,7 +30,7 @@ namespace limbo {
             template <typename BO, typename AggregatorFunction>
             bool operator()(const BO& bo, const AggregatorFunction& afun) const
             {
-                // Prevent instantiation of GPMean if there are no observed samplesgit
+                // Prevent instantiation of GPMean if there are no observed samples
                 if (bo.observations().size() == 0)
                     return false;
 

@@ -14,30 +14,22 @@
 
 namespace limbo {
     namespace model {
-
-
-      /**
-      \rst
-      A classic Gaussian process.
-      It is parametrized by:
-        - The :ref:`Params <params-guide>`
-        - a mean function
-        - [optionnal] an optimizer for the hyper-parameters
-
-        .. doxygenstruct:: limbo::defaults::acqui_ucb
-           :members:
-           :undoc-members:
-        \endrst
-        */
+        /// @ingroup model
+        /// A classic Gaussian process.
+        /// It is parametrized by:
+        /// - a mean function
+        /// - [optionnal] an optimizer for the hyper-parameters
         template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = gp::NoLFOpt<Params>>
         class GP {
         public:
+            /// useful because the model might be created before knowing anything about the process
             GP() : _dim_in(-1), _dim_out(-1) {}
 
-            // useful because the model might be created  before having samples
+            /// useful because the model might be created  before having samples
             GP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
+            /// Compute the GP from samples, observation, noise. [optionnal: blacklisted samples]. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations, double noise,
                 const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
@@ -76,7 +68,11 @@ namespace limbo {
                 HyperParamsOptimizer()(*this);
             }
 
-            // return mu, sigma (unormaliz)
+            /**
+             \rst
+             return :math:`mu`, :math:`sigma` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
+             \endrst
+            */
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0 && _bl_samples.size() == 0)
@@ -91,6 +87,11 @@ namespace limbo {
                 return std::make_tuple(_mu(v, k), _sigma(v, _compute_k_bl(v, k)));
             }
 
+            /**
+             \rst
+             return :math:`mu` (unormalized). If there is no sample, return the value according to the mean function.
+             \endrst
+            */
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
@@ -98,6 +99,11 @@ namespace limbo {
                 return _mu(v, _compute_k(v));
             }
 
+            /**
+             \rst
+             return :math:`sigma` (unormalized). If there is no sample, return the value according to the mean function.
+             \endrst
+            */
             double sigma(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0 && _bl_samples.size() == 0)
@@ -105,12 +111,14 @@ namespace limbo {
                 return _sigma(v, _compute_k_bl(v, _compute_k(v)));
             }
 
+            /// return the number of dimensions of the input
             int dim_in() const
             {
                 assert(_dim_in != -1); // need to compute first !
                 return _dim_in;
             }
 
+            /// return the number of dimensions of the output
             int dim_out() const
             {
                 assert(_dim_out != -1); // need to compute first !
@@ -125,6 +133,7 @@ namespace limbo {
 
             MeanFunction& mean_function() { return _mean_function; }
 
+            /// return the maximum observation (only call this if the output of the GP is of dimension 1)
             Eigen::VectorXd max_observation() const
             {
                 if (_observations.cols() > 1)
@@ -133,6 +142,7 @@ namespace limbo {
                 return _observations.maxCoeff();
             }
 
+            /// return the mean observation (only call this if the output of the GP is of dimension 1)
             Eigen::VectorXd mean_observation() const
             {
                 // TO-DO: Check if _dim_out is correct?!
@@ -144,10 +154,13 @@ namespace limbo {
 
             const Eigen::MatrixXd& obs_mean() const { return _obs_mean; }
 
+            /// return the number of samples used to compute the GP
             int nb_samples() const { return _samples.size(); }
 
+            /// return the number of blacklisted samples used to compute the GP
             int nb_bl_samples() const { return _bl_samples.size(); }
 
+            /// update the GP
             void update()
             {
                 this->_compute_obs_mean(); // ORDER MATTERS

@@ -5,6 +5,9 @@
 
 namespace limbo {
     namespace stat {
+        ///@ingroup stat
+        /// blacklisted samples
+        ///filename: `bl_samples.dat`
         template <typename Params>
         struct BlSamples : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>

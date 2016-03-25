@@ -3,6 +3,8 @@
 
 namespace limbo {
     namespace stop {
+        ///@ingroup stop
+        /// TODO
         template <typename BO, typename AggregatorFunction>
         struct ChainCriteria {
             typedef bool result_type;
