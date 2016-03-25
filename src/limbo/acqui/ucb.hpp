@@ -8,11 +8,13 @@
 namespace limbo {
     namespace defaults {
         struct acqui_ucb {
-            /// \ingroup defaults
+            /// @ingroup acqui_defaults
             BO_PARAM(double, alpha, 0.5);
         };
     }
     namespace acqui {
+        /// @ingroup acqui
+        /// Classic UCB
         template <typename Params, typename Model>
         class UCB {
         public:

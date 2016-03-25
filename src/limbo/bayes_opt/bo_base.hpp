@@ -100,7 +100,6 @@ namespace limbo {
         This class is templated by several types with default values (thanks to boost::parameters).
 
         \rst
-
         +----------------+---------+---------+---------------+
         |type            |typedef  | argument| default       |
         +================+=========+=========+===============+
@@ -114,6 +113,8 @@ namespace limbo {
         +----------------+---------+---------+---------------+
         |stopping crit.  | stop_t  | stopcrit| MaxIterations |
         +----------------+---------+---------+---------------+
+        \endrst
+
 
         For GP, the default value is: ``model::GP<Params, kf_t, mean_t, opt_t>>``,
         - with ``kf_t = kernel::SquaredExpARD<Params>``
@@ -124,7 +125,6 @@ namespace limbo {
 
         For Statistics, the default value is: ``boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>>``
 
-        \endrst
 
 
          Example of customization:
@@ -173,22 +173,22 @@ namespace limbo {
             /// copy is disabled (dangerous and useless)
             BoBase& operator=(const BoBase& other) = delete;
 
-            /// @return true if the statitics are enabled (they can be disabled to avoid dumping data, e.g. for unit tests)
+            /// return true if the statitics are enabled (they can be disabled to avoid dumping data, e.g. for unit tests)
             bool stats_enabled() const { return Params::bayes_opt_bobase::stats_enabled(); }
 
-            /// @return the name of the directory in which results (statistics) are written
+            /// return the name of the directory in which results (statistics) are written
             const std::string& res_dir() const { return _res_dir; }
 
-            ///@return the vector of points of observations (observations can be multi-dimensional, hence the VectorXd) -- f(x)
+            /// return the vector of points of observations (observations can be multi-dimensional, hence the VectorXd) -- f(x)
             const std::vector<Eigen::VectorXd>& observations() const { return _observations; }
 
-            ///@return list of the points that have been evaluated so far (x)
+            /// return the list of the points that have been evaluated so far (x)
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
-            ///@return list of blacklisted points
+            /// return the list of blacklisted points
             const std::vector<Eigen::VectorXd>& bl_samples() const { return _bl_samples; }
 
-            ///@return the current iteration number
+            /// return the current iteration number
             int current_iteration() const { return _current_iteration; }
 
             int total_iterations() const { return _total_iterations; }
@@ -207,7 +207,7 @@ namespace limbo {
             /// Add a new blacklisted sample
             void add_new_bl_sample(const Eigen::VectorXd& s) { _bl_samples.push_back(s); }
 
-            /// Evaluate a sample and add the result to the 'database' (sample / observations vectors)
+            /// Evaluate a sample and add the result to the 'database' (sample / observations vectors) -- it does not update the model
             template <typename StateFunction>
             bool eval_and_add(const StateFunction& seval, const Eigen::VectorXd& sample)
             {

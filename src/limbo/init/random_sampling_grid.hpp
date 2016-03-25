@@ -9,11 +9,15 @@
 namespace limbo {
     namespace defaults {
         struct init_randomsamplinggrid {
+            ///@ingroup init_defaults
             BO_PARAM(int, samples, 10);
+            ///@ingroup init_defaults
             BO_PARAM(int, bins, 5);
         };
     }
     namespace init {
+        ///@ingroup init
+        ///Grid-based random sampling
         template <typename Params>
         struct RandomSamplingGrid {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>

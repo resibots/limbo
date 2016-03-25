@@ -3,8 +3,8 @@
 
 namespace limbo {
     namespace init {
-        // params is here only to make it easy to switch
-        // from/to the other init functions
+        ///@ingroup init
+        ///Do nothing (dummy initializer)
         template <typename Params>
         struct NoInit {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>

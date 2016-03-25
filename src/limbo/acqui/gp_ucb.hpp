@@ -7,15 +7,14 @@
 
 namespace limbo {
     namespace defaults {
-      /**
-      \defgroup defaults
-      */
         struct acqui_gpucb {
-          /// \ingroup defaults
+          /// @ingroup acqui_defaults
             BO_PARAM(double, delta, 0.001);
         };
     }
     namespace acqui {
+        /// @ingroup acqui
+        /// GP-UCB (UCB with regret)
         template <typename Params, typename Model>
         class GP_UCB {
         public:
