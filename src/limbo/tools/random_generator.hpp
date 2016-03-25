@@ -45,7 +45,7 @@
 
 namespace limbo {
     namespace tools {
-        ///@ingroup tools
+        /// @ingroup tools
         /// random vector in [0, 1]
         Eigen::VectorXd random_vector(int size)
         {
@@ -57,7 +57,7 @@ namespace limbo {
         /// a mt19937-based random generator (mutex-protected)
         ///
         /// usage :
-        /// - rgen_double_t(0.0, 1.0);
+        /// - RandomGenerator<double>(0.0, 1.0);
         /// - double r = rgen.rand();
         template <typename D>
         class RandomGenerator {
@@ -75,10 +75,18 @@ namespace limbo {
             std::mt19937 _rgen;
             std::mutex _mutex;
         };
+
+        /// @ingroup tools
         using rdist_double_t = std::uniform_real_distribution<double>;
+        /// @ingroup tools
         using rdist_int_t = std::uniform_int_distribution<int>;
 
+        /// @ingroup tools
+        /// Double random number generator
         using rgen_double_t = RandomGenerator<rdist_double_t>;
+        
+        ///@ingroup tools
+        ///integer random number generator
         using rgen_int_t = RandomGenerator<rdist_int_t>;
     }
 }

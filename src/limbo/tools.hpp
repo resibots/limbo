@@ -2,7 +2,6 @@
 #define LIMBO_TOOLS_HPP
 
 ///@defgroup tools
-
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
 #include <limbo/tools/math.hpp>
