@@ -19,9 +19,9 @@ namespace limbo {
     }
     namespace stop {
         ///@ingroup stop
-        ///Stop once the value for the best sample is above (ratio * best value predicted by the model
+        ///Stop once the value for the best sample is above : ratio * (best value predicted by the model)
         ///
-        ///Paramter: double ratio
+        ///Parameter: double ratio
         template <typename Params, typename Optimizer = boost::parameter::void_>
         struct MaxPredictedValue {
 
