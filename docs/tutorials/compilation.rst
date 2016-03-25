@@ -79,3 +79,13 @@ Depending on your compiler, there may be some warnings, but the output should en
         /home/fallocat/limbo_git/build/src/tests/test_init_functions
         /home/fallocat/limbo_git/build/src/tests/test_gp
         /home/fallocat/limbo_git/build/src/tests/test_boptimizer
+
+
+Building the documentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- install sphinx via pip
+- install breathe via pip (`sudo pip install breathe`)
+- install doxygen via apt-get / brew
+- git clone the sphinx_resibots_theme somewhere (from github)
+- `export SPHINX_RESIBOTS_THEME=<path to the theme>`
+- in `doc`: `make html`
