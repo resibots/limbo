@@ -45,16 +45,20 @@
 
 namespace limbo {
     namespace tools {
-        // random vector in [0, 1]
+        ///@ingroup tools
+        /// random vector in [0, 1]
         Eigen::VectorXd random_vector(int size)
         {
             // Eigen returns in [-1:1] (??)
             return ((Eigen::VectorXd::Random(size)).array() + 1.0) / 2.0;
         }
 
-        // usage :
-        // rgen_double_t(0.0, 1.0);
-        // double r = rgen.rand();
+        /// @ingroup tools
+        /// a mt19937-based random generator (mutex-protected)
+        ///
+        /// usage :
+        /// - rgen_double_t(0.0, 1.0);
+        /// - double r = rgen.rand();
         template <typename D>
         class RandomGenerator {
         public:
