@@ -49,12 +49,17 @@ If everything is okay, you should expect an output like this: ::
 
 The actual ouput may differ, depending on your configuration and installed libraries.
 
-Waf should automatically detect Intel's TBB and MKL, if they where installed in the default folders, but if it doesn't,
+Waf should automatically detect the libraries if they where installed in the default folders, but if it doesn't,
 you can use the following command-line options to indicate where they are:
 
+* ``--boost-includes /path/to/boost-includes`` [.h]
+* ``--boost-libs /path/to/boost-libraries`` [.a, .so, .dynlib]
+* ``--eigen /path/to/eigen3``
 * ``--tbb /path/to/tbb``
 * ``--mkl /path/to/mkl``
 * ``--sferes /path/to/sferes2``
+
+
 
 Note that Sferes2 won't be used unless you specify it's installation folder.
 You can also specify a different compiler than the default, setting the environment variables ``CC`` and ``CXX``.
