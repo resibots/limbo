@@ -8,6 +8,7 @@
 namespace limbo {
     namespace defaults {
         struct acqui_ucb {
+            /// \ingroup defaults
             BO_PARAM(double, alpha, 0.5);
         };
     }

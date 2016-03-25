@@ -34,9 +34,12 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
-    'sphinxcontrib.bibtex'
-
+    'sphinxcontrib.bibtex',
+    'breathe'
 ]
+
+breathe_projects = { "limbo": "/Users/jbm/Documents/git/resibots/limbo/docs/doxygen_doc/xml/" }
+breathe_default_project="limbo"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

@@ -8,6 +8,7 @@
 namespace limbo {
     namespace defaults {
         struct kernel_exp {
+          /// \ingroup defaults
             BO_PARAM(double, sigma, 1);
         };
     }

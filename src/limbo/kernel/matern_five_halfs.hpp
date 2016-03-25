@@ -8,7 +8,9 @@
 namespace limbo {
     namespace defaults {
         struct kernel_maternfivehalfs {
+          /// \ingroup defaults
             BO_PARAM(double, sigma, 1);
+            /// \ingroup defaults
             BO_PARAM(double, l, 1);
         };
     }

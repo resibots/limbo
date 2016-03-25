@@ -16,10 +16,40 @@
 namespace limbo {
     namespace defaults {
         struct opt_nloptnograd {
+            /// @ingroup opt_defaults
+            /// number of calls to the optimized function
             BO_PARAM(int, iterations, 500);
         };
     }
     namespace opt {
+        /// @ingroup opt
+        /// Binding to gradient-free NLOpt algorithms.
+        /// See: http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms
+        ///
+        /// Algorithms:
+        /// - GN_DIRECT
+        /// - GN_DIRECT_L, [default]
+        /// - GN_DIRECT_L_RAND
+        /// - GN_DIRECT_NOSCAL
+        /// - GN_DIRECT_L_NOSCAL
+        /// - GN_DIRECT_L_RAND_NOSCAL
+        /// - GN_ORIG_DIRECT
+        /// - GN_ORIG_DIRECT_L
+        /// - GN_CRS2_LM
+        /// - GN_MLSL
+        /// - GN_MLSL_LDS
+        /// - GN_ISRES
+        /// - LN_COBYLA
+        /// - LN_AUGLAG_EQ
+        /// - LN_BOBYQA
+        /// - LN_NEWUOA
+        /// - LN_NEWUOA_BOUND
+        /// - LN_NELDERMEAD
+        /// - LN_SBPLX
+        /// - LN_AUGLAG
+        ///
+        /// Parameters:
+        /// - int iterations
         template <typename Params, nlopt::algorithm Algorithm = nlopt::GN_DIRECT_L_RAND>
         struct NLOptNoGrad {
         public:

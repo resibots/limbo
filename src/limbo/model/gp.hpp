@@ -15,6 +15,20 @@
 namespace limbo {
     namespace model {
 
+
+      /**
+      \rst
+      A classic Gaussian process.
+      It is parametrized by:
+        - The :ref:`Params <params-guide>`
+        - a mean function
+        - [optionnal] an optimizer for the hyper-parameters
+
+        .. doxygenstruct:: limbo::defaults::acqui_ucb
+           :members:
+           :undoc-members:
+        \endrst
+        */
         template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = gp::NoLFOpt<Params>>
         class GP {
         public:

@@ -45,6 +45,7 @@ Contents:
    self
    tutorials/index
    guides/index
+   api
    faq
 
 

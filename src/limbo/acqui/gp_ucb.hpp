@@ -7,7 +7,11 @@
 
 namespace limbo {
     namespace defaults {
+      /**
+      \defgroup defaults
+      */
         struct acqui_gpucb {
+          /// \ingroup defaults
             BO_PARAM(double, delta, 0.001);
         };
     }
