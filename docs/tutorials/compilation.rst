@@ -17,19 +17,19 @@ Required
 
 Optional but highly recommended
 +++++++++++++++++++++++++++++++++
-* `libcmaes <https://github.com/beniz/libcmaes>`_
-  - Be careful that gtest (which is a dependency of libcmaes) needs to be compiled **even if you install it with your package manager** (e.g. apt-get) :
+* `libcmaes <https://github.com/beniz/libcmaes>`_. Be careful that gtest (which is a dependency of libcmaes) needs to be compiled **even if you install it with your package manager** (e.g. apt-get) (see below). Then follow the instructions here: https://github.com/beniz/libcmaes#build ::
 
-  sudo apt-get install gtest
-  sudo cd /usr/src/gtest
-  sudo mkdir build && cd build
-  sudo cmake ..
-  sudo make
-  sudo cp *.a /usr/lib
+    sudo apt-get install gtest
+    sudo cd /usr/src/gtest
+    sudo mkdir build && cd build
+    sudo cmake ..
+    sudo make
+    sudo cp *.a /usr/lib
 
-  - Follow the instructions here: https://github.com/beniz/libcmaes#build
-  
-* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding
+* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
+
+    ./configure -with-cxx --enable-shared   --without-python --without-matlab --without-octave
+    make install
 
 
 Optional
@@ -69,9 +69,11 @@ The actual ouput may differ, depending on your configuration and installed libra
 Waf should automatically detect Intel's TBB and MKL, if they where installed in the default folders, but if it doesn't,
 you can use the following command-line options to indicate where they are:
 
-* ``--tbb /path/to/tbb``
-* ``--mkl /path/to/mkl``
-* ``--sferes /path/to/sferes2``
+* ``--libcmaes=/path/to/libcmaes``
+* ``--nlopt=/path/to/nlopt``
+* ``--tbb=/path/to/tbb``
+* ``--mkl=/path/to/mkl``
+* ``--sferes=/path/to/sferes2``
 
 Note that Sferes2 won't be used unless you specify it's installation folder.
 You can also specify a different compiler than the default, setting the environment variables ``CC`` and ``CXX``.
