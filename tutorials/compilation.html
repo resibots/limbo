@@ -200,6 +200,27 @@ as a zip.</p>
 <li><a class="reference external" href="http://eigen.tuxfamily.org">Eigen 3</a>, Eigen3 is a highly-efficient, templated-based C++ library for linear algebra.</li>
 </ul>
 </div>
+<div class="section" id="optional-but-highly-recommended">
+<h4>Optional but highly recommended<a class="headerlink" href="#optional-but-highly-recommended" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. Be careful that gtest (which is a dependency of libcmaes) needs to be compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get) (see below). Then follow the instructions here: <a class="reference external" href="https://github.com/beniz/libcmaes#build">https://github.com/beniz/libcmaes#build</a></p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install gtest
+sudo cd /usr/src/gtest
+sudo mkdir build &amp;&amp; cd build
+sudo cmake ..
+sudo make
+sudo cp *.a /usr/lib
+</pre></div>
+</div>
+</li>
+<li><p class="first"><a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">NLOpt</a> with C++ binding:</p>
+<div class="highlight-python"><div class="highlight"><pre>./configure -with-cxx --enable-shared   --without-python --without-matlab --without-octave
+make install
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 <div class="section" id="optional">
 <h4>Optional<a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
@@ -237,9 +258,11 @@ Checking Intel MKL includes                    : not found
 <p>Waf should automatically detect Intel&#8217;s TBB and MKL, if they where installed in the default folders, but if it doesn&#8217;t,
 you can use the following command-line options to indicate where they are:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">--tbb</span> <span class="pre">/path/to/tbb</span></code></li>
-<li><code class="docutils literal"><span class="pre">--mkl</span> <span class="pre">/path/to/mkl</span></code></li>
-<li><code class="docutils literal"><span class="pre">--sferes</span> <span class="pre">/path/to/sferes2</span></code></li>
+<li><code class="docutils literal"><span class="pre">--libcmaes=/path/to/libcmaes</span></code></li>
+<li><code class="docutils literal"><span class="pre">--nlopt=/path/to/nlopt</span></code></li>
+<li><code class="docutils literal"><span class="pre">--tbb=/path/to/tbb</span></code></li>
+<li><code class="docutils literal"><span class="pre">--mkl=/path/to/mkl</span></code></li>
+<li><code class="docutils literal"><span class="pre">--sferes=/path/to/sferes2</span></code></li>
 </ul>
 <p>Note that Sferes2 won&#8217;t be used unless you specify it&#8217;s installation folder.
 You can also specify a different compiler than the default, setting the environment variables <code class="docutils literal"><span class="pre">CC</span></code> and <code class="docutils literal"><span class="pre">CXX</span></code>.</p>
