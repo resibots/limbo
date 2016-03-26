@@ -8,12 +8,11 @@
 #include <Eigen/Core>
 
 #ifdef USE_TBB
-#include <map>
-
 #include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>
 #include <tbb/concurrent_hash_map.h>
 #else
+#include <map>
 #endif
 
 #include <limbo/tools/macros.hpp>
