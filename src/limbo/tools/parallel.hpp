@@ -65,7 +65,7 @@ namespace limbo {
                 static tbb::task_scheduler_init init;
             }
 #else
-            ///@ingroup par_tools
+            /// @ingroup par_tools
             /// init TBB (if activated) for multi-core computing
             void init()
             {
@@ -79,7 +79,7 @@ namespace limbo {
             {
 #ifdef USE_TBB
                 tbb::parallel_for(size_t(begin), end, size_t(1), [&](size_t i) {
-    // clang-format off
+                  // clang-format off
                 f(i);
                     // clang-format on
                 });
@@ -89,11 +89,8 @@ namespace limbo {
 #endif
             }
 
-<<<<<<< HEAD
-            ///@ingroup par_tools
-            /// parallel max
-=======
-            // parallel for_each
+            /// @ingroup par_tools
+            /// parallel for_each
             template <typename Iterator, typename F>
             inline void for_each(Iterator begin, Iterator end, const F& f)
             {
@@ -105,7 +102,8 @@ namespace limbo {
 #endif
             }
 
->>>>>>> master
+            /// @ingroup par_tools
+            /// parallel max
             template <typename T, typename F, typename C>
             T max(const T& init, int num_steps, const F& f, const C& comp)
             {
