@@ -267,9 +267,16 @@ bool is_in_argv(int argc, char** argv, const char* needle)
 template <typename T1, typename T2>
 void add_to_results(const char* key, T1& map, const T2& p)
 {
+#ifdef USE_TBB
     typename T1::accessor a;
     if (!map.find(a, key))
         map.insert(a, key);
+#else
+    typename T1::iterator a;
+    a = map.find(key);
+    if (a == map.end())
+        map[key] = std::vector<std::pair<double, double>>();
+#endif
     a->second.push_back(p);
 }
 
