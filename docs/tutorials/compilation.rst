@@ -88,9 +88,37 @@ Depending on your compiler, there may be some warnings, but the output should en
 
 Building the documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- install sphinx via pip
-- install breathe via pip (`sudo pip install breathe`)
-- install doxygen via apt-get / brew
-- git clone the sphinx_resibots_theme somewhere (from github)
-- `export SPHINX_RESIBOTS_THEME=<path to the theme>`
-- in `doc`: `make html`
+*This section is only useful for developers who need to update the documentation.*
+
+Install sphinx via pip: ::
+
+    sudo pip install Sphinx
+    sudo pip install sphinxcontrib-bibtex
+
+.. warning::
+
+  On Mac OSX, do not use `brew install sphinx` because this is not the right sphinx
+
+Install the Resibots theme for resibots: ::
+
+    git clone https://github.com/resibots/sphinx_resibots_theme
+    export SPHINX_RESIBOTS_THEME="/home/me/path/to/sphinx_resibots_theme"
+
+Install `breathe` via pip: ::
+
+    sudo pip install breathe
+
+Install doxygen via your package manager (e.g. apt-get / brew): ::
+
+    apt-get install doxygen
+
+In the `doc` directory: ::
+
+    make html
+
+About sphinx and ReStructuredText:
+  - `There is a tutorial <http://sphinx-doc.org/tutorial.html>`_,
+  - `Primer for ReStructuredText <http://sphinx-doc.org/rest.html>`_, the markup language of Sphinx,
+  - `markup specific to Sphinx <http://sphinx-doc.org/markup/index.html>`_,
+  - `About C++ in Sphinx <http://sphinx-doc.org/domains.html#id2>`_
+  - `Breathe (bridge between sphinx and doxygen) <https://breathe.readthedocs.org/en/latest/>`_
