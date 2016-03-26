@@ -15,6 +15,23 @@ Required
 * `Boost <http://www.boost.org>`_ , with the following libraries: filesystem, system, unit_test_framework, program_options, and thread; `Boost` is mainly used for the interaction with the system.
 * `Eigen 3 <http://eigen.tuxfamily.org>`_, Eigen3 is a highly-efficient, templated-based C++ library for linear algebra.
 
+Optional but highly recommended
++++++++++++++++++++++++++++++++++
+* `libcmaes <https://github.com/beniz/libcmaes>`_. Be careful that gtest (which is a dependency of libcmaes) needs to be compiled **even if you install it with your package manager** (e.g. apt-get) (see below). Then follow the instructions here: https://github.com/beniz/libcmaes#build ::
+
+    sudo apt-get install gtest
+    sudo cd /usr/src/gtest
+    sudo mkdir build && cd build
+    sudo cmake ..
+    sudo make
+    sudo cp *.a /usr/lib
+
+* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
+
+    ./configure -with-cxx --enable-shared   --without-python --without-matlab --without-octave
+    make install
+
+
 Optional
 +++++++++++++
 * `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
@@ -52,13 +69,14 @@ The actual ouput may differ, depending on your configuration and installed libra
 Waf should automatically detect the libraries if they where installed in the default folders, but if it doesn't,
 you can use the following command-line options to indicate where they are:
 
+* ``--libcmaes=/path/to/libcmaes``
+* ``--nlopt=/path/to/nlopt``
+* ``--tbb=/path/to/tbb``
+* ``--mkl=/path/to/mkl``
+* ``--sferes=/path/to/sferes2``
 * ``--boost-includes /path/to/boost-includes`` [.h]
 * ``--boost-libs /path/to/boost-libraries`` [.a, .so, .dynlib]
 * ``--eigen /path/to/eigen3``
-* ``--tbb /path/to/tbb``
-* ``--mkl /path/to/mkl``
-* ``--sferes /path/to/sferes2``
-
 
 
 Note that Sferes2 won't be used unless you specify it's installation folder.

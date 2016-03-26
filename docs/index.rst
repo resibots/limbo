@@ -57,7 +57,3 @@ Contents:
 .. * :ref:`search`
 
 
-TODO list
-==========
-
-.. todolist::
