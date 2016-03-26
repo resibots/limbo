@@ -15,6 +15,23 @@ Required
 * `Boost <http://www.boost.org>`_ , with the following libraries: filesystem, system, unit_test_framework, program_options, and thread; `Boost` is mainly used for the interaction with the system.
 * `Eigen 3 <http://eigen.tuxfamily.org>`_, Eigen3 is a highly-efficient, templated-based C++ library for linear algebra.
 
+Optional but highly recommended
++++++++++++++++++++++++++++++++++
+* `libcmaes <https://github.com/beniz/libcmaes>`_
+  - Be careful that gtest (which is a dependency of libcmaes) needs to be compiled **even if you install it with your package manager** (e.g. apt-get) :
+
+  sudo apt-get install gtest
+  sudo cd /usr/src/gtest
+  sudo mkdir build && cd build
+  sudo cmake ..
+  sudo make
+  sudo cp *.a /usr/lib
+
+  - Follow the instructions here: https://github.com/beniz/libcmaes#build
+  
+* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding
+
+
 Optional
 +++++++++++++
 * `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
