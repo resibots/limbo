@@ -2,29 +2,21 @@
 #define LIMBO_KERNEL_SQUARED_EXP_ARD_HPP
 
 #include <Eigen/Core>
-/*\rst
-Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
-Computes the squared exponential covariance like this:
 
-.. math::
-
-  k_{SE}(x, y) := \alpha^2 \exp(-\frac{1}{2}(x-y)^T\Lambda^{-1}(x-y)),
-
-with :math:`\Lambda = diag(l_1^2, \dots, l_n^2)` being the characteristic length scales and :math:`\alpha\f$` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \alpha` are expected in this order in the parameter array.
-\endrst
-*/
 namespace limbo {
     namespace kernel {
         /**
         @ingroup kernel
         \rst
+
         Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
         Computes the squared exponential covariance like this:
 
         .. math::
-            k_{SE}(x, y) := \alpha^2 \exp(-\frac{1}{2}(x-y)^T\Lambda^{-1}(x-y)),
+            k_{SE}(x, y) = \alpha^2 \exp(-\frac{1}{2}(x-y)^T\Lambda^{-1}(x-y)),
 
         with :math:`\Lambda = diag(l_1^2, \dots, l_n^2)` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \alpha` are expected in this order in the parameter array.
+
         \endrst
         */
         template <typename Params>

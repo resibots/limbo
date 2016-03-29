@@ -6,7 +6,7 @@ Limbo follows a  `policy-based design <https://en.wikipedia.org/wiki/Policy-base
 
 For the parameters of the algorithms themselves (e.g. an epsilon), they are given by a template class (usually called Params in our code, and always the first argument). See :doc:`parameters` for details.
 
-To avoid defining each component of an optimizer manually, Limbo provides sensible defaults. In addition, Limbo relies on `Boost.Parameter <http://www.boost.org/doc/libs/1_60_0/libs/parameter/doc/html/index.html>`  to make it easy to customize a single part. This Boost library allows us to write classes that accept template argument (user-defined custom classes) by name. For instance, to customize the stopping criteria:
+To avoid defining each component of an optimizer manually, Limbo provides sensible defaults. In addition, Limbo relies on `Boost.Parameter <http://www.boost.org/doc/libs/1_60_0/libs/parameter/doc/html/index.html>`_  to make it easy to customize a single part. This Boost library allows us to write classes that accept template argument (user-defined custom classes) by name. For instance, to customize the stopping criteria:
 
 
 ::

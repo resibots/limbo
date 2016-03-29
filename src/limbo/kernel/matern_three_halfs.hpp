@@ -15,12 +15,17 @@ namespace limbo {
         };
     }
     namespace kernel {
-        /// @ingroup kernel
-        /// Matern 3/2 kernel (TODO: formula)
-        ///
-        /// Parameters:
-        /// - ``double sigma``
-        /// - ``double l``
+        /**
+         @ingroup kernel
+         \rst
+         Matern 3/2 kernel (TODO: formula)
+
+         Parameters:
+          - ``double sigma``
+          - ``double l``
+
+        \endrst
+        */
         template <typename Params>
         struct MaternThreeHalfs {
             MaternThreeHalfs(size_t dim = 1) {}

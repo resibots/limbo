@@ -70,7 +70,7 @@ namespace limbo {
 
             /**
              \rst
-             return :math:`mu`, :math:`sigma` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
+             return :math:`\mu`, :math:`\sigma` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
              \endrst
             */
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
@@ -89,7 +89,7 @@ namespace limbo {
 
             /**
              \rst
-             return :math:`mu` (unormalized). If there is no sample, return the value according to the mean function.
+             return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
              \endrst
             */
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
@@ -101,7 +101,7 @@ namespace limbo {
 
             /**
              \rst
-             return :math:`sigma` (unormalized). If there is no sample, return the value according to the mean function.
+             return :math:`\sigma` (unormalized). If there is no sample, return the value according to the mean function.
              \endrst
             */
             double sigma(const Eigen::VectorXd& v) const
