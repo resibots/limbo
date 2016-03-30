@@ -336,6 +336,9 @@ Template
       }
   };
 
+
+.. doxygenstruct:: limbo::stat::StatBase
+
 Available statistics
 ^^^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: stat
