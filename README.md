@@ -13,8 +13,8 @@ Authors
 - Antoine Cully (Imperial College): http://www.isir.upmc.fr/?op=view_profil&lang=fr&id=278
 - Jean-Baptiste Mouret (Inria): http://pages.isir.upmc.fr/~mouret/website/
 - Konstantinos Chatzilygeroudis (Inria)
-- Federico Allocai (Inria)
-- 
+- Federico Allocati (Inria)
+-
 Main features
 -------------
 - Bayesian optimisation based on Gaussian processes
