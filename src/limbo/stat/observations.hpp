@@ -5,6 +5,8 @@
 
 namespace limbo {
     namespace stat {
+        ///@ingroup stat
+        ///filename: `observations.dat`
         template <typename Params>
         struct Observations : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>

@@ -8,11 +8,26 @@
 namespace limbo {
     namespace defaults {
         struct kernel_maternfivehalfs {
+            /// @ingroup kernel_defaults
             BO_PARAM(double, sigma, 1);
+            /// @ingroup kernel_defaults
             BO_PARAM(double, l, 1);
         };
     }
     namespace kernel {
+        /**
+          @ingroup kernel
+
+          \rst
+
+          Matern kernel (TODO: formula)
+
+          Parameters:
+            - ``double sigma``
+            - ``double l``
+
+          \endrst
+        */
         template <typename Params>
         struct MaternFiveHalfs {
             MaternFiveHalfs(size_t dim = 1) {}

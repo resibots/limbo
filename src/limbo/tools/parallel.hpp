@@ -14,6 +14,8 @@
 #include <tbb/blocked_range.h>
 #endif
 
+///@defgroup par_tools
+
 namespace limbo {
     namespace tools {
         namespace par {
@@ -28,6 +30,8 @@ namespace limbo {
             template <typename X>
             using vector = tbb::concurrent_vector<X>; // Template alias (for GCC 4.7 and later)
 #endif
+            /// @ingroup par_tools
+            /// convert a std::vector to something else (e.g. a std::list)
             template <typename V>
             std::vector<typename V::value_type> convert_vector(const V& v)
             {
@@ -61,18 +65,21 @@ namespace limbo {
                 static tbb::task_scheduler_init init;
             }
 #else
+            /// @ingroup par_tools
+            /// init TBB (if activated) for multi-core computing
             void init()
             {
             }
 #endif
 
-            // parallel for
+            ///@ingroup par_tools
+            /// parallel for
             template <typename F>
             inline void loop(size_t begin, size_t end, const F& f)
             {
 #ifdef USE_TBB
                 tbb::parallel_for(size_t(begin), end, size_t(1), [&](size_t i) {
-    // clang-format off
+                  // clang-format off
                 f(i);
                     // clang-format on
                 });
@@ -82,7 +89,8 @@ namespace limbo {
 #endif
             }
 
-            // parallel for_each
+            /// @ingroup par_tools
+            /// parallel for_each
             template <typename Iterator, typename F>
             inline void for_each(Iterator begin, Iterator end, const F& f)
             {
@@ -94,6 +102,8 @@ namespace limbo {
 #endif
             }
 
+            /// @ingroup par_tools
+            /// parallel max
             template <typename T, typename F, typename C>
             T max(const T& init, int num_steps, const F& f, const C& comp)
             {
@@ -128,7 +138,8 @@ namespace limbo {
                 return current_max;
 #endif
             }
-
+            /// @ingroup par_tools
+            /// parallel sort
             template <typename T1, typename T2, typename T3>
             inline void sort(T1 i1, T2 i2, T3 comp)
             {
@@ -139,13 +150,14 @@ namespace limbo {
 #endif
             }
 
-            // replicate a function nb times
+            /// @ingroup par_tools
+            /// replicate a function nb times
             template <typename F>
             inline void replicate(size_t nb, const F& f)
             {
 #ifdef USE_TBB
                 tbb::parallel_for(size_t(0), nb, size_t(1), [&](size_t i) {
-    // clang-format off
+                    // clang-format off
                 f();
                     // clang-format on
                 });

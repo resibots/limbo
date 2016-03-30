@@ -1,6 +1,9 @@
 #ifndef LIMBO_STAT_HPP
 #define LIMBO_STAT_HPP
 
+///@defgroup stat
+///@defgroup stat_defaults
+
 #include <limbo/stat/best_aggregated_observations.hpp>
 #include <limbo/stat/best_observations.hpp>
 #include <limbo/stat/best_samples.hpp>

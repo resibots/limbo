@@ -41,6 +41,8 @@
 
 namespace limbo {
     namespace tools {
+        /// @ingroup tools
+        /// easy way to get the current date
         inline std::string date()
         {
             char date[30];
@@ -50,6 +52,8 @@ namespace limbo {
             return std::string(date);
         }
 
+        /// @ingroup tools
+        /// easy way to get the hostame
         inline std::string hostname()
         {
             char hostname[30];
@@ -59,6 +63,8 @@ namespace limbo {
             return std::string(hostname);
         }
 
+        /// @ingroup tools
+        /// easy way to get the PID
         inline std::string getpid()
         {
             return std::to_string(::getpid());

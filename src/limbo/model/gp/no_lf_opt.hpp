@@ -4,6 +4,8 @@
 namespace limbo {
     namespace model {
         namespace gp {
+            ///@ingroup model_opt
+            ///do not optimize anything
             template <typename Params>
             struct NoLFOpt {
                 template <typename GP>

@@ -51,10 +51,13 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
-html:
+html: doxygen
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+doxygen:
+	doxygen Doxyfile
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml

@@ -10,6 +10,8 @@
 namespace limbo {
     namespace model {
         namespace gp {
+            ///@ingroup model_opt
+            ///optimize the likelihood of both the kernel and the mean (try to align the mean function)
             template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
             struct KernelMeanLFOpt {
             public:

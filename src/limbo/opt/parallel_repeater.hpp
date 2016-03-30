@@ -13,10 +13,18 @@
 namespace limbo {
     namespace defaults {
         struct opt_parallelrepeater {
+            /// @ingroup opt_defaults
+            /// number of replicates
             BO_PARAM(int, repeats, 10);
         };
     }
     namespace opt {
+        /// @ingroup opt
+        /// Meta-optimizer: run the same algorithm in parallel many times from different init points and return the maximum found among all the replicates
+        /// (useful for local algorithms)
+        ///
+        /// Parameters:
+        /// - int repeats
         template <typename Params, typename Optimizer>
         struct ParallelRepeater {
             template <typename F>

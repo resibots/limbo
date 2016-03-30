@@ -18,11 +18,25 @@
 namespace limbo {
     namespace defaults {
         struct opt_cmaes {
+            /// @ingroup opt_defaults
+            /// number of restarts of CMA-ES
             BO_PARAM(int, restarts, 1);
+            /// @ingroup opt_defaults
+            /// number of calls to the function to be optimized
             BO_PARAM(double, max_fun_evals, -1);
         };
     }
     namespace opt {
+        /// @ingroup opt
+        /// Covariance Matrix Adaptation Evolution Strategy by Hansen et al.
+        /// (See: https://www.lri.fr/~hansen/cmaesintro.html)
+        /// - our implementation is based on libcmaes (https://github.com/beniz/libcmaes)
+        /// - Support bounded and unbounded optimization
+        /// - Only available if libcmaes is installed (see the compilation instructions)
+        ///
+        /// - Parameters :
+        ///   - double max_fun_evals
+        ///   - int restarts
         template <typename Params>
         struct Cmaes {
         public:

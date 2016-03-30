@@ -5,6 +5,8 @@
 
 namespace limbo {
     namespace stat {
+        ///@ingroup stat
+        ///write the status of the algorithm on the terminal
         template <typename Params>
         struct ConsoleSummary : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>

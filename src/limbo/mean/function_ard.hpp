@@ -5,6 +5,9 @@
 
 namespace limbo {
     namespace mean {
+
+        ///@ingroup mean
+        /// TODO
         template <typename Params, typename MeanFunction>
         struct FunctionARD {
             FunctionARD(size_t dim_out = 1)

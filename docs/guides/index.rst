@@ -9,4 +9,3 @@ Guides
    limbo_concepts
    framework
    parameters
-   general_concepts
