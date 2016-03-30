@@ -38,7 +38,7 @@ extensions = [
     'breathe'
 ]
 
-breathe_projects = { "limbo": "/Users/jbm/Documents/git/resibots/limbo/docs/doxygen_doc/xml/" }
+breathe_projects = { "limbo": "doxygen_doc/xml/" }
 breathe_default_project="limbo"
 
 # Add any paths that contain templates here, relative to this directory.
