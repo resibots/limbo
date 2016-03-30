@@ -349,16 +349,15 @@ Default parameters
 .. doxygengroup:: stat_defaults
    :undoc-members:
 
-Parallel tools (tools)
+Parallel tools (par)
 -----------------------
-namespace: tools::par
 
-.. doxygengroup:: par_tools
+.. doxygennamespace:: limbo::tools::par
   :members:
 
 Misc tools (tools)
 -------------------------------
-.. doxygengroup:: tools
+.. doxygennamespace:: limbo::tools
   :members:
 
 .. bibliography:: refs.bib
