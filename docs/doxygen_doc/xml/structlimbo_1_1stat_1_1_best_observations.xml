@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1stat_1_1_best_observations" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::stat::BestObservations</compoundname>
+    <basecompoundref refid="structlimbo_1_1stat_1_1_stat_base" prot="public" virt="non-virtual">limbo::stat::StatBase&lt; Params &gt;</basecompoundref>
+    <includes refid="best__observations_8hpp" local="no">limbo/stat/best_observations.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1stat_1_1_best_observations_1a62490e2a957d770d30c8575e1c34ce76" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BO</type>
+          </param>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::stat::BestObservations&lt; Params &gt;::operator()</definition>
+        <argsstring>(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const BO &amp;</type>
+          <declname>bo</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>blacklisted</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/best_observations.hpp" line="14" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/best_observations.hpp" bodystart="14" bodyend="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Write the best observation so far filename: <computeroutput>best_observations.dat"</computeroutput> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="23">
+        <label>limbo::stat::StatBase&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
+      </node>
+      <node id="22">
+        <label>limbo::stat::BestObservations&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_best_observations"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="25">
+        <label>limbo::stat::StatBase&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
+      </node>
+      <node id="24">
+        <label>limbo::stat::BestObservations&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_best_observations"/>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/best_observations.hpp" line="12" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/best_observations.hpp" bodystart="12" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1stat_1_1_best_observations_1a62490e2a957d770d30c8575e1c34ce76" prot="public" virt="non-virtual"><scope>limbo::stat::BestObservations</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1aaa6c2d6e3b520907955988daf73993ba" prot="public" virt="non-virtual" ambiguityscope="limbo::stat::StatBase::"><scope>limbo::stat::BestObservations</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1aac1bea59acf624ed728660823189006f" prot="public" virt="non-virtual"><scope>limbo::stat::BestObservations</scope><name>StatBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

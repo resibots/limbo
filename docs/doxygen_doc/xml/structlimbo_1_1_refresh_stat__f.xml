@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1_refresh_stat__f" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::RefreshStat_f</compoundname>
+    <includes refid="bo__base_8hpp" local="no">limbo/bayes_opt/bo_base.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename BO</type>
+      </param>
+      <param>
+        <type>typename AggregatorFunction</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" prot="public" static="no" mutable="no">
+        <type>BO &amp;</type>
+        <definition>BO&amp; limbo::RefreshStat_f&lt; BO, AggregatorFunction &gt;::_bo</definition>
+        <argsstring></argsstring>
+        <name>_bo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="51" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" prot="public" static="no" mutable="no">
+        <type>const AggregatorFunction &amp;</type>
+        <definition>const AggregatorFunction&amp; limbo::RefreshStat_f&lt; BO, AggregatorFunction &gt;::_afun</definition>
+        <argsstring></argsstring>
+        <name>_afun</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="52" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool limbo::RefreshStat_f&lt; BO, AggregatorFunction &gt;::_blacklisted</definition>
+        <argsstring></argsstring>
+        <name>_blacklisted</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="53" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1_refresh_stat__f_1af0f6e976aa3f357cdd4418d84e1e69ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::RefreshStat_f&lt; BO, AggregatorFunction &gt;::RefreshStat_f</definition>
+        <argsstring>(BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</argsstring>
+        <name>RefreshStat_f</name>
+        <param>
+          <type>BO &amp;</type>
+          <declname>bo</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>blacklisted</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="48" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="48" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1_refresh_stat__f_1a24498c1e97e8aa89a8180422a3ad9109" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::RefreshStat_f&lt; BO, AggregatorFunction &gt;::operator()</definition>
+        <argsstring>(T &amp;x) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="56" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="47" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="47" bodyend="57"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" prot="public" virt="non-virtual"><scope>limbo::RefreshStat_f</scope><name>_afun</name></member>
+      <member refid="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" prot="public" virt="non-virtual"><scope>limbo::RefreshStat_f</scope><name>_blacklisted</name></member>
+      <member refid="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" prot="public" virt="non-virtual"><scope>limbo::RefreshStat_f</scope><name>_bo</name></member>
+      <member refid="structlimbo_1_1_refresh_stat__f_1a24498c1e97e8aa89a8180422a3ad9109" prot="public" virt="non-virtual"><scope>limbo::RefreshStat_f</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1_refresh_stat__f_1af0f6e976aa3f357cdd4418d84e1e69ec" prot="public" virt="non-virtual"><scope>limbo::RefreshStat_f</scope><name>RefreshStat_f</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -121,6 +121,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#compilation">Compilation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build">Build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -131,6 +132,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -255,7 +257,7 @@ Checking Intel MKL includes                    : not found
 </pre></div>
 </div>
 <p>The actual ouput may differ, depending on your configuration and installed libraries.</p>
-<p>Waf should automatically detect Intel&#8217;s TBB and MKL, if they where installed in the default folders, but if it doesn&#8217;t,
+<p>Waf should automatically detect the libraries if they where installed in the default folders, but if it doesn&#8217;t,
 you can use the following command-line options to indicate where they are:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">--libcmaes=/path/to/libcmaes</span></code></li>
@@ -263,6 +265,9 @@ you can use the following command-line options to indicate where they are:</p>
 <li><code class="docutils literal"><span class="pre">--tbb=/path/to/tbb</span></code></li>
 <li><code class="docutils literal"><span class="pre">--mkl=/path/to/mkl</span></code></li>
 <li><code class="docutils literal"><span class="pre">--sferes=/path/to/sferes2</span></code></li>
+<li><code class="docutils literal"><span class="pre">--boost-includes</span> <span class="pre">/path/to/boost-includes</span></code> [.h]</li>
+<li><code class="docutils literal"><span class="pre">--boost-libs</span> <span class="pre">/path/to/boost-libraries</span></code> [.a, .so, .dynlib]</li>
+<li><code class="docutils literal"><span class="pre">--eigen</span> <span class="pre">/path/to/eigen3</span></code></li>
 </ul>
 <p>Note that Sferes2 won&#8217;t be used unless you specify it&#8217;s installation folder.
 You can also specify a different compiler than the default, setting the environment variables <code class="docutils literal"><span class="pre">CC</span></code> and <code class="docutils literal"><span class="pre">CXX</span></code>.</p>
@@ -287,6 +292,47 @@ You can also specify a different compiler than the default, setting the environm
     /home/fallocat/limbo_git/build/src/tests/test_boptimizer
 </pre></div>
 </div>
+</div>
+<div class="section" id="building-the-documentation">
+<h3>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
+<p><em>This section is only useful for developers who need to update the documentation.</em></p>
+<p>Install sphinx via pip:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo pip install Sphinx
+sudo pip install sphinxcontrib-bibtex
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">On Mac OSX, do not use <cite>brew install sphinx</cite> because this is not the right sphinx</p>
+</div>
+<p>Install the Resibots theme for resibots:</p>
+<div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/resibots/sphinx_resibots_theme
+export SPHINX_RESIBOTS_THEME=&quot;/home/me/path/to/sphinx_resibots_theme&quot;
+</pre></div>
+</div>
+<p>Install <cite>breathe</cite> via pip:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo pip install breathe
+</pre></div>
+</div>
+<p>Install doxygen via your package manager (e.g. apt-get / brew):</p>
+<div class="highlight-python"><div class="highlight"><pre>apt-get install doxygen
+</pre></div>
+</div>
+<p>In the <cite>doc</cite> directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>make html
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>About sphinx and ReStructuredText:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://sphinx-doc.org/tutorial.html">There is a tutorial</a>,</li>
+<li><a class="reference external" href="http://sphinx-doc.org/rest.html">Primer for ReStructuredText</a>, the markup language of Sphinx,</li>
+<li><a class="reference external" href="http://sphinx-doc.org/markup/index.html">markup specific to Sphinx</a>,</li>
+<li><a class="reference external" href="http://sphinx-doc.org/domains.html#id2">About C++ in Sphinx</a></li>
+<li><a class="reference external" href="https://breathe.readthedocs.org/en/latest/">Breathe (bridge between sphinx and doxygen)</a></li>
+</ul>
+</dd>
+</dl>
 </div>
 </div>
 </div>

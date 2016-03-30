@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespacelimbo_1_1tools_1_1par" kind="namespace" language="C++">
+    <compoundname>limbo::tools::par</compoundname>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacelimbo_1_1tools_1_1par_1af51cb7a6b55652377e2553e6de65b948" prot="public" static="no">
+        <type>std::vector&lt; X &gt;</type>
+        <definition>using limbo::tools::par::vector = typedef std::vector&lt;X&gt;</definition>
+        <argsstring></argsstring>
+        <name>vector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="51" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacelimbo_1_1tools_1_1par_1ae700f38cb80d3db4307227c2f33e72e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename V</type>
+          </param>
+        </templateparamlist>
+        <type>V &amp;</type>
+        <definition>V&amp; limbo::tools::par::convert_vector</definition>
+        <argsstring>(const V &amp;v)</argsstring>
+        <name>convert_vector</name>
+        <param>
+          <type>const V &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="55" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" bodystart="55" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="group__par__tools_1ga1d650a019b6c1bb551cb42f1c3f5ef82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::tools::par::init</definition>
+        <argsstring>()</argsstring>
+        <name>init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>init TBB (if activated) for multi-core computing </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="70" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" bodystart="70" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="group__par__tools_1ga0e0d97b2a06005eac32290a846ccef91" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::tools::par::loop</definition>
+        <argsstring>(size_t begin, size_t end, const F &amp;f)</argsstring>
+        <name>loop</name>
+        <param>
+          <type>size_t</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>parallel for </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="78" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" bodystart="78" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="group__par__tools_1gaa7bbb8a640ed2b66101d57b5b565457f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::tools::par::for_each</definition>
+        <argsstring>(Iterator begin, Iterator end, const F &amp;f)</argsstring>
+        <name>for_each</name>
+        <param>
+          <type>Iterator</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>parallel for_each </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="95" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" bodystart="95" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="group__par__tools_1gaf3fdc36fc4e94ad4cac72c803234b6ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type>typename C</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T limbo::tools::par::max</definition>
+        <argsstring>(const T &amp;init, int num_steps, const F &amp;f, const C &amp;comp)</argsstring>
+        <name>max</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>init</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_steps</declname>
+        </param>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const C &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>parallel max </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="108" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" bodystart="108" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="group__par__tools_1gab29bca0dac2a8917b8447bc52d376f1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+          <param>
+            <type>typename T3</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::tools::par::sort</definition>
+        <argsstring>(T1 i1, T2 i2, T3 comp)</argsstring>
+        <name>sort</name>
+        <param>
+          <type>T1</type>
+          <declname>i1</declname>
+        </param>
+        <param>
+          <type>T2</type>
+          <declname>i2</declname>
+        </param>
+        <param>
+          <type>T3</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>parallel sort </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="144" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" bodystart="144" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="group__par__tools_1gade6005a5ea74ca5203203d30210c0f22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::tools::par::replicate</definition>
+        <argsstring>(size_t nb, const F &amp;f)</argsstring>
+        <name>replicate</name>
+        <param>
+          <type>size_t</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>replicate a function nb times </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="156" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" bodystart="156" bodyend="168"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/tools/parallel.hpp" line="21" column="1"/>
+  </compounddef>
+</doxygen>

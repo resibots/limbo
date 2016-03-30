@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1stat_1_1_g_p_acquisitions" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::stat::GPAcquisitions</compoundname>
+    <basecompoundref refid="structlimbo_1_1stat_1_1_stat_base" prot="public" virt="non-virtual">limbo::stat::StatBase&lt; Params &gt;</basecompoundref>
+    <includes refid="gp__acquisitions_8hpp" local="no">limbo/stat/gp_acquisitions.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1stat_1_1_g_p_acquisitions_1a5b6d7301b0696e77a8a9276d1d12d614" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BO</type>
+          </param>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::stat::GPAcquisitions&lt; Params &gt;::operator()</definition>
+        <argsstring>(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const BO &amp;</type>
+          <declname>bo</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>blacklisted</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/gp_acquisitions.hpp" line="15" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/gp_acquisitions.hpp" bodystart="15" bodyend="40"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>filename: <computeroutput>gp_acquisitions.dat</computeroutput> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="99">
+        <label>limbo::stat::StatBase&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
+      </node>
+      <node id="98">
+        <label>limbo::stat::GPAcquisitions&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_acquisitions"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="101">
+        <label>limbo::stat::StatBase&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
+      </node>
+      <node id="100">
+        <label>limbo::stat::GPAcquisitions&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_acquisitions"/>
+        <childnode refid="101" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/gp_acquisitions.hpp" line="13" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/gp_acquisitions.hpp" bodystart="13" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1stat_1_1_g_p_acquisitions_1a5b6d7301b0696e77a8a9276d1d12d614" prot="public" virt="non-virtual"><scope>limbo::stat::GPAcquisitions</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1aaa6c2d6e3b520907955988daf73993ba" prot="public" virt="non-virtual" ambiguityscope="limbo::stat::StatBase::"><scope>limbo::stat::GPAcquisitions</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1aac1bea59acf624ed728660823189006f" prot="public" virt="non-virtual"><scope>limbo::stat::GPAcquisitions</scope><name>StatBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

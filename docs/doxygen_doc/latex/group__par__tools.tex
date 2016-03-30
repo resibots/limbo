@@ -1,0 +1,76 @@
+\hypertarget{group__par__tools}{}\section{Par\+\_\+tools}
+\label{group__par__tools}\index{Par\+\_\+tools@{Par\+\_\+tools}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__par__tools_ga1d650a019b6c1bb551cb42f1c3f5ef82}{limbo\+::tools\+::par\+::init} ()
+\item 
+{\footnotesize template$<$typename F $>$ }\\void \hyperlink{group__par__tools_ga0e0d97b2a06005eac32290a846ccef91}{limbo\+::tools\+::par\+::loop} (size\+\_\+t begin, size\+\_\+t end, const F \&f)
+\item 
+{\footnotesize template$<$typename Iterator , typename F $>$ }\\void \hyperlink{group__par__tools_gaa7bbb8a640ed2b66101d57b5b565457f}{limbo\+::tools\+::par\+::for\+\_\+each} (Iterator begin, Iterator end, const F \&f)
+\item 
+{\footnotesize template$<$typename T , typename F , typename C $>$ }\\T \hyperlink{group__par__tools_gaf3fdc36fc4e94ad4cac72c803234b6ac}{limbo\+::tools\+::par\+::max} (const T \&init, int num\+\_\+steps, const F \&f, const C \&comp)
+\item 
+{\footnotesize template$<$typename T1 , typename T2 , typename T3 $>$ }\\void \hyperlink{group__par__tools_gab29bca0dac2a8917b8447bc52d376f1c}{limbo\+::tools\+::par\+::sort} (T1 i1, T2 i2, T3 comp)
+\item 
+{\footnotesize template$<$typename F $>$ }\\void \hyperlink{group__par__tools_gade6005a5ea74ca5203203d30210c0f22}{limbo\+::tools\+::par\+::replicate} (size\+\_\+t nb, const F \&f)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__par__tools_gaa7bbb8a640ed2b66101d57b5b565457f}{}\index{Par\+\_\+tools@{Par\+\_\+tools}!for\+\_\+each@{for\+\_\+each}}
+\index{for\+\_\+each@{for\+\_\+each}!Par\+\_\+tools@{Par\+\_\+tools}}
+\subsubsection[{for\+\_\+each}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Iterator , typename F $>$ void limbo\+::tools\+::par\+::for\+\_\+each (
+\begin{DoxyParamCaption}
+\item[{Iterator}]{begin, }
+\item[{Iterator}]{end, }
+\item[{const F \&}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{group__par__tools_gaa7bbb8a640ed2b66101d57b5b565457f}
+parallel for\+\_\+each \hypertarget{group__par__tools_ga1d650a019b6c1bb551cb42f1c3f5ef82}{}\index{Par\+\_\+tools@{Par\+\_\+tools}!init@{init}}
+\index{init@{init}!Par\+\_\+tools@{Par\+\_\+tools}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void limbo\+::tools\+::par\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{group__par__tools_ga1d650a019b6c1bb551cb42f1c3f5ef82}
+init T\+B\+B (if activated) for multi-\/core computing \hypertarget{group__par__tools_ga0e0d97b2a06005eac32290a846ccef91}{}\index{Par\+\_\+tools@{Par\+\_\+tools}!loop@{loop}}
+\index{loop@{loop}!Par\+\_\+tools@{Par\+\_\+tools}}
+\subsubsection[{loop}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ void limbo\+::tools\+::par\+::loop (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{begin, }
+\item[{size\+\_\+t}]{end, }
+\item[{const F \&}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{group__par__tools_ga0e0d97b2a06005eac32290a846ccef91}
+parallel for \hypertarget{group__par__tools_gaf3fdc36fc4e94ad4cac72c803234b6ac}{}\index{Par\+\_\+tools@{Par\+\_\+tools}!max@{max}}
+\index{max@{max}!Par\+\_\+tools@{Par\+\_\+tools}}
+\subsubsection[{max}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename F , typename C $>$ T limbo\+::tools\+::par\+::max (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{init, }
+\item[{int}]{num\+\_\+steps, }
+\item[{const F \&}]{f, }
+\item[{const C \&}]{comp}
+\end{DoxyParamCaption}
+)}\label{group__par__tools_gaf3fdc36fc4e94ad4cac72c803234b6ac}
+parallel max \hypertarget{group__par__tools_gade6005a5ea74ca5203203d30210c0f22}{}\index{Par\+\_\+tools@{Par\+\_\+tools}!replicate@{replicate}}
+\index{replicate@{replicate}!Par\+\_\+tools@{Par\+\_\+tools}}
+\subsubsection[{replicate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ void limbo\+::tools\+::par\+::replicate (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{nb, }
+\item[{const F \&}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{group__par__tools_gade6005a5ea74ca5203203d30210c0f22}
+replicate a function nb times \hypertarget{group__par__tools_gab29bca0dac2a8917b8447bc52d376f1c}{}\index{Par\+\_\+tools@{Par\+\_\+tools}!sort@{sort}}
+\index{sort@{sort}!Par\+\_\+tools@{Par\+\_\+tools}}
+\subsubsection[{sort}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T1 , typename T2 , typename T3 $>$ void limbo\+::tools\+::par\+::sort (
+\begin{DoxyParamCaption}
+\item[{T1}]{i1, }
+\item[{T2}]{i2, }
+\item[{T3}]{comp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{group__par__tools_gab29bca0dac2a8917b8447bc52d376f1c}
+parallel sort 

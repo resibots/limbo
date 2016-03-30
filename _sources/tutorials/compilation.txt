@@ -66,7 +66,7 @@ If everything is okay, you should expect an output like this: ::
 
 The actual ouput may differ, depending on your configuration and installed libraries.
 
-Waf should automatically detect Intel's TBB and MKL, if they where installed in the default folders, but if it doesn't,
+Waf should automatically detect the libraries if they where installed in the default folders, but if it doesn't,
 you can use the following command-line options to indicate where they are:
 
 * ``--libcmaes=/path/to/libcmaes``
@@ -74,6 +74,10 @@ you can use the following command-line options to indicate where they are:
 * ``--tbb=/path/to/tbb``
 * ``--mkl=/path/to/mkl``
 * ``--sferes=/path/to/sferes2``
+* ``--boost-includes /path/to/boost-includes`` [.h]
+* ``--boost-libs /path/to/boost-libraries`` [.a, .so, .dynlib]
+* ``--eigen /path/to/eigen3``
+
 
 Note that Sferes2 won't be used unless you specify it's installation folder.
 You can also specify a different compiler than the default, setting the environment variables ``CC`` and ``CXX``.
@@ -98,3 +102,41 @@ Depending on your compiler, there may be some warnings, but the output should en
         /home/fallocat/limbo_git/build/src/tests/test_init_functions
         /home/fallocat/limbo_git/build/src/tests/test_gp
         /home/fallocat/limbo_git/build/src/tests/test_boptimizer
+
+
+Building the documentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*This section is only useful for developers who need to update the documentation.*
+
+Install sphinx via pip: ::
+
+    sudo pip install Sphinx
+    sudo pip install sphinxcontrib-bibtex
+
+.. warning::
+
+  On Mac OSX, do not use `brew install sphinx` because this is not the right sphinx
+
+Install the Resibots theme for resibots: ::
+
+    git clone https://github.com/resibots/sphinx_resibots_theme
+    export SPHINX_RESIBOTS_THEME="/home/me/path/to/sphinx_resibots_theme"
+
+Install `breathe` via pip: ::
+
+    sudo pip install breathe
+
+Install doxygen via your package manager (e.g. apt-get / brew): ::
+
+    apt-get install doxygen
+
+In the `doc` directory: ::
+
+    make html
+
+About sphinx and ReStructuredText:
+  - `There is a tutorial <http://sphinx-doc.org/tutorial.html>`_,
+  - `Primer for ReStructuredText <http://sphinx-doc.org/rest.html>`_, the markup language of Sphinx,
+  - `markup specific to Sphinx <http://sphinx-doc.org/markup/index.html>`_,
+  - `About C++ in Sphinx <http://sphinx-doc.org/domains.html#id2>`_
+  - `Breathe (bridge between sphinx and doxygen) <https://breathe.readthedocs.org/en/latest/>`_

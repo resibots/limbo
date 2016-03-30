@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1kernel_1_1_matern_five_halfs" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::kernel::MaternFiveHalfs</compoundname>
+    <includes refid="matern__five__halfs_8hpp" local="no">limbo/kernel/matern_five_halfs.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_matern_five_halfs_1a6b7d9003e76fb0284e209b3b5d9527ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::kernel::MaternFiveHalfs&lt; Params &gt;::MaternFiveHalfs</definition>
+        <argsstring>(size_t dim=1)</argsstring>
+        <name>MaternFiveHalfs</name>
+        <param>
+          <type>size_t</type>
+          <declname>dim</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="33" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_matern_five_halfs_1a070ed97b62698e9c9d10f606254954e7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double limbo::kernel::MaternFiveHalfs&lt; Params &gt;::operator()</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v1</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="35" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="35" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>embed:rst
+
+Matern kernel (TODO: formula)
+
+Parameters:
+  - ``double sigma``
+  - ``double l``</verbatim> </para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="32" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="32" bodyend="40"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1kernel_1_1_matern_five_halfs_1a6b7d9003e76fb0284e209b3b5d9527ee" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalfs</scope><name>MaternFiveHalfs</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_matern_five_halfs_1a070ed97b62698e9c9d10f606254954e7" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalfs</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

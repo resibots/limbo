@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespacelimbo_1_1opt" kind="namespace" language="C++">
+    <compoundname>limbo::opt</compoundname>
+    <innerclass refid="structlimbo_1_1opt_1_1_chained" prot="public">limbo::opt::Chained</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_01_4" prot="public">limbo::opt::Chained&lt; Params, Optimizer &gt;</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_00_01_optimizers_8_8_8_4" prot="public">limbo::opt::Chained&lt; Params, Optimizer, Optimizers...&gt;</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_cmaes" prot="public">limbo::opt::Cmaes</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_grid_search" prot="public">limbo::opt::GridSearch</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_n_l_opt_grad" prot="public">limbo::opt::NLOptGrad</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_n_l_opt_no_grad" prot="public">limbo::opt::NLOptNoGrad</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_parallel_repeater" prot="public">limbo::opt::ParallelRepeater</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_random_point" prot="public">limbo::opt::RandomPoint</innerclass>
+    <innerclass refid="structlimbo_1_1opt_1_1_rprop" prot="public">limbo::opt::Rprop</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__opt__tools_1ga7fc87080ebf563d050fc547d25528ef0" prot="public" static="no">
+        <type>std::pair&lt; double, boost::optional&lt; Eigen::VectorXd &gt; &gt;</type>
+        <definition>typedef std::pair&lt;double, boost::optional&lt;Eigen::VectorXd&gt; &gt; limbo::opt::eval_t</definition>
+        <argsstring></argsstring>
+        <name>eval_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>return type of the function to optimize </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" line="16" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__opt__tools_1ga38e53ccac21f452bd31e9b239985d456" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__opt__tools_1ga7fc87080ebf563d050fc547d25528ef0" kindref="member">eval_t</ref></type>
+        <definition>eval_t limbo::opt::no_grad</definition>
+        <argsstring>(double x)</argsstring>
+        <name>no_grad</name>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>return with opt::no_grad(your_val) if no gradient is available (to be used in functions to be optimized) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" line="20" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const Eigen::VectorXd &amp;</type>
+        <definition>const Eigen::VectorXd&amp; limbo::opt::grad</definition>
+        <argsstring>(const eval_t &amp;fg)</argsstring>
+        <name>grad</name>
+        <param>
+          <type>const <ref refid="group__opt__tools_1ga7fc87080ebf563d050fc547d25528ef0" kindref="member">eval_t</ref> &amp;</type>
+          <declname>fg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>get the gradient from a function evaluation (eval_t) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" line="24" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" bodystart="24" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__tools_1ga68ad00d7501bc26a2a0990bac762393e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double limbo::opt::fun</definition>
+        <argsstring>(const eval_t &amp;fg)</argsstring>
+        <name>fun</name>
+        <param>
+          <type>const <ref refid="group__opt__tools_1ga7fc87080ebf563d050fc547d25528ef0" kindref="member">eval_t</ref> &amp;</type>
+          <declname>fg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>get the value from a function evaluation (eval_t) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" line="32" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" bodystart="32" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__tools_1ga698d932ac52cab812742b1300f875372" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double limbo::opt::eval</definition>
+        <argsstring>(const F &amp;f, const Eigen::VectorXd &amp;x)</argsstring>
+        <name>eval</name>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate f without gradient (to be called from the optimization algorithms that do not use the gradient) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" line="40" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__tools_1ga6abbcdf8d83abca89802881d883fb9e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group__opt__tools_1ga7fc87080ebf563d050fc547d25528ef0" kindref="member">eval_t</ref></type>
+        <definition>eval_t limbo::opt::eval_grad</definition>
+        <argsstring>(const F &amp;f, const Eigen::VectorXd &amp;x)</argsstring>
+        <name>eval_grad</name>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate f with gradient (to be called from the optimization algorithms that use the gradient) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" line="48" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/optimizer.hpp" bodystart="48" bodyend="51"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/opt/chained.hpp" line="11" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classlimbo_1_1bayes__opt_1_1_b_optimizer" kind="class" language="C++" prot="public">
+    <compoundname>limbo::bayes_opt::BOptimizer</compoundname>
+    <basecompoundref refid="classlimbo_1_1bayes__opt_1_1_bo_base" prot="public" virt="non-virtual">limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;</basecompoundref>
+    <includes refid="boptimizer_8hpp" local="no">limbo/bayes_opt/boptimizer.hpp</includes>
+    <innerclass refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults" prot="public">limbo::bayes_opt::BOptimizer::defaults</innerclass>
+    <templateparamlist>
+      <param>
+        <type>class</type>
+        <declname>Params</declname>
+        <defname>Params</defname>
+      </param>
+      <param>
+        <type>class</type>
+        <declname>A1</declname>
+        <defname>A1</defname>
+        <defval>boost::parameter::void_</defval>
+      </param>
+      <param>
+        <type>class</type>
+        <declname>A2</declname>
+        <defname>A2</defname>
+        <defval>boost::parameter::void_</defval>
+      </param>
+      <param>
+        <type>class</type>
+        <declname>A3</declname>
+        <defname>A3</defname>
+        <defval>boost::parameter::void_</defval>
+      </param>
+      <param>
+        <type>class</type>
+        <declname>A4</declname>
+        <defname>A4</defname>
+        <defval>boost::parameter::void_</defval>
+      </param>
+      <param>
+        <type>class</type>
+        <declname>A5</declname>
+        <defname>A5</defname>
+        <defval>boost::parameter::void_</defval>
+      </param>
+      <param>
+        <type>class</type>
+        <declname>A6</declname>
+        <defname>A6</defname>
+        <defval>boost::parameter::void_</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a89d1cce7fdecc3598db103e337d942de" prot="public" static="no">
+        <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>&lt; Params, A1, A2, A3, A4, A5 &gt;</type>
+        <definition>typedef BoBase&lt;Params, A1, A2, A3, A4, A5&gt; limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::base_t</definition>
+        <argsstring></argsstring>
+        <name>base_t</name>
+        <briefdescription>
+<para>link to the corresponding <ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref> (useful for typedefs) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="78" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1aaddb85f5014ba377c9e2e3a64db87678" prot="public" static="no">
+        <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1ddc93cc023a2d7d527deb4cc750624e" kindref="member">base_t::model_t</ref></type>
+        <definition>typedef base_t::model_t limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::model_t</definition>
+        <argsstring></argsstring>
+        <name>model_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="79" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1ae0a407a5eba370a6a30acda501cd4ddc" prot="public" static="no">
+        <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a02b14991b62e0f8c9bcf834220ed62e4" kindref="member">base_t::acquisition_function_t</ref></type>
+        <definition>typedef base_t::acquisition_function_t limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::acquisition_function_t</definition>
+        <argsstring></argsstring>
+        <name>acquisition_function_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="80" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1afd4c6a7d361de59fac5aa3a332ea0149" prot="public" static="no">
+        <type>boptimizer_signature::bind&lt; A1, A2, A3, A4, A5, A6 &gt;::type</type>
+        <definition>typedef boptimizer_signature::bind&lt;A1, A2, A3, A4, A5, A6&gt;::type limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::args</definition>
+        <argsstring></argsstring>
+        <name>args</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="82" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a18dc1b593c859b8f89450a31f80fb592" prot="public" static="no">
+        <type>boost::parameter::binding&lt; <ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a75c1ae9e7268016c6f767c56bcede7d2" kindref="member">args</ref>, tag::acquiopt, typename <ref refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults_1a4eb44d2abad01f5ef0206b7c5c595c7b" kindref="member">defaults::acquiopt_t</ref> &gt;::type</type>
+        <definition>typedef boost::parameter::binding&lt;args, tag::acquiopt, typename defaults::acquiopt_t&gt;::type limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::acqui_optimizer_t</definition>
+        <argsstring></argsstring>
+        <name>acqui_optimizer_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="83" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a0014224c378fefa42967f1008771939d" prot="private" static="no" mutable="no">
+        <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1ddc93cc023a2d7d527deb4cc750624e" kindref="member">model_t</ref></type>
+        <definition>model_t limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::_model</definition>
+        <argsstring></argsstring>
+        <name>_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="142" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a731de253fe21749b9a00e609aae0386f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename StateFunction</type>
+          </param>
+          <param>
+            <type>typename AggregatorFunction</type>
+            <defval><ref refid="structlimbo_1_1_first_elem" kindref="compound">FirstElem</ref></defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::optimize</definition>
+        <argsstring>(const StateFunction &amp;sfun, const AggregatorFunction &amp;afun=AggregatorFunction(), bool reset=true)</argsstring>
+        <name>optimize</name>
+        <param>
+          <type>const StateFunction &amp;</type>
+          <declname>sfun</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+          <defval>AggregatorFunction()</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>reset</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>The main function (run the Bayesian optimization algorithm) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="87" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="87" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1aac35dbb6504e5a1b7d5fc9252c5e6a51" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename AggregatorFunction</type>
+            <defval><ref refid="structlimbo_1_1_first_elem" kindref="compound">FirstElem</ref></defval>
+          </param>
+        </templateparamlist>
+        <type>const Eigen::VectorXd &amp;</type>
+        <definition>const Eigen::VectorXd&amp; limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::best_observation</definition>
+        <argsstring>(const AggregatorFunction &amp;afun=AggregatorFunction()) const </argsstring>
+        <name>best_observation</name>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+          <defval>AggregatorFunction()</defval>
+        </param>
+        <briefdescription>
+<para>return the best observation so far (i.e. max(f(x))) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="121" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="121" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1ad3a19271e9d00827648f83b0dccc66b0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename AggregatorFunction</type>
+            <defval><ref refid="structlimbo_1_1_first_elem" kindref="compound">FirstElem</ref></defval>
+          </param>
+        </templateparamlist>
+        <type>const Eigen::VectorXd &amp;</type>
+        <definition>const Eigen::VectorXd&amp; limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::best_sample</definition>
+        <argsstring>(const AggregatorFunction &amp;afun=AggregatorFunction()) const </argsstring>
+        <name>best_sample</name>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+          <defval>AggregatorFunction()</defval>
+        </param>
+        <briefdescription>
+<para>return the best sample so far (i.e. the argmax(f(x))) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="131" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="131" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a1f338242d56d6a2b97245ca3bcaf991f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1ddc93cc023a2d7d527deb4cc750624e" kindref="member">model_t</ref> &amp;</type>
+        <definition>const model_t&amp; limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::model</definition>
+        <argsstring>() const </argsstring>
+        <name>model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="139" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="139" bodyend="139"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The classic Bayesian optimization algorithm.</para><para><verbatim>embed:rst
+References: :cite:`brochu2010tutorial,Mockus2013`
+</verbatim></para><para>This class takes the same template parameters as <ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>. It adds: <verbatim>embed:rst
++---------------------+------------+----------+---------------+
+|type                 |typedef     | argument | default       |
++=====================+============+==========+===============+
+|acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
++---------------------+------------+----------+---------------+
+</verbatim></para><para>The default value of acqui_opt_t is:<itemizedlist>
+<listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_cmaes" kindref="compound">opt::Cmaes</ref>&lt;Params&gt;</computeroutput> libcmaes was found</para></listitem><listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_n_l_opt_no_grad" kindref="compound">opt::NLOptNoGrad</ref>&lt;Params, nlopt::GN_DIRECT_L_RAND&gt;</computeroutput> if NLOpt was found but libcmaes was not found</para></listitem><listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_grid_search" kindref="compound">opt::GridSearch</ref>&lt;Params&gt;</computeroutput> otherwise (please do not use this) </para></listitem></itemizedlist>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="42">
+        <label>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1bayes__opt_1_1_b_optimizer"/>
+        <childnode refid="43" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;</label>
+        <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="44">
+        <label>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1bayes__opt_1_1_b_optimizer"/>
+        <childnode refid="45" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;</label>
+        <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" line="64" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp" bodystart="64" bodyend="143"/>
+    <listofallmembers>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a0014224c378fefa42967f1008771939d" prot="private" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>_model</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a18dc1b593c859b8f89450a31f80fb592" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>acqui_optimizer_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1ae0a407a5eba370a6a30acda501cd4ddc" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>acquisition_function_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a7197b0c20d5644ec44070432555eb49b" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>add_new_bl_sample</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>add_new_sample</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1afd4c6a7d361de59fac5aa3a332ea0149" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>args</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a89d1cce7fdecc3598db103e337d942de" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>base_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1aac35dbb6504e5a1b7d5fc9252c5e6a51" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>best_observation</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1ad3a19271e9d00827648f83b0dccc66b0" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>best_sample</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa85b7824943ae2ee35b50b446f6740c6" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>bl_samples</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1602cb9a6fa728d8181ee7ec080dd441" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>BoBase</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a807db4b72b87b720303b4b56fce44899" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>BoBase</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1abbd79a26fafeb6ea8f09df782972caa0" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>current_iteration</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a49f332ebc6e526169c619e6bc4430116" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>eval_and_add</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa4cf2b36051de6b46e75621f0b9ed642" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>init_function_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a1f338242d56d6a2b97245ca3bcaf991f" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>model</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1aaddb85f5014ba377c9e2e3a64db87678" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>model_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1c5e2b7c9aaae38770505011dfcb61ec" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>observations</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a91b7f3f0295d4e6e2a1263f3882817bd" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>operator=</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a731de253fe21749b9a00e609aae0386f" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>optimize</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3fb955ab00c385f5deb56f3d18211d3d" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>params_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5f589de569a67fe5a645ee0b7fe1173c" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>res_dir</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3a68d0a9fce39ae5575c63a57a549f58" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>samples</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a0da8155a1a5be0999e112655ec3d610e" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>Stat</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a67aac9bd22ae3de346afe7ffe5b564d3" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>stat_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a124b963cab48ee23698b3cbd2dd1e496" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>stats_enabled</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad045a21de8950f3671f6b156f2271e44" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>stopping_criteria_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac9ab3f37c746dcf70ef7096a89dd1b6c" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>StoppingCriteria</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a923fec38c8f1c473fdd9cf35b395b471" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BOptimizer</scope><name>total_iterations</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

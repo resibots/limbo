@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1opt_1_1_random_point" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::opt::RandomPoint</compoundname>
+    <includes refid="random__point_8hpp" local="no">limbo/opt/random_point.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1opt_1_1_random_point_1a7403cebcb83dbaa75634965facfecc7e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::opt::RandomPoint&lt; Params &gt;::operator()</definition>
+        <argsstring>(const F &amp;f, const Eigen::VectorXd &amp;init, bool bounded) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>init</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bounded</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/random_point.hpp" line="16" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/random_point.hpp" bodystart="16" bodyend="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para>return a random point in [0, 1]</para></listitem><listitem><para>no parameters</para></listitem><listitem><para>useful for control experiments (do not use this otherwise!) </para></listitem></itemizedlist>
+</para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/opt/random_point.hpp" line="14" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/random_point.hpp" bodystart="14" bodyend="22"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1opt_1_1_random_point_1a7403cebcb83dbaa75634965facfecc7e" prot="public" virt="non-virtual"><scope>limbo::opt::RandomPoint</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

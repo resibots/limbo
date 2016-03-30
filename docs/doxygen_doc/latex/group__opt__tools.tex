@@ -1,0 +1,70 @@
+\hypertarget{group__opt__tools}{}\section{Opt\+\_\+tools}
+\label{group__opt__tools}\index{Opt\+\_\+tools@{Opt\+\_\+tools}}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::pair$<$ double, boost\+::optional$<$ Eigen\+::\+Vector\+Xd $>$ $>$ \hyperlink{group__opt__tools_ga7fc87080ebf563d050fc547d25528ef0}{limbo\+::opt\+::eval\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+eval\+\_\+t \hyperlink{group__opt__tools_ga38e53ccac21f452bd31e9b239985d456}{limbo\+::opt\+::no\+\_\+grad} (double x)
+\item 
+const Eigen\+::\+Vector\+Xd \& \hyperlink{group__opt__tools_gaf28d9af930b2993024ab497b285e0521}{limbo\+::opt\+::grad} (const eval\+\_\+t \&fg)
+\item 
+double \hyperlink{group__opt__tools_ga68ad00d7501bc26a2a0990bac762393e}{limbo\+::opt\+::fun} (const eval\+\_\+t \&fg)
+\item 
+{\footnotesize template$<$typename F $>$ }\\double \hyperlink{group__opt__tools_ga698d932ac52cab812742b1300f875372}{limbo\+::opt\+::eval} (const F \&f, const Eigen\+::\+Vector\+Xd \&x)
+\item 
+{\footnotesize template$<$typename F $>$ }\\eval\+\_\+t \hyperlink{group__opt__tools_ga6abbcdf8d83abca89802881d883fb9e3}{limbo\+::opt\+::eval\+\_\+grad} (const F \&f, const Eigen\+::\+Vector\+Xd \&x)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{group__opt__tools_ga7fc87080ebf563d050fc547d25528ef0}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval\+\_\+t@{eval\+\_\+t}}
+\index{eval\+\_\+t@{eval\+\_\+t}!Opt\+\_\+tools@{Opt\+\_\+tools}}
+\subsubsection[{eval\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::pair$<$double, boost\+::optional$<$Eigen\+::\+Vector\+Xd$>$ $>$ {\bf limbo\+::opt\+::eval\+\_\+t}}\label{group__opt__tools_ga7fc87080ebf563d050fc547d25528ef0}
+return type of the function to optimize 
+
+\subsection{Function Documentation}
+\hypertarget{group__opt__tools_ga698d932ac52cab812742b1300f875372}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval@{eval}}
+\index{eval@{eval}!Opt\+\_\+tools@{Opt\+\_\+tools}}
+\subsubsection[{eval}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ double limbo\+::opt\+::eval (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{x}
+\end{DoxyParamCaption}
+)}\label{group__opt__tools_ga698d932ac52cab812742b1300f875372}
+Evaluate f without gradient (to be called from the optimization algorithms that do not use the gradient) \hypertarget{group__opt__tools_ga6abbcdf8d83abca89802881d883fb9e3}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval\+\_\+grad@{eval\+\_\+grad}}
+\index{eval\+\_\+grad@{eval\+\_\+grad}!Opt\+\_\+tools@{Opt\+\_\+tools}}
+\subsubsection[{eval\+\_\+grad}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ eval\+\_\+t limbo\+::opt\+::eval\+\_\+grad (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{x}
+\end{DoxyParamCaption}
+)}\label{group__opt__tools_ga6abbcdf8d83abca89802881d883fb9e3}
+Evaluate f with gradient (to be called from the optimization algorithms that use the gradient) \hypertarget{group__opt__tools_ga68ad00d7501bc26a2a0990bac762393e}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!fun@{fun}}
+\index{fun@{fun}!Opt\+\_\+tools@{Opt\+\_\+tools}}
+\subsubsection[{fun}]{\setlength{\rightskip}{0pt plus 5cm}double limbo\+::opt\+::fun (
+\begin{DoxyParamCaption}
+\item[{const {\bf eval\+\_\+t} \&}]{fg}
+\end{DoxyParamCaption}
+)}\label{group__opt__tools_ga68ad00d7501bc26a2a0990bac762393e}
+get the value from a function evaluation (eval\+\_\+t) \hypertarget{group__opt__tools_gaf28d9af930b2993024ab497b285e0521}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!grad@{grad}}
+\index{grad@{grad}!Opt\+\_\+tools@{Opt\+\_\+tools}}
+\subsubsection[{grad}]{\setlength{\rightskip}{0pt plus 5cm}const Eigen\+::\+Vector\+Xd\& limbo\+::opt\+::grad (
+\begin{DoxyParamCaption}
+\item[{const {\bf eval\+\_\+t} \&}]{fg}
+\end{DoxyParamCaption}
+)}\label{group__opt__tools_gaf28d9af930b2993024ab497b285e0521}
+get the gradient from a function evaluation (eval\+\_\+t) \hypertarget{group__opt__tools_ga38e53ccac21f452bd31e9b239985d456}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!no\+\_\+grad@{no\+\_\+grad}}
+\index{no\+\_\+grad@{no\+\_\+grad}!Opt\+\_\+tools@{Opt\+\_\+tools}}
+\subsubsection[{no\+\_\+grad}]{\setlength{\rightskip}{0pt plus 5cm}eval\+\_\+t limbo\+::opt\+::no\+\_\+grad (
+\begin{DoxyParamCaption}
+\item[{double}]{x}
+\end{DoxyParamCaption}
+)}\label{group__opt__tools_ga38e53ccac21f452bd31e9b239985d456}
+return with opt\+::no\+\_\+grad(your\+\_\+val) if no gradient is available (to be used in functions to be optimized) 

@@ -1,0 +1,254 @@
+\hypertarget{macros_8hpp}{}\section{/tmp/doc\+\_\+limbo/limbo/src/limbo/tools/macros.hpp File Reference}
+\label{macros_8hpp}\index{/tmp/doc\+\_\+limbo/limbo/src/limbo/tools/macros.\+hpp@{/tmp/doc\+\_\+limbo/limbo/src/limbo/tools/macros.\+hpp}}
+{\ttfamily \#include $<$boost/algorithm/string.\+hpp$>$}\\*
+{\ttfamily \#include $<$Eigen/\+Core$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{macros_8hpp_ad68f3013c7d5a9f453afa375bc887dbe}{B\+O\+\_\+\+P\+A\+R\+A\+M}(Type,  Name,  Value)~static constexpr Type Name() \{ return Value; \}
+\item 
+\#define \hyperlink{macros_8hpp_ab5f63fba934f46823f80127a35f1a2f4}{B\+O\+\_\+\+R\+E\+Q\+U\+I\+R\+E\+D\+\_\+\+P\+A\+R\+A\+M}(Type,  Name)
+\item 
+\#define \hyperlink{macros_8hpp_a9480d1b4a8754ae3d5abe0a10ec4072f}{B\+O\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M}(Type,  Name)
+\item 
+\#define \hyperlink{macros_8hpp_aa6c2a729ea9318a7845489707f22e761}{B\+O\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M}(Type,  Namespace,  Name)~Type Namespace\+::\+\_\+\#\#Name;
+\item 
+\#define \hyperlink{macros_8hpp_a148a5d0deca5eb03a47aea299c949fa2}{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+\+\_\+}(...)~(\hyperlink{macros_8hpp_a464ea5250d42d69e04aaaec7b6125f42}{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+}(\+\_\+0, \#\#\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+, \hyperlink{macros_8hpp_a7647f671a6f9d07b3a0c9c10496f358e}{\+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N}()) -\/ 1)
+\item 
+\#define \hyperlink{macros_8hpp_a464ea5250d42d69e04aaaec7b6125f42}{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+}(...)~\hyperlink{macros_8hpp_a3b3a4ff18b0384cd19c3ed1d5492d280}{\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N}(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
+\item 
+\#define \hyperlink{macros_8hpp_a3b3a4ff18b0384cd19c3ed1d5492d280}{\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N}(\+\_\+1,  \+\_\+2,  \+\_\+3,  \+\_\+4,  \+\_\+5,  \+\_\+6,  \+\_\+7,  \+\_\+8,  \+\_\+9,  \+\_\+10, \+\_\+11,  \+\_\+12,  \+\_\+13,  \+\_\+14,  \+\_\+15,  \+\_\+16,  \+\_\+17,  \+\_\+18,  \+\_\+19,  \+\_\+20,  \+\_\+21,  \+\_\+22,  \+\_\+23,  \+\_\+24,  \+\_\+25,  \+\_\+26,  \+\_\+27,  \+\_\+28,  \+\_\+29,  \+\_\+30,  \+\_\+31,  \+\_\+32,  \+\_\+33,  \+\_\+34,  \+\_\+35,  \+\_\+36,  \+\_\+37,  \+\_\+38,  \+\_\+39,  \+\_\+40,  \+\_\+41,  \+\_\+42,  \+\_\+43,  \+\_\+44,  \+\_\+45,  \+\_\+46,  \+\_\+47,  \+\_\+48,  \+\_\+49,  \+\_\+50,  \+\_\+51,  \+\_\+52,  \+\_\+53,  \+\_\+54,  \+\_\+55,  \+\_\+56,  \+\_\+57,  \+\_\+58,  \+\_\+59,  \+\_\+60,  \+\_\+61,  \+\_\+62,  \+\_\+63,  N, ...)~N
+\item 
+\#define \hyperlink{macros_8hpp_a7647f671a6f9d07b3a0c9c10496f358e}{\+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N}()
+\item 
+\#define \hyperlink{macros_8hpp_ab856fee5381f0c2ca0f77bc077f0ceec}{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+A\+R\+R\+A\+Y}(Type,  Name, ...)
+\item 
+\#define \hyperlink{macros_8hpp_a766976ab2fc44e197dd9e7ce5dd44100}{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+V\+E\+C\+T\+O\+R}(Type,  Name, ...)
+\item 
+\#define \hyperlink{macros_8hpp_a61011ba4ab698f42cce794f0720c2339}{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+T\+R\+I\+N\+G}(Name,  Value)~static constexpr const char$\ast$ Name() \{ return Value; \}
+\item 
+\#define \hyperlink{macros_8hpp_a930049a87f80198bd2a45b44fc962482}{B\+O\+\_\+\+P\+A\+R\+A\+M\+S}(Stream,  P)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{macros_8hpp_a7647f671a6f9d07b3a0c9c10496f358e}{}\index{macros.\+hpp@{macros.\+hpp}!\+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N@{\+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N}}
+\index{\+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N@{\+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{\+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{macros_8hpp_a7647f671a6f9d07b3a0c9c10496f358e}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+63, 62, 61, 60,                             \(\backslash\)
+        59, 58, 57, 56, 55, 54, 53, 52, 51, 50, \(\backslash\)
+        49, 48, 47, 46, 45, 44, 43, 42, 41, 40, \(\backslash\)
+        39, 38, 37, 36, 35, 34, 33, 32, 31, 30, \(\backslash\)
+        29, 28, 27, 26, 25, 24, 23, 22, 21, 20, \(\backslash\)
+        19, 18, 17, 16, 15, 14, 13, 12, 11, 10, \(\backslash\)
+        9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+\end{DoxyCode}
+\hypertarget{macros_8hpp_a3b3a4ff18b0384cd19c3ed1d5492d280}{}\index{macros.\+hpp@{macros.\+hpp}!\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N@{\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N}}
+\index{\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N@{\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N(
+\begin{DoxyParamCaption}
+\item[{}]{\+\_\+1, }
+\item[{}]{\+\_\+2, }
+\item[{}]{\+\_\+3, }
+\item[{}]{\+\_\+4, }
+\item[{}]{\+\_\+5, }
+\item[{}]{\+\_\+6, }
+\item[{}]{\+\_\+7, }
+\item[{}]{\+\_\+8, }
+\item[{}]{\+\_\+9, }
+\item[{}]{\+\_\+10, }
+\item[{}]{\+\_\+11, }
+\item[{}]{\+\_\+12, }
+\item[{}]{\+\_\+13, }
+\item[{}]{\+\_\+14, }
+\item[{}]{\+\_\+15, }
+\item[{}]{\+\_\+16, }
+\item[{}]{\+\_\+17, }
+\item[{}]{\+\_\+18, }
+\item[{}]{\+\_\+19, }
+\item[{}]{\+\_\+20, }
+\item[{}]{\+\_\+21, }
+\item[{}]{\+\_\+22, }
+\item[{}]{\+\_\+23, }
+\item[{}]{\+\_\+24, }
+\item[{}]{\+\_\+25, }
+\item[{}]{\+\_\+26, }
+\item[{}]{\+\_\+27, }
+\item[{}]{\+\_\+28, }
+\item[{}]{\+\_\+29, }
+\item[{}]{\+\_\+30, }
+\item[{}]{\+\_\+31, }
+\item[{}]{\+\_\+32, }
+\item[{}]{\+\_\+33, }
+\item[{}]{\+\_\+34, }
+\item[{}]{\+\_\+35, }
+\item[{}]{\+\_\+36, }
+\item[{}]{\+\_\+37, }
+\item[{}]{\+\_\+38, }
+\item[{}]{\+\_\+39, }
+\item[{}]{\+\_\+40, }
+\item[{}]{\+\_\+41, }
+\item[{}]{\+\_\+42, }
+\item[{}]{\+\_\+43, }
+\item[{}]{\+\_\+44, }
+\item[{}]{\+\_\+45, }
+\item[{}]{\+\_\+46, }
+\item[{}]{\+\_\+47, }
+\item[{}]{\+\_\+48, }
+\item[{}]{\+\_\+49, }
+\item[{}]{\+\_\+50, }
+\item[{}]{\+\_\+51, }
+\item[{}]{\+\_\+52, }
+\item[{}]{\+\_\+53, }
+\item[{}]{\+\_\+54, }
+\item[{}]{\+\_\+55, }
+\item[{}]{\+\_\+56, }
+\item[{}]{\+\_\+57, }
+\item[{}]{\+\_\+58, }
+\item[{}]{\+\_\+59, }
+\item[{}]{\+\_\+60, }
+\item[{}]{\+\_\+61, }
+\item[{}]{\+\_\+62, }
+\item[{}]{\+\_\+63, }
+\item[{}]{N, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)~N}\label{macros_8hpp_a3b3a4ff18b0384cd19c3ed1d5492d280}
+\hypertarget{macros_8hpp_a464ea5250d42d69e04aaaec7b6125f42}{}\index{macros.\+hpp@{macros.\+hpp}!\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+@{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+}}
+\index{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+@{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+(
+\begin{DoxyParamCaption}
+\item[{}]{...}
+\end{DoxyParamCaption}
+)~{\bf \+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+\_\+\+N}(\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)}\label{macros_8hpp_a464ea5250d42d69e04aaaec7b6125f42}
+\hypertarget{macros_8hpp_a148a5d0deca5eb03a47aea299c949fa2}{}\index{macros.\+hpp@{macros.\+hpp}!\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+\+\_\+@{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+\+\_\+@{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+\+\_\+}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{\+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+\+\_\+}]{\setlength{\rightskip}{0pt plus 5cm}\#define \+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+\+\_\+(
+\begin{DoxyParamCaption}
+\item[{}]{...}
+\end{DoxyParamCaption}
+)~({\bf \+\_\+\+\_\+\+V\+A\+\_\+\+N\+A\+R\+G\+\_\+}(\+\_\+0, \#\#\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+, {\bf \+\_\+\+\_\+\+R\+S\+E\+Q\+\_\+\+N}()) -\/ 1)}\label{macros_8hpp_a148a5d0deca5eb03a47aea299c949fa2}
+\hypertarget{macros_8hpp_aa6c2a729ea9318a7845489707f22e761}{}\index{macros.\+hpp@{macros.\+hpp}!B\+O\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M@{B\+O\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M}}
+\index{B\+O\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M@{B\+O\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{B\+O\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M(
+\begin{DoxyParamCaption}
+\item[{}]{Type, }
+\item[{}]{Namespace, }
+\item[{}]{Name}
+\end{DoxyParamCaption}
+)~Type Namespace\+::\+\_\+\#\#Name;}\label{macros_8hpp_aa6c2a729ea9318a7845489707f22e761}
+\hypertarget{macros_8hpp_a9480d1b4a8754ae3d5abe0a10ec4072f}{}\index{macros.\+hpp@{macros.\+hpp}!B\+O\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M@{B\+O\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M}}
+\index{B\+O\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M@{B\+O\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{B\+O\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+\_\+\+D\+Y\+N\+\_\+\+P\+A\+R\+A\+M(
+\begin{DoxyParamCaption}
+\item[{}]{Type, }
+\item[{}]{Name}
+\end{DoxyParamCaption}
+)}\label{macros_8hpp_a9480d1b4a8754ae3d5abe0a10ec4072f}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{static} Type \_##Name;                   \(\backslash\)
+    static Type Name() \{ \textcolor{keywordflow}{return} \_##Name; \} \(\backslash\)
+    static \textcolor{keywordtype}{void} set\_##Name(\textcolor{keyword}{const} Type& v) \{ \_##Name = v; \}
+\end{DoxyCode}
+\hypertarget{macros_8hpp_ad68f3013c7d5a9f453afa375bc887dbe}{}\index{macros.\+hpp@{macros.\+hpp}!B\+O\+\_\+\+P\+A\+R\+A\+M@{B\+O\+\_\+\+P\+A\+R\+A\+M}}
+\index{B\+O\+\_\+\+P\+A\+R\+A\+M@{B\+O\+\_\+\+P\+A\+R\+A\+M}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{B\+O\+\_\+\+P\+A\+R\+A\+M}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+\_\+\+P\+A\+R\+A\+M(
+\begin{DoxyParamCaption}
+\item[{}]{Type, }
+\item[{}]{Name, }
+\item[{}]{Value}
+\end{DoxyParamCaption}
+)~static constexpr Type Name() \{ return Value; \}}\label{macros_8hpp_ad68f3013c7d5a9f453afa375bc887dbe}
+\hypertarget{macros_8hpp_ab856fee5381f0c2ca0f77bc077f0ceec}{}\index{macros.\+hpp@{macros.\+hpp}!B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+A\+R\+R\+A\+Y@{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+A\+R\+R\+A\+Y}}
+\index{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+A\+R\+R\+A\+Y@{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+A\+R\+R\+A\+Y}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+A\+R\+R\+A\+Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+A\+R\+R\+A\+Y(
+\begin{DoxyParamCaption}
+\item[{}]{Type, }
+\item[{}]{Name, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{macros_8hpp_ab856fee5381f0c2ca0f77bc077f0ceec}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{static} Type Name(\textcolor{keywordtype}{size\_t} i)                           \(\backslash\)
+    \{                                                    \(\backslash\)
+        assert(i < \hyperlink{macros_8hpp_a148a5d0deca5eb03a47aea299c949fa2}{\_\_VA\_NARG\_\_}(\_\_VA\_ARGS\_\_));            \(\backslash\)
+        static constexpr Type \_##Name[] = \{\_\_VA\_ARGS\_\_\}; \(\backslash\)
+        return \_##Name[i];                               \(\backslash\)
+    \}                                                    \(\backslash\)
+    static constexpr \textcolor{keywordtype}{size\_t} Name##\_size()                \(\backslash\)
+    \{                                                    \(\backslash\)
+        return \hyperlink{macros_8hpp_a148a5d0deca5eb03a47aea299c949fa2}{\_\_VA\_NARG\_\_}(\_\_VA\_ARGS\_\_);                 \(\backslash\)
+    \}                                                    \(\backslash\)
+    typedef Type Name##\_t;
+\end{DoxyCode}
+\hypertarget{macros_8hpp_a61011ba4ab698f42cce794f0720c2339}{}\index{macros.\+hpp@{macros.\+hpp}!B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+T\+R\+I\+N\+G@{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+T\+R\+I\+N\+G}}
+\index{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+T\+R\+I\+N\+G@{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+T\+R\+I\+N\+G}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+T\+R\+I\+N\+G}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+S\+T\+R\+I\+N\+G(
+\begin{DoxyParamCaption}
+\item[{}]{Name, }
+\item[{}]{Value}
+\end{DoxyParamCaption}
+)~static constexpr const char$\ast$ Name() \{ return Value; \}}\label{macros_8hpp_a61011ba4ab698f42cce794f0720c2339}
+\hypertarget{macros_8hpp_a766976ab2fc44e197dd9e7ce5dd44100}{}\index{macros.\+hpp@{macros.\+hpp}!B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+V\+E\+C\+T\+O\+R@{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+V\+E\+C\+T\+O\+R}}
+\index{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+V\+E\+C\+T\+O\+R@{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+V\+E\+C\+T\+O\+R}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+V\+E\+C\+T\+O\+R}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+\_\+\+P\+A\+R\+A\+M\+\_\+\+V\+E\+C\+T\+O\+R(
+\begin{DoxyParamCaption}
+\item[{}]{Type, }
+\item[{}]{Name, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}\label{macros_8hpp_a766976ab2fc44e197dd9e7ce5dd44100}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{static} \textcolor{keyword}{const} Eigen::Matrix<Type, \_\_VA\_NARG\_\_(\_\_VA\_ARGS\_\_), 1> Name()                    \(\backslash\)
+    \{                                                                                       \(\backslash\)
+        static constexpr Type \_##Name[] = \{\_\_VA\_ARGS\_\_\};                                    \(\backslash\)
+        return Eigen::Map<const Eigen::Matrix<Type, \_\_VA\_NARG\_\_(\_\_VA\_ARGS\_\_), 1>>(\_##Name); \(\backslash\)
+    \}
+\end{DoxyCode}
+\hypertarget{macros_8hpp_a930049a87f80198bd2a45b44fc962482}{}\index{macros.\+hpp@{macros.\+hpp}!B\+O\+\_\+\+P\+A\+R\+A\+M\+S@{B\+O\+\_\+\+P\+A\+R\+A\+M\+S}}
+\index{B\+O\+\_\+\+P\+A\+R\+A\+M\+S@{B\+O\+\_\+\+P\+A\+R\+A\+M\+S}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{B\+O\+\_\+\+P\+A\+R\+A\+M\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+\_\+\+P\+A\+R\+A\+M\+S(
+\begin{DoxyParamCaption}
+\item[{}]{Stream, }
+\item[{}]{P}
+\end{DoxyParamCaption}
+)}\label{macros_8hpp_a930049a87f80198bd2a45b44fc962482}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{struct }Ps\_\_ \{                                             \(\backslash\)
+        Ps\_\_()                                                \(\backslash\)
+        \{                                                     \(\backslash\)
+            static std::string \_\_params = #P;                 \(\backslash\)
+            boost::replace\_all(\_\_params, \textcolor{stringliteral}{";"}, \textcolor{stringliteral}{";\(\backslash\)n"});         \(\backslash\)
+            boost::replace\_all(\_\_params, \textcolor{stringliteral}{"\{"}, \textcolor{stringliteral}{"\{\(\backslash\)n"});         \(\backslash\)
+            Stream << \textcolor{stringliteral}{"Parameters:"} << \_\_params << std::endl; \(\backslash\)
+        \}                                                     \(\backslash\)
+    \};                                                        \(\backslash\)
+    P;                                                        \(\backslash\)
+    static Ps\_\_ \_\_\_\_p;
+\end{DoxyCode}
+\hypertarget{macros_8hpp_ab5f63fba934f46823f80127a35f1a2f4}{}\index{macros.\+hpp@{macros.\+hpp}!B\+O\+\_\+\+R\+E\+Q\+U\+I\+R\+E\+D\+\_\+\+P\+A\+R\+A\+M@{B\+O\+\_\+\+R\+E\+Q\+U\+I\+R\+E\+D\+\_\+\+P\+A\+R\+A\+M}}
+\index{B\+O\+\_\+\+R\+E\+Q\+U\+I\+R\+E\+D\+\_\+\+P\+A\+R\+A\+M@{B\+O\+\_\+\+R\+E\+Q\+U\+I\+R\+E\+D\+\_\+\+P\+A\+R\+A\+M}!macros.\+hpp@{macros.\+hpp}}
+\subsubsection[{B\+O\+\_\+\+R\+E\+Q\+U\+I\+R\+E\+D\+\_\+\+P\+A\+R\+A\+M}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+O\+\_\+\+R\+E\+Q\+U\+I\+R\+E\+D\+\_\+\+P\+A\+R\+A\+M(
+\begin{DoxyParamCaption}
+\item[{}]{Type, }
+\item[{}]{Name}
+\end{DoxyParamCaption}
+)}\label{macros_8hpp_ab5f63fba934f46823f80127a35f1a2f4}
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keyword}{static} \textcolor{keyword}{const} Type Name()                                                  \(\backslash\)
+    \{                                                                         \(\backslash\)
+        static\_assert(\textcolor{keyword}{false}, \textcolor{stringliteral}{"You need to define the parameter:"} #Name \textcolor{stringliteral}{" !"}); \(\backslash\)
+        return Type();                                                        \(\backslash\)
+    \}
+\end{DoxyCode}

@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="model_8hpp" kind="file" language="C++">
+    <compoundname>model.hpp</compoundname>
+    <includes refid="gp_8hpp" local="no">limbo/model/gp.hpp</includes>
+    <includes refid="kernel__lf__opt_8hpp" local="no">limbo/model/gp/kernel_lf_opt.hpp</includes>
+    <includes refid="kernel__mean__lf__opt_8hpp" local="no">limbo/model/gp/kernel_mean_lf_opt.hpp</includes>
+    <includes refid="mean__lf__opt_8hpp" local="no">limbo/model/gp/mean_lf_opt.hpp</includes>
+    <includes refid="no__lf__opt_8hpp" local="no">limbo/model/gp/no_lf_opt.hpp</includes>
+    <includedby refid="limbo_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</includedby>
+    <incdepgraph>
+      <node id="832">
+        <label>list</label>
+      </node>
+      <node id="827">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="820">
+        <label>Eigen/Cholesky</label>
+      </node>
+      <node id="816">
+        <label>limits</label>
+      </node>
+      <node id="819">
+        <label>Eigen/LU</label>
+      </node>
+      <node id="823">
+        <label>limbo/opt/rprop.hpp</label>
+        <link refid="rprop_8hpp"/>
+        <childnode refid="824" relation="include">
+        </childnode>
+        <childnode refid="825" relation="include">
+        </childnode>
+        <childnode refid="818" relation="include">
+        </childnode>
+        <childnode refid="826" relation="include">
+        </childnode>
+        <childnode refid="828" relation="include">
+        </childnode>
+        <childnode refid="837" relation="include">
+        </childnode>
+      </node>
+      <node id="833">
+        <label>stdlib.h</label>
+      </node>
+      <node id="837">
+        <label>limbo/opt/optimizer.hpp</label>
+        <link refid="optimizer_8hpp"/>
+        <childnode refid="838" relation="include">
+        </childnode>
+        <childnode refid="818" relation="include">
+        </childnode>
+        <childnode refid="839" relation="include">
+        </childnode>
+      </node>
+      <node id="830">
+        <label>cmath</label>
+      </node>
+      <node id="815">
+        <label>cassert</label>
+      </node>
+      <node id="818">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="841">
+        <label>limbo/tools/parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
+        <childnode refid="817" relation="include">
+        </childnode>
+        <childnode refid="824" relation="include">
+        </childnode>
+      </node>
+      <node id="812">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
+        <link refid="model.hpp"/>
+        <childnode refid="813" relation="include">
+        </childnode>
+        <childnode refid="822" relation="include">
+        </childnode>
+        <childnode refid="843" relation="include">
+        </childnode>
+        <childnode refid="844" relation="include">
+        </childnode>
+        <childnode refid="821" relation="include">
+        </childnode>
+      </node>
+      <node id="842">
+        <label>limbo/tools/random_generator.hpp</label>
+        <link refid="random__generator_8hpp"/>
+        <childnode refid="829" relation="include">
+        </childnode>
+        <childnode refid="830" relation="include">
+        </childnode>
+        <childnode refid="831" relation="include">
+        </childnode>
+        <childnode refid="832" relation="include">
+        </childnode>
+        <childnode refid="833" relation="include">
+        </childnode>
+        <childnode refid="834" relation="include">
+        </childnode>
+        <childnode refid="835" relation="include">
+        </childnode>
+        <childnode refid="836" relation="include">
+        </childnode>
+      </node>
+      <node id="834">
+        <label>random</label>
+      </node>
+      <node id="840">
+        <label>limbo/opt/parallel_repeater.hpp</label>
+        <link refid="parallel__repeater_8hpp"/>
+        <childnode refid="824" relation="include">
+        </childnode>
+        <childnode refid="818" relation="include">
+        </childnode>
+        <childnode refid="826" relation="include">
+        </childnode>
+        <childnode refid="841" relation="include">
+        </childnode>
+        <childnode refid="842" relation="include">
+        </childnode>
+        <childnode refid="837" relation="include">
+        </childnode>
+      </node>
+      <node id="838">
+        <label>tuple</label>
+      </node>
+      <node id="831">
+        <label>ctime</label>
+      </node>
+      <node id="822">
+        <label>limbo/model/gp/kernel_lf_opt.hpp</label>
+        <link refid="kernel__lf__opt_8hpp"/>
+        <childnode refid="818" relation="include">
+        </childnode>
+        <childnode refid="823" relation="include">
+        </childnode>
+        <childnode refid="840" relation="include">
+        </childnode>
+        <childnode refid="842" relation="include">
+        </childnode>
+      </node>
+      <node id="817">
+        <label>vector</label>
+      </node>
+      <node id="835">
+        <label>utility</label>
+      </node>
+      <node id="829">
+        <label>cstdlib</label>
+      </node>
+      <node id="844">
+        <label>limbo/model/gp/mean_lf_opt.hpp</label>
+        <link refid="mean__lf__opt_8hpp"/>
+        <childnode refid="818" relation="include">
+        </childnode>
+        <childnode refid="823" relation="include">
+        </childnode>
+        <childnode refid="840" relation="include">
+        </childnode>
+        <childnode refid="842" relation="include">
+        </childnode>
+      </node>
+      <node id="814">
+        <label>iostream</label>
+      </node>
+      <node id="813">
+        <label>limbo/model/gp.hpp</label>
+        <link refid="gp_8hpp"/>
+        <childnode refid="814" relation="include">
+        </childnode>
+        <childnode refid="815" relation="include">
+        </childnode>
+        <childnode refid="816" relation="include">
+        </childnode>
+        <childnode refid="817" relation="include">
+        </childnode>
+        <childnode refid="818" relation="include">
+        </childnode>
+        <childnode refid="819" relation="include">
+        </childnode>
+        <childnode refid="820" relation="include">
+        </childnode>
+        <childnode refid="821" relation="include">
+        </childnode>
+      </node>
+      <node id="821">
+        <label>limbo/model/gp/no_lf_opt.hpp</label>
+        <link refid="no__lf__opt_8hpp"/>
+      </node>
+      <node id="836">
+        <label>mutex</label>
+      </node>
+      <node id="839">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="828">
+        <label>limbo/tools/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="829" relation="include">
+        </childnode>
+        <childnode refid="830" relation="include">
+        </childnode>
+        <childnode refid="831" relation="include">
+        </childnode>
+        <childnode refid="832" relation="include">
+        </childnode>
+        <childnode refid="833" relation="include">
+        </childnode>
+        <childnode refid="834" relation="include">
+        </childnode>
+        <childnode refid="835" relation="include">
+        </childnode>
+        <childnode refid="836" relation="include">
+        </childnode>
+      </node>
+      <node id="843">
+        <label>limbo/model/gp/kernel_mean_lf_opt.hpp</label>
+        <link refid="kernel__mean__lf__opt_8hpp"/>
+        <childnode refid="818" relation="include">
+        </childnode>
+        <childnode refid="823" relation="include">
+        </childnode>
+        <childnode refid="840" relation="include">
+        </childnode>
+        <childnode refid="842" relation="include">
+        </childnode>
+      </node>
+      <node id="824">
+        <label>algorithm</label>
+      </node>
+      <node id="825">
+        <label>boost/math/special_functions/sign.hpp</label>
+      </node>
+      <node id="826">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="827" relation="include">
+        </childnode>
+        <childnode refid="818" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="845">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
+        <link refid="model.hpp"/>
+        <childnode refid="846" relation="include">
+        </childnode>
+      </node>
+      <node id="846">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+      </node>
+    </invincdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>LIMBO_MODEL_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIMBO_MODEL_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="gp_8hpp" kindref="compound">limbo/model/gp.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="kernel__lf__opt_8hpp" kindref="compound">limbo/model/gp/kernel_lf_opt.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="kernel__mean__lf__opt_8hpp" kindref="compound">limbo/model/gp/kernel_mean_lf_opt.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="mean__lf__opt_8hpp" kindref="compound">limbo/model/gp/mean_lf_opt.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="no__lf__opt_8hpp" kindref="compound">limbo/model/gp/no_lf_opt.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/model.hpp"/>
+  </compounddef>
+</doxygen>

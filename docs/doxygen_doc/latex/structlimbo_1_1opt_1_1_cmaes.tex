@@ -1,0 +1,43 @@
+\hypertarget{structlimbo_1_1opt_1_1_cmaes}{}\section{limbo\+:\+:opt\+:\+:Cmaes$<$ Params $>$ Struct Template Reference}
+\label{structlimbo_1_1opt_1_1_cmaes}\index{limbo\+::opt\+::\+Cmaes$<$ Params $>$@{limbo\+::opt\+::\+Cmaes$<$ Params $>$}}
+
+
+{\ttfamily \#include $<$limbo/opt/cmaes.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename F $>$ }\\Eigen\+::\+Vector\+Xd \hyperlink{structlimbo_1_1opt_1_1_cmaes_a47ee6970bd2300108c83281ea6fced17}{operator()} (const F \&f, const Eigen\+::\+Vector\+Xd \&init, double bounded) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Params$>$struct limbo\+::opt\+::\+Cmaes$<$ Params $>$}
+
+Covariance Matrix Adaptation Evolution Strategy by Hansen et al. (See\+: \href{https://www.lri.fr/~hansen/cmaesintro.html}{\tt https\+://www.\+lri.\+fr/$\sim$hansen/cmaesintro.\+html})
+\begin{DoxyItemize}
+\item our implementation is based on libcmaes (\href{https://github.com/beniz/libcmaes}{\tt https\+://github.\+com/beniz/libcmaes})
+\item Support bounded and unbounded optimization
+\item Only available if libcmaes is installed (see the compilation instructions)
+\item Parameters \+:
+\begin{DoxyItemize}
+\item double max\+\_\+fun\+\_\+evals
+\item int restarts 
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\subsection{Member Function Documentation}
+\hypertarget{structlimbo_1_1opt_1_1_cmaes_a47ee6970bd2300108c83281ea6fced17}{}\index{limbo\+::opt\+::\+Cmaes@{limbo\+::opt\+::\+Cmaes}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::opt\+::\+Cmaes@{limbo\+::opt\+::\+Cmaes}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ template$<$typename F $>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::opt\+::\+Cmaes}$<$ Params $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const F \&}]{f, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{init, }
+\item[{double}]{bounded}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1opt_1_1_cmaes_a47ee6970bd2300108c83281ea6fced17}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/opt/\hyperlink{cmaes_8hpp}{cmaes.\+hpp}\end{DoxyCompactItemize}

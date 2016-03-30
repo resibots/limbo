@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o" kind="class" language="C++" prot="public">
+    <compoundname>limbo::acqui::experimental::UCB_IMGPO</compoundname>
+    <includes refid="ucb__imgpo_8hpp" local="no">limbo/experimental/acqui/ucb_imgpo.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+      <param>
+        <type>typename Model</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1ab665bb5269a43f78b892b50955902bec" prot="private" static="no" mutable="no">
+        <type>const Model &amp;</type>
+        <definition>const Model&amp; limbo::acqui::experimental::UCB_IMGPO&lt; Params, Model &gt;::_model</definition>
+        <argsstring></argsstring>
+        <name>_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" line="38" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1a1b83dbc4cc1ed2666af59152ab2fd7e9" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t limbo::acqui::experimental::UCB_IMGPO&lt; Params, Model &gt;::_M</definition>
+        <argsstring></argsstring>
+        <name>_M</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" line="39" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1a13c9d89758fe241c051fafe06337fd1e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::acqui::experimental::UCB_IMGPO&lt; Params, Model &gt;::UCB_IMGPO</definition>
+        <argsstring>(const Model &amp;model, size_t M=1)</argsstring>
+        <name>UCB_IMGPO</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>M</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" line="19" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1ac773917d0802053632cd37e7885fe282" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::acqui::experimental::UCB_IMGPO&lt; Params, Model &gt;::dim_in</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_in</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" line="21" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1ad6b61ac04acf5a268eb7fef4a879bc31" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::acqui::experimental::UCB_IMGPO&lt; Params, Model &gt;::dim_out</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_out</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" line="23" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1a4f0d0671883e2d3a9a501e95c091098f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double limbo::acqui::experimental::UCB_IMGPO&lt; Params, Model &gt;::operator()</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" line="26" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" bodystart="26" bodyend="35"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" line="17" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp" bodystart="17" bodyend="40"/>
+    <listofallmembers>
+      <member refid="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1a1b83dbc4cc1ed2666af59152ab2fd7e9" prot="private" virt="non-virtual"><scope>limbo::acqui::experimental::UCB_IMGPO</scope><name>_M</name></member>
+      <member refid="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1ab665bb5269a43f78b892b50955902bec" prot="private" virt="non-virtual"><scope>limbo::acqui::experimental::UCB_IMGPO</scope><name>_model</name></member>
+      <member refid="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1ac773917d0802053632cd37e7885fe282" prot="public" virt="non-virtual"><scope>limbo::acqui::experimental::UCB_IMGPO</scope><name>dim_in</name></member>
+      <member refid="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1ad6b61ac04acf5a268eb7fef4a879bc31" prot="public" virt="non-virtual"><scope>limbo::acqui::experimental::UCB_IMGPO</scope><name>dim_out</name></member>
+      <member refid="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1a4f0d0671883e2d3a9a501e95c091098f" prot="public" virt="non-virtual"><scope>limbo::acqui::experimental::UCB_IMGPO</scope><name>operator()</name></member>
+      <member refid="classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o_1a13c9d89758fe241c051fafe06337fd1e" prot="public" virt="non-virtual"><scope>limbo::acqui::experimental::UCB_IMGPO</scope><name>UCB_IMGPO</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

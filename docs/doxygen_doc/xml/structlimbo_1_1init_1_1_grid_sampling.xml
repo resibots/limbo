@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1init_1_1_grid_sampling" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::init::GridSampling</compoundname>
+    <includes refid="grid__sampling_8hpp" local="no">limbo/init/grid_sampling.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1init_1_1_grid_sampling_1a9b17fba72e1ae09a3361e9dcb8ff3fe3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename StateFunction</type>
+          </param>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+          <param>
+            <type>typename Opt</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::init::GridSampling&lt; Params &gt;::operator()</definition>
+        <argsstring>(const StateFunction &amp;seval, const AggregatorFunction &amp;, Opt &amp;opt) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const StateFunction &amp;</type>
+          <declname>seval</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+        </param>
+        <param>
+          <type>Opt &amp;</type>
+          <declname>opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp" line="23" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp" bodystart="23" bodyend="26"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="structlimbo_1_1init_1_1_grid_sampling_1a2889b4784ef2938f2e1038589242226a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename StateFunction</type>
+          </param>
+          <param>
+            <type>typename Opt</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::init::GridSampling&lt; Params &gt;::_explore</definition>
+        <argsstring>(int dim_in, const StateFunction &amp;seval, const Eigen::VectorXd &amp;current, Opt &amp;opt) const </argsstring>
+        <name>_explore</name>
+        <param>
+          <type>int</type>
+          <declname>dim_in</declname>
+        </param>
+        <param>
+          <type>const StateFunction &amp;</type>
+          <declname>seval</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>current</declname>
+        </param>
+        <param>
+          <type>Opt &amp;</type>
+          <declname>opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp" line="31" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp" bodystart="31" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Grid sampling.</para><para>Parameter : <computeroutput>int bins</computeroutput> (number of bins) </para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp" line="21" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp" bodystart="21" bodyend="45"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1init_1_1_grid_sampling_1a2889b4784ef2938f2e1038589242226a" prot="private" virt="non-virtual"><scope>limbo::init::GridSampling</scope><name>_explore</name></member>
+      <member refid="structlimbo_1_1init_1_1_grid_sampling_1a9b17fba72e1ae09a3361e9dcb8ff3fe3" prot="public" virt="non-virtual"><scope>limbo::init::GridSampling</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

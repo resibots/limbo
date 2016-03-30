@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classlimbo_1_1acqui_1_1_g_p___u_c_b" kind="class" language="C++" prot="public">
+    <compoundname>limbo::acqui::GP_UCB</compoundname>
+    <includes refid="gp__ucb_8hpp" local="no">limbo/acqui/gp_ucb.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+      <param>
+        <type>typename Model</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1acb7e407f488e3760e6e04ac3e896b75a" prot="private" static="no" mutable="no">
+        <type>const Model &amp;</type>
+        <definition>const Model&amp; limbo::acqui::GP_UCB&lt; Params, Model &gt;::_model</definition>
+        <argsstring></argsstring>
+        <name>_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="43" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1adf28df8228fedd16ccd465316005d2e8" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double limbo::acqui::GP_UCB&lt; Params, Model &gt;::_beta</definition>
+        <argsstring></argsstring>
+        <name>_beta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="44" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a9846faaa39b1d1d7b039284f2c905205" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::acqui::GP_UCB&lt; Params, Model &gt;::GP_UCB</definition>
+        <argsstring>(const Model &amp;model, int iteration)</argsstring>
+        <name>GP_UCB</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iteration</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="21" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="21" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a30c58b2f857da76de61e8cf555e73d06" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::acqui::GP_UCB&lt; Params, Model &gt;::dim_in</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_in</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="29" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1abde3ddcfa0bfb16d453587832f4e78b1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::acqui::GP_UCB&lt; Params, Model &gt;::dim_out</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_out</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="31" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a810a016815ee1e2355654b3a7658d207" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double limbo::acqui::GP_UCB&lt; Params, Model &gt;::operator()</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="34" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="34" bodyend="40"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>GP-UCB (<ref refid="classlimbo_1_1acqui_1_1_u_c_b" kindref="compound">UCB</ref> with regret) </para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="19" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="19" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1adf28df8228fedd16ccd465316005d2e8" prot="private" virt="non-virtual"><scope>limbo::acqui::GP_UCB</scope><name>_beta</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1acb7e407f488e3760e6e04ac3e896b75a" prot="private" virt="non-virtual"><scope>limbo::acqui::GP_UCB</scope><name>_model</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a30c58b2f857da76de61e8cf555e73d06" prot="public" virt="non-virtual"><scope>limbo::acqui::GP_UCB</scope><name>dim_in</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1abde3ddcfa0bfb16d453587832f4e78b1" prot="public" virt="non-virtual"><scope>limbo::acqui::GP_UCB</scope><name>dim_out</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a9846faaa39b1d1d7b039284f2c905205" prot="public" virt="non-virtual"><scope>limbo::acqui::GP_UCB</scope><name>GP_UCB</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a810a016815ee1e2355654b3a7658d207" prot="public" virt="non-virtual"><scope>limbo::acqui::GP_UCB</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

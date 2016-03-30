@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="matern__five__halfs_8hpp" kind="file" language="C++">
+    <compoundname>matern_five_halfs.hpp</compoundname>
+    <includes local="no">Eigen/Core</includes>
+    <includes refid="macros_8hpp" local="no">limbo/tools/macros.hpp</includes>
+    <includedby refid="kernel_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</includedby>
+    <incdepgraph>
+      <node id="650">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="648">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="647">
+        <label>/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp</label>
+        <link refid="matern_five_halfs.hpp"/>
+        <childnode refid="648" relation="include">
+        </childnode>
+        <childnode refid="649" relation="include">
+        </childnode>
+      </node>
+      <node id="649">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="650" relation="include">
+        </childnode>
+        <childnode refid="648" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="652">
+        <label>/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</label>
+        <link refid="kernel_8hpp"/>
+        <childnode refid="653" relation="include">
+        </childnode>
+      </node>
+      <node id="651">
+        <label>/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp</label>
+        <link refid="matern_five_halfs.hpp"/>
+        <childnode refid="652" relation="include">
+        </childnode>
+      </node>
+      <node id="653">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structlimbo_1_1defaults_1_1kernel__maternfivehalfs" prot="public">limbo::defaults::kernel_maternfivehalfs</innerclass>
+    <innerclass refid="structlimbo_1_1kernel_1_1_matern_five_halfs" prot="public">limbo::kernel::MaternFiveHalfs</innerclass>
+    <innernamespace refid="namespacelimbo">limbo</innernamespace>
+    <innernamespace refid="namespacelimbo_1_1defaults">limbo::defaults</innernamespace>
+    <innernamespace refid="namespacelimbo_1_1kernel">limbo::kernel</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>LIMBO_KERNEL_MATERN_FIVE_HALFS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIMBO_KERNEL_MATERN_FIVE_HALFS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Core&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="macros_8hpp" kindref="compound">limbo/tools/macros.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">defaults<sp/>{</highlight></codeline>
+<codeline lineno="10" refid="structlimbo_1_1defaults_1_1kernel__maternfivehalfs" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1defaults_1_1kernel__maternfivehalfs" kindref="compound">kernel_maternfivehalfs</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__kernel__defaults_1ga784d4f60df0708935c742652168d132c" kindref="member">BO_PARAM</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">,<sp/>sigma,<sp/>1);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__kernel__defaults_1ga784d4f60df0708935c742652168d132c" kindref="member">BO_PARAM</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">,<sp/>l,<sp/>1);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">kernel<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
+<codeline lineno="32" refid="structlimbo_1_1kernel_1_1_matern_five_halfs" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1kernel_1_1_matern_five_halfs" kindref="compound">MaternFiveHalfs</ref><sp/>{</highlight></codeline>
+<codeline lineno="33" refid="structlimbo_1_1kernel_1_1_matern_five_halfs_1a6b7d9003e76fb0284e209b3b5d9527ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1kernel_1_1_matern_five_halfs_1a6b7d9003e76fb0284e209b3b5d9527ee" kindref="member">MaternFiveHalfs</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>dim<sp/>=<sp/>1)<sp/>{}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="structlimbo_1_1kernel_1_1_matern_five_halfs_1a070ed97b62698e9c9d10f606254954e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_matern_five_halfs_1a070ed97b62698e9c9d10f606254954e7" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>v1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>v2)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="36"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>d<sp/>=<sp/>(v1<sp/>-<sp/>v2).norm();</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Params::kernel_maternfivehalfs::sigma()<sp/>*<sp/>(1<sp/>+<sp/>std::sqrt(5)<sp/>*<sp/>d<sp/>/<sp/>Params::kernel_maternfivehalfs::l()<sp/>+<sp/>5<sp/>*<sp/>d<sp/>*<sp/>d<sp/>/<sp/>(3<sp/>*<sp/>Params::kernel_maternfivehalfs::l()<sp/>*<sp/>Params::kernel_maternfivehalfs::l()))<sp/>*<sp/>std::exp(-std::sqrt(5)<sp/>*<sp/>d<sp/>/<sp/>Params::kernel_maternfivehalfs::l());</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp"/>
+  </compounddef>
+</doxygen>
