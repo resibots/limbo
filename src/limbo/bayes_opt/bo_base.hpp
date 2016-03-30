@@ -92,14 +92,16 @@ namespace limbo {
           class A4 = boost::parameter::void_,
           class A5 = boost::parameter::void_>
         // clang-format on
-        /** Base class for Bayesian optimizers
+        /**
+        \rst
 
-        **Parameters**
-        - ``bool Params::bayes_opt_bobase::stats_enabled``: activate / deactivate the statistics
+        Base class for Bayesian optimizers
+
+        Parameters:
+          - ``bool Params::bayes_opt_bobase::stats_enabled``: activate / deactivate the statistics
 
         This class is templated by several types with default values (thanks to boost::parameters).
 
-        \rst
         +----------------+---------+---------+---------------+
         |type            |typedef  | argument| default       |
         +================+=========+=========+===============+
@@ -113,27 +115,26 @@ namespace limbo {
         +----------------+---------+---------+---------------+
         |stopping crit.  | stop_t  | stopcrit| MaxIterations |
         +----------------+---------+---------+---------------+
+
         \endrst
 
-
         For GP, the default value is: ``model::GP<Params, kf_t, mean_t, opt_t>>``,
-        - with ``kf_t = kernel::SquaredExpARD<Params>``
-        - with ``mean_t = mean::Data<Params>``
-        - with ``opt_t = model::gp::KernelLFOpt<Params>``
+          - with ``kf_t = kernel::SquaredExpARD<Params>``
+          - with ``mean_t = mean::Data<Params>``
+          - with ``opt_t = model::gp::KernelLFOpt<Params>``
 
          (meaning: kernel with automatic relevance determination and mean equals to the mean of the input data, that is, center the data automatically)
 
         For Statistics, the default value is: ``boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>>``
 
+        Example of customization:
+          - ``typedef kernel::MaternFiveHalfs<Params> Kernel_t;``
+          - ``typedef mean::Data<Params> Mean_t;``
+          - ``typedef model::GP<Params, Kernel_t, Mean_t> GP_t;``
+          - ``typedef acqui::UCB<Params, GP_t> Acqui_t;``
+          - ``bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;``
 
 
-         Example of customization:
-
-         - typedef kernel::MaternFiveHalfs<Params> Kernel_t;
-         - typedef mean::Data<Params> Mean_t;
-         - typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
-         - typedef acqui::UCB<Params, GP_t> Acqui_t;
-         - bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
 
          @see limbo::bayes_opt::Boptimizer
         */

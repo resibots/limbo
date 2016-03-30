@@ -8,10 +8,24 @@
 
 namespace limbo {
     namespace stat {
+        /**
+          Base class for statistics
+
+          The only method provided is protected :
+
+          \rst
+          .. code-block:: cpp
+          
+            template <typename BO>
+            void _create_log_file(const BO& bo, const std::string& name)
+
+          \endrst
+        */
         template <typename Params>
         struct StatBase {
             StatBase() {}
 
+            /// main method (to be written in derived classes)
             template <typename BO>
             void operator()(const BO& bo, bool blacklisted)
             {
