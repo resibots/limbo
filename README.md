@@ -14,7 +14,7 @@ Authors
 - Jean-Baptiste Mouret (Inria): http://pages.isir.upmc.fr/~mouret/website/
 - Konstantinos Chatzilygeroudis (Inria)
 - Federico Allocati (Inria)
--
+
 Main features
 -------------
 - Bayesian optimisation based on Gaussian processes
