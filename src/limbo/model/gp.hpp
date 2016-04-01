@@ -157,7 +157,11 @@ namespace limbo {
             /// return the number of samples used to compute the GP
             int nb_samples() const { return _samples.size(); }
 
-            /// return the number of blacklisted samples used to compute the GP
+            /** return the number of blacklisted samples used to compute the GP
+            \rst
+            For the blacklist concept, see :doc:`limbo_concepts`.
+            \endrst
+            */
             int nb_bl_samples() const { return _bl_samples.size(); }
 
             /// update the GP
@@ -167,14 +171,18 @@ namespace limbo {
                 this->_compute_kernel();
             }
 
+            /// return the likelihood (do not compute it!)
             double get_lik() const { return _lik; }
 
+            /// set the likelihood (you need to compute it from outside!)
             void set_lik(const double& lik) { _lik = lik; }
 
+            /// LLT matrix (from Cholesky decomposition)
             const Eigen::LLT<Eigen::MatrixXd>& llt() const { return _llt; }
 
             const Eigen::MatrixXd& alpha() const { return _alpha; }
 
+            /// return the list of samples that have been tested so far 
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
         protected:
