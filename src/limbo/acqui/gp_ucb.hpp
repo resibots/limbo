@@ -8,13 +8,29 @@
 namespace limbo {
     namespace defaults {
         struct acqui_gpucb {
-          /// @ingroup acqui_defaults
-            BO_PARAM(double, delta, 0.001);
+            /// @ingroup acqui_defaults
+            BO_PARAM(double, delta, 0.1);
         };
     }
     namespace acqui {
-        /// @ingroup acqui
-        /// GP-UCB (UCB with regret)
+        /** @ingroup acqui
+        \rst
+        GP-UCB (Upper Confidence Bound). See :cite:`brochu2010tutorial`, p. 15. See also: http://arxiv.org/abs/0912.3995
+
+        .. math::
+          UCB(x) = \mu(x) + \kappa \sigma(x).
+
+        with:
+
+        .. math::
+          \kappa = \sqrt{2 \log{(\frac{n^{D/2+2}\pi^2}{3 \delta})}}
+
+        where :math:`n` is the number of past evaluations of the objective function and :math:`D` the dimensionality of the parameters (dim_in).
+
+        Parameters:
+          - `double delta` (a small number in [0,1], e.g. 0.1)
+        \endrst
+        */
         template <typename Params, typename Model>
         class GP_UCB {
         public:
