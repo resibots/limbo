@@ -19,7 +19,7 @@ namespace limbo {
           Exponential kernel with a :math:`\sigma` parameter that controls the width (see :cite:`brochu2010tutorial` p. 9).
 
           .. math::
-              k(v_1, v_2)  = \exp (-\frac{1}{\sigma^2} ||v_1 - v_2||^2)
+              k(v_1, v_2)  = \exp \Big(-\frac{1}{\sigma^2} ||v_1 - v_2||^2\Big)
 
           Parameters:
             - ``double sigma``

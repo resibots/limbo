@@ -228,7 +228,7 @@ Utility functions & typedefs
    :members:
 
 
-Models (model)
+Models / Gaussian processes (model)
 ---------------
 Currentl, Limbo only include Gaussian processes as models. More may come in the future.
 
@@ -326,6 +326,12 @@ Default parameters
 ^^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: stop_defaults
    :undoc-members:
+
+Internals
+^^^^^^^^^^
+.. doxygenstruct:: limbo::stop::ChainCriteria
+  :members:
+
 
 Statistics (stats)
 --------------------------

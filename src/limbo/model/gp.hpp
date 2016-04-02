@@ -159,7 +159,7 @@ namespace limbo {
 
             /** return the number of blacklisted samples used to compute the GP
             \rst
-            For the blacklist concept, see :doc:`limbo_concepts`.
+            For the blacklist concept, see the Limbo-specific concept guide.
             \endrst
             */
             int nb_bl_samples() const { return _bl_samples.size(); }
@@ -182,7 +182,7 @@ namespace limbo {
 
             const Eigen::MatrixXd& alpha() const { return _alpha; }
 
-            /// return the list of samples that have been tested so far 
+            /// return the list of samples that have been tested so far
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
         protected:

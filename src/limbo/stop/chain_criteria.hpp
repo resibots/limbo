@@ -3,8 +3,19 @@
 
 namespace limbo {
     namespace stop {
-        ///@ingroup stop
-        /// TODO
+        /**
+          \rst
+          Utility functor for boost::fusion::accumulate, e.g.:
+
+          .. code-block:: cpp
+
+            stop::ChainCriteria<BO, AggregatorFunction> chain(bo, afun);
+            return boost::fusion::accumulate(_stopping_criteria, false, chain);
+
+          Where ``_stopping_criteria` is a ``boost::fusion::vector`` of classes.
+
+          \endrst
+        */
         template <typename BO, typename AggregatorFunction>
         struct ChainCriteria {
             typedef bool result_type;
