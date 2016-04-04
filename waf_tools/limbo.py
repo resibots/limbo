@@ -1,6 +1,7 @@
 import os
 import stat
 import subprocess
+import time
 
 json_ok = True
 try:
@@ -101,6 +102,68 @@ def _sub_script(tpl, conf_file):
                 os.chmod(fname, stat.S_IEXEC | stat.S_IREAD | stat.S_IWRITE)
                 fnames += [(fname, directory)]
     return fnames
+
+def _sub_script_local(conf_file):
+    if 'LD_LIBRARY_PATH' in os.environ:
+        ld_lib_path = os.environ['LD_LIBRARY_PATH']
+    else:
+        ld_lib_path = "''"
+    print 'LD_LIBRARY_PATH=' + ld_lib_path
+     # parse conf
+    list_exps = simplejson.load(open(conf_file))
+    fnames = []
+    arguments = []
+    for conf in list_exps:
+        exps = conf['exps']
+        nb_runs = conf['nb_runs']
+        res_dir = conf['res_dir']
+        bin_dir = conf['bin_dir']
+        wall_time = conf['wall_time']
+        use_mpi = "false"
+        try:
+            use_mpi = conf['use_mpi']
+        except:
+            use_mpi = "false"
+        try:
+            nb_cores = conf['nb_cores']
+        except:
+            nb_cores = 1
+        try:
+            args = conf['args']
+        except:
+            args = ''
+        email = conf['email']
+        if (use_mpi == "true"):
+            ppn = '1'
+            mpirun = 'mpirun'
+        else:
+     #      nb_cores = 1;
+            ppn = "8"
+            mpirun = ''
+
+        #fnames = []
+        for i in range(0, nb_runs):
+            for e in exps:
+                directory = res_dir + "/" + e + "/exp_" + str(i)
+                try:
+                    os.makedirs(directory)
+                except:
+                    print "WARNING, dir:" + directory + " not be created"
+                subprocess.call('cp ' + bin_dir + '/' + e + ' ' + '"' + directory + '"', shell=True)
+                fname = e
+                fnames += [(fname, directory)]
+                arguments.append(args)
+    return fnames,arguments
+
+def run_local(conf_file):
+    fnames,args = _sub_script_local(conf_file)
+    i = 0
+    for (fname, directory) in fnames:
+        s = "cd " + '"' + directory + '"' + " && " + "./" + fname + ' ' + args[i] # + " &"
+        print "Executing " + s
+        retcode = subprocess.call(s, shell=True, env=None)
+        time.sleep(1)
+        i = i + 1
 
 
 def qsub(conf_file):
