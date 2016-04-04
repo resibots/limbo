@@ -30,7 +30,11 @@ The only method provided is protected \+:
 .. code-block:: cpp
 
   template <typename BO>
-  void _create_log_file(const BO& bo, const std::string& name)\end{DoxyVerb}
+  void _create_log_file(const BO& bo, const std::string& name)
+
+
+This method allocates an attribute `_log_file` (type: `std::shared_ptr<std::ofstream>`) if it has not been created yet, and does nothing otherwise. This method is designed so that you can safely call it in operator() while being 'guaranteed' that the file exists. Using this method is not mandatory for a statistics class.
+\end{DoxyVerb}
  
 
 \subsection{Constructor \& Destructor Documentation}

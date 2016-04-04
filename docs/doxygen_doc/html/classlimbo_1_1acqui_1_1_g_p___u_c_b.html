@@ -115,8 +115,22 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename Params, typename Model&gt;<br />
 class limbo::acqui::GP_UCB&lt; Params, Model &gt;</h3>
 
-<p>GP-UCB (<a class="el" href="classlimbo_1_1acqui_1_1_u_c_b.html">UCB</a> with regret) </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<pre class="fragment">embed:rst
+GP-UCB (Upper Confidence Bound). See :cite:`brochu2010tutorial`, p. 15. See also: http://arxiv.org/abs/0912.3995
+
+.. math::
+  UCB(x) = \mu(x) + \kappa \sigma(x).
+
+with:
+
+.. math::
+  \kappa = \sqrt{2 \log{(\frac{n^{D/2+2}\pi^2}{3 \delta})}}
+
+where :math:`n` is the number of past evaluations of the objective function and :math:`D` the dimensionality of the parameters (dim_in).
+
+Parameters:
+  - `double delta` (a small number in [0,1], e.g. 0.1)
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a9846faaa39b1d1d7b039284f2c905205"></a>
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +262,7 @@ template&lt;typename AggregatorFunction &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 30 2016 16:27:29 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 4 2016 13:53:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

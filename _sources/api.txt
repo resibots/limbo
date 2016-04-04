@@ -2,9 +2,9 @@ API
 ============
 .. highlight:: c++
 
-Limbo follows a  `policy-based design <https://en.wikipedia.org/wiki/Policy-based_design>`_, which allows users to combine high flexibility (almost every part of Limbo can be substituted by a user-defined part) with high performance (the abstraction do not add any overhead, contrary to classic OOP design). These two features are critical for researchers who want to experiment new ideas in Bayesian optimization. This means that changing a part of limbo (e.g. changing the kernel functions) corresponds to changing a template parameter of the optimizer.
+Limbo follows a  `policy-based design <https://en.wikipedia.org/wiki/Policy-based_design>`_, which allows users to combine high flexibility (almost every part of Limbo can be substituted by a user-defined part) with high performance (the abstraction do not add any overhead, contrary to classic OOP design). These two features are critical for researchers who want to experiment new ideas in Bayesian optimization. This means that changing a part of limbo (e.g. changing the kernel functions) usually corresponds to changing a template parameter of the optimizer.
 
-For the parameters of the algorithms themselves (e.g. an epsilon), they are given by a template class (usually called Params in our code, and always the first argument). See :doc:`parameters` for details.
+The parameters of the algorithms (e.g. an epsilon) are given by a template class (usually called Params in our code, and always the first argument). See :doc:`parameters` for details.
 
 To avoid defining each component of an optimizer manually, Limbo provides sensible defaults. In addition, Limbo relies on `Boost.Parameter <http://www.boost.org/doc/libs/1_60_0/libs/parameter/doc/html/index.html>`_  to make it easy to customize a single part. This Boost library allows us to write classes that accept template argument (user-defined custom classes) by name. For instance, to customize the stopping criteria:
 
@@ -34,7 +34,16 @@ Class Structure
 
    Click on the image to see it bigger.
 
-Every class is paremetrized by a :ref:`Params <params-guide>` class that contains all the parameters.
+There is almost no explicit inheritance in Limbo because polymorphism is not used. However, each kind of class follow a similar template (or 'concept'), that is, they have to implement the same methods. For instance, every initialization function must implement a `()` method:
+
+.. code-block:: cpp
+
+  template <typename StateFunction, typename AggregatorFunction, typename Opt>
+  void operator()(const StateFunction& seval, const AggregatorFunction&, Opt& opt) const
+
+However, there is no need to inherit from a particular 'abstract' class.
+
+Every class is parametrized by a :ref:`Params <params-guide>` class that contains all the parameters.
 
 Sequence graph
 ---------------
@@ -219,7 +228,7 @@ Utility functions & typedefs
    :members:
 
 
-Models (model)
+Models / Gaussian processes (model)
 ---------------
 Currentl, Limbo only include Gaussian processes as models. More may come in the future.
 
@@ -317,6 +326,12 @@ Default parameters
 ^^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: stop_defaults
    :undoc-members:
+
+Internals
+^^^^^^^^^^
+.. doxygenstruct:: limbo::stop::ChainCriteria
+  :members:
+
 
 Statistics (stats)
 --------------------------

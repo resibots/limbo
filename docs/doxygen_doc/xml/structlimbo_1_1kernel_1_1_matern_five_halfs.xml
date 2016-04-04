@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="33" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="33" bodyend="33"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="42" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="structlimbo_1_1kernel_1_1_matern_five_halfs_1a070ed97b62698e9c9d10f606254954e7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="35" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="35" bodyend="39"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="44" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="44" bodyend="48"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -56,10 +56,21 @@
 
 Matern kernel (TODO: formula)
 
+.. math::
+  d = ||v1 - v2||
+
+  \nu = 5/2
+
+  C(d) = \sigma^2\frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg)^\nu K_\nu\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg),
+
+
 Parameters:
   - ``double sigma``
-  - ``double l``</verbatim> </para>    </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="32" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="32" bodyend="40"/>
+  - ``double l``
+
+Reference: :cite:`matern1960spatial` &amp; :cite:`brochu2010tutorial` p.10 &amp; https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
+</verbatim> </para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" line="41" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halfs.hpp" bodystart="41" bodyend="49"/>
     <listofallmembers>
       <member refid="structlimbo_1_1kernel_1_1_matern_five_halfs_1a6b7d9003e76fb0284e209b3b5d9527ee" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalfs</scope><name>MaternFiveHalfs</name></member>
       <member refid="structlimbo_1_1kernel_1_1_matern_five_halfs_1a070ed97b62698e9c9d10f606254954e7" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalfs</scope><name>operator()</name></member>

@@ -115,8 +115,15 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename Params, typename Model&gt;<br />
 class limbo::acqui::UCB&lt; Params, Model &gt;</h3>
 
-<p>Classic <a class="el" href="classlimbo_1_1acqui_1_1_u_c_b.html">UCB</a> </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<pre class="fragment">embed:rst
+Classic UCB (Upper Confidence Bound). See :cite:`brochu2010tutorial`, p. 14
+
+  .. math::
+    UCB(x) = \mu(x) + \alpha \sigma(x).
+
+Parameters:
+  - ``double alpha``
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ae4410ba09273ea88b36130ea916fcc60"></a>
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +255,7 @@ template&lt;typename AggregatorFunction &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 30 2016 16:27:29 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 4 2016 13:53:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

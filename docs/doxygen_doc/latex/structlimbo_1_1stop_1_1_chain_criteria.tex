@@ -21,7 +21,16 @@ typedef bool \hyperlink{structlimbo_1_1stop_1_1_chain_criteria_a2b3c7f6d2309ff6d
 \subsection{Detailed Description}
 \subsubsection*{template$<$typename B\+O, typename Aggregator\+Function$>$struct limbo\+::stop\+::\+Chain\+Criteria$<$ B\+O, Aggregator\+Function $>$}
 
-T\+O\+D\+O 
+\begin{DoxyVerb}embed:rst
+Utility functor for boost::fusion::accumulate, e.g.:
+
+.. code-block:: cpp
+
+  stop::ChainCriteria<BO, AggregatorFunction> chain(bo, afun);
+  return boost::fusion::accumulate(_stopping_criteria, false, chain);
+
+Where ``_stopping_criteria` is a ``boost::fusion::vector`` of classes.\end{DoxyVerb}
+ 
 
 \subsection{Member Typedef Documentation}
 \hypertarget{structlimbo_1_1stop_1_1_chain_criteria_a2b3c7f6d2309ff6dd4e67fb28302a7e4}{}\index{limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}!result\+\_\+type@{result\+\_\+type}}

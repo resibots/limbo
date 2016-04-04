@@ -111,11 +111,22 @@ Public Member Functions</h2></td></tr>
 struct limbo::kernel::MaternThreeHalfs&lt; Params &gt;</h3>
 
 <pre class="fragment">embed:rst
- Matern 3/2 kernel (TODO: formula)
+ Matern 3/2 kernel
+
+ .. math::
+   d = ||v1 - v2||
+
+   \nu = 3/2
+
+   C(d) = \sigma^2\frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg)^\nu K_\nu\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg),
+
 
  Parameters:
-  - ``double sigma``
-  - ``double l``</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+  - ``double sigma`` **squared**
+  - ``double l``
+
+Reference: :cite:`matern1960spatial` &amp; :cite:`brochu2010tutorial` p.10 &amp; https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2f46e1fb1e7239e1f1dccd422dee576e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -185,7 +196,7 @@ template&lt;typename Params &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 30 2016 16:27:29 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 4 2016 13:53:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

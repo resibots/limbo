@@ -141,7 +141,11 @@ struct limbo::stat::StatBase&lt; Params &gt;</h3>
 .. code-block:: cpp
 
   template &lt;typename BO&gt;
-  void _create_log_file(const BO&amp; bo, const std::string&amp; name)</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+  void _create_log_file(const BO&amp; bo, const std::string&amp; name)
+
+
+This method allocates an attribute `_log_file` (type: `std::shared_ptr&lt;std::ofstream&gt;`) if it has not been created yet, and does nothing otherwise. This method is designed so that you can safely call it in operator() while being 'guaranteed' that the file exists. Using this method is not mandatory for a statistics class.
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aac1bea59acf624ed728660823189006f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -214,7 +218,7 @@ template&lt;typename BO &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 30 2016 16:27:29 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 4 2016 13:53:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

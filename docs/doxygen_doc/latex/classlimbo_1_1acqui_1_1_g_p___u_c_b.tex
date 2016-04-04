@@ -20,7 +20,23 @@ size\+\_\+t \hyperlink{classlimbo_1_1acqui_1_1_g_p___u_c_b_abde3ddcfa0bfb16d4535
 \subsection{Detailed Description}
 \subsubsection*{template$<$typename Params, typename Model$>$class limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B$<$ Params, Model $>$}
 
-G\+P-\/\+U\+C\+B (\hyperlink{classlimbo_1_1acqui_1_1_u_c_b}{U\+C\+B} with regret) 
+\begin{DoxyVerb}embed:rst
+GP-UCB (Upper Confidence Bound). See :cite:`brochu2010tutorial`, p. 15. See also: http://arxiv.org/abs/0912.3995
+
+.. math::
+  UCB(x) = \mu(x) + \kappa \sigma(x).
+
+with:
+
+.. math::
+  \kappa = \sqrt{2 \log{(\frac{n^{D/2+2}\pi^2}{3 \delta})}}
+
+where :math:`n` is the number of past evaluations of the objective function and :math:`D` the dimensionality of the parameters (dim_in).
+
+Parameters:
+  - `double delta` (a small number in [0,1], e.g. 0.1)
+\end{DoxyVerb}
+ 
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{classlimbo_1_1acqui_1_1_g_p___u_c_b_a9846faaa39b1d1d7b039284f2c905205}{}\index{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}!G\+P\+\_\+\+U\+C\+B@{G\+P\+\_\+\+U\+C\+B}}

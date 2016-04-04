@@ -241,7 +241,7 @@ References: :cite:`brochu2010tutorial,Mockus2013`
 |acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
 +---------------------+------------+----------+---------------+
 </verbatim></para><para>The default value of acqui_opt_t is:<itemizedlist>
-<listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_cmaes" kindref="compound">opt::Cmaes</ref>&lt;Params&gt;</computeroutput> libcmaes was found</para></listitem><listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_n_l_opt_no_grad" kindref="compound">opt::NLOptNoGrad</ref>&lt;Params, nlopt::GN_DIRECT_L_RAND&gt;</computeroutput> if NLOpt was found but libcmaes was not found</para></listitem><listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_grid_search" kindref="compound">opt::GridSearch</ref>&lt;Params&gt;</computeroutput> otherwise (please do not use this) </para></listitem></itemizedlist>
+<listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_cmaes" kindref="compound">opt::Cmaes</ref>&lt;Params&gt;</computeroutput> if libcmaes was found in <computeroutput>waf configure</computeroutput></para></listitem><listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_n_l_opt_no_grad" kindref="compound">opt::NLOptNoGrad</ref>&lt;Params, nlopt::GN_DIRECT_L_RAND&gt;</computeroutput> if NLOpt was found but libcmaes was not found</para></listitem><listitem><para><computeroutput><ref refid="structlimbo_1_1opt_1_1_grid_search" kindref="compound">opt::GridSearch</ref>&lt;Params&gt;</computeroutput> otherwise (please do not use this: the algorithm will not work at all!) </para></listitem></itemizedlist>
 </para>    </detaileddescription>
     <inheritancegraph>
       <node id="42">

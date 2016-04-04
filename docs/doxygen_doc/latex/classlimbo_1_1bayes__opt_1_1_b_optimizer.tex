@@ -62,9 +62,9 @@ This class takes the same template parameters as \hyperlink{classlimbo_1_1bayes_
 
 The default value of acqui\+\_\+opt\+\_\+t is\+:
 \begin{DoxyItemize}
-\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_cmaes}{opt\+::\+Cmaes}$<$Params$>$} libcmaes was found
+\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_cmaes}{opt\+::\+Cmaes}$<$Params$>$} if libcmaes was found in {\ttfamily waf configure}
 \item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_n_l_opt_no_grad}{opt\+::\+N\+L\+Opt\+No\+Grad}$<$Params, nlopt\+::\+G\+N\+\_\+\+D\+I\+R\+E\+C\+T\+\_\+\+L\+\_\+\+R\+A\+N\+D$>$} if N\+L\+Opt was found but libcmaes was not found
-\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_grid_search}{opt\+::\+Grid\+Search}$<$Params$>$} otherwise (please do not use this) 
+\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_grid_search}{opt\+::\+Grid\+Search}$<$Params$>$} otherwise (please do not use this\+: the algorithm will not work at all!) 
 \end{DoxyItemize}
 
 \subsection{Member Typedef Documentation}

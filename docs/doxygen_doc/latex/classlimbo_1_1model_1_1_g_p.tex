@@ -42,19 +42,19 @@ const Eigen\+::\+Matrix\+Xd \& \hyperlink{classlimbo_1_1model_1_1_g_p_aa9d3799fd
 int \hyperlink{classlimbo_1_1model_1_1_g_p_ac490915c95cc78f6cd836f78e3638bf1}{nb\+\_\+samples} () const 
 \begin{DoxyCompactList}\small\item\em return the number of samples used to compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} \end{DoxyCompactList}\item 
 int \hyperlink{classlimbo_1_1model_1_1_g_p_aa41665d2029a541ce5fe85647fe3662d}{nb\+\_\+bl\+\_\+samples} () const 
-\begin{DoxyCompactList}\small\item\em return the number of blacklisted samples used to compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} \end{DoxyCompactList}\item 
+\item 
 void \hyperlink{classlimbo_1_1model_1_1_g_p_af9563c3faaa672e814772a1a2a877e24}{update} ()
 \begin{DoxyCompactList}\small\item\em update the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} \end{DoxyCompactList}\item 
 double \hyperlink{classlimbo_1_1model_1_1_g_p_a794ed0eeda29aaa7afe303b5e72d3927}{get\+\_\+lik} () const 
-\item 
+\begin{DoxyCompactList}\small\item\em return the likelihood (do not compute it!) \end{DoxyCompactList}\item 
 void \hyperlink{classlimbo_1_1model_1_1_g_p_a4dfc1807eb4f113191dbd3ae51c053ee}{set\+\_\+lik} (const double \&lik)
-\item 
+\begin{DoxyCompactList}\small\item\em set the likelihood (you need to compute it from outside!) \end{DoxyCompactList}\item 
 const Eigen\+::\+L\+L\+T$<$ Eigen\+::\+Matrix\+Xd $>$ \& \hyperlink{classlimbo_1_1model_1_1_g_p_ac6d67788494fe1de9a7dddc4e55e857c}{llt} () const 
-\item 
+\begin{DoxyCompactList}\small\item\em L\+L\+T matrix (from Cholesky decomposition) \end{DoxyCompactList}\item 
 const Eigen\+::\+Matrix\+Xd \& \hyperlink{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}{alpha} () const 
 \item 
 const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \& \hyperlink{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}{samples} () const 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em return the list of samples that have been tested so far \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -143,6 +143,10 @@ return the number of dimensions of the output
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a794ed0eeda29aaa7afe303b5e72d3927}
+
+
+return the likelihood (do not compute it!) 
+
 \hypertarget{classlimbo_1_1model_1_1_g_p_aaf794227fb4b8ba92bc22f15ec379d87}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!kernel\+\_\+function@{kernel\+\_\+function}}
 \index{kernel\+\_\+function@{kernel\+\_\+function}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{kernel\+\_\+function}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Kernel\+Function\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::kernel\+\_\+function (
@@ -164,6 +168,10 @@ return the number of dimensions of the output
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_ac6d67788494fe1de9a7dddc4e55e857c}
+
+
+L\+L\+T matrix (from Cholesky decomposition) 
+
 \hypertarget{classlimbo_1_1model_1_1_g_p_a480f1b249edf89bc6960512e8baceab8}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!max\+\_\+observation@{max\+\_\+observation}}
 \index{max\+\_\+observation@{max\+\_\+observation}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{max\+\_\+observation}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::max\+\_\+observation (
@@ -224,11 +232,10 @@ return :math:`\mu` (unormalized). If there is no sample, return the value accord
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_aa41665d2029a541ce5fe85647fe3662d}
-
-
-return the number of blacklisted samples used to compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} 
-
-\hypertarget{classlimbo_1_1model_1_1_g_p_ac490915c95cc78f6cd836f78e3638bf1}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!nb\+\_\+samples@{nb\+\_\+samples}}
+return the number of blacklisted samples used to compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} \begin{DoxyVerb}embed:rst
+For the blacklist concept, see the Limbo-specific concept guide.
+\end{DoxyVerb}
+ \hypertarget{classlimbo_1_1model_1_1_g_p_ac490915c95cc78f6cd836f78e3638bf1}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!nb\+\_\+samples@{nb\+\_\+samples}}
 \index{nb\+\_\+samples@{nb\+\_\+samples}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{nb\+\_\+samples}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ int {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::nb\+\_\+samples (
 \begin{DoxyParamCaption}
@@ -254,7 +261,7 @@ return the number of samples used to compute the \hyperlink{classlimbo_1_1model_
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a33937ff7df97c01fdd9bf8911e0a6159}
 \begin{DoxyVerb}embed:rst
-return :math:`\mu`, :math:`\sigma` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
+return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
 \end{DoxyVerb}
  \hypertarget{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!samples@{samples}}
 \index{samples@{samples}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
@@ -263,6 +270,10 @@ return :math:`\mu`, :math:`\sigma` (unormalized). If there is no sample, return 
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}
+
+
+return the list of samples that have been tested so far 
+
 \hypertarget{classlimbo_1_1model_1_1_g_p_a4dfc1807eb4f113191dbd3ae51c053ee}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!set\+\_\+lik@{set\+\_\+lik}}
 \index{set\+\_\+lik@{set\+\_\+lik}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{set\+\_\+lik}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::set\+\_\+lik (
@@ -270,6 +281,10 @@ return :math:`\mu`, :math:`\sigma` (unormalized). If there is no sample, return 
 \item[{const double \&}]{lik}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a4dfc1807eb4f113191dbd3ae51c053ee}
+
+
+set the likelihood (you need to compute it from outside!) 
+
 \hypertarget{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!sigma@{sigma}}
 \index{sigma@{sigma}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{sigma}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ double {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::sigma (
@@ -278,7 +293,7 @@ return :math:`\mu`, :math:`\sigma` (unormalized). If there is no sample, return 
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}
 \begin{DoxyVerb}embed:rst
-return :math:`\sigma` (unormalized). If there is no sample, return the value according to the mean function.
+return :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function.
 \end{DoxyVerb}
  \hypertarget{classlimbo_1_1model_1_1_g_p_af9563c3faaa672e814772a1a2a877e24}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!update@{update}}
 \index{update@{update}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}

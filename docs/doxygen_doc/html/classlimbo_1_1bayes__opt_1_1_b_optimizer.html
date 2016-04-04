@@ -218,9 +218,9 @@ References: :cite:`brochu2010tutorial,Mockus2013`
 |acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
 +---------------------+------------+----------+---------------+
 </pre><p>The default value of acqui_opt_t is:</p><ul>
-<li><code><a class="el" href="structlimbo_1_1opt_1_1_cmaes.html">opt::Cmaes</a>&lt;Params&gt;</code> libcmaes was found</li>
+<li><code><a class="el" href="structlimbo_1_1opt_1_1_cmaes.html">opt::Cmaes</a>&lt;Params&gt;</code> if libcmaes was found in <code>waf configure</code></li>
 <li><code><a class="el" href="structlimbo_1_1opt_1_1_n_l_opt_no_grad.html">opt::NLOptNoGrad</a>&lt;Params, nlopt::GN_DIRECT_L_RAND&gt;</code> if NLOpt was found but libcmaes was not found</li>
-<li><code><a class="el" href="structlimbo_1_1opt_1_1_grid_search.html">opt::GridSearch</a>&lt;Params&gt;</code> otherwise (please do not use this) </li>
+<li><code><a class="el" href="structlimbo_1_1opt_1_1_grid_search.html">opt::GridSearch</a>&lt;Params&gt;</code> otherwise (please do not use this: the algorithm will not work at all!) </li>
 </ul>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="a18dc1b593c859b8f89450a31f80fb592"></a>
@@ -433,7 +433,7 @@ template&lt;typename StateFunction , typename AggregatorFunction  = FirstElem&gt
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 30 2016 16:27:29 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 4 2016 13:53:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

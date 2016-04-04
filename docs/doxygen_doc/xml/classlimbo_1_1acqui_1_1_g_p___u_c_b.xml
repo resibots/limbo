@@ -23,7 +23,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="43" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="43" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="59" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1adf28df8228fedd16ccd465316005d2e8" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="44" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="60" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="21" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="21" bodyend="27"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="37" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="37" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a30c58b2f857da76de61e8cf555e73d06" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>size_t</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="29" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="29" bodyend="29"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="45" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="45" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1abde3ddcfa0bfb16d453587832f4e78b1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>size_t</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="31" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="31" bodyend="31"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="47" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="47" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a810a016815ee1e2355654b3a7658d207" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -111,14 +111,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="34" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="34" bodyend="40"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="50" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="50" bodyend="56"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para>GP-UCB (<ref refid="classlimbo_1_1acqui_1_1_u_c_b" kindref="compound">UCB</ref> with regret) </para>    </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="19" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="19" bodyend="45"/>
+<para><verbatim>embed:rst
+GP-UCB (Upper Confidence Bound). See :cite:`brochu2010tutorial`, p. 15. See also: http://arxiv.org/abs/0912.3995
+
+.. math::
+  UCB(x) = \mu(x) + \kappa \sigma(x).
+
+with:
+
+.. math::
+  \kappa = \sqrt{2 \log{(\frac{n^{D/2+2}\pi^2}{3 \delta})}}
+
+where :math:`n` is the number of past evaluations of the objective function and :math:`D` the dimensionality of the parameters (dim_in).
+
+Parameters:
+  - `double delta` (a small number in [0,1], e.g. 0.1)
+</verbatim> </para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" line="35" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp" bodystart="35" bodyend="61"/>
     <listofallmembers>
       <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1adf28df8228fedd16ccd465316005d2e8" prot="private" virt="non-virtual"><scope>limbo::acqui::GP_UCB</scope><name>_beta</name></member>
       <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1acb7e407f488e3760e6e04ac3e896b75a" prot="private" virt="non-virtual"><scope>limbo::acqui::GP_UCB</scope><name>_model</name></member>

@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="36" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="36" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="38" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="26" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="26" bodyend="26"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="28" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="28" bodyend="28"/>
       </memberdef>
       <memberdef kind="function" id="structlimbo_1_1stat_1_1_stat_base_1aaa6c2d6e3b520907955988daf73993ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="30" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="30" bodyend="33"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="32" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="32" bodyend="35"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="39" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="39" bodyend="45"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="41" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="41" bodyend="48"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -114,7 +114,11 @@
 .. code-block:: cpp
 
   template &lt;typename BO&gt;
-  void _create_log_file(const BO&amp; bo, const std::string&amp; name)</verbatim> </para>    </detaileddescription>
+  void _create_log_file(const BO&amp; bo, const std::string&amp; name)
+
+
+This method allocates an attribute `_log_file` (type: `std::shared_ptr&lt;std::ofstream&gt;`) if it has not been created yet, and does nothing otherwise. This method is designed so that you can safely call it in operator() while being &apos;guaranteed&apos; that the file exists. Using this method is not mandatory for a statistics class.
+</verbatim> </para>    </detaileddescription>
     <inheritancegraph>
       <node id="247">
         <label>limbo::stat::GPLikelihood&lt; Params &gt;</label>
@@ -211,7 +215,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="25" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="25" bodyend="46"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="27" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="27" bodyend="49"/>
     <listofallmembers>
       <member refid="structlimbo_1_1stat_1_1_stat_base_1ae07cc71e5a9b00620c1951a450feda9f" prot="private" virt="non-virtual"><scope>limbo::stat::StatBase</scope><name>_create_log_file</name></member>
       <member refid="structlimbo_1_1stat_1_1_stat_base_1a9701911e8794d411ccbe34c0e3b7f311" prot="private" virt="non-virtual"><scope>limbo::stat::StatBase</scope><name>_log_file</name></member>

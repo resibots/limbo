@@ -96,34 +96,34 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1stop.html">    5</a></span>&#160;    <span class="keyword">namespace </span>stop {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO, <span class="keyword">typename</span> AggregatorFunction&gt;</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="structlimbo_1_1stop_1_1_chain_criteria.html">    9</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1stop_1_1_chain_criteria.html">ChainCriteria</a> {</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structlimbo_1_1stop_1_1_chain_criteria.html#a2b3c7f6d2309ff6dd4e67fb28302a7e4">   10</a></span>&#160;            <span class="keyword">typedef</span> <span class="keywordtype">bool</span> <a class="code" href="structlimbo_1_1stop_1_1_chain_criteria.html#a2b3c7f6d2309ff6dd4e67fb28302a7e4">result_type</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d">   11</a></span>&#160;            <a class="code" href="structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d">ChainCriteria</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun) : _bo(bo), _afun(afun) {}</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> stopping_criterion&gt;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structlimbo_1_1stop_1_1_chain_criteria.html#a1d95f89ebcc61121482a372d37c3a62f">   14</a></span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="structlimbo_1_1stop_1_1_chain_criteria.html#a1d95f89ebcc61121482a372d37c3a62f">operator()</a>(<span class="keywordtype">bool</span> state, stopping_criterion stop)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                <span class="keywordflow">return</span> state || stop(_bo, _afun);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            }</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="keyword">const</span> BO&amp; _bo;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keyword">const</span> AggregatorFunction&amp; _afun;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        };</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structlimbo_1_1stop_1_1_chain_criteria_html_a1d95f89ebcc61121482a372d37c3a62f"><div class="ttname"><a href="structlimbo_1_1stop_1_1_chain_criteria.html#a1d95f89ebcc61121482a372d37c3a62f">limbo::stop::ChainCriteria::operator()</a></div><div class="ttdeci">bool operator()(bool state, stopping_criterion stop) const </div><div class="ttdef"><b>Definition:</b> chain_criteria.hpp:14</div></div>
-<div class="ttc" id="structlimbo_1_1stop_1_1_chain_criteria_html_a2b3c7f6d2309ff6dd4e67fb28302a7e4"><div class="ttname"><a href="structlimbo_1_1stop_1_1_chain_criteria.html#a2b3c7f6d2309ff6dd4e67fb28302a7e4">limbo::stop::ChainCriteria::result_type</a></div><div class="ttdeci">bool result_type</div><div class="ttdef"><b>Definition:</b> chain_criteria.hpp:10</div></div>
-<div class="ttc" id="structlimbo_1_1stop_1_1_chain_criteria_html_a287a286866f5ddc83432f23dc1c7c63d"><div class="ttname"><a href="structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d">limbo::stop::ChainCriteria::ChainCriteria</a></div><div class="ttdeci">ChainCriteria(const BO &amp;bo, const AggregatorFunction &amp;afun)</div><div class="ttdef"><b>Definition:</b> chain_criteria.hpp:11</div></div>
-<div class="ttc" id="structlimbo_1_1stop_1_1_chain_criteria_html"><div class="ttname"><a href="structlimbo_1_1stop_1_1_chain_criteria.html">limbo::stop::ChainCriteria</a></div><div class="ttdef"><b>Definition:</b> chain_criteria.hpp:9</div></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO, <span class="keyword">typename</span> AggregatorFunction&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="structlimbo_1_1stop_1_1_chain_criteria.html">   20</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1stop_1_1_chain_criteria.html">ChainCriteria</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structlimbo_1_1stop_1_1_chain_criteria.html#a2b3c7f6d2309ff6dd4e67fb28302a7e4">   21</a></span>&#160;            <span class="keyword">typedef</span> <span class="keywordtype">bool</span> <a class="code" href="structlimbo_1_1stop_1_1_chain_criteria.html#a2b3c7f6d2309ff6dd4e67fb28302a7e4">result_type</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d">   22</a></span>&#160;            <a class="code" href="structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d">ChainCriteria</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun) : _bo(bo), _afun(afun) {}</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> stopping_criterion&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structlimbo_1_1stop_1_1_chain_criteria.html#a1d95f89ebcc61121482a372d37c3a62f">   25</a></span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="structlimbo_1_1stop_1_1_chain_criteria.html#a1d95f89ebcc61121482a372d37c3a62f">operator()</a>(<span class="keywordtype">bool</span> state, stopping_criterion stop)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <span class="keywordflow">return</span> state || stop(_bo, _afun);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keyword">const</span> BO&amp; _bo;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">const</span> AggregatorFunction&amp; _afun;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        };</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structlimbo_1_1stop_1_1_chain_criteria_html_a1d95f89ebcc61121482a372d37c3a62f"><div class="ttname"><a href="structlimbo_1_1stop_1_1_chain_criteria.html#a1d95f89ebcc61121482a372d37c3a62f">limbo::stop::ChainCriteria::operator()</a></div><div class="ttdeci">bool operator()(bool state, stopping_criterion stop) const </div><div class="ttdef"><b>Definition:</b> chain_criteria.hpp:25</div></div>
+<div class="ttc" id="structlimbo_1_1stop_1_1_chain_criteria_html_a2b3c7f6d2309ff6dd4e67fb28302a7e4"><div class="ttname"><a href="structlimbo_1_1stop_1_1_chain_criteria.html#a2b3c7f6d2309ff6dd4e67fb28302a7e4">limbo::stop::ChainCriteria::result_type</a></div><div class="ttdeci">bool result_type</div><div class="ttdef"><b>Definition:</b> chain_criteria.hpp:21</div></div>
+<div class="ttc" id="structlimbo_1_1stop_1_1_chain_criteria_html_a287a286866f5ddc83432f23dc1c7c63d"><div class="ttname"><a href="structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d">limbo::stop::ChainCriteria::ChainCriteria</a></div><div class="ttdeci">ChainCriteria(const BO &amp;bo, const AggregatorFunction &amp;afun)</div><div class="ttdef"><b>Definition:</b> chain_criteria.hpp:22</div></div>
+<div class="ttc" id="structlimbo_1_1stop_1_1_chain_criteria_html"><div class="ttname"><a href="structlimbo_1_1stop_1_1_chain_criteria.html">limbo::stop::ChainCriteria</a></div><div class="ttdef"><b>Definition:</b> chain_criteria.hpp:20</div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> gp_ucb.hpp:8</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 30 2016 16:27:29 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 4 2016 13:53:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

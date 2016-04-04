@@ -126,9 +126,12 @@ Squared exponential covariance function with automatic relevance detection (to b
 Computes the squared exponential covariance like this:
 
 .. math::
-    k_{SE}(x, y) = \alpha^2 \exp(-\frac{1}{2}(x-y)^T\Lambda^{-1}(x-y)),
+    k_{SE}(x, y) = \alpha^2 \exp \Big(-\frac{1}{2}(x-y)^T\Lambda^{-1}(x-y)\Big),
 
-with :math:`\Lambda = diag(l_1^2, \dots, l_n^2)` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \alpha` are expected in this order in the parameter array.</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+with :math:`\Lambda = diag(l_1^2, \dots, l_n^2)` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \alpha` are expected in this order in the parameter array.
+
+Reference: :cite:`Rasmussen2006`, p. 106 &amp; :cite:`brochu2010tutorial`, p. 10
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a33d5c074a487792a305a0ae89e864f34"></a>
 <div class="memitem">
 <div class="memproto">
@@ -335,7 +338,7 @@ template&lt;typename Params &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 30 2016 16:27:29 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Apr 4 2016 13:53:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
