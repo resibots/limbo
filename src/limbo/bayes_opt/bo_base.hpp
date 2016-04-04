@@ -134,9 +134,6 @@ namespace limbo {
           - ``typedef acqui::UCB<Params, GP_t> Acqui_t;``
           - ``bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;``
 
-
-
-         @see limbo::bayes_opt::Boptimizer
         */
         class BoBase {
         public:

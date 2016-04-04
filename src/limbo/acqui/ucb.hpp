@@ -13,8 +13,17 @@ namespace limbo {
         };
     }
     namespace acqui {
-        /// @ingroup acqui
-        /// Classic UCB
+        /** @ingroup acqui
+        \rst
+        Classic UCB (Upper Confidence Bound). See :cite:`brochu2010tutorial`, p. 14
+
+          .. math::
+            UCB(x) = \mu(x) + \alpha \sigma(x).
+
+        Parameters:
+          - ``double alpha``
+        \endrst
+        */
         template <typename Params, typename Model>
         class UCB {
         public:

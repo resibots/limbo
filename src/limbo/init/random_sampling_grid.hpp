@@ -16,8 +16,15 @@ namespace limbo {
         };
     }
     namespace init {
-        ///@ingroup init
-        ///Grid-based random sampling
+        /** @ingroup init
+          Grid-based random sampling: for each bin, take k random samples until k = samples.
+
+          For instance, if bins = 5 and samples = 10, then put 2 random samples in each bin.
+
+          Parameters:
+            - `int samples`
+            - `int bins`
+        */
         template <typename Params>
         struct RandomSamplingGrid {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>

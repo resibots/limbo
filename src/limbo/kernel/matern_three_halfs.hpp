@@ -9,6 +9,7 @@ namespace limbo {
     namespace defaults {
         struct kernel_maternthreehalfs {
             /// @ingroup kernel_defaults
+            /// This is is sigma squared!
             BO_PARAM(double, sigma, 1);
             /// @ingroup kernel_defaults
             BO_PARAM(double, l, 1);
@@ -18,12 +19,21 @@ namespace limbo {
         /**
          @ingroup kernel
          \rst
-         Matern 3/2 kernel (TODO: formula)
+         Matern 3/2 kernel
+
+         .. math::
+           d = ||v1 - v2||
+
+           \nu = 3/2
+
+           C(d) = \sigma^2\frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg)^\nu K_\nu\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg),
+
 
          Parameters:
-          - ``double sigma``
+          - ``double sigma`` **squared**
           - ``double l``
 
+        Reference: :cite:`matern1960spatial` & :cite:`brochu2010tutorial` p.10 & https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
         \endrst
         */
         template <typename Params>

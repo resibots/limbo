@@ -5,13 +5,13 @@
 
 namespace limbo {
     namespace defaults {
-        ///@ingroup stop_defaults
         struct stop_maxiterations {
+            /// @ingroup stop_defaults 
             BO_PARAM(int, iterations, 190);
         };
     }
     namespace stop {
-        ///@ingroup stop
+        /// @ingroup stop
         /// Stop after a given number of iterations
         ///
         /// parameter: int iterations

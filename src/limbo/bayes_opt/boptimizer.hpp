@@ -49,9 +49,9 @@ namespace limbo {
         \endrst
 
         The default value of acqui_opt_t is:
-        - ``opt::Cmaes<Params>`` libcmaes was found
+        - ``opt::Cmaes<Params>`` if libcmaes was found in `waf configure`
         - ``opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>`` if NLOpt was found but libcmaes was not found
-        - ``opt::GridSearch<Params>`` otherwise (please do not use this)
+        - ``opt::GridSearch<Params>`` otherwise (please do not use this: the algorithm will not work at all!)
         */
         template <class Params,
           class A1 = boost::parameter::void_,
