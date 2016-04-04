@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization" kind="struct" language="C++" prot="private">
+    <compoundname>limbo::stop::MaxPredictedValue::ModelMeanOptimization</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename Model</type>
+      </param>
+      <param>
+        <type>typename AggregatorFunction</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1a0e9f23f20789e7fd21b5a4117db01804" prot="private" static="no" mutable="no">
+        <type>const Model &amp;</type>
+        <definition>const Model&amp; limbo::stop::MaxPredictedValue&lt; Params, Optimizer &gt;::ModelMeanOptimization&lt; Model, AggregatorFunction &gt;::_model</definition>
+        <argsstring></argsstring>
+        <name>_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" line="76" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1ac152a651365a22d86ad575d0e00a81f3" prot="private" static="no" mutable="no">
+        <type>const AggregatorFunction &amp;</type>
+        <definition>const AggregatorFunction&amp; limbo::stop::MaxPredictedValue&lt; Params, Optimizer &gt;::ModelMeanOptimization&lt; Model, AggregatorFunction &gt;::_afun</definition>
+        <argsstring></argsstring>
+        <name>_afun</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" line="77" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1ae1b0e6fe4e04bf8c18331ec04268b80a" prot="private" static="no" mutable="no">
+        <type>const Eigen::VectorXd</type>
+        <definition>const Eigen::VectorXd limbo::stop::MaxPredictedValue&lt; Params, Optimizer &gt;::ModelMeanOptimization&lt; Model, AggregatorFunction &gt;::_init</definition>
+        <argsstring></argsstring>
+        <name>_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" line="78" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1aecba5d421069387bf34f785bc9831448" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::stop::MaxPredictedValue&lt; Params, Optimizer &gt;::ModelMeanOptimization&lt; Model, AggregatorFunction &gt;::ModelMeanOptimization</definition>
+        <argsstring>(const Model &amp;model, const AggregatorFunction &amp;afun, const Eigen::VectorXd &amp;init)</argsstring>
+        <name>ModelMeanOptimization</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>init</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" line="58" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1affba92680835e7dd1cc3b352c7f05545" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double limbo::stop::MaxPredictedValue&lt; Params, Optimizer &gt;::ModelMeanOptimization&lt; Model, AggregatorFunction &gt;::utility</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v) const </argsstring>
+        <name>utility</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" line="60" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" bodystart="60" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1a3c7ece505b88f84a24182f471ca305f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::stop::MaxPredictedValue&lt; Params, Optimizer &gt;::ModelMeanOptimization&lt; Model, AggregatorFunction &gt;::param_size</definition>
+        <argsstring>() const </argsstring>
+        <name>param_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" line="65" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" bodystart="65" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1adbcd3f4e1aeef03f4b0dba2e6525e08f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Eigen::VectorXd &amp;</type>
+        <definition>const Eigen::VectorXd&amp; limbo::stop::MaxPredictedValue&lt; Params, Optimizer &gt;::ModelMeanOptimization&lt; Model, AggregatorFunction &gt;::init</definition>
+        <argsstring>() const </argsstring>
+        <name>init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" line="70" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" bodystart="70" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" line="56" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp" bodystart="56" bodyend="79"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1ac152a651365a22d86ad575d0e00a81f3" prot="private" virt="non-virtual"><scope>limbo::stop::MaxPredictedValue::ModelMeanOptimization</scope><name>_afun</name></member>
+      <member refid="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1ae1b0e6fe4e04bf8c18331ec04268b80a" prot="private" virt="non-virtual"><scope>limbo::stop::MaxPredictedValue::ModelMeanOptimization</scope><name>_init</name></member>
+      <member refid="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1a0e9f23f20789e7fd21b5a4117db01804" prot="private" virt="non-virtual"><scope>limbo::stop::MaxPredictedValue::ModelMeanOptimization</scope><name>_model</name></member>
+      <member refid="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1adbcd3f4e1aeef03f4b0dba2e6525e08f" prot="public" virt="non-virtual"><scope>limbo::stop::MaxPredictedValue::ModelMeanOptimization</scope><name>init</name></member>
+      <member refid="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1aecba5d421069387bf34f785bc9831448" prot="public" virt="non-virtual"><scope>limbo::stop::MaxPredictedValue::ModelMeanOptimization</scope><name>ModelMeanOptimization</name></member>
+      <member refid="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1a3c7ece505b88f84a24182f471ca305f9" prot="public" virt="non-virtual"><scope>limbo::stop::MaxPredictedValue::ModelMeanOptimization</scope><name>param_size</name></member>
+      <member refid="structlimbo_1_1stop_1_1_max_predicted_value_1_1_model_mean_optimization_1affba92680835e7dd1cc3b352c7f05545" prot="public" virt="non-virtual"><scope>limbo::stop::MaxPredictedValue::ModelMeanOptimization</scope><name>utility</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

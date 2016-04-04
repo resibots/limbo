@@ -1,0 +1,53 @@
+\hypertarget{structlimbo_1_1kernel_1_1_exp}{}\section{limbo\+:\+:kernel\+:\+:Exp$<$ Params $>$ Struct Template Reference}
+\label{structlimbo_1_1kernel_1_1_exp}\index{limbo\+::kernel\+::\+Exp$<$ Params $>$@{limbo\+::kernel\+::\+Exp$<$ Params $>$}}
+
+
+{\ttfamily \#include $<$limbo/kernel/exp.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structlimbo_1_1kernel_1_1_exp_abec48720f518fa51be7f74bf102add09}{Exp} (size\+\_\+t dim=1)
+\item 
+double \hyperlink{structlimbo_1_1kernel_1_1_exp_a50951330db2210da72d2ea8fc9ef8b96}{operator()} (const Eigen\+::\+Vector\+Xd \&v1, const Eigen\+::\+Vector\+Xd \&v2) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Params$>$struct limbo\+::kernel\+::\+Exp$<$ Params $>$}
+
+\begin{DoxyVerb}embed:rst
+Exponential kernel with a :math:`\sigma` parameter that controls the width (see :cite:`brochu2010tutorial` p. 9).
+
+.. math::
+    k(v_1, v_2)  = \exp \Big(-\frac{1}{\sigma^2} ||v_1 - v_2||^2\Big)
+
+Parameters:
+  - ``double sigma``
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structlimbo_1_1kernel_1_1_exp_abec48720f518fa51be7f74bf102add09}{}\index{limbo\+::kernel\+::\+Exp@{limbo\+::kernel\+::\+Exp}!Exp@{Exp}}
+\index{Exp@{Exp}!limbo\+::kernel\+::\+Exp@{limbo\+::kernel\+::\+Exp}}
+\subsubsection[{Exp}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ {\bf limbo\+::kernel\+::\+Exp}$<$ Params $>$\+::{\bf Exp} (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{dim = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1kernel_1_1_exp_abec48720f518fa51be7f74bf102add09}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structlimbo_1_1kernel_1_1_exp_a50951330db2210da72d2ea8fc9ef8b96}{}\index{limbo\+::kernel\+::\+Exp@{limbo\+::kernel\+::\+Exp}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::kernel\+::\+Exp@{limbo\+::kernel\+::\+Exp}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ double {\bf limbo\+::kernel\+::\+Exp}$<$ Params $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v1, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v2}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1kernel_1_1_exp_a50951330db2210da72d2ea8fc9ef8b96}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/kernel/\hyperlink{exp_8hpp}{exp.\+hpp}\end{DoxyCompactItemize}

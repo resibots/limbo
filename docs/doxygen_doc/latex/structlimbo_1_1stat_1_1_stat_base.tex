@@ -1,0 +1,67 @@
+\hypertarget{structlimbo_1_1stat_1_1_stat_base}{}\section{limbo\+:\+:stat\+:\+:Stat\+Base$<$ Params $>$ Struct Template Reference}
+\label{structlimbo_1_1stat_1_1_stat_base}\index{limbo\+::stat\+::\+Stat\+Base$<$ Params $>$@{limbo\+::stat\+::\+Stat\+Base$<$ Params $>$}}
+
+
+{\ttfamily \#include $<$limbo/stat/stat\+\_\+base.\+hpp$>$}
+
+Inheritance diagram for limbo\+:\+:stat\+:\+:Stat\+Base$<$ Params $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{structlimbo_1_1stat_1_1_stat_base}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structlimbo_1_1stat_1_1_stat_base_aac1bea59acf624ed728660823189006f}{Stat\+Base} ()
+\item 
+{\footnotesize template$<$typename B\+O $>$ }\\void \hyperlink{structlimbo_1_1stat_1_1_stat_base_aaa6c2d6e3b520907955988daf73993ba}{operator()} (const B\+O \&bo, bool blacklisted)
+\begin{DoxyCompactList}\small\item\em main method (to be written in derived classes) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Params$>$struct limbo\+::stat\+::\+Stat\+Base$<$ Params $>$}
+
+Base class for statistics
+
+The only method provided is protected \+:
+
+\begin{DoxyVerb}embed:rst
+.. code-block:: cpp
+
+  template <typename BO>
+  void _create_log_file(const BO& bo, const std::string& name)
+
+
+This method allocates an attribute `_log_file` (type: `std::shared_ptr<std::ofstream>`) if it has not been created yet, and does nothing otherwise. This method is designed so that you can safely call it in operator() while being 'guaranteed' that the file exists. Using this method is not mandatory for a statistics class.
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structlimbo_1_1stat_1_1_stat_base_aac1bea59acf624ed728660823189006f}{}\index{limbo\+::stat\+::\+Stat\+Base@{limbo\+::stat\+::\+Stat\+Base}!Stat\+Base@{Stat\+Base}}
+\index{Stat\+Base@{Stat\+Base}!limbo\+::stat\+::\+Stat\+Base@{limbo\+::stat\+::\+Stat\+Base}}
+\subsubsection[{Stat\+Base}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ {\bf limbo\+::stat\+::\+Stat\+Base}$<$ Params $>$\+::{\bf Stat\+Base} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1stat_1_1_stat_base_aac1bea59acf624ed728660823189006f}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structlimbo_1_1stat_1_1_stat_base_aaa6c2d6e3b520907955988daf73993ba}{}\index{limbo\+::stat\+::\+Stat\+Base@{limbo\+::stat\+::\+Stat\+Base}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::stat\+::\+Stat\+Base@{limbo\+::stat\+::\+Stat\+Base}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ template$<$typename B\+O $>$ void {\bf limbo\+::stat\+::\+Stat\+Base}$<$ Params $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const B\+O \&}]{bo, }
+\item[{bool}]{blacklisted}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1stat_1_1_stat_base_aaa6c2d6e3b520907955988daf73993ba}
+
+
+main method (to be written in derived classes) 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/stat/\hyperlink{stat__base_8hpp}{stat\+\_\+base.\+hpp}\end{DoxyCompactItemize}

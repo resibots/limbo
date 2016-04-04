@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1opt_1_1_n_l_opt_no_grad" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::opt::NLOptNoGrad</compoundname>
+    <includes refid="nlopt__no__grad_8hpp" local="no">limbo/opt/nlopt_no_grad.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+      <param>
+        <type>nlopt::algorithm</type>
+        <declname>Algorithm</declname>
+        <defname>Algorithm</defname>
+        <defval>nlopt::GN_DIRECT_L_RAND</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1opt_1_1_n_l_opt_no_grad_1a23cdeb4f9c63e44bd7fb4dbf8d8553d7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::opt::NLOptNoGrad&lt; Params, Algorithm &gt;::operator()</definition>
+        <argsstring>(const F &amp;f, const Eigen::VectorXd &amp;init, bool bounded) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>init</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bounded</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_no_grad.hpp" line="59" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_no_grad.hpp" bodystart="59" bodyend="97"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structlimbo_1_1opt_1_1_n_l_opt_no_grad_1a7ec4ebfbf618b8db945c58a22daff5a5" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>static double limbo::opt::NLOptNoGrad&lt; Params, Algorithm &gt;::nlopt_func</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;x, std::vector&lt; double &gt; &amp;grad, void *my_func_data)</argsstring>
+        <name>nlopt_func</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>grad</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>my_func_data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_no_grad.hpp" line="101" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_no_grad.hpp" bodystart="101" bodyend="107"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Binding to gradient-free NLOpt algorithms. See: <ulink url="http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms">http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms</ulink></para><para>Algorithms:<itemizedlist>
+<listitem><para>GN_DIRECT</para></listitem><listitem><para>GN_DIRECT_L, [default]</para></listitem><listitem><para>GN_DIRECT_L_RAND</para></listitem><listitem><para>GN_DIRECT_NOSCAL</para></listitem><listitem><para>GN_DIRECT_L_NOSCAL</para></listitem><listitem><para>GN_DIRECT_L_RAND_NOSCAL</para></listitem><listitem><para>GN_ORIG_DIRECT</para></listitem><listitem><para>GN_ORIG_DIRECT_L</para></listitem><listitem><para>GN_CRS2_LM</para></listitem><listitem><para>GN_MLSL</para></listitem><listitem><para>GN_MLSL_LDS</para></listitem><listitem><para>GN_ISRES</para></listitem><listitem><para>LN_COBYLA</para></listitem><listitem><para>LN_AUGLAG_EQ</para></listitem><listitem><para>LN_BOBYQA</para></listitem><listitem><para>LN_NEWUOA</para></listitem><listitem><para>LN_NEWUOA_BOUND</para></listitem><listitem><para>LN_NELDERMEAD</para></listitem><listitem><para>LN_SBPLX</para></listitem><listitem><para>LN_AUGLAG</para></listitem></itemizedlist>
+</para><para>Parameters:<itemizedlist>
+<listitem><para>int iterations </para></listitem></itemizedlist>
+</para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_no_grad.hpp" line="56" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_no_grad.hpp" bodystart="56" bodyend="108"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1opt_1_1_n_l_opt_no_grad_1a7ec4ebfbf618b8db945c58a22daff5a5" prot="private" virt="non-virtual"><scope>limbo::opt::NLOptNoGrad</scope><name>nlopt_func</name></member>
+      <member refid="structlimbo_1_1opt_1_1_n_l_opt_no_grad_1a23cdeb4f9c63e44bd7fb4dbf8d8553d7" prot="public" virt="non-virtual"><scope>limbo::opt::NLOptNoGrad</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

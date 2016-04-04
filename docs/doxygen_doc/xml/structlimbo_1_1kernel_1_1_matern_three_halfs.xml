@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1kernel_1_1_matern_three_halfs" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::kernel::MaternThreeHalfs</compoundname>
+    <includes refid="matern__three__halfs_8hpp" local="no">limbo/kernel/matern_three_halfs.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_matern_three_halfs_1a2f46e1fb1e7239e1f1dccd422dee576e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::kernel::MaternThreeHalfs&lt; Params &gt;::MaternThreeHalfs</definition>
+        <argsstring>(size_t dim=1)</argsstring>
+        <name>MaternThreeHalfs</name>
+        <param>
+          <type>size_t</type>
+          <declname>dim</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_three_halfs.hpp" line="41" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_three_halfs.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_matern_three_halfs_1affe5c6971e6afe32881603b857958a83" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double limbo::kernel::MaternThreeHalfs&lt; Params &gt;::operator()</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v1</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_three_halfs.hpp" line="43" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_three_halfs.hpp" bodystart="43" bodyend="47"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>embed:rst
+ Matern 3/2 kernel
+
+ .. math::
+   d = ||v1 - v2||
+
+   \nu = 3/2
+
+   C(d) = \sigma^2\frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg)^\nu K_\nu\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg),
+
+
+ Parameters:
+  - ``double sigma`` **squared**
+  - ``double l``
+
+Reference: :cite:`matern1960spatial` &amp; :cite:`brochu2010tutorial` p.10 &amp; https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
+</verbatim> </para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_three_halfs.hpp" line="40" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_three_halfs.hpp" bodystart="40" bodyend="48"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1kernel_1_1_matern_three_halfs_1a2f46e1fb1e7239e1f1dccd422dee576e" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternThreeHalfs</scope><name>MaternThreeHalfs</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_matern_three_halfs_1affe5c6971e6afe32881603b857958a83" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternThreeHalfs</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

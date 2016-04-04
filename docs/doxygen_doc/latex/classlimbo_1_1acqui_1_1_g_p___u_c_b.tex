@@ -1,0 +1,79 @@
+\hypertarget{classlimbo_1_1acqui_1_1_g_p___u_c_b}{}\section{limbo\+:\+:acqui\+:\+:G\+P\+\_\+\+U\+C\+B$<$ Params, Model $>$ Class Template Reference}
+\label{classlimbo_1_1acqui_1_1_g_p___u_c_b}\index{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B$<$ Params, Model $>$@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B$<$ Params, Model $>$}}
+
+
+{\ttfamily \#include $<$limbo/acqui/gp\+\_\+ucb.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlimbo_1_1acqui_1_1_g_p___u_c_b_a9846faaa39b1d1d7b039284f2c905205}{G\+P\+\_\+\+U\+C\+B} (const Model \&model, int iteration)
+\item 
+size\+\_\+t \hyperlink{classlimbo_1_1acqui_1_1_g_p___u_c_b_a30c58b2f857da76de61e8cf555e73d06}{dim\+\_\+in} () const 
+\item 
+size\+\_\+t \hyperlink{classlimbo_1_1acqui_1_1_g_p___u_c_b_abde3ddcfa0bfb16d453587832f4e78b1}{dim\+\_\+out} () const 
+\item 
+{\footnotesize template$<$typename Aggregator\+Function $>$ }\\double \hyperlink{classlimbo_1_1acqui_1_1_g_p___u_c_b_a810a016815ee1e2355654b3a7658d207}{operator()} (const Eigen\+::\+Vector\+Xd \&v, const Aggregator\+Function \&afun) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Params, typename Model$>$class limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B$<$ Params, Model $>$}
+
+\begin{DoxyVerb}embed:rst
+GP-UCB (Upper Confidence Bound). See :cite:`brochu2010tutorial`, p. 15. See also: http://arxiv.org/abs/0912.3995
+
+.. math::
+  UCB(x) = \mu(x) + \kappa \sigma(x).
+
+with:
+
+.. math::
+  \kappa = \sqrt{2 \log{(\frac{n^{D/2+2}\pi^2}{3 \delta})}}
+
+where :math:`n` is the number of past evaluations of the objective function and :math:`D` the dimensionality of the parameters (dim_in).
+
+Parameters:
+  - `double delta` (a small number in [0,1], e.g. 0.1)
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classlimbo_1_1acqui_1_1_g_p___u_c_b_a9846faaa39b1d1d7b039284f2c905205}{}\index{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}!G\+P\+\_\+\+U\+C\+B@{G\+P\+\_\+\+U\+C\+B}}
+\index{G\+P\+\_\+\+U\+C\+B@{G\+P\+\_\+\+U\+C\+B}!limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}}
+\subsubsection[{G\+P\+\_\+\+U\+C\+B}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ {\bf limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}$<$ Params, Model $>$\+::{\bf G\+P\+\_\+\+U\+C\+B} (
+\begin{DoxyParamCaption}
+\item[{const Model \&}]{model, }
+\item[{int}]{iteration}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1acqui_1_1_g_p___u_c_b_a9846faaa39b1d1d7b039284f2c905205}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classlimbo_1_1acqui_1_1_g_p___u_c_b_a30c58b2f857da76de61e8cf555e73d06}{}\index{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}!dim\+\_\+in@{dim\+\_\+in}}
+\index{dim\+\_\+in@{dim\+\_\+in}!limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}}
+\subsubsection[{dim\+\_\+in}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ size\+\_\+t {\bf limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}$<$ Params, Model $>$\+::dim\+\_\+in (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1acqui_1_1_g_p___u_c_b_a30c58b2f857da76de61e8cf555e73d06}
+\hypertarget{classlimbo_1_1acqui_1_1_g_p___u_c_b_abde3ddcfa0bfb16d453587832f4e78b1}{}\index{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}!dim\+\_\+out@{dim\+\_\+out}}
+\index{dim\+\_\+out@{dim\+\_\+out}!limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}}
+\subsubsection[{dim\+\_\+out}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ size\+\_\+t {\bf limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}$<$ Params, Model $>$\+::dim\+\_\+out (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1acqui_1_1_g_p___u_c_b_abde3ddcfa0bfb16d453587832f4e78b1}
+\hypertarget{classlimbo_1_1acqui_1_1_g_p___u_c_b_a810a016815ee1e2355654b3a7658d207}{}\index{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B@{limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ template$<$typename Aggregator\+Function $>$ double {\bf limbo\+::acqui\+::\+G\+P\+\_\+\+U\+C\+B}$<$ Params, Model $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v, }
+\item[{const Aggregator\+Function \&}]{afun}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1acqui_1_1_g_p___u_c_b_a810a016815ee1e2355654b3a7658d207}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/acqui/\hyperlink{gp__ucb_8hpp}{gp\+\_\+ucb.\+hpp}\end{DoxyCompactItemize}

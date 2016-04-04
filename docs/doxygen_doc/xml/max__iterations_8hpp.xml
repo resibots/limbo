@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="max__iterations_8hpp" kind="file" language="C++">
+    <compoundname>max_iterations.hpp</compoundname>
+    <includes refid="macros_8hpp" local="no">limbo/tools/macros.hpp</includes>
+    <includedby refid="bo__base_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</includedby>
+    <includedby refid="stop_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/stop.hpp</includedby>
+    <incdepgraph>
+      <node id="1394">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="1395">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="1392">
+        <label>/tmp/doc_limbo/limbo/src/limbo/stop/max_iterations.hpp</label>
+        <link refid="max_iterations.hpp"/>
+        <childnode refid="1393" relation="include">
+        </childnode>
+      </node>
+      <node id="1393">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="1394" relation="include">
+        </childnode>
+        <childnode refid="1395" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1404">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
+        <link refid="nsbo_8hpp"/>
+      </node>
+      <node id="1403">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
+        <link refid="bayes__opt_2ehvi_8hpp"/>
+      </node>
+      <node id="1398">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
+        <link refid="boptimizer_8hpp"/>
+        <childnode refid="1399" relation="include">
+        </childnode>
+        <childnode refid="1401" relation="include">
+        </childnode>
+      </node>
+      <node id="1401">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
+        <link refid="parego_8hpp"/>
+      </node>
+      <node id="1400">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+      </node>
+      <node id="1405">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
+        <link refid="imgpo_8hpp"/>
+      </node>
+      <node id="1396">
+        <label>/tmp/doc_limbo/limbo/src/limbo/stop/max_iterations.hpp</label>
+        <link refid="max_iterations.hpp"/>
+        <childnode refid="1397" relation="include">
+        </childnode>
+        <childnode refid="1406" relation="include">
+        </childnode>
+      </node>
+      <node id="1402">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
+        <link refid="bo__multi_8hpp"/>
+        <childnode refid="1403" relation="include">
+        </childnode>
+        <childnode refid="1404" relation="include">
+        </childnode>
+      </node>
+      <node id="1397">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="1398" relation="include">
+        </childnode>
+        <childnode refid="1402" relation="include">
+        </childnode>
+        <childnode refid="1405" relation="include">
+        </childnode>
+        <childnode refid="1401" relation="include">
+        </childnode>
+      </node>
+      <node id="1399">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
+        <link refid="bayes__opt_8hpp"/>
+        <childnode refid="1400" relation="include">
+        </childnode>
+      </node>
+      <node id="1406">
+        <label>/tmp/doc_limbo/limbo/src/limbo/stop.hpp</label>
+        <link refid="stop_8hpp"/>
+        <childnode refid="1400" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structlimbo_1_1defaults_1_1stop__maxiterations" prot="public">limbo::defaults::stop_maxiterations</innerclass>
+    <innerclass refid="structlimbo_1_1stop_1_1_max_iterations" prot="public">limbo::stop::MaxIterations</innerclass>
+    <innernamespace refid="namespacelimbo">limbo</innernamespace>
+    <innernamespace refid="namespacelimbo_1_1defaults">limbo::defaults</innernamespace>
+    <innernamespace refid="namespacelimbo_1_1stop">limbo::stop</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>LIMBO_STOP_MAX_ITERATIONS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIMBO_STOP_MAX_ITERATIONS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="macros_8hpp" kindref="compound">limbo/tools/macros.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">defaults<sp/>{</highlight></codeline>
+<codeline lineno="8" refid="structlimbo_1_1defaults_1_1stop__maxiterations" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1defaults_1_1stop__maxiterations" kindref="compound">stop_maxiterations</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__stop__defaults_1ga87b011bd30622aa8b333b0d3452412ad" kindref="member">BO_PARAM</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">,<sp/>iterations,<sp/>190);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">stop<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
+<codeline lineno="19" refid="structlimbo_1_1stop_1_1_max_iterations" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1stop_1_1_max_iterations" kindref="compound">MaxIterations</ref><sp/>{</highlight></codeline>
+<codeline lineno="20" refid="structlimbo_1_1stop_1_1_max_iterations_1a07bb1bbffe6b7374c9d1af7575dbc745" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1stop_1_1_max_iterations_1a07bb1bbffe6b7374c9d1af7575dbc745" kindref="member">MaxIterations</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
+<codeline lineno="23" refid="structlimbo_1_1stop_1_1_max_iterations_1a357c80242e43d6cd25e48a63044bf2a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1stop_1_1_max_iterations_1a357c80242e43d6cd25e48a63044bf2a2" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bo.current_iteration()<sp/>&gt;=<sp/>Params::stop_maxiterations::iterations();</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/stop/max_iterations.hpp"/>
+  </compounddef>
+</doxygen>

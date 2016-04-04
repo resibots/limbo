@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1stat_1_1_stat_base" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::stat::StatBase</compoundname>
+    <derivedcompoundref refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume" prot="public" virt="non-virtual">limbo::experimental::stat::HyperVolume&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front" prot="public" virt="non-virtual">limbo::experimental::stat::ParetoFront&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_aggregated_observations" prot="public" virt="non-virtual">limbo::stat::AggregatedObservations&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_best_aggregated_observations" prot="public" virt="non-virtual">limbo::stat::BestAggregatedObservations&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_best_observations" prot="public" virt="non-virtual">limbo::stat::BestObservations&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_best_samples" prot="public" virt="non-virtual">limbo::stat::BestSamples&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_bl_samples" prot="public" virt="non-virtual">limbo::stat::BlSamples&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_console_summary" prot="public" virt="non-virtual">limbo::stat::ConsoleSummary&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p_acquisitions" prot="public" virt="non-virtual">limbo::stat::GPAcquisitions&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p_kernel_h_params" prot="public" virt="non-virtual">limbo::stat::GPKernelHParams&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p_likelihood" prot="public" virt="non-virtual">limbo::stat::GPLikelihood&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p_mean_h_params" prot="public" virt="non-virtual">limbo::stat::GPMeanHParams&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p_prediction_differences" prot="public" virt="non-virtual">limbo::stat::GPPredictionDifferences&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_observations" prot="public" virt="non-virtual">limbo::stat::Observations&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_samples" prot="public" virt="non-virtual">limbo::stat::Samples&lt; Params &gt;</derivedcompoundref>
+    <includes refid="stat__base_8hpp" local="no">limbo/stat/stat_base.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structlimbo_1_1stat_1_1_stat_base_1a9701911e8794d411ccbe34c0e3b7f311" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::ofstream &gt;</type>
+        <definition>std::shared_ptr&lt;std::ofstream&gt; limbo::stat::StatBase&lt; Params &gt;::_log_file</definition>
+        <argsstring></argsstring>
+        <name>_log_file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="38" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1stat_1_1_stat_base_1aac1bea59acf624ed728660823189006f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::stat::StatBase&lt; Params &gt;::StatBase</definition>
+        <argsstring>()</argsstring>
+        <name>StatBase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="28" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1stat_1_1_stat_base_1aaa6c2d6e3b520907955988daf73993ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BO</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::stat::StatBase&lt; Params &gt;::operator()</definition>
+        <argsstring>(const BO &amp;bo, bool blacklisted)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const BO &amp;</type>
+          <declname>bo</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>blacklisted</declname>
+        </param>
+        <briefdescription>
+<para>main method (to be written in derived classes) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="32" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="32" bodyend="35"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="structlimbo_1_1stat_1_1_stat_base_1ae07cc71e5a9b00620c1951a450feda9f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BO</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::stat::StatBase&lt; Params &gt;::_create_log_file</definition>
+        <argsstring>(const BO &amp;bo, const std::string &amp;name)</argsstring>
+        <name>_create_log_file</name>
+        <param>
+          <type>const BO &amp;</type>
+          <declname>bo</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="41" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="41" bodyend="48"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Base class for statistics</para><para>The only method provided is protected :</para><para><verbatim>embed:rst
+.. code-block:: cpp
+
+  template &lt;typename BO&gt;
+  void _create_log_file(const BO&amp; bo, const std::string&amp; name)
+
+
+This method allocates an attribute `_log_file` (type: `std::shared_ptr&lt;std::ofstream&gt;`) if it has not been created yet, and does nothing otherwise. This method is designed so that you can safely call it in operator() while being &apos;guaranteed&apos; that the file exists. Using this method is not mandatory for a statistics class.
+</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="247">
+        <label>limbo::stat::GPLikelihood&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_likelihood"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="246">
+        <label>limbo::stat::GPKernelHParams&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_kernel_h_params"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="238">
+        <label>limbo::experimental::stat::ParetoFront&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="251">
+        <label>limbo::stat::Samples&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_samples"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="237">
+        <label>limbo::experimental::stat::HyperVolume&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="242">
+        <label>limbo::stat::BestSamples&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_best_samples"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="244">
+        <label>limbo::stat::ConsoleSummary&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_console_summary"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="239">
+        <label>limbo::stat::AggregatedObservations&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_aggregated_observations"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="249">
+        <label>limbo::stat::GPPredictionDifferences&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_prediction_differences"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="248">
+        <label>limbo::stat::GPMeanHParams&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_mean_h_params"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="243">
+        <label>limbo::stat::BlSamples&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_bl_samples"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="236">
+        <label>limbo::stat::StatBase&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
+      </node>
+      <node id="245">
+        <label>limbo::stat::GPAcquisitions&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_acquisitions"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="250">
+        <label>limbo::stat::Observations&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_observations"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="240">
+        <label>limbo::stat::BestAggregatedObservations&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_best_aggregated_observations"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="241">
+        <label>limbo::stat::BestObservations&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_best_observations"/>
+        <childnode refid="236" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" line="27" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/stat_base.hpp" bodystart="27" bodyend="49"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1ae07cc71e5a9b00620c1951a450feda9f" prot="private" virt="non-virtual"><scope>limbo::stat::StatBase</scope><name>_create_log_file</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1a9701911e8794d411ccbe34c0e3b7f311" prot="private" virt="non-virtual"><scope>limbo::stat::StatBase</scope><name>_log_file</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1aaa6c2d6e3b520907955988daf73993ba" prot="public" virt="non-virtual"><scope>limbo::stat::StatBase</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1aac1bea59acf624ed728660823189006f" prot="public" virt="non-virtual"><scope>limbo::stat::StatBase</scope><name>StatBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

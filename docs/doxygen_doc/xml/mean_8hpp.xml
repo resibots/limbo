@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="mean_8hpp" kind="file" language="C++">
+    <compoundname>mean.hpp</compoundname>
+    <includes refid="constant_8hpp" local="no">limbo/mean/constant.hpp</includes>
+    <includes refid="data_8hpp" local="no">limbo/mean/data.hpp</includes>
+    <includes refid="function__ard_8hpp" local="no">limbo/mean/function_ard.hpp</includes>
+    <includes refid="null__function_8hpp" local="no">limbo/mean/null_function.hpp</includes>
+    <includedby refid="limbo_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</includedby>
+    <incdepgraph>
+      <node id="776">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="773">
+        <label>limbo/mean/constant.hpp</label>
+        <link refid="constant_8hpp"/>
+        <childnode refid="774" relation="include">
+        </childnode>
+        <childnode refid="775" relation="include">
+        </childnode>
+      </node>
+      <node id="774">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="777">
+        <label>limbo/mean/data.hpp</label>
+        <link refid="data_8hpp"/>
+        <childnode refid="774" relation="include">
+        </childnode>
+      </node>
+      <node id="778">
+        <label>limbo/mean/function_ard.hpp</label>
+        <link refid="function__ard_8hpp"/>
+        <childnode refid="774" relation="include">
+        </childnode>
+      </node>
+      <node id="779">
+        <label>limbo/mean/null_function.hpp</label>
+        <link refid="null__function_8hpp"/>
+        <childnode refid="774" relation="include">
+        </childnode>
+      </node>
+      <node id="772">
+        <label>/tmp/doc_limbo/limbo/src/limbo/mean.hpp</label>
+        <link refid="mean.hpp"/>
+        <childnode refid="773" relation="include">
+        </childnode>
+        <childnode refid="777" relation="include">
+        </childnode>
+        <childnode refid="778" relation="include">
+        </childnode>
+        <childnode refid="779" relation="include">
+        </childnode>
+      </node>
+      <node id="775">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="776" relation="include">
+        </childnode>
+        <childnode refid="774" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="781">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+      </node>
+      <node id="780">
+        <label>/tmp/doc_limbo/limbo/src/limbo/mean.hpp</label>
+        <link refid="mean.hpp"/>
+        <childnode refid="781" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>LIMBO_MEAN_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIMBO_MEAN_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="constant_8hpp" kindref="compound">limbo/mean/constant.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="data_8hpp" kindref="compound">limbo/mean/data.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="function__ard_8hpp" kindref="compound">limbo/mean/function_ard.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="null__function_8hpp" kindref="compound">limbo/mean/null_function.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/mean.hpp"/>
+  </compounddef>
+</doxygen>

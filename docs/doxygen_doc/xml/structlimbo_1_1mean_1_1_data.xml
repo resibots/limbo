@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1mean_1_1_data" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::mean::Data</compoundname>
+    <includes refid="data_8hpp" local="no">limbo/mean/data.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1mean_1_1_data_1aedfef0dbf9ef90dd910eb11883dd2ba4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::mean::Data&lt; Params &gt;::Data</definition>
+        <argsstring>(size_t dim_out=1)</argsstring>
+        <name>Data</name>
+        <param>
+          <type>size_t</type>
+          <declname>dim_out</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/mean/data.hpp" line="12" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/mean/data.hpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1mean_1_1_data_1a68c22daf948a8367802ba6747f373a81" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename GP</type>
+          </param>
+        </templateparamlist>
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::mean::Data&lt; Params &gt;::operator()</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v, const GP &amp;gp) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const GP &amp;</type>
+          <declname>gp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/mean/data.hpp" line="15" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/mean/data.hpp" bodystart="15" bodyend="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Use the mean of the observation as a constant mean </para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/mean/data.hpp" line="11" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/mean/data.hpp" bodystart="11" bodyend="19"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1mean_1_1_data_1aedfef0dbf9ef90dd910eb11883dd2ba4" prot="public" virt="non-virtual"><scope>limbo::mean::Data</scope><name>Data</name></member>
+      <member refid="structlimbo_1_1mean_1_1_data_1a68c22daf948a8367802ba6747f373a81" prot="public" virt="non-virtual"><scope>limbo::mean::Data</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

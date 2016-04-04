@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="group__opt__defaults" kind="group">
+    <compoundname>opt_defaults</compoundname>
+    <title>Opt_defaults</title>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__opt__defaults_1gaba7127b5e591a72095bd6c3a4155828d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(int, restarts, 1)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>restarts</type>
+        </param>
+        <param>
+          <type>1</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>number of restarts of CMA-ES </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1ga5130bd236acff913c59380059474ebab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(double, max_fun_evals,-1)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>double</type>
+        </param>
+        <param>
+          <type>max_fun_evals</type>
+        </param>
+        <param>
+          <type>-</type>
+          <declname>1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>number of calls to the function to be optimized </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="26" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1ga0ce56e9b25771d8a1b381b6ec132b8fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_gridsearch::BO_PARAM</definition>
+        <argsstring>(int, bins, 5)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>bins</type>
+        </param>
+        <param>
+          <type>5</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>number of bins for each dimension </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/grid_search.hpp" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1ga4b0e251e3b7440148225201bcfc61f26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_nloptgrad::BO_PARAM</definition>
+        <argsstring>(int, iterations, 500)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>iterations</type>
+        </param>
+        <param>
+          <type>500</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>number of calls to the optimized function </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_grad.hpp" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1ga4dfaebabf04a129cbb565807ed31f2de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_parallelrepeater::BO_PARAM</definition>
+        <argsstring>(int, repeats, 10)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>repeats</type>
+        </param>
+        <param>
+          <type>10</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>number of replicates </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1gadf6a8058cda20130ad992631e561eb5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_rprop::BO_PARAM</definition>
+        <argsstring>(int, iterations, 300)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>iterations</type>
+        </param>
+        <param>
+          <type>300</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/rprop.hpp" line="18" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

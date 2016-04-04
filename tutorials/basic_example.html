@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basic Example &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+
+  
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Add External Library" href="external_libs.html"/>
+        <link rel="prev" title="Download and Compilation" href="compilation.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
+<ul class="simple">
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Basic Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Basic Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-directories-and-files">Create directories and files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Tutorials</a> &raquo;</li>
+    
+    <li>Basic Example</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/tutorials/basic_example.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basic-example">
+<h1>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Basic Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-directories-and-files">
+<h3>Create directories and files<a class="headerlink" href="#create-directories-and-files" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s say we want to create an experiment called &#8220;test&#8221;. The first thing to do is to create the folder <code class="docutils literal"><span class="pre">exp/test</span></code> under the limbo root. Then add two files:</p>
+<ul class="simple">
+<li>the <code class="docutils literal"><span class="pre">main.cpp</span></code> file</li>
+<li>a pyhton file called <code class="docutils literal"><span class="pre">wscript</span></code>, which will be used by <code class="docutils literal"><span class="pre">waf</span></code> to register the executable for building</li>
+</ul>
+<p>The file structure should look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>limbo
+|-- exp
+     |-- test
+          +-- wscript
+          +-- main.cpp
+</pre></div>
+</div>
+<p>Next, copy the following content to the <code class="docutils literal"><span class="pre">wscript</span></code> file:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
+    <span class="n">bld</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="s">&#39;cxx cxxprogram&#39;</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="s">&#39;main.cpp&#39;</span><span class="p">,</span>
+        <span class="n">includes</span><span class="o">=</span><span class="s">&#39;. ../../src&#39;</span><span class="p">,</span>
+        <span class="n">target</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">,</span>
+        <span class="n">uselib</span><span class="o">=</span><span class="s">&#39;BOOST EIGEN TBB&#39;</span><span class="p">,</span>
+        <span class="n">use</span><span class="o">=</span><span class="s">&#39;limbo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For this example, we will optimize a simple function: <span class="math">\(-{(5*x - 2.5)}^2 + 5\)</span>, using all default values and settings.</p>
+<p>To begin, the <code class="docutils literal"><span class="pre">main</span></code> file has to include the necessary files, and declare the <code class="docutils literal"><span class="pre">Parameter</span> <span class="pre">struct</span></code>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">acqui_gpucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_gpucb</span> <span class="p">{</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function),
+that we don&#8217;t want to output any stats (by setting the dump period to -1), that the model has to be initialized with 10 samples (that will be
+selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults.</p>
+<p>Then, we have to define the evaluation function for the optimizer to call:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">res</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>It is required that the evaluation struct has the static members <code class="docutils literal"><span class="pre">dim_in</span></code> and <code class="docutils literal"><span class="pre">dim_out</span></code>, specifying the input and output dimension.
+Also, it should have the <code class="docutils literal"><span class="pre">operator()</span></code> expecting a <code class="docutils literal"><span class="pre">const</span> <span class="pre">Eigen::VectorXd&amp;</span></code> of size <code class="docutils literal"><span class="pre">dim_in</span></code>, and return another one, of size <code class="docutils literal"><span class="pre">dim_out</span></code>.</p>
+<p>With this, we can declare the main function:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+    <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">Eval</span><span class="p">());</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Best sample: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_sample</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; - Best observation: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_observation</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, from the root of limbo, run a build command, with the additional switch <code class="docutils literal"><span class="pre">--exp</span> <span class="pre">test</span></code>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">waf</span> <span class="n">build</span> <span class="o">--</span><span class="n">exp</span> <span class="n">test</span>
+</pre></div>
+</div>
+<p>Then, an executable named <code class="docutils literal"><span class="pre">test</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/test</span></code>.</p>
+<p>Full <code class="docutils literal"><span class="pre">main.cpp</span></code>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">acqui_gpucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_gpucb</span> <span class="p">{</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+ <span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">res</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+    <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">Eval</span><span class="p">());</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Best sample: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_sample</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; - Best observation: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_observation</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="external_libs.html" class="btn btn-neutral float-right" title="Add External Library" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="compilation.html" class="btn btn-neutral" title="Download and Compilation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

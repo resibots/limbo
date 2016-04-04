@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="math_8hpp" kind="file" language="C++">
+    <compoundname>math.hpp</compoundname>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">ctime</includes>
+    <includes local="no">list</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">random</includes>
+    <includes local="no">utility</includes>
+    <includes local="no">mutex</includes>
+    <includedby refid="rprop_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/opt/rprop.hpp</includedby>
+    <includedby refid="tools_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/tools.hpp</includedby>
+    <incdepgraph>
+      <node id="1493">
+        <label>list</label>
+      </node>
+      <node id="1494">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1491">
+        <label>cmath</label>
+      </node>
+      <node id="1495">
+        <label>random</label>
+      </node>
+      <node id="1492">
+        <label>ctime</label>
+      </node>
+      <node id="1496">
+        <label>utility</label>
+      </node>
+      <node id="1490">
+        <label>cstdlib</label>
+      </node>
+      <node id="1497">
+        <label>mutex</label>
+      </node>
+      <node id="1489">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools/math.hpp</label>
+        <link refid="math.hpp"/>
+        <childnode refid="1490" relation="include">
+        </childnode>
+        <childnode refid="1491" relation="include">
+        </childnode>
+        <childnode refid="1492" relation="include">
+        </childnode>
+        <childnode refid="1493" relation="include">
+        </childnode>
+        <childnode refid="1494" relation="include">
+        </childnode>
+        <childnode refid="1495" relation="include">
+        </childnode>
+        <childnode refid="1496" relation="include">
+        </childnode>
+        <childnode refid="1497" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1508">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
+        <link refid="nsbo_8hpp"/>
+      </node>
+      <node id="1507">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
+        <link refid="bayes__opt_2ehvi_8hpp"/>
+      </node>
+      <node id="1499">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/rprop.hpp</label>
+        <link refid="rprop_8hpp"/>
+        <childnode refid="1500" relation="include">
+        </childnode>
+        <childnode refid="1511" relation="include">
+        </childnode>
+        <childnode refid="1512" relation="include">
+        </childnode>
+        <childnode refid="1513" relation="include">
+        </childnode>
+      </node>
+      <node id="1502">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
+        <link refid="boptimizer_8hpp"/>
+        <childnode refid="1503" relation="include">
+        </childnode>
+        <childnode refid="1505" relation="include">
+        </childnode>
+      </node>
+      <node id="1505">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
+        <link refid="parego_8hpp"/>
+      </node>
+      <node id="1510">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
+        <link refid="model_8hpp"/>
+        <childnode refid="1504" relation="include">
+        </childnode>
+      </node>
+      <node id="1514">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
+        <link refid="tools_8hpp"/>
+        <childnode refid="1504" relation="include">
+        </childnode>
+      </node>
+      <node id="1504">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+      </node>
+      <node id="1509">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
+        <link refid="imgpo_8hpp"/>
+      </node>
+      <node id="1500">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_lf_opt.hpp</label>
+        <link refid="kernel__lf__opt_8hpp"/>
+        <childnode refid="1501" relation="include">
+        </childnode>
+        <childnode refid="1510" relation="include">
+        </childnode>
+      </node>
+      <node id="1512">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp</label>
+        <link refid="mean__lf__opt_8hpp"/>
+        <childnode refid="1510" relation="include">
+        </childnode>
+      </node>
+      <node id="1506">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
+        <link refid="bo__multi_8hpp"/>
+        <childnode refid="1507" relation="include">
+        </childnode>
+        <childnode refid="1508" relation="include">
+        </childnode>
+      </node>
+      <node id="1513">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
+        <link refid="opt_8hpp"/>
+        <childnode refid="1504" relation="include">
+        </childnode>
+      </node>
+      <node id="1498">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools/math.hpp</label>
+        <link refid="math.hpp"/>
+        <childnode refid="1499" relation="include">
+        </childnode>
+        <childnode refid="1514" relation="include">
+        </childnode>
+      </node>
+      <node id="1511">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
+        <link refid="kernel__mean__lf__opt_8hpp"/>
+        <childnode refid="1510" relation="include">
+        </childnode>
+      </node>
+      <node id="1501">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="1502" relation="include">
+        </childnode>
+        <childnode refid="1506" relation="include">
+        </childnode>
+        <childnode refid="1509" relation="include">
+        </childnode>
+        <childnode refid="1505" relation="include">
+        </childnode>
+      </node>
+      <node id="1503">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
+        <link refid="bayes__opt_8hpp"/>
+        <childnode refid="1504" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacelimbo">limbo</innernamespace>
+    <innernamespace refid="namespacelimbo_1_1tools">limbo::tools</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>This<sp/>file<sp/>is<sp/>a<sp/>part<sp/>of<sp/>the<sp/>sferes2<sp/>framework.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>Copyright<sp/>2009,<sp/>ISIR<sp/>/<sp/>Universite<sp/>Pierre<sp/>et<sp/>Marie<sp/>Curie<sp/>(UPMC)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>Main<sp/>contributor(s):<sp/>Jean-Baptiste<sp/>Mouret,<sp/>mouret@isir.fr</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>This<sp/>software<sp/>is<sp/>a<sp/>computer<sp/>program<sp/>whose<sp/>purpose<sp/>is<sp/>to<sp/>facilitate</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>experiments<sp/>in<sp/>evolutionary<sp/>computation<sp/>and<sp/>evolutionary<sp/>robotics.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>This<sp/>software<sp/>is<sp/>governed<sp/>by<sp/>the<sp/>CeCILL<sp/>license<sp/>under<sp/>French<sp/>law</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>and<sp/>abiding<sp/>by<sp/>the<sp/>rules<sp/>of<sp/>distribution<sp/>of<sp/>free<sp/>software.<sp/><sp/>You</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>can<sp/>use,<sp/>modify<sp/>and/<sp/>or<sp/>redistribute<sp/>the<sp/>software<sp/>under<sp/>the<sp/>terms</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>of<sp/>the<sp/>CeCILL<sp/>license<sp/>as<sp/>circulated<sp/>by<sp/>CEA,<sp/>CNRS<sp/>and<sp/>INRIA<sp/>at<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>following<sp/>URL<sp/>&quot;http://www.cecill.info&quot;.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>As<sp/>a<sp/>counterpart<sp/>to<sp/>the<sp/>access<sp/>to<sp/>the<sp/>source<sp/>code<sp/>and<sp/>rights<sp/>to</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>copy,<sp/>modify<sp/>and<sp/>redistribute<sp/>granted<sp/>by<sp/>the<sp/>license,<sp/>users<sp/>are</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>provided<sp/>only<sp/>with<sp/>a<sp/>limited<sp/>warranty<sp/>and<sp/>the<sp/>software&apos;s<sp/>author,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>the<sp/>holder<sp/>of<sp/>the<sp/>economic<sp/>rights,<sp/>and<sp/>the<sp/>successive<sp/>licensors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>have<sp/>only<sp/>limited<sp/>liability.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>In<sp/>this<sp/>respect,<sp/>the<sp/>user&apos;s<sp/>attention<sp/>is<sp/>drawn<sp/>to<sp/>the<sp/>risks</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>associated<sp/>with<sp/>loading,<sp/>using,<sp/>modifying<sp/>and/or<sp/>developing<sp/>or</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>reproducing<sp/>the<sp/>software<sp/>by<sp/>the<sp/>user<sp/>in<sp/>light<sp/>of<sp/>its<sp/>specific</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>status<sp/>of<sp/>free<sp/>software,<sp/>that<sp/>may<sp/>mean<sp/>that<sp/>it<sp/>is<sp/>complicated<sp/>to</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>manipulate,<sp/>and<sp/>that<sp/>also<sp/>therefore<sp/>means<sp/>that<sp/>it<sp/>is<sp/>reserved<sp/>for</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>developers<sp/>and<sp/>experienced<sp/>professionals<sp/>having<sp/>in-depth<sp/>computer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>knowledge.<sp/>Users<sp/>are<sp/>therefore<sp/>encouraged<sp/>to<sp/>load<sp/>and<sp/>test<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>software&apos;s<sp/>suitability<sp/>as<sp/>regards<sp/>their<sp/>requirements<sp/>in<sp/>conditions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>enabling<sp/>the<sp/>security<sp/>of<sp/>their<sp/>systems<sp/>and/or<sp/>data<sp/>to<sp/>be<sp/>ensured</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>and,<sp/>more<sp/>generally,<sp/>to<sp/>use<sp/>and<sp/>operate<sp/>it<sp/>in<sp/>the<sp/>same<sp/>conditions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>as<sp/>regards<sp/>security.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>The<sp/>fact<sp/>that<sp/>you<sp/>are<sp/>presently<sp/>reading<sp/>this<sp/>means<sp/>that<sp/>you<sp/>have</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>had<sp/>knowledge<sp/>of<sp/>the<sp/>CeCILL<sp/>license<sp/>and<sp/>that<sp/>you<sp/>accept<sp/>its<sp/>terms.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LIMBO_TOOLS_MATH_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIMBO_TOOLS_MATH_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdlib&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ctime&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;list&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;random&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
+<codeline lineno="50" refid="namespacelimbo_1_1tools" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">tools<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>get<sp/>sign<sp/>of<sp/>number</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="53" refid="namespacelimbo_1_1tools_1ac56ad2bccc403ffa8341394f2fc28cda" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="namespacelimbo_1_1tools_1ac56ad2bccc403ffa8341394f2fc28cda" kindref="member">signum</ref>(T<sp/>x,<sp/>std::false_type<sp/>is_signed)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>T(0)<sp/>&lt;<sp/>x;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="59" refid="namespacelimbo_1_1tools_1a5e6d3a39db3c143a271eac9625f9779e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="namespacelimbo_1_1tools_1ac56ad2bccc403ffa8341394f2fc28cda" kindref="member">signum</ref>(T<sp/>x,<sp/>std::true_type<sp/>is_signed)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(T(0)<sp/>&lt;<sp/>x)<sp/>-<sp/>(x<sp/>&lt;<sp/>T(0));</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="65" refid="namespacelimbo_1_1tools_1a156cca8d927600da93054c952247857b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="namespacelimbo_1_1tools_1ac56ad2bccc403ffa8341394f2fc28cda" kindref="member">signum</ref>(T<sp/>x)</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="namespacelimbo_1_1tools_1ac56ad2bccc403ffa8341394f2fc28cda" kindref="member">signum</ref>(x,<sp/>std::is_signed&lt;T&gt;());</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>inf<sp/>or<sp/>NAN<sp/>checks</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>T,<sp/>typename<sp/>std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;::type<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="72" refid="namespacelimbo_1_1tools_1abcb0caa2ffabd42fa865c9ab0b624681" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespacelimbo_1_1tools_1abcb0caa2ffabd42fa865c9ab0b624681" kindref="member">is_nan_or_inf</ref>(T<sp/>v)</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::isinf(v)<sp/>||<sp/>std::isnan(v);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>T,<sp/>typename<sp/>std::enable_if&lt;!std::is_arithmetic&lt;T&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;::type<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="78" refid="namespacelimbo_1_1tools_1af4ca69df04108670f0cc61e4a8ae7367" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="namespacelimbo_1_1tools_1abcb0caa2ffabd42fa865c9ab0b624681" kindref="member">is_nan_or_inf</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T&amp;<sp/>v)</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>v.size();<sp/>++i)</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(std::isinf(v(i))<sp/>||<sp/>std::isnan(v(i)))</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/tools/math.hpp"/>
+  </compounddef>
+</doxygen>

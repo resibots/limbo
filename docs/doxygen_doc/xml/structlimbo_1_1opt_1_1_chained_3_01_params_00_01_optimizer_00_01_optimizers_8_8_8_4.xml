@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_00_01_optimizers_8_8_8_4" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::opt::Chained&lt; Params, Optimizer, Optimizers...&gt;</compoundname>
+    <basecompoundref refid="structlimbo_1_1opt_1_1_chained" prot="public" virt="non-virtual">limbo::opt::Chained&lt; Params, Optimizers...&gt;</basecompoundref>
+    <includes refid="chained_8hpp" local="no">limbo/opt/chained.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+      <param>
+        <type>typename Optimizer</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Optimizers</declname>
+        <defname>Optimizers</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_00_01_optimizers_8_8_8_4_1a02bcc74dcdc42d685baaf277886fc8e5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::opt::Chained&lt; Params, Optimizer, Optimizers...&gt;::operator()</definition>
+        <argsstring>(const F &amp;f, const Eigen::VectorXd &amp;init, bool bounded) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const F &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>init</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bounded</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/chained.hpp" line="30" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/chained.hpp" bodystart="30" bodyend="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="52">
+        <label>limbo::opt::Chained&lt; Params, Optimizer, Optimizers...&gt;</label>
+        <link refid="structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_00_01_optimizers_8_8_8_4"/>
+        <childnode refid="53" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>limbo::opt::Chained&lt; Params, Optimizers...&gt;</label>
+        <link refid="structlimbo_1_1opt_1_1_chained"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="54">
+        <label>limbo::opt::Chained&lt; Params, Optimizer, Optimizers...&gt;</label>
+        <link refid="structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_00_01_optimizers_8_8_8_4"/>
+        <childnode refid="55" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>limbo::opt::Chained&lt; Params, Optimizers...&gt;</label>
+        <link refid="structlimbo_1_1opt_1_1_chained"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/opt/chained.hpp" line="28" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/chained.hpp" bodystart="28" bodyend="34"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_00_01_optimizers_8_8_8_4_1a02bcc74dcdc42d685baaf277886fc8e5" prot="public" virt="non-virtual"><scope>limbo::opt::Chained&lt; Params, Optimizer, Optimizers...&gt;</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

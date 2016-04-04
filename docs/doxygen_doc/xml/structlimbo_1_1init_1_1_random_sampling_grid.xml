@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1init_1_1_random_sampling_grid" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::init::RandomSamplingGrid</compoundname>
+    <includes refid="random__sampling__grid_8hpp" local="no">limbo/init/random_sampling_grid.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1init_1_1_random_sampling_grid_1a6fd277031f69bf9da891b5f35065c369" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename StateFunction</type>
+          </param>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+          <param>
+            <type>typename Opt</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void limbo::init::RandomSamplingGrid&lt; Params &gt;::operator()</definition>
+        <argsstring>(const StateFunction &amp;seval, const AggregatorFunction &amp;, Opt &amp;opt) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const StateFunction &amp;</type>
+          <declname>seval</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+        </param>
+        <param>
+          <type>Opt &amp;</type>
+          <declname>opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp" line="31" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp" bodystart="31" bodyend="40"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Grid-based random sampling: for each bin, take k random samples until k = samples.</para><para>For instance, if bins = 5 and samples = 10, then put 2 random samples in each bin.</para><para>Parameters:<itemizedlist>
+<listitem><para><computeroutput>int samples</computeroutput></para></listitem><listitem><para><computeroutput>int bins</computeroutput> </para></listitem></itemizedlist>
+</para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp" line="29" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp" bodystart="29" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1init_1_1_random_sampling_grid_1a6fd277031f69bf9da891b5f35065c369" prot="public" virt="non-virtual"><scope>limbo::init::RandomSamplingGrid</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
