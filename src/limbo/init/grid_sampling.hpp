@@ -13,10 +13,14 @@ namespace limbo {
         };
     }
     namespace init {
-        ///@ingroup init
-        ///Grid sampling.
-        ///
-        /// Parameter : ``int bins`` (number of bins)
+        /** @ingroup init
+          \rst
+          Grid sampling.
+
+          Parameter :
+            - ``int bins`` (number of bins)
+          \endrst
+        */
         template <typename Params>
         struct GridSampling {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>
