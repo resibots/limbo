@@ -16,7 +16,7 @@
 namespace limbo {
     namespace defaults {
         struct opt_nloptnograd {
-             @ingroup opt_defaults
+            /// @ingroup opt_defaults
             /// number of calls to the optimized function
             BO_PARAM(int, iterations, 500);
         };

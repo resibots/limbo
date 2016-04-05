@@ -43,7 +43,7 @@ namespace limbo {
                 if (!_log_file && bo.stats_enabled()) {
                     std::string log = bo.res_dir() + "/" + name;
                     _log_file = std::make_shared<std::ofstream>(log.c_str());
-                    assert(_log_file->godod());
+                    assert(_log_file->good());
                 }
             }
         };
