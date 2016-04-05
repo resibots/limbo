@@ -299,6 +299,13 @@ Default parameters
 .. doxygengroup:: mean_defaults
    :undoc-members:
 
+
+Internals
+^^^^^^^^^^
+.. doxygenstruct:: limbo::mean::FunctionARD
+  :members:
+
+
 Stopping criteria (stop)
 ---------------------------------
 Stopping criteria are used to stop the Bayesian optimizer algorithm.

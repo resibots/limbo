@@ -6,8 +6,9 @@
 namespace limbo {
     namespace mean {
 
-        ///@ingroup mean
-        /// TODO
+        /// Functor used to optimize the mean function using the maximum likelihood principle
+        ///
+        /// @see limbo::model::gp::KernelMeanLFOpt, limbo::model::gp::MeanLFOpt
         template <typename Params, typename MeanFunction>
         struct FunctionARD {
             FunctionARD(size_t dim_out = 1)
