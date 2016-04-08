@@ -230,7 +230,7 @@ Utility functions & typedefs
 
 Models / Gaussian processes (model)
 ---------------
-Currentl, Limbo only include Gaussian processes as models. More may come in the future.
+Currently, Limbo only includes Gaussian processes as models. More may come in the future.
 
 .. doxygenclass::  limbo::model::GP
    :members:
