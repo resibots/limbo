@@ -39,6 +39,9 @@ def options(opt):
                 if os.path.isdir(i):
                     opt.recurse(i)
 
+	opt.recurse('src/benchmarks')
+		
+
 
 def configure(conf):
         conf.load('compiler_cxx boost waf_unit_test')
@@ -87,6 +90,7 @@ def configure(conf):
                 for i in conf.options.exp.split(','):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
+	conf.recurse('src/benchmarks')
 
 def build(bld):
     bld.recurse('src/')
@@ -118,6 +122,31 @@ def submit_extensive_tests(ctx):
             retcode = subprocess.call(s, shell=True, env=None)
             print "oarsub returned:" + str(retcode)
 
+def run_benchmark(ctx):
+	HEADER='\033[95m'
+	NC='\033[0m'
+	res_dir=os.getcwd()+"/benchmark_results/"
+	try:
+                    os.makedirs(res_dir)
+	except:
+                    print "WARNING, dir:" + res_dir + " not be created"
+	for fullname in glob.glob('build/src/benchmarks/*'):
+		if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
+			fpath, fname = os.path.split(fullname)
+			directory = res_dir + "/" + fname 
+			try:
+				os.makedirs(directory)
+			except:
+				print "WARNING, dir:" + directory + " not be created"
+			s = "cp " + fullname + " " + directory
+			retcode = subprocess.call(s, shell=True, env=None)
+			# TODO add the number of replicates as an option
+			for i in range(1,10):
+				print HEADER+" Running: " + fname + " for the "+str(i)+"th time"+NC
+				s="cd " + directory +";./" + fname
+				retcode = subprocess.call(s, shell=True, env=None)
+			
+			
 
 def shutdown(ctx):
     if ctx.options.qsub:
