@@ -34,6 +34,7 @@ def options(opt):
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
         opt.add_option('--experimental', action='store_true', help='specify to compile the experimental examples', dest='experimental')
+        opt.add_option('--nb_replicates', type='int', help='number of replicates performed during the benchmark', dest='nb_rep')
         opt.load('xcode')
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
@@ -137,11 +138,14 @@ def run_benchmark(ctx):
 			try:
 				os.makedirs(directory)
 			except:
-				print "WARNING, dir:" + directory + " not be created"
+				print "WARNING, dir:" + directory + " not be created, the new results will be concatenated to the old ones"
 			s = "cp " + fullname + " " + directory
 			retcode = subprocess.call(s, shell=True, env=None)
-			# TODO add the number of replicates as an option
-			for i in range(1,10):
+			if ctx.options.nb_rep:
+				nb_rep = ctx.options.nb_rep
+			else:
+				nb_rep = 10
+			for i in range(0,nb_rep):
 				print HEADER+" Running: " + fname + " for the "+str(i)+"th time"+NC
 				s="cd " + directory +";./" + fname
 				retcode = subprocess.call(s, shell=True, env=None)
