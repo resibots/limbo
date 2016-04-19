@@ -14,7 +14,10 @@ compiler:
 
 env:
   global:
-    - CI_HOME=`pwd`
+    - CI_HOME=`pwd` LIBCMAES=ON NLOPT=ON
+    - CI_HOME=`pwd` LIBCMAES=ON NLOPT=OFF
+    - CI_HOME=`pwd` LIBCMAES=OFF NLOPT=ON
+    - CI_HOME=`pwd` LIBCMAES=OFF NLOPT=OFF
 
 addons:
   apt:
@@ -30,21 +33,8 @@ addons:
     - libgflags-dev
 
 install:
-  - cd /usr/src/gtest
-  - sudo mkdir build && cd build
-  - sudo cmake ..
-  - sudo make
-  - sudo cp *.a /usr/lib
-  - cd
-  - git clone https://github.com/beniz/libcmaes.git
-  - cd libcmaes
-  - ./autogen.sh
-  - ./configure
-  - make
-  - sudo make install
-  - cd
-  - cd $CI_HOME
-  - sudo ldconfig
+  - if [ "$LIBCMAES" = "ON" ]; then 'cd /usr/src/gtest && sudo mkdir build && cd build && sudo cmake .. && sudo make && sudo cp *.a /usr/lib && cd && git clone https://github.com/beniz/libcmaes.git && cd libcmaes && ./autogen.sh && ./configure && make && sudo make install && cd && cd $CI_HOME && sudo ldconfig' ; fi
+  - if [ "$NLOPT" = "ON"]; then 'cd && wget http://ab-initio.mit.edu/nlopt/nlopt-2.4.2.tar.gz && tar -zxvf nlopt-2.4.2.tar.gz && cd nlopt-2.4.2 && ./configure -with-cxx --enable-shared   --without-python --without-matlab --without-octave && sudo make install && cd $CI_HOME && sudo ldconfig' ; fi
 
 
 # Change this to your needs
