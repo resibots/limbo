@@ -14,10 +14,12 @@ compiler:
 
 env:
   global:
-    - CI_HOME=`pwd` LIBCMAES=ON NLOPT=ON
-    - CI_HOME=`pwd` LIBCMAES=ON NLOPT=OFF
-    - CI_HOME=`pwd` LIBCMAES=OFF NLOPT=ON
-    - CI_HOME=`pwd` LIBCMAES=OFF NLOPT=OFF
+    - CI_HOME=`pwd`
+  matrix:
+    - LIBCMAES=ON NLOPT=ON
+    - LIBCMAES=ON NLOPT=OFF
+    - LIBCMAES=OFF NLOPT=ON
+    - LIBCMAES=OFF NLOPT=OFF
 
 addons:
   apt:
