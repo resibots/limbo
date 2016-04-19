@@ -98,8 +98,7 @@ def summary(bld):
         tfail = len([x for x in lst if x[1]])
     waf_unit_test.summary(bld)
     if tfail > 0:
-        print "Build failed, because some tests failed!"
-        # bld.fatal("Build failed, because some tests failed!")
+        bld.fatal("Build failed, because some tests failed!")
 
 def build(bld):
     bld.recurse('src/')
