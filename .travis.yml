@@ -1,10 +1,47 @@
+
 language: cpp
+
+os:
+  - linux
+
+sudo: required
+
+dist: trusty
+
 compiler:
   - gcc
   - clang
-sudo: required
-install: sudo apt-get update -qq && sudo apt-get install -qq libboost-all-dev libboost-test-dev libeigen3-dev libtbb-dev
+addons:
+  apt:
+    packages:
+    - libboost1.55-all-dev
+    - libeigen3-dev
+    - libtbb-dev
+    - libgtest-dev
+    - autoconf
+    - automake
+    - libtool
+    - libgoogle-glog-dev
+    - libgflags-dev
+
+install:
+
 
 # Change this to your needs
-script: 
- ./waf configure && ./waf
+script:
+  - sudo cd /usr/src/gtest
+  - sudo mkdir build && cd build
+  - sudo cmake ..
+  - sudo make
+  - sudo cp *.a /usr/lib
+  - cd
+  - git clone git@github.com:beniz/libcmaes.git
+  - cd libcmaes
+  - ./autogen.sh
+  - ./configure
+  - make
+  - sudo make install
+  - cd ..
+  - cd resibots/limbo
+  - ./waf configure
+  - ./waf --tests --alltests -v

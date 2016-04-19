@@ -14,6 +14,7 @@ import os
 import subprocess
 import limbo
 from waflib.Build import BuildContext
+from waflib.Tools import waf_unit_test
 
 import inspect
 
@@ -34,6 +35,8 @@ def options(opt):
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
         opt.add_option('--experimental', action='store_true', help='specify to compile the experimental examples', dest='experimental')
+        # tests
+        opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
         opt.load('xcode')
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
@@ -88,14 +91,24 @@ def configure(conf):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
 
+def summary(bld):
+    lst = getattr(bld, 'utest_results', [])
+    total = 0
+    tfail = 0
+    if lst:
+        total = len(lst)
+        tfail = len([x for x in lst if x[1]])
+    waf_unit_test.summary(bld)
+    if tfail > 0:
+        bld.fatal("Build failed, because some tests failed!")
+
 def build(bld):
     bld.recurse('src/')
     if bld.options.exp:
         for i in bld.options.exp.split(','):
             print 'Building exp: ' + i
             bld.recurse('exp/' + i)
-        from waflib.Tools import waf_unit_test
-        bld.add_post_fun(waf_unit_test.summary)
+    bld.add_post_fun(summary)
 
 
 def build_extensive_tests(ctx):
