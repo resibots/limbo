@@ -11,6 +11,12 @@ dist: trusty
 compiler:
   - gcc
   - clang
+
+env:
+  global:
+    - REPO="resibots/limbo"
+    - CI_HOME=`pwd`/$REPO
+
 addons:
   apt:
     packages:
@@ -38,8 +44,7 @@ install:
   - make
   - sudo make install
   - cd
-  - ls
-  - cd resibots/limbo
+  - cd $CI_HOME
 
 
 # Change this to your needs
