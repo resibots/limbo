@@ -35,8 +35,8 @@ addons:
     - libgflags-dev
 
 install:
-  - if [ "$LIBCMAES" = "ON" ]; then 'cd /usr/src/gtest && sudo mkdir build && cd build && sudo cmake .. && sudo make && sudo cp *.a /usr/lib && cd && git clone https://github.com/beniz/libcmaes.git && cd libcmaes && ./autogen.sh && ./configure && make && sudo make install && cd && cd $CI_HOME && sudo ldconfig' ; fi
-  - if [ "$NLOPT" = "ON"]; then 'cd && wget http://ab-initio.mit.edu/nlopt/nlopt-2.4.2.tar.gz && tar -zxvf nlopt-2.4.2.tar.gz && cd nlopt-2.4.2 && ./configure -with-cxx --enable-shared   --without-python --without-matlab --without-octave && sudo make install && cd $CI_HOME && sudo ldconfig' ; fi
+  - if [ "$LIBCMAES" = "ON" ]; then 'ci/install_libcmaes.sh' ; fi
+  - if [ "$NLOPT" = "ON"]; then 'ci/install_nlopt.sh' ; fi
 
 
 # Change this to your needs
