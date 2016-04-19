@@ -36,7 +36,7 @@ addons:
 
 install:
   - if [ "$LIBCMAES" = "ON" ]; then 'ci/install_libcmaes.sh' ; fi
-  - if [ "$NLOPT" = "ON"]; then 'ci/install_nlopt.sh' ; fi
+  - if [ "$NLOPT" = "ON" ]; then 'ci/install_nlopt.sh' ; fi
 
 
 # Change this to your needs
