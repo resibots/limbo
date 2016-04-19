@@ -1,4 +1,4 @@
-limbo
+limbo [![Build Status](https://img.shields.io/travis/resibots/limbo.svg)](https://travis-ci.org/resibots/limbo)
 =====
 
 A lightweight framework for Bayesian and model-based optimisation of black-box functions (C++11).
@@ -27,7 +27,7 @@ Main references
 
 - **General introduction:** Brochu, E., Cora, V. M., & De Freitas, N. (2010). A tutorial on Bayesian optimization of expensive cost functions, with application to active user modeling and hierarchical reinforcement learning. *arXiv preprint arXiv:1012.2599*.
 
-- **Gaussian Processes (GP)**: Rasmussen, C. A, Williams C. K. I. (2006). /Gaussian Processes for Machine Learning./ MIT Press. 
+- **Gaussian Processes (GP)**: Rasmussen, C. A, Williams C. K. I. (2006). /Gaussian Processes for Machine Learning./ MIT Press.
 
 - **Optimizing hyperparameters:** Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian Process Hyperparameters using Rprop. In *European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning*.
 
@@ -45,4 +45,3 @@ Limbo is a framework for our research that is voluntarily kept small. It is desi
 If you need a more full-featured library, check:
 - BayesOpt: http://rmcantin.bitbucket.org/html/
 - libGP (no optimization): https://github.com/mblum/libgp
-
