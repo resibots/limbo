@@ -50,3 +50,6 @@ install:
 script:
   - ./waf configure
   - ./waf --tests --alltests -v
+  - ./build/src/tests/test_optimizers
+  - ./build/src/tests/test_init_functions
+  - ./build/src/tests/test_cmaes
