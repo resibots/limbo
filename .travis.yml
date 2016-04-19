@@ -25,23 +25,21 @@ addons:
     - libgflags-dev
 
 install:
-
-
-# Change this to your needs
-script:
-  - sudo cd /usr/src/gtest
+  - cd /usr/src/gtest
   - sudo mkdir build && cd build
   - sudo cmake ..
   - sudo make
   - sudo cp *.a /usr/lib
   - cd
-  - git clone git@github.com:beniz/libcmaes.git
+  - git clone https://github.com/beniz/libcmaes.git
   - cd libcmaes
   - ./autogen.sh
   - ./configure
   - make
   - sudo make install
-  - cd ..
-  - cd resibots/limbo
+
+
+# Change this to your needs
+script:
   - ./waf configure
   - ./waf --tests --alltests -v
