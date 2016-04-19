@@ -16,17 +16,20 @@ env:
   global:
     - CI_HOME=`pwd`
   matrix:
-    - LIBCMAES=ON NLOPT=ON
-    - LIBCMAES=ON NLOPT=OFF
-    - LIBCMAES=OFF NLOPT=ON
-    - LIBCMAES=OFF NLOPT=OFF
+    - LIBCMAES=ON NLOPT=ON TBB=ON
+    - LIBCMAES=ON NLOPT=ON TBB=OFF
+    - LIBCMAES=ON NLOPT=OFF TBB=ON
+    - LIBCMAES=ON NLOPT=OFF TBB=OFF
+    - LIBCMAES=OFF NLOPT=ON TBB=ON
+    - LIBCMAES=OFF NLOPT=ON TBB=OFF
+    - LIBCMAES=OFF NLOPT=OFF TBB=ON
+    - LIBCMAES=OFF NLOPT=OFF TBB=OFF
 
 addons:
   apt:
     packages:
     - libboost1.55-all-dev
     - libeigen3-dev
-    - libtbb-dev
     - libgtest-dev
     - autoconf
     - automake
@@ -37,6 +40,7 @@ addons:
 install:
   - if [ "$LIBCMAES" = "ON" ]; then 'ci/install_libcmaes.sh' ; fi
   - if [ "$NLOPT" = "ON" ]; then 'ci/install_nlopt.sh' ; fi
+  - if [ "$TBB" = "ON" ]; then 'ci/install_tbb.sh' ; fi
 
 
 # Change this to your needs
