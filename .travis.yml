@@ -24,7 +24,6 @@ env:
     - LIBCMAES=OFF NLOPT=ON TBB=OFF
     - LIBCMAES=OFF NLOPT=OFF TBB=ON
     - LIBCMAES=OFF NLOPT=OFF TBB=OFF
-    - LIBCMAES=ON NLOPT=ON TBB=ON EXTENSIVE=ON
 
 addons:
   apt:
@@ -42,4 +41,3 @@ install:
 script:
   - ./waf configure
   - ./waf --tests --alltests -v
-  - if [ "$EXTENSIVE" = "ON" ]; then 'ci/run_extensive.sh' ; fi
