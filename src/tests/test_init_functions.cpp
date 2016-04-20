@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE init_functions
+#define BOOST_TEST_MODULE test_init_functions
 
 #include <boost/test/unit_test.hpp>
 
@@ -79,8 +79,8 @@ BOOST_AUTO_TEST_CASE(no_init)
 
     Opt_t opt;
     opt.optimize(fit_eval());
-    BOOST_CHECK(opt.observations().size() == 1);
-    BOOST_CHECK(opt.samples().size() == 1);
+    BOOST_CHECK(opt.observations().size() == 0);
+    BOOST_CHECK(opt.samples().size() == 0);
 }
 
 BOOST_AUTO_TEST_CASE(random_sampling)
