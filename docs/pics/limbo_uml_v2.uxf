@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>525</x>
+      <y>154</y>
+      <w>133</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>BoOptimizer&lt;Params, ...&gt;
+--
+
+layer=1
+bg=white
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>518</x>
+      <y>84</y>
+      <w>147</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>bayes_opt
+--
+bg=#aaaaaa
+layer=-2
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>525</x>
+      <y>112</y>
+      <w>133</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>BoBase&lt;Params, ...&gt;
+--
+bg=#ffffff
+layer=1
+group=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>574</x>
+      <y>133</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+group=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>322</x>
+      <y>343</y>
+      <w>70</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>acqui
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>168</x>
+      <y>329</y>
+      <w>140</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>init
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>483</x>
+      <y>518</y>
+      <w>112</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>kernel
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>364</x>
+      <y>518</y>
+      <w>91</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>mean
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>175</x>
+      <y>357</y>
+      <w>126</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>RandomSampling
+RandomSamplingGrid
+GridSampling
+NoInit
+bg=#aaaaff
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>483</x>
+      <y>539</y>
+      <w>98</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Exp
+MaternFiveHalfs
+MaternThreeHalfs
+SquaredExpARD
+
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>329</x>
+      <y>364</y>
+      <w>56</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>UCB
+GP_UCB
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>371</x>
+      <y>539</y>
+      <w>77</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Constant
+Data
+FunctionARD
+NullFunction
+
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>406</x>
+      <y>343</y>
+      <w>112</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>model
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>532</x>
+      <y>364</y>
+      <w>126</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>Cmaes
+GridSearch
+ParallelRepeater
+Random_point
+Rprop
+NLOptGrad
+NLOptNoGrad
+NoInit
+
+bg=#aaaaff
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>525</x>
+      <y>343</y>
+      <w>140</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>opt
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>679</x>
+      <y>343</y>
+      <w>308</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>stat
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>686</x>
+      <y>364</y>
+      <w>154</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>AggregatedObservations
+BestAggregatedObservations
+BestObservations
+BestSamples
+BlSamples
+GPAcquisitions
+
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1001</x>
+      <y>364</y>
+      <w>98</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>ChainCriteria
+MaxIterations
+PredictedValue
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>994</x>
+      <y>343</y>
+      <w>112</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>stop
+--
+bg=#aaaaaa
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>854</x>
+      <y>364</y>
+      <w>126</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>GPKernelHParams
+GPLikelihood
+GPMeanHParams
+GPPredictionDifferences
+Observations
+Sample
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>413</x>
+      <y>364</y>
+      <w>35</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>GP
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>371</x>
+      <y>469</y>
+      <w>63</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>434</x>
+      <y>469</y>
+      <w>84</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>182</x>
+      <y>203</y>
+      <w>350</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>480.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>329</x>
+      <y>203</y>
+      <w>224</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>300.0;10.0;15.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>203</y>
+      <w>154</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>203</y>
+      <w>105</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>546</x>
+      <y>203</y>
+      <w>56</w>
+      <h>154</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>658</x>
+      <y>196</y>
+      <w>364</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;500.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>154</x>
+      <y>21</y>
+      <w>966</w>
+      <h>602</h>
+    </coordinates>
+    <panel_attributes>limbo
+--
+bg=#cccccc
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>294</y>
+      <w>266</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+optimize acquisition function</panel_attributes>
+    <additional_attributes>10.0;90.0;90.0;20.0;360.0;20.0;360.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>469</y>
+      <w>147</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+optimize hyper-parameters
+with *LFOpt</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>413</x>
+      <y>406</y>
+      <w>98</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>KernelLFOpt
+KernelMeanLFOpt
+MeanLFOpt
+NoLFOpt
+bg=#aaaaff</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -32,6 +32,27 @@ namespace limbo {
             boost::parameter::optional<tag::modelfun>> boptimizer_signature;
 
         // clang-format off
+        /**
+        The classic Bayesian optimization algorithm.
+
+        \rst
+        References: :cite:`brochu2010tutorial,Mockus2013`
+        \endrst
+
+        This class takes the same template parameters as BoBase. It adds:
+        \rst
+        +---------------------+------------+----------+---------------+
+        |type                 |typedef     | argument | default       |
+        +=====================+============+==========+===============+
+        |acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
+        +---------------------+------------+----------+---------------+
+        \endrst
+
+        The default value of acqui_opt_t is:
+        - ``opt::Cmaes<Params>`` if libcmaes was found in `waf configure`
+        - ``opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>`` if NLOpt was found but libcmaes was not found
+        - ``opt::GridSearch<Params>`` otherwise (please do not use this: the algorithm will not work at all!)
+        */
         template <class Params,
           class A1 = boost::parameter::void_,
           class A2 = boost::parameter::void_,
@@ -53,7 +74,7 @@ namespace limbo {
                 typedef opt::GridSearch<Params> acquiopt_t;
 #endif
             };
-
+            /// link to the corresponding BoBase (useful for typedefs)
             typedef BoBase<Params, A1, A2, A3, A4, A5> base_t;
             typedef typename base_t::model_t model_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
@@ -61,6 +82,7 @@ namespace limbo {
             typedef typename boptimizer_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
             typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
 
+            /// The main function (run the Bayesian optimization algorithm)
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
@@ -94,6 +116,7 @@ namespace limbo {
                 }
             }
 
+            /// return the best observation so far (i.e. max(f(x)))
             template <typename AggregatorFunction = FirstElem>
             const Eigen::VectorXd& best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
             {
@@ -103,6 +126,7 @@ namespace limbo {
                 return this->_observations[std::distance(rewards.begin(), max_e)];
             }
 
+            /// return the best sample so far (i.e. the argmax(f(x)))
             template <typename AggregatorFunction = FirstElem>
             const Eigen::VectorXd& best_sample(const AggregatorFunction& afun = AggregatorFunction()) const
             {

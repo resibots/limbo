@@ -14,16 +14,22 @@
 namespace limbo {
     namespace defaults {
         struct opt_rprop {
+            /// @ingroup opt_defaults
             BO_PARAM(int, iterations, 300);
         };
     }
     namespace opt {
-        // partly inspired by libgp: https://github.com/mblum/libgp
-        // reference :
-        // Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian
-        // Process Hyperparameters using Rprop. In European Symposium
-        // on Artificial Neural Networks, Computational Intelligence
-        // and Machine Learning.
+        /// @ingroup opt
+        /// Gradient-based optimization (rprop)
+        /// - partly inspired by libgp: https://github.com/mblum/libgp
+        /// - reference :
+        /// Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian
+        /// Process Hyperparameters using Rprop. In European Symposium
+        /// on Artificial Neural Networks, Computational Intelligence
+        /// and Machine Learning.
+        ///
+        /// Parameters:
+        /// - int iterations
         template <typename Params>
         struct Rprop {
             template <typename F>

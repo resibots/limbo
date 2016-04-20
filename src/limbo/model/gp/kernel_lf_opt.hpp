@@ -10,6 +10,8 @@
 namespace limbo {
     namespace model {
         namespace gp {
+            ///@ingroup model_opt
+            ///optimize the likelihood of the kernel only
             template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
             struct KernelLFOpt {
             public:

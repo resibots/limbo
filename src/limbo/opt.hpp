@@ -1,7 +1,12 @@
 #ifndef LIMBO_OPT_HPP
 #define LIMBO_OPT_HPP
 
+
+///@defgroup opt_defaults
+///@defgroup opt
+
 #include <limbo/opt/optimizer.hpp>
+#include <limbo/opt/chained.hpp>
 #ifdef USE_LIBCMAES
 #include <limbo/opt/cmaes.hpp>
 #endif

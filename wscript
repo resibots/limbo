@@ -34,6 +34,8 @@ def options(opt):
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
         opt.add_option('--experimental', action='store_true', help='specify to compile the experimental examples', dest='experimental')
+        # tests
+        opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
         opt.load('xcode')
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
@@ -56,11 +58,12 @@ def configure(conf):
             common_flags = "-Wall -std=c++11"
             opt_flags = " -O3 -xHost  -march=native -mtune=native -unroll -fma -g"
         else:
-            if int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
+            if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
                 common_flags = "-Wall -std=c++0x"
             else:
                 common_flags = "-Wall -std=c++11"
-            common_flags += " -fdiagnostics-color"
+            if conf.env.CXX_NAME in ["clang", "llvm"]:
+                common_flags += " -fdiagnostics-color"
             opt_flags = " -O3 -march=native -g"
 
         conf.check_boost(lib='serialization filesystem \
@@ -75,9 +78,6 @@ def configure(conf):
         conf.check_libcmaes()
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
-
-        if conf.env['CXXFLAGS_ODE']:
-                common_flags += ' ' + conf.env['CXXFLAGS_ODE']
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
@@ -94,8 +94,7 @@ def build(bld):
         for i in bld.options.exp.split(','):
             print 'Building exp: ' + i
             bld.recurse('exp/' + i)
-        from waflib.Tools import waf_unit_test
-        bld.add_post_fun(waf_unit_test.summary)
+    bld.add_post_fun(limbo.summary)
 
 
 def build_extensive_tests(ctx):

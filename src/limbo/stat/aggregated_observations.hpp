@@ -5,6 +5,10 @@
 
 namespace limbo {
     namespace stat {
+        ///@ingroup stat
+        /// TODO fallocati
+        ///Write all the observations
+        ///filename: `aggregated_observations.dat`
         template <typename Params>
         struct AggregatedObservations : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>

@@ -5,6 +5,8 @@
 
 namespace limbo {
     namespace mean {
+        ///@ingroup mean
+        ///Use the mean of the observation as a constant mean
         template <typename Params>
         struct Data {
             Data(size_t dim_out = 1) {}

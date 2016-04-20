@@ -48,4 +48,4 @@ We have specific needs that mainly revolve around high-performance, minimzing bo
 
 - Long-term use: our libraries will be used for at least 10 years in our group, therefore we want to use a language that will still exist in 10 years and that is not moving too fast (we do not want to rewrite our code every other month).
 
-Modern C++11 appears to be a good choice to fulfill all these criteria: it is reasonably easy to use, very easy to interface with everything, and very high-performance... but we keep a close eye on `Julia <julialang.org>`_, `Scala <www.scala-lang.org>`_, and `Rust <www.rust-lang.org>`_!
+Modern C++11 appears to be a good choice to fulfill all these criteria: it is reasonably easy to use, very easy to interface with everything, and very high-performance... but we keep a close eye on `Julia <http://julialang.org>`_, `Scala <http://www.scala-lang.org>`_, and `Rust <http://www.rust-lang.org>`_!
