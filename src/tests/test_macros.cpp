@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE macros
+#define BOOST_TEST_MODULE test_macros
 
 #include <cstring>
 

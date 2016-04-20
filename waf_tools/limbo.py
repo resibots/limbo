@@ -1,6 +1,7 @@
 import os
 import stat
 import subprocess
+from waflib.Tools import waf_unit_test
 
 json_ok = True
 try:
@@ -39,6 +40,16 @@ def create_variants(bld, source, uselib_local,
                     use=uselib_local,
                     defines=deff)
 
+def summary(bld):
+    lst = getattr(bld, 'utest_results', [])
+    total = 0
+    tfail = 0
+    if lst:
+        total = len(lst)
+        tfail = len([x for x in lst if x[1]])
+    waf_unit_test.summary(bld)
+    if tfail > 0:
+        bld.fatal("Build failed, because some tests failed!")
 
 def _sub_script(tpl, conf_file):
     if 'LD_LIBRARY_PATH' in os.environ:
