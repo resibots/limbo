@@ -14,7 +14,6 @@ import os
 import subprocess
 import limbo
 from waflib.Build import BuildContext
-from waflib.Tools import waf_unit_test
 
 import inspect
 
@@ -89,24 +88,13 @@ def configure(conf):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
 
-def summary(bld):
-    lst = getattr(bld, 'utest_results', [])
-    total = 0
-    tfail = 0
-    if lst:
-        total = len(lst)
-        tfail = len([x for x in lst if x[1]])
-    waf_unit_test.summary(bld)
-    if tfail > 0:
-        bld.fatal("Build failed, because some tests failed!")
-
 def build(bld):
     bld.recurse('src/')
     if bld.options.exp:
         for i in bld.options.exp.split(','):
             print 'Building exp: ' + i
             bld.recurse('exp/' + i)
-    bld.add_post_fun(summary)
+    bld.add_post_fun(limbo.summary)
 
 
 def build_extensive_tests(ctx):
