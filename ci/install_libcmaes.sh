@@ -1,3 +1,5 @@
+sudo apt-get -qq update
+sudo apt-get -qq --yes --force-yes install libgtest-dev autoconf automake libtool libgoogle-glog-dev libgflags-dev
 cd /usr/src/gtest
 sudo mkdir build && cd build
 sudo cmake ..
@@ -10,4 +12,4 @@ cd libcmaes
 make
 sudo make install
 sudo ldconfig
-cd && cd $CI_HOME
+cd $CI_HOME
