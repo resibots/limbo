@@ -1,5 +1,5 @@
-#ifndef LIMBO_BAYES_OPT_PARETO_HPP
-#define LIMBO_BAYES_OPT_PARETO_HPP
+#ifndef LIMBO_TOOLS_PARETO_HPP
+#define LIMBO_TOOLS_PARETO_HPP
 
 #include <algorithm>
 
@@ -102,11 +102,12 @@ namespace pareto {
 #endif
             limbo::tools::par::loop(0, p.size(), [&](size_t i) {
                 // clang-format off
-                    if (i % 10000 == 0)
+                /*    if (i % 10000 == 0)
                     {
                         std::cout << i << '[' << p.size() << "] ";
                         std::cout.flush();
                     }
+                */
                     if (non_dominated<K>(std::get<K>(p[i]), p))
                         pareto.push_back(p[i]);
                 // clang-format on
@@ -127,10 +128,10 @@ namespace pareto {
             f.push_back(impl::new_vector(p[0]));
             size_t e = 0;
             for (size_t i = 1; i < p.size(); ++i) {
-                if (i % 10000 == 0) {
+              /* if (i % 10000 == 0) {
                     std::cout << i << " [" << p.size() << "] ";
                     std::cout.flush();
-                }
+                }*/
                 if (std::get<K>(p[i])(1) > std::get<K>(f[e].back())(1)) { // !dominate(si, f_e)
                     auto b = std::lower_bound(f.begin(), f.end(), impl::new_vector(p[i]),
                         impl::comp_fronts<K>());

@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE nlopt_test
+#define BOOST_TEST_MODULE test_nlopt
 
 #include <boost/test/unit_test.hpp>
 

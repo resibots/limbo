@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE gp
+#define BOOST_TEST_MODULE test_gp
 
 #include <boost/test/unit_test.hpp>
 

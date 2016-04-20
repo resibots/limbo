@@ -5,6 +5,8 @@
 
 namespace limbo {
     namespace mean {
+        /// @ingroup mean
+        /// Constant with m=0
         template <typename Params>
         struct NullFunction {
             NullFunction(size_t dim_out = 1) : _dim_out(dim_out) {}

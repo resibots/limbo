@@ -9,10 +9,13 @@
 namespace limbo {
     namespace defaults {
         struct init_randomsampling {
+            ///@ingroup init_defaults
             BO_PARAM(int, samples, 10);
         };
     }
     namespace init {
+        ///@ingroup init
+        ///Pure random sampling
         template <typename Params>
         struct RandomSampling {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>

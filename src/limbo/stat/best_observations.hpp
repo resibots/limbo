@@ -5,6 +5,9 @@
 
 namespace limbo {
     namespace stat {
+        ///@ingroup stat
+        /// Write the best observation so far
+        ///filename: `best_observations.dat"`
         template <typename Params>
         struct BestObservations : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>

@@ -8,10 +8,22 @@
 namespace limbo {
     namespace defaults {
         struct acqui_ucb {
+            /// @ingroup acqui_defaults
             BO_PARAM(double, alpha, 0.5);
         };
     }
     namespace acqui {
+        /** @ingroup acqui
+        \rst
+        Classic UCB (Upper Confidence Bound). See :cite:`brochu2010tutorial`, p. 14
+
+          .. math::
+            UCB(x) = \mu(x) + \alpha \sigma(x).
+
+        Parameters:
+          - ``double alpha``
+        \endrst
+        */
         template <typename Params, typename Model>
         class UCB {
         public:

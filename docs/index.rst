@@ -45,6 +45,7 @@ Contents:
    self
    tutorials/index
    guides/index
+   api
    faq
 
 
@@ -56,7 +57,3 @@ Contents:
 .. * :ref:`search`
 
 
-TODO list
-==========
-
-.. todolist::

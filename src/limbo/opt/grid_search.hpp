@@ -11,10 +11,17 @@
 namespace limbo {
     namespace defaults {
         struct opt_gridsearch {
+            /// @ingroup opt_defaults
+            /// number of bins for each dimension
             BO_PARAM(int, bins, 5);
         };
     }
     namespace opt {
+        /// @ingroup opt
+        /// Grid search
+        ///
+        /// Parameters:
+        /// - int bins
         template <typename Params>
         struct GridSearch {
         public:

@@ -8,10 +8,19 @@
 namespace limbo {
     namespace defaults {
         struct init_gridsampling {
+            ///@ingroup init_defaults
             BO_PARAM(int, bins, 5);
         };
     }
     namespace init {
+        /** @ingroup init
+          \rst
+          Grid sampling.
+
+          Parameter :
+            - ``int bins`` (number of bins)
+          \endrst
+        */
         template <typename Params>
         struct GridSampling {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>
