@@ -28,14 +28,6 @@ struct Params {
   struct init_randomsampling {
       BO_PARAM(int, samples, 10);
   };
-  struct opt_nloptnograd {
-      BO_DYN_PARAM(int, iterations);
-      BO_PARAM(double, epsilon, 1e-12);
-  };
-  struct opt_nloptgrad {
-      BO_DYN_PARAM(int, iterations);
-      BO_PARAM(double, epsilon, 1e-12);
-  };
   struct mean_constant {
     BO_PARAM(double, constant, 1);
   };
