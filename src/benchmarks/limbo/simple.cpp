@@ -91,7 +91,6 @@ int main()
   srand(time(NULL));
 
     typedef kernel::MaternFiveHalfs<Params> Kernel_t;
-    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L> AcquiOpt_t;
     typedef opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
