@@ -19,6 +19,9 @@ namespace limbo {
             /// @ingroup opt_defaults
             /// number of calls to the optimized function
             BO_PARAM(int, iterations, 500);
+            /// @ingroup opt_defaults
+            /// nlopt relative and absolute tolerance stopping criteria
+            BO_PARAM(double, epsilon, 1e-12);
         };
     }
     namespace opt {
@@ -78,6 +81,8 @@ namespace limbo {
                 nlopt::opt opt(Algorithm, dim);
 
                 opt.set_max_objective(nlopt_func<F>, (void*)&f);
+                opt.set_ftol_rel(Params::opt_nloptnograd::epsilon());	
+                opt.set_ftol_abs(Params::opt_nloptnograd::epsilon());
 
                 std::vector<double> x(dim);
                 Eigen::VectorXd::Map(&x[0], dim) = init;
