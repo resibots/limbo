@@ -36,14 +36,12 @@ struct Params {
 struct DirectParams {
   struct opt_nloptnograd {
       BO_DYN_PARAM(int, iterations);
-      BO_PARAM(double, epsilon, 1e-12);
   };
 };
 
 struct BobyqaParams {
   struct opt_nloptnograd {
       BO_DYN_PARAM(int, iterations);
-      BO_PARAM(double, epsilon, 1e-12);
   };
 };
 
@@ -55,7 +53,7 @@ void benchmark(const std::string& name)
 {
     int iters_base = 250;
     DirectParams::opt_nloptnograd::set_iterations(static_cast<int>(iters_base * Function::dim_in * 0.9));
-    BobyqaParams::opt_nloptnograd::set_iterations(iters_base - DirectParams::opt_nloptnograd::iterations());
+    BobyqaParams::opt_nloptnograd::set_iterations(iters_base * Function::dim_in - DirectParams::opt_nloptnograd::iterations());
 
     auto t1 = std::chrono::steady_clock::now();
     Optimizer opt;
