@@ -60,7 +60,7 @@ The json file should look like this (for both OAR or Torque):
 
 .. code-block:: javascript
 
-    {
+    [{
      "exps" : ["hexa_duty_text"],
      "bin_dir" : "/nfs/hal01/jmouret/git/sferes2/build/default/exp/hexa_duty_cycle",
      "res_dir" : "/nfs/hal01/jmouret/data/maps_hexapod-slippy/",
@@ -68,7 +68,17 @@ The json file should look like this (for both OAR or Torque):
      "wall_time" : "270:00:00",
      "nb_runs" : 2,
      "nb_cores" : 24,
-    }
+    },
+
+    {
+     "exps" : ["hexa_duty_graphic"],
+     "bin_dir" : "/nfs/hal01/jmouret/git/sferes2/build/default/exp/hexa_duty_cycle",
+     "res_dir" : "/nfs/hal01/jmouret/data/maps_hexapod-slippy-graphic/",
+     "email" : "JBM",
+     "wall_time" : "270:00:00",
+     "nb_runs" : 2,
+     "nb_cores" : 24,
+    }]
 
 Explanations:
 
@@ -92,7 +102,7 @@ Explanations:
 
 Variants
 --------
-A very common use case is to compare variant XX to variant YY of an algorithm. Usually, only a few lines of code are different (like, calling kernel X or kernel Y). Limbo is designed to create a binary for each variant by defining a few constant at the beginning of a source file.
+A very common use case is to compare variant XX to variant YY of an algorithm. Usually, only a few lines of code are different (like, calling kernel X or kernel Y). Limbo is designed to create a binary for each variant by using defines (like defining constants at the beginning of each file).
 
 For instance, let's say we have a file called ``multi.cpp`` for which we want to compare two algorithms, ``Parego`` and ``EHVI``:
 
@@ -122,12 +132,10 @@ We can create two variants in the ``wscript``, as follows:
                                     'EHVI'])
 
 
-Limbo will create two files:
+Limbo will create two binaries:
 
-- ``multi_parego.cpp``, which is the ``multi.cpp`` file with a ``#define PAREGO`` at the first line
-- ``multi_ehvi.cpp``, which is the ``multi.cpp`` file with a ``#define EHVI`` at the first line
-
-**You should never edit these files**: they will be re-generated each time you will compile.
+- ``multi_parego``, which is the compilation of ``multi.cpp`` file with a ``#define PAREGO`` at the first line
+- ``multi_ehvi``, which is the compilation of ``multi.cpp`` file with a ``#define EHVI`` at the first line
 
 You can add as many defines as you like (or even generate them with python code), for instance:
 
@@ -150,4 +158,25 @@ This will create ``multi_parego_mop2_dim2`` and ``multi_ehvi_zdt2_dim6``.
 
 Using ``./waf --exp your_experiment`` will compile all the corresponding libraries. If you want to compile a single variant, you can use the ``--target`` option: ``./waf --exp your_experiment --target parego_mop2_dim2`.
 
-If you have more than one file, you will need to first compile a static library, then link with it in the variant.
+If you have more than one file, you have 2 options:
+
+- First compile a static library, then link with it in the variant.
+- Add them in sequence in the source input. The name of the first file is used for the variant target names. Example:
+
+.. code-block:: python
+
+  #! /usr/bin/env python
+  import limbo
+  def build(bld):
+
+    limbo.create_variants(bld,
+                        source = 'multi.cpp dep.cpp impl.cpp',
+                        uselib_local = 'limbo',
+                        uselib = 'BOOST EIGEN TBB SFERES',
+                        variants = ['PAREGO',
+                                    'EHVI'])
+
+Limbo will create two binaries:
+
+- ``multi_parego``, which is the compilation of ``multi.cpp``, ``dep.cpp`` and ``impl.cpp`` files with a ``#define PAREGO`` at the first line of each file
+- ``multi_ehvi``, which is the compilation of ``multi.cpp``, ``dep.cpp`` and ``impl.cpp`` files with a ``#define EHVI`` at the first line of each file

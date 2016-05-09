@@ -235,7 +235,7 @@
 <li><code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--oar=your_json_file.json</span></code></li>
 </ul>
 <p>The json file should look like this (for both OAR or Torque):</p>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[{</span>
  <span class="s2">&quot;exps&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;hexa_duty_text&quot;</span><span class="p">],</span>
  <span class="s2">&quot;bin_dir&quot;</span> <span class="o">:</span> <span class="s2">&quot;/nfs/hal01/jmouret/git/sferes2/build/default/exp/hexa_duty_cycle&quot;</span><span class="p">,</span>
  <span class="s2">&quot;res_dir&quot;</span> <span class="o">:</span> <span class="s2">&quot;/nfs/hal01/jmouret/data/maps_hexapod-slippy/&quot;</span><span class="p">,</span>
@@ -243,7 +243,17 @@
  <span class="s2">&quot;wall_time&quot;</span> <span class="o">:</span> <span class="s2">&quot;270:00:00&quot;</span><span class="p">,</span>
  <span class="s2">&quot;nb_runs&quot;</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
  <span class="s2">&quot;nb_cores&quot;</span> <span class="o">:</span> <span class="mi">24</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="p">},</span>
+
+<span class="p">{</span>
+ <span class="s2">&quot;exps&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;hexa_duty_graphic&quot;</span><span class="p">],</span>
+ <span class="s2">&quot;bin_dir&quot;</span> <span class="o">:</span> <span class="s2">&quot;/nfs/hal01/jmouret/git/sferes2/build/default/exp/hexa_duty_cycle&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;res_dir&quot;</span> <span class="o">:</span> <span class="s2">&quot;/nfs/hal01/jmouret/data/maps_hexapod-slippy-graphic/&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;email&quot;</span> <span class="o">:</span> <span class="s2">&quot;JBM&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;wall_time&quot;</span> <span class="o">:</span> <span class="s2">&quot;270:00:00&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;nb_runs&quot;</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+ <span class="s2">&quot;nb_cores&quot;</span> <span class="o">:</span> <span class="mi">24</span><span class="p">,</span>
+<span class="p">}]</span>
 </pre></div>
 </div>
 <p>Explanations:</p>
@@ -267,7 +277,7 @@
 </div>
 <div class="section" id="variants">
 <h2>Variants<a class="headerlink" href="#variants" title="Permalink to this headline">¶</a></h2>
-<p>A very common use case is to compare variant XX to variant YY of an algorithm. Usually, only a few lines of code are different (like, calling kernel X or kernel Y). Limbo is designed to create a binary for each variant by defining a few constant at the beginning of a source file.</p>
+<p>A very common use case is to compare variant XX to variant YY of an algorithm. Usually, only a few lines of code are different (like, calling kernel X or kernel Y). Limbo is designed to create a binary for each variant by using defines (like defining constants at the beginning of each file).</p>
 <p>For instance, let&#8217;s say we have a file called <code class="docutils literal"><span class="pre">multi.cpp</span></code> for which we want to compare two algorithms, <code class="docutils literal"><span class="pre">Parego</span></code> and <code class="docutils literal"><span class="pre">EHVI</span></code>:</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//.... code</span>
 <span class="cp">#ifdef PAREGO</span>
@@ -291,12 +301,11 @@
                                   <span class="s">&#39;EHVI&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Limbo will create two files:</p>
+<p>Limbo will create two binaries:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">multi_parego.cpp</span></code>, which is the <code class="docutils literal"><span class="pre">multi.cpp</span></code> file with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">PAREGO</span></code> at the first line</li>
-<li><code class="docutils literal"><span class="pre">multi_ehvi.cpp</span></code>, which is the <code class="docutils literal"><span class="pre">multi.cpp</span></code> file with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">EHVI</span></code> at the first line</li>
+<li><code class="docutils literal"><span class="pre">multi_parego</span></code>, which is the compilation of <code class="docutils literal"><span class="pre">multi.cpp</span></code> file with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">PAREGO</span></code> at the first line</li>
+<li><code class="docutils literal"><span class="pre">multi_ehvi</span></code>, which is the compilation of <code class="docutils literal"><span class="pre">multi.cpp</span></code> file with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">EHVI</span></code> at the first line</li>
 </ul>
-<p><strong>You should never edit these files</strong>: they will be re-generated each time you will compile.</p>
 <p>You can add as many defines as you like (or even generate them with python code), for instance:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
@@ -312,7 +321,28 @@
 </div>
 <p>This will create <code class="docutils literal"><span class="pre">multi_parego_mop2_dim2</span></code> and <code class="docutils literal"><span class="pre">multi_ehvi_zdt2_dim6</span></code>.</p>
 <p>Using <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--exp</span> <span class="pre">your_experiment</span></code> will compile all the corresponding libraries. If you want to compile a single variant, you can use the <code class="docutils literal"><span class="pre">--target</span></code> option: <a href="#id1"><span class="problematic" id="id2">``</span></a>./waf &#8211;exp your_experiment &#8211;target parego_mop2_dim2`.</p>
-<p>If you have more than one file, you will need to first compile a static library, then link with it in the variant.</p>
+<p>If you have more than one file, you have 2 options:</p>
+<ul class="simple">
+<li>First compile a static library, then link with it in the variant.</li>
+<li>Add them in sequence in the source input. The name of the first file is used for the variant target names. Example:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">limbo</span>
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
+
+  <span class="n">limbo</span><span class="o">.</span><span class="n">create_variants</span><span class="p">(</span><span class="n">bld</span><span class="p">,</span>
+                      <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;multi.cpp dep.cpp impl.cpp&#39;</span><span class="p">,</span>
+                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">,</span>
+                      <span class="n">uselib</span> <span class="o">=</span> <span class="s">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
+                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;PAREGO&#39;</span><span class="p">,</span>
+                                  <span class="s">&#39;EHVI&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Limbo will create two binaries:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">multi_parego</span></code>, which is the compilation of <code class="docutils literal"><span class="pre">multi.cpp</span></code>, <code class="docutils literal"><span class="pre">dep.cpp</span></code> and <code class="docutils literal"><span class="pre">impl.cpp</span></code> files with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">PAREGO</span></code> at the first line of each file</li>
+<li><code class="docutils literal"><span class="pre">multi_ehvi</span></code>, which is the compilation of <code class="docutils literal"><span class="pre">multi.cpp</span></code>, <code class="docutils literal"><span class="pre">dep.cpp</span></code> and <code class="docutils literal"><span class="pre">impl.cpp</span></code> files with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">EHVI</span></code> at the first line of each file</li>
+</ul>
 </div>
 </div>
 
