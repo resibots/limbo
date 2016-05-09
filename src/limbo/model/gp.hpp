@@ -59,25 +59,27 @@ namespace limbo {
 		
 	      } 
 	    
-	    if(samples.size()==_samples.size() && incremental) //no changes in samples since last computation.
-	      return;
-	    
-	    _samples = samples;
-            
-	    _observations.resize(observations.size(), _dim_out);
-	    for (int i = 0; i < _observations.rows(); ++i)
-	      _observations.row(i) = observations[i];
-	    
-	    _mean_observation.resize(_dim_out);
-	    for (int i = 0; i < _observations.cols(); i++)
-	      _mean_observation(i) = _observations.col(i).sum() / _observations.rows();
-	    
 	    _noise = noise;
+
+	    if(samples.size()!=_samples.size() || !incremental) //no changes in samples since last computation.
+	      {
+		_samples = samples;
+		
+		_observations.resize(observations.size(), _dim_out);
+		for (int i = 0; i < _observations.rows(); ++i)
+		  _observations.row(i) = observations[i];
+		
+		_mean_observation.resize(_dim_out);
+		for (int i = 0; i < _observations.cols(); i++)
+		  _mean_observation(i) = _observations.col(i).sum() / _observations.rows();
+		
+		_compute_obs_mean();
+		_compute_kernel(incremental);
+	      }
 	    
 	    _bl_samples = bl_samples;
-	    
-	    _compute_obs_mean();
-	    _compute_kernel(incremental);
+	    if (_bl_samples.size() != 0)
+	      _compute_bl_kernel();
 	    
 	    HyperParamsOptimizer()(*this);
 	  }
@@ -277,45 +279,45 @@ namespace limbo {
 
 	       // alpha = K^{-1} * this->_obs_mean;
 	       _alpha = _matrixL.template triangularView<Eigen::Lower>().solve(_obs_mean);
-		 _matrixL.template triangularView<Eigen::Lower>().adjoint().solveInPlace(_alpha); //can probably be improved by avoiding to generate the view twice
+	       _matrixL.template triangularView<Eigen::Lower>().adjoint().solveInPlace(_alpha); //can probably be improved by avoiding to generate the view twice
 		 
-		 if (_bl_samples.size() == 0)
-		   return;
+	   }
 
-
-		 Eigen::MatrixXd A1 = Eigen::MatrixXd::Identity(this->_samples.size(), this->_samples.size());
-		 _matrixL.template triangularView<Eigen::Lower>().solveInPlace(A1);
-		 _matrixL.template triangularView<Eigen::Lower>().transpose().solveInPlace(A1);
-
-		 _inv_bl_kernel.resize(_samples.size() + _bl_samples.size(),
-		     _samples.size() + _bl_samples.size());
-
-		 Eigen::MatrixXd B(_samples.size(), _bl_samples.size());
-		 for (size_t i = 0; i < _samples.size(); i++)
-		     for (size_t j = 0; j < _bl_samples.size(); ++j)
-			 B(i, j) = _kernel_function(_samples[i], _bl_samples[j]);
-
-		 Eigen::MatrixXd D(_bl_samples.size(), _bl_samples.size());
-		 for (size_t i = 0; i < _bl_samples.size(); i++)
-		     for (size_t j = 0; j < _bl_samples.size(); ++j)
-			 D(i, j) = _kernel_function(_bl_samples[i], _bl_samples[j]) + ((i == j) ? _noise : 0);
-
-		 Eigen::MatrixXd comA = (D - B.transpose() * A1 * B);
-		 Eigen::LLT<Eigen::MatrixXd> llt_bl(comA);
-		 Eigen::MatrixXd comA1 = Eigen::MatrixXd::Identity(_bl_samples.size(), _bl_samples.size());
-		 llt_bl.matrixL().solveInPlace(comA1);
-		 llt_bl.matrixL().transpose().solveInPlace(comA1);
-
-		 // fill the matrix block wise
-		 _inv_bl_kernel.block(0, 0, _samples.size(), _samples.size()) = A1 + A1 * B * comA1 * B.transpose() * A1;
-		 _inv_bl_kernel.block(0, _samples.size(), _samples.size(),
-		     _bl_samples.size()) = -A1 * B * comA1;
-		 _inv_bl_kernel.block(_samples.size(), 0, _bl_samples.size(),
-		     _samples.size()) = _inv_bl_kernel.block(0, _samples.size(), _samples.size(),
-							   _bl_samples.size()).transpose();
-		 _inv_bl_kernel.block(_samples.size(), _samples.size(), _bl_samples.size(),
-		 _bl_samples.size()) = comA1;
-	     }
+	  void _compute_bl_kernel()
+	  {
+	    Eigen::MatrixXd A1 = Eigen::MatrixXd::Identity(this->_samples.size(), this->_samples.size());
+	    _matrixL.template triangularView<Eigen::Lower>().solveInPlace(A1);
+	    _matrixL.template triangularView<Eigen::Lower>().transpose().solveInPlace(A1);
+	    
+	    _inv_bl_kernel.resize(_samples.size() + _bl_samples.size(),
+				  _samples.size() + _bl_samples.size());
+	    
+	    Eigen::MatrixXd B(_samples.size(), _bl_samples.size());
+	    for (size_t i = 0; i < _samples.size(); i++)
+	      for (size_t j = 0; j < _bl_samples.size(); ++j)
+		B(i, j) = _kernel_function(_samples[i], _bl_samples[j]);
+	    
+	    Eigen::MatrixXd D(_bl_samples.size(), _bl_samples.size());
+	    for (size_t i = 0; i < _bl_samples.size(); i++)
+	      for (size_t j = 0; j < _bl_samples.size(); ++j)
+		D(i, j) = _kernel_function(_bl_samples[i], _bl_samples[j]) + ((i == j) ? _noise : 0);
+	    
+	    Eigen::MatrixXd comA = (D - B.transpose() * A1 * B);
+	    Eigen::LLT<Eigen::MatrixXd> llt_bl(comA);
+	    Eigen::MatrixXd comA1 = Eigen::MatrixXd::Identity(_bl_samples.size(), _bl_samples.size());
+	    llt_bl.matrixL().solveInPlace(comA1);
+	    llt_bl.matrixL().transpose().solveInPlace(comA1);
+	    
+	    // fill the matrix block wise
+	    _inv_bl_kernel.block(0, 0, _samples.size(), _samples.size()) = A1 + A1 * B * comA1 * B.transpose() * A1;
+	    _inv_bl_kernel.block(0, _samples.size(), _samples.size(),
+				 _bl_samples.size()) = -A1 * B * comA1;
+	    _inv_bl_kernel.block(_samples.size(), 0, _bl_samples.size(),
+				 _samples.size()) = _inv_bl_kernel.block(0, _samples.size(), _samples.size(),
+									 _bl_samples.size()).transpose();
+	    _inv_bl_kernel.block(_samples.size(), _samples.size(), _bl_samples.size(),
+				 _bl_samples.size()) = comA1;
+	  }
 
 	     Eigen::VectorXd _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const
 	     {
