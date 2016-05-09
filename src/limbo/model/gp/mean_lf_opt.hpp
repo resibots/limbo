@@ -45,7 +45,7 @@ namespace limbo {
                         // --- cholesky ---
                         // see:
                         // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
-                        Eigen::MatrixXd l = gp.llt().matrixL();
+                        Eigen::MatrixXd l = gp.matrixL();
                         long double det = 2 * l.diagonal().array().log().sum();
 
                         double a = (gp.obs_mean().transpose() * gp.alpha())
@@ -58,8 +58,8 @@ namespace limbo {
 
                         // K^{-1} using Cholesky decomposition
                         Eigen::MatrixXd K = Eigen::MatrixXd::Identity(n, n);
-                        gp.llt().matrixL().solveInPlace(K);
-                        gp.llt().matrixL().transpose().solveInPlace(K);
+                        gp.matrixL().template triangularView<Eigen::Lower>().solveInPlace(K);
+                        gp.matrixL().template triangularView<Eigen::Lower>().transpose().solveInPlace(K);
 
                         Eigen::VectorXd grad = Eigen::VectorXd::Zero(params.size());
                         for (int i_obs = 0; i_obs < gp.dim_out(); ++i_obs)
