@@ -26,6 +26,13 @@ def build(bld):
                 uselib='BOOST EIGEN TBB SFERES NLOPT',
                 use='limbo')
 
+    bld.program(features='cxx',
+                source='limbo/hp_opt.cpp',
+                includes='. .. ../../ ../../src',
+                target='benchmark_limbo_hp_opt',
+                uselib='BOOST EIGEN TBB SFERES NLOPT',
+                use='limbo')
+
     #Quick and dirty way to add Bayesopt 
     #TODO make proper detection
 
@@ -34,6 +41,13 @@ def build(bld):
             source='bayesopt/simple.cpp',
             includes='.',
             target='benchmark_bayesopt',
+            uselib='BOOST EIGEN TBB NLOPT BAYESOPT',
+            use='')
+
+        bld(features='cxx cxxprogram',
+            source='bayesopt/hp_opt.cpp',
+            includes='.',
+            target='benchmark_bayesopt_hp_opt',
             uselib='BOOST EIGEN TBB NLOPT BAYESOPT',
             use='')
 
