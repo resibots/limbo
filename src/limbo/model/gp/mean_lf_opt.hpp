@@ -3,8 +3,8 @@
 
 #include <Eigen/Core>
 
-#include <limbo/opt/rprop.hpp>
 #include <limbo/opt/parallel_repeater.hpp>
+#include <limbo/opt/rprop.hpp>
 #include <limbo/tools/random_generator.hpp>
 
 namespace limbo {

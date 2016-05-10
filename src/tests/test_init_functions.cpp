@@ -3,10 +3,10 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <limbo/tools/macros.hpp>
-#include <limbo/init.hpp>
 #include <limbo/acqui.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/init.hpp>
+#include <limbo/tools/macros.hpp>
 
 using namespace limbo;
 
