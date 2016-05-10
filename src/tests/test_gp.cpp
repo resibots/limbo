@@ -260,3 +260,4 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 }
+
