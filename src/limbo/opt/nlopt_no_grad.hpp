@@ -78,8 +78,6 @@ namespace limbo {
                 nlopt::opt opt(Algorithm, dim);
 
                 opt.set_max_objective(nlopt_func<F>, (void*)&f);
-                opt.set_ftol_rel(1e-12);
-                opt.set_ftol_abs(1e-12);
 
                 std::vector<double> x(dim);
                 Eigen::VectorXd::Map(&x[0], dim) = init;
