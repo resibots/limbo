@@ -143,16 +143,16 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
     samples.push_back(make_v1(rgen.rand()));
 
     t1 = std::chrono::steady_clock::now();
-    gp.compute(samples, observations, 0.0);
+    gp.add_sample(samples.back(), observations.back(), 0.0);
     auto time_increment = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
     std::cout << "Time running increment: " << time_increment << "us" << std::endl
               << std::endl;
 
-    t1 = std::chrono::steady_clock::now();
+    /*t1 = std::chrono::steady_clock::now();
     gp.compute(samples, observations, 0.0);
     auto time_nothing = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
     std::cout << "Time running no change: " << time_nothing << "us" << std::endl
-              << std::endl;
+              << std::endl;*/
 
     GP_t gp2;
     t1 = std::chrono::steady_clock::now();
@@ -165,7 +165,7 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
     BOOST_CHECK((gp.mu(s) - gp2.mu(s)).norm() < 1e-5);
     BOOST_CHECK(gp.matrixL().isApprox(gp2.matrixL(), 1e-5));
     BOOST_CHECK(time_full > time_increment);
-    BOOST_CHECK(time_increment > time_nothing);
+    //BOOST_CHECK(time_increment > time_nothing);
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_no_samples_acqui_opt)

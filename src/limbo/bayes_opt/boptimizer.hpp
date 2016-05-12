@@ -35,18 +35,18 @@ namespace limbo {
         /**
         The classic Bayesian optimization algorithm.
 
-        \rst
+        \\rst
         References: :cite:`brochu2010tutorial,Mockus2013`
-        \endrst
+        \\endrst
 
         This class takes the same template parameters as BoBase. It adds:
-        \rst
+        \\rst
         +---------------------+------------+----------+---------------+
         |type                 |typedef     | argument | default       |
         +=====================+============+==========+===============+
         |acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
         +---------------------+------------+----------+---------------+
-        \endrst
+        \\endrst
 
         The default value of acqui_opt_t is:
         - ``opt::Cmaes<Params>`` if libcmaes was found in `waf configure`
@@ -108,8 +108,11 @@ namespace limbo {
 
                     this->_update_stats(*this, afun, blacklisted);
 
-                    if (!this->_observations.empty())
-                        _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
+                    if (blacklisted) {
+                        _model.add_bl_sample(this->_bl_samples.back(), Params::bayes_opt_boptimizer::noise());
+                    } else {
+                        _model.add_sample(this->_samples.back(), this->_observations.back(), Params::bayes_opt_boptimizer::noise());
+                    }
 
                     this->_current_iteration++;
                     this->_total_iterations++;

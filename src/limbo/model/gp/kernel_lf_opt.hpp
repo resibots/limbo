@@ -24,7 +24,7 @@ namespace limbo {
                     auto params = optimizer(optimization, tools::random_vector(dim), false);
                     gp.kernel_function().set_h_params(params);
                     gp.set_lik(opt::eval(optimization, params));
-                    gp.update();
+                    gp.recompute(false);
                 }
 
             protected:
@@ -38,7 +38,7 @@ namespace limbo {
                         GP gp(this->_original_gp);
                         gp.kernel_function().set_h_params(params);
 
-                        gp.update();
+                        gp.recompute(false);
 
                         size_t n = gp.obs_mean().rows();
 

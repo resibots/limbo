@@ -25,7 +25,7 @@ namespace limbo {
                     gp.kernel_function().set_h_params(params.head(gp.kernel_function().h_params_size()));
                     gp.mean_function().set_h_params(params.tail(gp.mean_function().h_params_size()));
                     gp.set_lik(opt::eval(optimization, params));
-                    gp.update();
+                    gp.recompute(true);
                 }
 
             protected:
@@ -40,7 +40,7 @@ namespace limbo {
                         gp.kernel_function().set_h_params(params.head(gp.kernel_function().h_params_size()));
                         gp.mean_function().set_h_params(params.tail(gp.mean_function().h_params_size()));
 
-                        gp.update();
+                        gp.recompute(true);
 
                         size_t n = gp.obs_mean().rows();
 

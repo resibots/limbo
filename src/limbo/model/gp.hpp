@@ -23,11 +23,11 @@ namespace limbo {
         class GP {
         public:
             /// useful because the model might be created before knowing anything about the process
-            GP() : _dim_in(-1), _dim_out(-1), _change_kf(true) {}
+            GP() : _dim_in(-1), _dim_out(-1) {}
 
             /// useful because the model might be created  before having samples
             GP(int dim_in, int dim_out)
-                : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out), _change_kf(true) {}
+                : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
             /// Compute the GP from samples, observation, noise. [optionnal: blacklisted samples]. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
@@ -49,44 +49,91 @@ namespace limbo {
                     _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
                 }
 
-                bool change_samples = true;
-                if (samples.size() == _samples.size() || samples.size() == _samples.size() + 1) //only one additional sample, can probably be generalized
-                {
-                    change_samples = false;
-                    for (size_t i = 0; !change_samples && i < _samples.size(); i++)
-                        change_samples = !_samples[i].isApprox(samples[i], 1e-1);
-                }
+                _samples = samples;
+
+                _observations.resize(observations.size(), _dim_out);
+                for (int i = 0; i < _observations.rows(); ++i)
+                    _observations.row(i) = observations[i];
+
+                _mean_observation = _observations.colwise().mean();
+                //_mean_observation.resize(_dim_out)
+                //for (int i = 0; i < _dim_out; i++)
+                //    _mean_observation(i) = _observations.col(i).mean();
 
                 _noise = noise;
 
-                if (samples.size() != _samples.size() || change_samples) //no changes in samples since last computation.
-                {
-                    _samples = samples;
-
-                    _observations.resize(observations.size(), _dim_out);
-                    for (int i = 0; i < _observations.rows(); ++i)
-                        _observations.row(i) = observations[i];
-
-                    _mean_observation.resize(_dim_out);
-                    for (int i = 0; i < _observations.cols(); i++)
-                        _mean_observation(i) = _observations.col(i).sum() / _observations.rows();
-
-                    _compute_obs_mean();
-                    _compute_kernel(!change_samples && !_change_kf);
-                }
-
                 _bl_samples = bl_samples;
-                if (_bl_samples.size() != 0)
-                    _compute_bl_kernel();
+
+                this->_compute_obs_mean();
+                this->_compute_kernel(false);
+
+                if (!_bl_samples.empty())
+                    this->_compute_bl_kernel();
 
                 HyperParamsOptimizer()(*this);
             }
 
+            void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
+            {
+                if (_samples.empty()) {
+                    if (_bl_samples.empty()) {
+                        _dim_in = sample.size();
+                        _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                    } else {
+                        assert(sample.size() == _dim_in);
+                    }
+
+                    _dim_out = observation.size();
+                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                } else {
+                    assert(sample.size() == _dim_in);
+                    assert(observation.size() == _dim_out);
+                }
+
+                _samples.push_back(sample);
+
+                _observations.conservativeResize(_observations.rows() + 1, _dim_out);
+                _observations.bottomRows<1>() = observation.transpose();
+
+                _mean_observation = _observations.colwise().mean();
+                //_mean_observation.resize(_dim_out)
+                //for (int i = 0; i < _dim_out; i++)
+                //    _mean_observation(i) = _observations.col(i).mean();
+
+                _noise = noise;
+
+                this->_compute_obs_mean();
+                this->_compute_kernel(true);
+
+                if (!_bl_samples.empty())
+                    this->_compute_bl_kernel();
+
+                HyperParamsOptimizer()(*this);
+            }
+
+            void add_bl_sample(const Eigen::VectorXd& bl_sample, double noise)
+            {
+                if (_samples.empty() && _bl_samples.empty()) {
+                    _dim_in = bl_sample.size();
+                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                } else {
+                    assert(bl_sample.size() == _dim_in);
+                }
+
+                _bl_samples.push_back(bl_sample);
+                _noise = noise;
+
+                if (!_samples.empty()) {
+                    this->_compute_bl_kernel();
+                    HyperParamsOptimizer()(*this);
+                }
+            }
+
             /**
-             \rst
-             return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
-             \endrst
-	  */
+             \\rst
+             return :math:`\\mu`, :math:`\\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
+             \\endrst
+	  		*/
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0 && _bl_samples.size() == 0)
@@ -102,10 +149,10 @@ namespace limbo {
             }
 
             /**
-             \rst
-             return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
-             \endrst
-	  */
+             \\rst
+             return :math:`\\mu` (unormalized). If there is no sample, return the value according to the mean function.
+             \\endrst
+	  		*/
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
@@ -114,10 +161,10 @@ namespace limbo {
             }
 
             /**
-             \rst
-             return :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function.
-             \endrst
-	  */
+             \\rst
+             return :math:`\\sigma^2` (unormalized). If there is no sample, return the value according to the mean function.
+             \\endrst
+	  		*/
             double sigma(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0 && _bl_samples.size() == 0)
@@ -141,11 +188,7 @@ namespace limbo {
 
             const KernelFunction& kernel_function() const { return _kernel_function; }
 
-            KernelFunction& kernel_function()
-            {
-                _change_kf = true;
-                return _kernel_function;
-            }
+            KernelFunction& kernel_function() { return _kernel_function; }
 
             const MeanFunction& mean_function() const { return _mean_function; }
 
@@ -177,17 +220,24 @@ namespace limbo {
             int nb_samples() const { return _samples.size(); }
 
             /** return the number of blacklisted samples used to compute the GP
-	     \rst
+	     \\rst
 	     For the blacklist concept, see the Limbo-specific concept guide.
-	     \endrst
+	     \\endrst
 	     */
             int nb_bl_samples() const { return _bl_samples.size(); }
 
-            /// update the GP
-            void update(bool incremental = false)
+            ///  recomputes the GP
+            void recompute(bool update_obs_mean)
             {
-                this->_compute_obs_mean(); // ORDER MATTERS
-                this->_compute_kernel(incremental);
+                assert(!_samples.empty());
+
+                if (update_obs_mean)
+                    this->_compute_obs_mean(); // ORDER MATTERS
+
+                this->_compute_kernel(false);
+
+                if (!_bl_samples.empty())
+                    this->_compute_bl_kernel();
             }
 
             /// return the likelihood (do not compute it!)
@@ -223,7 +273,6 @@ namespace limbo {
             Eigen::VectorXd _mean_observation;
 
             Eigen::MatrixXd _kernel;
-            bool _change_kf;
 
             // Eigen::MatrixXd _inverted_kernel;
 
@@ -247,7 +296,7 @@ namespace limbo {
                 if (!incremental) //_kernel.cols()==0 || !kernel.block(0,0,_kernel.rows(),_kernel.cols()).isApprox(_kernel, 1e-10)) // incremental LLT is impossible
                 {
 		  
-		  _kernel.resize(_samples.size(), _samples.size());
+		          _kernel.resize(_samples.size(), _samples.size());
 		  
                     // O(n^2) [should be negligible]
                     for (size_t i = 0; i < _samples.size(); i++)
@@ -293,7 +342,6 @@ namespace limbo {
                 // alpha = K^{-1} * this->_obs_mean;
                 _alpha = _matrixL.template triangularView<Eigen::Lower>().solve(_obs_mean);
                 _matrixL.template triangularView<Eigen::Lower>().adjoint().solveInPlace(_alpha); //can probably be improved by avoiding to generate the view twice
-                _change_kf = false;
 						  
             }
 
