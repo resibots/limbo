@@ -58,7 +58,7 @@ namespace limbo {
                 _bl_samples = bl_samples;
 
                 this->_compute_obs_mean();
-                this->_compute_kernel(false);
+                this->_compute_full_kernel();
 
                 if (!_bl_samples.empty())
                     this->_compute_bl_kernel();
@@ -93,7 +93,7 @@ namespace limbo {
                 _noise = noise;
 
                 this->_compute_obs_mean();
-                this->_compute_kernel(true);
+                this->_compute_incremental_kernel();
 
                 if (!_bl_samples.empty())
                     this->_compute_bl_kernel();
@@ -222,9 +222,9 @@ namespace limbo {
                 assert(!_samples.empty());
 
                 if (update_obs_mean)
-                    this->_compute_obs_mean(); // ORDER MATTERS
+                    this->_compute_obs_mean();
 
-                this->_compute_kernel(false);
+                this->_compute_full_kernel();
 
                 if (!_bl_samples.empty())
                     this->_compute_bl_kernel();
@@ -279,60 +279,60 @@ namespace limbo {
                 _obs_mean = _observations - _mean_vector;
             }
 
-            void _compute_kernel(bool incremental = false)
+            void _compute_full_kernel()
             {
-	      
-                // Check if new kernel is the same as before
-                if (!incremental) //_kernel.cols()==0 || !kernel.block(0,0,_kernel.rows(),_kernel.cols()).isApprox(_kernel, 1e-10)) // incremental LLT is impossible
-                {
-		  
-		          _kernel.resize(_samples.size(), _samples.size());
-		  
-                    // O(n^2) [should be negligible]
-                    for (size_t i = 0; i < _samples.size(); i++)
-                        for (size_t j = 0; j < _samples.size(); ++j)
-                            _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noise : 0); // noise only on the diagonal
-		  
-		  
-                    // O(n^3)
-                    //  _inverted_kernel = _kernel.inverse();
-                    _matrixL = Eigen::LLT<Eigen::MatrixXd>(_kernel).matrixL();
-		  
-		    
-                }
-                else //incremental LLT
-                //This part of the code is inpired from the Bayesopt Library (cholesky_add_row function). However, the mathematical fundations can be easily retrieved by detailling the equations of the extended L matrix that produces the desired kernel.
-                {
-		  
-		  size_t n = _samples.size();
-		  _kernel.conservativeResize(n, n);
-		  
+                size_t n = _samples.size();
+                _kernel.resize(n, n);
 
-		  
-                    for (size_t i = 0; i < n; ++i) {
-                        _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]) + ((i == n - 1) ? _noise : 0); // noise only on the diagonal
-                        _kernel(n - 1, i) = _kernel(i, n - 1);
-                    }
-		  
-		    _matrixL.conservativeResizeLike(Eigen::MatrixXd::Zero(n, n));
-		    
-                    double L_j;
-                    for (size_t j = 0; j < n - 1; ++j) {
-                        L_j = _kernel(n - 1, j) - (_matrixL.block(j, 0, 1, j) * _matrixL.block(n - 1, 0, 1, j).transpose())(0, 0);
-                        _matrixL(n - 1, j) = (L_j) / _matrixL(j, j);
-                    }
+                // O(n^2) [should be negligible]
+                for (size_t i = 0; i < n; i++)
+                    for (size_t j = 0; j <= i; ++j)
+                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noise : 0); // noise only on the diagonal
 
-                    L_j = _kernel(n - 1, n - 1) - (_matrixL.block(n - 1, 0, 1, n - 1) * _matrixL.block(n - 1, 0, 1, n - 1).transpose())(0, 0);
-                    _matrixL(n - 1, n - 1) = sqrt(L_j);
-		  
+                for (size_t i = 0; i < n; i++)
+                    for (size_t j = 0; j < i; ++j)
+                        _kernel(j, i) = _kernel(i, j);
+
+                // O(n^3)
+                _matrixL = Eigen::LLT<Eigen::MatrixXd>(_kernel).matrixL();
+
+                this->_compute_alpha();		  
+            }
+
+            void _compute_incremental_kernel()
+            {          
+                // Incremental LLT
+                // This part of the code is inpired from the Bayesopt Library (cholesky_add_row function). 
+                // However, the mathematical fundations can be easily retrieved by detailling the equations of the
+                // extended L matrix that produces the desired kernel.
+          
+                size_t n = _samples.size();
+                _kernel.conservativeResize(n, n);
+      
+                for (size_t i = 0; i < n; ++i) {
+                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]) + ((i == n - 1) ? _noise : 0); // noise only on the diagonal
+                    _kernel(n - 1, i) = _kernel(i, n - 1);
                 }
 
+                _matrixL.conservativeResizeLike(Eigen::MatrixXd::Zero(n, n));
 
- 
+                double L_j;
+                for (size_t j = 0; j < n - 1; ++j) {
+                    L_j = _kernel(n - 1, j) - (_matrixL.block(j, 0, 1, j) * _matrixL.block(n - 1, 0, 1, j).transpose())(0, 0);
+                    _matrixL(n - 1, j) = (L_j) / _matrixL(j, j);
+                }
+
+                L_j = _kernel(n - 1, n - 1) - (_matrixL.block(n - 1, 0, 1, n - 1) * _matrixL.block(n - 1, 0, 1, n - 1).transpose())(0, 0);
+                _matrixL(n - 1, n - 1) = sqrt(L_j);
+
+                this->_compute_alpha();                          
+            }
+
+            void _compute_alpha() 
+            {
                 // alpha = K^{-1} * this->_obs_mean;
                 _alpha = _matrixL.template triangularView<Eigen::Lower>().solve(_obs_mean);
                 _matrixL.template triangularView<Eigen::Lower>().adjoint().solveInPlace(_alpha); //can probably be improved by avoiding to generate the view twice
-						  
             }
 
             void _compute_bl_kernel()
