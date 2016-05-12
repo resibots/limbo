@@ -29,25 +29,21 @@ namespace limbo {
             GP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
-            /// Compute the GP from samples, observation, noise. [optionnal: blacklisted samples]. This call needs to be explicit!
+            /// Compute the GP from samples, observation, noise. [optional: blacklisted samples]. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations, double noise,
                 const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
             {
-                //should be checked each time! not only the first time
                 assert(samples.size() != 0);
                 assert(observations.size() != 0);
                 assert(samples.size() == observations.size());
 
-                if (_dim_in != samples[0].size()) {
-                    _dim_in = samples[0].size();
-                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-                }
+                _dim_in = samples[0].size();
+                _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                
 
-                if (_dim_out != observations[0].size()) {
-                    _dim_out = observations[0].size();
-                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
-                }
+                _dim_out = observations[0].size();
+                _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
 
                 _samples = samples;
 
@@ -56,9 +52,6 @@ namespace limbo {
                     _observations.row(i) = observations[i];
 
                 _mean_observation = _observations.colwise().mean();
-                //_mean_observation.resize(_dim_out)
-                //for (int i = 0; i < _dim_out; i++)
-                //    _mean_observation(i) = _observations.col(i).mean();
 
                 _noise = noise;
 
@@ -96,9 +89,6 @@ namespace limbo {
                 _observations.bottomRows<1>() = observation.transpose();
 
                 _mean_observation = _observations.colwise().mean();
-                //_mean_observation.resize(_dim_out)
-                //for (int i = 0; i < _dim_out; i++)
-                //    _mean_observation(i) = _observations.col(i).mean();
 
                 _noise = noise;
 
