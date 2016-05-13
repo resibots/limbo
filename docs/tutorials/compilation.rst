@@ -43,6 +43,8 @@ Compilation
 
 We use  the `WAF <https://waf.io>`_  build system, which is provided with the **limbo** source code. To know why we use waf (and not CMAKE, SCONS, traditional makefiles, etc.), see the :ref:`FAQ <faq-waf>`.
 
+Like most build systems, it has a configuration and build steps, described bellow.
+
 Configuration
 ~~~~~~~~~~~~~
 
