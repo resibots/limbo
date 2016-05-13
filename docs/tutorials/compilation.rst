@@ -48,11 +48,13 @@ Like most build systems, it has a configuration and build steps, described bello
 Configuration
 ~~~~~~~~~~~~~
 
+.. caution::
+  Make sure that the waf file has execution rights.
+
 The first step is to configure your waf environment. For this, assuming that you are in the main limbo directory, you have to run the command: ::
 
     ./waf configure
 
-Make sure that the waf file has execution rights.
 If everything is okay, you should expect an output like this: ::
 
     Setting top to                           : /path/to/limbo
