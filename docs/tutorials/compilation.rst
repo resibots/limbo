@@ -86,14 +86,14 @@ you can use the following command-line options to indicate where they are:
 Note that Sferes2 won't be used unless you specify it's installation folder.
 You can also specify a different compiler than the default, setting the environment variables ``CC`` and ``CXX``.
 
-A full example: ::
+A full example::
 
     CC=icc CXX=icpc ./waf configure --sferes ~/sferes2 --mkl ~/intel/mkl --tbb ~/intel/tbb
 
 Build
 ~~~~~~~~~~~~~
 
-The second step is to run the build command:::
+The second step is to run the build command::
 
     ./waf build
 
