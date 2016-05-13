@@ -2,6 +2,7 @@ import os
 import stat
 import subprocess
 import time
+import threading
 from waflib.Tools import waf_unit_test
 
 json_ok = True
@@ -123,7 +124,6 @@ def _sub_script_local(conf_file):
      # parse conf
     list_exps = simplejson.load(open(conf_file))
     fnames = []
-    arguments = []
     for conf in list_exps:
         exps = conf['exps']
         nb_runs = conf['nb_runs']
@@ -163,19 +163,30 @@ def _sub_script_local(conf_file):
                 subprocess.call('cp ' + bin_dir + '/' + e + ' ' + '"' + directory + '"', shell=True)
                 fname = e
                 fnames += [(fname, directory)]
-                arguments.append(args)
-    return fnames,arguments
+    return fnames,args
 
-def run_local(conf_file):
-    fnames,args = _sub_script_local(conf_file)
-    i = 0
+def run_local_one(directory, s):
+    std_out = open(directory+"/stdout.txt", "w")
+    std_err = open(directory+"/stderr.txt", "w")
+    retcode = subprocess.call(s, shell=True, env=None, stdout=std_out, stderr=std_err)
+
+def run_local(conf_file, serial = True):
+    fnames,arguments = _sub_script_local(conf_file)
+    threads = []
     for (fname, directory) in fnames:
-        s = "cd " + '"' + directory + '"' + " && " + "./" + fname + ' ' + args[i] # + " &"
+        s = "cd " + '"' + directory + '"' + " && " + "./" + fname + ' ' + arguments
         print "Executing " + s
-        retcode = subprocess.call(s, shell=True, env=None)
-        time.sleep(1)
-        i = i + 1
+        if not serial:
+            t = threading.Thread(target=run_local_one, args=(directory,s,))
+            threads.append(t)
+        else:
+            run_local_one(directory,s)
 
+    if not serial:
+        for i in range(len(threads)):
+            threads[i].start()
+        for i in range(len(threads)):
+            threads[i].join()
 
 def qsub(conf_file):
     tpl = """#!/bin/sh
