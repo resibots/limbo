@@ -17,7 +17,7 @@ Required
 
 Optional but highly recommended
 +++++++++++++++++++++++++++++++++
-* `libcmaes <https://github.com/beniz/libcmaes>`_. Be careful that gtest (which is a dependency of libcmaes) needs to be compiled **even if you install it with your package manager** (e.g. apt-get) (see below). Then follow the instructions here: https://github.com/beniz/libcmaes#build ::
+* `libcmaes <https://github.com/beniz/libcmaes>`_. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get). Follow the instructions `here <https://github.com/beniz/libcmaes#build>`_, reproduced for your convenience::
 
     sudo apt-get install gtest
     sudo cd /usr/src/gtest
@@ -28,7 +28,7 @@ Optional but highly recommended
 
 * `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
 
-    ./configure -with-cxx --enable-shared   --without-python --without-matlab --without-octave
+    ./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
     make install
 
 
