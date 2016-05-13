@@ -40,7 +40,7 @@ namespace limbo {
 
                 _dim_in = samples[0].size();
                 _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-                
+
 
                 _dim_out = observations[0].size();
                 _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
@@ -65,7 +65,8 @@ namespace limbo {
 
                 HyperParamsOptimizer()(*this);
             }
-
+            /// add sample and update the GP. This code uses an incremental implementation of the Cholesky
+            /// decomposition. It is therefore much faster than a call to compute()
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
                 if (_samples.empty()) {
@@ -101,6 +102,7 @@ namespace limbo {
                 HyperParamsOptimizer()(*this);
             }
 
+            /// add blacklisted sample and update the GP
             void add_bl_sample(const Eigen::VectorXd& bl_sample, double noise)
             {
                 if (_samples.empty() && _bl_samples.empty()) {
@@ -296,19 +298,19 @@ namespace limbo {
                 // O(n^3)
                 _matrixL = Eigen::LLT<Eigen::MatrixXd>(_kernel).matrixL();
 
-                this->_compute_alpha();		  
+                this->_compute_alpha();
             }
 
             void _compute_incremental_kernel()
-            {          
+            {
                 // Incremental LLT
-                // This part of the code is inpired from the Bayesopt Library (cholesky_add_row function). 
+                // This part of the code is inpired from the Bayesopt Library (cholesky_add_row function).
                 // However, the mathematical fundations can be easily retrieved by detailling the equations of the
                 // extended L matrix that produces the desired kernel.
-          
+
                 size_t n = _samples.size();
                 _kernel.conservativeResize(n, n);
-      
+
                 for (size_t i = 0; i < n; ++i) {
                     _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]) + ((i == n - 1) ? _noise : 0); // noise only on the diagonal
                     _kernel(n - 1, i) = _kernel(i, n - 1);
@@ -325,10 +327,10 @@ namespace limbo {
                 L_j = _kernel(n - 1, n - 1) - (_matrixL.block(n - 1, 0, 1, n - 1) * _matrixL.block(n - 1, 0, 1, n - 1).transpose())(0, 0);
                 _matrixL(n - 1, n - 1) = sqrt(L_j);
 
-                this->_compute_alpha();                          
+                this->_compute_alpha();
             }
 
-            void _compute_alpha() 
+            void _compute_alpha()
             {
                 // alpha = K^{-1} * this->_obs_mean;
                 _alpha = _matrixL.template triangularView<Eigen::Lower>().solve(_obs_mean);
