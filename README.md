@@ -1,4 +1,4 @@
-limbo [![Build Status](https://img.shields.io/travis/resibots/limbo.svg)](https://travis-ci.org/resibots/limbo)
+limbo [![Build Status](https://travis-ci.org/resibots/limbo.svg?branch=master)](https://travis-ci.org/resibots/limbo)
 =====
 
 A lightweight framework for Bayesian and model-based optimisation of black-box functions (C++11).
