@@ -30,7 +30,7 @@ struct Params {
         BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.001);
         BO_PARAM(bool, stats_enabled, true);
     };

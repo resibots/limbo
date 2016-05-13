@@ -330,6 +330,7 @@ namespace limbo {
                             XI = XI + 4.0;
                         LB_old = LB;
                     }
+                    _model.optimize_hyperparams();
                 }
 
                 template <typename AggregatorFunction = FirstElem>
