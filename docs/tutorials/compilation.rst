@@ -110,7 +110,8 @@ Depending on your compiler, there may be some warnings, but the output should en
 
 Building the documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*This section is only useful for developers who need to update the documentation.*
+.. note::
+    This section is only useful for developers who need to update the documentation.
 
 Install sphinx via pip: ::
 
