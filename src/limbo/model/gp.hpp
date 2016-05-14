@@ -62,9 +62,13 @@ namespace limbo {
 
                 if (!_bl_samples.empty())
                     this->_compute_bl_kernel();
+            }
 
+            /// Do not forget to call this if you use hyper-prameters optimization!!
+            void optimize_hyperparams() {
                 HyperParamsOptimizer()(*this);
             }
+
             /// add sample and update the GP. This code uses an incremental implementation of the Cholesky
             /// decomposition. It is therefore much faster than a call to compute()
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
@@ -98,8 +102,6 @@ namespace limbo {
 
                 if (!_bl_samples.empty())
                     this->_compute_bl_kernel();
-
-                HyperParamsOptimizer()(*this);
             }
 
             /// add blacklisted sample and update the GP
@@ -117,7 +119,6 @@ namespace limbo {
 
                 if (!_samples.empty()) {
                     this->_compute_bl_kernel();
-                    HyperParamsOptimizer()(*this);
                 }
             }
 

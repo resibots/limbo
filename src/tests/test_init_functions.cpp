@@ -22,7 +22,7 @@ struct Params {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer{
         BO_PARAM(double, noise, 0.01);
     };
 

@@ -17,6 +17,7 @@ namespace limbo {
     namespace defaults {
         struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 1e-6);
+            BO_PARAM(int, hp_period, 5);
         };
     }
 
@@ -110,9 +111,14 @@ namespace limbo {
 
                     if (blacklisted) {
                         _model.add_bl_sample(this->_bl_samples.back(), Params::bayes_opt_boptimizer::noise());
-                    } else {
+                    }
+                    else {
                         _model.add_sample(this->_samples.back(), this->_observations.back(), Params::bayes_opt_boptimizer::noise());
                     }
+
+                    if (Params::bayes_opt_boptimizer::hp_period() != -1
+                        && this->_current_iteration % Params::bayes_opt_boptimizer::hp_period() == 0)
+                        _model.optimize_hyperparams();
 
                     this->_current_iteration++;
                     this->_total_iterations++;
