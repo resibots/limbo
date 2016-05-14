@@ -31,12 +31,15 @@ namespace limbo {
 
             /// Compute the GP from samples, observation, noise. [optional: blacklisted samples]. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
-                const std::vector<Eigen::VectorXd>& observations, double noise,
-                const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
+                const std::vector<Eigen::VectorXd>& observations,
+                const Eigen::VectorXd& noises,
+                const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>(),
+                const Eigen::VectorXd& noises_bl = Eigen::VectorXd())
             {
                 assert(samples.size() != 0);
                 assert(observations.size() != 0);
                 assert(samples.size() == observations.size());
+                assert(bl_samples.size() == noises_bl.size());
 
                 _dim_in = samples[0].size();
                 _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
@@ -53,7 +56,8 @@ namespace limbo {
 
                 _mean_observation = _observations.colwise().mean();
 
-                _noise = noise;
+                _noises = noises;
+                _noises_bl = noises_bl;
 
                 _bl_samples = bl_samples;
 
@@ -95,7 +99,9 @@ namespace limbo {
 
                 _mean_observation = _observations.colwise().mean();
 
-                _noise = noise;
+                _noises.conservativeResize(_noises.size() + 1);
+                _noises[_noises.size() - 1] = noise;
+                //_noise = noise;
 
                 this->_compute_obs_mean();
                 this->_compute_incremental_kernel();
@@ -115,7 +121,10 @@ namespace limbo {
                 }
 
                 _bl_samples.push_back(bl_sample);
-                _noise = noise;
+
+                _noises_bl.conservativeResize(_noises_bl.size() + 1);
+                _noises_bl[_noises_bl.size() - 1] = noise;
+                //_noise = noise;
 
                 if (!_samples.empty()) {
                     this->_compute_bl_kernel();
@@ -261,7 +270,10 @@ namespace limbo {
             Eigen::MatrixXd _mean_vector;
             Eigen::MatrixXd _obs_mean;
 
-            double _noise;
+            //double _noise;
+            Eigen::VectorXd _noises;
+            Eigen::VectorXd _noises_bl;
+
             Eigen::MatrixXd _alpha;
             Eigen::VectorXd _mean_observation;
 
@@ -290,7 +302,7 @@ namespace limbo {
                 // O(n^2) [should be negligible]
                 for (size_t i = 0; i < n; i++)
                     for (size_t j = 0; j <= i; ++j)
-                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noise : 0); // noise only on the diagonal
+                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noises[i] : 0); // noise only on the diagonal
 
                 for (size_t i = 0; i < n; i++)
                     for (size_t j = 0; j < i; ++j)
@@ -313,7 +325,7 @@ namespace limbo {
                 _kernel.conservativeResize(n, n);
 
                 for (size_t i = 0; i < n; ++i) {
-                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]) + ((i == n - 1) ? _noise : 0); // noise only on the diagonal
+                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]) + ((i == n - 1) ? _noises[i] : 0); // noise only on the diagonal
                     _kernel(n - 1, i) = _kernel(i, n - 1);
                 }
 
@@ -355,7 +367,7 @@ namespace limbo {
                 Eigen::MatrixXd D(_bl_samples.size(), _bl_samples.size());
                 for (size_t i = 0; i < _bl_samples.size(); i++)
                     for (size_t j = 0; j < _bl_samples.size(); ++j)
-                        D(i, j) = _kernel_function(_bl_samples[i], _bl_samples[j]) + ((i == j) ? _noise : 0);
+                        D(i, j) = _kernel_function(_bl_samples[i], _bl_samples[j]) + ((i == j) ? _noises_bl[i] : 0);
 
                 Eigen::MatrixXd comA = (D - B.transpose() * A1 * B);
                 Eigen::LLT<Eigen::MatrixXd> llt_bl(comA);

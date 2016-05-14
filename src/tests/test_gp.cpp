@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE(test_gp_dim)
         make_v2(5, 5)};
     std::vector<Eigen::VectorXd> samples = {make_v2(1, 1), make_v2(2, 2), make_v2(3, 3)};
 
-    gp.compute(samples, observations, 0.0);
+    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
 
     Eigen::VectorXd mu;
     double sigma;
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE(test_gp)
         make_v1(5)};
     std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
 
-    gp.compute(samples, observations, 0.0);
+    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
 
     Eigen::VectorXd mu;
     double sigma;
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
 
     GP_t gp;
     auto t1 = std::chrono::steady_clock::now();
-    gp.compute(samples, observations, 0.0);
+    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
     auto time_init = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
     std::cout.precision(17);
     std::cout << "Time running first batch: " << time_init << "us" << std::endl
@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
 
     GP_t gp2;
     t1 = std::chrono::steady_clock::now();
-    gp2.compute(samples, observations, 0.0);
+    gp2.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
     auto time_full = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
     std::cout << "Time running whole batch: " << time_full << "us" << std::endl
               << std::endl;
@@ -214,7 +214,7 @@ BOOST_AUTO_TEST_CASE(test_gp_blacklist)
     std::vector<Eigen::VectorXd> observations = {make_v1(5)};
     std::vector<Eigen::VectorXd> bl_samples = {make_v1(2)};
 
-    gp.compute(samples, observations, 0.0);
+    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
 
     Eigen::VectorXd prev_mu1, mu1, prev_mu2, mu2;
     double prev_sigma1, sigma1, prev_sigma2, sigma2;
@@ -222,7 +222,7 @@ BOOST_AUTO_TEST_CASE(test_gp_blacklist)
     std::tie(prev_mu1, prev_sigma1) = gp.query(make_v1(1));
     std::tie(prev_mu2, prev_sigma2) = gp.query(make_v1(2));
 
-    gp.compute(samples, observations, 0.0, bl_samples);
+    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()), bl_samples, Eigen::VectorXd::Zero(bl_samples.size()));
 
     std::tie(mu1, sigma1) = gp.query(make_v1(1));
     std::tie(mu2, sigma2) = gp.query(make_v1(2));
@@ -244,7 +244,7 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10), make_v1(5)};
     std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
 
-    gp.compute(samples, observations, 0.0);
+    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
 
     Eigen::VectorXd mu;
     double sigma;

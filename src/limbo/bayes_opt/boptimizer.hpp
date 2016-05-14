@@ -91,7 +91,7 @@ namespace limbo {
                 this->_init(sfun, afun, reset);
 
                 if (!this->_observations.empty())
-                    _model.compute(this->_samples, this->_observations, Params::bayes_opt_boptimizer::noise(), this->_bl_samples);
+                    _model.compute(this->_samples, this->_observations, Eigen::VectorXd::Constant(this->_observations.size(), Params::bayes_opt_boptimizer::noise()), this->_bl_samples);
                 else
                     _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
 
