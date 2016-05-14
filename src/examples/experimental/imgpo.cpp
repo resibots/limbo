@@ -205,22 +205,6 @@ struct Params {
     struct acqui_ucb_imgpo : public defaults::acqui_ucb_imgpo {
     };
 
-#ifdef USE_LIBCMAES
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
-#elif defined(USE_NLOPT)
-    struct opt_nloptnograd : public defaults::opt_nloptnograd {
-    };
-#else
-    struct opt_gridsearch : public defaults::opt_gridsearch {
-    };
-#endif
-    struct opt_rprop : public defaults::opt_rprop {
-    };
-
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-    };
-
     struct mean_constant {
         BO_PARAM(double, constant, 0);
     };
