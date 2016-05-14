@@ -41,4 +41,4 @@ install:
 # Change this to your needs
 script:
   - ./waf configure
-  - if [ "$EXPERIMENTAL" = "OFF" ]; then './waf --tests --alltests -v' ; else './waf --experimental' ; fi
+  - if [ "$EXPERIMENTAL" = "OFF" ]; then ./waf --tests --alltests -v ; else ./waf --experimental ; fi
