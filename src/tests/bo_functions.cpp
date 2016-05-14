@@ -203,7 +203,10 @@ struct Params {
         BO_PARAM(int, iterations, 40);
     };
 
-    struct acqui_gpucb : public defaults::acqui_gpucb {
+  struct SquaredExpARD : public defaults::SquaredExpARD {
+  };
+
+  struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
 #ifdef USE_LIBCMAES

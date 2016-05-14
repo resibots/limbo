@@ -18,9 +18,12 @@ struct Params {
     struct opt_gridsearch : public defaults::opt_gridsearch {
     };
 #endif
-    struct opt_rprop : public defaults::opt_rprop {
-    };
-
+  struct opt_rprop : public defaults::opt_rprop {
+  };
+  
+  struct SquaredExpARD : public defaults::SquaredExpARD {
+  };
+    
     struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.2);

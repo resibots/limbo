@@ -28,7 +28,11 @@ struct Params {
         BO_PARAM(int, iterations, 50);
     };
 
-    struct kernel_maternfivehalfs {
+  struct SquaredExpARD : public defaults::SquaredExpARD {
+  };
+  
+  
+  struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.4);
     };
