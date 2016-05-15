@@ -20,12 +20,15 @@ struct Params {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.0001);
     };
 
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 50);
+    };
+
+    struct SquaredExpARD : public defaults::SquaredExpARD {
     };
 
     struct kernel_maternfivehalfs {

@@ -1,22 +1,22 @@
-#include <cmath>
 #include <algorithm>
-#include <string>
-#include <vector>
-#include <utility>
+#include <cmath>
 #include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include <Eigen/Core>
 
 #ifdef USE_TBB
-#include <tbb/task_scheduler_init.h>
-#include <tbb/parallel_for.h>
 #include <tbb/concurrent_hash_map.h>
+#include <tbb/parallel_for.h>
+#include <tbb/task_scheduler_init.h>
 #else
 #include <map>
 #endif
 
-#include <limbo/tools/macros.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
 
 using namespace limbo;
@@ -191,7 +191,7 @@ struct Params {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.0);
     };
 
@@ -201,6 +201,9 @@ struct Params {
 
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 40);
+    };
+
+    struct SquaredExpARD : public defaults::SquaredExpARD {
     };
 
     struct acqui_gpucb : public defaults::acqui_gpucb {
@@ -236,7 +239,7 @@ void print_res(const T& r)
         std::vector<std::pair<double, double>>& v = x.second;
         std::sort(v.begin(), v.end(),
             [](const std::pair<double, double>& x1,
-                      const std::pair<double, double>& x2) {
+                const std::pair<double, double>& x2) {
                 // clang-format off
                 return x1.second < x2.second;
                 // clang-format on
@@ -298,7 +301,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Sphere());
                 Eigen::Vector2d s_val(0.5, 0.5);
@@ -309,7 +312,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
                 Eigen::Vector2d s_val(0.5, 0.5);
@@ -320,7 +323,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Rastrigin());
                 Eigen::Vector4d s_val(0, 0, 0, 0);
@@ -331,7 +334,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman3());
                 // double s_max = 3.86278;
@@ -343,7 +346,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman6());
                 Eigen::Matrix<double, 6, 1> s_val;
@@ -356,7 +359,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(GoldenPrice());
                 //    double s_max = -log(3);

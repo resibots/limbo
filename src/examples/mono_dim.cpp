@@ -35,8 +35,8 @@ BO_PARAMS(std::cout,
                 BO_PARAM(bool, stats_enabled, true);
               };
 
-              struct bayes_opt_boptimizer {
-                  BO_PARAM(double, noise, 0.001);                  
+              struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
+                  BO_PARAM(double, noise, 0.001);
               };
 
               struct init_randomsampling {
