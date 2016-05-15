@@ -39,11 +39,10 @@ namespace limbo {
                 assert(samples.size() != 0);
                 assert(observations.size() != 0);
                 assert(samples.size() == observations.size());
-                assert(bl_samples.size() == noises_bl.size());
+                assert(bl_samples.size() == (unsigned int)noises_bl.size());
 
                 _dim_in = samples[0].size();
                 _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-
 
                 _dim_out = observations[0].size();
                 _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
@@ -69,7 +68,8 @@ namespace limbo {
             }
 
             /// Do not forget to call this if you use hyper-prameters optimization!!
-            void optimize_hyperparams() {
+            void optimize_hyperparams()
+            {
                 HyperParamsOptimizer()(*this);
             }
 
@@ -81,13 +81,15 @@ namespace limbo {
                     if (_bl_samples.empty()) {
                         _dim_in = sample.size();
                         _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-                    } else {
+                    }
+                    else {
                         assert(sample.size() == _dim_in);
                     }
 
                     _dim_out = observation.size();
                     _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
-                } else {
+                }
+                else {
                     assert(sample.size() == _dim_in);
                     assert(observation.size() == _dim_out);
                 }
@@ -116,7 +118,8 @@ namespace limbo {
                 if (_samples.empty() && _bl_samples.empty()) {
                     _dim_in = bl_sample.size();
                     _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-                } else {
+                }
+                else {
                     assert(bl_sample.size() == _dim_in);
                 }
 
@@ -383,7 +386,7 @@ namespace limbo {
                 _inv_bl_kernel.block(_samples.size(), 0, _bl_samples.size(),
                     _samples.size())
                     = _inv_bl_kernel.block(0, _samples.size(), _samples.size(),
-                                        _bl_samples.size())
+                                         _bl_samples.size())
                           .transpose();
                 _inv_bl_kernel.block(_samples.size(), _samples.size(), _bl_samples.size(),
                     _bl_samples.size())
