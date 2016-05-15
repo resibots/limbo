@@ -4,11 +4,11 @@
 #include <Eigen/Core>
 
 namespace limbo {
-    namespace defaults {
-        struct SquaredExpARD {
-            BO_PARAM(int, k, 0); //equivalent to the standard exp ARD
-        };
-    }
+  namespace defaults {
+    struct SquaredExpARD {
+      BO_PARAM(int, k, 0); //equivalent to the standard exp ARD
+    };
+  }
 
     namespace kernel {
         /**
@@ -19,9 +19,9 @@ namespace limbo {
         Computes the squared exponential covariance like this:
 
         .. math::
-            k_{SE}(x, y) = \alpha^2 \exp \Big(-\frac{1}{2}(x-y)^T\Lambda^{-1}(x-y)\Big),
+            k_{SE}(x, y) = \alpha^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),
 
-        with :math:`\Lambda = diag(l_1^2, \dots, l_n^2)` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \alpha` are expected in this order in the parameter array.
+	 with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \alpha, \Lambda` are expected in this order in the parameter array.
 
         Reference: :cite:`Rasmussen2006`, p. 106 & :cite:`brochu2010tutorial`, p. 10
         \endrst
