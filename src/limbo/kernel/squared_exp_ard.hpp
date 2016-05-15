@@ -4,11 +4,11 @@
 #include <Eigen/Core>
 
 namespace limbo {
-  namespace defaults {
-    struct SquaredExpARD {
-      BO_PARAM(int, k, 0); //equivalent to the standard exp ARD
-    };
-  }
+    namespace defaults {
+        struct SquaredExpARD {
+            BO_PARAM(int, k, 0); //equivalent to the standard exp ARD
+        };
+    }
 
     namespace kernel {
         /**
@@ -45,7 +45,7 @@ namespace limbo {
                 _h_params = p;
                 for (size_t i = 0; i < _input_dim; ++i)
                     _ell(i) = std::exp(p(i));
-                for (size_t j = 0; j < Params::SquaredExpARD::k(); ++j)
+                for (size_t j = 0; j < (unsigned int)Params::SquaredExpARD::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
                         _A(i, j) = p((j + 1) * _input_dim + i); //can be negative
                 _sf2 = 1; // exp(2 * p(p.size()-1));
