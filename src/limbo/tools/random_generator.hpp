@@ -54,6 +54,16 @@ namespace limbo {
         }
 
         /// @ingroup tools
+        /// make a 1-D vector from a double (useful when we need to return vectors)
+        Eigen::VectorXd make_vector(double x)
+        {
+          Eigen::VectorXd res(1);
+          res(0) = x;
+          return res;
+        }
+
+
+        /// @ingroup tools
         /// a mt19937-based random generator (mutex-protected)
         ///
         /// usage :
@@ -84,7 +94,7 @@ namespace limbo {
         /// @ingroup tools
         /// Double random number generator
         using rgen_double_t = RandomGenerator<rdist_double_t>;
-        
+
         ///@ingroup tools
         ///integer random number generator
         using rgen_int_t = RandomGenerator<rdist_int_t>;
