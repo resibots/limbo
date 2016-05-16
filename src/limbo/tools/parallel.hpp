@@ -52,7 +52,7 @@ namespace limbo {
 #endif
 
             template <typename V>
-            V& convert_vector(const V& v)
+            V convert_vector(const V& v)
             {
                 return v;
             }
@@ -130,7 +130,7 @@ namespace limbo {
                     body, joint);
 #else
                 T current_max = init;
-                for (size_t i = 0; i < num_steps; ++i) {
+                for (int i = 0; i < num_steps; ++i) {
                     T v = f(i);
                     if (comp(v, current_max))
                         current_max = v;
