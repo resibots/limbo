@@ -131,36 +131,46 @@ Full ``main.cpp``::
     using namespace limbo;
 
     struct Params {
+        // option for the Bayesian optimizer
         struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 0.0);
         };
 
+        // enable / disable the output
         struct bayes_opt_bobase {
-            BO_PARAM(int, stats_enabled, false);
+          BO_PARAM(int, stats_enabled, false);
         };
 
+        // options for the internal optimizer
+        #ifdef USE_LIBCMAES
+        struct opt_cmaes : public defaults::opt_cmaes { };
+        #elif defined(USE_NLOPT)
+        struct opt_nloptnograd : public defaults::opt_nloptnograd { };
+        #else
+        struct opt_gridsearch : public defaults::opt_gridsearch { };
+        #endif
+
+        // options for the initializer
         struct init_randomsampling {
             BO_PARAM(int, samples, 10);
         };
 
+        // options for the stopping criteria
         struct stop_maxiterations {
             BO_PARAM(int, iterations, 40);
         };
 
-        struct acqui_gpucb : public defaults::acqui_gpucb {
-        };
+        // options for the acquisition function
+        // (here we just take the default values)
+        struct acqui_gpucb : public defaults::acqui_gpucb { };
 
-        struct opt_gridsearch : public defaults::opt_gridsearch {
-        };
-
-        struct opt_rprop : public defaults::opt_rprop {
-        };
-
-        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-        };
+        // options for the hyper-parameter optimizer
+        // (here we just take the default values)
+        struct opt_rprop : public defaults::opt_rprop { };
+        struct opt_parallelrepeater : public defaults::opt_parallelrepeater { };
     };
 
-     struct Eval {
+    struct Eval {
         static constexpr size_t dim_in = 1;
         static constexpr size_t dim_out = 1;
 
