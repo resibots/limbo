@@ -45,12 +45,7 @@ namespace limbo {
 
             protected:
                 size_t _nb_objs;
-                Eigen::VectorXd _make_v1(double x)
-                {
-                    Eigen::VectorXd v1(1);
-                    v1 << x;
-                    return v1;
-                }
+
                 std::vector<Eigen::VectorXd> _scalarize_obs(const std::vector<Eigen::VectorXd>& observations)
                 {
                     Eigen::VectorXd lambda = tools::random_vector(_nb_objs);
@@ -61,7 +56,7 @@ namespace limbo {
                     for (auto x : observations) {
                         double y = (lambda.array() * x.array()).maxCoeff();
                         double s = (lambda.array() * x.array()).sum();
-                        auto v = _make_v1(y + Params::model_gp_parego::rho() * s);
+                        auto v = tools::make_vector(y + Params::model_gp_parego::rho() * s);
                         scalarized.push_back(v);
                     }
                     return scalarized;

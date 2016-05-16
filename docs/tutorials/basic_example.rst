@@ -55,7 +55,7 @@ To begin, the ``main`` file has to include the necessary files, and declare the 
 
         // enable / disable the output
         struct bayes_opt_bobase {
-          BO_PARAM(int, stats_enabled, false);
+          BO_PARAM(int, stats_enabled, true);
         };
 
         // options for the internal optimizer
@@ -99,9 +99,8 @@ Then, we have to define the evaluation function for the optimizer to call: ::
 
         Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
         {
-            Eigen::VectorXd res(1);
-            res(0) = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
-            return res;
+            double y = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
+            return tools::make_vector(y);
         }
     };
 
@@ -176,9 +175,8 @@ Full ``main.cpp``::
 
         Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
         {
-            Eigen::VectorXd res(1);
-            res(0) = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
-            return res;
+          double y = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
+          return tools::make_vector(y);
         }
     };
 

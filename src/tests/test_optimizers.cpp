@@ -11,13 +11,6 @@
 
 using namespace limbo;
 
-Eigen::VectorXd make_v1(double x)
-{
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
-}
-
 struct Params {
     struct opt_gridsearch {
         BO_PARAM(int, bins, 20);

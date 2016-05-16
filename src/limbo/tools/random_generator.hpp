@@ -84,7 +84,7 @@ namespace limbo {
         /// @ingroup tools
         /// Double random number generator
         using rgen_double_t = RandomGenerator<rdist_double_t>;
-        
+
         ///@ingroup tools
         ///integer random number generator
         using rgen_int_t = RandomGenerator<rdist_int_t>;
