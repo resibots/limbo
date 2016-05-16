@@ -8,12 +8,11 @@
 #include <Eigen/Core>
 
 #ifdef USE_TBB
-#include <map>
-
 #include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>
 #include <tbb/concurrent_hash_map.h>
 #else
+#include <map>
 #endif
 
 #include <limbo/tools/macros.hpp>
@@ -206,22 +205,6 @@ struct Params {
     struct acqui_ucb_imgpo : public defaults::acqui_ucb_imgpo {
     };
 
-#ifdef USE_LIBCMAES
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
-#elif defined(USE_NLOPT)
-    struct opt_nloptnograd : public defaults::opt_nloptnograd {
-    };
-#else
-    struct opt_gridsearch : public defaults::opt_gridsearch {
-    };
-#endif
-    struct opt_rprop : public defaults::opt_rprop {
-    };
-
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-    };
-
     struct mean_constant {
         BO_PARAM(double, constant, 0);
     };
@@ -271,9 +254,16 @@ bool is_in_argv(int argc, char** argv, const char* needle)
 template <typename T1, typename T2>
 void add_to_results(const char* key, T1& map, const T2& p)
 {
+#ifdef USE_TBB
     typename T1::accessor a;
     if (!map.find(a, key))
         map.insert(a, key);
+#else
+    typename T1::iterator a;
+    a = map.find(key);
+    if (a == map.end())
+        map[key] = std::vector<std::pair<double, double>>();
+#endif
     a->second.push_back(p);
 }
 
