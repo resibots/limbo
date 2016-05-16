@@ -210,11 +210,11 @@
         <span class="n">source</span><span class="o">=</span><span class="s">&#39;main.cpp&#39;</span><span class="p">,</span>
         <span class="n">includes</span><span class="o">=</span><span class="s">&#39;. ../../src&#39;</span><span class="p">,</span>
         <span class="n">target</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">,</span>
-        <span class="n">uselib</span><span class="o">=</span><span class="s">&#39;BOOST EIGEN TBB&#39;</span><span class="p">,</span>
+        <span class="n">uselib</span><span class="o">=</span><span class="s">&#39;BOOST EIGEN TBB LIBCMAES NLOPT&#39;</span><span class="p">,</span>
         <span class="n">use</span><span class="o">=</span><span class="s">&#39;limbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For this example, we will optimize a simple function: <span class="math">\(-{(5*x - 2.5)}^2 + 5\)</span>, using all default values and settings.</p>
+<p>For this example, we will optimize a simple function: <span class="math">\(-{(5*x - 2.5)}^2 + 5\)</span>, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from &#8216;uselib&#8217;.</p>
 <p>To begin, the <code class="docutils literal"><span class="pre">main</span></code> file has to include the necessary files, and declare the <code class="docutils literal"><span class="pre">Parameter</span> <span class="pre">struct</span></code>:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
 <span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>
@@ -222,33 +222,43 @@
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
 
 <span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="c1">// option for the Bayesian optimizer</span>
     <span class="k">struct</span> <span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
     <span class="p">};</span>
 
+    <span class="c1">// enable / disable the output</span>
     <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
     <span class="p">};</span>
 
+    <span class="c1">// options for the internal optimizer</span>
+    <span class="cp">#ifdef USE_LIBCMAES</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="cp">#elif defined(USE_NLOPT)</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="cp">#else</span>
+    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="cp">#endif</span>
+
+    <span class="c1">// options for the initializer</span>
     <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="p">};</span>
 
+    <span class="c1">// options for the stopping criteria</span>
     <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="k">struct</span> <span class="nl">acqui_gpucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_gpucb</span> <span class="p">{</span>
-    <span class="p">};</span>
+    <span class="c1">// options for the acquisition function</span>
+    <span class="c1">// (here we just take the default values)</span>
+    <span class="k">struct</span> <span class="nl">acqui_gpucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_gpucb</span> <span class="p">{</span> <span class="p">};</span>
 
-    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>
-    <span class="p">};</span>
-
-    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
-    <span class="p">};</span>
-
-    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
-    <span class="p">};</span>
+    <span class="c1">// options for the hyper-parameter optimizer</span>
+    <span class="c1">// (here we just take the default values)</span>
+    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span> <span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
 </div>

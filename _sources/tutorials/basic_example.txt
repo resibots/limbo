@@ -20,7 +20,7 @@ The file structure should look like this: ::
             +-- wscript
             +-- main.cpp
 
-Next, copy the following content to the ``wscript`` file: 
+Next, copy the following content to the ``wscript`` file:
 
 .. code:: python
 
@@ -33,10 +33,10 @@ Next, copy the following content to the ``wscript`` file:
             source='main.cpp',
             includes='. ../../src',
             target='test',
-            uselib='BOOST EIGEN TBB',
-            use='limbo') 
+            uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+            use='limbo')
 
-For this example, we will optimize a simple function: :math:`-{(5*x - 2.5)}^2 + 5`, using all default values and settings.
+For this example, we will optimize a simple function: :math:`-{(5*x - 2.5)}^2 + 5`, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from 'uselib'.
 
 .. highlight:: c++
 
@@ -48,33 +48,43 @@ To begin, the ``main`` file has to include the necessary files, and declare the 
     using namespace limbo;
 
     struct Params {
+        // option for the Bayesian optimizer
         struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 0.0);
         };
 
+        // enable / disable the output
         struct bayes_opt_bobase {
-            BO_PARAM(int, stats_enabled, false);
+          BO_PARAM(int, stats_enabled, false);
         };
 
+        // options for the internal optimizer
+        #ifdef USE_LIBCMAES
+        struct opt_cmaes : public defaults::opt_cmaes { };
+        #elif defined(USE_NLOPT)
+        struct opt_nloptnograd : public defaults::opt_nloptnograd { };
+        #else
+        struct opt_gridsearch : public defaults::opt_gridsearch { };
+        #endif
+
+        // options for the initializer
         struct init_randomsampling {
             BO_PARAM(int, samples, 10);
         };
 
+        // options for the stopping criteria
         struct stop_maxiterations {
             BO_PARAM(int, iterations, 40);
         };
 
-        struct acqui_gpucb : public defaults::acqui_gpucb {
-        };
+        // options for the acquisition function
+        // (here we just take the default values)
+        struct acqui_gpucb : public defaults::acqui_gpucb { };
 
-        struct opt_gridsearch : public defaults::opt_gridsearch {
-        };
-
-        struct opt_rprop : public defaults::opt_rprop {
-        };
-
-        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-        };
+        // options for the hyper-parameter optimizer
+        // (here we just take the default values)
+        struct opt_rprop : public defaults::opt_rprop { };
+        struct opt_parallelrepeater : public defaults::opt_parallelrepeater { };
     };
 
 Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function),

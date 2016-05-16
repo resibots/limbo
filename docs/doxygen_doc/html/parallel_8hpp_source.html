@@ -123,7 +123,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keyword">using</span> <a class="code" href="namespacelimbo_1_1tools_1_1par.html#af51cb7a6b55652377e2553e6de65b948">vector</a> = tbb::concurrent_vector&lt;X&gt;; <span class="comment">// Template alias (for GCC 4.7 and later)</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> V&gt;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            std::vector&lt;typename V::value_type&gt; <a class="code" href="namespacelimbo_1_1tools_1_1par.html#ae700f38cb80d3db4307227c2f33e72e7">convert_vector</a>(<span class="keyword">const</span> V&amp; v)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            std::vector&lt;typename V::value_type&gt; <a class="code" href="namespacelimbo_1_1tools_1_1par.html#ae84275467a83e81f3201ce512c178c9c">convert_vector</a>(<span class="keyword">const</span> V&amp; v)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                std::vector&lt;typename V::value_type&gt; v2(v.size());</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                std::copy(v.begin(), v.end(), v2.begin());</div>
@@ -142,7 +142,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> V&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1tools_1_1par.html#ae700f38cb80d3db4307227c2f33e72e7">   55</a></span>&#160;            V&amp; <a class="code" href="namespacelimbo_1_1tools_1_1par.html#ae700f38cb80d3db4307227c2f33e72e7">convert_vector</a>(<span class="keyword">const</span> V&amp; v)</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1tools_1_1par.html#ae84275467a83e81f3201ce512c178c9c">   55</a></span>&#160;            V <a class="code" href="namespacelimbo_1_1tools_1_1par.html#ae84275467a83e81f3201ce512c178c9c">convert_vector</a>(<span class="keyword">const</span> V&amp; v)</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            {</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="keywordflow">return</span> v;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            }</div>
@@ -212,7 +212,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                    body, joint);</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                T current_max = <a class="code" href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">init</a>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; num_steps; ++i) {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_steps; ++i) {</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                    T v = f(i);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    <span class="keywordflow">if</span> (comp(v, current_max))</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                        current_max = v;</div>
@@ -252,16 +252,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:70</div></div>
 <div class="ttc" id="group__par__tools_html_gaa7bbb8a640ed2b66101d57b5b565457f"><div class="ttname"><a href="group__par__tools.html#gaa7bbb8a640ed2b66101d57b5b565457f">limbo::tools::par::for_each</a></div><div class="ttdeci">void for_each(Iterator begin, Iterator end, const F &amp;f)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:95</div></div>
 <div class="ttc" id="group__par__tools_html_gade6005a5ea74ca5203203d30210c0f22"><div class="ttname"><a href="group__par__tools.html#gade6005a5ea74ca5203203d30210c0f22">limbo::tools::par::replicate</a></div><div class="ttdeci">void replicate(size_t nb, const F &amp;f)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:156</div></div>
-<div class="ttc" id="namespacelimbo_1_1tools_1_1par_html_ae700f38cb80d3db4307227c2f33e72e7"><div class="ttname"><a href="namespacelimbo_1_1tools_1_1par.html#ae700f38cb80d3db4307227c2f33e72e7">limbo::tools::par::convert_vector</a></div><div class="ttdeci">V &amp; convert_vector(const V &amp;v)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:55</div></div>
 <div class="ttc" id="group__par__tools_html_gab29bca0dac2a8917b8447bc52d376f1c"><div class="ttname"><a href="group__par__tools.html#gab29bca0dac2a8917b8447bc52d376f1c">limbo::tools::par::sort</a></div><div class="ttdeci">void sort(T1 i1, T2 i2, T3 comp)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:144</div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> gp_ucb.hpp:8</div></div>
 <div class="ttc" id="group__par__tools_html_gaf3fdc36fc4e94ad4cac72c803234b6ac"><div class="ttname"><a href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">limbo::tools::par::max</a></div><div class="ttdeci">T max(const T &amp;init, int num_steps, const F &amp;f, const C &amp;comp)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:108</div></div>
 <div class="ttc" id="group__par__tools_html_ga0e0d97b2a06005eac32290a846ccef91"><div class="ttname"><a href="group__par__tools.html#ga0e0d97b2a06005eac32290a846ccef91">limbo::tools::par::loop</a></div><div class="ttdeci">void loop(size_t begin, size_t end, const F &amp;f)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:78</div></div>
 <div class="ttc" id="namespacelimbo_1_1tools_1_1par_html_af51cb7a6b55652377e2553e6de65b948"><div class="ttname"><a href="namespacelimbo_1_1tools_1_1par.html#af51cb7a6b55652377e2553e6de65b948">limbo::tools::par::vector</a></div><div class="ttdeci">std::vector&lt; X &gt; vector</div><div class="ttdef"><b>Definition:</b> parallel.hpp:51</div></div>
+<div class="ttc" id="namespacelimbo_1_1tools_1_1par_html_ae84275467a83e81f3201ce512c178c9c"><div class="ttname"><a href="namespacelimbo_1_1tools_1_1par.html#ae84275467a83e81f3201ce512c178c9c">limbo::tools::par::convert_vector</a></div><div class="ttdeci">V convert_vector(const V &amp;v)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:55</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 9 2016 10:07:49 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 16 2016 14:29:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
