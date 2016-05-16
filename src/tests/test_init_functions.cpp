@@ -10,13 +10,6 @@
 
 using namespace limbo;
 
-Eigen::VectorXd make_v1(double x)
-{
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
-}
-
 struct Params {
     struct bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
@@ -67,7 +60,7 @@ struct fit_eval {
         double res = 0;
         for (int i = 0; i < x.size(); i++)
             res += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
-        return make_v1(res);
+        return tools::make_vector(res);
     }
 };
 
