@@ -19,9 +19,8 @@ def configure(conf):
         conf.get_env()['USE_BAYESOPT'] = True
 
 def build(bld):
-    if bld.env.DEFINES_NLOPT == 'USE_NLOPT':
-    
 
+    if bld.env.DEFINES_NLOPT == ['USE_NLOPT']:
         bld.program(features='cxx',
                     source='limbo/simple.cpp',
                     includes='. .. ../../ ../../src',

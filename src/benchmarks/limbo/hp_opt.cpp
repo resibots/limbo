@@ -14,6 +14,7 @@ struct Params {
   struct bayes_opt_boptimizer {
       BO_PARAM(double, noise, 1e-10);
       BO_PARAM(int, dump_period, -1);
+      BO_PARAM(int, hp_period, 1 );
   };
   struct stop_maxiterations {
       BO_PARAM(int, iterations, 190);
@@ -27,6 +28,8 @@ struct Params {
   };
   struct init_randomsampling {
       BO_PARAM(int, samples, 10);
+  };
+  struct SquaredExpARD: public defaults::SquaredExpARD {
   };
   struct mean_constant {
     BO_PARAM(double, constant, 1);
