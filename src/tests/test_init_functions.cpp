@@ -3,10 +3,10 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <limbo/tools/macros.hpp>
-#include <limbo/init.hpp>
 #include <limbo/acqui.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/init.hpp>
+#include <limbo/tools/macros.hpp>
 
 using namespace limbo;
 
@@ -15,12 +15,15 @@ struct Params {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.01);
     };
 
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 0);
+    };
+
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
     struct kernel_maternfivehalfs {
