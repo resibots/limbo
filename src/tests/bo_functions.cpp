@@ -70,7 +70,6 @@ inline Eigen::VectorXd t_osz(const Eigen::VectorXd& x)
     return r;
 }
 
-
 struct Sphere {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 1;
@@ -197,7 +196,7 @@ struct Params {
         BO_PARAM(int, iterations, 40);
     };
 
-    struct SquaredExpARD : public defaults::SquaredExpARD {
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
     struct acqui_gpucb : public defaults::acqui_gpucb {
@@ -233,7 +232,7 @@ void print_res(const T& r)
         std::vector<std::pair<double, double>>& v = x.second;
         std::sort(v.begin(), v.end(),
             [](const std::pair<double, double>& x1,
-                const std::pair<double, double>& x2) {
+                      const std::pair<double, double>& x2) {
                 // clang-format off
                 return x1.second < x2.second;
                 // clang-format on

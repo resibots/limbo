@@ -33,7 +33,7 @@ struct Params {
         BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct SquaredExpARD {
+    struct kernel_squared_exp_ard {
         BO_PARAM(int, k, 0);
     };
 

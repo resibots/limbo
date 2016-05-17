@@ -191,7 +191,7 @@ struct Params {
         BO_PARAM(double, noise, 0.0);
     };
 
-    struct SquaredExpARD {
+    struct kernel_squared_exp_ard {
         BO_PARAM(int, k, 0);
     };
 

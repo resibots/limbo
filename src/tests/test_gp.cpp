@@ -27,7 +27,7 @@ Eigen::VectorXd make_v2(double x1, double x2)
 }
 
 struct Params {
-    struct SquaredExpARD : public defaults::SquaredExpARD {
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
     struct kernel_maternfivehalfs {
