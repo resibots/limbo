@@ -6,7 +6,6 @@ def build(bld):
     bld.recurse('examples')
     if bld.options.tests:
         bld.recurse('tests')
-    bld.recurse('benchmarks')
 
     bld.stlib(source=' \
               ehvi/ehvi_calculations.cc \

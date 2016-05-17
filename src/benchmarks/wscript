@@ -18,7 +18,8 @@ def configure(conf):
         conf.env.DEFINES_BAYESOPT = ['USE_BAYESOPT']
         conf.get_env()['USE_BAYESOPT'] = True
 
-def build(bld):
+
+def build_benchmark(bld):
 
     if bld.env.DEFINES_NLOPT == ['USE_NLOPT']:
         bld.program(features='cxx',
@@ -34,7 +35,7 @@ def build(bld):
                     target='benchmark_limbo_hp_opt',
                     uselib='BOOST EIGEN TBB SFERES NLOPT',
                     use='limbo')
-        
+    
         #Quick and dirty way to add Bayesopt 
         #TODO make proper detection
         
@@ -45,7 +46,7 @@ def build(bld):
                 target='benchmark_bayesopt',
                 uselib='BOOST EIGEN TBB NLOPT BAYESOPT',
                 use='')
-            
+        
             bld(features='cxx cxxprogram',
                 source='bayesopt/hp_opt.cpp',
                 includes='.',

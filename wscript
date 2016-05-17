@@ -106,6 +106,10 @@ def build_extensive_tests(ctx):
     ctx.recurse('src/')
     ctx.recurse('src/tests')
 
+def build_benchmark(ctx):
+    ctx.recurse('src/benchmarks')
+
+
 def run_extensive_tests(ctx):
     for fullname in glob.glob('build/src/tests/combinations/*'):
         if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
@@ -122,6 +126,8 @@ def submit_extensive_tests(ctx):
             retcode = subprocess.call(s, shell=True, env=None)
             print "oarsub returned:" + str(retcode)
 
+
+            
 def run_benchmark(ctx):
 	HEADER='\033[95m'
 	NC='\033[0m'
@@ -161,3 +167,7 @@ def shutdown(ctx):
 class BuildExtensiveTestsContext(BuildContext):
     cmd = 'build_extensive_tests'
     fun = 'build_extensive_tests'
+
+class BuildBenchmark(BuildContext):
+    cmd = 'build_benchmark'
+    fun = 'build_benchmark'
