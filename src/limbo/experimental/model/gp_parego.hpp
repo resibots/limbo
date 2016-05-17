@@ -39,35 +39,31 @@ namespace limbo {
                     const std::vector<Eigen::VectorXd>& observations, const Eigen::VectorXd& noises,
                     const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
                 {
+                    _raw_observations = observations;
                     auto new_observations = _scalarize_obs(observations);
                     Model::compute(samples, new_observations, noises, bl_samples);
                 }
                 /// add sample will NOT be incremental (we call compute each time)
                 void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
                 {
-                    Model::add_sample(sample, observation, noise);
+                    _raw_observations.push_back(observation);
                     this->compute(this->_samples,
-                      _convert_observations(this->_observations), this->_noises,
+                      _raw_observations, this->_noises,
                       this->_bl_samples);
                 }
+                /// WARNING: Parego does not really work with blacklisted samples
                 void add_bl_sample(const Eigen::VectorXd& bl_sample, double noise)
                 {
                   Model::add_bl_sample(bl_sample, noise);
                   this->compute(this->_samples,
-                    _convert_observations(this->_observations), this->_noises,
+                    _raw_observations, this->_noises,
                     this->_bl_samples);
                 }
 
 
             protected:
                 size_t _nb_objs;
-                /// we need to do this because the GP does not store the vector of observations, but convert it to a matrix...
-                std::vector<Eigen::VectorXd> _convert_observations(const Eigen::MatrixXd& m){
-                  std::vector<Eigen::VectorXd> res;
-                  for (int i = 0; i < m.rows(); ++i)
-                    res.push_back(m.row(i));
-                  return res;
-                }
+                std::vector<Eigen::VectorXd> _raw_observations;
                 std::vector<Eigen::VectorXd> _scalarize_obs(const std::vector<Eigen::VectorXd>& observations)
                 {
                     Eigen::VectorXd lambda = tools::random_vector(_nb_objs);
