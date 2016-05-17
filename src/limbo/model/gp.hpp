@@ -232,7 +232,7 @@ namespace limbo {
             int nb_bl_samples() const { return _bl_samples.size(); }
 
             ///  recomputes the GP
-            void recompute(bool update_obs_mean)
+            void recompute(bool update_obs_mean = true)
             {
                 assert(!_samples.empty());
 
