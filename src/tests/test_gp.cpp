@@ -116,54 +116,65 @@ BOOST_AUTO_TEST_CASE(test_gp)
 BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
 {
     using namespace limbo;
+    size_t N = 1000;
+    size_t failures = 0;
 
     typedef kernel::MaternFiveHalfs<Params> KF_t;
     typedef mean::Constant<Params> Mean_t;
     typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
-    std::vector<Eigen::VectorXd> observations;
-    std::vector<Eigen::VectorXd> samples;
-    tools::rgen_double_t rgen(0.0, 10);
-    for (size_t i = 0; i < 100; i++) {
+    for (size_t i = 0; i < N; i++) {
+
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+        tools::rgen_double_t rgen(0.0, 10);
+        for (size_t i = 0; i < 100; i++) {
+            observations.push_back(make_v1(rgen.rand()));
+            samples.push_back(make_v1(rgen.rand()));
+        }
+
+        GP_t gp;
+        auto t1 = std::chrono::steady_clock::now();
+        gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+        auto time_init = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
+        std::cout.precision(17);
+        std::cout << "Time running first batch: " << time_init << "us" << std::endl
+                  << std::endl;
+
         observations.push_back(make_v1(rgen.rand()));
         samples.push_back(make_v1(rgen.rand()));
+
+        t1 = std::chrono::steady_clock::now();
+        gp.add_sample(samples.back(), observations.back(), 0.0);
+        auto time_increment = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
+        std::cout << "Time running increment: " << time_increment << "us" << std::endl
+                  << std::endl;
+
+        t1 = std::chrono::steady_clock::now();
+        gp.recompute(true);
+        auto time_recompute = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
+        std::cout << "Time recomputing: " << time_recompute << "us" << std::endl
+                  << std::endl;
+
+        GP_t gp2;
+        t1 = std::chrono::steady_clock::now();
+        gp2.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+        auto time_full = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
+        std::cout << "Time running whole batch: " << time_full << "us" << std::endl
+                  << std::endl;
+
+        Eigen::VectorXd s = make_v1(rgen.rand());
+        if ((gp.mu(s) - gp2.mu(s)).norm() >= 1e-5)
+            failures++;
+        if (!gp.matrixL().isApprox(gp2.matrixL(), 1e-5))
+            failures++;
+        if (time_full <= time_increment)
+            failures++;
+        if (time_recompute <= time_increment)
+            failures++;
     }
 
-    GP_t gp;
-    auto t1 = std::chrono::steady_clock::now();
-    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
-    auto time_init = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
-    std::cout.precision(17);
-    std::cout << "Time running first batch: " << time_init << "us" << std::endl
-              << std::endl;
-
-    observations.push_back(make_v1(rgen.rand()));
-    samples.push_back(make_v1(rgen.rand()));
-
-    t1 = std::chrono::steady_clock::now();
-    gp.add_sample(samples.back(), observations.back(), 0.0);
-    auto time_increment = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
-    std::cout << "Time running increment: " << time_increment << "us" << std::endl
-              << std::endl;
-
-    t1 = std::chrono::steady_clock::now();
-    gp.recompute(true);
-    auto time_recompute = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
-    std::cout << "Time recomputing: " << time_recompute << "us" << std::endl
-              << std::endl;
-
-    GP_t gp2;
-    t1 = std::chrono::steady_clock::now();
-    gp2.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
-    auto time_full = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
-    std::cout << "Time running whole batch: " << time_full << "us" << std::endl
-              << std::endl;
-
-    Eigen::VectorXd s = make_v1(rgen.rand());
-    BOOST_CHECK((gp.mu(s) - gp2.mu(s)).norm() < 1e-5);
-    BOOST_CHECK(gp.matrixL().isApprox(gp2.matrixL(), 1e-5));
-    BOOST_CHECK(time_full > time_increment);
-    BOOST_CHECK(time_recompute > time_increment);
+    BOOST_CHECK(double(failures) / double(N) < 0.1);
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_no_samples_acqui_opt)
@@ -258,4 +269,3 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma < 1e-5);
 }
-
