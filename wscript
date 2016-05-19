@@ -31,6 +31,8 @@ def options(opt):
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
+        opt.add_option('--local', type='string', help='config file (json) to run local', dest='local')
+        opt.add_option('--local_serial', type='string', help='config file (json) to run local', dest='local_serial')
         opt.add_option('--experimental', action='store_true', help='specify to compile the experimental examples', dest='experimental')
         opt.add_option('--nb_replicates', type='int', help='number of replicates performed during the benchmark', dest='nb_rep')
         # tests
@@ -152,6 +154,10 @@ def shutdown(ctx):
         limbo.qsub(ctx.options.qsub)
     if ctx.options.oar:
         limbo.oar(ctx.options.oar)
+    if ctx.options.local:
+        limbo.run_local(ctx.options.local, False)
+    if ctx.options.local_serial:
+        limbo.run_local(ctx.options.local_serial)
 
 class BuildExtensiveTestsContext(BuildContext):
     cmd = 'build_extensive_tests'

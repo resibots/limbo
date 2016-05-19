@@ -21,7 +21,7 @@ struct Params {
     struct opt_rprop : public defaults::opt_rprop {
     };
 
-    struct SquaredExpARD : public defaults::SquaredExpARD {
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
     struct kernel_maternfivehalfs {

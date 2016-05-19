@@ -70,13 +70,6 @@ inline Eigen::VectorXd t_osz(const Eigen::VectorXd& x)
     return r;
 }
 
-Eigen::VectorXd make_v1(double x)
-{
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
-}
-
 struct Sphere {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 1;
@@ -84,7 +77,7 @@ struct Sphere {
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::Vector2d opt(0.5, 0.5);
-        return make_v1(-(x - opt).squaredNorm());
+        return tools::make_vector(-(x - opt).squaredNorm());
     }
 };
 
@@ -99,7 +92,7 @@ struct Ellipsoid {
         double r = 0;
         for (size_t i = 0; i < dim_in; ++i)
             r += std::pow(10, ((double)i) / (dim_in - 1.0)) * z(i) * z(i) + 1;
-        return make_v1(-r);
+        return tools::make_vector(-r);
     }
 };
 
@@ -112,7 +105,7 @@ struct Rastrigin {
         double f = 10 * x.size();
         for (int i = 0; i < x.size(); ++i)
             f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));
-        return make_v1(-f);
+        return tools::make_vector(-f);
     }
 };
 
@@ -138,7 +131,7 @@ struct Hartman3 {
             }
             res += alpha(i) * exp(-s);
         }
-        return make_v1(res);
+        return tools::make_vector(res);
     }
 };
 
@@ -167,7 +160,7 @@ struct Hartman6 {
             }
             res += alpha(i) * exp(-s);
         }
-        return make_v1(res);
+        return tools::make_vector(res);
     }
 };
 
@@ -182,7 +175,7 @@ struct GoldenPrice {
         Eigen::VectorXd x = (4.0 * xx).array() - 2.0;
         double r = (1 + (x(0) + x(1) + 1) * (x(0) + x(1) + 1) * (19 - 14 * x(0) + 3 * x(0) * x(0) - 14 * x(1) + 6 * x(0) * x(1) + 3 * x(1) * x(1))) * (30 + (2 * x(0) - 3 * x(1)) * (2 * x(0) - 3 * x(1)) * (18 - 32 * x(0) + 12 * x(0) * x(0) + 48 * x(1) - 36 * x(0) * x(1) + 27 * x(1) * x(1)));
 
-        return make_v1(-log(r) + 5);
+        return tools::make_vector(-log(r) + 5);
     }
 };
 
@@ -203,7 +196,7 @@ struct Params {
         BO_PARAM(int, iterations, 40);
     };
 
-    struct SquaredExpARD : public defaults::SquaredExpARD {
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
     struct acqui_gpucb : public defaults::acqui_gpucb {
@@ -239,7 +232,7 @@ void print_res(const T& r)
         std::vector<std::pair<double, double>>& v = x.second;
         std::sort(v.begin(), v.end(),
             [](const std::pair<double, double>& x1,
-                const std::pair<double, double>& x2) {
+                      const std::pair<double, double>& x2) {
                 // clang-format off
                 return x1.second < x2.second;
                 // clang-format on

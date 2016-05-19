@@ -10,19 +10,12 @@
 
 using namespace limbo;
 
-Eigen::VectorXd make_v1(double x)
-{
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
-}
-
 struct Params {
     struct bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer{
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.01);
     };
 
@@ -30,7 +23,7 @@ struct Params {
         BO_PARAM(int, iterations, 0);
     };
 
-    struct SquaredExpARD : public defaults::SquaredExpARD {
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
     struct kernel_maternfivehalfs {
@@ -70,7 +63,7 @@ struct fit_eval {
         double res = 0;
         for (int i = 0; i < x.size(); i++)
             res += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
-        return make_v1(res);
+        return tools::make_vector(res);
     }
 };
 
