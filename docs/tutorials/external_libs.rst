@@ -176,7 +176,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
         conf.check_ros()
 
     def build(bld):
-        libs = 'EIGEN BOOST ROS LIMBO'
+        libs = 'EIGEN BOOST ROS LIMBO ROS'
 
         obj = bld(features = 'cxx cxxstlib',
                   source = 'main.cpp',
