@@ -13,10 +13,8 @@ import glob
 import os
 import subprocess
 import limbo
-from waflib.Build import BuildContext
-
 import inspect
-
+from waflib.Build import BuildContext
 
 def options(opt):
         opt.load('compiler_cxx boost waf_unit_test')
@@ -35,16 +33,14 @@ def options(opt):
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
         opt.add_option('--experimental', action='store_true', help='specify to compile the experimental examples', dest='experimental')
         opt.add_option('--nb_replicates', type='int', help='number of replicates performed during the benchmark', dest='nb_rep')
-	# tests
+        # tests
         opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
         opt.load('xcode')
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
                     opt.recurse(i)
 
-	opt.recurse('src/benchmarks')
-		
-
+        opt.recurse('src/benchmarks')
 
 def configure(conf):
         conf.load('compiler_cxx boost waf_unit_test')
@@ -91,7 +87,7 @@ def configure(conf):
                 for i in conf.options.exp.split(','):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
-	conf.recurse('src/benchmarks')
+        conf.recurse('src/benchmarks')
 
 def build(bld):
     bld.recurse('src/')
@@ -101,14 +97,12 @@ def build(bld):
             bld.recurse('exp/' + i)
     bld.add_post_fun(limbo.summary)
 
-
 def build_extensive_tests(ctx):
     ctx.recurse('src/')
     ctx.recurse('src/tests')
 
 def build_benchmark(ctx):
     ctx.recurse('src/benchmarks')
-
 
 def run_extensive_tests(ctx):
     for fullname in glob.glob('build/src/tests/combinations/*'):
@@ -126,43 +120,38 @@ def submit_extensive_tests(ctx):
             retcode = subprocess.call(s, shell=True, env=None)
             print "oarsub returned:" + str(retcode)
 
-
-            
 def run_benchmark(ctx):
-	HEADER='\033[95m'
-	NC='\033[0m'
-	res_dir=os.getcwd()+"/benchmark_results/"
-	try:
-                    os.makedirs(res_dir)
-	except:
-                    print "WARNING, dir:" + res_dir + " not be created"
-	for fullname in glob.glob('build/src/benchmarks/*'):
-		if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
-			fpath, fname = os.path.split(fullname)
-			directory = res_dir + "/" + fname 
-			try:
-				os.makedirs(directory)
-			except:
-				print "WARNING, dir:" + directory + " not be created, the new results will be concatenated to the old ones"
-			s = "cp " + fullname + " " + directory
-			retcode = subprocess.call(s, shell=True, env=None)
-			if ctx.options.nb_rep:
-				nb_rep = ctx.options.nb_rep
-			else:
-				nb_rep = 10
-			for i in range(0,nb_rep):
-				print HEADER+" Running: " + fname + " for the "+str(i)+"th time"+NC
-				s="cd " + directory +";./" + fname
-				retcode = subprocess.call(s, shell=True, env=None)
-			
-			
+    HEADER='\033[95m'
+    NC='\033[0m'
+    res_dir=os.getcwd()+"/benchmark_results/"
+    try:
+        os.makedirs(res_dir)
+    except:
+        print "WARNING, dir:" + res_dir + " not be created"
+    for fullname in glob.glob('build/src/benchmarks/*'):
+        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
+            fpath, fname = os.path.split(fullname)
+            directory = res_dir + "/" + fname
+            try:
+                os.makedirs(directory)
+            except:
+                print "WARNING, dir:" + directory + " not be created, the new results will be concatenated to the old ones"
+            s = "cp " + fullname + " " + directory
+            retcode = subprocess.call(s, shell=True, env=None)
+            if ctx.options.nb_rep:
+                nb_rep = ctx.options.nb_rep
+            else:
+                nb_rep = 10
+            for i in range(0,nb_rep):
+                print HEADER+" Running: " + fname + " for the "+str(i)+"th time"+NC
+                s="cd " + directory +";./" + fname
+                retcode = subprocess.call(s, shell=True, env=None)
 
 def shutdown(ctx):
     if ctx.options.qsub:
         limbo.qsub(ctx.options.qsub)
     if ctx.options.oar:
         limbo.oar(ctx.options.oar)
-
 
 class BuildExtensiveTestsContext(BuildContext):
     cmd = 'build_extensive_tests'
