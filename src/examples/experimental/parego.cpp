@@ -33,6 +33,10 @@ struct Params {
         BO_PARAM(bool, stats_enabled, true);
     };
 
+    struct kernel_squared_exp_ard {
+        BO_PARAM(int, k, 0);
+    };
+
     struct init_randomsampling {
         BO_PARAM(int, samples, 5);
     };
