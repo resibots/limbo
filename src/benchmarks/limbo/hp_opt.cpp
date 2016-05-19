@@ -8,52 +8,51 @@
 using namespace limbo;
 
 struct Params {
-  struct bayes_opt_bobase {
-    BO_PARAM(bool, stats_enabled, false);
-  };
-  struct bayes_opt_boptimizer {
-      BO_PARAM(double, noise, 1e-10);
-      BO_PARAM(int, dump_period, -1);
-      BO_PARAM(int, hp_period, 1);
-  };
-  struct stop_maxiterations {
-      BO_PARAM(int, iterations, 190);
-  };
-  struct kernel_maternfivehalfs {
-      BO_PARAM(double, sigma, 1);
-      BO_PARAM(double, l, 1);
-  };
-  struct acqui_ucb {
-      BO_PARAM(double, alpha, 0.125);
-  };
-  struct init_randomsampling {
-      BO_PARAM(int, samples, 10);
-  };
-  struct SquaredExpARD : public defaults::SquaredExpARD {
-  };
-  struct mean_constant {
-    BO_PARAM(double, constant, 1);
-  };
-  struct opt_rprop : public defaults::opt_rprop {
-  };
-
+    struct bayes_opt_bobase {
+        BO_PARAM(bool, stats_enabled, false);
+    };
+    struct bayes_opt_boptimizer {
+        BO_PARAM(double, noise, 1e-10);
+        BO_PARAM(int, dump_period, -1);
+        BO_PARAM(int, hp_period, 1);
+    };
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 190);
+    };
+    struct kernel_maternfivehalfs {
+        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, l, 1);
+    };
+    struct acqui_ucb {
+        BO_PARAM(double, alpha, 0.125);
+    };
+    struct init_randomsampling {
+        BO_PARAM(int, samples, 10);
+    };
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+    };
+    struct mean_constant {
+        BO_PARAM(double, constant, 1);
+    };
+    struct opt_rprop : public defaults::opt_rprop {
+    };
 };
 
 struct DirectParams {
-  struct opt_nloptnograd {
-      BO_DYN_PARAM(int, iterations);
-  };
+    struct opt_nloptnograd {
+        BO_DYN_PARAM(int, iterations);
+    };
 };
 
 struct BobyqaParams {
-  struct opt_nloptnograd {
-      BO_DYN_PARAM(int, iterations);
-  };
+    struct opt_nloptnograd {
+        BO_DYN_PARAM(int, iterations);
+    };
 };
 struct BobyqaParams_HP {
-  struct opt_nloptnograd {
-      BO_DYN_PARAM(int, iterations);
-  };
+    struct opt_nloptnograd {
+        BO_DYN_PARAM(int, iterations);
+    };
 };
 
 BO_DECLARE_DYN_PARAM(int, DirectParams::opt_nloptnograd, iterations);
@@ -85,14 +84,14 @@ void benchmark(const std::string& name)
     std::cout << "Time running: " << time_running << "ms" << std::endl
               << std::endl;
 
-    std::ofstream res_file(name + ".dat",std::ios_base::out | std::ios_base::app);
+    std::ofstream res_file(name + ".dat", std::ios_base::out | std::ios_base::app);
     res_file.precision(17);
     res_file << std::fixed << accuracy << " " << time_running << std::endl;
 }
 
 int main()
 {
-  srand(time(NULL));
+    srand(time(NULL));
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
     typedef opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>> AcquiOpt_t;
@@ -101,7 +100,7 @@ int main()
     typedef mean::Constant<Params> Mean_t;
     typedef boost::fusion::vector<> Stat_t;
     typedef init::RandomSampling<Params> Init_t;
-    typedef model::GP<Params, Kernel_t, Mean_t,model::gp::KernelLFOpt<Params,opt::NLOptNoGrad<BobyqaParams_HP, nlopt::LN_BOBYQA> > > GP_t;
+    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params, opt::NLOptNoGrad<BobyqaParams_HP, nlopt::LN_BOBYQA>>> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     typedef bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> Opt_t;

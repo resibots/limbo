@@ -1,16 +1,16 @@
 /*
 -------------------------------------------------------------------------
-   This file is part of BayesOpt, an efficient C++ library for 
+   This file is part of BayesOpt, an efficient C++ library for
    Bayesian optimization.
 
    Copyright (C) 2011-2013 Ruben Martinez-Cantin <rmcantin@unizar.es>
- 
-   BayesOpt is free software: you can redistribute it and/or modify it 
+
+   BayesOpt is free software: you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
 
-   BayesOpt is distributed in the hope that it will be useful, but 
+   BayesOpt is distributed in the hope that it will be useful, but
    WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
@@ -39,7 +39,7 @@ inline double sign(double x)
     return 0;
 }
 
-inline double sqr(double x) 
+inline double sqr(double x)
 {
     return x * x;
 };
@@ -87,9 +87,9 @@ struct Sphere {
 
     matrixd solutions() const
     {
-      matrixd sols(1, 2);
-      sols <<= 0.5, 0.5;
-      return sols;
+        matrixd sols(1, 2);
+        sols <<= 0.5, 0.5;
+        return sols;
     }
 };
 
@@ -110,9 +110,9 @@ struct Ellipsoid {
 
     matrixd solutions() const
     {
-      matrixd sols(1, 2);
-      sols <<= 0.5, 0.5;
-      return sols;
+        matrixd sols(1, 2);
+        sols <<= 0.5, 0.5;
+        return sols;
     }
 };
 
@@ -130,10 +130,10 @@ struct Rastrigin {
 
     matrixd solutions() const
     {
-      matrixd sols(1, dim_in);
-      for (size_t i = 0; i < dim_in; ++i)
-        sols(0, i) = 0;
-      return sols;
+        matrixd sols(1, dim_in);
+        for (size_t i = 0; i < dim_in; ++i)
+            sols(0, i) = 0;
+        return sols;
     }
 };
 
@@ -165,9 +165,9 @@ struct Hartman3 {
 
     matrixd solutions() const
     {
-      matrixd sols(1, 3);
-      sols <<= 0.114614, 0.555649, 0.852547;
-      return sols;
+        matrixd sols(1, 3);
+        sols <<= 0.114614, 0.555649, 0.852547;
+        return sols;
     }
 };
 
@@ -202,9 +202,9 @@ struct Hartman6 {
 
     matrixd solutions() const
     {
-      matrixd sols(1, 6);
-      sols <<= 0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573;
-      return sols;
+        matrixd sols(1, 6);
+        sols <<= 0.20169, 0.150011, 0.476874, 0.275332, 0.311652, 0.6573;
+        return sols;
     }
 };
 
@@ -226,9 +226,9 @@ struct GoldenPrice {
 
     matrixd solutions() const
     {
-      matrixd sols(1, 2);
-      sols <<= 0.5, 0.25;
-      return sols;
+        matrixd sols(1, 2);
+        sols <<= 0.5, 0.25;
+        return sols;
     }
 };
 
@@ -245,67 +245,66 @@ struct BraninNormalized {
 
     matrixd solutions() const
     {
-      matrixd sols(3, 2);
-      sols <<= 0.1238938, 0.818333,
-                    0.5427728, 0.151667,
-                    0.961652, 0.1650;
-      return sols;
+        matrixd sols(3, 2);
+        sols <<= 0.1238938, 0.818333,
+            0.5427728, 0.151667,
+            0.961652, 0.1650;
+        return sols;
     }
 };
 
 struct SixHumpCamel {
-  static constexpr size_t dim_in = 2;
-  static constexpr size_t dim_out = 1;
-  double operator()(const vectord& x) const
-  {
-     double x1_2 = x(0)*x(0);
-     double x2_2 = x(1)*x(1);
+    static constexpr size_t dim_in = 2;
+    static constexpr size_t dim_out = 1;
+    double operator()(const vectord& x) const
+    {
+        double x1_2 = x(0) * x(0);
+        double x2_2 = x(1) * x(1);
 
-     double tmp1 = (4 - 2.1 * x1_2 + (x1_2*x1_2)/3) * x1_2;
-     double tmp2 = x(0)*x(1);
-     double tmp3 = (-4 + 4 * x2_2) * x2_2;
-     return tmp1 + tmp2 + tmp3;
-  }
+        double tmp1 = (4 - 2.1 * x1_2 + (x1_2 * x1_2) / 3) * x1_2;
+        double tmp2 = x(0) * x(1);
+        double tmp3 = (-4 + 4 * x2_2) * x2_2;
+        return tmp1 + tmp2 + tmp3;
+    }
 
-  matrixd solutions() const
-  {
-    matrixd sols(2, 2);
-    sols <<= 0.0898, -0.7126,
-                -0.0898, 0.7126;
-    return sols;
-  }
+    matrixd solutions() const
+    {
+        matrixd sols(2, 2);
+        sols <<= 0.0898, -0.7126,
+            -0.0898, 0.7126;
+        return sols;
+    }
 };
 
 template <typename Function>
-class Benchmark : public bayesopt::ContinuousModel
-{
+class Benchmark : public bayesopt::ContinuousModel {
 public:
-  Benchmark(bopt_params par):
-    ContinuousModel(Function::dim_in, par) {}
+    Benchmark(bopt_params par) : ContinuousModel(Function::dim_in, par) {}
 
-  double evaluateSample(const vectord& xin)
-  {
-      return f(xin);
-  }
-
-  bool checkReachability(const vectord &query)
-  {return true;};
-
-  double accuracy(double x)
-  {
-    matrixd sols = f.solutions();
-    double diff = std::abs(x - f(row(sols, 0)));
-    double min_diff = diff;
-
-    for (size_t i = 1; i < sols.size1(); i++) {
-      diff = std::abs(x - f(row(sols, i)));
-      if (diff < min_diff)
-        min_diff = diff;
+    double evaluateSample(const vectord& xin)
+    {
+        return f(xin);
     }
 
-    return min_diff;
-  }
+    bool checkReachability(const vectord& query)
+    {
+        return true;
+    };
 
-  Function f;
+    double accuracy(double x)
+    {
+        matrixd sols = f.solutions();
+        double diff = std::abs(x - f(row(sols, 0)));
+        double min_diff = diff;
 
+        for (size_t i = 1; i < sols.size1(); i++) {
+            diff = std::abs(x - f(row(sols, i)));
+            if (diff < min_diff)
+                min_diff = diff;
+        }
+
+        return min_diff;
+    }
+
+    Function f;
 };

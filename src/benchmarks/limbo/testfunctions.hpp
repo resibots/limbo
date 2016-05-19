@@ -88,29 +88,26 @@ struct Ellipsoid {
     }
 };
 
-
 struct Rastrigin {
     static constexpr size_t dim_in = 4;
     static constexpr size_t dim_out = 1;
 
     double operator()(const Eigen::VectorXd& x) const
     {
-      double f = 10 * dim_in;                                                                                                               
-      for (size_t i = 0; i < dim_in; ++i)                                                                                                   
-	f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));                                                                                     
-      return f;  
+        double f = 10 * dim_in;
+        for (size_t i = 0; i < dim_in; ++i)
+            f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));
+        return f;
     }
 
     Eigen::MatrixXd solutions() const
     {
-      Eigen::MatrixXd sols(1, 4);                                                                                                      
-      for (size_t i = 0; i < 4; ++i)                                                                                                   
-	sols(0, i) = 0;                                                                                                                   
-      return sols;   
+        Eigen::MatrixXd sols(1, 4);
+        for (size_t i = 0; i < 4; ++i)
+            sols(0, i) = 0;
+        return sols;
     }
 };
-
-
 
 // see : http://www.sfu.ca/~ssurjano/hart3.html
 struct Hartman3 {
@@ -264,9 +261,9 @@ public:
         return res;
     }
 
-  double accuracy(Eigen::VectorXd obs)
+    double accuracy(Eigen::VectorXd obs)
     {
-      double x=obs[0];
+        double x = obs[0];
         Eigen::MatrixXd sols = f.solutions();
         double diff = std::abs(x + f(sols.row(0)));
         double min_diff = diff;

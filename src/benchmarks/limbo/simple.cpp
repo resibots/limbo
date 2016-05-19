@@ -8,42 +8,42 @@
 using namespace limbo;
 
 struct Params {
-  struct bayes_opt_bobase {
-    BO_PARAM(bool, stats_enabled, false);
-  };
-  struct bayes_opt_boptimizer {
-      BO_PARAM(double, noise, 1e-10);
-      BO_PARAM(int, dump_period, -1);
-      BO_PARAM(int, hp_period, -1);
-  };
-  struct stop_maxiterations {
-      BO_PARAM(int, iterations, 190);
-  };
-  struct kernel_maternfivehalfs {
-      BO_PARAM(double, sigma, 1);
-      BO_PARAM(double, l, 1);
-  };
-  struct acqui_ucb {
-      BO_PARAM(double, alpha, 0.125);
-  };
-  struct init_randomsampling {
-      BO_PARAM(int, samples, 10);
-  };
-  struct mean_constant {
-    BO_PARAM(double, constant, 1);
-  };
+    struct bayes_opt_bobase {
+        BO_PARAM(bool, stats_enabled, false);
+    };
+    struct bayes_opt_boptimizer {
+        BO_PARAM(double, noise, 1e-10);
+        BO_PARAM(int, dump_period, -1);
+        BO_PARAM(int, hp_period, -1);
+    };
+    struct stop_maxiterations {
+        BO_PARAM(int, iterations, 190);
+    };
+    struct kernel_maternfivehalfs {
+        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, l, 1);
+    };
+    struct acqui_ucb {
+        BO_PARAM(double, alpha, 0.125);
+    };
+    struct init_randomsampling {
+        BO_PARAM(int, samples, 10);
+    };
+    struct mean_constant {
+        BO_PARAM(double, constant, 1);
+    };
 };
 
 struct DirectParams {
-  struct opt_nloptnograd {
-      BO_DYN_PARAM(int, iterations);
-  };
+    struct opt_nloptnograd {
+        BO_DYN_PARAM(int, iterations);
+    };
 };
 
 struct BobyqaParams {
-  struct opt_nloptnograd {
-      BO_DYN_PARAM(int, iterations);
-  };
+    struct opt_nloptnograd {
+        BO_DYN_PARAM(int, iterations);
+    };
 };
 
 BO_DECLARE_DYN_PARAM(int, DirectParams::opt_nloptnograd, iterations);
@@ -72,14 +72,14 @@ void benchmark(const std::string& name)
     std::cout << "Time running: " << time_running << "ms" << std::endl
               << std::endl;
 
-    std::ofstream res_file(name + ".dat",std::ios_base::out | std::ios_base::app);
+    std::ofstream res_file(name + ".dat", std::ios_base::out | std::ios_base::app);
     res_file.precision(17);
     res_file << std::fixed << accuracy << " " << time_running << std::endl;
 }
 
 int main()
 {
-  srand(time(NULL));
+    srand(time(NULL));
 
     typedef kernel::MaternFiveHalfs<Params> Kernel_t;
     typedef opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>> AcquiOpt_t;
