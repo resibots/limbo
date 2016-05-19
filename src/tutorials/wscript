@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+def build(bld):
+    obj = bld.program(features='cxx',
+                      source='basic_example.cpp',
+                      includes='. .. ../../',
+                      target='basic_example',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      use='limbo')
+    obj = bld.program(features='cxx',
+                      source='advanced_example.cpp',
+                      includes='. .. ../../',
+                      target='advanced_example',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      use='limbo')
+    obj = bld.program(features='cxx',
+                      source='statistics.cpp',
+                      includes='. .. ../../',
+                      target='statistics',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      use='limbo')

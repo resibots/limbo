@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE init_functions
+#define BOOST_TEST_MODULE test_init_functions
 
 #include <boost/test/unit_test.hpp>
 
@@ -9,13 +9,6 @@
 #include <limbo/bayes_opt/boptimizer.hpp>
 
 using namespace limbo;
-
-Eigen::VectorXd make_v1(double x)
-{
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
-}
 
 struct Params {
     struct bayes_opt_bobase {
@@ -67,7 +60,7 @@ struct fit_eval {
         double res = 0;
         for (int i = 0; i < x.size(); i++)
             res += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
-        return make_v1(res);
+        return tools::make_vector(res);
     }
 };
 
@@ -79,8 +72,8 @@ BOOST_AUTO_TEST_CASE(no_init)
 
     Opt_t opt;
     opt.optimize(fit_eval());
-    BOOST_CHECK(opt.observations().size() == 1);
-    BOOST_CHECK(opt.samples().size() == 1);
+    BOOST_CHECK(opt.observations().size() == 0);
+    BOOST_CHECK(opt.samples().size() == 0);
 }
 
 BOOST_AUTO_TEST_CASE(random_sampling)

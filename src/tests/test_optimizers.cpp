@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE optimizers
+#define BOOST_TEST_MODULE test_optimizers
 
 #include <boost/test/unit_test.hpp>
 
@@ -10,13 +10,6 @@
 #include <limbo/opt/chained.hpp>
 
 using namespace limbo;
-
-Eigen::VectorXd make_v1(double x)
-{
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
-}
 
 struct Params {
     struct opt_gridsearch {

@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE gp
+#define BOOST_TEST_MODULE test_gp
 
 #include <boost/test/unit_test.hpp>
 
@@ -16,9 +16,7 @@ using namespace limbo;
 
 Eigen::VectorXd make_v1(double x)
 {
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
+    return tools::make_vector(x);
 }
 
 Eigen::VectorXd make_v2(double x1, double x2)
