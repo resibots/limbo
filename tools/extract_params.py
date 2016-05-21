@@ -110,13 +110,15 @@ if __name__ == "__main__":
 				else:
 					print '-', defaults[k][kk].type, defaults[k][kk].name, '=', defaults[k][kk].value, '[default value, from ' + defaults[k][kk].fname + ']'
 			print ''
-	else: # no filename, print the defaults
-		print "Default values in Limbo"
+	else: # no filename, print the defaults in rst (for the doc)
+		print "Default values"
 		print '------------------------'
 		print ''
-		for k in defaults.keys():
+		print '.. highlight:: c++'
+		print ''
+		for k in sorted(defaults.keys()):
 			underline(k)
 			print ''
-			for kk in defaults[k].keys():
-				print '-', defaults[k][kk].type, defaults[k][kk].name, '=', defaults[k][kk].value, '[default value, from ' + defaults[k][kk].fname + ']'
+			for kk in sorted(defaults[k].keys()):
+				print '- ``' + defaults[k][kk].type + ' ' + defaults[k][kk].name + ' = ' + defaults[k][kk].value + '`` [default value, from ' + defaults[k][kk].fname + ']'
 			print '\n'
