@@ -72,6 +72,13 @@ class Param:
 		s += " -> " + self.type + ' ' + self.name + ' = ' + self.value + ' [from ' + self.fname + ']'
 		print s
 
+def underline(k):
+	print k
+	s = ''
+	for i in range(0, len(k)):
+		s += '='
+	print s
+
 if __name__ == "__main__":
 	# find the default params
 	dirs = make_dirlist('src/', ['.hpp'])
@@ -83,6 +90,8 @@ if __name__ == "__main__":
 	for i in params:
 		if 'defaults' in i.namespace:
 			defaults[i.struct][i.name] = i
+
+	# if we have a filename
 	if (len(sys.argv) > 1):
 		# find the params in the current file
 		p, d = extract_params(sys.argv[1])
@@ -94,14 +103,20 @@ if __name__ == "__main__":
 		for i in d:
 			struct_set.add(i)
 		for k in struct_set:
-			print k
-			s = ''
-			for i in range(0, len(k)):
-				s += '-'
-			print s
+			underline(k)
 			for kk in defaults[k].keys():
 				if kk in plist[k]:
-					print '\t', plist[k][kk].type, plist[k][kk].name, '=', plist[k][kk].value, '[redefined]'
+					print '-', plist[k][kk].type, plist[k][kk].name, '=', plist[k][kk].value, '[defined in ' + plist[k][kk].fname + ']'
 				else:
-					print '\t', defaults[k][kk].type, defaults[k][kk].name, '=', defaults[k][kk].value, '[default value, from ' + defaults[k][kk].fname + ']'
+					print '-', defaults[k][kk].type, defaults[k][kk].name, '=', defaults[k][kk].value, '[default value, from ' + defaults[k][kk].fname + ']'
 			print ''
+	else: # no filename, print the defaults
+		print "Default values in Limbo"
+		print '------------------------'
+		print ''
+		for k in defaults.keys():
+			underline(k)
+			print ''
+			for kk in defaults[k].keys():
+				print '-', defaults[k][kk].type, defaults[k][kk].name, '=', defaults[k][kk].value, '[default value, from ' + defaults[k][kk].fname + ']'
+			print '\n'
