@@ -3,8 +3,8 @@
 
 #include <Eigen/Core>
 
-#include <limbo/opt/rprop.hpp>
 #include <limbo/opt/parallel_repeater.hpp>
+#include <limbo/opt/rprop.hpp>
 #include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
@@ -25,7 +25,7 @@ namespace limbo {
                     gp.kernel_function().set_h_params(params.head(gp.kernel_function().h_params_size()));
                     gp.mean_function().set_h_params(params.tail(gp.mean_function().h_params_size()));
                     gp.set_lik(opt::eval(optimization, params));
-                    gp.update();
+                    gp.recompute(true);
                 }
 
             protected:
@@ -40,14 +40,14 @@ namespace limbo {
                         gp.kernel_function().set_h_params(params.head(gp.kernel_function().h_params_size()));
                         gp.mean_function().set_h_params(params.tail(gp.mean_function().h_params_size()));
 
-                        gp.update();
+                        gp.recompute(true);
 
                         size_t n = gp.obs_mean().rows();
 
                         // --- cholesky ---
                         // see:
                         // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
-                        Eigen::MatrixXd l = gp.llt().matrixL();
+                        Eigen::MatrixXd l = gp.matrixL();
                         long double det = 2 * l.diagonal().array().log().sum();
 
                         double a = (gp.obs_mean().transpose() * gp.alpha())
@@ -60,8 +60,9 @@ namespace limbo {
 
                         // K^{-1} using Cholesky decomposition
                         Eigen::MatrixXd K = Eigen::MatrixXd::Identity(n, n);
-                        gp.llt().matrixL().solveInPlace(K);
-                        gp.llt().matrixL().transpose().solveInPlace(K);
+
+                        gp.matrixL().template triangularView<Eigen::Lower>().solveInPlace(K);
+                        gp.matrixL().template triangularView<Eigen::Lower>().transpose().solveInPlace(K);
 
                         // alpha * alpha.transpose() - K^{-1}
                         Eigen::MatrixXd w = gp.alpha() * gp.alpha().transpose() - K;
