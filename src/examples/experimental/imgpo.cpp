@@ -191,6 +191,10 @@ struct Params {
         BO_PARAM(double, noise, 0.0);
     };
 
+    struct kernel_squared_exp_ard {
+        BO_PARAM(int, k, 0);
+    };
+
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 100);
     };

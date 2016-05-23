@@ -28,9 +28,13 @@ struct Params {
         BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.001);
         BO_PARAM(bool, stats_enabled, true);
+    };
+
+    struct kernel_squared_exp_ard {
+        BO_PARAM(int, k, 0);
     };
 
     struct init_randomsampling {
@@ -49,7 +53,7 @@ struct Params {
     struct acqui_gpucb : public defaults::acqui_gpucb {
     };
     struct stat_hyper_volume {
-       BO_PARAM_ARRAY(double, ref, 10, 10);
+        BO_PARAM_ARRAY(double, ref, 10, 10);
     };
 };
 
@@ -71,8 +75,8 @@ struct zdt2 {
             g += 9.0 / (x.size() - 1) * x(i);
         double h = 1.0f - pow((f1 / g), 2.0);
         double f2 = g * h;
-        res(0) = - f1;
-        res(1) = - f2;
+        res(0) = -f1;
+        res(1) = -f2;
         return res;
     }
 };
@@ -92,20 +96,18 @@ struct mop2 {
         double f1 = 1.0 - exp(-v1.sum());
         double f2 = 1.0 - exp(-v2.sum());
         // we _maximize in [0:1]
-        res(0) = 1 -f1;
-        res(1) = 1 -f2;
+        res(0) = 1 - f1;
+        res(1) = 1 - f2;
         return res;
     }
 };
 
 int main()
 {
-    using stat_t =
-      boost::fusion::vector<
-        experimental::stat::ParetoFront<Params>,
+    using stat_t = boost::fusion::vector<experimental::stat::ParetoFront<Params>,
         experimental::stat::HyperVolume<Params>,
         stat::ConsoleSummary<Params>>;
-    using opt_t = experimental::bayes_opt::Parego<Params, statsfun<stat_t> >;
+    using opt_t = experimental::bayes_opt::Parego<Params, statsfun<stat_t>>;
     opt_t opt;
     opt.optimize(mop2());
 

@@ -21,6 +21,9 @@ struct Params {
     struct opt_rprop : public defaults::opt_rprop {
     };
 
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+    };
+
     struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.2);
@@ -30,7 +33,7 @@ struct Params {
         BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.001);
         BO_PARAM(bool, stats_enabled, true);
     };

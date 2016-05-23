@@ -3,8 +3,8 @@
 
 #include <Eigen/Core>
 
-#include <limbo/opt/rprop.hpp>
 #include <limbo/opt/parallel_repeater.hpp>
+#include <limbo/opt/rprop.hpp>
 #include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
@@ -24,7 +24,7 @@ namespace limbo {
                     auto params = optimizer(optimization, tools::random_vector(dim), false);
                     gp.kernel_function().set_h_params(params);
                     gp.set_lik(opt::eval(optimization, params));
-                    gp.update();
+                    gp.recompute(false);
                 }
 
             protected:
@@ -38,14 +38,14 @@ namespace limbo {
                         GP gp(this->_original_gp);
                         gp.kernel_function().set_h_params(params);
 
-                        gp.update();
+                        gp.recompute(false);
 
                         size_t n = gp.obs_mean().rows();
 
                         // --- cholesky ---
                         // see:
                         // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
-                        Eigen::MatrixXd l = gp.llt().matrixL();
+                        Eigen::MatrixXd l = gp.matrixL();
                         long double det = 2 * l.diagonal().array().log().sum();
 
                         double a = (gp.obs_mean().transpose() * gp.alpha())
@@ -58,8 +58,9 @@ namespace limbo {
 
                         // K^{-1} using Cholesky decomposition
                         Eigen::MatrixXd w = Eigen::MatrixXd::Identity(n, n);
-                        gp.llt().matrixL().solveInPlace(w);
-                        gp.llt().matrixL().transpose().solveInPlace(w);
+
+                        gp.matrixL().template triangularView<Eigen::Lower>().solveInPlace(w);
+                        gp.matrixL().template triangularView<Eigen::Lower>().transpose().solveInPlace(w);
 
                         // alpha * alpha.transpose() - K^{-1}
                         w = gp.alpha() * gp.alpha().transpose() - w;
