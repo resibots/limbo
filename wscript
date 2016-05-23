@@ -96,6 +96,7 @@ def build(bld):
         for i in bld.options.exp.split(','):
             print 'Building exp: ' + i
             bld.recurse('exp/' + i)
+            limbo.run_script_on_folder('./tools/extract_params.py', 'exp/'+i)
     bld.add_post_fun(limbo.summary)
 
 
