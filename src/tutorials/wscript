@@ -8,12 +8,13 @@ def build(bld):
                       target='basic_example',
                       uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
-    obj = bld.program(features='cxx',
-                      source='advanced_example.cpp',
-                      includes='. .. ../../',
-                      target='advanced_example',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                      use='limbo')
+    if bld.env.DEFINES_LIBCMAES == ['USE_LIBCMAES']:
+        obj = bld.program(features='cxx',
+                          source='advanced_example.cpp',
+                          includes='. .. ../../',
+                          target='advanced_example',
+                          uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                          use='limbo')
     obj = bld.program(features='cxx',
                       source='statistics.cpp',
                       includes='. .. ../../',
