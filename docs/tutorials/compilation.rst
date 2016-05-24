@@ -122,20 +122,20 @@ Install sphinx via pip: ::
 
   On Mac OSX, do not use `brew install sphinx` because this is not the right sphinx
 
-Install the Resibots theme for resibots: ::
+Install the Resibots theme for Sphinx::
 
     git clone https://github.com/resibots/sphinx_resibots_theme
     export SPHINX_RESIBOTS_THEME="/home/me/path/to/sphinx_resibots_theme"
 
-Install `breathe` via pip: ::
+Install `breathe <https://breathe.readthedocs.io/en/latest/>`_ via pip::
 
     sudo pip install breathe
 
-Install doxygen via your package manager (e.g. apt-get / brew): ::
+Install `doxygen <http://www.stack.nl/~dimitri/doxygen/>`_ via your package manager (e.g. apt-get / brew)::
 
     apt-get install doxygen
 
-In the `doc` directory: ::
+In the `doc` directory::
 
     make html
 
