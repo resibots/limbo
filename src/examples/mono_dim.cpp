@@ -63,7 +63,6 @@ struct fit_eval {
 
 int main()
 {
-  Params p;
     typedef kernel::MaternFiveHalfs<Params> Kernel_t;
     typedef mean::Data<Params> Mean_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
