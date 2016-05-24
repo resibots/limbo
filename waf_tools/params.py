@@ -109,7 +109,6 @@ def get_output(file):
     for i in params:
         if 'defaults' in i.namespace:
             defaults[i.struct][i.name] = i
-
     # find the params in the current file
     p, d = extract_params(file)
     struct_set = set()
@@ -125,7 +124,7 @@ def get_output(file):
             if kk in plist[k]:
                 output += '- ' + str(plist[k][kk].type) + ' ' + str(plist[k][kk].name) + ' = ' + str(plist[k][kk].value) + ' [defined in ' + plist[k][kk].fname + ']'  + str(plist[k][kk].ifdef) + '\n'
             else:
-                output += '- ' + str(defaults[k][kk].type) + ' ' + str(defaults[k][kk].name) + ' = ' + str(defaults[k][kk].value) + ' [default value, from ' + ']'  + str(plist[k][kk].ifdef) + '\n'
+                output += '- ' + str(defaults[k][kk].type) + ' ' + str(defaults[k][kk].name) + ' = ' + str(defaults[k][kk].value) + ' [default value, from ' + ']'  + str(defaults[k][kk].ifdef) + '\n'
         output += '\n'
 
     return output
