@@ -1,33 +1,29 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE init_functions
+#define BOOST_TEST_MODULE test_init_functions
 
 #include <boost/test/unit_test.hpp>
 
-#include <limbo/tools/macros.hpp>
-#include <limbo/init.hpp>
 #include <limbo/acqui.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/init.hpp>
+#include <limbo/tools/macros.hpp>
 
 using namespace limbo;
-
-Eigen::VectorXd make_v1(double x)
-{
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
-}
 
 struct Params {
     struct bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.01);
     };
 
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 0);
+    };
+
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
     struct kernel_maternfivehalfs {
@@ -67,7 +63,7 @@ struct fit_eval {
         double res = 0;
         for (int i = 0; i < x.size(); i++)
             res += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
-        return make_v1(res);
+        return tools::make_vector(res);
     }
 };
 
@@ -79,8 +75,8 @@ BOOST_AUTO_TEST_CASE(no_init)
 
     Opt_t opt;
     opt.optimize(fit_eval());
-    BOOST_CHECK(opt.observations().size() == 1);
-    BOOST_CHECK(opt.samples().size() == 1);
+    BOOST_CHECK(opt.observations().size() == 0);
+    BOOST_CHECK(opt.samples().size() == 0);
 }
 
 BOOST_AUTO_TEST_CASE(random_sampling)

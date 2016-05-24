@@ -35,8 +35,8 @@ BO_PARAMS(std::cout,
                 BO_PARAM(bool, stats_enabled, true);
               };
 
-              struct bayes_opt_boptimizer {
-                  BO_PARAM(double, noise, 0.001);                  
+              struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
+                  BO_PARAM(double, noise, 0.001);
               };
 
               struct init_randomsampling {
@@ -54,11 +54,10 @@ struct fit_eval {
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
-        Eigen::VectorXd res(1);
-        res(0) = 0;
+        double res = 0;
         for (int i = 0; i < x.size(); i++)
-            res(0) += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
-        return res;
+            res += 1 - (x[i] - 0.3) * (x[i] - 0.3) + sin(10 * x[i]) * 0.2;
+        return tools::make_vector(res);
     }
 };
 

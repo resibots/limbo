@@ -1,22 +1,22 @@
-#include <cmath>
 #include <algorithm>
-#include <string>
-#include <vector>
-#include <utility>
+#include <cmath>
 #include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include <Eigen/Core>
 
 #ifdef USE_TBB
-#include <tbb/task_scheduler_init.h>
-#include <tbb/parallel_for.h>
 #include <tbb/concurrent_hash_map.h>
+#include <tbb/parallel_for.h>
+#include <tbb/task_scheduler_init.h>
 #else
 #include <map>
 #endif
 
-#include <limbo/tools/macros.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
 
 using namespace limbo;
@@ -70,13 +70,6 @@ inline Eigen::VectorXd t_osz(const Eigen::VectorXd& x)
     return r;
 }
 
-Eigen::VectorXd make_v1(double x)
-{
-    Eigen::VectorXd v1(1);
-    v1 << x;
-    return v1;
-}
-
 struct Sphere {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 1;
@@ -84,7 +77,7 @@ struct Sphere {
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::Vector2d opt(0.5, 0.5);
-        return make_v1(-(x - opt).squaredNorm());
+        return tools::make_vector(-(x - opt).squaredNorm());
     }
 };
 
@@ -99,7 +92,7 @@ struct Ellipsoid {
         double r = 0;
         for (size_t i = 0; i < dim_in; ++i)
             r += std::pow(10, ((double)i) / (dim_in - 1.0)) * z(i) * z(i) + 1;
-        return make_v1(-r);
+        return tools::make_vector(-r);
     }
 };
 
@@ -112,7 +105,7 @@ struct Rastrigin {
         double f = 10 * x.size();
         for (int i = 0; i < x.size(); ++i)
             f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));
-        return make_v1(-f);
+        return tools::make_vector(-f);
     }
 };
 
@@ -138,7 +131,7 @@ struct Hartman3 {
             }
             res += alpha(i) * exp(-s);
         }
-        return make_v1(res);
+        return tools::make_vector(res);
     }
 };
 
@@ -167,7 +160,7 @@ struct Hartman6 {
             }
             res += alpha(i) * exp(-s);
         }
-        return make_v1(res);
+        return tools::make_vector(res);
     }
 };
 
@@ -182,7 +175,7 @@ struct GoldenPrice {
         Eigen::VectorXd x = (4.0 * xx).array() - 2.0;
         double r = (1 + (x(0) + x(1) + 1) * (x(0) + x(1) + 1) * (19 - 14 * x(0) + 3 * x(0) * x(0) - 14 * x(1) + 6 * x(0) * x(1) + 3 * x(1) * x(1))) * (30 + (2 * x(0) - 3 * x(1)) * (2 * x(0) - 3 * x(1)) * (18 - 32 * x(0) + 12 * x(0) * x(0) + 48 * x(1) - 36 * x(0) * x(1) + 27 * x(1) * x(1)));
 
-        return make_v1(-log(r) + 5);
+        return tools::make_vector(-log(r) + 5);
     }
 };
 
@@ -191,7 +184,7 @@ struct Params {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.0);
     };
 
@@ -201,6 +194,9 @@ struct Params {
 
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 40);
+    };
+
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
     struct acqui_gpucb : public defaults::acqui_gpucb {
@@ -298,7 +294,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Sphere());
                 Eigen::Vector2d s_val(0.5, 0.5);
@@ -309,7 +305,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
                 Eigen::Vector2d s_val(0.5, 0.5);
@@ -320,7 +316,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Rastrigin());
                 Eigen::Vector4d s_val(0, 0, 0, 0);
@@ -331,7 +327,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman3());
                 // double s_max = 3.86278;
@@ -343,7 +339,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman6());
                 Eigen::Matrix<double, 6, 1> s_val;
@@ -356,7 +352,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(GoldenPrice());
                 //    double s_max = -log(3);

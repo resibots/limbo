@@ -14,8 +14,14 @@ namespace limbo {
         };
     }
     namespace init {
-        ///@ingroup init
-        ///Pure random sampling
+        /** @ingroup init
+          \rst
+          Pure random sampling in [0, 1]^n
+
+          Parameters:
+            - ``int samples`` (total number of samples)
+          \endrst
+        */
         template <typename Params>
         struct RandomSampling {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>

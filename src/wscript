@@ -4,7 +4,9 @@
 
 def build(bld):
     bld.recurse('examples')
-    bld.recurse('tests')
+    bld.recurse('tutorials')
+    if bld.options.tests:
+        bld.recurse('tests')
     bld.recurse('benchmarks')
 
     bld.stlib(source=' \
