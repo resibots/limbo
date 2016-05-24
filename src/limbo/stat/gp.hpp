@@ -32,13 +32,11 @@ namespace limbo {
                     Eigen::VectorXd point = current;
                     point[dim_in] = x;
                     if (dim_in == current.size() - 1) {
-                        double sigma;
-                        Eigen::VectorXd mu;
-                        std::tie(mu, sigma) = bo.model().query(point);
+                        auto q = bo.model().query(point);
                         double acqui = typename BO::acquisition_function_t(bo.model(), bo.current_iteration())(point, afun);
                         ofs << point.transpose() << " "
-                            << mu.transpose() << " "
-                            << sigma << " "
+                            << std::get<0>(q).transpose() << " "
+                            << std::get<1>(q) << " "
                             << acqui << std::endl;
                     } else {
                         _explore(dim_in + 1, ofs, bo, afun, point);
