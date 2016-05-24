@@ -17,13 +17,15 @@ namespace limbo {
     }
     namespace init {
         /** @ingroup init
-          Grid-based random sampling: for each bin, take k random samples until k = samples.
+          \rst
+          Grid-based random sampling: for each bin, take a random sample until the total number of samples is equal to```samples``.
 
           For instance, if bins = 5 and samples = 10, then put 2 random samples in each bin.
 
           Parameters:
-            - `int samples`
-            - `int bins`
+            - ``int samples`` (total number of samples)
+            - ``int bins`` (number of bins)
+          \endrst
         */
         template <typename Params>
         struct RandomSamplingGrid {
