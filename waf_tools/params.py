@@ -1,19 +1,16 @@
 #!/usr/bin/env python
-import fnmatch
-import re
+import fnmatch,re
 import os
 import sys
 from collections import defaultdict
-
 
 def make_dirlist(folder, extensions):
     matches = []
     for root, dirnames, filenames in os.walk(folder):
         for ext in extensions:
-            for filename in fnmatch.filter(filenames, '*' + ext):
+            for filename in fnmatch.filter(filenames, '*'+ext):
                 matches.append(os.path.join(root, filename))
     return matches
-
 
 def extract_namespace(level):
     namespace = []
@@ -29,7 +26,6 @@ def extract_namespace(level):
             struct = n
     return namespace, struct
 
-
 def extract_param(line):
     i = line.replace(' ', '').replace('\t', '')
     k = re.split('(,|\(|\))', i)
@@ -38,12 +34,10 @@ def extract_param(line):
     value = k[6]
     return type, name, value
 
-
 def extract_ifdef(d):
     x = filter(lambda x: not ('_HPP' in x), d)
     x = map(lambda x: x.replace('NOT #ifndef', '#ifdef'), x)
     x = map(lambda x: x.replace('\n', ''), x)
-
     return x
 
 def extract_params(fname):
@@ -52,10 +46,9 @@ def extract_params(fname):
     level = []
     defaults = []
     ifdefs = []
-    elifdef = []
     for line in f:
         if '{' in line:
-            level += [line]
+            level += [line];
         if '}' in line:
             level.pop(-1)
         if '#if' in line:
@@ -72,15 +65,13 @@ def extract_params(fname):
             defaults += [dd]
         if 'BO_PARAM(' in line and not "#define" in line:
             namespace, struct = extract_namespace(level)
-            d = extract_ifdef(ifdefs)
             type, name, value = extract_param(line)
+            d = extract_ifdef(ifdefs)
             p = Param(namespace, struct, type, name, value, fname, d)
             params += [p]
     return params, defaults
 
-
 class Param:
-
     def __init__(self, namespace, struct, type, name, value, fname, ifdef):
         self.namespace = namespace
         self.struct = struct
@@ -95,19 +86,19 @@ class Param:
         for k in self.namespace:
             s += k + ' :: '
         s += self.struct
-        s += " -> " + self.type + ' ' + self.name + ' = ' + \
-            self.value + ' [from ' + self.fname + ']'
-        print s
-
+        s += " -> " + self.type + ' ' + self.name + ' = ' + self.value + ' [from ' + self.fname + ']' + str(self.ifdef)
+        return s
 
 def underline(k):
-    print k
+    out = k + '\n'
     s = ''
     for i in range(0, len(k)):
         s += '='
-    print s
+    out += s + '\n'
+    return out
 
-if __name__ == "__main__":
+def get_output(file):
+    output = ""
     # find the default params
     dirs = make_dirlist('src/', ['.hpp'])
     params = []
@@ -119,34 +110,22 @@ if __name__ == "__main__":
         if 'defaults' in i.namespace:
             defaults[i.struct][i.name] = i
 
-    # if we have a filename
-    if (len(sys.argv) > 1):
-        # find the params in the current file
-        p, d = extract_params(sys.argv[1])
-        struct_set = set()
-        plist = defaultdict(dict)
-        for i in p:
-            struct_set.add(i.struct)
-            plist[i.struct][i.name] = i
-        for i in d:
-            struct_set.add(i)
-        for k in struct_set:
-            underline(k)
-            for kk in defaults[k].keys():
-                if kk in plist[k]:
-                    print '-', plist[k][kk].type, plist[k][kk].name, '=', plist[k][kk].value, '[defined in ' + plist[k][kk].fname + ']', plist[k][kk].ifdef
-                else:
-                    print '-', defaults[k][kk].type, defaults[k][kk].name, '=', defaults[k][kk].value, '[default value, from ' + defaults[k][kk].fname + ']', plist[k][kk].ifdef
-            print ''
-    else:  # no filename, print the defaults in rst (for the doc)
-        print "Default values"
-        print '------------------------'
-        print ''
-        print '.. highlight:: c++'
-        print ''
-        for k in sorted(defaults.keys()):
-            underline(k)
-            print ''
-            for kk in sorted(defaults[k].keys()):
-                print '- ``' + defaults[k][kk].type + ' ' + defaults[k][kk].name + ' = ' + defaults[k][kk].value + '`` [default value, from ' + defaults[k][kk].fname + ']', defaults[k][kk].ifdef
-            print '\n'
+    # find the params in the current file
+    p, d = extract_params(file)
+    struct_set = set()
+    plist = defaultdict(dict)
+    for i in p:
+        struct_set.add(i.struct)
+        plist[i.struct][i.name] = i
+    for i in d:
+        struct_set.add(i)
+    for k in struct_set:
+        output += underline(k)
+        for kk in defaults[k].keys():
+            if kk in plist[k]:
+                output += '- ' + str(plist[k][kk].type) + ' ' + str(plist[k][kk].name) + ' = ' + str(plist[k][kk].value) + ' [defined in ' + plist[k][kk].fname + ']'  + str(plist[k][kk].ifdef) + '\n'
+            else:
+                output += '- ' + str(defaults[k][kk].type) + ' ' + str(defaults[k][kk].name) + ' = ' + str(defaults[k][kk].value) + ' [default value, from ' + ']'  + str(plist[k][kk].ifdef) + '\n'
+        output += '\n'
+
+    return output

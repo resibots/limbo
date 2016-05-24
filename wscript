@@ -96,6 +96,7 @@ def build(bld):
         for i in bld.options.exp.split(','):
             print 'Building exp: ' + i
             bld.recurse('exp/' + i)
+            limbo.output_params('exp/'+i)
     bld.add_post_fun(limbo.summary)
 
 

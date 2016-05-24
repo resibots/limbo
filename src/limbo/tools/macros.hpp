@@ -5,9 +5,8 @@
 #include <Eigen/Core>
 #include <iostream>
 
-
 #define BO_PARAM(Type, Name, Value) \
-  static constexpr Type Name() { return Value; }
+    static constexpr Type Name() { return Value; }
 
 #define BO_REQUIRED_PARAM(Type, Name)                                         \
     static const Type Name()                                                  \
