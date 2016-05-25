@@ -19,6 +19,8 @@ The file structure should look like this: ::
        |-- test
             +-- wscript
             +-- main.cpp
+  |-- src
+  ...
 
 Next, copy the following content to the ``wscript`` file:
 
