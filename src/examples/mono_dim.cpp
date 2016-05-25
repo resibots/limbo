@@ -71,11 +71,10 @@ int main()
     typedef mean::Data<Params> Mean_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
-    using stat_t =
-    boost::fusion::vector<stat::ConsoleSummary<Params>,
-                          stat::Samples<Params>,
-                          stat::Observations<Params>,
-                          stat::GP<Params> >;
+    using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>,
+        stat::Samples<Params>,
+        stat::Observations<Params>,
+        stat::GP<Params>>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, statsfun<stat_t>, acquifun<Acqui_t>> opt;
     opt.optimize(fit_eval());

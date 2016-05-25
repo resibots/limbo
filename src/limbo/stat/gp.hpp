@@ -16,17 +16,20 @@ namespace limbo {
             {
                 if (!bo.stats_enabled())
                     return;
-                std::string  fname = bo.res_dir() + "/" +
-                  "gp_" + std::to_string(bo.total_iterations()) + ".dat";
+                std::string fname = bo.res_dir() + "/" + "gp_" + std::to_string(bo.total_iterations()) + ".dat";
                 std::ofstream ofs(fname.c_str());
+                int gp_in = bo.model().dim_in();
+                int gp_out = bo.model().dim_out();
+                ofs << "#Point[" << gp_in << "d] mu[" << gp_out << "d] sigma[1d] acquisition[1d]" << std::endl;
                 _explore(0, ofs, bo, afun, Eigen::VectorXd::Constant(bo.model().dim_in(), 0));
             }
-          protected:
+
+        protected:
             // recursively explore all the dimensions
             template <typename BO, typename AggregatorFunction>
             void _explore(int dim_in, std::ofstream& ofs,
-                          const BO& bo, const AggregatorFunction& afun,
-                          const Eigen::VectorXd& current) const
+                const BO& bo, const AggregatorFunction& afun,
+                const Eigen::VectorXd& current) const
             {
                 for (double x = 0; x <= 1.0f; x += 1.0f / (double)Params::stat_gp::bins()) {
                     Eigen::VectorXd point = current;
@@ -38,7 +41,8 @@ namespace limbo {
                             << std::get<0>(q).transpose() << " "
                             << std::get<1>(q) << " "
                             << acqui << std::endl;
-                    } else {
+                    }
+                    else {
                         _explore(dim_in + 1, ofs, bo, afun, point);
                     }
                 }
