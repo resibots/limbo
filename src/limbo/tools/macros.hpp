@@ -3,6 +3,7 @@
 
 #include <boost/algorithm/string.hpp>
 #include <Eigen/Core>
+#include <iostream>
 
 #define BO_PARAM(Type, Name, Value) \
     static constexpr Type Name() { return Value; }
