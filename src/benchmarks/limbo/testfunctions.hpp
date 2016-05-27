@@ -268,7 +268,7 @@ public:
         double diff = std::abs(x + f(sols.row(0)));
         double min_diff = diff;
 
-        for (size_t i = 1; i < sols.rows(); i++) {
+        for (int i = 1; i < sols.rows(); i++) {
             diff = std::abs(x + f(sols.row(i)));
             if (diff < min_diff)
                 min_diff = diff;

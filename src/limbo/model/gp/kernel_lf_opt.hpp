@@ -59,7 +59,7 @@ namespace limbo {
                         // K^{-1} using Cholesky decomposition
                         Eigen::MatrixXd w = Eigen::MatrixXd::Identity(n, n);
 
-                        gp.matrixL().template triangularView<Eigen::Lower>().solveInPlace(w);
+                        // gp.matrixL().template triangularView<Eigen::Lower>().solveInPlace(w);
                         gp.matrixL().template triangularView<Eigen::Lower>().transpose().solveInPlace(w);
 
                         // alpha * alpha.transpose() - K^{-1}

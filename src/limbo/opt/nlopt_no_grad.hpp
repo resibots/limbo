@@ -91,12 +91,10 @@ namespace limbo {
 
                 double max;
 
-                try
-                {
+                try {
                     opt.optimize(x, max);
                 }
-                catch (nlopt::roundoff_limited& e)
-                {
+                catch (nlopt::roundoff_limited& e) {
                     // In theory it's ok to ignore this error
                 }
 

@@ -71,9 +71,15 @@ namespace limbo {
             double operator()(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
             {
                 assert(x1.size() == _ell.size());
-                Eigen::MatrixXd K = (_A * _A.transpose());
-                K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
-                double z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();
+                double z;
+                if (Params::kernel_squared_exp_ard::k() > 0) {
+                    Eigen::MatrixXd K = (_A * _A.transpose());
+                    K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
+                    z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();
+                }
+                else {
+                    z = (x1 - x2).cwiseQuotient(_ell).squaredNorm();
+                }
                 return _sf2 * std::exp(-0.5 * z);
             }
 
