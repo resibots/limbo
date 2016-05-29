@@ -18,13 +18,13 @@ namespace limbo {
     namespace init {
         /** @ingroup init
           \rst
-          Grid-based random sampling: for each bin, take a random sample until the total number of samples is equal to```samples``.
-
-          For instance, if bins = 5 and samples = 10, then put 2 random samples in each bin.
+          Grid-based random sampling: in effect, define a grid and takes random samples from this grid. The number of bins in the grid is ``bins``^number_of_dimensions 
+          
+          For instance, if bins = 5 and there are 3 inputs dimensions, then the grid is 5*5*5=125, and random points will all be points of this grid.
 
           Parameters:
             - ``int samples`` (total number of samples)
-            - ``int bins`` (number of bins)
+            - ``int bins`` (number of bins for each dimensions)
           \endrst
         */
         template <typename Params>
