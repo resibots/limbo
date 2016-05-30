@@ -19,6 +19,14 @@ using \hyperlink{group__tools_ga3df78ebcb864be91e73e840bb42b9208}{limbo\+::tools
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+Eigen\+::\+Vector\+Xd \hyperlink{group__tools_ga029807776f0b7f44f806e4f9d92e34e7}{limbo\+::tools\+::make\+\_\+vector} (double x)
+\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr int \hyperlink{group__tools_ga156cca8d927600da93054c952247857b}{limbo\+::tools\+::signum} (T x)
+\item 
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ }\\bool \hyperlink{group__tools_gabcb0caa2ffabd42fa865c9ab0b624681}{limbo\+::tools\+::is\+\_\+nan\+\_\+or\+\_\+inf} (T v)
+\item 
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$!std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ }\\bool \hyperlink{group__tools_gaf4ca69df04108670f0cc61e4a8ae7367}{limbo\+::tools\+::is\+\_\+nan\+\_\+or\+\_\+inf} (const T \&v)
+\item 
 Eigen\+::\+Vector\+Xd \hyperlink{group__tools_ga2a64df3120a3ecd84e62640fb43722d0}{limbo\+::tools\+::random\+\_\+vector} (int size)
 \item 
 std\+::string \hyperlink{group__tools_gafb48d3271e7423f8b8d94599869bd9cb}{limbo\+::tools\+::date} ()
@@ -69,11 +77,39 @@ easy way to get the P\+I\+D \hypertarget{group__tools_ga4810ffa502d791d6ad750739
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{group__tools_ga4810ffa502d791d6ad750739a953f56f}
-easy way to get the hostame \hypertarget{group__tools_ga2a64df3120a3ecd84e62640fb43722d0}{}\index{Tools@{Tools}!random\+\_\+vector@{random\+\_\+vector}}
+easy way to get the hostame \hypertarget{group__tools_gabcb0caa2ffabd42fa865c9ab0b624681}{}\index{Tools@{Tools}!is\+\_\+nan\+\_\+or\+\_\+inf@{is\+\_\+nan\+\_\+or\+\_\+inf}}
+\index{is\+\_\+nan\+\_\+or\+\_\+inf@{is\+\_\+nan\+\_\+or\+\_\+inf}!Tools@{Tools}}
+\subsubsection[{is\+\_\+nan\+\_\+or\+\_\+inf}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ bool limbo\+::tools\+::is\+\_\+nan\+\_\+or\+\_\+inf (
+\begin{DoxyParamCaption}
+\item[{T}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{group__tools_gabcb0caa2ffabd42fa865c9ab0b624681}
+return true if v is nan (not a number) or infinity \hypertarget{group__tools_gaf4ca69df04108670f0cc61e4a8ae7367}{}\index{Tools@{Tools}!is\+\_\+nan\+\_\+or\+\_\+inf@{is\+\_\+nan\+\_\+or\+\_\+inf}}
+\index{is\+\_\+nan\+\_\+or\+\_\+inf@{is\+\_\+nan\+\_\+or\+\_\+inf}!Tools@{Tools}}
+\subsubsection[{is\+\_\+nan\+\_\+or\+\_\+inf}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename std\+::enable\+\_\+if$<$!std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ bool limbo\+::tools\+::is\+\_\+nan\+\_\+or\+\_\+inf (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{group__tools_gaf4ca69df04108670f0cc61e4a8ae7367}
+return true if v is nan (not a number) or infinity (const version) \hypertarget{group__tools_ga029807776f0b7f44f806e4f9d92e34e7}{}\index{Tools@{Tools}!make\+\_\+vector@{make\+\_\+vector}}
+\index{make\+\_\+vector@{make\+\_\+vector}!Tools@{Tools}}
+\subsubsection[{make\+\_\+vector}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector\+Xd limbo\+::tools\+::make\+\_\+vector (
+\begin{DoxyParamCaption}
+\item[{double}]{x}
+\end{DoxyParamCaption}
+)}\label{group__tools_ga029807776f0b7f44f806e4f9d92e34e7}
+make a 1-\/\+D vector from a double (useful when we need to return vectors) \hypertarget{group__tools_ga2a64df3120a3ecd84e62640fb43722d0}{}\index{Tools@{Tools}!random\+\_\+vector@{random\+\_\+vector}}
 \index{random\+\_\+vector@{random\+\_\+vector}!Tools@{Tools}}
 \subsubsection[{random\+\_\+vector}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Vector\+Xd limbo\+::tools\+::random\+\_\+vector (
 \begin{DoxyParamCaption}
 \item[{int}]{size}
 \end{DoxyParamCaption}
 )}\label{group__tools_ga2a64df3120a3ecd84e62640fb43722d0}
-random vector in \mbox{[}0, 1\mbox{]} 
+random vector in \mbox{[}0, 1\mbox{]} \hypertarget{group__tools_ga156cca8d927600da93054c952247857b}{}\index{Tools@{Tools}!signum@{signum}}
+\index{signum@{signum}!Tools@{Tools}}
+\subsubsection[{signum}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ constexpr int limbo\+::tools\+::signum (
+\begin{DoxyParamCaption}
+\item[{T}]{x}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{group__tools_ga156cca8d927600da93054c952247857b}
+return -\/1 if x $<$ 0; return 0 if x = 0; return 1 if x $>$ 0. 

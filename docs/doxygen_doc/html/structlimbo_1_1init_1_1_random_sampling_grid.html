@@ -109,13 +109,15 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename Params&gt;<br />
 struct limbo::init::RandomSamplingGrid&lt; Params &gt;</h3>
 
-<p>Grid-based random sampling: for each bin, take k random samples until k = samples.</p>
-<p>For instance, if bins = 5 and samples = 10, then put 2 random samples in each bin.</p>
-<p>Parameters:</p><ul>
-<li><code>int samples</code></li>
-<li><code>int bins</code> </li>
-</ul>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<pre class="fragment">embed:rst
+Grid-based random sampling: in effect, define a grid and takes random samples from this grid. The number of bins in the grid is ``bins``^number_of_dimensions 
+
+For instance, if bins = 5 and there are 3 inputs dimensions, then the grid is 5*5*5=125, and random points will all be points of this grid.
+
+Parameters:
+  - ``int samples`` (total number of samples)
+  - ``int bins`` (number of bins for each dimensions)
+</pre> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a6fd277031f69bf9da891b5f35065c369"></a>
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +168,7 @@ template&lt;typename StateFunction , typename AggregatorFunction , typename Opt 
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 16 2016 14:31:30 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 30 2016 13:05:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

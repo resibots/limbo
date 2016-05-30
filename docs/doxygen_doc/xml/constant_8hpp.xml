@@ -6,44 +6,49 @@
     <includes refid="macros_8hpp" local="no">limbo/tools/macros.hpp</includes>
     <includedby refid="mean_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/mean.hpp</includedby>
     <incdepgraph>
-      <node id="785">
+      <node id="799">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="782">
+      <node id="796">
         <label>/tmp/doc_limbo/limbo/src/limbo/mean/constant.hpp</label>
         <link refid="constant.hpp"/>
-        <childnode refid="783" relation="include">
+        <childnode refid="797" relation="include">
         </childnode>
-        <childnode refid="784" relation="include">
+        <childnode refid="798" relation="include">
         </childnode>
       </node>
-      <node id="783">
+      <node id="797">
         <label>Eigen/Core</label>
       </node>
-      <node id="784">
+      <node id="800">
+        <label>iostream</label>
+      </node>
+      <node id="798">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="785" relation="include">
+        <childnode refid="799" relation="include">
         </childnode>
-        <childnode refid="783" relation="include">
+        <childnode refid="797" relation="include">
+        </childnode>
+        <childnode refid="800" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="786">
+      <node id="801">
         <label>/tmp/doc_limbo/limbo/src/limbo/mean/constant.hpp</label>
         <link refid="constant.hpp"/>
-        <childnode refid="787" relation="include">
+        <childnode refid="802" relation="include">
         </childnode>
       </node>
-      <node id="788">
+      <node id="803">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
       </node>
-      <node id="787">
+      <node id="802">
         <label>/tmp/doc_limbo/limbo/src/limbo/mean.hpp</label>
         <link refid="mean_8hpp"/>
-        <childnode refid="788" relation="include">
+        <childnode refid="803" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -71,23 +76,23 @@
 <codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="15" refid="namespacelimbo_1_1mean" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">mean<sp/>{</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
-<codeline lineno="21" refid="structlimbo_1_1mean_1_1_constant" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1mean_1_1_constant" kindref="compound">Constant</ref><sp/>{</highlight></codeline>
-<codeline lineno="22" refid="structlimbo_1_1mean_1_1_constant_1a263296f6d6b10aa360727137588735f7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1mean_1_1_constant_1a263296f6d6b10aa360727137588735f7" kindref="member">Constant</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>dim_out<sp/>=<sp/>1)<sp/>:<sp/>_dim_out(dim_out)<sp/>{}</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GP&gt;</highlight></codeline>
-<codeline lineno="25" refid="structlimbo_1_1mean_1_1_constant_1a6ea7d6a07dfb9a45cefe9717dd25030b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="structlimbo_1_1mean_1_1_constant_1a6ea7d6a07dfb9a45cefe9717dd25030b" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>v,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GP&amp;)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="26"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Eigen::VectorXd::Constant(_dim_out,<sp/>Params::mean_constant::constant());</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>_dim_out;</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
+<codeline lineno="23" refid="structlimbo_1_1mean_1_1_constant" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1mean_1_1_constant" kindref="compound">Constant</ref><sp/>{</highlight></codeline>
+<codeline lineno="24" refid="structlimbo_1_1mean_1_1_constant_1a263296f6d6b10aa360727137588735f7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1mean_1_1_constant_1a263296f6d6b10aa360727137588735f7" kindref="member">Constant</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>dim_out<sp/>=<sp/>1)<sp/>:<sp/>_dim_out(dim_out)<sp/>{}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GP&gt;</highlight></codeline>
+<codeline lineno="27" refid="structlimbo_1_1mean_1_1_constant_1a6ea7d6a07dfb9a45cefe9717dd25030b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="structlimbo_1_1mean_1_1_constant_1a6ea7d6a07dfb9a45cefe9717dd25030b" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>v,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GP&amp;)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="28"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Eigen::VectorXd::Constant(_dim_out,<sp/>Params::mean_constant::constant());</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>_dim_out;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="/tmp/doc_limbo/limbo/src/limbo/mean/constant.hpp"/>
   </compounddef>

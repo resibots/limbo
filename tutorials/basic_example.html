@@ -123,6 +123,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
@@ -229,7 +230,7 @@
 
     <span class="c1">// enable / disable the output</span>
     <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="p">};</span>
 
     <span class="c1">// options for the internal optimizer</span>
@@ -272,9 +273,8 @@ selected randomly), and that the optimizer should run for 40 iterations. The res
 
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
     <span class="p">{</span>
-        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">res</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
@@ -347,9 +347,8 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
 
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
     <span class="p">{</span>
-        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">res</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+      <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 

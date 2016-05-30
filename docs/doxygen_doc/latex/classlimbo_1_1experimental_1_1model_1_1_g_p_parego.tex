@@ -17,9 +17,23 @@ Inheritance diagram for limbo\+:\+:experimental\+:\+:model\+:\+:G\+P\+Parego$<$ 
 \item 
 \hyperlink{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a1f0eb578140f01874b13bfca124c085c}{G\+P\+Parego} (int dim\+\_\+in, int dim\+\_\+out)
 \item 
-void \hyperlink{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae70c804aa8c90057844e49af1ffb9fa5}{compute} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&samples, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&observations, double noise, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&bl\+\_\+samples=std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$())
-\end{DoxyCompactItemize}
+void \hyperlink{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81f8ca3a7f114b015575ae7c64183ead}{compute} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&samples, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&observations, const Eigen\+::\+Vector\+Xd \&noises, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&bl\+\_\+samples=std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$())
+\item 
+void \hyperlink{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81955696f79b4ac11a17d0faf28ccc31}{add\+\_\+sample} (const Eigen\+::\+Vector\+Xd \&sample, const Eigen\+::\+Vector\+Xd \&observation, double noise)
+\begin{DoxyCompactList}\small\item\em add sample will N\+O\+T be incremental (we call compute each time) \end{DoxyCompactList}\item 
+void \hyperlink{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_aee0ce034411e11614069718a3140a3f8}{add\+\_\+bl\+\_\+sample} (const Eigen\+::\+Vector\+Xd \&bl\+\_\+sample, double noise)
+\begin{DoxyCompactList}\small\item\em W\+A\+R\+N\+I\+N\+G\+: Parego does not really work with blacklisted samples. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Params, typename Model$>$class limbo\+::experimental\+::model\+::\+G\+P\+Parego$<$ Params, Model $>$}
+
+this is the model used in Parego reference\+: Knowles, J. (2006). Par\+E\+G\+O\+: A hybrid algorithm with on-\/line landscape approximation for expensive multiobjective optimization problems. I\+E\+E\+E Transactions On Evolutionary Computation, 10(1), 50-\/66. Main idea\+:
+\begin{DoxyItemize}
+\item this models aggregates all the objective values with the Tchebycheff distance
+\item objectives are weighted using a random vector
+\item a single model is built 
+\end{DoxyItemize}
 
 \subsection{Constructor \& Destructor Documentation}
 \hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ac351d6798add22da5c6dd58ac4a00723}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!G\+P\+Parego@{G\+P\+Parego}}
@@ -40,16 +54,41 @@ void \hyperlink{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae70c804aa8c9
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae70c804aa8c90057844e49af1ffb9fa5}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!compute@{compute}}
+\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_aee0ce034411e11614069718a3140a3f8}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!add\+\_\+bl\+\_\+sample@{add\+\_\+bl\+\_\+sample}}
+\index{add\+\_\+bl\+\_\+sample@{add\+\_\+bl\+\_\+sample}!limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}}
+\subsubsection[{add\+\_\+bl\+\_\+sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ void {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::add\+\_\+bl\+\_\+sample (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{bl\+\_\+sample, }
+\item[{double}]{noise}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_aee0ce034411e11614069718a3140a3f8}
+
+
+W\+A\+R\+N\+I\+N\+G\+: Parego does not really work with blacklisted samples. 
+
+\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81955696f79b4ac11a17d0faf28ccc31}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!add\+\_\+sample@{add\+\_\+sample}}
+\index{add\+\_\+sample@{add\+\_\+sample}!limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}}
+\subsubsection[{add\+\_\+sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ void {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::add\+\_\+sample (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{sample, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{observation, }
+\item[{double}]{noise}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81955696f79b4ac11a17d0faf28ccc31}
+
+
+add sample will N\+O\+T be incremental (we call compute each time) 
+
+\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81f8ca3a7f114b015575ae7c64183ead}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!compute@{compute}}
 \index{compute@{compute}!limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}}
 \subsubsection[{compute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ void {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::compute (
 \begin{DoxyParamCaption}
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{samples, }
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{observations, }
-\item[{double}]{noise, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{noises, }
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{bl\+\_\+samples = {\ttfamily std\+:\+:vector$<$Eigen\+:\+:VectorXd$>$()}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae70c804aa8c90057844e49af1ffb9fa5}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81f8ca3a7f114b015575ae7c64183ead}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

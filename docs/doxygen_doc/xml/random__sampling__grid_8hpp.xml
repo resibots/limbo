@@ -7,90 +7,95 @@
     <includes refid="random__generator_8hpp" local="no">limbo/tools/random_generator.hpp</includes>
     <includedby refid="init_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/init.hpp</includedby>
     <incdepgraph>
-      <node id="622">
+      <node id="630">
         <label>list</label>
       </node>
-      <node id="617">
+      <node id="624">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="623">
+      <node id="631">
         <label>stdlib.h</label>
       </node>
-      <node id="620">
+      <node id="628">
         <label>cmath</label>
       </node>
-      <node id="615">
+      <node id="622">
         <label>Eigen/Core</label>
       </node>
-      <node id="618">
+      <node id="626">
         <label>limbo/tools/random_generator.hpp</label>
         <link refid="random__generator_8hpp"/>
-        <childnode refid="619" relation="include">
+        <childnode refid="627" relation="include">
         </childnode>
-        <childnode refid="620" relation="include">
+        <childnode refid="628" relation="include">
         </childnode>
-        <childnode refid="621" relation="include">
+        <childnode refid="629" relation="include">
         </childnode>
+        <childnode refid="630" relation="include">
+        </childnode>
+        <childnode refid="631" relation="include">
+        </childnode>
+        <childnode refid="632" relation="include">
+        </childnode>
+        <childnode refid="633" relation="include">
+        </childnode>
+        <childnode refid="634" relation="include">
+        </childnode>
+      </node>
+      <node id="632">
+        <label>random</label>
+      </node>
+      <node id="629">
+        <label>ctime</label>
+      </node>
+      <node id="621">
+        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp</label>
+        <link refid="random_sampling_grid.hpp"/>
         <childnode refid="622" relation="include">
         </childnode>
         <childnode refid="623" relation="include">
         </childnode>
-        <childnode refid="624" relation="include">
-        </childnode>
-        <childnode refid="625" relation="include">
-        </childnode>
         <childnode refid="626" relation="include">
         </childnode>
       </node>
-      <node id="624">
-        <label>random</label>
-      </node>
-      <node id="621">
-        <label>ctime</label>
-      </node>
-      <node id="614">
-        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp</label>
-        <link refid="random_sampling_grid.hpp"/>
-        <childnode refid="615" relation="include">
-        </childnode>
-        <childnode refid="616" relation="include">
-        </childnode>
-        <childnode refid="618" relation="include">
-        </childnode>
-      </node>
-      <node id="625">
+      <node id="633">
         <label>utility</label>
       </node>
-      <node id="619">
+      <node id="627">
         <label>cstdlib</label>
       </node>
-      <node id="626">
+      <node id="625">
+        <label>iostream</label>
+      </node>
+      <node id="634">
         <label>mutex</label>
       </node>
-      <node id="616">
+      <node id="623">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="617" relation="include">
+        <childnode refid="624" relation="include">
         </childnode>
-        <childnode refid="615" relation="include">
+        <childnode refid="622" relation="include">
+        </childnode>
+        <childnode refid="625" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="628">
+      <node id="636">
         <label>/tmp/doc_limbo/limbo/src/limbo/init.hpp</label>
         <link refid="init_8hpp"/>
-        <childnode refid="629" relation="include">
+        <childnode refid="637" relation="include">
         </childnode>
       </node>
-      <node id="629">
+      <node id="637">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
       </node>
-      <node id="627">
+      <node id="635">
         <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp</label>
         <link refid="random_sampling_grid.hpp"/>
-        <childnode refid="628" relation="include">
+        <childnode refid="636" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -120,24 +125,24 @@
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="group__par__tools_1ga1d650a019b6c1bb551cb42f1c3f5ef82" kindref="member">init</ref><sp/>{</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
-<codeline lineno="29" refid="structlimbo_1_1init_1_1_random_sampling_grid" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1init_1_1_random_sampling_grid" kindref="compound">RandomSamplingGrid</ref><sp/>{</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StateFunction,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Opt&gt;</highlight></codeline>
-<codeline lineno="31" refid="structlimbo_1_1init_1_1_random_sampling_grid_1a6fd277031f69bf9da891b5f35065c369" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1init_1_1_random_sampling_grid_1a6fd277031f69bf9da891b5f35065c369" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StateFunction&amp;<sp/>seval,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;,<sp/>Opt&amp;<sp/>opt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="32"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">tools::rgen_int_t</ref><sp/>rgen(0,<sp/>Params::init_randomsamplinggrid::bins());</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>Params::init_randomsamplinggrid::samples();<sp/>i++)<sp/>{</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>new_sample(StateFunction::dim_in);</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>StateFunction::dim_in;<sp/>i++)</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new_sample[i]<sp/>=<sp/>rgen.<ref refid="classlimbo_1_1tools_1_1_random_generator_1a8428af24ab2e4eb744563d12180b6246" kindref="member">rand</ref>()<sp/>/<sp/>double(Params::init_randomsamplinggrid::bins());</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>opt.eval_and_add(seval,<sp/>new_sample);</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="43"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
+<codeline lineno="31" refid="structlimbo_1_1init_1_1_random_sampling_grid" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1init_1_1_random_sampling_grid" kindref="compound">RandomSamplingGrid</ref><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StateFunction,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Opt&gt;</highlight></codeline>
+<codeline lineno="33" refid="structlimbo_1_1init_1_1_random_sampling_grid_1a6fd277031f69bf9da891b5f35065c369" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1init_1_1_random_sampling_grid_1a6fd277031f69bf9da891b5f35065c369" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StateFunction&amp;<sp/>seval,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;,<sp/>Opt&amp;<sp/>opt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="34"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">tools::rgen_int_t</ref><sp/>rgen(0,<sp/>Params::init_randomsamplinggrid::bins());</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>Params::init_randomsamplinggrid::samples();<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>new_sample(StateFunction::dim_in);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>StateFunction::dim_in;<sp/>i++)</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new_sample[i]<sp/>=<sp/>rgen.<ref refid="classlimbo_1_1tools_1_1_random_generator_1a8428af24ab2e4eb744563d12180b6246" kindref="member">rand</ref>()<sp/>/<sp/>double(Params::init_randomsamplinggrid::bins());</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>opt.eval_and_add(seval,<sp/>new_sample);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp"/>
   </compounddef>

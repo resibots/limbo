@@ -24,15 +24,17 @@ using \hyperlink{group__tools_ga3df78ebcb864be91e73e840bb42b9208}{rgen\+\_\+int\
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+Eigen\+::\+Vector\+Xd \hyperlink{group__tools_ga029807776f0b7f44f806e4f9d92e34e7}{make\+\_\+vector} (double x)
+\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr int \hyperlink{namespacelimbo_1_1tools_ac56ad2bccc403ffa8341394f2fc28cda}{signum} (T x, std\+::false\+\_\+type is\+\_\+signed)
 \item 
 {\footnotesize template$<$typename T $>$ }\\constexpr int \hyperlink{namespacelimbo_1_1tools_a5e6d3a39db3c143a271eac9625f9779e}{signum} (T x, std\+::true\+\_\+type is\+\_\+signed)
 \item 
-{\footnotesize template$<$typename T $>$ }\\constexpr int \hyperlink{namespacelimbo_1_1tools_a156cca8d927600da93054c952247857b}{signum} (T x)
+{\footnotesize template$<$typename T $>$ }\\constexpr int \hyperlink{group__tools_ga156cca8d927600da93054c952247857b}{signum} (T x)
 \item 
-{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ }\\bool \hyperlink{namespacelimbo_1_1tools_abcb0caa2ffabd42fa865c9ab0b624681}{is\+\_\+nan\+\_\+or\+\_\+inf} (T v)
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ }\\bool \hyperlink{group__tools_gabcb0caa2ffabd42fa865c9ab0b624681}{is\+\_\+nan\+\_\+or\+\_\+inf} (T v)
 \item 
-{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$!std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ }\\bool \hyperlink{namespacelimbo_1_1tools_af4ca69df04108670f0cc61e4a8ae7367}{is\+\_\+nan\+\_\+or\+\_\+inf} (const T \&v)
+{\footnotesize template$<$typename T , typename std\+::enable\+\_\+if$<$!std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ }\\bool \hyperlink{group__tools_gaf4ca69df04108670f0cc61e4a8ae7367}{is\+\_\+nan\+\_\+or\+\_\+inf} (const T \&v)
 \item 
 Eigen\+::\+Vector\+Xd \hyperlink{group__tools_ga2a64df3120a3ecd84e62640fb43722d0}{random\+\_\+vector} (int size)
 \item 
@@ -45,20 +47,6 @@ std\+::string \hyperlink{group__tools_ga4ee13d198367d07cabd37316e671db09}{getpid
 
 
 \subsection{Function Documentation}
-\hypertarget{namespacelimbo_1_1tools_abcb0caa2ffabd42fa865c9ab0b624681}{}\index{limbo\+::tools@{limbo\+::tools}!is\+\_\+nan\+\_\+or\+\_\+inf@{is\+\_\+nan\+\_\+or\+\_\+inf}}
-\index{is\+\_\+nan\+\_\+or\+\_\+inf@{is\+\_\+nan\+\_\+or\+\_\+inf}!limbo\+::tools@{limbo\+::tools}}
-\subsubsection[{is\+\_\+nan\+\_\+or\+\_\+inf}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename std\+::enable\+\_\+if$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ bool limbo\+::tools\+::is\+\_\+nan\+\_\+or\+\_\+inf (
-\begin{DoxyParamCaption}
-\item[{T}]{v}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{namespacelimbo_1_1tools_abcb0caa2ffabd42fa865c9ab0b624681}
-\hypertarget{namespacelimbo_1_1tools_af4ca69df04108670f0cc61e4a8ae7367}{}\index{limbo\+::tools@{limbo\+::tools}!is\+\_\+nan\+\_\+or\+\_\+inf@{is\+\_\+nan\+\_\+or\+\_\+inf}}
-\index{is\+\_\+nan\+\_\+or\+\_\+inf@{is\+\_\+nan\+\_\+or\+\_\+inf}!limbo\+::tools@{limbo\+::tools}}
-\subsubsection[{is\+\_\+nan\+\_\+or\+\_\+inf}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename std\+::enable\+\_\+if$<$!std\+::is\+\_\+arithmetic$<$ T $>$\+::value, int $>$\+::type  = 0$>$ bool limbo\+::tools\+::is\+\_\+nan\+\_\+or\+\_\+inf (
-\begin{DoxyParamCaption}
-\item[{const T \&}]{v}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{namespacelimbo_1_1tools_af4ca69df04108670f0cc61e4a8ae7367}
 \hypertarget{namespacelimbo_1_1tools_ac56ad2bccc403ffa8341394f2fc28cda}{}\index{limbo\+::tools@{limbo\+::tools}!signum@{signum}}
 \index{signum@{signum}!limbo\+::tools@{limbo\+::tools}}
 \subsubsection[{signum}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ constexpr int limbo\+::tools\+::signum (
@@ -75,10 +63,3 @@ std\+::string \hyperlink{group__tools_ga4ee13d198367d07cabd37316e671db09}{getpid
 \item[{std\+::true\+\_\+type}]{is\+\_\+signed}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{namespacelimbo_1_1tools_a5e6d3a39db3c143a271eac9625f9779e}
-\hypertarget{namespacelimbo_1_1tools_a156cca8d927600da93054c952247857b}{}\index{limbo\+::tools@{limbo\+::tools}!signum@{signum}}
-\index{signum@{signum}!limbo\+::tools@{limbo\+::tools}}
-\subsubsection[{signum}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ constexpr int limbo\+::tools\+::signum (
-\begin{DoxyParamCaption}
-\item[{T}]{x}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{namespacelimbo_1_1tools_a156cca8d927600da93054c952247857b}

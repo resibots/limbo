@@ -8,67 +8,72 @@
     <includes refid="optimizer_8hpp" local="no">limbo/opt/optimizer.hpp</includes>
     <includedby refid="opt_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/opt.hpp</includedby>
     <incdepgraph>
-      <node id="1038">
+      <node id="1065">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="1035">
+      <node id="1062">
         <label>limits</label>
       </node>
-      <node id="1039">
+      <node id="1067">
         <label>limbo/opt/optimizer.hpp</label>
         <link refid="optimizer_8hpp"/>
-        <childnode refid="1040" relation="include">
+        <childnode refid="1068" relation="include">
         </childnode>
-        <childnode refid="1036" relation="include">
+        <childnode refid="1063" relation="include">
         </childnode>
-        <childnode refid="1041" relation="include">
+        <childnode refid="1069" relation="include">
         </childnode>
       </node>
-      <node id="1036">
+      <node id="1063">
         <label>Eigen/Core</label>
       </node>
-      <node id="1040">
+      <node id="1068">
         <label>tuple</label>
       </node>
-      <node id="1041">
+      <node id="1066">
+        <label>iostream</label>
+      </node>
+      <node id="1069">
         <label>boost/optional.hpp</label>
       </node>
-      <node id="1037">
+      <node id="1064">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="1038" relation="include">
+        <childnode refid="1065" relation="include">
         </childnode>
-        <childnode refid="1036" relation="include">
+        <childnode refid="1063" relation="include">
+        </childnode>
+        <childnode refid="1066" relation="include">
         </childnode>
       </node>
-      <node id="1034">
+      <node id="1061">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt/grid_search.hpp</label>
         <link refid="grid_search.hpp"/>
-        <childnode refid="1035" relation="include">
+        <childnode refid="1062" relation="include">
         </childnode>
-        <childnode refid="1036" relation="include">
+        <childnode refid="1063" relation="include">
         </childnode>
-        <childnode refid="1037" relation="include">
+        <childnode refid="1064" relation="include">
         </childnode>
-        <childnode refid="1039" relation="include">
+        <childnode refid="1067" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1044">
+      <node id="1072">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
       </node>
-      <node id="1043">
+      <node id="1071">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
         <link refid="opt_8hpp"/>
-        <childnode refid="1044" relation="include">
+        <childnode refid="1072" relation="include">
         </childnode>
       </node>
-      <node id="1042">
+      <node id="1070">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt/grid_search.hpp</label>
         <link refid="grid_search.hpp"/>
-        <childnode refid="1043" relation="include">
+        <childnode refid="1071" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

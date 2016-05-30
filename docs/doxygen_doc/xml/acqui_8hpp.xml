@@ -9,7 +9,7 @@
       <node id="4">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="5">
+      <node id="6">
         <label>limbo/acqui/gp_ucb.hpp</label>
         <link refid="gp__ucb_8hpp"/>
         <childnode refid="2" relation="include">
@@ -22,7 +22,7 @@
         <link refid="acqui.hpp"/>
         <childnode refid="1" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -36,6 +36,9 @@
       <node id="2">
         <label>Eigen/Core</label>
       </node>
+      <node id="5">
+        <label>iostream</label>
+      </node>
       <node id="3">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
@@ -43,16 +46,18 @@
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="6">
+      <node id="7">
         <label>/tmp/doc_limbo/limbo/src/limbo/acqui.hpp</label>
         <link refid="acqui.hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="8">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
       </node>

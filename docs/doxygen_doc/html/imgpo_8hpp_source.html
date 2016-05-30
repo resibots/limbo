@@ -249,12 +249,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                                            x_d(splitd) = (tmp_tree[h2].x_min[ii](splitd) + 5 * tmp_tree[h2].x_max[ii](splitd)) / 6.0;</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                                            <span class="comment">// TO-DO: Properly handle bl_samples etc</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                            _model.compute(this-&gt;_samples, this-&gt;_observations, Params::bayes_opt_imgpo::noise(), this-&gt;_bl_samples);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                            _model.compute(this-&gt;_samples, this-&gt;_observations, Eigen::VectorXd::Constant(this-&gt;_samples.size(), Params::bayes_opt_imgpo::noise()), this-&gt;_bl_samples);</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                                            acquisition_function_t acqui_g(_model, M2);</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                                            z_max = <a class="code" href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">std::max</a>(z_max, acqui_g(x_g, afun));</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                                            M2++;</div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                                            _model.compute(this-&gt;_samples, this-&gt;_observations, Params::bayes_opt_imgpo::noise(), this-&gt;_bl_samples);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                                            _model.compute(this-&gt;_samples, this-&gt;_observations, Eigen::VectorXd::Constant(this-&gt;_samples.size(), Params::bayes_opt_imgpo::noise()), this-&gt;_bl_samples);</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                                            acquisition_function_t acqui_d(_model, M2);</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                                            z_max = <a class="code" href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">std::max</a>(z_max, acqui_d(x_d, afun));</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                            M2++;</div>
@@ -319,7 +319,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                                <span class="comment">// left node</span></div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                                _tree[h + 1].x.push_back(x_g);</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                                <span class="comment">// TO-DO: Properly handle bl_samples etc</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                _model.compute(this-&gt;_samples, this-&gt;_observations, Params::bayes_opt_imgpo::noise(), this-&gt;_bl_samples);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                _model.compute(this-&gt;_samples, this-&gt;_observations, Eigen::VectorXd::Constant(this-&gt;_samples.size(), Params::bayes_opt_imgpo::noise()), this-&gt;_bl_samples);</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                                acquisition_function_t acqui_g(_model, M);</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                                <span class="keywordtype">double</span> UCB = acqui_g(x_g, afun);</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                                Eigen::VectorXd fsample_g;</div>
@@ -358,7 +358,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                                <span class="comment">// right node</span></div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                                _tree[h + 1].x.push_back(x_d);</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                                <span class="comment">// TO-DO: Properly handle bl_samples etc</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                                _model.compute(this-&gt;_samples, this-&gt;_observations, Params::bayes_opt_imgpo::noise(), this-&gt;_bl_samples);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                                _model.compute(this-&gt;_samples, this-&gt;_observations, Eigen::VectorXd::Constant(this-&gt;_samples.size(), Params::bayes_opt_imgpo::noise()), this-&gt;_bl_samples);</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                                acquisition_function_t acqui_d(_model, M);</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                                <span class="keywordtype">double</span> UCB2 = acqui_d(x_d, afun);</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                                Eigen::VectorXd fsample_d;</div>
@@ -423,43 +423,45 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                            XI = XI + 4.0;</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                        LB_old = LB;</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                    }</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                }</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> AggregatorFunction = FirstElem&gt;</div>
-<div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#a1724761e5705e64b01acfff23c0b2c28">  336</a></span>&#160;                <span class="keyword">const</span> Eigen::VectorXd&amp; <a class="code" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#a1724761e5705e64b01acfff23c0b2c28">best_observation</a>(<span class="keyword">const</span> AggregatorFunction&amp; afun = AggregatorFunction())<span class="keyword"> const</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword">                </span>{</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                    <span class="keyword">auto</span> rewards = std::vector&lt;double&gt;(this-&gt;_observations.size());</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                    std::transform(this-&gt;_observations.begin(), this-&gt;_observations.end(), rewards.begin(), afun);</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                    <span class="keyword">auto</span> max_e = std::max_element(rewards.begin(), rewards.end());</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                    <span class="keywordflow">return</span> this-&gt;_observations[std::distance(rewards.begin(), max_e)];</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                }</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> AggregatorFunction = FirstElem&gt;</div>
-<div class="line"><a name="l00345"></a><span class="lineno"><a class="line" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#aeafb58cec2621c70ea4db4806272dc0b">  345</a></span>&#160;                <span class="keyword">const</span> Eigen::VectorXd&amp; <a class="code" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#aeafb58cec2621c70ea4db4806272dc0b">best_sample</a>(<span class="keyword">const</span> AggregatorFunction&amp; afun = AggregatorFunction())<span class="keyword"> const</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="keyword">                </span>{</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                    <span class="keyword">auto</span> rewards = std::vector&lt;double&gt;(this-&gt;_observations.size());</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                    std::transform(this-&gt;_observations.begin(), this-&gt;_observations.end(), rewards.begin(), afun);</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                    <span class="keyword">auto</span> max_e = std::max_element(rewards.begin(), rewards.end());</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                    <span class="keywordflow">return</span> this-&gt;_samples[std::distance(rewards.begin(), max_e)];</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;</div>
-<div class="line"><a name="l00353"></a><span class="lineno"><a class="line" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#ac0ee4f560d2629dd6a738a79d669f580">  353</a></span>&#160;                <span class="keyword">const</span> model_t&amp; <a class="code" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#ac0ee4f560d2629dd6a738a79d669f580">model</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model; }</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                    _model.optimize_hyperparams();</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                }</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> AggregatorFunction = FirstElem&gt;</div>
+<div class="line"><a name="l00338"></a><span class="lineno"><a class="line" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#a1724761e5705e64b01acfff23c0b2c28">  338</a></span>&#160;                <span class="keyword">const</span> Eigen::VectorXd&amp; <a class="code" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#a1724761e5705e64b01acfff23c0b2c28">best_observation</a>(<span class="keyword">const</span> AggregatorFunction&amp; afun = AggregatorFunction())<span class="keyword"> const</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="keyword">                </span>{</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                    <span class="keyword">auto</span> rewards = std::vector&lt;double&gt;(this-&gt;_observations.size());</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                    std::transform(this-&gt;_observations.begin(), this-&gt;_observations.end(), rewards.begin(), afun);</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                    <span class="keyword">auto</span> max_e = std::max_element(rewards.begin(), rewards.end());</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                    <span class="keywordflow">return</span> this-&gt;_observations[std::distance(rewards.begin(), max_e)];</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> AggregatorFunction = FirstElem&gt;</div>
+<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#aeafb58cec2621c70ea4db4806272dc0b">  347</a></span>&#160;                <span class="keyword">const</span> Eigen::VectorXd&amp; <a class="code" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#aeafb58cec2621c70ea4db4806272dc0b">best_sample</a>(<span class="keyword">const</span> AggregatorFunction&amp; afun = AggregatorFunction())<span class="keyword"> const</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="keyword">                </span>{</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                    <span class="keyword">auto</span> rewards = std::vector&lt;double&gt;(this-&gt;_observations.size());</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                    std::transform(this-&gt;_observations.begin(), this-&gt;_observations.end(), rewards.begin(), afun);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                    <span class="keyword">auto</span> max_e = std::max_element(rewards.begin(), rewards.end());</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                    <span class="keywordflow">return</span> this-&gt;_samples[std::distance(rewards.begin(), max_e)];</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                }</div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                <span class="keywordtype">void</span> _init_tree(<span class="keywordtype">size_t</span> h_max = 1000)</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                {</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                    _tree.clear();</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                    _tree = std::vector&lt;TreeNode&gt;(h_max);</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                }</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                model_t _model;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                std::vector&lt;TreeNode&gt; _tree;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            };</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;        }</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    }</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;}</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno"><a class="line" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#ac0ee4f560d2629dd6a738a79d669f580">  355</a></span>&#160;                <span class="keyword">const</span> model_t&amp; <a class="code" href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#ac0ee4f560d2629dd6a738a79d669f580">model</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model; }</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                <span class="keywordtype">void</span> _init_tree(<span class="keywordtype">size_t</span> h_max = 1000)</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                {</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                    _tree.clear();</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                    _tree = std::vector&lt;TreeNode&gt;(h_max);</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                }</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                model_t _model;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                std::vector&lt;TreeNode&gt; _tree;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            };</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        }</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;}</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node_html_a09ee8e7b77c04a859ecdc253329303f4"><div class="ttname"><a href="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node.html#a09ee8e7b77c04a859ecdc253329303f4">limbo::bayes_opt::experimental::TreeNode::x_min</a></div><div class="ttdeci">std::vector&lt; Eigen::VectorXd &gt; x_min</div><div class="ttdef"><b>Definition:</b> imgpo.hpp:27</div></div>
 <div class="ttc" id="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node_html_a790ebef4a33235acf40cf745599c4afe"><div class="ttname"><a href="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node.html#a790ebef4a33235acf40cf745599c4afe">limbo::bayes_opt::experimental::TreeNode::x</a></div><div class="ttdeci">std::vector&lt; Eigen::VectorXd &gt; x</div><div class="ttdef"><b>Definition:</b> imgpo.hpp:27</div></div>
 <div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html_afbee4ff7950e1f0f2f98962211fb4ae4"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#afbee4ff7950e1f0f2f98962211fb4ae4">limbo::bayes_opt::experimental::IMGPO::optimize</a></div><div class="ttdeci">void optimize(const StateFunction &amp;sfun, const AggregatorFunction &amp;afun=AggregatorFunction(), bool reset=true)</div><div class="ttdef"><b>Definition:</b> imgpo.hpp:48</div></div>
@@ -469,7 +471,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="structlimbo_1_1bayes__opt_1_1experimental_1_1defaults_1_1bayes__opt__imgpo_html"><div class="ttname"><a href="structlimbo_1_1bayes__opt_1_1experimental_1_1defaults_1_1bayes__opt__imgpo.html">limbo::bayes_opt::experimental::defaults::bayes_opt_imgpo</a></div><div class="ttdef"><b>Definition:</b> imgpo.hpp:21</div></div>
 <div class="ttc" id="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node_html_a69aca1e19bb631e4a5fee776f6965cd9"><div class="ttname"><a href="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node.html#a69aca1e19bb631e4a5fee776f6965cd9">limbo::bayes_opt::experimental::TreeNode::leaf</a></div><div class="ttdeci">std::vector&lt; bool &gt; leaf</div><div class="ttdef"><b>Definition:</b> imgpo.hpp:28</div></div>
 <div class="ttc" id="classlimbo_1_1bayes__opt_1_1_bo_base_html_a77482415d06619f49e6b0300fc950f96"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a77482415d06619f49e6b0300fc950f96">limbo::bayes_opt::BoBase::add_new_sample</a></div><div class="ttdeci">void add_new_sample(const Eigen::VectorXd &amp;s, const Eigen::VectorXd &amp;v)</div><div class="ttdef"><b>Definition:</b> bo_base.hpp:197</div></div>
-<div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html_aeafb58cec2621c70ea4db4806272dc0b"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#aeafb58cec2621c70ea4db4806272dc0b">limbo::bayes_opt::experimental::IMGPO::best_sample</a></div><div class="ttdeci">const Eigen::VectorXd &amp; best_sample(const AggregatorFunction &amp;afun=AggregatorFunction()) const </div><div class="ttdef"><b>Definition:</b> imgpo.hpp:345</div></div>
+<div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html_aeafb58cec2621c70ea4db4806272dc0b"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#aeafb58cec2621c70ea4db4806272dc0b">limbo::bayes_opt::experimental::IMGPO::best_sample</a></div><div class="ttdeci">const Eigen::VectorXd &amp; best_sample(const AggregatorFunction &amp;afun=AggregatorFunction()) const </div><div class="ttdef"><b>Definition:</b> imgpo.hpp:347</div></div>
 <div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html_a2a2958dccaec1f7f1b21a2d4c85cf1fc"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#a2a2958dccaec1f7f1b21a2d4c85cf1fc">limbo::bayes_opt::experimental::IMGPO::model_t</a></div><div class="ttdeci">base_t::model_t model_t</div><div class="ttdef"><b>Definition:</b> imgpo.hpp:44</div></div>
 <div class="ttc" id="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node_html_a3948f2f233995ce1cd4b36d3944b27b9"><div class="ttname"><a href="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node.html#a3948f2f233995ce1cd4b36d3944b27b9">limbo::bayes_opt::experimental::TreeNode::x_max</a></div><div class="ttdeci">std::vector&lt; Eigen::VectorXd &gt; x_max</div><div class="ttdef"><b>Definition:</b> imgpo.hpp:27</div></div>
 <div class="ttc" id="classlimbo_1_1bayes__opt_1_1_bo_base_html_a1ddc93cc023a2d7d527deb4cc750624e"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a1ddc93cc023a2d7d527deb4cc750624e">limbo::bayes_opt::BoBase::model_t</a></div><div class="ttdeci">boost::parameter::binding&lt; args, tag::modelfun, typename defaults::model_t &gt;::type model_t</div><div class="ttdef"><b>Definition:</b> bo_base.hpp:159</div></div>
@@ -484,12 +486,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html">limbo::bayes_opt::experimental::IMGPO</a></div><div class="ttdef"><b>Definition:</b> imgpo.hpp:41</div></div>
 <div class="ttc" id="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node_html_a6f0c0d02a8129c2bd08ba8ecc1f9f0f1"><div class="ttname"><a href="structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node.html#a6f0c0d02a8129c2bd08ba8ecc1f9f0f1">limbo::bayes_opt::experimental::TreeNode::samp</a></div><div class="ttdeci">std::vector&lt; bool &gt; samp</div><div class="ttdef"><b>Definition:</b> imgpo.hpp:28</div></div>
 <div class="ttc" id="bo__base_8hpp_html"><div class="ttname"><a href="bo__base_8hpp.html">bo_base.hpp</a></div></div>
-<div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html_a1724761e5705e64b01acfff23c0b2c28"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#a1724761e5705e64b01acfff23c0b2c28">limbo::bayes_opt::experimental::IMGPO::best_observation</a></div><div class="ttdeci">const Eigen::VectorXd &amp; best_observation(const AggregatorFunction &amp;afun=AggregatorFunction()) const </div><div class="ttdef"><b>Definition:</b> imgpo.hpp:336</div></div>
-<div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html_ac0ee4f560d2629dd6a738a79d669f580"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#ac0ee4f560d2629dd6a738a79d669f580">limbo::bayes_opt::experimental::IMGPO::model</a></div><div class="ttdeci">const model_t &amp; model() const </div><div class="ttdef"><b>Definition:</b> imgpo.hpp:353</div></div>
+<div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html_a1724761e5705e64b01acfff23c0b2c28"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#a1724761e5705e64b01acfff23c0b2c28">limbo::bayes_opt::experimental::IMGPO::best_observation</a></div><div class="ttdeci">const Eigen::VectorXd &amp; best_observation(const AggregatorFunction &amp;afun=AggregatorFunction()) const </div><div class="ttdef"><b>Definition:</b> imgpo.hpp:338</div></div>
+<div class="ttc" id="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_html_ac0ee4f560d2629dd6a738a79d669f580"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#ac0ee4f560d2629dd6a738a79d669f580">limbo::bayes_opt::experimental::IMGPO::model</a></div><div class="ttdeci">const model_t &amp; model() const </div><div class="ttdef"><b>Definition:</b> imgpo.hpp:355</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 16 2016 14:31:30 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 30 2016 13:05:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

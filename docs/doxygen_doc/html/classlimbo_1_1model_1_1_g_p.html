@@ -97,7 +97,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="gp_8hpp_source.html">limbo/model/gp.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="model_2gp_8hpp_source.html">limbo/model/gp.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -107,9 +107,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab36947c89e4f5ad92599656a21829755"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#ab36947c89e4f5ad92599656a21829755">GP</a> (int <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a41d99e6a69d53fc7d9260d295f787bc3">dim_in</a>, int <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a077144695f9f0b33b64d4feb8fb4e447">dim_out</a>)</td></tr>
 <tr class="memdesc:ab36947c89e4f5ad92599656a21829755"><td class="mdescLeft">&#160;</td><td class="mdescRight">useful because the model might be created before having samples  <a href="#ab36947c89e4f5ad92599656a21829755">More...</a><br /></td></tr>
 <tr class="separator:ab36947c89e4f5ad92599656a21829755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb8c8521002a7157f48423e9b6739ee0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#abb8c8521002a7157f48423e9b6739ee0">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">samples</a>, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, double noise, const std::vector&lt; Eigen::VectorXd &gt; &amp;bl_samples=std::vector&lt; Eigen::VectorXd &gt;())</td></tr>
-<tr class="memdesc:abb8c8521002a7157f48423e9b6739ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> from samples, observation, noise. [optionnal: blacklisted samples]. This call needs to be explicit!  <a href="#abb8c8521002a7157f48423e9b6739ee0">More...</a><br /></td></tr>
-<tr class="separator:abb8c8521002a7157f48423e9b6739ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3597b1c02b61d0ea1301808b08d8abb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a3597b1c02b61d0ea1301808b08d8abb7">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">samples</a>, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises, const std::vector&lt; Eigen::VectorXd &gt; &amp;bl_samples=std::vector&lt; Eigen::VectorXd &gt;(), const Eigen::VectorXd &amp;noises_bl=Eigen::VectorXd())</td></tr>
+<tr class="memdesc:a3597b1c02b61d0ea1301808b08d8abb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> from samples, observation, noise. [optional: blacklisted samples]. This call needs to be explicit!  <a href="#a3597b1c02b61d0ea1301808b08d8abb7">More...</a><br /></td></tr>
+<tr class="separator:a3597b1c02b61d0ea1301808b08d8abb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa01b41e37de4def676cf6c79b08aac94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#aa01b41e37de4def676cf6c79b08aac94">optimize_hyperparams</a> ()</td></tr>
+<tr class="memdesc:aa01b41e37de4def676cf6c79b08aac94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do not forget to call this if you use hyper-prameters optimization!!  <a href="#aa01b41e37de4def676cf6c79b08aac94">More...</a><br /></td></tr>
+<tr class="separator:aa01b41e37de4def676cf6c79b08aac94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e4e23d98c421d610df52ea6d3f3539"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a43e4e23d98c421d610df52ea6d3f3539">add_sample</a> (const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation, double noise)</td></tr>
+<tr class="separator:a43e4e23d98c421d610df52ea6d3f3539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43b06658ba27a37e12c1addce9ab8569"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a43b06658ba27a37e12c1addce9ab8569">add_bl_sample</a> (const Eigen::VectorXd &amp;bl_sample, double noise)</td></tr>
+<tr class="memdesc:a43b06658ba27a37e12c1addce9ab8569"><td class="mdescLeft">&#160;</td><td class="mdescRight">add blacklisted sample and update the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>  <a href="#a43b06658ba27a37e12c1addce9ab8569">More...</a><br /></td></tr>
+<tr class="separator:a43b06658ba27a37e12c1addce9ab8569"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33937ff7df97c01fdd9bf8911e0a6159"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; Eigen::VectorXd, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a33937ff7df97c01fdd9bf8911e0a6159">query</a> (const Eigen::VectorXd &amp;v) const </td></tr>
 <tr class="separator:a33937ff7df97c01fdd9bf8911e0a6159"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d26e30b8c53400cdf12058d83dc41f0"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a5d26e30b8c53400cdf12058d83dc41f0">mu</a> (const Eigen::VectorXd &amp;v) const </td></tr>
@@ -145,18 +153,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac490915c95cc78f6cd836f78e3638bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa41665d2029a541ce5fe85647fe3662d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#aa41665d2029a541ce5fe85647fe3662d">nb_bl_samples</a> () const </td></tr>
 <tr class="separator:aa41665d2029a541ce5fe85647fe3662d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9563c3faaa672e814772a1a2a877e24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#af9563c3faaa672e814772a1a2a877e24">update</a> ()</td></tr>
-<tr class="memdesc:af9563c3faaa672e814772a1a2a877e24"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>  <a href="#af9563c3faaa672e814772a1a2a877e24">More...</a><br /></td></tr>
-<tr class="separator:af9563c3faaa672e814772a1a2a877e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55ea6fe353a12d4c788fac5f2e20e416"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a55ea6fe353a12d4c788fac5f2e20e416">recompute</a> (bool update_obs_mean=true)</td></tr>
+<tr class="memdesc:a55ea6fe353a12d4c788fac5f2e20e416"><td class="mdescLeft">&#160;</td><td class="mdescRight">recomputes the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>  <a href="#a55ea6fe353a12d4c788fac5f2e20e416">More...</a><br /></td></tr>
+<tr class="separator:a55ea6fe353a12d4c788fac5f2e20e416"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a794ed0eeda29aaa7afe303b5e72d3927"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a794ed0eeda29aaa7afe303b5e72d3927">get_lik</a> () const </td></tr>
 <tr class="memdesc:a794ed0eeda29aaa7afe303b5e72d3927"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the likelihood (do not compute it!)  <a href="#a794ed0eeda29aaa7afe303b5e72d3927">More...</a><br /></td></tr>
 <tr class="separator:a794ed0eeda29aaa7afe303b5e72d3927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4dfc1807eb4f113191dbd3ae51c053ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a4dfc1807eb4f113191dbd3ae51c053ee">set_lik</a> (const double &amp;lik)</td></tr>
 <tr class="memdesc:a4dfc1807eb4f113191dbd3ae51c053ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the likelihood (you need to compute it from outside!)  <a href="#a4dfc1807eb4f113191dbd3ae51c053ee">More...</a><br /></td></tr>
 <tr class="separator:a4dfc1807eb4f113191dbd3ae51c053ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6d67788494fe1de9a7dddc4e55e857c"><td class="memItemLeft" align="right" valign="top">const Eigen::LLT&lt; Eigen::MatrixXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#ac6d67788494fe1de9a7dddc4e55e857c">llt</a> () const </td></tr>
-<tr class="memdesc:ac6d67788494fe1de9a7dddc4e55e857c"><td class="mdescLeft">&#160;</td><td class="mdescRight">LLT matrix (from Cholesky decomposition)  <a href="#ac6d67788494fe1de9a7dddc4e55e857c">More...</a><br /></td></tr>
-<tr class="separator:ac6d67788494fe1de9a7dddc4e55e857c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f3a88531cc874a3a0cae0c218b0cf0a"><td class="memItemLeft" align="right" valign="top">const Eigen::MatrixXd &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a> () const </td></tr>
+<tr class="memdesc:a6f3a88531cc874a3a0cae0c218b0cf0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">LLT matrix (from Cholesky decomposition)  <a href="#a6f3a88531cc874a3a0cae0c218b0cf0a">More...</a><br /></td></tr>
+<tr class="separator:a6f3a88531cc874a3a0cae0c218b0cf0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adab606218ab9ef0c35babf8d1cc16d81"><td class="memItemLeft" align="right" valign="top">const Eigen::MatrixXd &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#adab606218ab9ef0c35babf8d1cc16d81">alpha</a> () const </td></tr>
 <tr class="separator:adab606218ab9ef0c35babf8d1cc16d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abaa15a2e503bac670dd1a35fb377aa23"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">samples</a> () const </td></tr>
@@ -238,6 +246,87 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a43b06658ba27a37e12c1addce9ab8569"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Params , typename KernelFunction , typename MeanFunction , class HyperParamsOptimizer  = gp::NoLFOpt&lt;Params&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a>&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::add_bl_sample </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>bl_sample</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>noise</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>add blacklisted sample and update the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> </p>
+
+</div>
+</div>
+<a class="anchor" id="a43e4e23d98c421d610df52ea6d3f3539"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Params , typename KernelFunction , typename MeanFunction , class HyperParamsOptimizer  = gp::NoLFOpt&lt;Params&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a>&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::add_sample </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>sample</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>observation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>noise</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>add sample and update the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a3597b1c02b61d0ea1301808b08d8abb7" title="Compute the GP from samples, observation, noise. [optional: blacklisted samples]. This call needs to ...">compute()</a> </p>
+
+</div>
+</div>
 <a class="anchor" id="adab606218ab9ef0c35babf8d1cc16d81"></a>
 <div class="memitem">
 <div class="memproto">
@@ -263,7 +352,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 
 </div>
 </div>
-<a class="anchor" id="abb8c8521002a7157f48423e9b6739ee0"></a>
+<a class="anchor" id="a3597b1c02b61d0ea1301808b08d8abb7"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -287,14 +376,20 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>noise</em>, </td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>noises</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td>
-          <td class="paramname"><em>bl_samples</em> = <code>std::vector&lt;Eigen::VectorXd&gt;()</code>&#160;</td>
+          <td class="paramname"><em>bl_samples</em> = <code>std::vector&lt;Eigen::VectorXd&gt;()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>noises_bl</em> = <code>Eigen::VectorXd()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -309,7 +404,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 </table>
 </div><div class="memdoc">
 
-<p>Compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> from samples, observation, noise. [optionnal: blacklisted samples]. This call needs to be explicit! </p>
+<p>Compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> from samples, observation, noise. [optional: blacklisted samples]. This call needs to be explicit! </p>
 
 </div>
 </div>
@@ -444,7 +539,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 
 </div>
 </div>
-<a class="anchor" id="ac6d67788494fe1de9a7dddc4e55e857c"></a>
+<a class="anchor" id="a6f3a88531cc874a3a0cae0c218b0cf0a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -454,7 +549,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const Eigen::LLT&lt;Eigen::MatrixXd&gt;&amp; <a class="el" href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a>&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::llt </td>
+          <td class="memname">const Eigen::MatrixXd&amp; <a class="el" href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a>&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::matrixL </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -623,9 +718,8 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
   </tr>
 </table>
 </div><div class="memdoc">
-<pre class="fragment">embed:rst
-return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
-</pre> 
+<p>\rst return :math:<code>\\mu</code> (unormalized). If there is no sample, return the value according to the mean function. \endrst </p>
+
 </div>
 </div>
 <a class="anchor" id="aa41665d2029a541ce5fe85647fe3662d"></a>
@@ -650,9 +744,8 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
   </tr>
 </table>
 </div><div class="memdoc">
-<p>return the number of blacklisted samples used to compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> </p><pre class="fragment">embed:rst
-For the blacklist concept, see the Limbo-specific concept guide.
-</pre> 
+<p>return the number of blacklisted samples used to compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> \rst For the blacklist concept, see the Limbo-specific concept guide. \endrst </p>
+
 </div>
 </div>
 <a class="anchor" id="ac490915c95cc78f6cd836f78e3638bf1"></a>
@@ -707,6 +800,33 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 
 </div>
 </div>
+<a class="anchor" id="aa01b41e37de4def676cf6c79b08aac94"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Params , typename KernelFunction , typename MeanFunction , class HyperParamsOptimizer  = gp::NoLFOpt&lt;Params&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a>&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::optimize_hyperparams </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do not forget to call this if you use hyper-prameters optimization!! </p>
+
+</div>
+</div>
 <a class="anchor" id="a33937ff7df97c01fdd9bf8911e0a6159"></a>
 <div class="memitem">
 <div class="memproto">
@@ -730,9 +850,36 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
   </tr>
 </table>
 </div><div class="memdoc">
-<pre class="fragment">embed:rst
-return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
-</pre> 
+<p>\rst return :math:<code>\\mu</code>, :math:<code>\\sigma^2</code> (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a5d26e30b8c53400cdf12058d83dc41f0">mu()</a> and <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a2ea153c1de2021740235cfa10822395d">sigma()</a> is more efficient because some computations are shared between <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a5d26e30b8c53400cdf12058d83dc41f0">mu()</a> and <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a2ea153c1de2021740235cfa10822395d">sigma()</a>. \endrst </p>
+
+</div>
+</div>
+<a class="anchor" id="a55ea6fe353a12d4c788fac5f2e20e416"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Params , typename KernelFunction , typename MeanFunction , class HyperParamsOptimizer  = gp::NoLFOpt&lt;Params&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a>&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::recompute </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>update_obs_mean</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>recomputes the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> </p>
+
 </div>
 </div>
 <a class="anchor" id="abaa15a2e503bac670dd1a35fb377aa23"></a>
@@ -813,45 +960,17 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
   </tr>
 </table>
 </div><div class="memdoc">
-<pre class="fragment">embed:rst
-return :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function.
-</pre> 
-</div>
-</div>
-<a class="anchor" id="af9563c3faaa672e814772a1a2a877e24"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Params , typename KernelFunction , typename MeanFunction , class HyperParamsOptimizer  = gp::NoLFOpt&lt;Params&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a>&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::update </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>update the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> </p>
+<p>\rst return :math:<code>\\sigma^2</code> (unormalized). If there is no sample, return the value according to the mean function. \endrst </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/tmp/doc_limbo/limbo/src/limbo/model/<a class="el" href="gp_8hpp_source.html">gp.hpp</a></li>
+<li>/tmp/doc_limbo/limbo/src/limbo/model/<a class="el" href="model_2gp_8hpp_source.html">gp.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 16 2016 14:31:30 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 30 2016 13:05:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

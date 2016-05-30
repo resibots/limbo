@@ -17,6 +17,7 @@
   </compound>
   <compound refid="structlimbo_1_1defaults_1_1bayes__opt__boptimizer" kind="struct"><name>limbo::defaults::bayes_opt_boptimizer</name>
     <member refid="structlimbo_1_1defaults_1_1bayes__opt__boptimizer_1a20e662092603c59dc5f72bdda49c19a2" kind="function"><name>BO_PARAM</name></member>
+    <member refid="structlimbo_1_1defaults_1_1bayes__opt__boptimizer_1acf714a1cefe8447b8193d57d11681b2a" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="structlimbo_1_1defaults_1_1bayes__opt__ehvi" kind="struct"><name>limbo::defaults::bayes_opt_ehvi</name>
     <member refid="structlimbo_1_1defaults_1_1bayes__opt__ehvi_1a1cb97e82bdc2c50e649cdff5f7869efc" kind="function"><name>BO_PARAM</name></member>
@@ -196,6 +197,10 @@
     <member refid="structlimbo_1_1mean_1_1_function_a_r_d_1a5bd1343c7f3616c066296813361d9a96" kind="function"><name>grad</name></member>
     <member refid="structlimbo_1_1mean_1_1_function_a_r_d_1acfc9ce5670a247a35a1f09e5f0a09adb" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="structlimbo_1_1stat_1_1_g_p" kind="struct"><name>limbo::stat::GP</name>
+    <member refid="structlimbo_1_1stat_1_1_g_p_1ae4963dbd20077223711a646226091944" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_g_p_1a9aec28dcdc629de9043ffc224a6dac9f" kind="function"><name>_explore</name></member>
+  </compound>
   <compound refid="classlimbo_1_1model_1_1_g_p" kind="class"><name>limbo::model::GP</name>
     <member refid="classlimbo_1_1model_1_1_g_p_1ae966fae0cb420280dddca8dc1d0436f7" kind="variable"><name>_dim_in</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1af303a3c3291cee5763e2c2dc49033ceb" kind="variable"><name>_dim_out</name></member>
@@ -206,17 +211,20 @@
     <member refid="classlimbo_1_1model_1_1_g_p_1a99e861ae5a2fd002b2b9894b7264777e" kind="variable"><name>_bl_samples</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aaf43e8f6a03502a5dd9d2f82fa1fffc4" kind="variable"><name>_mean_vector</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a36e947a9bf0d61f00d4c17840fbca686" kind="variable"><name>_obs_mean</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1adc705f18c0e7eb1f001b68dcb2a63a24" kind="variable"><name>_noise</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a8044ad4148cdfa9a22d8f128c3f4835c" kind="variable"><name>_noises</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a5f0dc7c784b9fbf0baa2fe1c1ab07eb4" kind="variable"><name>_noises_bl</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a763f3026baa92e3eeab888e8e1a3974c" kind="variable"><name>_alpha</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1ab066cd502f90bb9b9ea35a5dd0cc80a3" kind="variable"><name>_mean_observation</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a126ccf98308dbae67f3096c5f15f9526" kind="variable"><name>_kernel</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1acb9fe9d0f6183c1a4a0434e6d66c2df5" kind="variable"><name>_l_matrix</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1a9664094ca312353d3b2d98f50c176fbc" kind="variable"><name>_llt</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1aa922853cf7ce5a21a7602c2f9bdd961a" kind="variable"><name>_matrixL</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a56acad1e7f839030b4a8dafdbe25c0a9" kind="variable"><name>_inv_bl_kernel</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a8bb1959df5645cd6ef3f2117f34254d5" kind="variable"><name>_lik</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aa18de82f231f3aed6ce8cce4c778aedb" kind="function"><name>GP</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1ab36947c89e4f5ad92599656a21829755" kind="function"><name>GP</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1abb8c8521002a7157f48423e9b6739ee0" kind="function"><name>compute</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a3597b1c02b61d0ea1301808b08d8abb7" kind="function"><name>compute</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1aa01b41e37de4def676cf6c79b08aac94" kind="function"><name>optimize_hyperparams</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a43e4e23d98c421d610df52ea6d3f3539" kind="function"><name>add_sample</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a43b06658ba27a37e12c1addce9ab8569" kind="function"><name>add_bl_sample</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a33937ff7df97c01fdd9bf8911e0a6159" kind="function"><name>query</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0" kind="function"><name>mu</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d" kind="function"><name>sigma</name></member>
@@ -232,14 +240,17 @@
     <member refid="classlimbo_1_1model_1_1_g_p_1aa9d3799fdcd71a8ccc19bc43932fa321" kind="function"><name>obs_mean</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1ac490915c95cc78f6cd836f78e3638bf1" kind="function"><name>nb_samples</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aa41665d2029a541ce5fe85647fe3662d" kind="function"><name>nb_bl_samples</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1af9563c3faaa672e814772a1a2a877e24" kind="function"><name>update</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a55ea6fe353a12d4c788fac5f2e20e416" kind="function"><name>recompute</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a794ed0eeda29aaa7afe303b5e72d3927" kind="function"><name>get_lik</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a4dfc1807eb4f113191dbd3ae51c053ee" kind="function"><name>set_lik</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1ac6d67788494fe1de9a7dddc4e55e857c" kind="function"><name>llt</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a6f3a88531cc874a3a0cae0c218b0cf0a" kind="function"><name>matrixL</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1adab606218ab9ef0c35babf8d1cc16d81" kind="function"><name>alpha</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1abaa15a2e503bac670dd1a35fb377aa23" kind="function"><name>samples</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a456a20ef2f15135042c3b2202f0a478d" kind="function"><name>_compute_obs_mean</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1ab9a0aa532a23940cc667e753be356038" kind="function"><name>_compute_kernel</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a979295bbd4890d5561d9c859db704ecd" kind="function"><name>_compute_full_kernel</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1ab91a58a8ed3d86b95fe78fe52a0b3023" kind="function"><name>_compute_incremental_kernel</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1aa71ac4adc879ccf5ed1d827563adb853" kind="function"><name>_compute_alpha</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1af2506dd2b0aa8a875f4dce09765ec6e1" kind="function"><name>_compute_bl_kernel</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a7bac678eec7b25fc028b4a16f4d15dcb" kind="function"><name>_mu</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a2f0475a0c6368ff1324bfa34626dc46c" kind="function"><name>_sigma</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a7586b65b5f55875f53aa49123b933564" kind="function"><name>_compute_k</name></member>
@@ -267,10 +278,12 @@
   </compound>
   <compound refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego" kind="class"><name>limbo::experimental::model::GPParego</name>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1acb31231abaffaec8b2b1c57afe40639a" kind="variable"><name>_nb_objs</name></member>
+    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aa17b4e92259ecb87446084b07964f890" kind="variable"><name>_raw_observations</name></member>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1ac351d6798add22da5c6dd58ac4a00723" kind="function"><name>GPParego</name></member>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a1f0eb578140f01874b13bfca124c085c" kind="function"><name>GPParego</name></member>
-    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1ae70c804aa8c90057844e49af1ffb9fa5" kind="function"><name>compute</name></member>
-    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a87033587a19c9052acd2ed7f5ebb9491" kind="function"><name>_make_v1</name></member>
+    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a81f8ca3a7f114b015575ae7c64183ead" kind="function"><name>compute</name></member>
+    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a81955696f79b4ac11a17d0faf28ccc31" kind="function"><name>add_sample</name></member>
+    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aee0ce034411e11614069718a3140a3f8" kind="function"><name>add_bl_sample</name></member>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aaab4351547dd1d119062f1a32e694a7b" kind="function"><name>_scalarize_obs</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_g_p_prediction_differences" kind="struct"><name>limbo::stat::GPPredictionDifferences</name>
@@ -319,6 +332,9 @@
   <compound refid="structlimbo_1_1defaults_1_1kernel__maternthreehalfs" kind="struct"><name>limbo::defaults::kernel_maternthreehalfs</name>
     <member refid="group__kernel__defaults_1ga59b38b1e10b24b9192a2f7ff05735186" kind="function"><name>BO_PARAM</name></member>
     <member refid="group__kernel__defaults_1ga8764c13406e6fe0ab8f3c79d200c5e96" kind="function"><name>BO_PARAM</name></member>
+  </compound>
+  <compound refid="structlimbo_1_1defaults_1_1kernel__squared__exp__ard" kind="struct"><name>limbo::defaults::kernel_squared_exp_ard</name>
+    <member refid="structlimbo_1_1defaults_1_1kernel__squared__exp__ard_1a913157eccae4e432cb2fd43ec682773c" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt" kind="struct"><name>limbo::model::gp::KernelLFOpt</name>
     <member refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt_1a6d4fc16f320af9d298e2d2ab9c22e50a" kind="function"><name>operator()</name></member>
@@ -468,6 +484,7 @@
   <compound refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d" kind="struct"><name>limbo::kernel::SquaredExpARD</name>
     <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a5c3c458ea6c80a146a02145762f1211c" kind="variable"><name>_sf2</name></member>
     <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a58ebedcc9d926593fedd851ba5ea2c10" kind="variable"><name>_ell</name></member>
+    <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a36aac45a14454b9a4c5b964124c59d9f" kind="variable"><name>_A</name></member>
     <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ab0436ae8990145ea6796a315502bf746" kind="variable"><name>_input_dim</name></member>
     <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa1c0262252f92bdc14d5857aabfff3e6" kind="variable"><name>_h_params</name></member>
     <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a33d5c074a487792a305a0ae89e864f34" kind="function"><name>SquaredExpARD</name></member>
@@ -575,11 +592,12 @@
     <member refid="group__tools_1gacb322b4600b2e500dbcd24661a749f49" kind="typedef"><name>rdist_int_t</name></member>
     <member refid="group__tools_1gacdb2963659056fc5fa9f94405f59a851" kind="typedef"><name>rgen_double_t</name></member>
     <member refid="group__tools_1ga3df78ebcb864be91e73e840bb42b9208" kind="typedef"><name>rgen_int_t</name></member>
+    <member refid="group__tools_1ga029807776f0b7f44f806e4f9d92e34e7" kind="function"><name>make_vector</name></member>
     <member refid="namespacelimbo_1_1tools_1ac56ad2bccc403ffa8341394f2fc28cda" kind="function"><name>signum</name></member>
     <member refid="namespacelimbo_1_1tools_1a5e6d3a39db3c143a271eac9625f9779e" kind="function"><name>signum</name></member>
-    <member refid="namespacelimbo_1_1tools_1a156cca8d927600da93054c952247857b" kind="function"><name>signum</name></member>
-    <member refid="namespacelimbo_1_1tools_1abcb0caa2ffabd42fa865c9ab0b624681" kind="function"><name>is_nan_or_inf</name></member>
-    <member refid="namespacelimbo_1_1tools_1af4ca69df04108670f0cc61e4a8ae7367" kind="function"><name>is_nan_or_inf</name></member>
+    <member refid="group__tools_1ga156cca8d927600da93054c952247857b" kind="function"><name>signum</name></member>
+    <member refid="group__tools_1gabcb0caa2ffabd42fa865c9ab0b624681" kind="function"><name>is_nan_or_inf</name></member>
+    <member refid="group__tools_1gaf4ca69df04108670f0cc61e4a8ae7367" kind="function"><name>is_nan_or_inf</name></member>
     <member refid="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" kind="function"><name>random_vector</name></member>
     <member refid="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" kind="function"><name>date</name></member>
     <member refid="group__tools_1ga4810ffa502d791d6ad750739a953f56f" kind="function"><name>hostname</name></member>
@@ -676,7 +694,9 @@
   </compound>
   <compound refid="model_8hpp" kind="file"><name>model.hpp</name>
   </compound>
-  <compound refid="gp_8hpp" kind="file"><name>gp.hpp</name>
+  <compound refid="model_2gp_8hpp" kind="file"><name>gp.hpp</name>
+  </compound>
+  <compound refid="stat_2gp_8hpp" kind="file"><name>gp.hpp</name>
   </compound>
   <compound refid="kernel__lf__opt_8hpp" kind="file"><name>kernel_lf_opt.hpp</name>
   </compound>
@@ -842,6 +862,10 @@
     <member refid="group__tools_1gacb322b4600b2e500dbcd24661a749f49" kind="typedef"><name>rdist_int_t</name></member>
     <member refid="group__tools_1gacdb2963659056fc5fa9f94405f59a851" kind="typedef"><name>rgen_double_t</name></member>
     <member refid="group__tools_1ga3df78ebcb864be91e73e840bb42b9208" kind="typedef"><name>rgen_int_t</name></member>
+    <member refid="group__tools_1ga029807776f0b7f44f806e4f9d92e34e7" kind="function"><name>make_vector</name></member>
+    <member refid="group__tools_1ga156cca8d927600da93054c952247857b" kind="function"><name>signum</name></member>
+    <member refid="group__tools_1gabcb0caa2ffabd42fa865c9ab0b624681" kind="function"><name>is_nan_or_inf</name></member>
+    <member refid="group__tools_1gaf4ca69df04108670f0cc61e4a8ae7367" kind="function"><name>is_nan_or_inf</name></member>
     <member refid="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" kind="function"><name>random_vector</name></member>
     <member refid="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" kind="function"><name>date</name></member>
     <member refid="group__tools_1ga4810ffa502d791d6ad750739a953f56f" kind="function"><name>hostname</name></member>

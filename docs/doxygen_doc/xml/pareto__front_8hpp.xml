@@ -5,53 +5,53 @@
     <includes refid="stat__base_8hpp" local="no">limbo/stat/stat_base.hpp</includes>
     <includes refid="pareto_8hpp" local="no">limbo/experimental/tools/pareto.hpp</includes>
     <incdepgraph>
-      <node id="546">
+      <node id="550">
         <label>string</label>
       </node>
-      <node id="550">
+      <node id="554">
         <label>limbo/tools/parallel.hpp</label>
         <link refid="parallel_8hpp"/>
-        <childnode refid="551" relation="include">
+        <childnode refid="555" relation="include">
         </childnode>
-        <childnode refid="549" relation="include">
+        <childnode refid="553" relation="include">
         </childnode>
       </node>
-      <node id="545">
+      <node id="549">
         <label>fstream</label>
       </node>
-      <node id="548">
+      <node id="552">
         <label>limbo/experimental/tools/pareto.hpp</label>
         <link refid="pareto_8hpp"/>
+        <childnode refid="553" relation="include">
+        </childnode>
+        <childnode refid="554" relation="include">
+        </childnode>
+      </node>
+      <node id="555">
+        <label>vector</label>
+      </node>
+      <node id="548">
+        <label>limbo/stat/stat_base.hpp</label>
+        <link refid="stat__base_8hpp"/>
         <childnode refid="549" relation="include">
         </childnode>
         <childnode refid="550" relation="include">
         </childnode>
-      </node>
-      <node id="551">
-        <label>vector</label>
-      </node>
-      <node id="544">
-        <label>limbo/stat/stat_base.hpp</label>
-        <link refid="stat__base_8hpp"/>
-        <childnode refid="545" relation="include">
+        <childnode refid="551" relation="include">
         </childnode>
-        <childnode refid="546" relation="include">
-        </childnode>
-        <childnode refid="547" relation="include">
-        </childnode>
-      </node>
-      <node id="543">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_front.hpp</label>
-        <link refid="pareto_front.hpp"/>
-        <childnode refid="544" relation="include">
-        </childnode>
-        <childnode refid="548" relation="include">
-        </childnode>
-      </node>
-      <node id="549">
-        <label>algorithm</label>
       </node>
       <node id="547">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_front.hpp</label>
+        <link refid="pareto_front.hpp"/>
+        <childnode refid="548" relation="include">
+        </childnode>
+        <childnode refid="552" relation="include">
+        </childnode>
+      </node>
+      <node id="553">
+        <label>algorithm</label>
+      </node>
+      <node id="551">
         <label>memory</label>
       </node>
     </incdepgraph>

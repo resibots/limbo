@@ -240,7 +240,7 @@ Setting the parameter structure
 ::
 
   struct Params {
-    struct bayes_opt_boptimizer {
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.0);
     };
     struct bayes_opt_bobase {
@@ -250,13 +250,15 @@ Setting the parameter structure
         BO_PARAM(int, iterations, 100);
     };
     struct stop_mintolerance {
-          BO_PARAM(double, tolerance, -0.02);
+        BO_PARAM(double, tolerance, -0.02);
     };
     struct acqui_ucb {
         BO_PARAM(double, alpha, 0.4);
     };
     struct init_randomsampling {
         BO_PARAM(int, samples, 10);
+    };
+    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
     struct opt_rprop : public defaults::opt_rprop {
     };

@@ -10,6 +10,7 @@
     <derivedcompoundref refid="structlimbo_1_1stat_1_1_best_samples" prot="public" virt="non-virtual">limbo::stat::BestSamples&lt; Params &gt;</derivedcompoundref>
     <derivedcompoundref refid="structlimbo_1_1stat_1_1_bl_samples" prot="public" virt="non-virtual">limbo::stat::BlSamples&lt; Params &gt;</derivedcompoundref>
     <derivedcompoundref refid="structlimbo_1_1stat_1_1_console_summary" prot="public" virt="non-virtual">limbo::stat::ConsoleSummary&lt; Params &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p" prot="public" virt="non-virtual">limbo::stat::GP&lt; Params &gt;</derivedcompoundref>
     <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p_acquisitions" prot="public" virt="non-virtual">limbo::stat::GPAcquisitions&lt; Params &gt;</derivedcompoundref>
     <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p_kernel_h_params" prot="public" virt="non-virtual">limbo::stat::GPKernelHParams&lt; Params &gt;</derivedcompoundref>
     <derivedcompoundref refid="structlimbo_1_1stat_1_1_g_p_likelihood" prot="public" virt="non-virtual">limbo::stat::GPLikelihood&lt; Params &gt;</derivedcompoundref>
@@ -120,98 +121,104 @@
 This method allocates an attribute `_log_file` (type: `std::shared_ptr&lt;std::ofstream&gt;`) if it has not been created yet, and does nothing otherwise. This method is designed so that you can safely call it in operator() while being &apos;guaranteed&apos; that the file exists. Using this method is not mandatory for a statistics class.
 </verbatim> </para>    </detaileddescription>
     <inheritancegraph>
-      <node id="247">
+      <node id="254">
         <label>limbo::stat::GPLikelihood&lt; Params &gt;</label>
         <link refid="structlimbo_1_1stat_1_1_g_p_likelihood"/>
-        <childnode refid="236" relation="public-inheritance">
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="246">
+      <node id="253">
         <label>limbo::stat::GPKernelHParams&lt; Params &gt;</label>
         <link refid="structlimbo_1_1stat_1_1_g_p_kernel_h_params"/>
-        <childnode refid="236" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="238">
-        <label>limbo::experimental::stat::ParetoFront&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front"/>
-        <childnode refid="236" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="251">
-        <label>limbo::stat::Samples&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_samples"/>
-        <childnode refid="236" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="237">
-        <label>limbo::experimental::stat::HyperVolume&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume"/>
-        <childnode refid="236" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="242">
-        <label>limbo::stat::BestSamples&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_best_samples"/>
-        <childnode refid="236" relation="public-inheritance">
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
       <node id="244">
-        <label>limbo::stat::ConsoleSummary&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_console_summary"/>
-        <childnode refid="236" relation="public-inheritance">
+        <label>limbo::experimental::stat::ParetoFront&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front"/>
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="239">
-        <label>limbo::stat::AggregatedObservations&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_aggregated_observations"/>
-        <childnode refid="236" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="249">
-        <label>limbo::stat::GPPredictionDifferences&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_g_p_prediction_differences"/>
-        <childnode refid="236" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="248">
-        <label>limbo::stat::GPMeanHParams&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_g_p_mean_h_params"/>
-        <childnode refid="236" relation="public-inheritance">
+      <node id="258">
+        <label>limbo::stat::Samples&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_samples"/>
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
       <node id="243">
-        <label>limbo::stat::BlSamples&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_bl_samples"/>
-        <childnode refid="236" relation="public-inheritance">
+        <label>limbo::experimental::stat::HyperVolume&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume"/>
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="236">
-        <label>limbo::stat::StatBase&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
-      </node>
-      <node id="245">
-        <label>limbo::stat::GPAcquisitions&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_g_p_acquisitions"/>
-        <childnode refid="236" relation="public-inheritance">
+      <node id="248">
+        <label>limbo::stat::BestSamples&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_best_samples"/>
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
       <node id="250">
+        <label>limbo::stat::ConsoleSummary&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_console_summary"/>
+        <childnode refid="242" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="245">
+        <label>limbo::stat::AggregatedObservations&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_aggregated_observations"/>
+        <childnode refid="242" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="256">
+        <label>limbo::stat::GPPredictionDifferences&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_prediction_differences"/>
+        <childnode refid="242" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="255">
+        <label>limbo::stat::GPMeanHParams&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_mean_h_params"/>
+        <childnode refid="242" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="249">
+        <label>limbo::stat::BlSamples&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_bl_samples"/>
+        <childnode refid="242" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="242">
+        <label>limbo::stat::StatBase&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
+      </node>
+      <node id="251">
+        <label>limbo::stat::GP&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p"/>
+        <childnode refid="242" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="252">
+        <label>limbo::stat::GPAcquisitions&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_g_p_acquisitions"/>
+        <childnode refid="242" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="257">
         <label>limbo::stat::Observations&lt; Params &gt;</label>
         <link refid="structlimbo_1_1stat_1_1_observations"/>
-        <childnode refid="236" relation="public-inheritance">
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="240">
+      <node id="246">
         <label>limbo::stat::BestAggregatedObservations&lt; Params &gt;</label>
         <link refid="structlimbo_1_1stat_1_1_best_aggregated_observations"/>
-        <childnode refid="236" relation="public-inheritance">
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="241">
+      <node id="247">
         <label>limbo::stat::BestObservations&lt; Params &gt;</label>
         <link refid="structlimbo_1_1stat_1_1_best_observations"/>
-        <childnode refid="236" relation="public-inheritance">
+        <childnode refid="242" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

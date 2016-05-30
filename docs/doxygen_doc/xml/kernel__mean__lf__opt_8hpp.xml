@@ -3,182 +3,187 @@
   <compounddef id="kernel__mean__lf__opt_8hpp" kind="file" language="C++">
     <compoundname>kernel_mean_lf_opt.hpp</compoundname>
     <includes local="no">Eigen/Core</includes>
-    <includes refid="rprop_8hpp" local="no">limbo/opt/rprop.hpp</includes>
     <includes refid="parallel__repeater_8hpp" local="no">limbo/opt/parallel_repeater.hpp</includes>
+    <includes refid="rprop_8hpp" local="no">limbo/opt/rprop.hpp</includes>
     <includes refid="random__generator_8hpp" local="no">limbo/tools/random_generator.hpp</includes>
     <includedby refid="model_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/model.hpp</includedby>
     <incdepgraph>
-      <node id="912">
+      <node id="939">
         <label>list</label>
       </node>
-      <node id="907">
+      <node id="931">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="903">
+      <node id="947">
         <label>limbo/opt/rprop.hpp</label>
         <link refid="rprop_8hpp"/>
-        <childnode refid="904" relation="include">
+        <childnode refid="929" relation="include">
         </childnode>
-        <childnode refid="905" relation="include">
+        <childnode refid="948" relation="include">
         </childnode>
-        <childnode refid="902" relation="include">
+        <childnode refid="927" relation="include">
         </childnode>
-        <childnode refid="906" relation="include">
+        <childnode refid="930" relation="include">
         </childnode>
-        <childnode refid="908" relation="include">
+        <childnode refid="949" relation="include">
         </childnode>
-        <childnode refid="917" relation="include">
+        <childnode refid="944" relation="include">
         </childnode>
       </node>
-      <node id="913">
+      <node id="940">
         <label>stdlib.h</label>
       </node>
-      <node id="917">
+      <node id="944">
         <label>limbo/opt/optimizer.hpp</label>
         <link refid="optimizer_8hpp"/>
-        <childnode refid="918" relation="include">
+        <childnode refid="945" relation="include">
         </childnode>
-        <childnode refid="902" relation="include">
+        <childnode refid="927" relation="include">
         </childnode>
-        <childnode refid="919" relation="include">
+        <childnode refid="946" relation="include">
         </childnode>
       </node>
-      <node id="910">
+      <node id="937">
         <label>cmath</label>
       </node>
-      <node id="902">
+      <node id="927">
         <label>Eigen/Core</label>
       </node>
-      <node id="921">
+      <node id="933">
         <label>limbo/tools/parallel.hpp</label>
         <link refid="parallel_8hpp"/>
-        <childnode refid="922" relation="include">
+        <childnode refid="934" relation="include">
         </childnode>
-        <childnode refid="904" relation="include">
+        <childnode refid="929" relation="include">
         </childnode>
       </node>
-      <node id="923">
+      <node id="935">
         <label>limbo/tools/random_generator.hpp</label>
         <link refid="random__generator_8hpp"/>
-        <childnode refid="909" relation="include">
+        <childnode refid="936" relation="include">
         </childnode>
-        <childnode refid="910" relation="include">
+        <childnode refid="937" relation="include">
         </childnode>
-        <childnode refid="911" relation="include">
+        <childnode refid="938" relation="include">
         </childnode>
-        <childnode refid="912" relation="include">
+        <childnode refid="939" relation="include">
         </childnode>
-        <childnode refid="913" relation="include">
+        <childnode refid="940" relation="include">
         </childnode>
-        <childnode refid="914" relation="include">
+        <childnode refid="941" relation="include">
         </childnode>
-        <childnode refid="915" relation="include">
+        <childnode refid="942" relation="include">
         </childnode>
-        <childnode refid="916" relation="include">
+        <childnode refid="943" relation="include">
         </childnode>
       </node>
-      <node id="914">
+      <node id="941">
         <label>random</label>
       </node>
-      <node id="920">
+      <node id="928">
         <label>limbo/opt/parallel_repeater.hpp</label>
         <link refid="parallel__repeater_8hpp"/>
-        <childnode refid="904" relation="include">
+        <childnode refid="929" relation="include">
         </childnode>
-        <childnode refid="902" relation="include">
+        <childnode refid="927" relation="include">
         </childnode>
-        <childnode refid="906" relation="include">
+        <childnode refid="930" relation="include">
         </childnode>
-        <childnode refid="921" relation="include">
+        <childnode refid="933" relation="include">
         </childnode>
-        <childnode refid="923" relation="include">
+        <childnode refid="935" relation="include">
         </childnode>
-        <childnode refid="917" relation="include">
+        <childnode refid="944" relation="include">
         </childnode>
       </node>
-      <node id="918">
+      <node id="945">
         <label>tuple</label>
       </node>
-      <node id="911">
+      <node id="938">
         <label>ctime</label>
       </node>
-      <node id="922">
+      <node id="934">
         <label>vector</label>
       </node>
-      <node id="915">
+      <node id="942">
         <label>utility</label>
       </node>
-      <node id="909">
+      <node id="936">
         <label>cstdlib</label>
       </node>
-      <node id="916">
+      <node id="932">
+        <label>iostream</label>
+      </node>
+      <node id="943">
         <label>mutex</label>
       </node>
-      <node id="919">
+      <node id="946">
         <label>boost/optional.hpp</label>
       </node>
-      <node id="908">
+      <node id="949">
         <label>limbo/tools/math.hpp</label>
         <link refid="math_8hpp"/>
-        <childnode refid="909" relation="include">
+        <childnode refid="936" relation="include">
         </childnode>
-        <childnode refid="910" relation="include">
+        <childnode refid="937" relation="include">
         </childnode>
-        <childnode refid="911" relation="include">
+        <childnode refid="938" relation="include">
         </childnode>
-        <childnode refid="912" relation="include">
+        <childnode refid="939" relation="include">
         </childnode>
-        <childnode refid="913" relation="include">
+        <childnode refid="940" relation="include">
         </childnode>
-        <childnode refid="914" relation="include">
+        <childnode refid="941" relation="include">
         </childnode>
-        <childnode refid="915" relation="include">
+        <childnode refid="942" relation="include">
         </childnode>
-        <childnode refid="916" relation="include">
+        <childnode refid="943" relation="include">
         </childnode>
       </node>
-      <node id="904">
+      <node id="929">
         <label>algorithm</label>
       </node>
-      <node id="901">
+      <node id="926">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
         <link refid="kernel_mean_lf_opt.hpp"/>
-        <childnode refid="902" relation="include">
+        <childnode refid="927" relation="include">
         </childnode>
-        <childnode refid="903" relation="include">
+        <childnode refid="928" relation="include">
         </childnode>
-        <childnode refid="920" relation="include">
+        <childnode refid="947" relation="include">
         </childnode>
-        <childnode refid="923" relation="include">
+        <childnode refid="935" relation="include">
         </childnode>
       </node>
-      <node id="905">
+      <node id="948">
         <label>boost/math/special_functions/sign.hpp</label>
       </node>
-      <node id="906">
+      <node id="930">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="907" relation="include">
+        <childnode refid="931" relation="include">
         </childnode>
-        <childnode refid="902" relation="include">
+        <childnode refid="927" relation="include">
+        </childnode>
+        <childnode refid="932" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="925">
+      <node id="951">
         <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
         <link refid="model_8hpp"/>
-        <childnode refid="926" relation="include">
+        <childnode refid="952" relation="include">
         </childnode>
       </node>
-      <node id="926">
+      <node id="952">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
       </node>
-      <node id="924">
+      <node id="950">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
         <link refid="kernel_mean_lf_opt.hpp"/>
-        <childnode refid="925" relation="include">
+        <childnode refid="951" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -197,8 +202,8 @@
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Core&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="rprop_8hpp" kindref="compound">limbo/opt/rprop.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="parallel__repeater_8hpp" kindref="compound">limbo/opt/parallel_repeater.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="parallel__repeater_8hpp" kindref="compound">limbo/opt/parallel_repeater.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="rprop_8hpp" kindref="compound">limbo/opt/rprop.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="random__generator_8hpp" kindref="compound">limbo/tools/random_generator.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
@@ -217,7 +222,7 @@
 <codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.<ref refid="classlimbo_1_1model_1_1_g_p_1aaf794227fb4b8ba92bc22f15ec379d87" kindref="member">kernel_function</ref>().set_h_params(params.head(gp.<ref refid="classlimbo_1_1model_1_1_g_p_1aaf794227fb4b8ba92bc22f15ec379d87" kindref="member">kernel_function</ref>().h_params_size()));</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.<ref refid="classlimbo_1_1model_1_1_g_p_1a29be4dfec28fbf0ab970529a18a20c34" kindref="member">mean_function</ref>().set_h_params(params.tail(gp.<ref refid="classlimbo_1_1model_1_1_g_p_1a29be4dfec28fbf0ab970529a18a20c34" kindref="member">mean_function</ref>().h_params_size()));</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.<ref refid="classlimbo_1_1model_1_1_g_p_1a4dfc1807eb4f113191dbd3ae51c053ee" kindref="member">set_lik</ref>(<ref refid="group__opt__tools_1ga698d932ac52cab812742b1300f875372" kindref="member">opt::eval</ref>(optimization,<sp/>params));</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.<ref refid="classlimbo_1_1model_1_1_g_p_1af9563c3faaa672e814772a1a2a877e24" kindref="member">update</ref>();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.<ref refid="classlimbo_1_1model_1_1_g_p_1a55ea6fe353a12d4c788fac5f2e20e416" kindref="member">recompute</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
@@ -232,14 +237,14 @@
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.kernel_function().set_h_params(params.head(gp.kernel_function().h_params_size()));</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.mean_function().set_h_params(params.tail(gp.mean_function().h_params_size()));</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.update();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.recompute(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n<sp/>=<sp/>gp.obs_mean().rows();</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>cholesky<sp/>---</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>see:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>l<sp/>=<sp/>gp.llt().matrixL();</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>l<sp/>=<sp/>gp.matrixL();</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>det<sp/>=<sp/>2<sp/>*<sp/>l.diagonal().array().log().sum();</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>(gp.obs_mean().transpose()<sp/>*<sp/>gp.alpha())</highlight></codeline>
@@ -252,41 +257,42 @@
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>K^{-1}<sp/>using<sp/>Cholesky<sp/>decomposition</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>K<sp/>=<sp/>Eigen::MatrixXd::Identity(n,<sp/>n);</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.llt().matrixL().solveInPlace(K);</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.llt().matrixL().transpose().solveInPlace(K);</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>alpha<sp/>*<sp/>alpha.transpose()<sp/>-<sp/>K^{-1}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>w<sp/>=<sp/>gp.alpha()<sp/>*<sp/>gp.alpha().transpose()<sp/>-<sp/>K;</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>only<sp/>compute<sp/>half<sp/>of<sp/>the<sp/>matrix<sp/>(symmetrical<sp/>matrix)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref><sp/>=<sp/>Eigen::VectorXd::Zero(params.size());</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>n;<sp/>++i)<sp/>{</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;=<sp/>i;<sp/>++j)<sp/>{</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>g<sp/>=<sp/>gp.kernel_function().grad(gp.samples()[i],<sp/>gp.samples()[j]);</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>==<sp/>j)</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.head(gp.kernel_function().h_params_size())<sp/>+=<sp/>w(i,<sp/>j)<sp/>*<sp/>g<sp/>*<sp/>0.5;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.head(gp.kernel_function().h_params_size())<sp/>+=<sp/>w(i,<sp/>j)<sp/>*<sp/>g;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i_obs<sp/>=<sp/>0;<sp/>i_obs<sp/>&lt;<sp/>gp.dim_out();<sp/>++i_obs)</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_obs<sp/>=<sp/>0;<sp/>n_obs<sp/>&lt;<sp/>n;<sp/>n_obs++)<sp/>{</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.tail(gp.mean_function().h_params_size())<sp/>+=<sp/>gp.obs_mean().col(i_obs).transpose()<sp/>*<sp/>K.col(n_obs)<sp/>*<sp/>gp.mean_function().grad(gp.samples()[n_obs],<sp/>gp).row(i_obs);</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{lik,<sp/>grad};</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"></highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GP&amp;<sp/>_original_gp;</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="95"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.matrixL().template<sp/>triangularView&lt;Eigen::Lower&gt;().solveInPlace(K);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gp.matrixL().template<sp/>triangularView&lt;Eigen::Lower&gt;().transpose().solveInPlace(K);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>alpha<sp/>*<sp/>alpha.transpose()<sp/>-<sp/>K^{-1}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>w<sp/>=<sp/>gp.alpha()<sp/>*<sp/>gp.alpha().transpose()<sp/>-<sp/>K;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>only<sp/>compute<sp/>half<sp/>of<sp/>the<sp/>matrix<sp/>(symmetrical<sp/>matrix)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref><sp/>=<sp/>Eigen::VectorXd::Zero(params.size());</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>n;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;=<sp/>i;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>g<sp/>=<sp/>gp.kernel_function().grad(gp.samples()[i],<sp/>gp.samples()[j]);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>==<sp/>j)</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.head(gp.kernel_function().h_params_size())<sp/>+=<sp/>w(i,<sp/>j)<sp/>*<sp/>g<sp/>*<sp/>0.5;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.head(gp.kernel_function().h_params_size())<sp/>+=<sp/>w(i,<sp/>j)<sp/>*<sp/>g;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i_obs<sp/>=<sp/>0;<sp/>i_obs<sp/>&lt;<sp/>gp.dim_out();<sp/>++i_obs)</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n_obs<sp/>=<sp/>0;<sp/>n_obs<sp/>&lt;<sp/>n;<sp/>n_obs++)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.tail(gp.mean_function().h_params_size())<sp/>+=<sp/>gp.obs_mean().col(i_obs).transpose()<sp/>*<sp/>K.col(n_obs)<sp/>*<sp/>gp.mean_function().grad(gp.samples()[n_obs],<sp/>gp).row(i_obs);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{lik,<sp/>grad};</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>GP&amp;<sp/>_original_gp;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp"/>
   </compounddef>

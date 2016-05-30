@@ -14,15 +14,16 @@
 \subsection{Detailed Description}
 \subsubsection*{template$<$typename Params$>$struct limbo\+::init\+::\+Random\+Sampling\+Grid$<$ Params $>$}
 
-Grid-\/based random sampling\+: for each bin, take k random samples until k = samples.
+\begin{DoxyVerb}embed:rst
+Grid-based random sampling: in effect, define a grid and takes random samples from this grid. The number of bins in the grid is ``bins``^number_of_dimensions 
 
-For instance, if bins = 5 and samples = 10, then put 2 random samples in each bin.
+For instance, if bins = 5 and there are 3 inputs dimensions, then the grid is 5*5*5=125, and random points will all be points of this grid.
 
-Parameters\+:
-\begin{DoxyItemize}
-\item {\ttfamily int samples}
-\item {\ttfamily int bins} 
-\end{DoxyItemize}
+Parameters:
+  - ``int samples`` (total number of samples)
+  - ``int bins`` (number of bins for each dimensions)
+\end{DoxyVerb}
+ 
 
 \subsection{Member Function Documentation}
 \hypertarget{structlimbo_1_1init_1_1_random_sampling_grid_a6fd277031f69bf9da891b5f35065c369}{}\index{limbo\+::init\+::\+Random\+Sampling\+Grid@{limbo\+::init\+::\+Random\+Sampling\+Grid}!operator()@{operator()}}

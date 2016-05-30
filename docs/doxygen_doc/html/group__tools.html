@@ -104,6 +104,17 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga029807776f0b7f44f806e4f9d92e34e7"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tools.html#ga029807776f0b7f44f806e4f9d92e34e7">limbo::tools::make_vector</a> (double x)</td></tr>
+<tr class="separator:ga029807776f0b7f44f806e4f9d92e34e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga156cca8d927600da93054c952247857b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga156cca8d927600da93054c952247857b"><td class="memTemplItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tools.html#ga156cca8d927600da93054c952247857b">limbo::tools::signum</a> (T x)</td></tr>
+<tr class="separator:ga156cca8d927600da93054c952247857b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabcb0caa2ffabd42fa865c9ab0b624681"><td class="memTemplParams" colspan="2">template&lt;typename T , typename std::enable_if&lt; std::is_arithmetic&lt; T &gt;::value, int &gt;::type  = 0&gt; </td></tr>
+<tr class="memitem:gabcb0caa2ffabd42fa865c9ab0b624681"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tools.html#gabcb0caa2ffabd42fa865c9ab0b624681">limbo::tools::is_nan_or_inf</a> (T v)</td></tr>
+<tr class="separator:gabcb0caa2ffabd42fa865c9ab0b624681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf4ca69df04108670f0cc61e4a8ae7367"><td class="memTemplParams" colspan="2">template&lt;typename T , typename std::enable_if&lt;!std::is_arithmetic&lt; T &gt;::value, int &gt;::type  = 0&gt; </td></tr>
+<tr class="memitem:gaf4ca69df04108670f0cc61e4a8ae7367"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tools.html#gaf4ca69df04108670f0cc61e4a8ae7367">limbo::tools::is_nan_or_inf</a> (const T &amp;v)</td></tr>
+<tr class="separator:gaf4ca69df04108670f0cc61e4a8ae7367"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2a64df3120a3ecd84e62640fb43722d0"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">limbo::tools::random_vector</a> (int size)</td></tr>
 <tr class="separator:ga2a64df3120a3ecd84e62640fb43722d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafb48d3271e7423f8b8d94599869bd9cb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tools.html#gafb48d3271e7423f8b8d94599869bd9cb">limbo::tools::date</a> ()</td></tr>
@@ -238,6 +249,77 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gabcb0caa2ffabd42fa865c9ab0b624681"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename std::enable_if&lt; std::is_arithmetic&lt; T &gt;::value, int &gt;::type  = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool limbo::tools::is_nan_or_inf </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return true if v is nan (not a number) or infinity </p>
+
+</div>
+</div>
+<a class="anchor" id="gaf4ca69df04108670f0cc61e4a8ae7367"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename std::enable_if&lt;!std::is_arithmetic&lt; T &gt;::value, int &gt;::type  = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool limbo::tools::is_nan_or_inf </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return true if v is nan (not a number) or infinity (const version) </p>
+
+</div>
+</div>
+<a class="anchor" id="ga029807776f0b7f44f806e4f9d92e34e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::VectorXd limbo::tools::make_vector </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>make a 1-D vector from a double (useful when we need to return vectors) </p>
+
+</div>
+</div>
 <a class="anchor" id="ga2a64df3120a3ecd84e62640fb43722d0"></a>
 <div class="memitem">
 <div class="memproto">
@@ -255,10 +337,37 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga156cca8d927600da93054c952247857b"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int limbo::tools::signum </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>return -1 if x &lt; 0; return 0 if x = 0; return 1 if x &gt; 0. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 16 2016 14:31:30 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 30 2016 13:05:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

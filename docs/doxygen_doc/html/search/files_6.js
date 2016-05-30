@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['gp_2ehpp',['gp.hpp',['../gp_8hpp.html',1,'']]],
+  ['gp_2ehpp',['gp.hpp',['../model_2gp_8hpp.html',1,'']]],
+  ['gp_2ehpp',['gp.hpp',['../stat_2gp_8hpp.html',1,'']]],
   ['gp_5facquisitions_2ehpp',['gp_acquisitions.hpp',['../gp__acquisitions_8hpp.html',1,'']]],
   ['gp_5fkernel_5fhparams_2ehpp',['gp_kernel_hparams.hpp',['../gp__kernel__hparams_8hpp.html',1,'']]],
   ['gp_5flikelihood_2ehpp',['gp_likelihood.hpp',['../gp__likelihood_8hpp.html',1,'']]],

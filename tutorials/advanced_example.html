@@ -29,7 +29,7 @@
   
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
-        <link rel="next" title="Guides" href="../guides/index.html"/>
+        <link rel="next" title="Statistics / Writing results" href="statistics.html"/>
         <link rel="prev" title="Add External Library" href="external_libs.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
@@ -133,6 +133,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
@@ -416,7 +417,7 @@
 <div class="section" id="setting-the-parameter-structure">
 <h3>Setting the parameter structure<a class="headerlink" href="#setting-the-parameter-structure" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-  <span class="k">struct</span> <span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
       <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
   <span class="p">};</span>
   <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
@@ -426,13 +427,15 @@
       <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
   <span class="p">};</span>
   <span class="k">struct</span> <span class="n">stop_mintolerance</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">);</span>
+      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">);</span>
   <span class="p">};</span>
   <span class="k">struct</span> <span class="n">acqui_ucb</span> <span class="p">{</span>
       <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">);</span>
   <span class="p">};</span>
   <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
       <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
   <span class="p">};</span>
   <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
   <span class="p">};</span>
@@ -645,7 +648,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../guides/index.html" class="btn btn-neutral float-right" title="Guides" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="statistics.html" class="btn btn-neutral float-right" title="Statistics / Writing results" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="external_libs.html" class="btn btn-neutral" title="Add External Library" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

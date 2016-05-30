@@ -10,5 +10,5 @@ var searchData=
   ['init_5frandomsampling',['init_randomsampling',['../structlimbo_1_1defaults_1_1init__randomsampling.html',1,'limbo::defaults']]],
   ['init_5frandomsamplinggrid',['init_randomsamplinggrid',['../structlimbo_1_1defaults_1_1init__randomsamplinggrid.html',1,'limbo::defaults']]],
   ['init_5ft',['init_t',['../structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#acbba74470eccef31c3f2518a3c57200c',1,'limbo::bayes_opt::BoBase::defaults']]],
-  ['is_5fnan_5for_5finf',['is_nan_or_inf',['../namespacelimbo_1_1tools.html#abcb0caa2ffabd42fa865c9ab0b624681',1,'limbo::tools::is_nan_or_inf(T v)'],['../namespacelimbo_1_1tools.html#af4ca69df04108670f0cc61e4a8ae7367',1,'limbo::tools::is_nan_or_inf(const T &amp;v)']]]
+  ['is_5fnan_5for_5finf',['is_nan_or_inf',['../group__tools.html#gabcb0caa2ffabd42fa865c9ab0b624681',1,'limbo::tools::is_nan_or_inf(T v)'],['../group__tools.html#gaf4ca69df04108670f0cc61e4a8ae7367',1,'limbo::tools::is_nan_or_inf(const T &amp;v)']]]
 ];

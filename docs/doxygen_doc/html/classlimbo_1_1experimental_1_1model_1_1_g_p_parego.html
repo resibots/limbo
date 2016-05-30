@@ -113,10 +113,25 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac351d6798add22da5c6dd58ac4a00723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f0eb578140f01874b13bfca124c085c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a1f0eb578140f01874b13bfca124c085c">GPParego</a> (int dim_in, int dim_out)</td></tr>
 <tr class="separator:a1f0eb578140f01874b13bfca124c085c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae70c804aa8c90057844e49af1ffb9fa5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae70c804aa8c90057844e49af1ffb9fa5">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, double noise, const std::vector&lt; Eigen::VectorXd &gt; &amp;bl_samples=std::vector&lt; Eigen::VectorXd &gt;())</td></tr>
-<tr class="separator:ae70c804aa8c90057844e49af1ffb9fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81f8ca3a7f114b015575ae7c64183ead"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81f8ca3a7f114b015575ae7c64183ead">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises, const std::vector&lt; Eigen::VectorXd &gt; &amp;bl_samples=std::vector&lt; Eigen::VectorXd &gt;())</td></tr>
+<tr class="separator:a81f8ca3a7f114b015575ae7c64183ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81955696f79b4ac11a17d0faf28ccc31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">add_sample</a> (const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation, double noise)</td></tr>
+<tr class="memdesc:a81955696f79b4ac11a17d0faf28ccc31"><td class="mdescLeft">&#160;</td><td class="mdescRight">add sample will NOT be incremental (we call compute each time)  <a href="#a81955696f79b4ac11a17d0faf28ccc31">More...</a><br /></td></tr>
+<tr class="separator:a81955696f79b4ac11a17d0faf28ccc31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee0ce034411e11614069718a3140a3f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#aee0ce034411e11614069718a3140a3f8">add_bl_sample</a> (const Eigen::VectorXd &amp;bl_sample, double noise)</td></tr>
+<tr class="memdesc:aee0ce034411e11614069718a3140a3f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">WARNING: Parego does not really work with blacklisted samples.  <a href="#aee0ce034411e11614069718a3140a3f8">More...</a><br /></td></tr>
+<tr class="separator:aee0ce034411e11614069718a3140a3f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename Params, typename Model&gt;<br />
+class limbo::experimental::model::GPParego&lt; Params, Model &gt;</h3>
+
+<p>this is the model used in Parego reference: Knowles, J. (2006). ParEGO: A hybrid algorithm with on-line landscape approximation for expensive multiobjective optimization problems. IEEE Transactions On Evolutionary Computation, 10(1), 50-66. Main idea:</p><ul>
+<li>this models aggregates all the objective values with the Tchebycheff distance</li>
+<li>objectives are weighted using a random vector</li>
+<li>a single model is built </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac351d6798add22da5c6dd58ac4a00723"></a>
 <div class="memitem">
 <div class="memproto">
@@ -179,7 +194,89 @@ template&lt;typename Params , typename Model &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ae70c804aa8c90057844e49af1ffb9fa5"></a>
+<a class="anchor" id="aee0ce034411e11614069718a3140a3f8"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Params , typename Model &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html">limbo::experimental::model::GPParego</a>&lt; Params, Model &gt;::add_bl_sample </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>bl_sample</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>noise</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>WARNING: Parego does not really work with blacklisted samples. </p>
+
+</div>
+</div>
+<a class="anchor" id="a81955696f79b4ac11a17d0faf28ccc31"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Params , typename Model &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html">limbo::experimental::model::GPParego</a>&lt; Params, Model &gt;::add_sample </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>sample</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>observation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>noise</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>add sample will NOT be incremental (we call compute each time) </p>
+
+</div>
+</div>
+<a class="anchor" id="a81f8ca3a7f114b015575ae7c64183ead"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -203,8 +300,8 @@ template&lt;typename Params , typename Model &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>noise</em>, </td>
+          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramname"><em>noises</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -233,7 +330,7 @@ template&lt;typename Params , typename Model &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon May 16 2016 14:31:30 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon May 30 2016 13:05:21 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -1,7 +1,9 @@
 var searchData=
 [
+  ['make_5fvector',['make_vector',['../group__tools.html#ga029807776f0b7f44f806e4f9d92e34e7',1,'limbo::tools']]],
   ['maternfivehalfs',['MaternFiveHalfs',['../structlimbo_1_1kernel_1_1_matern_five_halfs.html#a6b7d9003e76fb0284e209b3b5d9527ee',1,'limbo::kernel::MaternFiveHalfs']]],
   ['maternthreehalfs',['MaternThreeHalfs',['../structlimbo_1_1kernel_1_1_matern_three_halfs.html#a2f46e1fb1e7239e1f1dccd422dee576e',1,'limbo::kernel::MaternThreeHalfs']]],
+  ['matrixl',['matrixL',['../classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a',1,'limbo::model::GP']]],
   ['max',['max',['../group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac',1,'limbo::tools::par']]],
   ['max_5fobservation',['max_observation',['../classlimbo_1_1model_1_1_g_p.html#a480f1b249edf89bc6960512e8baceab8',1,'limbo::model::GP']]],
   ['maxiterations',['MaxIterations',['../structlimbo_1_1stop_1_1_max_iterations.html#a07bb1bbffe6b7374c9d1af7575dbc745',1,'limbo::stop::MaxIterations']]],
