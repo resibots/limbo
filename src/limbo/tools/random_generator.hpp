@@ -46,14 +46,6 @@
 namespace limbo {
     namespace tools {
         /// @ingroup tools
-        /// random vector in [0, 1]
-        Eigen::VectorXd random_vector(int size)
-        {
-            // Eigen returns in [-1:1] (??)
-            return ((Eigen::VectorXd::Random(size)).array() + 1.0) / 2.0;
-        }
-
-        /// @ingroup tools
         /// a mt19937-based random generator (mutex-protected)
         ///
         /// usage :
@@ -88,6 +80,20 @@ namespace limbo {
         ///@ingroup tools
         ///integer random number generator
         using rgen_int_t = RandomGenerator<rdist_int_t>;
+
+        /// @ingroup tools
+        /// random vector in [0, 1]
+        ///
+        /// - this function is thread safe because the random number generator we use is thread-safe
+        /// - we use a C++11 random number generator
+        Eigen::VectorXd random_vector(int size)
+        {
+            static rgen_double_t rgen(0.0, 1.0);
+            Eigen::VectorXd res(size);
+            for (int i = 0; i < size; ++i)
+              res[i] = rgen.rand();
+            return res;
+        }
     }
 }
 
