@@ -91,7 +91,7 @@ namespace limbo {
             static rgen_double_t rgen(0.0, 1.0);
             Eigen::VectorXd res(size);
             for (int i = 0; i < size; ++i)
-              res[i] = rgen.rand();
+                res[i] = rgen.rand();
             return res;
         }
     }
