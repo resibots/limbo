@@ -13,10 +13,12 @@ namespace limbo {
         };
     }
     namespace mean {
-        ///@ingroup mean
-        ///A constant mean (the traditionnal choice for Bayesian optimization)
-        ///
-        /// Parameter: double constant
+        /** @ingroup mean
+          A constant mean (the traditionnal choice for Bayesian optimization)
+
+          Parameter:
+            - ``double constant`` (the value of the constant)
+        */
         template <typename Params>
         struct Constant {
             Constant(size_t dim_out = 1) : _dim_out(dim_out) {}

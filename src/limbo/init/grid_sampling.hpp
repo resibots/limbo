@@ -17,7 +17,7 @@ namespace limbo {
           \rst
           Grid sampling.
 
-          Parameter :
+          Parameter:
             - ``int bins`` (number of bins)
           \endrst
         */

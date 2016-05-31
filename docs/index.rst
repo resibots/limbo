@@ -46,6 +46,7 @@ Contents:
    tutorials/index
    guides/index
    api
+   defaults
    faq
 
 
@@ -55,5 +56,3 @@ Contents:
 .. * :ref:`genindex`
 .. * :ref:`modindex`
 .. * :ref:`search`
-
-

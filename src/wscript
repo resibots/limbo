@@ -4,6 +4,7 @@
 
 def build(bld):
     bld.recurse('examples')
+    bld.recurse('tutorials')
     if bld.options.tests:
         bld.recurse('tests')
 

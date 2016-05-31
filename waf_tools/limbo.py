@@ -3,6 +3,7 @@ import stat
 import subprocess
 import time
 import threading
+import params
 from waflib.Tools import waf_unit_test
 
 json_ok = True
@@ -229,3 +230,15 @@ exec @exec
         print "executing:" + s
         retcode = subprocess.call(s, shell=True, env=None)
         print "oarsub returned:" + str(retcode)
+
+def output_params(folder):
+    files = [each for each in os.listdir(folder) if each.endswith('.cpp')]
+    output = ''
+    for file in files:
+        output += 'FILE: ' + folder + '/' + file + '\n\n'
+        output += params.get_output(folder + '/' + file)
+        output += '=========================================\n'
+
+    text_file = open("params_"+folder[4:]+".txt", "w")
+    text_file.write(output)
+    text_file.close()
