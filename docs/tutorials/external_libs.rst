@@ -206,6 +206,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
 
     @conf
     def check_ros(conf):
+      # Get locations where to search for ROS's header and lib files
       if conf.options.ros:
         includes_check = [conf.options.ros + '/include']
         libs_check = [conf.options.ros + '/lib']
@@ -218,14 +219,19 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
         libs_check = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/lib/']
 
       try:
+        # Find the header for ROS
         conf.start_msg('Checking for ROS includes')
         res = conf.find_file('ros/ros.h', includes_check)
         conf.end_msg('ok')
-        libs = ['roscpp','rosconsole','roscpp_serialization','rostime', 'xmlrpcpp','rosconsole_log4cxx', 'rosconsole_backend_interface']
+
+        # Find the lib files
+        libs = ['roscpp','rosconsole','roscpp_serialization','rostime','xmlrpcpp',
+                'rosconsole_log4cxx', 'rosconsole_backend_interface']
         conf.start_msg('Checking for ROS libs')
         for lib in libs:
           res = res and conf.find_file('lib'+lib+'.so', libs_check)
         conf.end_msg('ok')
+
         conf.env.INCLUDES_ROS = includes_check
         conf.env.LIBPATH_ROS = libs_check
         conf.env.LIB_ROS = libs
@@ -235,7 +241,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
         return 1
       return 1
 
-Assuming we are at **limbo** root, we run the following to compile our experiment: ::
+Assuming we are at **limbo** root, we run the following to compile our experiment::
 
   ./waf configure --exp example
   ./waf --exp example
