@@ -33,40 +33,38 @@ The file structure should look like this: ::
   |-- src
   ...
 
-.. highlight:: c++
+The basic layout of your ``main.cpp`` file should look like this:
 
-The basic layout of your ``main.cpp`` file should look like this: ::
+.. code-block:: c++
 
-            #include <iostream>
-            #include <limbo/bayes_opt/boptimizer.hpp>
-            // Here we have to include other needed limbo headers
+    #include <iostream>
+    #include <limbo/bayes_opt/boptimizer.hpp>
+    // Here we have to include other needed limbo headers
 
-            using namespace limbo;
+    using namespace limbo;
 
-            struct Params {
-              // Here go the parameters
-            };
+    struct Params {
+      // Here go the parameters
+    };
 
-            template <typename Params>
-            struct eval_func {
-              static constexpr int dim_in = sample_dimensions;
-              static constexpr int dim_out = output_dimensions;
-              // Here we define the function evaluation
-            };
+    template <typename Params>
+    struct eval_func {
+      static constexpr int dim_in = sample_dimensions;
+      static constexpr int dim_out = output_dimensions;
+      // Here we define the function evaluation
+    };
 
-            int main(int argc, char** argv)
-            {
-              // Defines, etc.
-              bayes_opt::BOptimizer<Params, ...> opt;
-              opt.optimize(eval_func<Params, ...>());
-              auto val = opt.best_observation();
-            }
+    int main(int argc, char** argv)
+    {
+      // Defines, etc.
+      bayes_opt::BOptimizer<Params, ...> opt;
+      opt.optimize(eval_func<Params, ...>());
+      auto val = opt.best_observation();
+    }
 
 The ``wscript`` will have the following form:
 
-.. highlight:: python
-
-.. code:: python
+.. code-block:: python
 
     from waflib.Configure import conf
 
@@ -111,10 +109,11 @@ To compute the forward kinematics of our simple planar arm we use the following 
           Eigen::VectorXd dh = dh_mat.row(i);
 
           Eigen::Matrix4d submat;
-          submat << cos(dh(0)), -cos(dh(3)) * sin(dh(0)), sin(dh(3)) * sin(dh(0)), dh(2) * cos(dh(0)),
-              sin(dh(0)), cos(dh(3)) * cos(dh(0)), -sin(dh(3)) * cos(dh(0)), dh(2) * sin(dh(0)),
-              0, sin(dh(3)), cos(dh(3)), dh(1),
-              0, 0, 0, 1;
+          submat <<
+            cos(dh(0)), -cos(dh(3)) * sin(dh(0)), sin(dh(3)) * sin(dh(0)), dh(2) * cos(dh(0)),
+            sin(dh(0)), cos(dh(3)) * cos(dh(0)), -sin(dh(3)) * cos(dh(0)), dh(2) * sin(dh(0)),
+            0, sin(dh(3)), cos(dh(3)), dh(1),
+            0, 0, 0, 1;
           mat = mat * submat;
       }
 
@@ -234,7 +233,10 @@ Acquisition, Initialization and other aliases
 
 **Statistics alias:** ::
 
-  using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>, stat::Samples<Params>, stat::Observations<Params>, stat::AggregatedObservations<Params>, stat::GPAcquisitions<Params>, stat::BestAggregatedObservations<Params>, stat::GPKernelHParams<Params>>;
+  using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>,
+    stat::Samples<Params>, stat::Observations<Params>,
+    stat::AggregatedObservations<Params>, stat::GPAcquisitions<Params>,
+    stat::BestAggregatedObservations<Params>, stat::GPKernelHParams<Params>>;
 
 Setting the parameter structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -283,7 +285,9 @@ In your main function, you need to have something like the following: ::
   int main(int argc, char** argv)
   {
     // aliases
-    bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>, acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>, stopcrit<stop_t>> boptimizer;
+    bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>,
+      acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>,
+      stopcrit<stop_t>> boptimizer;
     // Instantiate aggregator
     DistanceToTarget<Params> aggregator({1.5, 1.5});
     boptimizer.optimize(eval_func(), aggregator);
@@ -297,6 +301,8 @@ In your main function, you need to have something like the following: ::
 
 Running the experiment
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: none
 
 Finally, from the root of limbo, run a build command, with the additional switch ``--exp arm_example``: ::
 
@@ -317,7 +323,9 @@ Then, an executable named ``arm_example`` should be produced under the folder ``
 
 Using state-based bayesian optimization, we can transfer what we learned doing one task to learn faster new tasks.
 
-The whole ``main.cpp`` file: ::
+The whole ``main.cpp`` file:
+
+.. code-block:: c++
 
   #include <limbo/limbo.hpp>
 
@@ -371,10 +379,11 @@ The whole ``main.cpp`` file: ::
           Eigen::VectorXd dh = dh_mat.row(i);
 
           Eigen::Matrix4d submat;
-          submat << cos(dh(0)), -cos(dh(3)) * sin(dh(0)), sin(dh(3)) * sin(dh(0)), dh(2) * cos(dh(0)),
-              sin(dh(0)), cos(dh(3)) * cos(dh(0)), -sin(dh(3)) * cos(dh(0)), dh(2) * sin(dh(0)),
-              0, sin(dh(3)), cos(dh(3)), dh(1),
-              0, 0, 0, 1;
+          submat <<
+            cos(dh(0)), -cos(dh(3)) * sin(dh(0)), sin(dh(3)) * sin(dh(0)), dh(2) * cos(dh(0)),
+            sin(dh(0)), cos(dh(3)) * cos(dh(0)), -sin(dh(3)) * cos(dh(0)), dh(2) * sin(dh(0)),
+            0, sin(dh(3)), cos(dh(3)), dh(1),
+            0, 0, 0, 1;
           mat = mat * submat;
       }
 
@@ -450,11 +459,17 @@ The whole ``main.cpp`` file: ::
 
       using init_t = init::RandomSampling<Params>;
 
-      using stop_t = boost::fusion::vector<stop::MaxIterations<Params>, MinTolerance<Params>>;
+      using stop_t = boost::fusion::vector<stop::MaxIterations<Params>,
+        MinTolerance<Params>>;
 
-      using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>, stat::Samples<Params>, stat::Observations<Params>, stat::AggregatedObservations<Params>, stat::GPAcquisitions<Params>, stat::BestAggregatedObservations<Params>, stat::GPKernelHParams<Params>>;
+      using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>,
+        stat::Samples<Params>, stat::Observations<Params>,
+        stat::AggregatedObservations<Params>, stat::GPAcquisitions<Params>,
+        stat::BestAggregatedObservations<Params>, stat::GPKernelHParams<Params>>;
 
-      bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>, acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>, stopcrit<stop_t>> boptimizer;
+      bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>,
+        acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>,
+        stopcrit<stop_t>> boptimizer;
       // Instantiate aggregator
       DistanceToTarget<Params> aggregator({1.5, 1.5});
       boptimizer.optimize(eval_func<Params>(), aggregator);
