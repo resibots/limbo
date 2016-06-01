@@ -108,10 +108,10 @@ To check for the lib files of the library, we add the following code to the ``ch
 
     # rest of code
 
-Add options
-^^^^^^^^^^^^
+Add configuration options
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We often need specific options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to add a new function named ``options`` in our ``wscript`` and another one in the library configuration file:
+We often need additional configuration options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to define a new function named ``options`` in our ``wscript`` and another one in the library configuration file. In the library's configuration file:
 
 .. code:: python
 
@@ -119,7 +119,8 @@ We often need specific options when adding new libraries. One useful option, for
 
     def options(opt):
         # add options to the configuration
-        opt.add_option('cmd_option', type='option_type', help='info message', dest='destination_variable')
+        opt.add_option('cmd_option', type='option_type', help='info message',
+            dest='destination_variable')
 
     @conf
     def check_libname(conf):
