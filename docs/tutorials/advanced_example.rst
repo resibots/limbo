@@ -30,6 +30,8 @@ The file structure should look like this: ::
        |-- arm_example
             +-- wscript
             +-- main.cpp
+  |-- src
+  ...
 
 .. highlight:: c++
 
