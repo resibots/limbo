@@ -161,6 +161,8 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
             +-- wscript
             +-- ros.py
             +-- main.cpp
+  |-- src
+  ...
 
 **wscript:**
 
