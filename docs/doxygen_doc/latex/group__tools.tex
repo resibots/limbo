@@ -105,7 +105,13 @@ make a 1-\/\+D vector from a double (useful when we need to return vectors) \hyp
 \item[{int}]{size}
 \end{DoxyParamCaption}
 )}\label{group__tools_ga2a64df3120a3ecd84e62640fb43722d0}
-random vector in \mbox{[}0, 1\mbox{]} \hypertarget{group__tools_ga156cca8d927600da93054c952247857b}{}\index{Tools@{Tools}!signum@{signum}}
+random vector in \mbox{[}0, 1\mbox{]}
+
+
+\begin{DoxyItemize}
+\item this function is thread safe because the random number generator we use is thread-\/safe
+\item we use a C++11 random number generator 
+\end{DoxyItemize}\hypertarget{group__tools_ga156cca8d927600da93054c952247857b}{}\index{Tools@{Tools}!signum@{signum}}
 \index{signum@{signum}!Tools@{Tools}}
 \subsubsection[{signum}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ constexpr int limbo\+::tools\+::signum (
 \begin{DoxyParamCaption}

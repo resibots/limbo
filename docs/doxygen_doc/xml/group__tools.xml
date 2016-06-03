@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="80" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="80" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="72" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group__tools_1gacb322b4600b2e500dbcd24661a749f49" prot="public" static="no">
         <type>std::uniform_int_distribution&lt; int &gt;</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="82" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="82" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="74" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group__tools_1gacdb2963659056fc5fa9f94405f59a851" prot="public" static="no">
         <type>RandomGenerator&lt; rdist_double_t &gt;</type>
@@ -42,7 +42,7 @@
 <para>Double random number generator </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="86" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="86" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="78" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group__tools_1ga3df78ebcb864be91e73e840bb42b9208" prot="public" static="no">
         <type>RandomGenerator&lt; rdist_int_t &gt;</type>
@@ -55,7 +55,7 @@
 <para>integer random number generator </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="90" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="90" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="82" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="82" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -162,10 +162,12 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>random vector in [0, 1] </para>        </detaileddescription>
+<para>random vector in [0, 1]</para><para><itemizedlist>
+<listitem><para>this function is thread safe because the random number generator we use is thread-safe</para></listitem><listitem><para>we use a C++11 random number generator </para></listitem></itemizedlist>
+</para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="50" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="50" bodyend="54"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="89" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="89" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>

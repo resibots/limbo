@@ -1840,7 +1840,12 @@ Computes the squared exponential covariance like this:</p>
 <dl class="function">
 <dt id="_CPPv2N5limbo5tools13random_vectorEi">
 <span id="limbo::tools::random_vector__i"></span><span class="target" id="limbogroup__tools_1ga2a64df3120a3ecd84e62640fb43722d0"></span>Eigen::VectorXd <code class="descname">random_vector</code><span class="sig-paren">(</span>int <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools13random_vectorEi" title="Permalink to this definition">¶</a></dt>
-<dd><p>random vector in [0, 1] </p>
+<dd><p>random vector in [0, 1]</p>
+<p><ul class="simple">
+<li>this function is thread safe because the random number generator we use is thread-safe</li>
+<li>we use a C++11 random number generator </li>
+</ul>
+</p>
 </dd></dl>
 
 <dl class="function">
