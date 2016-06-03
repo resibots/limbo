@@ -11,7 +11,7 @@ Statistics are functors that are called at the end of each iteration of the Baye
 
 All the statistics are written in a directory called ``hostname_date_pid-number``. For instance: ``wallepro-perso.loria.fr_2016-05-13_16_16_09_72226``
 
-Limbo provides a few classes for common uses (see api.rst#statistics-stats for details):
+Limbo provides a few classes for common uses (see :ref:`statistics-stats` for details):
 
 - ``ConsoleSummary``: write a summary to ``std::cout`` at each iteration of the algorithm
 - ``AggregatedObservations``: what values of the evaluation function have been evaluated (after aggregation) [filename ``aggregated_observations.dat``]

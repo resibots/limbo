@@ -340,6 +340,8 @@ Internals
   :members:
 
 
+.. _statistics-stats:
+
 Statistics (stats)
 --------------------------
 
