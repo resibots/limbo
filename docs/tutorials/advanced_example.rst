@@ -321,7 +321,7 @@ Then, an executable named ``arm_example`` should be produced under the folder ``
   6 new point:  0.455737  0.978531   0.55947 0.0435089 0.0143673  0.999978 value: -0.0113502 best:-0.0113502
 
 
-Using state-based bayesian optimization, we can transfer what we learned doing one task to faster new tasks faster.
+Using state-based bayesian optimization, we can transfer what we learned doing one task to learn new tasks faster.
 
 The whole ``main.cpp`` file:
 
