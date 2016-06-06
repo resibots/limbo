@@ -26,7 +26,7 @@ See :ref:`the Limbo implementation guide <mean-guide>` for the available mean fu
 Black lists
 -----------
 
-When performing physical experiments, it is possible that some solutions cannot be properly evaluated. For example, this situation happens often with a physical robot, typically because (1) The robot may be outside the sensor’s range, for example when the robot is not visible from the camera’s point of view, making it impossible to assess its performance and (2) The sensor may return intractable values (infinity, NaN,...).
+When performing experiments, it is possible that some solutions cannot be properly evaluated. For example, this situation happens often with a physical robot, typically because (1) The robot may be outside the sensor’s range, for example when the robot is not visible from the camera’s point of view, making it impossible to assess its performance and (2) The sensor may return intractable values (infinity, NaN,...).
 
 Different solutions exist to deal with missing data. The simplest way consists in redoing the evaluation. This may work, but only if the problem is not deterministic, otherwise the algorithm will be continuously redoing the same, not working, evaluation. A second solution consists in assigning a very low value to the behavior’s performance, like a punishment. This approach will work with evolutionary algorithms because the corresponding individual will very likely be removed from the population in the next generation. By contrast, this approach will have a dramatic effect on algorithms using models of the reward function, like Bayesian Optimization, as the models will be completely distorted.
 
