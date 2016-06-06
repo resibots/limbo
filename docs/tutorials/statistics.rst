@@ -64,11 +64,14 @@ For instance, we could add a statistics class that writes the worst observation 
       template <typename BO, typename AggregatorFunction>
       void operator()(const BO& bo, const AggregatorFunction& afun, bool blacklisted)
       {
-        // [optional] if statistics have been disabled or if there are no observations, we do not do anything
+        // [optional] if statistics have been disabled or if there are no observations,
+        //    we do nothing
         if (!bo.stats_enabled() || bo.observations().empty())
             return;
 
-        // [optional] we create a file to write / you can use your own file but remember that this method is called at each iteration (you need to create it in the constructor)
+        // [optional] we create a file to write
+        //    you can use your own file but remember that this method is called
+        //    at each iteration (you need to create it in the constructor)
         this->_create_log_file(bo, "worst_observations.dat");
 
         // [optional] we add a header to the file to make it easier to read later
@@ -86,7 +89,8 @@ For instance, we could add a statistics class that writes the worst observation 
 
         // ----- write what we have found ------
         // the file is (*this->_log_file)
-        (*this->_log_file) << bo.total_iterations() << " " << min_obs.transpose() << " " << min_sample.transpose() << std::endl;
+        (*this->_log_file) << bo.total_iterations() << " " << min_obs.transpose()
+            << " " << min_sample.transpose() << std::endl;
       }
   };
 
