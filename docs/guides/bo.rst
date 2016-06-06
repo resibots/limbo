@@ -47,7 +47,7 @@ Our implementation of Bayesian optimization uses this Gaussian process model to 
 Optimizing the hyper-parameters of a Gaussian process
 ------------------------------------------------------
 
-A GP is fully specified by its mean function :math:`\mu(\mathbf{x})` and covariance function :math:`k(\chi_1, \chi_2)`. Nevertheless, the kernel function often includes some parameters, called *hyperparameters*, that need to be tuned. For instance, one of the most common kernel is the squared exponential covariance function:
+A GP is fully specified by its mean function :math:`\mu(\mathbf{x})` and covariance function :math:`k(\chi_1, \chi_2)` (a.k.a. *kernell function*). Nevertheless, the kernel function often includes some parameters, called *hyperparameters*, that need to be tuned. For instance, one of the most common kernel is the Squared Exponential covariance function:
 
 .. math::
 
@@ -100,11 +100,7 @@ There are other kernel functions in Limbo, and it is easy to define more. See :r
 Acquisition function
 --------------------
 
-The selection of the next solution to evaluate is made by
-finding the solution that maximizes the acquisition function. This
-step is another optimization problem, but does not require evaluating the objective function. In
-general, for this optimization problem we can derive the exact
-equation and find a solution with gradient-based optimization, or use any other optimizer (e.g. CMA-ES)
+In order to find the next point to evaluate, we optimize the acquisition function over the model. This step is another optimization problem, but does not require evaluating the objective function. In general, for this optimization problem we can derive the exact equation and find a solution with gradient-based optimization, or use any other optimizer (e.g. CMA-ES).
 
 Several different acquisition functions exist, such as the probability
 of improvement, the expected improvement, or the Upper Confidence
