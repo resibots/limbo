@@ -48,7 +48,7 @@ Many limbo classes provide default parameters. To use them, the parameter sub-st
       };
     };
 
-That way, the ``acqui_ucb::alpha()`` exists, but it has its default value.
+That way, the ``acqui_ucb::alpha()`` exists, but with the default value.
 
 Dynamic parameters
 ------------------
