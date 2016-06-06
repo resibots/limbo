@@ -124,6 +124,8 @@ exploitation/exploration trade-off of the algorithm.
 
 There are other acquisition functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <acquisition-guide>` for the available acquisition functions.
 
+-----
+
 .. bibliography:: refs.bib
   :style: plain
   :cited:

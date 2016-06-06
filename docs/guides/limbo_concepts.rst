@@ -45,6 +45,8 @@ Instead of modeling the performance function, it is sometimes more effective to 
 
 Limbo implements this concept.
 
+-----
+
 .. bibliography:: refs.bib
   :style: plain
   :cited:
