@@ -28,7 +28,7 @@ BO_PARAMS(std::cout,
               };
 
               struct kernel_maternfivehalfs {
-                  BO_PARAM(double, sigma, 1);
+                  BO_PARAM(double, sigma_sq, 1);
                   BO_PARAM(double, l, 0.2);
               };
 

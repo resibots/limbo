@@ -20,7 +20,7 @@ struct Params {
     };
 
     struct kernel_maternfivehalfs {
-        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.2);
     };
 
@@ -35,6 +35,7 @@ struct Params {
 
     struct kernel_squared_exp_ard {
         BO_PARAM(int, k, 0);
+        BO_PARAM(double, sigma_sq, 1);
     };
 
     struct init_randomsampling {

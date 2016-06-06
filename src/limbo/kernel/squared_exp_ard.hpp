@@ -7,6 +7,7 @@ namespace limbo {
     namespace defaults {
         struct kernel_squared_exp_ard {
             BO_PARAM(int, k, 0); //equivalent to the standard exp ARD
+            BO_PARAM(double, sigma_sq, 1);
         };
     }
 
@@ -34,6 +35,7 @@ namespace limbo {
                 Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1);
                 p.head(_ell.size()) = Eigen::VectorXd::Ones(_ell.size()) * -1;
                 this->set_h_params(p);
+                _sf2 = Params::kernel_squared_exp_ard::sigma_sq();
             }
 
             size_t h_params_size() const { return _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1; }
@@ -48,7 +50,7 @@ namespace limbo {
                 for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
                         _A(i, j) = p((j + 1) * _input_dim + i); //can be negative
-                _sf2 = 1; // exp(2 * p(p.size()-1));
+                // _sf2 = 1; // exp(2 * p(p.size()-1));
             }
 
             Eigen::VectorXd grad(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
