@@ -4,7 +4,7 @@ API
 
 Limbo follows a  `policy-based design <https://en.wikipedia.org/wiki/Policy-based_design>`_, which allows users to combine high flexibility (almost every part of Limbo can be substituted by a user-defined part) with high performance (the abstraction do not add any overhead, contrary to classic OOP design). These two features are critical for researchers who want to experiment new ideas in Bayesian optimization. This means that changing a part of limbo (e.g. changing the kernel functions) usually corresponds to changing a template parameter of the optimizer.
 
-The parameters of the algorithms (e.g. an epsilon) are given by a template class (usually called Params in our code, and always the first argument). See :doc:`parameters` for details.
+The parameters of the algorithms (e.g. an epsilon) are given by a template class (usually called Params in our code, and always the first argument). See :doc:`guides/parameters` for details.
 
 To avoid defining each component of an optimizer manually, Limbo provides sensible defaults. In addition, Limbo relies on `Boost.Parameter <http://www.boost.org/doc/libs/1_60_0/libs/parameter/doc/html/index.html>`_  to make it easy to customize a single part. This Boost library allows us to write classes that accept template argument (user-defined custom classes) by name. For instance, to customize the stopping criteria:
 
