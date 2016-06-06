@@ -383,6 +383,3 @@ Misc tools (tools)
 -------------------------------
 .. doxygennamespace:: limbo::tools
   :members:
-
-.. bibliography:: refs.bib
-  :style: plain
