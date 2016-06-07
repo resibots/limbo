@@ -167,7 +167,7 @@ namespace limbo {
 
             /**
              \\rst
-             return :math:`\sigma^2` (unormalized). If there is no sample, return the max \sigma^2.
+             return :math:`\sigma^2` (unormalized). If there is no sample, return the max :math:`\sigma^2`.
              \\endrst
 	  		*/
             double sigma(const Eigen::VectorXd& v) const
