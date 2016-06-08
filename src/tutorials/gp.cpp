@@ -64,11 +64,12 @@ int main(int argc, char **argv)
   typedef kernel::SquaredExpARD<Params> Kernel2_t;
   typedef mean::Data<Params> Mean_t;
   typedef model::GP<Params, Kernel2_t, Mean_t> GP2_t;
-  GP2_t gp_ard(1, 1);
 
+  GP2_t gp_ard(1, 1);
   // do not forget to call the optimization!
-  gp_ard.compute(samples, observations, noises);
   gp_ard.optimize_hyperparams();
+  gp_ard.compute(samples, observations, noises);
+
 
   // write the predicted data in a file (e.g. to be plotted)
   std::ofstream ofs_ard("gp_ard.dat");
