@@ -42,7 +42,7 @@ int main(int argc, char **argv)
   GP_t gp(1, 1);
 
   // noise is the same for all the samples (0.05)
-  Eigen::VectorXd noises = Eigen::VectorXd::Ones(samples.size()) * 0.05;
+  Eigen::VectorXd noises = Eigen::VectorXd::Ones(samples.size()) * 0.01;
 
   // compute the GP
   gp.compute(samples, observations, noises);
