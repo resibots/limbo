@@ -17,5 +17,6 @@
 #include <limbo/stat/gp_mean_hparams.hpp>
 #include <limbo/stat/gp_prediction_differences.hpp>
 #include <limbo/stat/samples.hpp>
+#include <limbo/stat/gp.hpp>
 
 #endif
