@@ -3,6 +3,7 @@
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/data.hpp>
 #include <limbo/model/gp.hpp>
+#include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/tools.hpp>
 #include <fstream>
 
@@ -15,6 +16,10 @@ struct Params {
         BO_PARAM(double, sigma, 0.15);
     };
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+    };
+    struct opt_rprop : public defaults::opt_rprop {
+    };
+    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
 };
 
@@ -64,12 +69,13 @@ int main(int argc, char** argv)
     // in that case, we need a kernel with hyper-parameters that are designed to be optimized
     typedef kernel::SquaredExpARD<Params> Kernel2_t;
     typedef mean::Data<Params> Mean_t;
-    typedef model::GP<Params, Kernel2_t, Mean_t> GP2_t;
+    typedef model::GP<Params, Kernel2_t, Mean_t, model::gp::KernelLFOpt<Params>> GP2_t;
 
     GP2_t gp_ard(1, 1);
     // do not forget to call the optimization!
-    gp_ard.optimize_hyperparams();
     gp_ard.compute(samples, observations, noises);
+    gp_ard.optimize_hyperparams();
+    gp_ard.recompute(false);
 
     // write the predicted data in a file (e.g. to be plotted)
     std::ofstream ofs_ard("gp_ard.dat");
