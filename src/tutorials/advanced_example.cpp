@@ -49,7 +49,7 @@ Eigen::Vector2d forward_kinematics(const Eigen::VectorXd& x)
 
     Eigen::Matrix4d mat = Eigen::Matrix4d::Identity(4, 4);
 
-    for (size_t i = 0; i < dh_mat.rows(); i++) {
+    for (int i = 0; i < dh_mat.rows(); i++) {
         Eigen::VectorXd dh = dh_mat.row(i);
 
         Eigen::Matrix4d submat;
