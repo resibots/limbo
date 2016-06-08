@@ -79,6 +79,9 @@ int main(int argc, char **argv)
     ofs_ard << v.transpose() << " " << mu[0] << " " << sqrt(sigma) << std::endl;
   }
 
-
+  // write the data to a file (useful for plotting)
+  std::ofstream ofs_data("data.dat");
+  for (int i = 0; i < samples.size(); ++i)
+    ofs_data << samples[i].transpose() << " " << observations[i].transpose() << std::endl;
   return 0;
 }
