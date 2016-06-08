@@ -11,7 +11,7 @@ We assue that our samples are in a vector called ``samples`` and that our observ
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 24-34
+   :lines: 29-39
 
 Basic usage
 ------------
@@ -28,7 +28,7 @@ Now we can define the type of the GP:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 37-39
+   :lines: 42-44
 
 To use the GP, we need :
 
@@ -40,14 +40,14 @@ Here we assume that the noise is the same for all samples and that it is equal t
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 41-48
+   :lines: 46-53
 
 Querying the GP can be achieved in two different ways:
 
 - ``gp.mu(v)`` and ``gp.sigma(v)``, which returns the mean and the variance (sigma squared) for the input data point ``v``
 - ``std::tie(mu, sigma) = gp.query(v)``, which returns the mean and the variance at the same time.
 
-The second approch is faster because some computations are the same to compute ``mu`` and ``sigma``.
+The second approach is faster because some computations are the same to compute ``mu`` and ``sigma``.
 
 
 To write the GP in a file (to visualize it), we can query it for many points:
@@ -55,12 +55,12 @@ To write the GP in a file (to visualize it), we can query it for many points:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 51-60
+   :lines: 56-66
 
 
 Hyper-parameter optimization
 ----------------------------
-Most kernels have some parameters. It is common the GP litterature to set them by maximimizing the log-likelihood of the data knowing the model (see :ref:`gaussian-process` for a description of this concept).
+Most kernels have some parameters. It is common the GP literature to set them by maximizing the log-likelihood of the data knowing the model (see :ref:`gaussian-process` for a description of this concept).
 
 In limbo, only a subset of the kernels can have their hyper-parameters optimized. The most common one is ``SquaredExpARD`` (Squared Exponential with Automatic Relevance Determination).
 
@@ -69,21 +69,21 @@ We define a new GP type as follows:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 64-66
+   :lines: 70-72
 
 We use the default values for the parameters of ``SquaredExpARD``:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 17-18
+   :lines: 18-19
 
-Before calling the ``compute()`` method, we need to optimize the hyper-parameters by calling 'optimize_hyperparams()':
+After calling the ``compute()`` method, we need to optimize the hyper-parameters by calling 'optimize_hyperparams()' and recomputing the GP:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 68-71
+   :lines: 76-78
 
 
 We can have a look at the difference between the two GPs:
