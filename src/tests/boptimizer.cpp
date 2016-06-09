@@ -99,6 +99,32 @@ struct eval1 {
     }
 };
 
+BOOST_AUTO_TEST_CASE(test_bo_inheritance)
+{
+    using namespace limbo;
+
+    struct Parameters {
+        struct stop_maxiterations {
+            BO_PARAM(int, iterations, 1);
+        };
+    };
+
+    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    typedef opt::GridSearch<Params> AcquiOpt_t;
+    typedef boost::fusion::vector<stop::MaxIterations<Parameters>> Stop_t;
+    // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
+    typedef mean::Data<Params> Mean_t;
+    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
+    typedef init::NoInit<Params> Init_t;
+    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
+    typedef acqui::UCB<Params, GP_t> Acqui_t;
+
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
+    opt.optimize(eval3<Params>());
+
+    BOOST_CHECK(opt.total_iterations() == 1);
+}
+
 BOOST_AUTO_TEST_CASE(test_bo_gp)
 {
     using namespace limbo;
