@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE boptimizer
+#define BOOST_TEST_MODULE test_boptimizer
 
 #include <boost/test/unit_test.hpp>
 

@@ -41,10 +41,10 @@ def build(bld):
                 target='test_macros',
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
-    bld.program(features='cxx',
-                source='boptimizer.cpp',
+    bld.program(features='cxx test',
+                source='test_boptimizer.cpp',
                 includes='. .. ../../',
-                target='boptimizer',
+                target='test_boptimizer',
                 uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                 use='limbo')
     if bld.env.DEFINES_NLOPT:
