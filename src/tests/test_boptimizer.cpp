@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE boptimizer
+#define BOOST_TEST_MODULE test_boptimizer
 
 #include <boost/test/unit_test.hpp>
 
@@ -12,9 +12,13 @@ struct Params {
     struct opt_rprop : public defaults::opt_rprop {
     };
 
-    struct opt_gridsearch {
-        BO_PARAM(int, bins, 10);
+#ifdef USE_LIBCMAES
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
+#elif defined(USE_NLOPT)
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
+    };
+#endif
 
     struct bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
@@ -25,7 +29,7 @@ struct Params {
     };
 
     struct stop_maxiterations {
-        BO_PARAM(int, iterations, 50);
+        BO_PARAM(int, iterations, 75);
     };
 
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
@@ -49,15 +53,15 @@ struct Params {
 };
 
 template <typename Params, int obs_size = 1>
-struct eval3 {
-    BOOST_STATIC_CONSTEXPR int dim_in = 3;
+struct eval2 {
+    BOOST_STATIC_CONSTEXPR int dim_in = 2;
     BOOST_STATIC_CONSTEXPR int dim_out = obs_size;
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd v(1);
-        Eigen::VectorXd t(3);
-        t << 0.1, 0.2, 0.3;
+        Eigen::VectorXd t(2);
+        t << 0.25, 0.75;
         double y = (x - t).norm();
         v(0) = -y;
         return v;
@@ -65,18 +69,18 @@ struct eval3 {
 };
 
 template <typename Params, int obs_size = 1>
-struct eval3_blacklist {
-    BOOST_STATIC_CONSTEXPR int dim_in = 3;
+struct eval2_blacklist {
+    BOOST_STATIC_CONSTEXPR int dim_in = 2;
     BOOST_STATIC_CONSTEXPR int dim_out = obs_size;
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const throw(limbo::EvaluationError)
     {
         tools::rgen_double_t rgen(0, 1);
-        if (rgen.rand() < 0.1)
+        if (rgen.rand() < 0.05)
             throw limbo::EvaluationError();
         Eigen::VectorXd v(1);
-        Eigen::VectorXd t(3);
-        t << 0.1, 0.2, 0.3;
+        Eigen::VectorXd t(2);
+        t << 0.25, 0.75;
         double y = (x - t).norm();
         v(0) = -y;
         return v;
@@ -92,19 +96,53 @@ struct eval1 {
     {
         Eigen::VectorXd v(1);
         Eigen::VectorXd t(1);
-        t(0) = 0.1;
+        t(0) = 0.25;
         double y = (x - t).norm();
         v(0) = -y;
         return v;
     }
 };
 
+BOOST_AUTO_TEST_CASE(test_bo_inheritance)
+{
+    using namespace limbo;
+
+    struct Parameters {
+        struct stop_maxiterations {
+            BO_PARAM(int, iterations, 1);
+        };
+    };
+
+    typedef kernel::SquaredExpARD<Params> Kernel_t;
+#ifdef USE_LIBCMAES
+    typedef opt::Cmaes<Params> AcquiOpt_t;
+#else
+    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#endif
+    typedef boost::fusion::vector<stop::MaxIterations<Parameters>> Stop_t;
+    // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
+    typedef mean::Data<Params> Mean_t;
+    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
+    typedef init::NoInit<Params> Init_t;
+    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
+    typedef acqui::UCB<Params, GP_t> Acqui_t;
+
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
+    opt.optimize(eval2<Params>());
+
+    BOOST_CHECK(opt.total_iterations() == 1);
+}
+
 BOOST_AUTO_TEST_CASE(test_bo_gp)
 {
     using namespace limbo;
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::GridSearch<Params> AcquiOpt_t;
+#ifdef USE_LIBCMAES
+    typedef opt::Cmaes<Params> AcquiOpt_t;
+#else
+    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#endif
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
     typedef mean::Data<Params> Mean_t;
@@ -114,11 +152,10 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
-    opt.optimize(eval3<Params>());
+    opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.1, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.2, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(2), 0.3, 0.000001);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_blacklist)
@@ -126,7 +163,11 @@ BOOST_AUTO_TEST_CASE(test_bo_blacklist)
     using namespace limbo;
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::GridSearch<Params> AcquiOpt_t;
+#ifdef USE_LIBCMAES
+    typedef opt::Cmaes<Params> AcquiOpt_t;
+#else
+    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#endif
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
     typedef mean::Data<Params> Mean_t;
@@ -136,11 +177,10 @@ BOOST_AUTO_TEST_CASE(test_bo_blacklist)
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
-    opt.optimize(eval3_blacklist<Params>());
+    opt.optimize(eval2_blacklist<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.1, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.2, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(2), 0.3, 0.000001);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
@@ -148,7 +188,11 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     using namespace limbo;
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::GridSearch<Params> AcquiOpt_t;
+#ifdef USE_LIBCMAES
+    typedef opt::Cmaes<Params> AcquiOpt_t;
+#else
+    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#endif
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::Data<Params> Mean_t;
     typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
@@ -159,26 +203,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval1<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.1, 0.000001);
-}
-
-BOOST_AUTO_TEST_CASE(test_bo_gp_auto_mean)
-{
-    using namespace limbo;
-
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::GridSearch<Params> AcquiOpt_t;
-    typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
-    typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
-    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
-    typedef init::RandomSampling<Params> Init_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>> GP_t;
-    typedef acqui::UCB<Params, GP_t> Acqui_t;
-
-    bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
-    opt.optimize(eval1<Params>());
-
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.1, 0.000001);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
@@ -186,7 +211,11 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     using namespace limbo;
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::GridSearch<Params> AcquiOpt_t;
+#ifdef USE_LIBCMAES
+    typedef opt::Cmaes<Params> AcquiOpt_t;
+#else
+    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#endif
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
     typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
@@ -195,9 +224,8 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
-    opt.optimize(eval3<Params>());
+    opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.1, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.2, 0.000001);
-    BOOST_CHECK_CLOSE(opt.best_sample()(2), 0.3, 0.000001);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
 }
