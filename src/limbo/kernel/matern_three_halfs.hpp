@@ -10,7 +10,7 @@ namespace limbo {
         struct kernel_maternthreehalfs {
             /// @ingroup kernel_defaults
             /// This is is sigma squared!
-            BO_PARAM(double, sigma, 1);
+            BO_PARAM(double, sigma_sq, 1);
             /// @ingroup kernel_defaults
             BO_PARAM(double, l, 1);
         };
@@ -30,8 +30,8 @@ namespace limbo {
 
 
          Parameters:
-          - ``double sigma`` **squared**
-          - ``double l``
+          - ``double sigma_sq`` (signal variance)
+          - ``double l`` (characteristic length scale)
 
         Reference: :cite:`matern1960spatial` & :cite:`brochu2010tutorial` p.10 & https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
         \endrst
@@ -43,7 +43,7 @@ namespace limbo {
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double d = (v1 - v2).norm();
-                return Params::kernel_maternthreehalfs::sigma() * (1 + std::sqrt(3) * d / Params::kernel_maternthreehalfs::l()) * std::exp(-std::sqrt(3) * d / Params::kernel_maternthreehalfs::l());
+                return Params::kernel_maternthreehalfs::sigma_sq() * (1 + std::sqrt(3) * d / Params::kernel_maternthreehalfs::l()) * std::exp(-std::sqrt(3) * d / Params::kernel_maternthreehalfs::l());
             }
         };
     }

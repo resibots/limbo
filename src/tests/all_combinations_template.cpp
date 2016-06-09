@@ -9,16 +9,17 @@ using namespace limbo;
 struct Params {
 
     struct kernel_exp {
-        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, sigma_sq, 1);
+        BO_PARAM(double, l, 1);
     };
 
     struct kernel_maternthreehalfs {
-        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.2);
     };
 
     struct kernel_maternfivehalfs {
-        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.2);
     };
 
@@ -74,7 +75,7 @@ struct Params {
         BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer{
+    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.001);
     };
 };

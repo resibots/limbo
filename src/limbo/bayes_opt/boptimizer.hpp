@@ -62,7 +62,7 @@ namespace limbo {
           class A5 = boost::parameter::void_,
           class A6 = boost::parameter::void_>
         // clang-format on
-        class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5> {
+        class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6> {
         public:
             // defaults
             struct defaults {
@@ -76,7 +76,7 @@ namespace limbo {
 #endif
             };
             /// link to the corresponding BoBase (useful for typedefs)
-            typedef BoBase<Params, A1, A2, A3, A4, A5> base_t;
+            typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
             typedef typename base_t::model_t model_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
             // extract the types

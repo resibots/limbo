@@ -9,7 +9,7 @@ namespace limbo {
     namespace defaults {
         struct kernel_maternfivehalfs {
             /// @ingroup kernel_defaults
-            BO_PARAM(double, sigma, 1);
+            BO_PARAM(double, sigma_sq, 1);
             /// @ingroup kernel_defaults
             BO_PARAM(double, l, 1);
         };
@@ -20,7 +20,7 @@ namespace limbo {
 
           \rst
 
-          Matern kernel (TODO: formula)
+          Matern kernel
 
           .. math::
             d = ||v1 - v2||
@@ -31,8 +31,8 @@ namespace limbo {
 
 
           Parameters:
-            - ``double sigma``
-            - ``double l``
+            - ``double sigma_sq`` (signal variance)
+            - ``double l`` (characteristic length scale)
 
           Reference: :cite:`matern1960spatial` & :cite:`brochu2010tutorial` p.10 & https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
           \endrst
@@ -44,7 +44,7 @@ namespace limbo {
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double d = (v1 - v2).norm();
-                return Params::kernel_maternfivehalfs::sigma() * (1 + std::sqrt(5) * d / Params::kernel_maternfivehalfs::l() + 5 * d * d / (3 * Params::kernel_maternfivehalfs::l() * Params::kernel_maternfivehalfs::l())) * std::exp(-std::sqrt(5) * d / Params::kernel_maternfivehalfs::l());
+                return Params::kernel_maternfivehalfs::sigma_sq() * (1 + std::sqrt(5) * d / Params::kernel_maternfivehalfs::l() + 5 * d * d / (3 * Params::kernel_maternfivehalfs::l() * Params::kernel_maternfivehalfs::l())) * std::exp(-std::sqrt(5) * d / Params::kernel_maternfivehalfs::l());
             }
         };
     }
