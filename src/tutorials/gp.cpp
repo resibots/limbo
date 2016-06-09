@@ -13,7 +13,8 @@ using namespace limbo;
 
 struct Params {
     struct kernel_exp {
-        BO_PARAM(double, sigma, 0.15);
+        BO_PARAM(double, sigma_sq, 1.0);
+        BO_PARAM(double, l, 0.15);
     };
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };

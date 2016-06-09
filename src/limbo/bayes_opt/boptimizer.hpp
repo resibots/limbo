@@ -17,7 +17,7 @@ namespace limbo {
     namespace defaults {
         struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 1e-6);
-            BO_PARAM(int, hp_period, 5);
+            BO_PARAM(int, hp_period, -1);
         };
     }
 
