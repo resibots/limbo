@@ -25,27 +25,29 @@ struct Params {
     };
 
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 0.0001);
+        BO_PARAM(double, noise, 0.0);
         BO_DYN_PARAM(int, hp_period);
     };
 
     struct stop_maxiterations {
-        BO_PARAM(int, iterations, 75);
+        BO_PARAM(int, iterations, 190);
     };
 
     struct kernel_exp : public defaults::kernel_exp {
         BO_PARAM(double, l, 0.1);
+        BO_PARAM(double, sigma_sq, 0.25);
     };
 
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+        BO_PARAM(double, sigma_sq, 0.25);
     };
 
     struct acqui_ucb {
-        BO_PARAM(double, alpha, 0.125);
+        BO_PARAM(double, alpha, 1.0);
     };
 
     struct init_randomsampling {
-        BO_PARAM(int, samples, 20);
+        BO_PARAM(int, samples, 10);
     };
 
     struct opt_parallelrepeater : defaults::opt_parallelrepeater {
@@ -195,7 +197,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
 {
     using namespace limbo;
 
-    Params::bayes_opt_boptimizer::set_hp_period(25);
+    Params::bayes_opt_boptimizer::set_hp_period(50);
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
 #ifdef USE_LIBCMAES
@@ -221,9 +223,9 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
 {
     using namespace limbo;
 
-    Params::bayes_opt_boptimizer::set_hp_period(25);
+    Params::bayes_opt_boptimizer::set_hp_period(50);
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    typedef kernel::Exp<Params> Kernel_t;
 #ifdef USE_LIBCMAES
     typedef opt::Cmaes<Params> AcquiOpt_t;
 #else
