@@ -213,15 +213,15 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
 {
     using namespace limbo;
 
-    Params::bayes_opt_boptimizer::set_hp_period(10);
+    Params::bayes_opt_boptimizer::set_hp_period(25);
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
 #ifdef USE_LIBCMAES
@@ -239,6 +239,6 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
 }
