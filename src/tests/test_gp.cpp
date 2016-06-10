@@ -259,6 +259,8 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
 
     gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+    gp.optimize_hyperparams();
+    gp.recompute(false);
 
     Eigen::VectorXd mu;
     double sigma;
