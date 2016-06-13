@@ -45,7 +45,7 @@ However, there is no need to inherit from a particular 'abstract' class.
 
 Every class is parametrized by a :ref:`Params <params-guide>` class that contains all the parameters.
 
-Sequence graph
+Sequence diagram
 ---------------
 .. figure:: pics/limbo_call_graph.png
    :alt: Sequence diagram
@@ -58,6 +58,8 @@ Sequence graph
 File Structure
 --------------
 (see below for a short explanation of the concepts)
+
+..highlight:: none
 
 ::
 
@@ -76,11 +78,14 @@ File Structure
   |-- tests: unit tests
   |-- benchmarks: a few benchmark functions
   |-- examples: a few examples
-  |-- cmaes: [external] the CMA-ES library, used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
-  |-- ehvi: [external] the Expected HyperVolume Improvement, used for Multi-Objective Optimization -- by Iris Hupkens
+  |-- cmaes: [external] the CMA-ES library,
+      used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
+  |-- ehvi: [external] the Expected HyperVolume Improvement,
+      used for Multi-Objective Optimization -- by Iris Hupkens
 
+.. highlight:: c++
 
-Each directory in the `limbo` directory corresponds to a namespace with the same name. There is also a file for each directory called "directory.hpp" (e.g. `acqui.hpp`) that includes the whole namespace.
+Each directory in the `limbo` directory corresponds to a namespace with the same name. There is also a file for each directory called "*directory*.hpp" (e.g. ``acqui.hpp``) that includes the whole namespace.
 
 
 
