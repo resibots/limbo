@@ -42,7 +42,7 @@ How to add / compile your experiment?
                         uselib =  'BOOST EIGEN TBB NCURSE', # add NCURSE here to actually link with it
                         use = 'limbo')
 
-- compile with: ``./waf --exp my_experiment``
+- compile with: ``./waf --exp my_experiment`` (from limbo's folder)
 - if you added configure options, you need to do a ``./waf configure --exp my_experiment`` first
 
 
