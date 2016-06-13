@@ -36,6 +36,8 @@ In order to provide the information that some behaviors have already been tried,
 Thanks to this distinction between valid samples and blacklisted ones, the algorithm can consider only the valid samples when computing the mean of the Gaussian Process and both valid and blacklisted samples when computing the variance. By ignoring blacklisted samples, the mean will remain unchanged and free to move according to future observations  By contrast, the variance will consider both valid and blacklisted samples and will “mark” them as already explored .
 
 
+.. _state-based-bo:
+
 State-based optimization
 ------------------------
 

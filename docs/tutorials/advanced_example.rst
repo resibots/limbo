@@ -135,8 +135,9 @@ To make this forward kinematic model useful to our GP, we need to create a mean 
 
 Using State-based bayesian optimization
 -----------------------------------------
+See the explanation of the meaning of :ref:`state-based-bo`.
 
-Creating an Aggregator: ::
+Creating an Aggregator::
 
   template <typename Params>
   struct DistanceToTarget {
