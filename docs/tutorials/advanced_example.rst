@@ -11,9 +11,8 @@ Problem Statement
 Let's say we have a planar 6-DOF arm manipulator and we want its end-effector to reach a target position (i.e. catch an object). Now, imagine that a joint is broken (or not working properly). We want to use Bayesian Optimization to learn a compensatory behavior that will allow our arm to reach the target in spite of damage. Now, assume that once we have learned how to reach one target, we want to reach another (different) one. We will use state-based bayesian optimization to transfer knowledge between the two tasks. We will use the following:
 
 - The forward kinematic model as prior knowledge (mean of Gaussian Process).
-- The ``Squared exponential covariance function with automatic relevance detection`` as kernel of the GP.
-- Optimize the hyperparameters of the GP kernel using likelihood optimization.
-- Custom output statistics.
+- The **Squared exponential covariance function with automatic relevance detection** as kernel of the GP.
+- Likelihood optimization for the hyperparameters of the GP kernel.
 - Use different optimizer for the acquisition optimization.
 - Initialize the GP with random samples.
 - Custom stopping criterion.
@@ -51,7 +50,7 @@ The basic layout of your ``main.cpp`` file should look like this:
     struct eval_func {
       static constexpr int dim_in = sample_dimensions;
       static constexpr int dim_out = output_dimensions;
-      // Here we define the function evaluation
+      // Here we define the evaluation function
     };
 
     int main(int argc, char** argv)
