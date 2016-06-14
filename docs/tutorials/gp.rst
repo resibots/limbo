@@ -32,22 +32,22 @@ Now we can define the type of the GP:
 
 To use the GP, we need :
 
-- to instantiante a ``GP_t`` objectives
+- to instantiante a ``GP_t`` object
 - to call the method ``compute()``.
-
-Here we assume that the noise is the same for all samples and that it is equal to 0.05.
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
    :lines: 47-54
 
+Here we assume that the noise is the same for all samples and that it is equal to 0.01.
+
 Querying the GP can be achieved in two different ways:
 
 - ``gp.mu(v)`` and ``gp.sigma(v)``, which returns the mean and the variance (sigma squared) for the input data point ``v``
 - ``std::tie(mu, sigma) = gp.query(v)``, which returns the mean and the variance at the same time.
 
-The second approach is faster because some computations are the same to compute ``mu`` and ``sigma``.
+The second approach is faster because some computations are the same for ``mu`` and ``sigma``.
 
 
 To write the GP in a file (to visualize it), we can query it for many points:
@@ -78,7 +78,7 @@ We use the default values for the parameters of ``SquaredExpARD``:
    :linenos:
    :lines: 19-20
 
-After calling the ``compute()`` method, we need to optimize the hyper-parameters by calling 'optimize_hyperparams()' and recomputing the GP:
+After calling the ``compute()`` method, we need to optimize the hyper-parameters by calling 'optimize_hyperparams()' and then recompute the GP:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
@@ -93,7 +93,7 @@ We can have a look at the difference between the two GPs:
    :target: ../_images/gp.png
 
 
-This plot is generated using matplotlib.
+This plot is generated using matplotlib:
 
 .. literalinclude:: ../../src/tutorials/plot_gp.py
    :language: python
