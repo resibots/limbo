@@ -74,7 +74,7 @@ Then, we need to use when defining the optimizer:
    :linenos:
    :lines: 114-114
 
-The full source code is available in `src/tutorials/statistics.cpp`.
+The full source code is available in `src/tutorials/statistics.cpp` and reproduced here:
 
 .. literalinclude:: ../../src/tutorials/statistics.cpp
    :language: c++
