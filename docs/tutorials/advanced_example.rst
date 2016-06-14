@@ -192,3 +192,27 @@ In your main function, you need to have something like the following:
    :language: c++
    :linenos:
    :lines: 121-148
+
+Running the experiment
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Finally, from the root of limbo, run a build command, with the additional switch ``--exp arm_example``: ::
+
+   ./waf configure --exp arm_example
+   ./waf build --exp arm_example
+
+.. highlight:: none
+
+Then, an executable named ``arm_example`` should be produced under the folder ``build/exp/arm_example``. When running the experiment, you should expect something like the following: ::
+
+ 0 new point:   0.105457   0.984803   0.999724   0.397681 0.00178646   0.472922 value: -2.05529 best:-0.50564
+ 1 new point: 0.0418376  0.211166  0.610741   0.97042   0.49975  0.932997 value: -0.420461 best:-0.420461
+ 2 new point: 0.0499932  0.809128  0.647616  0.607996   0.98363  0.263471 value: -1.47844 best:-0.420461
+ 3 new point: 0.926947 0.304285 0.962505 0.923134 0.340676 0.352674 value: -1.77912 best:-0.420461
+ 4 new point:    0.139309  0.00337038   0.0725873     0.98806     0.52506 0.000522096 value: -0.000876567 best:-0.000876567
+ New target!
+ 5 new point: 0.0632575  0.981795  0.347888  0.342065   0.51396  0.785025 value: -1.26196 best:-0.50006
+ 6 new point:  0.455737  0.978531   0.55947 0.0435089 0.0143673  0.999978 value: -0.0113502 best:-0.0113502
+
+
+Using state-based bayesian optimization, we can transfer what we learned doing one task to learn faster new tasks.
