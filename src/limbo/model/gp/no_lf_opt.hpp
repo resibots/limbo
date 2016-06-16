@@ -1,6 +1,8 @@
 #ifndef LIMBO_MODEL_GP_NO_LF_OPT_HPP
 #define LIMBO_MODEL_GP_NO_LF_OPT_HPP
 
+#include <iostream>
+
 namespace limbo {
     namespace model {
         namespace gp {
@@ -9,7 +11,11 @@ namespace limbo {
             template <typename Params>
             struct NoLFOpt {
                 template <typename GP>
-                void operator()(GP&) const {}
+                void operator()(GP&) const
+                {
+                    std::cerr << "'NoLFOpt' should never be called!" << std::endl;
+                    assert(false);
+                }
             };
         }
     }

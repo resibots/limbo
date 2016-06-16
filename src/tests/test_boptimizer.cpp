@@ -25,32 +25,36 @@ struct Params {
     };
 
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 0.0001);
+        BO_PARAM(double, noise, 0.0);
+        BO_DYN_PARAM(int, hp_period);
     };
 
     struct stop_maxiterations {
-        BO_PARAM(int, iterations, 75);
+        BO_PARAM(int, iterations, 190);
+    };
+
+    struct kernel_exp : public defaults::kernel_exp {
+        BO_PARAM(double, l, 0.1);
+        BO_PARAM(double, sigma_sq, 0.25);
     };
 
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
-    };
-
-    struct kernel_maternfivehalfs {
-        BO_PARAM(double, sigma, 1);
-        BO_PARAM(double, l, 0.4);
+        BO_PARAM(double, sigma_sq, 0.25);
     };
 
     struct acqui_ucb {
-        BO_PARAM(double, alpha, 0.125);
+        BO_PARAM(double, alpha, 1.0);
     };
 
     struct init_randomsampling {
-        BO_PARAM(int, samples, 20);
+        BO_PARAM(int, samples, 10);
     };
 
     struct opt_parallelrepeater : defaults::opt_parallelrepeater {
     };
 };
+
+BO_DECLARE_DYN_PARAM(int, Params::bayes_opt_boptimizer, hp_period);
 
 template <typename Params, int obs_size = 1>
 struct eval2 {
@@ -113,7 +117,9 @@ BOOST_AUTO_TEST_CASE(test_bo_inheritance)
         };
     };
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    Params::bayes_opt_boptimizer::set_hp_period(-1);
+
+    typedef kernel::Exp<Params> Kernel_t;
 #ifdef USE_LIBCMAES
     typedef opt::Cmaes<Params> AcquiOpt_t;
 #else
@@ -137,7 +143,9 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
 {
     using namespace limbo;
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    Params::bayes_opt_boptimizer::set_hp_period(-1);
+
+    typedef kernel::Exp<Params> Kernel_t;
 #ifdef USE_LIBCMAES
     typedef opt::Cmaes<Params> AcquiOpt_t;
 #else
@@ -147,22 +155,24 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
     typedef mean::Data<Params> Mean_t;
     typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
-    typedef init::NoInit<Params> Init_t;
+    typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_blacklist)
 {
     using namespace limbo;
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    Params::bayes_opt_boptimizer::set_hp_period(-1);
+
+    typedef kernel::Exp<Params> Kernel_t;
 #ifdef USE_LIBCMAES
     typedef opt::Cmaes<Params> AcquiOpt_t;
 #else
@@ -172,20 +182,22 @@ BOOST_AUTO_TEST_CASE(test_bo_blacklist)
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
     typedef mean::Data<Params> Mean_t;
     typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
-    typedef init::NoInit<Params> Init_t;
+    typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2_blacklist<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
 {
     using namespace limbo;
+
+    Params::bayes_opt_boptimizer::set_hp_period(50);
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
 #ifdef USE_LIBCMAES
@@ -201,16 +213,19 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     typedef acqui::UCB<Params, GP_t> Acqui_t;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
-    opt.optimize(eval1<Params>());
+    opt.optimize(eval2<Params>());
 
     BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
 {
     using namespace limbo;
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    Params::bayes_opt_boptimizer::set_hp_period(50);
+
+    typedef kernel::Exp<Params> Kernel_t;
 #ifdef USE_LIBCMAES
     typedef opt::Cmaes<Params> AcquiOpt_t;
 #else
