@@ -34,7 +34,7 @@ int main(int nargs, char* args[])
     bopt_params par = initialize_parameters_to_default();
     par.n_iterations = 190;
     par.n_inner_iterations = 250;
-    par.n_iter_relearn = 1;
+    par.n_iter_relearn = 50;
     //par.random_seed = 0;
     par.verbose_level = 0;
     par.noise = 1e-10;

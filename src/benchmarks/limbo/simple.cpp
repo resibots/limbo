@@ -13,14 +13,13 @@ struct Params {
     };
     struct bayes_opt_boptimizer {
         BO_PARAM(double, noise, 1e-10);
-        BO_PARAM(int, dump_period, -1);
         BO_PARAM(int, hp_period, -1);
     };
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 190);
     };
     struct kernel_maternfivehalfs {
-        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 1);
     };
     struct acqui_ucb {
