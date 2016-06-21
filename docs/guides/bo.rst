@@ -14,6 +14,7 @@ Bayesian optimization is a model-based, black-box optimization algorithm that is
 Gaussian Process
 ----------------
 
+
 Limbo uses Gaussian process regression to find a model :cite:`a-Rasmussen2006`, which is a common choice for Bayesian optimization :cite:`a-brochu2010tutorial`. Gaussian processes are particularly interesting for regression because they not only model the cost function, but also the uncertainty associated with each prediction. For a cost function :math:`f`, usually unknown, a Gaussian process defines the probability distribution of the possible values :math:`f(\mathbf{x})` for each point :math:`\mathbf{x}`. These probability distributions are Gaussian, and are therefore defined by a mean (:math:`\mu`) and a standard deviation (:math:`\sigma`). However, :math:`\mu` and :math:`\sigma` can be different for each :math:`\mathbf{x}`; we therefore define a probability distribution *over functions*:
 
 .. math::
@@ -43,6 +44,9 @@ Given a set of observations :math:`\mathbf{P}_{1:t}=f(\mathbf{\chi}_{1:t})` and 
   \end{gathered}
 
 Our implementation of Bayesian optimization uses this Gaussian process model to search for the maximum of the objective function :math:`f(\mathbf{x})`, :math:`f(\mathbf{x})` being unknown. It selects the next :math:`\chi` to test by selecting the maximum of the *acquisition function*, which balances exploration -- improving the model in the less explored parts of the search space -- and exploitation -- favoring parts that the models predicts as promising. Here, we use the "Upper Confidence Bound" acquisition function (see the "information acquisition function" section below). Once the observation is made, the algorithm updates the Gaussian process to take the new data into account. In classic Bayesian optimization, the Gaussian process is initialized with a constant mean because it is assumed that all the points of the search space are equally likely to be good. The model is then progressively refined after each observation.
+
+
+.. _likelihood:
 
 Optimizing the hyper-parameters of a Gaussian process
 ------------------------------------------------------

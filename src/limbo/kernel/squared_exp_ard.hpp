@@ -7,6 +7,7 @@ namespace limbo {
     namespace defaults {
         struct kernel_squared_exp_ard {
             BO_PARAM(int, k, 0); //equivalent to the standard exp ARD
+            BO_PARAM(double, sigma_sq, 1);
         };
     }
 
@@ -34,6 +35,7 @@ namespace limbo {
                 Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1);
                 p.head(_ell.size()) = Eigen::VectorXd::Ones(_ell.size()) * -1;
                 this->set_h_params(p);
+                _sf2 = Params::kernel_squared_exp_ard::sigma_sq();
             }
 
             size_t h_params_size() const { return _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1; }
@@ -48,32 +50,48 @@ namespace limbo {
                 for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
                         _A(i, j) = p((j + 1) * _input_dim + i); //can be negative
-                _sf2 = 1; // exp(2 * p(p.size()-1));
+                // _sf2 = 1; // exp(2 * p(p.size()-1));
             }
 
             Eigen::VectorXd grad(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
             {
-                Eigen::VectorXd grad = Eigen::VectorXd::Zero(this->h_params_size());
-                Eigen::MatrixXd K = (_A * _A.transpose());
-                K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
-                double z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();
-                double k = _sf2 * std::exp(-0.5 * z);
+                if (Params::kernel_squared_exp_ard::k() > 0) {
+                    Eigen::VectorXd grad = Eigen::VectorXd::Zero(this->h_params_size());
+                    Eigen::MatrixXd K = (_A * _A.transpose());
+                    K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
+                    double z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();
+                    double k = _sf2 * std::exp(-0.5 * z);
 
-                grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;
-                Eigen::MatrixXd G = -k * (x1 - x2) * (x1 - x2).transpose() * _A;
-                for (size_t j = 0; j < Params::kernel_squared_exp_ard::k(); ++j)
-                    grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);
+                    grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;
+                    Eigen::MatrixXd G = -k * (x1 - x2) * (x1 - x2).transpose() * _A;
+                    for (size_t j = 0; j < Params::kernel_squared_exp_ard::k(); ++j)
+                        grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);
 
-                grad(this->h_params_size() - 1) = 0; // 2.0 * k;
-                return grad;
+                    grad(this->h_params_size() - 1) = 0; // 2.0 * k;
+                    return grad;
+                }
+                else {
+                    Eigen::VectorXd grad(_input_dim + 1);
+                    Eigen::VectorXd z = (x1 - x2).cwiseQuotient(_ell).array().square();
+                    double k = _sf2 * std::exp(-0.5 * z.sum());
+                    grad.head(_input_dim) = z * k;
+                    grad(_input_dim) = 0; // 2.0 * k;
+                    return grad;
+                }
             }
 
             double operator()(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
             {
                 assert(x1.size() == _ell.size());
-                Eigen::MatrixXd K = (_A * _A.transpose());
-                K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
-                double z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();
+                double z;
+                if (Params::kernel_squared_exp_ard::k() > 0) {
+                    Eigen::MatrixXd K = (_A * _A.transpose());
+                    K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
+                    z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();
+                }
+                else {
+                    z = (x1 - x2).cwiseQuotient(_ell).squaredNorm();
+                }
                 return _sf2 * std::exp(-0.5 * z);
             }
 

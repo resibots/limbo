@@ -38,87 +38,36 @@ Next, copy the following content to the ``wscript`` file:
             uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
             use='limbo')
 
-For this example, we will optimize a simple function: :math:`-{(5*x - 2.5)}^2 + 5`, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from 'uselib'.
+For this example, we will optimize a simple function: :math:`-{(5 \times x - 2.5)}^2 + 5`, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from 'uselib'.
 
-.. highlight:: c++
+To begin, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``:
 
-To begin, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``: ::
+.. literalinclude:: ../../src/tutorials/basic_example.cpp
+   :language: c++
+   :linenos:
+   :lines: 3-57
 
-    #include <iostream>
-    #include <limbo/bayes_opt/boptimizer.hpp>
 
-    using namespace limbo;
 
-    struct Params {
-        // option for the Bayesian optimizer
-        struct bayes_opt_boptimizer {
-            BO_PARAM(double, noise, 0.0);
-        };
+Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function), that we want to output the stats (by setting stats_enabled to `true`), that the model has to be initialized with 10 samples (that will be selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults.
 
-        // enable / disable the output
-        struct bayes_opt_bobase {
-          BO_PARAM(int, stats_enabled, true);
-        };
+Then, we have to define the evaluation function for the optimizer to call:
 
-        // options for the internal optimizer
-        #ifdef USE_LIBCMAES
-        struct opt_cmaes : public defaults::opt_cmaes { };
-        #elif defined(USE_NLOPT)
-        struct opt_nloptnograd : public defaults::opt_nloptnograd { };
-        #else
-        struct opt_gridsearch : public defaults::opt_gridsearch { };
-        #endif
-
-        // options for the initializer
-        struct init_randomsampling {
-            BO_PARAM(int, samples, 10);
-        };
-
-        // options for the stopping criteria
-        struct stop_maxiterations {
-            BO_PARAM(int, iterations, 40);
-        };
-
-        // options for the acquisition function
-        // (here we just take the default values)
-        struct acqui_gpucb : public defaults::acqui_gpucb { };
-
-        // options for the hyper-parameter optimizer
-        // (here we just take the default values)
-        struct opt_rprop : public defaults::opt_rprop { };
-        struct opt_parallelrepeater : public defaults::opt_parallelrepeater { };
-    };
-
-Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function),
-that we don't want to output any stats (by setting the dump period to -1), that the model has to be initialized with 10 samples (that will be
-selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults.
-
-Then, we have to define the evaluation function for the optimizer to call: ::
-
-    struct Eval {
-        static constexpr size_t dim_in = 1;
-        static constexpr size_t dim_out = 1;
-
-        Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
-        {
-            double y = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
-            return tools::make_vector(y);
-        }
-    };
+.. literalinclude:: ../../src/tutorials/basic_example.cpp
+   :language: c++
+   :linenos:
+   :lines: 59-72
 
 It is required that the evaluation struct has the static members ``dim_in`` and ``dim_out``, specifying the input and output dimensions.
 Also, it should have the ``operator()`` expecting a ``const Eigen::VectorXd&`` of size ``dim_in``, and return another one, of size ``dim_out``.
 
-With this, we can declare the main function: ::
+With this, we can declare the main function:
 
-    int main() {
-        bayes_opt::BOptimizer<Params> boptimizer;
-        boptimizer.optimize(Eval());
-        std::cout << "Best sample: " << boptimizer.best_sample()(0)
-                  << " - Best observation: " << boptimizer.best_observation()(0)
-                  << std::endl;
-        return 0;
-    }
+.. literalinclude:: ../../src/tutorials/basic_example.cpp
+   :language: c++
+   :linenos:
+   :lines: 74-83
+
 
 Finally, from the root of limbo, run a build command, with the additional switch ``--exp test``: ::
 
@@ -126,69 +75,8 @@ Finally, from the root of limbo, run a build command, with the additional switch
 
 Then, an executable named ``test`` should be produced under the folder ``build/exp/test``.
 
-Full ``main.cpp``::
+Full ``main.cpp``:
 
-    #include <iostream>
-    #include <limbo/bayes_opt/boptimizer.hpp>
-
-    using namespace limbo;
-
-    struct Params {
-        // option for the Bayesian optimizer
-        struct bayes_opt_boptimizer {
-            BO_PARAM(double, noise, 0.0);
-        };
-
-        // enable / disable the output
-        struct bayes_opt_bobase {
-          BO_PARAM(int, stats_enabled, false);
-        };
-
-        // options for the internal optimizer
-        #ifdef USE_LIBCMAES
-        struct opt_cmaes : public defaults::opt_cmaes { };
-        #elif defined(USE_NLOPT)
-        struct opt_nloptnograd : public defaults::opt_nloptnograd { };
-        #else
-        struct opt_gridsearch : public defaults::opt_gridsearch { };
-        #endif
-
-        // options for the initializer
-        struct init_randomsampling {
-            BO_PARAM(int, samples, 10);
-        };
-
-        // options for the stopping criteria
-        struct stop_maxiterations {
-            BO_PARAM(int, iterations, 40);
-        };
-
-        // options for the acquisition function
-        // (here we just take the default values)
-        struct acqui_gpucb : public defaults::acqui_gpucb { };
-
-        // options for the hyper-parameter optimizer
-        // (here we just take the default values)
-        struct opt_rprop : public defaults::opt_rprop { };
-        struct opt_parallelrepeater : public defaults::opt_parallelrepeater { };
-    };
-
-    struct Eval {
-        static constexpr size_t dim_in = 1;
-        static constexpr size_t dim_out = 1;
-
-        Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
-        {
-          double y = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
-          return tools::make_vector(y);
-        }
-    };
-
-    int main() {
-        bayes_opt::BOptimizer<Params> boptimizer;
-        boptimizer.optimize(Eval());
-        std::cout << "Best sample: " << boptimizer.best_sample()(0)
-                  << " - Best observation: " << boptimizer.best_observation()(0)
-                  << std::endl;
-        return 0;
-    }
+.. literalinclude:: ../../src/tutorials/basic_example.cpp
+   :language: c++
+   :linenos:

@@ -82,7 +82,7 @@ namespace limbo {
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
-            boost::parameter::optional<tag::modelfun>> class_signature;
+            boost::parameter::optional<tag::modelfun>> bobase_signature;
 
         // clang-format off
         template <class Params,
@@ -90,7 +90,8 @@ namespace limbo {
           class A2 = boost::parameter::void_,
           class A3 = boost::parameter::void_,
           class A4 = boost::parameter::void_,
-          class A5 = boost::parameter::void_>
+          class A5 = boost::parameter::void_,
+          class A6 = boost::parameter::void_>
         // clang-format on
         /**
         \rst
@@ -153,7 +154,7 @@ namespace limbo {
             };
 
             // extract the types
-            typedef typename class_signature::bind<A1, A2, A3, A4, A5>::type args;
+            typedef typename bobase_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
             typedef typename boost::parameter::binding<args, tag::initfun, typename defaults::init_t>::type init_function_t;
             typedef typename boost::parameter::binding<args, tag::acquifun, typename defaults::acqui_t>::type acquisition_function_t;
             typedef typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type model_t;

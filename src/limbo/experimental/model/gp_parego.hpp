@@ -14,12 +14,12 @@
 
 namespace limbo {
     namespace experimental {
-      namespace defaults {
-          struct model_gp_parego {
-              BO_PARAM(double, rho, 0.05);
-          };
-      }
-      namespace model {
+        namespace defaults {
+            struct model_gp_parego {
+                BO_PARAM(double, rho, 0.05);
+            };
+        }
+        namespace model {
 
             /// this is the model used in Parego
             /// reference: Knowles, J. (2006). ParEGO: A hybrid algorithm
@@ -37,7 +37,8 @@ namespace limbo {
                 GPParego(int dim_in, int dim_out) : Model(dim_in, 1), _nb_objs(dim_out) {}
                 void compute(const std::vector<Eigen::VectorXd>& samples,
                     const std::vector<Eigen::VectorXd>& observations, const Eigen::VectorXd& noises,
-                    const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>())
+                    const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>(),
+                    const Eigen::VectorXd& noises_bl = Eigen::VectorXd())
                 {
                     _raw_observations = observations;
                     auto new_observations = _scalarize_obs(observations);
@@ -48,18 +49,17 @@ namespace limbo {
                 {
                     _raw_observations.push_back(observation);
                     this->compute(this->_samples,
-                      _raw_observations, this->_noises,
-                      this->_bl_samples);
+                        _raw_observations, this->_noises,
+                        this->_bl_samples);
                 }
                 /// WARNING: Parego does not really work with blacklisted samples
                 void add_bl_sample(const Eigen::VectorXd& bl_sample, double noise)
                 {
-                  Model::add_bl_sample(bl_sample, noise);
-                  this->compute(this->_samples,
-                    _raw_observations, this->_noises,
-                    this->_bl_samples);
+                    Model::add_bl_sample(bl_sample, noise);
+                    this->compute(this->_samples,
+                        _raw_observations, this->_noises,
+                        this->_bl_samples);
                 }
-
 
             protected:
                 size_t _nb_objs;

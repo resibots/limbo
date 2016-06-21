@@ -5,6 +5,8 @@
 
 #include <limbo/acqui/ucb.hpp>
 #include <limbo/kernel/matern_five_halfs.hpp>
+#include <limbo/kernel/matern_three_halfs.hpp>
+#include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
 #include <limbo/model/gp.hpp>
@@ -31,7 +33,7 @@ struct Params {
     };
 
     struct kernel_maternfivehalfs {
-        BO_PARAM(double, sigma, 1);
+        BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.25);
     };
 
@@ -257,6 +259,8 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
 
     gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+    gp.optimize_hyperparams();
+    gp.recompute(false);
 
     Eigen::VectorXd mu;
     double sigma;
@@ -271,4 +275,64 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     std::tie(mu, sigma) = gp.query(make_v1(3));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma < 1e-5);
+}
+
+BOOST_AUTO_TEST_CASE(test_gp_init_variance)
+{
+    using namespace limbo;
+
+    struct Parameters {
+        struct kernel_squared_exp_ard {
+            BO_PARAM(int, k, 0);
+            BO_PARAM(double, sigma_sq, 10);
+        };
+        struct kernel_exp {
+            BO_PARAM(double, sigma_sq, 10);
+            BO_PARAM(double, l, 1);
+        };
+        struct kernel_maternthreehalfs {
+            BO_PARAM(double, sigma_sq, 10);
+            BO_PARAM(double, l, 0.25);
+        };
+        struct kernel_maternfivehalfs {
+            BO_PARAM(double, sigma_sq, 10);
+            BO_PARAM(double, l, 0.25);
+        };
+    };
+
+    // MaternThreeHalfs
+    typedef model::GP<Params, kernel::MaternThreeHalfs<Parameters>, mean::Constant<Params>> GP1_t;
+
+    GP1_t gp1(1, 1);
+
+    double sigma = gp1.sigma(tools::random_vector(1));
+
+    BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
+
+    // MaternFiveHalfs
+    typedef model::GP<Params, kernel::MaternFiveHalfs<Parameters>, mean::Constant<Params>> GP2_t;
+
+    GP2_t gp2(1, 1);
+
+    sigma = gp2.sigma(tools::random_vector(1));
+
+    BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
+
+    // Exponential
+    typedef model::GP<Params, kernel::Exp<Parameters>, mean::Constant<Params>> GP3_t;
+
+    GP3_t gp3(1, 1);
+
+    sigma = gp3.sigma(tools::random_vector(1));
+
+    BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
+
+    // ARD Squared Exponential
+    typedef model::GP<Params, kernel::SquaredExpARD<Parameters>, mean::Constant<Params>> GP4_t;
+
+    GP4_t gp4(1, 1);
+
+    sigma = gp4.sigma(tools::random_vector(1));
+
+    BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
 }

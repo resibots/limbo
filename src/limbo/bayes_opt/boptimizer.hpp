@@ -17,7 +17,7 @@ namespace limbo {
     namespace defaults {
         struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 1e-6);
-            BO_PARAM(int, hp_period, 5);
+            BO_PARAM(int, hp_period, -1);
         };
     }
 
@@ -62,7 +62,7 @@ namespace limbo {
           class A5 = boost::parameter::void_,
           class A6 = boost::parameter::void_>
         // clang-format on
-        class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5> {
+        class BOptimizer : public BoBase<Params, A1, A2, A3, A4, A5, A6> {
         public:
             // defaults
             struct defaults {
@@ -76,7 +76,7 @@ namespace limbo {
 #endif
             };
             /// link to the corresponding BoBase (useful for typedefs)
-            typedef BoBase<Params, A1, A2, A3, A4, A5> base_t;
+            typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
             typedef typename base_t::model_t model_t;
             typedef typename base_t::acquisition_function_t acquisition_function_t;
             // extract the types
@@ -91,7 +91,7 @@ namespace limbo {
                 this->_init(sfun, afun, reset);
 
                 if (!this->_observations.empty())
-                    _model.compute(this->_samples, this->_observations, Eigen::VectorXd::Constant(this->_observations.size(), Params::bayes_opt_boptimizer::noise()), this->_bl_samples);
+                    _model.compute(this->_samples, this->_observations, Eigen::VectorXd::Constant(this->_observations.size(), Params::bayes_opt_boptimizer::noise()), this->_bl_samples, Eigen::VectorXd::Constant(this->_bl_samples.size(), Params::bayes_opt_boptimizer::noise()));
                 else
                     _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
 

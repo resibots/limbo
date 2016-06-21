@@ -6,6 +6,7 @@ using namespace limbo;
 struct Params {
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.0);
+        BO_PARAM(int, hp_period, 10);
     };
     struct bayes_opt_bobase {
         BO_PARAM(int, stats_enabled, true);
@@ -49,7 +50,7 @@ Eigen::Vector2d forward_kinematics(const Eigen::VectorXd& x)
 
     Eigen::Matrix4d mat = Eigen::Matrix4d::Identity(4, 4);
 
-    for (size_t i = 0; i < dh_mat.rows(); i++) {
+    for (int i = 0; i < dh_mat.rows(); i++) {
         Eigen::VectorXd dh = dh_mat.row(i);
 
         Eigen::Matrix4d submat;

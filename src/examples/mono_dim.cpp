@@ -4,6 +4,7 @@
 #include <limbo/model/gp.hpp>
 #include <limbo/acqui/ucb.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/stat.hpp>
 
 using namespace limbo;
 
@@ -27,7 +28,7 @@ BO_PARAMS(std::cout,
               };
 
               struct kernel_maternfivehalfs {
-                  BO_PARAM(double, sigma, 1);
+                  BO_PARAM(double, sigma_sq, 1);
                   BO_PARAM(double, l, 0.2);
               };
 
@@ -45,6 +46,9 @@ BO_PARAMS(std::cout,
 
               struct stop_maxiterations {
                   BO_PARAM(int, iterations, 20);
+              };
+              struct stat_gp {
+                BO_PARAM(int, bins, 20);
               };
           };)
 
@@ -67,8 +71,12 @@ int main()
     typedef mean::Data<Params> Mean_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
     typedef acqui::UCB<Params, GP_t> Acqui_t;
+    using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>,
+        stat::Samples<Params>,
+        stat::Observations<Params>,
+        stat::GP<Params>>;
 
-    bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
+    bayes_opt::BOptimizer<Params, modelfun<GP_t>, statsfun<stat_t>, acquifun<Acqui_t>> opt;
     opt.optimize(fit_eval());
     std::cout << opt.best_observation() << " res  "
               << opt.best_sample().transpose() << std::endl;
