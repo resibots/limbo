@@ -47,9 +47,9 @@ Every class is parametrized by a :ref:`Params <params-guide>` class that contain
 
 Sequence diagram
 ---------------
-.. figure:: pics/limbo_call_graph.png
+.. figure:: pics/limbo_sequence_diagram.png
    :alt: Sequence diagram
-   :target: _images/limbo_call_graph.png
+   :target: _images/limbo_sequence_diagram.png
 
    Click on the image to see it bigger.
 
