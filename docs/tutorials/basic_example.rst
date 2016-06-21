@@ -38,7 +38,7 @@ Next, copy the following content to the ``wscript`` file:
             uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
             use='limbo')
 
-For this example, we will optimize a simple function: :math:`-{(5 \times x - 2.5)}^2 + 5`, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from 'uselib'.
+For this example, we will optimize a simple function: :math:`-{(5 * x - 2.5)}^2 + 5`, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from 'uselib'.
 
 To begin, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``:
 
