@@ -28,7 +28,7 @@ Optional but highly recommended
 
 * `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
 
-    ./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
+    ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
     make install
 
 
@@ -99,13 +99,7 @@ The second step is to run the build command::
 
 Depending on your compiler, there may be some warnings, but the output should end with the following lines: ::
 
-    execution summary
-      tests that pass 5/5
-        /home/fallocat/limbo_git/build/src/tests/test_macros
-        /home/fallocat/limbo_git/build/src/tests/test_optimizers
-        /home/fallocat/limbo_git/build/src/tests/test_init_functions
-        /home/fallocat/limbo_git/build/src/tests/test_gp
-        /home/fallocat/limbo_git/build/src/tests/test_boptimizer
+    'build' finished successfully (time in sec)
 
 
 Building the documentation
