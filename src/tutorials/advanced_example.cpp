@@ -143,6 +143,9 @@ int main()
     boptimizer.optimize(eval_func<Params>(), aggregator);
     std::cout << "New target!" << std::endl;
     aggregator = DistanceToTarget<Params>({2, 1.5});
+    // Do not forget to pass `false` as the last parameter in `optimize`,
+    // so you do not reset the data in boptimizer
+    // i.e. keep all the previous data points in the Gaussian Process
     boptimizer.optimize(eval_func<Params>(), aggregator, false);
     return 1;
 }

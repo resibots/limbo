@@ -194,7 +194,7 @@ In your main function, you need to have something like the following:
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 121-148
+   :lines: 121-151
 
 Running the experiment
 ^^^^^^^^^^^^^^^^^^^^^^^^^
