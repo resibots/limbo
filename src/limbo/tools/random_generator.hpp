@@ -42,6 +42,7 @@
 #include <random>
 #include <utility>
 #include <mutex>
+#include <limbo/tools/rand_utils.hpp>
 
 namespace limbo {
     namespace tools {
@@ -55,7 +56,7 @@ namespace limbo {
         class RandomGenerator {
         public:
             using result_type = typename D::result_type;
-            RandomGenerator(result_type min, result_type max) : _dist(min, max), _rgen(std::random_device()()) {}
+            RandomGenerator(result_type min, result_type max) : _dist(min, max), _rgen(randutils::auto_seed_128{}.base()) {}
             result_type rand()
             {
                 std::lock_guard<std::mutex> lock(_mutex);

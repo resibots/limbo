@@ -10,6 +10,7 @@ using namespace limbo;
 struct Params {
     struct kernel_squared_exp_ard {
         BO_DYN_PARAM(int, k); //equivalent to the standard exp ARD
+        BO_PARAM(double, sigma_sq, 1);
     };
 };
 

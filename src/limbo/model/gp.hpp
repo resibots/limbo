@@ -136,14 +136,14 @@ namespace limbo {
 
             /**
              \\rst
-             return :math:`\\mu`, :math:`\\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
+             return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
              \\endrst
 	  		*/
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0 && _bl_samples.size() == 0)
                     return std::make_tuple(_mean_function(v, *this),
-                        sqrt(_kernel_function(v, v)));
+                        _kernel_function(v, v));
 
                 if (_samples.size() == 0)
                     return std::make_tuple(_mean_function(v, *this),
@@ -155,7 +155,7 @@ namespace limbo {
 
             /**
              \\rst
-             return :math:`\\mu` (unormalized). If there is no sample, return the value according to the mean function.
+             return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
              \\endrst
 	  		*/
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
@@ -167,13 +167,13 @@ namespace limbo {
 
             /**
              \\rst
-             return :math:`\\sigma^2` (unormalized). If there is no sample, return the value according to the mean function.
+             return :math:`\sigma^2` (unormalized). If there is no sample, return the max :math:`\sigma^2`.
              \\endrst
 	  		*/
             double sigma(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0 && _bl_samples.size() == 0)
-                    return sqrt(_kernel_function(v, v));
+                    return _kernel_function(v, v);
                 return _sigma(v, _compute_k_bl(v, _compute_k(v)));
             }
 

@@ -8,5 +8,6 @@ Tutorials
    compilation
    basic_example
    external_libs
+   gp
    advanced_example
    statistics
