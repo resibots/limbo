@@ -27,7 +27,6 @@ This new file should have the following structure:
         except:
           conf.fatal('libname not found')
           return
-        return 1
 
 Where ``check_if_libname_exists`` is replaced with logic to find our library, as explained later. If we want the library to be optional, we omit the ``conf.fatal`` part.
 
@@ -65,10 +64,9 @@ To check for the headers of the library, we add the following code to the ``chec
         includes_check = ['path1', 'path2']
         try:
           conf.start_msg('Checking for libname includes')
-          res = True
           # include_files is a list with the headers we expect to find
           for file in include_files:
-            res = res and conf.find_file(file, includes_check)
+            conf.find_file(file, includes_check)
           conf.end_msg('ok')
           conf.env.INCLUDES_LIBNAME = includes_check
         except:
@@ -93,10 +91,9 @@ To check for the lib files of the library, we add the following code to the ``ch
         libs_check = ['path1', 'path2']
         try:
           conf.start_msg('Checking for libname libs')
-          res = True
           # lib_files is a list with the lib files we expect to find
           for file in lib_files:
-            res = res and conf.find_file(file, libs_check)
+            conf.find_file(file, libs_check)
           conf.end_msg('ok')
           conf.env.LIBPATH_LIBNAME = libs_check
           # list with the lib names the library has
@@ -214,14 +211,14 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
         if 'ROS_DISTRO' not in os.environ:
           conf.start_msg('Checking for ROS')
           conf.end_msg('ROS_DISTRO not in environmental variables', 'RED')
-          return 1
+          return
         includes_check = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/include']
         libs_check = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/lib/']
 
       try:
         # Find the header for ROS
         conf.start_msg('Checking for ROS includes')
-        res = conf.find_file('ros/ros.h', includes_check)
+        conf.find_file('ros/ros.h', includes_check)
         conf.end_msg('ok')
 
         # Find the lib files
@@ -229,7 +226,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
                 'rosconsole_log4cxx', 'rosconsole_backend_interface']
         conf.start_msg('Checking for ROS libs')
         for lib in libs:
-          res = res and conf.find_file('lib'+lib+'.so', libs_check)
+          conf.find_file('lib'+lib+'.so', libs_check)
         conf.end_msg('ok')
 
         conf.env.INCLUDES_ROS = includes_check
@@ -238,8 +235,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
         conf.env.DEFINES_ROS = ['USE_ROS']
       except:
         conf.end_msg('Not found', 'RED')
-        return 1
-      return 1
+        return
 
 Assuming we are at **limbo** root, we run the following to compile our experiment::
 
