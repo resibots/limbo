@@ -65,7 +65,7 @@ File Structure
 
   src
   +-- limbo:
-       +-- acqui: acquisition functions
+       |-- acqui: acquisition functions
        |-- bayes_opt: bayesian optimizers
        |-- init: initialization functions
        |-- kernel: kernel functions
