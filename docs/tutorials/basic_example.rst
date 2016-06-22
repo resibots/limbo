@@ -1,13 +1,7 @@
 Basic Example
 =================================================
 
-Basic Example
-----------------------------
-
-Create directories and files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Let's say we want to create an experiment called "test". The first thing to do is to create the folder ``exp/test`` under the limbo root. Then add two files:
+Let's say we want to create an experiment called "myExp". The first thing to do is to create the folder ``exp/myExp`` under the limbo root. Then add two files:
 
 * the ``main.cpp`` file
 * a pyhton file called ``wscript``, which will be used by ``waf`` to register the executable for building
@@ -16,9 +10,11 @@ The file structure should look like this: ::
 
   limbo
   |-- exp
-       |-- test
+       |-- myExp
             +-- wscript
             +-- main.cpp
+  |-- src
+  ...
 
 Next, copy the following content to the ``wscript`` file:
 
@@ -32,11 +28,11 @@ Next, copy the following content to the ``wscript`` file:
         bld(features='cxx cxxprogram',
             source='main.cpp',
             includes='. ../../src',
-            target='test',
+            target='myExp',
             uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
             use='limbo')
 
-For this example, we will optimize a simple function: :math:`-{(5 \times x - 2.5)}^2 + 5`, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from 'uselib'.
+For this example, we will optimize a simple function: :math:`-{(5 * x - 2.5)}^2 + 5`, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from 'uselib'.
 
 To begin, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``:
 
@@ -56,7 +52,7 @@ Then, we have to define the evaluation function for the optimizer to call:
    :linenos:
    :lines: 59-72
 
-It is required that the evaluation struct has the static members ``dim_in`` and ``dim_out``, specifying the input and output dimension.
+It is required that the evaluation struct has the static members ``dim_in`` and ``dim_out``, specifying the input and output dimensions.
 Also, it should have the ``operator()`` expecting a ``const Eigen::VectorXd&`` of size ``dim_in``, and return another one, of size ``dim_out``.
 
 With this, we can declare the main function:
@@ -67,11 +63,11 @@ With this, we can declare the main function:
    :lines: 74-83
 
 
-Finally, from the root of limbo, run a build command, with the additional switch ``--exp test``: ::
+Finally, from the root of limbo, run a build command, with the additional switch ``--exp myExp``: ::
 
-    ./waf build --exp test
+    ./waf build --exp myExp
 
-Then, an executable named ``test`` should be produced under the folder ``build/exp/test``.
+Then, an executable named ``myExp`` should be produced under the folder ``build/exp/myExp``.
 
 Full ``main.cpp``:
 

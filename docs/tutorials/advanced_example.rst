@@ -10,15 +10,14 @@ Problem Statement
 
 Let's say we have a planar 6-DOF arm manipulator and we want its end-effector to reach a target position (i.e. catch an object). Now, imagine that a joint is broken (or not working properly). We want to use Bayesian Optimization to learn a compensatory behavior that will allow our arm to reach the target in spite of damage. Now, assume that once we have learned how to reach one target, we want to reach another (different) one. We will use state-based bayesian optimization to transfer knowledge between the two tasks. We will use the following:
 
-- The forward kinematic model as prior knowledge (mean of GP).
-- The ``Squared exponential covariance function with automatic relevance detection`` as kernel of the GP.
-- Optimize the hyperparameters of the GP kernel using likelihood optimization.
-- Custom output statistics.
+- The forward kinematic model as prior knowledge (mean of Gaussian Process).
+- The **Squared exponential covariance function with automatic relevance detection** as kernel of the GP.
+- Likelihood optimization for the hyperparameters of the GP kernel.
 - Use different optimizer for the acquisition optimization.
 - Initialize the GP with random samples.
 - Custom stopping criterion.
 
-Also, we assume that all of our arm's links have **length of 1cm**.
+Also, we assume that all of our arm's links are **1cm long**.
 
 Basic Layout
 -----------------------------------
@@ -30,41 +29,41 @@ The file structure should look like this: ::
        |-- arm_example
             +-- wscript
             +-- main.cpp
+  |-- src
+  ...
 
-.. highlight:: c++
+The basic layout of your ``main.cpp`` file should look like this:
 
-The basic layout of your ``main.cpp`` file should look like this: ::
+.. code-block:: c++
 
-            #include <iostream>
-            #include <limbo/bayes_opt/boptimizer.hpp>
-            // Here we have to include other needed limbo headers
+    #include <iostream>
+    #include <limbo/bayes_opt/boptimizer.hpp>
+    // Here we have to include other needed limbo headers
 
-            using namespace limbo;
+    using namespace limbo;
 
-            struct Params {
-              // Here go the parameters
-            };
+    struct Params {
+      // Here go the parameters
+    };
 
-            template <typename Params>
-            struct eval_func {
-              static constexpr int dim_in = sample_dimensions;
-              static constexpr int dim_out = output_dimensions;
-              // Here we define the function evaluation
-            };
+    template <typename Params>
+    struct eval_func {
+      static constexpr int dim_in = sample_dimensions;
+      static constexpr int dim_out = output_dimensions;
+      // Here we define the evaluation function
+    };
 
-            int main(int argc, char** argv)
-            {
-              // Defines, etc.
-              bayes_opt::BOptimizer<Params, ...> opt;
-              opt.optimize(eval_func<Params, ...>());
-              auto val = opt.best_observation();
-            }
+    int main(int argc, char** argv)
+    {
+      // Defines, etc.
+      bayes_opt::BOptimizer<Params, ...> opt;
+      opt.optimize(eval_func<Params, ...>());
+      auto val = opt.best_observation();
+    }
 
 The ``wscript`` will have the following form:
 
-.. highlight:: python
-
-.. code:: python
+.. code-block:: python
 
     from waflib.Configure import conf
 
@@ -104,6 +103,7 @@ To make this forward kinematic model useful to our GP, we need to create a mean 
 
 Using State-based bayesian optimization
 -----------------------------------------
+See the explanation of the meaning of :ref:`state-based-bo`.
 
 Creating an Aggregator:
 
@@ -174,7 +174,10 @@ Acquisition, Initialization and other aliases
 
 **Statistics alias:** ::
 
-  using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>, stat::Samples<Params>, stat::Observations<Params>, stat::AggregatedObservations<Params>, stat::GPAcquisitions<Params>, stat::BestAggregatedObservations<Params>, stat::GPKernelHParams<Params>>;
+  using stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>,
+    stat::Samples<Params>, stat::Observations<Params>,
+    stat::AggregatedObservations<Params>, stat::GPAcquisitions<Params>,
+    stat::BestAggregatedObservations<Params>, stat::GPKernelHParams<Params>>;
 
 Setting the parameter structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -191,7 +194,7 @@ In your main function, you need to have something like the following:
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 121-148
+   :lines: 121-151
 
 Running the experiment
 ^^^^^^^^^^^^^^^^^^^^^^^^^

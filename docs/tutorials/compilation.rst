@@ -17,7 +17,7 @@ Required
 
 Optional but highly recommended
 +++++++++++++++++++++++++++++++++
-* `libcmaes <https://github.com/beniz/libcmaes>`_. Be careful that gtest (which is a dependency of libcmaes) needs to be compiled **even if you install it with your package manager** (e.g. apt-get) (see below). Then follow the instructions here: https://github.com/beniz/libcmaes#build ::
+* `libcmaes <https://github.com/beniz/libcmaes>`_. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get). Follow the instructions `here <https://github.com/beniz/libcmaes#build>`_, reproduced for your convenience::
 
     sudo apt-get install gtest
     sudo cd /usr/src/gtest
@@ -28,7 +28,7 @@ Optional but highly recommended
 
 * `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
 
-    ./configure -with-cxx --enable-shared   --without-python --without-matlab --without-octave
+    ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
     make install
 
 
@@ -43,14 +43,18 @@ Compilation
 
 We use  the `WAF <https://waf.io>`_  build system, which is provided with the **limbo** source code. To know why we use waf (and not CMAKE, SCONS, traditional makefiles, etc.), see the :ref:`FAQ <faq-waf>`.
 
+Like most build systems, it has a configuration and build steps, described bellow.
+
 Configuration
 ~~~~~~~~~~~~~
+
+.. caution::
+  Make sure that the waf file has execution rights.
 
 The first step is to configure your waf environment. For this, assuming that you are in the main limbo directory, you have to run the command: ::
 
     ./waf configure
 
-Make sure that the waf file has execution rights.
 If everything is okay, you should expect an output like this: ::
 
     Setting top to                           : /path/to/limbo
@@ -82,31 +86,26 @@ you can use the following command-line options to indicate where they are:
 Note that Sferes2 won't be used unless you specify it's installation folder.
 You can also specify a different compiler than the default, setting the environment variables ``CC`` and ``CXX``.
 
-A full example: ::
+A full example::
 
     CC=icc CXX=icpc ./waf configure --sferes ~/sferes2 --mkl ~/intel/mkl --tbb ~/intel/tbb
 
 Build
 ~~~~~~~~~~~~~
 
-The second step is to run the build command:::
+The second step is to run the build command::
 
     ./waf build
 
 Depending on your compiler, there may be some warnings, but the output should end with the following lines: ::
 
-    execution summary
-      tests that pass 5/5
-        /home/fallocat/limbo_git/build/src/tests/test_macros
-        /home/fallocat/limbo_git/build/src/tests/test_optimizers
-        /home/fallocat/limbo_git/build/src/tests/test_init_functions
-        /home/fallocat/limbo_git/build/src/tests/test_gp
-        /home/fallocat/limbo_git/build/src/tests/test_boptimizer
+    'build' finished successfully (time in sec)
 
 
 Building the documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*This section is only useful for developers who need to update the documentation.*
+.. note::
+    This section is only useful for developers who need to update the documentation.
 
 Install sphinx via pip: ::
 
@@ -117,20 +116,20 @@ Install sphinx via pip: ::
 
   On Mac OSX, do not use `brew install sphinx` because this is not the right sphinx
 
-Install the Resibots theme for resibots: ::
+Install the Resibots theme for Sphinx::
 
     git clone https://github.com/resibots/sphinx_resibots_theme
     export SPHINX_RESIBOTS_THEME="/home/me/path/to/sphinx_resibots_theme"
 
-Install `breathe` via pip: ::
+Install `breathe <https://breathe.readthedocs.io/en/latest/>`_ via pip::
 
     sudo pip install breathe
 
-Install doxygen via your package manager (e.g. apt-get / brew): ::
+Install `doxygen <http://www.stack.nl/~dimitri/doxygen/>`_ via your package manager (e.g. apt-get / brew)::
 
     apt-get install doxygen
 
-In the `doc` directory: ::
+In the `doc` directory::
 
     make html
 

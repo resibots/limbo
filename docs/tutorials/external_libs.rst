@@ -4,9 +4,11 @@ Add External Library
 Add external library to experiment's wscript
 --------------------------------------------
 
-To add an external library to your experiment, we need to modify our experiment's ``wscript``. The stantard way to do this is to create a new configuration file for the dependency we want. In the ``waf`` build system, we do this by creating a python script(`.py`), usually called ``libname.py`` (where ``libname`` is the name of the library), in the same directory as your experiment.
+To add an external library to your experiment, we need to modify the experiment's build script, ``wscript``. The standard way to do this is to create a new configuration file for the new dependency. In the ``waf`` build system, this is done by creating a python script (``.py`` file), usually called ``libname.py`` (where ``libname`` is the name of the library), in the same directory as your experiment.
 
-.. warning:: to activate this script, you need to activate your experiment **when configuring limbo**:  ``./waf configure --exp your_exp``
+.. warning:: to activate this script, you need to activate your experiment **when configuring limbo**::
+
+  ./waf configure --exp your_exp
 
 This new file should have the following structure:
 
@@ -25,9 +27,8 @@ This new file should have the following structure:
         except:
           conf.fatal('libname not found')
           return
-        return 1
 
-Where we replace the ``check_if_libname_exists`` with logic to find our library. If we want the library to be optional, we omit the ``conf.fatal`` part.
+Where ``check_if_libname_exists`` is replaced with logic to find our library, as explained later. If we want the library to be optional, we omit the ``conf.fatal`` part.
 
 Then in our ``wscript`` we add the following lines:
 
@@ -63,10 +64,9 @@ To check for the headers of the library, we add the following code to the ``chec
         includes_check = ['path1', 'path2']
         try:
           conf.start_msg('Checking for libname includes')
-          res = True
           # include_files is a list with the headers we expect to find
           for file in include_files:
-            res = res and conf.find_file(file, includes_check)
+            conf.find_file(file, includes_check)
           conf.end_msg('ok')
           conf.env.INCLUDES_LIBNAME = includes_check
         except:
@@ -91,10 +91,9 @@ To check for the lib files of the library, we add the following code to the ``ch
         libs_check = ['path1', 'path2']
         try:
           conf.start_msg('Checking for libname libs')
-          res = True
           # lib_files is a list with the lib files we expect to find
           for file in lib_files:
-            res = res and conf.find_file(file, libs_check)
+            conf.find_file(file, libs_check)
           conf.end_msg('ok')
           conf.env.LIBPATH_LIBNAME = libs_check
           # list with the lib names the library has
@@ -106,10 +105,10 @@ To check for the lib files of the library, we add the following code to the ``ch
 
     # rest of code
 
-Add options
-^^^^^^^^^^^^
+Add configuration options
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We often need specific options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to add a new function named ``options`` in our ``wscript`` and another one in the library configuration file:
+We often need additional configuration options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to define a new function named ``options`` in our ``wscript`` and another one in the library configuration file. In the library's configuration file:
 
 .. code:: python
 
@@ -117,7 +116,8 @@ We often need specific options when adding new libraries. One useful option, for
 
     def options(opt):
         # add options to the configuration
-        opt.add_option('cmd_option', type='option_type', help='info message', dest='destination_variable')
+        opt.add_option('cmd_option', type='option_type', help='info message',
+            dest='destination_variable')
 
     @conf
     def check_libname(conf):
@@ -158,6 +158,8 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
             +-- wscript
             +-- ros.py
             +-- main.cpp
+  |-- src
+  ...
 
 **wscript:**
 
@@ -201,6 +203,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
 
     @conf
     def check_ros(conf):
+      # Get locations where to search for ROS's header and lib files
       if conf.options.ros:
         includes_check = [conf.options.ros + '/include']
         libs_check = [conf.options.ros + '/lib']
@@ -208,29 +211,33 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
         if 'ROS_DISTRO' not in os.environ:
           conf.start_msg('Checking for ROS')
           conf.end_msg('ROS_DISTRO not in environmental variables', 'RED')
-          return 1
+          return
         includes_check = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/include']
         libs_check = ['/opt/ros/' + os.environ['ROS_DISTRO'] + '/lib/']
 
       try:
+        # Find the header for ROS
         conf.start_msg('Checking for ROS includes')
-        res = conf.find_file('ros/ros.h', includes_check)
+        conf.find_file('ros/ros.h', includes_check)
         conf.end_msg('ok')
-        libs = ['roscpp','rosconsole','roscpp_serialization','rostime', 'xmlrpcpp','rosconsole_log4cxx', 'rosconsole_backend_interface']
+
+        # Find the lib files
+        libs = ['roscpp','rosconsole','roscpp_serialization','rostime','xmlrpcpp',
+                'rosconsole_log4cxx', 'rosconsole_backend_interface']
         conf.start_msg('Checking for ROS libs')
         for lib in libs:
-          res = res and conf.find_file('lib'+lib+'.so', libs_check)
+          conf.find_file('lib'+lib+'.so', libs_check)
         conf.end_msg('ok')
+
         conf.env.INCLUDES_ROS = includes_check
         conf.env.LIBPATH_ROS = libs_check
         conf.env.LIB_ROS = libs
         conf.env.DEFINES_ROS = ['USE_ROS']
       except:
         conf.end_msg('Not found', 'RED')
-        return 1
-      return 1
+        return
 
-Assuming we are at **limbo** root, we run the following to compile our experiment: ::
+Assuming we are at **limbo** root, we run the following to compile our experiment::
 
   ./waf configure --exp example
   ./waf --exp example
