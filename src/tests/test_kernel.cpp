@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE(test_kernel_SE_ARD)
     Eigen::VectorXd hp(se.h_params_size());
     hp(0) = 0; //exp(0)=1
     hp(1) = 0;
-    hp(2) = 1;
+
     se.set_h_params(hp);
 
     Eigen::VectorXd v1 = make_v2(1, 1);
@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(test_kernel_SE_ARD)
     hp(1) = 0;
     hp(2) = 0;
     hp(3) = 0;
-    hp(4) = 1;
+    
 
     se.set_h_params(hp);
     BOOST_CHECK(s1 == se(v1, v2));
