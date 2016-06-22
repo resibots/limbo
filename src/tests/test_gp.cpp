@@ -3,7 +3,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-
 #include <limbo/acqui/ucb.hpp>
 #include <limbo/kernel/matern_five_halfs.hpp>
 #include <limbo/kernel/matern_three_halfs.hpp>

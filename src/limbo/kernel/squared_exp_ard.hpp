@@ -50,7 +50,6 @@ namespace limbo {
                 for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
                         _A(i, j) = p((j + 1) * _input_dim + i); //can be negative
-                // _sf2 = 1; // exp(2 * p(p.size()-1));
             }
 
             Eigen::VectorXd grad(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
@@ -67,7 +66,6 @@ namespace limbo {
                     for (size_t j = 0; j < Params::kernel_squared_exp_ard::k(); ++j)
                         grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);
 
-                    //grad(this->h_params_size() - 1) = 0; // 2.0 * k;
                     return grad;
                 }
                 else {
@@ -75,7 +73,6 @@ namespace limbo {
                     Eigen::VectorXd z = (x1 - x2).cwiseQuotient(_ell).array().square();
                     double k = _sf2 * std::exp(-0.5 * z.sum());
                     grad.head(_input_dim) = z * k;
-                    //grad(_input_dim) = 0; // 2.0 * k;
                     return grad;
                 }
             }

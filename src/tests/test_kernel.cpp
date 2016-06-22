@@ -54,7 +54,6 @@ BOOST_AUTO_TEST_CASE(test_kernel_SE_ARD)
     hp(1) = 0;
     hp(2) = 0;
     hp(3) = 0;
-    
 
     se.set_h_params(hp);
     BOOST_CHECK(s1 == se(v1, v2));
