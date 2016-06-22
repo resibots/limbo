@@ -32,13 +32,13 @@ namespace limbo {
             SquaredExpARD(int dim = 1) : _sf2(0), _ell(dim), _A(dim, Params::kernel_squared_exp_ard::k()), _input_dim(dim)
             {
                 //assert(Params::SquaredExpARD::k()<dim);
-                Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1);
+                Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k());
                 p.head(_ell.size()) = Eigen::VectorXd::Ones(_ell.size()) * -1;
                 this->set_h_params(p);
                 _sf2 = Params::kernel_squared_exp_ard::sigma_sq();
             }
 
-            size_t h_params_size() const { return _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1; }
+            size_t h_params_size() const { return _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k(); }
 
             const Eigen::VectorXd& h_params() const { return _h_params; }
 
@@ -67,15 +67,15 @@ namespace limbo {
                     for (size_t j = 0; j < Params::kernel_squared_exp_ard::k(); ++j)
                         grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);
 
-                    grad(this->h_params_size() - 1) = 0; // 2.0 * k;
+                    //grad(this->h_params_size() - 1) = 0; // 2.0 * k;
                     return grad;
                 }
                 else {
-                    Eigen::VectorXd grad(_input_dim + 1);
+                    Eigen::VectorXd grad(_input_dim);
                     Eigen::VectorXd z = (x1 - x2).cwiseQuotient(_ell).array().square();
                     double k = _sf2 * std::exp(-0.5 * z.sum());
                     grad.head(_input_dim) = z * k;
-                    grad(_input_dim) = 0; // 2.0 * k;
+                    //grad(_input_dim) = 0; // 2.0 * k;
                     return grad;
                 }
             }
