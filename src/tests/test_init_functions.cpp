@@ -23,7 +23,7 @@ struct Params {
         BO_PARAM(int, iterations, 0);
     };
 
-    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+    struct kernel_exp : public defaults::kernel_exp {
     };
 
     struct kernel_maternfivehalfs {
@@ -32,9 +32,6 @@ struct Params {
     };
 
     struct acqui_ucb : public defaults::acqui_ucb {
-    };
-
-    struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
 #ifdef USE_LIBCMAES
@@ -47,11 +44,6 @@ struct Params {
     struct opt_gridsearch : public defaults::opt_gridsearch {
     };
 #endif
-    struct opt_rprop : public defaults::opt_rprop {
-    };
-
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-    };
 };
 
 struct fit_eval {

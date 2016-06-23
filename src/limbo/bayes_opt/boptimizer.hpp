@@ -12,6 +12,13 @@
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/random_generator.hpp>
 #include <limbo/bayes_opt/bo_base.hpp>
+#ifdef USE_LIBCMAES
+#include <limbo/opt/cmaes.hpp>
+#elif defined USE_NLOPT
+#include <limbo/opt/nlopt_no_grad.hpp>
+#else
+#include <limbo/opt/grid_search.hpp>
+#endif
 
 namespace limbo {
     namespace defaults {
