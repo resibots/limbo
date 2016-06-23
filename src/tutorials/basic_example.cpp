@@ -30,7 +30,7 @@ struct Params {
         BO_PARAM(int, stats_enabled, true);
     };
 
-    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+    struct kernel_exp : public defaults::kernel_exp {
     };
 
     // we use 10 random samples to initialize the algorithm
@@ -44,15 +44,7 @@ struct Params {
     };
 
     // we use the default parameters for acqui_ucb
-    struct acqui_gpucb : public defaults::acqui_gpucb {
-    };
-
-    /// we use the default parameters for rprop (hyper-parameter optimization)
-    struct opt_rprop : public defaults::opt_rprop {
-    };
-
-    /// default parameters for the parallel_repeater ((hyper-parameter optimization))
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
+    struct acqui_ucb : public defaults::acqui_ucb {
     };
 };
 

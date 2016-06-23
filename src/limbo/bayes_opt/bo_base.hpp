@@ -23,19 +23,12 @@
 #include <limbo/stat/aggregated_observations.hpp>
 #include <limbo/stat/console_summary.hpp>
 #include <limbo/tools/sys.hpp>
-#include <limbo/kernel/squared_exp_ard.hpp>
-#include <limbo/acqui/gp_ucb.hpp>
+#include <limbo/kernel/exp.hpp>
+#include <limbo/acqui/ucb.hpp>
 #include <limbo/mean/data.hpp>
-#ifdef USE_LIBCMAES
-#include <limbo/opt/cmaes.hpp>
-#elif defined USE_NLOPT
-#include <limbo/opt/nlopt_no_grad.hpp>
-#else
-#include <limbo/opt/grid_search.hpp>
-#endif
 #include <limbo/model/gp.hpp>
-#include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/init/random_sampling.hpp>
+#include <limbo/tools/math.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -143,12 +136,12 @@ namespace limbo {
             struct defaults {
                 typedef init::RandomSampling<Params> init_t; // 1
 
-                typedef kernel::SquaredExpARD<Params> kf_t;
+                typedef kernel::Exp<Params> kf_t;
                 typedef mean::Data<Params> mean_t;
-                typedef model::GP<Params, kf_t, mean_t, model::gp::KernelLFOpt<Params>> model_t; // 2
+                typedef model::GP<Params, kf_t, mean_t> model_t; // 2
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
-                typedef acqui::GP_UCB<Params, model_t> acqui_t; // 3
+                typedef acqui::UCB<Params, model_t> acqui_t; // 3
                 typedef boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>> stat_t; // 4
                 typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 5
             };

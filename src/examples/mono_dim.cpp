@@ -2,7 +2,7 @@
 #include <limbo/kernel/matern_five_halfs.hpp>
 #include <limbo/mean/data.hpp>
 #include <limbo/model/gp.hpp>
-#include <limbo/acqui/ucb.hpp>
+#include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
 #include <limbo/stat.hpp>
 

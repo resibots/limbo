@@ -196,10 +196,10 @@ struct Params {
         BO_PARAM(int, iterations, 40);
     };
 
-    struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+    struct kernel_exp : public defaults::kernel_exp {
     };
 
-    struct acqui_gpucb : public defaults::acqui_gpucb {
+    struct acqui_ucb : public defaults::acqui_ucb {
     };
 
 #ifdef USE_LIBCMAES
@@ -212,11 +212,6 @@ struct Params {
     struct opt_gridsearch : public defaults::opt_gridsearch {
     };
 #endif
-    struct opt_rprop : public defaults::opt_rprop {
-    };
-
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-    };
 };
 
 template <typename T>

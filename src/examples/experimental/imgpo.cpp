@@ -191,9 +191,7 @@ struct Params {
         BO_PARAM(double, noise, 0.0);
     };
 
-    struct kernel_squared_exp_ard {
-        BO_PARAM(int, k, 0);
-        BO_PARAM(double, sigma_sq, 1);
+    struct kernel_exp : public defaults::kernel_exp {
     };
 
     struct stop_maxiterations {
@@ -279,7 +277,7 @@ int main(int argc, char** argv)
 #endif
     res_t results;
 
-    typedef kernel::SquaredExpARD<Params> kf_t;
+    typedef kernel::Exp<Params> kf_t;
     typedef mean::Constant<Params> mean_t;
     typedef model::GP<Params, kf_t, mean_t> model_t;
     typedef init::NoInit<Params> init_t;

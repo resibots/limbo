@@ -16,8 +16,6 @@ struct Params {
     struct opt_gridsearch : public defaults::opt_gridsearch {
     };
 #endif
-    struct opt_rprop : public defaults::opt_rprop {
-    };
 
     struct kernel_maternfivehalfs {
         BO_PARAM(double, sigma_sq, 1);
@@ -33,9 +31,7 @@ struct Params {
         BO_PARAM(bool, stats_enabled, true);
     };
 
-    struct kernel_squared_exp_ard {
-        BO_PARAM(int, k, 0);
-        BO_PARAM(double, sigma_sq, 1);
+    struct kernel_exp : public defaults::kernel_exp {
     };
 
     struct init_randomsampling {
@@ -46,12 +42,10 @@ struct Params {
         BO_PARAM(int, iterations, 100);
     };
 
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-    };
     struct model_gp_parego : public experimental::defaults::model_gp_parego {
     };
 
-    struct acqui_gpucb : public defaults::acqui_gpucb {
+    struct acqui_ucb : public defaults::acqui_ucb {
     };
     struct stat_hyper_volume {
         BO_PARAM_ARRAY(double, ref, 10, 10);
