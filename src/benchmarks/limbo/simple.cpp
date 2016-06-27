@@ -36,12 +36,14 @@ struct Params {
 struct DirectParams {
     struct opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
+        BO_PARAM(bool, test, false);
     };
 };
 
 struct BobyqaParams {
     struct opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
+        BO_PARAM(bool, test, false);
     };
 };
 

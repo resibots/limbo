@@ -21,7 +21,7 @@ namespace limbo {
                     int dim = gp.kernel_function().h_params_size();
                     KernelLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
-                    auto params = optimizer(optimization, tools::random_vector(dim), false);
+                    auto params = optimizer(optimization, gp.kernel_function().h_params(), true);
                     gp.kernel_function().set_h_params(params);
                     gp.set_lik(opt::eval(optimization, params));
                     gp.recompute(false);

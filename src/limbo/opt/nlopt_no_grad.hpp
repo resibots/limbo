@@ -87,6 +87,10 @@ namespace limbo {
                 if (bounded) {
                     opt.set_lower_bounds(std::vector<double>(dim, 0));
                     opt.set_upper_bounds(std::vector<double>(dim, 1));
+                    if (Params::opt_nloptnograd::test()) {
+                        opt.set_lower_bounds(std::vector<double>(dim, -6.0));
+                        opt.set_upper_bounds(std::vector<double>(dim, 1.0));
+                    }
                 }
 
                 double max;
@@ -95,6 +99,9 @@ namespace limbo {
                     opt.optimize(x, max);
                 }
                 catch (nlopt::roundoff_limited& e) {
+                    // In theory it's ok to ignore this error
+                }
+                catch (std::invalid_argument& e) {
                     // In theory it's ok to ignore this error
                 }
 
