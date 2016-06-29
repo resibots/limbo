@@ -206,7 +206,7 @@ namespace limbo {
                     std::cout << "WARNING max_observation with multi dimensional "
                                  "observations doesn't make sense"
                               << std::endl;
-                return _observations.maxCoeff();
+                return Eigen::VectorXd(_observations.maxCoeff());
             }
 
             /// return the mean observation (only call this if the output of the GP is of dimension 1)

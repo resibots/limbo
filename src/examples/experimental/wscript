@@ -15,3 +15,10 @@ def build(bld):
                       target = 'parego',
                       uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
                       use = 'limbo')
+
+    obj = bld.program(features = 'cxx',
+                      source = 'multi.cpp',
+                      includes = '.. ../.. ../../../',
+                      target = 'multi',
+                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      use = 'limbo')

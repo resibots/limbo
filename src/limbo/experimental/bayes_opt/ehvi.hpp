@@ -1,5 +1,5 @@
-#ifndef LIMBO_BAYES_OPT_EHVI_HPP
-#define LIMBO_BAYES_OPT_EHVI_HPP
+#ifndef LIMBO_EXPERIMENTAL_BAYES_OPT_EHVI_HPP
+#define LIMBO_EXPERIMENTAL_BAYES_OPT_EHVI_HPP
 
 #include <algorithm>
 
@@ -31,7 +31,7 @@ namespace limbo {
             class Ehvi : public BoMulti<Params, A2, A3, A4, A5, A6> {
             public:
                 typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
-                typedef limbo::bayes_opt::BoBase<Params, A3, A4, A5, A6> base_t;
+                typedef limbo::experimental::bayes_opt::BoMulti<Params, A3, A4, A5, A6> base_t;
                 typedef typename base_t::model_t model_t;
                 typedef typename base_t::acqui_optimizer_t acqui_optimizer_t;
 
@@ -44,7 +44,7 @@ namespace limbo {
 
                     while (this->_samples.size() == 0 || !this->_stop(*this, FirstElem())) {
                         std::cout.flush();
-                        this->template update_pareto_model<EvalFunction::dim>();
+                        this->template update_pareto_model<EvalFunction::dim_in>();
                         this->update_pareto_data();
 
                         // copy in the ehvi structure to compute expected improvement
@@ -69,20 +69,26 @@ namespace limbo {
                         typedef std::pair<Eigen::VectorXd, double> pair_t;
                         pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
                         auto body = [&](int i) -> pair_t {
-                            // clang-format off
-                            auto x = this->pareto_data()[i];
+                                    // clang-format off
+                                    auto x = this->pareto_data()[i];
 
-                            auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
-                            Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, true);
+                                    auto acqui_optimization =
+                                        [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(acqui(x)); };
 
-                            Eigen::VectorXd s = inner_opt(acqui, acqui.dim(), std::get<0>(x), FirstElem());
-                            double hv = acqui(s);
-                            return std::make_pair(s, hv);
+                                    // TODO recheck
+                                    // auto acqui_optimization = AcquiOptimization<acquisition_function_t, AggregatorFunction>(acqui, afun, starting_point);
+                                    // acqui_optimizer_t acqui_optimizer;
+                                    // Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, true);
+
+                                    Eigen::VectorXd s = inner_opt(acqui_optimization, std::get<0>(x), true);
+                                    double hv = acqui(s);
+
+                                    return std::make_pair(s, hv);
                             // clang-format on
                         };
                         auto comp = [](const pair_t& v1, const pair_t& v2) {
-                            // clang-format off
-                            return v1.second > v2.second;
+                                    // clang-format off
+                                    return v1.second > v2.second;
                             // clang-format on
                         };
                         auto m = tools::par::max(init, this->pareto_data().size(), body, comp);

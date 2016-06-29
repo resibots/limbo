@@ -1,6 +1,5 @@
 #ifndef LIMBO_BAYES_OPT_BO_MULTI_HPP
 #define LIMBO_BAYES_OPT_BO_MULTI_HPP
-#define VERSION "xxx"
 
 #include <Eigen/Core>
 
@@ -15,7 +14,7 @@
 #endif
 
 #include <limbo/bayes_opt/bo_base.hpp>
-#include <limbo/experimental/bayes_opt/pareto.hpp>
+#include <limbo/experimental/tools/pareto.hpp>
 
 namespace limbo {
     namespace experimental {
@@ -47,14 +46,17 @@ namespace limbo {
                     };
                 };
 
+                SFERES_FITNESS(SferesFitBase, sferes::fit::Fitness){
+                    template <typename Indiv>
+                    void eval(const Indiv& indiv){}};
+
                 template <typename M>
-                class SferesFit {
+                class SferesFit : public SferesFitBase<> {
                 public:
                     SferesFit(const std::vector<M>& models) : _models(models) {}
                     SferesFit() {}
 
                     const std::vector<float>& objs() const { return _objs; }
-
                     float obj(size_t i) const { return _objs[i]; }
 
                     template <typename Indiv>
@@ -66,12 +68,11 @@ namespace limbo {
                             v[j] = indiv.data(j);
                         // we protect against overestimation because this has some spurious effect
                         for (size_t i = 0; i < _models.size(); ++i)
-                            this->_objs[i] = std::min(_models[i].mu(v), _models[i].max_observation());
+                            this->_objs[i] = std::min(_models[i].mu(v)(0), _models[i].max_observation()(0));
                     }
 
                 protected:
                     std::vector<M> _models;
-                    std::vector<float> _objs;
                 };
 #endif
             }
@@ -93,7 +94,6 @@ namespace limbo {
                 boost::parameter::optional<tag::stopcrit>,
                 boost::parameter::optional<tag::modelfun>> bo_multi_signature;
 
-
             // clang-format off
             template <class Params,
               class A1 = boost::parameter::void_,
@@ -103,22 +103,22 @@ namespace limbo {
               class A5 = boost::parameter::void_,
               class A6 = boost::parameter::void_>
             // clang-format on
-            class BoMulti : public limbo::bayes_opt::BoBase<Params, A2, A3, A4, A5, A6> {
+            class BoMulti : public limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> {
             public:
-              struct defaults {
+                struct defaults {
 #ifdef USE_LIBCMAES
-                  typedef opt::Cmaes<Params> acquiopt_t;
+                    typedef opt::Cmaes<Params> acquiopt_t;
 #elif defined(USE_NLOPT)
-                  typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+                    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-                  typedef opt::GridSearch<Params> acquiopt_t;
+                    typedef opt::GridSearch<Params> acquiopt_t;
 #endif
-              };
-              typedef typename bo_multi_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
-              typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+                };
+                typedef typename bo_multi_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
+                typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
 
-                typedef limbo::bayes_opt::BoBase<Params, A2, A3, A4, A5, A6> base_t;
+                typedef limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
                 typedef typename base_t::model_t model_t;
                 typedef typename base_t::acquisition_function_t acquisition_function_t;
                 // point, obj, sigma
@@ -203,14 +203,15 @@ namespace limbo {
                 void _update_models()
                 {
                     size_t dim = this->_samples[0].size();
-                    std::vector<std::vector<double>> uni_obs(nb_objs());
+                    std::vector<std::vector<Eigen::VectorXd>> uni_obs(nb_objs());
                     for (size_t i = 0; i < this->_observations.size(); ++i)
                         for (int j = 0; j < this->_observations[i].size(); ++j)
-                            uni_obs[j].push_back(this->_observations[i][j]);
-                    std::vector<model_t> models(nb_objs(), model_t(dim));
+                            uni_obs[j].push_back(Eigen::VectorXd::Constant(1, this->_observations[i][j]));
+                    std::vector<model_t> models(nb_objs(), model_t(dim, 1));
                     _models = models;
-                    for (size_t i = 0; i < uni_obs.size(); ++i)
-                        _models[i].compute(this->_samples, uni_obs[i], 1e-5);
+                    for (size_t i = 0; i < uni_obs.size(); ++i) {
+                        _models[i].compute(this->_samples, uni_obs[i], Eigen::VectorXd::Constant(this->_samples.size(), 1e-5));
+                    }
                 }
             };
         }

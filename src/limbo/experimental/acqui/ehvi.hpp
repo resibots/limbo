@@ -1,5 +1,5 @@
-#ifndef LIMBO_ACQUI_EHVI_HPP
-#define LIMBO_ACQUI_EHVI_HPP
+#ifndef LIMBO_EXPERIMENTAL_ACQUI_EHVI_HPP
+#define LIMBO_EXPERIMENTAL_ACQUI_EHVI_HPP
 
 #include <vector>
 
@@ -22,11 +22,12 @@ namespace limbo {
 
             size_t dim() const { return _models[0].dim(); }
 
-            double operator()(const Eigen::VectorXd& v) const
+            template <typename AggregatorFunction = FirstElem>
+            double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun = AggregatorFunction()) const
             {
                 assert(_models.size() == 2);
                 double r[3] = {_ref_point(0), _ref_point(1), _ref_point(2)};
-                double mu[3] = {_models[0].mu(v), _models[1].mu(v), 0};
+                double mu[3] = {afun(_models[0].mu(v)), afun(_models[1].mu(v)), 0};
                 double s[3] = {_models[0].sigma(v), _models[1].sigma(v), 0};
                 double ehvi = ehvi2d(_pop, r, mu, s);
                 return ehvi;
