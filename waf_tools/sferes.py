@@ -17,7 +17,7 @@ def options(opt):
 def check_sferes(self, *k, **kw):
     if self.options.sferes:
         includes_sferes = [self.options.sferes]
-        libpath_sferes = [self.options.sferes + '/build/default/sferes']
+        libpath_sferes = [self.options.sferes + '/build/sferes']
     else:
         return
 
