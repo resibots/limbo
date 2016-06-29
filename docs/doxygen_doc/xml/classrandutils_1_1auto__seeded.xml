@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classrandutils_1_1auto__seeded" kind="class" language="C++" prot="public">
+    <compoundname>randutils::auto_seeded</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">SeedSeq</basecompoundref>
+    <includes refid="rand__utils_8hpp" local="no">limbo/tools/rand_utils.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename SeedSeq</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classrandutils_1_1auto__seeded_1a129ae83a4176c2c9d88a6244cfb0eb17" prot="private" static="no">
+        <type>std::array&lt; uint32_t, 11 &gt;</type>
+        <definition>using randutils::auto_seeded&lt; SeedSeq &gt;::default_seeds =  std::array&lt;uint32_t, 11&gt;</definition>
+        <argsstring></argsstring>
+        <name>default_seeds</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="421" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="421" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrandutils_1_1auto__seeded_1a91549adccbb3c55e5d18b69c6647856f" prot="public" static="no">
+        <type>SeedSeq</type>
+        <definition>using randutils::auto_seeded&lt; SeedSeq &gt;::base_seed_seq =  SeedSeq</definition>
+        <argsstring></argsstring>
+        <name>base_seed_seq</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="524" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="524" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classrandutils_1_1auto__seeded_1ada2ffc18c231d084ca501bf8b3302ecc" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>uint32_t</type>
+        <definition>static uint32_t randutils::auto_seeded&lt; SeedSeq &gt;::crushto32</definition>
+        <argsstring>(T value)</argsstring>
+        <name>crushto32</name>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="424" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="424" bodyend="433"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1auto__seeded_1a47e32cf6943b2e3195cb7560ebed8b98" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>uint32_t</type>
+        <definition>static uint32_t randutils::auto_seeded&lt; SeedSeq &gt;::hash</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>hash</name>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="436" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="436" bodyend="441"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1auto__seeded_1a00793d0e0395ae49536f141292970653" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr uint32_t</type>
+        <definition>static constexpr uint32_t randutils::auto_seeded&lt; SeedSeq &gt;::fnv</definition>
+        <argsstring>(uint32_t hash, const char *pos)</argsstring>
+        <name>fnv</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>hash</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="443" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="443" bodyend="446"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrandutils_1_1auto__seeded_1a57c6eaa7e86a73d94bca19ff93e14158" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>default_seeds</type>
+        <definition>default_seeds randutils::auto_seeded&lt; SeedSeq &gt;::local_entropy</definition>
+        <argsstring>()</argsstring>
+        <name>local_entropy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="448" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="448" bodyend="519"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrandutils_1_1auto__seeded_1a632a62881c4ee2492a58920beb338074" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classrandutils_1_1auto__seeded_1a91549adccbb3c55e5d18b69c6647856f" kindref="member">base_seed_seq</ref> &amp;</type>
+        <definition>const base_seed_seq&amp; randutils::auto_seeded&lt; SeedSeq &gt;::base</definition>
+        <argsstring>() const </argsstring>
+        <name>base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="526" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="526" bodyend="529"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1auto__seeded_1af77746278c7d80a81f57912d0c4431f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrandutils_1_1auto__seeded_1a91549adccbb3c55e5d18b69c6647856f" kindref="member">base_seed_seq</ref> &amp;</type>
+        <definition>base_seed_seq&amp; randutils::auto_seeded&lt; SeedSeq &gt;::base</definition>
+        <argsstring>()</argsstring>
+        <name>base</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="531" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="531" bodyend="534"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1auto__seeded_1a2d3b3febda1981eb6637f6b1ce535c87" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>randutils::auto_seeded&lt; SeedSeq &gt;::auto_seeded</definition>
+        <argsstring>(default_seeds seeds)</argsstring>
+        <name>auto_seeded</name>
+        <param>
+          <type>default_seeds</type>
+          <declname>seeds</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="536" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="536" bodyend="540"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1auto__seeded_1a57acbed4b30b44634419a24fb866cbaf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>randutils::auto_seeded&lt; SeedSeq &gt;::auto_seeded</definition>
+        <argsstring>()</argsstring>
+        <name>auto_seeded</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="542" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="542" bodyend="546"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="10">
+        <label>randutils::auto_seeded&lt; SeedSeq &gt;</label>
+        <link refid="classrandutils_1_1auto__seeded"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>SeedSeq</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="12">
+        <label>randutils::auto_seeded&lt; SeedSeq &gt;</label>
+        <link refid="classrandutils_1_1auto__seeded"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>SeedSeq</label>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="420" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="420" bodyend="547"/>
+    <listofallmembers>
+      <member refid="classrandutils_1_1auto__seeded_1a2d3b3febda1981eb6637f6b1ce535c87" prot="public" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>auto_seeded</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1a57acbed4b30b44634419a24fb866cbaf" prot="public" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>auto_seeded</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1a632a62881c4ee2492a58920beb338074" prot="public" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>base</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1af77746278c7d80a81f57912d0c4431f0" prot="public" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>base</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1a91549adccbb3c55e5d18b69c6647856f" prot="public" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>base_seed_seq</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1ada2ffc18c231d084ca501bf8b3302ecc" prot="private" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>crushto32</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1a129ae83a4176c2c9d88a6244cfb0eb17" prot="private" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>default_seeds</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1a00793d0e0395ae49536f141292970653" prot="private" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>fnv</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1a47e32cf6943b2e3195cb7560ebed8b98" prot="private" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>hash</name></member>
+      <member refid="classrandutils_1_1auto__seeded_1a57c6eaa7e86a73d94bca19ff93e14158" prot="private" virt="non-virtual"><scope>randutils::auto_seeded</scope><name>local_entropy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

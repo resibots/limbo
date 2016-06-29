@@ -113,11 +113,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html">Guides</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bo.html">Introduction to Bayesian Optimization (BO)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="limbo_concepts.html">Limbo-specific concepts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="framework.html">Using Limbo as an environment for experiments</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Parameters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-parameters">Default parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynamic-parameters">Dynamic parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arrays">Arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-sets-of-parameters">Multiple sets of parameters</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
@@ -197,6 +202,8 @@
 </pre></div>
 </div>
 <p>No need to write any parsing code!</p>
+<div class="section" id="default-parameters">
+<h2>Default parameters<a class="headerlink" href="#default-parameters" title="Permalink to this headline">¶</a></h2>
 <p>Many limbo classes provide default parameters. To use them, the parameter sub-structure has to inherit from the default structure:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
   <span class="k">struct</span> <span class="nl">acqui_ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_ucb</span> <span class="p">{</span>
@@ -204,7 +211,10 @@
 <span class="p">};</span>
 </pre></div>
 </div>
-<p>That way, the <code class="docutils literal"><span class="pre">acqui_ucb::alpha()</span></code> exists, but it has its default value.</p>
+<p>That way, the <code class="docutils literal"><span class="pre">acqui_ucb::alpha()</span></code> exists, but with the default value.</p>
+</div>
+<div class="section" id="dynamic-parameters">
+<h2>Dynamic parameters<a class="headerlink" href="#dynamic-parameters" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a <code class="docutils literal"><span class="pre">BO_DYN_PARAM</span></code> instead of a <code class="docutils literal"><span class="pre">BO_PARAM</span></code>:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
   <span class="k">struct</span> <span class="n">acqui_ucb</span> <span class="p">{</span>
@@ -221,6 +231,9 @@
 <p class="first admonition-title">Warning</p>
 <p class="last">Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead &#8211; they are equivalent to writing a constant).</p>
 </div>
+</div>
+<div class="section" id="arrays">
+<h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
 <p>Last, we can also use arrays, Eigen vectors, and strings as follows:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="n">test</span> <span class="p">{</span>
@@ -235,6 +248,9 @@
 </pre></div>
 </div>
 <p>All these macros are defined in <code class="docutils literal"><span class="pre">tools/macros.hpp</span></code>.</p>
+</div>
+<div class="section" id="multiple-sets-of-parameters">
+<h2>Multiple sets of parameters<a class="headerlink" href="#multiple-sets-of-parameters" title="Permalink to this headline">¶</a></h2>
 <p>In some rare cases, you may have 2 different instances of the same algorithm, for example, if you choose to use the same optimizer for the acquisition optimization and the GP hyperparametrs optimization.  In such cases, you may also wish to set different parameters for each instance. This can be easily accomplished in the following way:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
   <span class="c1">// All the other parameters</span>
@@ -266,6 +282,7 @@
 
 <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="n">GP_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="n">Acqui_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquiopt</span><span class="o">&lt;</span><span class="n">Acqui_opt_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
 </pre></div>
+</div>
 </div>
 </div>
 

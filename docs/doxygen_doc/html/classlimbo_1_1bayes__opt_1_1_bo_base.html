@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>Limbo: limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt; Class Template Reference</title>
+<title>Limbo: limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,19 +95,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classlimbo_1_1bayes__opt_1_1_bo_base-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt; Class Template Reference</div>  </div>
+<div class="title">limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="bo__base_8hpp_source.html">limbo/bayes_opt/bo_base.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;:</div>
+Inheritance diagram for limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classlimbo_1_1bayes__opt_1_1_bo_base.png" usemap="#limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;_map" alt=""/>
-  <map id="limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;_map" name="limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;_map">
-<area href="classlimbo_1_1bayes__opt_1_1_b_optimizer.html" alt="limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;" shape="rect" coords="0,56,420,80"/>
-<area href="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html" alt="limbo::bayes_opt::experimental::IMGPO&lt; Params, A1, A2, A3, A4, A5 &gt;" shape="rect" coords="430,56,850,80"/>
+  <img src="classlimbo_1_1bayes__opt_1_1_bo_base.png" usemap="#limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;_map" alt=""/>
+  <map id="limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;_map" name="limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;_map">
+<area href="classlimbo_1_1bayes__opt_1_1_b_optimizer.html" alt="limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;" shape="rect" coords="0,56,388,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -118,69 +117,69 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a3fb955ab00c385f5deb56f3d18211d3d"><td class="memItemLeft" align="right" valign="top">typedef Params&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3fb955ab00c385f5deb56f3d18211d3d">params_t</a></td></tr>
-<tr class="separator:a3fb955ab00c385f5deb56f3d18211d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75c1ae9e7268016c6f767c56bcede7d2"><td class="memItemLeft" align="right" valign="top">typedef class_signature::bind&lt; A1, A2, A3, A4, A5 &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a></td></tr>
-<tr class="separator:a75c1ae9e7268016c6f767c56bcede7d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4cf2b36051de6b46e75621f0b9ed642"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::initfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#acbba74470eccef31c3f2518a3c57200c">defaults::init_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#aa4cf2b36051de6b46e75621f0b9ed642">init_function_t</a></td></tr>
-<tr class="separator:aa4cf2b36051de6b46e75621f0b9ed642"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02b14991b62e0f8c9bcf834220ed62e4"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::acquifun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a4ba658f2746db27c5f3abdb24d2a2f85">defaults::acqui_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a02b14991b62e0f8c9bcf834220ed62e4">acquisition_function_t</a></td></tr>
-<tr class="separator:a02b14991b62e0f8c9bcf834220ed62e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ddc93cc023a2d7d527deb4cc750624e"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::modelfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a6f8da6a743f6a87096f8e0b9d4411503">defaults::model_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a1ddc93cc023a2d7d527deb4cc750624e">model_t</a></td></tr>
-<tr class="separator:a1ddc93cc023a2d7d527deb4cc750624e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0da8155a1a5be0999e112655ec3d610e"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::statsfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a70f64f21a85e2fa25063709abd5a2467">defaults::stat_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a0da8155a1a5be0999e112655ec3d610e">Stat</a></td></tr>
-<tr class="separator:a0da8155a1a5be0999e112655ec3d610e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9ab3f37c746dcf70ef7096a89dd1b6c"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::stopcrit, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a3cb5d1c8866494a7a641e6f3b4367d75">defaults::stop_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac9ab3f37c746dcf70ef7096a89dd1b6c">StoppingCriteria</a></td></tr>
-<tr class="separator:ac9ab3f37c746dcf70ef7096a89dd1b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad045a21de8950f3671f6b156f2271e44"><td class="memItemLeft" align="right" valign="top">typedef boost::mpl::if_&lt; boost::fusion::traits::is_sequence&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac9ab3f37c746dcf70ef7096a89dd1b6c">StoppingCriteria</a> &gt;, <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac9ab3f37c746dcf70ef7096a89dd1b6c">StoppingCriteria</a>, boost::fusion::vector&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac9ab3f37c746dcf70ef7096a89dd1b6c">StoppingCriteria</a> &gt; &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ad045a21de8950f3671f6b156f2271e44">stopping_criteria_t</a></td></tr>
-<tr class="separator:ad045a21de8950f3671f6b156f2271e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67aac9bd22ae3de346afe7ffe5b564d3"><td class="memItemLeft" align="right" valign="top">typedef boost::mpl::if_&lt; boost::fusion::traits::is_sequence&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a0da8155a1a5be0999e112655ec3d610e">Stat</a> &gt;, <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a0da8155a1a5be0999e112655ec3d610e">Stat</a>, boost::fusion::vector&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a0da8155a1a5be0999e112655ec3d610e">Stat</a> &gt; &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a67aac9bd22ae3de346afe7ffe5b564d3">stat_t</a></td></tr>
-<tr class="separator:a67aac9bd22ae3de346afe7ffe5b564d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae46fa6c574ca2a2c4368c8c9d3ff63e5"><td class="memItemLeft" align="right" valign="top">typedef Params&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ae46fa6c574ca2a2c4368c8c9d3ff63e5">params_t</a></td></tr>
+<tr class="separator:ae46fa6c574ca2a2c4368c8c9d3ff63e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3844c259aa1e59d0241f90390aa6f7fa"><td class="memItemLeft" align="right" valign="top">typedef bobase_signature::bind&lt; A1, A2, A3, A4, A5, A6 &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a></td></tr>
+<tr class="separator:a3844c259aa1e59d0241f90390aa6f7fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a734d263ce8c37ae2c5233f9e4499828c"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::initfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a675d927a474fc77608cc63c8406448f7">defaults::init_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a734d263ce8c37ae2c5233f9e4499828c">init_function_t</a></td></tr>
+<tr class="separator:a734d263ce8c37ae2c5233f9e4499828c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200a43abb6c95d2d99660898b36f2200"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::acquifun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a4cb9b80ab762b3b763fdd97e893886e5">defaults::acqui_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a200a43abb6c95d2d99660898b36f2200">acquisition_function_t</a></td></tr>
+<tr class="separator:a200a43abb6c95d2d99660898b36f2200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a151af5c7eef92a82d8813bb2e067d267"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::modelfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a07f65b6332c4f0c029069100feecb789">defaults::model_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a151af5c7eef92a82d8813bb2e067d267">model_t</a></td></tr>
+<tr class="separator:a151af5c7eef92a82d8813bb2e067d267"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adda0d6bf0fa0def996eb0af7e8a84f3f"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::statsfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#ab8f3991474723d27b9c77d0e0a76fce2">defaults::stat_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f">Stat</a></td></tr>
+<tr class="separator:adda0d6bf0fa0def996eb0af7e8a84f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06717d469296323cc277e3769b828e98"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::binding&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::stopcrit, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a66e1dbe1ccd9dbef0fdfc5c9faee9eff">defaults::stop_t</a> &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98">StoppingCriteria</a></td></tr>
+<tr class="separator:a06717d469296323cc277e3769b828e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dfcab20696e6c85665b150e9881c010"><td class="memItemLeft" align="right" valign="top">typedef boost::mpl::if_&lt; boost::fusion::traits::is_sequence&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98">StoppingCriteria</a> &gt;, <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98">StoppingCriteria</a>, boost::fusion::vector&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98">StoppingCriteria</a> &gt; &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a8dfcab20696e6c85665b150e9881c010">stopping_criteria_t</a></td></tr>
+<tr class="separator:a8dfcab20696e6c85665b150e9881c010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17d395abfdd3158f238c83764ba68fd0"><td class="memItemLeft" align="right" valign="top">typedef boost::mpl::if_&lt; boost::fusion::traits::is_sequence&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f">Stat</a> &gt;, <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f">Stat</a>, boost::fusion::vector&lt; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f">Stat</a> &gt; &gt;::type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a17d395abfdd3158f238c83764ba68fd0">stat_t</a></td></tr>
+<tr class="separator:a17d395abfdd3158f238c83764ba68fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1602cb9a6fa728d8181ee7ec080dd441"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a1602cb9a6fa728d8181ee7ec080dd441">BoBase</a> ()</td></tr>
-<tr class="memdesc:a1602cb9a6fa728d8181ee7ec080dd441"><td class="mdescLeft">&#160;</td><td class="mdescRight">default constructor  <a href="#a1602cb9a6fa728d8181ee7ec080dd441">More...</a><br /></td></tr>
-<tr class="separator:a1602cb9a6fa728d8181ee7ec080dd441"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a807db4b72b87b720303b4b56fce44899"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a807db4b72b87b720303b4b56fce44899">BoBase</a> (const <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> &amp;other)=delete</td></tr>
-<tr class="memdesc:a807db4b72b87b720303b4b56fce44899"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy is disabled (dangerous and useless)  <a href="#a807db4b72b87b720303b4b56fce44899">More...</a><br /></td></tr>
-<tr class="separator:a807db4b72b87b720303b4b56fce44899"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91b7f3f0295d4e6e2a1263f3882817bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a91b7f3f0295d4e6e2a1263f3882817bd">operator=</a> (const <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> &amp;other)=delete</td></tr>
-<tr class="memdesc:a91b7f3f0295d4e6e2a1263f3882817bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy is disabled (dangerous and useless)  <a href="#a91b7f3f0295d4e6e2a1263f3882817bd">More...</a><br /></td></tr>
-<tr class="separator:a91b7f3f0295d4e6e2a1263f3882817bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a124b963cab48ee23698b3cbd2dd1e496"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a124b963cab48ee23698b3cbd2dd1e496">stats_enabled</a> () const </td></tr>
-<tr class="memdesc:a124b963cab48ee23698b3cbd2dd1e496"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if the statitics are enabled (they can be disabled to avoid dumping data, e.g. for unit tests)  <a href="#a124b963cab48ee23698b3cbd2dd1e496">More...</a><br /></td></tr>
-<tr class="separator:a124b963cab48ee23698b3cbd2dd1e496"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f589de569a67fe5a645ee0b7fe1173c"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a5f589de569a67fe5a645ee0b7fe1173c">res_dir</a> () const </td></tr>
-<tr class="memdesc:a5f589de569a67fe5a645ee0b7fe1173c"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the name of the directory in which results (statistics) are written  <a href="#a5f589de569a67fe5a645ee0b7fe1173c">More...</a><br /></td></tr>
-<tr class="separator:a5f589de569a67fe5a645ee0b7fe1173c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c5e2b7c9aaae38770505011dfcb61ec"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a1c5e2b7c9aaae38770505011dfcb61ec">observations</a> () const </td></tr>
-<tr class="memdesc:a1c5e2b7c9aaae38770505011dfcb61ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the vector of points of observations (observations can be multi-dimensional, hence the VectorXd) &ndash; f(x)  <a href="#a1c5e2b7c9aaae38770505011dfcb61ec">More...</a><br /></td></tr>
-<tr class="separator:a1c5e2b7c9aaae38770505011dfcb61ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a68d0a9fce39ae5575c63a57a549f58"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3a68d0a9fce39ae5575c63a57a549f58">samples</a> () const </td></tr>
-<tr class="memdesc:a3a68d0a9fce39ae5575c63a57a549f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the list of the points that have been evaluated so far (x)  <a href="#a3a68d0a9fce39ae5575c63a57a549f58">More...</a><br /></td></tr>
-<tr class="separator:a3a68d0a9fce39ae5575c63a57a549f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa85b7824943ae2ee35b50b446f6740c6"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#aa85b7824943ae2ee35b50b446f6740c6">bl_samples</a> () const </td></tr>
-<tr class="memdesc:aa85b7824943ae2ee35b50b446f6740c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the list of blacklisted points  <a href="#aa85b7824943ae2ee35b50b446f6740c6">More...</a><br /></td></tr>
-<tr class="separator:aa85b7824943ae2ee35b50b446f6740c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbd79a26fafeb6ea8f09df782972caa0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#abbd79a26fafeb6ea8f09df782972caa0">current_iteration</a> () const </td></tr>
-<tr class="memdesc:abbd79a26fafeb6ea8f09df782972caa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the current iteration number  <a href="#abbd79a26fafeb6ea8f09df782972caa0">More...</a><br /></td></tr>
-<tr class="separator:abbd79a26fafeb6ea8f09df782972caa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a923fec38c8f1c473fdd9cf35b395b471"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a923fec38c8f1c473fdd9cf35b395b471">total_iterations</a> () const </td></tr>
-<tr class="separator:a923fec38c8f1c473fdd9cf35b395b471"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77482415d06619f49e6b0300fc950f96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a77482415d06619f49e6b0300fc950f96">add_new_sample</a> (const Eigen::VectorXd &amp;s, const Eigen::VectorXd &amp;v)</td></tr>
-<tr class="separator:a77482415d06619f49e6b0300fc950f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7197b0c20d5644ec44070432555eb49b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a7197b0c20d5644ec44070432555eb49b">add_new_bl_sample</a> (const Eigen::VectorXd &amp;s)</td></tr>
-<tr class="memdesc:a7197b0c20d5644ec44070432555eb49b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new blacklisted sample.  <a href="#a7197b0c20d5644ec44070432555eb49b">More...</a><br /></td></tr>
-<tr class="separator:a7197b0c20d5644ec44070432555eb49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49f332ebc6e526169c619e6bc4430116"><td class="memTemplParams" colspan="2">template&lt;typename StateFunction &gt; </td></tr>
-<tr class="memitem:a49f332ebc6e526169c619e6bc4430116"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a49f332ebc6e526169c619e6bc4430116">eval_and_add</a> (const StateFunction &amp;seval, const Eigen::VectorXd &amp;sample)</td></tr>
-<tr class="memdesc:a49f332ebc6e526169c619e6bc4430116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate a sample and add the result to the 'database' (sample / observations vectors) &ndash; it does not update the model.  <a href="#a49f332ebc6e526169c619e6bc4430116">More...</a><br /></td></tr>
-<tr class="separator:a49f332ebc6e526169c619e6bc4430116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad361278c23693c4220eaa9a9de5d3333"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ad361278c23693c4220eaa9a9de5d3333">BoBase</a> ()</td></tr>
+<tr class="memdesc:ad361278c23693c4220eaa9a9de5d3333"><td class="mdescLeft">&#160;</td><td class="mdescRight">default constructor  <a href="#ad361278c23693c4220eaa9a9de5d3333">More...</a><br /></td></tr>
+<tr class="separator:ad361278c23693c4220eaa9a9de5d3333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a50eebb8a6efd528582ea871a0879a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a1a50eebb8a6efd528582ea871a0879a0">BoBase</a> (const <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> &amp;other)=delete</td></tr>
+<tr class="memdesc:a1a50eebb8a6efd528582ea871a0879a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy is disabled (dangerous and useless)  <a href="#a1a50eebb8a6efd528582ea871a0879a0">More...</a><br /></td></tr>
+<tr class="separator:a1a50eebb8a6efd528582ea871a0879a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69628ced9d71209a59dcdfb7f5637265"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a69628ced9d71209a59dcdfb7f5637265">operator=</a> (const <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> &amp;other)=delete</td></tr>
+<tr class="memdesc:a69628ced9d71209a59dcdfb7f5637265"><td class="mdescLeft">&#160;</td><td class="mdescRight">copy is disabled (dangerous and useless)  <a href="#a69628ced9d71209a59dcdfb7f5637265">More...</a><br /></td></tr>
+<tr class="separator:a69628ced9d71209a59dcdfb7f5637265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d94db5c40b35bec292aebfd19b8fb3d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a4d94db5c40b35bec292aebfd19b8fb3d">stats_enabled</a> () const </td></tr>
+<tr class="memdesc:a4d94db5c40b35bec292aebfd19b8fb3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">return true if the statitics are enabled (they can be disabled to avoid dumping data, e.g. for unit tests)  <a href="#a4d94db5c40b35bec292aebfd19b8fb3d">More...</a><br /></td></tr>
+<tr class="separator:a4d94db5c40b35bec292aebfd19b8fb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c87b7618144f99027c294db3eb803f6"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a4c87b7618144f99027c294db3eb803f6">res_dir</a> () const </td></tr>
+<tr class="memdesc:a4c87b7618144f99027c294db3eb803f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the name of the directory in which results (statistics) are written  <a href="#a4c87b7618144f99027c294db3eb803f6">More...</a><br /></td></tr>
+<tr class="separator:a4c87b7618144f99027c294db3eb803f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a855dc5de1d0732a25f4c9730ac50d0bd"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a855dc5de1d0732a25f4c9730ac50d0bd">observations</a> () const </td></tr>
+<tr class="memdesc:a855dc5de1d0732a25f4c9730ac50d0bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the vector of points of observations (observations can be multi-dimensional, hence the VectorXd) &ndash; f(x)  <a href="#a855dc5de1d0732a25f4c9730ac50d0bd">More...</a><br /></td></tr>
+<tr class="separator:a855dc5de1d0732a25f4c9730ac50d0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3ba0dba1418df0ed8e79d4dd3cc907a"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ad3ba0dba1418df0ed8e79d4dd3cc907a">samples</a> () const </td></tr>
+<tr class="memdesc:ad3ba0dba1418df0ed8e79d4dd3cc907a"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the list of the points that have been evaluated so far (x)  <a href="#ad3ba0dba1418df0ed8e79d4dd3cc907a">More...</a><br /></td></tr>
+<tr class="separator:ad3ba0dba1418df0ed8e79d4dd3cc907a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa84e215cffa97a4e287aad3690f89635"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#aa84e215cffa97a4e287aad3690f89635">bl_samples</a> () const </td></tr>
+<tr class="memdesc:aa84e215cffa97a4e287aad3690f89635"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the list of blacklisted points  <a href="#aa84e215cffa97a4e287aad3690f89635">More...</a><br /></td></tr>
+<tr class="separator:aa84e215cffa97a4e287aad3690f89635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3d643d5a668edf22ad053bfc54ea090"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac3d643d5a668edf22ad053bfc54ea090">current_iteration</a> () const </td></tr>
+<tr class="memdesc:ac3d643d5a668edf22ad053bfc54ea090"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the current iteration number  <a href="#ac3d643d5a668edf22ad053bfc54ea090">More...</a><br /></td></tr>
+<tr class="separator:ac3d643d5a668edf22ad053bfc54ea090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5470e106c4584a30636cafb6fbad6d73"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a5470e106c4584a30636cafb6fbad6d73">total_iterations</a> () const </td></tr>
+<tr class="separator:a5470e106c4584a30636cafb6fbad6d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac533d6397b0c0fa5ba0a4d03e0545fa2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac533d6397b0c0fa5ba0a4d03e0545fa2">add_new_sample</a> (const Eigen::VectorXd &amp;s, const Eigen::VectorXd &amp;v)</td></tr>
+<tr class="separator:ac533d6397b0c0fa5ba0a4d03e0545fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8694d4bbc5c373d067790ec31fb42a44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a8694d4bbc5c373d067790ec31fb42a44">add_new_bl_sample</a> (const Eigen::VectorXd &amp;s)</td></tr>
+<tr class="memdesc:a8694d4bbc5c373d067790ec31fb42a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new blacklisted sample.  <a href="#a8694d4bbc5c373d067790ec31fb42a44">More...</a><br /></td></tr>
+<tr class="separator:a8694d4bbc5c373d067790ec31fb42a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a387fba7bf70aa9410e1c04f035694f34"><td class="memTemplParams" colspan="2">template&lt;typename StateFunction &gt; </td></tr>
+<tr class="memitem:a387fba7bf70aa9410e1c04f035694f34"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a387fba7bf70aa9410e1c04f035694f34">eval_and_add</a> (const StateFunction &amp;seval, const Eigen::VectorXd &amp;sample)</td></tr>
+<tr class="memdesc:a387fba7bf70aa9410e1c04f035694f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate a sample and add the result to the 'database' (sample / observations vectors) &ndash; it does not update the model.  <a href="#a387fba7bf70aa9410e1c04f035694f34">More...</a><br /></td></tr>
+<tr class="separator:a387fba7bf70aa9410e1c04f035694f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt;<br />
-class limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;</h3>
+<div class="textblock"><h3>template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt;<br />
+class limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</h3>
 
 <pre class="fragment">embed:rst
 
@@ -218,126 +217,126 @@ This class is templated by several types with default values (thanks to boost::p
 <li><code><a class="el" href="classlimbo_1_1bayes__opt_1_1_b_optimizer.html">bayes_opt::BOptimizer</a>&lt;Params, modelfun&lt;GP_t&gt;, acquifun&lt;Acqui_t&gt;&gt; opt;</code> </li>
 </ul>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a class="anchor" id="a02b14991b62e0f8c9bcf834220ed62e4"></a>
+<a class="anchor" id="a200a43abb6c95d2d99660898b36f2200"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::acquifun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a4ba658f2746db27c5f3abdb24d2a2f85">defaults::acqui_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a02b14991b62e0f8c9bcf834220ed62e4">acquisition_function_t</a></td>
+          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::acquifun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a4cb9b80ab762b3b763fdd97e893886e5">defaults::acqui_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a200a43abb6c95d2d99660898b36f2200">acquisition_function_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a75c1ae9e7268016c6f767c56bcede7d2"></a>
+<a class="anchor" id="a3844c259aa1e59d0241f90390aa6f7fa"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef class_signature::bind&lt;A1, A2, A3, A4, A5&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a></td>
+          <td class="memname">typedef bobase_signature::bind&lt;A1, A2, A3, A4, A5, A6&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="aa4cf2b36051de6b46e75621f0b9ed642"></a>
+<a class="anchor" id="a734d263ce8c37ae2c5233f9e4499828c"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::initfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#acbba74470eccef31c3f2518a3c57200c">defaults::init_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#aa4cf2b36051de6b46e75621f0b9ed642">init_function_t</a></td>
+          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::initfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a675d927a474fc77608cc63c8406448f7">defaults::init_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a734d263ce8c37ae2c5233f9e4499828c">init_function_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a1ddc93cc023a2d7d527deb4cc750624e"></a>
+<a class="anchor" id="a151af5c7eef92a82d8813bb2e067d267"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::modelfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a6f8da6a743f6a87096f8e0b9d4411503">defaults::model_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a1ddc93cc023a2d7d527deb4cc750624e">model_t</a></td>
+          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::modelfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a07f65b6332c4f0c029069100feecb789">defaults::model_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a151af5c7eef92a82d8813bb2e067d267">model_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a3fb955ab00c385f5deb56f3d18211d3d"></a>
+<a class="anchor" id="ae46fa6c574ca2a2c4368c8c9d3ff63e5"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef Params <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3fb955ab00c385f5deb56f3d18211d3d">params_t</a></td>
+          <td class="memname">typedef Params <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ae46fa6c574ca2a2c4368c8c9d3ff63e5">params_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a0da8155a1a5be0999e112655ec3d610e"></a>
+<a class="anchor" id="adda0d6bf0fa0def996eb0af7e8a84f3f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::statsfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a70f64f21a85e2fa25063709abd5a2467">defaults::stat_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a0da8155a1a5be0999e112655ec3d610e">Stat</a></td>
+          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::statsfun, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#ab8f3991474723d27b9c77d0e0a76fce2">defaults::stat_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f">Stat</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a67aac9bd22ae3de346afe7ffe5b564d3"></a>
+<a class="anchor" id="a17d395abfdd3158f238c83764ba68fd0"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::mpl::if_&lt;boost::fusion::traits::is_sequence&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a0da8155a1a5be0999e112655ec3d610e">Stat</a>&gt;, <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a0da8155a1a5be0999e112655ec3d610e">Stat</a>, boost::fusion::vector&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a0da8155a1a5be0999e112655ec3d610e">Stat</a>&gt; &gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a67aac9bd22ae3de346afe7ffe5b564d3">stat_t</a></td>
+          <td class="memname">typedef boost::mpl::if_&lt;boost::fusion::traits::is_sequence&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f">Stat</a>&gt;, <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f">Stat</a>, boost::fusion::vector&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f">Stat</a>&gt; &gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a17d395abfdd3158f238c83764ba68fd0">stat_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="ad045a21de8950f3671f6b156f2271e44"></a>
+<a class="anchor" id="a8dfcab20696e6c85665b150e9881c010"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::mpl::if_&lt;boost::fusion::traits::is_sequence&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac9ab3f37c746dcf70ef7096a89dd1b6c">StoppingCriteria</a>&gt;, <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac9ab3f37c746dcf70ef7096a89dd1b6c">StoppingCriteria</a>, boost::fusion::vector&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac9ab3f37c746dcf70ef7096a89dd1b6c">StoppingCriteria</a>&gt; &gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ad045a21de8950f3671f6b156f2271e44">stopping_criteria_t</a></td>
+          <td class="memname">typedef boost::mpl::if_&lt;boost::fusion::traits::is_sequence&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98">StoppingCriteria</a>&gt;, <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98">StoppingCriteria</a>, boost::fusion::vector&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98">StoppingCriteria</a>&gt; &gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a8dfcab20696e6c85665b150e9881c010">stopping_criteria_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="ac9ab3f37c746dcf70ef7096a89dd1b6c"></a>
+<a class="anchor" id="a06717d469296323cc277e3769b828e98"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a75c1ae9e7268016c6f767c56bcede7d2">args</a>, tag::stopcrit, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a3cb5d1c8866494a7a641e6f3b4367d75">defaults::stop_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac9ab3f37c746dcf70ef7096a89dd1b6c">StoppingCriteria</a></td>
+          <td class="memname">typedef boost::parameter::binding&lt;<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a3844c259aa1e59d0241f90390aa6f7fa">args</a>, tag::stopcrit, typename <a class="el" href="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a66e1dbe1ccd9dbef0fdfc5c9faee9eff">defaults::stop_t</a>&gt;::type <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98">StoppingCriteria</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -345,17 +344,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a1602cb9a6fa728d8181ee7ec080dd441"></a>
+<a class="anchor" id="ad361278c23693c4220eaa9a9de5d3333"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> </td>
+          <td class="memname"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -372,19 +371,19 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a807db4b72b87b720303b4b56fce44899"></a>
+<a class="anchor" id="a1a50eebb8a6efd528582ea871a0879a0"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> </td>
+          <td class="memname"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::<a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -401,17 +400,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a7197b0c20d5644ec44070432555eb49b"></a>
+<a class="anchor" id="a8694d4bbc5c373d067790ec31fb42a44"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::add_new_bl_sample </td>
+          <td class="memname">void <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::add_new_bl_sample </td>
           <td>(</td>
           <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
           <td class="paramname"><em>s</em></td><td>)</td>
@@ -429,17 +428,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a77482415d06619f49e6b0300fc950f96"></a>
+<a class="anchor" id="ac533d6397b0c0fa5ba0a4d03e0545fa2"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::add_new_sample </td>
+          <td class="memname">void <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::add_new_sample </td>
           <td>(</td>
           <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
           <td class="paramname"><em>s</em>, </td>
@@ -469,17 +468,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="aa85b7824943ae2ee35b50b446f6740c6"></a>
+<a class="anchor" id="aa84e215cffa97a4e287aad3690f89635"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::vector&lt;Eigen::VectorXd&gt;&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::bl_samples </td>
+          <td class="memname">const std::vector&lt;Eigen::VectorXd&gt;&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::bl_samples </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -496,17 +495,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="abbd79a26fafeb6ea8f09df782972caa0"></a>
+<a class="anchor" id="ac3d643d5a668edf22ad053bfc54ea090"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::current_iteration </td>
+          <td class="memname">int <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::current_iteration </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -523,11 +522,11 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a49f332ebc6e526169c619e6bc4430116"></a>
+<a class="anchor" id="a387fba7bf70aa9410e1c04f035694f34"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <div class="memtemplate">
 template&lt;typename StateFunction &gt; </div>
 <table class="mlabels">
@@ -535,7 +534,7 @@ template&lt;typename StateFunction &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::eval_and_add </td>
+          <td class="memname">bool <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::eval_and_add </td>
           <td>(</td>
           <td class="paramtype">const StateFunction &amp;&#160;</td>
           <td class="paramname"><em>seval</em>, </td>
@@ -563,17 +562,17 @@ template&lt;typename StateFunction &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a1c5e2b7c9aaae38770505011dfcb61ec"></a>
+<a class="anchor" id="a855dc5de1d0732a25f4c9730ac50d0bd"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::vector&lt;Eigen::VectorXd&gt;&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::observations </td>
+          <td class="memname">const std::vector&lt;Eigen::VectorXd&gt;&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::observations </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -590,19 +589,19 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a91b7f3f0295d4e6e2a1263f3882817bd"></a>
+<a class="anchor" id="a69628ced9d71209a59dcdfb7f5637265"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a>&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a>&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -618,17 +617,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a5f589de569a67fe5a645ee0b7fe1173c"></a>
+<a class="anchor" id="a4c87b7618144f99027c294db3eb803f6"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::string&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::res_dir </td>
+          <td class="memname">const std::string&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::res_dir </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -645,17 +644,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a3a68d0a9fce39ae5575c63a57a549f58"></a>
+<a class="anchor" id="ad3ba0dba1418df0ed8e79d4dd3cc907a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const std::vector&lt;Eigen::VectorXd&gt;&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::samples </td>
+          <td class="memname">const std::vector&lt;Eigen::VectorXd&gt;&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::samples </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -672,17 +671,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a124b963cab48ee23698b3cbd2dd1e496"></a>
+<a class="anchor" id="a4d94db5c40b35bec292aebfd19b8fb3d"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::stats_enabled </td>
+          <td class="memname">bool <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::stats_enabled </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -699,17 +698,17 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a923fec38c8f1c473fdd9cf35b395b471"></a>
+<a class="anchor" id="a5470e106c4584a30636cafb6fbad6d73"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_&gt; </div>
+template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5 &gt;::total_iterations </td>
+          <td class="memname">int <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::total_iterations </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -730,7 +729,7 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 3 2016 13:09:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 29 2016 14:22:06 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

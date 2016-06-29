@@ -8,18 +8,18 @@ var searchData=
   ['chained_3c_20params_2c_20optimizer_20_3e',['Chained&lt; Params, Optimizer &gt;',['../structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_01_4.html',1,'limbo::opt']]],
   ['chained_3c_20params_2c_20optimizer_2c_20optimizers_2e_2e_2e_3e',['Chained&lt; Params, Optimizer, Optimizers...&gt;',['../structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_00_01_optimizers_8_8_8_4.html',1,'limbo::opt']]],
   ['chained_3c_20params_2c_20optimizers_2e_2e_2e_3e',['Chained&lt; Params, Optimizers...&gt;',['../structlimbo_1_1opt_1_1_chained.html',1,'limbo::opt']]],
-  ['class_5fsignature',['class_signature',['../namespacelimbo_1_1bayes__opt.html#ac9ebb02d293842625e1ee8bac9710989',1,'limbo::bayes_opt']]],
+  ['choose',['choose',['../classrandutils_1_1random__generator.html#a29f305cbca6d418d4c2ddbf60953dc42',1,'randutils::random_generator::choose(Iter first, Iter last)'],['../classrandutils_1_1random__generator.html#a0eafdcc64b6d0967d9668a0775628af6',1,'randutils::random_generator::choose(Range &amp;&amp;range) -&gt; decltype(std::begin(range))']]],
   ['cmaes',['Cmaes',['../structlimbo_1_1opt_1_1_cmaes.html',1,'limbo::opt']]],
   ['cmaes_2ehpp',['cmaes.hpp',['../cmaes_8hpp.html',1,'']]],
   ['comp_5ffronts',['comp_fronts',['../structpareto_1_1impl_1_1comp__fronts.html',1,'pareto::impl']]],
   ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html',1,'pareto::impl']]],
   ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html#a0141f68fca61380d69773bc6225622e3',1,'pareto::impl::compare_objs_lex']]],
-  ['compute',['compute',['../classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81f8ca3a7f114b015575ae7c64183ead',1,'limbo::experimental::model::GPParego::compute()'],['../classlimbo_1_1model_1_1_g_p.html#a3597b1c02b61d0ea1301808b08d8abb7',1,'limbo::model::GP::compute()']]],
+  ['compute',['compute',['../classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a7a7998bd37de03f046b737113b952b65',1,'limbo::experimental::model::GPParego::compute()'],['../classlimbo_1_1model_1_1_g_p.html#a3597b1c02b61d0ea1301808b08d8abb7',1,'limbo::model::GP::compute()']]],
   ['console_5fsummary_2ehpp',['console_summary.hpp',['../console__summary_8hpp.html',1,'']]],
   ['consolesummary',['ConsoleSummary',['../structlimbo_1_1stat_1_1_console_summary.html',1,'limbo::stat']]],
-  ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html',1,'limbo::mean']]],
   ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html#a263296f6d6b10aa360727137588735f7',1,'limbo::mean::Constant']]],
+  ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html',1,'limbo::mean']]],
   ['constant_2ehpp',['constant.hpp',['../constant_8hpp.html',1,'']]],
   ['convert_5fvector',['convert_vector',['../namespacelimbo_1_1tools_1_1par.html#ae84275467a83e81f3201ce512c178c9c',1,'limbo::tools::par']]],
-  ['current_5fiteration',['current_iteration',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#abbd79a26fafeb6ea8f09df782972caa0',1,'limbo::bayes_opt::BoBase']]]
+  ['current_5fiteration',['current_iteration',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#ac3d643d5a668edf22ad053bfc54ea090',1,'limbo::bayes_opt::BoBase']]]
 ];

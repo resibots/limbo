@@ -19,290 +19,115 @@
     <includes refid="aggregated__observations_8hpp" local="no">limbo/stat/aggregated_observations.hpp</includes>
     <includes refid="console__summary_8hpp" local="no">limbo/stat/console_summary.hpp</includes>
     <includes refid="sys_8hpp" local="no">limbo/tools/sys.hpp</includes>
-    <includes refid="squared__exp__ard_8hpp" local="no">limbo/kernel/squared_exp_ard.hpp</includes>
-    <includes refid="gp__ucb_8hpp" local="no">limbo/acqui/gp_ucb.hpp</includes>
+    <includes refid="exp_8hpp" local="no">limbo/kernel/exp.hpp</includes>
+    <includes refid="ucb_8hpp" local="no">limbo/acqui/ucb.hpp</includes>
     <includes refid="data_8hpp" local="no">limbo/mean/data.hpp</includes>
-    <includes refid="cmaes_8hpp" local="no">limbo/opt/cmaes.hpp</includes>
     <includes refid="model_2gp_8hpp" local="no">limbo/model/gp.hpp</includes>
-    <includes refid="kernel__lf__opt_8hpp" local="no">limbo/model/gp/kernel_lf_opt.hpp</includes>
     <includes refid="random__sampling_8hpp" local="no">limbo/init/random_sampling.hpp</includes>
+    <includes refid="math_8hpp" local="no">limbo/tools/math.hpp</includes>
     <includedby refid="boptimizer_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</includedby>
     <includedby refid="bo__multi_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</includedby>
     <includedby refid="imgpo_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</includedby>
     <includedby refid="parego_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</includedby>
     <incdepgraph>
-      <node id="138">
+      <node id="135">
         <label>list</label>
       </node>
-      <node id="127">
-        <label>libcmaes/cmaes.h</label>
-      </node>
-      <node id="105">
+      <node id="110">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="130">
-        <label>Eigen/Cholesky</label>
-      </node>
-      <node id="96">
-        <label>limits</label>
-      </node>
-      <node id="119">
-        <label>limbo/acqui/gp_ucb.hpp</label>
-        <link refid="gp__ucb_8hpp"/>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
-      </node>
-      <node id="131">
-        <label>Eigen/LU</label>
-      </node>
-      <node id="143">
-        <label>limbo/opt/rprop.hpp</label>
-        <link refid="rprop_8hpp"/>
-        <childnode refid="123" relation="include">
-        </childnode>
-        <childnode refid="144" relation="include">
-        </childnode>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="145" relation="include">
-        </childnode>
-        <childnode refid="124" relation="include">
-        </childnode>
-      </node>
-      <node id="139">
-        <label>stdlib.h</label>
-      </node>
-      <node id="124">
-        <label>limbo/opt/optimizer.hpp</label>
-        <link refid="optimizer_8hpp"/>
-        <childnode refid="125" relation="include">
-        </childnode>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="126" relation="include">
-        </childnode>
-      </node>
-      <node id="146">
-        <label>limbo/init/random_sampling.hpp</label>
-        <link refid="random__sampling_8hpp"/>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="135" relation="include">
-        </childnode>
-      </node>
-      <node id="137">
-        <label>cmath</label>
-      </node>
-      <node id="129">
-        <label>cassert</label>
-      </node>
-      <node id="103">
-        <label>Eigen/Core</label>
-      </node>
-      <node id="111">
-        <label>string</label>
-      </node>
-      <node id="122">
-        <label>limbo/tools/parallel.hpp</label>
-        <link refid="parallel_8hpp"/>
-        <childnode refid="94" relation="include">
-        </childnode>
-        <childnode refid="123" relation="include">
-        </childnode>
-      </node>
-      <node id="98">
-        <label>boost/parameter.hpp</label>
-      </node>
-      <node id="97">
-        <label>exception</label>
-      </node>
-      <node id="110">
-        <label>fstream</label>
-      </node>
-      <node id="115">
-        <label>limbo/tools/sys.hpp</label>
-        <link refid="sys_8hpp"/>
-        <childnode refid="116" relation="include">
-        </childnode>
-        <childnode refid="117" relation="include">
-        </childnode>
-        <childnode refid="111" relation="include">
-        </childnode>
-      </node>
-      <node id="135">
-        <label>limbo/tools/random_generator.hpp</label>
-        <link refid="random__generator_8hpp"/>
-        <childnode refid="136" relation="include">
-        </childnode>
-        <childnode refid="137" relation="include">
-        </childnode>
-        <childnode refid="116" relation="include">
-        </childnode>
-        <childnode refid="138" relation="include">
-        </childnode>
-        <childnode refid="139" relation="include">
-        </childnode>
-        <childnode refid="140" relation="include">
-        </childnode>
-        <childnode refid="141" relation="include">
-        </childnode>
-        <childnode refid="142" relation="include">
-        </childnode>
-      </node>
-      <node id="120">
-        <label>limbo/mean/data.hpp</label>
-        <link refid="data_8hpp"/>
-        <childnode refid="103" relation="include">
-        </childnode>
-      </node>
-      <node id="101">
-        <label>boost/fusion/include/for_each.hpp</label>
-      </node>
-      <node id="140">
-        <label>random</label>
-      </node>
-      <node id="134">
-        <label>limbo/opt/parallel_repeater.hpp</label>
-        <link refid="parallel__repeater_8hpp"/>
-        <childnode refid="123" relation="include">
-        </childnode>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="122" relation="include">
-        </childnode>
-        <childnode refid="135" relation="include">
-        </childnode>
-        <childnode refid="124" relation="include">
-        </childnode>
-      </node>
-      <node id="125">
-        <label>tuple</label>
-      </node>
-      <node id="118">
-        <label>limbo/kernel/squared_exp_ard.hpp</label>
-        <link refid="squared__exp__ard_8hpp"/>
-        <childnode refid="103" relation="include">
-        </childnode>
-      </node>
-      <node id="116">
-        <label>ctime</label>
-      </node>
-      <node id="133">
-        <label>limbo/model/gp/kernel_lf_opt.hpp</label>
-        <link refid="kernel__lf__opt_8hpp"/>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="134" relation="include">
-        </childnode>
-        <childnode refid="143" relation="include">
-        </childnode>
-        <childnode refid="135" relation="include">
-        </childnode>
-      </node>
-      <node id="117">
-        <label>unistd.h</label>
-      </node>
-      <node id="94">
-        <label>vector</label>
-      </node>
-      <node id="102">
-        <label>boost/filesystem.hpp</label>
-      </node>
-      <node id="141">
-        <label>utility</label>
-      </node>
-      <node id="113">
-        <label>limbo/stat/aggregated_observations.hpp</label>
-        <link refid="aggregated__observations_8hpp"/>
-        <childnode refid="109" relation="include">
-        </childnode>
-      </node>
-      <node id="107">
-        <label>limbo/stop/max_iterations.hpp</label>
-        <link refid="max__iterations_8hpp"/>
-        <childnode refid="104" relation="include">
-        </childnode>
-      </node>
-      <node id="108">
-        <label>limbo/stat/samples.hpp</label>
-        <link refid="samples_8hpp"/>
-        <childnode refid="109" relation="include">
-        </childnode>
-      </node>
-      <node id="136">
-        <label>cstdlib</label>
-      </node>
-      <node id="95">
-        <label>iostream</label>
+      <node id="144">
+        <label>functional</label>
       </node>
       <node id="128">
-        <label>limbo/model/gp.hpp</label>
-        <link refid="model_2gp_8hpp"/>
-        <childnode refid="129" relation="include">
+        <label>Eigen/Cholesky</label>
+      </node>
+      <node id="101">
+        <label>limits</label>
+      </node>
+      <node id="129">
+        <label>Eigen/LU</label>
+      </node>
+      <node id="147">
+        <label>iterator</label>
+      </node>
+      <node id="124">
+        <label>limbo/acqui/ucb.hpp</label>
+        <link refid="ucb_8hpp"/>
+        <childnode refid="108" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
+      </node>
+      <node id="142">
+        <label>cstdint</label>
+      </node>
+      <node id="136">
+        <label>stdlib.h</label>
+      </node>
+      <node id="131">
+        <label>limbo/init/random_sampling.hpp</label>
+        <link refid="random__sampling_8hpp"/>
+        <childnode refid="108" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
-        </childnode>
-        <childnode refid="130" relation="include">
-        </childnode>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="131" relation="include">
+        <childnode refid="109" relation="include">
         </childnode>
         <childnode refid="132" relation="include">
         </childnode>
       </node>
-      <node id="100">
-        <label>boost/fusion/include/accumulate.hpp</label>
+      <node id="134">
+        <label>cmath</label>
       </node>
-      <node id="132">
-        <label>limbo/model/gp/no_lf_opt.hpp</label>
-        <link refid="no__lf__opt_8hpp"/>
+      <node id="127">
+        <label>cassert</label>
       </node>
-      <node id="109">
-        <label>limbo/stat/stat_base.hpp</label>
-        <link refid="stat__base_8hpp"/>
-        <childnode refid="110" relation="include">
+      <node id="108">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="116">
+        <label>string</label>
+      </node>
+      <node id="103">
+        <label>boost/parameter.hpp</label>
+      </node>
+      <node id="102">
+        <label>exception</label>
+      </node>
+      <node id="115">
+        <label>fstream</label>
+      </node>
+      <node id="123">
+        <label>limbo/kernel/exp.hpp</label>
+        <link refid="exp_8hpp"/>
+        <childnode refid="108" relation="include">
         </childnode>
-        <childnode refid="111" relation="include">
-        </childnode>
-        <childnode refid="112" relation="include">
-        </childnode>
-      </node>
-      <node id="142">
-        <label>mutex</label>
-      </node>
-      <node id="114">
-        <label>limbo/stat/console_summary.hpp</label>
-        <link refid="console__summary_8hpp"/>
         <childnode refid="109" relation="include">
         </childnode>
       </node>
-      <node id="99">
-        <label>boost/fusion/include/vector.hpp</label>
+      <node id="120">
+        <label>limbo/tools/sys.hpp</label>
+        <link refid="sys_8hpp"/>
+        <childnode refid="121" relation="include">
+        </childnode>
+        <childnode refid="122" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
       </node>
-      <node id="126">
-        <label>boost/optional.hpp</label>
-      </node>
-      <node id="145">
-        <label>limbo/tools/math.hpp</label>
-        <link refid="math_8hpp"/>
+      <node id="132">
+        <label>limbo/tools/random_generator.hpp</label>
+        <link refid="random__generator_8hpp"/>
+        <childnode refid="133" relation="include">
+        </childnode>
+        <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
+        </childnode>
         <childnode refid="136" relation="include">
         </childnode>
         <childnode refid="137" relation="include">
-        </childnode>
-        <childnode refid="116" relation="include">
         </childnode>
         <childnode refid="138" relation="include">
         </childnode>
@@ -310,31 +135,184 @@
         </childnode>
         <childnode refid="140" relation="include">
         </childnode>
+      </node>
+      <node id="125">
+        <label>limbo/mean/data.hpp</label>
+        <link refid="data_8hpp"/>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>boost/fusion/include/for_each.hpp</label>
+      </node>
+      <node id="137">
+        <label>random</label>
+      </node>
+      <node id="121">
+        <label>ctime</label>
+      </node>
+      <node id="122">
+        <label>unistd.h</label>
+      </node>
+      <node id="99">
+        <label>vector</label>
+      </node>
+      <node id="107">
+        <label>boost/filesystem.hpp</label>
+      </node>
+      <node id="138">
+        <label>utility</label>
+      </node>
+      <node id="143">
+        <label>array</label>
+      </node>
+      <node id="118">
+        <label>limbo/stat/aggregated_observations.hpp</label>
+        <link refid="aggregated__observations_8hpp"/>
+        <childnode refid="114" relation="include">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>limbo/stop/max_iterations.hpp</label>
+        <link refid="max__iterations_8hpp"/>
+        <childnode refid="109" relation="include">
+        </childnode>
+      </node>
+      <node id="113">
+        <label>limbo/stat/samples.hpp</label>
+        <link refid="samples_8hpp"/>
+        <childnode refid="114" relation="include">
+        </childnode>
+      </node>
+      <node id="140">
+        <label>limbo/tools/rand_utils.hpp</label>
+        <link refid="rand__utils_8hpp"/>
         <childnode refid="141" relation="include">
         </childnode>
         <childnode refid="142" relation="include">
         </childnode>
+        <childnode refid="133" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="143" relation="include">
+        </childnode>
+        <childnode refid="144" relation="include">
+        </childnode>
+        <childnode refid="145" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+        <childnode refid="146" relation="include">
+        </childnode>
+        <childnode refid="147" relation="include">
+        </childnode>
+        <childnode refid="148" relation="include">
+        </childnode>
+        <childnode refid="149" relation="include">
+        </childnode>
+        <childnode refid="150" relation="include">
+        </childnode>
       </node>
-      <node id="123">
+      <node id="133">
+        <label>cstdlib</label>
+      </node>
+      <node id="100">
+        <label>iostream</label>
+      </node>
+      <node id="126">
+        <label>limbo/model/gp.hpp</label>
+        <link refid="model_2gp_8hpp"/>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+      </node>
+      <node id="141">
+        <label>cstddef</label>
+      </node>
+      <node id="105">
+        <label>boost/fusion/include/accumulate.hpp</label>
+      </node>
+      <node id="130">
+        <label>limbo/model/gp/no_lf_opt.hpp</label>
+        <link refid="no__lf__opt_8hpp"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>limbo/stat/stat_base.hpp</label>
+        <link refid="stat__base_8hpp"/>
+        <childnode refid="115" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+        <childnode refid="117" relation="include">
+        </childnode>
+      </node>
+      <node id="139">
+        <label>mutex</label>
+      </node>
+      <node id="119">
+        <label>limbo/stat/console_summary.hpp</label>
+        <link refid="console__summary_8hpp"/>
+        <childnode refid="114" relation="include">
+        </childnode>
+      </node>
+      <node id="148">
+        <label>chrono</label>
+      </node>
+      <node id="104">
+        <label>boost/fusion/include/vector.hpp</label>
+      </node>
+      <node id="149">
+        <label>thread</label>
+      </node>
+      <node id="146">
+        <label>type_traits</label>
+      </node>
+      <node id="151">
+        <label>limbo/tools/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="133" relation="include">
+        </childnode>
+        <childnode refid="134" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
+      </node>
+      <node id="150">
         <label>algorithm</label>
       </node>
-      <node id="106">
+      <node id="111">
         <label>limbo/stop/chain_criteria.hpp</label>
         <link refid="chain__criteria_8hpp"/>
       </node>
-      <node id="93">
+      <node id="98">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
         <link refid="bo_base.hpp"/>
-        <childnode refid="94" relation="include">
-        </childnode>
-        <childnode refid="95" relation="include">
-        </childnode>
-        <childnode refid="96" relation="include">
-        </childnode>
-        <childnode refid="97" relation="include">
-        </childnode>
-        <childnode refid="98" relation="include">
-        </childnode>
         <childnode refid="99" relation="include">
         </childnode>
         <childnode refid="100" relation="include">
@@ -347,17 +325,21 @@
         </childnode>
         <childnode refid="104" relation="include">
         </childnode>
+        <childnode refid="105" relation="include">
+        </childnode>
         <childnode refid="106" relation="include">
         </childnode>
         <childnode refid="107" relation="include">
         </childnode>
         <childnode refid="108" relation="include">
         </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
         <childnode refid="113" relation="include">
-        </childnode>
-        <childnode refid="114" relation="include">
-        </childnode>
-        <childnode refid="115" relation="include">
         </childnode>
         <childnode refid="118" relation="include">
         </childnode>
@@ -365,103 +347,89 @@
         </childnode>
         <childnode refid="120" relation="include">
         </childnode>
-        <childnode refid="121" relation="include">
-        </childnode>
-        <childnode refid="128" relation="include">
-        </childnode>
-        <childnode refid="133" relation="include">
-        </childnode>
-        <childnode refid="146" relation="include">
-        </childnode>
-      </node>
-      <node id="144">
-        <label>boost/math/special_functions/sign.hpp</label>
-      </node>
-      <node id="121">
-        <label>limbo/opt/cmaes.hpp</label>
-        <link refid="cmaes_8hpp"/>
-        <childnode refid="94" relation="include">
-        </childnode>
-        <childnode refid="95" relation="include">
-        </childnode>
-        <childnode refid="103" relation="include">
-        </childnode>
-        <childnode refid="104" relation="include">
-        </childnode>
-        <childnode refid="122" relation="include">
+        <childnode refid="123" relation="include">
         </childnode>
         <childnode refid="124" relation="include">
         </childnode>
-        <childnode refid="127" relation="include">
+        <childnode refid="125" relation="include">
+        </childnode>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="151" relation="include">
         </childnode>
       </node>
-      <node id="112">
+      <node id="117">
         <label>memory</label>
       </node>
-      <node id="104">
+      <node id="145">
+        <label>initializer_list</label>
+      </node>
+      <node id="109">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="105" relation="include">
+        <childnode refid="110" relation="include">
         </childnode>
-        <childnode refid="103" relation="include">
+        <childnode refid="108" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="154">
+      <node id="159">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
         <link refid="nsbo_8hpp"/>
       </node>
-      <node id="153">
+      <node id="158">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
         <link refid="bayes__opt_2ehvi_8hpp"/>
       </node>
-      <node id="148">
+      <node id="153">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
         <link refid="boptimizer_8hpp"/>
-        <childnode refid="149" relation="include">
+        <childnode refid="154" relation="include">
         </childnode>
-        <childnode refid="151" relation="include">
+        <childnode refid="156" relation="include">
         </childnode>
       </node>
-      <node id="151">
+      <node id="156">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
         <link refid="parego_8hpp"/>
       </node>
-      <node id="150">
+      <node id="155">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
       </node>
-      <node id="155">
+      <node id="160">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
         <link refid="imgpo_8hpp"/>
       </node>
-      <node id="152">
+      <node id="157">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
         <link refid="bo__multi_8hpp"/>
-        <childnode refid="153" relation="include">
+        <childnode refid="158" relation="include">
         </childnode>
-        <childnode refid="154" relation="include">
+        <childnode refid="159" relation="include">
         </childnode>
       </node>
-      <node id="147">
+      <node id="152">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
         <link refid="bo_base.hpp"/>
-        <childnode refid="148" relation="include">
+        <childnode refid="153" relation="include">
         </childnode>
-        <childnode refid="152" relation="include">
+        <childnode refid="157" relation="include">
         </childnode>
-        <childnode refid="155" relation="include">
+        <childnode refid="160" relation="include">
         </childnode>
-        <childnode refid="151" relation="include">
+        <childnode refid="156" relation="include">
         </childnode>
       </node>
-      <node id="149">
+      <node id="154">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
         <link refid="bayes__opt_8hpp"/>
-        <childnode refid="150" relation="include">
+        <childnode refid="155" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -516,199 +484,193 @@
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="aggregated__observations_8hpp" kindref="compound">limbo/stat/aggregated_observations.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="console__summary_8hpp" kindref="compound">limbo/stat/console_summary.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="sys_8hpp" kindref="compound">limbo/tools/sys.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="squared__exp__ard_8hpp" kindref="compound">limbo/kernel/squared_exp_ard.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="gp__ucb_8hpp" kindref="compound">limbo/acqui/gp_ucb.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="exp_8hpp" kindref="compound">limbo/kernel/exp.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ucb_8hpp" kindref="compound">limbo/acqui/ucb.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="data_8hpp" kindref="compound">limbo/mean/data.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>USE_LIBCMAES</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="cmaes_8hpp" kindref="compound">limbo/opt/cmaes.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined<sp/>USE_NLOPT</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="nlopt__no__grad_8hpp" kindref="compound">limbo/opt/nlopt_no_grad.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="grid__search_8hpp" kindref="compound">limbo/opt/grid_search.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="model_2gp_8hpp" kindref="compound">limbo/model/gp.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="kernel__lf__opt_8hpp" kindref="compound">limbo/model/gp/kernel_lf_opt.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="random__sampling_8hpp" kindref="compound">limbo/init/random_sampling.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">defaults<sp/>{</highlight></codeline>
-<codeline lineno="42" refid="structlimbo_1_1defaults_1_1bayes__opt__bobase" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1defaults_1_1bayes__opt__bobase" kindref="compound">bayes_opt_bobase</ref><sp/>{</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1defaults_1_1bayes__opt__bobase_1ae45d5d0172acb6ca307cb62e3fa35365" kindref="member">BO_PARAM</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">,<sp/>stats_enabled,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
-<codeline lineno="47" refid="structlimbo_1_1_refresh_stat__f" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1_refresh_stat__f" kindref="compound">RefreshStat_f</ref><sp/>{</highlight></codeline>
-<codeline lineno="48" refid="structlimbo_1_1_refresh_stat__f_1af0f6e976aa3f357cdd4418d84e1e69ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1_refresh_stat__f_1af0f6e976aa3f357cdd4418d84e1e69ec" kindref="member">RefreshStat_f</ref>(BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted)</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" kindref="member">_bo</ref>(bo),<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" kindref="member">_afun</ref>(afun),<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" kindref="member">_blacklisted</ref>(blacklisted)<sp/>{}</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51" refid="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BO&amp;<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" kindref="member">_bo</ref>;</highlight></codeline>
-<codeline lineno="52" refid="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" kindref="member">_afun</ref>;</highlight></codeline>
-<codeline lineno="53" refid="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" kindref="member">_blacklisted</ref>;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="56" refid="structlimbo_1_1_refresh_stat__f_1a24498c1e97e8aa89a8180422a3ad9109" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1_refresh_stat__f_1a24498c1e97e8aa89a8180422a3ad9109" kindref="member">operator()</ref>(T&amp;<sp/>x)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>x(_bo,<sp/>_afun,<sp/>_blacklisted);<sp/>}</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59" refid="structlimbo_1_1_first_elem" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1_first_elem" kindref="compound">FirstElem</ref><sp/>{</highlight></codeline>
-<codeline lineno="60" refid="structlimbo_1_1_first_elem_1a8807f1723bc06dce8929cf77cf0751bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1_first_elem_1a8807f1723bc06dce8929cf77cf0751bc" kindref="member">result_type</ref>;</highlight></codeline>
-<codeline lineno="61" refid="structlimbo_1_1_first_elem_1a6816ea8e21acec76f91542776ab02422" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1_first_elem_1a6816ea8e21acec76f91542776ab02422" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="62"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>x(0);</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="66" refid="classlimbo_1_1_evaluation_error" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlimbo_1_1_evaluation_error" kindref="compound">EvaluationError</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>std::exception<sp/>{</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>we<sp/>use<sp/>optimal<sp/>named<sp/>template<sp/>parameters</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>see:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>http://www.boost.org/doc/libs/1_55_0/libs/parameter/doc/html/index.html#parameter-enabled-class-templates</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(initfun)</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(acquifun)</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(statsfun)</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(stopcrit)</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79" refid="namespacelimbo_1_1bayes__opt" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>namespace<sp/>bayes_opt<sp/>{</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::parameter::parameters&lt;boost::parameter::optional&lt;tag::statsfun&gt;,</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;tag::initfun&gt;,</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;tag::acquifun&gt;,</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;tag::stopcrit&gt;,</highlight></codeline>
-<codeline lineno="85" refid="namespacelimbo_1_1bayes__opt_1ac9ebb02d293842625e1ee8bac9710989" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;tag::modelfun&gt;&gt;<sp/><ref refid="namespacelimbo_1_1bayes__opt_1ac9ebb02d293842625e1ee8bac9710989" kindref="member">class_signature</ref>;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Params,</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A1<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A2<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A3<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A4<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A5<sp/>=<sp/>boost::parameter::void_&gt;</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight></codeline>
-<codeline lineno="138" refid="classlimbo_1_1bayes__opt_1_1_bo_base" refkind="compound"><highlight class="comment"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref><sp/>{</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="140" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3fb955ab00c385f5deb56f3d18211d3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>Params<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3fb955ab00c385f5deb56f3d18211d3d" kindref="member">params_t</ref>;</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="142" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults" kindref="compound">defaults</ref><sp/>{</highlight></codeline>
-<codeline lineno="143" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1acbba74470eccef31c3f2518a3c57200c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1init_1_1_random_sampling" kindref="compound">init::RandomSampling&lt;Params&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1acbba74470eccef31c3f2518a3c57200c" kindref="member">init_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>1</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="145" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aec54234d95d97261acf5aacca83eecaa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d" kindref="compound">kernel::SquaredExpARD&lt;Params&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aec54234d95d97261acf5aacca83eecaa" kindref="member">kf_t</ref>;</highlight></codeline>
-<codeline lineno="146" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aa8dcb3af9a3dffffb4749104cd27a597" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1mean_1_1_data" kindref="compound">mean::Data&lt;Params&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aa8dcb3af9a3dffffb4749104cd27a597" kindref="member">mean_t</ref>;</highlight></codeline>
-<codeline lineno="147" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a6f8da6a743f6a87096f8e0b9d4411503" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">model::GP&lt;Params, kf_t, mean_t, model::gp::KernelLFOpt&lt;Params&gt;</ref>&gt;<sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a6f8da6a743f6a87096f8e0b9d4411503" kindref="member">model_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>2</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>WARNING:<sp/>you<sp/>have<sp/>to<sp/>specify<sp/>the<sp/>acquisition<sp/><sp/>function</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>you<sp/>use<sp/>a<sp/>custom<sp/>model</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="150" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a4ba658f2746db27c5f3abdb24d2a2f85" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1acqui_1_1_g_p___u_c_b" kindref="compound">acqui::GP_UCB&lt;Params, model_t&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a4ba658f2746db27c5f3abdb24d2a2f85" kindref="member">acqui_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>3</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="151" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a70f64f21a85e2fa25063709abd5a2467" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::fusion::vector&lt;stat::Samples&lt;Params&gt;,<sp/><ref refid="structlimbo_1_1stat_1_1_aggregated_observations" kindref="compound">stat::AggregatedObservations&lt;Params&gt;</ref>,<sp/><ref refid="structlimbo_1_1stat_1_1_console_summary" kindref="compound">stat::ConsoleSummary&lt;Params&gt;</ref>&gt;<sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a70f64f21a85e2fa25063709abd5a2467" kindref="member">stat_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>4</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="152" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a3cb5d1c8866494a7a641e6f3b4367d75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::fusion::vector&lt;stop::MaxIterations&lt;Params&gt;&gt;<sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a3cb5d1c8866494a7a641e6f3b4367d75" kindref="member">stop_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>5</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>extract<sp/>the<sp/>types</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="156" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a75c1ae9e7268016c6f767c56bcede7d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>class_signature::bind&lt;A1,<sp/>A2,<sp/>A3,<sp/>A4,<sp/>A5&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a75c1ae9e7268016c6f767c56bcede7d2" kindref="member">args</ref>;</highlight></codeline>
-<codeline lineno="157" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa4cf2b36051de6b46e75621f0b9ed642" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::initfun,<sp/>typename<sp/>defaults::init_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa4cf2b36051de6b46e75621f0b9ed642" kindref="member">init_function_t</ref>;</highlight></codeline>
-<codeline lineno="158" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a02b14991b62e0f8c9bcf834220ed62e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::acquifun,<sp/>typename<sp/>defaults::acqui_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a02b14991b62e0f8c9bcf834220ed62e4" kindref="member">acquisition_function_t</ref>;</highlight></codeline>
-<codeline lineno="159" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1ddc93cc023a2d7d527deb4cc750624e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::modelfun,<sp/>typename<sp/>defaults::model_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1ddc93cc023a2d7d527deb4cc750624e" kindref="member">model_t</ref>;</highlight></codeline>
-<codeline lineno="160" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a0da8155a1a5be0999e112655ec3d610e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::statsfun,<sp/>typename<sp/>defaults::stat_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a0da8155a1a5be0999e112655ec3d610e" kindref="member">Stat</ref>;</highlight></codeline>
-<codeline lineno="161" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac9ab3f37c746dcf70ef7096a89dd1b6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::stopcrit,<sp/>typename<sp/>defaults::stop_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac9ab3f37c746dcf70ef7096a89dd1b6c" kindref="member">StoppingCriteria</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="model_2gp_8hpp" kindref="compound">limbo/model/gp.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="random__sampling_8hpp" kindref="compound">limbo/init/random_sampling.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="math_8hpp" kindref="compound">limbo/tools/math.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">defaults<sp/>{</highlight></codeline>
+<codeline lineno="35" refid="structlimbo_1_1defaults_1_1bayes__opt__bobase" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1defaults_1_1bayes__opt__bobase" kindref="compound">bayes_opt_bobase</ref><sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1defaults_1_1bayes__opt__bobase_1ae45d5d0172acb6ca307cb62e3fa35365" kindref="member">BO_PARAM</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">,<sp/>stats_enabled,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
+<codeline lineno="40" refid="structlimbo_1_1_refresh_stat__f" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1_refresh_stat__f" kindref="compound">RefreshStat_f</ref><sp/>{</highlight></codeline>
+<codeline lineno="41" refid="structlimbo_1_1_refresh_stat__f_1af0f6e976aa3f357cdd4418d84e1e69ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1_refresh_stat__f_1af0f6e976aa3f357cdd4418d84e1e69ec" kindref="member">RefreshStat_f</ref>(BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted)</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" kindref="member">_bo</ref>(bo),<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" kindref="member">_afun</ref>(afun),<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" kindref="member">_blacklisted</ref>(blacklisted)<sp/>{}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BO&amp;<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" kindref="member">_bo</ref>;</highlight></codeline>
+<codeline lineno="45" refid="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/><ref refid="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" kindref="member">_afun</ref>;</highlight></codeline>
+<codeline lineno="46" refid="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" kindref="member">_blacklisted</ref>;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="49" refid="structlimbo_1_1_refresh_stat__f_1a24498c1e97e8aa89a8180422a3ad9109" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1_refresh_stat__f_1a24498c1e97e8aa89a8180422a3ad9109" kindref="member">operator()</ref>(T&amp;<sp/>x)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>x(_bo,<sp/>_afun,<sp/>_blacklisted);<sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="structlimbo_1_1_first_elem" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1_first_elem" kindref="compound">FirstElem</ref><sp/>{</highlight></codeline>
+<codeline lineno="53" refid="structlimbo_1_1_first_elem_1a8807f1723bc06dce8929cf77cf0751bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1_first_elem_1a8807f1723bc06dce8929cf77cf0751bc" kindref="member">result_type</ref>;</highlight></codeline>
+<codeline lineno="54" refid="structlimbo_1_1_first_elem_1a6816ea8e21acec76f91542776ab02422" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1_first_elem_1a6816ea8e21acec76f91542776ab02422" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="55"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>x(0);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="59" refid="classlimbo_1_1_evaluation_error" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlimbo_1_1_evaluation_error" kindref="compound">EvaluationError</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>std::exception<sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>we<sp/>use<sp/>optimal<sp/>named<sp/>template<sp/>parameters</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>see:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>http://www.boost.org/doc/libs/1_55_0/libs/parameter/doc/html/index.html#parameter-enabled-class-templates</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(initfun)</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(acquifun)</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(modelfun)</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(statsfun)</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(stopcrit)</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="namespacelimbo_1_1bayes__opt" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/>namespace<sp/>bayes_opt<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::parameter::parameters&lt;boost::parameter::optional&lt;tag::statsfun&gt;,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;tag::initfun&gt;,</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;tag::acquifun&gt;,</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;tag::stopcrit&gt;,</highlight></codeline>
+<codeline lineno="78" refid="namespacelimbo_1_1bayes__opt_1a1edab117064bc665b2c743c0f3614479" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;tag::modelfun&gt;&gt;<sp/><ref refid="namespacelimbo_1_1bayes__opt_1a1edab117064bc665b2c743c0f3614479" kindref="member">bobase_signature</ref>;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Params,</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A1<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A2<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A3<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A4<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A5<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A6<sp/>=<sp/>boost::parameter::void_&gt;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight></codeline>
+<codeline lineno="132" refid="classlimbo_1_1bayes__opt_1_1_bo_base" refkind="compound"><highlight class="comment"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref><sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="134" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ae46fa6c574ca2a2c4368c8c9d3ff63e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>Params<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ae46fa6c574ca2a2c4368c8c9d3ff63e5" kindref="member">params_t</ref>;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults" kindref="compound">defaults</ref><sp/>{</highlight></codeline>
+<codeline lineno="137" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a675d927a474fc77608cc63c8406448f7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1init_1_1_random_sampling" kindref="compound">init::RandomSampling&lt;Params&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a675d927a474fc77608cc63c8406448f7" kindref="member">init_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a0a88a267bef731645079455cb11fa836" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_exp" kindref="compound">kernel::Exp&lt;Params&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a0a88a267bef731645079455cb11fa836" kindref="member">kf_t</ref>;</highlight></codeline>
+<codeline lineno="140" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ae66c699015cb936c8c429c64154bf202" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1mean_1_1_data" kindref="compound">mean::Data&lt;Params&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ae66c699015cb936c8c429c64154bf202" kindref="member">mean_t</ref>;</highlight></codeline>
+<codeline lineno="141" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a07f65b6332c4f0c029069100feecb789" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">model::GP&lt;Params, kf_t, mean_t&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a07f65b6332c4f0c029069100feecb789" kindref="member">model_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>WARNING:<sp/>you<sp/>have<sp/>to<sp/>specify<sp/>the<sp/>acquisition<sp/><sp/>function</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>you<sp/>use<sp/>a<sp/>custom<sp/>model</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a4cb9b80ab762b3b763fdd97e893886e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1acqui_1_1_u_c_b" kindref="compound">acqui::UCB&lt;Params, model_t&gt;</ref><sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a4cb9b80ab762b3b763fdd97e893886e5" kindref="member">acqui_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ab8f3991474723d27b9c77d0e0a76fce2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::fusion::vector&lt;stat::Samples&lt;Params&gt;,<sp/><ref refid="structlimbo_1_1stat_1_1_aggregated_observations" kindref="compound">stat::AggregatedObservations&lt;Params&gt;</ref>,<sp/><ref refid="structlimbo_1_1stat_1_1_console_summary" kindref="compound">stat::ConsoleSummary&lt;Params&gt;</ref>&gt;<sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ab8f3991474723d27b9c77d0e0a76fce2" kindref="member">stat_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146" refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a66e1dbe1ccd9dbef0fdfc5c9faee9eff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::fusion::vector&lt;stop::MaxIterations&lt;Params&gt;&gt;<sp/><ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a66e1dbe1ccd9dbef0fdfc5c9faee9eff" kindref="member">stop_t</ref>;<sp/></highlight><highlight class="comment">//<sp/>5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>extract<sp/>the<sp/>types</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3844c259aa1e59d0241f90390aa6f7fa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>bobase_signature::bind&lt;A1,<sp/>A2,<sp/>A3,<sp/>A4,<sp/>A5,<sp/>A6&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3844c259aa1e59d0241f90390aa6f7fa" kindref="member">args</ref>;</highlight></codeline>
+<codeline lineno="151" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a734d263ce8c37ae2c5233f9e4499828c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::initfun,<sp/>typename<sp/>defaults::init_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a734d263ce8c37ae2c5233f9e4499828c" kindref="member">init_function_t</ref>;</highlight></codeline>
+<codeline lineno="152" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a200a43abb6c95d2d99660898b36f2200" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::acquifun,<sp/>typename<sp/>defaults::acqui_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a200a43abb6c95d2d99660898b36f2200" kindref="member">acquisition_function_t</ref>;</highlight></codeline>
+<codeline lineno="153" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a151af5c7eef92a82d8813bb2e067d267" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::modelfun,<sp/>typename<sp/>defaults::model_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a151af5c7eef92a82d8813bb2e067d267" kindref="member">model_t</ref>;</highlight></codeline>
+<codeline lineno="154" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1adda0d6bf0fa0def996eb0af7e8a84f3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::statsfun,<sp/>typename<sp/>defaults::stat_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1adda0d6bf0fa0def996eb0af7e8a84f3f" kindref="member">Stat</ref>;</highlight></codeline>
+<codeline lineno="155" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a06717d469296323cc277e3769b828e98" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>tag::stopcrit,<sp/>typename<sp/>defaults::stop_t&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a06717d469296323cc277e3769b828e98" kindref="member">StoppingCriteria</ref>;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8dfcab20696e6c85665b150e9881c010" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::mpl::if_&lt;boost::fusion::traits::is_sequence&lt;StoppingCriteria&gt;,<sp/>StoppingCriteria,<sp/>boost::fusion::vector&lt;StoppingCriteria&gt;&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8dfcab20696e6c85665b150e9881c010" kindref="member">stopping_criteria_t</ref>;</highlight></codeline>
+<codeline lineno="158" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a17d395abfdd3158f238c83764ba68fd0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::mpl::if_&lt;boost::fusion::traits::is_sequence&lt;Stat&gt;,<sp/>Stat,<sp/>boost::fusion::vector&lt;Stat&gt;&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a17d395abfdd3158f238c83764ba68fd0" kindref="member">stat_t</ref>;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad361278c23693c4220eaa9a9de5d3333" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad361278c23693c4220eaa9a9de5d3333" kindref="member">BoBase</ref>()<sp/>:<sp/>_total_iterations(0)<sp/>{<sp/>_make_res_dir();<sp/>}</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad045a21de8950f3671f6b156f2271e44" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::mpl::if_&lt;boost::fusion::traits::is_sequence&lt;StoppingCriteria&gt;,<sp/>StoppingCriteria,<sp/>boost::fusion::vector&lt;StoppingCriteria&gt;&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad045a21de8950f3671f6b156f2271e44" kindref="member">stopping_criteria_t</ref>;</highlight></codeline>
-<codeline lineno="164" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a67aac9bd22ae3de346afe7ffe5b564d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::mpl::if_&lt;boost::fusion::traits::is_sequence&lt;Stat&gt;,<sp/>Stat,<sp/>boost::fusion::vector&lt;Stat&gt;&gt;::type<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a67aac9bd22ae3de346afe7ffe5b564d3" kindref="member">stat_t</ref>;</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="167" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1602cb9a6fa728d8181ee7ec080dd441" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1602cb9a6fa728d8181ee7ec080dd441" kindref="member">BoBase</ref>()<sp/>:<sp/>_total_iterations(0)<sp/>{<sp/>_make_res_dir();<sp/>}</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase</ref>&amp;<sp/>other)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a4d94db5c40b35bec292aebfd19b8fb3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a4d94db5c40b35bec292aebfd19b8fb3d" kindref="member">stats_enabled</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Params::bayes_opt_bobase::stats_enabled();<sp/>}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a4c87b7618144f99027c294db3eb803f6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a4c87b7618144f99027c294db3eb803f6" kindref="member">res_dir</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_res_dir;<sp/>}</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="175" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a124b963cab48ee23698b3cbd2dd1e496" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a124b963cab48ee23698b3cbd2dd1e496" kindref="member">stats_enabled</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Params::bayes_opt_bobase::stats_enabled();<sp/>}</highlight></codeline>
+<codeline lineno="175" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a855dc5de1d0732a25f4c9730ac50d0bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Eigen::VectorXd&gt;&amp;<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a855dc5de1d0732a25f4c9730ac50d0bd" kindref="member">observations</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_observations;<sp/>}</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
-<codeline lineno="178" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5f589de569a67fe5a645ee0b7fe1173c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5f589de569a67fe5a645ee0b7fe1173c" kindref="member">res_dir</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_res_dir;<sp/>}</highlight></codeline>
+<codeline lineno="178" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad3ba0dba1418df0ed8e79d4dd3cc907a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Eigen::VectorXd&gt;&amp;<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad3ba0dba1418df0ed8e79d4dd3cc907a" kindref="member">samples</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_samples;<sp/>}</highlight></codeline>
 <codeline lineno="179"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1c5e2b7c9aaae38770505011dfcb61ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Eigen::VectorXd&gt;&amp;<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1c5e2b7c9aaae38770505011dfcb61ec" kindref="member">observations</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_observations;<sp/>}</highlight></codeline>
+<codeline lineno="181" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa84e215cffa97a4e287aad3690f89635" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Eigen::VectorXd&gt;&amp;<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa84e215cffa97a4e287aad3690f89635" kindref="member">bl_samples</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_bl_samples;<sp/>}</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"></highlight></codeline>
-<codeline lineno="184" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3a68d0a9fce39ae5575c63a57a549f58" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Eigen::VectorXd&gt;&amp;<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3a68d0a9fce39ae5575c63a57a549f58" kindref="member">samples</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_samples;<sp/>}</highlight></codeline>
+<codeline lineno="184" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac3d643d5a668edf22ad053bfc54ea090" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac3d643d5a668edf22ad053bfc54ea090" kindref="member">current_iteration</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_current_iteration;<sp/>}</highlight></codeline>
 <codeline lineno="185"><highlight class="normal"></highlight></codeline>
-<codeline lineno="187" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa85b7824943ae2ee35b50b446f6740c6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;Eigen::VectorXd&gt;&amp;<sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa85b7824943ae2ee35b50b446f6740c6" kindref="member">bl_samples</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_bl_samples;<sp/>}</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"></highlight></codeline>
-<codeline lineno="190" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1abbd79a26fafeb6ea8f09df782972caa0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1abbd79a26fafeb6ea8f09df782972caa0" kindref="member">current_iteration</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_current_iteration;<sp/>}</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight></codeline>
-<codeline lineno="192" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a923fec38c8f1c473fdd9cf35b395b471" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a923fec38c8f1c473fdd9cf35b395b471" kindref="member">total_iterations</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_total_iterations;<sp/>}</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight></codeline>
-<codeline lineno="197" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96" kindref="member">add_new_sample</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>s,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>v)</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group__tools_1gabcb0caa2ffabd42fa865c9ab0b624681" kindref="member">tools::is_nan_or_inf</ref>(v))</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1_evaluation_error" kindref="compound">EvaluationError</ref>();</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_samples.push_back(s);</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_observations.push_back(v);</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"></highlight></codeline>
-<codeline lineno="206" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a7197b0c20d5644ec44070432555eb49b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a7197b0c20d5644ec44070432555eb49b" kindref="member">add_new_bl_sample</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>s)<sp/>{<sp/>_bl_samples.push_back(s);<sp/>}</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"></highlight></codeline>
-<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StateFunction&gt;</highlight></codeline>
-<codeline lineno="210" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a49f332ebc6e526169c619e6bc4430116" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a49f332ebc6e526169c619e6bc4430116" kindref="member">eval_and_add</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StateFunction&amp;<sp/>seval,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>sample)</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;add_new_sample(sample,<sp/>seval(sample));</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1_evaluation_error" kindref="compound">EvaluationError</ref>&amp;<sp/>e)<sp/>{</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;add_new_bl_sample(sample);</highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"></highlight></codeline>
-<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="222"><highlight class="normal"></highlight></codeline>
-<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StateFunction,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_init(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StateFunction&amp;<sp/>seval,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>reset<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_current_iteration<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(reset)<sp/>{</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_total_iterations<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_samples.clear();</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_observations.clear();</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_bl_samples.clear();</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="234"><highlight class="normal"></highlight></codeline>
-<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(this-&gt;_total_iterations<sp/>==<sp/>0)</highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>init_function_t()(seval,<sp/>afun,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"></highlight></codeline>
-<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_stop(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="241"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stop::ChainCriteria&lt;BO,<sp/>AggregatorFunction&gt;<sp/>chain(bo,<sp/>afun);</highlight></codeline>
-<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>boost::fusion::accumulate(_stopping_criteria,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>chain);</highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"></highlight></codeline>
-<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
-<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_update_stats(BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted)</highlight></codeline>
-<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight><highlight class="comment">//<sp/>not<sp/>const,<sp/>because<sp/>some<sp/>stat<sp/>class</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>modify<sp/>the<sp/>optimizer....</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__par__tools_1gaa7bbb8a640ed2b66101d57b5b565457f" kindref="member">boost::fusion::for_each</ref>(_stat,<sp/>RefreshStat_f&lt;BO,<sp/>AggregatorFunction&gt;(bo,<sp/>afun,<sp/>blacklisted));</highlight></codeline>
-<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="252"><highlight class="normal"></highlight></codeline>
-<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_make_res_dir()</highlight></codeline>
-<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!Params::bayes_opt_bobase::stats_enabled())</highlight></codeline>
-<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_res_dir<sp/>=<sp/><ref refid="group__tools_1ga4810ffa502d791d6ad750739a953f56f" kindref="member">tools::hostname</ref>()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;_&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" kindref="member">tools::date</ref>()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;_&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="group__tools_1ga4ee13d198367d07cabd37316e671db09" kindref="member">tools::getpid</ref>();</highlight></codeline>
-<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::filesystem::path<sp/>my_path(_res_dir);</highlight></codeline>
-<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::filesystem::create_directory(my_path);</highlight></codeline>
-<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5470e106c4584a30636cafb6fbad6d73" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5470e106c4584a30636cafb6fbad6d73" kindref="member">total_iterations</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_total_iterations;<sp/>}</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" kindref="member">add_new_sample</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>s,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>v)</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group__tools_1gabcb0caa2ffabd42fa865c9ab0b624681" kindref="member">tools::is_nan_or_inf</ref>(v))</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1_evaluation_error" kindref="compound">EvaluationError</ref>();</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_samples.push_back(s);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_observations.push_back(v);</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8694d4bbc5c373d067790ec31fb42a44" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8694d4bbc5c373d067790ec31fb42a44" kindref="member">add_new_bl_sample</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>s)<sp/>{<sp/>_bl_samples.push_back(s);<sp/>}</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StateFunction&gt;</highlight></codeline>
+<codeline lineno="204" refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a387fba7bf70aa9410e1c04f035694f34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a387fba7bf70aa9410e1c04f035694f34" kindref="member">eval_and_add</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StateFunction&amp;<sp/>seval,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>sample)</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;add_new_sample(sample,<sp/>seval(sample));</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1_evaluation_error" kindref="compound">EvaluationError</ref>&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;add_new_bl_sample(sample);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StateFunction,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_init(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StateFunction&amp;<sp/>seval,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>reset<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_current_iteration<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(reset)<sp/>{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_total_iterations<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_samples.clear();</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_observations.clear();</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_bl_samples.clear();</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(this-&gt;_total_iterations<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>init_function_t()(seval,<sp/>afun,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_stop(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="235"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stop::ChainCriteria&lt;BO,<sp/>AggregatorFunction&gt;<sp/>chain(bo,<sp/>afun);</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>boost::fusion::accumulate(_stopping_criteria,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>chain);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_update_stats(BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted)</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight><highlight class="comment">//<sp/>not<sp/>const,<sp/>because<sp/>some<sp/>stat<sp/>class</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>modify<sp/>the<sp/>optimizer....</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__par__tools_1gaa7bbb8a640ed2b66101d57b5b565457f" kindref="member">boost::fusion::for_each</ref>(_stat,<sp/>RefreshStat_f&lt;BO,<sp/>AggregatorFunction&gt;(bo,<sp/>afun,<sp/>blacklisted));</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_make_res_dir()</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!Params::bayes_opt_bobase::stats_enabled())</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_res_dir<sp/>=<sp/><ref refid="group__tools_1ga4810ffa502d791d6ad750739a953f56f" kindref="member">tools::hostname</ref>()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;_&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" kindref="member">tools::date</ref>()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;_&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="group__tools_1ga4ee13d198367d07cabd37316e671db09" kindref="member">tools::getpid</ref>();</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::filesystem::path<sp/>my_path(_res_dir);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::filesystem::create_directory(my_path);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>_res_dir;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_current_iteration;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_total_iterations;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stopping_criteria_t<sp/>_stopping_criteria;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stat_t<sp/>_stat;</highlight></codeline>
 <codeline lineno="261"><highlight class="normal"></highlight></codeline>
-<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>_res_dir;</highlight></codeline>
-<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_current_iteration;</highlight></codeline>
-<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_total_iterations;</highlight></codeline>
-<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stopping_criteria_t<sp/>_stopping_criteria;</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stat_t<sp/>_stat;</highlight></codeline>
-<codeline lineno="267"><highlight class="normal"></highlight></codeline>
-<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>_observations;</highlight></codeline>
-<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>_samples;</highlight></codeline>
-<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>_bl_samples;</highlight></codeline>
-<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="273"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="274"><highlight class="normal"></highlight></codeline>
-<codeline lineno="275"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>_observations;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>_samples;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>_bl_samples;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="267"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp"/>
   </compounddef>

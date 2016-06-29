@@ -5,51 +5,104 @@
     <includes local="no">Eigen/Core</includes>
     <includes refid="macros_8hpp" local="no">limbo/tools/macros.hpp</includes>
     <includedby refid="acqui_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/acqui.hpp</includedby>
+    <includedby refid="bo__base_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</includedby>
     <incdepgraph>
-      <node id="28">
+      <node id="20">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="25">
+      <node id="17">
         <label>/tmp/doc_limbo/limbo/src/limbo/acqui/ucb.hpp</label>
         <link refid="ucb.hpp"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="18">
         <label>Eigen/Core</label>
       </node>
-      <node id="29">
+      <node id="21">
         <label>iostream</label>
       </node>
-      <node id="27">
+      <node id="19">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="28" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="31">
+      <node id="23">
         <label>/tmp/doc_limbo/limbo/src/limbo/acqui.hpp</label>
         <link refid="acqui_8hpp"/>
-        <childnode refid="32" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
+      <node id="31">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
+        <link refid="nsbo_8hpp"/>
+      </node>
       <node id="30">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
+        <link refid="bayes__opt_2ehvi_8hpp"/>
+      </node>
+      <node id="22">
         <label>/tmp/doc_limbo/limbo/src/limbo/acqui/ucb.hpp</label>
         <link refid="ucb.hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
+        <link refid="boptimizer_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
+        <link refid="parego_8hpp"/>
+      </node>
+      <node id="24">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+      </node>
+      <node id="32">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
+        <link refid="imgpo_8hpp"/>
+      </node>
+      <node id="29">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
+        <link refid="bo__multi_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="32">
-        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
-        <link refid="limbo_8hpp"/>
+      <node id="25">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
+        <link refid="bayes__opt_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="structlimbo_1_1defaults_1_1acqui__ucb" prot="public">limbo::defaults::acqui_ucb</innerclass>

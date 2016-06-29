@@ -54,7 +54,7 @@
     <detaileddescription>
 <para><verbatim>embed:rst
 
-Matern kernel (TODO: formula)
+Matern kernel
 
 .. math::
   d = ||v1 - v2||
@@ -65,8 +65,8 @@ Matern kernel (TODO: formula)
 
 
 Parameters:
-  - ``double sigma``
-  - ``double l``
+  - ``double sigma_sq`` (signal variance)
+  - ``double l`` (characteristic length scale)
 
 Reference: :cite:`matern1960spatial` &amp; :cite:`brochu2010tutorial` p.10 &amp; https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
 </verbatim> </para>    </detaileddescription>

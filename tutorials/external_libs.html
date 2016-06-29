@@ -29,7 +29,7 @@
   
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
-        <link rel="next" title="Advanced Example" href="advanced_example.html"/>
+        <link rel="next" title="Gaussian Process" href="gp.html"/>
         <link rel="prev" title="Basic Example" href="basic_example.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
@@ -112,19 +112,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html">Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Add External Library</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#add-external-library-to-experiment-s-wscript">Add external library to experiment&#8217;s wscript</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#check-for-headers">Check for headers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#check-for-lib-files">Check for lib files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#add-options">Add options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-configuration-options">Add configuration options</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#example-add-ros-as-external-library">Example: Add ROS as external library</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
 </ul>
@@ -189,10 +189,13 @@
 <h1>Add External Library<a class="headerlink" href="#add-external-library" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="add-external-library-to-experiment-s-wscript">
 <h2>Add external library to experiment&#8217;s wscript<a class="headerlink" href="#add-external-library-to-experiment-s-wscript" title="Permalink to this headline">¶</a></h2>
-<p>To add an external library to your experiment, we need to modify our experiment&#8217;s <code class="docutils literal"><span class="pre">wscript</span></code>. The stantard way to do this is to create a new configuration file for the dependency we want. In the <code class="docutils literal"><span class="pre">waf</span></code> build system, we do this by creating a python script(<cite>.py</cite>), usually called <code class="docutils literal"><span class="pre">libname.py</span></code> (where <code class="docutils literal"><span class="pre">libname</span></code> is the name of the library), in the same directory as your experiment.</p>
+<p>To add an external library to your experiment, we need to modify the experiment&#8217;s build script, <code class="docutils literal"><span class="pre">wscript</span></code>. The standard way to do this is to create a new configuration file for the new dependency. In the <code class="docutils literal"><span class="pre">waf</span></code> build system, this is done by creating a python script (<code class="docutils literal"><span class="pre">.py</span></code> file), usually called <code class="docutils literal"><span class="pre">libname.py</span></code> (where <code class="docutils literal"><span class="pre">libname</span></code> is the name of the library), in the same directory as your experiment.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">to activate this script, you need to activate your experiment <strong>when configuring limbo</strong>:  <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">configure</span> <span class="pre">--exp</span> <span class="pre">your_exp</span></code></p>
+<p>to activate this script, you need to activate your experiment <strong>when configuring limbo</strong>:</p>
+<div class="last highlight-python"><div class="highlight"><pre>./waf configure --exp your_exp
+</pre></div>
+</div>
 </div>
 <p>This new file should have the following structure:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
@@ -208,10 +211,9 @@
     <span class="k">except</span><span class="p">:</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;libname not found&#39;</span><span class="p">)</span>
       <span class="k">return</span>
-    <span class="k">return</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>Where we replace the <code class="docutils literal"><span class="pre">check_if_libname_exists</span></code> with logic to find our library. If we want the library to be optional, we omit the <code class="docutils literal"><span class="pre">conf.fatal</span></code> part.</p>
+<p>Where <code class="docutils literal"><span class="pre">check_if_libname_exists</span></code> is replaced with logic to find our library, as explained later. If we want the library to be optional, we omit the <code class="docutils literal"><span class="pre">conf.fatal</span></code> part.</p>
 <p>Then in our <code class="docutils literal"><span class="pre">wscript</span></code> we add the following lines:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c"># imports, etc, ...</span>
 
@@ -238,10 +240,9 @@
     <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;path1&#39;</span><span class="p">,</span> <span class="s">&#39;path2&#39;</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for libname includes&#39;</span><span class="p">)</span>
-      <span class="n">res</span> <span class="o">=</span> <span class="bp">True</span>
       <span class="c"># include_files is a list with the headers we expect to find</span>
       <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">include_files</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="ow">and</span> <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">INCLUDES_LIBNAME</span> <span class="o">=</span> <span class="n">includes_check</span>
     <span class="k">except</span><span class="p">:</span>
@@ -264,10 +265,9 @@
     <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;path1&#39;</span><span class="p">,</span> <span class="s">&#39;path2&#39;</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for libname libs&#39;</span><span class="p">)</span>
-      <span class="n">res</span> <span class="o">=</span> <span class="bp">True</span>
       <span class="c"># lib_files is a list with the lib files we expect to find</span>
       <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">lib_files</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="ow">and</span> <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIBPATH_LIBNAME</span> <span class="o">=</span> <span class="n">libs_check</span>
       <span class="c"># list with the lib names the library has</span>
@@ -281,14 +281,15 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="add-options">
-<h3>Add options<a class="headerlink" href="#add-options" title="Permalink to this headline">¶</a></h3>
-<p>We often need specific options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to add a new function named <code class="docutils literal"><span class="pre">options</span></code> in our <code class="docutils literal"><span class="pre">wscript</span></code> and another one in the library configuration file:</p>
+<div class="section" id="add-configuration-options">
+<h3>Add configuration options<a class="headerlink" href="#add-configuration-options" title="Permalink to this headline">¶</a></h3>
+<p>We often need additional configuration options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to define a new function named <code class="docutils literal"><span class="pre">options</span></code> in our <code class="docutils literal"><span class="pre">wscript</span></code> and another one in the library configuration file. In the library&#8217;s configuration file:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c">#imports, etc, ...</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
     <span class="c"># add options to the configuration</span>
-    <span class="n">opt</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;cmd_option&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;option_type&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;info message&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;destination_variable&#39;</span><span class="p">)</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;cmd_option&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;option_type&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;info message&#39;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s">&#39;destination_variable&#39;</span><span class="p">)</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
@@ -320,6 +321,8 @@
           +-- wscript
           +-- ros.py
           +-- main.cpp
+|-- src
+...
 </pre></div>
 </div>
 <p><strong>wscript:</strong></p>
@@ -359,6 +362,7 @@
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_ros</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
+  <span class="c"># Get locations where to search for ROS&#39;s header and lib files</span>
   <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ros</span><span class="p">:</span>
     <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ros</span> <span class="o">+</span> <span class="s">&#39;/include&#39;</span><span class="p">]</span>
     <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ros</span> <span class="o">+</span> <span class="s">&#39;/lib&#39;</span><span class="p">]</span>
@@ -366,27 +370,31 @@
     <span class="k">if</span> <span class="s">&#39;ROS_DISTRO&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for ROS&#39;</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ROS_DISTRO not in environmental variables&#39;</span><span class="p">,</span> <span class="s">&#39;RED&#39;</span><span class="p">)</span>
-      <span class="k">return</span> <span class="mi">1</span>
+      <span class="k">return</span>
     <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/opt/ros/&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;ROS_DISTRO&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/include&#39;</span><span class="p">]</span>
     <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/opt/ros/&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;ROS_DISTRO&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/lib/&#39;</span><span class="p">]</span>
 
   <span class="k">try</span><span class="p">:</span>
+    <span class="c"># Find the header for ROS</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for ROS includes&#39;</span><span class="p">)</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s">&#39;ros/ros.h&#39;</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s">&#39;ros/ros.h&#39;</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
-    <span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;roscpp&#39;</span><span class="p">,</span><span class="s">&#39;rosconsole&#39;</span><span class="p">,</span><span class="s">&#39;roscpp_serialization&#39;</span><span class="p">,</span><span class="s">&#39;rostime&#39;</span><span class="p">,</span> <span class="s">&#39;xmlrpcpp&#39;</span><span class="p">,</span><span class="s">&#39;rosconsole_log4cxx&#39;</span><span class="p">,</span> <span class="s">&#39;rosconsole_backend_interface&#39;</span><span class="p">]</span>
+
+    <span class="c"># Find the lib files</span>
+    <span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;roscpp&#39;</span><span class="p">,</span><span class="s">&#39;rosconsole&#39;</span><span class="p">,</span><span class="s">&#39;roscpp_serialization&#39;</span><span class="p">,</span><span class="s">&#39;rostime&#39;</span><span class="p">,</span><span class="s">&#39;xmlrpcpp&#39;</span><span class="p">,</span>
+            <span class="s">&#39;rosconsole_log4cxx&#39;</span><span class="p">,</span> <span class="s">&#39;rosconsole_backend_interface&#39;</span><span class="p">]</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for ROS libs&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">lib</span> <span class="ow">in</span> <span class="n">libs</span><span class="p">:</span>
-      <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="ow">and</span> <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s">&#39;lib&#39;</span><span class="o">+</span><span class="n">lib</span><span class="o">+</span><span class="s">&#39;.so&#39;</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s">&#39;lib&#39;</span><span class="o">+</span><span class="n">lib</span><span class="o">+</span><span class="s">&#39;.so&#39;</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
+
     <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">INCLUDES_ROS</span> <span class="o">=</span> <span class="n">includes_check</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIBPATH_ROS</span> <span class="o">=</span> <span class="n">libs_check</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIB_ROS</span> <span class="o">=</span> <span class="n">libs</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">DEFINES_ROS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;USE_ROS&#39;</span><span class="p">]</span>
   <span class="k">except</span><span class="p">:</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;Not found&#39;</span><span class="p">,</span> <span class="s">&#39;RED&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="mi">1</span>
-  <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span>
 </pre></div>
 </div>
 <p>Assuming we are at <strong>limbo</strong> root, we run the following to compile our experiment:</p>
@@ -404,7 +412,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="advanced_example.html" class="btn btn-neutral float-right" title="Advanced Example" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="gp.html" class="btn btn-neutral float-right" title="Gaussian Process" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="basic_example.html" class="btn btn-neutral" title="Basic Example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

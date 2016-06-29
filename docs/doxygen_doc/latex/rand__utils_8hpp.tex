@@ -1,0 +1,67 @@
+\hypertarget{rand__utils_8hpp}{}\section{/tmp/doc\+\_\+limbo/limbo/src/limbo/tools/rand\+\_\+utils.hpp File Reference}
+\label{rand__utils_8hpp}\index{/tmp/doc\+\_\+limbo/limbo/src/limbo/tools/rand\+\_\+utils.\+hpp@{/tmp/doc\+\_\+limbo/limbo/src/limbo/tools/rand\+\_\+utils.\+hpp}}
+{\ttfamily \#include $<$cstddef$>$}\\*
+{\ttfamily \#include $<$cstdint$>$}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$random$>$}\\*
+{\ttfamily \#include $<$array$>$}\\*
+{\ttfamily \#include $<$functional$>$}\\*
+{\ttfamily \#include $<$initializer\+\_\+list$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include $<$type\+\_\+traits$>$}\\*
+{\ttfamily \#include $<$iterator$>$}\\*
+{\ttfamily \#include $<$chrono$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structrandutils_1_1seed__seq__fe}{randutils\+::seed\+\_\+seq\+\_\+fe$<$ count, Int\+Rep, mix\+\_\+rounds $>$}
+\item 
+class \hyperlink{classrandutils_1_1auto__seeded}{randutils\+::auto\+\_\+seeded$<$ Seed\+Seq $>$}
+\item 
+class \hyperlink{classrandutils_1_1random__generator}{randutils\+::random\+\_\+generator$<$ Random\+Engine, Default\+Seed\+Seq $>$}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacerandutils}{randutils}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{rand__utils_8hpp_a5f37c8382c9af2999a0e8e0376d7c2ee}{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+C\+P\+U\+\_\+\+E\+N\+T\+R\+O\+P\+Y}~0
+\item 
+\#define \hyperlink{rand__utils_8hpp_a61a22e26388255c3745edf97acf97725}{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+T\+P\+I\+D}~0
+\item 
+\#define \hyperlink{rand__utils_8hpp_a2915d2a055bd10130cbf9adf63b9dc74}{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+N\+E\+R\+A\+L\+I\+Z\+E\+D\+\_\+\+C\+O\+N\+S\+T\+E\+X\+P\+R}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{namespacerandutils_a2b7c80226592f2cfc2dd51ef1b6a6648}{randutils\+::seed\+\_\+seq\+\_\+fe128} = seed\+\_\+seq\+\_\+fe$<$ 4, uint32\+\_\+t $>$
+\item 
+using \hyperlink{namespacerandutils_ab264470d8fc7505e72c78a33528108bd}{randutils\+::seed\+\_\+seq\+\_\+fe256} = seed\+\_\+seq\+\_\+fe$<$ 8, uint32\+\_\+t $>$
+\item 
+using \hyperlink{namespacerandutils_ac122072eca2bd6dc81a557e59147099c}{randutils\+::auto\+\_\+seed\+\_\+128} = auto\+\_\+seeded$<$ seed\+\_\+seq\+\_\+fe128 $>$
+\item 
+using \hyperlink{namespacerandutils_a96647abcb6ceb1ef0c3cf7c8875ae298}{randutils\+::auto\+\_\+seed\+\_\+256} = auto\+\_\+seeded$<$ seed\+\_\+seq\+\_\+fe256 $>$
+\item 
+{\footnotesize template$<$typename Numeric $>$ }\\using \hyperlink{namespacerandutils_ad441b52b9359829bc0e396b1eb484953}{randutils\+::uniform\+\_\+distribution} = typename std\+::conditional$<$ std\+::is\+\_\+integral$<$ Numeric $>$\+::value, std\+::uniform\+\_\+int\+\_\+distribution$<$ Numeric $>$, std\+::uniform\+\_\+real\+\_\+distribution$<$ Numeric $>$$>$\+::type
+\item 
+using \hyperlink{namespacerandutils_a541e8d25081229bd349f2a5facb915a1}{randutils\+::default\+\_\+rng} = random\+\_\+generator$<$ std\+::default\+\_\+random\+\_\+engine $>$
+\item 
+using \hyperlink{namespacerandutils_a7ad409d0cae7ed019fd23cc64e3f764f}{randutils\+::mt19937\+\_\+rng} = random\+\_\+generator$<$ std\+::mt19937 $>$
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{rand__utils_8hpp_a5f37c8382c9af2999a0e8e0376d7c2ee}{}\index{rand\+\_\+utils.\+hpp@{rand\+\_\+utils.\+hpp}!R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+C\+P\+U\+\_\+\+E\+N\+T\+R\+O\+P\+Y@{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+C\+P\+U\+\_\+\+E\+N\+T\+R\+O\+P\+Y}}
+\index{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+C\+P\+U\+\_\+\+E\+N\+T\+R\+O\+P\+Y@{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+C\+P\+U\+\_\+\+E\+N\+T\+R\+O\+P\+Y}!rand\+\_\+utils.\+hpp@{rand\+\_\+utils.\+hpp}}
+\subsubsection[{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+C\+P\+U\+\_\+\+E\+N\+T\+R\+O\+P\+Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+C\+P\+U\+\_\+\+E\+N\+T\+R\+O\+P\+Y~0}\label{rand__utils_8hpp_a5f37c8382c9af2999a0e8e0376d7c2ee}
+\hypertarget{rand__utils_8hpp_a2915d2a055bd10130cbf9adf63b9dc74}{}\index{rand\+\_\+utils.\+hpp@{rand\+\_\+utils.\+hpp}!R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+N\+E\+R\+A\+L\+I\+Z\+E\+D\+\_\+\+C\+O\+N\+S\+T\+E\+X\+P\+R@{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+N\+E\+R\+A\+L\+I\+Z\+E\+D\+\_\+\+C\+O\+N\+S\+T\+E\+X\+P\+R}}
+\index{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+N\+E\+R\+A\+L\+I\+Z\+E\+D\+\_\+\+C\+O\+N\+S\+T\+E\+X\+P\+R@{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+N\+E\+R\+A\+L\+I\+Z\+E\+D\+\_\+\+C\+O\+N\+S\+T\+E\+X\+P\+R}!rand\+\_\+utils.\+hpp@{rand\+\_\+utils.\+hpp}}
+\subsubsection[{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+N\+E\+R\+A\+L\+I\+Z\+E\+D\+\_\+\+C\+O\+N\+S\+T\+E\+X\+P\+R}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+N\+E\+R\+A\+L\+I\+Z\+E\+D\+\_\+\+C\+O\+N\+S\+T\+E\+X\+P\+R}\label{rand__utils_8hpp_a2915d2a055bd10130cbf9adf63b9dc74}
+\hypertarget{rand__utils_8hpp_a61a22e26388255c3745edf97acf97725}{}\index{rand\+\_\+utils.\+hpp@{rand\+\_\+utils.\+hpp}!R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+T\+P\+I\+D@{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+T\+P\+I\+D}}
+\index{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+T\+P\+I\+D@{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+T\+P\+I\+D}!rand\+\_\+utils.\+hpp@{rand\+\_\+utils.\+hpp}}
+\subsubsection[{R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+T\+P\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\+A\+N\+D\+U\+T\+I\+L\+S\+\_\+\+G\+E\+T\+P\+I\+D~0}\label{rand__utils_8hpp_a61a22e26388255c3745edf97acf97725}

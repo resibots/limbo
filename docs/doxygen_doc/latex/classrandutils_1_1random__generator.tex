@@ -1,0 +1,204 @@
+\hypertarget{classrandutils_1_1random__generator}{}\section{randutils\+:\+:random\+\_\+generator$<$ Random\+Engine, Default\+Seed\+Seq $>$ Class Template Reference}
+\label{classrandutils_1_1random__generator}\index{randutils\+::random\+\_\+generator$<$ Random\+Engine, Default\+Seed\+Seq $>$@{randutils\+::random\+\_\+generator$<$ Random\+Engine, Default\+Seed\+Seq $>$}}
+
+
+{\ttfamily \#include $<$limbo/tools/rand\+\_\+utils.\+hpp$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classrandutils_1_1random__generator_a7ccbb95be67d7cd19f4b128be21b4ac3}{engine\+\_\+type} = Random\+Engine
+\item 
+using \hyperlink{classrandutils_1_1random__generator_a424b01b5232f91d42163369ad6bd3b11}{default\+\_\+seed\+\_\+type} = Default\+Seed\+Seq
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Seeding  = default\+\_\+seed\+\_\+type, typename... Params$>$ }\\\hyperlink{classrandutils_1_1random__generator_abfccab3973766dbd0526bc8269f26cff}{random\+\_\+generator} (Seeding \&\&seeding=\hyperlink{classrandutils_1_1random__generator_a424b01b5232f91d42163369ad6bd3b11}{default\+\_\+seed\+\_\+type}\{\})
+\item 
+{\footnotesize template$<$typename Seeding , typename... Params$>$ }\\\hyperlink{classrandutils_1_1random__generator_ab706901b79a9fceb71e3ad7fd7031ae4}{random\+\_\+generator} (Seeding \&\&seeding, Params \&\&...params)
+\item 
+{\footnotesize template$<$typename Seeding  = default\+\_\+seed\+\_\+type, typename... Params$>$ }\\void \hyperlink{classrandutils_1_1random__generator_ae25cea4c3bd86714fb8f2c2135842e68}{seed} (Seeding \&\&seeding=\hyperlink{classrandutils_1_1random__generator_a424b01b5232f91d42163369ad6bd3b11}{default\+\_\+seed\+\_\+type}\{\})
+\item 
+{\footnotesize template$<$typename Seeding , typename... Params$>$ }\\void \hyperlink{classrandutils_1_1random__generator_a05fa4e4dba44982912c32562dc8e16d8}{seed} (Seeding \&\&seeding, Params \&\&...params)
+\item 
+Random\+Engine \& \hyperlink{classrandutils_1_1random__generator_a85303ed792296a49a8f395fb3a71c2ed}{engine} ()
+\item 
+{\footnotesize template$<$typename Result\+Type , template$<$ typename $>$ class Dist\+Tmpl = std\+::normal\+\_\+distribution, typename... Params$>$ }\\Result\+Type \hyperlink{classrandutils_1_1random__generator_a4aed9ef9fe1695d08b9b30891f1127b3}{variate} (Params \&\&...params)
+\item 
+{\footnotesize template$<$typename Numeric $>$ }\\Numeric \hyperlink{classrandutils_1_1random__generator_a122935c5a83df7f584d7120c64c732bc}{uniform} (Numeric lower, Numeric upper)
+\item 
+{\footnotesize template$<$template$<$ typename $>$ class Dist\+Tmpl = uniform\+\_\+distribution, typename Iter , typename... Params$>$ }\\void \hyperlink{classrandutils_1_1random__generator_aa0e413e887ea03dfd1653d0b071f70bf}{generate} (Iter first, Iter last, Params \&\&...params)
+\item 
+{\footnotesize template$<$template$<$ typename $>$ class Dist\+Tmpl = uniform\+\_\+distribution, typename Range , typename... Params$>$ }\\void \hyperlink{classrandutils_1_1random__generator_ae061f844df411efc2ebfe6c3bbc6f206}{generate} (Range \&\&range, Params \&\&...params)
+\item 
+{\footnotesize template$<$typename Iter $>$ }\\void \hyperlink{classrandutils_1_1random__generator_aaa2790b3799d1a62d489ae3efefbb006}{shuffle} (Iter first, Iter last)
+\item 
+{\footnotesize template$<$typename Range $>$ }\\void \hyperlink{classrandutils_1_1random__generator_a96bd60aadafa23dc853dcd9414f26b69}{shuffle} (Range \&\&range)
+\item 
+{\footnotesize template$<$typename Iter $>$ }\\Iter \hyperlink{classrandutils_1_1random__generator_a29f305cbca6d418d4c2ddbf60953dc42}{choose} (Iter first, Iter last)
+\item 
+{\footnotesize template$<$typename Range $>$ }\\auto \hyperlink{classrandutils_1_1random__generator_a0eafdcc64b6d0967d9668a0775628af6}{choose} (Range \&\&range) -\/$>$ decltype(std\+::begin(range))
+\item 
+{\footnotesize template$<$typename Range $>$ }\\auto \hyperlink{classrandutils_1_1random__generator_a6d9a9002b313cf8126bf640f728f3c49}{pick} (Range \&\&range) -\/$>$ decltype($\ast$std\+::begin(range))
+\item 
+{\footnotesize template$<$typename T $>$ }\\auto \hyperlink{classrandutils_1_1random__generator_aab0a1c9def1a609d5739eddf5ca8caeb}{pick} (std\+::initializer\+\_\+list$<$ T $>$ range) -\/$>$ decltype($\ast$range.\+begin())
+\item 
+{\footnotesize template$<$typename Size , typename Iter $>$ }\\Iter \hyperlink{classrandutils_1_1random__generator_a6572f276cd3c8fd547ffbefce5cd4dc4}{sample} (Size to\+\_\+go, Iter first, Iter last)
+\item 
+{\footnotesize template$<$typename Size , typename Range $>$ }\\auto \hyperlink{classrandutils_1_1random__generator_a1f99da2d77fccea01edc3a5fe32255ac}{sample} (Size to\+\_\+go, Range \&\&range) -\/$>$ decltype(std\+::begin(range))
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classrandutils_1_1random__generator_a424b01b5232f91d42163369ad6bd3b11}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!default\+\_\+seed\+\_\+type@{default\+\_\+seed\+\_\+type}}
+\index{default\+\_\+seed\+\_\+type@{default\+\_\+seed\+\_\+type}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{default\+\_\+seed\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ using {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::{\bf default\+\_\+seed\+\_\+type} =  Default\+Seed\+Seq}\label{classrandutils_1_1random__generator_a424b01b5232f91d42163369ad6bd3b11}
+\hypertarget{classrandutils_1_1random__generator_a7ccbb95be67d7cd19f4b128be21b4ac3}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!engine\+\_\+type@{engine\+\_\+type}}
+\index{engine\+\_\+type@{engine\+\_\+type}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{engine\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ using {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::{\bf engine\+\_\+type} =  Random\+Engine}\label{classrandutils_1_1random__generator_a7ccbb95be67d7cd19f4b128be21b4ac3}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classrandutils_1_1random__generator_abfccab3973766dbd0526bc8269f26cff}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!random\+\_\+generator@{random\+\_\+generator}}
+\index{random\+\_\+generator@{random\+\_\+generator}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{random\+\_\+generator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Seeding  = default\+\_\+seed\+\_\+type, typename... Params$>$ {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::{\bf random\+\_\+generator} (
+\begin{DoxyParamCaption}
+\item[{Seeding \&\&}]{seeding = {\ttfamily {\bf default\+\_\+seed\+\_\+type}\{\}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_abfccab3973766dbd0526bc8269f26cff}
+\hypertarget{classrandutils_1_1random__generator_ab706901b79a9fceb71e3ad7fd7031ae4}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!random\+\_\+generator@{random\+\_\+generator}}
+\index{random\+\_\+generator@{random\+\_\+generator}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{random\+\_\+generator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Seeding , typename... Params$>$ {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::{\bf random\+\_\+generator} (
+\begin{DoxyParamCaption}
+\item[{Seeding \&\&}]{seeding, }
+\item[{Params \&\&...}]{params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_ab706901b79a9fceb71e3ad7fd7031ae4}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classrandutils_1_1random__generator_a29f305cbca6d418d4c2ddbf60953dc42}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!choose@{choose}}
+\index{choose@{choose}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{choose}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Iter $>$ Iter {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::choose (
+\begin{DoxyParamCaption}
+\item[{Iter}]{first, }
+\item[{Iter}]{last}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a29f305cbca6d418d4c2ddbf60953dc42}
+\hypertarget{classrandutils_1_1random__generator_a0eafdcc64b6d0967d9668a0775628af6}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!choose@{choose}}
+\index{choose@{choose}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{choose}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Range $>$ auto {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::choose (
+\begin{DoxyParamCaption}
+\item[{Range \&\&}]{range}
+\end{DoxyParamCaption}
+) -\/$>$ decltype(std\+::begin(range))
+        \hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a0eafdcc64b6d0967d9668a0775628af6}
+\hypertarget{classrandutils_1_1random__generator_a85303ed792296a49a8f395fb3a71c2ed}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!engine@{engine}}
+\index{engine@{engine}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{engine}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ Random\+Engine\& {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::engine (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a85303ed792296a49a8f395fb3a71c2ed}
+\hypertarget{classrandutils_1_1random__generator_aa0e413e887ea03dfd1653d0b071f70bf}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!generate@{generate}}
+\index{generate@{generate}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{generate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$template$<$ typename $>$ class Dist\+Tmpl = uniform\+\_\+distribution, typename Iter , typename... Params$>$ void {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::generate (
+\begin{DoxyParamCaption}
+\item[{Iter}]{first, }
+\item[{Iter}]{last, }
+\item[{Params \&\&...}]{params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_aa0e413e887ea03dfd1653d0b071f70bf}
+\hypertarget{classrandutils_1_1random__generator_ae061f844df411efc2ebfe6c3bbc6f206}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!generate@{generate}}
+\index{generate@{generate}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{generate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$template$<$ typename $>$ class Dist\+Tmpl = uniform\+\_\+distribution, typename Range , typename... Params$>$ void {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::generate (
+\begin{DoxyParamCaption}
+\item[{Range \&\&}]{range, }
+\item[{Params \&\&...}]{params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_ae061f844df411efc2ebfe6c3bbc6f206}
+\hypertarget{classrandutils_1_1random__generator_a6d9a9002b313cf8126bf640f728f3c49}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!pick@{pick}}
+\index{pick@{pick}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{pick}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Range $>$ auto {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::pick (
+\begin{DoxyParamCaption}
+\item[{Range \&\&}]{range}
+\end{DoxyParamCaption}
+) -\/$>$ decltype($\ast$std\+::begin(range))
+        \hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a6d9a9002b313cf8126bf640f728f3c49}
+\hypertarget{classrandutils_1_1random__generator_aab0a1c9def1a609d5739eddf5ca8caeb}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!pick@{pick}}
+\index{pick@{pick}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{pick}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename T $>$ auto {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::pick (
+\begin{DoxyParamCaption}
+\item[{std\+::initializer\+\_\+list$<$ T $>$}]{range}
+\end{DoxyParamCaption}
+) -\/$>$ decltype($\ast$range.\+begin())
+        \hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_aab0a1c9def1a609d5739eddf5ca8caeb}
+\hypertarget{classrandutils_1_1random__generator_a6572f276cd3c8fd547ffbefce5cd4dc4}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!sample@{sample}}
+\index{sample@{sample}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Size , typename Iter $>$ Iter {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::sample (
+\begin{DoxyParamCaption}
+\item[{Size}]{to\+\_\+go, }
+\item[{Iter}]{first, }
+\item[{Iter}]{last}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a6572f276cd3c8fd547ffbefce5cd4dc4}
+\hypertarget{classrandutils_1_1random__generator_a1f99da2d77fccea01edc3a5fe32255ac}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!sample@{sample}}
+\index{sample@{sample}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Size , typename Range $>$ auto {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::sample (
+\begin{DoxyParamCaption}
+\item[{Size}]{to\+\_\+go, }
+\item[{Range \&\&}]{range}
+\end{DoxyParamCaption}
+) -\/$>$ decltype(std\+::begin(range))
+        \hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a1f99da2d77fccea01edc3a5fe32255ac}
+\hypertarget{classrandutils_1_1random__generator_ae25cea4c3bd86714fb8f2c2135842e68}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!seed@{seed}}
+\index{seed@{seed}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{seed}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Seeding  = default\+\_\+seed\+\_\+type, typename... Params$>$ void {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::seed (
+\begin{DoxyParamCaption}
+\item[{Seeding \&\&}]{seeding = {\ttfamily {\bf default\+\_\+seed\+\_\+type}\{\}}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_ae25cea4c3bd86714fb8f2c2135842e68}
+\hypertarget{classrandutils_1_1random__generator_a05fa4e4dba44982912c32562dc8e16d8}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!seed@{seed}}
+\index{seed@{seed}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{seed}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Seeding , typename... Params$>$ void {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::seed (
+\begin{DoxyParamCaption}
+\item[{Seeding \&\&}]{seeding, }
+\item[{Params \&\&...}]{params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a05fa4e4dba44982912c32562dc8e16d8}
+\hypertarget{classrandutils_1_1random__generator_aaa2790b3799d1a62d489ae3efefbb006}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!shuffle@{shuffle}}
+\index{shuffle@{shuffle}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{shuffle}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Iter $>$ void {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::shuffle (
+\begin{DoxyParamCaption}
+\item[{Iter}]{first, }
+\item[{Iter}]{last}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_aaa2790b3799d1a62d489ae3efefbb006}
+\hypertarget{classrandutils_1_1random__generator_a96bd60aadafa23dc853dcd9414f26b69}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!shuffle@{shuffle}}
+\index{shuffle@{shuffle}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{shuffle}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Range $>$ void {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::shuffle (
+\begin{DoxyParamCaption}
+\item[{Range \&\&}]{range}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a96bd60aadafa23dc853dcd9414f26b69}
+\hypertarget{classrandutils_1_1random__generator_a122935c5a83df7f584d7120c64c732bc}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!uniform@{uniform}}
+\index{uniform@{uniform}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{uniform}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Numeric $>$ Numeric {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::uniform (
+\begin{DoxyParamCaption}
+\item[{Numeric}]{lower, }
+\item[{Numeric}]{upper}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a122935c5a83df7f584d7120c64c732bc}
+\hypertarget{classrandutils_1_1random__generator_a4aed9ef9fe1695d08b9b30891f1127b3}{}\index{randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}!variate@{variate}}
+\index{variate@{variate}!randutils\+::random\+\_\+generator@{randutils\+::random\+\_\+generator}}
+\subsubsection[{variate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Random\+Engine  = std\+::default\+\_\+random\+\_\+engine, typename Default\+Seed\+Seq  = auto\+\_\+seed\+\_\+256$>$ template$<$typename Result\+Type , template$<$ typename $>$ class Dist\+Tmpl = std\+::normal\+\_\+distribution, typename... Params$>$ Result\+Type {\bf randutils\+::random\+\_\+generator}$<$ Random\+Engine, Default\+Seed\+Seq $>$\+::variate (
+\begin{DoxyParamCaption}
+\item[{Params \&\&...}]{params}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classrandutils_1_1random__generator_a4aed9ef9fe1695d08b9b30891f1127b3}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/tools/\hyperlink{rand__utils_8hpp}{rand\+\_\+utils.\+hpp}\end{DoxyCompactItemize}

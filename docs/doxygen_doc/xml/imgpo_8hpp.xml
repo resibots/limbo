@@ -12,335 +12,96 @@
     <includes refid="random__generator_8hpp" local="no">limbo/tools/random_generator.hpp</includes>
     <includes refid="bo__base_8hpp" local="no">limbo/bayes_opt/bo_base.hpp</includes>
     <incdepgraph>
-      <node id="361">
+      <node id="371">
         <label>list</label>
       </node>
-      <node id="394">
-        <label>libcmaes/cmaes.h</label>
-      </node>
-      <node id="357">
+      <node id="367">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="397">
+      <node id="380">
+        <label>functional</label>
+      </node>
+      <node id="410">
         <label>Eigen/Cholesky</label>
       </node>
-      <node id="368">
+      <node id="387">
         <label>limits</label>
       </node>
-      <node id="387">
-        <label>limbo/acqui/gp_ucb.hpp</label>
-        <link refid="gp__ucb_8hpp"/>
-        <childnode refid="355" relation="include">
-        </childnode>
-        <childnode refid="356" relation="include">
-        </childnode>
-      </node>
-      <node id="398">
+      <node id="411">
         <label>Eigen/LU</label>
       </node>
-      <node id="352">
+      <node id="362">
         <label>iterator</label>
       </node>
-      <node id="402">
-        <label>limbo/opt/rprop.hpp</label>
-        <link refid="rprop_8hpp"/>
-        <childnode refid="351" relation="include">
-        </childnode>
-        <childnode refid="403" relation="include">
-        </childnode>
-        <childnode refid="355" relation="include">
-        </childnode>
-        <childnode refid="356" relation="include">
-        </childnode>
-        <childnode refid="404" relation="include">
-        </childnode>
-        <childnode refid="391" relation="include">
-        </childnode>
-      </node>
-      <node id="362">
-        <label>stdlib.h</label>
-      </node>
-      <node id="391">
-        <label>limbo/opt/optimizer.hpp</label>
-        <link refid="optimizer_8hpp"/>
-        <childnode refid="392" relation="include">
-        </childnode>
-        <childnode refid="355" relation="include">
-        </childnode>
-        <childnode refid="393" relation="include">
-        </childnode>
-      </node>
-      <node id="405">
-        <label>limbo/init/random_sampling.hpp</label>
-        <link refid="random__sampling_8hpp"/>
-        <childnode refid="355" relation="include">
-        </childnode>
-        <childnode refid="356" relation="include">
-        </childnode>
-        <childnode refid="358" relation="include">
-        </childnode>
-      </node>
-      <node id="353">
-        <label>cmath</label>
-      </node>
-      <node id="396">
-        <label>cassert</label>
-      </node>
-      <node id="355">
-        <label>Eigen/Core</label>
-      </node>
-      <node id="380">
-        <label>string</label>
-      </node>
-      <node id="390">
-        <label>limbo/tools/parallel.hpp</label>
-        <link refid="parallel_8hpp"/>
-        <childnode refid="367" relation="include">
-        </childnode>
-        <childnode refid="351" relation="include">
-        </childnode>
-      </node>
-      <node id="370">
-        <label>boost/parameter.hpp</label>
-      </node>
-      <node id="369">
-        <label>exception</label>
-      </node>
-      <node id="379">
-        <label>fstream</label>
-      </node>
-      <node id="384">
-        <label>limbo/tools/sys.hpp</label>
-        <link refid="sys_8hpp"/>
-        <childnode refid="360" relation="include">
-        </childnode>
-        <childnode refid="385" relation="include">
-        </childnode>
-        <childnode refid="380" relation="include">
-        </childnode>
-      </node>
-      <node id="358">
-        <label>limbo/tools/random_generator.hpp</label>
-        <link refid="random__generator_8hpp"/>
-        <childnode refid="359" relation="include">
-        </childnode>
-        <childnode refid="353" relation="include">
-        </childnode>
-        <childnode refid="360" relation="include">
-        </childnode>
-        <childnode refid="361" relation="include">
-        </childnode>
-        <childnode refid="362" relation="include">
-        </childnode>
-        <childnode refid="363" relation="include">
-        </childnode>
-        <childnode refid="364" relation="include">
-        </childnode>
+      <node id="406">
+        <label>limbo/acqui/ucb.hpp</label>
+        <link refid="ucb_8hpp"/>
         <childnode refid="365" relation="include">
-        </childnode>
-      </node>
-      <node id="354">
-        <label>boost/parameter/aux_/void.hpp</label>
-      </node>
-      <node id="388">
-        <label>limbo/mean/data.hpp</label>
-        <link refid="data_8hpp"/>
-        <childnode refid="355" relation="include">
-        </childnode>
-      </node>
-      <node id="373">
-        <label>boost/fusion/include/for_each.hpp</label>
-      </node>
-      <node id="363">
-        <label>random</label>
-      </node>
-      <node id="401">
-        <label>limbo/opt/parallel_repeater.hpp</label>
-        <link refid="parallel__repeater_8hpp"/>
-        <childnode refid="351" relation="include">
-        </childnode>
-        <childnode refid="355" relation="include">
-        </childnode>
-        <childnode refid="356" relation="include">
-        </childnode>
-        <childnode refid="390" relation="include">
-        </childnode>
-        <childnode refid="358" relation="include">
-        </childnode>
-        <childnode refid="391" relation="include">
-        </childnode>
-      </node>
-      <node id="392">
-        <label>tuple</label>
-      </node>
-      <node id="386">
-        <label>limbo/kernel/squared_exp_ard.hpp</label>
-        <link refid="squared__exp__ard_8hpp"/>
-        <childnode refid="355" relation="include">
-        </childnode>
-      </node>
-      <node id="360">
-        <label>ctime</label>
-      </node>
-      <node id="349">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
-        <link refid="imgpo.hpp"/>
-        <childnode refid="350" relation="include">
-        </childnode>
-        <childnode refid="351" relation="include">
-        </childnode>
-        <childnode refid="352" relation="include">
-        </childnode>
-        <childnode refid="353" relation="include">
-        </childnode>
-        <childnode refid="354" relation="include">
-        </childnode>
-        <childnode refid="355" relation="include">
-        </childnode>
-        <childnode refid="356" relation="include">
-        </childnode>
-        <childnode refid="358" relation="include">
         </childnode>
         <childnode refid="366" relation="include">
         </childnode>
       </node>
-      <node id="400">
-        <label>limbo/model/gp/kernel_lf_opt.hpp</label>
-        <link refid="kernel__lf__opt_8hpp"/>
-        <childnode refid="355" relation="include">
+      <node id="378">
+        <label>cstdint</label>
+      </node>
+      <node id="372">
+        <label>stdlib.h</label>
+      </node>
+      <node id="413">
+        <label>limbo/init/random_sampling.hpp</label>
+        <link refid="random__sampling_8hpp"/>
+        <childnode refid="365" relation="include">
         </childnode>
-        <childnode refid="401" relation="include">
-        </childnode>
-        <childnode refid="402" relation="include">
-        </childnode>
-        <childnode refid="358" relation="include">
-        </childnode>
-      </node>
-      <node id="385">
-        <label>unistd.h</label>
-      </node>
-      <node id="367">
-        <label>vector</label>
-      </node>
-      <node id="374">
-        <label>boost/filesystem.hpp</label>
-      </node>
-      <node id="364">
-        <label>utility</label>
-      </node>
-      <node id="382">
-        <label>limbo/stat/aggregated_observations.hpp</label>
-        <link refid="aggregated__observations_8hpp"/>
-        <childnode refid="378" relation="include">
-        </childnode>
-      </node>
-      <node id="376">
-        <label>limbo/stop/max_iterations.hpp</label>
-        <link refid="max__iterations_8hpp"/>
-        <childnode refid="356" relation="include">
-        </childnode>
-      </node>
-      <node id="377">
-        <label>limbo/stat/samples.hpp</label>
-        <link refid="samples_8hpp"/>
-        <childnode refid="378" relation="include">
-        </childnode>
-      </node>
-      <node id="359">
-        <label>cstdlib</label>
-      </node>
-      <node id="350">
-        <label>iostream</label>
-      </node>
-      <node id="395">
-        <label>limbo/model/gp.hpp</label>
-        <link refid="model_2gp_8hpp"/>
-        <childnode refid="396" relation="include">
-        </childnode>
-        <childnode refid="350" relation="include">
+        <childnode refid="366" relation="include">
         </childnode>
         <childnode refid="368" relation="include">
         </childnode>
-        <childnode refid="367" relation="include">
+      </node>
+      <node id="363">
+        <label>cmath</label>
+      </node>
+      <node id="409">
+        <label>cassert</label>
+      </node>
+      <node id="365">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="399">
+        <label>string</label>
+      </node>
+      <node id="389">
+        <label>boost/parameter.hpp</label>
+      </node>
+      <node id="388">
+        <label>exception</label>
+      </node>
+      <node id="398">
+        <label>fstream</label>
+      </node>
+      <node id="405">
+        <label>limbo/kernel/exp.hpp</label>
+        <link refid="exp_8hpp"/>
+        <childnode refid="365" relation="include">
         </childnode>
-        <childnode refid="397" relation="include">
+        <childnode refid="366" relation="include">
         </childnode>
-        <childnode refid="355" relation="include">
+      </node>
+      <node id="403">
+        <label>limbo/tools/sys.hpp</label>
+        <link refid="sys_8hpp"/>
+        <childnode refid="370" relation="include">
         </childnode>
-        <childnode refid="398" relation="include">
+        <childnode refid="404" relation="include">
         </childnode>
         <childnode refid="399" relation="include">
         </childnode>
       </node>
-      <node id="372">
-        <label>boost/fusion/include/accumulate.hpp</label>
-      </node>
-      <node id="399">
-        <label>limbo/model/gp/no_lf_opt.hpp</label>
-        <link refid="no__lf__opt_8hpp"/>
-      </node>
-      <node id="378">
-        <label>limbo/stat/stat_base.hpp</label>
-        <link refid="stat__base_8hpp"/>
-        <childnode refid="379" relation="include">
-        </childnode>
-        <childnode refid="380" relation="include">
-        </childnode>
-        <childnode refid="381" relation="include">
-        </childnode>
-      </node>
-      <node id="365">
-        <label>mutex</label>
-      </node>
-      <node id="383">
-        <label>limbo/stat/console_summary.hpp</label>
-        <link refid="console__summary_8hpp"/>
-        <childnode refid="378" relation="include">
-        </childnode>
-      </node>
-      <node id="371">
-        <label>boost/fusion/include/vector.hpp</label>
-      </node>
-      <node id="393">
-        <label>boost/optional.hpp</label>
-      </node>
-      <node id="404">
-        <label>limbo/tools/math.hpp</label>
-        <link refid="math_8hpp"/>
-        <childnode refid="359" relation="include">
-        </childnode>
-        <childnode refid="353" relation="include">
-        </childnode>
-        <childnode refid="360" relation="include">
-        </childnode>
-        <childnode refid="361" relation="include">
-        </childnode>
-        <childnode refid="362" relation="include">
+      <node id="368">
+        <label>limbo/tools/random_generator.hpp</label>
+        <link refid="random__generator_8hpp"/>
+        <childnode refid="369" relation="include">
         </childnode>
         <childnode refid="363" relation="include">
-        </childnode>
-        <childnode refid="364" relation="include">
-        </childnode>
-        <childnode refid="365" relation="include">
-        </childnode>
-      </node>
-      <node id="351">
-        <label>algorithm</label>
-      </node>
-      <node id="375">
-        <label>limbo/stop/chain_criteria.hpp</label>
-        <link refid="chain__criteria_8hpp"/>
-      </node>
-      <node id="366">
-        <label>limbo/bayes_opt/bo_base.hpp</label>
-        <link refid="bo__base_8hpp"/>
-        <childnode refid="367" relation="include">
-        </childnode>
-        <childnode refid="350" relation="include">
-        </childnode>
-        <childnode refid="368" relation="include">
-        </childnode>
-        <childnode refid="369" relation="include">
         </childnode>
         <childnode refid="370" relation="include">
         </childnode>
@@ -352,23 +113,216 @@
         </childnode>
         <childnode refid="374" relation="include">
         </childnode>
-        <childnode refid="355" relation="include">
-        </childnode>
-        <childnode refid="356" relation="include">
-        </childnode>
         <childnode refid="375" relation="include">
         </childnode>
         <childnode refid="376" relation="include">
         </childnode>
+      </node>
+      <node id="364">
+        <label>boost/parameter/aux_/void.hpp</label>
+      </node>
+      <node id="407">
+        <label>limbo/mean/data.hpp</label>
+        <link refid="data_8hpp"/>
+        <childnode refid="365" relation="include">
+        </childnode>
+      </node>
+      <node id="392">
+        <label>boost/fusion/include/for_each.hpp</label>
+      </node>
+      <node id="373">
+        <label>random</label>
+      </node>
+      <node id="370">
+        <label>ctime</label>
+      </node>
+      <node id="359">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
+        <link refid="imgpo.hpp"/>
+        <childnode refid="360" relation="include">
+        </childnode>
+        <childnode refid="361" relation="include">
+        </childnode>
+        <childnode refid="362" relation="include">
+        </childnode>
+        <childnode refid="363" relation="include">
+        </childnode>
+        <childnode refid="364" relation="include">
+        </childnode>
+        <childnode refid="365" relation="include">
+        </childnode>
+        <childnode refid="366" relation="include">
+        </childnode>
+        <childnode refid="368" relation="include">
+        </childnode>
+        <childnode refid="385" relation="include">
+        </childnode>
+      </node>
+      <node id="404">
+        <label>unistd.h</label>
+      </node>
+      <node id="386">
+        <label>vector</label>
+      </node>
+      <node id="393">
+        <label>boost/filesystem.hpp</label>
+      </node>
+      <node id="374">
+        <label>utility</label>
+      </node>
+      <node id="379">
+        <label>array</label>
+      </node>
+      <node id="401">
+        <label>limbo/stat/aggregated_observations.hpp</label>
+        <link refid="aggregated__observations_8hpp"/>
+        <childnode refid="397" relation="include">
+        </childnode>
+      </node>
+      <node id="395">
+        <label>limbo/stop/max_iterations.hpp</label>
+        <link refid="max__iterations_8hpp"/>
+        <childnode refid="366" relation="include">
+        </childnode>
+      </node>
+      <node id="396">
+        <label>limbo/stat/samples.hpp</label>
+        <link refid="samples_8hpp"/>
+        <childnode refid="397" relation="include">
+        </childnode>
+      </node>
+      <node id="376">
+        <label>limbo/tools/rand_utils.hpp</label>
+        <link refid="rand__utils_8hpp"/>
         <childnode refid="377" relation="include">
         </childnode>
+        <childnode refid="378" relation="include">
+        </childnode>
+        <childnode refid="369" relation="include">
+        </childnode>
+        <childnode refid="373" relation="include">
+        </childnode>
+        <childnode refid="379" relation="include">
+        </childnode>
+        <childnode refid="380" relation="include">
+        </childnode>
+        <childnode refid="381" relation="include">
+        </childnode>
+        <childnode refid="374" relation="include">
+        </childnode>
         <childnode refid="382" relation="include">
+        </childnode>
+        <childnode refid="362" relation="include">
         </childnode>
         <childnode refid="383" relation="include">
         </childnode>
         <childnode refid="384" relation="include">
         </childnode>
+        <childnode refid="361" relation="include">
+        </childnode>
+      </node>
+      <node id="369">
+        <label>cstdlib</label>
+      </node>
+      <node id="360">
+        <label>iostream</label>
+      </node>
+      <node id="408">
+        <label>limbo/model/gp.hpp</label>
+        <link refid="model_2gp_8hpp"/>
+        <childnode refid="409" relation="include">
+        </childnode>
+        <childnode refid="360" relation="include">
+        </childnode>
+        <childnode refid="387" relation="include">
+        </childnode>
         <childnode refid="386" relation="include">
+        </childnode>
+        <childnode refid="410" relation="include">
+        </childnode>
+        <childnode refid="365" relation="include">
+        </childnode>
+        <childnode refid="411" relation="include">
+        </childnode>
+        <childnode refid="412" relation="include">
+        </childnode>
+      </node>
+      <node id="377">
+        <label>cstddef</label>
+      </node>
+      <node id="391">
+        <label>boost/fusion/include/accumulate.hpp</label>
+      </node>
+      <node id="412">
+        <label>limbo/model/gp/no_lf_opt.hpp</label>
+        <link refid="no__lf__opt_8hpp"/>
+        <childnode refid="360" relation="include">
+        </childnode>
+      </node>
+      <node id="397">
+        <label>limbo/stat/stat_base.hpp</label>
+        <link refid="stat__base_8hpp"/>
+        <childnode refid="398" relation="include">
+        </childnode>
+        <childnode refid="399" relation="include">
+        </childnode>
+        <childnode refid="400" relation="include">
+        </childnode>
+      </node>
+      <node id="375">
+        <label>mutex</label>
+      </node>
+      <node id="402">
+        <label>limbo/stat/console_summary.hpp</label>
+        <link refid="console__summary_8hpp"/>
+        <childnode refid="397" relation="include">
+        </childnode>
+      </node>
+      <node id="390">
+        <label>boost/fusion/include/vector.hpp</label>
+      </node>
+      <node id="383">
+        <label>chrono</label>
+      </node>
+      <node id="384">
+        <label>thread</label>
+      </node>
+      <node id="382">
+        <label>type_traits</label>
+      </node>
+      <node id="414">
+        <label>limbo/tools/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="369" relation="include">
+        </childnode>
+        <childnode refid="363" relation="include">
+        </childnode>
+        <childnode refid="370" relation="include">
+        </childnode>
+        <childnode refid="371" relation="include">
+        </childnode>
+        <childnode refid="372" relation="include">
+        </childnode>
+        <childnode refid="373" relation="include">
+        </childnode>
+        <childnode refid="374" relation="include">
+        </childnode>
+        <childnode refid="375" relation="include">
+        </childnode>
+      </node>
+      <node id="361">
+        <label>algorithm</label>
+      </node>
+      <node id="394">
+        <label>limbo/stop/chain_criteria.hpp</label>
+        <link refid="chain__criteria_8hpp"/>
+      </node>
+      <node id="385">
+        <label>limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="386" relation="include">
+        </childnode>
+        <childnode refid="360" relation="include">
         </childnode>
         <childnode refid="387" relation="include">
         </childnode>
@@ -376,45 +330,57 @@
         </childnode>
         <childnode refid="389" relation="include">
         </childnode>
-        <childnode refid="395" relation="include">
-        </childnode>
-        <childnode refid="400" relation="include">
-        </childnode>
-        <childnode refid="405" relation="include">
-        </childnode>
-      </node>
-      <node id="403">
-        <label>boost/math/special_functions/sign.hpp</label>
-      </node>
-      <node id="389">
-        <label>limbo/opt/cmaes.hpp</label>
-        <link refid="cmaes_8hpp"/>
-        <childnode refid="367" relation="include">
-        </childnode>
-        <childnode refid="350" relation="include">
-        </childnode>
-        <childnode refid="355" relation="include">
-        </childnode>
-        <childnode refid="356" relation="include">
-        </childnode>
         <childnode refid="390" relation="include">
         </childnode>
         <childnode refid="391" relation="include">
         </childnode>
+        <childnode refid="392" relation="include">
+        </childnode>
+        <childnode refid="393" relation="include">
+        </childnode>
+        <childnode refid="365" relation="include">
+        </childnode>
+        <childnode refid="366" relation="include">
+        </childnode>
         <childnode refid="394" relation="include">
         </childnode>
+        <childnode refid="395" relation="include">
+        </childnode>
+        <childnode refid="396" relation="include">
+        </childnode>
+        <childnode refid="401" relation="include">
+        </childnode>
+        <childnode refid="402" relation="include">
+        </childnode>
+        <childnode refid="403" relation="include">
+        </childnode>
+        <childnode refid="405" relation="include">
+        </childnode>
+        <childnode refid="406" relation="include">
+        </childnode>
+        <childnode refid="407" relation="include">
+        </childnode>
+        <childnode refid="408" relation="include">
+        </childnode>
+        <childnode refid="413" relation="include">
+        </childnode>
+        <childnode refid="414" relation="include">
+        </childnode>
       </node>
-      <node id="381">
+      <node id="400">
         <label>memory</label>
       </node>
-      <node id="356">
+      <node id="381">
+        <label>initializer_list</label>
+      </node>
+      <node id="366">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="357" relation="include">
+        <childnode refid="367" relation="include">
         </childnode>
-        <childnode refid="355" relation="include">
+        <childnode refid="365" relation="include">
         </childnode>
-        <childnode refid="350" relation="include">
+        <childnode refid="360" relation="include">
         </childnode>
       </node>
     </incdepgraph>
@@ -473,8 +439,8 @@
 <codeline lineno="41" refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o" kindref="compound">IMGPO</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">limbo::bayes_opt::BoBase</ref>&lt;Params,<sp/>A1,<sp/>A2,<sp/>A3,<sp/>A4,<sp/>A5&gt;<sp/>{</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="43" refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1a08e12049587eed6be7bc86f05da043f0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">BoBase&lt;Params, A1, A2, A3, A4, A5&gt;</ref><sp/><ref refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1a08e12049587eed6be7bc86f05da043f0" kindref="member">base_t</ref>;</highlight></codeline>
-<codeline lineno="44" refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1a2a2958dccaec1f7f1b21a2d4c85cf1fc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1ddc93cc023a2d7d527deb4cc750624e" kindref="member">base_t::model_t</ref><sp/><ref refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1a2a2958dccaec1f7f1b21a2d4c85cf1fc" kindref="member">model_t</ref>;</highlight></codeline>
-<codeline lineno="45" refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1af7f26bfe0e3119ce147088e9e8fbfc17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a02b14991b62e0f8c9bcf834220ed62e4" kindref="member">base_t::acquisition_function_t</ref><sp/><ref refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1af7f26bfe0e3119ce147088e9e8fbfc17" kindref="member">acquisition_function_t</ref>;</highlight></codeline>
+<codeline lineno="44" refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1a2a2958dccaec1f7f1b21a2d4c85cf1fc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a151af5c7eef92a82d8813bb2e067d267" kindref="member">base_t::model_t</ref><sp/><ref refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1a2a2958dccaec1f7f1b21a2d4c85cf1fc" kindref="member">model_t</ref>;</highlight></codeline>
+<codeline lineno="45" refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1af7f26bfe0e3119ce147088e9e8fbfc17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a200a43abb6c95d2d99660898b36f2200" kindref="member">base_t::acquisition_function_t</ref><sp/><ref refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1af7f26bfe0e3119ce147088e9e8fbfc17" kindref="member">acquisition_function_t</ref>;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StateFunction,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction<sp/>=<sp/>FirstElem&gt;</highlight></codeline>
 <codeline lineno="48" refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1afbee4ff7950e1f0f2f98962211fb4ae4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1afbee4ff7950e1f0f2f98962211fb4ae4" kindref="member">optimize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StateFunction&amp;<sp/>sfun,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun<sp/>=<sp/>AggregatorFunction(),<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>reset<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
@@ -496,7 +462,7 @@
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_tree[0].leaf.push_back(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_tree[0].samp.push_back(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96" kindref="member">add_new_sample</ref>(_tree[0].x[0],<sp/>_tree[0].f[0]);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" kindref="member">add_new_sample</ref>(_tree[0].x[0],<sp/>_tree[0].f[0]);</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>LB<sp/>=<sp/>afun(_tree[0].f[0]);</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>inf<sp/>=<sp/>std::numeric_limits&lt;double&gt;::infinity();</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
@@ -544,7 +510,7 @@
 <codeline lineno="112"><highlight class="normal"></highlight></codeline>
 <codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>tmp_sample<sp/>=<sp/>sfun(xxx);</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_tree[h].samp[i_max[h]]<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96" kindref="member">add_new_sample</ref>(xxx,<sp/>tmp_sample);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" kindref="member">add_new_sample</ref>(xxx,<sp/>tmp_sample);</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight></codeline>
 <codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>N<sp/>=<sp/>N+1</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_current_iteration++;</highlight></codeline>
@@ -676,7 +642,7 @@
 <codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fsample_g<sp/>=<sp/>sfun(x_g);</highlight></codeline>
 <codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_tree[h<sp/>+<sp/>1].samp.push_back(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="246"><highlight class="normal"></highlight></codeline>
-<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96" kindref="member">add_new_sample</ref>(x_g,<sp/>fsample_g);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" kindref="member">add_new_sample</ref>(x_g,<sp/>fsample_g);</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"></highlight></codeline>
 <codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b_hi_max_2<sp/>=<sp/><ref refid="group__par__tools_1gaf3fdc36fc4e94ad4cac72c803234b6ac" kindref="member">std::max</ref>(b_hi_max_2,<sp/>fsample_g(0));</highlight></codeline>
 <codeline lineno="250"><highlight class="normal"></highlight></codeline>
@@ -715,7 +681,7 @@
 <codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fsample_d<sp/>=<sp/>sfun(x_d);</highlight></codeline>
 <codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_tree[h<sp/>+<sp/>1].samp.push_back(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="285"><highlight class="normal"></highlight></codeline>
-<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96" kindref="member">add_new_sample</ref>(x_d,<sp/>fsample_d);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" kindref="member">add_new_sample</ref>(x_d,<sp/>fsample_d);</highlight></codeline>
 <codeline lineno="287"><highlight class="normal"></highlight></codeline>
 <codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b_hi_max_2<sp/>=<sp/><ref refid="group__par__tools_1gaf3fdc36fc4e94ad4cac72c803234b6ac" kindref="member">std::max</ref>(b_hi_max_2,<sp/>fsample_d(0));</highlight></codeline>
 <codeline lineno="289"><highlight class="normal"></highlight></codeline>

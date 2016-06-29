@@ -114,7 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#class-structure">Class Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sequence-graph">Sequence graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sequence-diagram">Sequence diagram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#file-structure">File Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bayesian-optimizers-bayes-opt">Bayesian optimizers (bayes_opt)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acquisition-functions-acqui">Acquisition functions (acqui)</a><ul>
@@ -158,9 +158,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#statistics-stats">Statistics (stats)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id23">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-statistics">Available statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id24">Default parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Default parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#parallel-tools-par">Parallel tools (par)</a></li>
@@ -222,7 +222,7 @@
   <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <p>Limbo follows a  <a class="reference external" href="https://en.wikipedia.org/wiki/Policy-based_design">policy-based design</a>, which allows users to combine high flexibility (almost every part of Limbo can be substituted by a user-defined part) with high performance (the abstraction do not add any overhead, contrary to classic OOP design). These two features are critical for researchers who want to experiment new ideas in Bayesian optimization. This means that changing a part of limbo (e.g. changing the kernel functions) usually corresponds to changing a template parameter of the optimizer.</p>
-<p>The parameters of the algorithms (e.g. an epsilon) are given by a template class (usually called Params in our code, and always the first argument). See <code class="xref doc docutils literal"><span class="pre">parameters</span></code> for details.</p>
+<p>The parameters of the algorithms (e.g. an epsilon) are given by a template class (usually called Params in our code, and always the first argument). See <a class="reference internal" href="guides/parameters.html"><em>Parameters</em></a> for details.</p>
 <p>To avoid defining each component of an optimizer manually, Limbo provides sensible defaults. In addition, Limbo relies on <a class="reference external" href="http://www.boost.org/doc/libs/1_60_0/libs/parameter/doc/html/index.html">Boost.Parameter</a>  to make it easy to customize a single part. This Boost library allows us to write classes that accept template argument (user-defined custom classes) by name. For instance, to customize the stopping criteria:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
 
@@ -239,7 +239,7 @@
 </div>
 <div class="section" id="class-structure">
 <h2>Class Structure<a class="headerlink" href="#class-structure" title="Permalink to this headline">¶</a></h2>
-<div class="figure" id="id25">
+<div class="figure" id="id26">
 <a class="reference external image-reference" href="_images/limbo_uml_v2.png"><img alt="UML class diagram" src="_images/limbo_uml_v2.png" /></a>
 <p class="caption"><span class="caption-text">Click on the image to see it bigger.</span></p>
 </div>
@@ -251,19 +251,20 @@
 <p>However, there is no need to inherit from a particular &#8216;abstract&#8217; class.</p>
 <p>Every class is parametrized by a <a class="reference internal" href="guides/parameters.html#params-guide"><span>Params</span></a> class that contains all the parameters.</p>
 </div>
-<div class="section" id="sequence-graph">
-<h2>Sequence graph<a class="headerlink" href="#sequence-graph" title="Permalink to this headline">¶</a></h2>
-<div class="figure" id="id26">
-<a class="reference external image-reference" href="_images/limbo_call_graph.png"><img alt="Sequence diagram" src="_images/limbo_call_graph.png" /></a>
+<div class="section" id="sequence-diagram">
+<h2>Sequence diagram<a class="headerlink" href="#sequence-diagram" title="Permalink to this headline">¶</a></h2>
+<div class="figure" id="id27">
+<a class="reference external image-reference" href="_images/limbo_sequence_diagram.png"><img alt="Sequence diagram" src="_images/limbo_sequence_diagram.png" /></a>
 <p class="caption"><span class="caption-text">Click on the image to see it bigger.</span></p>
 </div>
 </div>
 <div class="section" id="file-structure">
 <h2>File Structure<a class="headerlink" href="#file-structure" title="Permalink to this headline">¶</a></h2>
 <p>(see below for a short explanation of the concepts)</p>
+<p>..highlight:: none</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="n">src</span>
 <span class="o">+--</span> <span class="nl">limbo</span><span class="p">:</span>
-     <span class="o">+--</span> <span class="nl">acqui</span><span class="p">:</span> <span class="n">acquisition</span> <span class="n">functions</span>
+     <span class="o">|--</span> <span class="nl">acqui</span><span class="p">:</span> <span class="n">acquisition</span> <span class="n">functions</span>
      <span class="o">|--</span> <span class="nl">bayes_opt</span><span class="p">:</span> <span class="n">bayesian</span> <span class="n">optimizers</span>
      <span class="o">|--</span> <span class="nl">init</span><span class="p">:</span> <span class="n">initialization</span> <span class="n">functions</span>
      <span class="o">|--</span> <span class="nl">kernel</span><span class="p">:</span> <span class="n">kernel</span> <span class="n">functions</span>
@@ -276,17 +277,19 @@
 <span class="o">|--</span> <span class="nl">tests</span><span class="p">:</span> <span class="n">unit</span> <span class="n">tests</span>
 <span class="o">|--</span> <span class="nl">benchmarks</span><span class="p">:</span> <span class="n">a</span> <span class="n">few</span> <span class="n">benchmark</span> <span class="n">functions</span>
 <span class="o">|--</span> <span class="nl">examples</span><span class="p">:</span> <span class="n">a</span> <span class="n">few</span> <span class="n">examples</span>
-<span class="o">|--</span> <span class="nl">cmaes</span><span class="p">:</span> <span class="p">[</span><span class="n">external</span><span class="p">]</span> <span class="n">the</span> <span class="n">CMA</span><span class="o">-</span><span class="n">ES</span> <span class="n">library</span><span class="p">,</span> <span class="n">used</span> <span class="k">for</span> <span class="n">inner</span> <span class="n">optimizations</span> <span class="o">--</span> <span class="n">from</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//www.lri.fr/~hansen/cmaesintro.html</span>
-<span class="o">|--</span> <span class="nl">ehvi</span><span class="p">:</span> <span class="p">[</span><span class="n">external</span><span class="p">]</span> <span class="n">the</span> <span class="n">Expected</span> <span class="n">HyperVolume</span> <span class="n">Improvement</span><span class="p">,</span> <span class="n">used</span> <span class="k">for</span> <span class="n">Multi</span><span class="o">-</span><span class="n">Objective</span> <span class="n">Optimization</span> <span class="o">--</span> <span class="n">by</span> <span class="n">Iris</span> <span class="n">Hupkens</span>
+<span class="o">|--</span> <span class="nl">cmaes</span><span class="p">:</span> <span class="p">[</span><span class="n">external</span><span class="p">]</span> <span class="n">the</span> <span class="n">CMA</span><span class="o">-</span><span class="n">ES</span> <span class="n">library</span><span class="p">,</span>
+    <span class="n">used</span> <span class="k">for</span> <span class="n">inner</span> <span class="n">optimizations</span> <span class="o">--</span> <span class="n">from</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//www.lri.fr/~hansen/cmaesintro.html</span>
+<span class="o">|--</span> <span class="nl">ehvi</span><span class="p">:</span> <span class="p">[</span><span class="n">external</span><span class="p">]</span> <span class="n">the</span> <span class="n">Expected</span> <span class="n">HyperVolume</span> <span class="n">Improvement</span><span class="p">,</span>
+    <span class="n">used</span> <span class="k">for</span> <span class="n">Multi</span><span class="o">-</span><span class="n">Objective</span> <span class="n">Optimization</span> <span class="o">--</span> <span class="n">by</span> <span class="n">Iris</span> <span class="n">Hupkens</span>
 </pre></div>
 </div>
-<p>Each directory in the <cite>limbo</cite> directory corresponds to a namespace with the same name. There is also a file for each directory called &#8220;directory.hpp&#8221; (e.g. <cite>acqui.hpp</cite>) that includes the whole namespace.</p>
+<p>Each directory in the <cite>limbo</cite> directory corresponds to a namespace with the same name. There is also a file for each directory called &#8220;<em>directory</em>.hpp&#8221; (e.g. <code class="docutils literal"><span class="pre">acqui.hpp</span></code>) that includes the whole namespace.</p>
 </div>
 <div class="section" id="bayesian-optimizers-bayes-opt">
 <h2>Bayesian optimizers (bayes_opt)<a class="headerlink" href="#bayesian-optimizers-bayes-opt" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt>
-<span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base"></span><em class="property">template </em>&lt;class <em>Params</em>, class <em>A1</em> = boost::parameter::void_, class <em>A2</em> = boost::parameter::void_, class <em>A3</em> = boost::parameter::void_, class <em>A4</em> = boost::parameter::void_, class <em>A5</em> = boost::parameter::void_&gt;</dt>
+<span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base"></span><em class="property">template </em>&lt;class <em>Params</em>, class <em>A1</em> = boost::parameter::void_, class <em>A2</em> = boost::parameter::void_, class <em>A3</em> = boost::parameter::void_, class <em>A4</em> = boost::parameter::void_, class <em>A5</em> = boost::parameter::void_, class <em>A6</em> = boost::parameter::void_&gt;</dt>
 <dt id="_CPPv2N5limbo9bayes_opt6BoBaseE">
 <span id="limbo::bayes_opt::BoBase"></span><em class="property">class </em><code class="descclassname">limbo::bayes_opt::</code><code class="descname">BoBase</code><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBaseE" title="Permalink to this definition">¶</a></dt>
 <dd><p><p>Base class for Bayesian optimizers</p>
@@ -357,66 +360,66 @@
 <li><code class="docutils literal"><a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_b_optimizer"><span><span class="pre">bayes_opt::BOptimizer</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">modelfun&lt;GP_t&gt;,</span> <span class="pre">acquifun&lt;Acqui_t&gt;&gt;</span> <span class="pre">opt;</span></code> </li>
 </ul>
 </p>
-<p>Subclassed by <a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_b_optimizer"><span>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</span></a>, limbo::bayes_opt::experimental::IMGPO&lt; Params, A1, A2, A3, A4, A5 &gt;</p>
+<p>Subclassed by <a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_b_optimizer"><span>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</span></a></p>
 <div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv">
-<span id="limbo::bayes_opt::BoBase::BoBase"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a1602cb9a6fa728d8181ee7ec080dd441"></span><code class="descname">BoBase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::BoBase"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1ad361278c23693c4220eaa9a9de5d3333"></span><code class="descname">BoBase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>default constructor </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase6BoBaseERK6BoBase">
-<span id="limbo::bayes_opt::BoBase::BoBase__BoBaseCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a807db4b72b87b720303b4b56fce44899"></span><code class="descname">BoBase</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv" title="limbo::bayes_opt::BoBase::BoBase">BoBase</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseERK6BoBase" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::BoBase__BoBaseCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a1a50eebb8a6efd528582ea871a0879a0"></span><code class="descname">BoBase</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv" title="limbo::bayes_opt::BoBase::BoBase">BoBase</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseERK6BoBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>copy is disabled (dangerous and useless) </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBaseaSERK6BoBase">
-<span id="limbo::bayes_opt::BoBase::assign-operator__BoBaseCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a91b7f3f0295d4e6e2a1263f3882817bd"></span><a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv" title="limbo::bayes_opt::BoBase::BoBase">BoBase</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv" title="limbo::bayes_opt::BoBase::BoBase">BoBase</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBaseaSERK6BoBase" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::assign-operator__BoBaseCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a69628ced9d71209a59dcdfb7f5637265"></span><a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv" title="limbo::bayes_opt::BoBase::BoBase">BoBase</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBase6BoBaseEv" title="limbo::bayes_opt::BoBase::BoBase">BoBase</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBaseaSERK6BoBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>copy is disabled (dangerous and useless) </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase13stats_enabledEv">
-<span id="limbo::bayes_opt::BoBase::stats_enabled"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a124b963cab48ee23698b3cbd2dd1e496"></span>bool <code class="descname">stats_enabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase13stats_enabledEv" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::stats_enabled"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a4d94db5c40b35bec292aebfd19b8fb3d"></span>bool <code class="descname">stats_enabled</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase13stats_enabledEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>return true if the statitics are enabled (they can be disabled to avoid dumping data, e.g. for unit tests) </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase7res_dirEv">
-<span id="limbo::bayes_opt::BoBase::res_dir"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a5f589de569a67fe5a645ee0b7fe1173c"></span><em class="property">const</em> std::string &amp;<code class="descname">res_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase7res_dirEv" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::res_dir"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a4c87b7618144f99027c294db3eb803f6"></span><em class="property">const</em> std::string &amp;<code class="descname">res_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase7res_dirEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the name of the directory in which results (statistics) are written </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase12observationsEv">
-<span id="limbo::bayes_opt::BoBase::observations"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a1c5e2b7c9aaae38770505011dfcb61ec"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">observations</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase12observationsEv" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::observations"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a855dc5de1d0732a25f4c9730ac50d0bd"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">observations</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase12observationsEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the vector of points of observations (observations can be multi-dimensional, hence the VectorXd)  f(x) </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase7samplesEv">
-<span id="limbo::bayes_opt::BoBase::samples"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a3a68d0a9fce39ae5575c63a57a549f58"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase7samplesEv" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::samples"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1ad3ba0dba1418df0ed8e79d4dd3cc907a"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase7samplesEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the list of the points that have been evaluated so far (x) </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase10bl_samplesEv">
-<span id="limbo::bayes_opt::BoBase::bl_samples"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1aa85b7824943ae2ee35b50b446f6740c6"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">bl_samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase10bl_samplesEv" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::bl_samples"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1aa84e215cffa97a4e287aad3690f89635"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">bl_samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase10bl_samplesEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the list of blacklisted points </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase17current_iterationEv">
-<span id="limbo::bayes_opt::BoBase::current_iteration"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1abbd79a26fafeb6ea8f09df782972caa0"></span>int <code class="descname">current_iteration</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase17current_iterationEv" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::current_iteration"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1ac3d643d5a668edf22ad053bfc54ea090"></span>int <code class="descname">current_iteration</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase17current_iterationEv" title="Permalink to this definition">¶</a></dt>
 <dd><p>return the current iteration number </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase14add_new_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE">
-<span id="limbo::bayes_opt::BoBase::add_new_sample__Eigen::VectorXdCR.Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96"></span>void <code class="descname">add_new_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>s</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase14add_new_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::add_new_sample__Eigen::VectorXdCR.Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2"></span>void <code class="descname">add_new_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>s</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase14add_new_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a new sample / observation pair<ul class="simple">
 <li>does not update the model!</li>
 <li>we don&#8217;t add NaN and inf observations </li>
@@ -426,7 +429,7 @@
 
 <dl class="function">
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase17add_new_bl_sampleERKN5Eigen8VectorXdE">
-<span id="limbo::bayes_opt::BoBase::add_new_bl_sample__Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a7197b0c20d5644ec44070432555eb49b"></span>void <code class="descname">add_new_bl_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase17add_new_bl_sampleERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::add_new_bl_sample__Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a8694d4bbc5c373d067790ec31fb42a44"></span>void <code class="descname">add_new_bl_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase17add_new_bl_sampleERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a new blacklisted sample. </p>
 </dd></dl>
 
@@ -434,7 +437,7 @@
 <dt>
 <em class="property">template </em>&lt;<em class="property">typename</em> StateFunction&gt;</dt>
 <dt id="_CPPv2N5limbo9bayes_opt6BoBase12eval_and_addERK13StateFunctionRKN5Eigen8VectorXdE">
-<span id="limbo::bayes_opt::BoBase::eval_and_add__StateFunctionCR.Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a49f332ebc6e526169c619e6bc4430116"></span>bool <code class="descname">eval_and_add</code><span class="sig-paren">(</span><em class="property">const</em> StateFunction &amp;<em>seval</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>sample</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase12eval_and_addERK13StateFunctionRKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BoBase::eval_and_add__StateFunctionCR.Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_bo_base_1a387fba7bf70aa9410e1c04f035694f34"></span>bool <code class="descname">eval_and_add</code><span class="sig-paren">(</span><em class="property">const</em> StateFunction &amp;<em>seval</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>sample</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt6BoBase12eval_and_addERK13StateFunctionRKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a sample and add the result to the &#8216;database&#8217; (sample / observations vectors)  it does not update the model. </p>
 </dd></dl>
 
@@ -455,12 +458,12 @@
 <li><code class="docutils literal"><a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_grid_search"><span><span class="pre">opt::GridSearch</span></span></a><span class="pre">&lt;Params&gt;</span></code> otherwise (please do not use this: the algorithm will not work at all!) </li>
 </ul>
 </p>
-<p>Inherits from <a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_bo_base"><span>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;</span></a></p>
+<p>Inherits from <a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_bo_base"><span>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</span></a></p>
 <div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Public Types</p>
 <dl class="type">
 <dt id="_CPPv2N5limbo9bayes_opt10BOptimizer6base_tE">
-<span id="limbo::bayes_opt::BOptimizer::base_t"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_b_optimizer_1a89d1cce7fdecc3598db103e337d942de"></span><em class="property">typedef </em><a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBaseE" title="limbo::bayes_opt::BoBase">BoBase</a>&lt;Params, A1, A2, A3, A4, A5&gt; <code class="descname">base_t</code><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt10BOptimizer6base_tE" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::bayes_opt::BOptimizer::base_t"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_b_optimizer_1acfc58fcdd57f2f5520e6ba175677c319"></span><em class="property">typedef </em><a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBaseE" title="limbo::bayes_opt::BoBase">BoBase</a>&lt;Params, A1, A2, A3, A4, A5, A6&gt; <code class="descname">base_t</code><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt10BOptimizer6base_tE" title="Permalink to this definition">¶</a></dt>
 <dd><p>link to the corresponding <a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_bo_base"><span>BoBase</span></a> (useful for typedefs) </p>
 </dd></dl>
 
@@ -525,7 +528,7 @@
 <span class="target" id="limboclasslimbo_1_1acqui_1_1_g_p___u_c_b"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Model&gt;</dt>
 <dt id="_CPPv2N5limbo5acqui6GP_UCBE">
 <span id="limbo::acqui::GP_UCB"></span><em class="property">class </em><code class="descname">GP_UCB</code><a class="headerlink" href="#_CPPv2N5limbo5acqui6GP_UCBE" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;limbo/acqui/gp_ucb.hpp&gt;</em><p><p>GP-UCB (Upper Confidence Bound). See <a class="reference internal" href="guides/limbo_concepts.html#brochu2010tutorial" id="id1">[1]</a>, p. 15. See also: <a class="reference external" href="http://arxiv.org/abs/0912.3995">http://arxiv.org/abs/0912.3995</a></p>
+<dd><em>#include &lt;limbo/acqui/gp_ucb.hpp&gt;</em><p><p>GP-UCB (Upper Confidence Bound). See [brochu2010tutorial], p. 15. See also: <a class="reference external" href="http://arxiv.org/abs/0912.3995">http://arxiv.org/abs/0912.3995</a></p>
 <div class="math">
 \[UCB(x) = \mu(x) + \kappa \sigma(x).\]</div>
 <p>with:</p>
@@ -547,7 +550,7 @@
 <span class="target" id="limboclasslimbo_1_1acqui_1_1_u_c_b"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Model&gt;</dt>
 <dt id="_CPPv2N5limbo5acqui3UCBE">
 <span id="limbo::acqui::UCB"></span><em class="property">class </em><code class="descname">UCB</code><a class="headerlink" href="#_CPPv2N5limbo5acqui3UCBE" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;limbo/acqui/ucb.hpp&gt;</em><p><p>Classic UCB (Upper Confidence Bound). See <a class="reference internal" href="guides/limbo_concepts.html#brochu2010tutorial" id="id2">[1]</a>, p. 14</p>
+<dd><em>#include &lt;limbo/acqui/ucb.hpp&gt;</em><p><p>Classic UCB (Upper Confidence Bound). See [brochu2010tutorial], p. 14</p>
 <blockquote>
 <div><div class="math">
 \[UCB(x) = \mu(x) + \alpha \sigma(x).\]</div>
@@ -1084,19 +1087,19 @@
 <dl class="function">
 <dt id="_CPPv2N5limbo5model2GP5queryERKN5Eigen8VectorXdE">
 <span id="limbo::model::GP::query__Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a33937ff7df97c01fdd9bf8911e0a6159"></span>std::tuple&lt;Eigen::VectorXd, double&gt; <code class="descname">query</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo5model2GP5queryERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
-<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\\mu</span></code>, :math:<code class="docutils literal"><span class="pre">\\sigma^2</span></code> (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"><span>mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"><span>sigma()</span></a> is more efficient because some computations are shared between <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"><span>mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"><span>sigma()</span></a>. \endrst </p>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\mu</span></code>, :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code> (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"><span>mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"><span>sigma()</span></a> is more efficient because some computations are shared between <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"><span>mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"><span>sigma()</span></a>. \endrst </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo5model2GP2muERKN5Eigen8VectorXdE">
 <span id="limbo::model::GP::mu__Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"></span>Eigen::VectorXd <code class="descname">mu</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo5model2GP2muERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
-<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\\mu</span></code> (unormalized). If there is no sample, return the value according to the mean function. \endrst </p>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\mu</span></code> (unormalized). If there is no sample, return the value according to the mean function. \endrst </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo5model2GP5sigmaERKN5Eigen8VectorXdE">
 <span id="limbo::model::GP::sigma__Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"></span>double <code class="descname">sigma</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N5limbo5model2GP5sigmaERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
-<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\\sigma^2</span></code> (unormalized). If there is no sample, return the value according to the mean function. \endrst </p>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code> (unormalized). If there is no sample, return the max :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code>. \endrst </p>
 </dd></dl>
 
 <dl class="function">
@@ -1232,13 +1235,14 @@
 <span class="target" id="limbostructlimbo_1_1kernel_1_1_exp"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
 <dt id="_CPPv2N5limbo6kernel3ExpE">
 <span id="limbo::kernel::Exp"></span><em class="property">struct </em><code class="descname">Exp</code><a class="headerlink" href="#_CPPv2N5limbo6kernel3ExpE" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;limbo/kernel/exp.hpp&gt;</em><p><p>Exponential kernel with a <span class="math">\(\sigma\)</span> parameter that controls the width (see <a class="reference internal" href="guides/limbo_concepts.html#brochu2010tutorial" id="id10">[1]</a> p. 9).</p>
+<dd><em>#include &lt;limbo/kernel/exp.hpp&gt;</em><p><p>Exponential kernel (see [brochu2010tutorial] p. 9).</p>
 <div class="math">
-\[k(v_1, v_2)  = \exp \Big(-\frac{1}{\sigma^2} ||v_1 - v_2||^2\Big)\]</div>
+\[k(v_1, v_2)  = \sigma^2\exp \Big(-\frac{1}{\l^2} ||v_1 - v_2||^2\Big)\]</div>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma</span></code></li>
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma_sq</span></code> (signal variance)</li>
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">l</span></code> (characteristic length scale)</li>
 </ul>
 </dd>
 </dl>
@@ -1250,18 +1254,18 @@
 <span class="target" id="limbostructlimbo_1_1kernel_1_1_matern_five_halfs"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
 <dt id="_CPPv2N5limbo6kernel15MaternFiveHalfsE">
 <span id="limbo::kernel::MaternFiveHalfs"></span><em class="property">struct </em><code class="descname">MaternFiveHalfs</code><a class="headerlink" href="#_CPPv2N5limbo6kernel15MaternFiveHalfsE" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;limbo/kernel/matern_five_halfs.hpp&gt;</em><p><p>Matern kernel (TODO: formula)</p>
+<dd><em>#include &lt;limbo/kernel/matern_five_halfs.hpp&gt;</em><p><p>Matern kernel</p>
 <div class="math">
 \[d = ||v1 - v2||\]\[\nu = 5/2\]\[C(d) = \sigma^2\frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg)^\nu K_\nu\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg),\]</div>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma</span></code></li>
-<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">l</span></code></li>
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma_sq</span></code> (signal variance)</li>
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">l</span></code> (characteristic length scale)</li>
 </ul>
 </dd>
 </dl>
-<p>Reference: <a class="reference internal" href="guides/limbo_concepts.html#matern1960spatial" id="id11">[4]</a> &amp; <a class="reference internal" href="guides/limbo_concepts.html#brochu2010tutorial" id="id12">[1]</a> p.10 &amp; <a class="reference external" href="https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function">https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function</a></p>
+<p>Reference: [matern1960spatial] &amp; [brochu2010tutorial] p.10 &amp; <a class="reference external" href="https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function">https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function</a></p>
  </p>
 </dd></dl>
 
@@ -1277,13 +1281,13 @@
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma</span></code> <strong>squared</strong></li>
-<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">l</span></code></li>
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma_sq</span></code> (signal variance)</li>
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">l</span></code> (characteristic length scale)</li>
 </ul>
 </dd>
 </dl>
 </div></blockquote>
-<p>Reference: <a class="reference internal" href="guides/limbo_concepts.html#matern1960spatial" id="id13">[4]</a> &amp; <a class="reference internal" href="guides/limbo_concepts.html#brochu2010tutorial" id="id14">[1]</a> p.10 &amp; <a class="reference external" href="https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function">https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function</a></p>
+<p>Reference: [matern1960spatial] &amp; [brochu2010tutorial] p.10 &amp; <a class="reference external" href="https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function">https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function</a></p>
  </p>
 </dd></dl>
 
@@ -1300,7 +1304,7 @@ Computes the squared exponential covariance like this:</p>
 </div></blockquote>
 <p>with <span class="math">\(M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})\)</span> being the characteristic length scales and <span class="math">\(\alpha\)</span> describing the variability of the latent function. The parameters <span class="math">\(l_1^2, \dots, l_n^2, \alpha, \Lambda\)</span> are expected in this order in the parameter array.</p>
 <blockquote>
-<div>Reference: <a class="reference internal" href="guides/limbo_concepts.html#rasmussen2006" id="id15">[6]</a>, p. 106 &amp; <a class="reference internal" href="guides/limbo_concepts.html#brochu2010tutorial" id="id16">[1]</a>, p. 10</div></blockquote>
+<div>Reference: [Rasmussen2006], p. 106 &amp; [brochu2010tutorial], p. 10</div></blockquote>
  </p>
 </dd></dl>
 
@@ -1316,12 +1320,12 @@ Computes the squared exponential covariance like this:</p>
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt>
-<span class="target" id="limbogroup__kernel__defaults_1ga14c991dc7de698f2af7a689b157ace9c"></span><code class="descname">limbo::defaults::kernel_exp::BO_PARAM(double, sigma, 1)</code></dt>
+<span class="target" id="limbogroup__kernel__defaults_1ga202b52540fa68b47005cd9e3ef61a3fe"></span><code class="descname">limbo::defaults::kernel_exp::BO_PARAM(double, sigma_sq, 1)</code></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt>
-<span class="target" id="limbogroup__kernel__defaults_1ga784d4f60df0708935c742652168d132c"></span><code class="descname">limbo::defaults::kernel_maternfivehalfs::BO_PARAM(double, sigma, 1)</code></dt>
+<span class="target" id="limbogroup__kernel__defaults_1ga872fb50d6e244a40ff7c65321434b24b"></span><code class="descname">limbo::defaults::kernel_maternfivehalfs::BO_PARAM(double, sigma_sq, 1)</code></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -1331,7 +1335,7 @@ Computes the squared exponential covariance like this:</p>
 
 <dl class="function">
 <dt>
-<span class="target" id="limbogroup__kernel__defaults_1ga59b38b1e10b24b9192a2f7ff05735186"></span><code class="descname">limbo::defaults::kernel_maternthreehalfs::BO_PARAM(double, sigma, 1)</code></dt>
+<span class="target" id="limbogroup__kernel__defaults_1ga5cf36a497746c36b6bded9c6fb368ae6"></span><code class="descname">limbo::defaults::kernel_maternthreehalfs::BO_PARAM(double, sigma_sq, 1)</code></dt>
 <dd><p>This is is sigma squared! </p>
 </dd></dl>
 
@@ -1515,10 +1519,10 @@ Computes the squared exponential covariance like this:</p>
 </div>
 </div>
 <div class="section" id="statistics-stats">
-<h2>Statistics (stats)<a class="headerlink" href="#statistics-stats" title="Permalink to this headline">¶</a></h2>
+<span id="id23"></span><h2>Statistics (stats)<a class="headerlink" href="#statistics-stats" title="Permalink to this headline">¶</a></h2>
 <p>Statistics are used to report informations about the current state of the algorithm (e.g., the best observation for each iteration). They are typically chained in a <cite>boost::fusion::vector&lt;&gt;</cite>.</p>
-<div class="section" id="id23">
-<h3>Template<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id24">
+<h3>Template<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nl">Samples</span> <span class="p">:</span> <span class="k">public</span> <span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
@@ -1680,8 +1684,8 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id24">
-<h3>Default parameters<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id25">
+<h3>Default parameters<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <dl class="group">
 <dt>
 <span class="target" id="limbogroup__stat__defaults"></span><em>group</em> <code class="descname">stat_defaults</code></dt>
@@ -1951,7 +1955,6 @@ Computes the squared exponential covariance like this:</p>
 
 </dd></dl>
 
-<p id="bibtex-bibliography-api-0"></p>
 </div>
 </div>
 

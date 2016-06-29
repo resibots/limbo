@@ -219,7 +219,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keyword">            </span>{</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                <span class="keywordflow">if</span> (_samples.size() == 0 &amp;&amp; _bl_samples.size() == 0)</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                    <span class="keywordflow">return</span> std::make_tuple(_mean_function(v, *<span class="keyword">this</span>),</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                        sqrt(_kernel_function(v, v)));</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                        _kernel_function(v, v));</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                <span class="keywordflow">if</span> (_samples.size() == 0)</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                    <span class="keywordflow">return</span> std::make_tuple(_mean_function(v, *<span class="keyword">this</span>),</div>
@@ -239,7 +239,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="classlimbo_1_1model_1_1_g_p.html#a2ea153c1de2021740235cfa10822395d">  173</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="classlimbo_1_1model_1_1_g_p.html#a2ea153c1de2021740235cfa10822395d">sigma</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">            </span>{</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <span class="keywordflow">if</span> (_samples.size() == 0 &amp;&amp; _bl_samples.size() == 0)</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                    <span class="keywordflow">return</span> sqrt(_kernel_function(v, v));</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                    <span class="keywordflow">return</span> _kernel_function(v, v);</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                <span class="keywordflow">return</span> _sigma(v, _compute_k_bl(v, _compute_k(v)));</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            }</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
@@ -523,7 +523,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 3 2016 13:09:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 29 2016 14:22:05 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

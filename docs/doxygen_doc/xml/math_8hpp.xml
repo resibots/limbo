@@ -10,165 +10,166 @@
     <includes local="no">random</includes>
     <includes local="no">utility</includes>
     <includes local="no">mutex</includes>
+    <includedby refid="bo__base_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</includedby>
     <includedby refid="rprop_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/opt/rprop.hpp</includedby>
     <includedby refid="tools_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/tools.hpp</includedby>
     <incdepgraph>
-      <node id="1530">
+      <node id="1656">
         <label>list</label>
       </node>
-      <node id="1531">
+      <node id="1657">
         <label>stdlib.h</label>
       </node>
-      <node id="1528">
+      <node id="1654">
         <label>cmath</label>
       </node>
-      <node id="1532">
+      <node id="1658">
         <label>random</label>
       </node>
-      <node id="1529">
+      <node id="1655">
         <label>ctime</label>
       </node>
-      <node id="1533">
+      <node id="1659">
         <label>utility</label>
       </node>
-      <node id="1527">
+      <node id="1653">
         <label>cstdlib</label>
       </node>
-      <node id="1534">
+      <node id="1660">
         <label>mutex</label>
       </node>
-      <node id="1526">
+      <node id="1652">
         <label>/tmp/doc_limbo/limbo/src/limbo/tools/math.hpp</label>
         <link refid="math.hpp"/>
-        <childnode refid="1527" relation="include">
+        <childnode refid="1653" relation="include">
         </childnode>
-        <childnode refid="1528" relation="include">
+        <childnode refid="1654" relation="include">
         </childnode>
-        <childnode refid="1529" relation="include">
+        <childnode refid="1655" relation="include">
         </childnode>
-        <childnode refid="1530" relation="include">
+        <childnode refid="1656" relation="include">
         </childnode>
-        <childnode refid="1531" relation="include">
+        <childnode refid="1657" relation="include">
         </childnode>
-        <childnode refid="1532" relation="include">
+        <childnode refid="1658" relation="include">
         </childnode>
-        <childnode refid="1533" relation="include">
+        <childnode refid="1659" relation="include">
         </childnode>
-        <childnode refid="1534" relation="include">
+        <childnode refid="1660" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1545">
+      <node id="1669">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
         <link refid="nsbo_8hpp"/>
       </node>
-      <node id="1544">
+      <node id="1668">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
         <link refid="bayes__opt_2ehvi_8hpp"/>
       </node>
-      <node id="1536">
+      <node id="1671">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt/rprop.hpp</label>
         <link refid="rprop_8hpp"/>
-        <childnode refid="1537" relation="include">
+        <childnode refid="1672" relation="include">
         </childnode>
-        <childnode refid="1548" relation="include">
+        <childnode refid="1674" relation="include">
         </childnode>
-        <childnode refid="1549" relation="include">
+        <childnode refid="1675" relation="include">
         </childnode>
-        <childnode refid="1550" relation="include">
+        <childnode refid="1676" relation="include">
         </childnode>
       </node>
-      <node id="1539">
+      <node id="1663">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
         <link refid="boptimizer_8hpp"/>
-        <childnode refid="1540" relation="include">
+        <childnode refid="1664" relation="include">
         </childnode>
-        <childnode refid="1542" relation="include">
+        <childnode refid="1666" relation="include">
         </childnode>
       </node>
-      <node id="1542">
+      <node id="1666">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
         <link refid="parego_8hpp"/>
       </node>
-      <node id="1547">
+      <node id="1673">
         <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
         <link refid="model_8hpp"/>
-        <childnode refid="1541" relation="include">
+        <childnode refid="1665" relation="include">
         </childnode>
       </node>
-      <node id="1551">
+      <node id="1677">
         <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
         <link refid="tools_8hpp"/>
-        <childnode refid="1541" relation="include">
+        <childnode refid="1665" relation="include">
         </childnode>
       </node>
-      <node id="1541">
+      <node id="1665">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
       </node>
-      <node id="1546">
+      <node id="1670">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
         <link refid="imgpo_8hpp"/>
       </node>
-      <node id="1537">
+      <node id="1672">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_lf_opt.hpp</label>
         <link refid="kernel__lf__opt_8hpp"/>
-        <childnode refid="1538" relation="include">
-        </childnode>
-        <childnode refid="1547" relation="include">
+        <childnode refid="1673" relation="include">
         </childnode>
       </node>
-      <node id="1549">
+      <node id="1675">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp</label>
         <link refid="mean__lf__opt_8hpp"/>
-        <childnode refid="1547" relation="include">
+        <childnode refid="1673" relation="include">
         </childnode>
       </node>
-      <node id="1543">
+      <node id="1667">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
         <link refid="bo__multi_8hpp"/>
-        <childnode refid="1544" relation="include">
+        <childnode refid="1668" relation="include">
         </childnode>
-        <childnode refid="1545" relation="include">
+        <childnode refid="1669" relation="include">
         </childnode>
       </node>
-      <node id="1550">
+      <node id="1676">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
         <link refid="opt_8hpp"/>
-        <childnode refid="1541" relation="include">
+        <childnode refid="1665" relation="include">
         </childnode>
       </node>
-      <node id="1535">
+      <node id="1661">
         <label>/tmp/doc_limbo/limbo/src/limbo/tools/math.hpp</label>
         <link refid="math.hpp"/>
-        <childnode refid="1536" relation="include">
+        <childnode refid="1662" relation="include">
         </childnode>
-        <childnode refid="1551" relation="include">
+        <childnode refid="1671" relation="include">
+        </childnode>
+        <childnode refid="1677" relation="include">
         </childnode>
       </node>
-      <node id="1548">
+      <node id="1674">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
         <link refid="kernel__mean__lf__opt_8hpp"/>
-        <childnode refid="1547" relation="include">
+        <childnode refid="1673" relation="include">
         </childnode>
       </node>
-      <node id="1538">
+      <node id="1662">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
         <link refid="bo__base_8hpp"/>
-        <childnode refid="1539" relation="include">
+        <childnode refid="1663" relation="include">
         </childnode>
-        <childnode refid="1543" relation="include">
+        <childnode refid="1667" relation="include">
         </childnode>
-        <childnode refid="1546" relation="include">
+        <childnode refid="1670" relation="include">
         </childnode>
-        <childnode refid="1542" relation="include">
+        <childnode refid="1666" relation="include">
         </childnode>
       </node>
-      <node id="1540">
+      <node id="1664">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
         <link refid="bayes__opt_8hpp"/>
-        <childnode refid="1541" relation="include">
+        <childnode refid="1665" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

@@ -2,92 +2,104 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
   <compounddef id="no__lf__opt_8hpp" kind="file" language="C++">
     <compoundname>no_lf_opt.hpp</compoundname>
+    <includes local="no">iostream</includes>
     <includedby refid="gp__parego_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp</includedby>
     <includedby refid="model_2gp_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</includedby>
     <includedby refid="model_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/model.hpp</includedby>
+    <incdepgraph>
+      <node id="1069">
+        <label>iostream</label>
+      </node>
+      <node id="1068">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/no_lf_opt.hpp</label>
+        <link refid="no_lf_opt.hpp"/>
+        <childnode refid="1069" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
     <invincdepgraph>
-      <node id="991">
+      <node id="1080">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
         <link refid="nsbo_8hpp"/>
       </node>
-      <node id="990">
+      <node id="1079">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
         <link refid="bayes__opt_2ehvi_8hpp"/>
       </node>
-      <node id="986">
+      <node id="1075">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
         <link refid="boptimizer_8hpp"/>
-        <childnode refid="987" relation="include">
+        <childnode refid="1076" relation="include">
         </childnode>
-        <childnode refid="983" relation="include">
+        <childnode refid="1072" relation="include">
         </childnode>
       </node>
-      <node id="983">
+      <node id="1072">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
         <link refid="parego_8hpp"/>
       </node>
-      <node id="993">
+      <node id="1082">
         <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
         <link refid="model_8hpp"/>
-        <childnode refid="988" relation="include">
+        <childnode refid="1077" relation="include">
         </childnode>
       </node>
-      <node id="988">
+      <node id="1077">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
       </node>
-      <node id="992">
+      <node id="1081">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
         <link refid="imgpo_8hpp"/>
       </node>
-      <node id="984">
+      <node id="1073">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
         <link refid="model_2gp_8hpp"/>
-        <childnode refid="985" relation="include">
+        <childnode refid="1074" relation="include">
         </childnode>
-        <childnode refid="993" relation="include">
+        <childnode refid="1082" relation="include">
         </childnode>
       </node>
-      <node id="989">
+      <node id="1078">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
         <link refid="bo__multi_8hpp"/>
-        <childnode refid="990" relation="include">
+        <childnode refid="1079" relation="include">
         </childnode>
-        <childnode refid="991" relation="include">
+        <childnode refid="1080" relation="include">
         </childnode>
       </node>
-      <node id="981">
+      <node id="1070">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/no_lf_opt.hpp</label>
         <link refid="no_lf_opt.hpp"/>
-        <childnode refid="982" relation="include">
+        <childnode refid="1071" relation="include">
         </childnode>
-        <childnode refid="984" relation="include">
+        <childnode refid="1073" relation="include">
         </childnode>
-        <childnode refid="993" relation="include">
+        <childnode refid="1082" relation="include">
         </childnode>
       </node>
-      <node id="982">
+      <node id="1071">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp</label>
         <link refid="gp__parego_8hpp"/>
-        <childnode refid="983" relation="include">
+        <childnode refid="1072" relation="include">
         </childnode>
       </node>
-      <node id="985">
+      <node id="1074">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
         <link refid="bo__base_8hpp"/>
-        <childnode refid="986" relation="include">
+        <childnode refid="1075" relation="include">
         </childnode>
-        <childnode refid="989" relation="include">
+        <childnode refid="1078" relation="include">
         </childnode>
-        <childnode refid="992" relation="include">
+        <childnode refid="1081" relation="include">
         </childnode>
-        <childnode refid="983" relation="include">
+        <childnode refid="1072" relation="include">
         </childnode>
       </node>
-      <node id="987">
+      <node id="1076">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
         <link refid="bayes__opt_8hpp"/>
-        <childnode refid="988" relation="include">
+        <childnode refid="1077" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -103,19 +115,25 @@
 <codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>LIMBO_MODEL_GP_NO_LF_OPT_HPP</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIMBO_MODEL_GP_NO_LF_OPT_HPP</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
-<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
-<codeline lineno="5"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">model<sp/>{</highlight></codeline>
-<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">gp<sp/>{</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
-<codeline lineno="10" refid="structlimbo_1_1model_1_1gp_1_1_no_l_f_opt" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1model_1_1gp_1_1_no_l_f_opt" kindref="compound">NoLFOpt</ref><sp/>{</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GP&gt;</highlight></codeline>
-<codeline lineno="12" refid="structlimbo_1_1model_1_1gp_1_1_no_l_f_opt_1abeb1162ce0ee3cd307cdd22ded7986b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1model_1_1gp_1_1_no_l_f_opt_1abeb1162ce0ee3cd307cdd22ded7986b6" kindref="member">operator()</ref>(<ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">GP</ref>&amp;)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{}</highlight></codeline>
-<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">model<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">gp<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
+<codeline lineno="12" refid="structlimbo_1_1model_1_1gp_1_1_no_l_f_opt" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1model_1_1gp_1_1_no_l_f_opt" kindref="compound">NoLFOpt</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>GP&gt;</highlight></codeline>
+<codeline lineno="14" refid="structlimbo_1_1model_1_1gp_1_1_no_l_f_opt_1abeb1162ce0ee3cd307cdd22ded7986b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1model_1_1gp_1_1_no_l_f_opt_1abeb1162ce0ee3cd307cdd22ded7986b6" kindref="member">operator()</ref>(<ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">GP</ref>&amp;)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="15"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;&apos;NoLFOpt&apos;<sp/>should<sp/>never<sp/>be<sp/>called!&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/no_lf_opt.hpp"/>
   </compounddef>

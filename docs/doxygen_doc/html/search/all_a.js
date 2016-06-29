@@ -12,5 +12,5 @@ var searchData=
   ['kernel_5fsquared_5fexp_5fard',['kernel_squared_exp_ard',['../structlimbo_1_1defaults_1_1kernel__squared__exp__ard.html',1,'limbo::defaults']]],
   ['kernellfopt',['KernelLFOpt',['../structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt.html',1,'limbo::model::gp']]],
   ['kernelmeanlfopt',['KernelMeanLFOpt',['../structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt.html',1,'limbo::model::gp']]],
-  ['kf_5ft',['kf_t',['../structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#aec54234d95d97261acf5aacca83eecaa',1,'limbo::bayes_opt::BoBase::defaults']]]
+  ['kf_5ft',['kf_t',['../structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a0a88a267bef731645079455cb11fa836',1,'limbo::bayes_opt::BoBase::defaults']]]
 ];

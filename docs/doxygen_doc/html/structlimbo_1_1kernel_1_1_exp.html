@@ -111,13 +111,14 @@ Public Member Functions</h2></td></tr>
 struct limbo::kernel::Exp&lt; Params &gt;</h3>
 
 <pre class="fragment">embed:rst
-Exponential kernel with a :math:`\sigma` parameter that controls the width (see :cite:`brochu2010tutorial` p. 9).
+Exponential kernel (see :cite:`brochu2010tutorial` p. 9).
 
 .. math::
-    k(v_1, v_2)  = \exp \Big(-\frac{1}{\sigma^2} ||v_1 - v_2||^2\Big)
+    k(v_1, v_2)  = \sigma^2\exp \Big(-\frac{1}{\l^2} ||v_1 - v_2||^2\Big)
 
 Parameters:
-  - ``double sigma``
+  - ``double sigma_sq`` (signal variance)
+  - ``double l`` (characteristic length scale)
 </pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="abec48720f518fa51be7f74bf102add09"></a>
 <div class="memitem">
@@ -188,7 +189,7 @@ template&lt;typename Params &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 3 2016 13:09:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 29 2016 14:22:06 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

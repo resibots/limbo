@@ -57,7 +57,7 @@
         <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" line="34" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1af9a1e49996eb15f36e08a7398e3b024e" prot="public" static="no">
-        <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1ddc93cc023a2d7d527deb4cc750624e" kindref="member">base_t::model_t</ref></type>
+        <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a151af5c7eef92a82d8813bb2e067d267" kindref="member">base_t::model_t</ref></type>
         <definition>typedef base_t::model_t limbo::experimental::bayes_opt::Ehvi&lt; Params, A2, A3, A4, A5, A6 &gt;::model_t</definition>
         <argsstring></argsstring>
         <name>model_t</name>
@@ -117,24 +117,6 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="78">
-        <label>limbo::bayes_opt::BoBase&lt; Params, A3, A4, A5, A6, boost::parameter::void_ &gt;</label>
-        <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
-      </node>
-      <node id="77">
-        <label>limbo::experimental::bayes_opt::BoMulti&lt; Params, A2, A3, A4, A5, A6 &gt;</label>
-        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi"/>
-        <childnode refid="78" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="76">
-        <label>limbo::experimental::bayes_opt::Ehvi&lt; Params, A2, A3, A4, A5, A6 &gt;</label>
-        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi"/>
-        <childnode refid="77" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
       <node id="81">
         <label>limbo::bayes_opt::BoBase&lt; Params, A3, A4, A5, A6, boost::parameter::void_ &gt;</label>
         <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
@@ -151,40 +133,58 @@
         <childnode refid="80" relation="public-inheritance">
         </childnode>
       </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="84">
+        <label>limbo::bayes_opt::BoBase&lt; Params, A3, A4, A5, A6, boost::parameter::void_ &gt;</label>
+        <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
+      </node>
+      <node id="83">
+        <label>limbo::experimental::bayes_opt::BoMulti&lt; Params, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi"/>
+        <childnode refid="84" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>limbo::experimental::bayes_opt::Ehvi&lt; Params, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi"/>
+        <childnode refid="83" relation="public-inheritance">
+        </childnode>
+      </node>
     </collaborationgraph>
     <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" line="31" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" bodystart="31" bodyend="121"/>
     <listofallmembers>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1a0bcaf7560c3d5cb4f18f2b6b3cbd521f" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>acqui_optimizer_t</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1af5c8c4b0a4912c1efa5e0156a83b06ab" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>acquisition_function_t</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a7197b0c20d5644ec44070432555eb49b" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>add_new_bl_sample</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a77482415d06619f49e6b0300fc950f96" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>add_new_sample</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8694d4bbc5c373d067790ec31fb42a44" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>add_new_bl_sample</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>add_new_sample</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1afbec2602c4a22ad0a1285cc813a51c58" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>args</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1aab1a707afba4fe47658755ca5b66a77e" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>base_t</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa85b7824943ae2ee35b50b446f6740c6" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>bl_samples</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1602cb9a6fa728d8181ee7ec080dd441" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>BoBase</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a807db4b72b87b720303b4b56fce44899" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>BoBase</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1abbd79a26fafeb6ea8f09df782972caa0" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>current_iteration</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a49f332ebc6e526169c619e6bc4430116" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>eval_and_add</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa4cf2b36051de6b46e75621f0b9ed642" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>init_function_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa84e215cffa97a4e287aad3690f89635" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>bl_samples</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad361278c23693c4220eaa9a9de5d3333" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>BoBase</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1a50eebb8a6efd528582ea871a0879a0" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>BoBase</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac3d643d5a668edf22ad053bfc54ea090" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>current_iteration</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a387fba7bf70aa9410e1c04f035694f34" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>eval_and_add</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a734d263ce8c37ae2c5233f9e4499828c" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>init_function_t</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1af9a1e49996eb15f36e08a7398e3b024e" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>model_t</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a50114c72da6ef12f29938df0c8b0bcc6" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>models</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a3817f6ffa5860e8530c663083dd0f9b0" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>nb_objs</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1c5e2b7c9aaae38770505011dfcb61ec" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>observations</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a91b7f3f0295d4e6e2a1263f3882817bd" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>operator=</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a855dc5de1d0732a25f4c9730ac50d0bd" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>observations</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a69628ced9d71209a59dcdfb7f5637265" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>operator=</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1a8b0bf0093f587c4e0b71612049bcec6e" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>optimize</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3fb955ab00c385f5deb56f3d18211d3d" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>params_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ae46fa6c574ca2a2c4368c8c9d3ff63e5" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>params_t</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a4572fa750cb3678783af45d89d026f9f" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>pareto_data</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a74989812b92d1f938169d434906c1416" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>pareto_model</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1a98176e0f540cebc76616142da6fbca6e" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>pareto_point_t</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ae2b586fb9056fdfba859b288927a2f1c" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>pareto_t</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5f589de569a67fe5a645ee0b7fe1173c" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>res_dir</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3a68d0a9fce39ae5575c63a57a549f58" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>samples</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a0da8155a1a5be0999e112655ec3d610e" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>Stat</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a67aac9bd22ae3de346afe7ffe5b564d3" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>stat_t</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a124b963cab48ee23698b3cbd2dd1e496" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>stats_enabled</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad045a21de8950f3671f6b156f2271e44" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>stopping_criteria_t</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac9ab3f37c746dcf70ef7096a89dd1b6c" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>StoppingCriteria</name></member>
-      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a923fec38c8f1c473fdd9cf35b395b471" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>total_iterations</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a4c87b7618144f99027c294db3eb803f6" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>res_dir</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad3ba0dba1418df0ed8e79d4dd3cc907a" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>samples</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1adda0d6bf0fa0def996eb0af7e8a84f3f" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>Stat</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a17d395abfdd3158f238c83764ba68fd0" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>stat_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a4d94db5c40b35bec292aebfd19b8fb3d" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>stats_enabled</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8dfcab20696e6c85665b150e9881c010" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>stopping_criteria_t</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a06717d469296323cc277e3769b828e98" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>StoppingCriteria</name></member>
+      <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5470e106c4584a30636cafb6fbad6d73" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>total_iterations</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a43c817f66221750175b905eab3640a19" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>update_pareto_data</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ad6240a53ed0faf0ed638f357aa99f31d" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi</scope><name>update_pareto_model</name></member>
     </listofallmembers>

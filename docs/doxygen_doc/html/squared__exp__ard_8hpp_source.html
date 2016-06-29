@@ -100,89 +100,107 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keyword">namespace </span>defaults {</div>
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1kernel__squared__exp__ard.html">    8</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1kernel__squared__exp__ard.html">kernel_squared_exp_ard</a> {</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;            <a class="code" href="structlimbo_1_1defaults_1_1kernel__squared__exp__ard.html#a913157eccae4e432cb2fd43ec682773c">BO_PARAM</a>(<span class="keywordtype">int</span>, k, 0); <span class="comment">//equivalent to the standard exp ARD</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        };</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    }</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">namespace </span>kernel {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html">   30</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html">SquaredExpARD</a> {</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a33d5c074a487792a305a0ae89e864f34">   31</a></span>&#160;            <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a33d5c074a487792a305a0ae89e864f34">SquaredExpARD</a>(<span class="keywordtype">int</span> dim = 1) : _sf2(0), _ell(dim), _A(dim, Params::kernel_squared_exp_ard::k()), _input_dim(dim)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <span class="comment">//assert(Params::SquaredExpARD::k()&lt;dim);</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                p.head(_ell.size()) = Eigen::VectorXd::Ones(_ell.size()) * -1;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                this-&gt;<a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a0275e61c4ce395b988c903302d8e088e">set_h_params</a>(p);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">   39</a></span>&#160;            <span class="keywordtype">size_t</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">h_params_size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1; }</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;            <a class="code" href="structlimbo_1_1defaults_1_1kernel__squared__exp__ard.html#a913157eccae4e432cb2fd43ec682773c">BO_PARAM</a>(<span class="keywordtype">double</span>, sigma_sq, 1);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        };</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    }</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">namespace </span>kernel {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html">   31</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html">SquaredExpARD</a> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a33d5c074a487792a305a0ae89e864f34">   32</a></span>&#160;            <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a33d5c074a487792a305a0ae89e864f34">SquaredExpARD</a>(<span class="keywordtype">int</span> dim = 1) : _sf2(0), _ell(dim), _A(dim, Params::kernel_squared_exp_ard::k()), _input_dim(dim)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="comment">//assert(Params::SquaredExpARD::k()&lt;dim);</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                p.head(_ell.size()) = Eigen::VectorXd::Ones(_ell.size()) * -1;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                this-&gt;<a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a0275e61c4ce395b988c903302d8e088e">set_h_params</a>(p);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                _sf2 = Params::kernel_squared_exp_ard::sigma_sq();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            }</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a528af96c67834d1ee6bfb8594fcc2956">   41</a></span>&#160;            <span class="keyword">const</span> Eigen::VectorXd&amp; <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a528af96c67834d1ee6bfb8594fcc2956">h_params</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _h_params; }</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">   41</a></span>&#160;            <span class="keywordtype">size_t</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">h_params_size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1; }</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a0275e61c4ce395b988c903302d8e088e">   43</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a0275e61c4ce395b988c903302d8e088e">set_h_params</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; p)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                _h_params = p;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _input_dim; ++i)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    _ell(i) = std::exp(p(i));</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; (<span class="keywordtype">unsigned</span> int)Params::kernel_squared_exp_ard::k(); ++j)</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _input_dim; ++i)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                        _A(i, j) = p((j + 1) * _input_dim + i); <span class="comment">//can be negative</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                _sf2 = 1; <span class="comment">// exp(2 * p(p.size()-1));</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">   54</a></span>&#160;            Eigen::VectorXd <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; x1, <span class="keyword">const</span> Eigen::VectorXd&amp; x2)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                Eigen::VectorXd <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a> = Eigen::VectorXd::Zero(this-&gt;<a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">h_params_size</a>());</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                Eigen::MatrixXd K = (_A * _A.transpose());</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keywordtype">double</span> z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordtype">double</span> k = _sf2 * std::exp(-0.5 * z);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                Eigen::MatrixXd G = -k * (x1 - x2) * (x1 - x2).transpose() * _A;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; Params::kernel_squared_exp_ard::k(); ++j)</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>(this-&gt;<a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">h_params_size</a>() - 1) = 0; <span class="comment">// 2.0 * k;</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#ab3021822831528a6dbb4fcaf0d1c157e">   71</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#ab3021822831528a6dbb4fcaf0d1c157e">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; x1, <span class="keyword">const</span> Eigen::VectorXd&amp; x2)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                assert(x1.size() == _ell.size());</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                Eigen::MatrixXd K = (_A * _A.transpose());</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordtype">double</span> z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordflow">return</span> _sf2 * std::exp(-0.5 * z);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aad6902b522c4fdd9b5c5799a0c440c40">   80</a></span>&#160;            <span class="keyword">const</span> Eigen::VectorXd&amp; <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aad6902b522c4fdd9b5c5799a0c440c40">ell</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _ell; }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordtype">double</span> _sf2;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            Eigen::VectorXd _ell;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            Eigen::MatrixXd _A;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordtype">size_t</span> _input_dim;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            Eigen::VectorXd _h_params;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        };</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_a42d0d653ef61abce8713acdec5c876a5"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">limbo::kernel::SquaredExpARD::h_params_size</a></div><div class="ttdeci">size_t h_params_size() const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:39</div></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a528af96c67834d1ee6bfb8594fcc2956">   43</a></span>&#160;            <span class="keyword">const</span> Eigen::VectorXd&amp; <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a528af96c67834d1ee6bfb8594fcc2956">h_params</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _h_params; }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a0275e61c4ce395b988c903302d8e088e">   45</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a0275e61c4ce395b988c903302d8e088e">set_h_params</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; p)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                _h_params = p;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _input_dim; ++i)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    _ell(i) = std::exp(p(i));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; (<span class="keywordtype">unsigned</span> int)Params::kernel_squared_exp_ard::k(); ++j)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _input_dim; ++i)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        _A(i, j) = p((j + 1) * _input_dim + i); <span class="comment">//can be negative</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="comment">// _sf2 = 1; // exp(2 * p(p.size()-1));</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">   56</a></span>&#160;            Eigen::VectorXd <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; x1, <span class="keyword">const</span> Eigen::VectorXd&amp; x2)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordflow">if</span> (Params::kernel_squared_exp_ard::k() &gt; 0) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    Eigen::VectorXd <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a> = Eigen::VectorXd::Zero(this-&gt;<a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">h_params_size</a>());</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    Eigen::MatrixXd K = (_A * _A.transpose());</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordtype">double</span> z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    <span class="keywordtype">double</span> k = _sf2 * std::exp(-0.5 * z);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    Eigen::MatrixXd G = -k * (x1 - x2) * (x1 - x2).transpose() * _A;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; Params::kernel_squared_exp_ard::k(); ++j)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                        grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>(this-&gt;<a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">h_params_size</a>() - 1) = 0; <span class="comment">// 2.0 * k;</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    <span class="keywordflow">return</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    Eigen::VectorXd <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>(_input_dim + 1);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    Eigen::VectorXd z = (x1 - x2).cwiseQuotient(_ell).array().square();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    <span class="keywordtype">double</span> k = _sf2 * std::exp(-0.5 * z.sum());</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    grad.head(_input_dim) = z * k;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>(_input_dim) = 0; <span class="comment">// 2.0 * k;</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    <span class="keywordflow">return</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">grad</a>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#ab3021822831528a6dbb4fcaf0d1c157e">   83</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#ab3021822831528a6dbb4fcaf0d1c157e">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; x1, <span class="keyword">const</span> Eigen::VectorXd&amp; x2)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                assert(x1.size() == _ell.size());</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordtype">double</span> z;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="keywordflow">if</span> (Params::kernel_squared_exp_ard::k() &gt; 0) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    Eigen::MatrixXd K = (_A * _A.transpose());</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    z = (x1 - x2).cwiseQuotient(_ell).squaredNorm();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="keywordflow">return</span> _sf2 * std::exp(-0.5 * z);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aad6902b522c4fdd9b5c5799a0c440c40">   98</a></span>&#160;            <span class="keyword">const</span> Eigen::VectorXd&amp; <a class="code" href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aad6902b522c4fdd9b5c5799a0c440c40">ell</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _ell; }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordtype">double</span> _sf2;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            Eigen::VectorXd _ell;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            Eigen::MatrixXd _A;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">size_t</span> _input_dim;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            Eigen::VectorXd _h_params;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        };</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_a42d0d653ef61abce8713acdec5c876a5"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d0d653ef61abce8713acdec5c876a5">limbo::kernel::SquaredExpARD::h_params_size</a></div><div class="ttdeci">size_t h_params_size() const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:41</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1kernel__squared__exp__ard_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1kernel__squared__exp__ard.html">limbo::defaults::kernel_squared_exp_ard</a></div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:8</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_ab3021822831528a6dbb4fcaf0d1c157e"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#ab3021822831528a6dbb4fcaf0d1c157e">limbo::kernel::SquaredExpARD::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;x1, const Eigen::VectorXd &amp;x2) const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:71</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_a528af96c67834d1ee6bfb8594fcc2956"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a528af96c67834d1ee6bfb8594fcc2956">limbo::kernel::SquaredExpARD::h_params</a></div><div class="ttdeci">const Eigen::VectorXd &amp; h_params() const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:41</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_ab3021822831528a6dbb4fcaf0d1c157e"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#ab3021822831528a6dbb4fcaf0d1c157e">limbo::kernel::SquaredExpARD::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;x1, const Eigen::VectorXd &amp;x2) const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:83</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_a528af96c67834d1ee6bfb8594fcc2956"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a528af96c67834d1ee6bfb8594fcc2956">limbo::kernel::SquaredExpARD::h_params</a></div><div class="ttdeci">const Eigen::VectorXd &amp; h_params() const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:43</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1kernel__squared__exp__ard_html_a913157eccae4e432cb2fd43ec682773c"><div class="ttname"><a href="structlimbo_1_1defaults_1_1kernel__squared__exp__ard.html#a913157eccae4e432cb2fd43ec682773c">limbo::defaults::kernel_squared_exp_ard::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(int, k, 0)</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_aa7dd2fbe6e8d5e84101eb3ccce15359e"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">limbo::kernel::SquaredExpARD::grad</a></div><div class="ttdeci">Eigen::VectorXd grad(const Eigen::VectorXd &amp;x1, const Eigen::VectorXd &amp;x2) const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:54</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_a33d5c074a487792a305a0ae89e864f34"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a33d5c074a487792a305a0ae89e864f34">limbo::kernel::SquaredExpARD::SquaredExpARD</a></div><div class="ttdeci">SquaredExpARD(int dim=1)</div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:31</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html">limbo::kernel::SquaredExpARD</a></div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:30</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_a0275e61c4ce395b988c903302d8e088e"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a0275e61c4ce395b988c903302d8e088e">limbo::kernel::SquaredExpARD::set_h_params</a></div><div class="ttdeci">void set_h_params(const Eigen::VectorXd &amp;p)</div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:43</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_aa7dd2fbe6e8d5e84101eb3ccce15359e"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa7dd2fbe6e8d5e84101eb3ccce15359e">limbo::kernel::SquaredExpARD::grad</a></div><div class="ttdeci">Eigen::VectorXd grad(const Eigen::VectorXd &amp;x1, const Eigen::VectorXd &amp;x2) const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:56</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_a33d5c074a487792a305a0ae89e864f34"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a33d5c074a487792a305a0ae89e864f34">limbo::kernel::SquaredExpARD::SquaredExpARD</a></div><div class="ttdeci">SquaredExpARD(int dim=1)</div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:32</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html">limbo::kernel::SquaredExpARD</a></div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:31</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_a0275e61c4ce395b988c903302d8e088e"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a0275e61c4ce395b988c903302d8e088e">limbo::kernel::SquaredExpARD::set_h_params</a></div><div class="ttdeci">void set_h_params(const Eigen::VectorXd &amp;p)</div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:45</div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> gp_ucb.hpp:8</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_aad6902b522c4fdd9b5c5799a0c440c40"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aad6902b522c4fdd9b5c5799a0c440c40">limbo::kernel::SquaredExpARD::ell</a></div><div class="ttdeci">const Eigen::VectorXd &amp; ell() const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:80</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_html_aad6902b522c4fdd9b5c5799a0c440c40"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aad6902b522c4fdd9b5c5799a0c440c40">limbo::kernel::SquaredExpARD::ell</a></div><div class="ttdeci">const Eigen::VectorXd &amp; ell() const </div><div class="ttdef"><b>Definition:</b> squared_exp_ard.hpp:98</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 3 2016 13:09:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 29 2016 14:22:05 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

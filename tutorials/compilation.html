@@ -112,7 +112,6 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html">Tutorials</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Download and Compilation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#download">Download</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dependencies">Dependencies</a></li>
@@ -128,6 +127,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
 </ul>
@@ -206,8 +206,8 @@ as a zip.</p>
 <div class="section" id="optional-but-highly-recommended">
 <h4>Optional but highly recommended<a class="headerlink" href="#optional-but-highly-recommended" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. Be careful that gtest (which is a dependency of libcmaes) needs to be compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get) (see below). Then follow the instructions here: <a class="reference external" href="https://github.com/beniz/libcmaes#build">https://github.com/beniz/libcmaes#build</a></p>
-<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install gtest
+<li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get). Follow the instructions <a class="reference external" href="https://github.com/beniz/libcmaes#build">here</a>, reproduced for your convenience:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get install libgtest-dev
 sudo cd /usr/src/gtest
 sudo mkdir build &amp;&amp; cd build
 sudo cmake ..
@@ -217,7 +217,7 @@ sudo cp *.a /usr/lib
 </div>
 </li>
 <li><p class="first"><a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">NLOpt</a> with C++ binding:</p>
-<div class="highlight-python"><div class="highlight"><pre>./configure -with-cxx --enable-shared   --without-python --without-matlab --without-octave
+<div class="highlight-python"><div class="highlight"><pre>./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
 make install
 </pre></div>
 </div>
@@ -237,14 +237,18 @@ make install
 <div class="section" id="compilation">
 <h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this headline">¶</a></h2>
 <p>We use  the <a class="reference external" href="https://waf.io">WAF</a>  build system, which is provided with the <strong>limbo</strong> source code. To know why we use waf (and not CMAKE, SCONS, traditional makefiles, etc.), see the <a class="reference internal" href="../faq.html#faq-waf"><span>FAQ</span></a>.</p>
+<p>Like most build systems, it has a configuration and build steps, described bellow.</p>
 <div class="section" id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Make sure that the waf file has execution rights.</p>
+</div>
 <p>The first step is to configure your waf environment. For this, assuming that you are in the main limbo directory, you have to run the command:</p>
 <div class="highlight-python"><div class="highlight"><pre>./waf configure
 </pre></div>
 </div>
-<p>Make sure that the waf file has execution rights.
-If everything is okay, you should expect an output like this:</p>
+<p>If everything is okay, you should expect an output like this:</p>
 <div class="highlight-python"><div class="highlight"><pre>Setting top to                           : /path/to/limbo
 Setting out to                           : /path/to/limbo/build
 Checking for &#39;g++&#39; (c++ compiler)        : /usr/bin/g++
@@ -279,24 +283,21 @@ You can also specify a different compiler than the default, setting the environm
 </div>
 <div class="section" id="build">
 <h3>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h3>
-<p>The second step is to run the build command::</p>
+<p>The second step is to run the build command:</p>
 <div class="highlight-python"><div class="highlight"><pre>./waf build
 </pre></div>
 </div>
 <p>Depending on your compiler, there may be some warnings, but the output should end with the following lines:</p>
-<div class="highlight-python"><div class="highlight"><pre>execution summary
-  tests that pass 5/5
-    /home/fallocat/limbo_git/build/src/tests/test_macros
-    /home/fallocat/limbo_git/build/src/tests/test_optimizers
-    /home/fallocat/limbo_git/build/src/tests/test_init_functions
-    /home/fallocat/limbo_git/build/src/tests/test_gp
-    /home/fallocat/limbo_git/build/src/tests/test_boptimizer
+<div class="highlight-python"><div class="highlight"><pre>&#39;build&#39; finished successfully (time in sec)
 </pre></div>
 </div>
 </div>
 <div class="section" id="building-the-documentation">
 <h3>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
-<p><em>This section is only useful for developers who need to update the documentation.</em></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section is only useful for developers who need to update the documentation.</p>
+</div>
 <p>Install sphinx via pip:</p>
 <div class="highlight-python"><div class="highlight"><pre>sudo pip install Sphinx
 sudo pip install sphinxcontrib-bibtex
@@ -306,16 +307,16 @@ sudo pip install sphinxcontrib-bibtex
 <p class="first admonition-title">Warning</p>
 <p class="last">On Mac OSX, do not use <cite>brew install sphinx</cite> because this is not the right sphinx</p>
 </div>
-<p>Install the Resibots theme for resibots:</p>
+<p>Install the Resibots theme for Sphinx:</p>
 <div class="highlight-python"><div class="highlight"><pre>git clone https://github.com/resibots/sphinx_resibots_theme
 export SPHINX_RESIBOTS_THEME=&quot;/home/me/path/to/sphinx_resibots_theme&quot;
 </pre></div>
 </div>
-<p>Install <cite>breathe</cite> via pip:</p>
+<p>Install <a class="reference external" href="https://breathe.readthedocs.io/en/latest/">breathe</a> via pip:</p>
 <div class="highlight-python"><div class="highlight"><pre>sudo pip install breathe
 </pre></div>
 </div>
-<p>Install doxygen via your package manager (e.g. apt-get / brew):</p>
+<p>Install <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a> via your package manager (e.g. apt-get / brew):</p>
 <div class="highlight-python"><div class="highlight"><pre>apt-get install doxygen
 </pre></div>
 </div>

@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" line="30" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" bodystart="30" bodyend="30"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" line="32" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="structlimbo_1_1kernel_1_1_exp_1a50951330db2210da72d2ea8fc9ef8b96" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -46,22 +46,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" line="31" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" bodystart="31" bodyend="35"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" line="33" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" bodystart="33" bodyend="37"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
 <para><verbatim>embed:rst
-Exponential kernel with a :math:`\sigma` parameter that controls the width (see :cite:`brochu2010tutorial` p. 9).
+Exponential kernel (see :cite:`brochu2010tutorial` p. 9).
 
 .. math::
-    k(v_1, v_2)  = \exp \Big(-\frac{1}{\sigma^2} ||v_1 - v_2||^2\Big)
+    k(v_1, v_2)  = \sigma^2\exp \Big(-\frac{1}{\l^2} ||v_1 - v_2||^2\Big)
 
 Parameters:
-  - ``double sigma``
+  - ``double sigma_sq`` (signal variance)
+  - ``double l`` (characteristic length scale)
 </verbatim> </para>    </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" line="29" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" bodystart="29" bodyend="36"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" line="31" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp" bodystart="31" bodyend="38"/>
     <listofallmembers>
       <member refid="structlimbo_1_1kernel_1_1_exp_1abec48720f518fa51be7f74bf102add09" prot="public" virt="non-virtual"><scope>limbo::kernel::Exp</scope><name>Exp</name></member>
       <member refid="structlimbo_1_1kernel_1_1_exp_1a50951330db2210da72d2ea8fc9ef8b96" prot="public" virt="non-virtual"><scope>limbo::kernel::Exp</scope><name>operator()</name></member>

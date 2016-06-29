@@ -1,0 +1,661 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classrandutils_1_1random__generator" kind="class" language="C++" prot="public">
+    <compoundname>randutils::random_generator</compoundname>
+    <includes refid="rand__utils_8hpp" local="no">limbo/tools/rand_utils.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename RandomEngine</type>
+        <defval>std::default_random_engine</defval>
+      </param>
+      <param>
+        <type>typename DefaultSeedSeq</type>
+        <defval><ref refid="namespacerandutils_1a96647abcb6ceb1ef0c3cf7c8875ae298" kindref="member">auto_seed_256</ref></defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrandutils_1_1random__generator_1a7ccbb95be67d7cd19f4b128be21b4ac3" prot="public" static="no">
+        <type>RandomEngine</type>
+        <definition>using randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::engine_type =  RandomEngine</definition>
+        <argsstring></argsstring>
+        <name>engine_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="598" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="598" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrandutils_1_1random__generator_1a424b01b5232f91d42163369ad6bd3b11" prot="public" static="no">
+        <type>DefaultSeedSeq</type>
+        <definition>using randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::default_seed_type =  DefaultSeedSeq</definition>
+        <argsstring></argsstring>
+        <name>default_seed_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="599" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="599" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrandutils_1_1random__generator_1aa9341052e73bd58553b12f5990494a5b" prot="private" static="no" mutable="no">
+        <type><ref refid="classrandutils_1_1random__generator_1a7ccbb95be67d7cd19f4b128be21b4ac3" kindref="member">engine_type</ref></type>
+        <definition>engine_type randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::engine_</definition>
+        <argsstring></argsstring>
+        <name>engine_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="602" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="602" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a564e7f3827e02acae58b244bb20d9f91" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>static constexpr bool randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::has_base_seed_seq</definition>
+        <argsstring>(typename T::base_seed_seq *)</argsstring>
+        <name>has_base_seed_seq</name>
+        <param>
+          <type>typename T::base_seed_seq *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="611" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="611" bodyend="614"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a8076b06e240845bb955777fa9e14e36d" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>constexpr bool</type>
+        <definition>static constexpr bool randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::has_base_seed_seq</definition>
+        <argsstring>(...)</argsstring>
+        <name>has_base_seed_seq</name>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="617" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="617" bodyend="620"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a16310bb02088e8dddaf1b83869299474" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename SeedSeqBased</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::seed_seq_cast</definition>
+        <argsstring>(SeedSeqBased &amp;&amp;seq, typename std::enable_if&lt; has_base_seed_seq&lt; SeedSeqBased &gt;(0)&gt;::type *=0) -&gt; decltype(seq.base())</argsstring>
+        <name>seed_seq_cast</name>
+        <param>
+          <type>SeedSeqBased &amp;&amp;</type>
+          <declname>seq</declname>
+        </param>
+        <param>
+          <type>typename std::enable_if&lt; has_base_seed_seq&lt; SeedSeqBased &gt;(0)&gt;::type *</type>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="623" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="623" bodyend="628"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a683a781b0bceedb9532936bace02214a" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename SeedSeq</type>
+          </param>
+        </templateparamlist>
+        <type>SeedSeq</type>
+        <definition>static SeedSeq randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::seed_seq_cast</definition>
+        <argsstring>(SeedSeq &amp;&amp;seq, typename std::enable_if&lt;!has_base_seed_seq&lt; SeedSeq &gt;(0)&gt;::type *=0)</argsstring>
+        <name>seed_seq_cast</name>
+        <param>
+          <type>SeedSeq &amp;&amp;</type>
+          <declname>seq</declname>
+        </param>
+        <param>
+          <type>typename std::enable_if&lt;!has_base_seed_seq&lt; SeedSeq &gt;(0)&gt;::type *</type>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="631" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="631" bodyend="635"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1abfccab3973766dbd0526bc8269f26cff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Seeding</type>
+            <defval><ref refid="classrandutils_1_1random__generator_1a424b01b5232f91d42163369ad6bd3b11" kindref="member">default_seed_type</ref></defval>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Params</declname>
+            <defname>Params</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::random_generator</definition>
+        <argsstring>(Seeding &amp;&amp;seeding=default_seed_type{})</argsstring>
+        <name>random_generator</name>
+        <param>
+          <type>Seeding &amp;&amp;</type>
+          <declname>seeding</declname>
+          <defval><ref refid="classrandutils_1_1random__generator_1a424b01b5232f91d42163369ad6bd3b11" kindref="member">default_seed_type</ref>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="640" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="640" bodyend="644"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1ab706901b79a9fceb71e3ad7fd7031ae4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Seeding</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Params</declname>
+            <defname>Params</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::random_generator</definition>
+        <argsstring>(Seeding &amp;&amp;seeding, Params &amp;&amp;...params)</argsstring>
+        <name>random_generator</name>
+        <param>
+          <type>Seeding &amp;&amp;</type>
+          <declname>seeding</declname>
+        </param>
+        <param>
+          <type>Params &amp;&amp;...</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="652" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="652" bodyend="657"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1ae25cea4c3bd86714fb8f2c2135842e68" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Seeding</type>
+            <defval><ref refid="classrandutils_1_1random__generator_1a424b01b5232f91d42163369ad6bd3b11" kindref="member">default_seed_type</ref></defval>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Params</declname>
+            <defname>Params</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::seed</definition>
+        <argsstring>(Seeding &amp;&amp;seeding=default_seed_type{})</argsstring>
+        <name>seed</name>
+        <param>
+          <type>Seeding &amp;&amp;</type>
+          <declname>seeding</declname>
+          <defval><ref refid="classrandutils_1_1random__generator_1a424b01b5232f91d42163369ad6bd3b11" kindref="member">default_seed_type</ref>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="661" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="661" bodyend="664"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a05fa4e4dba44982912c32562dc8e16d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Seeding</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Params</declname>
+            <defname>Params</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::seed</definition>
+        <argsstring>(Seeding &amp;&amp;seeding, Params &amp;&amp;...params)</argsstring>
+        <name>seed</name>
+        <param>
+          <type>Seeding &amp;&amp;</type>
+          <declname>seeding</declname>
+        </param>
+        <param>
+          <type>Params &amp;&amp;...</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="672" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="672" bodyend="675"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a85303ed792296a49a8f395fb3a71c2ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>RandomEngine &amp;</type>
+        <definition>RandomEngine&amp; randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::engine</definition>
+        <argsstring>()</argsstring>
+        <name>engine</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="677" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="677" bodyend="680"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a4aed9ef9fe1695d08b9b30891f1127b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename ResultType</type>
+          </param>
+          <param>
+            <type>template&lt; typename &gt; class</type>
+            <declname>DistTmpl</declname>
+            <defname>DistTmpl</defname>
+            <defval>std::normal_distribution</defval>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Params</declname>
+            <defname>Params</defname>
+          </param>
+        </templateparamlist>
+        <type>ResultType</type>
+        <definition>ResultType randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::variate</definition>
+        <argsstring>(Params &amp;&amp;...params)</argsstring>
+        <name>variate</name>
+        <param>
+          <type>Params &amp;&amp;...</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="685" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="685" bodyend="690"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a122935c5a83df7f584d7120c64c732bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Numeric</type>
+          </param>
+        </templateparamlist>
+        <type>Numeric</type>
+        <definition>Numeric randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::uniform</definition>
+        <argsstring>(Numeric lower, Numeric upper)</argsstring>
+        <name>uniform</name>
+        <param>
+          <type>Numeric</type>
+          <declname>lower</declname>
+        </param>
+        <param>
+          <type>Numeric</type>
+          <declname>upper</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="693" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="693" bodyend="696"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1aa0e413e887ea03dfd1653d0b071f70bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>template&lt; typename &gt; class</type>
+            <declname>DistTmpl</declname>
+            <defname>DistTmpl</defname>
+            <defval><ref refid="namespacerandutils_1ad441b52b9359829bc0e396b1eb484953" kindref="member">uniform_distribution</ref></defval>
+          </param>
+          <param>
+            <type>typename Iter</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Params</declname>
+            <defname>Params</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::generate</definition>
+        <argsstring>(Iter first, Iter last, Params &amp;&amp;...params)</argsstring>
+        <name>generate</name>
+        <param>
+          <type>Iter</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iter</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Params &amp;&amp;...</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="701" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="701" bodyend="709"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1ae061f844df411efc2ebfe6c3bbc6f206" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>template&lt; typename &gt; class</type>
+            <declname>DistTmpl</declname>
+            <defname>DistTmpl</defname>
+            <defval><ref refid="namespacerandutils_1ad441b52b9359829bc0e396b1eb484953" kindref="member">uniform_distribution</ref></defval>
+          </param>
+          <param>
+            <type>typename Range</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Params</declname>
+            <defname>Params</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::generate</definition>
+        <argsstring>(Range &amp;&amp;range, Params &amp;&amp;...params)</argsstring>
+        <name>generate</name>
+        <param>
+          <type>Range &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>Params &amp;&amp;...</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="714" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="714" bodyend="718"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1aaa2790b3799d1a62d489ae3efefbb006" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iter</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::shuffle</definition>
+        <argsstring>(Iter first, Iter last)</argsstring>
+        <name>shuffle</name>
+        <param>
+          <type>Iter</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iter</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="721" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="721" bodyend="724"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a96bd60aadafa23dc853dcd9414f26b69" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Range</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::shuffle</definition>
+        <argsstring>(Range &amp;&amp;range)</argsstring>
+        <name>shuffle</name>
+        <param>
+          <type>Range &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="727" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="727" bodyend="730"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a29f305cbca6d418d4c2ddbf60953dc42" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iter</type>
+          </param>
+        </templateparamlist>
+        <type>Iter</type>
+        <definition>Iter randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::choose</definition>
+        <argsstring>(Iter first, Iter last)</argsstring>
+        <name>choose</name>
+        <param>
+          <type>Iter</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iter</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="733" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="733" bodyend="742"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a0eafdcc64b6d0967d9668a0775628af6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Range</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::choose</definition>
+        <argsstring>(Range &amp;&amp;range) -&gt; decltype(std::begin(range))</argsstring>
+        <name>choose</name>
+        <param>
+          <type>Range &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="745" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="745" bodyend="748"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a6d9a9002b313cf8126bf640f728f3c49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Range</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::pick</definition>
+        <argsstring>(Range &amp;&amp;range) -&gt; decltype(*std::begin(range))</argsstring>
+        <name>pick</name>
+        <param>
+          <type>Range &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="751" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="751" bodyend="754"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1aab0a1c9def1a609d5739eddf5ca8caeb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::pick</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; range) -&gt; decltype(*range.begin())</argsstring>
+        <name>pick</name>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="757" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="757" bodyend="760"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a6572f276cd3c8fd547ffbefce5cd4dc4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Size</type>
+          </param>
+          <param>
+            <type>typename Iter</type>
+          </param>
+        </templateparamlist>
+        <type>Iter</type>
+        <definition>Iter randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::sample</definition>
+        <argsstring>(Size to_go, Iter first, Iter last)</argsstring>
+        <name>sample</name>
+        <param>
+          <type>Size</type>
+          <declname>to_go</declname>
+        </param>
+        <param>
+          <type>Iter</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iter</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="763" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="763" bodyend="780"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandutils_1_1random__generator_1a1f99da2d77fccea01edc3a5fe32255ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Size</type>
+          </param>
+          <param>
+            <type>typename Range</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto randutils::random_generator&lt; RandomEngine, DefaultSeedSeq &gt;::sample</definition>
+        <argsstring>(Size to_go, Range &amp;&amp;range) -&gt; decltype(std::begin(range))</argsstring>
+        <name>sample</name>
+        <param>
+          <type>Size</type>
+          <declname>to_go</declname>
+        </param>
+        <param>
+          <type>Range &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="783" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="783" bodyend="786"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="596" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="596" bodyend="787"/>
+    <listofallmembers>
+      <member refid="classrandutils_1_1random__generator_1a29f305cbca6d418d4c2ddbf60953dc42" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>choose</name></member>
+      <member refid="classrandutils_1_1random__generator_1a0eafdcc64b6d0967d9668a0775628af6" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>choose</name></member>
+      <member refid="classrandutils_1_1random__generator_1a424b01b5232f91d42163369ad6bd3b11" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>default_seed_type</name></member>
+      <member refid="classrandutils_1_1random__generator_1a85303ed792296a49a8f395fb3a71c2ed" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>engine</name></member>
+      <member refid="classrandutils_1_1random__generator_1aa9341052e73bd58553b12f5990494a5b" prot="private" virt="non-virtual"><scope>randutils::random_generator</scope><name>engine_</name></member>
+      <member refid="classrandutils_1_1random__generator_1a7ccbb95be67d7cd19f4b128be21b4ac3" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>engine_type</name></member>
+      <member refid="classrandutils_1_1random__generator_1aa0e413e887ea03dfd1653d0b071f70bf" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>generate</name></member>
+      <member refid="classrandutils_1_1random__generator_1ae061f844df411efc2ebfe6c3bbc6f206" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>generate</name></member>
+      <member refid="classrandutils_1_1random__generator_1a564e7f3827e02acae58b244bb20d9f91" prot="private" virt="non-virtual"><scope>randutils::random_generator</scope><name>has_base_seed_seq</name></member>
+      <member refid="classrandutils_1_1random__generator_1a8076b06e240845bb955777fa9e14e36d" prot="private" virt="non-virtual"><scope>randutils::random_generator</scope><name>has_base_seed_seq</name></member>
+      <member refid="classrandutils_1_1random__generator_1a6d9a9002b313cf8126bf640f728f3c49" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>pick</name></member>
+      <member refid="classrandutils_1_1random__generator_1aab0a1c9def1a609d5739eddf5ca8caeb" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>pick</name></member>
+      <member refid="classrandutils_1_1random__generator_1abfccab3973766dbd0526bc8269f26cff" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>random_generator</name></member>
+      <member refid="classrandutils_1_1random__generator_1ab706901b79a9fceb71e3ad7fd7031ae4" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>random_generator</name></member>
+      <member refid="classrandutils_1_1random__generator_1a6572f276cd3c8fd547ffbefce5cd4dc4" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>sample</name></member>
+      <member refid="classrandutils_1_1random__generator_1a1f99da2d77fccea01edc3a5fe32255ac" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>sample</name></member>
+      <member refid="classrandutils_1_1random__generator_1ae25cea4c3bd86714fb8f2c2135842e68" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>seed</name></member>
+      <member refid="classrandutils_1_1random__generator_1a05fa4e4dba44982912c32562dc8e16d8" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>seed</name></member>
+      <member refid="classrandutils_1_1random__generator_1a16310bb02088e8dddaf1b83869299474" prot="private" virt="non-virtual"><scope>randutils::random_generator</scope><name>seed_seq_cast</name></member>
+      <member refid="classrandutils_1_1random__generator_1a683a781b0bceedb9532936bace02214a" prot="private" virt="non-virtual"><scope>randutils::random_generator</scope><name>seed_seq_cast</name></member>
+      <member refid="classrandutils_1_1random__generator_1aaa2790b3799d1a62d489ae3efefbb006" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>shuffle</name></member>
+      <member refid="classrandutils_1_1random__generator_1a96bd60aadafa23dc853dcd9414f26b69" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>shuffle</name></member>
+      <member refid="classrandutils_1_1random__generator_1a122935c5a83df7f584d7120c64c732bc" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>uniform</name></member>
+      <member refid="classrandutils_1_1random__generator_1a4aed9ef9fe1695d08b9b30891f1127b3" prot="public" virt="non-virtual"><scope>randutils::random_generator</scope><name>variate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

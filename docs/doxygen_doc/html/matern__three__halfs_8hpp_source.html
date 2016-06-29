@@ -101,8 +101,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">namespace </span>defaults {</div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1kernel__maternthreehalfs.html">   10</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1kernel__maternthreehalfs.html">kernel_maternthreehalfs</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <a class="code" href="group__kernel__defaults.html#ga59b38b1e10b24b9192a2f7ff05735186">BO_PARAM</a>(<span class="keywordtype">double</span>, sigma, 1);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            <a class="code" href="group__kernel__defaults.html#ga59b38b1e10b24b9192a2f7ff05735186">BO_PARAM</a>(<span class="keywordtype">double</span>, l, 1);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <a class="code" href="group__kernel__defaults.html#ga5cf36a497746c36b6bded9c6fb368ae6">BO_PARAM</a>(<span class="keywordtype">double</span>, sigma_sq, 1);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            <a class="code" href="group__kernel__defaults.html#ga5cf36a497746c36b6bded9c6fb368ae6">BO_PARAM</a>(<span class="keywordtype">double</span>, l, 1);</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        };</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    }</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">namespace </span>kernel {</div>
@@ -113,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_matern_three_halfs.html#affe5c6971e6afe32881603b857958a83">   43</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="structlimbo_1_1kernel_1_1_matern_three_halfs.html#affe5c6971e6afe32881603b857958a83">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v1, <span class="keyword">const</span> Eigen::VectorXd&amp; v2)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">            </span>{</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordtype">double</span> d = (v1 - v2).norm();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordflow">return</span> Params::kernel_maternthreehalfs::sigma() * (1 + std::sqrt(3) * d / Params::kernel_maternthreehalfs::l()) * std::exp(-std::sqrt(3) * d / Params::kernel_maternthreehalfs::l());</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordflow">return</span> Params::kernel_maternthreehalfs::sigma_sq() * (1 + std::sqrt(3) * d / Params::kernel_maternthreehalfs::l()) * std::exp(-std::sqrt(3) * d / Params::kernel_maternthreehalfs::l());</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        };</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
@@ -125,12 +125,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="structlimbo_1_1kernel_1_1_matern_three_halfs_html"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_matern_three_halfs.html">limbo::kernel::MaternThreeHalfs</a></div><div class="ttdef"><b>Definition:</b> matern_three_halfs.hpp:40</div></div>
 <div class="ttc" id="macros_8hpp_html"><div class="ttname"><a href="macros_8hpp.html">macros.hpp</a></div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> gp_ucb.hpp:8</div></div>
-<div class="ttc" id="group__kernel__defaults_html_ga59b38b1e10b24b9192a2f7ff05735186"><div class="ttname"><a href="group__kernel__defaults.html#ga59b38b1e10b24b9192a2f7ff05735186">limbo::defaults::kernel_maternthreehalfs::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, sigma, 1)</div></div>
+<div class="ttc" id="group__kernel__defaults_html_ga5cf36a497746c36b6bded9c6fb368ae6"><div class="ttname"><a href="group__kernel__defaults.html#ga5cf36a497746c36b6bded9c6fb368ae6">limbo::defaults::kernel_maternthreehalfs::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, sigma_sq, 1)</div></div>
 <div class="ttc" id="structlimbo_1_1kernel_1_1_matern_three_halfs_html_a2f46e1fb1e7239e1f1dccd422dee576e"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_matern_three_halfs.html#a2f46e1fb1e7239e1f1dccd422dee576e">limbo::kernel::MaternThreeHalfs::MaternThreeHalfs</a></div><div class="ttdeci">MaternThreeHalfs(size_t dim=1)</div><div class="ttdef"><b>Definition:</b> matern_three_halfs.hpp:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 3 2016 13:09:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 29 2016 14:22:05 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

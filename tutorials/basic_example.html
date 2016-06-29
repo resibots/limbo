@@ -112,16 +112,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html">Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Basic Example</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Basic Example</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#create-directories-and-files">Create directories and files</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Basic Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
 </ul>
@@ -184,11 +178,7 @@
             
   <div class="section" id="basic-example">
 <h1>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id1">
-<h2>Basic Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="create-directories-and-files">
-<h3>Create directories and files<a class="headerlink" href="#create-directories-and-files" title="Permalink to this headline">¶</a></h3>
-<p>Let&#8217;s say we want to create an experiment called &#8220;test&#8221;. The first thing to do is to create the folder <code class="docutils literal"><span class="pre">exp/test</span></code> under the limbo root. Then add two files:</p>
+<p>Let&#8217;s say we want to create an experiment called &#8220;myExp&#8221;. The first thing to do is to create the folder <code class="docutils literal"><span class="pre">exp/myExp</span></code> under the limbo root. Then add two files:</p>
 <ul class="simple">
 <li>the <code class="docutils literal"><span class="pre">main.cpp</span></code> file</li>
 <li>a pyhton file called <code class="docutils literal"><span class="pre">wscript</span></code>, which will be used by <code class="docutils literal"><span class="pre">waf</span></code> to register the executable for building</li>
@@ -196,9 +186,11 @@
 <p>The file structure should look like this:</p>
 <div class="highlight-python"><div class="highlight"><pre>limbo
 |-- exp
-     |-- test
+     |-- myExp
           +-- wscript
           +-- main.cpp
+|-- src
+...
 </pre></div>
 </div>
 <p>Next, copy the following content to the <code class="docutils literal"><span class="pre">wscript</span></code> file:</p>
@@ -210,158 +202,320 @@
     <span class="n">bld</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="s">&#39;cxx cxxprogram&#39;</span><span class="p">,</span>
         <span class="n">source</span><span class="o">=</span><span class="s">&#39;main.cpp&#39;</span><span class="p">,</span>
         <span class="n">includes</span><span class="o">=</span><span class="s">&#39;. ../../src&#39;</span><span class="p">,</span>
-        <span class="n">target</span><span class="o">=</span><span class="s">&#39;test&#39;</span><span class="p">,</span>
+        <span class="n">target</span><span class="o">=</span><span class="s">&#39;myExp&#39;</span><span class="p">,</span>
         <span class="n">uselib</span><span class="o">=</span><span class="s">&#39;BOOST EIGEN TBB LIBCMAES NLOPT&#39;</span><span class="p">,</span>
         <span class="n">use</span><span class="o">=</span><span class="s">&#39;limbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For this example, we will optimize a simple function: <span class="math">\(-{(5*x - 2.5)}^2 + 5\)</span>, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from &#8216;uselib&#8217;.</p>
+<p>For this example, we will optimize a simple function: <span class="math">\(-{(5 * x - 2.5)}^2 + 5\)</span>, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from &#8216;uselib&#8217;.</p>
 <p>To begin, the <code class="docutils literal"><span class="pre">main</span></code> file has to include the necessary files, and declare the <code class="docutils literal"><span class="pre">Parameter</span> <span class="pre">struct</span></code>:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="c1">// you can also include &lt;limbo/limbo.hpp&gt; but it will slow down the compilation</span>
 <span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
 
 <span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-    <span class="c1">// option for the Bayesian optimizer</span>
-    <span class="k">struct</span> <span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+    <span class="c1">// no noise</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// enable / disable the output</span>
+<span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
+<span class="cp">#ifdef USE_LIBCMAES</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#elif defined(USE_NLOPT)</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#else</span>
+    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#endif</span>
+
+    <span class="c1">// enable / disable the writing of the result files</span>
     <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// options for the internal optimizer</span>
-    <span class="cp">#ifdef USE_LIBCMAES</span>
-    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="cp">#elif defined(USE_NLOPT)</span>
-    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="cp">#else</span>
-    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="cp">#endif</span>
+    <span class="k">struct</span> <span class="nl">kernel_exp</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_exp</span> <span class="p">{</span>
+    <span class="p">};</span>
 
-    <span class="c1">// options for the initializer</span>
+    <span class="c1">// we use 10 random samples to initialize the algorithm</span>
     <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// options for the stopping criteria</span>
+    <span class="c1">// we stop after 40 iterations</span>
     <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// options for the acquisition function</span>
-    <span class="c1">// (here we just take the default values)</span>
-    <span class="k">struct</span> <span class="nl">acqui_gpucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_gpucb</span> <span class="p">{</span> <span class="p">};</span>
-
-    <span class="c1">// options for the hyper-parameter optimizer</span>
-    <span class="c1">// (here we just take the default values)</span>
-    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="c1">// we use the default parameters for acqui_ucb</span>
+    <span class="k">struct</span> <span class="nl">acqui_ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_ucb</span> <span class="p">{</span>
+    <span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
-</div>
-<p>Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function),
-that we don&#8217;t want to output any stats (by setting the dump period to -1), that the model has to be initialized with 10 samples (that will be
-selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults.</p>
+</td></tr></table></div>
+<p>Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function), that we want to output the stats (by setting stats_enabled to <cite>true</cite>), that the model has to be initialized with 10 samples (that will be selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults.</p>
 <p>Then, we have to define the evaluation function for the optimizer to call:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
+    <span class="c1">// number of input dimension (x.size())</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c1">// number of dimenions of the result (res.size())</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
+    <span class="c1">// the function to be optimized</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
     <span class="p">{</span>
         <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="c1">// we return a 1-dimensional vector</span>
         <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
-</div>
-<p>It is required that the evaluation struct has the static members <code class="docutils literal"><span class="pre">dim_in</span></code> and <code class="docutils literal"><span class="pre">dim_out</span></code>, specifying the input and output dimension.
+</td></tr></table></div>
+<p>It is required that the evaluation struct has the static members <code class="docutils literal"><span class="pre">dim_in</span></code> and <code class="docutils literal"><span class="pre">dim_out</span></code>, specifying the input and output dimensions.
 Also, it should have the <code class="docutils literal"><span class="pre">operator()</span></code> expecting a <code class="docutils literal"><span class="pre">const</span> <span class="pre">Eigen::VectorXd&amp;</span></code> of size <code class="docutils literal"><span class="pre">dim_in</span></code>, and return another one, of size <code class="docutils literal"><span class="pre">dim_out</span></code>.</p>
 <p>With this, we can declare the main function:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// we use the default acquisition function / model / stat / etc.</span>
     <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+    <span class="c1">// run the evaluation</span>
     <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">Eval</span><span class="p">());</span>
+    <span class="c1">// the best sample found</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Best sample: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_sample</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; - Best observation: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_observation</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</div>
-<p>Finally, from the root of limbo, run a build command, with the additional switch <code class="docutils literal"><span class="pre">--exp</span> <span class="pre">test</span></code>:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">waf</span> <span class="n">build</span> <span class="o">--</span><span class="n">exp</span> <span class="n">test</span>
+</td></tr></table></div>
+<p>Finally, from the root of limbo, run a build command, with the additional switch <code class="docutils literal"><span class="pre">--exp</span> <span class="pre">myExp</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre>./waf build --exp myExp
 </pre></div>
 </div>
-<p>Then, an executable named <code class="docutils literal"><span class="pre">test</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/test</span></code>.</p>
+<p>Then, an executable named <code class="docutils literal"><span class="pre">myExp</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/myExp</span></code>.</p>
 <p>Full <code class="docutils literal"><span class="pre">main.cpp</span></code>:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// please see the explanation in the documentation</span>
+
+<span class="cp">#include &lt;iostream&gt;</span>
+
+<span class="c1">// you can also include &lt;limbo/limbo.hpp&gt; but it will slow down the compilation</span>
 <span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
 
 <span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-    <span class="c1">// option for the Bayesian optimizer</span>
-    <span class="k">struct</span> <span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+    <span class="c1">// no noise</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// enable / disable the output</span>
+<span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
+<span class="cp">#ifdef USE_LIBCMAES</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#elif defined(USE_NLOPT)</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#else</span>
+    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#endif</span>
+
+    <span class="c1">// enable / disable the writing of the result files</span>
     <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// options for the internal optimizer</span>
-    <span class="cp">#ifdef USE_LIBCMAES</span>
-    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="cp">#elif defined(USE_NLOPT)</span>
-    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="cp">#else</span>
-    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="cp">#endif</span>
+    <span class="k">struct</span> <span class="nl">kernel_exp</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_exp</span> <span class="p">{</span>
+    <span class="p">};</span>
 
-    <span class="c1">// options for the initializer</span>
+    <span class="c1">// we use 10 random samples to initialize the algorithm</span>
     <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// options for the stopping criteria</span>
+    <span class="c1">// we stop after 40 iterations</span>
     <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="c1">// options for the acquisition function</span>
-    <span class="c1">// (here we just take the default values)</span>
-    <span class="k">struct</span> <span class="nl">acqui_gpucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_gpucb</span> <span class="p">{</span> <span class="p">};</span>
-
-    <span class="c1">// options for the hyper-parameter optimizer</span>
-    <span class="c1">// (here we just take the default values)</span>
-    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="c1">// we use the default parameters for acqui_ucb</span>
+    <span class="k">struct</span> <span class="nl">acqui_ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_ucb</span> <span class="p">{</span>
+    <span class="p">};</span>
 <span class="p">};</span>
 
 <span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
+    <span class="c1">// number of input dimension (x.size())</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c1">// number of dimenions of the result (res.size())</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
+    <span class="c1">// the function to be optimized</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
     <span class="p">{</span>
-      <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
-      <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+        <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="c1">// we return a 1-dimensional vector</span>
+        <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// we use the default acquisition function / model / stat / etc.</span>
     <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+    <span class="c1">// run the evaluation</span>
     <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">Eval</span><span class="p">());</span>
+    <span class="c1">// the best sample found</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Best sample: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_sample</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; - Best observation: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_observation</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
-</div>
-</div>
-</div>
+</td></tr></table></div>
 </div>
 
 

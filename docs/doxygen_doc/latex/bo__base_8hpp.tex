@@ -17,13 +17,12 @@
 {\ttfamily \#include $<$limbo/stat/aggregated\+\_\+observations.\+hpp$>$}\\*
 {\ttfamily \#include $<$limbo/stat/console\+\_\+summary.\+hpp$>$}\\*
 {\ttfamily \#include $<$limbo/tools/sys.\+hpp$>$}\\*
-{\ttfamily \#include $<$limbo/kernel/squared\+\_\+exp\+\_\+ard.\+hpp$>$}\\*
-{\ttfamily \#include $<$limbo/acqui/gp\+\_\+ucb.\+hpp$>$}\\*
+{\ttfamily \#include $<$limbo/kernel/exp.\+hpp$>$}\\*
+{\ttfamily \#include $<$limbo/acqui/ucb.\+hpp$>$}\\*
 {\ttfamily \#include $<$limbo/mean/data.\+hpp$>$}\\*
-{\ttfamily \#include $<$limbo/opt/cmaes.\+hpp$>$}\\*
 {\ttfamily \#include $<$limbo/model/gp.\+hpp$>$}\\*
-{\ttfamily \#include $<$limbo/model/gp/kernel\+\_\+lf\+\_\+opt.\+hpp$>$}\\*
 {\ttfamily \#include $<$limbo/init/random\+\_\+sampling.\+hpp$>$}\\*
+{\ttfamily \#include $<$limbo/tools/math.\+hpp$>$}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,9 +34,9 @@ struct \hyperlink{structlimbo_1_1_first_elem}{limbo\+::\+First\+Elem}
 \item 
 class \hyperlink{classlimbo_1_1_evaluation_error}{limbo\+::\+Evaluation\+Error}
 \item 
-class \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base}{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base$<$ Params, A1, A2, A3, A4, A5 $>$}
+class \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base}{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base$<$ Params, A1, A2, A3, A4, A5, A6 $>$}
 \item 
-struct \hyperlink{structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults}{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base$<$ Params, A1, A2, A3, A4, A5 $>$\+::defaults}
+struct \hyperlink{structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults}{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::defaults}
 \end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
@@ -56,7 +55,7 @@ struct \hyperlink{structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults}{limbo\+::ba
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef boost\+::parameter\+::parameters$<$ boost\+::parameter\+::optional$<$ tag\+::statsfun $>$, boost\+::parameter\+::optional$<$ tag\+::initfun $>$, boost\+::parameter\+::optional$<$ tag\+::acquifun $>$, boost\+::parameter\+::optional$<$ tag\+::stopcrit $>$, boost\+::parameter\+::optional$<$ tag\+::modelfun $>$ $>$ \hyperlink{namespacelimbo_1_1bayes__opt_ac9ebb02d293842625e1ee8bac9710989}{limbo\+::bayes\+\_\+opt\+::class\+\_\+signature}
+typedef boost\+::parameter\+::parameters$<$ boost\+::parameter\+::optional$<$ tag\+::statsfun $>$, boost\+::parameter\+::optional$<$ tag\+::initfun $>$, boost\+::parameter\+::optional$<$ tag\+::acquifun $>$, boost\+::parameter\+::optional$<$ tag\+::stopcrit $>$, boost\+::parameter\+::optional$<$ tag\+::modelfun $>$ $>$ \hyperlink{namespacelimbo_1_1bayes__opt_a1edab117064bc665b2c743c0f3614479}{limbo\+::bayes\+\_\+opt\+::bobase\+\_\+signature}
 \end{DoxyCompactItemize}
 
 

@@ -30,7 +30,7 @@
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
         <link rel="next" title="Statistics / Writing results" href="statistics.html"/>
-        <link rel="prev" title="Add External Library" href="external_libs.html"/>
+        <link rel="prev" title="Gaussian Process" href="gp.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
 
@@ -112,10 +112,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="index.html">Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Advanced Example</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#basic-layout">Basic Layout</a></li>
@@ -201,15 +201,14 @@
 </div>
 <p>Let&#8217;s say we have a planar 6-DOF arm manipulator and we want its end-effector to reach a target position (i.e. catch an object). Now, imagine that a joint is broken (or not working properly). We want to use Bayesian Optimization to learn a compensatory behavior that will allow our arm to reach the target in spite of damage. Now, assume that once we have learned how to reach one target, we want to reach another (different) one. We will use state-based bayesian optimization to transfer knowledge between the two tasks. We will use the following:</p>
 <ul class="simple">
-<li>The forward kinematic model as prior knowledge (mean of GP).</li>
-<li>The <code class="docutils literal"><span class="pre">Squared</span> <span class="pre">exponential</span> <span class="pre">covariance</span> <span class="pre">function</span> <span class="pre">with</span> <span class="pre">automatic</span> <span class="pre">relevance</span> <span class="pre">detection</span></code> as kernel of the GP.</li>
-<li>Optimize the hyperparameters of the GP kernel using likelihood optimization.</li>
-<li>Custom output statistics.</li>
+<li>The forward kinematic model as prior knowledge (mean of Gaussian Process).</li>
+<li>The <strong>Squared exponential covariance function with automatic relevance detection</strong> as kernel of the GP.</li>
+<li>Likelihood optimization for the hyperparameters of the GP kernel.</li>
 <li>Use different optimizer for the acquisition optimization.</li>
 <li>Initialize the GP with random samples.</li>
 <li>Custom stopping criterion.</li>
 </ul>
-<p>Also, we assume that all of our arm&#8217;s links have <strong>length of 1cm</strong>.</p>
+<p>Also, we assume that all of our arm&#8217;s links are <strong>1cm long</strong>.</p>
 </div>
 <div class="section" id="basic-layout">
 <h2>Basic Layout<a class="headerlink" href="#basic-layout" title="Permalink to this headline">¶</a></h2>
@@ -219,6 +218,8 @@
      |-- arm_example
           +-- wscript
           +-- main.cpp
+|-- src
+...
 </pre></div>
 </div>
 <p>The basic layout of your <code class="docutils literal"><span class="pre">main.cpp</span></code> file should look like this:</p>
@@ -236,7 +237,7 @@
 <span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
   <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="n">sample_dimensions</span><span class="p">;</span>
   <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="n">output_dimensions</span><span class="p">;</span>
-  <span class="c1">// Here we define the function evaluation</span>
+  <span class="c1">// Here we define the evaluation function</span>
 <span class="p">};</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
@@ -249,7 +250,7 @@
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">wscript</span></code> will have the following form:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="kn">import</span> <span class="n">conf</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="kn">import</span> <span class="n">conf</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
     <span class="k">pass</span>
@@ -271,22 +272,49 @@
 <div class="section" id="adding-the-forward-kinematic-model-as-prior">
 <h2>Adding the forward kinematic model as prior<a class="headerlink" href="#adding-the-forward-kinematic-model-as-prior" title="Permalink to this headline">¶</a></h2>
 <p>To compute the forward kinematics of our simple planar arm we use the following code:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">rads</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">M_PI</span><span class="p">;</span>
 
     <span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span> <span class="n">dh_mat</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
 
     <span class="n">dh_mat</span> <span class="o">&lt;&lt;</span> <span class="n">rads</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="n">rads</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="n">rads</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="n">rads</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="n">rads</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="n">rads</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
 
     <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dh_mat</span><span class="p">.</span><span class="n">rows</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dh_mat</span><span class="p">.</span><span class="n">rows</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">dh</span> <span class="o">=</span> <span class="n">dh_mat</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 
         <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span> <span class="n">submat</span><span class="p">;</span>
@@ -300,9 +328,19 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">mat</span> <span class="o">*</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector4d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)).</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>To make this forward kinematic model useful to our GP, we need to create a mean function:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
     <span class="n">MeanFWModel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
 
@@ -314,32 +352,54 @@
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="section" id="using-state-based-bayesian-optimization">
 <h2>Using State-based bayesian optimization<a class="headerlink" href="#using-state-based-bayesian-optimization" title="Permalink to this headline">¶</a></h2>
+<p>See the explanation of the meaning of <a class="reference internal" href="../guides/limbo_concepts.html#state-based-bo"><span>State-based optimization</span></a>.</p>
 <p>Creating an Aggregator:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
-  <span class="k">typedef</span> <span class="kt">double</span> <span class="n">result_type</span><span class="p">;</span>
-  <span class="n">DistanceToTarget</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span><span class="o">&amp;</span> <span class="n">target</span><span class="p">)</span> <span class="o">:</span> <span class="n">_target</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="k">typedef</span> <span class="kt">double</span> <span class="n">result_type</span><span class="p">;</span>
+    <span class="n">DistanceToTarget</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span><span class="o">&amp;</span> <span class="n">target</span><span class="p">)</span> <span class="o">:</span> <span class="n">_target</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="p">{}</span>
 
-  <span class="kt">double</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
-  <span class="p">{</span>
-      <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">_target</span><span class="p">).</span><span class="n">norm</span><span class="p">();</span>
-  <span class="p">}</span>
+    <span class="kt">double</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">_target</span><span class="p">).</span><span class="n">norm</span><span class="p">();</span>
+    <span class="p">}</span>
 
 <span class="k">protected</span><span class="o">:</span>
-  <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">_target</span><span class="p">;</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">_target</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 <p>Here, we are using a very simple aggregator that simply computes the distance between the end-effector and the target position.</p>
 </div>
 <div class="section" id="adding-custom-stop-criterion">
 <h2>Adding custom stop criterion<a class="headerlink" href="#adding-custom-stop-criterion" title="Permalink to this headline">¶</a></h2>
 <p>When our bayesian optimizer finds a solution that the end-effector of the arm is reasonably close to the target, we want it to stop. We can easily do this by creating our own stopping criterion:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
     <span class="n">MinTolerance</span><span class="p">()</span> <span class="p">{}</span>
 
@@ -350,11 +410,26 @@
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="section" id="creating-the-evaluation-function">
 <h2>Creating the evaluation function<a class="headerlink" href="#creating-the-evaluation-function" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -371,7 +446,7 @@
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="section" id="creating-the-experiment">
 <h2>Creating the experiment<a class="headerlink" href="#creating-the-experiment" title="Permalink to this headline">¶</a></h2>
@@ -410,94 +485,49 @@
 </pre></div>
 </div>
 <p><strong>Statistics alias:</strong></p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">using</span> <span class="kt">stat_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">Observations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">AggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">GPAcquisitions</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">BestAggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">GPKernelHParams</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">using</span> <span class="kt">stat_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">Observations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="n">stat</span><span class="o">::</span><span class="n">AggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">GPAcquisitions</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="n">stat</span><span class="o">::</span><span class="n">BestAggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">GPKernelHParams</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="setting-the-parameter-structure">
 <h3>Setting the parameter structure<a class="headerlink" href="#setting-the-parameter-structure" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-  <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="n">stop_mintolerance</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">);</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="n">acqui_ucb</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">);</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
-  <span class="p">};</span>
-  <span class="k">struct</span> <span class="n">opt_cmaes</span> <span class="p">{</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">restarts</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-      <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-  <span class="p">};</span>
-<span class="p">};</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="creating-and-running-the-bayesian-optimizer">
-<h3>Creating and running the Bayesian Optimizer<a class="headerlink" href="#creating-and-running-the-bayesian-optimizer" title="Permalink to this headline">¶</a></h3>
-<p>In your main function, you need to have something like the following:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="c1">// includes</span>
-<span class="c1">// parameter structure</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="c1">// aliases</span>
-  <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="kt">gp_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="kt">acqui_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquiopt</span><span class="o">&lt;</span><span class="kt">acqui_opt_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">initfun</span><span class="o">&lt;</span><span class="kt">init_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stopcrit</span><span class="o">&lt;</span><span class="kt">stop_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
-  <span class="c1">// Instantiate aggregator</span>
-  <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">aggregator</span><span class="p">({</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">});</span>
-  <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eval_func</span><span class="p">(),</span> <span class="n">aggregator</span><span class="p">);</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;New target!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-  <span class="c1">// Adding new target</span>
-  <span class="n">aggregator</span> <span class="o">=</span> <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">});</span>
-  <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eval_func</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">aggregator</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
-  <span class="c1">// rest of code</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="running-the-experiment">
-<h3>Running the experiment<a class="headerlink" href="#running-the-experiment" title="Permalink to this headline">¶</a></h3>
-<p>Finally, from the root of limbo, run a build command, with the additional switch <code class="docutils literal"><span class="pre">--exp</span> <span class="pre">arm_example</span></code>:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">waf</span> <span class="n">configure</span> <span class="o">--</span><span class="n">exp</span> <span class="n">arm_example</span>
-<span class="p">.</span><span class="o">/</span><span class="n">waf</span> <span class="n">build</span> <span class="o">--</span><span class="n">exp</span> <span class="n">arm_example</span>
-</pre></div>
-</div>
-<p>Then, an executable named <code class="docutils literal"><span class="pre">arm_example</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/arm_example</span></code>. When running the experiment, you should expect something like the following:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="mi">0</span> <span class="k">new</span> <span class="nl">point</span><span class="p">:</span>   <span class="mf">0.105457</span>   <span class="mf">0.984803</span>   <span class="mf">0.999724</span>   <span class="mf">0.397681</span> <span class="mf">0.00178646</span>   <span class="mf">0.472922</span> <span class="nl">value</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.05529</span> <span class="nl">best</span><span class="p">:</span><span class="o">-</span><span class="mf">0.50564</span>
-<span class="mi">1</span> <span class="k">new</span> <span class="nl">point</span><span class="p">:</span> <span class="mf">0.0418376</span>  <span class="mf">0.211166</span>  <span class="mf">0.610741</span>   <span class="mf">0.97042</span>   <span class="mf">0.49975</span>  <span class="mf">0.932997</span> <span class="nl">value</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.420461</span> <span class="nl">best</span><span class="p">:</span><span class="o">-</span><span class="mf">0.420461</span>
-<span class="mi">2</span> <span class="k">new</span> <span class="nl">point</span><span class="p">:</span> <span class="mf">0.0499932</span>  <span class="mf">0.809128</span>  <span class="mf">0.647616</span>  <span class="mf">0.607996</span>   <span class="mf">0.98363</span>  <span class="mf">0.263471</span> <span class="nl">value</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.47844</span> <span class="nl">best</span><span class="p">:</span><span class="o">-</span><span class="mf">0.420461</span>
-<span class="mi">3</span> <span class="k">new</span> <span class="nl">point</span><span class="p">:</span> <span class="mf">0.926947</span> <span class="mf">0.304285</span> <span class="mf">0.962505</span> <span class="mf">0.923134</span> <span class="mf">0.340676</span> <span class="mf">0.352674</span> <span class="nl">value</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.77912</span> <span class="nl">best</span><span class="p">:</span><span class="o">-</span><span class="mf">0.420461</span>
-<span class="mi">4</span> <span class="k">new</span> <span class="nl">point</span><span class="p">:</span>    <span class="mf">0.139309</span>  <span class="mf">0.00337038</span>   <span class="mf">0.0725873</span>     <span class="mf">0.98806</span>     <span class="mf">0.52506</span> <span class="mf">0.000522096</span> <span class="nl">value</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.000876567</span> <span class="nl">best</span><span class="p">:</span><span class="o">-</span><span class="mf">0.000876567</span>
-<span class="n">New</span> <span class="n">target</span><span class="o">!</span>
-<span class="mi">5</span> <span class="k">new</span> <span class="nl">point</span><span class="p">:</span> <span class="mf">0.0632575</span>  <span class="mf">0.981795</span>  <span class="mf">0.347888</span>  <span class="mf">0.342065</span>   <span class="mf">0.51396</span>  <span class="mf">0.785025</span> <span class="nl">value</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.26196</span> <span class="nl">best</span><span class="p">:</span><span class="o">-</span><span class="mf">0.50006</span>
-<span class="mi">6</span> <span class="k">new</span> <span class="nl">point</span><span class="p">:</span>  <span class="mf">0.455737</span>  <span class="mf">0.978531</span>   <span class="mf">0.55947</span> <span class="mf">0.0435089</span> <span class="mf">0.0143673</span>  <span class="mf">0.999978</span> <span class="nl">value</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.0113502</span> <span class="nl">best</span><span class="p">:</span><span class="o">-</span><span class="mf">0.0113502</span>
-</pre></div>
-</div>
-<p>Using state-based bayesian optimization, we can transfer what we learned doing one task to learn faster new tasks.</p>
-<p>The whole <code class="docutils literal"><span class="pre">main.cpp</span></code> file:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include &lt;limbo/limbo.hpp&gt;</span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
-
-<span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">hp_period</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
@@ -514,6 +544,8 @@
     <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
+    <span class="p">};</span>
     <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
@@ -523,91 +555,43 @@
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
     <span class="p">};</span>
 <span class="p">};</span>
-
-<span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">rads</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">M_PI</span><span class="p">;</span>
-
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span> <span class="n">dh_mat</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
-
-    <span class="n">dh_mat</span> <span class="o">&lt;&lt;</span> <span class="n">rads</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">rads</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">rads</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">rads</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">rads</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">rads</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dh_mat</span><span class="p">.</span><span class="n">rows</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">dh</span> <span class="o">=</span> <span class="n">dh_mat</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-
-        <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span> <span class="n">submat</span><span class="p">;</span>
-        <span class="n">submat</span> <span class="o">&lt;&lt;</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">dh</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-            <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">dh</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
-            <span class="mi">0</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="n">dh</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-            <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span> <span class="o">*</span> <span class="n">submat</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="p">(</span><span class="n">mat</span> <span class="o">*</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector4d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)).</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
-    <span class="n">MeanFWModel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
-
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">GP</span><span class="o">&gt;</span>
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">GP</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span>
-    <span class="p">{</span>
-        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">pos</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
-    <span class="n">MinTolerance</span><span class="p">()</span> <span class="p">{}</span>
-
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
-    <span class="kt">bool</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="n">afun</span><span class="p">(</span><span class="n">bo</span><span class="p">.</span><span class="n">best_observation</span><span class="p">(</span><span class="n">afun</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">Params</span><span class="o">::</span><span class="n">stop_mintolerance</span><span class="o">::</span><span class="n">tolerance</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
-    <span class="k">typedef</span> <span class="kt">double</span> <span class="n">result_type</span><span class="p">;</span>
-    <span class="n">DistanceToTarget</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span><span class="o">&amp;</span> <span class="n">target</span><span class="p">)</span> <span class="o">:</span> <span class="n">_target</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="p">{}</span>
-
-    <span class="kt">double</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">_target</span><span class="p">).</span><span class="n">norm</span><span class="p">();</span>
-    <span class="p">}</span>
-
-<span class="k">protected</span><span class="o">:</span>
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">_target</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
-    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-
-    <span class="n">eval_func</span><span class="p">()</span> <span class="p">{}</span>
-
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
-    <span class="p">{</span>
-        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-        <span class="c1">// blocked joint</span>
-        <span class="n">xx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">grip_pos</span> <span class="o">=</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="n">xx</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">grip_pos</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="creating-and-running-the-bayesian-optimizer">
+<h3>Creating and running the Bayesian Optimizer<a class="headerlink" href="#creating-and-running-the-bayesian-optimizer" title="Permalink to this headline">¶</a></h3>
+<p>In your main function, you need to have something like the following:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="kt">kernel_t</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">::</span><span class="n">SquaredExpARD</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
 
@@ -632,11 +616,34 @@
     <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eval_func</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">aggregator</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;New target!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     <span class="n">aggregator</span> <span class="o">=</span> <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">});</span>
+    <span class="c1">// Do not forget to pass `false` as the last parameter in `optimize`,</span>
+    <span class="c1">// so you do not reset the data in boptimizer</span>
+    <span class="c1">// i.e. keep all the previous data points in the Gaussian Process</span>
     <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eval_func</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">aggregator</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
     <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
+</td></tr></table></div>
 </div>
+<div class="section" id="running-the-experiment">
+<h3>Running the experiment<a class="headerlink" href="#running-the-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Finally, from the root of limbo, run a build command, with the additional switch <code class="docutils literal"><span class="pre">--exp</span> <span class="pre">arm_example</span></code>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="p">.</span><span class="o">/</span><span class="n">waf</span> <span class="n">configure</span> <span class="o">--</span><span class="n">exp</span> <span class="n">arm_example</span>
+<span class="p">.</span><span class="o">/</span><span class="n">waf</span> <span class="n">build</span> <span class="o">--</span><span class="n">exp</span> <span class="n">arm_example</span>
+</pre></div>
+</div>
+<p>Then, an executable named <code class="docutils literal"><span class="pre">arm_example</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/arm_example</span></code>. When running the experiment, you should expect something like the following:</p>
+<div class="highlight-none"><div class="highlight"><pre>0 new point:   0.105457   0.984803   0.999724   0.397681 0.00178646   0.472922 value: -2.05529 best:-0.50564
+1 new point: 0.0418376  0.211166  0.610741   0.97042   0.49975  0.932997 value: -0.420461 best:-0.420461
+2 new point: 0.0499932  0.809128  0.647616  0.607996   0.98363  0.263471 value: -1.47844 best:-0.420461
+3 new point: 0.926947 0.304285 0.962505 0.923134 0.340676 0.352674 value: -1.77912 best:-0.420461
+4 new point:    0.139309  0.00337038   0.0725873     0.98806     0.52506 0.000522096 value: -0.000876567 best:-0.000876567
+New target!
+5 new point: 0.0632575  0.981795  0.347888  0.342065   0.51396  0.785025 value: -1.26196 best:-0.50006
+6 new point:  0.455737  0.978531   0.55947 0.0435089 0.0143673  0.999978 value: -0.0113502 best:-0.0113502
+</pre></div>
+</div>
+<p>Using state-based bayesian optimization, we can transfer what we learned doing one task to learn faster new tasks.</p>
 </div>
 </div>
 </div>
@@ -651,7 +658,7 @@
         <a href="statistics.html" class="btn btn-neutral float-right" title="Statistics / Writing results" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="external_libs.html" class="btn btn-neutral" title="Add External Library" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="gp.html" class="btn btn-neutral" title="Gaussian Process" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -4,7 +4,7 @@ API
 
 Limbo follows a  `policy-based design <https://en.wikipedia.org/wiki/Policy-based_design>`_, which allows users to combine high flexibility (almost every part of Limbo can be substituted by a user-defined part) with high performance (the abstraction do not add any overhead, contrary to classic OOP design). These two features are critical for researchers who want to experiment new ideas in Bayesian optimization. This means that changing a part of limbo (e.g. changing the kernel functions) usually corresponds to changing a template parameter of the optimizer.
 
-The parameters of the algorithms (e.g. an epsilon) are given by a template class (usually called Params in our code, and always the first argument). See :doc:`parameters` for details.
+The parameters of the algorithms (e.g. an epsilon) are given by a template class (usually called Params in our code, and always the first argument). See :doc:`guides/parameters` for details.
 
 To avoid defining each component of an optimizer manually, Limbo provides sensible defaults. In addition, Limbo relies on `Boost.Parameter <http://www.boost.org/doc/libs/1_60_0/libs/parameter/doc/html/index.html>`_  to make it easy to customize a single part. This Boost library allows us to write classes that accept template argument (user-defined custom classes) by name. For instance, to customize the stopping criteria:
 
@@ -45,11 +45,11 @@ However, there is no need to inherit from a particular 'abstract' class.
 
 Every class is parametrized by a :ref:`Params <params-guide>` class that contains all the parameters.
 
-Sequence graph
+Sequence diagram
 ---------------
-.. figure:: pics/limbo_call_graph.png
+.. figure:: pics/limbo_sequence_diagram.png
    :alt: Sequence diagram
-   :target: _images/limbo_call_graph.png
+   :target: _images/limbo_sequence_diagram.png
 
    Click on the image to see it bigger.
 
@@ -59,11 +59,13 @@ File Structure
 --------------
 (see below for a short explanation of the concepts)
 
+..highlight:: none
+
 ::
 
   src
   +-- limbo:
-       +-- acqui: acquisition functions
+       |-- acqui: acquisition functions
        |-- bayes_opt: bayesian optimizers
        |-- init: initialization functions
        |-- kernel: kernel functions
@@ -76,11 +78,14 @@ File Structure
   |-- tests: unit tests
   |-- benchmarks: a few benchmark functions
   |-- examples: a few examples
-  |-- cmaes: [external] the CMA-ES library, used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
-  |-- ehvi: [external] the Expected HyperVolume Improvement, used for Multi-Objective Optimization -- by Iris Hupkens
+  |-- cmaes: [external] the CMA-ES library,
+      used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
+  |-- ehvi: [external] the Expected HyperVolume Improvement,
+      used for Multi-Objective Optimization -- by Iris Hupkens
 
+.. highlight:: c++
 
-Each directory in the `limbo` directory corresponds to a namespace with the same name. There is also a file for each directory called "directory.hpp" (e.g. `acqui.hpp`) that includes the whole namespace.
+Each directory in the `limbo` directory corresponds to a namespace with the same name. There is also a file for each directory called "*directory*.hpp" (e.g. ``acqui.hpp``) that includes the whole namespace.
 
 
 
@@ -340,6 +345,8 @@ Internals
   :members:
 
 
+.. _statistics-stats:
+
 Statistics (stats)
 --------------------------
 
@@ -381,6 +388,3 @@ Misc tools (tools)
 -------------------------------
 .. doxygennamespace:: limbo::tools
   :members:
-
-.. bibliography:: refs.bib
-  :style: plain

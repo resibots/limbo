@@ -4,6 +4,8 @@ var searchData=
   ['data',['Data',['../structlimbo_1_1mean_1_1_data.html#aedfef0dbf9ef90dd910eb11883dd2ba4',1,'limbo::mean::Data']]],
   ['data_2ehpp',['data.hpp',['../data_8hpp.html',1,'']]],
   ['date',['date',['../group__tools.html#gafb48d3271e7423f8b8d94599869bd9cb',1,'limbo::tools']]],
+  ['default_5frng',['default_rng',['../namespacerandutils.html#a541e8d25081229bd349f2a5facb915a1',1,'randutils']]],
+  ['default_5fseed_5ftype',['default_seed_type',['../classrandutils_1_1random__generator.html#a424b01b5232f91d42163369ad6bd3b11',1,'randutils::random_generator']]],
   ['defaults',['defaults',['../structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults.html',1,'limbo::bayes_opt::BOptimizer']]],
   ['defaults',['defaults',['../structlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1_1defaults.html',1,'limbo::experimental::bayes_opt::BoMulti']]],
   ['defaults',['defaults',['../structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html',1,'limbo::bayes_opt::BoBase']]],

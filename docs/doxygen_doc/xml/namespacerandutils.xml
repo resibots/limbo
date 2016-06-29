@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespacerandutils" kind="namespace" language="C++">
+    <compoundname>randutils</compoundname>
+    <innerclass refid="classrandutils_1_1auto__seeded" prot="public">randutils::auto_seeded</innerclass>
+    <innerclass refid="classrandutils_1_1random__generator" prot="public">randutils::random_generator</innerclass>
+    <innerclass refid="structrandutils_1_1seed__seq__fe" prot="public">randutils::seed_seq_fe</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacerandutils_1a2b7c80226592f2cfc2dd51ef1b6a6648" prot="public" static="no">
+        <type><ref refid="structrandutils_1_1seed__seq__fe" kindref="compound">seed_seq_fe</ref>&lt; 4, uint32_t &gt;</type>
+        <definition>using randutils::seed_seq_fe128 = typedef seed_seq_fe&lt;4, uint32_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>seed_seq_fe128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="391" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="391" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacerandutils_1ab264470d8fc7505e72c78a33528108bd" prot="public" static="no">
+        <type><ref refid="structrandutils_1_1seed__seq__fe" kindref="compound">seed_seq_fe</ref>&lt; 8, uint32_t &gt;</type>
+        <definition>using randutils::seed_seq_fe256 = typedef seed_seq_fe&lt;8, uint32_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>seed_seq_fe256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="392" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="392" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacerandutils_1ac122072eca2bd6dc81a557e59147099c" prot="public" static="no">
+        <type><ref refid="classrandutils_1_1auto__seeded" kindref="compound">auto_seeded</ref>&lt; <ref refid="namespacerandutils_1a2b7c80226592f2cfc2dd51ef1b6a6648" kindref="member">seed_seq_fe128</ref> &gt;</type>
+        <definition>using randutils::auto_seed_128 = typedef auto_seeded&lt;seed_seq_fe128&gt;</definition>
+        <argsstring></argsstring>
+        <name>auto_seed_128</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="549" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="549" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacerandutils_1a96647abcb6ceb1ef0c3cf7c8875ae298" prot="public" static="no">
+        <type><ref refid="classrandutils_1_1auto__seeded" kindref="compound">auto_seeded</ref>&lt; <ref refid="namespacerandutils_1ab264470d8fc7505e72c78a33528108bd" kindref="member">seed_seq_fe256</ref> &gt;</type>
+        <definition>using randutils::auto_seed_256 = typedef auto_seeded&lt;seed_seq_fe256&gt;</definition>
+        <argsstring></argsstring>
+        <name>auto_seed_256</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="550" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="550" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacerandutils_1ad441b52b9359829bc0e396b1eb484953" prot="public" static="no">
+        <type>typename std::conditional&lt; std::is_integral&lt; Numeric &gt;::value, std::uniform_int_distribution&lt; Numeric &gt;, std::uniform_real_distribution&lt; Numeric &gt;&gt;::type</type>
+        <definition>using randutils::uniform_distribution = typedef typename std::conditional&lt;std::is_integral&lt;Numeric&gt;::value, std::uniform_int_distribution&lt;Numeric&gt;, std::uniform_real_distribution&lt;Numeric&gt;&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>uniform_distribution</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="566" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="568" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacerandutils_1a541e8d25081229bd349f2a5facb915a1" prot="public" static="no">
+        <type><ref refid="classrandutils_1_1random__generator" kindref="compound">random_generator</ref>&lt; std::default_random_engine &gt;</type>
+        <definition>using randutils::default_rng = typedef random_generator&lt;std::default_random_engine&gt;</definition>
+        <argsstring></argsstring>
+        <name>default_rng</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="789" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="789" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacerandutils_1a7ad409d0cae7ed019fd23cc64e3f764f" prot="public" static="no">
+        <type><ref refid="classrandutils_1_1random__generator" kindref="compound">random_generator</ref>&lt; std::mt19937 &gt;</type>
+        <definition>using randutils::mt19937_rng = typedef random_generator&lt;std::mt19937&gt;</definition>
+        <argsstring></argsstring>
+        <name>mt19937_rng</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="790" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" bodystart="790" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/tools/rand_utils.hpp" line="144" column="1"/>
+  </compounddef>
+</doxygen>

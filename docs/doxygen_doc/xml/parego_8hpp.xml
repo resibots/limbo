@@ -8,369 +8,323 @@
     <includes refid="bo__base_8hpp" local="no">limbo/bayes_opt/bo_base.hpp</includes>
     <includes refid="boptimizer_8hpp" local="no">limbo/bayes_opt/boptimizer.hpp</includes>
     <incdepgraph>
-      <node id="512">
+      <node id="514">
         <label>list</label>
       </node>
-      <node id="505">
+      <node id="537">
         <label>libcmaes/cmaes.h</label>
       </node>
-      <node id="468">
+      <node id="477">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="476">
+      <node id="523">
+        <label>functional</label>
+      </node>
+      <node id="485">
         <label>Eigen/Cholesky</label>
       </node>
-      <node id="473">
+      <node id="482">
         <label>limits</label>
       </node>
-      <node id="498">
-        <label>limbo/acqui/gp_ucb.hpp</label>
-        <link refid="gp__ucb_8hpp"/>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="467" relation="include">
-        </childnode>
-      </node>
-      <node id="475">
+      <node id="484">
         <label>Eigen/LU</label>
       </node>
-      <node id="522">
+      <node id="526">
         <label>iterator</label>
       </node>
-      <node id="517">
-        <label>limbo/opt/rprop.hpp</label>
-        <link refid="rprop_8hpp"/>
-        <childnode refid="466" relation="include">
+      <node id="507">
+        <label>limbo/acqui/ucb.hpp</label>
+        <link refid="ucb_8hpp"/>
+        <childnode refid="478" relation="include">
         </childnode>
-        <childnode refid="518" relation="include">
+        <childnode refid="476" relation="include">
         </childnode>
-        <childnode refid="469" relation="include">
+      </node>
+      <node id="521">
+        <label>cstdint</label>
+      </node>
+      <node id="515">
+        <label>stdlib.h</label>
+      </node>
+      <node id="530">
+        <label>limbo/bayes_opt/boptimizer.hpp</label>
+        <link refid="boptimizer_8hpp"/>
+        <childnode refid="479" relation="include">
         </childnode>
-        <childnode refid="467" relation="include">
+        <childnode refid="475" relation="include">
         </childnode>
-        <childnode refid="519" relation="include">
+        <childnode refid="526" relation="include">
         </childnode>
-        <childnode refid="502" relation="include">
+        <childnode refid="531" relation="include">
+        </childnode>
+        <childnode refid="478" relation="include">
+        </childnode>
+        <childnode refid="476" relation="include">
+        </childnode>
+        <childnode refid="511" relation="include">
+        </childnode>
+        <childnode refid="487" relation="include">
+        </childnode>
+        <childnode refid="532" relation="include">
+        </childnode>
+      </node>
+      <node id="534">
+        <label>limbo/opt/optimizer.hpp</label>
+        <link refid="optimizer_8hpp"/>
+        <childnode refid="535" relation="include">
+        </childnode>
+        <childnode refid="478" relation="include">
+        </childnode>
+        <childnode refid="536" relation="include">
+        </childnode>
+      </node>
+      <node id="510">
+        <label>limbo/init/random_sampling.hpp</label>
+        <link refid="random__sampling_8hpp"/>
+        <childnode refid="478" relation="include">
+        </childnode>
+        <childnode refid="476" relation="include">
+        </childnode>
+        <childnode refid="511" relation="include">
         </childnode>
       </node>
       <node id="513">
-        <label>stdlib.h</label>
+        <label>cmath</label>
       </node>
-      <node id="521">
-        <label>limbo/bayes_opt/boptimizer.hpp</label>
-        <link refid="boptimizer_8hpp"/>
-        <childnode refid="470" relation="include">
+      <node id="481">
+        <label>cassert</label>
+      </node>
+      <node id="478">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="499">
+        <label>string</label>
+      </node>
+      <node id="533">
+        <label>limbo/tools/parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
+        <childnode refid="483" relation="include">
         </childnode>
-        <childnode refid="466" relation="include">
+        <childnode refid="475" relation="include">
+        </childnode>
+      </node>
+      <node id="489">
+        <label>boost/parameter.hpp</label>
+      </node>
+      <node id="474">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
+        <link refid="parego.hpp"/>
+        <childnode refid="475" relation="include">
+        </childnode>
+        <childnode refid="476" relation="include">
+        </childnode>
+        <childnode refid="480" relation="include">
+        </childnode>
+        <childnode refid="487" relation="include">
+        </childnode>
+        <childnode refid="530" relation="include">
+        </childnode>
+      </node>
+      <node id="488">
+        <label>exception</label>
+      </node>
+      <node id="498">
+        <label>fstream</label>
+      </node>
+      <node id="506">
+        <label>limbo/kernel/exp.hpp</label>
+        <link refid="exp_8hpp"/>
+        <childnode refid="478" relation="include">
+        </childnode>
+        <childnode refid="476" relation="include">
+        </childnode>
+      </node>
+      <node id="503">
+        <label>limbo/tools/sys.hpp</label>
+        <link refid="sys_8hpp"/>
+        <childnode refid="504" relation="include">
+        </childnode>
+        <childnode refid="505" relation="include">
+        </childnode>
+        <childnode refid="499" relation="include">
+        </childnode>
+      </node>
+      <node id="511">
+        <label>limbo/tools/random_generator.hpp</label>
+        <link refid="random__generator_8hpp"/>
+        <childnode refid="512" relation="include">
+        </childnode>
+        <childnode refid="513" relation="include">
+        </childnode>
+        <childnode refid="504" relation="include">
+        </childnode>
+        <childnode refid="514" relation="include">
+        </childnode>
+        <childnode refid="515" relation="include">
+        </childnode>
+        <childnode refid="516" relation="include">
+        </childnode>
+        <childnode refid="517" relation="include">
+        </childnode>
+        <childnode refid="518" relation="include">
+        </childnode>
+        <childnode refid="519" relation="include">
+        </childnode>
+      </node>
+      <node id="531">
+        <label>boost/parameter/aux_/void.hpp</label>
+      </node>
+      <node id="508">
+        <label>limbo/mean/data.hpp</label>
+        <link refid="data_8hpp"/>
+        <childnode refid="478" relation="include">
+        </childnode>
+      </node>
+      <node id="492">
+        <label>boost/fusion/include/for_each.hpp</label>
+      </node>
+      <node id="516">
+        <label>random</label>
+      </node>
+      <node id="535">
+        <label>tuple</label>
+      </node>
+      <node id="504">
+        <label>ctime</label>
+      </node>
+      <node id="505">
+        <label>unistd.h</label>
+      </node>
+      <node id="483">
+        <label>vector</label>
+      </node>
+      <node id="493">
+        <label>boost/filesystem.hpp</label>
+      </node>
+      <node id="517">
+        <label>utility</label>
+      </node>
+      <node id="522">
+        <label>array</label>
+      </node>
+      <node id="501">
+        <label>limbo/stat/aggregated_observations.hpp</label>
+        <link refid="aggregated__observations_8hpp"/>
+        <childnode refid="497" relation="include">
+        </childnode>
+      </node>
+      <node id="495">
+        <label>limbo/stop/max_iterations.hpp</label>
+        <link refid="max__iterations_8hpp"/>
+        <childnode refid="476" relation="include">
+        </childnode>
+      </node>
+      <node id="496">
+        <label>limbo/stat/samples.hpp</label>
+        <link refid="samples_8hpp"/>
+        <childnode refid="497" relation="include">
+        </childnode>
+      </node>
+      <node id="519">
+        <label>limbo/tools/rand_utils.hpp</label>
+        <link refid="rand__utils_8hpp"/>
+        <childnode refid="520" relation="include">
+        </childnode>
+        <childnode refid="521" relation="include">
+        </childnode>
+        <childnode refid="512" relation="include">
+        </childnode>
+        <childnode refid="516" relation="include">
         </childnode>
         <childnode refid="522" relation="include">
         </childnode>
         <childnode refid="523" relation="include">
         </childnode>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="467" relation="include">
-        </childnode>
-        <childnode refid="509" relation="include">
-        </childnode>
-        <childnode refid="478" relation="include">
-        </childnode>
-      </node>
-      <node id="502">
-        <label>limbo/opt/optimizer.hpp</label>
-        <link refid="optimizer_8hpp"/>
-        <childnode refid="503" relation="include">
-        </childnode>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="504" relation="include">
-        </childnode>
-      </node>
-      <node id="520">
-        <label>limbo/init/random_sampling.hpp</label>
-        <link refid="random__sampling_8hpp"/>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="467" relation="include">
-        </childnode>
-        <childnode refid="509" relation="include">
-        </childnode>
-      </node>
-      <node id="511">
-        <label>cmath</label>
-      </node>
-      <node id="472">
-        <label>cassert</label>
-      </node>
-      <node id="469">
-        <label>Eigen/Core</label>
-      </node>
-      <node id="490">
-        <label>string</label>
-      </node>
-      <node id="501">
-        <label>limbo/tools/parallel.hpp</label>
-        <link refid="parallel_8hpp"/>
-        <childnode refid="474" relation="include">
-        </childnode>
-        <childnode refid="466" relation="include">
-        </childnode>
-      </node>
-      <node id="480">
-        <label>boost/parameter.hpp</label>
-      </node>
-      <node id="465">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
-        <link refid="parego.hpp"/>
-        <childnode refid="466" relation="include">
-        </childnode>
-        <childnode refid="467" relation="include">
-        </childnode>
-        <childnode refid="471" relation="include">
-        </childnode>
-        <childnode refid="478" relation="include">
-        </childnode>
-        <childnode refid="521" relation="include">
-        </childnode>
-      </node>
-      <node id="479">
-        <label>exception</label>
-      </node>
-      <node id="489">
-        <label>fstream</label>
-      </node>
-      <node id="494">
-        <label>limbo/tools/sys.hpp</label>
-        <link refid="sys_8hpp"/>
-        <childnode refid="495" relation="include">
-        </childnode>
-        <childnode refid="496" relation="include">
-        </childnode>
-        <childnode refid="490" relation="include">
-        </childnode>
-      </node>
-      <node id="509">
-        <label>limbo/tools/random_generator.hpp</label>
-        <link refid="random__generator_8hpp"/>
-        <childnode refid="510" relation="include">
-        </childnode>
-        <childnode refid="511" relation="include">
-        </childnode>
-        <childnode refid="495" relation="include">
-        </childnode>
-        <childnode refid="512" relation="include">
-        </childnode>
-        <childnode refid="513" relation="include">
-        </childnode>
-        <childnode refid="514" relation="include">
-        </childnode>
-        <childnode refid="515" relation="include">
-        </childnode>
-        <childnode refid="516" relation="include">
-        </childnode>
-      </node>
-      <node id="523">
-        <label>boost/parameter/aux_/void.hpp</label>
-      </node>
-      <node id="499">
-        <label>limbo/mean/data.hpp</label>
-        <link refid="data_8hpp"/>
-        <childnode refid="469" relation="include">
-        </childnode>
-      </node>
-      <node id="483">
-        <label>boost/fusion/include/for_each.hpp</label>
-      </node>
-      <node id="514">
-        <label>random</label>
-      </node>
-      <node id="508">
-        <label>limbo/opt/parallel_repeater.hpp</label>
-        <link refid="parallel__repeater_8hpp"/>
-        <childnode refid="466" relation="include">
-        </childnode>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="467" relation="include">
-        </childnode>
-        <childnode refid="501" relation="include">
-        </childnode>
-        <childnode refid="509" relation="include">
-        </childnode>
-        <childnode refid="502" relation="include">
-        </childnode>
-      </node>
-      <node id="503">
-        <label>tuple</label>
-      </node>
-      <node id="497">
-        <label>limbo/kernel/squared_exp_ard.hpp</label>
-        <link refid="squared__exp__ard_8hpp"/>
-        <childnode refid="469" relation="include">
-        </childnode>
-      </node>
-      <node id="495">
-        <label>ctime</label>
-      </node>
-      <node id="507">
-        <label>limbo/model/gp/kernel_lf_opt.hpp</label>
-        <link refid="kernel__lf__opt_8hpp"/>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="508" relation="include">
+        <childnode refid="524" relation="include">
         </childnode>
         <childnode refid="517" relation="include">
         </childnode>
-        <childnode refid="509" relation="include">
+        <childnode refid="525" relation="include">
+        </childnode>
+        <childnode refid="526" relation="include">
+        </childnode>
+        <childnode refid="527" relation="include">
+        </childnode>
+        <childnode refid="528" relation="include">
+        </childnode>
+        <childnode refid="475" relation="include">
         </childnode>
       </node>
-      <node id="496">
-        <label>unistd.h</label>
-      </node>
-      <node id="474">
-        <label>vector</label>
-      </node>
-      <node id="484">
-        <label>boost/filesystem.hpp</label>
-      </node>
-      <node id="515">
-        <label>utility</label>
-      </node>
-      <node id="492">
-        <label>limbo/stat/aggregated_observations.hpp</label>
-        <link refid="aggregated__observations_8hpp"/>
-        <childnode refid="488" relation="include">
-        </childnode>
-      </node>
-      <node id="486">
-        <label>limbo/stop/max_iterations.hpp</label>
-        <link refid="max__iterations_8hpp"/>
-        <childnode refid="467" relation="include">
-        </childnode>
-      </node>
-      <node id="487">
-        <label>limbo/stat/samples.hpp</label>
-        <link refid="samples_8hpp"/>
-        <childnode refid="488" relation="include">
-        </childnode>
-      </node>
-      <node id="510">
+      <node id="512">
         <label>cstdlib</label>
       </node>
-      <node id="470">
+      <node id="479">
         <label>iostream</label>
       </node>
-      <node id="506">
+      <node id="509">
         <label>limbo/model/gp.hpp</label>
         <link refid="model_2gp_8hpp"/>
-        <childnode refid="472" relation="include">
-        </childnode>
-        <childnode refid="470" relation="include">
-        </childnode>
-        <childnode refid="473" relation="include">
-        </childnode>
-        <childnode refid="474" relation="include">
-        </childnode>
-        <childnode refid="476" relation="include">
-        </childnode>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="475" relation="include">
-        </childnode>
-        <childnode refid="477" relation="include">
-        </childnode>
-      </node>
-      <node id="482">
-        <label>boost/fusion/include/accumulate.hpp</label>
-      </node>
-      <node id="477">
-        <label>limbo/model/gp/no_lf_opt.hpp</label>
-        <link refid="no__lf__opt_8hpp"/>
-      </node>
-      <node id="488">
-        <label>limbo/stat/stat_base.hpp</label>
-        <link refid="stat__base_8hpp"/>
-        <childnode refid="489" relation="include">
-        </childnode>
-        <childnode refid="490" relation="include">
-        </childnode>
-        <childnode refid="491" relation="include">
-        </childnode>
-      </node>
-      <node id="516">
-        <label>mutex</label>
-      </node>
-      <node id="493">
-        <label>limbo/stat/console_summary.hpp</label>
-        <link refid="console__summary_8hpp"/>
-        <childnode refid="488" relation="include">
-        </childnode>
-      </node>
-      <node id="481">
-        <label>boost/fusion/include/vector.hpp</label>
-      </node>
-      <node id="504">
-        <label>boost/optional.hpp</label>
-      </node>
-      <node id="471">
-        <label>limbo/experimental/model/gp_parego.hpp</label>
-        <link refid="gp__parego_8hpp"/>
-        <childnode refid="470" relation="include">
-        </childnode>
-        <childnode refid="472" relation="include">
-        </childnode>
-        <childnode refid="473" relation="include">
-        </childnode>
-        <childnode refid="474" relation="include">
-        </childnode>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="475" relation="include">
-        </childnode>
-        <childnode refid="476" relation="include">
-        </childnode>
-        <childnode refid="477" relation="include">
-        </childnode>
-      </node>
-      <node id="519">
-        <label>limbo/tools/math.hpp</label>
-        <link refid="math_8hpp"/>
-        <childnode refid="510" relation="include">
-        </childnode>
-        <childnode refid="511" relation="include">
-        </childnode>
-        <childnode refid="495" relation="include">
-        </childnode>
-        <childnode refid="512" relation="include">
-        </childnode>
-        <childnode refid="513" relation="include">
-        </childnode>
-        <childnode refid="514" relation="include">
-        </childnode>
-        <childnode refid="515" relation="include">
-        </childnode>
-        <childnode refid="516" relation="include">
-        </childnode>
-      </node>
-      <node id="466">
-        <label>algorithm</label>
-      </node>
-      <node id="485">
-        <label>limbo/stop/chain_criteria.hpp</label>
-        <link refid="chain__criteria_8hpp"/>
-      </node>
-      <node id="478">
-        <label>limbo/bayes_opt/bo_base.hpp</label>
-        <link refid="bo__base_8hpp"/>
-        <childnode refid="474" relation="include">
-        </childnode>
-        <childnode refid="470" relation="include">
-        </childnode>
-        <childnode refid="473" relation="include">
+        <childnode refid="481" relation="include">
         </childnode>
         <childnode refid="479" relation="include">
         </childnode>
-        <childnode refid="480" relation="include">
+        <childnode refid="482" relation="include">
+        </childnode>
+        <childnode refid="483" relation="include">
+        </childnode>
+        <childnode refid="485" relation="include">
+        </childnode>
+        <childnode refid="478" relation="include">
+        </childnode>
+        <childnode refid="484" relation="include">
+        </childnode>
+        <childnode refid="486" relation="include">
+        </childnode>
+      </node>
+      <node id="520">
+        <label>cstddef</label>
+      </node>
+      <node id="491">
+        <label>boost/fusion/include/accumulate.hpp</label>
+      </node>
+      <node id="486">
+        <label>limbo/model/gp/no_lf_opt.hpp</label>
+        <link refid="no__lf__opt_8hpp"/>
+        <childnode refid="479" relation="include">
+        </childnode>
+      </node>
+      <node id="497">
+        <label>limbo/stat/stat_base.hpp</label>
+        <link refid="stat__base_8hpp"/>
+        <childnode refid="498" relation="include">
+        </childnode>
+        <childnode refid="499" relation="include">
+        </childnode>
+        <childnode refid="500" relation="include">
+        </childnode>
+      </node>
+      <node id="518">
+        <label>mutex</label>
+      </node>
+      <node id="502">
+        <label>limbo/stat/console_summary.hpp</label>
+        <link refid="console__summary_8hpp"/>
+        <childnode refid="497" relation="include">
+        </childnode>
+      </node>
+      <node id="527">
+        <label>chrono</label>
+      </node>
+      <node id="490">
+        <label>boost/fusion/include/vector.hpp</label>
+      </node>
+      <node id="536">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="480">
+        <label>limbo/experimental/model/gp_parego.hpp</label>
+        <link refid="gp__parego_8hpp"/>
+        <childnode refid="479" relation="include">
         </childnode>
         <childnode refid="481" relation="include">
         </childnode>
@@ -378,71 +332,130 @@
         </childnode>
         <childnode refid="483" relation="include">
         </childnode>
+        <childnode refid="478" relation="include">
+        </childnode>
         <childnode refid="484" relation="include">
-        </childnode>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="467" relation="include">
         </childnode>
         <childnode refid="485" relation="include">
         </childnode>
         <childnode refid="486" relation="include">
         </childnode>
-        <childnode refid="487" relation="include">
+      </node>
+      <node id="528">
+        <label>thread</label>
+      </node>
+      <node id="525">
+        <label>type_traits</label>
+      </node>
+      <node id="529">
+        <label>limbo/tools/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="512" relation="include">
+        </childnode>
+        <childnode refid="513" relation="include">
+        </childnode>
+        <childnode refid="504" relation="include">
+        </childnode>
+        <childnode refid="514" relation="include">
+        </childnode>
+        <childnode refid="515" relation="include">
+        </childnode>
+        <childnode refid="516" relation="include">
+        </childnode>
+        <childnode refid="517" relation="include">
+        </childnode>
+        <childnode refid="518" relation="include">
+        </childnode>
+      </node>
+      <node id="475">
+        <label>algorithm</label>
+      </node>
+      <node id="494">
+        <label>limbo/stop/chain_criteria.hpp</label>
+        <link refid="chain__criteria_8hpp"/>
+      </node>
+      <node id="487">
+        <label>limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="483" relation="include">
+        </childnode>
+        <childnode refid="479" relation="include">
+        </childnode>
+        <childnode refid="482" relation="include">
+        </childnode>
+        <childnode refid="488" relation="include">
+        </childnode>
+        <childnode refid="489" relation="include">
+        </childnode>
+        <childnode refid="490" relation="include">
+        </childnode>
+        <childnode refid="491" relation="include">
         </childnode>
         <childnode refid="492" relation="include">
         </childnode>
         <childnode refid="493" relation="include">
         </childnode>
+        <childnode refid="478" relation="include">
+        </childnode>
+        <childnode refid="476" relation="include">
+        </childnode>
         <childnode refid="494" relation="include">
         </childnode>
-        <childnode refid="497" relation="include">
+        <childnode refid="495" relation="include">
         </childnode>
-        <childnode refid="498" relation="include">
-        </childnode>
-        <childnode refid="499" relation="include">
-        </childnode>
-        <childnode refid="500" relation="include">
-        </childnode>
-        <childnode refid="506" relation="include">
-        </childnode>
-        <childnode refid="507" relation="include">
-        </childnode>
-        <childnode refid="520" relation="include">
-        </childnode>
-      </node>
-      <node id="518">
-        <label>boost/math/special_functions/sign.hpp</label>
-      </node>
-      <node id="500">
-        <label>limbo/opt/cmaes.hpp</label>
-        <link refid="cmaes_8hpp"/>
-        <childnode refid="474" relation="include">
-        </childnode>
-        <childnode refid="470" relation="include">
-        </childnode>
-        <childnode refid="469" relation="include">
-        </childnode>
-        <childnode refid="467" relation="include">
+        <childnode refid="496" relation="include">
         </childnode>
         <childnode refid="501" relation="include">
         </childnode>
         <childnode refid="502" relation="include">
         </childnode>
-        <childnode refid="505" relation="include">
+        <childnode refid="503" relation="include">
+        </childnode>
+        <childnode refid="506" relation="include">
+        </childnode>
+        <childnode refid="507" relation="include">
+        </childnode>
+        <childnode refid="508" relation="include">
+        </childnode>
+        <childnode refid="509" relation="include">
+        </childnode>
+        <childnode refid="510" relation="include">
+        </childnode>
+        <childnode refid="529" relation="include">
         </childnode>
       </node>
-      <node id="491">
+      <node id="532">
+        <label>limbo/opt/cmaes.hpp</label>
+        <link refid="cmaes_8hpp"/>
+        <childnode refid="483" relation="include">
+        </childnode>
+        <childnode refid="479" relation="include">
+        </childnode>
+        <childnode refid="478" relation="include">
+        </childnode>
+        <childnode refid="476" relation="include">
+        </childnode>
+        <childnode refid="533" relation="include">
+        </childnode>
+        <childnode refid="534" relation="include">
+        </childnode>
+        <childnode refid="537" relation="include">
+        </childnode>
+      </node>
+      <node id="500">
         <label>memory</label>
       </node>
-      <node id="467">
+      <node id="524">
+        <label>initializer_list</label>
+      </node>
+      <node id="476">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="468" relation="include">
+        <childnode refid="477" relation="include">
         </childnode>
-        <childnode refid="469" relation="include">
+        <childnode refid="478" relation="include">
         </childnode>
-        <childnode refid="470" relation="include">
+        <childnode refid="479" relation="include">
         </childnode>
       </node>
     </incdepgraph>
@@ -489,7 +502,7 @@
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>boost::parameter::binding&lt;</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/>parego_signature::bind&lt;A1,<sp/>A2,<sp/>A3,<sp/>A4,<sp/>A5&gt;::type,</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tag::parego_modelfun,</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/><ref refid="namespacelimbo" kindref="compound">limbo</ref>::bayes_opt::BoBase&lt;Params,<sp/>A1,<sp/>A2,<sp/>A3,<sp/>A4,<sp/>A5&gt;::defaults::<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1ddc93cc023a2d7d527deb4cc750624e" kindref="member">model_t</ref></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>typename<sp/><ref refid="namespacelimbo" kindref="compound">limbo</ref>::bayes_opt::BoBase&lt;Params,<sp/>A1,<sp/>A2,<sp/>A3,<sp/>A4,<sp/>A5&gt;::defaults::<ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a151af5c7eef92a82d8813bb2e067d267" kindref="member">model_t</ref></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&gt;<sp/>::type<sp/></highlight><highlight class="comment">//<sp/>end<sp/>binding</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&gt;<sp/></highlight><highlight class="comment">//<sp/>end<sp/>GPParego</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&gt;<sp/></highlight><highlight class="comment">//<sp/>end<sp/>model_fun</highlight><highlight class="normal"></highlight></codeline>

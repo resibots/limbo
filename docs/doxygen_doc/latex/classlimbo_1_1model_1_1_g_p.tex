@@ -250,7 +250,7 @@ return the mean observation (only call this if the output of the \hyperlink{clas
 \item[{const Eigen\+::\+Vector\+Xd \&}]{v}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}
-\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}\textbackslash{}mu} (unormalized). If there is no sample, return the value according to the mean function. \textbackslash{}endrst \hypertarget{classlimbo_1_1model_1_1_g_p_aa41665d2029a541ce5fe85647fe3662d}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!nb\+\_\+bl\+\_\+samples@{nb\+\_\+bl\+\_\+samples}}
+\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}mu} (unormalized). If there is no sample, return the value according to the mean function. \textbackslash{}endrst \hypertarget{classlimbo_1_1model_1_1_g_p_aa41665d2029a541ce5fe85647fe3662d}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!nb\+\_\+bl\+\_\+samples@{nb\+\_\+bl\+\_\+samples}}
 \index{nb\+\_\+bl\+\_\+samples@{nb\+\_\+bl\+\_\+samples}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{nb\+\_\+bl\+\_\+samples}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ int {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::nb\+\_\+bl\+\_\+samples (
 \begin{DoxyParamCaption}
@@ -293,7 +293,7 @@ Do not forget to call this if you use hyper-\/prameters optimization!!
 \item[{const Eigen\+::\+Vector\+Xd \&}]{v}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a33937ff7df97c01fdd9bf8911e0a6159}
-\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}\textbackslash{}mu}, \+:math\+:{\ttfamily \textbackslash{}\textbackslash{}sigma$^\wedge$2} (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to \hyperlink{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{mu()} and \hyperlink{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{sigma()} is more efficient because some computations are shared between \hyperlink{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{mu()} and \hyperlink{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{sigma()}. \textbackslash{}endrst \hypertarget{classlimbo_1_1model_1_1_g_p_a55ea6fe353a12d4c788fac5f2e20e416}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!recompute@{recompute}}
+\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}mu}, \+:math\+:{\ttfamily \textbackslash{}sigma$^\wedge$2} (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to \hyperlink{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{mu()} and \hyperlink{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{sigma()} is more efficient because some computations are shared between \hyperlink{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{mu()} and \hyperlink{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{sigma()}. \textbackslash{}endrst \hypertarget{classlimbo_1_1model_1_1_g_p_a55ea6fe353a12d4c788fac5f2e20e416}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!recompute@{recompute}}
 \index{recompute@{recompute}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{recompute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::recompute (
 \begin{DoxyParamCaption}
@@ -333,7 +333,7 @@ set the likelihood (you need to compute it from outside!)
 \item[{const Eigen\+::\+Vector\+Xd \&}]{v}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}
-\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}\textbackslash{}sigma$^\wedge$2} (unormalized). If there is no sample, return the value according to the mean function. \textbackslash{}endrst 
+\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}sigma$^\wedge$2} (unormalized). If there is no sample, return the max \+:math\+:{\ttfamily \textbackslash{}sigma$^\wedge$2}. \textbackslash{}endrst 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

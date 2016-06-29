@@ -112,7 +112,7 @@ struct limbo::kernel::MaternFiveHalfs&lt; Params &gt;</h3>
 
 <pre class="fragment">embed:rst
 
-Matern kernel (TODO: formula)
+Matern kernel
 
 .. math::
   d = ||v1 - v2||
@@ -123,8 +123,8 @@ Matern kernel (TODO: formula)
 
 
 Parameters:
-  - ``double sigma``
-  - ``double l``
+  - ``double sigma_sq`` (signal variance)
+  - ``double l`` (characteristic length scale)
 
 Reference: :cite:`matern1960spatial` &amp; :cite:`brochu2010tutorial` p.10 &amp; https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
 </pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -197,7 +197,7 @@ template&lt;typename Params &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 3 2016 13:09:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 29 2016 14:22:06 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

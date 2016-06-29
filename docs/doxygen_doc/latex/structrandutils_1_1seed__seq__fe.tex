@@ -1,0 +1,118 @@
+\hypertarget{structrandutils_1_1seed__seq__fe}{}\section{randutils\+:\+:seed\+\_\+seq\+\_\+fe$<$ count, Int\+Rep, mix\+\_\+rounds $>$ Struct Template Reference}
+\label{structrandutils_1_1seed__seq__fe}\index{randutils\+::seed\+\_\+seq\+\_\+fe$<$ count, Int\+Rep, mix\+\_\+rounds $>$@{randutils\+::seed\+\_\+seq\+\_\+fe$<$ count, Int\+Rep, mix\+\_\+rounds $>$}}
+
+
+{\ttfamily \#include $<$limbo/tools/rand\+\_\+utils.\+hpp$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef Int\+Rep \hyperlink{structrandutils_1_1seed__seq__fe_ae485fbabe93091ea392c3bf777e64279}{result\+\_\+type}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structrandutils_1_1seed__seq__fe_adfc89fa1466e011b999baad509645b50}{seed\+\_\+seq\+\_\+fe} (const \hyperlink{structrandutils_1_1seed__seq__fe}{seed\+\_\+seq\+\_\+fe} \&)=delete
+\item 
+void \hyperlink{structrandutils_1_1seed__seq__fe_a117fb76a53d51b628c7ef267b47f0753}{operator=} (const \hyperlink{structrandutils_1_1seed__seq__fe}{seed\+\_\+seq\+\_\+fe} \&)=delete
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{structrandutils_1_1seed__seq__fe_ad716e450723c10c84a725a2e7bd0fbcd}{seed\+\_\+seq\+\_\+fe} (std\+::initializer\+\_\+list$<$ T $>$ init)
+\item 
+{\footnotesize template$<$typename Input\+Iter $>$ }\\\hyperlink{structrandutils_1_1seed__seq__fe_a18d0ce2ce0ac242c65e7d0aade46816e}{seed\+\_\+seq\+\_\+fe} (Input\+Iter begin, Input\+Iter end)
+\item 
+{\footnotesize template$<$typename Random\+Access\+Iterator $>$ }\\void \hyperlink{structrandutils_1_1seed__seq__fe_ae7622793bcbdafbeeb533413b1e3e340}{generate} (Random\+Access\+Iterator first, Random\+Access\+Iterator last) const 
+\item 
+{\footnotesize template$<$typename Output\+Iterator $>$ }\\void \hyperlink{structrandutils_1_1seed__seq__fe_a8b35797e2f894d92bd02cc5eb45f6915}{param} (Output\+Iterator dest) const 
+\item 
+{\footnotesize template$<$typename Input\+Iter $>$ }\\void \hyperlink{structrandutils_1_1seed__seq__fe_ad4b55fdb44ca51461e4e9aa9ec6aba89}{seed} (Input\+Iter begin, Input\+Iter end)
+\item 
+\hyperlink{structrandutils_1_1seed__seq__fe}{seed\+\_\+seq\+\_\+fe} \& \hyperlink{structrandutils_1_1seed__seq__fe_af0bd79352a6fee86f10fb4d45058ef79}{stir} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \hyperlink{structrandutils_1_1seed__seq__fe_a3e9976ba5975a1ca19974cf4eaba72bc}{size} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{structrandutils_1_1seed__seq__fe_ae485fbabe93091ea392c3bf777e64279}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!result\+\_\+type@{result\+\_\+type}}
+\index{result\+\_\+type@{result\+\_\+type}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{result\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count = 4, typename Int\+Rep  = uint32\+\_\+t, size\+\_\+t mix\+\_\+rounds = 1 + (count $<$= 2)$>$ typedef Int\+Rep {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::{\bf result\+\_\+type}}\label{structrandutils_1_1seed__seq__fe_ae485fbabe93091ea392c3bf777e64279}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structrandutils_1_1seed__seq__fe_adfc89fa1466e011b999baad509645b50}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!seed\+\_\+seq\+\_\+fe@{seed\+\_\+seq\+\_\+fe}}
+\index{seed\+\_\+seq\+\_\+fe@{seed\+\_\+seq\+\_\+fe}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{seed\+\_\+seq\+\_\+fe}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count = 4, typename Int\+Rep  = uint32\+\_\+t, size\+\_\+t mix\+\_\+rounds = 1 + (count $<$= 2)$>$ {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::{\bf seed\+\_\+seq\+\_\+fe} (
+\begin{DoxyParamCaption}
+\item[{const {\bf seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}\label{structrandutils_1_1seed__seq__fe_adfc89fa1466e011b999baad509645b50}
+\hypertarget{structrandutils_1_1seed__seq__fe_ad716e450723c10c84a725a2e7bd0fbcd}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!seed\+\_\+seq\+\_\+fe@{seed\+\_\+seq\+\_\+fe}}
+\index{seed\+\_\+seq\+\_\+fe@{seed\+\_\+seq\+\_\+fe}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{seed\+\_\+seq\+\_\+fe}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count = 4, typename Int\+Rep  = uint32\+\_\+t, size\+\_\+t mix\+\_\+rounds = 1 + (count $<$= 2)$>$ template$<$typename T $>$ {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::{\bf seed\+\_\+seq\+\_\+fe} (
+\begin{DoxyParamCaption}
+\item[{std\+::initializer\+\_\+list$<$ T $>$}]{init}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structrandutils_1_1seed__seq__fe_ad716e450723c10c84a725a2e7bd0fbcd}
+\hypertarget{structrandutils_1_1seed__seq__fe_a18d0ce2ce0ac242c65e7d0aade46816e}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!seed\+\_\+seq\+\_\+fe@{seed\+\_\+seq\+\_\+fe}}
+\index{seed\+\_\+seq\+\_\+fe@{seed\+\_\+seq\+\_\+fe}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{seed\+\_\+seq\+\_\+fe}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count = 4, typename Int\+Rep  = uint32\+\_\+t, size\+\_\+t mix\+\_\+rounds = 1 + (count $<$= 2)$>$ template$<$typename Input\+Iter $>$ {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::{\bf seed\+\_\+seq\+\_\+fe} (
+\begin{DoxyParamCaption}
+\item[{Input\+Iter}]{begin, }
+\item[{Input\+Iter}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structrandutils_1_1seed__seq__fe_a18d0ce2ce0ac242c65e7d0aade46816e}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structrandutils_1_1seed__seq__fe_ae7622793bcbdafbeeb533413b1e3e340}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!generate@{generate}}
+\index{generate@{generate}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{generate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count, typename Int\+Rep , size\+\_\+t mix\+\_\+rounds$>$ template$<$typename Random\+Access\+Iterator $>$ void {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::generate (
+\begin{DoxyParamCaption}
+\item[{Random\+Access\+Iterator}]{first, }
+\item[{Random\+Access\+Iterator}]{last}
+\end{DoxyParamCaption}
+) const}\label{structrandutils_1_1seed__seq__fe_ae7622793bcbdafbeeb533413b1e3e340}
+\hypertarget{structrandutils_1_1seed__seq__fe_a117fb76a53d51b628c7ef267b47f0753}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!operator=@{operator=}}
+\index{operator=@{operator=}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count = 4, typename Int\+Rep  = uint32\+\_\+t, size\+\_\+t mix\+\_\+rounds = 1 + (count $<$= 2)$>$ void {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$ \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}\label{structrandutils_1_1seed__seq__fe_a117fb76a53d51b628c7ef267b47f0753}
+\hypertarget{structrandutils_1_1seed__seq__fe_a8b35797e2f894d92bd02cc5eb45f6915}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!param@{param}}
+\index{param@{param}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{param}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count, typename Int\+Rep , size\+\_\+t mix\+\_\+rounds$>$ template$<$typename Output\+Iterator $>$ void {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::param (
+\begin{DoxyParamCaption}
+\item[{Output\+Iterator}]{dest}
+\end{DoxyParamCaption}
+) const}\label{structrandutils_1_1seed__seq__fe_a8b35797e2f894d92bd02cc5eb45f6915}
+\hypertarget{structrandutils_1_1seed__seq__fe_ad4b55fdb44ca51461e4e9aa9ec6aba89}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!seed@{seed}}
+\index{seed@{seed}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{seed}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count = 4, typename Int\+Rep  = uint32\+\_\+t, size\+\_\+t mix\+\_\+rounds = 1 + (count $<$= 2)$>$ template$<$typename Input\+Iter $>$ void {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::seed (
+\begin{DoxyParamCaption}
+\item[{Input\+Iter}]{begin, }
+\item[{Input\+Iter}]{end}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structrandutils_1_1seed__seq__fe_ad4b55fdb44ca51461e4e9aa9ec6aba89}
+\hypertarget{structrandutils_1_1seed__seq__fe_a3e9976ba5975a1ca19974cf4eaba72bc}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!size@{size}}
+\index{size@{size}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count = 4, typename Int\+Rep  = uint32\+\_\+t, size\+\_\+t mix\+\_\+rounds = 1 + (count $<$= 2)$>$ static constexpr size\+\_\+t {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\label{structrandutils_1_1seed__seq__fe_a3e9976ba5975a1ca19974cf4eaba72bc}
+\hypertarget{structrandutils_1_1seed__seq__fe_af0bd79352a6fee86f10fb4d45058ef79}{}\index{randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}!stir@{stir}}
+\index{stir@{stir}!randutils\+::seed\+\_\+seq\+\_\+fe@{randutils\+::seed\+\_\+seq\+\_\+fe}}
+\subsubsection[{stir}]{\setlength{\rightskip}{0pt plus 5cm}template$<$size\+\_\+t count = 4, typename Int\+Rep  = uint32\+\_\+t, size\+\_\+t mix\+\_\+rounds = 1 + (count $<$= 2)$>$ {\bf seed\+\_\+seq\+\_\+fe}\& {\bf randutils\+::seed\+\_\+seq\+\_\+fe}$<$ count, Int\+Rep, mix\+\_\+rounds $>$\+::stir (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structrandutils_1_1seed__seq__fe_af0bd79352a6fee86f10fb4d45058ef79}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/tools/\hyperlink{rand__utils_8hpp}{rand\+\_\+utils.\+hpp}\end{DoxyCompactItemize}

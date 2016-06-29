@@ -101,34 +101,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">namespace </span>defaults {</div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1kernel__exp.html">   10</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1kernel__exp.html">kernel_exp</a> {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            <a class="code" href="group__kernel__defaults.html#ga14c991dc7de698f2af7a689b157ace9c">BO_PARAM</a>(<span class="keywordtype">double</span>, sigma, 1);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        };</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    }</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1kernel.html">   15</a></span>&#160;    <span class="keyword">namespace </span>kernel {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_exp.html">   29</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1kernel_1_1_exp.html">Exp</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_exp.html#abec48720f518fa51be7f74bf102add09">   30</a></span>&#160;            <a class="code" href="structlimbo_1_1kernel_1_1_exp.html#abec48720f518fa51be7f74bf102add09">Exp</a>(<span class="keywordtype">size_t</span> dim = 1) {}</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_exp.html#a50951330db2210da72d2ea8fc9ef8b96">   31</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="structlimbo_1_1kernel_1_1_exp.html#a50951330db2210da72d2ea8fc9ef8b96">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v1, <span class="keyword">const</span> Eigen::VectorXd&amp; v2)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <span class="keywordtype">double</span> _sigma = Params::kernel_exp::sigma();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="keywordflow">return</span> (std::exp(-(1 / (2 * std::pow(_sigma, 2))) * std::pow((v1 - v2).norm(), 2)));</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        };</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_exp_html"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_exp.html">limbo::kernel::Exp</a></div><div class="ttdef"><b>Definition:</b> exp.hpp:29</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_exp_html_a50951330db2210da72d2ea8fc9ef8b96"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_exp.html#a50951330db2210da72d2ea8fc9ef8b96">limbo::kernel::Exp::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2) const </div><div class="ttdef"><b>Definition:</b> exp.hpp:31</div></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            <a class="code" href="group__kernel__defaults.html#ga202b52540fa68b47005cd9e3ef61a3fe">BO_PARAM</a>(<span class="keywordtype">double</span>, sigma_sq, 1);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <a class="code" href="group__kernel__defaults.html#ga202b52540fa68b47005cd9e3ef61a3fe">BO_PARAM</a>(<span class="keywordtype">double</span>, l, 1);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        };</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    }</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1kernel.html">   16</a></span>&#160;    <span class="keyword">namespace </span>kernel {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_exp.html">   31</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1kernel_1_1_exp.html">Exp</a> {</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_exp.html#abec48720f518fa51be7f74bf102add09">   32</a></span>&#160;            <a class="code" href="structlimbo_1_1kernel_1_1_exp.html#abec48720f518fa51be7f74bf102add09">Exp</a>(<span class="keywordtype">size_t</span> dim = 1) {}</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structlimbo_1_1kernel_1_1_exp.html#a50951330db2210da72d2ea8fc9ef8b96">   33</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="structlimbo_1_1kernel_1_1_exp.html#a50951330db2210da72d2ea8fc9ef8b96">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v1, <span class="keyword">const</span> Eigen::VectorXd&amp; v2)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keywordtype">double</span> _l = Params::kernel_exp::l();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="keywordflow">return</span> Params::kernel_exp::sigma_sq() * (std::exp(-(1 / (2 * std::pow(_l, 2))) * std::pow((v1 - v2).norm(), 2)));</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        };</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_exp_html"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_exp.html">limbo::kernel::Exp</a></div><div class="ttdef"><b>Definition:</b> exp.hpp:31</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_exp_html_a50951330db2210da72d2ea8fc9ef8b96"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_exp.html#a50951330db2210da72d2ea8fc9ef8b96">limbo::kernel::Exp::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2) const </div><div class="ttdef"><b>Definition:</b> exp.hpp:33</div></div>
 <div class="ttc" id="macros_8hpp_html"><div class="ttname"><a href="macros_8hpp.html">macros.hpp</a></div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> gp_ucb.hpp:8</div></div>
+<div class="ttc" id="group__kernel__defaults_html_ga202b52540fa68b47005cd9e3ef61a3fe"><div class="ttname"><a href="group__kernel__defaults.html#ga202b52540fa68b47005cd9e3ef61a3fe">limbo::defaults::kernel_exp::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, sigma_sq, 1)</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1kernel__exp_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1kernel__exp.html">limbo::defaults::kernel_exp</a></div><div class="ttdef"><b>Definition:</b> exp.hpp:10</div></div>
-<div class="ttc" id="group__kernel__defaults_html_ga14c991dc7de698f2af7a689b157ace9c"><div class="ttname"><a href="group__kernel__defaults.html#ga14c991dc7de698f2af7a689b157ace9c">limbo::defaults::kernel_exp::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, sigma, 1)</div></div>
-<div class="ttc" id="structlimbo_1_1kernel_1_1_exp_html_abec48720f518fa51be7f74bf102add09"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_exp.html#abec48720f518fa51be7f74bf102add09">limbo::kernel::Exp::Exp</a></div><div class="ttdeci">Exp(size_t dim=1)</div><div class="ttdef"><b>Definition:</b> exp.hpp:30</div></div>
+<div class="ttc" id="structlimbo_1_1kernel_1_1_exp_html_abec48720f518fa51be7f74bf102add09"><div class="ttname"><a href="structlimbo_1_1kernel_1_1_exp.html#abec48720f518fa51be7f74bf102add09">limbo::kernel::Exp::Exp</a></div><div class="ttdeci">Exp(size_t dim=1)</div><div class="ttdef"><b>Definition:</b> exp.hpp:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 3 2016 13:09:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 29 2016 14:22:05 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

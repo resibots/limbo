@@ -36,6 +36,9 @@ In the UCB class, the value can be accessed like this:
 
 No need to write any parsing code!
 
+Default parameters
+------------------
+
 Many limbo classes provide default parameters. To use them, the parameter sub-structure has to inherit from the default structure:
 
 ::
@@ -45,8 +48,10 @@ Many limbo classes provide default parameters. To use them, the parameter sub-st
       };
     };
 
-That way, the ``acqui_ucb::alpha()`` exists, but it has its default value.
+That way, the ``acqui_ucb::alpha()`` exists, but with the default value.
 
+Dynamic parameters
+------------------
 
 Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a ``BO_DYN_PARAM`` instead of a ``BO_PARAM``:
 
@@ -67,10 +72,10 @@ However, for dynamic parameters, we need to call ``BO_DECLARE_DYN_PARAM`` in our
 
 .. warning:: Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead -- they are equivalent to writing a constant).
 
-Last, we can also use arrays, Eigen vectors, and strings as follows:
+Arrays
+------
 
-::
-
+Last, we can also use arrays, Eigen vectors, and strings as follows::
 
     struct Params {
         struct test {
@@ -84,6 +89,9 @@ Last, we can also use arrays, Eigen vectors, and strings as follows:
     BO_DECLARE_DYN_PARAM(int, Params::test, b);
 
 All these macros are defined in ``tools/macros.hpp``.
+
+Multiple sets of parameters
+---------------------------
 
 In some rare cases, you may have 2 different instances of the same algorithm, for example, if you choose to use the same optimizer for the acquisition optimization and the GP hyperparametrs optimization.  In such cases, you may also wish to set different parameters for each instance. This can be easily accomplished in the following way:
 

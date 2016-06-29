@@ -6,6 +6,8 @@ var searchData=
   ['ucb_5fimgpo',['UCB_IMGPO',['../classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o.html',1,'limbo::acqui::experimental']]],
   ['ucb_5fimgpo',['UCB_IMGPO',['../classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o.html#a13c9d89758fe241c051fafe06337fd1e',1,'limbo::acqui::experimental::UCB_IMGPO']]],
   ['ucb_5fimgpo_2ehpp',['ucb_imgpo.hpp',['../ucb__imgpo_8hpp.html',1,'']]],
+  ['uniform',['uniform',['../classrandutils_1_1random__generator.html#a122935c5a83df7f584d7120c64c732bc',1,'randutils::random_generator']]],
+  ['uniform_5fdistribution',['uniform_distribution',['../namespacerandutils.html#ad441b52b9359829bc0e396b1eb484953',1,'randutils']]],
   ['update_5fpareto_5fdata',['update_pareto_data',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html#a43c817f66221750175b905eab3640a19',1,'limbo::experimental::bayes_opt::BoMulti']]],
   ['update_5fpareto_5fmodel',['update_pareto_model',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html#ad6240a53ed0faf0ed638f357aa99f31d',1,'limbo::experimental::bayes_opt::BoMulti']]]
 ];
