@@ -161,6 +161,8 @@ Default Parameters
 
 Optimization functions (opt)
 ------------------------------
+.. _opt-api:
+
 In Limbo, optimizers are used both to optimize acquisition functions and to optimize hyper-parameters. However, this API might be helpful in other places whenever an optimization of a function is needed.
 
 .. warning::
@@ -170,7 +172,7 @@ In Limbo, optimizers are used both to optimize acquisition functions and to opti
 
 Most algorithms are wrappers to external libraries (NLOpt and CMA-ES). Only the Rprop (and a few control algorithms like 'RandomPoint') is implemented in Limbo. Some optimizers require the gradient, some don't.
 
-The tutorial :ref:`Optimization sub-API <opt-api>` describes how to use the opt:: API in your own algorithms.
+The tutorial :ref:`Optimization sub-API <opt-tutorial>` describes how to use the opt:: API in your own algorithms.
 
 The return type of the function to be optimized is ``eval_t``, which is defined as a pair of a double (f(x)) and a vector (the gradient):
 

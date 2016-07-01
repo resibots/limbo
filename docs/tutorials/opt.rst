@@ -1,4 +1,4 @@
-.. _opt-api:
+.. _opt-tutorial:
 
 Optimization Sub-API
 ====================
@@ -62,6 +62,8 @@ Or with CMA-ES:
    :linenos:
    :lines: 58-62
 
+
+See the :ref:`API documentation <opt-api>` for more details.
 
 Here is the full file.
 
