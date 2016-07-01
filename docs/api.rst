@@ -161,7 +161,27 @@ Default Parameters
 
 Optimization functions (opt)
 ------------------------------
-Optimizers are used both to optimize acquisition functions and to optimize hyper-parameters. Some optimizers require the gradient, some don't.
+In Limbo, optimizers are used both to optimize acquisition functions and to optimize hyper-parameters. However, this API might be helpful in other places whenever an optimization of a function is needed.
+
+.. warning::
+
+  Limbo optimizers always MAXIMIZE f(x), whereas many libraries MINIMIZE f(x)
+
+
+Most algorithms are wrappers to external libraries (NLOpt and CMA-ES). Only the Rprop (and a few control algorithms like 'RandomPoint') is implemented in Limbo. Some optimizers require the gradient, some don't.
+
+The tutorial :ref:`Optimization sub-API <opt-api>` describes how to use the opt:: API in your own algorithms.
+
+The return type of the function to be optimized is ``eval_t``, which is defined as a pair of a double (f(x)) and a vector (the gradient):
+
+.. code-block:: cpp
+
+  typedef std::pair<double, boost::optional<Eigen::VectorXd>> eval_t;
+
+To make it easy to work with ``eval_t``, Limbo defines a few shortcuts:
+
+.. doxygengroup:: opt_tools
+   :members:
 
 Template
 ^^^^^^^^^
@@ -181,18 +201,32 @@ Template
 
 .. code-block:: cpp
 
-  limbo::opt::eval_t my_function(const Eigen::VectorXd& v)
+  limbo::opt::eval_t my_function(const Eigen::VectorXd& v, bool eval_grad = false)
   {
-    double x = <function_value>;
+    double fx = <function_value>;
     Eigen::VectorXd gradient = <gradient>;
-    return std::make_pair(x, gradient);
+    return {fx, gradient};
   }
+
+It is possible to make it a bit more generic by not computing the gradient when it is not asked, that is:
+
+.. code-block:: cpp
+
+  limbo::opt::eval_t my_function(const Eigen::VectorXd& v, bool eval_grad = false)
+  {
+    double fx = <function_value>;
+    if (!eval_grad)
+      return opt::no_grad(v);
+    Eigen::VectorXd gradient = <gradient>;
+    return {fx, gradient};
+  }
+
 
 - If the gradient of ``f`` is not known:
 
 .. code-block:: cpp
 
-  limbo::opt::eval_t my_function(const Eigen::VectorXd& v)
+  limbo::opt::eval_t my_function(const Eigen::VectorXd& v, bool eval_grad = false)
   {
     double x = <function_value>(v);
     return limbo::opt::no_grad(x);
@@ -201,6 +235,21 @@ Template
 
 - ``init`` is an optionnal starting point (for local optimizers); many optimizers ignore this argument (see the table below): in that case, an assert will fail.
 - ``bounded`` is true if the optimization is bounded in [0,1]; many optimizers do not support bounded optimization (see the table below).
+- ``eval_grad`` allows Limbo to avoid computing the gradient when it is not needed (i.e. when the gradient is known but we optimize using a gradient-free optimizer).
+
+To call an optimizer (e.g. NLOptGrad):
+
+.. code-block:: cpp
+
+  // the type of the optimizer (here NLOpt with the LN_LBGFGS algorithm)
+  opt::NLOptGrad<ParamsGrad, nlopt::LD_LBFGS> lbfgs;
+  // we start from a random point (in 2D), and the search is not bounded
+  Eigen::VectorXd res_lbfgs = lbfgs(my_function, tools::random_vector(2), false);
+  std::cout <<"Result with LBFGS:\t" << res_lbfgs.transpose()
+            << " -> " << my_function(res_lbfgs).first << std::endl;
+
+Not all the algorithms support bounded optimization:
+
 
 +-------------+---------+-------+
 |Algo.        | bounded |  init |
@@ -216,6 +265,11 @@ Template
 |RandomPoint  | yes     | no    |
 +-------------+---------+-------+
 
+For example, to use the LBFGS optimizer to optimize :math:`(x-0.5)^2`:
+
+.. code-block:: cpp
+
+
 Available optimizers
 ^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: opt
@@ -226,11 +280,6 @@ Default parameters
 .. doxygengroup:: opt_defaults
    :undoc-members:
 
-Utility functions & typedefs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. doxygengroup:: opt_tools
-   :members:
 
 
 Models / Gaussian processes (model)
@@ -244,6 +293,8 @@ The hyper-parameters of the model (kernel, mean) can be optimized. The following
 
 .. doxygengroup:: model_opt
   :members:
+
+See the `Gaussian Process`_ tutorial for a tutorial about using GP without using a Bayesian optimization algorithm.
 
 Kernel functions (kernel)
 --------------------------
