@@ -27,3 +27,9 @@ def build(bld):
                       target='gp',
                       uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
+    obj = bld.program(features='cxx',
+                      source='opt.cpp',
+                      includes='. .. ../../',
+                      target='opt',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      use='limbo')

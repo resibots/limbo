@@ -19,7 +19,7 @@ Optional but highly recommended
 +++++++++++++++++++++++++++++++++
 * `libcmaes <https://github.com/beniz/libcmaes>`_. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get). Follow the instructions `here <https://github.com/beniz/libcmaes#build>`_, reproduced for your convenience::
 
-    sudo apt-get install gtest
+    sudo apt-get install libgtest-dev
     sudo cd /usr/src/gtest
     sudo mkdir build && cd build
     sudo cmake ..
