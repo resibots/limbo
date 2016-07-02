@@ -133,7 +133,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#id7">Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-optimizers">Available optimizers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id8">Default parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#utility-functions-typedefs">Utility functions &amp; typedefs</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#models-gaussian-processes-model">Models / Gaussian processes (model)</a></li>
@@ -704,7 +703,69 @@
 </div>
 <div class="section" id="optimization-functions-opt">
 <h2>Optimization functions (opt)<a class="headerlink" href="#optimization-functions-opt" title="Permalink to this headline">¶</a></h2>
-<p>Optimizers are used both to optimize acquisition functions and to optimize hyper-parameters. Some optimizers require the gradient, some don&#8217;t.</p>
+<p id="opt-api">In Limbo, optimizers are used both to optimize acquisition functions and to optimize hyper-parameters. However, this API might be helpful in other places whenever an optimization of a function is needed.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Limbo optimizers always MAXIMIZE f(x), whereas many libraries MINIMIZE f(x)</p>
+</div>
+<p>Most algorithms are wrappers to external libraries (NLOpt and CMA-ES). Only the Rprop (and a few control algorithms like &#8216;RandomPoint&#8217;) is implemented in Limbo. Some optimizers require the gradient, some don&#8217;t.</p>
+<p>The tutorial <a class="reference internal" href="tutorials/opt.html#opt-tutorial"><span>Optimization sub-API</span></a> describes how to use the opt:: API in your own algorithms.</p>
+<p>The return type of the function to be optimized is <code class="docutils literal"><span class="pre">eval_t</span></code>, which is defined as a pair of a double (f(x)) and a vector (the gradient):</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;&gt;</span> <span class="kt">eval_t</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To make it easy to work with <code class="docutils literal"><span class="pre">eval_t</span></code>, Limbo defines a few shortcuts:</p>
+<dl class="group">
+<dt>
+<span class="target" id="limbogroup__opt__tools"></span><em>group</em> <code class="descname">opt_tools</code></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv2N5limbo3opt6eval_tE">
+<span id="limbo::opt::eval_t"></span><span class="target" id="limbogroup__opt__tools_1ga7fc87080ebf563d050fc547d25528ef0"></span><em class="property">typedef </em>std::pair&lt;double, boost::optional&lt;Eigen::VectorXd&gt;&gt; <code class="descname">eval_t</code><a class="headerlink" href="#_CPPv2N5limbo3opt6eval_tE" title="Permalink to this definition">¶</a></dt>
+<dd><p>return type of the function to optimize </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt id="_CPPv2N5limbo3opt7no_gradEd">
+<span id="limbo::opt::no_grad__double"></span><span class="target" id="limbogroup__opt__tools_1ga38e53ccac21f452bd31e9b239985d456"></span><a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> <code class="descname">no_grad</code><span class="sig-paren">(</span>double <em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt7no_gradEd" title="Permalink to this definition">¶</a></dt>
+<dd><p>return with opt::no_grad(your_val) if no gradient is available (to be used in functions to be optimized) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo3opt4gradERK6eval_t">
+<span id="limbo::opt::grad__eval_tCR"></span><span class="target" id="limbogroup__opt__tools_1gaf28d9af930b2993024ab497b285e0521"></span><em class="property">const</em> Eigen::VectorXd &amp;<code class="descname">grad</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> &amp;<em>fg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt4gradERK6eval_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the gradient from a function evaluation (eval_t) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo3opt3funERK6eval_t">
+<span id="limbo::opt::fun__eval_tCR"></span><span class="target" id="limbogroup__opt__tools_1ga68ad00d7501bc26a2a0990bac762393e"></span>double <code class="descname">fun</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> &amp;<em>fg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt3funERK6eval_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the value from a function evaluation (eval_t) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> F&gt;</dt>
+<dt id="_CPPv2N5limbo3opt4evalERK1FRKN5Eigen8VectorXdE">
+<span id="limbo::opt::eval__FCR.Eigen::VectorXdCR"></span><span class="target" id="limbogroup__opt__tools_1ga698d932ac52cab812742b1300f875372"></span>double <code class="descname">eval</code><span class="sig-paren">(</span><em class="property">const</em> F &amp;<em>f</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt4evalERK1FRKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate f without gradient (to be called from the optimization algorithms that do not use the gradient) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> F&gt;</dt>
+<dt id="_CPPv2N5limbo3opt9eval_gradERK1FRKN5Eigen8VectorXdE">
+<span id="limbo::opt::eval_grad__FCR.Eigen::VectorXdCR"></span><span class="target" id="limbogroup__opt__tools_1ga6abbcdf8d83abca89802881d883fb9e3"></span><a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> <code class="descname">eval_grad</code><span class="sig-paren">(</span><em class="property">const</em> F &amp;<em>f</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt9eval_gradERK1FRKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate f with gradient (to be called from the optimization algorithms that use the gradient) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
 <div class="section" id="id7">
 <h3>Template<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
@@ -720,18 +781,29 @@
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">f</span></code> is the function to be optimized. If the gradient is known, the function should look like this:</li>
 </ul>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">function_value</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">fx</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">function_value</span><span class="o">&gt;</span><span class="p">;</span>
   <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">gradient</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">gradient</span><span class="o">&gt;</span><span class="p">;</span>
-  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gradient</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">{</span><span class="n">fx</span><span class="p">,</span> <span class="n">gradient</span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It is possible to make it a bit more generic by not computing the gradient when it is not asked, that is:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">fx</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">function_value</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">eval_grad</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">opt</span><span class="o">::</span><span class="n">no_grad</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+  <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">gradient</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">gradient</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">{</span><span class="n">fx</span><span class="p">,</span> <span class="n">gradient</span><span class="p">};</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li>If the gradient of <code class="docutils literal"><span class="pre">f</span></code> is not known:</li>
 </ul>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">function_value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
   <span class="k">return</span> <span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">no_grad</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
@@ -741,7 +813,18 @@
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">init</span></code> is an optionnal starting point (for local optimizers); many optimizers ignore this argument (see the table below): in that case, an assert will fail.</li>
 <li><code class="docutils literal"><span class="pre">bounded</span></code> is true if the optimization is bounded in [0,1]; many optimizers do not support bounded optimization (see the table below).</li>
+<li><code class="docutils literal"><span class="pre">eval_grad</span></code> allows Limbo to avoid computing the gradient when it is not needed (i.e. when the gradient is known but we optimize using a gradient-free optimizer).</li>
 </ul>
+<p>To call an optimizer (e.g. NLOptGrad):</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">// the type of the optimizer (here NLOpt with the LN_LBGFGS algorithm)</span>
+<span class="n">opt</span><span class="o">::</span><span class="n">NLOptGrad</span><span class="o">&lt;</span><span class="n">ParamsGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">LD_LBFGS</span><span class="o">&gt;</span> <span class="n">lbfgs</span><span class="p">;</span>
+<span class="c1">// we start from a random point (in 2D), and the search is not bounded</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_lbfgs</span> <span class="o">=</span> <span class="n">lbfgs</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span><span class="s">&quot;Result with LBFGS:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_lbfgs</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
+          <span class="o">&lt;&lt;</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">my_function</span><span class="p">(</span><span class="n">res_lbfgs</span><span class="p">).</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Not all the algorithms support bounded optimization:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="45%" />
@@ -777,6 +860,10 @@
 </tr>
 </tbody>
 </table>
+<p>For example, to use the LBFGS optimizer to optimize <span class="math">\((x-0.5)^2\)</span>:</p>
+<div class="highlight-cpp"><div class="highlight"><pre>
+</pre></div>
+</div>
 </div>
 <div class="section" id="available-optimizers">
 <h3>Available optimizers<a class="headerlink" href="#available-optimizers" title="Permalink to this headline">¶</a></h3>
@@ -978,60 +1065,6 @@
 </dd></dl>
 
 </div>
-<div class="section" id="utility-functions-typedefs">
-<h3>Utility functions &amp; typedefs<a class="headerlink" href="#utility-functions-typedefs" title="Permalink to this headline">¶</a></h3>
-<dl class="group">
-<dt>
-<span class="target" id="limbogroup__opt__tools"></span><em>group</em> <code class="descname">opt_tools</code></dt>
-<dd><div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Typedefs</p>
-<dl class="type">
-<dt id="_CPPv2N5limbo3opt6eval_tE">
-<span id="limbo::opt::eval_t"></span><span class="target" id="limbogroup__opt__tools_1ga7fc87080ebf563d050fc547d25528ef0"></span><em class="property">typedef </em>std::pair&lt;double, boost::optional&lt;Eigen::VectorXd&gt;&gt; <code class="descname">eval_t</code><a class="headerlink" href="#_CPPv2N5limbo3opt6eval_tE" title="Permalink to this definition">¶</a></dt>
-<dd><p>return type of the function to optimize </p>
-</dd></dl>
-
-</div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Functions</p>
-<dl class="function">
-<dt id="_CPPv2N5limbo3opt7no_gradEd">
-<span id="limbo::opt::no_grad__double"></span><span class="target" id="limbogroup__opt__tools_1ga38e53ccac21f452bd31e9b239985d456"></span><a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> <code class="descname">no_grad</code><span class="sig-paren">(</span>double <em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt7no_gradEd" title="Permalink to this definition">¶</a></dt>
-<dd><p>return with opt::no_grad(your_val) if no gradient is available (to be used in functions to be optimized) </p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5limbo3opt4gradERK6eval_t">
-<span id="limbo::opt::grad__eval_tCR"></span><span class="target" id="limbogroup__opt__tools_1gaf28d9af930b2993024ab497b285e0521"></span><em class="property">const</em> Eigen::VectorXd &amp;<code class="descname">grad</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> &amp;<em>fg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt4gradERK6eval_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the gradient from a function evaluation (eval_t) </p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv2N5limbo3opt3funERK6eval_t">
-<span id="limbo::opt::fun__eval_tCR"></span><span class="target" id="limbogroup__opt__tools_1ga68ad00d7501bc26a2a0990bac762393e"></span>double <code class="descname">fun</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> &amp;<em>fg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt3funERK6eval_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>get the value from a function evaluation (eval_t) </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<em class="property">template </em>&lt;<em class="property">typename</em> F&gt;</dt>
-<dt id="_CPPv2N5limbo3opt4evalERK1FRKN5Eigen8VectorXdE">
-<span id="limbo::opt::eval__FCR.Eigen::VectorXdCR"></span><span class="target" id="limbogroup__opt__tools_1ga698d932ac52cab812742b1300f875372"></span>double <code class="descname">eval</code><span class="sig-paren">(</span><em class="property">const</em> F &amp;<em>f</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt4evalERK1FRKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate f without gradient (to be called from the optimization algorithms that do not use the gradient) </p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<em class="property">template </em>&lt;<em class="property">typename</em> F&gt;</dt>
-<dt id="_CPPv2N5limbo3opt9eval_gradERK1FRKN5Eigen8VectorXdE">
-<span id="limbo::opt::eval_grad__FCR.Eigen::VectorXdCR"></span><span class="target" id="limbogroup__opt__tools_1ga6abbcdf8d83abca89802881d883fb9e3"></span><a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> <code class="descname">eval_grad</code><span class="sig-paren">(</span><em class="property">const</em> F &amp;<em>f</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt9eval_gradERK1FRKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate f with gradient (to be called from the optimization algorithms that use the gradient) </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-</div>
 </div>
 <div class="section" id="models-gaussian-processes-model">
 <h2>Models / Gaussian processes (model)<a class="headerlink" href="#models-gaussian-processes-model" title="Permalink to this headline">¶</a></h2>
@@ -1209,6 +1242,7 @@
 
 </dd></dl>
 
+<p>See the <a href="#id28"><span class="problematic" id="id29">`Gaussian Process`_</span></a> tutorial for a tutorial about using GP without using a Bayesian optimization algorithm.</p>
 </div>
 <div class="section" id="kernel-functions-kernel">
 <h2>Kernel functions (kernel)<a class="headerlink" href="#kernel-functions-kernel" title="Permalink to this headline">¶</a></h2>
