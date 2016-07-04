@@ -48,5 +48,6 @@ install:
 
 # Change this to your needs
 script:
+  - echo "string: $SFERES_HOME"
   - if [ "$SFERES" = "OFF" ]; then ./waf configure ; else ./waf configure --sferes=$SFERES_HOME ; fi
   - if [ "$EXPERIMENTAL" = "OFF" ]; then ./waf --tests --alltests -v ; else ./waf --experimental ; fi
