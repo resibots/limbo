@@ -17,7 +17,7 @@ cp -r /tmp/doxygen_doc .
 cd ..
 cp -r docs/_build/html/* .
 git add .
-git commit -m 'automatic update of the doc [skip ci]'
+git commit -m 'automatic update of the doc [ci skip]'
 git push origin gh-pages
 
 rm -rf /tmp/doxygen_doc
