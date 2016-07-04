@@ -152,7 +152,6 @@ namespace limbo {
                     this->_update_models();
                     std::cout << "ok" << std::endl;
 #ifdef USE_SFERES
-
                     typedef sferes::gen::EvoFloat<D, multi::SferesParams> gen_t;
                     typedef sferes::phen::Parameters<gen_t, multi::SferesFit<model_t>, multi::SferesParams> phen_t;
                     typedef sferes::eval::Parallel<multi::SferesParams> eval_t;
