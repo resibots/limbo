@@ -24,7 +24,7 @@ namespace limbo {
                     if (!bo.stats_enabled())
                         return;
                     // convert the data to C arrays
-                    double** data = new double* [bo.observations().size()];
+                    double** data = new double*[bo.observations().size()];
                     for (size_t i = 0; i < bo.observations().size(); ++i) {
                         size_t dim = bo.observations()[i].size();
                         data[i] = new double[dim];

@@ -287,7 +287,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Sphere());
                 Eigen::Vector2d s_val(0.5, 0.5);
@@ -298,7 +298,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
                 Eigen::Vector2d s_val(0.5, 0.5);
@@ -309,7 +309,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Rastrigin());
                 Eigen::Vector4d s_val(0, 0, 0, 0);
@@ -320,7 +320,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman3());
                 // double s_max = 3.86278;
@@ -332,7 +332,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman6());
                 Eigen::Matrix<double, 6, 1> s_val;
@@ -345,7 +345,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(GoldenPrice());
                 //    double s_max = -log(3);

@@ -71,7 +71,8 @@ void doscheme(char* schemename, deque<individual*>& testcase, double r[],
         else {
             cerr << "Scheme " << schemename << " does not exist." << endl
                  << "Multi-versions have only been implemented for the 5-term and "
-                    "slice-update schemes!" << endl;
+                    "slice-update schemes!"
+                 << endl;
         }
     }
 }
@@ -163,14 +164,16 @@ int main(int argc, char* argv[])
     }
     else {
         cerr << "Welcome to the EHVI calculator. Please create a testcase to try "
-                "out " << endl
+                "out "
+             << endl
              << " the available calculation schemes." << endl;
         cerr << "(Alternative usage: \"" << argv[0] << " FILENAME [schemes] \""
              << endl;
         cerr << "How many individuals?" << endl;
         cin >> n;
         cerr << "Enter their x, y and z coordinates. They will be tested for "
-                "mutual non-dominance." << endl;
+                "mutual non-dominance."
+             << endl;
         for (int i = 1; i <= n; i++) {
             individual* tempvidual = new individual;
             cerr << "Individual " << i << " of " << n << ": ";
@@ -179,7 +182,8 @@ int main(int argc, char* argv[])
             testcase.push_back(tempvidual);
         }
         cerr << "Enter the x, y and z coordinate of the reference point. It should "
-                "be dominated" << endl;
+                "be dominated"
+             << endl;
         cerr << "by all individuals in the population." << endl;
         cin >> r[0] >> r[1] >> r[2];
         cerr << "Enter the mean vector." << endl;

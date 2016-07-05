@@ -37,7 +37,8 @@ namespace limbo {
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
-            boost::parameter::optional<tag::modelfun>> boptimizer_signature;
+            boost::parameter::optional<tag::modelfun>>
+            boptimizer_signature;
 
         // clang-format off
         /**

@@ -1,7 +1,6 @@
 #ifndef LIMBO_OPT_HPP
 #define LIMBO_OPT_HPP
 
-
 ///@defgroup opt_defaults
 ///@defgroup opt
 

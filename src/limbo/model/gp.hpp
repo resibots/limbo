@@ -386,7 +386,7 @@ namespace limbo {
                 _inv_bl_kernel.block(_samples.size(), 0, _bl_samples.size(),
                     _samples.size())
                     = _inv_bl_kernel.block(0, _samples.size(), _samples.size(),
-                                         _bl_samples.size())
+                                        _bl_samples.size())
                           .transpose();
                 _inv_bl_kernel.block(_samples.size(), _samples.size(), _bl_samples.size(),
                     _bl_samples.size())

@@ -19,7 +19,7 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
     int n = P.size(); // Holds amount of points.
     thingy* Pstruct; // 2D array with information about the shape of the dominated
     // hypervolume
-    deque<specialind*> Px, Py,
+    deque<specialind *> Px, Py,
         Pz; // P sorted by x/y/z coordinate with extra information.
     double cellength[3] = {0};
     try {
@@ -55,7 +55,8 @@ double ehvi3d_sliceupdate(deque<individual*> P, double r[], double mu[],
     }
     catch (...) {
         cout << "An exception was thrown. There probably isn't enough memory "
-                "available." << endl;
+                "available."
+             << endl;
         cout << "-1 will be returned." << endl;
         return -1;
     }

@@ -15,13 +15,13 @@ BO_PARAMS(std::cout,
 
 #ifdef USE_LIBCMAES
               struct opt_cmaes : public defaults::opt_cmaes {
-	      };
+              };
 #elif defined(USE_NLOPT)
-	      struct opt_nloptnograd : public defaults::opt_nloptnograd {
-	      };
+              struct opt_nloptnograd : public defaults::opt_nloptnograd {
+              };
 #else
-	      struct opt_gridsearch : public defaults::opt_gridsearch {
-	      };
+              struct opt_gridsearch : public defaults::opt_gridsearch {
+              };
 #endif
               struct acqui_ucb {
                   BO_PARAM(double, alpha, 0.1);
@@ -33,7 +33,7 @@ BO_PARAMS(std::cout,
               };
 
               struct bayes_opt_bobase {
-                BO_PARAM(bool, stats_enabled, true);
+                  BO_PARAM(bool, stats_enabled, true);
               };
 
               struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
@@ -48,7 +48,7 @@ BO_PARAMS(std::cout,
                   BO_PARAM(int, iterations, 20);
               };
               struct stat_gp {
-                BO_PARAM(int, bins, 20);
+                  BO_PARAM(int, bins, 20);
               };
           };)
 
