@@ -87,10 +87,6 @@ namespace limbo {
                 if (bounded) {
                     opt.set_lower_bounds(std::vector<double>(dim, 0));
                     opt.set_upper_bounds(std::vector<double>(dim, 1));
-                    if (Params::opt_nloptnograd::test()) {
-                        opt.set_lower_bounds(std::vector<double>(dim, -6.0));
-                        opt.set_upper_bounds(std::vector<double>(dim, 1.0));
-                    }
                 }
 
                 double max;
