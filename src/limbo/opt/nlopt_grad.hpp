@@ -74,7 +74,15 @@ namespace limbo {
 
                 double max;
 
-                opt.optimize(x, max);
+                try {
+                    opt.optimize(x, max);
+                }
+                catch (nlopt::roundoff_limited& e) {
+                    // In theory it's ok to ignore this error
+                }
+                catch (std::invalid_argument& e) {
+                    // In theory it's ok to ignore this error
+                }
 
                 return Eigen::VectorXd::Map(x.data(), x.size());
             }

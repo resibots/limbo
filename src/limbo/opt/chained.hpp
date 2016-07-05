@@ -11,7 +11,9 @@ namespace limbo {
     namespace opt {
 
         // Needed for the variadic data structure
-        template <typename Params, typename... Optimizers> struct Chained {};
+        template <typename Params, typename... Optimizers>
+        struct Chained {
+        };
 
         // Base case: just 1 optimizer to call
         template <typename Params, typename Optimizer>
@@ -29,7 +31,7 @@ namespace limbo {
             template <typename F>
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
-                return Chained<Params, Optimizers...>::operator ()(f, Optimizer()(f, init, bounded), bounded);
+                return Chained<Params, Optimizers...>::operator()(f, Optimizer()(f, init, bounded), bounded);
             };
         };
     }

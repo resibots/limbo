@@ -18,11 +18,10 @@ namespace limbo {
                 template <typename GP>
                 void operator()(GP& gp) const
                 {
-                    int dim = gp.kernel_function().h_params_size();
                     KernelLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
-                    auto params = optimizer(optimization, tools::random_vector(dim), false);
-                    gp.kernel_function().set_h_params(params);
+                    auto params = optimizer(optimization, gp.kernel_function().h_params(), true);
+                    gp.kernel_function().set_h_params(-6.0 + params.array() * 7.0);
                     gp.set_lik(opt::eval(optimization, params));
                     gp.recompute(false);
                 }
@@ -36,7 +35,7 @@ namespace limbo {
                     opt::eval_t operator()(const Eigen::VectorXd& params, bool compute_grad) const
                     {
                         GP gp(this->_original_gp);
-                        gp.kernel_function().set_h_params(params);
+                        gp.kernel_function().set_h_params(-6.0 + params.array() * 7.0);
 
                         gp.recompute(false);
 
