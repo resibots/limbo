@@ -91,8 +91,8 @@ namespace limbo {
                 boost::parameter::optional<tag::initfun>,
                 boost::parameter::optional<tag::acquifun>,
                 boost::parameter::optional<tag::stopcrit>,
-                boost::parameter::optional<tag::modelfun>> bo_multi_signature;
-
+                boost::parameter::optional<tag::modelfun>>
+                bo_multi_signature;
 
             // clang-format off
             template <class Params,
@@ -105,18 +105,18 @@ namespace limbo {
             // clang-format on
             class BoMulti : public limbo::bayes_opt::BoBase<Params, A2, A3, A4, A5, A6> {
             public:
-              struct defaults {
+                struct defaults {
 #ifdef USE_LIBCMAES
-                  typedef opt::Cmaes<Params> acquiopt_t;
+                    typedef opt::Cmaes<Params> acquiopt_t;
 #elif defined(USE_NLOPT)
-                  typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+                    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-                  typedef opt::GridSearch<Params> acquiopt_t;
+                    typedef opt::GridSearch<Params> acquiopt_t;
 #endif
-              };
-              typedef typename bo_multi_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
-              typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+                };
+                typedef typename bo_multi_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
+                typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
 
                 typedef limbo::bayes_opt::BoBase<Params, A2, A3, A4, A5, A6> base_t;
                 typedef typename base_t::model_t model_t;

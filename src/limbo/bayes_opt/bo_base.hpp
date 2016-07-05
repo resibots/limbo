@@ -82,7 +82,8 @@ namespace limbo {
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
-            boost::parameter::optional<tag::modelfun>> bobase_signature;
+            boost::parameter::optional<tag::modelfun>>
+            bobase_signature;
 
         // clang-format off
         template <class Params,

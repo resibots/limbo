@@ -79,7 +79,7 @@ namespace limbo {
             {
 #ifdef USE_TBB
                 tbb::parallel_for(size_t(begin), end, size_t(1), [&](size_t i) {
-                  // clang-format off
+                    // clang-format off
                 f(i);
                     // clang-format on
                 });
@@ -109,7 +109,7 @@ namespace limbo {
             {
 #ifdef USE_TBB
                 auto body = [&](const tbb::blocked_range<size_t>& r, T current_max) -> T {
-    // clang-format off
+                    // clang-format off
             for (size_t i = r.begin(); i != r.end(); ++i)
             {
                 T v = f(i);
@@ -120,7 +120,7 @@ namespace limbo {
                     // clang-format on
                 };
                 auto joint = [&](const T& p1, const T& p2) -> T {
-    // clang-format off
+                    // clang-format off
             if (comp(p1, p2))
                 return p1;
             return p2;

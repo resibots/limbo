@@ -17,7 +17,8 @@ namespace limbo {
 
                 std::cout << bo.total_iterations() << " new point: "
                           << (blacklisted ? bo.bl_samples().back()
-                                          : bo.samples().back()).transpose();
+                                          : bo.samples().back())
+                                 .transpose();
                 if (blacklisted)
                     std::cout << " value: "
                               << "No data, blacklisted";

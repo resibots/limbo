@@ -12,9 +12,9 @@ namespace limbo {
     namespace experimental {
         namespace bayes_opt {
 
-          BOOST_PARAMETER_TEMPLATE_KEYWORD(parego_modelfun)
+            BOOST_PARAMETER_TEMPLATE_KEYWORD(parego_modelfun)
 
-          typedef boost::parameter::parameters<boost::parameter::optional<tag::parego_modelfun>> parego_signature;
+            typedef boost::parameter::parameters<boost::parameter::optional<tag::parego_modelfun>> parego_signature;
 
             // clang-format off
             template <class Params,
@@ -40,7 +40,6 @@ namespace limbo {
               // nothing here !
             };
             // clang-format on
-
         }
     }
 }

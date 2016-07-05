@@ -18,7 +18,7 @@ vector<double> ehvi3d_5term(deque<individual*> P, double r[],
     vector<double> answer; // The eventual answer
     int n = P.size(); // Holds amount of points.
     double Sminus; // Correction term for the integral.
-    deque<individual*> Py, Pz; // P sorted by y/z coordinate
+    deque<individual *> Py, Pz; // P sorted by y/z coordinate
     sort(P.begin(), P.end(), ycomparator);
     for (size_t i = 0; i < P.size(); i++) {
         Py.push_back(P[i]);
@@ -106,7 +106,7 @@ vector<double> ehvi3d_sliceupdate(deque<individual*> P, double r[DIMENSIONS],
     int n = P.size(); // Holds amount of points.
     thingy* Pstruct; // 2D array with information about the shape of the dominated
     // hypervolume
-    deque<specialind*> Px, Py,
+    deque<specialind *> Px, Py,
         Pz; // P sorted by x/y/z coordinate with extra information.
     double cellength[DIMENSIONS] = {0};
     while (answer.size() < pdf.size())
@@ -144,7 +144,8 @@ vector<double> ehvi3d_sliceupdate(deque<individual*> P, double r[DIMENSIONS],
     }
     catch (...) {
         cout << "An exception was thrown. There probably isn't enough memory "
-                "available." << endl;
+                "available."
+             << endl;
         cout << "zero-vector will be returned." << endl;
         return answer;
     }

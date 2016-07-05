@@ -47,9 +47,9 @@ namespace limbo {
 
                 // wrap the function
                 libcmaes::FitFunc f_cmaes = [&](const double* x, const int n) {
-		Eigen::Map<const Eigen::VectorXd> m(x, n);
-		// remember that our optimizers maximize
-		return -eval(f, m);
+                    Eigen::Map<const Eigen::VectorXd> m(x, n);
+                    // remember that our optimizers maximize
+                    return -eval(f, m);
                 };
 
                 if (bounded)

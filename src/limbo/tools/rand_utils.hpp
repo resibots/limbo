@@ -298,16 +298,16 @@ namespace randutils {
     {
         auto hash_const = INIT_A;
         auto hash = [&](IntRep value) {
-        value ^= hash_const;
-        hash_const *= MULT_A;
-        value *= hash_const;
-        value ^= value >> XSHIFT;
-        return value;
+            value ^= hash_const;
+            hash_const *= MULT_A;
+            value *= hash_const;
+            value ^= value >> XSHIFT;
+            return value;
         };
         auto mix = [](IntRep x, IntRep y) {
-        IntRep result = MIX_MULT_L*x - MIX_MULT_R*y;
-        result ^= result >> XSHIFT;
-        return result;
+            IntRep result = MIX_MULT_L * x - MIX_MULT_R * y;
+            result ^= result >> XSHIFT;
+            return result;
         };
 
         InputIter current = begin;
@@ -436,7 +436,7 @@ namespace randutils {
         static uint32_t hash(T&& value)
         {
             return crushto32(std::hash<typename std::remove_reference<
-                typename std::remove_cv<T>::type>::type>{}(
+                    typename std::remove_cv<T>::type>::type>{}(
                 std::forward<T>(value)));
         }
 
@@ -767,15 +767,16 @@ namespace randutils {
 
             return std::stable_partition(first, last,
                 [&](const value_type&) {
-                --total;
-                using distance_type = decltype(total);
-                distance_type zero{};
-                if (uniform(zero, total) < to_go) {
-                    --to_go;
-                    return true;
-                } else {
-                    return false;
-                }
+                    --total;
+                    using distance_type = decltype(total);
+                    distance_type zero{};
+                    if (uniform(zero, total) < to_go) {
+                        --to_go;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
                 });
         }
 

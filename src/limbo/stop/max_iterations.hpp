@@ -6,7 +6,7 @@
 namespace limbo {
     namespace defaults {
         struct stop_maxiterations {
-            /// @ingroup stop_defaults 
+            /// @ingroup stop_defaults
             BO_PARAM(int, iterations, 190);
         };
     }
