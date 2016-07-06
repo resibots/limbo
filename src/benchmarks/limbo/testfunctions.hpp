@@ -230,11 +230,13 @@ struct SixHumpCamel {
     static constexpr size_t dim_out = 1;
     double operator()(const Eigen::VectorXd& x) const
     {
-        double x1_2 = x(0) * x(0);
-        double x2_2 = x(1) * x(1);
+        double x1 = -3 + 6 * x(0);
+        double x2 = -2 + 4 * x(1);
+        double x1_2 = x1 * x1;
+        double x2_2 = x2 * x2;
 
         double tmp1 = (4 - 2.1 * x1_2 + (x1_2 * x1_2) / 3) * x1_2;
-        double tmp2 = x(0) * x(1);
+        double tmp2 = x1 * x2;
         double tmp3 = (-4 + 4 * x2_2) * x2_2;
         return tmp1 + tmp2 + tmp3;
     }
@@ -244,6 +246,10 @@ struct SixHumpCamel {
         Eigen::MatrixXd sols(2, 2);
         sols << 0.0898, -0.7126,
             -0.0898, 0.7126;
+        sols(0, 0) = (sols(0, 0) + 3.0) / 6.0;
+        sols(1, 0) = (sols(1, 0) + 3.0) / 6.0;
+        sols(0, 1) = (sols(0, 1) + 2.0) / 4.0;
+        sols(1, 1) = (sols(1, 1) + 2.0) / 4.0;
         return sols;
     }
 };
