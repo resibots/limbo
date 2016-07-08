@@ -349,7 +349,7 @@ namespace limbo {
             void _compute_alpha()
             {
                 // alpha = K^{-1} * this->_obs_mean;
-                auto triang = _matrixL.template triangularView<Eigen::Lower>();
+                Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> triang = _matrixL.template triangularView<Eigen::Lower>();
                 _alpha = triang.solve(_obs_mean);
                 triang.adjoint().solveInPlace(_alpha);
             }
