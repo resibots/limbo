@@ -20,7 +20,7 @@ namespace limbo {
                 {
                     KernelLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
-                    auto params = optimizer(optimization, gp.kernel_function().h_params(), true);
+                    auto params = optimizer(optimization, (gp.kernel_function().h_params().array() + 6.0) / 7.0, true);
                     gp.kernel_function().set_h_params(-6.0 + params.array() * 7.0);
                     gp.set_lik(opt::eval(optimization, params));
                     gp.recompute(false);

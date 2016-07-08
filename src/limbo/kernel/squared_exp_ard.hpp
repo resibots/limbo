@@ -31,25 +31,25 @@ namespace limbo {
         struct SquaredExpARD {
             SquaredExpARD(int dim = 1) : _sf2(0), _ell(dim), _A(dim, Params::kernel_squared_exp_ard::k()), _input_dim(dim)
             {
-                //assert(Params::SquaredExpARD::k()<dim);
                 Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k());
-                p.head(_ell.size()) = Eigen::VectorXd::Ones(_ell.size());
                 this->set_h_params(p);
                 _sf2 = Params::kernel_squared_exp_ard::sigma_sq();
             }
 
             size_t h_params_size() const { return _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k(); }
 
+            // Return the hyper parameters in log-space
             const Eigen::VectorXd& h_params() const { return _h_params; }
 
+            // We expect the input parameters to be in log-space
             void set_h_params(const Eigen::VectorXd& p)
             {
                 _h_params = p;
                 for (size_t i = 0; i < _input_dim; ++i)
-                    _ell(i) = p(i);
+                    _ell(i) = std::exp(p(i));
                 for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
-                        _A(i, j) = p((j + 1) * _input_dim + i); //can be negative
+                        _A(i, j) = std::exp(p((j + 1) * _input_dim + i));
             }
 
             Eigen::VectorXd grad(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
