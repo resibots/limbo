@@ -21,9 +21,12 @@ namespace limbo {
                     KernelMeanLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
                     int dim = gp.kernel_function().h_params_size() + gp.mean_function().h_params_size();
-                    auto params = optimizer(optimization, tools::random_vector(dim), false);
-                    gp.kernel_function().set_h_params(params.head(gp.kernel_function().h_params_size()));
-                    gp.mean_function().set_h_params(params.tail(gp.mean_function().h_params_size()));
+                    Eigen::VectorXd init(dim);
+                    init.head(gp.kernel_function().h_params_size()) = (gp.kernel_function().h_params().array() + 6.0) / 7.0;
+                    init.tail(gp.mean_function().h_params_size()) = (gp.mean_function().h_params().array() + 6.0) / 7.0;
+                    auto params = optimizer(optimization, init, true);
+                    gp.kernel_function().set_h_params(-6.0 + params.head(gp.kernel_function().h_params_size()).array() * 7.0);
+                    gp.mean_function().set_h_params(-6.0 + params.tail(gp.mean_function().h_params_size()).array() * 7.0);
                     gp.set_lik(opt::eval(optimization, params));
                     gp.recompute(true);
                 }
@@ -37,8 +40,8 @@ namespace limbo {
                     opt::eval_t operator()(const Eigen::VectorXd& params, bool compute_grad) const
                     {
                         GP gp(this->_original_gp);
-                        gp.kernel_function().set_h_params(params.head(gp.kernel_function().h_params_size()));
-                        gp.mean_function().set_h_params(params.tail(gp.mean_function().h_params_size()));
+                        gp.kernel_function().set_h_params(-6.0 + params.head(gp.kernel_function().h_params_size()).array() * 7.0);
+                        gp.mean_function().set_h_params(-6.0 + params.tail(gp.mean_function().h_params_size()).array() * 7.0);
 
                         gp.recompute(true);
 

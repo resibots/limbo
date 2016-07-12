@@ -36,6 +36,7 @@ struct Params {
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
         BO_PARAM(double, noise, 0.001);
         BO_PARAM(bool, stats_enabled, true);
+        BO_PARAM(int, hp_period, 50);
     };
 
     struct init_randomsampling {

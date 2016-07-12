@@ -20,9 +20,8 @@ namespace limbo {
                 {
                     MeanLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
-                    int dim = gp.mean_function().h_params_size();
-                    auto params = optimizer(optimization, tools::random_vector(dim), false);
-                    gp.mean_function().set_h_params(params);
+                    auto params = optimizer(optimization, (gp.mean_function().h_params().array() + 6.0) / 7.0, true);
+                    gp.mean_function().set_h_params(-6.0 + params.array() * 7.0);
                     gp.set_lik(opt::eval(optimization, params));
                     gp.recompute(true);
                 }
@@ -36,7 +35,7 @@ namespace limbo {
                     opt::eval_t operator()(const Eigen::VectorXd& params, bool compute_grad) const
                     {
                         GP gp(this->_original_gp);
-                        gp.mean_function().set_h_params(params);
+                        gp.mean_function().set_h_params(-6.0 + params.array() * 7.0);
 
                         gp.recompute(true);
 
