@@ -31,17 +31,17 @@ namespace limbo {
         struct SquaredExpARD {
             SquaredExpARD(int dim = 1) : _sf2(0), _ell(dim), _A(dim, Params::kernel_squared_exp_ard::k()), _input_dim(dim)
             {
-                //assert(Params::SquaredExpARD::k()<dim);
-                Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1);
-                p.head(_ell.size()) = Eigen::VectorXd::Ones(_ell.size()) * -1;
+                Eigen::VectorXd p = Eigen::VectorXd::Zero(_ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k());
                 this->set_h_params(p);
                 _sf2 = Params::kernel_squared_exp_ard::sigma_sq();
             }
 
-            size_t h_params_size() const { return _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k() + 1; }
+            size_t h_params_size() const { return _ell.size() + _ell.size() * Params::kernel_squared_exp_ard::k(); }
 
+            // Return the hyper parameters in log-space
             const Eigen::VectorXd& h_params() const { return _h_params; }
 
+            // We expect the input parameters to be in log-space
             void set_h_params(const Eigen::VectorXd& p)
             {
                 _h_params = p;
@@ -49,8 +49,7 @@ namespace limbo {
                     _ell(i) = std::exp(p(i));
                 for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
-                        _A(i, j) = p((j + 1) * _input_dim + i); //can be negative
-                // _sf2 = 1; // exp(2 * p(p.size()-1));
+                        _A(i, j) = std::exp(p((j + 1) * _input_dim + i));
             }
 
             Eigen::VectorXd grad(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
@@ -67,15 +66,13 @@ namespace limbo {
                     for (size_t j = 0; j < Params::kernel_squared_exp_ard::k(); ++j)
                         grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);
 
-                    grad(this->h_params_size() - 1) = 0; // 2.0 * k;
                     return grad;
                 }
                 else {
-                    Eigen::VectorXd grad(_input_dim + 1);
+                    Eigen::VectorXd grad(_input_dim);
                     Eigen::VectorXd z = (x1 - x2).cwiseQuotient(_ell).array().square();
                     double k = _sf2 * std::exp(-0.5 * z.sum());
                     grad.head(_input_dim) = z * k;
-                    grad(_input_dim) = 0; // 2.0 * k;
                     return grad;
                 }
             }
