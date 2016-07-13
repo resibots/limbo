@@ -48,12 +48,12 @@ int main(int nargs, char* args[])
     strcpy(par.kernel.name, "kMaternISO5");
 
     benchmark<BraninNormalized>(par, "branin");
-    benchmark<Hartman6>(par, "hartman6");
-    benchmark<Hartman3>(par, "hartman3");
+    benchmark<Hartmann6>(par, "hartmann6");
+    benchmark<Hartmann3>(par, "hartmann3");
     benchmark<Rastrigin>(par, "rastrigin");
     benchmark<Sphere>(par, "sphere");
     benchmark<Ellipsoid>(par, "ellipsoid");
-    benchmark<GoldenPrice>(par, "goldenprice");
+    benchmark<GoldsteinPrice>(par, "goldsteinprice");
     benchmark<SixHumpCamel>(par, "sixhumpcamel");
 
     return 0;

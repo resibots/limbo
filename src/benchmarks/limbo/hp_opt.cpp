@@ -105,12 +105,12 @@ int main()
     typedef bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> Opt_t;
 
     benchmark<Opt_t, BraninNormalized>("branin");
-    benchmark<Opt_t, Hartman6>("hartman6");
-    benchmark<Opt_t, Hartman3>("hartman3");
+    benchmark<Opt_t, Hartmann6>("hartmann6");
+    benchmark<Opt_t, Hartmann3>("hartmann3");
     benchmark<Opt_t, Rastrigin>("rastrigin");
     benchmark<Opt_t, Sphere>("sphere");
     benchmark<Opt_t, Ellipsoid>("ellipsoid");
-    benchmark<Opt_t, GoldenPrice>("goldenprice");
+    benchmark<Opt_t, GoldsteinPrice>("goldsteinprice");
     benchmark<Opt_t, SixHumpCamel>("sixhumpcamel");
 
     return 0;
