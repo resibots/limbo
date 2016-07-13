@@ -38,8 +38,8 @@ namespace limbo {
           \endrst
         */
         template <typename Params>
-        struct MaternFiveHalfs {
-            MaternFiveHalfs(size_t dim = 1) {}
+        struct MaternFiveHalves {
+            MaternFiveHalves(size_t dim = 1) {}
 
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {

@@ -6,11 +6,11 @@ import os
 
 
 def create(bld):
-    kernels = ['Exp', 'MaternThreeHalfs', 'MaternFiveHalfs', 'SquaredExpARD']
+    kernels = ['Exp', 'MaternThreeHalves', 'MaternFiveHalves', 'SquaredExpARD']
     kernel_incompatibility = {}
     kernel_incompatibility['Exp'] = ['KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
-    kernel_incompatibility['MaternThreeHalfs'] = ['KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
-    kernel_incompatibility['MaternFiveHalfs'] = ['KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
+    kernel_incompatibility['MaternThreeHalves'] = ['KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
+    kernel_incompatibility['MaternFiveHalves'] = ['KernelLFOpt', 'KernelMeanLFOpt', 'MeanLFOpt']
 
     means = ['NullFunction', 'Constant', 'Data', 'FunctionARD']
     mean_additional_params = {}
