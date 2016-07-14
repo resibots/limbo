@@ -80,7 +80,7 @@ int main()
 {
     srand(time(NULL));
 
-    typedef kernel::MaternFiveHalfs<Params> Kernel_t;
+    typedef kernel::MaternFiveHalves<Params> Kernel_t;
     typedef opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
@@ -93,12 +93,12 @@ int main()
     typedef bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> Opt_t;
 
     benchmark<Opt_t, BraninNormalized>("branin");
-    benchmark<Opt_t, Hartman6>("hartman6");
-    benchmark<Opt_t, Hartman3>("hartman3");
+    benchmark<Opt_t, Hartmann6>("hartmann6");
+    benchmark<Opt_t, Hartmann3>("hartmann3");
     benchmark<Opt_t, Rastrigin>("rastrigin");
     benchmark<Opt_t, Sphere>("sphere");
     benchmark<Opt_t, Ellipsoid>("ellipsoid");
-    benchmark<Opt_t, GoldenPrice>("goldenprice");
+    benchmark<Opt_t, GoldsteinPrice>("goldsteinprice");
     benchmark<Opt_t, SixHumpCamel>("sixhumpcamel");
 
     return 0;

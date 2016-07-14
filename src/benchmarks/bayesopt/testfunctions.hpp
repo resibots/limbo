@@ -138,7 +138,7 @@ struct Rastrigin {
 };
 
 // see : http://www.sfu.ca/~ssurjano/hart3.html
-struct Hartman3 {
+struct Hartmann3 {
     static constexpr size_t dim_in = 3;
     static constexpr size_t dim_out = 1;
 
@@ -172,7 +172,7 @@ struct Hartman3 {
 };
 
 // see : http://www.sfu.ca/~ssurjano/hart6.html
-struct Hartman6 {
+struct Hartmann6 {
     static constexpr size_t dim_in = 6;
     static constexpr size_t dim_out = 1;
 
@@ -210,7 +210,7 @@ struct Hartman6 {
 
 // see : http://www.sfu.ca/~ssurjano/goldpr.html
 // (with ln, as suggested in Jones et al.)
-struct GoldenPrice {
+struct GoldsteinPrice {
     static constexpr size_t dim_in = 2;
     static constexpr size_t dim_out = 1;
 

@@ -37,8 +37,8 @@ namespace limbo {
         \endrst
         */
         template <typename Params>
-        struct MaternThreeHalfs {
-            MaternThreeHalfs(size_t dim = 1) {}
+        struct MaternThreeHalves {
+            MaternThreeHalves(size_t dim = 1) {}
 
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
