@@ -90,7 +90,7 @@ int main(int argc, char** argv)
 
     // write the data to a file (useful for plotting)
     std::ofstream ofs_data("data.dat");
-    for (int i = 0; i < samples.size(); ++i)
+    for (size_t i = 0; i < samples.size(); ++i)
         ofs_data << samples[i].transpose() << " " << observations[i].transpose() << std::endl;
     return 0;
 }
