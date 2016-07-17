@@ -128,7 +128,7 @@ namespace pareto {
             f.push_back(impl::new_vector(p[0]));
             size_t e = 0;
             for (size_t i = 1; i < p.size(); ++i) {
-              /* if (i % 10000 == 0) {
+                /* if (i % 10000 == 0) {
                     std::cout << i << " [" << p.size() << "] ";
                     std::cout.flush();
                 }*/
