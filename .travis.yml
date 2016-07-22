@@ -48,5 +48,5 @@ install:
 
 # Change this to your needs
 script:
-  - if [ "$SFERES" = "OFF" ]; then ./waf configure ; else ./waf configure --sferes=~/sferes2 ; fi
+  - if [ "$SFERES" = "OFF" ]; then ./waf configure ; else ./waf configure --sferes=$CI_HOME/sferes2 ; fi
   - if [ "$EXPERIMENTAL" = "OFF" ]; then ./waf --tests --alltests -v ; else ./waf --experimental ; fi
