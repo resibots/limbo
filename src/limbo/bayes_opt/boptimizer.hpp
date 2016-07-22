@@ -124,7 +124,7 @@ namespace limbo {
                     }
 
                     if (Params::bayes_opt_boptimizer::hp_period() > 0
-                        && this->_current_iteration % Params::bayes_opt_boptimizer::hp_period() == 0)
+                        && (this->_current_iteration + 1) % Params::bayes_opt_boptimizer::hp_period() == 0)
                         _model.optimize_hyperparams();
 
                     this->_current_iteration++;

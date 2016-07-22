@@ -1,21 +1,55 @@
 #! /usr/bin/env python
 import limbo
 
-def build(bld):
-    pass
-    # limbo.create_variants(bld,
-    #                        source = 'multi.cpp',
-    #                        uselib_local = 'limbo',
-    #                        uselib = 'BOOST EIGEN TBB SFERES',
-    #                        variants = ['PAREGO ZDT2 DIM2',
-    #                                    'PAREGO ZDT2 DIM6',
-    #                                    'PAREGO MOP2',
-    #                                    # NSBO
-    #                                    'NSBO ZDT2 DIM2',
-    #                                    'NSBO ZDT2 DIM6',
-    #                                    'NSBO MOP2',
-    #                                    # EHVI
-    #                                    'EHVI ZDT2 DIM6',
-    #                                    'EHVI ZDT2 DIM2',
-    #                                    'EHVI MOP2'
-    #                                   ],)
+def options(opt):
+    opt.add_option('--enable_bayesopt', action='store_true', help='enable the comparison with bayesopt in the benchmarks ', dest='enable_bayesopt')
+    opt.add_option('--bayesopt_path', type='string', help='path to Bayesopt', dest='bayesopt_path')
+
+
+def configure(conf):
+    if conf.options.enable_bayesopt:
+        if conf.options.bayesopt_path:
+            conf.env.LIBPATH_BAYESOPT = [conf.options.bayesopt_path+'/lib']
+            conf.env.INCLUDES_BAYESOPT = [conf.options.bayesopt_path+'/include/']
+        else:
+            conf.env.LIBPATH_BAYESOPT = ['/usr/local/lib']
+            conf.env.INCLUDES_BAYESOPT = ['/usr/local/include/']
+        conf.env.LIB_BAYESOPT = ['bayesopt', 'nlopt']
+        conf.env.DEFINES_BAYESOPT = ['USE_BAYESOPT']
+        conf.get_env()['USE_BAYESOPT'] = True
+
+
+def build_benchmark(bld):
+
+    if bld.env.DEFINES_NLOPT == ['USE_NLOPT']:
+        bld.program(features='cxx',
+                    source='limbo/simple.cpp',
+                    includes='. .. ../../ ../../src',
+                    target='benchmark_limbo',
+                    uselib='BOOST EIGEN TBB SFERES NLOPT',
+                    use='limbo')
+
+        bld.program(features='cxx',
+                    source='limbo/hp_opt.cpp',
+                    includes='. .. ../../ ../../src',
+                    target='benchmark_limbo_hp_opt',
+                    uselib='BOOST EIGEN TBB SFERES NLOPT',
+                    use='limbo')
+
+        #Quick and dirty way to add Bayesopt
+        #TODO make proper detection
+
+        if bld.get_env()['USE_BAYESOPT'] == True:
+            bld(features='cxx cxxprogram',
+                source='bayesopt/simple.cpp',
+                includes='.',
+                target='benchmark_bayesopt',
+                uselib='BOOST EIGEN TBB NLOPT BAYESOPT',
+                use='')
+
+            bld(features='cxx cxxprogram',
+                source='bayesopt/hp_opt.cpp',
+                includes='.',
+                target='benchmark_bayesopt_hp_opt',
+                uselib='BOOST EIGEN TBB NLOPT BAYESOPT',
+                use='')

@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(test_gp_dim)
 {
     using namespace limbo;
 
-    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef kernel::MaternFiveHalves<Params> KF_t;
     typedef mean::Constant<Params> Mean_t;
     typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(test_gp)
 {
     using namespace limbo;
 
-    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef kernel::MaternFiveHalves<Params> KF_t;
     typedef mean::Constant<Params> Mean_t;
     typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
@@ -124,7 +124,7 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
     size_t N = 1000;
     size_t failures = 0;
 
-    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef kernel::MaternFiveHalves<Params> KF_t;
     typedef mean::Constant<Params> Mean_t;
     typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
@@ -219,7 +219,7 @@ BOOST_AUTO_TEST_CASE(test_gp_blacklist)
 {
     using namespace limbo;
 
-    typedef kernel::MaternFiveHalfs<Params> KF_t;
+    typedef kernel::MaternFiveHalves<Params> KF_t;
     typedef mean::Constant<Params> Mean_t;
     typedef model::GP<Params, KF_t, Mean_t> GP_t;
 
@@ -300,8 +300,8 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
         };
     };
 
-    // MaternThreeHalfs
-    typedef model::GP<Params, kernel::MaternThreeHalfs<Parameters>, mean::Constant<Params>> GP1_t;
+    // MaternThreeHalves
+    typedef model::GP<Params, kernel::MaternThreeHalves<Parameters>, mean::Constant<Params>> GP1_t;
 
     GP1_t gp1(1, 1);
 
@@ -309,8 +309,8 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
 
     BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
 
-    // MaternFiveHalfs
-    typedef model::GP<Params, kernel::MaternFiveHalfs<Parameters>, mean::Constant<Params>> GP2_t;
+    // MaternFiveHalves
+    typedef model::GP<Params, kernel::MaternFiveHalves<Parameters>, mean::Constant<Params>> GP2_t;
 
     GP2_t gp2(1, 1);
 

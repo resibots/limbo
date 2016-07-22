@@ -1,5 +1,6 @@
 #ifndef LIMBO_BAYES_OPT_BO_MULTI_HPP
 #define LIMBO_BAYES_OPT_BO_MULTI_HPP
+#define VERSION "xxx"
 
 #include <Eigen/Core>
 
@@ -62,6 +63,7 @@ namespace limbo {
                     SferesFit() {}
 
                     const std::vector<float>& objs() const { return _objs; }
+
                     float obj(size_t i) const { return _objs[i]; }
 
                     template <typename Indiv>

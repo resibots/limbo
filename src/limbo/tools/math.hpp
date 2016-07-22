@@ -53,11 +53,10 @@ namespace limbo {
         /// make a 1-D vector from a double (useful when we need to return vectors)
         Eigen::VectorXd make_vector(double x)
         {
-          Eigen::VectorXd res(1);
-          res(0) = x;
-          return res;
+            Eigen::VectorXd res(1);
+            res(0) = x;
+            return res;
         }
-
 
         template <typename T>
         inline constexpr int signum(T x, std::false_type is_signed)
@@ -88,7 +87,7 @@ namespace limbo {
         {
             return std::isinf(v) || std::isnan(v);
         }
-    
+
         /// @ingroup tools
         /// return true if v is nan (not a number) or infinity
         /// (const version)
