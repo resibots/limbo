@@ -27,13 +27,14 @@ namespace limbo {
             typedef boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>> ehvi_signature;
 
             template <class Params,
+                class A1 = boost::parameter::void_,
                 class A2 = boost::parameter::void_,
                 class A3 = boost::parameter::void_,
                 class A4 = boost::parameter::void_,
                 class A5 = boost::parameter::void_,
                 class A6 = boost::parameter::void_>
 
-            class Ehvi : public BoMulti<Params, A2, A3, A4, A5, A6> {
+            class Ehvi : public BoMulti<Params, A1, A2, A3, A4, A5, A6> {
             public:
                 struct defaults {
 #ifdef USE_LIBCMAES
@@ -46,11 +47,11 @@ namespace limbo {
 #endif
                 };
 
-                typedef typename ehvi_signature::bind<A2, A3, A4, A5, A6>::type args;
+                typedef typename ehvi_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
                 typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
 
                 typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
-                typedef limbo::experimental::bayes_opt::BoMulti<Params, A2, A3, A4, A5, A6> base_t;
+                typedef limbo::experimental::bayes_opt::BoMulti<Params, A1, A2, A3, A4, A5, A6> base_t;
                 typedef typename base_t::model_t model_t;
 
                 template <typename EvalFunction>
