@@ -17,7 +17,7 @@ struct Params {
     };
 #endif
 
-    struct kernel_maternfivehalfs {
+    struct kernel_maternfivehalves {
         BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.2);
     };

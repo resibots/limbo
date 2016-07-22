@@ -6,7 +6,9 @@
 namespace limbo {
     namespace defaults {
         struct kernel_squared_exp_ard {
+            /// @ingroup kernel_defaults
             BO_PARAM(int, k, 0); //equivalent to the standard exp ARD
+            /// @ingroup kernel_defaults
             BO_PARAM(double, sigma_sq, 1);
         };
     }
@@ -20,9 +22,13 @@ namespace limbo {
         Computes the squared exponential covariance like this:
 
         .. math::
-            k_{SE}(x, y) = \alpha^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),
+            k_{SE}(x, y) = \sigma^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),
 
-	 with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \alpha, \Lambda` are expected in this order in the parameter array.
+	 with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \Lambda` are expected in this order in the parameter array. :math:`\Lambda` is a :math:`D\times k` matrix with :math:`k<D`.
+
+        Parameters:
+           - ``double sigma_sq`` (signal variance)
+           - ``int k`` (number of columns of :math:`\Lambda` matrix)
 
         Reference: :cite:`Rasmussen2006`, p. 106 & :cite:`brochu2010tutorial`, p. 10
         \endrst

@@ -24,7 +24,7 @@ struct Params {
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
-    struct kernel_maternfivehalfs {
+    struct kernel_maternfivehalves {
         BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.2);
     };
