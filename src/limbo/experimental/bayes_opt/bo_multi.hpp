@@ -8,7 +8,7 @@
 #else
 #include <sferes/phen/parameters.hpp>
 #include <sferes/gen/evo_float.hpp>
-#ifndef NO_PARALLEL
+#ifdef USE_TBB
 #include <sferes/eval/parallel.hpp>
 #endif
 #include <sferes/modif/dummy.hpp>
