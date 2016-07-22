@@ -6,6 +6,9 @@
 #ifndef USE_SFERES
 #warning No sferes
 #else
+#ifndef USE_TBB
+#define NO_PARALLEL
+#endif
 #include <sferes/phen/parameters.hpp>
 #include <sferes/gen/evo_float.hpp>
 #ifdef USE_TBB
