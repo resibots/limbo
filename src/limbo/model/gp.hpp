@@ -11,6 +11,7 @@
 #include <Eigen/LU>
 
 #include <limbo/model/gp/no_lf_opt.hpp>
+#include <limbo/tools.hpp>
 
 namespace limbo {
     namespace model {
@@ -206,9 +207,7 @@ namespace limbo {
                     std::cout << "WARNING max_observation with multi dimensional "
                                  "observations doesn't make sense"
                               << std::endl;
-                Eigen::VectorXd _max_observation(1);
-                _max_observation << _observations.maxCoeff();
-                return _max_observation;
+                return tools::make_vector(_observations.maxCoeff());
             }
 
             /// return the mean observation (only call this if the output of the GP is of dimension 1)

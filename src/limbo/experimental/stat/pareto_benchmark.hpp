@@ -36,7 +36,6 @@ namespace limbo {
                     for (size_t i = 0; i < opt.observations().size(); ++i)
                         obs << opt.observations()[i].transpose() << " "
                             << opt.samples()[i].transpose() << std::endl;
-                    std::cout << "stats done" << std::endl;
                 }
             };
         }
