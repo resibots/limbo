@@ -1,5 +1,5 @@
-#ifndef LIMBO_KERNEL_MATERN_FIVE_HALFS_HPP
-#define LIMBO_KERNEL_MATERN_FIVE_HALFS_HPP
+#ifndef LIMBO_KERNEL_MATERN_FIVE_HALVES_HPP
+#define LIMBO_KERNEL_MATERN_FIVE_HALVES_HPP
 
 #include <Eigen/Core>
 
@@ -7,7 +7,7 @@
 
 namespace limbo {
     namespace defaults {
-        struct kernel_maternfivehalfs {
+        struct kernel_maternfivehalves {
             /// @ingroup kernel_defaults
             BO_PARAM(double, sigma_sq, 1);
             /// @ingroup kernel_defaults
@@ -44,7 +44,7 @@ namespace limbo {
             double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double d = (v1 - v2).norm();
-                return Params::kernel_maternfivehalfs::sigma_sq() * (1 + std::sqrt(5) * d / Params::kernel_maternfivehalfs::l() + 5 * d * d / (3 * Params::kernel_maternfivehalfs::l() * Params::kernel_maternfivehalfs::l())) * std::exp(-std::sqrt(5) * d / Params::kernel_maternfivehalfs::l());
+                return Params::kernel_maternfivehalves::sigma_sq() * (1 + std::sqrt(5) * d / Params::kernel_maternfivehalves::l() + 5 * d * d / (3 * Params::kernel_maternfivehalves::l() * Params::kernel_maternfivehalves::l())) * std::exp(-std::sqrt(5) * d / Params::kernel_maternfivehalves::l());
             }
         };
     }

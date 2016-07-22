@@ -4,8 +4,8 @@
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/acqui/ucb.hpp>
-#include <limbo/kernel/matern_five_halfs.hpp>
-#include <limbo/kernel/matern_three_halfs.hpp>
+#include <limbo/kernel/matern_five_halves.hpp>
+#include <limbo/kernel/matern_three_halves.hpp>
 #include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
@@ -32,7 +32,7 @@ struct Params {
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
-    struct kernel_maternfivehalfs {
+    struct kernel_maternfivehalves {
         BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.25);
     };
@@ -290,11 +290,11 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
             BO_PARAM(double, sigma_sq, 10);
             BO_PARAM(double, l, 1);
         };
-        struct kernel_maternthreehalfs {
+        struct kernel_maternthreehalves {
             BO_PARAM(double, sigma_sq, 10);
             BO_PARAM(double, l, 0.25);
         };
-        struct kernel_maternfivehalfs {
+        struct kernel_maternfivehalves {
             BO_PARAM(double, sigma_sq, 10);
             BO_PARAM(double, l, 0.25);
         };

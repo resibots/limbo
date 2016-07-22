@@ -1,5 +1,5 @@
 #include <limbo/tools/macros.hpp>
-#include <limbo/kernel/matern_five_halfs.hpp>
+#include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/mean/data.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/acqui/gp_ucb.hpp>
@@ -27,7 +27,7 @@ BO_PARAMS(std::cout,
                   BO_PARAM(double, alpha, 0.1);
               };
 
-              struct kernel_maternfivehalfs {
+              struct kernel_maternfivehalves {
                   BO_PARAM(double, sigma_sq, 1);
                   BO_PARAM(double, l, 0.2);
               };

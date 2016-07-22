@@ -26,7 +26,7 @@ struct Params {
     struct kernel_exp : public defaults::kernel_exp {
     };
 
-    struct kernel_maternfivehalfs {
+    struct kernel_maternfivehalves {
         BO_PARAM(double, sigma, 1);
         BO_PARAM(double, l, 0.25);
     };
