@@ -9,7 +9,6 @@ namespace limbo {
     namespace defaults {
         struct kernel_maternthreehalves {
             /// @ingroup kernel_defaults
-            /// This is is sigma squared!
             BO_PARAM(double, sigma_sq, 1);
             /// @ingroup kernel_defaults
             BO_PARAM(double, l, 1);
