@@ -126,9 +126,13 @@ struct limbo::kernel::SquaredExpARD&lt; Params &gt;</h3>
    Computes the squared exponential covariance like this:
 
    .. math::
-       k_{SE}(x, y) = \alpha^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),
+       k_{SE}(x, y) = \sigma^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),
 
-with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \alpha, \Lambda` are expected in this order in the parameter array.
+with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \Lambda` are expected in this order in the parameter array. :math:`\Lambda` is a :math:`D\times k` matrix with :math:`k&lt;D`.
+
+   Parameters:
+      - ``double sigma_sq`` (signal variance)
+      - ``int k`` (number of columns of :math:`\Lambda` matrix)
 
    Reference: :cite:`Rasmussen2006`, p. 106 &amp; :cite:`brochu2010tutorial`, p. 10</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a33d5c074a487792a305a0ae89e864f34"></a>
@@ -337,7 +341,7 @@ template&lt;typename Params &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 4 2016 15:31:41 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jul 23 2016 19:38:03 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -106,7 +106,9 @@ Inheritance diagram for limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5,
  <div class="center">
   <img src="classlimbo_1_1bayes__opt_1_1_bo_base.png" usemap="#limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;_map" alt=""/>
   <map id="limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;_map" name="limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;_map">
-<area href="classlimbo_1_1bayes__opt_1_1_b_optimizer.html" alt="limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;" shape="rect" coords="0,56,388,80"/>
+<area href="classlimbo_1_1bayes__opt_1_1_b_optimizer.html" alt="limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;" shape="rect" coords="0,56,446,80"/>
+<area href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html" alt="limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;" shape="rect" coords="456,56,902,80"/>
+<area href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html" alt="limbo::experimental::bayes_opt::Ehvi&lt; Params, A1, A2, A3, A4, A5, A6 &gt;" shape="rect" coords="456,112,902,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -210,7 +212,7 @@ This class is templated by several types with default values (thanks to boost::p
 <p>(meaning: kernel with automatic relevance determination and mean equals to the mean of the input data, that is, center the data automatically)</p>
 <p>For Statistics, the default value is: <code>boost::fusion::vector&lt;<a class="el" href="structlimbo_1_1stat_1_1_samples.html">stat::Samples</a>&lt;Params&gt;, <a class="el" href="structlimbo_1_1stat_1_1_aggregated_observations.html">stat::AggregatedObservations</a>&lt;Params&gt;, <a class="el" href="structlimbo_1_1stat_1_1_console_summary.html">stat::ConsoleSummary</a>&lt;Params&gt;&gt;</code></p>
 <p>Example of customization:</p><ul>
-<li><code>typedef <a class="el" href="structlimbo_1_1kernel_1_1_matern_five_halfs.html">kernel::MaternFiveHalfs</a>&lt;Params&gt; Kernel_t;</code></li>
+<li><code>typedef <a class="el" href="structlimbo_1_1kernel_1_1_matern_five_halves.html">kernel::MaternFiveHalves</a>&lt;Params&gt; Kernel_t;</code></li>
 <li><code>typedef <a class="el" href="structlimbo_1_1mean_1_1_data.html">mean::Data</a>&lt;Params&gt; Mean_t;</code></li>
 <li><code>typedef <a class="el" href="classlimbo_1_1model_1_1_g_p.html">model::GP</a>&lt;Params, Kernel_t, Mean_t&gt; GP_t;</code></li>
 <li><code>typedef <a class="el" href="classlimbo_1_1acqui_1_1_u_c_b.html">acqui::UCB</a>&lt;Params, GP_t&gt; Acqui_t;</code></li>
@@ -729,7 +731,7 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 4 2016 15:31:41 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jul 23 2016 19:38:03 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

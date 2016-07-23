@@ -3,6 +3,7 @@
   <compounddef id="classlimbo_1_1bayes__opt_1_1_bo_base" kind="class" language="C++" prot="public">
     <compoundname>limbo::bayes_opt::BoBase</compoundname>
     <derivedcompoundref refid="classlimbo_1_1bayes__opt_1_1_b_optimizer" prot="public" virt="non-virtual">limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi" prot="public" virt="non-virtual">limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</derivedcompoundref>
     <includes refid="bo__base_8hpp" local="no">limbo/bayes_opt/bo_base.hpp</includes>
     <innerclass refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults" prot="public">limbo::bayes_opt::BoBase::defaults</innerclass>
     <templateparamlist>
@@ -617,9 +618,15 @@ This class is templated by several types with default values (thanks to boost::p
 +----------------+---------+---------+---------------+</verbatim></para><para>For GP, the default value is: <computeroutput><ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">model::GP</ref>&lt;Params, kf_t, mean_t, opt_t&gt;&gt;</computeroutput>,<itemizedlist>
 <listitem><para>with <computeroutput>kf_t = <ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d" kindref="compound">kernel::SquaredExpARD</ref>&lt;Params&gt;</computeroutput></para></listitem><listitem><para>with <computeroutput>mean_t = <ref refid="structlimbo_1_1mean_1_1_data" kindref="compound">mean::Data</ref>&lt;Params&gt;</computeroutput></para></listitem><listitem><para>with <computeroutput>opt_t = <ref refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt" kindref="compound">model::gp::KernelLFOpt</ref>&lt;Params&gt;</computeroutput></para></listitem></itemizedlist>
 </para><para>(meaning: kernel with automatic relevance determination and mean equals to the mean of the input data, that is, center the data automatically)</para><para>For Statistics, the default value is: <computeroutput>boost::fusion::vector&lt;<ref refid="structlimbo_1_1stat_1_1_samples" kindref="compound">stat::Samples</ref>&lt;Params&gt;, <ref refid="structlimbo_1_1stat_1_1_aggregated_observations" kindref="compound">stat::AggregatedObservations</ref>&lt;Params&gt;, <ref refid="structlimbo_1_1stat_1_1_console_summary" kindref="compound">stat::ConsoleSummary</ref>&lt;Params&gt;&gt;</computeroutput></para><para>Example of customization:<itemizedlist>
-<listitem><para><computeroutput>typedef <ref refid="structlimbo_1_1kernel_1_1_matern_five_halfs" kindref="compound">kernel::MaternFiveHalfs</ref>&lt;Params&gt; Kernel_t;</computeroutput></para></listitem><listitem><para><computeroutput>typedef <ref refid="structlimbo_1_1mean_1_1_data" kindref="compound">mean::Data</ref>&lt;Params&gt; Mean_t;</computeroutput></para></listitem><listitem><para><computeroutput>typedef <ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">model::GP</ref>&lt;Params, Kernel_t, Mean_t&gt; GP_t;</computeroutput></para></listitem><listitem><para><computeroutput>typedef <ref refid="classlimbo_1_1acqui_1_1_u_c_b" kindref="compound">acqui::UCB</ref>&lt;Params, GP_t&gt; Acqui_t;</computeroutput></para></listitem><listitem><para><computeroutput><ref refid="classlimbo_1_1bayes__opt_1_1_b_optimizer" kindref="compound">bayes_opt::BOptimizer</ref>&lt;Params, modelfun&lt;GP_t&gt;, acquifun&lt;Acqui_t&gt;&gt; opt;</computeroutput> </para></listitem></itemizedlist>
+<listitem><para><computeroutput>typedef <ref refid="structlimbo_1_1kernel_1_1_matern_five_halves" kindref="compound">kernel::MaternFiveHalves</ref>&lt;Params&gt; Kernel_t;</computeroutput></para></listitem><listitem><para><computeroutput>typedef <ref refid="structlimbo_1_1mean_1_1_data" kindref="compound">mean::Data</ref>&lt;Params&gt; Mean_t;</computeroutput></para></listitem><listitem><para><computeroutput>typedef <ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">model::GP</ref>&lt;Params, Kernel_t, Mean_t&gt; GP_t;</computeroutput></para></listitem><listitem><para><computeroutput>typedef <ref refid="classlimbo_1_1acqui_1_1_u_c_b" kindref="compound">acqui::UCB</ref>&lt;Params, GP_t&gt; Acqui_t;</computeroutput></para></listitem><listitem><para><computeroutput><ref refid="classlimbo_1_1bayes__opt_1_1_b_optimizer" kindref="compound">bayes_opt::BOptimizer</ref>&lt;Params, modelfun&lt;GP_t&gt;, acquifun&lt;Acqui_t&gt;&gt; opt;</computeroutput> </para></listitem></itemizedlist>
 </para>    </detaileddescription>
     <inheritancegraph>
+      <node id="41">
+        <label>limbo::experimental::bayes_opt::Ehvi&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi"/>
+        <childnode refid="40" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="38">
         <label>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
         <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
@@ -627,6 +634,12 @@ This class is templated by several types with default values (thanks to boost::p
       <node id="39">
         <label>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
         <link refid="classlimbo_1_1bayes__opt_1_1_b_optimizer"/>
+        <childnode refid="38" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi"/>
         <childnode refid="38" relation="public-inheritance">
         </childnode>
       </node>

@@ -152,26 +152,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordtype">double</span> <a class="code" href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">max</a>;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                opt.optimize(x, max);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordflow">return</span> Eigen::VectorXd::Map(x.data(), x.size());</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keyword">static</span> <span class="keywordtype">double</span> nlopt_func(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; x, std::vector&lt;double&gt;&amp; <a class="code" href="group__opt__tools.html#gaf28d9af930b2993024ab497b285e0521">grad</a>, <span class="keywordtype">void</span>* my_func_data)</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                F* f = (F*)(my_func_data);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keywordtype">double</span> v = <a class="code" href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">eval</a>(*f, params);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                <span class="keywordflow">return</span> v;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <span class="keywordflow">try</span> {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    opt.optimize(x, max);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">catch</span> (nlopt::roundoff_limited&amp; e) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="comment">// In theory it&#39;s ok to ignore this error</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    std::cerr &lt;&lt; <span class="stringliteral">&quot;[NLOptNoGrad]: &quot;</span> &lt;&lt; e.what() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordflow">catch</span> (std::invalid_argument&amp; e) {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                    <span class="comment">// In theory it&#39;s ok to ignore this error</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                    std::cerr &lt;&lt; <span class="stringliteral">&quot;[NLOptNoGrad]: &quot;</span> &lt;&lt; e.what() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                <span class="keywordflow">return</span> Eigen::VectorXd::Map(x.data(), x.size());</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        };</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keyword">static</span> <span class="keywordtype">double</span> nlopt_func(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; x, std::vector&lt;double&gt;&amp; <a class="code" href="group__opt__tools.html#gaf28d9af930b2993024ab497b285e0521">grad</a>, <span class="keywordtype">void</span>* my_func_data)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                F* f = (F*)(my_func_data);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                <span class="keywordtype">double</span> v = <a class="code" href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">eval</a>(*f, params);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                <span class="keywordflow">return</span> v;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        };</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:70</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1opt__nloptnograd_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1opt__nloptnograd.html">limbo::defaults::opt_nloptnograd</a></div><div class="ttdef"><b>Definition:</b> nlopt_no_grad.hpp:18</div></div>
 <div class="ttc" id="optimizer_8hpp_html"><div class="ttname"><a href="optimizer_8hpp.html">optimizer.hpp</a></div></div>
@@ -186,7 +196,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 4 2016 15:31:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jul 23 2016 19:38:03 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['maternfivehalfs',['MaternFiveHalfs',['../structlimbo_1_1kernel_1_1_matern_five_halfs.html',1,'limbo::kernel']]],
-  ['maternthreehalfs',['MaternThreeHalfs',['../structlimbo_1_1kernel_1_1_matern_three_halfs.html',1,'limbo::kernel']]],
+  ['maternfivehalves',['MaternFiveHalves',['../structlimbo_1_1kernel_1_1_matern_five_halves.html',1,'limbo::kernel']]],
+  ['maternthreehalves',['MaternThreeHalves',['../structlimbo_1_1kernel_1_1_matern_three_halves.html',1,'limbo::kernel']]],
   ['maxiterations',['MaxIterations',['../structlimbo_1_1stop_1_1_max_iterations.html',1,'limbo::stop']]],
   ['maxpredictedvalue',['MaxPredictedValue',['../structlimbo_1_1stop_1_1_max_predicted_value.html',1,'limbo::stop']]],
   ['mean_5fconstant',['mean_constant',['../structlimbo_1_1defaults_1_1mean__constant.html',1,'limbo::defaults']]],

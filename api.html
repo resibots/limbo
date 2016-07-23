@@ -352,14 +352,14 @@
 <p>(meaning: kernel with automatic relevance determination and mean equals to the mean of the input data, that is, center the data automatically)</p>
 <p>For Statistics, the default value is: <code class="docutils literal"><span class="pre">boost::fusion::vector&lt;</span><a class="reference internal" href="#limbostructlimbo_1_1stat_1_1_samples"><span><span class="pre">stat::Samples</span></span></a><span class="pre">&lt;Params&gt;,</span> <a class="reference internal" href="#limbostructlimbo_1_1stat_1_1_aggregated_observations"><span><span class="pre">stat::AggregatedObservations</span></span></a><span class="pre">&lt;Params&gt;,</span> <a class="reference internal" href="#limbostructlimbo_1_1stat_1_1_console_summary"><span><span class="pre">stat::ConsoleSummary</span></span></a><span class="pre">&lt;Params&gt;&gt;</span></code></p>
 <p>Example of customization:<ul class="simple">
-<li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_matern_five_halfs"><span><span class="pre">kernel::MaternFiveHalfs</span></span></a><span class="pre">&lt;Params&gt;</span> <span class="pre">Kernel_t;</span></code></li>
+<li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_matern_five_halves"><span><span class="pre">kernel::MaternFiveHalves</span></span></a><span class="pre">&lt;Params&gt;</span> <span class="pre">Kernel_t;</span></code></li>
 <li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_data"><span><span class="pre">mean::Data</span></span></a><span class="pre">&lt;Params&gt;</span> <span class="pre">Mean_t;</span></code></li>
 <li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span><span class="pre">model::GP</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">Kernel_t,</span> <span class="pre">Mean_t&gt;</span> <span class="pre">GP_t;</span></code></li>
 <li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limboclasslimbo_1_1acqui_1_1_u_c_b"><span><span class="pre">acqui::UCB</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">GP_t&gt;</span> <span class="pre">Acqui_t;</span></code></li>
 <li><code class="docutils literal"><a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_b_optimizer"><span><span class="pre">bayes_opt::BOptimizer</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">modelfun&lt;GP_t&gt;,</span> <span class="pre">acquifun&lt;Acqui_t&gt;&gt;</span> <span class="pre">opt;</span></code> </li>
 </ul>
 </p>
-<p>Subclassed by <a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_b_optimizer"><span>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</span></a></p>
+<p>Subclassed by <a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_b_optimizer"><span>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</span></a>, limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</p>
 <div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
@@ -1271,7 +1271,7 @@
 <span id="limbo::kernel::Exp"></span><em class="property">struct </em><code class="descname">Exp</code><a class="headerlink" href="#_CPPv2N5limbo6kernel3ExpE" title="Permalink to this definition">¶</a></dt>
 <dd><em>#include &lt;limbo/kernel/exp.hpp&gt;</em><p><p>Exponential kernel (see [brochu2010tutorial] p. 9).</p>
 <div class="math">
-\[k(v_1, v_2)  = \sigma^2\exp \Big(-\frac{1}{\l^2} ||v_1 - v_2||^2\Big)\]</div>
+\[k(v_1, v_2)  = \sigma^2\exp \Big(-\frac{1}{l^2} ||v_1 - v_2||^2\Big)\]</div>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
@@ -1285,10 +1285,10 @@
 
 <dl class="class">
 <dt>
-<span class="target" id="limbostructlimbo_1_1kernel_1_1_matern_five_halfs"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
-<dt id="_CPPv2N5limbo6kernel15MaternFiveHalfsE">
-<span id="limbo::kernel::MaternFiveHalfs"></span><em class="property">struct </em><code class="descname">MaternFiveHalfs</code><a class="headerlink" href="#_CPPv2N5limbo6kernel15MaternFiveHalfsE" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;limbo/kernel/matern_five_halfs.hpp&gt;</em><p><p>Matern kernel</p>
+<span class="target" id="limbostructlimbo_1_1kernel_1_1_matern_five_halves"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
+<dt id="_CPPv2N5limbo6kernel16MaternFiveHalvesE">
+<span id="limbo::kernel::MaternFiveHalves"></span><em class="property">struct </em><code class="descname">MaternFiveHalves</code><a class="headerlink" href="#_CPPv2N5limbo6kernel16MaternFiveHalvesE" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;limbo/kernel/matern_five_halves.hpp&gt;</em><p><p>Matern kernel</p>
 <div class="math">
 \[d = ||v1 - v2||\]\[\nu = 5/2\]\[C(d) = \sigma^2\frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg)^\nu K_\nu\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg),\]</div>
 <dl class="docutils">
@@ -1305,10 +1305,10 @@
 
 <dl class="class">
 <dt>
-<span class="target" id="limbostructlimbo_1_1kernel_1_1_matern_three_halfs"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
-<dt id="_CPPv2N5limbo6kernel16MaternThreeHalfsE">
-<span id="limbo::kernel::MaternThreeHalfs"></span><em class="property">struct </em><code class="descname">MaternThreeHalfs</code><a class="headerlink" href="#_CPPv2N5limbo6kernel16MaternThreeHalfsE" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;limbo/kernel/matern_three_halfs.hpp&gt;</em><p><blockquote>
+<span class="target" id="limbostructlimbo_1_1kernel_1_1_matern_three_halves"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
+<dt id="_CPPv2N5limbo6kernel17MaternThreeHalvesE">
+<span id="limbo::kernel::MaternThreeHalves"></span><em class="property">struct </em><code class="descname">MaternThreeHalves</code><a class="headerlink" href="#_CPPv2N5limbo6kernel17MaternThreeHalvesE" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;limbo/kernel/matern_three_halves.hpp&gt;</em><p><blockquote>
 <div><p>Matern 3/2 kernel</p>
 <div class="math">
 \[d = ||v1 - v2||\]\[\nu = 3/2\]\[C(d) = \sigma^2\frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg)^\nu K_\nu\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg),\]</div>
@@ -1334,11 +1334,20 @@
 <div><p>Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
 Computes the squared exponential covariance like this:</p>
 <div class="math">
-\[k_{SE}(x, y) = \alpha^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),\]</div>
+\[k_{SE}(x, y) = \sigma^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),\]</div>
 </div></blockquote>
-<p>with <span class="math">\(M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})\)</span> being the characteristic length scales and <span class="math">\(\alpha\)</span> describing the variability of the latent function. The parameters <span class="math">\(l_1^2, \dots, l_n^2, \alpha, \Lambda\)</span> are expected in this order in the parameter array.</p>
+<p>with <span class="math">\(M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})\)</span> being the characteristic length scales and <span class="math">\(\alpha\)</span> describing the variability of the latent function. The parameters <span class="math">\(l_1^2, \dots, l_n^2, \Lambda\)</span> are expected in this order in the parameter array. <span class="math">\(\Lambda\)</span> is a <span class="math">\(D\times k\)</span> matrix with <span class="math">\(k&lt;D\)</span>.</p>
 <blockquote>
-<div>Reference: [Rasmussen2006], p. 106 &amp; [brochu2010tutorial], p. 10</div></blockquote>
+<div><dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma_sq</span></code> (signal variance)</li>
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">k</span></code> (number of columns of <span class="math">\(\Lambda\)</span> matrix)</li>
+</ul>
+</dd>
+</dl>
+<p>Reference: [Rasmussen2006], p. 106 &amp; [brochu2010tutorial], p. 10</p>
+</div></blockquote>
  </p>
 </dd></dl>
 
@@ -1359,23 +1368,32 @@ Computes the squared exponential covariance like this:</p>
 
 <dl class="function">
 <dt>
-<span class="target" id="limbogroup__kernel__defaults_1ga872fb50d6e244a40ff7c65321434b24b"></span><code class="descname">limbo::defaults::kernel_maternfivehalfs::BO_PARAM(double, sigma_sq, 1)</code></dt>
+<span class="target" id="limbogroup__kernel__defaults_1ga001b0195485017f316c32002aba15139"></span><code class="descname">limbo::defaults::kernel_maternfivehalves::BO_PARAM(double, sigma_sq, 1)</code></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt>
-<span class="target" id="limbogroup__kernel__defaults_1gaae66735209158acd497dc5034fa535ff"></span><code class="descname">limbo::defaults::kernel_maternfivehalfs::BO_PARAM(double, l, 1)</code></dt>
+<span class="target" id="limbogroup__kernel__defaults_1gabc34e7cdebd3b2db4ffa355ac8eb51e9"></span><code class="descname">limbo::defaults::kernel_maternfivehalves::BO_PARAM(double, l, 1)</code></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt>
-<span class="target" id="limbogroup__kernel__defaults_1ga5cf36a497746c36b6bded9c6fb368ae6"></span><code class="descname">limbo::defaults::kernel_maternthreehalfs::BO_PARAM(double, sigma_sq, 1)</code></dt>
-<dd><p>This is is sigma squared! </p>
-</dd></dl>
+<span class="target" id="limbogroup__kernel__defaults_1ga76321c51e14ac1db904dd1411771e391"></span><code class="descname">limbo::defaults::kernel_maternthreehalves::BO_PARAM(double, sigma_sq, 1)</code></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt>
-<span class="target" id="limbogroup__kernel__defaults_1ga8764c13406e6fe0ab8f3c79d200c5e96"></span><code class="descname">limbo::defaults::kernel_maternthreehalfs::BO_PARAM(double, l, 1)</code></dt>
+<span class="target" id="limbogroup__kernel__defaults_1ga5e0b13e8fe6cc8b335d86ed94631225d"></span><code class="descname">limbo::defaults::kernel_maternthreehalves::BO_PARAM(double, l, 1)</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__kernel__defaults_1ga913157eccae4e432cb2fd43ec682773c"></span><code class="descname">limbo::defaults::kernel_squared_exp_ard::BO_PARAM(int, k, 0)</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__kernel__defaults_1ga5322933a812efe2019e375cd2b4875fc"></span><code class="descname">limbo::defaults::kernel_squared_exp_ard::BO_PARAM(double, sigma_sq, 1)</code></dt>
 <dd></dd></dl>
 
 </div>

@@ -6,50 +6,56 @@
     <includes refid="macros_8hpp" local="no">limbo/tools/macros.hpp</includes>
     <includedby refid="acqui_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/acqui.hpp</includedby>
     <incdepgraph>
-      <node id="12">
+      <node id="13">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="9">
+      <node id="10">
         <label>/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp</label>
         <link refid="gp_ucb.hpp"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="14">
+        <label>iostream</label>
+      </node>
+      <node id="12">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-      </node>
-      <node id="10">
-        <label>Eigen/Core</label>
-      </node>
-      <node id="13">
-        <label>iostream</label>
-      </node>
-      <node id="11">
-        <label>limbo/tools/macros.hpp</label>
-        <link refid="macros_8hpp"/>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="14">
+      <node id="15">
         <label>/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp</label>
         <link refid="gp_ucb.hpp"/>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>/tmp/doc_limbo/limbo/src/limbo/acqui.hpp</label>
-        <link refid="acqui_8hpp"/>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="16">
+        <label>/tmp/doc_limbo/limbo/src/limbo/acqui.hpp</label>
+        <link refid="acqui_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
+        <link refid="pareto__benchmark_8hpp"/>
+      </node>
+      <node id="17">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="structlimbo_1_1defaults_1_1acqui__gpucb" prot="public">limbo::defaults::acqui_gpucb</innerclass>

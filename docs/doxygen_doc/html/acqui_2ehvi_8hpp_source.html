@@ -91,8 +91,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ehvi.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="acqui_2ehvi_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LIMBO_ACQUI_EHVI_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LIMBO_ACQUI_EHVI_HPP</span></div>
+<a href="acqui_2ehvi_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LIMBO_EXPERIMENTAL_ACQUI_EHVI_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LIMBO_EXPERIMENTAL_ACQUI_EHVI_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
@@ -115,34 +115,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_ehvi.html#a5d0876e753a2f1037bdf264501fdbd5d">   23</a></span>&#160;            <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1acqui_1_1_ehvi.html#a5d0876e753a2f1037bdf264501fdbd5d">dim</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _models[0].dim(); }</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_ehvi.html#a19ffe236fe5628a867af32f0177e4f88">   25</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="classlimbo_1_1acqui_1_1_ehvi.html#a19ffe236fe5628a867af32f0177e4f88">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                assert(_models.size() == 2);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <span class="keywordtype">double</span> r[3] = {_ref_point(0), _ref_point(1), _ref_point(2)};</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordtype">double</span> mu[3] = {_models[0].mu(v), _models[1].mu(v), 0};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                <span class="keywordtype">double</span> s[3] = {_models[0].sigma(v), _models[1].sigma(v), 0};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordtype">double</span> ehvi = ehvi2d(_pop, r, mu, s);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <span class="keywordflow">return</span> ehvi;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">const</span> std::vector&lt;Model&gt;&amp; _models;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keyword">const</span> std::deque&lt;individual*&gt;&amp; _pop;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            Eigen::VectorXd _ref_point;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> AggregatorFunction = FirstElem&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_ehvi.html#a1e99fe83a965b5f706d057895598907d">   26</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="classlimbo_1_1acqui_1_1_ehvi.html#a1e99fe83a965b5f706d057895598907d">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> AggregatorFunction&amp; afun = AggregatorFunction())<span class="keyword"> const</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                assert(_models.size() == 2);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordtype">double</span> r[3] = {_ref_point(0), _ref_point(1), _ref_point(2)};</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                <span class="keywordtype">double</span> mu[3] = {afun(_models[0].mu(v)), afun(_models[1].mu(v)), 0};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordtype">double</span> s[3] = {_models[0].sigma(v), _models[1].sigma(v), 0};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <span class="keywordtype">double</span> ehvi = ehvi2d(_pop, r, mu, s);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <span class="keywordflow">return</span> ehvi;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keyword">const</span> std::vector&lt;Model&gt;&amp; _models;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <span class="keyword">const</span> std::deque&lt;individual*&gt;&amp; _pop;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            Eigen::VectorXd _ref_point;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        };</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classlimbo_1_1acqui_1_1_ehvi_html"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_ehvi.html">limbo::acqui::Ehvi</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:14</div></div>
+<div class="ttc" id="classlimbo_1_1acqui_1_1_ehvi_html_a1e99fe83a965b5f706d057895598907d"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_ehvi.html#a1e99fe83a965b5f706d057895598907d">limbo::acqui::Ehvi::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun=AggregatorFunction()) const </div><div class="ttdef"><b>Definition:</b> ehvi.hpp:26</div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> gp_ucb.hpp:8</div></div>
 <div class="ttc" id="classlimbo_1_1acqui_1_1_ehvi_html_a9868f015ef640e9406022b027a0d7683"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_ehvi.html#a9868f015ef640e9406022b027a0d7683">limbo::acqui::Ehvi::Ehvi</a></div><div class="ttdeci">Ehvi(const std::vector&lt; Model &gt; &amp;models, const std::deque&lt; individual * &gt; &amp;pop, const Eigen::VectorXd &amp;ref_point)</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:16</div></div>
 <div class="ttc" id="classlimbo_1_1acqui_1_1_ehvi_html_a5d0876e753a2f1037bdf264501fdbd5d"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_ehvi.html#a5d0876e753a2f1037bdf264501fdbd5d">limbo::acqui::Ehvi::dim</a></div><div class="ttdeci">size_t dim() const </div><div class="ttdef"><b>Definition:</b> ehvi.hpp:23</div></div>
-<div class="ttc" id="classlimbo_1_1acqui_1_1_ehvi_html_a19ffe236fe5628a867af32f0177e4f88"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_ehvi.html#a19ffe236fe5628a867af32f0177e4f88">limbo::acqui::Ehvi::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;v) const </div><div class="ttdef"><b>Definition:</b> ehvi.hpp:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 4 2016 15:31:40 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jul 23 2016 19:38:03 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

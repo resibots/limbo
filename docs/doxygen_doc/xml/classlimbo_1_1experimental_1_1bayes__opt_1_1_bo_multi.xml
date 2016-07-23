@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
   <compounddef id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi" kind="class" language="C++" prot="public">
     <compoundname>limbo::experimental::bayes_opt::BoMulti</compoundname>
-    <basecompoundref refid="classlimbo_1_1bayes__opt_1_1_bo_base" prot="public" virt="non-virtual">limbo::bayes_opt::BoBase&lt; Params, A2, A3, A4, A5, A6 &gt;</basecompoundref>
+    <basecompoundref refid="classlimbo_1_1bayes__opt_1_1_bo_base" prot="public" virt="non-virtual">limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</basecompoundref>
+    <derivedcompoundref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi" prot="public" virt="non-virtual">limbo::experimental::bayes_opt::Ehvi&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</derivedcompoundref>
     <includes refid="bo__multi_8hpp" local="no">limbo/experimental/bayes_opt/bo_multi.hpp</includes>
-    <innerclass refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1_1defaults" prot="public">limbo::experimental::bayes_opt::BoMulti::defaults</innerclass>
     <templateparamlist>
       <param>
         <type>class</type>
@@ -60,24 +60,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="118" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="118" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="108" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="108" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1aeea7e1ae62b3116ea392b098c40a1676" prot="public" static="no">
-        <type>boost::parameter::binding&lt; <ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1afbec2602c4a22ad0a1285cc813a51c58" kindref="member">args</ref>, tag::acquiopt, typename <ref refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1_1defaults_1a24be1814310958ec5808cb9856cf8c74" kindref="member">defaults::acquiopt_t</ref> &gt;::type</type>
-        <definition>typedef boost::parameter::binding&lt;args, tag::acquiopt, typename defaults::acquiopt_t&gt;::type limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::acqui_optimizer_t</definition>
-        <argsstring></argsstring>
-        <name>acqui_optimizer_t</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="119" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="119" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a62d938e4735374911ea55c4b4f8a6562" prot="public" static="no">
-        <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">limbo::bayes_opt::BoBase</ref>&lt; Params, A2, A3, A4, A5, A6 &gt;</type>
-        <definition>typedef limbo::bayes_opt::BoBase&lt;Params, A2, A3, A4, A5, A6&gt; limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::base_t</definition>
+      <memberdef kind="typedef" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ab5e0a9d998083ff1063045d289683287" prot="public" static="no">
+        <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">limbo::bayes_opt::BoBase</ref>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</type>
+        <definition>typedef limbo::bayes_opt::BoBase&lt;Params, A1, A2, A3, A4, A5, A6&gt; limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::base_t</definition>
         <argsstring></argsstring>
         <name>base_t</name>
         <briefdescription>
@@ -86,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="121" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="121" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="110" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a94e37f45e30ac591bacf36df6767d6ad" prot="public" static="no">
         <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a151af5c7eef92a82d8813bb2e067d267" kindref="member">base_t::model_t</ref></type>
@@ -99,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="122" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="122" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="111" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1af5c8c4b0a4912c1efa5e0156a83b06ab" prot="public" static="no">
         <type><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a200a43abb6c95d2d99660898b36f2200" kindref="member">base_t::acquisition_function_t</ref></type>
@@ -112,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="123" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="123" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="112" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a1a48dd47159458edc16374082379879e" prot="public" static="no">
         <type>std::tuple&lt; Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd &gt;</type>
@@ -125,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="125" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="125" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="114" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ae2b586fb9056fdfba859b288927a2f1c" prot="public" static="no">
         <type>std::vector&lt; <ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a1a48dd47159458edc16374082379879e" kindref="member">pareto_point_t</ref> &gt;</type>
@@ -138,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="126" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="126" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="115" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="115" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -153,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="184" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="184" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="169" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="169" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1afdd9e649381b04576ad1e2bb8241ce78" prot="private" static="no" mutable="no">
         <type><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ae2b586fb9056fdfba859b288927a2f1c" kindref="member">pareto_t</ref></type>
@@ -166,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="185" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="185" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="170" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="170" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1aa7d8d8a45107c77f68269afa9cef5aa3" prot="private" static="no" mutable="no">
         <type><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ae2b586fb9056fdfba859b288927a2f1c" kindref="member">pareto_t</ref></type>
@@ -179,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="186" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="186" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="171" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="171" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -194,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="128" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="128" bodyend="128"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="117" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="117" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a74989812b92d1f938169d434906c1416" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ae2b586fb9056fdfba859b288927a2f1c" kindref="member">pareto_t</ref> &amp;</type>
@@ -207,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="130" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="130" bodyend="130"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="119" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="119" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a4572fa750cb3678783af45d89d026f9f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ae2b586fb9056fdfba859b288927a2f1c" kindref="member">pareto_t</ref> &amp;</type>
@@ -220,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="132" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="132" bodyend="132"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="121" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="121" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a50114c72da6ef12f29938df0c8b0bcc6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const std::vector&lt; <ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a94e37f45e30ac591bacf36df6767d6ad" kindref="member">model_t</ref> &gt; &amp;</type>
@@ -233,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="134" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="134" bodyend="134"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="123" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="123" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a43c817f66221750175b905eab3640a19" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -246,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="137" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="137" bodyend="144"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="126" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="126" bodyend="133"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ad6240a53ed0faf0ed638f357aa99f31d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -266,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="148" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="148" bodyend="181"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="137" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="137" bodyend="166"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -293,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="188" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="188" bodyend="201"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="173" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="173" bodyend="184"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a0de4946e7f2a50968a265b50b7912a5b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -306,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="203" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="203" bodyend="214"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="186" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="186" bodyend="198"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -314,20 +301,14 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="42">
-        <label>limbo::bayes_opt::BoBase&lt; Params, A2, A3, A4, A5, A6 &gt;</label>
-        <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
-      </node>
-      <node id="41">
-        <label>limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
-        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi"/>
-        <childnode refid="42" relation="public-inheritance">
+      <node id="45">
+        <label>limbo::experimental::bayes_opt::Ehvi&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi"/>
+        <childnode refid="43" relation="public-inheritance">
         </childnode>
       </node>
-    </inheritancegraph>
-    <collaborationgraph>
       <node id="44">
-        <label>limbo::bayes_opt::BoBase&lt; Params, A2, A3, A4, A5, A6 &gt;</label>
+        <label>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
         <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
       </node>
       <node id="43">
@@ -336,20 +317,31 @@
         <childnode refid="44" relation="public-inheritance">
         </childnode>
       </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="47">
+        <label>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
+      </node>
+      <node id="46">
+        <label>limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi"/>
+        <childnode refid="47" relation="public-inheritance">
+        </childnode>
+      </node>
     </collaborationgraph>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="106" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="106" bodyend="215"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="106" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="106" bodyend="199"/>
     <listofallmembers>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a206299447eee4fa0543135ea64ef3bff" prot="private" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>_models</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a4802ab580ce922f2e9042db022d95f87" prot="private" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>_pack_data</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1aa7d8d8a45107c77f68269afa9cef5aa3" prot="private" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>_pareto_data</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1afdd9e649381b04576ad1e2bb8241ce78" prot="private" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>_pareto_model</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a0de4946e7f2a50968a265b50b7912a5b" prot="private" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>_update_models</name></member>
-      <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1aeea7e1ae62b3116ea392b098c40a1676" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>acqui_optimizer_t</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1af5c8c4b0a4912c1efa5e0156a83b06ab" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>acquisition_function_t</name></member>
       <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8694d4bbc5c373d067790ec31fb42a44" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>add_new_bl_sample</name></member>
       <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>add_new_sample</name></member>
       <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1afbec2602c4a22ad0a1285cc813a51c58" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>args</name></member>
-      <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1a62d938e4735374911ea55c4b4f8a6562" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>base_t</name></member>
+      <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1ab5e0a9d998083ff1063045d289683287" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>base_t</name></member>
       <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa84e215cffa97a4e287aad3690f89635" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>bl_samples</name></member>
       <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad361278c23693c4220eaa9a9de5d3333" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>BoBase</name></member>
       <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1a50eebb8a6efd528582ea871a0879a0" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::BoMulti</scope><name>BoBase</name></member>

@@ -7,7 +7,7 @@ var searchData=
   ['default_5frng',['default_rng',['../namespacerandutils.html#a541e8d25081229bd349f2a5facb915a1',1,'randutils']]],
   ['default_5fseed_5ftype',['default_seed_type',['../classrandutils_1_1random__generator.html#a424b01b5232f91d42163369ad6bd3b11',1,'randutils::random_generator']]],
   ['defaults',['defaults',['../structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults.html',1,'limbo::bayes_opt::BOptimizer']]],
-  ['defaults',['defaults',['../structlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1_1defaults.html',1,'limbo::experimental::bayes_opt::BoMulti']]],
+  ['defaults',['defaults',['../structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html',1,'limbo::experimental::bayes_opt::Ehvi']]],
   ['defaults',['defaults',['../structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html',1,'limbo::bayes_opt::BoBase']]],
   ['dim',['dim',['../classlimbo_1_1acqui_1_1_ehvi.html#a5d0876e753a2f1037bdf264501fdbd5d',1,'limbo::acqui::Ehvi']]],
   ['dim_5fin',['dim_in',['../classlimbo_1_1acqui_1_1_g_p___u_c_b.html#a30c58b2f857da76de61e8cf555e73d06',1,'limbo::acqui::GP_UCB::dim_in()'],['../classlimbo_1_1acqui_1_1_u_c_b.html#ab922a11b709216f35db6ee83fcb86ed5',1,'limbo::acqui::UCB::dim_in()'],['../classlimbo_1_1acqui_1_1experimental_1_1_u_c_b___i_m_g_p_o.html#ac773917d0802053632cd37e7885fe282',1,'limbo::acqui::experimental::UCB_IMGPO::dim_in()'],['../classlimbo_1_1model_1_1_g_p.html#a41d99e6a69d53fc7d9260d295f787bc3',1,'limbo::model::GP::dim_in()']]],

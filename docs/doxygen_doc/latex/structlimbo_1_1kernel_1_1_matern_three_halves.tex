@@ -1,0 +1,61 @@
+\hypertarget{structlimbo_1_1kernel_1_1_matern_three_halves}{}\section{limbo\+:\+:kernel\+:\+:Matern\+Three\+Halves$<$ Params $>$ Struct Template Reference}
+\label{structlimbo_1_1kernel_1_1_matern_three_halves}\index{limbo\+::kernel\+::\+Matern\+Three\+Halves$<$ Params $>$@{limbo\+::kernel\+::\+Matern\+Three\+Halves$<$ Params $>$}}
+
+
+{\ttfamily \#include $<$limbo/kernel/matern\+\_\+three\+\_\+halves.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structlimbo_1_1kernel_1_1_matern_three_halves_a676c205ada09d0ef4ba9ea36d68ba9b9}{Matern\+Three\+Halves} (size\+\_\+t dim=1)
+\item 
+double \hyperlink{structlimbo_1_1kernel_1_1_matern_three_halves_a9df77c86c2de097bed64edf38a721bb1}{operator()} (const Eigen\+::\+Vector\+Xd \&v1, const Eigen\+::\+Vector\+Xd \&v2) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Params$>$struct limbo\+::kernel\+::\+Matern\+Three\+Halves$<$ Params $>$}
+
+\begin{DoxyVerb}embed:rst
+ Matern 3/2 kernel
+
+ .. math::
+   d = ||v1 - v2||
+
+   \nu = 3/2
+
+   C(d) = \sigma^2\frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg)^\nu K_\nu\Bigg(\sqrt{2\nu}\frac{d}{l}\Bigg),
+
+
+ Parameters:
+  - ``double sigma_sq`` (signal variance)
+  - ``double l`` (characteristic length scale)
+
+Reference: :cite:`matern1960spatial` & :cite:`brochu2010tutorial` p.10 & https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{structlimbo_1_1kernel_1_1_matern_three_halves_a676c205ada09d0ef4ba9ea36d68ba9b9}{}\index{limbo\+::kernel\+::\+Matern\+Three\+Halves@{limbo\+::kernel\+::\+Matern\+Three\+Halves}!Matern\+Three\+Halves@{Matern\+Three\+Halves}}
+\index{Matern\+Three\+Halves@{Matern\+Three\+Halves}!limbo\+::kernel\+::\+Matern\+Three\+Halves@{limbo\+::kernel\+::\+Matern\+Three\+Halves}}
+\subsubsection[{Matern\+Three\+Halves}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ {\bf limbo\+::kernel\+::\+Matern\+Three\+Halves}$<$ Params $>$\+::{\bf Matern\+Three\+Halves} (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{dim = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1kernel_1_1_matern_three_halves_a676c205ada09d0ef4ba9ea36d68ba9b9}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structlimbo_1_1kernel_1_1_matern_three_halves_a9df77c86c2de097bed64edf38a721bb1}{}\index{limbo\+::kernel\+::\+Matern\+Three\+Halves@{limbo\+::kernel\+::\+Matern\+Three\+Halves}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::kernel\+::\+Matern\+Three\+Halves@{limbo\+::kernel\+::\+Matern\+Three\+Halves}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ double {\bf limbo\+::kernel\+::\+Matern\+Three\+Halves}$<$ Params $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v1, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v2}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1kernel_1_1_matern_three_halves_a9df77c86c2de097bed64edf38a721bb1}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/kernel/\hyperlink{matern__three__halves_8hpp}{matern\+\_\+three\+\_\+halves.\+hpp}\end{DoxyCompactItemize}

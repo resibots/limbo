@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 128.479657
+%%BoundingBox: 0 0 500 121.951220
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,7 +19,7 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 3.891667 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 4.100000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
@@ -175,7 +175,7 @@ boxfont setfont
 1 boundaspect scale
 (limbo::experimental::bayes_opt::Nsbo< Params, A2, A3, A4, A5, A6 >) cw
 (limbo::experimental::bayes_opt::BoMulti< Params, A2, A3, A4, A5, A6 >) cw
-(limbo::bayes_opt::BoBase< Params, A3, A4, A5, A6, boost::parameter::void_ >) cw
+(limbo::bayes_opt::BoBase< Params, A2, A3, A4, A5, A6, boost::parameter::void_ >) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -189,7 +189,7 @@ boundx scalefactor div boundy scalefactor div scale
 
  (limbo::experimental::bayes_opt::Nsbo< Params, A2, A3, A4, A5, A6 >) 0.000000 0.000000 box
  (limbo::experimental::bayes_opt::BoMulti< Params, A2, A3, A4, A5, A6 >) 0.000000 1.000000 box
- (limbo::bayes_opt::BoBase< Params, A3, A4, A5, A6, boost::parameter::void_ >) 0.000000 2.000000 box
+ (limbo::bayes_opt::BoBase< Params, A2, A3, A4, A5, A6, boost::parameter::void_ >) 0.000000 2.000000 box
 
 % ----- relations -----
 

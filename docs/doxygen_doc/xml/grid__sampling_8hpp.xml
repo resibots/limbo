@@ -6,49 +6,55 @@
     <includes refid="macros_8hpp" local="no">limbo/tools/macros.hpp</includes>
     <includedby refid="init_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/init.hpp</includedby>
     <incdepgraph>
-      <node id="612">
+      <node id="744">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="610">
+      <node id="742">
         <label>Eigen/Core</label>
       </node>
-      <node id="609">
+      <node id="741">
         <label>/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp</label>
         <link refid="grid_sampling.hpp"/>
-        <childnode refid="610" relation="include">
+        <childnode refid="742" relation="include">
         </childnode>
-        <childnode refid="611" relation="include">
+        <childnode refid="743" relation="include">
         </childnode>
       </node>
-      <node id="613">
+      <node id="745">
         <label>iostream</label>
       </node>
-      <node id="611">
+      <node id="743">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="612" relation="include">
+        <childnode refid="744" relation="include">
         </childnode>
-        <childnode refid="610" relation="include">
+        <childnode refid="742" relation="include">
         </childnode>
-        <childnode refid="613" relation="include">
+        <childnode refid="745" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="615">
+      <node id="747">
         <label>/tmp/doc_limbo/limbo/src/limbo/init.hpp</label>
         <link refid="init_8hpp"/>
-        <childnode refid="616" relation="include">
+        <childnode refid="748" relation="include">
         </childnode>
       </node>
-      <node id="616">
+      <node id="749">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
+        <link refid="pareto__benchmark_8hpp"/>
+      </node>
+      <node id="748">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
+        <childnode refid="749" relation="include">
+        </childnode>
       </node>
-      <node id="614">
+      <node id="746">
         <label>/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp</label>
         <link refid="grid_sampling.hpp"/>
-        <childnode refid="615" relation="include">
+        <childnode refid="747" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

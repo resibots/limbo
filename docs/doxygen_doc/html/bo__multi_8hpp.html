@@ -90,7 +90,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">bo_multi.hpp File Reference</div>  </div>
@@ -98,15 +97,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><code>#include &lt;Eigen/Core&gt;</code><br />
 <code>#include &lt;<a class="el" href="bo__base_8hpp_source.html">limbo/bayes_opt/bo_base.hpp</a>&gt;</code><br />
-<code>#include &lt;limbo/experimental/bayes_opt/pareto.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="pareto_8hpp_source.html">limbo/experimental/tools/pareto.hpp</a>&gt;</code><br />
 </div>
 <p><a href="bo__multi_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html">limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_1_1defaults.html">limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -120,33 +117,15 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespacelimbo_1_1experimental_1_1bayes__opt_1_1multi"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelimbo_1_1experimental_1_1bayes__opt_1_1multi.html">limbo::experimental::bayes_opt::multi</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a1c6d5de492ac61ad29aec7aa9a436bbf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bo__multi_8hpp.html#a1c6d5de492ac61ad29aec7aa9a436bbf">VERSION</a>&#160;&#160;&#160;&quot;xxx&quot;</td></tr>
-<tr class="separator:a1c6d5de492ac61ad29aec7aa9a436bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a6dc573f8069efe3be8c162d741c645c5"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::parameters&lt; boost::parameter::optional&lt; tag::acquiopt &gt;, boost::parameter::optional&lt; tag::statsfun &gt;, boost::parameter::optional&lt; tag::initfun &gt;, boost::parameter::optional&lt; tag::acquifun &gt;, boost::parameter::optional&lt; tag::stopcrit &gt;, boost::parameter::optional&lt; tag::modelfun &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelimbo_1_1experimental_1_1bayes__opt.html#a6dc573f8069efe3be8c162d741c645c5">limbo::experimental::bayes_opt::bo_multi_signature</a></td></tr>
-<tr class="separator:a6dc573f8069efe3be8c162d741c645c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a917a3d4ba3c92a91c3664f9e3ab91057"><td class="memItemLeft" align="right" valign="top">typedef boost::parameter::parameters&lt; boost::parameter::optional&lt; tag::statsfun &gt;, boost::parameter::optional&lt; tag::initfun &gt;, boost::parameter::optional&lt; tag::acquifun &gt;, boost::parameter::optional&lt; tag::stopcrit &gt;, boost::parameter::optional&lt; tag::modelfun &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelimbo_1_1experimental_1_1bayes__opt.html#a917a3d4ba3c92a91c3664f9e3ab91057">limbo::experimental::bayes_opt::bo_multi_signature</a></td></tr>
+<tr class="separator:a917a3d4ba3c92a91c3664f9e3ab91057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a class="anchor" id="a1c6d5de492ac61ad29aec7aa9a436bbf"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define VERSION&#160;&#160;&#160;&quot;xxx&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 4 2016 15:31:41 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jul 23 2016 19:38:03 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
