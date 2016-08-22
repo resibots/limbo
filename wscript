@@ -28,6 +28,7 @@ def options(opt):
         opt.load('nlopt')
         opt.load('libcmaes')
 
+        opt.add_option('--create', type='string', help='create a new exp', dest='create_exp')
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
@@ -151,6 +152,8 @@ def run_benchmark(ctx):
                 retcode = subprocess.call(s, shell=True, env=None)
 
 def shutdown(ctx):
+    if ctx.options.create_exp:
+        limbo.create_exp(ctx.options.create_exp)
     if ctx.options.qsub:
         limbo.qsub(ctx.options.qsub)
     if ctx.options.oar:
