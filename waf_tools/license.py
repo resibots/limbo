@@ -55,23 +55,32 @@ def make_dirlist(folder, extensions):
                 matches.append(os.path.join(root, filename))
     return matches
 
-def insert_header(fname, prefix, license):
+def insert_header(fname, prefix, license, kept_header = []):
     input = open(fname, 'r')
     output = open('/tmp/' + fname.split('/')[-1], 'w')
+    for line in kept_header:
+        output.write(line + '\n')
     for line in license.split('\n'):
         output.write(prefix + line + "\n")
     for line in input:
-        if line[0:len(prefix)] != prefix:
+
+        #print kept_header
+        print line in kept_header
+        header = len(filter(lambda x: x in line, kept_header)) != 0
+        print filter(lambda x: x in line, kept_header)
+        if (line[0:len(prefix)] != prefix) and (not header):
             output.write(line)
     output.close()
 
 def insert():
     # cpp
     cpp =  make_dirlist('src', ['.hpp', '.cpp'])
-    insert_header('src/benchmarks/bayesopt/testfunctions.hpp', "//| ", license)
+    insert_header('src/benchmarks/wscript', "//| ", license,  ['#!/usr/bin/env python', '# encoding: utf-8'])
+    return
     for i in cpp:
         insert_header(i, "//| ", license)
+    # py
     py = make_dirlist('waf_tools', ['.py'])
     py += make_dirlist('.', ['wscript'])
     for i in py:
-        insert_header(i, "#| ", license)
+        insert_header(i, "#| ", license, ['#!/usr/bin/env python', '# encoding: utf-8'])
