@@ -239,6 +239,6 @@ def output_params(folder):
         output += params.get_output(folder + '/' + file)
         output += '=========================================\n'
 
-    text_file = open("params_"+folder[4:]+".txt", "w")
+    text_file = open(folder + "/params_" + folder[4:] + ".txt", "w")
     text_file.write(output)
     text_file.close()
