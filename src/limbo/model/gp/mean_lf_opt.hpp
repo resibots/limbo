@@ -1,10 +1,7 @@
 #ifndef LIMBO_MODEL_GP_MEAN_LF_OPT_HPP
 #define LIMBO_MODEL_GP_MEAN_LF_OPT_HPP
 
-#include <Eigen/Core>
-
-#include <limbo/opt/parallel_repeater.hpp>
-#include <limbo/opt/rprop.hpp>
+#include <limbo/model/gp/hp_opt.hpp>
 #include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
@@ -13,21 +10,12 @@ namespace limbo {
             ///@ingroup model_opt
             ///optimize the likelihood of the mean only (try to align the mean function)
             template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
-            struct MeanLFOpt {
+            struct MeanLFOpt : public HPOpt<Params, Optimizer> {
             public:
-                MeanLFOpt() : _called(false) {}
-                ~MeanLFOpt()
-                {
-                    if (!_called) {
-                        std::cerr << "'MeanLFOpt' was never called!" << std::endl;
-                        assert(false);
-                    }
-                }
-
                 template <typename GP>
                 void operator()(GP& gp)
                 {
-                    _called = true;
+                    this->_called = true;
                     MeanLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
                     auto params = optimizer(optimization, (gp.mean_function().h_params().array() + 6.0) / 7.0, true);
@@ -82,8 +70,6 @@ namespace limbo {
                 protected:
                     const GP& _original_gp;
                 };
-
-                bool _called;
             };
         }
     }

@@ -1,10 +1,7 @@
 #ifndef LIMBO_MODEL_GP_KERNEL_LF_OPT_HPP
 #define LIMBO_MODEL_GP_KERNEL_LF_OPT_HPP
 
-#include <Eigen/Core>
-
-#include <limbo/opt/parallel_repeater.hpp>
-#include <limbo/opt/rprop.hpp>
+#include <limbo/model/gp/hp_opt.hpp>
 #include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
@@ -13,21 +10,12 @@ namespace limbo {
             ///@ingroup model_opt
             ///optimize the likelihood of the kernel only
             template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
-            struct KernelLFOpt {
+            struct KernelLFOpt : public HPOpt<Params, Optimizer> {
             public:
-                KernelLFOpt() : _called(false) {}
-                ~KernelLFOpt()
-                {
-                    if (!_called) {
-                        std::cerr << "'KernelLFOpt' was never called!" << std::endl;
-                        assert(false);
-                    }
-                }
-
                 template <typename GP>
                 void operator()(GP& gp)
                 {
-                    _called = true;
+                    this->_called = true;
                     KernelLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
                     auto params = optimizer(optimization, (gp.kernel_function().h_params().array() + 6.0) / 7.0, true);
@@ -92,8 +80,6 @@ namespace limbo {
                 protected:
                     const GP& _original_gp;
                 };
-
-                bool _called;
             };
         }
     }
