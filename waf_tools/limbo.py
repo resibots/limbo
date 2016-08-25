@@ -100,6 +100,8 @@ def _sub_script(tpl, conf_file):
                 except:
                     print "WARNING, dir:" + directory + " not be created"
                 subprocess.call('cp ' + bin_dir + '/' + e + ' ' + directory, shell=True)
+                src_dir = bin_dir.replace('build/',  '')
+                subprocess.call('cp ' + src_dir + '/params_*.txt '  + directory, shell=True)
                 fname = directory + "/" + e + "_" + str(i) + ".job"
                 f = open(fname, "w")
                 f.write(tpl
@@ -162,6 +164,8 @@ def _sub_script_local(conf_file):
                 except:
                     print "WARNING, dir:" + directory + " not be created"
                 subprocess.call('cp ' + bin_dir + '/' + e + ' ' + '"' + directory + '"', shell=True)
+                src_dir = bin_dir.replace('build/',  '')
+                subprocess.call('cp ' + src_dir + '/params_*.txt '  + directory, shell=True)
                 fname = e
                 fnames += [(fname, directory)]
     return fnames,args
