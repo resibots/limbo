@@ -160,6 +160,9 @@ def shutdown(ctx):
     if ctx.options.local_serial:
         limbo.run_local(ctx.options.local_serial)
 
+def insert_license(ctx):
+    limbo.insert_license()
+
 class BuildExtensiveTestsContext(BuildContext):
     cmd = 'build_extensive_tests'
     fun = 'build_extensive_tests'
@@ -167,3 +170,7 @@ class BuildExtensiveTestsContext(BuildContext):
 class BuildBenchmark(BuildContext):
     cmd = 'build_benchmark'
     fun = 'build_benchmark'
+
+class InsertLicense(BuildContext):
+    cmd = 'insert_license'
+    fun = 'insert_license'

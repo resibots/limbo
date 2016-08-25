@@ -4,6 +4,7 @@ import subprocess
 import time
 import threading
 import params
+import license
 from waflib.Tools import waf_unit_test
 
 json_ok = True
@@ -242,3 +243,5 @@ def output_params(folder):
     text_file = open("params_"+folder[4:]+".txt", "w")
     text_file.write(output)
     text_file.close()
+
+def insert_license(): license.insert()
