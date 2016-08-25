@@ -71,7 +71,7 @@ namespace limbo {
             /// Do not forget to call this if you use hyper-prameters optimization!!
             void optimize_hyperparams()
             {
-                HyperParamsOptimizer()(*this);
+                _hp_optimize(*this);
             }
 
             /// add sample and update the GP. This code uses an incremental implementation of the Cholesky
@@ -289,6 +289,8 @@ namespace limbo {
             Eigen::MatrixXd _inv_bl_kernel;
 
             double _lik;
+
+            HyperParamsOptimizer _hp_optimize;
 
             void _compute_obs_mean()
             {

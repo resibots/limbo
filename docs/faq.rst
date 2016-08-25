@@ -39,6 +39,11 @@ Why am I getting "'NoLFOpt' should never be called!" assertion failure?
 
 Most probably, you are using the `BOptimizer` class and you have set an `hp_period` (rate at which the hyperparams are optimized) bigger than 0, but you are using a Gaussian Process model with no hyperparameters optimization. This should never happen. So, if you do not want to optimize any hyperparameters, set `hp_period` parameter to -1. On the other hand, if you want use a Gaussian Process model that does optimize the hyperparameters, check :ref:`here <gp-hpopt>` for available hyperparameters optimization options.
 
+Why am I getting "'XXXLFOpt' was never called!" assertion failure at the end of my program execution?
+-------------------------------------------------------------------------------------------------------
+
+Most probably, you are using the `BOptimizer` class and you have set an `hp_period` (rate at which the hyperparams are optimized) less than 1, but you are using a Gaussian Process model that optimizes the hyperparameters. This should never happen. If you want use a Gaussian Process model that does optimize the hyperparameters, set the `hp_period` parameter to a value bigger than 0. On the other hand, if you do not want to optimize any hyperparameters, set `hp_period` parameter to -1 and use a Gaussian Process model that does not optimize the hyperparameters. Check :ref:`here <gp-hpopt>` for available hyperparameters optimization options.
+
 Why C++11? (and not <insert your favorite language>)?
 -----------------------------------------------------
 We have specific needs that mainly revolve around high-performance, minimzing boilerplate code, and easy interface with hardware and existing libraries:

@@ -15,9 +15,19 @@ namespace limbo {
             template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
             struct MeanLFOpt {
             public:
-                template <typename GP>
-                void operator()(GP& gp) const
+                MeanLFOpt() : _called(false) {}
+                ~MeanLFOpt()
                 {
+                    if (!_called) {
+                        std::cerr << "'MeanLFOpt' was never called!" << std::endl;
+                        assert(false);
+                    }
+                }
+
+                template <typename GP>
+                void operator()(GP& gp)
+                {
+                    _called = true;
                     MeanLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
                     auto params = optimizer(optimization, (gp.mean_function().h_params().array() + 6.0) / 7.0, true);
@@ -72,6 +82,8 @@ namespace limbo {
                 protected:
                     const GP& _original_gp;
                 };
+
+                bool _called;
             };
         }
     }

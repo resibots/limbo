@@ -15,9 +15,19 @@ namespace limbo {
             template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
             struct KernelLFOpt {
             public:
-                template <typename GP>
-                void operator()(GP& gp) const
+                KernelLFOpt() : _called(false) {}
+                ~KernelLFOpt()
                 {
+                    if (!_called) {
+                        std::cerr << "'KernelLFOpt' was never called!" << std::endl;
+                        assert(false);
+                    }
+                }
+
+                template <typename GP>
+                void operator()(GP& gp)
+                {
+                    _called = true;
                     KernelLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
                     auto params = optimizer(optimization, (gp.kernel_function().h_params().array() + 6.0) / 7.0, true);
@@ -82,6 +92,8 @@ namespace limbo {
                 protected:
                     const GP& _original_gp;
                 };
+
+                bool _called;
             };
         }
     }
