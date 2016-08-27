@@ -54,9 +54,9 @@ def options(opt):
 
 def build(bld):
     bld(features='cxx cxxprogram',
-        source='basic_example.cpp',
+        source='@exp.cpp',
         includes='. ../../src',
-        target='basic_example',
+        target='@exp',
         uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
         use='limbo')
 """
@@ -65,7 +65,7 @@ def build(bld):
     os.mkdir('exp/' + name)
     wscript = open('exp/' + name + "/wscript", "w")
     wscript.write(ws_tpl.replace('@exp', name))
-    os.system("cp src/tutorials/basic_example.cpp exp/" + name + "/")
+    os.system("cp src/tutorials/basic_example.cpp exp/" + name + "/" + name + ".cpp")
 
 def summary(bld):
     lst = getattr(bld, 'utest_results', [])
