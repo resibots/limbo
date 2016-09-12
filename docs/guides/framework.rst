@@ -1,3 +1,5 @@
+.. _framework-guide:
+
 Using Limbo as an environment for scientific experiments
 =========================================================
 
