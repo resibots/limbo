@@ -1,4 +1,5 @@
 // please see the explanation in the documentation
+// http://www.resibots.eu/limbo
 
 #include <iostream>
 
@@ -8,9 +9,8 @@
 using namespace limbo;
 
 struct Params {
-    // no noise
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 1e-10);
+        @BAYES_OPT_BOPTIMIZER_NOISE
     };
 
 // depending on which internal optimizer we use, we need to import different parameters
@@ -25,22 +25,19 @@ struct Params {
     };
 #endif
 
-    // enable / disable the writing of the result files
-    struct bayes_opt_bobase {
-        BO_PARAM(int, stats_enabled, true);
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
+        @BAYES_OPT_BOBASE_STATS_ENABLED
     };
 
     struct kernel_exp : public defaults::kernel_exp {
     };
 
-    // we use 10 random samples to initialize the algorithm
-    struct init_randomsampling {
-        BO_PARAM(int, samples, 10);
+    struct init_randomsampling : public defaults::init_randomsampling {
+        @INIT_RANDOMSAMPLING_SAMPLES
     };
 
-    // we stop after 40 iterations
-    struct stop_maxiterations {
-        BO_PARAM(int, iterations, 40);
+    struct stop_maxiterations : public defaults::stop_maxiterations {
+        @STOP_MAXITERATIONS_ITERATIONS
     };
 
     // we use the default parameters for acqui_ucb
@@ -50,16 +47,18 @@ struct Params {
 
 struct Eval {
     // number of input dimension (x.size())
-    static constexpr size_t dim_in = 1;
+    static constexpr size_t dim_in = @DIM_IN;
     // number of dimenions of the result (res.size())
-    static constexpr size_t dim_out = 1;
+    static constexpr size_t dim_out = @DIM_OUT;
 
     // the function to be optimized
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
-        double y = -((5 * x(0) - 2.5) * (5 * x(0) - 2.5)) + 5;
-        // we return a 1-dimensional vector
-        return tools::make_vector(y);
+        @CODE_RES_INIT
+
+            // YOUR CODE HERE
+
+            @CODE_RES_RETURN
     }
 };
 
@@ -70,6 +69,6 @@ int main()
     // run the evaluation
     boptimizer.optimize(Eval());
     // the best sample found
-    std::cout << "Best sample: " << boptimizer.best_sample()(0) << " - Best observation: " << boptimizer.best_observation()(0) << std::endl;
+    std::cout << "Best sample: " << @CODE_BEST_SAMPLE << " - Best observation: " << @CODE_BEST_OBS << std::endl;
     return 0;
 }

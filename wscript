@@ -29,6 +29,8 @@ def options(opt):
         opt.load('libcmaes')
         opt.load('xcode')
 
+        opt.add_option('--create', type='string', help='create a new exp', dest='create_exp')
+        limbo.add_create_options(opt)
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
@@ -84,13 +86,22 @@ def configure(conf):
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
-        print conf.env['CXXFLAGS']
+        print 'CXXFLAGS:', conf.env['CXXFLAGS']
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
         conf.recurse('src/benchmarks')
+        print ''
+        print 'WHAT TO DO NOW?'
+        print '---------------'
+        print '[users] To compile Limbo (inc. unit tests): ./waf build'
+        print '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo'
+        print '[developpers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
+        print '[developpers] To compile the benchmarks: ./waf build_benchmarks'
+        print '[developpers] To compile the extensive tests: ./waf build_extensive_tests'
+
 
 def build(bld):
     if bld.options.write_params:
@@ -155,6 +166,8 @@ def run_benchmark(ctx):
                 retcode = subprocess.call(s, shell=True, env=None)
 
 def shutdown(ctx):
+    if ctx.options.create_exp:
+        limbo.create_exp(ctx.options.create_exp, ctx.options)
     if ctx.options.qsub:
         limbo.qsub(ctx.options.qsub)
     if ctx.options.oar:
@@ -164,6 +177,10 @@ def shutdown(ctx):
     if ctx.options.local_serial:
         limbo.run_local(ctx.options.local_serial)
 
+def build_docs(ctx):
+    s = "cd docs; make html"
+    retcode = subprocess.call(s, shell=True, env=None)
+
 class BuildExtensiveTestsContext(BuildContext):
     cmd = 'build_extensive_tests'
     fun = 'build_extensive_tests'
@@ -171,3 +188,7 @@ class BuildExtensiveTestsContext(BuildContext):
 class BuildBenchmark(BuildContext):
     cmd = 'build_benchmark'
     fun = 'build_benchmark'
+
+class BuildDoc(BuildContext):
+    cmd = 'docs'
+    fun = 'build_docs'
