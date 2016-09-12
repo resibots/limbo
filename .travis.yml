@@ -39,6 +39,9 @@ addons:
     - libboost1.55-all-dev
     - libeigen3-dev
 
+before_install:
+  - sudo sed -i -e 's/^Defaults\tsecure_path.*$//' /etc/sudoers
+
 install:
   - if [ "$LIBCMAES" = "ON" ]; then 'ci/install_libcmaes.sh' ; fi
   - if [ "$NLOPT" = "ON" ]; then 'ci/install_nlopt.sh' ; fi

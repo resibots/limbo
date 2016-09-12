@@ -24,7 +24,7 @@ def check_libcmaes(conf):
 		libs_check = ['/usr/local/lib', '/usr/lib']
 
 	try:
-		conf.start_msg('Checking for libcmaes includes')
+		conf.start_msg('Checking for libcmaes includes (optional)')
 		res = conf.find_file('libcmaes/cmaes.h', includes_check)
 		conf.end_msg('ok')
 	except:

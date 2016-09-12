@@ -13,9 +13,13 @@ except:
     json_ok = False
     print "WARNING simplejson not found some function may not work"
 
-
-def options(opt):
-    opt.add_option('--qsub', type='string', help='json file to submit to torque', dest='qsub')
+def add_create_options(opt):
+    opt.add_option('--dim_in', type='int', dest='dim_in', help='Number of dimensions for the function to optimize [default: 1]')
+    opt.add_option('--dim_out', type='int', dest='dim_out', help='Number of dimensions for the function to optimize [default: 1]')
+    opt.add_option('--bayes_opt_boptimizer_noise', type='float', dest='bayes_opt_boptimizer_noise', help='Acquisition noise of the function to optimize [default: 1e-6]')
+    opt.add_option('--bayes_opt_bobase_stats_enabled', action='store_true', dest='bayes_opt_bobase_stats_enabled', help='Enable statistics [default: true]')
+    opt.add_option('--init_randomsampling_samples', type='int', dest='init_randomsampling_samples', help='Number of samples used for the initialization [default: 10]')
+    opt.add_option('--stop_maxiterations_iterations', type='int', dest='stop_maxiterations_iterations', help='Number of iterations performed before stopping the optimization [default: 190]')
 
 
 def create_variants(bld, source, uselib_local,
@@ -42,6 +46,53 @@ def create_variants(bld, source, uselib_local,
                     cxxflags=cxxflags,
                     use=uselib_local,
                     defines=deff)
+
+def create_exp(name, opt):
+    if not os.path.exists('exp'):
+        os.makedirs('exp')
+    os.mkdir('exp/' + name)
+
+    ws_tpl = ""
+    for line in open("waf_tools/exp_template.wscript"):
+        ws_tpl += line
+    ws_tpl = ws_tpl.replace('@NAME', name)
+    ws = open('exp/' + name + "/wscript", "w")
+    ws.write(ws_tpl)
+    ws.close()
+
+    cpp_tpl = ""
+    for line in open("waf_tools/exp_template.cpp"):
+        cpp_tpl += line
+
+    cpp_params = {}
+    cpp_params['BAYES_OPT_BOPTIMIZER_NOISE'] = '    BO_PARAM(double, noise, ' + str(opt.bayes_opt_boptimizer_noise) + ');\n    ' if opt.bayes_opt_boptimizer_noise and opt.bayes_opt_boptimizer_noise >= 0 else ''
+    cpp_params['BAYES_OPT_BOBASE_STATS_ENABLED'] = '' if opt.bayes_opt_bobase_stats_enabled else '    BO_PARAM(bool, stats_enabled, false);\n    '
+    cpp_params['INIT_RANDOMSAMPLING_SAMPLES'] = '    BO_PARAM(int, samples, ' + str(opt.init_randomsampling_samples) + ');\n    ' if opt.init_randomsampling_samples and opt.init_randomsampling_samples > 0  else ''
+    cpp_params['STOP_MAXITERATIONS_ITERATIONS'] = '    BO_PARAM(int, iterations, ' + str(opt.stop_maxiterations_iterations) + ');\n    ' if opt.stop_maxiterations_iterations and opt.stop_maxiterations_iterations > 0 else ''
+
+    cpp_params['DIM_IN'] = str(opt.dim_in) if opt.dim_in and opt.dim_in > 1 else '1'
+    cpp_params['DIM_OUT'] = str(opt.dim_out) if opt.dim_out and opt.dim_out > 1 else '1'
+
+    if opt.dim_in and opt.dim_in > 1:
+        cpp_params['CODE_BEST_SAMPLE'] = 'boptimizer.best_sample().transpose()'
+    else:
+        cpp_params['CODE_BEST_SAMPLE'] = 'boptimizer.best_sample()(0)'
+
+    if opt.dim_out and opt.dim_out > 1:
+        cpp_params['CODE_RES_INIT'] = 'Eigen::VectorXd res(' + str(opt.dim_in) + ')'
+        cpp_params['CODE_RES_RETURN'] = 'return res;'
+        cpp_params['CODE_BEST_OBS'] = 'boptimizer.best_observation().transpose()'
+    else:
+        cpp_params['CODE_RES_INIT'] = 'double y = 0;'
+        cpp_params['CODE_RES_RETURN'] = '// return a 1-dimensional vector\n        return tools::make_vector(y);'
+        cpp_params['CODE_BEST_OBS'] = 'boptimizer.best_observation()(0)'
+
+    for key, value in cpp_params.iteritems():
+        cpp_tpl = cpp_tpl.replace('@' + key, value)
+
+    cpp = open('exp/' + name + "/" + name + ".cpp", "w")
+    cpp.write(cpp_tpl)
+    cpp.close()
 
 def summary(bld):
     lst = getattr(bld, 'utest_results', [])

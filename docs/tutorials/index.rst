@@ -4,6 +4,7 @@ Tutorials
 .. toctree::
    :maxdepth: 2
 
+   quick_start
    compilation
    basic_example
    advanced_example

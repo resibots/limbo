@@ -22,7 +22,7 @@ def check_mkl(conf):
         includes_mkl = ['/usr/local/include', '/usr/include', '/opt/intel/mkl/include']
         libpath_mkl = ['/usr/local/lib/', '/usr/lib', '/opt/intel/mkl/lib/intel64']
 
-    conf.start_msg('Checking Intel MKL includes')
+    conf.start_msg('Checking Intel MKL includes (optionnal)')
     try:
         res = conf.find_file('mkl.h', includes_mkl)
         conf.end_msg('ok')
