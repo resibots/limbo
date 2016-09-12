@@ -164,6 +164,10 @@ def shutdown(ctx):
     if ctx.options.local_serial:
         limbo.run_local(ctx.options.local_serial)
 
+def build_docs(ctx):
+    s = "cd docs; make html"
+    retcode = subprocess.call(s, shell=True, env=None)
+
 class BuildExtensiveTestsContext(BuildContext):
     cmd = 'build_extensive_tests'
     fun = 'build_extensive_tests'
@@ -171,3 +175,7 @@ class BuildExtensiveTestsContext(BuildContext):
 class BuildBenchmark(BuildContext):
     cmd = 'build_benchmark'
     fun = 'build_benchmark'
+
+class BuildDoc(BuildContext):
+    cmd = 'docs'
+    fun = 'build_docs'
