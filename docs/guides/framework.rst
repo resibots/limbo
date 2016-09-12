@@ -153,7 +153,7 @@ We can create two variants in the ``wscript``, as follows:
 
 .. code-block:: python
 
-  #! /usr/bin/env python
+  #!/usr/bin/env python
   import limbo
   def build(bld):
 
@@ -175,7 +175,7 @@ You can add as many defines as you like (or even generate them with python code)
 
 .. code-block:: python
 
-  #! /usr/bin/env python
+  #!/usr/bin/env python
   import limbo
   def build(bld):
 
@@ -198,7 +198,7 @@ If you have more than one file, you have 2 options:
 
 .. code-block:: python
 
-  #! /usr/bin/env python
+  #!/usr/bin/env python
   import limbo
   def build(bld):
 

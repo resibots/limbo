@@ -14,7 +14,7 @@ This new file should have the following structure:
 
 .. code:: python
 
-    #! /usr/bin/env python
+    #!/usr/bin/env python
     # encoding: utf-8
 
     from waflib.Configure import conf
@@ -165,7 +165,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
 
 .. code:: python
 
-    #! /usr/bin/env python
+    #!/usr/bin/env python
 
     import limbo
     import ros
@@ -191,7 +191,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
 
 .. code:: python
 
-    #! /usr/bin/env python
+    #!/usr/bin/env python
     # encoding: utf-8
 
     import os
