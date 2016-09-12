@@ -1,5 +1,7 @@
-Using Limbo as an environment for experiments
-=============================================
+.. _framework-guide:
+
+Using Limbo as an environment for scientific experiments
+=========================================================
 
 The typical use case of Limbo for research in Bayesian Optimization is:
 
@@ -9,8 +11,42 @@ The typical use case of Limbo for research in Bayesian Optimization is:
 
 Limbo provides basics tools to make these steps easier. They are mostly additions to ``waf`` (see our :ref:`FAQ about waf <faq-waf>`). For users who are used to ROS, you can see these additions as our 'catkin for Bayesian optimization'.
 
+**The use of these tools are optional**: you can use Limbo as header-only library in your own project.
+
+
+What is a Limbo experiment?
+-----------------------
+Each time we want to investigate an idea (e.g. a particular function to optimize, a new kernel function, etc.), we create a new experiment in the directory ``exp``. For instance, we can have ``exp/test``. This directory should contain all the code that is specific to your experiment (.cpp files, but also .hpp, data files, etc.).
+
+Experiments give you the following benefits:
+
+- it keeps things organized (with code that is specific to a specific paper in a directory and generic code that is maintained by Limbo's team)
+- Limbo provides a service to easily generate variants of an experiment (e.g. compare using kernel XX using kernel YY)
+- experiments can be easily submitted to a cluster (``--oar=...``)
+- experiments can be easily run multiple times locally (if you do not have access to a cluster), via ``--local`` or ``--loca-serial``
+
+
+How to quickly create a new experiment?
+----------------------------------------
+To quickly create a new experiment, you can use ``./waf --create=your_name``. For instance ``./waf --create=test`` will create a new directory in exp/test with a ``wscript`` and a file called ``test.cpp``, based on a basic template.
+
+The experiment can the be compiled using ``./waf --exp test``
+
+If you want to customize the parameters, you can use the following options:
+
+- ``--dim_in=DIM_IN``: Number of dimensions for the function to optimize [default: 1]
+- ``--dim_out=DIM_OUT``: Number of dimensions for the function to optimize [default: 1]
+- ``--bayes_opt_boptimizer_noise=BAYES_OPT_BOPTIMIZER_NOISE``: Acquisition noise of the function to optimize [default: 1e-6]
+- ``--bayes_opt_bobase_stats_enabled``: Enable statistics [default: true]
+- ``--init_randomsampling_samples=INIT_RANDOMSAMPLING_SAMPLES``: Number of samples used for the initialization [default: 10]
+- ``--stop_maxiterations_iterations=STOP_MAXITERATIONS_ITERATIONS``: Number of iterations performed before stopping the optimization [default: 190
+
+
+**These parameters can be changed later.** You will only need to open the generated cpp file and put the values you want.
+
 How to add / compile your experiment?
 -------------------------------------
+If you do not want to use ``./waf --create``, you can do it yourself:
 
 - add a directory called ``exp`` at the root the limbo tree
 - add a directory for your experiment (e.g. ``my_experiment``)
