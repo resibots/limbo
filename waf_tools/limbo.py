@@ -51,6 +51,15 @@ def create_exp(name, opt):
     if not os.path.exists('exp'):
         os.makedirs('exp')
     os.mkdir('exp/' + name)
+
+    ws_tpl = ""
+    for line in open("waf_tools/exp_template.wscript"):
+        ws_tpl += line
+    ws_tpl = ws_tpl.replace('@NAME', name)
+    ws = open('exp/' + name + "/wscript", "w")
+    ws.write(ws_tpl)
+    ws.close()
+
     cpp_tpl = ""
     for line in open("waf_tools/exp_template.cpp"):
         cpp_tpl += line
@@ -83,6 +92,7 @@ def create_exp(name, opt):
 
     cpp = open('exp/' + name + "/" + name + ".cpp", "w")
     cpp.write(cpp_tpl)
+    cpp.close()
 
 def summary(bld):
     lst = getattr(bld, 'utest_results', [])

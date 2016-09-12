@@ -9,6 +9,13 @@ The typical use case of Limbo for research in Bayesian Optimization is:
 
 Limbo provides basics tools to make these steps easier. They are mostly additions to ``waf`` (see our :ref:`FAQ about waf <faq-waf>`). For users who are used to ROS, you can see these additions as our 'catkin for Bayesian optimization'.
 
+How to create a new experiment?
+--------------------------------
+To quickly create a new experiment, you can use ``./waf --create=your_name``. For instance ``./waf --create=test`` will create a new directory in exp/test with a ``wscript`` and a file called ``test.cpp``, based on a basic template.
+
+If you want to customize the parameters, you can use the following options:
+
+
 How to add / compile your experiment?
 -------------------------------------
 
