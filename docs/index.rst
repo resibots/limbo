@@ -23,7 +23,7 @@ Limbo shares many ideas with `Sferes2 <http://github.com/sferes2>`_, a similar f
 Main features
 --------------
 
-- Bayesian optimisation based on Gaussian processes
+- Bayesian optimization based on Gaussian processes
 - Generic framework (template-based / policy-based design), which allows for easy customization, to test novel ideas
 - Programming / experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters, etc.
 - High performance (in particular, Limbo can exploit multicore computers via Intel TBB and vectorize some operations via Eigen3)

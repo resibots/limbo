@@ -99,6 +99,7 @@ Bayesian optimizers (bayes_opt)
 
 Acquisition functions (acqui)
 ------------------------------
+.. _acqui-api:
 
 An acquisition function is what is optimized to select the next point to try. It usually depends on the model.
 
@@ -300,6 +301,8 @@ See the `Gaussian Process`_ tutorial for a tutorial about using GP without using
 
 Kernel functions (kernel)
 --------------------------
+
+.. _kernel-api:
 
 Template
 ^^^^^^^^

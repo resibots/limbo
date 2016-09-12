@@ -13,14 +13,14 @@ All the statistics are written in a directory called ``hostname_date_pid-number`
 
 Limbo provides a few classes for common uses (see :ref:`statistics-stats` for details):
 
-- ``ConsoleSummary``: write a summary to ``std::cout`` at each iteration of the algorithm
-- ``AggregatedObservations``: what values of the evaluation function have been evaluated (after aggregation) [filename ``aggregated_observations.dat``]
-- ``BestAggregatedObservations``: what is the best value at each iteration? [filename ``aggregated_observations.dat``]
-- ``Observations``: what values of the evaluation function have been measured? [filename: ``observations.dat``]
-- ``Samples``: what points have been  tested? [filename: ``samples.dat``]
-- ``BestObservations``: what is the best observation for each iteration? [filename ``best_observations.dat``]
-- ``BestSamples``: what is the best solution for each iteration? [filename: ``best_samples.dat``]
-- ``BlSamples``: what candidate solutions have been blacklisted? [filename: ``bl_samples.dat``]
+- ``ConsoleSummary``: writes a summary to ``std::cout`` at each iteration of the algorithm
+- ``AggregatedObservations``: records the value of each evaluation of the function (after aggregation) [filename ``aggregated_observations.dat``]
+- ``BestAggregatedObservations``: records the best value observed so far after each iteration [filename ``aggregated_observations.dat``]
+- ``Observations``: records the value of each evaluation of the function (before aggregation) [filename: ``observations.dat``]
+- ``Samples``: records the position in the search space of the evaluated points [filename: ``samples.dat``]
+- ``BestObservations``: records the best observation after each iteration? [filename ``best_observations.dat``]
+- ``BestSamples``: records the position in the search space of the best observation after each iteration [filename: ``best_samples.dat``]
+- ``BlSamples``: records the candidate solutions that have been blacklisted [filename: ``bl_samples.dat``]
 
 These statistics are for "advanced users":
 
@@ -36,7 +36,7 @@ The default statistics list is::
 
 Writing your own statistics class
 ----------------------------------
-Limbo only provides generic statistics class. Because they are generic, it is often useful to add user-defined statistics class that are specific to a particular experiment.
+Limbo only provides generic statistics classes. However, it is often useful to add user-defined statistics classes that are specific to a particular experiment.
 
 All the statistics functors follow the same template:
 
@@ -61,7 +61,7 @@ For instance, we could add a statistics class that writes the worst observation 
    :linenos:
    :lines: 64-93
 
-Then we need to install it into the Bayesian optimiser. The first thing to do is to is to define a new statistics list which include our new `WorstObservation`:
+In order to configure the Bayesian optimizer to use our new statistics class, we first need to define a new statistics list which includes our new `WorstObservation`:
 
 
 .. literalinclude:: ../../src/tutorials/statistics.cpp
@@ -69,7 +69,7 @@ Then we need to install it into the Bayesian optimiser. The first thing to do is
    :linenos:
    :lines: 100-103
 
-Then, we need to use it when defining the optimizer:
+Then, we use it to define the optimizer:
 
 .. literalinclude:: ../../src/tutorials/statistics.cpp
    :language: c++

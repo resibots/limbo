@@ -53,21 +53,21 @@ Create a new experiment
 
 See the :ref:`Framework guide <framework-guide>`
 
-Edit the Eval function to define the function that you want to optimized
+Edit the "Eval" function to define the function that you want to optimized
 -------------------------------------------------------------------------
 
 ::
 
   $EDITOR exp/test.cpp
 
-Build your experimental
+Build your experiment
 -----------------------
 
 ::
 
   ./waf --exp test
 
-Run your experimental
+Run your experiment
 -----------------------
 ::
 

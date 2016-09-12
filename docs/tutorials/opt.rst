@@ -31,7 +31,7 @@ Thanks to c++11, we can simply return ``{v, grad}`` and an object of type ``eval
 
 The boolean ``eval_grad`` is true when we need to evaluate the gradient for x, and false otherwise. This is useful because some algorithms do not need the gradient: there is no need to compute this value.
 
-As usual, each algorithm has some parameters (typically the number of iterations to perform). They are defined as the other parameters in Limbo (see `Parameters`):
+As usual, each algorithm has some parameters (typically the number of iterations to perform). They are defined like the other parameters in Limbo (see :ref:`Parameters <parameters>`):
 
 
 .. literalinclude:: ../../src/tutorials/opt.cpp
