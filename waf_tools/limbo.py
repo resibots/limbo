@@ -299,7 +299,9 @@ def output_params(folder):
     text_file.close()
 
 def write_default_params(fname):
-    output = params.get_default_params()
+    output = "Default values\n"
+    output += "===============\n"
+    output += params.get_default_params()
     text_file = open(fname, "w")
     text_file.write(output)
     text_file.close()

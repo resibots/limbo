@@ -93,7 +93,7 @@ def underline(k):
     out = k + '\n'
     s = ''
     for i in range(0, len(k)):
-        s += '='
+        s += '^'
     out += s + '\n'
     return out
 

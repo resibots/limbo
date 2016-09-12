@@ -178,6 +178,9 @@ def shutdown(ctx):
         limbo.run_local(ctx.options.local_serial)
 
 def build_docs(ctx):
+    print 'extracting default params...'
+    limbo.write_default_params('docs/defaults.rst')
+    print "generating HTML doc..."
     s = "cd docs; make html"
     retcode = subprocess.call(s, shell=True, env=None)
 
