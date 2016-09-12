@@ -266,7 +266,7 @@
 <span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
     <span class="c1">// no noise</span>
     <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
     <span class="p">};</span>
 
 <span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
@@ -452,7 +452,7 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
 <span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
     <span class="c1">// no noise</span>
     <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
     <span class="p">};</span>
 
 <span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>

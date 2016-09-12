@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Using Limbo as an environment for experiments &mdash; limbo 0.1 documentation</title>
+  <title>Using Limbo as an environment for scientific experiments &mdash; limbo 0.1 documentation</title>
   
 
   
@@ -115,7 +115,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bo.html">Introduction to Bayesian Optimization (BO)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="limbo_concepts.html">Limbo-specific concepts</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Using Limbo as an environment for experiments</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Using Limbo as an environment for scientific experiments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-a-limbo-experiment">What is a Limbo experiment?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-quickly-create-a-new-experiment">How to quickly create a new experiment?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-to-add-compile-your-experiment">How to add / compile your experiment?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-to-submit-jobs-with-limbo-on-clusters">How to submit jobs with limbo on clusters?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#variants">Variants</a></li>
@@ -165,7 +167,7 @@
     
       <li><a href="index.html">Guides</a> &raquo;</li>
     
-    <li>Using Limbo as an environment for experiments</li>
+    <li>Using Limbo as an environment for scientific experiments</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -179,8 +181,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="using-limbo-as-an-environment-for-experiments">
-<h1>Using Limbo as an environment for experiments<a class="headerlink" href="#using-limbo-as-an-environment-for-experiments" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="using-limbo-as-an-environment-for-scientific-experiments">
+<span id="framework-guide"></span><h1>Using Limbo as an environment for scientific experiments<a class="headerlink" href="#using-limbo-as-an-environment-for-scientific-experiments" title="Permalink to this headline">¶</a></h1>
 <p>The typical use case of Limbo for research in Bayesian Optimization is:</p>
 <ul class="simple">
 <li>we design an experiment that uses some components of Limbo</li>
@@ -188,8 +190,36 @@
 <li>because the algorithms that we use have some stochastic components (initialization, inner optimization, ...), we usually need to replicate each experiment (typically, we use 30 replicates) in order to do some statistics (see  <a class="reference external" href="http://www.github.com/jbmouret/matplotlib_for_papers">Matplotlib for Papers</a> for a tutorial about how to draw nice box plots with these statistics).</li>
 </ul>
 <p>Limbo provides basics tools to make these steps easier. They are mostly additions to <code class="docutils literal"><span class="pre">waf</span></code> (see our <a class="reference internal" href="../faq.html#faq-waf"><span>FAQ about waf</span></a>). For users who are used to ROS, you can see these additions as our &#8216;catkin for Bayesian optimization&#8217;.</p>
+<p><strong>The use of these tools are optional</strong>: you can use Limbo as header-only library in your own project.</p>
+<div class="section" id="what-is-a-limbo-experiment">
+<h2>What is a Limbo experiment?<a class="headerlink" href="#what-is-a-limbo-experiment" title="Permalink to this headline">¶</a></h2>
+<p>Each time we want to investigate an idea (e.g. a particular function to optimize, a new kernel function, etc.), we create a new experiment in the directory <code class="docutils literal"><span class="pre">exp</span></code>. For instance, we can have <code class="docutils literal"><span class="pre">exp/test</span></code>. This directory should contain all the code that is specific to your experiment (.cpp files, but also .hpp, data files, etc.).</p>
+<p>Experiments give you the following benefits:</p>
+<ul class="simple">
+<li>it keeps things organized (with code that is specific to a specific paper in a directory and generic code that is maintained by Limbo&#8217;s team)</li>
+<li>Limbo provides a service to easily generate variants of an experiment (e.g. compare using kernel XX using kernel YY)</li>
+<li>experiments can be easily submitted to a cluster (<code class="docutils literal"><span class="pre">--oar=...</span></code>)</li>
+<li>experiments can be easily run multiple times locally (if you do not have access to a cluster), via <code class="docutils literal"><span class="pre">--local</span></code> or <code class="docutils literal"><span class="pre">--loca-serial</span></code></li>
+</ul>
+</div>
+<div class="section" id="how-to-quickly-create-a-new-experiment">
+<h2>How to quickly create a new experiment?<a class="headerlink" href="#how-to-quickly-create-a-new-experiment" title="Permalink to this headline">¶</a></h2>
+<p>To quickly create a new experiment, you can use <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--create=your_name</span></code>. For instance <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--create=test</span></code> will create a new directory in exp/test with a <code class="docutils literal"><span class="pre">wscript</span></code> and a file called <code class="docutils literal"><span class="pre">test.cpp</span></code>, based on a basic template.</p>
+<p>The experiment can the be compiled using <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--exp</span> <span class="pre">test</span></code></p>
+<p>If you want to customize the parameters, you can use the following options:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">--dim_in=DIM_IN</span></code>: Number of dimensions for the function to optimize [default: 1]</li>
+<li><code class="docutils literal"><span class="pre">--dim_out=DIM_OUT</span></code>: Number of dimensions for the function to optimize [default: 1]</li>
+<li><code class="docutils literal"><span class="pre">--bayes_opt_boptimizer_noise=BAYES_OPT_BOPTIMIZER_NOISE</span></code>: Acquisition noise of the function to optimize [default: 1e-6]</li>
+<li><code class="docutils literal"><span class="pre">--bayes_opt_bobase_stats_enabled</span></code>: Enable statistics [default: true]</li>
+<li><code class="docutils literal"><span class="pre">--init_randomsampling_samples=INIT_RANDOMSAMPLING_SAMPLES</span></code>: Number of samples used for the initialization [default: 10]</li>
+<li><code class="docutils literal"><span class="pre">--stop_maxiterations_iterations=STOP_MAXITERATIONS_ITERATIONS</span></code>: Number of iterations performed before stopping the optimization [default: 190</li>
+</ul>
+<p><strong>These parameters can be changed later.</strong> You will only need to open the generated cpp file and put the values you want.</p>
+</div>
 <div class="section" id="how-to-add-compile-your-experiment">
 <h2>How to add / compile your experiment?<a class="headerlink" href="#how-to-add-compile-your-experiment" title="Permalink to this headline">¶</a></h2>
+<p>If you do not want to use <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--create</span></code>, you can do it yourself:</p>
 <ul class="simple">
 <li>add a directory called <code class="docutils literal"><span class="pre">exp</span></code> at the root the limbo tree</li>
 <li>add a directory for your experiment (e.g. <code class="docutils literal"><span class="pre">my_experiment</span></code>)</li>

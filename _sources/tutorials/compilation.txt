@@ -1,3 +1,5 @@
+.. _compilation-tutorial:
+
 Download and Compilation
 =================================================
 
@@ -29,7 +31,7 @@ Optional but highly recommended
 * `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
 
     ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
-    make install
+    sudo make install
 
 
 Optional
