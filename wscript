@@ -27,6 +27,7 @@ def options(opt):
         opt.load('openmp')
         opt.load('nlopt')
         opt.load('libcmaes')
+        opt.load('xcode')
 
         opt.add_option('--create', type='string', help='create a new exp', dest='create_exp')
         limbo.add_create_options(opt)
@@ -37,9 +38,9 @@ def options(opt):
         opt.add_option('--local_serial', type='string', help='config file (json) to run local', dest='local_serial')
         opt.add_option('--experimental', action='store_true', help='specify to compile the experimental examples', dest='experimental')
         opt.add_option('--nb_replicates', type='int', help='number of replicates performed during the benchmark', dest='nb_rep')
-        # tests
         opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
-        opt.load('xcode')
+        opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
+
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
                     opt.recurse(i)
@@ -103,6 +104,9 @@ def configure(conf):
 
 
 def build(bld):
+    if bld.options.write_params:
+        limbo.write_default_params(bld.options.write_params)
+        print 'default parameters written in ' + bld.options.write_params
     bld.recurse('src/')
     if bld.options.exp:
         for i in bld.options.exp.split(','):

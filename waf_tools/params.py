@@ -63,7 +63,7 @@ def extract_params(fname):
             d = re.findall('defaults::\w+', line)[0]
             dd = d.split('::')[1]
             defaults += [dd]
-        if 'BO_PARAM(' in line and not "#define" in line:
+        if 'BO_PARAM(' in line and not "#define" in line and not '//' in line:
             namespace, struct = extract_namespace(level)
             type, name, value = extract_param(line)
             d = extract_ifdef(ifdefs)
@@ -97,8 +97,7 @@ def underline(k):
     out += s + '\n'
     return out
 
-def get_output(file):
-    output = ""
+def extract_defaults():
     # find the default params
     dirs = make_dirlist('src/', ['.hpp'])
     params = []
@@ -109,6 +108,26 @@ def get_output(file):
     for i in params:
         if 'defaults' in i.namespace:
             defaults[i.struct][i.name] = i
+    return defaults
+
+
+def get_default_params():
+    output = ''
+    defaults = extract_defaults()
+    for k in defaults.keys():
+        output += underline(k)
+        for kk in defaults[k].keys():
+            output += '- ' + str(defaults[k][kk].type) + ' ' + str(defaults[k][kk].name) + ' = ' + str(defaults[k][kk].value) + ' [defined in ' + str(defaults[k][kk].fname) + ']'
+            if defaults[k][kk].ifdef:
+                output += ' ' + str(defaults[k][kk].ifdef)
+            output += '\n'
+        output += '\n'
+    return output
+
+def get_output(file):
+    get_default_params()
+    output = ""
+    defaults = extract_defaults()
     # find the params in the current file
     p, d = extract_params(file)
     struct_set = set()
@@ -124,7 +143,7 @@ def get_output(file):
             if kk in plist[k]:
                 output += '- ' + str(plist[k][kk].type) + ' ' + str(plist[k][kk].name) + ' = ' + str(plist[k][kk].value) + ' [defined in ' + plist[k][kk].fname + ']'  + str(plist[k][kk].ifdef) + '\n'
             else:
-                output += '- ' + str(defaults[k][kk].type) + ' ' + str(defaults[k][kk].name) + ' = ' + str(defaults[k][kk].value) + ' [default value, from ' + ']'  + str(defaults[k][kk].ifdef) + '\n'
+                output += '- ' + str(defaults[k][kk].type) + ' ' + str(defaults[k][kk].name) + ' = ' + str(defaults[k][kk].value) + ' [default value, from ' + str(defaults[k][kk].fname) + ']'  + str(defaults[k][kk].ifdef) + '\n'
         output += '\n'
 
     return output
