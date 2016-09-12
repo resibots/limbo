@@ -85,13 +85,22 @@ def configure(conf):
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
-        print conf.env['CXXFLAGS']
+        print 'CXXFLAGS:', conf.env['CXXFLAGS']
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
         conf.recurse('src/benchmarks')
+        print ''
+        print 'WHAT TO DO NOW?'
+        print '---------------'
+        print '[users] To compile Limbo (inc. unit tests): ./waf build'
+        print '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo'
+        print '[developpers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
+        print '[developpers] To compile the benchmarks: ./waf build_benchmarks'
+        print '[developpers] To compile the extensive tests: ./waf build_extensive_tests'
+
 
 def build(bld):
     bld.recurse('src/')
