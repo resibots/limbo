@@ -14,13 +14,13 @@ except:
     print "WARNING simplejson not found some function may not work"
 
 def add_create_options(opt):
-    opt.add_option('--dim_in', type='int', help='dim_in', dest='dim_in')
-    opt.add_option('--dim_out', type='int', help='dim_out', dest='dim_out')
-    opt.add_option('--bayes_opt_boptimizer_noise', type='float', help='bayes_opt_boptimizer_noise', dest='bayes_opt_boptimizer_noise')
-    opt.add_option('--bayes_opt_bobase_stats_enabled', action='store_true', help='bayes_opt_bobase_stats_enabled', dest='bayes_opt_bobase_stats_enabled')
-    opt.add_option('--init_randomsampling_samples', type='int', help='init_randomsampling_samples', dest='init_randomsampling_samples')
-    opt.add_option('--stop_maxiterations_iterations', type='int', help='stop_maxiterations_iterations', dest='stop_maxiterations_iterations')
-    
+    opt.add_option('--dim_in', type='int', dest='dim_in', help='Number of dimensions for the function to optimize [default: 1]')
+    opt.add_option('--dim_out', type='int', dest='dim_out', help='Number of dimensions for the function to optimize [default: 1]')
+    opt.add_option('--bayes_opt_boptimizer_noise', type='float', dest='bayes_opt_boptimizer_noise', help='Acquisition noise of the function to optimize [default: 1e-6]')
+    opt.add_option('--bayes_opt_bobase_stats_enabled', action='store_true', dest='bayes_opt_bobase_stats_enabled', help='Enable statistics [default: true]')
+    opt.add_option('--init_randomsampling_samples', type='int', dest='init_randomsampling_samples', help='Number of samples used for the initialization [default: 10]')
+    opt.add_option('--stop_maxiterations_iterations', type='int', dest='stop_maxiterations_iterations', help='Number of iterations performed before stopping the optimization [default: 190]')
+
 
 def create_variants(bld, source, uselib_local,
                     uselib, variants, includes=". ../",
@@ -51,99 +51,11 @@ def create_exp(name, opt):
     if not os.path.exists('exp'):
         os.makedirs('exp')
     os.mkdir('exp/' + name)
+    cpp_tpl = ""
+    for line in open("waf_tools/exp_template.cpp"):
+        cpp_tpl += line
 
-    ws_tpl = """#! /usr/bin/env python
-def configure(conf):
-    pass
-
-def options(opt):
-    pass
-
-def build(bld):
-    bld(features='cxx cxxprogram',
-        source='@NAME.cpp',
-        includes='. ../../src',
-        target='@NAME',
-        uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-        use='limbo')
-"""
-    
-    ws_tpl = ws_tpl.replace('@NAME', name)
-    
-    ws = open('exp/' + name + "/wscript", "w")    
-    ws.write(ws_tpl)
-
-    cpp_tpl = """// please see the explanation in the documentation
-
-#include <iostream>
-
-// you can also include <limbo/limbo.hpp> but it will slow down the compilation
-#include <limbo/bayes_opt/boptimizer.hpp>
-
-using namespace limbo;
-
-struct Params {
-    struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-    @BAYES_OPT_BOPTIMIZER_NOISE};
-
-    // depending on which internal optimizer we use, we need to import different parameters
-#ifdef USE_LIBCMAES
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
-#elif defined(USE_NLOPT)
-    struct opt_nloptnograd : public defaults::opt_nloptnograd {
-    };
-#else
-    struct opt_gridsearch : public defaults::opt_gridsearch {
-    };
-#endif
-
-    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
-    @BAYES_OPT_BOBASE_STATS_ENABLED};
-
-    struct kernel_exp : public defaults::kernel_exp {
-    };
-
-    struct init_randomsampling : public defaults::init_randomsampling {
-    @INIT_RANDOMSAMPLING_SAMPLES};
-
-    struct stop_maxiterations : public defaults::stop_maxiterations {
-    @STOP_MAXITERATIONS_ITERATIONS};
-
-    // we use the default parameters for acqui_ucb
-    struct acqui_ucb : public defaults::acqui_ucb {
-    };
-};
-
-struct Eval {
-    // number of input dimension (x.size())
-    static constexpr size_t dim_in = @DIM_IN;
-    // number of dimenions of the result (res.size())
-    static constexpr size_t dim_out = @DIM_OUT;
-
-    // the function to be optimized
-    Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
-    {
-        @CODE_RES_INIT
-
-        // YOUR CODE HERE
-
-        @CODE_RES_RETURN
-    }
-};
-
-int main()
-{
-    // we use the default acquisition function / model / stat / etc.
-    bayes_opt::BOptimizer<Params> boptimizer;
-    // run the evaluation
-    boptimizer.optimize(Eval());
-    // the best sample found
-    std::cout << "Best sample: " << @CODE_BEST_SAMPLE << " - Best observation: " << @CODE_BEST_OBS << std::endl;
-    return 0;
-}
-"""
-    cpp_params = {}    
+    cpp_params = {}
     cpp_params['BAYES_OPT_BOPTIMIZER_NOISE'] = '    BO_PARAM(double, noise, ' + str(opt.bayes_opt_boptimizer_noise) + ');\n    ' if opt.bayes_opt_boptimizer_noise and opt.bayes_opt_boptimizer_noise >= 0 else ''
     cpp_params['BAYES_OPT_BOBASE_STATS_ENABLED'] = '' if opt.bayes_opt_bobase_stats_enabled else '    BO_PARAM(bool, stats_enabled, false);\n    '
     cpp_params['INIT_RANDOMSAMPLING_SAMPLES'] = '    BO_PARAM(int, samples, ' + str(opt.init_randomsampling_samples) + ');\n    ' if opt.init_randomsampling_samples and opt.init_randomsampling_samples > 0  else ''
@@ -159,11 +71,11 @@ int main()
 
     if opt.dim_out and opt.dim_out > 1:
         cpp_params['CODE_RES_INIT'] = 'Eigen::VectorXd res(' + str(opt.dim_in) + ')'
-        cpp_params['CODE_RES_RETURN'] = 'return res;'        
+        cpp_params['CODE_RES_RETURN'] = 'return res;'
         cpp_params['CODE_BEST_OBS'] = 'boptimizer.best_observation().transpose()'
     else:
         cpp_params['CODE_RES_INIT'] = 'double y = 0;'
-        cpp_params['CODE_RES_RETURN'] = '// return a 1-dimensional vector\n        return tools::make_vector(y);'        
+        cpp_params['CODE_RES_RETURN'] = '// return a 1-dimensional vector\n        return tools::make_vector(y);'
         cpp_params['CODE_BEST_OBS'] = 'boptimizer.best_observation()(0)'
 
     for key, value in cpp_params.iteritems():
