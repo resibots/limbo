@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structlimbo_1_1model_1_1gp_1_1_h_p_opt" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::model::gp::HPOpt</compoundname>
+    <derivedcompoundref refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt" prot="public" virt="non-virtual">limbo::model::gp::KernelLFOpt&lt; Params, Optimizer &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt" prot="public" virt="non-virtual">limbo::model::gp::KernelMeanLFOpt&lt; Params, Optimizer &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt" prot="public" virt="non-virtual">limbo::model::gp::MeanLFOpt&lt; Params, Optimizer &gt;</derivedcompoundref>
+    <includes refid="hp__opt_8hpp" local="no">limbo/model/gp/hp_opt.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+      <param>
+        <type>typename Optimizer</type>
+        <defval><ref refid="structlimbo_1_1opt_1_1_parallel_repeater" kindref="compound">opt::ParallelRepeater</ref>&lt;Params, <ref refid="structlimbo_1_1opt_1_1_rprop" kindref="compound">opt::Rprop</ref>&lt;Params&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1ad75cfb29710f317861e52b11b9ca8ed2" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;::_called</definition>
+        <argsstring></argsstring>
+        <name>_called</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp" line="27" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a4db24a2480ea1e8600f41515ef9d30cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;::HPOpt</definition>
+        <argsstring>()</argsstring>
+        <name>HPOpt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp" line="17" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a9dc7a6a24a0dfccf45e4f88ddab8797d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;::~HPOpt</definition>
+        <argsstring>()</argsstring>
+        <name>~HPOpt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp" line="18" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp" bodystart="18" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>optimize the likelihood of the kernel only </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="137">
+        <label>limbo::model::gp::KernelLFOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt"/>
+        <childnode refid="136" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="136">
+        <label>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt"/>
+      </node>
+      <node id="139">
+        <label>limbo::model::gp::MeanLFOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"/>
+        <childnode refid="136" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="138">
+        <label>limbo::model::gp::KernelMeanLFOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"/>
+        <childnode refid="136" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp" line="15" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp" bodystart="15" bodyend="28"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1ad75cfb29710f317861e52b11b9ca8ed2" prot="private" virt="non-virtual"><scope>limbo::model::gp::HPOpt</scope><name>_called</name></member>
+      <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a4db24a2480ea1e8600f41515ef9d30cd" prot="public" virt="non-virtual"><scope>limbo::model::gp::HPOpt</scope><name>HPOpt</name></member>
+      <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a9dc7a6a24a0dfccf45e4f88ddab8797d" prot="public" virt="non-virtual"><scope>limbo::model::gp::HPOpt</scope><name>~HPOpt</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

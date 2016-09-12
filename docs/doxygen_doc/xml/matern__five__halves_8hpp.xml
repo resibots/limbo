@@ -6,55 +6,55 @@
     <includes refid="macros_8hpp" local="no">limbo/tools/macros.hpp</includes>
     <includedby refid="kernel_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</includedby>
     <incdepgraph>
-      <node id="853">
+      <node id="854">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="851">
+      <node id="852">
         <label>Eigen/Core</label>
       </node>
-      <node id="850">
+      <node id="851">
         <label>/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp</label>
         <link refid="matern_five_halves.hpp"/>
-        <childnode refid="851" relation="include">
+        <childnode refid="852" relation="include">
+        </childnode>
+        <childnode refid="853" relation="include">
+        </childnode>
+      </node>
+      <node id="855">
+        <label>iostream</label>
+      </node>
+      <node id="853">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="854" relation="include">
         </childnode>
         <childnode refid="852" relation="include">
         </childnode>
-      </node>
-      <node id="854">
-        <label>iostream</label>
-      </node>
-      <node id="852">
-        <label>limbo/tools/macros.hpp</label>
-        <link refid="macros_8hpp"/>
-        <childnode refid="853" relation="include">
-        </childnode>
-        <childnode refid="851" relation="include">
-        </childnode>
-        <childnode refid="854" relation="include">
+        <childnode refid="855" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="856">
+      <node id="857">
         <label>/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</label>
         <link refid="kernel_8hpp"/>
-        <childnode refid="857" relation="include">
-        </childnode>
-      </node>
-      <node id="858">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
-        <link refid="pareto__benchmark_8hpp"/>
-      </node>
-      <node id="857">
-        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
-        <link refid="limbo_8hpp"/>
         <childnode refid="858" relation="include">
         </childnode>
       </node>
-      <node id="855">
+      <node id="859">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
+        <link refid="pareto__benchmark_8hpp"/>
+      </node>
+      <node id="858">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+        <childnode refid="859" relation="include">
+        </childnode>
+      </node>
+      <node id="856">
         <label>/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp</label>
         <link refid="matern_five_halves.hpp"/>
-        <childnode refid="856" relation="include">
+        <childnode refid="857" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

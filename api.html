@@ -28,7 +28,7 @@
 
   
     <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
-        <link rel="next" title="Frequently Asked Questions" href="faq.html"/>
+        <link rel="next" title="Default values" href="defaults.html"/>
         <link rel="prev" title="Parameters" href="guides/parameters.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
@@ -166,6 +166,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#misc-tools-tools">Misc tools (tools)</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -1204,16 +1205,26 @@
 </div>
 </dd></dl>
 
-<p>The hyper-parameters of the model (kernel, mean) can be optimized. The following options are possible:</p>
+<p id="gp-hpopt">The hyper-parameters of the model (kernel, mean) can be optimized. The following options are possible:</p>
 <dl class="group">
 <dt>
 <span class="target" id="limbogroup__model__opt"></span><em>group</em> <code class="descname">model_opt</code></dt>
 <dd><dl class="class">
 <dt>
+<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_parallel_repeater"><span>opt::ParallelRepeater</span></a>&lt;Params, <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span>opt::Rprop</span></a>&lt;Params&gt;&gt;&gt;</dt>
+<dt id="_CPPv2N5limbo5model2gp5HPOptE">
+<span id="limbo::model::gp::HPOpt"></span><em class="property">struct </em><code class="descname">HPOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp5HPOptE" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;limbo/model/gp/hp_opt.hpp&gt;</em><p>optimize the likelihood of the kernel only </p>
+<p>Subclassed by <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt"><span>limbo::model::gp::KernelLFOpt&lt; Params, Optimizer &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"><span>limbo::model::gp::KernelMeanLFOpt&lt; Params, Optimizer &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"><span>limbo::model::gp::MeanLFOpt&lt; Params, Optimizer &gt;</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt>
 <span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_parallel_repeater"><span>opt::ParallelRepeater</span></a>&lt;Params, <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span>opt::Rprop</span></a>&lt;Params&gt;&gt;&gt;</dt>
 <dt id="_CPPv2N5limbo5model2gp11KernelLFOptE">
 <span id="limbo::model::gp::KernelLFOpt"></span><em class="property">struct </em><code class="descname">KernelLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp11KernelLFOptE" title="Permalink to this definition">¶</a></dt>
 <dd><em>#include &lt;limbo/model/gp/kernel_lf_opt.hpp&gt;</em><p>optimize the likelihood of the kernel only </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"><span>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</span></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -1222,6 +1233,7 @@
 <dt id="_CPPv2N5limbo5model2gp15KernelMeanLFOptE">
 <span id="limbo::model::gp::KernelMeanLFOpt"></span><em class="property">struct </em><code class="descname">KernelMeanLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp15KernelMeanLFOptE" title="Permalink to this definition">¶</a></dt>
 <dd><em>#include &lt;limbo/model/gp/kernel_mean_lf_opt.hpp&gt;</em><p>optimize the likelihood of both the kernel and the mean (try to align the mean function) </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"><span>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</span></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -1230,6 +1242,7 @@
 <dt id="_CPPv2N5limbo5model2gp9MeanLFOptE">
 <span id="limbo::model::gp::MeanLFOpt"></span><em class="property">struct </em><code class="descname">MeanLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp9MeanLFOptE" title="Permalink to this definition">¶</a></dt>
 <dd><em>#include &lt;limbo/model/gp/mean_lf_opt.hpp&gt;</em><p>optimize the likelihood of the mean only (try to align the mean function) </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"><span>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</span></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -2017,7 +2030,7 @@ Computes the squared exponential covariance like this:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="defaults.html" class="btn btn-neutral float-right" title="Default values" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="guides/parameters.html" class="btn btn-neutral" title="Parameters" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

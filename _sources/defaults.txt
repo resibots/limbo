@@ -1,0 +1,105 @@
+Default values
+===============
+kernel_maternthreehalves
+^^^^^^^^^^^^^^^^^^^^^^^^
+- double sigma_sq = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]
+- double l = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]
+
+bayes_opt_bobase
+^^^^^^^^^^^^^^^^
+- bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]
+
+acqui_ucb_imgpo
+^^^^^^^^^^^^^^^
+- double nu = 0.05 [defined in src/limbo/experimental/acqui/ucb_imgpo.hpp]
+
+init_randomsamplinggrid
+^^^^^^^^^^^^^^^^^^^^^^^
+- int bins = 5 [defined in src/limbo/init/random_sampling_grid.hpp]
+- int samples = 10 [defined in src/limbo/init/random_sampling_grid.hpp]
+
+mean_constant
+^^^^^^^^^^^^^
+- double constant = 1 [defined in src/limbo/mean/constant.hpp]
+
+stop_maxpredictedvalue
+^^^^^^^^^^^^^^^^^^^^^^
+- double ratio = 0.9 [defined in src/limbo/stop/max_predicted_value.hpp]
+
+stop_maxiterations
+^^^^^^^^^^^^^^^^^^
+- int iterations = 190 [defined in src/limbo/stop/max_iterations.hpp]
+
+opt_rprop
+^^^^^^^^^
+- int iterations = 300 [defined in src/limbo/opt/rprop.hpp]
+
+bayes_opt_boptimizer
+^^^^^^^^^^^^^^^^^^^^
+- double noise = 1e-6 [defined in src/limbo/bayes_opt/boptimizer.hpp]
+- int hp_period = -1 [defined in src/limbo/bayes_opt/boptimizer.hpp]
+
+kernel_maternfivehalves
+^^^^^^^^^^^^^^^^^^^^^^^
+- double sigma_sq = 1 [defined in src/limbo/kernel/matern_five_halves.hpp]
+- double l = 1 [defined in src/limbo/kernel/matern_five_halves.hpp]
+
+opt_nloptnograd
+^^^^^^^^^^^^^^^
+- int iterations = 500 [defined in src/limbo/opt/nlopt_no_grad.hpp] ['#ifdef USE_NLOPT']
+
+bayes_opt_imgpo
+^^^^^^^^^^^^^^^
+- double noise = 1e-6 [defined in src/limbo/experimental/bayes_opt/imgpo.hpp]
+
+opt_parallelrepeater
+^^^^^^^^^^^^^^^^^^^^
+- int repeats = 10 [defined in src/limbo/opt/parallel_repeater.hpp]
+
+opt_cmaes
+^^^^^^^^^
+- int restarts = 1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
+- double max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
+
+opt_nloptgrad
+^^^^^^^^^^^^^
+- int iterations = 500 [defined in src/limbo/opt/nlopt_grad.hpp] ['#ifdef USE_NLOPT']
+
+kernel_squared_exp_ard
+^^^^^^^^^^^^^^^^^^^^^^
+- double sigma_sq = 1 [defined in src/limbo/kernel/squared_exp_ard.hpp]
+
+acqui_ucb
+^^^^^^^^^
+- double alpha = 0.5 [defined in src/limbo/acqui/ucb.hpp]
+
+init_gridsampling
+^^^^^^^^^^^^^^^^^
+- int bins = 5 [defined in src/limbo/init/grid_sampling.hpp]
+
+opt_gridsearch
+^^^^^^^^^^^^^^
+- int bins = 5 [defined in src/limbo/opt/grid_search.hpp]
+
+kernel_exp
+^^^^^^^^^^
+- double sigma_sq = 1 [defined in src/limbo/kernel/exp.hpp]
+- double l = 1 [defined in src/limbo/kernel/exp.hpp]
+
+bayes_opt_ehvi
+^^^^^^^^^^^^^^
+- double x_ref = -11 [defined in src/limbo/experimental/bayes_opt/ehvi.hpp]
+- double y_ref = -11 [defined in src/limbo/experimental/bayes_opt/ehvi.hpp]
+
+model_gp_parego
+^^^^^^^^^^^^^^^
+- double rho = 0.05 [defined in src/limbo/experimental/model/gp_parego.hpp]
+
+acqui_gpucb
+^^^^^^^^^^^
+- double delta = 0.1 [defined in src/limbo/acqui/gp_ucb.hpp]
+
+init_randomsampling
+^^^^^^^^^^^^^^^^^^^
+- int samples = 10 [defined in src/limbo/init/random_sampling.hpp]
+

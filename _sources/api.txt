@@ -283,13 +283,14 @@ Default parameters
    :undoc-members:
 
 
-
 Models / Gaussian processes (model)
 ---------------
 Currently, Limbo only includes Gaussian processes as models. More may come in the future.
 
 .. doxygenclass::  limbo::model::GP
    :members:
+
+.. _gp-hpopt:
 
 The hyper-parameters of the model (kernel, mean) can be optimized. The following options are possible:
 

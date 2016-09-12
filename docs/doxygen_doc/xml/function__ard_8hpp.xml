@@ -5,26 +5,8 @@
     <includes local="no">Eigen/Core</includes>
     <includedby refid="mean_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/mean.hpp</includedby>
     <incdepgraph>
-      <node id="1019">
+      <node id="1021">
         <label>Eigen/Core</label>
-      </node>
-      <node id="1018">
-        <label>/tmp/doc_limbo/limbo/src/limbo/mean/function_ard.hpp</label>
-        <link refid="function_ard.hpp"/>
-        <childnode refid="1019" relation="include">
-        </childnode>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="1023">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
-        <link refid="pareto__benchmark_8hpp"/>
-      </node>
-      <node id="1022">
-        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
-        <link refid="limbo_8hpp"/>
-        <childnode refid="1023" relation="include">
-        </childnode>
       </node>
       <node id="1020">
         <label>/tmp/doc_limbo/limbo/src/limbo/mean/function_ard.hpp</label>
@@ -32,10 +14,28 @@
         <childnode refid="1021" relation="include">
         </childnode>
       </node>
-      <node id="1021">
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1025">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
+        <link refid="pareto__benchmark_8hpp"/>
+      </node>
+      <node id="1024">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+        <childnode refid="1025" relation="include">
+        </childnode>
+      </node>
+      <node id="1022">
+        <label>/tmp/doc_limbo/limbo/src/limbo/mean/function_ard.hpp</label>
+        <link refid="function_ard.hpp"/>
+        <childnode refid="1023" relation="include">
+        </childnode>
+      </node>
+      <node id="1023">
         <label>/tmp/doc_limbo/limbo/src/limbo/mean.hpp</label>
         <link refid="mean_8hpp"/>
-        <childnode refid="1022" relation="include">
+        <childnode refid="1024" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

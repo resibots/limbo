@@ -231,6 +231,7 @@
     <member refid="classlimbo_1_1model_1_1_g_p_1aa922853cf7ce5a21a7602c2f9bdd961a" kind="variable"><name>_matrixL</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a56acad1e7f839030b4a8dafdbe25c0a9" kind="variable"><name>_inv_bl_kernel</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a8bb1959df5645cd6ef3f2117f34254d5" kind="variable"><name>_lik</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a2213df810e55e09e44586c37a1e4e2ad" kind="variable"><name>_hp_optimize</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aa18de82f231f3aed6ce8cce4c778aedb" kind="function"><name>GP</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1ab36947c89e4f5ad92599656a21829755" kind="function"><name>GP</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a3597b1c02b61d0ea1301808b08d8abb7" kind="function"><name>compute</name></member>
@@ -309,6 +310,11 @@
     <member refid="structlimbo_1_1opt_1_1_grid_search_1a33545a99e631d9e35776a7d7a582c8a2" kind="function"><name>operator()</name></member>
     <member refid="structlimbo_1_1opt_1_1_grid_search_1a0adcf8b5107854c1248c0897bc0e5972" kind="function"><name>_inner_search</name></member>
   </compound>
+  <compound refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt" kind="struct"><name>limbo::model::gp::HPOpt</name>
+    <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1ad75cfb29710f317861e52b11b9ca8ed2" kind="variable"><name>_called</name></member>
+    <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a4db24a2480ea1e8600f41515ef9d30cd" kind="function"><name>HPOpt</name></member>
+    <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a9dc7a6a24a0dfccf45e4f88ddab8797d" kind="function"><name>~HPOpt</name></member>
+  </compound>
   <compound refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume" kind="struct"><name>limbo::experimental::stat::HyperVolume</name>
     <member refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume_1ab3a05ba6796fde834b798d0330492346" kind="function"><name>operator()</name></member>
   </compound>
@@ -351,7 +357,7 @@
     <member refid="group__kernel__defaults_1ga5322933a812efe2019e375cd2b4875fc" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt" kind="struct"><name>limbo::model::gp::KernelLFOpt</name>
-    <member refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt_1a6d4fc16f320af9d298e2d2ab9c22e50a" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt_1af35e4e360f557fc34c4ea2bed3eeec28" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt_1_1_kernel_l_f_optimization" kind="struct"><name>limbo::model::gp::KernelLFOpt::KernelLFOptimization</name>
     <member refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt_1_1_kernel_l_f_optimization_1ac87e7784f09bde5a95486e60b37d570b" kind="variable"><name>_original_gp</name></member>
@@ -359,7 +365,7 @@
     <member refid="structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt_1_1_kernel_l_f_optimization_1a18608d25c10c33db5892336f3d504453" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt" kind="struct"><name>limbo::model::gp::KernelMeanLFOpt</name>
-    <member refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt_1a2fd0d46074879d180edd094a8cd02182" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt_1afdd30bef6dbad7b8f6e459bcea7f4412" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt_1_1_kernel_mean_l_f_optimization" kind="struct"><name>limbo::model::gp::KernelMeanLFOpt::KernelMeanLFOptimization</name>
     <member refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt_1_1_kernel_mean_l_f_optimization_1aa2d906a9ae357c3641a79ef635efb7bf" kind="variable"><name>_original_gp</name></member>
@@ -389,7 +395,7 @@
     <member refid="group__mean__defaults_1gafa1b143b975c61c4547a005794f44a12" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt" kind="struct"><name>limbo::model::gp::MeanLFOpt</name>
-    <member refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1a5aa3594a4e34320abe306676b0af6039" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1a3db7aa510b906aeacc851f984ceac1ca" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1_1_mean_l_f_optimization" kind="struct"><name>limbo::model::gp::MeanLFOpt::MeanLFOptimization</name>
     <member refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1_1_mean_l_f_optimization_1af20d0b160de0f0598d52cf2088976c15" kind="variable"><name>_original_gp</name></member>
@@ -773,6 +779,8 @@
   <compound refid="model_2gp_8hpp" kind="file"><name>gp.hpp</name>
   </compound>
   <compound refid="stat_2gp_8hpp" kind="file"><name>gp.hpp</name>
+  </compound>
+  <compound refid="hp__opt_8hpp" kind="file"><name>hp_opt.hpp</name>
   </compound>
   <compound refid="kernel__lf__opt_8hpp" kind="file"><name>kernel_lf_opt.hpp</name>
   </compound>

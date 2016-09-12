@@ -155,7 +155,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
 <div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classlimbo_1_1model_1_1_g_p.html#aa01b41e37de4def676cf6c79b08aac94">   72</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa01b41e37de4def676cf6c79b08aac94">optimize_hyperparams</a>()</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                HyperParamsOptimizer()(*this);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                _hp_optimize(*<span class="keyword">this</span>);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            }</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classlimbo_1_1model_1_1_g_p.html#a43e4e23d98c421d610df52ea6d3f3539">   79</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1model_1_1_g_p.html#a43e4e23d98c421d610df52ea6d3f3539">add_sample</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; sample, <span class="keyword">const</span> Eigen::VectorXd&amp; observation, <span class="keywordtype">double</span> noise)</div>
@@ -341,157 +341,159 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;</div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            <span class="keywordtype">double</span> _lik;</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            <span class="keywordtype">void</span> _compute_obs_mean()</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            {</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                _mean_vector.resize(_samples.size(), _dim_out);</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _mean_vector.rows(); i++)</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                    _mean_vector.row(i) = _mean_function(_samples[i], *<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                _obs_mean = _observations - _mean_vector;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            }</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            <span class="keywordtype">void</span> _compute_full_kernel()</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;            {</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                <span class="keywordtype">size_t</span> n = _samples.size();</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                _kernel.resize(n, n);</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                <span class="comment">// O(n^2) [should be negligible]</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++)</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt;= i; ++j)</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noises[i] : 0); <span class="comment">// noise only on the diagonal</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++)</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; i; ++j)</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                        _kernel(j, i) = _kernel(i, j);</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                <span class="comment">// O(n^3)</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                _matrixL = Eigen::LLT&lt;Eigen::MatrixXd&gt;(_kernel).<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a>();</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                this-&gt;_compute_alpha();</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            }</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            <span class="keywordtype">void</span> _compute_incremental_kernel()</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            {</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                <span class="comment">// Incremental LLT</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                <span class="comment">// This part of the code is inpired from the Bayesopt Library (cholesky_add_row function).</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                <span class="comment">// However, the mathematical fundations can be easily retrieved by detailling the equations of the</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                <span class="comment">// extended L matrix that produces the desired kernel.</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                <span class="keywordtype">size_t</span> n = _samples.size();</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                _kernel.conservativeResize(n, n);</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; ++i) {</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]) + ((i == n - 1) ? _noises[i] : 0); <span class="comment">// noise only on the diagonal</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                    _kernel(n - 1, i) = _kernel(i, n - 1);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                }</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                _matrixL.conservativeResizeLike(Eigen::MatrixXd::Zero(n, n));</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            HyperParamsOptimizer _hp_optimize;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <span class="keywordtype">void</span> _compute_obs_mean()</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                _mean_vector.resize(_samples.size(), _dim_out);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; _mean_vector.rows(); i++)</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                    _mean_vector.row(i) = _mean_function(_samples[i], *<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                _obs_mean = _observations - _mean_vector;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            }</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            <span class="keywordtype">void</span> _compute_full_kernel()</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            {</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                <span class="keywordtype">size_t</span> n = _samples.size();</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                _kernel.resize(n, n);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                <span class="comment">// O(n^2) [should be negligible]</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++)</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt;= i; ++j)</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noises[i] : 0); <span class="comment">// noise only on the diagonal</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; i++)</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; i; ++j)</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                        _kernel(j, i) = _kernel(i, j);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                <span class="comment">// O(n^3)</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                _matrixL = Eigen::LLT&lt;Eigen::MatrixXd&gt;(_kernel).<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a>();</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                this-&gt;_compute_alpha();</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            }</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            <span class="keywordtype">void</span> _compute_incremental_kernel()</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                <span class="comment">// Incremental LLT</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                <span class="comment">// This part of the code is inpired from the Bayesopt Library (cholesky_add_row function).</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                <span class="comment">// However, the mathematical fundations can be easily retrieved by detailling the equations of the</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                <span class="comment">// extended L matrix that produces the desired kernel.</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                <span class="keywordtype">size_t</span> n = _samples.size();</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                _kernel.conservativeResize(n, n);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; n; ++i) {</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]) + ((i == n - 1) ? _noises[i] : 0); <span class="comment">// noise only on the diagonal</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                    _kernel(n - 1, i) = _kernel(i, n - 1);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                }</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                <span class="keywordtype">double</span> L_j;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; n - 1; ++j) {</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                    L_j = _kernel(n - 1, j) - (_matrixL.block(j, 0, 1, j) * _matrixL.block(n - 1, 0, 1, j).transpose())(0, 0);</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                    _matrixL(n - 1, j) = (L_j) / _matrixL(j, j);</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                }</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                L_j = _kernel(n - 1, n - 1) - (_matrixL.block(n - 1, 0, 1, n - 1) * _matrixL.block(n - 1, 0, 1, n - 1).transpose())(0, 0);</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                _matrixL(n - 1, n - 1) = sqrt(L_j);</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                this-&gt;_compute_alpha();</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            }</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            <span class="keywordtype">void</span> _compute_alpha()</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            {</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                <span class="comment">// alpha = K^{-1} * this-&gt;_obs_mean;</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                Eigen::TriangularView&lt;Eigen::MatrixXd, Eigen::Lower&gt; triang = _matrixL.template triangularView&lt;Eigen::Lower&gt;();</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                _alpha = triang.solve(_obs_mean);</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                triang.adjoint().solveInPlace(_alpha);</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            }</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            <span class="keywordtype">void</span> _compute_bl_kernel()</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            {</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                Eigen::MatrixXd A1 = Eigen::MatrixXd::Identity(this-&gt;_samples.size(), this-&gt;_samples.size());</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                _matrixL.template triangularView&lt;Eigen::Lower&gt;().solveInPlace(A1);</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                _matrixL.template triangularView&lt;Eigen::Lower&gt;().transpose().solveInPlace(A1);</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                _inv_bl_kernel.resize(_samples.size() + _bl_samples.size(),</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                    _samples.size() + _bl_samples.size());</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                Eigen::MatrixXd B(_samples.size(), _bl_samples.size());</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _samples.size(); i++)</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; _bl_samples.size(); ++j)</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                        B(i, j) = _kernel_function(_samples[i], _bl_samples[j]);</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                Eigen::MatrixXd D(_bl_samples.size(), _bl_samples.size());</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _bl_samples.size(); i++)</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; _bl_samples.size(); ++j)</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                        D(i, j) = _kernel_function(_bl_samples[i], _bl_samples[j]) + ((i == j) ? _noises_bl[i] : 0);</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                Eigen::MatrixXd comA = (D - B.transpose() * A1 * B);</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                Eigen::LLT&lt;Eigen::MatrixXd&gt; llt_bl(comA);</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                Eigen::MatrixXd comA1 = Eigen::MatrixXd::Identity(_bl_samples.size(), _bl_samples.size());</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                llt_bl.matrixL().solveInPlace(comA1);</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                llt_bl.matrixL().transpose().solveInPlace(comA1);</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                <span class="comment">// fill the matrix block wise</span></div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                _inv_bl_kernel.block(0, 0, _samples.size(), _samples.size()) = A1 + A1 * B * comA1 * B.transpose() * A1;</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                _inv_bl_kernel.block(0, _samples.size(), _samples.size(),</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                    _bl_samples.size())</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                    = -A1 * B * comA1;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                _inv_bl_kernel.block(_samples.size(), 0, _bl_samples.size(),</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                    _samples.size())</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                    = _inv_bl_kernel.block(0, _samples.size(), _samples.size(),</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                                         _bl_samples.size())</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                          .transpose();</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                _inv_bl_kernel.block(_samples.size(), _samples.size(), _bl_samples.size(),</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;                    _bl_samples.size())</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                    = comA1;</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            }</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            Eigen::VectorXd _mu(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> Eigen::VectorXd&amp; k)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                <span class="keywordflow">return</span> (k.transpose() * _alpha) + _mean_function(v, *<span class="keyword">this</span>).transpose();</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            }</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            <span class="keywordtype">double</span> _sigma(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> Eigen::VectorXd&amp; k)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;                <span class="keywordtype">double</span> res;</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;                <span class="keywordflow">if</span> (_bl_samples.size() == 0) {</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                    Eigen::VectorXd z = _matrixL.triangularView&lt;Eigen::Lower&gt;().solve(k);</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                    res = _kernel_function(v, v) - z.dot(z);</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                }</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;                <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;                    res = _kernel_function(v, v) - k.transpose() * _inv_bl_kernel * k;</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;                }</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;                <span class="keywordflow">return</span> (res &lt;= std::numeric_limits&lt;double&gt;::epsilon()) ? 0 : res;</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;            }</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;            Eigen::VectorXd _compute_k(<span class="keyword">const</span> Eigen::VectorXd&amp; v)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                Eigen::VectorXd k(_samples.size());</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; k.size(); i++)</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                    k[i] = _kernel_function(_samples[i], v);</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                <span class="keywordflow">return</span> k;</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;            }</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            Eigen::VectorXd _compute_k_bl(<span class="keyword">const</span> Eigen::VectorXd&amp; v,</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                <span class="keyword">const</span> Eigen::VectorXd&amp; k)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                <span class="keywordflow">if</span> (_bl_samples.size() == 0) {</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                    <span class="keywordflow">return</span> k;</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                }</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;                Eigen::VectorXd k_bl(_samples.size() + _bl_samples.size());</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                _matrixL.conservativeResizeLike(Eigen::MatrixXd::Zero(n, n));</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                <span class="keywordtype">double</span> L_j;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; n - 1; ++j) {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                    L_j = _kernel(n - 1, j) - (_matrixL.block(j, 0, 1, j) * _matrixL.block(n - 1, 0, 1, j).transpose())(0, 0);</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                    _matrixL(n - 1, j) = (L_j) / _matrixL(j, j);</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                L_j = _kernel(n - 1, n - 1) - (_matrixL.block(n - 1, 0, 1, n - 1) * _matrixL.block(n - 1, 0, 1, n - 1).transpose())(0, 0);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                _matrixL(n - 1, n - 1) = sqrt(L_j);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                this-&gt;_compute_alpha();</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            }</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            <span class="keywordtype">void</span> _compute_alpha()</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            {</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                <span class="comment">// alpha = K^{-1} * this-&gt;_obs_mean;</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                Eigen::TriangularView&lt;Eigen::MatrixXd, Eigen::Lower&gt; triang = _matrixL.template triangularView&lt;Eigen::Lower&gt;();</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                _alpha = triang.solve(_obs_mean);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                triang.adjoint().solveInPlace(_alpha);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            <span class="keywordtype">void</span> _compute_bl_kernel()</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                Eigen::MatrixXd A1 = Eigen::MatrixXd::Identity(this-&gt;_samples.size(), this-&gt;_samples.size());</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                _matrixL.template triangularView&lt;Eigen::Lower&gt;().solveInPlace(A1);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                _matrixL.template triangularView&lt;Eigen::Lower&gt;().transpose().solveInPlace(A1);</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                _inv_bl_kernel.resize(_samples.size() + _bl_samples.size(),</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                    _samples.size() + _bl_samples.size());</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                Eigen::MatrixXd B(_samples.size(), _bl_samples.size());</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _samples.size(); i++)</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; _bl_samples.size(); ++j)</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                        B(i, j) = _kernel_function(_samples[i], _bl_samples[j]);</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                Eigen::MatrixXd D(_bl_samples.size(), _bl_samples.size());</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _bl_samples.size(); i++)</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = 0; j &lt; _bl_samples.size(); ++j)</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                        D(i, j) = _kernel_function(_bl_samples[i], _bl_samples[j]) + ((i == j) ? _noises_bl[i] : 0);</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                Eigen::MatrixXd comA = (D - B.transpose() * A1 * B);</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                Eigen::LLT&lt;Eigen::MatrixXd&gt; llt_bl(comA);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                Eigen::MatrixXd comA1 = Eigen::MatrixXd::Identity(_bl_samples.size(), _bl_samples.size());</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                llt_bl.matrixL().solveInPlace(comA1);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                llt_bl.matrixL().transpose().solveInPlace(comA1);</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                <span class="comment">// fill the matrix block wise</span></div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                _inv_bl_kernel.block(0, 0, _samples.size(), _samples.size()) = A1 + A1 * B * comA1 * B.transpose() * A1;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                _inv_bl_kernel.block(0, _samples.size(), _samples.size(),</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                    _bl_samples.size())</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                    = -A1 * B * comA1;</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                _inv_bl_kernel.block(_samples.size(), 0, _bl_samples.size(),</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                    _samples.size())</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                    = _inv_bl_kernel.block(0, _samples.size(), _samples.size(),</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                                         _bl_samples.size())</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;                          .transpose();</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                _inv_bl_kernel.block(_samples.size(), _samples.size(), _bl_samples.size(),</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                    _bl_samples.size())</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                    = comA1;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            }</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            Eigen::VectorXd _mu(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> Eigen::VectorXd&amp; k)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;                <span class="keywordflow">return</span> (k.transpose() * _alpha) + _mean_function(v, *<span class="keyword">this</span>).transpose();</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            }</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            <span class="keywordtype">double</span> _sigma(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> Eigen::VectorXd&amp; k)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                <span class="keywordtype">double</span> res;</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                <span class="keywordflow">if</span> (_bl_samples.size() == 0) {</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                    Eigen::VectorXd z = _matrixL.triangularView&lt;Eigen::Lower&gt;().solve(k);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;                    res = _kernel_function(v, v) - z.dot(z);</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;                }</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;                <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;                    res = _kernel_function(v, v) - k.transpose() * _inv_bl_kernel * k;</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;                }</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                <span class="keywordflow">return</span> (res &lt;= std::numeric_limits&lt;double&gt;::epsilon()) ? 0 : res;</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;            }</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;            Eigen::VectorXd _compute_k(<span class="keyword">const</span> Eigen::VectorXd&amp; v)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                Eigen::VectorXd k(_samples.size());</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; k.size(); i++)</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                    k[i] = _kernel_function(_samples[i], v);</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                <span class="keywordflow">return</span> k;</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            }</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;            Eigen::VectorXd _compute_k_bl(<span class="keyword">const</span> Eigen::VectorXd&amp; v,</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                <span class="keyword">const</span> Eigen::VectorXd&amp; k)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                <span class="keywordflow">if</span> (_bl_samples.size() == 0) {</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;                    <span class="keywordflow">return</span> k;</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;                }</div>
 <div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;</div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                k_bl.head(_samples.size()) = k;</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _bl_samples.size(); i++)</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                    k_bl[i + this-&gt;_samples.size()] = this-&gt;_kernel_function(_bl_samples[i], v);</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                <span class="keywordflow">return</span> k_bl;</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;            }</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;        };</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    }</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;}</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                Eigen::VectorXd k_bl(_samples.size() + _bl_samples.size());</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                k_bl.head(_samples.size()) = k;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _bl_samples.size(); i++)</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                    k_bl[i + this-&gt;_samples.size()] = this-&gt;_kernel_function(_bl_samples[i], v);</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                <span class="keywordflow">return</span> k_bl;</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;            }</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;        };</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    }</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;}</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a3597b1c02b61d0ea1301808b08d8abb7"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a3597b1c02b61d0ea1301808b08d8abb7">limbo::model::GP::compute</a></div><div class="ttdeci">void compute(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises, const std::vector&lt; Eigen::VectorXd &gt; &amp;bl_samples=std::vector&lt; Eigen::VectorXd &gt;(), const Eigen::VectorXd &amp;noises_bl=Eigen::VectorXd())</div><div class="ttdoc">Compute the GP from samples, observation, noise. [optional: blacklisted samples]. This call needs to ...</div><div class="ttdef"><b>Definition:</b> gp.hpp:34</div></div>
 <div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a077144695f9f0b33b64d4feb8fb4e447"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a077144695f9f0b33b64d4feb8fb4e447">limbo::model::GP::dim_out</a></div><div class="ttdeci">int dim_out() const </div><div class="ttdoc">return the number of dimensions of the output </div><div class="ttdef"><b>Definition:</b> gp.hpp:189</div></div>
 <div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_ade0d93b847e3d112735b3e8143470a55"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#ade0d93b847e3d112735b3e8143470a55">limbo::model::GP::mean_vector</a></div><div class="ttdeci">const Eigen::MatrixXd &amp; mean_vector() const </div><div class="ttdef"><b>Definition:</b> gp.hpp:221</div></div>
@@ -527,7 +529,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 12 2016 14:18:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 12 2016 16:21:15 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

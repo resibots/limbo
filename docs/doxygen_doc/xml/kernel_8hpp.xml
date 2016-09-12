@@ -8,83 +8,83 @@
     <includes refid="squared__exp__ard_8hpp" local="no">limbo/kernel/squared_exp_ard.hpp</includes>
     <includedby refid="limbo_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</includedby>
     <incdepgraph>
-      <node id="825">
+      <node id="826">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="823">
+      <node id="824">
         <label>Eigen/Core</label>
       </node>
-      <node id="821">
+      <node id="822">
         <label>/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</label>
         <link refid="kernel.hpp"/>
-        <childnode refid="822" relation="include">
-        </childnode>
-        <childnode refid="827" relation="include">
+        <childnode refid="823" relation="include">
         </childnode>
         <childnode refid="828" relation="include">
         </childnode>
         <childnode refid="829" relation="include">
         </childnode>
+        <childnode refid="830" relation="include">
+        </childnode>
       </node>
-      <node id="822">
+      <node id="823">
         <label>limbo/kernel/exp.hpp</label>
         <link refid="exp_8hpp"/>
-        <childnode refid="823" relation="include">
+        <childnode refid="824" relation="include">
         </childnode>
+        <childnode refid="825" relation="include">
+        </childnode>
+      </node>
+      <node id="829">
+        <label>limbo/kernel/matern_three_halves.hpp</label>
+        <link refid="matern__three__halves_8hpp"/>
+        <childnode refid="824" relation="include">
+        </childnode>
+        <childnode refid="825" relation="include">
+        </childnode>
+      </node>
+      <node id="830">
+        <label>limbo/kernel/squared_exp_ard.hpp</label>
+        <link refid="squared__exp__ard_8hpp"/>
         <childnode refid="824" relation="include">
         </childnode>
       </node>
       <node id="828">
-        <label>limbo/kernel/matern_three_halves.hpp</label>
-        <link refid="matern__three__halves_8hpp"/>
-        <childnode refid="823" relation="include">
-        </childnode>
+        <label>limbo/kernel/matern_five_halves.hpp</label>
+        <link refid="matern__five__halves_8hpp"/>
         <childnode refid="824" relation="include">
         </childnode>
-      </node>
-      <node id="829">
-        <label>limbo/kernel/squared_exp_ard.hpp</label>
-        <link refid="squared__exp__ard_8hpp"/>
-        <childnode refid="823" relation="include">
+        <childnode refid="825" relation="include">
         </childnode>
       </node>
       <node id="827">
-        <label>limbo/kernel/matern_five_halves.hpp</label>
-        <link refid="matern__five__halves_8hpp"/>
-        <childnode refid="823" relation="include">
+        <label>iostream</label>
+      </node>
+      <node id="825">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="826" relation="include">
         </childnode>
         <childnode refid="824" relation="include">
         </childnode>
-      </node>
-      <node id="826">
-        <label>iostream</label>
-      </node>
-      <node id="824">
-        <label>limbo/tools/macros.hpp</label>
-        <link refid="macros_8hpp"/>
-        <childnode refid="825" relation="include">
-        </childnode>
-        <childnode refid="823" relation="include">
-        </childnode>
-        <childnode refid="826" relation="include">
+        <childnode refid="827" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="830">
+      <node id="831">
         <label>/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</label>
         <link refid="kernel.hpp"/>
-        <childnode refid="831" relation="include">
+        <childnode refid="832" relation="include">
         </childnode>
       </node>
-      <node id="832">
+      <node id="833">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="831">
+      <node id="832">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="832" relation="include">
+        <childnode refid="833" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

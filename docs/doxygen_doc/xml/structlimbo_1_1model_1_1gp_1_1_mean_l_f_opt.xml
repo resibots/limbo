@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
   <compounddef id="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt" kind="struct" language="C++" prot="public">
     <compoundname>limbo::model::gp::MeanLFOpt</compoundname>
+    <basecompoundref refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt" prot="public" virt="non-virtual">limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</basecompoundref>
     <includes refid="mean__lf__opt_8hpp" local="no">limbo/model/gp/mean_lf_opt.hpp</includes>
     <innerclass refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1_1_mean_l_f_optimization" prot="private">limbo::model::gp::MeanLFOpt::MeanLFOptimization</innerclass>
     <templateparamlist>
@@ -14,7 +15,7 @@
       </param>
     </templateparamlist>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1a5aa3594a4e34320abe306676b0af6039" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1a3db7aa510b906aeacc851f984ceac1ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename <ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">GP</ref></type>
@@ -22,7 +23,7 @@
         </templateparamlist>
         <type>void</type>
         <definition>void limbo::model::gp::MeanLFOpt&lt; Params, Optimizer &gt;::operator()</definition>
-        <argsstring>(GP &amp;gp) const </argsstring>
+        <argsstring>(GP &amp;gp)</argsstring>
         <name>operator()</name>
         <param>
           <type><ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">GP</ref> &amp;</type>
@@ -34,16 +35,42 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp" line="19" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp" bodystart="19" bodyend="27"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp" line="16" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp" bodystart="16" bodyend="25"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
 <para>optimize the likelihood of the mean only (try to align the mean function) </para>    </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp" line="16" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp" bodystart="16" bodyend="75"/>
+    <inheritancegraph>
+      <node id="186">
+        <label>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt"/>
+      </node>
+      <node id="185">
+        <label>limbo::model::gp::MeanLFOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"/>
+        <childnode refid="186" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="188">
+        <label>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt"/>
+      </node>
+      <node id="187">
+        <label>limbo::model::gp::MeanLFOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"/>
+        <childnode refid="188" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp" line="13" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp" bodystart="13" bodyend="73"/>
     <listofallmembers>
-      <member refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1a5aa3594a4e34320abe306676b0af6039" prot="public" virt="non-virtual"><scope>limbo::model::gp::MeanLFOpt</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a4db24a2480ea1e8600f41515ef9d30cd" prot="public" virt="non-virtual"><scope>limbo::model::gp::MeanLFOpt</scope><name>HPOpt</name></member>
+      <member refid="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_1a3db7aa510b906aeacc851f984ceac1ca" prot="public" virt="non-virtual"><scope>limbo::model::gp::MeanLFOpt</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a9dc7a6a24a0dfccf45e4f88ddab8797d" prot="public" virt="non-virtual"><scope>limbo::model::gp::MeanLFOpt</scope><name>~HPOpt</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>
