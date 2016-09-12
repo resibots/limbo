@@ -49,7 +49,7 @@ using namespace limbo;
 
 struct Params {
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 0.0);
+        BO_PARAM(double, noise, 1e-10);
         BO_PARAM(int, hp_period, 10);
     };
     struct bayes_opt_bobase {

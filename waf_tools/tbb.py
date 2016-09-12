@@ -67,7 +67,7 @@ def check_tbb(self, *k, **kw):
         includes_tbb = ['/usr/local/include', '/usr/include', '/opt/intel/tbb/include']
         libpath_tbb = ['/usr/local/lib/', '/usr/lib', '/opt/intel/tbb/lib']
 
-    self.start_msg('Checking Intel TBB includes')
+    self.start_msg('Checking Intel TBB includes (optional)')
     try:
         self.find_file('tbb/parallel_for.h', includes_tbb)
         self.end_msg('ok')

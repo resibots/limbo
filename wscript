@@ -4,32 +4,32 @@
 #| This project has received funding from the European Research Council (ERC) under
 #| the European Union's Horizon 2020 research and innovation programme (grant
 #| agreement No 637972) - see http://www.resibots.eu
-#| 
+#|
 #| Contributor(s):
 #|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 #|   - Antoine Cully (antoinecully@gmail.com)
 #|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 #|   - Federico Allocati (fede.allocati@gmail.com)
 #|   - Vaios Papaspyros (b.papaspyros@gmail.com)
-#| 
+#|
 #| This software is a computer library whose purpose is to optimize continuous,
 #| black-box functions. It mainly implements Gaussian processes and Bayesian
 #| optimization.
 #| Main repository: http://github.com/resibots/limbo
 #| Documentation: http://www.resibots.eu/limbo
-#| 
+#|
 #| This software is governed by the CeCILL-C license under French law and
 #| abiding by the rules of distribution of free software.  You can  use,
 #| modify and/ or redistribute the software under the terms of the CeCILL-C
 #| license as circulated by CEA, CNRS and INRIA at the following URL
 #| "http://www.cecill.info".
-#| 
+#|
 #| As a counterpart to the access to the source code and  rights to copy,
 #| modify and redistribute granted by the license, users are provided only
 #| with a limited warranty  and the software's author,  the holder of the
 #| economic rights,  and the successive licensors  have only  limited
 #| liability.
-#| 
+#|
 #| In this respect, the user's attention is drawn to the risks associated
 #| with loading,  using,  modifying and/or developing or reproducing the
 #| software by the user in light of its specific status of free software,
@@ -40,10 +40,10 @@
 #| requirements in conditions enabling the security of their systems and/or
 #| data to be ensured and,  more generally, to use and operate it in the
 #| same conditions as regards security.
-#| 
+#|
 #| The fact that you are presently reading this means that you have had
 #| knowledge of the CeCILL-C license and that you accept its terms.
-#| 
+#|
 import sys
 sys.path.insert(0, './waf_tools')
 
@@ -72,6 +72,8 @@ def options(opt):
         opt.load('nlopt')
         opt.load('libcmaes')
 
+        opt.add_option('--create', type='string', help='create a new exp', dest='create_exp')
+        limbo.add_create_options(opt)
         opt.add_option('--exp', type='string', help='exp(s) to build, separate by comma', dest='exp')
         opt.add_option('--qsub', type='string', help='config file (json) to submit to torque', dest='qsub')
         opt.add_option('--oar', type='string', help='config file (json) to submit to oar', dest='oar')
@@ -127,13 +129,22 @@ def configure(conf):
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
-        print conf.env['CXXFLAGS']
+        print 'CXXFLAGS:', conf.env['CXXFLAGS']
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
                         print 'configuring for exp: ' + i
                         conf.recurse('exp/' + i)
         conf.recurse('src/benchmarks')
+        print ''
+        print 'WHAT TO DO NOW?'
+        print '---------------'
+        print '[users] To compile Limbo (inc. unit tests): ./waf build'
+        print '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo'
+        print '[developpers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
+        print '[developpers] To compile the benchmarks: ./waf build_benchmarks'
+        print '[developpers] To compile the extensive tests: ./waf build_extensive_tests'
+
 
 def build(bld):
     bld.recurse('src/')
@@ -195,6 +206,8 @@ def run_benchmark(ctx):
                 retcode = subprocess.call(s, shell=True, env=None)
 
 def shutdown(ctx):
+    if ctx.options.create_exp:
+        limbo.create_exp(ctx.options.create_exp, ctx.options)
     if ctx.options.qsub:
         limbo.qsub(ctx.options.qsub)
     if ctx.options.oar:
@@ -207,6 +220,10 @@ def shutdown(ctx):
 def insert_license(ctx):
     limbo.insert_license()
 
+def build_docs(ctx):
+    s = "cd docs; make html"
+    retcode = subprocess.call(s, shell=True, env=None)
+
 class BuildExtensiveTestsContext(BuildContext):
     cmd = 'build_extensive_tests'
     fun = 'build_extensive_tests'
@@ -218,3 +235,7 @@ class BuildBenchmark(BuildContext):
 class InsertLicense(BuildContext):
     cmd = 'insert_license'
     fun = 'insert_license'
+
+class BuildDoc(BuildContext):
+    cmd = 'docs'
+    fun = 'build_docs'
