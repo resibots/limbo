@@ -10,7 +10,7 @@ Bayesian Optimization algorithms, acquisition functions, etc. all have many para
 
 Put differently, using a configuration file is nice for the user, but not for the developer. Since **limbo** is targeted to scientists who want to *easily* test  new code, we need a way to separate parameters from code that do not require any boilerplate code.
 
-In **limbo**, every class takes a structure name (usually called ``Params``) that contains the parameters. By doing so, we rely on the compiler to check the types, and we require very little work to separate parameters values from algorithms.
+In **limbo**, every class takes a structure (usually called ``Params``) that contains the parameters. By doing so, we rely on the compiler to check the types, and we require very little work to separate parameters values from algorithms.
 
 From the user's point of view, this looks like this:
 

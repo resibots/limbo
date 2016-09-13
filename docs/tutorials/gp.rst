@@ -1,3 +1,5 @@
+.. _gp-tutorial:
+
 Gaussian Process
 ====================
 

@@ -34,7 +34,7 @@ Class Structure
 
    Click on the image to see it bigger.
 
-There is almost no explicit inheritance in Limbo because polymorphism is not used. However, each kind of class follow a similar template (or 'concept'), that is, they have to implement the same methods. For instance, every initialization function must implement a `()` method:
+There is almost no explicit inheritance in Limbo because polymorphism is not used. However, each kind of class follow a similar template (or 'concept'), that is, they have to implement the same methods. For instance, every initialization function must implement a `operator()` method:
 
 .. code-block:: cpp
 
@@ -59,7 +59,7 @@ File Structure
 --------------
 (see below for a short explanation of the concepts)
 
-..highlight:: none
+.. highlight:: none
 
 ::
 
@@ -268,10 +268,6 @@ Not all the algorithms support bounded optimization:
 |RandomPoint  | yes     | no    |
 +-------------+---------+-------+
 
-For example, to use the LBFGS optimizer to optimize :math:`(x-0.5)^2`:
-
-.. code-block:: cpp
-
 
 Available optimizers
 ^^^^^^^^^^^^^^^^^^
@@ -297,7 +293,7 @@ The hyper-parameters of the model (kernel, mean) can be optimized. The following
 .. doxygengroup:: model_opt
   :members:
 
-See the `Gaussian Process`_ tutorial for a tutorial about using GP without using a Bayesian optimization algorithm.
+See the :ref:`Gaussian Process<gp-tutorial>` tutorial for a tutorial about using GP without using a Bayesian optimization algorithm.
 
 Kernel functions (kernel)
 --------------------------
@@ -330,6 +326,8 @@ Default parameters
 
 Mean functions (mean)
 --------------------------
+
+.. _mean-api:
 
 Mean functions capture the prior about the function to be optimized.
 
