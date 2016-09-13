@@ -64,11 +64,10 @@ namespace limbo {
         Classic EI (Expected Improvement). See :cite:`brochu2010tutorial`, p. 14
 
           .. math::
-            EI(x) = (\mu(x) - f(x^+) - \xi)\Phi(Z) + \sigma(x)\phi(Z).
-            Z = \frac{\mu(x)-f(x^+) - \xi}{\sigma(x)}.
+            EI(x) = (\mu(x) - f(x^+) - \xi)\Phi(Z) + \sigma(x)\phi(Z),\\\text{with } Z = \frac{\mu(x)-f(x^+) - \xi}{\sigma(x)}.
 
         Parameters:
-          - ``double jitter`` - ..math:: \xi
+          - ``double jitter`` - :math:`\xi`
         \endrst
         */
         template <typename Params, typename Model>
