@@ -42,14 +42,70 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_ACQUI_HPP
-#define LIMBO_ACQUI_HPP
+#ifndef LIMBO_ACQUI_EI_HPP
+#define LIMBO_ACQUI_EI_HPP
 
-///@defgroup acqui
-///@defgroup acqui_defaults
+#include <cmath>
 
-#include <limbo/acqui/ucb.hpp>
-#include <limbo/acqui/gp_ucb.hpp>
-#include <limbo/acqui/ei.hpp>
+#include <Eigen/Core>
+
+#include <limbo/tools/macros.hpp>
+
+namespace limbo {
+    namespace defaults {
+        struct acqui_ei {
+            /// @ingroup acqui_defaults
+            BO_PARAM(double, jitter, 0.0);
+        };
+    }
+    namespace acqui {
+        /** @ingroup acqui
+        \rst
+        Classic EI (Expected Improvement). See :cite:`brochu2010tutorial`, p. 14
+
+          .. math::
+            EI(x) = (\mu(x) - f(x^+) - \xi)\Phi(Z) + \sigma(x)\phi(Z).
+            Z = \frac{\mu(x)-f(x^+) - \xi}{\sigma(x)}.
+
+        Parameters:
+          - ``double jitter`` - ..math:: \xi
+        \endrst
+        */
+        template <typename Params, typename Model>
+        class EI {
+        public:
+            EI(const Model& model, int iteration = 0) : _model(model) {}
+
+            size_t dim_in() const { return _model.dim_in(); }
+
+            size_t dim_out() const { return _model.dim_out(); }
+
+            template <typename AggregatorFunction>
+            double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+            {
+                Eigen::VectorXd mu;
+                double sigma_sq;
+                std::tie(mu, sigma_sq) = _model.query(v);
+                double sigma = std::sqrt(sigma_sq);
+                if (sigma < 1e-10 || _model.observations().size() < 1)
+                    return 0.0;
+                // return (afun(mu) + Params::acqui_ucb::alpha() * sqrt(sigma));
+                std::vector<Eigen::VectorXd> obs = _model.observations();
+                auto rewards = std::vector<double>(obs.size());
+                std::transform(obs.begin(), obs.end(), rewards.begin(), afun);
+                auto max_e = std::max_element(rewards.begin(), rewards.end());
+                double f_max = afun(obs[std::distance(rewards.begin(), max_e)]);
+                double Z = (afun(mu) - f_max - Params::acqui_ei::jitter()) / sigma;
+                double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);
+                double Phi = 0.5 * (1.0 + std::erf(Z / std::sqrt(2)));
+
+                return Z * Phi + sigma * phi;
+            }
+
+        protected:
+            const Model& _model;
+        };
+    }
+}
 
 #endif
