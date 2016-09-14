@@ -19,7 +19,6 @@ namespace limbo {
                 {
                     if (!_called) {
                         std::cerr << "'HPOpt' was never called!" << std::endl;
-                        assert(false);
                     }
                 }
 
