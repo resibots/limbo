@@ -91,7 +91,7 @@ struct Params {
     };
 
     struct acqui_ei {
-        BO_PARAM(double, jitter, 1.0);
+        BO_PARAM(double, jitter, 0.1);
     };
 
     struct init_randomsampling {
