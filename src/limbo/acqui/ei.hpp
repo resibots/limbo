@@ -101,10 +101,10 @@ namespace limbo {
                 double f_max = *std::max_element(rewards.begin(), rewards.end());
                 // Calculate Z and \Phi(Z) and \phi(Z)
                 double Z = (afun(mu) - f_max - Params::acqui_ei::jitter()) / sigma;
-                double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * sigma_sq * M_PI);
-                double Phi = 0.5 * (1.0 + std::erf(Z / std::sqrt(2)));
+                double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);
+                double Phi = 0.5 * std::erfc(-Z / std::sqrt(2)); //0.5 * (1.0 + std::erf(Z / std::sqrt(2)));
 
-                return Z / sigma * Phi + sigma * phi;
+                return (afun(mu) - f_max - Params::acqui_ei::jitter()) * Phi + sigma * phi;
             }
 
         protected:
