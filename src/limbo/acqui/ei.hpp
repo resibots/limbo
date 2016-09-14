@@ -88,16 +88,17 @@ namespace limbo {
                 double sigma = std::sqrt(sigma_sq);
 
                 // If \sigma(x) = 0 or we do not have any observation yet we return 0
-                if (sigma < 1e-10 || _model.observations().size() < 1)
+                if (sigma < 1e-10 || _model.samples().size() < 1)
                     return 0.0;
 
                 // Compute EI(x)
-                // First find the best so far observation
-                std::vector<Eigen::VectorXd> obs = _model.observations();
-                auto rewards = std::vector<double>(obs.size());
-                std::transform(obs.begin(), obs.end(), rewards.begin(), afun);
-                auto max_e = std::max_element(rewards.begin(), rewards.end());
-                double f_max = afun(obs[std::distance(rewards.begin(), max_e)]);
+                // First find the best so far (predicted) observation
+                std::vector<Eigen::VectorXd> samples = _model.samples();
+                std::vector<double> rewards;
+                for (auto s : samples) {
+                    rewards.push_back(afun(_model.mu(s)));
+                }
+                double f_max = *std::max_element(rewards.begin(), rewards.end());
                 // Calculate Z and \Phi(Z) and \phi(Z)
                 double Z = (afun(mu) - f_max - Params::acqui_ei::jitter()) / sigma;
                 double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);

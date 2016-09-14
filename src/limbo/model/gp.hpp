@@ -305,16 +305,6 @@ namespace limbo {
             /// return the list of samples that have been tested so far
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
-            // return the list of observations that have been recorded so far
-            std::vector<Eigen::VectorXd> observations() const
-            {
-                std::vector<Eigen::VectorXd> res;
-                for (int i = 0; i < _observations.rows(); i++) {
-                    res.push_back(_observations.row(i));
-                }
-                return res;
-            }
-
         protected:
             int _dim_in;
             int _dim_out;
