@@ -58,7 +58,7 @@ Edit the "Eval" function to define the function that you want to optimized
 
 ::
 
-  $EDITOR exp/test.cpp
+  $EDITOR exp/test/test.cpp
 
 Build your experiment
 -----------------------
@@ -71,7 +71,7 @@ Run your experiment
 -----------------------
 ::
 
-  build/exp/test
+  build/exp/test/test
 
 Analyze the results
 --------------------
