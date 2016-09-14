@@ -104,7 +104,7 @@ namespace limbo {
                 double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * sigma_sq * M_PI);
                 double Phi = 0.5 * (1.0 + std::erf(Z / std::sqrt(2)));
 
-                return Z * Phi + sigma * phi;
+                return Z / sigma * Phi + sigma * phi;
             }
 
         protected:

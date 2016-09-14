@@ -91,7 +91,7 @@ struct Params {
     };
 
     struct acqui_ei {
-        BO_PARAM(double, jitter, 0.1);
+        BO_PARAM(double, jitter, 1.0);
     };
 
     struct init_randomsampling {
@@ -210,8 +210,8 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_blacklist)
