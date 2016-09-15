@@ -93,9 +93,8 @@ namespace limbo {
 
                 // Compute EI(x)
                 // First find the best so far (predicted) observation
-                std::vector<Eigen::VectorXd> samples = _model.samples();
                 std::vector<double> rewards;
-                for (auto s : samples) {
+                for (auto s : _model.samples()) {
                     rewards.push_back(afun(_model.mu(s)));
                 }
                 double f_max = *std::max_element(rewards.begin(), rewards.end());
