@@ -75,7 +75,7 @@ Edit the "Eval" function to define the function that you want to optimized
   $EDITOR exp/test/test.cpp
 
 
-For more information, see the :ref:`Basic example <basic-example>`
+For more information, see the :ref:`Basic example <basic-example>`.
 
 
 Build your experiment
