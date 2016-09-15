@@ -1,10 +1,10 @@
 Add External Library
 ====================
 
-Add external library to experiment's wscript
+Add external library to the wscript of your experiment
 --------------------------------------------
 
-To add an external library to your experiment, we need to modify the experiment's build script, ``wscript``. The standard way to do this is to create a new configuration file for the new dependency. In the ``waf`` build system, this is done by creating a python script (``.py`` file), usually called ``libname.py`` (where ``libname`` is the name of the library), in the same directory as your experiment.
+To add an external library to your experiment, you need to modify the build script of your experiment, named ``wscript``. The standard way to do this is to create a new configuration file for the new dependency. In the ``waf`` build system, this is done by creating a python script (``.py`` file), usually called ``libname.py`` (where ``libname`` is the name of the library), in the same directory as your experiment.
 
 .. warning:: to activate this script, you need to activate your experiment **when configuring limbo**::
 
@@ -28,9 +28,9 @@ This new file should have the following structure:
           conf.fatal('libname not found')
           return
 
-Where ``check_if_libname_exists`` is replaced with logic to find our library, as explained later. If we want the library to be optional, we omit the ``conf.fatal`` part.
+Where ``check_if_libname_exists`` is replaced with logic to find our library, as explained later. If the library is optional, the ``conf.fatal`` line can be removed.
 
-Then in our ``wscript`` we add the following lines:
+Then add the following lines in the ``wscript``:
 
 .. code:: python
 
@@ -47,12 +47,12 @@ Then in our ``wscript`` we add the following lines:
     # rest of code
 
 
-Libraries usually have the headers and the lib files in two different directories. Header-only libraries only have includes.
+Libraries usually have the headers and the lib files in two different directories. However, header-only libraries only have includes, in this case, you can ignore the following section named "Check for lib files".
 
 Check for headers
 ^^^^^^^^^^^^^^^^^
 
-To check for the headers of the library, we add the following code to the ``check_libname`` function:
+To check for the headers of the library, you can add the following code to the ``check_libname`` function:
 
 .. code:: python
 
@@ -79,7 +79,7 @@ To check for the headers of the library, we add the following code to the ``chec
 Check for lib files
 ^^^^^^^^^^^^^^^^^^^^
 
-To check for the lib files of the library, we add the following code to the ``check_libname`` function:
+To check for the lib files of the library, you can add the following code to the ``check_libname`` function:
 
 .. code:: python
 
@@ -108,7 +108,7 @@ To check for the lib files of the library, we add the following code to the ``ch
 Add configuration options
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We often need additional configuration options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to define a new function named ``options`` in our ``wscript`` and another one in the library configuration file. In the library's configuration file:
+Additional configuration options are often needed when adding new libraries. For example, one useful option is to specify the location of the library headers and lib files. Adding options is easy: you only need to define a new function named ``options`` in the ``wscript`` and another one in the library configuration file. In the library's configuration file (e.g., ``libname.py``):
 
 .. code:: python
 
@@ -130,7 +130,7 @@ The options in the waf build system are using the python's ``optparse``. Check t
 
 .. _optparse: https://docs.python.org/2/library/optparse.html
 
-Then in our ``wscript`` we add the following lines:
+Then add the following lines in the ``wscript`` of your experiment: 
 
 .. code:: python
 
@@ -237,7 +237,7 @@ Here's a small and quick example to add `ROS`_ as an external library to our exp
         conf.end_msg('Not found', 'RED')
         return
 
-Assuming we are at **limbo** root, we run the following to compile our experiment::
+The configuration and compilation of the experiment follows the usual procedure (assuming that we are in the **limbo** root folder)::
 
   ./waf configure --exp example
   ./waf --exp example

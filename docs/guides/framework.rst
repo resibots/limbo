@@ -34,8 +34,8 @@ The experiment can the be compiled using ``./waf --exp test``
 
 If you want to customize the parameters, you can use the following options:
 
-- ``--dim_in=DIM_IN``: Number of dimensions for the function to optimize [default: 1]
-- ``--dim_out=DIM_OUT``: Number of dimensions for the function to optimize [default: 1]
+- ``--dim_in=DIM_IN``: Number of input dimensions for the function to optimize [default: 1]
+- ``--dim_out=DIM_OUT``: Number of output dimensions for the function to optimize [default: 1]
 - ``--bayes_opt_boptimizer_noise=BAYES_OPT_BOPTIMIZER_NOISE``: Acquisition noise of the function to optimize [default: 1e-6]
 - ``--bayes_opt_bobase_stats_enabled``: Enable statistics [default: true]
 - ``--init_randomsampling_samples=INIT_RANDOMSAMPLING_SAMPLES``: Number of samples used for the initialization [default: 10]
