@@ -130,7 +130,7 @@ The options in the waf build system are using the python's ``optparse``. Check t
 
 .. _optparse: https://docs.python.org/2/library/optparse.html
 
-Then add the following lines in the ``wscript`` of your experiment: 
+Then add the following lines in the ``wscript`` of your experiment:
 
 .. code:: python
 

@@ -92,14 +92,14 @@ To compute the forward kinematics of our simple planar arm we use the following 
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 38-65
+   :lines: 82-110
 
 To make this forward kinematic model useful to our GP, we need to create a mean function:
 
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 67-77
+   :lines: 112-122
 
 Using State-based bayesian optimization
 -----------------------------------------
@@ -110,7 +110,7 @@ Creating an Aggregator:
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 90-102
+   :lines: 135-147
 
 
 Here, we are using a very simple aggregator that simply computes the distance between the end-effector and the target position.
@@ -124,7 +124,7 @@ When our bayesian optimizer finds a solution that the end-effector of the arm is
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 79-88
+   :lines: 124-133
 
 Creating the evaluation function
 -----------------------------------------
@@ -132,7 +132,7 @@ Creating the evaluation function
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 104-119
+   :lines: 149-164
 
 Creating the experiment
 -------------------------------------------------
@@ -184,7 +184,7 @@ Setting the parameter structure
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 6-36
+   :lines: 51-81
 
 Creating and running the Bayesian Optimizer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -194,7 +194,7 @@ In your main function, you need to have something like the following:
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 121-151
+   :lines: 165-196
 
 Running the experiment
 ^^^^^^^^^^^^^^^^^^^^^^^^^
