@@ -46,7 +46,7 @@
 #define LIMBO_ACQUI_EI_HPP
 
 #include <cmath>
-
+#include <vector>
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
