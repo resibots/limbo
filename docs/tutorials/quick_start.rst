@@ -23,15 +23,26 @@ For OSX with brew:
   brew install eigen3
   brew install boost
 
-We highly recommend that you install NLOpt. Infortunately, the Ubuntu packages are missing the C++. You can get NLOpt here: http://ab-initio.mit.edu/wiki/index.php/NLopt
+We highly recommend that you install NLOpt. Infortunately, the Ubuntu packages are missing the C++. You can get NLOpt here: http://ab-initio.mit.edu/wiki/index.php/NLopt [mirror: http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz]
 
+For Ubuntu / Debian:
 ::
 
-  wget http://ab-initio.mit.edu/wiki/index.php/NLopt/TODO
-  tar zxvf TODO
-  cd TODO
-   ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
-   sudo make install
+  sudo apt-get -qq update
+  sudo apt-get -qq --yes --force-yes install autoconf automake
+  wget http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz
+  tar -zxvf nlopt-2.4.2.tar.gz && cd nlopt-2.4.2
+  ./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
+  sudo make install
+  sudo ldconfig
+
+For OSX:
+::
+
+  wget http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz
+  tar -zxvf nlopt-2.4.2.tar.gz && cd nlopt-2.4.2
+  ./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
+  sudo make install
 
 
 For more options and troubleshootings, see the :ref:`Compilation tutorial <compilation-tutorial>`.
@@ -43,6 +54,9 @@ Compile Limbo
 
   ./waf configure
   ./waf build
+
+For more options and troubleshootings, see the :ref:`Compilation tutorial <compilation-tutorial>`.
+
 
 Create a new experiment
 ---------------------------
@@ -60,6 +74,10 @@ Edit the "Eval" function to define the function that you want to optimized
 
   $EDITOR exp/test/test.cpp
 
+
+For more information, see the :ref:`Basic example <basic-example>`
+
+
 Build your experiment
 -----------------------
 
@@ -75,3 +93,5 @@ Run your experiment
 
 Analyze the results
 --------------------
+
+The results are in
