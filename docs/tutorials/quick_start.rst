@@ -74,6 +74,18 @@ Edit the "Eval" function to define the function that you want to optimized
 
   $EDITOR exp/test/test.cpp
 
+The part to edit is between line 56 and line 63:
+
+.. code-block:: c++
+
+  Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
+  {
+      double y = 0;
+    // YOUR CODE HERE
+    // ...
+    // return a 1-dimensional vector
+    return tools::make_vector(y);
+  }
 
 For more information, see the :ref:`Basic example <basic-example>`.
 
@@ -94,4 +106,4 @@ Run your experiment
 Analyze the results
 --------------------
 
-The results are in
+The results are in yourcomputer-date-hour-pid. For instance: ``wallepro-perso.loria.fr_2016-09-15_19_43_50_74198``.
