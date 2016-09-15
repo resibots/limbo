@@ -13,7 +13,7 @@ We assume that our samples are in a vector called ``samples`` and that our obser
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 30-40
+   :lines: 75-84
 
 Basic usage
 ------------
@@ -23,14 +23,14 @@ We first create a basic GP with an Exponential kernel (``kernel::Exp<Params>``) 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 14-17
+   :lines: 58-62
 
 The type of the GP is defined by the following lines:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 43-45
+   :lines: 87-89
 
 To use the GP, we need :
 
@@ -40,7 +40,7 @@ To use the GP, we need :
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 47-54
+   :lines: 91-98
 
 Here we assume that the noise is the same for all samples and that it is equal to 0.01.
 
@@ -57,7 +57,7 @@ To visualize the predictions of the GP, we can query it for many points and reco
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 57-67
+   :lines: 101-111
 
 
 Hyper-parameter optimization
@@ -71,21 +71,21 @@ A new GP type is defined as follows:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 71-73
+   :lines: 115-117
 
 It uses the default values for the parameters of ``SquaredExpARD``:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 19-20
+   :lines: 63-64
 
 After calling the ``compute()`` method, the hyper-parameters can be optimized by calling the 'optimize_hyperparams()' function. Once the new parameters are found, the GP needs to be recomputed:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 77-79
+   :lines: 121-123
 
 
 We can have a look at the difference between the two GPs:

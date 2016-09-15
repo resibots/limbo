@@ -18,7 +18,7 @@ We first need to define a function to be optimized. Here we chose :math:`-(x_1-0
 .. literalinclude:: ../../src/tutorials/opt.cpp
    :language: c++
    :linenos:
-   :lines: 30-37
+   :lines: 74-82
 
 
 .. warning::
@@ -37,14 +37,14 @@ As usual, each algorithm has some parameters (typically the number of iterations
 .. literalinclude:: ../../src/tutorials/opt.cpp
    :language: c++
    :linenos:
-   :lines: 7-26
+   :lines: 51-71
 
 Now we can instantiate our optimizer and call it:
 
 .. literalinclude:: ../../src/tutorials/opt.cpp
    :language: c++
    :linenos:
-   :lines: 43-48
+   :lines: 87-91
 
 
 We can do the same with a gradient-free optimizer from NLOpt:
@@ -52,7 +52,7 @@ We can do the same with a gradient-free optimizer from NLOpt:
 .. literalinclude:: ../../src/tutorials/opt.cpp
    :language: c++
    :linenos:
-   :lines: 50-56
+   :lines: 94-99
 
 
 Or with CMA-ES:
@@ -60,7 +60,7 @@ Or with CMA-ES:
 .. literalinclude:: ../../src/tutorials/opt.cpp
    :language: c++
    :linenos:
-   :lines: 61-65
+   :lines: 105-108
 
 
 See the :ref:`API documentation <opt-api>` for more details.
@@ -70,3 +70,4 @@ Here is the full file.
 .. literalinclude:: ../../src/tutorials/opt.cpp
    :language: c++
    :linenos:
+   :lines: 45-
