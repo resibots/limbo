@@ -56,11 +56,11 @@ struct Params {
     struct opt_rprop : public defaults::opt_rprop {
     };
 
-#ifdef USE_LIBCMAES
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
-#elif defined(USE_NLOPT)
+#ifdef USE_NLOPT
     struct opt_nloptnograd : public defaults::opt_nloptnograd {
+    };
+#elif defined(USE_LIBCMAES)
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 #endif
 
@@ -168,10 +168,10 @@ BOOST_AUTO_TEST_CASE(test_bo_inheritance)
     Params::bayes_opt_boptimizer::set_hp_period(-1);
 
     typedef kernel::Exp<Params> Kernel_t;
-#ifdef USE_LIBCMAES
-    typedef opt::Cmaes<Params> AcquiOpt_t;
-#else
+#ifdef USE_NLOPT
     typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#else
+    typedef opt::Cmaes<Params> AcquiOpt_t;
 #endif
     typedef boost::fusion::vector<stop::MaxIterations<Parameters>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
@@ -194,10 +194,10 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     Params::bayes_opt_boptimizer::set_hp_period(-1);
 
     typedef kernel::Exp<Params> Kernel_t;
-#ifdef USE_LIBCMAES
-    typedef opt::Cmaes<Params> AcquiOpt_t;
-#else
+#ifdef USE_NLOPT
     typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#else
+    typedef opt::Cmaes<Params> AcquiOpt_t;
 #endif
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
@@ -221,10 +221,10 @@ BOOST_AUTO_TEST_CASE(test_bo_blacklist)
     Params::bayes_opt_boptimizer::set_hp_period(-1);
 
     typedef kernel::Exp<Params> Kernel_t;
-#ifdef USE_LIBCMAES
-    typedef opt::Cmaes<Params> AcquiOpt_t;
-#else
+#ifdef USE_NLOPT
     typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#else
+    typedef opt::Cmaes<Params> AcquiOpt_t;
 #endif
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
@@ -248,10 +248,10 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     Params::bayes_opt_boptimizer::set_hp_period(50);
 
     typedef kernel::SquaredExpARD<Params> Kernel_t;
-#ifdef USE_LIBCMAES
-    typedef opt::Cmaes<Params> AcquiOpt_t;
-#else
+#ifdef USE_NLOPT
     typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#else
+    typedef opt::Cmaes<Params> AcquiOpt_t;
 #endif
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::Data<Params> Mean_t;
@@ -274,10 +274,10 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     Params::bayes_opt_boptimizer::set_hp_period(50);
 
     typedef kernel::Exp<Params> Kernel_t;
-#ifdef USE_LIBCMAES
-    typedef opt::Cmaes<Params> AcquiOpt_t;
-#else
+#ifdef USE_NLOPT
     typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+#else
+    typedef opt::Cmaes<Params> AcquiOpt_t;
 #endif
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
     typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
