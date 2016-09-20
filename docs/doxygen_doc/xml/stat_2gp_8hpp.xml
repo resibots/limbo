@@ -6,58 +6,58 @@
     <includes refid="stat__base_8hpp" local="no">limbo/stat/stat_base.hpp</includes>
     <includedby refid="stat_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/stat.hpp</includedby>
     <incdepgraph>
-      <node id="1149">
+      <node id="1176">
         <label>cmath</label>
       </node>
-      <node id="1152">
+      <node id="1179">
         <label>string</label>
       </node>
-      <node id="1151">
+      <node id="1178">
         <label>fstream</label>
       </node>
-      <node id="1150">
+      <node id="1177">
         <label>limbo/stat/stat_base.hpp</label>
         <link refid="stat__base_8hpp"/>
-        <childnode refid="1151" relation="include">
+        <childnode refid="1178" relation="include">
         </childnode>
-        <childnode refid="1152" relation="include">
+        <childnode refid="1179" relation="include">
         </childnode>
-        <childnode refid="1153" relation="include">
+        <childnode refid="1180" relation="include">
         </childnode>
       </node>
-      <node id="1148">
+      <node id="1175">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat/gp.hpp</label>
         <link refid="stat/gp.hpp"/>
-        <childnode refid="1149" relation="include">
+        <childnode refid="1176" relation="include">
         </childnode>
-        <childnode refid="1150" relation="include">
+        <childnode refid="1177" relation="include">
         </childnode>
       </node>
-      <node id="1153">
+      <node id="1180">
         <label>memory</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1157">
+      <node id="1184">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1155">
+      <node id="1182">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat.hpp</label>
         <link refid="stat_8hpp"/>
-        <childnode refid="1156" relation="include">
+        <childnode refid="1183" relation="include">
         </childnode>
       </node>
-      <node id="1156">
+      <node id="1183">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="1157" relation="include">
+        <childnode refid="1184" relation="include">
         </childnode>
       </node>
-      <node id="1154">
+      <node id="1181">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat/gp.hpp</label>
         <link refid="stat/gp.hpp"/>
-        <childnode refid="1155" relation="include">
+        <childnode refid="1182" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -149,7 +149,7 @@
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>point[dim_in]<sp/>=<sp/>x;</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dim_in<sp/>==<sp/>current.size()<sp/>-<sp/>1)<sp/>{</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>q<sp/>=<sp/>bo.model().query(point);</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>acqui<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO::acquisition_function_t(bo.model(),<sp/>bo.current_iteration())(point,<sp/>afun);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>acqui<sp/>=<sp/><ref refid="group__opt__tools_1ga68ad00d7501bc26a2a0990bac762393e" kindref="member">opt::fun</ref>(</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO::acquisition_function_t(bo.model(),<sp/>bo.current_iteration())(point,<sp/>afun,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ofs<sp/>&lt;&lt;<sp/>point.transpose()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>std::get&lt;0&gt;(q).transpose()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>std::get&lt;1&gt;(q)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>

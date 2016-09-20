@@ -107,9 +107,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a52d965602aa60609e3f4f447dbea285b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b030343c6dae9af80853cfab0868e8d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1acqui_1_1_e_i.html#a7b030343c6dae9af80853cfab0868e8d">dim_out</a> () const </td></tr>
 <tr class="separator:a7b030343c6dae9af80853cfab0868e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64f65b304a80810adb9e0b4d193ffcd3"><td class="memTemplParams" colspan="2">template&lt;typename AggregatorFunction &gt; </td></tr>
-<tr class="memitem:a64f65b304a80810adb9e0b4d193ffcd3"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1acqui_1_1_e_i.html#a64f65b304a80810adb9e0b4d193ffcd3">operator()</a> (const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </td></tr>
-<tr class="separator:a64f65b304a80810adb9e0b4d193ffcd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed3ce84deb35f7f00e5550f7ce502fc"><td class="memTemplParams" colspan="2">template&lt;typename AggregatorFunction &gt; </td></tr>
+<tr class="memitem:a0ed3ce84deb35f7f00e5550f7ce502fc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">opt::eval_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1acqui_1_1_e_i.html#a0ed3ce84deb35f7f00e5550f7ce502fc">operator()</a> (const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun, bool gradient) const </td></tr>
+<tr class="separator:a0ed3ce84deb35f7f00e5550f7ce502fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Params, typename Model&gt;<br />
@@ -211,7 +211,7 @@ template&lt;typename Params , typename Model &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a64f65b304a80810adb9e0b4d193ffcd3"></a>
+<a class="anchor" id="a0ed3ce84deb35f7f00e5550f7ce502fc"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -223,7 +223,7 @@ template&lt;typename AggregatorFunction &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classlimbo_1_1acqui_1_1_e_i.html">limbo::acqui::EI</a>&lt; Params, Model &gt;::operator() </td>
+          <td class="memname"><a class="el" href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">opt::eval_t</a> <a class="el" href="classlimbo_1_1acqui_1_1_e_i.html">limbo::acqui::EI</a>&lt; Params, Model &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
           <td class="paramname"><em>v</em>, </td>
@@ -232,7 +232,13 @@ template&lt;typename AggregatorFunction &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const AggregatorFunction &amp;&#160;</td>
-          <td class="paramname"><em>afun</em>&#160;</td>
+          <td class="paramname"><em>afun</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>gradient</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -255,7 +261,7 @@ template&lt;typename AggregatorFunction &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 20 2016 13:11:23 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 21 2016 00:00:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

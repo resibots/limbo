@@ -171,7 +171,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    point[dim_in] = x;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    <span class="keywordflow">if</span> (dim_in == current.size() - 1) {</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        <span class="keyword">auto</span> q = bo.model().query(point);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        <span class="keywordtype">double</span> acqui = <span class="keyword">typename</span> BO::acquisition_function_t(bo.model(), bo.current_iteration())(point, afun);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        <span class="keywordtype">double</span> acqui = <a class="code" href="group__opt__tools.html#ga68ad00d7501bc26a2a0990bac762393e">opt::fun</a>(<span class="keyword">typename</span> BO::acquisition_function_t(bo.model(), bo.current_iteration())(point, afun, <span class="keyword">false</span>));</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        ofs &lt;&lt; point.transpose() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                            &lt;&lt; std::get&lt;0&gt;(q).transpose() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                            &lt;&lt; std::get&lt;1&gt;(q) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
@@ -188,14 +188,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_g_p_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p.html">limbo::stat::GP</a></div><div class="ttdef"><b>Definition:</b> gp.hpp:57</div></div>
+<div class="ttc" id="group__opt__tools_html_ga68ad00d7501bc26a2a0990bac762393e"><div class="ttname"><a href="group__opt__tools.html#ga68ad00d7501bc26a2a0990bac762393e">limbo::opt::fun</a></div><div class="ttdeci">double fun(const eval_t &amp;fg)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:76</div></div>
 <div class="ttc" id="stat__base_8hpp_html"><div class="ttname"><a href="stat__base_8hpp.html">stat_base.hpp</a></div></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_g_p_html_ae4963dbd20077223711a646226091944"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p.html#ae4963dbd20077223711a646226091944">limbo::stat::GP::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</div><div class="ttdef"><b>Definition:</b> gp.hpp:59</div></div>
-<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:54</div></div>
+<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_stat_base_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_stat_base.html">limbo::stat::StatBase</a></div><div class="ttdef"><b>Definition:</b> stat_base.hpp:71</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 20 2016 13:11:23 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 21 2016 00:00:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -6,58 +6,58 @@
     <includes refid="stat__base_8hpp" local="no">limbo/stat/stat_base.hpp</includes>
     <includedby refid="stat_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/stat.hpp</includedby>
     <incdepgraph>
-      <node id="1657">
+      <node id="1693">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat/gp_acquisitions.hpp</label>
         <link refid="gp_acquisitions.hpp"/>
-        <childnode refid="1658" relation="include">
+        <childnode refid="1694" relation="include">
         </childnode>
-        <childnode refid="1659" relation="include">
+        <childnode refid="1695" relation="include">
         </childnode>
       </node>
-      <node id="1658">
+      <node id="1694">
         <label>cmath</label>
       </node>
-      <node id="1661">
+      <node id="1697">
         <label>string</label>
       </node>
-      <node id="1660">
+      <node id="1696">
         <label>fstream</label>
       </node>
-      <node id="1659">
+      <node id="1695">
         <label>limbo/stat/stat_base.hpp</label>
         <link refid="stat__base_8hpp"/>
-        <childnode refid="1660" relation="include">
+        <childnode refid="1696" relation="include">
         </childnode>
-        <childnode refid="1661" relation="include">
+        <childnode refid="1697" relation="include">
         </childnode>
-        <childnode refid="1662" relation="include">
+        <childnode refid="1698" relation="include">
         </childnode>
       </node>
-      <node id="1662">
+      <node id="1698">
         <label>memory</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1663">
+      <node id="1699">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat/gp_acquisitions.hpp</label>
         <link refid="gp_acquisitions.hpp"/>
-        <childnode refid="1664" relation="include">
+        <childnode refid="1700" relation="include">
         </childnode>
       </node>
-      <node id="1666">
+      <node id="1702">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1664">
+      <node id="1700">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat.hpp</label>
         <link refid="stat_8hpp"/>
-        <childnode refid="1665" relation="include">
+        <childnode refid="1701" relation="include">
         </childnode>
       </node>
-      <node id="1665">
+      <node id="1701">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="1666" relation="include">
+        <childnode refid="1702" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -140,11 +140,11 @@
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!blacklisted<sp/>&amp;&amp;<sp/>!bo.samples().empty())<sp/>{</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::tie(mu,<sp/>sigma)<sp/>=<sp/>bo.model().query(bo.samples().back());</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>acqui<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO::acquisition_function_t(bo.model(),<sp/>bo.current_iteration())(bo.samples().back(),<sp/>afun);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>acqui<sp/>=<sp/><ref refid="group__opt__tools_1ga68ad00d7501bc26a2a0990bac762393e" kindref="member">opt::fun</ref>(</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO::acquisition_function_t(bo.model(),<sp/>bo.current_iteration())(bo.samples().back(),<sp/>afun,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!bo.bl_samples().empty())<sp/>{</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::tie(mu,<sp/>sigma)<sp/>=<sp/>bo.model().query(bo.bl_samples().back());</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>acqui<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO::acquisition_function_t(bo.model(),<sp/>bo.current_iteration())(bo.bl_samples().back(),<sp/>afun);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>acqui<sp/>=<sp/><ref refid="group__opt__tools_1ga68ad00d7501bc26a2a0990bac762393e" kindref="member">opt::fun</ref>(</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO::acquisition_function_t(bo.model(),<sp/>bo.current_iteration())(bo.bl_samples().back(),<sp/>afun,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>

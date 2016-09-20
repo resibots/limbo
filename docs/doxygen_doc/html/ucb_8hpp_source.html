@@ -141,52 +141,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;Eigen/Core&gt;</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="macros_8hpp.html">limbo/tools/macros.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">namespace </span>defaults {</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1acqui__ucb.html">   54</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1acqui__ucb.html">acqui_ucb</a> {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="group__acqui__defaults.html#ga1f72be83648befc624f5468668e5728a">BO_PARAM</a>(<span class="keywordtype">double</span>, alpha, 0.5);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        };</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">namespace </span>acqui {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params, <span class="keyword">typename</span> Model&gt;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html">   72</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html">UCB</a> {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html#ae4410ba09273ea88b36130ea916fcc60">   74</a></span>&#160;            <a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html#ae4410ba09273ea88b36130ea916fcc60">UCB</a>(<span class="keyword">const</span> Model&amp; model, <span class="keywordtype">int</span> iteration = 0) : _model(model) {}</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html#ab922a11b709216f35db6ee83fcb86ed5">   76</a></span>&#160;            <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html#ab922a11b709216f35db6ee83fcb86ed5">dim_in</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model.dim_in(); }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html#aa6870bb7764a6f729db39f86eb005d54">   78</a></span>&#160;            <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html#aa6870bb7764a6f729db39f86eb005d54">dim_out</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model.dim_out(); }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> AggregatorFunction&gt;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html#a46ab881ea6bc364bf52c2fa04cfaa1da">   81</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html#a46ab881ea6bc364bf52c2fa04cfaa1da">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> AggregatorFunction&amp; afun)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">            </span>{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                Eigen::VectorXd mu;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keywordtype">double</span> sigma;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                std::tie(mu, sigma) = _model.query(v);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordflow">return</span> (afun(mu) + Params::acqui_ucb::alpha() * sqrt(sigma));</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keyword">const</span> Model&amp; _model;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        };</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structlimbo_1_1defaults_1_1acqui__ucb_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1acqui__ucb.html">limbo::defaults::acqui_ucb</a></div><div class="ttdef"><b>Definition:</b> ucb.hpp:54</div></div>
-<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html_aa6870bb7764a6f729db39f86eb005d54"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html#aa6870bb7764a6f729db39f86eb005d54">limbo::acqui::UCB::dim_out</a></div><div class="ttdeci">size_t dim_out() const </div><div class="ttdef"><b>Definition:</b> ucb.hpp:78</div></div>
-<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html_a46ab881ea6bc364bf52c2fa04cfaa1da"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html#a46ab881ea6bc364bf52c2fa04cfaa1da">limbo::acqui::UCB::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </div><div class="ttdef"><b>Definition:</b> ucb.hpp:81</div></div>
-<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html_ae4410ba09273ea88b36130ea916fcc60"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html#ae4410ba09273ea88b36130ea916fcc60">limbo::acqui::UCB::UCB</a></div><div class="ttdeci">UCB(const Model &amp;model, int iteration=0)</div><div class="ttdef"><b>Definition:</b> ucb.hpp:74</div></div>
-<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html">limbo::acqui::UCB</a></div><div class="ttdef"><b>Definition:</b> ucb.hpp:72</div></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="optimizer_8hpp.html">limbo/opt/optimizer.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">namespace </span>defaults {</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1acqui__ucb.html">   55</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1acqui__ucb.html">acqui_ucb</a> {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <a class="code" href="group__acqui__defaults.html#ga1f72be83648befc624f5468668e5728a">BO_PARAM</a>(<span class="keywordtype">double</span>, alpha, 0.5);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        };</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">namespace </span>acqui {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params, <span class="keyword">typename</span> Model&gt;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html">   73</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html">UCB</a> {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html#ae4410ba09273ea88b36130ea916fcc60">   75</a></span>&#160;            <a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html#ae4410ba09273ea88b36130ea916fcc60">UCB</a>(<span class="keyword">const</span> Model&amp; model, <span class="keywordtype">int</span> iteration = 0) : _model(model) {}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html#ab922a11b709216f35db6ee83fcb86ed5">   77</a></span>&#160;            <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html#ab922a11b709216f35db6ee83fcb86ed5">dim_in</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model.dim_in(); }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html#aa6870bb7764a6f729db39f86eb005d54">   79</a></span>&#160;            <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html#aa6870bb7764a6f729db39f86eb005d54">dim_out</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model.dim_out(); }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> AggregatorFunction&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classlimbo_1_1acqui_1_1_u_c_b.html#a029c5489c29e294e50e0d83a203c9572">   82</a></span>&#160;            <a class="code" href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">opt::eval_t</a> <a class="code" href="classlimbo_1_1acqui_1_1_u_c_b.html#a029c5489c29e294e50e0d83a203c9572">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> AggregatorFunction&amp; afun, <span class="keywordtype">bool</span> gradient)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">            </span>{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                assert(!gradient);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                Eigen::VectorXd mu;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="keywordtype">double</span> sigma;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                std::tie(mu, sigma) = _model.query(v);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">opt::no_grad</a>(afun(mu) + Params::acqui_ucb::alpha() * sqrt(sigma));</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keyword">const</span> Model&amp; _model;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        };</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="optimizer_8hpp_html"><div class="ttname"><a href="optimizer_8hpp.html">optimizer.hpp</a></div></div>
+<div class="ttc" id="structlimbo_1_1defaults_1_1acqui__ucb_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1acqui__ucb.html">limbo::defaults::acqui_ucb</a></div><div class="ttdef"><b>Definition:</b> ucb.hpp:55</div></div>
+<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html_aa6870bb7764a6f729db39f86eb005d54"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html#aa6870bb7764a6f729db39f86eb005d54">limbo::acqui::UCB::dim_out</a></div><div class="ttdeci">size_t dim_out() const </div><div class="ttdef"><b>Definition:</b> ucb.hpp:79</div></div>
+<div class="ttc" id="group__opt__tools_html_ga38e53ccac21f452bd31e9b239985d456"><div class="ttname"><a href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">limbo::opt::no_grad</a></div><div class="ttdeci">eval_t no_grad(double x)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:64</div></div>
+<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html_ae4410ba09273ea88b36130ea916fcc60"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html#ae4410ba09273ea88b36130ea916fcc60">limbo::acqui::UCB::UCB</a></div><div class="ttdeci">UCB(const Model &amp;model, int iteration=0)</div><div class="ttdef"><b>Definition:</b> ucb.hpp:75</div></div>
+<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html">limbo::acqui::UCB</a></div><div class="ttdef"><b>Definition:</b> ucb.hpp:73</div></div>
 <div class="ttc" id="macros_8hpp_html"><div class="ttname"><a href="macros_8hpp.html">macros.hpp</a></div></div>
-<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:54</div></div>
+<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
+<div class="ttc" id="group__opt__tools_html_ga7fc87080ebf563d050fc547d25528ef0"><div class="ttname"><a href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">limbo::opt::eval_t</a></div><div class="ttdeci">std::pair&lt; double, boost::optional&lt; Eigen::VectorXd &gt; &gt; eval_t</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:60</div></div>
 <div class="ttc" id="group__acqui__defaults_html_ga1f72be83648befc624f5468668e5728a"><div class="ttname"><a href="group__acqui__defaults.html#ga1f72be83648befc624f5468668e5728a">limbo::defaults::acqui_ucb::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, alpha, 0.5)</div></div>
-<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html_ab922a11b709216f35db6ee83fcb86ed5"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html#ab922a11b709216f35db6ee83fcb86ed5">limbo::acqui::UCB::dim_in</a></div><div class="ttdeci">size_t dim_in() const </div><div class="ttdef"><b>Definition:</b> ucb.hpp:76</div></div>
+<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html_ab922a11b709216f35db6ee83fcb86ed5"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html#ab922a11b709216f35db6ee83fcb86ed5">limbo::acqui::UCB::dim_in</a></div><div class="ttdeci">size_t dim_in() const </div><div class="ttdef"><b>Definition:</b> ucb.hpp:77</div></div>
+<div class="ttc" id="classlimbo_1_1acqui_1_1_u_c_b_html_a029c5489c29e294e50e0d83a203c9572"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_u_c_b.html#a029c5489c29e294e50e0d83a203c9572">limbo::acqui::UCB::operator()</a></div><div class="ttdeci">opt::eval_t operator()(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun, bool gradient) const </div><div class="ttdef"><b>Definition:</b> ucb.hpp:82</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 20 2016 13:11:23 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 21 2016 00:00:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

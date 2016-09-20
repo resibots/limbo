@@ -46,15 +46,25 @@ const \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a151af5c7eef92a82d8813bb2e
 
 The classic Bayesian optimization algorithm.
 
-\textbackslash{}rst References\+: \+:cite\+:{\ttfamily brochu2010tutorial,Mockus2013} \textbackslash{}endrst
+\begin{DoxyVerb}embed:rst
+References: :cite:`brochu2010tutorial,Mockus2013`
+\end{DoxyVerb}
 
-This class takes the same template parameters as \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base}{Bo\+Base}. It adds\+: \textbackslash{}rst +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+ $\vert$type $\vert$typedef $\vert$ argument $\vert$ default $\vert$ +=====================+============+==========+===============+ $\vert$acqui. optimizer $\vert$acqui\+\_\+opt\+\_\+t $\vert$ acquiopt $\vert$ see below $\vert$ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+ \textbackslash{}endrst
+
+This class takes the same template parameters as \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base}{Bo\+Base}. It adds\+: \begin{DoxyVerb}embed:rst
++---------------------+------------+----------+---------------+
+|type                 |typedef     | argument | default       |
++=====================+============+==========+===============+
+|acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
++---------------------+------------+----------+---------------+
+\end{DoxyVerb}
+
 
 The default value of acqui\+\_\+opt\+\_\+t is\+:
 \begin{DoxyItemize}
-\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_cmaes}{opt\+::\+Cmaes}$<$Params$>$} if libcmaes was found in {\ttfamily waf configure}
-\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_n_l_opt_no_grad}{opt\+::\+N\+L\+Opt\+No\+Grad}$<$Params, nlopt\+::\+G\+N\+\_\+\+D\+I\+R\+E\+C\+T\+\_\+\+L\+\_\+\+R\+A\+N\+D$>$} if N\+L\+Opt was found but libcmaes was not found
-\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_grid_search}{opt\+::\+Grid\+Search}$<$Params$>$} otherwise (please do not use this\+: the algorithm will not work at all!) 
+\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_n_l_opt_no_grad}{opt\+::\+N\+L\+Opt\+No\+Grad}$<$Params, nlopt\+::\+G\+N\+\_\+\+D\+I\+R\+E\+C\+T\+\_\+\+L\+\_\+\+R\+A\+N\+D$>$} if N\+L\+Opt was found in {\ttfamily waf configure}
+\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_cmaes}{opt\+::\+Cmaes}$<$Params$>$} if libcmaes was found but N\+L\+Opt was not found
+\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_grid_search}{opt\+::\+Grid\+Search}$<$Params$>$} otherwise (please do not use this\+: the algorithm will not work as expected!) 
 \end{DoxyItemize}
 
 \subsection{Member Typedef Documentation}
