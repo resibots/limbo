@@ -1,0 +1,72 @@
+\hypertarget{classlimbo_1_1acqui_1_1_e_i}{}\section{limbo\+:\+:acqui\+:\+:E\+I$<$ Params, Model $>$ Class Template Reference}
+\label{classlimbo_1_1acqui_1_1_e_i}\index{limbo\+::acqui\+::\+E\+I$<$ Params, Model $>$@{limbo\+::acqui\+::\+E\+I$<$ Params, Model $>$}}
+
+
+{\ttfamily \#include $<$limbo/acqui/ei.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlimbo_1_1acqui_1_1_e_i_aa1e8c3ae70c75d10adf188e0c260a03a}{E\+I} (const Model \&model, int iteration=0)
+\item 
+size\+\_\+t \hyperlink{classlimbo_1_1acqui_1_1_e_i_a52d965602aa60609e3f4f447dbea285b}{dim\+\_\+in} () const 
+\item 
+size\+\_\+t \hyperlink{classlimbo_1_1acqui_1_1_e_i_a7b030343c6dae9af80853cfab0868e8d}{dim\+\_\+out} () const 
+\item 
+{\footnotesize template$<$typename Aggregator\+Function $>$ }\\double \hyperlink{classlimbo_1_1acqui_1_1_e_i_a64f65b304a80810adb9e0b4d193ffcd3}{operator()} (const Eigen\+::\+Vector\+Xd \&v, const Aggregator\+Function \&afun) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Params, typename Model$>$class limbo\+::acqui\+::\+E\+I$<$ Params, Model $>$}
+
+\begin{DoxyVerb}embed:rst
+Classic EI (Expected Improvement). See :cite:`brochu2010tutorial`, p. 14
+
+  .. math::
+    EI(x) = (\mu(x) - f(x^+) - \xi)\Phi(Z) + \sigma(x)\phi(Z),\\\text{with } Z = \frac{\mu(x)-f(x^+) - \xi}{\sigma(x)}.
+
+Parameters:
+  - ``double jitter`` - :math:`\xi`
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classlimbo_1_1acqui_1_1_e_i_aa1e8c3ae70c75d10adf188e0c260a03a}{}\index{limbo\+::acqui\+::\+E\+I@{limbo\+::acqui\+::\+E\+I}!E\+I@{E\+I}}
+\index{E\+I@{E\+I}!limbo\+::acqui\+::\+E\+I@{limbo\+::acqui\+::\+E\+I}}
+\subsubsection[{E\+I}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ {\bf limbo\+::acqui\+::\+E\+I}$<$ Params, Model $>$\+::{\bf E\+I} (
+\begin{DoxyParamCaption}
+\item[{const Model \&}]{model, }
+\item[{int}]{iteration = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1acqui_1_1_e_i_aa1e8c3ae70c75d10adf188e0c260a03a}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classlimbo_1_1acqui_1_1_e_i_a52d965602aa60609e3f4f447dbea285b}{}\index{limbo\+::acqui\+::\+E\+I@{limbo\+::acqui\+::\+E\+I}!dim\+\_\+in@{dim\+\_\+in}}
+\index{dim\+\_\+in@{dim\+\_\+in}!limbo\+::acqui\+::\+E\+I@{limbo\+::acqui\+::\+E\+I}}
+\subsubsection[{dim\+\_\+in}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ size\+\_\+t {\bf limbo\+::acqui\+::\+E\+I}$<$ Params, Model $>$\+::dim\+\_\+in (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1acqui_1_1_e_i_a52d965602aa60609e3f4f447dbea285b}
+\hypertarget{classlimbo_1_1acqui_1_1_e_i_a7b030343c6dae9af80853cfab0868e8d}{}\index{limbo\+::acqui\+::\+E\+I@{limbo\+::acqui\+::\+E\+I}!dim\+\_\+out@{dim\+\_\+out}}
+\index{dim\+\_\+out@{dim\+\_\+out}!limbo\+::acqui\+::\+E\+I@{limbo\+::acqui\+::\+E\+I}}
+\subsubsection[{dim\+\_\+out}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ size\+\_\+t {\bf limbo\+::acqui\+::\+E\+I}$<$ Params, Model $>$\+::dim\+\_\+out (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1acqui_1_1_e_i_a7b030343c6dae9af80853cfab0868e8d}
+\hypertarget{classlimbo_1_1acqui_1_1_e_i_a64f65b304a80810adb9e0b4d193ffcd3}{}\index{limbo\+::acqui\+::\+E\+I@{limbo\+::acqui\+::\+E\+I}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::acqui\+::\+E\+I@{limbo\+::acqui\+::\+E\+I}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ template$<$typename Aggregator\+Function $>$ double {\bf limbo\+::acqui\+::\+E\+I}$<$ Params, Model $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v, }
+\item[{const Aggregator\+Function \&}]{afun}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1acqui_1_1_e_i_a64f65b304a80810adb9e0b4d193ffcd3}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/acqui/\hyperlink{ei_8hpp}{ei.\+hpp}\end{DoxyCompactItemize}

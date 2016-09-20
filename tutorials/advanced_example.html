@@ -202,11 +202,12 @@
 <div class="figure">
 <a class="reference external image-reference" href="../_images/arm.svg"><img alt="6-DOF planar arm" src="../_images/arm.svg" /></a>
 </div>
-<p>Let&#8217;s say we have a planar 6-DOF arm manipulator and we want its end-effector to reach a target position (i.e. catch an object). Now, imagine that a joint is broken (or not working properly). We want to use Bayesian Optimization to learn a compensatory behavior that will allow our arm to reach the target in spite of damage. Now, assume that once we have learned how to reach one target, we want to reach another (different) one. We will use state-based bayesian optimization to transfer knowledge between the two tasks. We will use the following:</p>
+<p>Let&#8217;s say we have a planar 6-DOF arm manipulator and we want its end-effector to reach a target position (i.e. catch an object). Now, imagine that a joint is broken (or not working properly). We want to use Bayesian Optimization to learn a compensatory behavior that will allow our arm to reach the target in spite of damage. Moreover, once we have learned how to reach one target, we want to reach another (different) one. We will use state-based bayesian optimization to transfer knowledge between the two tasks. We will use the following:</p>
 <ul class="simple">
 <li>The forward kinematic model as prior knowledge (mean of Gaussian Process).</li>
-<li>The <strong>Squared exponential covariance function with automatic relevance detection</strong> as kernel of the GP.</li>
+<li>The <strong>Squared exponential covariance function with automatic relevance detection</strong> as the kernel function of the GP.</li>
 <li>Likelihood optimization for the hyperparameters of the GP kernel.</li>
+<li>Use Expected Improvement as the acquisition function.</li>
 <li>Use different optimizer for the acquisition optimization.</li>
 <li>Initialize the GP with random samples.</li>
 <li>Custom stopping criterion.</li>
@@ -342,9 +343,7 @@
  7
  8
  9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
     <span class="n">MeanFWModel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
 
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">GP</span><span class="o">&gt;</span>
@@ -372,9 +371,7 @@
  9
 10
 11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
     <span class="k">typedef</span> <span class="kt">double</span> <span class="n">result_type</span><span class="p">;</span>
     <span class="n">DistanceToTarget</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span><span class="o">&amp;</span> <span class="n">target</span><span class="p">)</span> <span class="o">:</span> <span class="n">_target</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="p">{}</span>
 
@@ -393,17 +390,15 @@
 <div class="section" id="adding-custom-stop-criterion">
 <h2>Adding custom stop criterion<a class="headerlink" href="#adding-custom-stop-criterion" title="Permalink to this headline">¶</a></h2>
 <p>When our bayesian optimizer finds a solution that the end-effector of the arm is reasonably close to the target, we want it to stop. We can easily do this by creating our own stopping criterion:</p>
-<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
     <span class="n">MinTolerance</span><span class="p">()</span> <span class="p">{}</span>
 
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
@@ -431,9 +426,7 @@
 12
 13
 14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
@@ -475,7 +468,7 @@
 <div class="section" id="acquisition-initialization-and-other-aliases">
 <h3>Acquisition, Initialization and other aliases<a class="headerlink" href="#acquisition-initialization-and-other-aliases" title="Permalink to this headline">¶</a></h3>
 <p><strong>Acquisition aliases:</strong></p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="k">using</span> <span class="kt">acqui_t</span> <span class="o">=</span> <span class="n">acqui</span><span class="o">::</span><span class="n">UCB</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="kt">gp_t</span><span class="o">&gt;</span><span class="p">;</span>
+<div class="highlight-c++"><div class="highlight"><pre><span class="k">using</span> <span class="kt">acqui_t</span> <span class="o">=</span> <span class="n">acqui</span><span class="o">::</span><span class="n">EI</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="kt">gp_t</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">using</span> <span class="kt">acqui_opt_t</span> <span class="o">=</span> <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -526,9 +519,7 @@
 27
 28
 29
-30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+30</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">hp_period</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="p">};</span>
@@ -539,10 +530,10 @@
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="n">stop_mintolerance</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">);</span>
     <span class="p">};</span>
-    <span class="k">struct</span> <span class="n">acqui_ucb</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">);</span>
+    <span class="k">struct</span> <span class="n">acqui_ei</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">jitter</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
@@ -604,7 +595,7 @@
 
     <span class="k">using</span> <span class="kt">gp_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="kt">kernel_t</span><span class="p">,</span> <span class="kt">mean_t</span><span class="p">,</span> <span class="kt">gp_opt_t</span><span class="o">&gt;</span><span class="p">;</span>
 
-    <span class="k">using</span> <span class="kt">acqui_t</span> <span class="o">=</span> <span class="n">acqui</span><span class="o">::</span><span class="n">UCB</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="kt">gp_t</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="kt">acqui_t</span> <span class="o">=</span> <span class="n">acqui</span><span class="o">::</span><span class="n">EI</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="kt">gp_t</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="k">using</span> <span class="kt">acqui_opt_t</span> <span class="o">=</span> <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
 
     <span class="k">using</span> <span class="kt">init_t</span> <span class="o">=</span> <span class="n">init</span><span class="o">::</span><span class="n">RandomSampling</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
@@ -615,10 +606,10 @@
 
     <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="kt">gp_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="kt">acqui_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquiopt</span><span class="o">&lt;</span><span class="kt">acqui_opt_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">initfun</span><span class="o">&lt;</span><span class="kt">init_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stopcrit</span><span class="o">&lt;</span><span class="kt">stop_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
     <span class="c1">// Instantiate aggregator</span>
-    <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">aggregator</span><span class="p">({</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">});</span>
+    <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">aggregator</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
     <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eval_func</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">aggregator</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;New target!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="n">aggregator</span> <span class="o">=</span> <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">});</span>
+    <span class="n">aggregator</span> <span class="o">=</span> <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">({</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
     <span class="c1">// Do not forget to pass `false` as the last parameter in `optimize`,</span>
     <span class="c1">// so you do not reset the data in boptimizer</span>
     <span class="c1">// i.e. keep all the previous data points in the Gaussian Process</span>
@@ -636,17 +627,39 @@
 </pre></div>
 </div>
 <p>Then, an executable named <code class="docutils literal"><span class="pre">arm_example</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/arm_example</span></code>. When running the experiment, you should expect something like the following:</p>
-<div class="highlight-none"><div class="highlight"><pre>0 new point:   0.105457   0.984803   0.999724   0.397681 0.00178646   0.472922 value: -2.05529 best:-0.50564
-1 new point: 0.0418376  0.211166  0.610741   0.97042   0.49975  0.932997 value: -0.420461 best:-0.420461
-2 new point: 0.0499932  0.809128  0.647616  0.607996   0.98363  0.263471 value: -1.47844 best:-0.420461
-3 new point: 0.926947 0.304285 0.962505 0.923134 0.340676 0.352674 value: -1.77912 best:-0.420461
-4 new point:    0.139309  0.00337038   0.0725873     0.98806     0.52506 0.000522096 value: -0.000876567 best:-0.000876567
+<div class="highlight-none"><div class="highlight"><pre>0 new point:  0.99374 0.999401 0.999716 0.532902 0.999337 0.648682 value: -0.73579 best:-0.73579
+1 new point: 0.00924137    0.52356   0.992816   0.591639   0.900581 0.00022477 value: -1.59172 best:-0.73579
+2 new point:  0.999114  0.303668 0.0132791  0.792124  0.391522  0.999149 value: -3.00304 best:-0.73579
+3 new point: 0.990481 0.981046 0.379883 0.999432 0.282599 0.291695 value: -0.824245 best:-0.73579
+4 new point: 0.00771956   0.949676   0.956241  0.0293142   0.244216  0.0891216 value: -2.68335 best:-0.73579
+5 new point:   0.972554 0.00021536   0.998559      0.808   0.346161 0.00134114 value: -3.7039 best:-0.73579
+6 new point: 0.00275069   0.495195 0.00167023   0.994612   0.631628   0.707545 value: -1.97244 best:-0.73579
+7 new point:  0.124159  0.262741  0.303586  0.999707  0.335987 0.0192833 value: -1.28697 best:-0.73579
+8 new point:  0.026011  0.307255  0.101375 0.0195426  0.562741 0.0400001 value: -2.31361 best:-0.73579
+9 new point:    0.153818  0.00117556 9.92801e-05    0.376417     0.18015  0.00215051 value: -1.00521 best:-0.73579
+10 new point:  0.107636  0.710152   0.41314 0.0703153  0.646439  0.606494 value: -0.685661 best:-0.685661
+11 new point: 0.282632 0.794559 0.940368 0.530688 0.113832 0.439228 value: -1.44821 best:-0.685661
+12 new point: 0.0110291  0.266178  0.576008  0.425873  0.120849  0.444479 value: -1.38147 best:-0.685661
+13 new point:  0.109448 0.0548453  0.458707  0.487198  0.739701  0.588758 value: -0.147514 best:-0.147514
+14 new point: 0.0877909 0.0481023  0.837642  0.438223  0.387531  0.649942 value: -0.150097 best:-0.147514
+15 new point: 0.111047 0.633206 0.509962 0.443725 0.359951 0.243446 value: -0.780535 best:-0.147514
+16 new point:  0.0827364   0.186448   0.333666   0.839036   0.536232 0.00476438 value: -0.575265 best:-0.147514
+17 new point:   0.123347 0.00377535   0.554967   0.103699   0.371233   0.233517 value: -0.00982979 best:-0.00982979
 New target!
-5 new point: 0.0632575  0.981795  0.347888  0.342065   0.51396  0.785025 value: -1.26196 best:-0.50006
-6 new point:  0.455737  0.978531   0.55947 0.0435089 0.0143673  0.999978 value: -0.0113502 best:-0.0113502
+18 new point:    0.998604    0.984174    0.999353 0.000200245    0.356422    0.999792 value: -1.38941 best:-0.370924
+19 new point: 0.0189988  0.999921  0.942007  0.665937  0.999451  0.986427 value: -3.16331 best:-0.370924
+20 new point: 0.0688255  0.230665 0.0273747  0.270297  0.980095  0.990872 value: -2.89225 best:-0.370924
+21 new point: 0.997416 0.857708 0.998912 0.984197 0.391337 0.114332 value: -0.883913 best:-0.370924
+22 new point:    0.999982 0.000168928    0.999398    0.336817    0.258304    0.929625 value: -1.19557 best:-0.370924
+23 new point: 0.0700344  0.281842  0.919103 0.0183289  0.074567  0.970264 value: -4.17297 best:-0.370924
+24 new point: 7.78708e-05 2.18076e-06    0.983852     0.99996    0.825274    0.612332 value: -2.57724 best:-0.370924
+25 new point: 0.000101799    0.997473    0.797134    0.994634    0.377403 3.70205e-05 value: -2.33882 best:-0.370924
+26 new point: 0.0467502  0.327915  0.235275  0.966877 0.0363554  0.909477 value: -3.49153 best:-0.370924
+27 new point:    0.999615 0.000340133    0.637717    0.994796  0.00143888    0.464556 value: -2.75311 best:-0.370924
+28 new point:   0.998958 0.00509838   0.474495   0.667517   0.532318   0.520064 value: -0.038073 best:-0.038073
 </pre></div>
 </div>
-<p>Using state-based bayesian optimization, we can transfer what we learned doing one task to learn faster new tasks.</p>
+<p>Using state-based bayesian optimization, we can transfer what we learned during one task to achieve faster new tasks.</p>
 </div>
 </div>
 </div>

@@ -4,9 +4,9 @@
     <compoundname>limbo::experimental::bayes_opt::Ehvi::defaults</compoundname>
     <includes refid="bayes__opt_2ehvi_8hpp" local="no">limbo/experimental/bayes_opt/ehvi.hpp</includes>
       <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_1a3de3f3a53d396b50e0358661f122d450" prot="public" static="no">
-        <type><ref refid="structlimbo_1_1opt_1_1_cmaes" kindref="compound">opt::Cmaes</ref>&lt; Params &gt;</type>
-        <definition>typedef opt::Cmaes&lt;Params&gt; limbo::experimental::bayes_opt::Ehvi&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::acquiopt_t</definition>
+      <memberdef kind="typedef" id="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_1a3d7a04bbbd73b4f95710c29fd88551bf" prot="public" static="no">
+        <type><ref refid="structlimbo_1_1opt_1_1_n_l_opt_no_grad" kindref="compound">opt::NLOptNoGrad</ref>&lt; Params, nlopt::GN_DIRECT_L_RAND &gt;</type>
+        <definition>typedef opt::NLOptNoGrad&lt;Params, nlopt::GN_DIRECT_L_RAND&gt; limbo::experimental::bayes_opt::Ehvi&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::acquiopt_t</definition>
         <argsstring></argsstring>
         <name>acquiopt_t</name>
         <briefdescription>
@@ -15,16 +15,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" line="41" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" bodystart="41" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" line="85" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" bodystart="85" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" line="39" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" bodystart="39" bodyend="48"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" line="83" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp" bodystart="83" bodyend="92"/>
     <listofallmembers>
-      <member refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_1a3de3f3a53d396b50e0358661f122d450" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi::defaults</scope><name>acquiopt_t</name></member>
+      <member refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_1a3d7a04bbbd73b4f95710c29fd88551bf" prot="public" virt="non-virtual"><scope>limbo::experimental::bayes_opt::Ehvi::defaults</scope><name>acquiopt_t</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

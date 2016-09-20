@@ -124,42 +124,42 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#init-functions-init">Init functions (init)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-initializers">Available initializers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">Default Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Default Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#optimization-functions-opt">Optimization functions (opt)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id7">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-optimizers">Available optimizers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">Default parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Default parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#models-gaussian-processes-model">Models / Gaussian processes (model)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#kernel-functions-kernel">Kernel functions (kernel)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id9">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kernel-api">Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-kernels">Available kernels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id17">Default parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Default parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mean-functions-mean">Mean functions (mean)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id18">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-mean-functions">Available mean functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id19">Default parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">Default parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#internals">Internals</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#stopping-criteria-stop">Stopping criteria (stop)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id20">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-stopping-criteria">Available stopping criteria</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">Default parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id22">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">Default parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">Internals</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#statistics-stats">Statistics (stats)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id24">Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-statistics">Available statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id25">Default parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">Default parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#parallel-tools-par">Parallel tools (par)</a></li>
@@ -239,11 +239,11 @@
 </div>
 <div class="section" id="class-structure">
 <h2>Class Structure<a class="headerlink" href="#class-structure" title="Permalink to this headline">¶</a></h2>
-<div class="figure" id="id26">
+<div class="figure" id="id27">
 <a class="reference external image-reference" href="_images/limbo_uml_v2.png"><img alt="UML class diagram" src="_images/limbo_uml_v2.png" /></a>
 <p class="caption"><span class="caption-text">Click on the image to see it bigger.</span></p>
 </div>
-<p>There is almost no explicit inheritance in Limbo because polymorphism is not used. However, each kind of class follow a similar template (or &#8216;concept&#8217;), that is, they have to implement the same methods. For instance, every initialization function must implement a <cite>()</cite> method:</p>
+<p>There is almost no explicit inheritance in Limbo because polymorphism is not used. However, each kind of class follow a similar template (or &#8216;concept&#8217;), that is, they have to implement the same methods. For instance, every initialization function must implement a <cite>operator()</cite> method:</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">StateFunction</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Opt</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">StateFunction</span><span class="o">&amp;</span> <span class="n">seval</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">Opt</span><span class="o">&amp;</span> <span class="n">opt</span><span class="p">)</span> <span class="k">const</span>
 </pre></div>
@@ -253,7 +253,7 @@
 </div>
 <div class="section" id="sequence-diagram">
 <h2>Sequence diagram<a class="headerlink" href="#sequence-diagram" title="Permalink to this headline">¶</a></h2>
-<div class="figure" id="id27">
+<div class="figure" id="id28">
 <a class="reference external image-reference" href="_images/limbo_sequence_diagram.png"><img alt="Sequence diagram" src="_images/limbo_sequence_diagram.png" /></a>
 <p class="caption"><span class="caption-text">Click on the image to see it bigger.</span></p>
 </div>
@@ -261,26 +261,25 @@
 <div class="section" id="file-structure">
 <h2>File Structure<a class="headerlink" href="#file-structure" title="Permalink to this headline">¶</a></h2>
 <p>(see below for a short explanation of the concepts)</p>
-<p>..highlight:: none</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="n">src</span>
-<span class="o">+--</span> <span class="nl">limbo</span><span class="p">:</span>
-     <span class="o">|--</span> <span class="nl">acqui</span><span class="p">:</span> <span class="n">acquisition</span> <span class="n">functions</span>
-     <span class="o">|--</span> <span class="nl">bayes_opt</span><span class="p">:</span> <span class="n">bayesian</span> <span class="n">optimizers</span>
-     <span class="o">|--</span> <span class="nl">init</span><span class="p">:</span> <span class="n">initialization</span> <span class="n">functions</span>
-     <span class="o">|--</span> <span class="nl">kernel</span><span class="p">:</span> <span class="n">kernel</span> <span class="n">functions</span>
-     <span class="o">|--</span> <span class="nl">mean</span><span class="p">:</span> <span class="n">mean</span> <span class="n">functions</span>
-     <span class="o">|--</span> <span class="nl">model</span><span class="p">:</span> <span class="n">models</span> <span class="p">(</span><span class="n">Gaussian</span> <span class="n">Processes</span><span class="p">)</span>
-     <span class="o">|--</span> <span class="nl">opt</span><span class="p">:</span> <span class="n">optimizers</span> <span class="p">(</span><span class="n">Rprop</span><span class="p">,</span> <span class="n">CMA</span><span class="o">-</span><span class="n">ES</span><span class="p">,</span> <span class="n">etc</span><span class="p">.)</span>
-     <span class="o">|--</span> <span class="nl">stat</span><span class="p">:</span> <span class="n">statistics</span> <span class="p">(</span><span class="n">to</span> <span class="n">dump</span> <span class="n">data</span><span class="p">)</span>
-     <span class="o">|--</span> <span class="nl">stop</span><span class="p">:</span> <span class="n">stopping</span> <span class="n">criteria</span>
-     <span class="o">|--</span> <span class="nl">tools</span><span class="p">:</span> <span class="n">useful</span> <span class="n">macros</span> <span class="o">&amp;</span> <span class="n">small</span> <span class="n">functions</span>
-<span class="o">|--</span> <span class="nl">tests</span><span class="p">:</span> <span class="n">unit</span> <span class="n">tests</span>
-<span class="o">|--</span> <span class="nl">benchmarks</span><span class="p">:</span> <span class="n">a</span> <span class="n">few</span> <span class="n">benchmark</span> <span class="n">functions</span>
-<span class="o">|--</span> <span class="nl">examples</span><span class="p">:</span> <span class="n">a</span> <span class="n">few</span> <span class="n">examples</span>
-<span class="o">|--</span> <span class="nl">cmaes</span><span class="p">:</span> <span class="p">[</span><span class="n">external</span><span class="p">]</span> <span class="n">the</span> <span class="n">CMA</span><span class="o">-</span><span class="n">ES</span> <span class="n">library</span><span class="p">,</span>
-    <span class="n">used</span> <span class="k">for</span> <span class="n">inner</span> <span class="n">optimizations</span> <span class="o">--</span> <span class="n">from</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//www.lri.fr/~hansen/cmaesintro.html</span>
-<span class="o">|--</span> <span class="nl">ehvi</span><span class="p">:</span> <span class="p">[</span><span class="n">external</span><span class="p">]</span> <span class="n">the</span> <span class="n">Expected</span> <span class="n">HyperVolume</span> <span class="n">Improvement</span><span class="p">,</span>
-    <span class="n">used</span> <span class="k">for</span> <span class="n">Multi</span><span class="o">-</span><span class="n">Objective</span> <span class="n">Optimization</span> <span class="o">--</span> <span class="n">by</span> <span class="n">Iris</span> <span class="n">Hupkens</span>
+<div class="highlight-none"><div class="highlight"><pre>src
++-- limbo:
+     |-- acqui: acquisition functions
+     |-- bayes_opt: bayesian optimizers
+     |-- init: initialization functions
+     |-- kernel: kernel functions
+     |-- mean: mean functions
+     |-- model: models (Gaussian Processes)
+     |-- opt: optimizers (Rprop, CMA-ES, etc.)
+     |-- stat: statistics (to dump data)
+     |-- stop: stopping criteria
+     |-- tools: useful macros &amp; small functions
+|-- tests: unit tests
+|-- benchmarks: a few benchmark functions
+|-- examples: a few examples
+|-- cmaes: [external] the CMA-ES library,
+    used for inner optimizations -- from https://www.lri.fr/~hansen/cmaesintro.html
+|-- ehvi: [external] the Expected HyperVolume Improvement,
+    used for Multi-Objective Optimization -- by Iris Hupkens
 </pre></div>
 </div>
 <p>Each directory in the <cite>limbo</cite> directory corresponds to a namespace with the same name. There is also a file for each directory called &#8220;<em>directory</em>.hpp&#8221; (e.g. <code class="docutils literal"><span class="pre">acqui.hpp</span></code>) that includes the whole namespace.</p>
@@ -500,7 +499,7 @@
 </div>
 <div class="section" id="acquisition-functions-acqui">
 <h2>Acquisition functions (acqui)<a class="headerlink" href="#acquisition-functions-acqui" title="Permalink to this headline">¶</a></h2>
-<p>An acquisition function is what is optimized to select the next point to try. It usually depends on the model.</p>
+<p id="acqui-api">An acquisition function is what is optimized to select the next point to try. It usually depends on the model.</p>
 <div class="section" id="template">
 <h3>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Model</span><span class="o">&gt;</span>
@@ -524,6 +523,26 @@
 <dt>
 <span class="target" id="limbogroup__acqui"></span><em>group</em> <code class="descname">acqui</code></dt>
 <dd><dl class="class">
+<dt>
+<span class="target" id="limboclasslimbo_1_1acqui_1_1_e_i"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Model&gt;</dt>
+<dt id="_CPPv2N5limbo5acqui2EIE">
+<span id="limbo::acqui::EI"></span><em class="property">class </em><code class="descname">EI</code><a class="headerlink" href="#_CPPv2N5limbo5acqui2EIE" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;limbo/acqui/ei.hpp&gt;</em><p><p>Classic EI (Expected Improvement). See [brochu2010tutorial], p. 14</p>
+<blockquote>
+<div><div class="math">
+\[\begin{split}EI(x) = (\mu(x) - f(x^+) - \xi)\Phi(Z) + \sigma(x)\phi(Z),\\\text{with } Z = \frac{\mu(x)-f(x^+) - \xi}{\sigma(x)}.\end{split}\]</div>
+</div></blockquote>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">jitter</span></code> - <span class="math">\(\xi\)</span></li>
+</ul>
+</dd>
+</dl>
+ </p>
+</dd></dl>
+
+<dl class="class">
 <dt>
 <span class="target" id="limboclasslimbo_1_1acqui_1_1_g_p___u_c_b"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Model&gt;</dt>
 <dt id="_CPPv2N5limbo5acqui6GP_UCBE">
@@ -577,6 +596,11 @@
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt>
+<span class="target" id="limbogroup__acqui__defaults_1gab43e714d9a9df7e92d6ff205e1d3edc9"></span><code class="descname">limbo::defaults::acqui_ei::BO_PARAM(double, jitter, 0. 0)</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
 <span class="target" id="limbogroup__acqui__defaults_1gace8b040a747dae17257aff4ab679bf5d"></span><code class="descname">limbo::defaults::acqui_gpucb::BO_PARAM(double, delta, 0. 1)</code></dt>
 <dd></dd></dl>
 
@@ -593,8 +617,8 @@
 <div class="section" id="init-functions-init">
 <h2>Init functions (init)<a class="headerlink" href="#init-functions-init" title="Permalink to this headline">¶</a></h2>
 <p>Initialization functions are used to inialize a Bayesian optimization algorithm with a few samples. For instance, we typically start with a dozen of random samples.</p>
-<div class="section" id="id3">
-<h3>Template<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Template<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">struct</span> <span class="n">InitName</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">StateFunction</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Opt</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">StateFunction</span><span class="o">&amp;</span> <span class="n">seval</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">Opt</span><span class="o">&amp;</span> <span class="n">opt</span><span class="p">)</span> <span class="k">const</span>
@@ -654,7 +678,7 @@
 <span class="target" id="limbostructlimbo_1_1init_1_1_random_sampling_grid"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
 <dt id="_CPPv2N5limbo4init18RandomSamplingGridE">
 <span id="limbo::init::RandomSamplingGrid"></span><em class="property">struct </em><code class="descname">RandomSamplingGrid</code><a class="headerlink" href="#_CPPv2N5limbo4init18RandomSamplingGridE" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;limbo/init/random_sampling_grid.hpp&gt;</em><p><p>Grid-based random sampling: in effect, define a grid and takes random samples from this grid. The number of bins in the grid is <a href="#id4"><span class="problematic" id="id5">``</span></a>bins``^number_of_dimensions</p>
+<dd><em>#include &lt;limbo/init/random_sampling_grid.hpp&gt;</em><p><p>Grid-based random sampling: in effect, define a grid and takes random samples from this grid. The number of bins in the grid is <a href="#id5"><span class="problematic" id="id6">``</span></a>bins``^number_of_dimensions</p>
 <p>For instance, if bins = 5 and there are 3 inputs dimensions, then the grid is 5*5*5=125, and random points will all be points of this grid.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -670,8 +694,8 @@
 </dd></dl>
 
 </div>
-<div class="section" id="id6">
-<h3>Default Parameters<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Default Parameters<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <dl class="group">
 <dt>
 <span class="target" id="limbogroup__init__defaults"></span><em>group</em> <code class="descname">init_defaults</code></dt>
@@ -767,8 +791,8 @@
 </div>
 </dd></dl>
 
-<div class="section" id="id7">
-<h3>Template<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Template<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">OptimizerName</span> <span class="p">{</span>
   <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">F</span><span class="o">&gt;</span>
@@ -861,10 +885,6 @@
 </tr>
 </tbody>
 </table>
-<p>For example, to use the LBFGS optimizer to optimize <span class="math">\((x-0.5)^2\)</span>:</p>
-<div class="highlight-cpp"><div class="highlight"><pre>
-</pre></div>
-</div>
 </div>
 <div class="section" id="available-optimizers">
 <h3>Available optimizers<a class="headerlink" href="#available-optimizers" title="Permalink to this headline">¶</a></h3>
@@ -1014,8 +1034,8 @@
 </dd></dl>
 
 </div>
-<div class="section" id="id8">
-<h3>Default parameters<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Default parameters<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <dl class="group">
 <dt>
 <span class="target" id="limbogroup__opt__defaults"></span><em>group</em> <code class="descname">opt_defaults</code></dt>
@@ -1255,12 +1275,12 @@
 
 </dd></dl>
 
-<p>See the <a href="#id28"><span class="problematic" id="id29">`Gaussian Process`_</span></a> tutorial for a tutorial about using GP without using a Bayesian optimization algorithm.</p>
+<p>See the <a class="reference internal" href="tutorials/gp.html#gp-tutorial"><span>Gaussian Process</span></a> tutorial for a tutorial about using GP without using a Bayesian optimization algorithm.</p>
 </div>
 <div class="section" id="kernel-functions-kernel">
 <h2>Kernel functions (kernel)<a class="headerlink" href="#kernel-functions-kernel" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id9">
-<h3>Template<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="kernel-api">
+<span id="id10"></span><h3>Template<a class="headerlink" href="#kernel-api" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">Kernel</span> <span class="p">{</span>
   <span class="n">Kernel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
@@ -1367,8 +1387,8 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id17">
-<h3>Default parameters<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id18">
+<h3>Default parameters<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <dl class="group">
 <dt>
 <span class="target" id="limbogroup__kernel__defaults"></span><em>group</em> <code class="descname">Kernel_defaults</code></dt>
@@ -1416,9 +1436,9 @@ Computes the squared exponential covariance like this:</p>
 </div>
 <div class="section" id="mean-functions-mean">
 <h2>Mean functions (mean)<a class="headerlink" href="#mean-functions-mean" title="Permalink to this headline">¶</a></h2>
-<p>Mean functions capture the prior about the function to be optimized.</p>
-<div class="section" id="id18">
-<h3>Template<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<p id="mean-api">Mean functions capture the prior about the function to be optimized.</p>
+<div class="section" id="id19">
+<h3>Template<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">MeanFunction</span> <span class="p">{</span>
   <span class="n">MeanFunction</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="n">_dim_out</span><span class="p">(</span><span class="n">dim_out</span><span class="p">)</span> <span class="p">{}</span>
@@ -1469,8 +1489,8 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id19">
-<h3>Default parameters<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id20">
+<h3>Default parameters<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <dl class="group">
 <dt>
 <span class="target" id="limbogroup__mean__defaults"></span><em>group</em> <code class="descname">mean_defaults</code></dt>
@@ -1505,8 +1525,8 @@ Computes the squared exponential covariance like this:</p>
 <div class="section" id="stopping-criteria-stop">
 <h2>Stopping criteria (stop)<a class="headerlink" href="#stopping-criteria-stop" title="Permalink to this headline">¶</a></h2>
 <p>Stopping criteria are used to stop the Bayesian optimizer algorithm.</p>
-<div class="section" id="id20">
-<h3>Template<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id21">
+<h3>Template<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="n">Name</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
@@ -1544,8 +1564,8 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id21">
-<h3>Default parameters<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id22">
+<h3>Default parameters<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
 <dl class="group">
 <dt>
 <span class="target" id="limbogroup__stop__defaults"></span><em>group</em> <code class="descname">stop_defaults</code></dt>
@@ -1565,8 +1585,8 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id22">
-<h3>Internals<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id23">
+<h3>Internals<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt>
 <span class="target" id="limbostructlimbo_1_1stop_1_1_chain_criteria"></span><em class="property">template </em>&lt;<em class="property">typename</em> BO, <em class="property">typename</em> AggregatorFunction&gt;</dt>
@@ -1584,10 +1604,10 @@ Computes the squared exponential covariance like this:</p>
 </div>
 </div>
 <div class="section" id="statistics-stats">
-<span id="id23"></span><h2>Statistics (stats)<a class="headerlink" href="#statistics-stats" title="Permalink to this headline">¶</a></h2>
+<span id="id24"></span><h2>Statistics (stats)<a class="headerlink" href="#statistics-stats" title="Permalink to this headline">¶</a></h2>
 <p>Statistics are used to report informations about the current state of the algorithm (e.g., the best observation for each iteration). They are typically chained in a <cite>boost::fusion::vector&lt;&gt;</cite>.</p>
-<div class="section" id="id24">
-<h3>Template<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id25">
+<h3>Template<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nl">Samples</span> <span class="p">:</span> <span class="k">public</span> <span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
@@ -1749,8 +1769,8 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 </div>
-<div class="section" id="id25">
-<h3>Default parameters<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id26">
+<h3>Default parameters<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h3>
 <dl class="group">
 <dt>
 <span class="target" id="limbogroup__stat__defaults"></span><em>group</em> <code class="descname">stat_defaults</code></dt>

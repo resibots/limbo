@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['gp',['GP',['../structlimbo_1_1stat_1_1_g_p.html',1,'limbo::stat']]],
   ['gp',['GP',['../classlimbo_1_1model_1_1_g_p.html',1,'limbo::model']]],
+  ['gp',['GP',['../structlimbo_1_1stat_1_1_g_p.html',1,'limbo::stat']]],
   ['gp_5fucb',['GP_UCB',['../classlimbo_1_1acqui_1_1_g_p___u_c_b.html',1,'limbo::acqui']]],
   ['gpacquisitions',['GPAcquisitions',['../structlimbo_1_1stat_1_1_g_p_acquisitions.html',1,'limbo::stat']]],
   ['gpkernelhparams',['GPKernelHParams',['../structlimbo_1_1stat_1_1_g_p_kernel_h_params.html',1,'limbo::stat']]],

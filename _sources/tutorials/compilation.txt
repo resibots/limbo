@@ -53,7 +53,7 @@ Configuration
 .. caution::
   Make sure that the waf file has execution rights.
 
-The first step is to configure your waf environment. For this, assuming that you are in the main limbo directory, you have to run the command: ::
+The first step is to configure your waf environment. For this, assuming that you are in the root directory of  Limbo, you have to run the command: ::
 
     ./waf configure
 

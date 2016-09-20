@@ -118,7 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Add External Library</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#add-external-library-to-experiment-s-wscript">Add external library to experiment&#8217;s wscript</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-external-library-to-the-wscript-of-your-experiment">Add external library to the wscript of your experiment</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#check-for-headers">Check for headers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#check-for-lib-files">Check for lib files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#add-configuration-options">Add configuration options</a></li>
@@ -190,9 +190,9 @@
             
   <div class="section" id="add-external-library">
 <h1>Add External Library<a class="headerlink" href="#add-external-library" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="add-external-library-to-experiment-s-wscript">
-<h2>Add external library to experiment&#8217;s wscript<a class="headerlink" href="#add-external-library-to-experiment-s-wscript" title="Permalink to this headline">¶</a></h2>
-<p>To add an external library to your experiment, we need to modify the experiment&#8217;s build script, <code class="docutils literal"><span class="pre">wscript</span></code>. The standard way to do this is to create a new configuration file for the new dependency. In the <code class="docutils literal"><span class="pre">waf</span></code> build system, this is done by creating a python script (<code class="docutils literal"><span class="pre">.py</span></code> file), usually called <code class="docutils literal"><span class="pre">libname.py</span></code> (where <code class="docutils literal"><span class="pre">libname</span></code> is the name of the library), in the same directory as your experiment.</p>
+<div class="section" id="add-external-library-to-the-wscript-of-your-experiment">
+<h2>Add external library to the wscript of your experiment<a class="headerlink" href="#add-external-library-to-the-wscript-of-your-experiment" title="Permalink to this headline">¶</a></h2>
+<p>To add an external library to your experiment, you need to modify the build script of your experiment, named <code class="docutils literal"><span class="pre">wscript</span></code>. The standard way to do this is to create a new configuration file for the new dependency. In the <code class="docutils literal"><span class="pre">waf</span></code> build system, this is done by creating a python script (<code class="docutils literal"><span class="pre">.py</span></code> file), usually called <code class="docutils literal"><span class="pre">libname.py</span></code> (where <code class="docutils literal"><span class="pre">libname</span></code> is the name of the library), in the same directory as your experiment.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>to activate this script, you need to activate your experiment <strong>when configuring limbo</strong>:</p>
@@ -201,7 +201,7 @@
 </div>
 </div>
 <p>This new file should have the following structure:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="c"># encoding: utf-8</span>
 
 <span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="kn">import</span> <span class="n">conf</span>
@@ -216,8 +216,8 @@
       <span class="k">return</span>
 </pre></div>
 </div>
-<p>Where <code class="docutils literal"><span class="pre">check_if_libname_exists</span></code> is replaced with logic to find our library, as explained later. If we want the library to be optional, we omit the <code class="docutils literal"><span class="pre">conf.fatal</span></code> part.</p>
-<p>Then in our <code class="docutils literal"><span class="pre">wscript</span></code> we add the following lines:</p>
+<p>Where <code class="docutils literal"><span class="pre">check_if_libname_exists</span></code> is replaced with logic to find our library, as explained later. If the library is optional, the <code class="docutils literal"><span class="pre">conf.fatal</span></code> line can be removed.</p>
+<p>Then add the following lines in the <code class="docutils literal"><span class="pre">wscript</span></code>:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c"># imports, etc, ...</span>
 
 <span class="c"># we assume that the configuration file is saved as libname.py</span>
@@ -231,10 +231,10 @@
 <span class="c"># rest of code</span>
 </pre></div>
 </div>
-<p>Libraries usually have the headers and the lib files in two different directories. Header-only libraries only have includes.</p>
+<p>Libraries usually have the headers and the lib files in two different directories. However, header-only libraries only have includes, in this case, you can ignore the following section named &#8220;Check for lib files&#8221;.</p>
 <div class="section" id="check-for-headers">
 <h3>Check for headers<a class="headerlink" href="#check-for-headers" title="Permalink to this headline">¶</a></h3>
-<p>To check for the headers of the library, we add the following code to the <code class="docutils literal"><span class="pre">check_libname</span></code> function:</p>
+<p>To check for the headers of the library, you can add the following code to the <code class="docutils literal"><span class="pre">check_libname</span></code> function:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c"># previous code</span>
 
 <span class="nd">@conf</span>
@@ -259,7 +259,7 @@
 </div>
 <div class="section" id="check-for-lib-files">
 <h3>Check for lib files<a class="headerlink" href="#check-for-lib-files" title="Permalink to this headline">¶</a></h3>
-<p>To check for the lib files of the library, we add the following code to the <code class="docutils literal"><span class="pre">check_libname</span></code> function:</p>
+<p>To check for the lib files of the library, you can add the following code to the <code class="docutils literal"><span class="pre">check_libname</span></code> function:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c"># previous code</span>
 
 <span class="nd">@conf</span>
@@ -286,7 +286,7 @@
 </div>
 <div class="section" id="add-configuration-options">
 <h3>Add configuration options<a class="headerlink" href="#add-configuration-options" title="Permalink to this headline">¶</a></h3>
-<p>We often need additional configuration options when adding new libraries. One useful option, for example, is to specify where to find the library headers and lib files. Adding options is easy: we only need to define a new function named <code class="docutils literal"><span class="pre">options</span></code> in our <code class="docutils literal"><span class="pre">wscript</span></code> and another one in the library configuration file. In the library&#8217;s configuration file:</p>
+<p>Additional configuration options are often needed when adding new libraries. For example, one useful option is to specify the location of the library headers and lib files. Adding options is easy: you only need to define a new function named <code class="docutils literal"><span class="pre">options</span></code> in the <code class="docutils literal"><span class="pre">wscript</span></code> and another one in the library configuration file. In the library&#8217;s configuration file (e.g., <code class="docutils literal"><span class="pre">libname.py</span></code>):</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c">#imports, etc, ...</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
@@ -303,7 +303,7 @@
 </pre></div>
 </div>
 <p>The options in the waf build system are using the python&#8217;s <code class="docutils literal"><span class="pre">optparse</span></code>. Check the official <a class="reference external" href="https://docs.python.org/2/library/optparse.html">optparse</a> documentation for more information.</p>
-<p>Then in our <code class="docutils literal"><span class="pre">wscript</span></code> we add the following lines:</p>
+<p>Then add the following lines in the <code class="docutils literal"><span class="pre">wscript</span></code> of your experiment:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c"># imports, etc, ...</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
@@ -329,7 +329,7 @@
 </pre></div>
 </div>
 <p><strong>wscript:</strong></p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="kn">import</span> <span class="nn">ros</span>
@@ -353,7 +353,7 @@
 </pre></div>
 </div>
 <p><strong>ros.py:</strong></p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="c"># encoding: utf-8</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
@@ -400,7 +400,7 @@
     <span class="k">return</span>
 </pre></div>
 </div>
-<p>Assuming we are at <strong>limbo</strong> root, we run the following to compile our experiment:</p>
+<p>The configuration and compilation of the experiment follows the usual procedure (assuming that we are in the <strong>limbo</strong> root folder):</p>
 <div class="highlight-python"><div class="highlight"><pre>./waf configure --exp example
 ./waf --exp example
 </pre></div>

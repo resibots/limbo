@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.9.1">
+  <compound refid="structlimbo_1_1defaults_1_1acqui__ei" kind="struct"><name>limbo::defaults::acqui_ei</name>
+    <member refid="group__acqui__defaults_1gab43e714d9a9df7e92d6ff205e1d3edc9" kind="function"><name>BO_PARAM</name></member>
+  </compound>
   <compound refid="structlimbo_1_1defaults_1_1acqui__gpucb" kind="struct"><name>limbo::defaults::acqui_gpucb</name>
     <member refid="group__acqui__defaults_1gace8b040a747dae17257aff4ab679bf5d" kind="function"><name>BO_PARAM</name></member>
   </compound>
@@ -157,9 +160,6 @@
     <member refid="structlimbo_1_1mean_1_1_data_1aedfef0dbf9ef90dd910eb11883dd2ba4" kind="function"><name>Data</name></member>
     <member refid="structlimbo_1_1mean_1_1_data_1a68c22daf948a8367802ba6747f373a81" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults" kind="struct"><name>limbo::experimental::bayes_opt::Ehvi::defaults</name>
-    <member refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_1a3de3f3a53d396b50e0358661f122d450" kind="typedef"><name>acquiopt_t</name></member>
-  </compound>
   <compound refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults" kind="struct"><name>limbo::bayes_opt::BoBase::defaults</name>
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a675d927a474fc77608cc63c8406448f7" kind="typedef"><name>init_t</name></member>
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a0a88a267bef731645079455cb11fa836" kind="typedef"><name>kf_t</name></member>
@@ -169,8 +169,19 @@
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ab8f3991474723d27b9c77d0e0a76fce2" kind="typedef"><name>stat_t</name></member>
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a66e1dbe1ccd9dbef0fdfc5c9faee9eff" kind="typedef"><name>stop_t</name></member>
   </compound>
+  <compound refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults" kind="struct"><name>limbo::experimental::bayes_opt::Ehvi::defaults</name>
+    <member refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_1a3d7a04bbbd73b4f95710c29fd88551bf" kind="typedef"><name>acquiopt_t</name></member>
+  </compound>
   <compound refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults" kind="struct"><name>limbo::bayes_opt::BOptimizer::defaults</name>
-    <member refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults_1a4eb44d2abad01f5ef0206b7c5c595c7b" kind="typedef"><name>acquiopt_t</name></member>
+    <member refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults_1af714505103b93f5a2028030a192cc955" kind="typedef"><name>acquiopt_t</name></member>
+  </compound>
+  <compound refid="classlimbo_1_1acqui_1_1_ehvi" kind="class"><name>limbo::acqui::Ehvi</name>
+    <member refid="classlimbo_1_1acqui_1_1_ehvi_1add82bbffb6b0748f68e933540150560a" kind="variable"><name>_models</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_ehvi_1a895aa96e45bce61d05745d32cbec53b4" kind="variable"><name>_pop</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_ehvi_1aa12bf8d58185b0ec2d2bdd2cbdcfe1e1" kind="variable"><name>_ref_point</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_ehvi_1a9868f015ef640e9406022b027a0d7683" kind="function"><name>Ehvi</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_ehvi_1a5d0876e753a2f1037bdf264501fdbd5d" kind="function"><name>dim</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_ehvi_1a1e99fe83a965b5f706d057895598907d" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi" kind="class"><name>limbo::experimental::bayes_opt::Ehvi</name>
     <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1ad5deb9cf89fe77464130cd2d400b5d7b" kind="typedef"><name>args</name></member>
@@ -180,13 +191,12 @@
     <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1af064e606073005f78ef0445d4ab4bc31" kind="typedef"><name>model_t</name></member>
     <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1a44003c1ef6450cbcce18e5c978e30f2c" kind="function"><name>optimize</name></member>
   </compound>
-  <compound refid="classlimbo_1_1acqui_1_1_ehvi" kind="class"><name>limbo::acqui::Ehvi</name>
-    <member refid="classlimbo_1_1acqui_1_1_ehvi_1add82bbffb6b0748f68e933540150560a" kind="variable"><name>_models</name></member>
-    <member refid="classlimbo_1_1acqui_1_1_ehvi_1a895aa96e45bce61d05745d32cbec53b4" kind="variable"><name>_pop</name></member>
-    <member refid="classlimbo_1_1acqui_1_1_ehvi_1aa12bf8d58185b0ec2d2bdd2cbdcfe1e1" kind="variable"><name>_ref_point</name></member>
-    <member refid="classlimbo_1_1acqui_1_1_ehvi_1a9868f015ef640e9406022b027a0d7683" kind="function"><name>Ehvi</name></member>
-    <member refid="classlimbo_1_1acqui_1_1_ehvi_1a5d0876e753a2f1037bdf264501fdbd5d" kind="function"><name>dim</name></member>
-    <member refid="classlimbo_1_1acqui_1_1_ehvi_1a1e99fe83a965b5f706d057895598907d" kind="function"><name>operator()</name></member>
+  <compound refid="classlimbo_1_1acqui_1_1_e_i" kind="class"><name>limbo::acqui::EI</name>
+    <member refid="classlimbo_1_1acqui_1_1_e_i_1ae23eaf02f04050a2bb22573e2bc09e23" kind="variable"><name>_model</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_e_i_1aa1e8c3ae70c75d10adf188e0c260a03a" kind="function"><name>EI</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_e_i_1a52d965602aa60609e3f4f447dbea285b" kind="function"><name>dim_in</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_e_i_1a7b030343c6dae9af80853cfab0868e8d" kind="function"><name>dim_out</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_e_i_1a64f65b304a80810adb9e0b4d193ffcd3" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classlimbo_1_1_evaluation_error" kind="class"><name>limbo::EvaluationError</name>
   </compound>
@@ -208,10 +218,6 @@
     <member refid="structlimbo_1_1mean_1_1_function_a_r_d_1a02dabc2cbdf001450cdd893f578c042d" kind="function"><name>set_h_params</name></member>
     <member refid="structlimbo_1_1mean_1_1_function_a_r_d_1a5bd1343c7f3616c066296813361d9a96" kind="function"><name>grad</name></member>
     <member refid="structlimbo_1_1mean_1_1_function_a_r_d_1acfc9ce5670a247a35a1f09e5f0a09adb" kind="function"><name>operator()</name></member>
-  </compound>
-  <compound refid="structlimbo_1_1stat_1_1_g_p" kind="struct"><name>limbo::stat::GP</name>
-    <member refid="structlimbo_1_1stat_1_1_g_p_1ae4963dbd20077223711a646226091944" kind="function"><name>operator()</name></member>
-    <member refid="structlimbo_1_1stat_1_1_g_p_1a9aec28dcdc629de9043ffc224a6dac9f" kind="function"><name>_explore</name></member>
   </compound>
   <compound refid="classlimbo_1_1model_1_1_g_p" kind="class"><name>limbo::model::GP</name>
     <member refid="classlimbo_1_1model_1_1_g_p_1ae966fae0cb420280dddca8dc1d0436f7" kind="variable"><name>_dim_in</name></member>
@@ -268,6 +274,10 @@
     <member refid="classlimbo_1_1model_1_1_g_p_1a2f0475a0c6368ff1324bfa34626dc46c" kind="function"><name>_sigma</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a7586b65b5f55875f53aa49123b933564" kind="function"><name>_compute_k</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1adb22a4f0feded47ef09df9675dbd4501" kind="function"><name>_compute_k_bl</name></member>
+  </compound>
+  <compound refid="structlimbo_1_1stat_1_1_g_p" kind="struct"><name>limbo::stat::GP</name>
+    <member refid="structlimbo_1_1stat_1_1_g_p_1ae4963dbd20077223711a646226091944" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_g_p_1a9aec28dcdc629de9043ffc224a6dac9f" kind="function"><name>_explore</name></member>
   </compound>
   <compound refid="classlimbo_1_1acqui_1_1_g_p___u_c_b" kind="class"><name>limbo::acqui::GP_UCB</name>
     <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1acb7e407f488e3760e6e04ac3e896b75a" kind="variable"><name>_model</name></member>
@@ -707,6 +717,8 @@
   </compound>
   <compound refid="acqui_8hpp" kind="file"><name>acqui.hpp</name>
   </compound>
+  <compound refid="ei_8hpp" kind="file"><name>ei.hpp</name>
+  </compound>
   <compound refid="gp__ucb_8hpp" kind="file"><name>gp_ucb.hpp</name>
   </compound>
   <compound refid="ucb_8hpp" kind="file"><name>ucb.hpp</name>
@@ -880,6 +892,7 @@
   <compound refid="group__acqui" kind="group"><name>acqui</name>
   </compound>
   <compound refid="group__acqui__defaults" kind="group"><name>Acqui_defaults</name>
+    <member refid="group__acqui__defaults_1gab43e714d9a9df7e92d6ff205e1d3edc9" kind="function"><name>BO_PARAM</name></member>
     <member refid="group__acqui__defaults_1gace8b040a747dae17257aff4ab679bf5d" kind="function"><name>BO_PARAM</name></member>
     <member refid="group__acqui__defaults_1ga1f72be83648befc624f5468668e5728a" kind="function"><name>BO_PARAM</name></member>
   </compound>

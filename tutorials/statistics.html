@@ -193,14 +193,14 @@
 <p>All the statistics are written in a directory called <code class="docutils literal"><span class="pre">hostname_date_pid-number</span></code>. For instance: <code class="docutils literal"><span class="pre">wallepro-perso.loria.fr_2016-05-13_16_16_09_72226</span></code></p>
 <p>Limbo provides a few classes for common uses (see <a class="reference internal" href="../api.html#statistics-stats"><span>Statistics (stats)</span></a> for details):</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">ConsoleSummary</span></code>: write a summary to <code class="docutils literal"><span class="pre">std::cout</span></code> at each iteration of the algorithm</li>
-<li><code class="docutils literal"><span class="pre">AggregatedObservations</span></code>: what values of the evaluation function have been evaluated (after aggregation) [filename <code class="docutils literal"><span class="pre">aggregated_observations.dat</span></code>]</li>
-<li><code class="docutils literal"><span class="pre">BestAggregatedObservations</span></code>: what is the best value at each iteration? [filename <code class="docutils literal"><span class="pre">aggregated_observations.dat</span></code>]</li>
-<li><code class="docutils literal"><span class="pre">Observations</span></code>: what values of the evaluation function have been measured? [filename: <code class="docutils literal"><span class="pre">observations.dat</span></code>]</li>
-<li><code class="docutils literal"><span class="pre">Samples</span></code>: what points have been  tested? [filename: <code class="docutils literal"><span class="pre">samples.dat</span></code>]</li>
-<li><code class="docutils literal"><span class="pre">BestObservations</span></code>: what is the best observation for each iteration? [filename <code class="docutils literal"><span class="pre">best_observations.dat</span></code>]</li>
-<li><code class="docutils literal"><span class="pre">BestSamples</span></code>: what is the best solution for each iteration? [filename: <code class="docutils literal"><span class="pre">best_samples.dat</span></code>]</li>
-<li><code class="docutils literal"><span class="pre">BlSamples</span></code>: what candidate solutions have been blacklisted? [filename: <code class="docutils literal"><span class="pre">bl_samples.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">ConsoleSummary</span></code>: writes a summary to <code class="docutils literal"><span class="pre">std::cout</span></code> at each iteration of the algorithm</li>
+<li><code class="docutils literal"><span class="pre">AggregatedObservations</span></code>: records the value of each evaluation of the function (after aggregation) [filename <code class="docutils literal"><span class="pre">aggregated_observations.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">BestAggregatedObservations</span></code>: records the best value observed so far after each iteration [filename <code class="docutils literal"><span class="pre">aggregated_observations.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">Observations</span></code>: records the value of each evaluation of the function (before aggregation) [filename: <code class="docutils literal"><span class="pre">observations.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">Samples</span></code>: records the position in the search space of the evaluated points [filename: <code class="docutils literal"><span class="pre">samples.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">BestObservations</span></code>: records the best observation after each iteration? [filename <code class="docutils literal"><span class="pre">best_observations.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">BestSamples</span></code>: records the position in the search space of the best observation after each iteration [filename: <code class="docutils literal"><span class="pre">best_samples.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">BlSamples</span></code>: records the candidate solutions that have been blacklisted [filename: <code class="docutils literal"><span class="pre">bl_samples.dat</span></code>]</li>
 </ul>
 <p>These statistics are for &#8220;advanced users&#8221;:</p>
 <ul class="simple">
@@ -216,7 +216,7 @@
 </div>
 <div class="section" id="writing-your-own-statistics-class">
 <h2>Writing your own statistics class<a class="headerlink" href="#writing-your-own-statistics-class" title="Permalink to this headline">¶</a></h2>
-<p>Limbo only provides generic statistics class. Because they are generic, it is often useful to add user-defined statistics class that are specific to a particular experiment.</p>
+<p>Limbo only provides generic statistics classes. However, it is often useful to add user-defined statistics classes that are specific to a particular experiment.</p>
 <p>All the statistics functors follow the same template:</p>
 <div class="code c++ highlight-c++"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nl">Samples</span> <span class="p">:</span> <span class="k">public</span> <span class="n">limbo</span><span class="o">::</span><span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
@@ -258,9 +258,7 @@
 26
 27
 28
-29
-30</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="nl">WorstObservation</span> <span class="p">:</span> <span class="k">public</span> <span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
+29</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="nl">WorstObservation</span> <span class="p">:</span> <span class="k">public</span> <span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">blacklisted</span><span class="p">)</span>
     <span class="p">{</span>
@@ -291,7 +289,7 @@
 <span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
-<p>Then we need to install it into the Bayesian optimiser. The first thing to do is to is to define a new statistics list which include our new <cite>WorstObservation</cite>:</p>
+<p>In order to configure the Bayesian optimizer to use our new statistics class, we first need to define a new statistics list which includes our new <cite>WorstObservation</cite>:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -301,7 +299,7 @@
         <span class="n">WorstObservation</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
-<p>Then, we need to use it when defining the optimizer:</p>
+<p>Then, we use it to define the optimizer:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
@@ -417,11 +415,7 @@
 109
 110
 111
-112
-113
-114</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// please see the explanation in the documentation</span>
-
-<span class="cp">#include &lt;iostream&gt;</span>
+112</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
 <span class="cp">#include &lt;limbo/limbo.hpp&gt;</span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
@@ -433,11 +427,11 @@
     <span class="p">};</span>
 
 <span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
-<span class="cp">#ifdef USE_LIBCMAES</span>
-    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
-    <span class="p">};</span>
-<span class="cp">#elif defined(USE_NLOPT)</span>
+<span class="cp">#ifdef USE_NLOPT</span>
     <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#elif defined(USE_LIBCMAES)</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
     <span class="p">};</span>
 <span class="cp">#else</span>
     <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>

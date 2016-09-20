@@ -209,8 +209,8 @@
 <p>The experiment can the be compiled using <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">--exp</span> <span class="pre">test</span></code></p>
 <p>If you want to customize the parameters, you can use the following options:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">--dim_in=DIM_IN</span></code>: Number of dimensions for the function to optimize [default: 1]</li>
-<li><code class="docutils literal"><span class="pre">--dim_out=DIM_OUT</span></code>: Number of dimensions for the function to optimize [default: 1]</li>
+<li><code class="docutils literal"><span class="pre">--dim_in=DIM_IN</span></code>: Number of input dimensions for the function to optimize [default: 1]</li>
+<li><code class="docutils literal"><span class="pre">--dim_out=DIM_OUT</span></code>: Number of output dimensions for the function to optimize [default: 1]</li>
 <li><code class="docutils literal"><span class="pre">--bayes_opt_boptimizer_noise=BAYES_OPT_BOPTIMIZER_NOISE</span></code>: Acquisition noise of the function to optimize [default: 1e-6]</li>
 <li><code class="docutils literal"><span class="pre">--bayes_opt_bobase_stats_enabled</span></code>: Enable statistics [default: true]</li>
 <li><code class="docutils literal"><span class="pre">--init_randomsampling_samples=INIT_RANDOMSAMPLING_SAMPLES</span></code>: Number of samples used for the initialization [default: 10]</li>
@@ -324,7 +324,7 @@
 </pre></div>
 </div>
 <p>We can create two variants in the <code class="docutils literal"><span class="pre">wscript</span></code>, as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
 
@@ -342,7 +342,7 @@
 <li><code class="docutils literal"><span class="pre">multi_ehvi</span></code>, which is the compilation of <code class="docutils literal"><span class="pre">multi.cpp</span></code> file with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">EHVI</span></code> at the first line</li>
 </ul>
 <p>You can add as many defines as you like (or even generate them with python code), for instance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
 
@@ -361,7 +361,7 @@
 <li>First compile a static library, then link with it in the variant.</li>
 <li>Add them in sequence in the source input. The name of the first file is used for the variant target names. Example:</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
 

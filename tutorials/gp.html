@@ -185,11 +185,11 @@
            <div itemprop="articleBody">
             
   <div class="section" id="gaussian-process">
-<h1>Gaussian Process<a class="headerlink" href="#gaussian-process" title="Permalink to this headline">¶</a></h1>
-<p>Limbo relies on our C++-11 implementation of Gaussian processes (See <a class="reference internal" href="../guides/bo.html#gaussian-process"><span>Gaussian Process</span></a> for a short introduction ) which can be useful by itself. This tutorial will explain you how to create a Gaussian Process (GP) using some data.</p>
+<span id="gp-tutorial"></span><h1>Gaussian Process<a class="headerlink" href="#gaussian-process" title="Permalink to this headline">¶</a></h1>
+<p>Limbo relies on our C++-11 implementation of Gaussian processes (See <a class="reference internal" href="../guides/bo.html#gaussian-process"><span>Gaussian Process</span></a> for a short introduction ) which can be useful by itself. This tutorial explains how to create and use a Gaussian Process (GP).</p>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
-<p>We assue that our samples are in a vector called <code class="docutils literal"><span class="pre">samples</span></code> and that our observations are in a vector called <code class="docutils literal"><span class="pre">observations</span></code>. Please note that the type of both observations and samples is Eigen::VectorXd (in this example, they are 1-D vectors).</p>
+<p>We assume that our samples are in a vector called <code class="docutils literal"><span class="pre">samples</span></code> and that our observations are in a vector called <code class="docutils literal"><span class="pre">observations</span></code>. Please note that the type of both observations and samples is Eigen::VectorXd (in this example, they are 1-D vectors).</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -199,9 +199,7 @@
  7
  8
  9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// our data (1-D inputs, 1-D outputs)</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;</span> <span class="n">samples</span> <span class="o">=</span> <span class="p">{</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;</span> <span class="n">samples</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
         <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mf">0.25</span><span class="p">),</span>
         <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
@@ -216,17 +214,19 @@
 </div>
 <div class="section" id="basic-usage">
 <h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
-<p>We first create a basic GP with an Exponential kernel (<code class="docutils literal"><span class="pre">kernel::Exp&lt;Params&gt;</span></code>) and a mean function equals to the mean of the obsevations (<code class="docutils literal"><span class="pre">mean::Data&lt;Params&gt;</span></code>). To use the <code class="docutils literal"><span class="pre">Exp</span></code> kernel, we need to define one parameter in a <code class="docutils literal"><span class="pre">Params</span></code> structure:</p>
+<p>We first create a basic GP with an Exponential kernel (<code class="docutils literal"><span class="pre">kernel::Exp&lt;Params&gt;</span></code>) and a mean function equals to the mean of the obsevations (<code class="docutils literal"><span class="pre">mean::Data&lt;Params&gt;</span></code>). The <code class="docutils literal"><span class="pre">Exp</span></code> kernel needs a few parameters to be defined in a <code class="docutils literal"><span class="pre">Params</span></code> structure:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="n">kernel_exp</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">sigma_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">);</span>
+    <span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
-<p>Now we can define the type of the GP:</p>
+<p>The type of the GP is defined by the following lines:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="k">typedef</span> <span class="n">kernel</span><span class="o">::</span><span class="n">Exp</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">Kernel_t</span><span class="p">;</span>
@@ -259,11 +259,11 @@
 <p>Here we assume that the noise is the same for all samples and that it is equal to 0.01.</p>
 <p>Querying the GP can be achieved in two different ways:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">gp.mu(v)</span></code> and <code class="docutils literal"><span class="pre">gp.sigma(v)</span></code>, which returns the mean and the variance (sigma squared) for the input data point <code class="docutils literal"><span class="pre">v</span></code></li>
+<li><code class="docutils literal"><span class="pre">gp.mu(v)</span></code> and <code class="docutils literal"><span class="pre">gp.sigma(v)</span></code>, which return the mean and the variance (sigma squared) for the input data point <code class="docutils literal"><span class="pre">v</span></code></li>
 <li><code class="docutils literal"><span class="pre">std::tie(mu,</span> <span class="pre">sigma)</span> <span class="pre">=</span> <span class="pre">gp.query(v)</span></code>, which returns the mean and the variance at the same time.</li>
 </ul>
 <p>The second approach is faster because some computations are the same for <code class="docutils literal"><span class="pre">mu</span></code> and <code class="docutils literal"><span class="pre">sigma</span></code>.</p>
-<p>To write the GP in a file (to visualize it), we can query it for many points:</p>
+<p>To visualize the predictions of the GP, we can query it for many points and record the predictions in a file:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -290,9 +290,9 @@
 </div>
 <div class="section" id="hyper-parameter-optimization">
 <h2>Hyper-parameter optimization<a class="headerlink" href="#hyper-parameter-optimization" title="Permalink to this headline">¶</a></h2>
-<p>Most kernels have some parameters. It is common the GP literature to set them by maximizing the log-likelihood of the data knowing the model (see <a class="reference internal" href="../guides/bo.html#gaussian-process"><span>Gaussian Process</span></a> for a description of this concept).</p>
-<p>In limbo, only a subset of the kernels can have their hyper-parameters optimized. The most common one is <code class="docutils literal"><span class="pre">SquaredExpARD</span></code> (Squared Exponential with Automatic Relevance Determination).</p>
-<p>We define a new GP type as follows:</p>
+<p>Most kernel functions have some parameters. It is common in the GP literature to set them by maximizing the log-likelihood of the data knowing the model (see <a class="reference internal" href="../guides/bo.html#gaussian-process"><span>Gaussian Process</span></a> for a description of this concept).</p>
+<p>In limbo, only a subset of the kernel functions can have their hyper-parameters optimized. The most common one is <code class="docutils literal"><span class="pre">SquaredExpARD</span></code> (Squared Exponential with Automatic Relevance Determination).</p>
+<p>A new GP type is defined as follows:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="k">typedef</span> <span class="n">kernel</span><span class="o">::</span><span class="n">SquaredExpARD</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">Kernel2_t</span><span class="p">;</span>
@@ -300,13 +300,13 @@
     <span class="k">typedef</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Kernel2_t</span><span class="p">,</span> <span class="n">Mean_t</span><span class="p">,</span> <span class="n">model</span><span class="o">::</span><span class="n">gp</span><span class="o">::</span><span class="n">KernelLFOpt</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span> <span class="n">GP2_t</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
-<p>We use the default values for the parameters of <code class="docutils literal"><span class="pre">SquaredExpARD</span></code>:</p>
+<p>It uses the default values for the parameters of <code class="docutils literal"><span class="pre">SquaredExpARD</span></code>:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
     <span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
-<p>After calling the <code class="docutils literal"><span class="pre">compute()</span></code> method, we need to optimize the hyper-parameters by calling &#8216;optimize_hyperparams()&#8217; and then recompute the GP:</p>
+<p>After calling the <code class="docutils literal"><span class="pre">compute()</span></code> method, the hyper-parameters can be optimized by calling the &#8216;optimize_hyperparams()&#8217; function. Once the new parameters are found, the GP needs to be recomputed:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">gp_ard</span><span class="p">.</span><span class="n">compute</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">noises</span><span class="p">);</span>

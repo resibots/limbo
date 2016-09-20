@@ -34,8 +34,8 @@ The experiment can the be compiled using ``./waf --exp test``
 
 If you want to customize the parameters, you can use the following options:
 
-- ``--dim_in=DIM_IN``: Number of dimensions for the function to optimize [default: 1]
-- ``--dim_out=DIM_OUT``: Number of dimensions for the function to optimize [default: 1]
+- ``--dim_in=DIM_IN``: Number of input dimensions for the function to optimize [default: 1]
+- ``--dim_out=DIM_OUT``: Number of output dimensions for the function to optimize [default: 1]
 - ``--bayes_opt_boptimizer_noise=BAYES_OPT_BOPTIMIZER_NOISE``: Acquisition noise of the function to optimize [default: 1e-6]
 - ``--bayes_opt_bobase_stats_enabled``: Enable statistics [default: true]
 - ``--init_randomsampling_samples=INIT_RANDOMSAMPLING_SAMPLES``: Number of samples used for the initialization [default: 10]
@@ -153,7 +153,7 @@ We can create two variants in the ``wscript``, as follows:
 
 .. code-block:: python
 
-  #! /usr/bin/env python
+  #!/usr/bin/env python
   import limbo
   def build(bld):
 
@@ -175,7 +175,7 @@ You can add as many defines as you like (or even generate them with python code)
 
 .. code-block:: python
 
-  #! /usr/bin/env python
+  #!/usr/bin/env python
   import limbo
   def build(bld):
 
@@ -198,7 +198,7 @@ If you have more than one file, you have 2 options:
 
 .. code-block:: python
 
-  #! /usr/bin/env python
+  #!/usr/bin/env python
   import limbo
   def build(bld):
 

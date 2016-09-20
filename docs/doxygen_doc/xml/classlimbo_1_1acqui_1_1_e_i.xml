@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classlimbo_1_1acqui_1_1_e_i" kind="class" language="C++" prot="public">
+    <compoundname>limbo::acqui::EI</compoundname>
+    <includes refid="ei_8hpp" local="no">limbo/acqui/ei.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+      <param>
+        <type>typename Model</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlimbo_1_1acqui_1_1_e_i_1ae23eaf02f04050a2bb22573e2bc09e23" prot="private" static="no" mutable="no">
+        <type>const Model &amp;</type>
+        <definition>const Model&amp; limbo::acqui::EI&lt; Params, Model &gt;::_model</definition>
+        <argsstring></argsstring>
+        <name>_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" line="111" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1_e_i_1aa1e8c3ae70c75d10adf188e0c260a03a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::acqui::EI&lt; Params, Model &gt;::EI</definition>
+        <argsstring>(const Model &amp;model, int iteration=0)</argsstring>
+        <name>EI</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iteration</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" line="76" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1_e_i_1a52d965602aa60609e3f4f447dbea285b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::acqui::EI&lt; Params, Model &gt;::dim_in</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_in</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" line="78" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1_e_i_1a7b030343c6dae9af80853cfab0868e8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::acqui::EI&lt; Params, Model &gt;::dim_out</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_out</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" line="80" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1acqui_1_1_e_i_1a64f65b304a80810adb9e0b4d193ffcd3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double limbo::acqui::EI&lt; Params, Model &gt;::operator()</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" line="83" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" bodystart="83" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>embed:rst
+Classic EI (Expected Improvement). See :cite:`brochu2010tutorial`, p. 14
+
+  .. math::
+    EI(x) = (\mu(x) - f(x^+) - \xi)\Phi(Z) + \sigma(x)\phi(Z),\\\text{with } Z = \frac{\mu(x)-f(x^+) - \xi}{\sigma(x)}.
+
+Parameters:
+  - ``double jitter`` - :math:`\xi`
+</verbatim> </para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" line="74" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp" bodystart="74" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classlimbo_1_1acqui_1_1_e_i_1ae23eaf02f04050a2bb22573e2bc09e23" prot="private" virt="non-virtual"><scope>limbo::acqui::EI</scope><name>_model</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_e_i_1a52d965602aa60609e3f4f447dbea285b" prot="public" virt="non-virtual"><scope>limbo::acqui::EI</scope><name>dim_in</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_e_i_1a7b030343c6dae9af80853cfab0868e8d" prot="public" virt="non-virtual"><scope>limbo::acqui::EI</scope><name>dim_out</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_e_i_1aa1e8c3ae70c75d10adf188e0c260a03a" prot="public" virt="non-virtual"><scope>limbo::acqui::EI</scope><name>EI</name></member>
+      <member refid="classlimbo_1_1acqui_1_1_e_i_1a64f65b304a80810adb9e0b4d193ffcd3" prot="public" virt="non-virtual"><scope>limbo::acqui::EI</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

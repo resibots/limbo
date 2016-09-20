@@ -224,12 +224,8 @@
 <div class="math">
 \[\log p(\mathbf{P}_{1:t}\mid\boldsymbol{\chi}_{1:t},\boldsymbol{\theta})= -\frac{1}{2}(\mathbf{P}_{1:t}-\mu_0)^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mu_0) - \frac{1}{2}\log\mid\mathbf{K}\mid - \frac{n}{2}\log2\pi\]</div>
 <p>where <span class="math">\(\mu_0\)</span> is the mean function (prior).</p>
-<p>Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop).</p>
+<p>Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop), see <a class="reference internal" href="../tutorials/opt.html#opt-tutorial"><span>Optimization Sub-API</span></a> and the <a class="reference internal" href="../api.html#opt-api"><span>the Limbo implementation guide</span></a>.</p>
 <p>For more details, see <a class="reference internal" href="#a-rasmussen2006" id="id9">[4]</a> (chapter 5).</p>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<p class="last">list the optimization algorithms</p>
-</div>
 </div>
 <div class="section" id="kernel-function">
 <span id="kernel-functions"></span><h2>Kernel function<a class="headerlink" href="#kernel-function" title="Permalink to this headline">¶</a></h2>
@@ -243,7 +239,7 @@ not-yet-tested solutions that are nearby.</p>
 k(\mathbf{x}_1,\mathbf{x}_2)=\left(1+ \frac{\sqrt{5}d(\mathbf{x}_1,\mathbf{x}_2)}{\rho}+\frac{5d(\mathbf{x}_1,\mathbf{x}_2)^2}{3\rho^2}\right)\exp\left(-\frac{\sqrt{5}d(\mathbf{x}_1,\mathbf{x}_2)}{\rho}\right)\\
 \textrm{where }d(\mathbf{x}_1,\mathbf{x}_2) \textrm{ is the Euclidean distance.}
 \end{array}\end{split}\]</div>
-<p id="acqui-functions">There are other kernel functions in Limbo, and it is easy to define more. See <span class="xref std std-ref">the Limbo implementation guide</span> for the available kernel functions.</p>
+<p id="acqui-functions">There are other kernel functions in Limbo, and it is easy to define more. See <a class="reference internal" href="../api.html#kernel-api"><span>the Limbo implementation guide</span></a> for the available kernel functions.</p>
 </div>
 <div class="section" id="acquisition-function">
 <h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this headline">¶</a></h2>
@@ -259,7 +255,7 @@ equation for the UCB is:</p>
 <p>Here, the emphasis on exploitation vs. exploration is explicit and easy to adjust. The UCB function can be seen as the maximum value (argmax) across all solutions of the weighted sum of the expected performance (mean of the Gaussian, <span class="math">\(\mu_{t}(\mathbf{x})\)</span>) and of the uncertainty (standard deviation of the Gaussian, <span class="math">\(\sigma_t(\mathbf{x})\)</span>) of each solution. This sum is weighted by the <span class="math">\(\kappa\)</span> factor. With a low <span class="math">\(\kappa\)</span>, the algorithm will choose solutions that are expected to be high-performing. Conversely, with a high <span class="math">\(\kappa\)</span>, the algorithm will focus its search on unexplored areas of the search space that may have high-performing solutions. The
 <span class="math">\(\kappa\)</span> factor enables fine adjustments to the
 exploitation/exploration trade-off of the algorithm.</p>
-<p>There are other acquisition functions in Limbo, and it is easy to define more. See <span class="xref std std-ref">the Limbo implementation guide</span> for the available acquisition functions.</p>
+<p>There are other acquisition functions in Limbo, and it is easy to define more. See <a class="reference internal" href="../api.html#acqui-api"><span>the Limbo implementation guide</span></a> for the available acquisition functions.</p>
 <hr class="docutils" />
 <p id="bibtex-bibliography-guides/bo-0"><table class="docutils citation" frame="void" id="a-brochu2010tutorial" rules="none">
 <colgroup><col class="label" /><col /></colgroup>

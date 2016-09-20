@@ -71,11 +71,11 @@ The marginal likelihood can be computed as follows:
 
 where :math:`\mu_0` is the mean function (prior).
 
-Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop).
+Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop), see :ref:`opt-tutorial` and the :ref:`the Limbo implementation guide <opt-api>`.
 
 For more details, see :cite:`a-Rasmussen2006` (chapter 5).
 
-.. todo:: list the optimization algorithms
+
 
 .. _kernel-functions:
 
@@ -99,7 +99,7 @@ The Matern kernel function is computed as follows :cite:`a-matern1960spatial,a-s
 .. _acqui-functions:
 
 
-There are other kernel functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <kernel-guide>` for the available kernel functions.
+There are other kernel functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <kernel-api>` for the available kernel functions.
 
 Acquisition function
 --------------------
@@ -122,7 +122,7 @@ Here, the emphasis on exploitation vs. exploration is explicit and easy to adjus
 :math:`\kappa` factor enables fine adjustments to the
 exploitation/exploration trade-off of the algorithm.
 
-There are other acquisition functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <acquisition-guide>` for the available acquisition functions.
+There are other acquisition functions in Limbo, and it is easy to define more. See :ref:`the Limbo implementation guide <acqui-api>` for the available acquisition functions.
 
 -----
 

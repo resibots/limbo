@@ -272,11 +272,11 @@
     <span class="p">};</span>
 
 <span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
-<span class="cp">#ifdef USE_LIBCMAES</span>
-    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
-    <span class="p">};</span>
-<span class="cp">#elif defined(USE_NLOPT)</span>
+<span class="cp">#ifdef USE_NLOPT</span>
     <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#elif defined(USE_LIBCMAES)</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
     <span class="p">};</span>
 <span class="cp">#else</span>
     <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>
@@ -440,11 +440,7 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
 70
 71
 72
-73
-74
-75</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// please see the explanation in the documentation</span>
-
-<span class="cp">#include &lt;iostream&gt;</span>
+73</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
 
 <span class="c1">// you can also include &lt;limbo/limbo.hpp&gt; but it will slow down the compilation</span>
 <span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>
@@ -458,11 +454,11 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
     <span class="p">};</span>
 
 <span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
-<span class="cp">#ifdef USE_LIBCMAES</span>
-    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
-    <span class="p">};</span>
-<span class="cp">#elif defined(USE_NLOPT)</span>
+<span class="cp">#ifdef USE_NLOPT</span>
     <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#elif defined(USE_LIBCMAES)</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
     <span class="p">};</span>
 <span class="cp">#else</span>
     <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>

@@ -19,7 +19,7 @@ Here is the longer answer. When we started Sferes2, around 2007, the free softwa
 
 We tried all of them.
 
-Cmake uses a custom language that is not especially well designed in our opinion (it looks like a language from the 70s and it ignores most of the research in computer languages of the last 30 years). Generating makefiles is nice, but (1) it is slow (because generating files is slow), (2) it is a 40 year old syntax (which does the job, OK), and (3) it is not designed for parallel build (whereas all our computers are now multi-core). Compiling on both Unix and MS Windows is easy, but Windows is not our target platform. On the contrary, cross-compiling for embedded platforms (e.g. am ARM-based Raspberry Pi or a robot) was very hard with the first versions of Cmake (whereas it was easy with Autoconf / Automake!).
+Cmake uses a custom language that is not especially well designed in our opinion (it looks like a language from the 70s and it ignores most of the research in computer languages of the last 30 years). Generating makefiles is nice, but (1) it is slow (because generating files is slow), (2) it is a 40 year old syntax (which does the job, OK), and (3) it is not designed for parallel build (whereas all our computers are now multi-core). Compiling on both Unix and MS Windows is easy, but Windows is not our target platform. On the contrary, cross-compiling for embedded platforms (e.g. an ARM-based Raspberry Pi or a robot) was very hard with the first versions of Cmake (whereas it was easy with Autoconf / Automake!).
 
 Scons is nice because it is based on Python, a nice, general purpose language that almost everybody know. It makes it easy to build complex build frameworks, but simple things can be not-that-simple to do (at least, in 2007, it probably improved since then). In addition, Scons does not generate makefiles, which makes it faster and more adapted to parallel builds.
 
@@ -39,7 +39,7 @@ Why am I getting "'NoLFOpt' should never be called!" assertion failure?
 
 Most probably, you are using the `BOptimizer` class and you have set an `hp_period` (rate at which the hyperparams are optimized) bigger than 0, but you are using a Gaussian Process model with no hyperparameters optimization. This should never happen. So, if you do not want to optimize any hyperparameters, set `hp_period` parameter to -1. On the other hand, if you want use a Gaussian Process model that does optimize the hyperparameters, check :ref:`here <gp-hpopt>` for available hyperparameters optimization options.
 
-Why am I getting "'XXXLFOpt' was never called!" assertion failure at the end of my program execution?
+Why am I getting "'XXXLFOpt' was never called!" errors?
 -------------------------------------------------------------------------------------------------------
 
 Most probably, you are using the `BOptimizer` class and you have set an `hp_period` (rate at which the hyperparams are optimized) less than 1, but you are using a Gaussian Process model that optimizes the hyperparameters. This should never happen. If you want use a Gaussian Process model that does optimize the hyperparameters, set the `hp_period` parameter to a value bigger than 0. On the other hand, if you do not want to optimize any hyperparameters, set `hp_period` parameter to -1 and use a Gaussian Process model that does not optimize the hyperparameters. Check :ref:`here <gp-hpopt>` for available hyperparameters optimization options.
