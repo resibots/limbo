@@ -48,6 +48,7 @@
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
+#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -91,12 +92,13 @@ namespace limbo {
             size_t dim_out() const { return _model.dim_out(); }
 
             template <typename AggregatorFunction>
-            double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+            opt::eval_t operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun, bool gradient) const
             {
+                assert(!gradient);
                 Eigen::VectorXd mu;
                 double sigma;
                 std::tie(mu, sigma) = _model.query(v);
-                return (afun(mu) + _beta * std::sqrt(sigma));
+                return opt::no_grad(afun(mu) + _beta * std::sqrt(sigma));
             }
 
         protected:

@@ -71,11 +71,11 @@ namespace limbo {
 
                 if (!blacklisted && !bo.samples().empty()) {
                     std::tie(mu, sigma) = bo.model().query(bo.samples().back());
-                    acqui = typename BO::acquisition_function_t(bo.model(), bo.current_iteration())(bo.samples().back(), afun);
+                    acqui = opt::fun(typename BO::acquisition_function_t(bo.model(), bo.current_iteration())(bo.samples().back(), afun, false));
                 }
                 else if (!bo.bl_samples().empty()) {
                     std::tie(mu, sigma) = bo.model().query(bo.bl_samples().back());
-                    acqui = typename BO::acquisition_function_t(bo.model(), bo.current_iteration())(bo.bl_samples().back(), afun);
+                    acqui = opt::fun(typename BO::acquisition_function_t(bo.model(), bo.current_iteration())(bo.bl_samples().back(), afun, false));
                 }
                 else
                     return;

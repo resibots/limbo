@@ -114,7 +114,7 @@ Template
       size_t dim_in() const { return _model.dim_in(); }
       size_t dim_out() const { return _model.dim_out(); }
       template <typename AggregatorFunction>
-      double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+      limbo::opt::eval_t operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun, bool gradient) const
       {
         // code
       }
