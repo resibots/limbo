@@ -87,23 +87,23 @@ namespace limbo {
         /**
         The classic Bayesian optimization algorithm.
 
-        \\rst
+        \rst
         References: :cite:`brochu2010tutorial,Mockus2013`
-        \\endrst
+        \endrst
 
         This class takes the same template parameters as BoBase. It adds:
-        \\rst
+        \rst
         +---------------------+------------+----------+---------------+
         |type                 |typedef     | argument | default       |
         +=====================+============+==========+===============+
         |acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
         +---------------------+------------+----------+---------------+
-        \\endrst
+        \endrst
 
         The default value of acqui_opt_t is:
-        - ``opt::Cmaes<Params>`` if libcmaes was found in `waf configure`
-        - ``opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>`` if NLOpt was found but libcmaes was not found
-        - ``opt::GridSearch<Params>`` otherwise (please do not use this: the algorithm will not work at all!)
+        - ``opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>`` if NLOpt was found in `waf configure`
+        - ``opt::Cmaes<Params>`` if libcmaes was found but NLOpt was not found
+        - ``opt::GridSearch<Params>`` otherwise (please do not use this: the algorithm will not work as expected!)
         */
         template <class Params,
           class A1 = boost::parameter::void_,
