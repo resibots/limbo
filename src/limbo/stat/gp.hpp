@@ -80,7 +80,7 @@ namespace limbo {
                     point[dim_in] = x;
                     if (dim_in == current.size() - 1) {
                         auto q = bo.model().query(point);
-                        double acqui = typename BO::acquisition_function_t(bo.model(), bo.current_iteration())(point, afun);
+                        double acqui = std::get<0>(typename BO::acquisition_function_t(bo.model(), bo.current_iteration())(point, afun));
                         ofs << point.transpose() << " "
                             << std::get<0>(q).transpose() << " "
                             << std::get<1>(q) << " "
