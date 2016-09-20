@@ -152,7 +152,7 @@ namespace limbo {
                     acquisition_function_t acqui(_model, this->_current_iteration);
 
                     auto acqui_optimization =
-                        [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun); };
+                        [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun,g); };
                     Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in);
                     Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, true);
                     bool blacklisted = !this->eval_and_add(sfun, new_sample);

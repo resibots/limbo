@@ -81,8 +81,9 @@ namespace limbo {
             size_t dim_out() const { return _model.dim_out(); }
 
             template <typename AggregatorFunction>
-            opt::eval_t operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+            opt::eval_t operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun, bool gradient) const
             {
+                assert(!gradient);
                 Eigen::VectorXd mu;
                 double sigma_sq;
                 std::tie(mu, sigma_sq) = _model.query(v);

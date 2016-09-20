@@ -252,7 +252,7 @@ BOOST_AUTO_TEST_CASE(test_gp_no_samples_acqui_opt)
 
     // we do not have gradient in our current acquisition function
     auto acqui_optimization =
-        [&](const Eigen::VectorXd& x, bool g) { return acqui(x, FirstElem()); };
+        [&](const Eigen::VectorXd& x, bool g) { return acqui(x, FirstElem(), g); };
     Eigen::VectorXd starting_point = tools::random_vector(2);
     Eigen::VectorXd test = acqui_optimizer(acqui_optimization, starting_point, true);
     BOOST_CHECK(test(0) < 1e-5);

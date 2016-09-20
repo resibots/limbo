@@ -105,8 +105,9 @@ public:
     size_t dim_out() const { return _model.dim_out(); }
 
     template <typename AggregatorFunction>
-    limbo::opt::eval_t operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+    limbo::opt::eval_t operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun, bool gradient) const
     {
+        assert(!gradient);
         // double mu, sigma;
         // std::tie(mu, sigma) = _model.query(v);
         // return (mu + Params::ucb::alpha() * sqrt(sigma));
