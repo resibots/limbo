@@ -46,7 +46,9 @@
 #include <limbo/experimental/bayes_opt/parego.hpp>
 #include <limbo/experimental/bayes_opt/nsbo.hpp>
 #include <limbo/experimental/bayes_opt/ehvi.hpp>
+#include <limbo/experimental/stat/pareto_front.hpp>
 #include <limbo/experimental/stat/pareto_benchmark.hpp>
+#include <limbo/experimental/stat/hyper_volume.hpp>
 
 using namespace limbo;
 
@@ -90,9 +92,16 @@ struct Params {
     struct mean_constant : public defaults::mean_constant {
     };
 
-    struct bayes_opt_ehvi {
+    struct bayes_opt_ehvi : public defaults::bayes_opt_ehvi {
         BO_PARAM(double, x_ref, -11);
         BO_PARAM(double, y_ref, -11);
+    };
+
+    struct model_gp_parego : public experimental::defaults::model_gp_parego {
+    };
+
+    struct stat_hyper_volume {
+        BO_PARAM_ARRAY(double, ref, 10, 10);
     };
 };
 
@@ -106,6 +115,8 @@ struct Params {
 
 struct zdt1 {
     static constexpr size_t dim_in = ZDT_DIM;
+    static constexpr size_t dim_out = 2;
+
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd res(2);
@@ -123,6 +134,8 @@ struct zdt1 {
 
 struct zdt2 {
     static constexpr size_t dim_in = ZDT_DIM;
+    static constexpr size_t dim_out = 2;
+
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd res(2);
@@ -140,6 +153,8 @@ struct zdt2 {
 
 struct zdt3 {
     static constexpr size_t dim_in = ZDT_DIM;
+    static constexpr size_t dim_out = 2;
+
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd res(2);
@@ -190,13 +205,16 @@ int main()
     typedef mop2 func_t;
 #endif
 
-    using stat_t = boost::fusion::vector<experimental::stat::ParetoBenchmark<func_t>>;
-
 #ifdef PAREGO
-    Parego<Params, statsfun<stat_t>> opt;
+    using stat_t = boost::fusion::vector<experimental::stat::ParetoFront<Params>,
+        experimental::stat::HyperVolume<Params>,
+        stat::ConsoleSummary<Params>>;
+    experimental::bayes_opt::Parego<Params, statsfun<stat_t>> opt;
 #elif defined(NSBO)
-    Nsbo<Params, statsfun<stat_t>> opt;
+    using stat_t = boost::fusion::vector<experimental::stat::ParetoBenchmark<func_t>>;
+    experimental::bayes_opt::Nsbo<Params, statsfun<stat_t>> opt;
 #else
+    using stat_t = boost::fusion::vector<experimental::stat::ParetoBenchmark<func_t>>;
     experimental::bayes_opt::Ehvi<Params, statsfun<stat_t>> opt;
 #endif
     opt.optimize(func_t());

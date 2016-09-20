@@ -106,7 +106,6 @@ namespace limbo {
                     acqui_optimizer_t inner_opt;
 
                     while (this->_samples.size() == 0 || !this->_stop(*this, FirstElem())) {
-                        std::cout.flush();
                         this->template update_pareto_model<EvalFunction::dim_in>();
                         this->update_pareto_data();
 
@@ -141,7 +140,7 @@ namespace limbo {
                         };
 
                         auto comp = [](const pair_t& v1, const pair_t& v2) {
-                                    return v1.second > v2.second;
+                            return v1.second > v2.second;
                         };
 
                         auto m = tools::par::max(init, this->pareto_data().size(), body, comp);
