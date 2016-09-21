@@ -73,12 +73,11 @@ namespace limbo {
     }
 
     namespace experimental {
-        BOOST_PARAMETER_TEMPLATE_KEYWORD(c_acquiopt)
         BOOST_PARAMETER_TEMPLATE_KEYWORD(constraint_modelfun)
 
         namespace bayes_opt {
 
-            typedef boost::parameter::parameters<boost::parameter::optional<tag::c_acquiopt>,
+            typedef boost::parameter::parameters<boost::parameter::optional<limbo::tag::acquiopt>,
                 boost::parameter::optional<limbo::tag::statsfun>,
                 boost::parameter::optional<limbo::tag::initfun>,
                 boost::parameter::optional<limbo::tag::acquifun>,
@@ -100,7 +99,7 @@ namespace limbo {
         +---------------------+------------+----------+---------------+
         |type                 |typedef     | argument | default       |
         +=====================+============+==========+===============+
-        |acqui. optimizer     |acqui_opt_t | c_acquiopt | see below     |
+        |acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
         +---------------------+------------+----------+---------------+
         \\endrst
 
@@ -141,7 +140,7 @@ namespace limbo {
                 typedef typename base_t::acquisition_function_t acquisition_function_t;
                 // extract the types
                 typedef typename cboptimizer_signature::bind<A1, A2, A3, A4, A5, A6, A7>::type args;
-                typedef typename boost::parameter::binding<args, tag::c_acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+                typedef typename boost::parameter::binding<args, limbo::tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
 
                 typedef typename boost::parameter::binding<args, tag::constraint_modelfun, typename defaults::constraint_model_t>::type constraint_model_t;
 
