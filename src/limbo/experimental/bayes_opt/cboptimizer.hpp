@@ -83,7 +83,7 @@ namespace limbo {
                 boost::parameter::optional<limbo::tag::acquifun>,
                 boost::parameter::optional<limbo::tag::stopcrit>,
                 boost::parameter::optional<limbo::tag::modelfun>,
-                boost::parameter::optional<tag::constraint_modelfun>>
+                boost::parameter::optional<limbo::experimental::tag::constraint_modelfun>>
                 cboptimizer_signature;
 
             // clang-format off
@@ -122,16 +122,16 @@ namespace limbo {
                 // defaults
                 struct defaults {
 #ifdef USE_NLOPT
-                    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+                    typedef limbo::opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
 #elif defined(USE_LIBCMAES)
-                    typedef opt::Cmaes<Params> acquiopt_t;
+                    typedef limbo::opt::Cmaes<Params> acquiopt_t;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-                    typedef opt::GridSearch<Params> acquiopt_t;
+                    typedef limbo::opt::GridSearch<Params> acquiopt_t;
 #endif
-                    typedef kernel::Exp<Params> kf_t;
-                    typedef mean::Constant<Params> mean_t;
-                    typedef model::GP<Params, kf_t, mean_t> constraint_model_t;
+                    typedef limbo::kernel::Exp<Params> kf_t;
+                    typedef limbo::mean::Constant<Params> mean_t;
+                    typedef limbo::model::GP<Params, kf_t, mean_t> constraint_model_t;
                 };
                 /// link to the corresponding BoBase (useful for typedefs)
                 typedef limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
@@ -142,7 +142,7 @@ namespace limbo {
                 typedef typename cboptimizer_signature::bind<A1, A2, A3, A4, A5, A6, A7>::type args;
                 typedef typename boost::parameter::binding<args, limbo::tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
 
-                typedef typename boost::parameter::binding<args, tag::constraint_modelfun, typename defaults::constraint_model_t>::type constraint_model_t;
+                typedef typename boost::parameter::binding<args, limbo::experimental::tag::constraint_modelfun, typename defaults::constraint_model_t>::type constraint_model_t;
 
                 /// The main function (run the Bayesian optimization algorithm)
                 template <typename StateFunction, typename AggregatorFunction = FirstElem>
