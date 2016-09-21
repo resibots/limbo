@@ -74,6 +74,7 @@ namespace limbo {
 
     namespace experimental {
         BOOST_PARAMETER_TEMPLATE_KEYWORD(c_acquiopt)
+        BOOST_PARAMETER_TEMPLATE_KEYWORD(constraint_modelfun)
 
         namespace bayes_opt {
 
@@ -82,7 +83,8 @@ namespace limbo {
                 boost::parameter::optional<limbo::tag::initfun>,
                 boost::parameter::optional<limbo::tag::acquifun>,
                 boost::parameter::optional<limbo::tag::stopcrit>,
-                boost::parameter::optional<limbo::tag::modelfun>>
+                boost::parameter::optional<limbo::tag::modelfun>,
+                boost::parameter::optional<tag::constraint_modelfun>>
                 cboptimizer_signature;
 
             // clang-format off
@@ -113,7 +115,8 @@ namespace limbo {
           class A3 = boost::parameter::void_,
           class A4 = boost::parameter::void_,
           class A5 = boost::parameter::void_,
-          class A6 = boost::parameter::void_>
+          class A6 = boost::parameter::void_,
+          class A7 = boost::parameter::void_>
             // clang-format on
             class CBOptimizer : public limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> {
             public:
@@ -127,20 +130,25 @@ namespace limbo {
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
                     typedef opt::GridSearch<Params> acquiopt_t;
 #endif
+                    typedef kernel::Exp<Params> kf_t;
+                    typedef mean::Constant<Params> mean_t;
+                    typedef model::GP<Params, kf_t, mean_t> constraint_model_t;
                 };
                 /// link to the corresponding BoBase (useful for typedefs)
                 typedef limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
                 typedef typename base_t::model_t model_t;
+
                 typedef typename base_t::acquisition_function_t acquisition_function_t;
                 // extract the types
-                typedef typename cboptimizer_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
+                typedef typename cboptimizer_signature::bind<A1, A2, A3, A4, A5, A6, A7>::type args;
                 typedef typename boost::parameter::binding<args, tag::c_acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+
+                typedef typename boost::parameter::binding<args, tag::constraint_modelfun, typename defaults::constraint_model_t>::type constraint_model_t;
 
                 /// The main function (run the Bayesian optimization algorithm)
                 template <typename StateFunction, typename AggregatorFunction = FirstElem>
                 void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
                 {
-                    _models.resize(StateFunction::nb_constraints + 1); // reserving enough space for the objective function gp + constraints
                     _nb_constraints = StateFunction::nb_constraints;
                     _dim_out = StateFunction::dim_out;
 
@@ -148,19 +156,20 @@ namespace limbo {
 
                     if (!this->_observations.empty()) {
                         _split_observations();
-                        for (size_t i = 0; i < _models.size(); ++i)
-                            _models[i].compute(this->_samples, _obs[i], Eigen::VectorXd::Constant(_obs[i].size(), Params::cbayes_opt_boptimizer::noise()), this->_bl_samples, Eigen::VectorXd::Constant(this->_bl_samples.size(), Params::cbayes_opt_boptimizer::noise()));
+                        _model.compute(this->_samples, _obs[0], Eigen::VectorXd::Constant(_obs[0].size(), Params::cbayes_opt_boptimizer::noise()), this->_bl_samples, Eigen::VectorXd::Constant(this->_bl_samples.size(), Params::cbayes_opt_boptimizer::noise()));
+                        if (_nb_constraints > 0)
+                            _constraint_model.compute(this->_samples, _obs[1], Eigen::VectorXd::Constant(_obs[1].size(), Params::cbayes_opt_boptimizer::noise()), this->_bl_samples, Eigen::VectorXd::Constant(this->_bl_samples.size(), Params::cbayes_opt_boptimizer::noise()));
                     }
                     else {
-                        _models[0] = model_t(StateFunction::dim_in, StateFunction::dim_out);
-                        for (size_t i = 1; i < _nb_constraints; ++i)
-                            _models[i] = model_t(StateFunction::dim_in, 1); // explicitly to 1 for the constraints
+                        _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
+                        if (_nb_constraints > 0)
+                            _constraint_model = model_t(StateFunction::dim_in, _nb_constraints);
                     }
 
                     acqui_optimizer_t acqui_optimizer;
 
                     while (!this->_stop(*this, afun)) {
-                        acquisition_function_t acqui(_models, this->_current_iteration);
+                        acquisition_function_t acqui(_model, _constraint_model, this->_current_iteration);
 
                         // we do not have gradient in our current acquisition function
                         auto acqui_optimization =
@@ -172,18 +181,21 @@ namespace limbo {
                         this->_update_stats(*this, afun, blacklisted);
 
                         if (blacklisted) {
-                            for (size_t i = 0; i < _models.size(); ++i)
-                                _models[i].add_bl_sample(this->_bl_samples.back(), Params::cbayes_opt_boptimizer::noise());
+                            _model.add_bl_sample(this->_bl_samples.back(), Params::cbayes_opt_boptimizer::noise());
+                            if (_nb_constraints > 0)
+                                _constraint_model.add_bl_sample(this->_bl_samples.back(), Params::cbayes_opt_boptimizer::noise());
                         }
                         else {
-                            for (size_t i = 0; i < _models.size(); ++i)
-                                _models[i].add_sample(this->_samples.back(), _obs[i].back(), Params::cbayes_opt_boptimizer::noise());
+                            _model.add_sample(this->_samples.back(), _obs[0].back(), Params::cbayes_opt_boptimizer::noise());
+                            if (_nb_constraints > 0)
+                                _constraint_model.add_sample(this->_samples.back(), _obs[1].back(), Params::cbayes_opt_boptimizer::noise());
                         }
 
                         if (Params::cbayes_opt_boptimizer::hp_period() > 0
                             && (this->_current_iteration + 1) % Params::cbayes_opt_boptimizer::hp_period() == 0) {
-                            for (size_t i = 0; i < _models.size(); ++i)
-                                _models[i].optimize_hyperparams();
+                            _model.optimize_hyperparams();
+                            if (_nb_constraints > 0)
+                                _constraint_model.optimize_hyperparams();
                         }
 
                         this->_current_iteration++;
@@ -195,7 +207,7 @@ namespace limbo {
                 template <typename AggregatorFunction = FirstElem>
                 const Eigen::VectorXd& best_observation(const AggregatorFunction& afun = AggregatorFunction()) const
                 {
-                    _dim_out = _models[0].dim_out();
+                    _dim_out = _model.dim_out();
                     _split_observations();
 
                     auto rewards = std::vector<double>(_obs[0].size());
@@ -208,7 +220,7 @@ namespace limbo {
                 template <typename AggregatorFunction = FirstElem>
                 const Eigen::VectorXd& best_sample(const AggregatorFunction& afun = AggregatorFunction()) const
                 {
-                    _dim_out = _models[0].dim_out();
+                    _dim_out = _model.dim_out();
                     _split_observations();
 
                     auto rewards = std::vector<double>(_obs[0].size());
@@ -217,11 +229,11 @@ namespace limbo {
                     return this->_samples[std::distance(rewards.begin(), max_e)];
                 }
 
-                const model_t& model() const { return _models[0]; } // returns model for the objective function
-                const std::vector<model_t>& models() const { return _models; } // returns all the models including the constraints
-
+                const model_t& model() const { return _model; } // returns model for the objective function
             protected:
-                std::vector<model_t> _models;
+                model_t _model;
+                constraint_model_t _constraint_model;
+
                 size_t _nb_constraints;
                 mutable size_t _dim_out;
                 mutable std::vector<std::vector<Eigen::VectorXd>> _obs;
@@ -229,19 +241,22 @@ namespace limbo {
                 void _split_observations() const
                 {
                     _obs.clear();
-                    _obs.resize(_nb_constraints + 1);
+                    _obs.resize(2);
 
                     for (size_t i = 0; i < this->_observations.size(); ++i) {
                         assert(this->_observations[i].size() == _dim_out + _nb_constraints);
 
-                        std::vector<double> tmp;
-                        Eigen::VectorXd vec(_dim_out);
+                        Eigen::VectorXd vec_obj(_dim_out);
                         for (size_t j = 0; j < _dim_out; ++j)
-                            vec(j) = this->_observations[i](j);
-                        _obs[0].push_back(vec);
+                            vec_obj(j) = this->_observations[i](j);
+                        _obs[0].push_back(vec_obj);
 
-                        for (size_t j = _dim_out, ind = 1; j < this->_observations[i].size(); ++j, ++ind)
-                            _obs[ind].push_back(tools::make_vector(this->_observations[i](j)));
+                        if (_nb_constraints > 0) {
+                            Eigen::VectorXd vec_con(_nb_constraints);
+                            for (size_t j = _dim_out, ind = 0; j < this->_observations[i].size(); ++j, ++ind)
+                                vec_con(ind) = this->_observations[i](j);
+                            _obs[1].push_back(vec_con);
+                        }
                     }
                 }
             };

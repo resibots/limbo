@@ -81,8 +81,9 @@ int main()
     using Mean_t = mean::Constant<Params>;
     using Kernel_t = kernel::Exp<Params>;
     using GP_t = model::GP<Params, Kernel_t, Mean_t>;
+    using Constrained_GP_t = model::GP<Params, Kernel_t, Mean_t>;
 
-    using Acqui_t = experimental::acqui::CEI<Params, GP_t>;
+    using Acqui_t = experimental::acqui::CEI<Params, GP_t, Constrained_GP_t>;
     using Init_t = init::RandomSampling<Params>;
 
     experimental::bayes_opt::CBOptimizer<Params,
@@ -90,7 +91,8 @@ int main()
         acquifun<Acqui_t>,
         statsfun<Stat_t>,
         initfun<Init_t>,
-        stopcrit<Stop_t>>
+        stopcrit<Stop_t>,
+        experimental::constraint_modelfun<Constrained_GP_t>>
         opt;
 
     opt.optimize(func_t());

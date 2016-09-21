@@ -72,33 +72,34 @@ namespace limbo {
           - ``double jitter`` - :math:`\xi`
         \endrst
         */
-            template <typename Params, typename Model>
+            template <typename Params, typename Model, typename ConstraintModel>
             class CEI {
             public:
-                CEI(const std::vector<Model>& models, int iteration = 0) : _models(models) {}
+                CEI(const Model& model, const ConstraintModel& constraint_model, int iteration = 0)
+                    : _model(model), _constraint_model(constraint_model) {}
 
-                size_t dim_in() const { return _models[0].dim_in(); }
+                size_t dim_in() const { return _model.dim_in(); }
 
-                size_t dim_out() const { return _models[0].dim_out(); }
+                size_t dim_out() const { return _model.dim_out(); }
 
                 template <typename AggregatorFunction>
                 double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
                 {
                     Eigen::VectorXd mu;
                     double sigma_sq;
-                    std::tie(mu, sigma_sq) = _models[0].query(v);
+                    std::tie(mu, sigma_sq) = _model.query(v);
                     double sigma = std::sqrt(sigma_sq);
 
                     // If \sigma(x) = 0 or we do not have any observation yet we return 0
-                    if (sigma < 1e-10 || _models[0].samples().size() < 1)
+                    if (sigma < 1e-10 || _model.samples().size() < 1)
                         return 0.0;
 
                     // Compute constrained EI(x)
                     // First find the best so far (predicted) observation
                     // (We are zeroing infeasible samples subject to the constraint value)
                     std::vector<double> rewards;
-                    for (auto s : _models[0].samples())
-                        rewards.push_back(afun(_models[0].mu(s)));
+                    for (auto s : _model.samples())
+                        rewards.push_back(afun(_model.mu(s)));
 
                     double f_max = *std::max_element(rewards.begin(), rewards.end());
                     // Calculate Z and \Phi(Z) and \phi(Z)
@@ -111,25 +112,24 @@ namespace limbo {
                 }
 
             protected:
-                const std::vector<Model>& _models;
+                const Model& _model;
+                const ConstraintModel& _constraint_model;
 
                 template <typename AggregatorFunction>
                 double _pf(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
                 {
-                    double p = 1.0;
+                    Eigen::VectorXd mu;
+                    double sigma_sq;
+                    std::tie(mu, sigma_sq) = _constraint_model.query(v);
+                    double sigma = std::sqrt(sigma_sq);
 
-                    for (size_t i = 1; i < _models.size(); ++i) {
-                        Eigen::VectorXd mu;
-                        double sigma_sq;
-                        std::tie(mu, sigma_sq) = _models[i].query(v);
-                        double sigma = std::sqrt(sigma_sq);
+                    if (sigma < 1e-10 || _constraint_model.samples().size() < 1)
+                        return 1.0;
 
-                        double Z = (afun(mu) - 1.0) / sigma;
-                        double Phi = 0.5 * std::erfc(-Z / std::sqrt(2));
-                        p *= Phi;
-                    }
+                    double Z = (afun(mu) - 1.0) / sigma;
+                    double Phi = 0.5 * std::erfc(-Z / std::sqrt(2));
 
-                    return p;
+                    return Phi;
                 }
             };
         }
