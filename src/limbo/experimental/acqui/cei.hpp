@@ -105,7 +105,7 @@ namespace limbo {
                     double X = afun(mu) - f_max - Params::acqui_cei::jitter();
                     double Z = X / sigma;
                     double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);
-                    double Phi = 0.5 * std::erfc(-Z / std::sqrt(2)); //0.5 * (1.0 + std::erf(Z / std::sqrt(2)));
+                    double Phi = 0.5 * std::erfc(-Z / std::sqrt(2));
 
                     return _pf(v, afun) * (X * Phi + sigma * phi);
                 }
@@ -124,9 +124,9 @@ namespace limbo {
                         std::tie(mu, sigma_sq) = _models[i].query(v);
                         double sigma = std::sqrt(sigma_sq);
 
-                        double Z = afun(mu) / sigma;
-                        double phi = (1.0 - std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI));
-                        p *= phi;
+                        double Z = (afun(mu) - 1.0) / sigma;
+                        double Phi = 0.5 * std::erfc(-Z / std::sqrt(2));
+                        p *= Phi;
                     }
 
                     return p;

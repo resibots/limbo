@@ -11,7 +11,7 @@ struct Params {
     };
 
     struct init_randomsampling {
-        BO_PARAM(int, samples, 1);
+        BO_PARAM(int, samples, 10);
     };
 
     struct kernel_exp : public defaults::kernel_exp {
@@ -29,7 +29,7 @@ struct Params {
     };
 
     struct mean_constant {
-        BO_PARAM(double, constant, 0.0);
+        BO_PARAM(double, constant, 1.0);
     };
 
 #ifdef USE_NLOPT
@@ -44,92 +44,26 @@ struct Params {
 #endif
 };
 
-#ifdef DIM6
-#define ZDT_DIM 6
-#elif defined(DIM2)
-#define ZDT_DIM 2
-#else
-#define ZDT_DIM 30
-#endif
-
-struct zdt1 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
-    {
-        Eigen::VectorXd res(2);
-        double f1 = x(0);
-        double g = 1.0;
-        for (int i = 1; i < x.size(); ++i)
-            g += 9.0 / (x.size() - 1) * x(i);
-        double h = 1.0f - sqrtf(f1 / g);
-        double f2 = g * h;
-        res(0) = 1.0 - f1;
-        res(1) = 1.0 - f2;
-        return res;
-    }
-};
-
-struct zdt2 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    static constexpr size_t dim_out = 2;
+struct cosine {
+    static constexpr size_t dim_in = 1;
+    static constexpr size_t dim_out = 1;
+    static constexpr size_t nb_constraints = 1;
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd res(2);
-        double f1 = x(0);
-        double g = 1.0;
-        for (int i = 1; i < x.size(); ++i)
-            g += 9.0 / (x.size() - 1) * x(i);
-        double h = 1.0f - pow((f1 / g), 2.0);
-        double f2 = g * h;
-        res(0) = 1.0 - f1;
-        res(1) = 1.0 - f2;
-        return res;
-    }
-};
-
-struct zdt3 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
-    {
-        Eigen::VectorXd res(2);
-        double f1 = x(0);
-        double g = 1.0;
-        for (int i = 1; i < x.size(); ++i)
-            g += 9.0 / (x.size() - 1) * x(i);
-        double h = 1.0f - sqrtf(f1 / g) - f1 / g * sin(10 * M_PI * f1);
-        double f2 = g * h;
-        res(0) = 1.0 - f1;
-        res(1) = 1.0 - f2;
-        return res;
-    }
-};
-
-struct mop2 {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 2;
-    static constexpr size_t nb_constraints = 2;
-
-    Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
-    {
-        Eigen::VectorXd res(4);
-
-        // scale to [-2, 2]
-        Eigen::VectorXd xx = (x * 4.0).array() - 2.0;
-        // f1, f2
-        Eigen::VectorXd v1 = (xx.array() - 1.0 / sqrt(xx.size())).array().square();
-        Eigen::VectorXd v2 = (xx.array() + 1.0 / sqrt(xx.size())).array().square();
-        double f1 = 1.0 - exp(-v1.sum());
-        double f2 = 1.0 - exp(-v2.sum());
         // we _maximize in [0:1]
-        res(0) = 1 - f1;
-        res(1) = 1 - f2;
+        Eigen::VectorXd xx = -4.0 + 8.0 * x.array();
+        res(0) = std::cos(xx.array()(0));
 
         // testing the constraints
-        (res(0) > 0.4) ? res(2) = 1 : res(2) = 0;
-        (res(1) > 0.4) ? res(3) = 1 : res(3) = 0;
-
-        std::cout << res(0) << " " << res(1) << std::endl;
+        std::string feas = "infeasible";
+        res(1) = 0;
+        if (res(0) < 0.5) {
+            res(1) = 1;
+            feas = "feasible";
+        }
+        std::cout << xx(0) << ": " << res(0) << " --> " << feas << std::endl;
         return res;
     }
 };
@@ -137,11 +71,7 @@ struct mop2 {
 int main()
 {
     tools::par::init();
-
-    // typedef zdt1 func_t;
-    // typedef zdt2 func_t;
-    // typedef zdt3 func_t;
-    typedef mop2 func_t;
+    typedef cosine func_t;
 
     using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
     using Stat_t = boost::fusion::vector<stat::Samples<Params>,
@@ -164,6 +94,18 @@ int main()
         opt;
 
     opt.optimize(func_t());
+
+    size_t n = 0;
+    double best = -100;
+    for (size_t i = 0; i < opt.samples().size(); i++) {
+        Eigen::VectorXd res = func_t()(opt.samples()[i]);
+        if (res(0) > best && res(0) < 0.5)
+            best = res(0);
+        if (res(0) >= 0.5)
+            n++;
+    }
+    std::cout << "Infeasible points tested: " << n << std::endl;
+    std::cout << "Best feasible observation: " << best << std::endl;
 
     return 0;
 }
