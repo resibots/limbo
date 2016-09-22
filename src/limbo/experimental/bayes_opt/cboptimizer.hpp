@@ -162,7 +162,7 @@ namespace limbo {
                     else {
                         _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
                         if (_nb_constraints > 0)
-                            _constraint_model = model_t(StateFunction::dim_in, _nb_constraints);
+                            _constraint_model = constraint_model_t(StateFunction::dim_in, _nb_constraints);
                     }
 
                     acqui_optimizer_t acqui_optimizer;
