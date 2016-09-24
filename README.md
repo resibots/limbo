@@ -1,7 +1,7 @@
 limbo [![Build Status](https://travis-ci.org/resibots/limbo.svg?branch=master)](https://travis-ci.org/resibots/limbo)
 =====
 
-A lightweight framework for Bayesian and model-based optimisation of black-box functions (C++11).
+A lightweight framework for Bayesian and model-based optimization of black-box functions (C++11).
 
 Documentation
 -------------
@@ -17,7 +17,7 @@ Authors
 
 Main features
 -------------
-- Bayesian optimisation based on Gaussian processes
+- Bayesian optimization based on Gaussian processes
 - Generic framework (template-based), which allows easy customization for testing original ideas
 - Can exploit multicore computers
 - Experimental support for some multi-objective algorithms
