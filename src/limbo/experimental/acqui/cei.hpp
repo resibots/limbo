@@ -61,17 +61,6 @@ namespace limbo {
 
     namespace experimental {
         namespace acqui {
-            /** @ingroup acqui
-        \rst
-        Constrained EI (Expected Improvement). See :cite:`TODO`, p. TODO
-
-          .. math::
-            TODO
-
-        Parameters:
-          - ``double jitter`` - :math:`\xi`
-        \endrst
-        */
             template <typename Params, typename Model, typename ConstraintModel>
             class CEI {
             public:
@@ -95,7 +84,7 @@ namespace limbo {
                         return 0.0;
 
                     // Compute constrained EI(x)
-                    // First find the best so far (predicted) observation
+                    // First find the best (predicted) observation so far
                     // (We are zeroing infeasible samples subject to the constraint value)
                     std::vector<double> rewards;
                     for (auto s : _model.samples())

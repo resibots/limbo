@@ -209,6 +209,10 @@ namespace limbo {
                     _dim_out = _model.dim_out();
                     _split_observations();
 
+                    std::vector<Eigen::VectorXd> obs = _feasible_observations();
+                    if (obs.size() > 0)
+                        _obs[0] = obs;
+
                     auto rewards = std::vector<double>(_obs[0].size());
                     std::transform(_obs[0].begin(), _obs[0].end(), rewards.begin(), afun);
                     auto max_e = std::max_element(rewards.begin(), rewards.end());
@@ -221,6 +225,10 @@ namespace limbo {
                 {
                     _dim_out = _model.dim_out();
                     _split_observations();
+
+                    std::vector<Eigen::VectorXd> obs = _feasible_observations();
+                    if (obs.size() > 0)
+                        _obs[0] = obs;
 
                     auto rewards = std::vector<double>(_obs[0].size());
                     std::transform(_obs[0].begin(), _obs[0].end(), rewards.begin(), afun);
@@ -236,6 +244,17 @@ namespace limbo {
                 size_t _nb_constraints;
                 mutable size_t _dim_out;
                 mutable std::vector<std::vector<Eigen::VectorXd>> _obs;
+
+                std::vector<Eigen::VectorXd> _feasible_observations() const
+                {
+                    std::vector<Eigen::VectorXd> feasible_obs;
+                    for (size_t i = 0; i < _obs[0].size(); ++i) {
+                        if (_obs[1][i].prod() > 0)
+                            feasible_obs.push_back(_obs[0][i]);
+                    }
+
+                    return feasible_obs;
+                }
 
                 void _split_observations() const
                 {
