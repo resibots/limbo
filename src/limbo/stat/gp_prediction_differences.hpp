@@ -56,9 +56,9 @@ namespace limbo {
         template <typename Params>
         struct GPPredictionDifferences : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>
-            void operator()(const BO& bo, const AggregatorFunction& afun, bool blacklisted)
+            void operator()(const BO& bo, const AggregatorFunction& afun)
             {
-                if (!bo.stats_enabled() || bo.observations().empty() || blacklisted)
+                if (!bo.stats_enabled() || bo.observations().empty())
                     return;
 
                 this->_create_log_file(bo, "gp_prediction_differences.dat");
@@ -68,7 +68,7 @@ namespace limbo {
 
                 double pred = afun(bo.model().mu(bo.samples().back()));
                 double obs = afun(bo.observations().back());
-                (*this->_log_file) << bo.total_iterations() << " " << pred << " " << obs << " " << fabs(pred - obs) << std::endl;
+                (*this->_log_file) << bo.total_iterations() << " " << pred << " " << obs << " " << std::abs(pred - obs) << std::endl;
             }
         };
     }

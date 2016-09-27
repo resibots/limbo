@@ -82,15 +82,14 @@ namespace limbo {
     }
     template <typename BO, typename AggregatorFunction>
     struct RefreshStat_f {
-        RefreshStat_f(BO& bo, const AggregatorFunction& afun, bool blacklisted)
-            : _bo(bo), _afun(afun), _blacklisted(blacklisted) {}
+        RefreshStat_f(BO& bo, const AggregatorFunction& afun)
+            : _bo(bo), _afun(afun) {}
 
         BO& _bo;
         const AggregatorFunction& _afun;
-        bool _blacklisted;
 
         template <typename T>
-        void operator()(T& x) const { x(_bo, _afun, _blacklisted); }
+        void operator()(T& x) const { x(_bo, _afun); }
     };
 
     struct FirstElem {
@@ -221,9 +220,6 @@ namespace limbo {
             /// return the list of the points that have been evaluated so far (x)
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
-            /// return the list of blacklisted points
-            const std::vector<Eigen::VectorXd>& bl_samples() const { return _bl_samples; }
-
             /// return the current iteration number
             int current_iteration() const { return _current_iteration; }
 
@@ -240,22 +236,11 @@ namespace limbo {
                 _observations.push_back(v);
             }
 
-            /// Add a new blacklisted sample
-            void add_new_bl_sample(const Eigen::VectorXd& s) { _bl_samples.push_back(s); }
-
             /// Evaluate a sample and add the result to the 'database' (sample / observations vectors) -- it does not update the model
             template <typename StateFunction>
-            bool eval_and_add(const StateFunction& seval, const Eigen::VectorXd& sample)
+            void eval_and_add(const StateFunction& seval, const Eigen::VectorXd& sample)
             {
-                try {
-                    this->add_new_sample(sample, seval(sample));
-                }
-                catch (const EvaluationError& e) {
-                    this->add_new_bl_sample(sample);
-                    return false;
-                }
-
-                return true;
+                this->add_new_sample(sample, seval(sample));
             }
 
         protected:
@@ -267,7 +252,6 @@ namespace limbo {
                     this->_total_iterations = 0;
                     this->_samples.clear();
                     this->_observations.clear();
-                    this->_bl_samples.clear();
                 }
 
                 if (this->_total_iterations == 0)
@@ -282,10 +266,10 @@ namespace limbo {
             }
 
             template <typename BO, typename AggregatorFunction>
-            void _update_stats(BO& bo, const AggregatorFunction& afun, bool blacklisted)
+            void _update_stats(BO& bo, const AggregatorFunction& afun)
             { // not const, because some stat class
                 // modify the optimizer....
-                boost::fusion::for_each(_stat, RefreshStat_f<BO, AggregatorFunction>(bo, afun, blacklisted));
+                boost::fusion::for_each(_stat, RefreshStat_f<BO, AggregatorFunction>(bo, afun));
             }
 
             void _make_res_dir()
@@ -305,7 +289,6 @@ namespace limbo {
 
             std::vector<Eigen::VectorXd> _observations;
             std::vector<Eigen::VectorXd> _samples;
-            std::vector<Eigen::VectorXd> _bl_samples;
         };
     }
 }

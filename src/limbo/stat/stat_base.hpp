@@ -73,7 +73,7 @@ namespace limbo {
 
             /// main method (to be written in derived classes)
             template <typename BO>
-            void operator()(const BO& bo, bool blacklisted)
+            void operator()(const BO& bo)
             {
                 assert(false);
             }
