@@ -414,7 +414,7 @@ Template
   template <typename Params>
   struct Samples : public StatBase<Params> {
       template <typename BO, typename AggregatorFunction>
-      void operator()(const BO& bo, const AggregatorFunction&, bool blacklisted)
+      void operator()(const BO& bo, const AggregatorFunction&)
       {
         // code
       }

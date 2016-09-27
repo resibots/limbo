@@ -74,7 +74,7 @@ namespace limbo {
             GP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
-            /// Compute the GP from samples, observation, noise. [optional: blacklisted samples]. This call needs to be explicit!
+            /// Compute the GP from samples, observation, noise. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations,
                 const Eigen::VectorXd& noises)
