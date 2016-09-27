@@ -62,8 +62,22 @@ def build(bld):
     obj = bld.program(features = 'cxx',
                       source = 'multi.cpp',
                       includes = '.. ../.. ../../../',
-                      target = 'multi',
+                      target = 'multi_ehvi',
                       uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      use = 'limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'multi.cpp',
+                      includes = '.. ../.. ../../../',
+                      target = 'multi_parego',
+                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      defines = 'PAREGO',
+                      use = 'limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'multi.cpp',
+                      includes = '.. ../.. ../../../',
+                      target = 'multi_nsbo',
+                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      defines = 'NSBO',
                       use = 'limbo')
     obj = bld.program(features = 'cxx',
                       source = 'constrained_ei.cpp',

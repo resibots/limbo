@@ -74,7 +74,7 @@ namespace limbo {
                     while (this->_samples.size() == 0 || !this->_stop(*this, FirstElem())) {
                         std::cout << "updating pareto model...";
                         std::cout.flush();
-                        this->template update_pareto_model<EvalFunction::dim>();
+                        this->template update_pareto_model<EvalFunction::dim_in>();
                         std::cout << "ok" << std::endl;
                         auto pareto = this->pareto_model();
 
@@ -98,9 +98,10 @@ namespace limbo {
 
             protected:
                 // former way to deal with the template of RefreshStat
-                /*    void _update_stats() {
-boost::fusion::for_each(this->_stat, RefreshStat_f<Nsbo>(*this));
-}*/
+                // void _update_stats()
+                // {
+                //     boost::fusion::for_each(this->_stat, RefreshStat_f<Nsbo>(*this));
+                // }
             };
         }
     }
