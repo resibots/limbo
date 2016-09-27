@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['seed_5fseq_5ffe128',['seed_seq_fe128',['../namespacerandutils.html#a2b7c80226592f2cfc2dd51ef1b6a6648',1,'randutils']]],
-  ['seed_5fseq_5ffe256',['seed_seq_fe256',['../namespacerandutils.html#ab264470d8fc7505e72c78a33528108bd',1,'randutils']]],
-  ['stat',['Stat',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#adda0d6bf0fa0def996eb0af7e8a84f3f',1,'limbo::bayes_opt::BoBase']]],
-  ['stat_5ft',['stat_t',['../structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#ab8f3991474723d27b9c77d0e0a76fce2',1,'limbo::bayes_opt::BoBase::defaults::stat_t()'],['../classlimbo_1_1bayes__opt_1_1_bo_base.html#a17d395abfdd3158f238c83764ba68fd0',1,'limbo::bayes_opt::BoBase::stat_t()']]],
-  ['stop_5ft',['stop_t',['../structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults.html#a66e1dbe1ccd9dbef0fdfc5c9faee9eff',1,'limbo::bayes_opt::BoBase::defaults']]],
-  ['stopping_5fcriteria_5ft',['stopping_criteria_t',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#a8dfcab20696e6c85665b150e9881c010',1,'limbo::bayes_opt::BoBase']]],
-  ['stoppingcriteria',['StoppingCriteria',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#a06717d469296323cc277e3769b828e98',1,'limbo::bayes_opt::BoBase']]]
+  ['rdist_5fdouble_5ft',['rdist_double_t',['../group__tools.html#gab2609bfef1e3bdb8b44c0d6c8c139927',1,'limbo::tools']]],
+  ['rdist_5fint_5ft',['rdist_int_t',['../group__tools.html#gacb322b4600b2e500dbcd24661a749f49',1,'limbo::tools']]],
+  ['result_5ftype',['result_type',['../structlimbo_1_1_first_elem.html#a8807f1723bc06dce8929cf77cf0751bc',1,'limbo::FirstElem::result_type()'],['../structlimbo_1_1stop_1_1_chain_criteria.html#a2b3c7f6d2309ff6dd4e67fb28302a7e4',1,'limbo::stop::ChainCriteria::result_type()'],['../structrandutils_1_1seed__seq__fe.html#ae485fbabe93091ea392c3bf777e64279',1,'randutils::seed_seq_fe::result_type()'],['../classlimbo_1_1tools_1_1_random_generator.html#ae5fdd214eb4fb253cf9f35b9ca7451ba',1,'limbo::tools::RandomGenerator::result_type()']]],
+  ['rgen_5fdouble_5ft',['rgen_double_t',['../group__tools.html#gacdb2963659056fc5fa9f94405f59a851',1,'limbo::tools']]],
+  ['rgen_5fint_5ft',['rgen_int_t',['../group__tools.html#ga3df78ebcb864be91e73e840bb42b9208',1,'limbo::tools']]]
 ];

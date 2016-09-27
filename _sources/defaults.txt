@@ -18,6 +18,15 @@ init_randomsamplinggrid
 - int bins = 5 [defined in src/limbo/init/random_sampling_grid.hpp]
 - int samples = 10 [defined in src/limbo/init/random_sampling_grid.hpp]
 
+acqui_cei
+^^^^^^^^^
+- double jitter = 0.0 [defined in src/limbo/experimental/acqui/cei.hpp]
+
+cbayes_opt_boptimizer
+^^^^^^^^^^^^^^^^^^^^^
+- double noise = 1e-6 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]
+- int hp_period = -1 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]
+
 mean_constant
 ^^^^^^^^^^^^^
 - double constant = 1 [defined in src/limbo/mean/constant.hpp]

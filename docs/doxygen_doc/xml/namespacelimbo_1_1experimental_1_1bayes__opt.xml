@@ -3,6 +3,7 @@
   <compounddef id="namespacelimbo_1_1experimental_1_1bayes__opt" kind="namespace" language="C++">
     <compoundname>limbo::experimental::bayes_opt</compoundname>
     <innerclass refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi" prot="public">limbo::experimental::bayes_opt::BoMulti</innerclass>
+    <innerclass refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer" prot="public">limbo::experimental::bayes_opt::CBOptimizer</innerclass>
     <innerclass refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi" prot="public">limbo::experimental::bayes_opt::Ehvi</innerclass>
     <innerclass refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo" prot="public">limbo::experimental::bayes_opt::Nsbo</innerclass>
     <innerclass refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_parego" prot="public">limbo::experimental::bayes_opt::Parego</innerclass>
@@ -20,6 +21,19 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" line="141" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacelimbo_1_1experimental_1_1bayes__opt_1a5b88cfb36e71acb407ac2258966e57b1" prot="public" static="no">
+        <type>boost::parameter::parameters&lt; boost::parameter::optional&lt; limbo::tag::acquiopt &gt;, boost::parameter::optional&lt; limbo::tag::statsfun &gt;, boost::parameter::optional&lt; limbo::tag::initfun &gt;, boost::parameter::optional&lt; limbo::tag::acquifun &gt;, boost::parameter::optional&lt; limbo::tag::stopcrit &gt;, boost::parameter::optional&lt; limbo::tag::modelfun &gt;, boost::parameter::optional&lt; limbo::experimental::tag::constraint_modelfun &gt; &gt;</type>
+        <definition>typedef boost::parameter::parameters&lt;boost::parameter::optional&lt;limbo::tag::acquiopt&gt;, boost::parameter::optional&lt;limbo::tag::statsfun&gt;, boost::parameter::optional&lt;limbo::tag::initfun&gt;, boost::parameter::optional&lt;limbo::tag::acquifun&gt;, boost::parameter::optional&lt;limbo::tag::stopcrit&gt;, boost::parameter::optional&lt;limbo::tag::modelfun&gt;, boost::parameter::optional&lt;limbo::experimental::tag::constraint_modelfun&gt; &gt; limbo::experimental::bayes_opt::cboptimizer_signature</definition>
+        <argsstring></argsstring>
+        <name>cboptimizer_signature</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp" line="87" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="namespacelimbo_1_1experimental_1_1bayes__opt_1aa9273d3d9c89937c8da1850d0174d3ff" prot="public" static="no">
         <type>boost::parameter::parameters&lt; boost::parameter::optional&lt; tag::acquiopt &gt; &gt;</type>

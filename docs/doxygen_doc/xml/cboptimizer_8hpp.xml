@@ -1,0 +1,721 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="cboptimizer_8hpp" kind="file" language="C++">
+    <compoundname>cboptimizer.hpp</compoundname>
+    <includes local="no">iostream</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">iterator</includes>
+    <includes local="no">boost/parameter/aux_/void.hpp</includes>
+    <includes local="no">Eigen/Core</includes>
+    <includes refid="macros_8hpp" local="no">limbo/tools/macros.hpp</includes>
+    <includes refid="random__generator_8hpp" local="no">limbo/tools/random_generator.hpp</includes>
+    <includes refid="bo__base_8hpp" local="no">limbo/bayes_opt/bo_base.hpp</includes>
+    <includes refid="nlopt__no__grad_8hpp" local="no">limbo/opt/nlopt_no_grad.hpp</includes>
+    <incdepgraph>
+      <node id="430">
+        <label>list</label>
+      </node>
+      <node id="425">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="439">
+        <label>functional</label>
+      </node>
+      <node id="472">
+        <label>Eigen/Cholesky</label>
+      </node>
+      <node id="446">
+        <label>limits</label>
+      </node>
+      <node id="473">
+        <label>Eigen/LU</label>
+      </node>
+      <node id="421">
+        <label>iterator</label>
+      </node>
+      <node id="465">
+        <label>limbo/acqui/ucb.hpp</label>
+        <link refid="ucb_8hpp"/>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="424" relation="include">
+        </childnode>
+        <childnode refid="466" relation="include">
+        </childnode>
+      </node>
+      <node id="437">
+        <label>cstdint</label>
+      </node>
+      <node id="431">
+        <label>stdlib.h</label>
+      </node>
+      <node id="466">
+        <label>limbo/opt/optimizer.hpp</label>
+        <link refid="optimizer_8hpp"/>
+        <childnode refid="467" relation="include">
+        </childnode>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="468" relation="include">
+        </childnode>
+      </node>
+      <node id="478">
+        <label>limbo/init/random_sampling.hpp</label>
+        <link refid="random__sampling_8hpp"/>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="424" relation="include">
+        </childnode>
+        <childnode refid="426" relation="include">
+        </childnode>
+      </node>
+      <node id="428">
+        <label>cmath</label>
+      </node>
+      <node id="471">
+        <label>cassert</label>
+      </node>
+      <node id="423">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="458">
+        <label>string</label>
+      </node>
+      <node id="476">
+        <label>limbo/tools/parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="420" relation="include">
+        </childnode>
+      </node>
+      <node id="448">
+        <label>boost/parameter.hpp</label>
+      </node>
+      <node id="447">
+        <label>exception</label>
+      </node>
+      <node id="457">
+        <label>fstream</label>
+      </node>
+      <node id="464">
+        <label>limbo/kernel/exp.hpp</label>
+        <link refid="exp_8hpp"/>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="424" relation="include">
+        </childnode>
+      </node>
+      <node id="418">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp</label>
+        <link refid="cboptimizer.hpp"/>
+        <childnode refid="419" relation="include">
+        </childnode>
+        <childnode refid="420" relation="include">
+        </childnode>
+        <childnode refid="421" relation="include">
+        </childnode>
+        <childnode refid="422" relation="include">
+        </childnode>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="424" relation="include">
+        </childnode>
+        <childnode refid="426" relation="include">
+        </childnode>
+        <childnode refid="444" relation="include">
+        </childnode>
+        <childnode refid="479" relation="include">
+        </childnode>
+      </node>
+      <node id="462">
+        <label>limbo/tools/sys.hpp</label>
+        <link refid="sys_8hpp"/>
+        <childnode refid="429" relation="include">
+        </childnode>
+        <childnode refid="463" relation="include">
+        </childnode>
+        <childnode refid="458" relation="include">
+        </childnode>
+      </node>
+      <node id="426">
+        <label>limbo/tools/random_generator.hpp</label>
+        <link refid="random__generator_8hpp"/>
+        <childnode refid="427" relation="include">
+        </childnode>
+        <childnode refid="428" relation="include">
+        </childnode>
+        <childnode refid="429" relation="include">
+        </childnode>
+        <childnode refid="430" relation="include">
+        </childnode>
+        <childnode refid="431" relation="include">
+        </childnode>
+        <childnode refid="432" relation="include">
+        </childnode>
+        <childnode refid="433" relation="include">
+        </childnode>
+        <childnode refid="434" relation="include">
+        </childnode>
+        <childnode refid="435" relation="include">
+        </childnode>
+      </node>
+      <node id="480">
+        <label>nlopt.hpp</label>
+      </node>
+      <node id="422">
+        <label>boost/parameter/aux_/void.hpp</label>
+      </node>
+      <node id="469">
+        <label>limbo/mean/data.hpp</label>
+        <link refid="data_8hpp"/>
+        <childnode refid="423" relation="include">
+        </childnode>
+      </node>
+      <node id="475">
+        <label>limbo/tools.hpp</label>
+        <link refid="tools_8hpp"/>
+        <childnode refid="424" relation="include">
+        </childnode>
+        <childnode refid="476" relation="include">
+        </childnode>
+        <childnode refid="477" relation="include">
+        </childnode>
+        <childnode refid="462" relation="include">
+        </childnode>
+        <childnode refid="426" relation="include">
+        </childnode>
+      </node>
+      <node id="451">
+        <label>boost/fusion/include/for_each.hpp</label>
+      </node>
+      <node id="432">
+        <label>random</label>
+      </node>
+      <node id="467">
+        <label>tuple</label>
+      </node>
+      <node id="429">
+        <label>ctime</label>
+      </node>
+      <node id="463">
+        <label>unistd.h</label>
+      </node>
+      <node id="445">
+        <label>vector</label>
+      </node>
+      <node id="452">
+        <label>boost/filesystem.hpp</label>
+      </node>
+      <node id="433">
+        <label>utility</label>
+      </node>
+      <node id="438">
+        <label>array</label>
+      </node>
+      <node id="460">
+        <label>limbo/stat/aggregated_observations.hpp</label>
+        <link refid="aggregated__observations_8hpp"/>
+        <childnode refid="456" relation="include">
+        </childnode>
+      </node>
+      <node id="454">
+        <label>limbo/stop/max_iterations.hpp</label>
+        <link refid="max__iterations_8hpp"/>
+        <childnode refid="424" relation="include">
+        </childnode>
+      </node>
+      <node id="455">
+        <label>limbo/stat/samples.hpp</label>
+        <link refid="samples_8hpp"/>
+        <childnode refid="456" relation="include">
+        </childnode>
+      </node>
+      <node id="435">
+        <label>limbo/tools/rand_utils.hpp</label>
+        <link refid="rand__utils_8hpp"/>
+        <childnode refid="436" relation="include">
+        </childnode>
+        <childnode refid="437" relation="include">
+        </childnode>
+        <childnode refid="427" relation="include">
+        </childnode>
+        <childnode refid="432" relation="include">
+        </childnode>
+        <childnode refid="438" relation="include">
+        </childnode>
+        <childnode refid="439" relation="include">
+        </childnode>
+        <childnode refid="440" relation="include">
+        </childnode>
+        <childnode refid="433" relation="include">
+        </childnode>
+        <childnode refid="441" relation="include">
+        </childnode>
+        <childnode refid="421" relation="include">
+        </childnode>
+        <childnode refid="442" relation="include">
+        </childnode>
+        <childnode refid="443" relation="include">
+        </childnode>
+        <childnode refid="420" relation="include">
+        </childnode>
+      </node>
+      <node id="427">
+        <label>cstdlib</label>
+      </node>
+      <node id="419">
+        <label>iostream</label>
+      </node>
+      <node id="470">
+        <label>limbo/model/gp.hpp</label>
+        <link refid="model_2gp_8hpp"/>
+        <childnode refid="471" relation="include">
+        </childnode>
+        <childnode refid="419" relation="include">
+        </childnode>
+        <childnode refid="446" relation="include">
+        </childnode>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="472" relation="include">
+        </childnode>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="473" relation="include">
+        </childnode>
+        <childnode refid="474" relation="include">
+        </childnode>
+        <childnode refid="475" relation="include">
+        </childnode>
+      </node>
+      <node id="436">
+        <label>cstddef</label>
+      </node>
+      <node id="450">
+        <label>boost/fusion/include/accumulate.hpp</label>
+      </node>
+      <node id="474">
+        <label>limbo/model/gp/no_lf_opt.hpp</label>
+        <link refid="no__lf__opt_8hpp"/>
+        <childnode refid="419" relation="include">
+        </childnode>
+      </node>
+      <node id="456">
+        <label>limbo/stat/stat_base.hpp</label>
+        <link refid="stat__base_8hpp"/>
+        <childnode refid="457" relation="include">
+        </childnode>
+        <childnode refid="458" relation="include">
+        </childnode>
+        <childnode refid="459" relation="include">
+        </childnode>
+      </node>
+      <node id="434">
+        <label>mutex</label>
+      </node>
+      <node id="461">
+        <label>limbo/stat/console_summary.hpp</label>
+        <link refid="console__summary_8hpp"/>
+        <childnode refid="456" relation="include">
+        </childnode>
+      </node>
+      <node id="449">
+        <label>boost/fusion/include/vector.hpp</label>
+      </node>
+      <node id="442">
+        <label>chrono</label>
+      </node>
+      <node id="468">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="443">
+        <label>thread</label>
+      </node>
+      <node id="441">
+        <label>type_traits</label>
+      </node>
+      <node id="477">
+        <label>limbo/tools/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="427" relation="include">
+        </childnode>
+        <childnode refid="428" relation="include">
+        </childnode>
+        <childnode refid="429" relation="include">
+        </childnode>
+        <childnode refid="430" relation="include">
+        </childnode>
+        <childnode refid="431" relation="include">
+        </childnode>
+        <childnode refid="432" relation="include">
+        </childnode>
+        <childnode refid="433" relation="include">
+        </childnode>
+        <childnode refid="434" relation="include">
+        </childnode>
+      </node>
+      <node id="420">
+        <label>algorithm</label>
+      </node>
+      <node id="453">
+        <label>limbo/stop/chain_criteria.hpp</label>
+        <link refid="chain__criteria_8hpp"/>
+      </node>
+      <node id="444">
+        <label>limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="419" relation="include">
+        </childnode>
+        <childnode refid="446" relation="include">
+        </childnode>
+        <childnode refid="447" relation="include">
+        </childnode>
+        <childnode refid="448" relation="include">
+        </childnode>
+        <childnode refid="449" relation="include">
+        </childnode>
+        <childnode refid="450" relation="include">
+        </childnode>
+        <childnode refid="451" relation="include">
+        </childnode>
+        <childnode refid="452" relation="include">
+        </childnode>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="424" relation="include">
+        </childnode>
+        <childnode refid="453" relation="include">
+        </childnode>
+        <childnode refid="454" relation="include">
+        </childnode>
+        <childnode refid="455" relation="include">
+        </childnode>
+        <childnode refid="460" relation="include">
+        </childnode>
+        <childnode refid="461" relation="include">
+        </childnode>
+        <childnode refid="462" relation="include">
+        </childnode>
+        <childnode refid="464" relation="include">
+        </childnode>
+        <childnode refid="465" relation="include">
+        </childnode>
+        <childnode refid="469" relation="include">
+        </childnode>
+        <childnode refid="470" relation="include">
+        </childnode>
+        <childnode refid="478" relation="include">
+        </childnode>
+        <childnode refid="477" relation="include">
+        </childnode>
+      </node>
+      <node id="479">
+        <label>limbo/opt/nlopt_no_grad.hpp</label>
+        <link refid="nlopt__no__grad_8hpp"/>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="445" relation="include">
+        </childnode>
+        <childnode refid="480" relation="include">
+        </childnode>
+        <childnode refid="424" relation="include">
+        </childnode>
+        <childnode refid="466" relation="include">
+        </childnode>
+      </node>
+      <node id="459">
+        <label>memory</label>
+      </node>
+      <node id="440">
+        <label>initializer_list</label>
+      </node>
+      <node id="424">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="425" relation="include">
+        </childnode>
+        <childnode refid="423" relation="include">
+        </childnode>
+        <childnode refid="419" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structlimbo_1_1defaults_1_1cbayes__opt__boptimizer" prot="public">limbo::defaults::cbayes_opt_boptimizer</innerclass>
+    <innerclass refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer" prot="public">limbo::experimental::bayes_opt::CBOptimizer</innerclass>
+    <innerclass refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults" prot="public">limbo::experimental::bayes_opt::CBOptimizer::defaults</innerclass>
+    <innernamespace refid="namespacelimbo">limbo</innernamespace>
+    <innernamespace refid="namespacelimbo_1_1defaults">limbo::defaults</innernamespace>
+    <innernamespace refid="namespacelimbo_1_1experimental">limbo::experimental</innernamespace>
+    <innernamespace refid="namespacelimbo_1_1experimental_1_1bayes__opt">limbo::experimental::bayes_opt</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//|<sp/>Copyright<sp/>Inria<sp/>May<sp/>2015</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>This<sp/>project<sp/>has<sp/>received<sp/>funding<sp/>from<sp/>the<sp/>European<sp/>Research<sp/>Council<sp/>(ERC)<sp/>under</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>the<sp/>European<sp/>Union&apos;s<sp/>Horizon<sp/>2020<sp/>research<sp/>and<sp/>innovation<sp/>programme<sp/>(grant</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>agreement<sp/>No<sp/>637972)<sp/>-<sp/>see<sp/>http://www.resibots.eu</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>Contributor(s):</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//|<sp/><sp/><sp/>-<sp/>Jean-Baptiste<sp/>Mouret<sp/>(jean-baptiste.mouret@inria.fr)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//|<sp/><sp/><sp/>-<sp/>Antoine<sp/>Cully<sp/>(antoinecully@gmail.com)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//|<sp/><sp/><sp/>-<sp/>Kontantinos<sp/>Chatzilygeroudis<sp/>(konstantinos.chatzilygeroudis@inria.fr)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//|<sp/><sp/><sp/>-<sp/>Federico<sp/>Allocati<sp/>(fede.allocati@gmail.com)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//|<sp/><sp/><sp/>-<sp/>Vaios<sp/>Papaspyros<sp/>(b.papaspyros@gmail.com)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>This<sp/>software<sp/>is<sp/>a<sp/>computer<sp/>library<sp/>whose<sp/>purpose<sp/>is<sp/>to<sp/>optimize<sp/>continuous,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>black-box<sp/>functions.<sp/>It<sp/>mainly<sp/>implements<sp/>Gaussian<sp/>processes<sp/>and<sp/>Bayesian</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>optimization.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>Main<sp/>repository:<sp/>http://github.com/resibots/limbo</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>Documentation:<sp/>http://www.resibots.eu/limbo</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>This<sp/>software<sp/>is<sp/>governed<sp/>by<sp/>the<sp/>CeCILL-C<sp/>license<sp/>under<sp/>French<sp/>law<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>abiding<sp/>by<sp/>the<sp/>rules<sp/>of<sp/>distribution<sp/>of<sp/>free<sp/>software.<sp/><sp/>You<sp/>can<sp/><sp/>use,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>modify<sp/>and/<sp/>or<sp/>redistribute<sp/>the<sp/>software<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>CeCILL-C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>license<sp/>as<sp/>circulated<sp/>by<sp/>CEA,<sp/>CNRS<sp/>and<sp/>INRIA<sp/>at<sp/>the<sp/>following<sp/>URL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>&quot;http://www.cecill.info&quot;.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>As<sp/>a<sp/>counterpart<sp/>to<sp/>the<sp/>access<sp/>to<sp/>the<sp/>source<sp/>code<sp/>and<sp/><sp/>rights<sp/>to<sp/>copy,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>modify<sp/>and<sp/>redistribute<sp/>granted<sp/>by<sp/>the<sp/>license,<sp/>users<sp/>are<sp/>provided<sp/>only</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>with<sp/>a<sp/>limited<sp/>warranty<sp/><sp/>and<sp/>the<sp/>software&apos;s<sp/>author,<sp/><sp/>the<sp/>holder<sp/>of<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>economic<sp/>rights,<sp/><sp/>and<sp/>the<sp/>successive<sp/>licensors<sp/><sp/>have<sp/>only<sp/><sp/>limited</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>liability.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>In<sp/>this<sp/>respect,<sp/>the<sp/>user&apos;s<sp/>attention<sp/>is<sp/>drawn<sp/>to<sp/>the<sp/>risks<sp/>associated</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>with<sp/>loading,<sp/><sp/>using,<sp/><sp/>modifying<sp/>and/or<sp/>developing<sp/>or<sp/>reproducing<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>software<sp/>by<sp/>the<sp/>user<sp/>in<sp/>light<sp/>of<sp/>its<sp/>specific<sp/>status<sp/>of<sp/>free<sp/>software,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>that<sp/>may<sp/>mean<sp/><sp/>that<sp/>it<sp/>is<sp/>complicated<sp/>to<sp/>manipulate,<sp/><sp/>and<sp/><sp/>that<sp/><sp/>also</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>therefore<sp/>means<sp/><sp/>that<sp/>it<sp/>is<sp/>reserved<sp/>for<sp/>developers<sp/><sp/>and<sp/><sp/>experienced</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>professionals<sp/>having<sp/>in-depth<sp/>computer<sp/>knowledge.<sp/>Users<sp/>are<sp/>therefore</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>encouraged<sp/>to<sp/>load<sp/>and<sp/>test<sp/>the<sp/>software&apos;s<sp/>suitability<sp/>as<sp/>regards<sp/>their</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>requirements<sp/>in<sp/>conditions<sp/>enabling<sp/>the<sp/>security<sp/>of<sp/>their<sp/>systems<sp/>and/or</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>data<sp/>to<sp/>be<sp/>ensured<sp/>and,<sp/><sp/>more<sp/>generally,<sp/>to<sp/>use<sp/>and<sp/>operate<sp/>it<sp/>in<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>same<sp/>conditions<sp/>as<sp/>regards<sp/>security.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>The<sp/>fact<sp/>that<sp/>you<sp/>are<sp/>presently<sp/>reading<sp/>this<sp/>means<sp/>that<sp/>you<sp/>have<sp/>had</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment">//|<sp/>knowledge<sp/>of<sp/>the<sp/>CeCILL-C<sp/>license<sp/>and<sp/>that<sp/>you<sp/>accept<sp/>its<sp/>terms.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//|</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LIMBO_BAYES_OPT_CBOPTIMIZER_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIMBO_BAYES_OPT_CBOPTIMIZER_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iterator&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/parameter/aux_/void.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Core&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="macros_8hpp" kindref="compound">limbo/tools/macros.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="random__generator_8hpp" kindref="compound">limbo/tools/random_generator.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="bo__base_8hpp" kindref="compound">limbo/bayes_opt/bo_base.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>USE_NLOPT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="nlopt__no__grad_8hpp" kindref="compound">limbo/opt/nlopt_no_grad.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined<sp/>USE_LIBCMAES</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="cmaes_8hpp" kindref="compound">limbo/opt/cmaes.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="grid__search_8hpp" kindref="compound">limbo/opt/grid_search.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">defaults<sp/>{</highlight></codeline>
+<codeline lineno="69" refid="structlimbo_1_1defaults_1_1cbayes__opt__boptimizer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1defaults_1_1cbayes__opt__boptimizer" kindref="compound">cbayes_opt_boptimizer</ref><sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1defaults_1_1cbayes__opt__boptimizer_1aa1e5222bd5f1ce84a66d49c46a1e4e3d" kindref="member">BO_PARAM</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">,<sp/>noise,<sp/>1e-6);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1defaults_1_1cbayes__opt__boptimizer_1aa1e5222bd5f1ce84a66d49c46a1e4e3d" kindref="member">BO_PARAM</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">,<sp/>hp_period,<sp/>-1);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">experimental<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(constraint_modelfun)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>namespace<sp/>bayes_opt<sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>boost::parameter::parameters&lt;boost::parameter::optional&lt;limbo::tag::acquiopt&gt;,</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;limbo::tag::statsfun&gt;,</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;limbo::tag::initfun&gt;,</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;limbo::tag::acquifun&gt;,</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;limbo::tag::stopcrit&gt;,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;limbo::tag::modelfun&gt;,</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;limbo::experimental::tag::constraint_modelfun&gt;&gt;</highlight></codeline>
+<codeline lineno="87" refid="namespacelimbo_1_1experimental_1_1bayes__opt_1a5b88cfb36e71acb407ac2258966e57b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacelimbo_1_1experimental_1_1bayes__opt_1a5b88cfb36e71acb407ac2258966e57b1" kindref="member">cboptimizer_signature</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Params,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A1<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A2<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A3<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A4<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A5<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A6<sp/>=<sp/>boost::parameter::void_,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">A7<sp/>=<sp/>boost::parameter::void_&gt;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer" kindref="compound">CBOptimizer</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">limbo::bayes_opt::BoBase</ref>&lt;Params,<sp/>A1,<sp/>A2,<sp/>A3,<sp/>A4,<sp/>A5,<sp/>A6&gt;<sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>defaults</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults" kindref="compound">defaults</ref><sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>USE_NLOPT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125" refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1ad87ee1f502b5730ede0b4e46ef9b6437" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1opt_1_1_n_l_opt_no_grad" kindref="compound">limbo::opt::NLOptNoGrad&lt;Params, nlopt::GN_DIRECT_L_RAND&gt;</ref><sp/><ref refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1ad87ee1f502b5730ede0b4e46ef9b6437" kindref="member">acquiopt_t</ref>;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(USE_LIBCMAES)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1opt_1_1_cmaes" kindref="compound">limbo::opt::Cmaes&lt;Params&gt;</ref><sp/>acquiopt_t;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#warning<sp/>NO<sp/>NLOpt,<sp/>and<sp/>NO<sp/>Libcmaes:<sp/>the<sp/>acquisition<sp/>function<sp/>will<sp/>be<sp/>optimized<sp/>by<sp/>a<sp/>grid<sp/>search<sp/>algorithm<sp/>(which<sp/>is<sp/>usually<sp/>bad).<sp/>Please<sp/>install<sp/>at<sp/>least<sp/>NLOpt<sp/>or<sp/>libcmaes<sp/>to<sp/>use<sp/>limbo!.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1opt_1_1_grid_search" kindref="compound">limbo::opt::GridSearch&lt;Params&gt;</ref><sp/>acquiopt_t;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1ad111c343608ef57fcb008aba61bd8803" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_exp" kindref="compound">limbo::kernel::Exp&lt;Params&gt;</ref><sp/><ref refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1ad111c343608ef57fcb008aba61bd8803" kindref="member">kf_t</ref>;</highlight></codeline>
+<codeline lineno="133" refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1a6f42eec8660a35b4f1eb066af0c1b2b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1mean_1_1_constant" kindref="compound">limbo::mean::Constant&lt;Params&gt;</ref><sp/><ref refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1a6f42eec8660a35b4f1eb066af0c1b2b9" kindref="member">mean_t</ref>;</highlight></codeline>
+<codeline lineno="134" refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1afbbb3a7663e1cabe65b094bca5bebc75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">limbo::model::GP&lt;Params, kf_t, mean_t&gt;</ref><sp/><ref refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1afbbb3a7663e1cabe65b094bca5bebc75" kindref="member">constraint_model_t</ref>;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="137" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a52bd94f4487175ef317b4d35149ac3c9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base" kindref="compound">limbo::bayes_opt::BoBase&lt;Params, A1, A2, A3, A4, A5, A6&gt;</ref><sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a52bd94f4487175ef317b4d35149ac3c9" kindref="member">base_t</ref>;</highlight></codeline>
+<codeline lineno="138" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a2809982ff7ad024476d8a7babfec9166" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a151af5c7eef92a82d8813bb2e067d267" kindref="member">base_t::model_t</ref><sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a2809982ff7ad024476d8a7babfec9166" kindref="member">model_t</ref>;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1aa8977e9e98215bb5e727ce2e182099dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a200a43abb6c95d2d99660898b36f2200" kindref="member">base_t::acquisition_function_t</ref><sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1aa8977e9e98215bb5e727ce2e182099dd" kindref="member">acquisition_function_t</ref>;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>extract<sp/>the<sp/>types</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a63a9a28cc266539b492774e381d06d6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>cboptimizer_signature::bind&lt;A1,<sp/>A2,<sp/>A3,<sp/>A4,<sp/>A5,<sp/>A6,<sp/>A7&gt;::type<sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a63a9a28cc266539b492774e381d06d6f" kindref="member">args</ref>;</highlight></codeline>
+<codeline lineno="143" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1afc949eca6b8ea7a84b5e0b38e8c17a4d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>limbo::tag::acquiopt,<sp/>typename<sp/>defaults::acquiopt_t&gt;::type<sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1afc949eca6b8ea7a84b5e0b38e8c17a4d" kindref="member">acqui_optimizer_t</ref>;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a1f820a8eb0aebd5eb8ff359b35b98bdc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>boost::parameter::binding&lt;args,<sp/>limbo::experimental::tag::constraint_modelfun,<sp/>typename<sp/>defaults::constraint_model_t&gt;::type<sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a1f820a8eb0aebd5eb8ff359b35b98bdc" kindref="member">constraint_model_t</ref>;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>StateFunction,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction<sp/>=<sp/>FirstElem&gt;</highlight></codeline>
+<codeline lineno="149" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1ae401a10958d1ff8f378f8a4947863a5a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1ae401a10958d1ff8f378f8a4947863a5a" kindref="member">optimize</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StateFunction&amp;<sp/>sfun,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun<sp/>=<sp/>AggregatorFunction(),<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>reset<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_nb_constraints<sp/>=<sp/>StateFunction::nb_constraints;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_dim_out<sp/>=<sp/>StateFunction::dim_out;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_init(sfun,<sp/>afun,<sp/>reset);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!this-&gt;_observations.empty())<sp/>{</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_split_observations();</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_model.compute(this-&gt;_samples,<sp/>_obs[0],<sp/>Eigen::VectorXd::Constant(_obs[0].size(),<sp/>Params::cbayes_opt_boptimizer::noise()),<sp/>this-&gt;_bl_samples,<sp/>Eigen::VectorXd::Constant(this-&gt;_bl_samples.size(),<sp/>Params::cbayes_opt_boptimizer::noise()));</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_nb_constraints<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_constraint_model.compute(this-&gt;_samples,<sp/>_obs[1],<sp/>Eigen::VectorXd::Constant(_obs[1].size(),<sp/>Params::cbayes_opt_boptimizer::noise()),<sp/>this-&gt;_bl_samples,<sp/>Eigen::VectorXd::Constant(this-&gt;_bl_samples.size(),<sp/>Params::cbayes_opt_boptimizer::noise()));</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_model<sp/>=<sp/>model_t(StateFunction::dim_in,<sp/>StateFunction::dim_out);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_nb_constraints<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_constraint_model<sp/>=<sp/>constraint_model_t(StateFunction::dim_in,<sp/>_nb_constraints);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>acqui_optimizer_t<sp/>acqui_optimizer;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!this-&gt;_stop(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>afun))<sp/>{</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>acquisition_function_t<sp/>acqui(_model,<sp/>_constraint_model,<sp/>this-&gt;_current_iteration);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>we<sp/>do<sp/>not<sp/>have<sp/>gradient<sp/>in<sp/>our<sp/>current<sp/>acquisition<sp/>function</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>acqui_optimization<sp/>=</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[&amp;](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>g)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__opt__tools_1ga38e53ccac21f452bd31e9b239985d456" kindref="member">opt::no_grad</ref>(acqui(x,<sp/>afun));<sp/>};</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>starting_point<sp/>=<sp/><ref refid="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" kindref="member">tools::random_vector</ref>(StateFunction::dim_in);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>new_sample<sp/>=<sp/>acqui_optimizer(acqui_optimization,<sp/>starting_point,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted<sp/>=<sp/>!this-&gt;eval_and_add(sfun,<sp/>new_sample);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_update_stats(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>afun,<sp/>blacklisted);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(blacklisted)<sp/>{</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_model.add_bl_sample(this-&gt;_bl_samples.back(),<sp/>Params::cbayes_opt_boptimizer::noise());</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_nb_constraints<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_constraint_model.add_bl_sample(this-&gt;_bl_samples.back(),<sp/>Params::cbayes_opt_boptimizer::noise());</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_model.add_sample(this-&gt;_samples.back(),<sp/>_obs[0].back(),<sp/>Params::cbayes_opt_boptimizer::noise());</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_nb_constraints<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_constraint_model.add_sample(this-&gt;_samples.back(),<sp/>_obs[1].back(),<sp/>Params::cbayes_opt_boptimizer::noise());</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Params::cbayes_opt_boptimizer::hp_period()<sp/>&gt;<sp/>0</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>(this-&gt;_current_iteration<sp/>+<sp/>1)<sp/>%<sp/>Params::cbayes_opt_boptimizer::hp_period()<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_model.optimize_hyperparams();</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_nb_constraints<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_constraint_model.optimize_hyperparams();</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_current_iteration++;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;_total_iterations++;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction<sp/>=<sp/>FirstElem&gt;</highlight></codeline>
+<codeline lineno="207" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1af7b2e8e92cf103d2e44ed1fa75eb8c8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1af7b2e8e92cf103d2e44ed1fa75eb8c8b" kindref="member">best_observation</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun<sp/>=<sp/>AggregatorFunction())</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="208"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_dim_out<sp/>=<sp/>_model.dim_out();</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_split_observations();</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>obs<sp/>=<sp/>_feasible_observations();</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(obs.size()<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_obs[0]<sp/>=<sp/>obs;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>rewards<sp/>=<sp/>std::vector&lt;double&gt;(_obs[0].size());</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::transform(_obs[0].begin(),<sp/>_obs[0].end(),<sp/>rewards.begin(),<sp/>afun);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>max_e<sp/>=<sp/>std::max_element(rewards.begin(),<sp/>rewards.end());</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_obs[0][std::distance(rewards.begin(),<sp/>max_e)];</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction<sp/>=<sp/>FirstElem&gt;</highlight></codeline>
+<codeline lineno="224" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a57f205b02a8a3e267cfaf3f25842aa34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a57f205b02a8a3e267cfaf3f25842aa34" kindref="member">best_sample</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun<sp/>=<sp/>AggregatorFunction())</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="225"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_dim_out<sp/>=<sp/>_model.dim_out();</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_split_observations();</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>obs<sp/>=<sp/>_feasible_observations();</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(obs.size()<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_obs[0]<sp/>=<sp/>obs;</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>rewards<sp/>=<sp/>std::vector&lt;double&gt;(_obs[0].size());</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::transform(_obs[0].begin(),<sp/>_obs[0].end(),<sp/>rewards.begin(),<sp/>afun);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>max_e<sp/>=<sp/>std::max_element(rewards.begin(),<sp/>rewards.end());</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;_samples[std::distance(rewards.begin(),<sp/>max_e)];</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1ae79ff606897d20e23f9749a968b8fe10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>model_t&amp;<sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1ae79ff606897d20e23f9749a968b8fe10" kindref="member">model</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_model;<sp/>}<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>model<sp/>for<sp/>the<sp/>objective<sp/>function</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>model_t<sp/>_model;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>constraint_model_t<sp/>_constraint_model;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>_nb_constraints;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>_dim_out;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>std::vector&lt;std::vector&lt;Eigen::VectorXd&gt;&gt;<sp/>_obs;</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>_feasible_observations()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="249"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Eigen::VectorXd&gt;<sp/>feasible_obs;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>_obs[0].size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_obs[1][i].prod()<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>feasible_obs.push_back(_obs[0][i]);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>feasible_obs;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>_split_observations()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="260"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_obs.clear();</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_obs.resize(2);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>this-&gt;_observations.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(this-&gt;_observations[i].size()<sp/>==<sp/>_dim_out<sp/>+<sp/>_nb_constraints);</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>vec_obj(_dim_out);</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>_dim_out;<sp/>++j)</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vec_obj(j)<sp/>=<sp/>this-&gt;_observations[i](j);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_obs[0].push_back(vec_obj);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_nb_constraints<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>vec_con(_nb_constraints);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>_dim_out,<sp/>ind<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>this-&gt;_observations[i].size();<sp/>++j,<sp/>++ind)</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vec_con(ind)<sp/>=<sp/>this-&gt;_observations[i](j);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_obs[1].push_back(vec_con);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp"/>
+  </compounddef>
+</doxygen>

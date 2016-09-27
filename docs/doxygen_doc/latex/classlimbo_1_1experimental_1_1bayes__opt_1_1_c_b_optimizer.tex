@@ -1,0 +1,134 @@
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer}{}\section{limbo\+:\+:experimental\+:\+:bayes\+\_\+opt\+:\+:C\+B\+Optimizer$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$ Class Template Reference}
+\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$}}
+
+
+{\ttfamily \#include $<$limbo/experimental/bayes\+\_\+opt/cboptimizer.\+hpp$>$}
+
+Inheritance diagram for limbo\+:\+:experimental\+:\+:bayes\+\_\+opt\+:\+:C\+B\+Optimizer$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults}{defaults}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base}{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$ \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a52bd94f4487175ef317b4d35149ac3c9}{base\+\_\+t}
+\begin{DoxyCompactList}\small\item\em link to the corresponding Bo\+Base (useful for typedefs) \end{DoxyCompactList}\item 
+typedef \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a151af5c7eef92a82d8813bb2e067d267}{base\+\_\+t\+::model\+\_\+t} \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a2809982ff7ad024476d8a7babfec9166}{model\+\_\+t}
+\item 
+typedef \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a200a43abb6c95d2d99660898b36f2200}{base\+\_\+t\+::acquisition\+\_\+function\+\_\+t} \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_aa8977e9e98215bb5e727ce2e182099dd}{acquisition\+\_\+function\+\_\+t}
+\item 
+typedef cboptimizer\+\_\+signature\+::bind$<$ A1, A2, A3, A4, A5, A6, A7 $>$\+::type \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a63a9a28cc266539b492774e381d06d6f}{args}
+\item 
+typedef boost\+::parameter\+::binding$<$ \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a3844c259aa1e59d0241f90390aa6f7fa}{args}, limbo\+::tag\+::acquiopt, typename \hyperlink{structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_ad87ee1f502b5730ede0b4e46ef9b6437}{defaults\+::acquiopt\+\_\+t} $>$\+::type \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_afc949eca6b8ea7a84b5e0b38e8c17a4d}{acqui\+\_\+optimizer\+\_\+t}
+\item 
+typedef boost\+::parameter\+::binding$<$ \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a3844c259aa1e59d0241f90390aa6f7fa}{args}, limbo\+::experimental\+::tag\+::constraint\+\_\+modelfun, typename \hyperlink{structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_afbbb3a7663e1cabe65b094bca5bebc75}{defaults\+::constraint\+\_\+model\+\_\+t} $>$\+::type \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a1f820a8eb0aebd5eb8ff359b35b98bdc}{constraint\+\_\+model\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename State\+Function , typename Aggregator\+Function  = First\+Elem$>$ }\\void \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_ae401a10958d1ff8f378f8a4947863a5a}{optimize} (const State\+Function \&sfun, const Aggregator\+Function \&afun=Aggregator\+Function(), bool reset=true)
+\begin{DoxyCompactList}\small\item\em The main function (run the Bayesian optimization algorithm) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Aggregator\+Function  = First\+Elem$>$ }\\const Eigen\+::\+Vector\+Xd \& \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_af7b2e8e92cf103d2e44ed1fa75eb8c8b}{best\+\_\+observation} (const Aggregator\+Function \&afun=Aggregator\+Function()) const 
+\begin{DoxyCompactList}\small\item\em return the best observation so far (i.\+e. max(f(x))) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Aggregator\+Function  = First\+Elem$>$ }\\const Eigen\+::\+Vector\+Xd \& \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a57f205b02a8a3e267cfaf3f25842aa34}{best\+\_\+sample} (const Aggregator\+Function \&afun=Aggregator\+Function()) const 
+\begin{DoxyCompactList}\small\item\em return the best sample so far (i.\+e. the argmax(f(x))) \end{DoxyCompactList}\item 
+const \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a151af5c7eef92a82d8813bb2e067d267}{model\+\_\+t} \& \hyperlink{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_ae79ff606897d20e23f9749a968b8fe10}{model} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+, class A7 = boost\+::parameter\+::void\+\_\+$>$class limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$}
+
+The classic Bayesian optimization algorithm.
+
+\textbackslash{}rst References\+: \+:cite\+:{\ttfamily brochu2010tutorial,Mockus2013} \textbackslash{}endrst
+
+This class takes the same template parameters as Bo\+Base. It adds\+: \textbackslash{}rst +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+ $\vert$type $\vert$typedef $\vert$ argument $\vert$ default $\vert$ +=====================+============+==========+===============+ $\vert$acqui. optimizer $\vert$acqui\+\_\+opt\+\_\+t $\vert$ acquiopt $\vert$ see below $\vert$ +-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/---+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---+ \textbackslash{}endrst
+
+The default value of acqui\+\_\+opt\+\_\+t is\+:
+\begin{DoxyItemize}
+\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_cmaes}{opt\+::\+Cmaes}$<$Params$>$} if libcmaes was found in {\ttfamily waf configure}
+\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_n_l_opt_no_grad}{opt\+::\+N\+L\+Opt\+No\+Grad}$<$Params, nlopt\+::\+G\+N\+\_\+\+D\+I\+R\+E\+C\+T\+\_\+\+L\+\_\+\+R\+A\+N\+D$>$} if N\+L\+Opt was found but libcmaes was not found
+\item {\ttfamily \hyperlink{structlimbo_1_1opt_1_1_grid_search}{opt\+::\+Grid\+Search}$<$Params$>$} otherwise (please do not use this\+: the algorithm will not work at all!) 
+\end{DoxyItemize}
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_afc949eca6b8ea7a84b5e0b38e8c17a4d}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!acqui\+\_\+optimizer\+\_\+t@{acqui\+\_\+optimizer\+\_\+t}}
+\index{acqui\+\_\+optimizer\+\_\+t@{acqui\+\_\+optimizer\+\_\+t}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{acqui\+\_\+optimizer\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ typedef boost\+::parameter\+::binding$<${\bf args}, limbo\+::tag\+::acquiopt, typename {\bf defaults\+::acquiopt\+\_\+t}$>$\+::type {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::{\bf acqui\+\_\+optimizer\+\_\+t}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_afc949eca6b8ea7a84b5e0b38e8c17a4d}
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_aa8977e9e98215bb5e727ce2e182099dd}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!acquisition\+\_\+function\+\_\+t@{acquisition\+\_\+function\+\_\+t}}
+\index{acquisition\+\_\+function\+\_\+t@{acquisition\+\_\+function\+\_\+t}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{acquisition\+\_\+function\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ typedef {\bf base\+\_\+t\+::acquisition\+\_\+function\+\_\+t} {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::{\bf acquisition\+\_\+function\+\_\+t}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_aa8977e9e98215bb5e727ce2e182099dd}
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a63a9a28cc266539b492774e381d06d6f}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!args@{args}}
+\index{args@{args}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{args}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ typedef cboptimizer\+\_\+signature\+::bind$<$A1, A2, A3, A4, A5, A6, A7$>$\+::type {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::{\bf args}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a63a9a28cc266539b492774e381d06d6f}
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a52bd94f4487175ef317b4d35149ac3c9}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!base\+\_\+t@{base\+\_\+t}}
+\index{base\+\_\+t@{base\+\_\+t}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{base\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ typedef {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$Params, A1, A2, A3, A4, A5, A6$>$ {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::{\bf base\+\_\+t}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a52bd94f4487175ef317b4d35149ac3c9}
+
+
+link to the corresponding Bo\+Base (useful for typedefs) 
+
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a1f820a8eb0aebd5eb8ff359b35b98bdc}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!constraint\+\_\+model\+\_\+t@{constraint\+\_\+model\+\_\+t}}
+\index{constraint\+\_\+model\+\_\+t@{constraint\+\_\+model\+\_\+t}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{constraint\+\_\+model\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ typedef boost\+::parameter\+::binding$<${\bf args}, limbo\+::experimental\+::tag\+::constraint\+\_\+modelfun, typename {\bf defaults\+::constraint\+\_\+model\+\_\+t}$>$\+::type {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::{\bf constraint\+\_\+model\+\_\+t}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a1f820a8eb0aebd5eb8ff359b35b98bdc}
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a2809982ff7ad024476d8a7babfec9166}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!model\+\_\+t@{model\+\_\+t}}
+\index{model\+\_\+t@{model\+\_\+t}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{model\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ typedef {\bf base\+\_\+t\+::model\+\_\+t} {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::{\bf model\+\_\+t}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a2809982ff7ad024476d8a7babfec9166}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_af7b2e8e92cf103d2e44ed1fa75eb8c8b}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!best\+\_\+observation@{best\+\_\+observation}}
+\index{best\+\_\+observation@{best\+\_\+observation}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{best\+\_\+observation}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ template$<$typename Aggregator\+Function  = First\+Elem$>$ const Eigen\+::\+Vector\+Xd\& {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::best\+\_\+observation (
+\begin{DoxyParamCaption}
+\item[{const Aggregator\+Function \&}]{afun = {\ttfamily AggregatorFunction()}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_af7b2e8e92cf103d2e44ed1fa75eb8c8b}
+
+
+return the best observation so far (i.\+e. max(f(x))) 
+
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a57f205b02a8a3e267cfaf3f25842aa34}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!best\+\_\+sample@{best\+\_\+sample}}
+\index{best\+\_\+sample@{best\+\_\+sample}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{best\+\_\+sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ template$<$typename Aggregator\+Function  = First\+Elem$>$ const Eigen\+::\+Vector\+Xd\& {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::best\+\_\+sample (
+\begin{DoxyParamCaption}
+\item[{const Aggregator\+Function \&}]{afun = {\ttfamily AggregatorFunction()}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_a57f205b02a8a3e267cfaf3f25842aa34}
+
+
+return the best sample so far (i.\+e. the argmax(f(x))) 
+
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_ae79ff606897d20e23f9749a968b8fe10}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!model@{model}}
+\index{model@{model}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{model}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ const {\bf model\+\_\+t}\& {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_ae79ff606897d20e23f9749a968b8fe10}
+\hypertarget{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_ae401a10958d1ff8f378f8a4947863a5a}{}\index{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}!optimize@{optimize}}
+\index{optimize@{optimize}!limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer@{limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}}
+\subsubsection[{optimize}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params , class A1  = boost\+::parameter\+::void\+\_\+, class A2  = boost\+::parameter\+::void\+\_\+, class A3  = boost\+::parameter\+::void\+\_\+, class A4  = boost\+::parameter\+::void\+\_\+, class A5  = boost\+::parameter\+::void\+\_\+, class A6  = boost\+::parameter\+::void\+\_\+, class A7  = boost\+::parameter\+::void\+\_\+$>$ template$<$typename State\+Function , typename Aggregator\+Function  = First\+Elem$>$ void {\bf limbo\+::experimental\+::bayes\+\_\+opt\+::\+C\+B\+Optimizer}$<$ Params, A1, A2, A3, A4, A5, A6, A7 $>$\+::optimize (
+\begin{DoxyParamCaption}
+\item[{const State\+Function \&}]{sfun, }
+\item[{const Aggregator\+Function \&}]{afun = {\ttfamily AggregatorFunction()}, }
+\item[{bool}]{reset = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_ae401a10958d1ff8f378f8a4947863a5a}
+
+
+The main function (run the Bayesian optimization algorithm) 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/experimental/bayes\+\_\+opt/\hyperlink{cboptimizer_8hpp}{cboptimizer.\+hpp}\end{DoxyCompactItemize}

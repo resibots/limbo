@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 66.079295
+%%BoundingBox: 0 0 500 39.447732
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 7.566667 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 12.675000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
 /rows 3 def
-/cols 2 def
+/cols 3 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -176,6 +176,7 @@ boxfont setfont
 (limbo::bayes_opt::BoBase< Params, A1, A2, A3, A4, A5, A6 >) cw
 (limbo::bayes_opt::BOptimizer< Params, A1, A2, A3, A4, A5, A6 >) cw
 (limbo::experimental::bayes_opt::BoMulti< Params, A1, A2, A3, A4, A5, A6 >) cw
+(limbo::experimental::bayes_opt::CBOptimizer< Params, A1, A2, A3, A4, A5, A6, A7 >) cw
 (limbo::experimental::bayes_opt::Ehvi< Params, A1, A2, A3, A4, A5, A6 >) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
@@ -188,22 +189,25 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (limbo::bayes_opt::BoBase< Params, A1, A2, A3, A4, A5, A6 >) 0.500000 2.000000 box
+ (limbo::bayes_opt::BoBase< Params, A1, A2, A3, A4, A5, A6 >) 1.000000 2.000000 box
  (limbo::bayes_opt::BOptimizer< Params, A1, A2, A3, A4, A5, A6 >) 0.000000 1.000000 box
  (limbo::experimental::bayes_opt::BoMulti< Params, A1, A2, A3, A4, A5, A6 >) 1.000000 1.000000 box
+ (limbo::experimental::bayes_opt::CBOptimizer< Params, A1, A2, A3, A4, A5, A6, A7 >) 2.000000 1.000000 box
  (limbo::experimental::bayes_opt::Ehvi< Params, A1, A2, A3, A4, A5, A6 >) 1.000000 0.000000 box
 
 % ----- relations -----
 
 solid
-1 0.500000 1.250000 out
+1 1.000000 1.250000 out
 solid
-0.000000 1.000000 2.000000 conn
+0.000000 2.000000 2.000000 conn
 solid
 0 0.000000 1.750000 in
 solid
 0 1.000000 1.750000 in
 solid
 1 1.000000 0.250000 out
+solid
+0 2.000000 1.750000 in
 solid
 0 1.000000 0.750000 in
