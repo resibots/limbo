@@ -9,10 +9,12 @@ Documentation is available here: http://www.resibots.eu/limbo
 
 Authors
 ------
-- Antoine Cully (Imperial College): http://www.isir.upmc.fr/?op=view_profil&lang=fr&id=278
-- Jean-Baptiste Mouret (Inria): http://pages.isir.upmc.fr/~mouret/website/
+- Antoine Cully (Imperial College): http://pages.isir.upmc.fr/~cully/website/
+- Jean-Baptiste Mouret (Inria): http://members.loria.fr/JBMouret
 - Konstantinos Chatzilygeroudis (Inria)
 - Federico Allocati (Inria)
+
+Limbo is partly funded by the ResiBots ERC Project (http://www.resibots.eu).
 
 Main features
 -------------
