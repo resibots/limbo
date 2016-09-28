@@ -13,6 +13,7 @@ Let's say we have a planar 6-DOF arm manipulator and we want its end-effector to
 - The forward kinematic model as prior knowledge (mean of Gaussian Process).
 - The **Squared exponential covariance function with automatic relevance detection** as the kernel function of the GP.
 - Likelihood optimization for the hyperparameters of the GP kernel.
+- Use Expected Improvement as the acquisition function.
 - Use different optimizer for the acquisition optimization.
 - Initialize the GP with random samples.
 - Custom stopping criterion.
@@ -161,7 +162,7 @@ Acquisition, Initialization and other aliases
 
 **Acquisition aliases:** ::
 
-  using acqui_t = acqui::UCB<Params, gp_t>;
+  using acqui_t = acqui::EI<Params, gp_t>;
   using acqui_opt_t = opt::Cmaes<Params>;
 
 **Initialization alias:** ::
@@ -208,14 +209,36 @@ Finally, from the root of limbo, run a build command, with the additional switch
 
 Then, an executable named ``arm_example`` should be produced under the folder ``build/exp/arm_example``. When running the experiment, you should expect something like the following: ::
 
- 0 new point:   0.105457   0.984803   0.999724   0.397681 0.00178646   0.472922 value: -2.05529 best:-0.50564
- 1 new point: 0.0418376  0.211166  0.610741   0.97042   0.49975  0.932997 value: -0.420461 best:-0.420461
- 2 new point: 0.0499932  0.809128  0.647616  0.607996   0.98363  0.263471 value: -1.47844 best:-0.420461
- 3 new point: 0.926947 0.304285 0.962505 0.923134 0.340676 0.352674 value: -1.77912 best:-0.420461
- 4 new point:    0.139309  0.00337038   0.0725873     0.98806     0.52506 0.000522096 value: -0.000876567 best:-0.000876567
- New target!
- 5 new point: 0.0632575  0.981795  0.347888  0.342065   0.51396  0.785025 value: -1.26196 best:-0.50006
- 6 new point:  0.455737  0.978531   0.55947 0.0435089 0.0143673  0.999978 value: -0.0113502 best:-0.0113502
+  0 new point:  0.99374 0.999401 0.999716 0.532902 0.999337 0.648682 value: -0.73579 best:-0.73579
+  1 new point: 0.00924137    0.52356   0.992816   0.591639   0.900581 0.00022477 value: -1.59172 best:-0.73579
+  2 new point:  0.999114  0.303668 0.0132791  0.792124  0.391522  0.999149 value: -3.00304 best:-0.73579
+  3 new point: 0.990481 0.981046 0.379883 0.999432 0.282599 0.291695 value: -0.824245 best:-0.73579
+  4 new point: 0.00771956   0.949676   0.956241  0.0293142   0.244216  0.0891216 value: -2.68335 best:-0.73579
+  5 new point:   0.972554 0.00021536   0.998559      0.808   0.346161 0.00134114 value: -3.7039 best:-0.73579
+  6 new point: 0.00275069   0.495195 0.00167023   0.994612   0.631628   0.707545 value: -1.97244 best:-0.73579
+  7 new point:  0.124159  0.262741  0.303586  0.999707  0.335987 0.0192833 value: -1.28697 best:-0.73579
+  8 new point:  0.026011  0.307255  0.101375 0.0195426  0.562741 0.0400001 value: -2.31361 best:-0.73579
+  9 new point:    0.153818  0.00117556 9.92801e-05    0.376417     0.18015  0.00215051 value: -1.00521 best:-0.73579
+  10 new point:  0.107636  0.710152   0.41314 0.0703153  0.646439  0.606494 value: -0.685661 best:-0.685661
+  11 new point: 0.282632 0.794559 0.940368 0.530688 0.113832 0.439228 value: -1.44821 best:-0.685661
+  12 new point: 0.0110291  0.266178  0.576008  0.425873  0.120849  0.444479 value: -1.38147 best:-0.685661
+  13 new point:  0.109448 0.0548453  0.458707  0.487198  0.739701  0.588758 value: -0.147514 best:-0.147514
+  14 new point: 0.0877909 0.0481023  0.837642  0.438223  0.387531  0.649942 value: -0.150097 best:-0.147514
+  15 new point: 0.111047 0.633206 0.509962 0.443725 0.359951 0.243446 value: -0.780535 best:-0.147514
+  16 new point:  0.0827364   0.186448   0.333666   0.839036   0.536232 0.00476438 value: -0.575265 best:-0.147514
+  17 new point:   0.123347 0.00377535   0.554967   0.103699   0.371233   0.233517 value: -0.00982979 best:-0.00982979
+  New target!
+  18 new point:    0.998604    0.984174    0.999353 0.000200245    0.356422    0.999792 value: -1.38941 best:-0.370924
+  19 new point: 0.0189988  0.999921  0.942007  0.665937  0.999451  0.986427 value: -3.16331 best:-0.370924
+  20 new point: 0.0688255  0.230665 0.0273747  0.270297  0.980095  0.990872 value: -2.89225 best:-0.370924
+  21 new point: 0.997416 0.857708 0.998912 0.984197 0.391337 0.114332 value: -0.883913 best:-0.370924
+  22 new point:    0.999982 0.000168928    0.999398    0.336817    0.258304    0.929625 value: -1.19557 best:-0.370924
+  23 new point: 0.0700344  0.281842  0.919103 0.0183289  0.074567  0.970264 value: -4.17297 best:-0.370924
+  24 new point: 7.78708e-05 2.18076e-06    0.983852     0.99996    0.825274    0.612332 value: -2.57724 best:-0.370924
+  25 new point: 0.000101799    0.997473    0.797134    0.994634    0.377403 3.70205e-05 value: -2.33882 best:-0.370924
+  26 new point: 0.0467502  0.327915  0.235275  0.966877 0.0363554  0.909477 value: -3.49153 best:-0.370924
+  27 new point:    0.999615 0.000340133    0.637717    0.994796  0.00143888    0.464556 value: -2.75311 best:-0.370924
+  28 new point:   0.998958 0.00509838   0.474495   0.667517   0.532318   0.520064 value: -0.038073 best:-0.038073
 
 
 Using state-based bayesian optimization, we can transfer what we learned during one task to achieve faster new tasks.

@@ -42,25 +42,30 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_EXPERIMENTAL_ACQUI_UCB_HPP
-#define LIMBO_EXPERIMENTAL_ACQUI_UCB_HPP
+#ifndef LIMBO_ACQUI_CEI_HPP
+#define LIMBO_ACQUI_CEI_HPP
 
+#include <cmath>
+#include <vector>
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
 
 namespace limbo {
     namespace defaults {
-        struct acqui_ucb_imgpo {
-            BO_PARAM(double, nu, 0.05);
+        struct acqui_cei {
+            /// @ingroup acqui_defaults
+            BO_PARAM(double, jitter, 0.0);
         };
     }
-    namespace acqui {
-        namespace experimental {
-            template <typename Params, typename Model>
-            class UCB_IMGPO {
+
+    namespace experimental {
+        namespace acqui {
+            template <typename Params, typename Model, typename ConstraintModel>
+            class CEI {
             public:
-                UCB_IMGPO(const Model& model, size_t M = 1) : _model(model), _M(M) {}
+                CEI(const Model& model, const ConstraintModel& constraint_model, int iteration = 0)
+                    : _model(model), _constraint_model(constraint_model) {}
 
                 size_t dim_in() const { return _model.dim_in(); }
 
@@ -70,17 +75,51 @@ namespace limbo {
                 double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
                 {
                     Eigen::VectorXd mu;
-                    double sigma;
-                    std::tie(mu, sigma) = _model.query(v);
-                    // UCB - nu = 0.05
-                    // sqrt(2*log(pi^2*M^2/(12*nu)))
-                    double gp_varsigma = std::sqrt(2.0 * std::log(std::pow(M_PI, 2.0) * std::pow(_M, 2.0) / (12.0 * Params::acqui_ucb_imgpo::nu())));
-                    return (afun(mu) + (gp_varsigma + 0.2) * std::sqrt(sigma));
+                    double sigma_sq;
+                    std::tie(mu, sigma_sq) = _model.query(v);
+                    double sigma = std::sqrt(sigma_sq);
+
+                    // If \sigma(x) = 0 or we do not have any observation yet we return 0
+                    if (sigma < 1e-10 || _model.samples().size() < 1)
+                        return 0.0;
+
+                    // Compute constrained EI(x)
+                    // First find the best (predicted) observation so far
+                    // (We are zeroing infeasible samples subject to the constraint value)
+                    std::vector<double> rewards;
+                    for (auto s : _model.samples())
+                        rewards.push_back(afun(_model.mu(s)));
+
+                    double f_max = *std::max_element(rewards.begin(), rewards.end());
+                    // Calculate Z and \Phi(Z) and \phi(Z)
+                    double X = afun(mu) - f_max - Params::acqui_cei::jitter();
+                    double Z = X / sigma;
+                    double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);
+                    double Phi = 0.5 * std::erfc(-Z / std::sqrt(2));
+
+                    return _pf(v, afun) * (X * Phi + sigma * phi);
                 }
 
             protected:
                 const Model& _model;
-                size_t _M;
+                const ConstraintModel& _constraint_model;
+
+                template <typename AggregatorFunction>
+                double _pf(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+                {
+                    Eigen::VectorXd mu;
+                    double sigma_sq;
+                    std::tie(mu, sigma_sq) = _constraint_model.query(v);
+                    double sigma = std::sqrt(sigma_sq);
+
+                    if (sigma < 1e-10 || _constraint_model.samples().size() < 1)
+                        return 1.0;
+
+                    double Z = (afun(mu) - 1.0) / sigma;
+                    double Phi = 0.5 * std::erfc(-Z / std::sqrt(2));
+
+                    return Phi;
+                }
             };
         }
     }

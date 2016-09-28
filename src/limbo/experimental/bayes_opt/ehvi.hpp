@@ -2,32 +2,32 @@
 //| This project has received funding from the European Research Council (ERC) under
 //| the European Union's Horizon 2020 research and innovation programme (grant
 //| agreement No 637972) - see http://www.resibots.eu
-//| 
+//|
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
-//| 
+//|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
 //| optimization.
 //| Main repository: http://github.com/resibots/limbo
 //| Documentation: http://www.resibots.eu/limbo
-//| 
+//|
 //| This software is governed by the CeCILL-C license under French law and
 //| abiding by the rules of distribution of free software.  You can  use,
 //| modify and/ or redistribute the software under the terms of the CeCILL-C
 //| license as circulated by CEA, CNRS and INRIA at the following URL
 //| "http://www.cecill.info".
-//| 
+//|
 //| As a counterpart to the access to the source code and  rights to copy,
 //| modify and redistribute granted by the license, users are provided only
 //| with a limited warranty  and the software's author,  the holder of the
 //| economic rights,  and the successive licensors  have only  limited
 //| liability.
-//| 
+//|
 //| In this respect, the user's attention is drawn to the risks associated
 //| with loading,  using,  modifying and/or developing or reproducing the
 //| software by the user in light of its specific status of free software,
@@ -38,10 +38,10 @@
 //| requirements in conditions enabling the security of their systems and/or
 //| data to be ensured and,  more generally, to use and operate it in the
 //| same conditions as regards security.
-//| 
+//|
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
-//| 
+//|
 #ifndef LIMBO_EXPERIMENTAL_BAYES_OPT_EHVI_HPP
 #define LIMBO_EXPERIMENTAL_BAYES_OPT_EHVI_HPP
 
@@ -81,10 +81,10 @@ namespace limbo {
             class Ehvi : public BoMulti<Params, A1, A2, A3, A4, A5, A6> {
             public:
                 struct defaults {
-#ifdef USE_LIBCMAES
-                    typedef opt::Cmaes<Params> acquiopt_t;
-#elif defined(USE_NLOPT)
+#ifdef USE_NLOPT
                     typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+#elif defined(USE_LIBCMAES)
+                    typedef opt::Cmaes<Params> acquiopt_t;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
                     typedef opt::GridSearch<Params> acquiopt_t;
@@ -106,7 +106,6 @@ namespace limbo {
                     acqui_optimizer_t inner_opt;
 
                     while (this->_samples.size() == 0 || !this->_stop(*this, FirstElem())) {
-                        std::cout.flush();
                         this->template update_pareto_model<EvalFunction::dim_in>();
                         this->update_pareto_data();
 
@@ -141,7 +140,7 @@ namespace limbo {
                         };
 
                         auto comp = [](const pair_t& v1, const pair_t& v2) {
-                                    return v1.second > v2.second;
+                            return v1.second > v2.second;
                         };
 
                         auto m = tools::par::max(init, this->pareto_data().size(), body, comp);

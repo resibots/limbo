@@ -50,6 +50,7 @@
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
+#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -80,8 +81,9 @@ namespace limbo {
             size_t dim_out() const { return _model.dim_out(); }
 
             template <typename AggregatorFunction>
-            double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+            opt::eval_t operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun, bool gradient) const
             {
+                assert(!gradient);
                 Eigen::VectorXd mu;
                 double sigma_sq;
                 std::tie(mu, sigma_sq) = _model.query(v);
@@ -89,7 +91,7 @@ namespace limbo {
 
                 // If \sigma(x) = 0 or we do not have any observation yet we return 0
                 if (sigma < 1e-10 || _model.samples().size() < 1)
-                    return 0.0;
+                    return opt::no_grad(0.0);
 
                 // Compute EI(x)
                 // First find the best so far (predicted) observation
@@ -104,7 +106,7 @@ namespace limbo {
                 double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);
                 double Phi = 0.5 * std::erfc(-Z / std::sqrt(2)); //0.5 * (1.0 + std::erf(Z / std::sqrt(2)));
 
-                return X * Phi + sigma * phi;
+                return opt::no_grad(X * Phi + sigma * phi);
             }
 
         protected:

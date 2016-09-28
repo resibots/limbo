@@ -2,32 +2,32 @@
 //| This project has received funding from the European Research Council (ERC) under
 //| the European Union's Horizon 2020 research and innovation programme (grant
 //| agreement No 637972) - see http://www.resibots.eu
-//| 
+//|
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
-//| 
+//|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
 //| optimization.
 //| Main repository: http://github.com/resibots/limbo
 //| Documentation: http://www.resibots.eu/limbo
-//| 
+//|
 //| This software is governed by the CeCILL-C license under French law and
 //| abiding by the rules of distribution of free software.  You can  use,
 //| modify and/ or redistribute the software under the terms of the CeCILL-C
 //| license as circulated by CEA, CNRS and INRIA at the following URL
 //| "http://www.cecill.info".
-//| 
+//|
 //| As a counterpart to the access to the source code and  rights to copy,
 //| modify and redistribute granted by the license, users are provided only
 //| with a limited warranty  and the software's author,  the holder of the
 //| economic rights,  and the successive licensors  have only  limited
 //| liability.
-//| 
+//|
 //| In this respect, the user's attention is drawn to the risks associated
 //| with loading,  using,  modifying and/or developing or reproducing the
 //| software by the user in light of its specific status of free software,
@@ -38,15 +38,17 @@
 //| requirements in conditions enabling the security of their systems and/or
 //| data to be ensured and,  more generally, to use and operate it in the
 //| same conditions as regards security.
-//| 
+//|
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
-//| 
+//|
 #include <limbo/limbo.hpp>
 #include <limbo/experimental/bayes_opt/parego.hpp>
 #include <limbo/experimental/bayes_opt/nsbo.hpp>
 #include <limbo/experimental/bayes_opt/ehvi.hpp>
+#include <limbo/experimental/stat/pareto_front.hpp>
 #include <limbo/experimental/stat/pareto_benchmark.hpp>
+#include <limbo/experimental/stat/hyper_volume.hpp>
 
 using namespace limbo;
 
@@ -76,11 +78,11 @@ struct Params {
     struct acqui_gpucb : public defaults::acqui_gpucb {
     };
 
-#ifdef USE_LIBCMAES
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
-#elif defined(USE_NLOPT)
+#ifdef USE_NLOPT
     struct opt_nloptnograd : public defaults::opt_nloptnograd {
+    };
+#elif defined(USE_LIBCMAES)
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 #else
     struct opt_gridsearch : public defaults::opt_gridsearch {
@@ -90,9 +92,16 @@ struct Params {
     struct mean_constant : public defaults::mean_constant {
     };
 
-    struct bayes_opt_ehvi {
+    struct bayes_opt_ehvi : public defaults::bayes_opt_ehvi {
         BO_PARAM(double, x_ref, -11);
         BO_PARAM(double, y_ref, -11);
+    };
+
+    struct model_gp_parego : public experimental::defaults::model_gp_parego {
+    };
+
+    struct stat_hyper_volume {
+        BO_PARAM_ARRAY(double, ref, 10, 10);
     };
 };
 
@@ -106,6 +115,8 @@ struct Params {
 
 struct zdt1 {
     static constexpr size_t dim_in = ZDT_DIM;
+    static constexpr size_t dim_out = 2;
+
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd res(2);
@@ -123,6 +134,8 @@ struct zdt1 {
 
 struct zdt2 {
     static constexpr size_t dim_in = ZDT_DIM;
+    static constexpr size_t dim_out = 2;
+
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd res(2);
@@ -140,6 +153,8 @@ struct zdt2 {
 
 struct zdt3 {
     static constexpr size_t dim_in = ZDT_DIM;
+    static constexpr size_t dim_out = 2;
+
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::VectorXd res(2);
@@ -190,13 +205,16 @@ int main()
     typedef mop2 func_t;
 #endif
 
-    using stat_t = boost::fusion::vector<experimental::stat::ParetoBenchmark<func_t>>;
-
 #ifdef PAREGO
-    Parego<Params, statsfun<stat_t>> opt;
+    using stat_t = boost::fusion::vector<experimental::stat::ParetoFront<Params>,
+        experimental::stat::HyperVolume<Params>,
+        stat::ConsoleSummary<Params>>;
+    experimental::bayes_opt::Parego<Params, statsfun<stat_t>> opt;
 #elif defined(NSBO)
-    Nsbo<Params, statsfun<stat_t>> opt;
+    using stat_t = boost::fusion::vector<experimental::stat::ParetoBenchmark<func_t>>;
+    experimental::bayes_opt::Nsbo<Params, statsfun<stat_t>> opt;
 #else
+    using stat_t = boost::fusion::vector<experimental::stat::ParetoBenchmark<func_t>>;
     experimental::bayes_opt::Ehvi<Params, statsfun<stat_t>> opt;
 #endif
     opt.optimize(func_t());

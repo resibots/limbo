@@ -183,10 +183,10 @@ int main()
 
     bayes_opt::BOptimizer<Params, modelfun<gp_t>, acquifun<acqui_t>, acquiopt<acqui_opt_t>, initfun<init_t>, statsfun<stat_t>, stopcrit<stop_t>> boptimizer;
     // Instantiate aggregator
-    DistanceToTarget<Params> aggregator({2, 1.5});
+    DistanceToTarget<Params> aggregator({1, 1});
     boptimizer.optimize(eval_func<Params>(), aggregator);
     std::cout << "New target!" << std::endl;
-    aggregator = DistanceToTarget<Params>({1.5, 1.5});
+    aggregator = DistanceToTarget<Params>({1.5, 1});
     // Do not forget to pass `false` as the last parameter in `optimize`,
     // so you do not reset the data in boptimizer
     // i.e. keep all the previous data points in the Gaussian Process
