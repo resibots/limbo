@@ -9,7 +9,7 @@ Documentation is available here: http://www.resibots.eu/limbo
 
 Authors
 ------
-- Antoine Cully (Imperial College): http://pages.isir.upmc.fr/~cully/website/
+- Antoine Cully (Imperial College): http://www.antoinecully.com
 - Jean-Baptiste Mouret (Inria): http://members.loria.fr/JBMouret
 - Konstantinos Chatzilygeroudis (Inria)
 - Federico Allocati (Inria)
