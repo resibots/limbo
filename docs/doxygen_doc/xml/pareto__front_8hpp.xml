@@ -5,53 +5,53 @@
     <includes refid="stat__base_8hpp" local="no">limbo/stat/stat_base.hpp</includes>
     <includes refid="pareto_8hpp" local="no">limbo/experimental/tools/pareto.hpp</includes>
     <incdepgraph>
-      <node id="809">
+      <node id="808">
         <label>string</label>
       </node>
-      <node id="813">
+      <node id="812">
         <label>limbo/tools/parallel.hpp</label>
         <link refid="parallel_8hpp"/>
-        <childnode refid="814" relation="include">
-        </childnode>
-        <childnode refid="812" relation="include">
-        </childnode>
-      </node>
-      <node id="808">
-        <label>fstream</label>
-      </node>
-      <node id="811">
-        <label>limbo/experimental/tools/pareto.hpp</label>
-        <link refid="pareto_8hpp"/>
-        <childnode refid="812" relation="include">
-        </childnode>
         <childnode refid="813" relation="include">
-        </childnode>
-      </node>
-      <node id="814">
-        <label>vector</label>
-      </node>
-      <node id="807">
-        <label>limbo/stat/stat_base.hpp</label>
-        <link refid="stat__base_8hpp"/>
-        <childnode refid="808" relation="include">
-        </childnode>
-        <childnode refid="809" relation="include">
-        </childnode>
-        <childnode refid="810" relation="include">
-        </childnode>
-      </node>
-      <node id="806">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_front.hpp</label>
-        <link refid="pareto_front.hpp"/>
-        <childnode refid="807" relation="include">
         </childnode>
         <childnode refid="811" relation="include">
         </childnode>
       </node>
-      <node id="812">
-        <label>algorithm</label>
+      <node id="807">
+        <label>fstream</label>
       </node>
       <node id="810">
+        <label>limbo/experimental/tools/pareto.hpp</label>
+        <link refid="pareto_8hpp"/>
+        <childnode refid="811" relation="include">
+        </childnode>
+        <childnode refid="812" relation="include">
+        </childnode>
+      </node>
+      <node id="813">
+        <label>vector</label>
+      </node>
+      <node id="806">
+        <label>limbo/stat/stat_base.hpp</label>
+        <link refid="stat__base_8hpp"/>
+        <childnode refid="807" relation="include">
+        </childnode>
+        <childnode refid="808" relation="include">
+        </childnode>
+        <childnode refid="809" relation="include">
+        </childnode>
+      </node>
+      <node id="805">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_front.hpp</label>
+        <link refid="pareto_front.hpp"/>
+        <childnode refid="806" relation="include">
+        </childnode>
+        <childnode refid="810" relation="include">
+        </childnode>
+      </node>
+      <node id="811">
+        <label>algorithm</label>
+      </node>
+      <node id="809">
         <label>memory</label>
       </node>
     </incdepgraph>
@@ -124,7 +124,7 @@
 <codeline lineno="58" refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1ad43dd449215fa8e506851c3f7fc96940" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::vector&lt;pareto_point_t&gt;<sp/><ref refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1ad43dd449215fa8e506851c3f7fc96940" kindref="member">pareto_t</ref>;</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
-<codeline lineno="61" refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1aa9576e145574a7c7dede0d7497388fec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1aa9576e145574a7c7dede0d7497388fec" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted)</highlight></codeline>
+<codeline lineno="61" refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1a341b34d96290a874818bbdb4f27f9f2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1a341b34d96290a874818bbdb4f27f9f2b" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;)</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!bo.stats_enabled()<sp/>||<sp/>bo.observations().empty())</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>

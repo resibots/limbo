@@ -200,7 +200,6 @@
 <li><code class="docutils literal"><span class="pre">Samples</span></code>: records the position in the search space of the evaluated points [filename: <code class="docutils literal"><span class="pre">samples.dat</span></code>]</li>
 <li><code class="docutils literal"><span class="pre">BestObservations</span></code>: records the best observation after each iteration? [filename <code class="docutils literal"><span class="pre">best_observations.dat</span></code>]</li>
 <li><code class="docutils literal"><span class="pre">BestSamples</span></code>: records the position in the search space of the best observation after each iteration [filename: <code class="docutils literal"><span class="pre">best_samples.dat</span></code>]</li>
-<li><code class="docutils literal"><span class="pre">BlSamples</span></code>: records the candidate solutions that have been blacklisted [filename: <code class="docutils literal"><span class="pre">bl_samples.dat</span></code>]</li>
 </ul>
 <p>These statistics are for &#8220;advanced users&#8221;:</p>
 <ul class="simple">
@@ -221,7 +220,7 @@
 <div class="code c++ highlight-c++"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nl">Samples</span> <span class="p">:</span> <span class="k">public</span> <span class="n">limbo</span><span class="o">::</span><span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
-    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">blacklisted</span><span class="p">)</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span><span class="p">)</span>
     <span class="p">{</span>
       <span class="c1">// code</span>
     <span class="p">}</span>
@@ -260,7 +259,7 @@
 28
 29</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="nl">WorstObservation</span> <span class="p">:</span> <span class="k">public</span> <span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
-    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">blacklisted</span><span class="p">)</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">// [optional] if statistics have been disabled or if there are no observations, we do not do anything</span>
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bo</span><span class="p">.</span><span class="n">stats_enabled</span><span class="p">()</span> <span class="o">||</span> <span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">empty</span><span class="p">())</span>
@@ -479,7 +478,7 @@
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nl">WorstObservation</span> <span class="p">:</span> <span class="k">public</span> <span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
-    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">blacklisted</span><span class="p">)</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">// [optional] if statistics have been disabled or if there are no observations, we do not do anything</span>
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bo</span><span class="p">.</span><span class="n">stats_enabled</span><span class="p">()</span> <span class="o">||</span> <span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">empty</span><span class="p">())</span>

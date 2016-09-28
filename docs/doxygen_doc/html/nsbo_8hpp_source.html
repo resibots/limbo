@@ -183,7 +183,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                                  &lt;&lt; this-&gt;_models[1].mu(best_v) &lt;&lt; <span class="stringliteral">&quot;)&quot;</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                                  &lt;&lt; <span class="stringliteral">&quot; sigma:&quot;</span> &lt;&lt; this-&gt;_models[0].sigma(best_v) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                                  &lt;&lt; this-&gt;_models[1].sigma(best_v) &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        this-&gt;_update_stats(*<span class="keyword">this</span>, <a class="code" href="structlimbo_1_1_first_elem.html">FirstElem</a>(), <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        this-&gt;_update_stats(*<span class="keyword">this</span>, <a class="code" href="structlimbo_1_1_first_elem.html">FirstElem</a>());</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        this-&gt;_current_iteration++;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        this-&gt;_total_iterations++;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    }</div>
@@ -202,19 +202,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo_html_a58cae8a4e4902070ef05e9320604805f"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo.html#a58cae8a4e4902070ef05e9320604805f">limbo::experimental::bayes_opt::Nsbo::optimize</a></div><div class="ttdeci">void optimize(const EvalFunction &amp;feval, bool reset=true)</div><div class="ttdef"><b>Definition:</b> nsbo.hpp:70</div></div>
-<div class="ttc" id="classlimbo_1_1bayes__opt_1_1_bo_base_html_ac533d6397b0c0fa5ba0a4d03e0545fa2"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac533d6397b0c0fa5ba0a4d03e0545fa2">limbo::bayes_opt::BoBase&lt; Params, A2, A3, A4, A5, A6, boost::parameter::void_ &gt;::add_new_sample</a></div><div class="ttdeci">void add_new_sample(const Eigen::VectorXd &amp;s, const Eigen::VectorXd &amp;v)</div><div class="ttdef"><b>Definition:</b> bo_base.hpp:235</div></div>
+<div class="ttc" id="classlimbo_1_1bayes__opt_1_1_bo_base_html_ac533d6397b0c0fa5ba0a4d03e0545fa2"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac533d6397b0c0fa5ba0a4d03e0545fa2">limbo::bayes_opt::BoBase&lt; Params, A2, A3, A4, A5, A6, boost::parameter::void_ &gt;::add_new_sample</a></div><div class="ttdeci">void add_new_sample(const Eigen::VectorXd &amp;s, const Eigen::VectorXd &amp;v)</div><div class="ttdef"><b>Definition:</b> bo_base.hpp:231</div></div>
 <div class="ttc" id="bo__multi_8hpp_html"><div class="ttname"><a href="bo__multi_8hpp.html">bo_multi.hpp</a></div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo_html_a3e81d90b45461a23fe86554370a0423e"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo.html#a3e81d90b45461a23fe86554370a0423e">limbo::experimental::bayes_opt::Nsbo::pareto_point_t</a></div><div class="ttdeci">std::tuple&lt; Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd &gt; pareto_point_t</div><div class="ttdef"><b>Definition:</b> nsbo.hpp:67</div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html">limbo::experimental::bayes_opt::BoMulti</a></div><div class="ttdef"><b>Definition:</b> bo_multi.hpp:150</div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo.html">limbo::experimental::bayes_opt::Nsbo</a></div><div class="ttdef"><b>Definition:</b> nsbo.hpp:64</div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
-<div class="ttc" id="structlimbo_1_1_first_elem_html"><div class="ttname"><a href="structlimbo_1_1_first_elem.html">limbo::FirstElem</a></div><div class="ttdef"><b>Definition:</b> bo_base.hpp:96</div></div>
+<div class="ttc" id="structlimbo_1_1_first_elem_html"><div class="ttname"><a href="structlimbo_1_1_first_elem.html">limbo::FirstElem</a></div><div class="ttdef"><b>Definition:</b> bo_base.hpp:95</div></div>
 <div class="ttc" id="namespacepareto_html"><div class="ttname"><a href="namespacepareto.html">pareto</a></div><div class="ttdef"><b>Definition:</b> pareto.hpp:52</div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_html_a74989812b92d1f938169d434906c1416"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html#a74989812b92d1f938169d434906c1416">limbo::experimental::bayes_opt::BoMulti&lt; Params, A2, A3, A4, A5, A6 &gt;::pareto_model</a></div><div class="ttdeci">const pareto_t &amp; pareto_model() const</div><div class="ttdef"><b>Definition:</b> bo_multi.hpp:163</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 28 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 00:00:17 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

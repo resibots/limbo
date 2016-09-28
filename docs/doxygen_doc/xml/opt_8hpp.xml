@@ -13,87 +13,91 @@
     <includes refid="rprop_8hpp" local="no">limbo/opt/rprop.hpp</includes>
     <includedby refid="limbo_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</includedby>
     <incdepgraph>
-      <node id="1462">
+      <node id="1460">
         <label>list</label>
       </node>
-      <node id="1451">
+      <node id="1449">
         <label>libcmaes/cmaes.h</label>
       </node>
-      <node id="1449">
+      <node id="1447">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="1471">
+      <node id="1469">
         <label>functional</label>
       </node>
-      <node id="1453">
+      <node id="1451">
         <label>limits</label>
       </node>
-      <node id="1474">
+      <node id="1472">
         <label>iterator</label>
       </node>
-      <node id="1478">
+      <node id="1476">
         <label>limbo/opt/rprop.hpp</label>
         <link refid="rprop_8hpp"/>
-        <childnode refid="1444" relation="include">
+        <childnode refid="1442" relation="include">
         </childnode>
-        <childnode refid="1479" relation="include">
-        </childnode>
-        <childnode refid="1441" relation="include">
-        </childnode>
-        <childnode refid="1448" relation="include">
-        </childnode>
-        <childnode refid="1480" relation="include">
+        <childnode refid="1477" relation="include">
         </childnode>
         <childnode refid="1439" relation="include">
         </childnode>
+        <childnode refid="1446" relation="include">
+        </childnode>
+        <childnode refid="1478" relation="include">
+        </childnode>
+        <childnode refid="1437" relation="include">
+        </childnode>
       </node>
-      <node id="1469">
+      <node id="1467">
         <label>cstdint</label>
       </node>
-      <node id="1463">
+      <node id="1461">
         <label>stdlib.h</label>
       </node>
-      <node id="1439">
+      <node id="1437">
         <label>limbo/opt/optimizer.hpp</label>
         <link refid="optimizer_8hpp"/>
+        <childnode refid="1438" relation="include">
+        </childnode>
+        <childnode refid="1439" relation="include">
+        </childnode>
         <childnode refid="1440" relation="include">
         </childnode>
-        <childnode refid="1441" relation="include">
+      </node>
+      <node id="1452">
+        <label>limbo/opt/nlopt_grad.hpp</label>
+        <link refid="nlopt__grad_8hpp"/>
+        <childnode refid="1439" relation="include">
+        </childnode>
+        <childnode refid="1444" relation="include">
+        </childnode>
+        <childnode refid="1453" relation="include">
+        </childnode>
+        <childnode refid="1446" relation="include">
+        </childnode>
+        <childnode refid="1437" relation="include">
+        </childnode>
+      </node>
+      <node id="1458">
+        <label>cmath</label>
+      </node>
+      <node id="1439">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="1448">
+        <label>limbo/tools/parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
+        <childnode refid="1444" relation="include">
         </childnode>
         <childnode refid="1442" relation="include">
         </childnode>
       </node>
-      <node id="1454">
-        <label>limbo/opt/nlopt_grad.hpp</label>
-        <link refid="nlopt__grad_8hpp"/>
-        <childnode refid="1441" relation="include">
-        </childnode>
-        <childnode refid="1446" relation="include">
-        </childnode>
-        <childnode refid="1455" relation="include">
-        </childnode>
-        <childnode refid="1448" relation="include">
-        </childnode>
-        <childnode refid="1439" relation="include">
-        </childnode>
-      </node>
-      <node id="1460">
-        <label>cmath</label>
-      </node>
-      <node id="1441">
-        <label>Eigen/Core</label>
-      </node>
-      <node id="1450">
-        <label>limbo/tools/parallel.hpp</label>
-        <link refid="parallel_8hpp"/>
-        <childnode refid="1446" relation="include">
-        </childnode>
-        <childnode refid="1444" relation="include">
-        </childnode>
-      </node>
-      <node id="1458">
+      <node id="1456">
         <label>limbo/tools/random_generator.hpp</label>
         <link refid="random__generator_8hpp"/>
+        <childnode refid="1457" relation="include">
+        </childnode>
+        <childnode refid="1458" relation="include">
+        </childnode>
         <childnode refid="1459" relation="include">
         </childnode>
         <childnode refid="1460" relation="include">
@@ -108,145 +112,145 @@
         </childnode>
         <childnode refid="1465" relation="include">
         </childnode>
+      </node>
+      <node id="1453">
+        <label>nlopt.hpp</label>
+      </node>
+      <node id="1475">
+        <label>limbo/opt/random_point.hpp</label>
+        <link refid="random__point_8hpp"/>
+        <childnode refid="1439" relation="include">
+        </childnode>
+        <childnode refid="1456" relation="include">
+        </childnode>
+      </node>
+      <node id="1462">
+        <label>random</label>
+      </node>
+      <node id="1455">
+        <label>limbo/opt/parallel_repeater.hpp</label>
+        <link refid="parallel__repeater_8hpp"/>
+        <childnode refid="1442" relation="include">
+        </childnode>
+        <childnode refid="1439" relation="include">
+        </childnode>
+        <childnode refid="1446" relation="include">
+        </childnode>
+        <childnode refid="1448" relation="include">
+        </childnode>
+        <childnode refid="1456" relation="include">
+        </childnode>
+        <childnode refid="1437" relation="include">
+        </childnode>
+      </node>
+      <node id="1441">
+        <label>limbo/opt/chained.hpp</label>
+        <link refid="chained_8hpp"/>
+        <childnode refid="1442" relation="include">
+        </childnode>
+        <childnode refid="1439" relation="include">
+        </childnode>
+        <childnode refid="1437" relation="include">
+        </childnode>
+      </node>
+      <node id="1438">
+        <label>tuple</label>
+      </node>
+      <node id="1459">
+        <label>ctime</label>
+      </node>
+      <node id="1444">
+        <label>vector</label>
+      </node>
+      <node id="1463">
+        <label>utility</label>
+      </node>
+      <node id="1468">
+        <label>array</label>
+      </node>
+      <node id="1465">
+        <label>limbo/tools/rand_utils.hpp</label>
+        <link refid="rand__utils_8hpp"/>
         <childnode refid="1466" relation="include">
         </childnode>
         <childnode refid="1467" relation="include">
         </childnode>
-      </node>
-      <node id="1455">
-        <label>nlopt.hpp</label>
-      </node>
-      <node id="1477">
-        <label>limbo/opt/random_point.hpp</label>
-        <link refid="random__point_8hpp"/>
-        <childnode refid="1441" relation="include">
+        <childnode refid="1457" relation="include">
         </childnode>
-        <childnode refid="1458" relation="include">
+        <childnode refid="1462" relation="include">
         </childnode>
-      </node>
-      <node id="1464">
-        <label>random</label>
-      </node>
-      <node id="1457">
-        <label>limbo/opt/parallel_repeater.hpp</label>
-        <link refid="parallel__repeater_8hpp"/>
-        <childnode refid="1444" relation="include">
-        </childnode>
-        <childnode refid="1441" relation="include">
-        </childnode>
-        <childnode refid="1448" relation="include">
-        </childnode>
-        <childnode refid="1450" relation="include">
-        </childnode>
-        <childnode refid="1458" relation="include">
-        </childnode>
-        <childnode refid="1439" relation="include">
-        </childnode>
-      </node>
-      <node id="1443">
-        <label>limbo/opt/chained.hpp</label>
-        <link refid="chained_8hpp"/>
-        <childnode refid="1444" relation="include">
-        </childnode>
-        <childnode refid="1441" relation="include">
-        </childnode>
-        <childnode refid="1439" relation="include">
-        </childnode>
-      </node>
-      <node id="1440">
-        <label>tuple</label>
-      </node>
-      <node id="1461">
-        <label>ctime</label>
-      </node>
-      <node id="1446">
-        <label>vector</label>
-      </node>
-      <node id="1465">
-        <label>utility</label>
-      </node>
-      <node id="1470">
-        <label>array</label>
-      </node>
-      <node id="1467">
-        <label>limbo/tools/rand_utils.hpp</label>
-        <link refid="rand__utils_8hpp"/>
         <childnode refid="1468" relation="include">
         </childnode>
         <childnode refid="1469" relation="include">
         </childnode>
-        <childnode refid="1459" relation="include">
-        </childnode>
-        <childnode refid="1464" relation="include">
-        </childnode>
         <childnode refid="1470" relation="include">
+        </childnode>
+        <childnode refid="1463" relation="include">
         </childnode>
         <childnode refid="1471" relation="include">
         </childnode>
         <childnode refid="1472" relation="include">
         </childnode>
-        <childnode refid="1465" relation="include">
-        </childnode>
         <childnode refid="1473" relation="include">
         </childnode>
         <childnode refid="1474" relation="include">
         </childnode>
-        <childnode refid="1475" relation="include">
-        </childnode>
-        <childnode refid="1476" relation="include">
-        </childnode>
-        <childnode refid="1444" relation="include">
+        <childnode refid="1442" relation="include">
         </childnode>
       </node>
-      <node id="1459">
+      <node id="1457">
         <label>cstdlib</label>
       </node>
-      <node id="1447">
+      <node id="1445">
         <label>iostream</label>
       </node>
-      <node id="1468">
+      <node id="1466">
         <label>cstddef</label>
       </node>
-      <node id="1438">
+      <node id="1436">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
         <link refid="opt.hpp"/>
-        <childnode refid="1439" relation="include">
+        <childnode refid="1437" relation="include">
+        </childnode>
+        <childnode refid="1441" relation="include">
         </childnode>
         <childnode refid="1443" relation="include">
         </childnode>
-        <childnode refid="1445" relation="include">
+        <childnode refid="1450" relation="include">
         </childnode>
         <childnode refid="1452" relation="include">
         </childnode>
         <childnode refid="1454" relation="include">
         </childnode>
-        <childnode refid="1456" relation="include">
+        <childnode refid="1455" relation="include">
         </childnode>
-        <childnode refid="1457" relation="include">
+        <childnode refid="1475" relation="include">
         </childnode>
-        <childnode refid="1477" relation="include">
-        </childnode>
-        <childnode refid="1478" relation="include">
+        <childnode refid="1476" relation="include">
         </childnode>
       </node>
-      <node id="1466">
+      <node id="1464">
         <label>mutex</label>
       </node>
-      <node id="1475">
+      <node id="1473">
         <label>chrono</label>
       </node>
-      <node id="1442">
+      <node id="1440">
         <label>boost/optional.hpp</label>
       </node>
-      <node id="1476">
+      <node id="1474">
         <label>thread</label>
       </node>
-      <node id="1473">
+      <node id="1471">
         <label>type_traits</label>
       </node>
-      <node id="1480">
+      <node id="1478">
         <label>limbo/tools/math.hpp</label>
         <link refid="math_8hpp"/>
+        <childnode refid="1457" relation="include">
+        </childnode>
+        <childnode refid="1458" relation="include">
+        </childnode>
         <childnode refid="1459" relation="include">
         </childnode>
         <childnode refid="1460" relation="include">
@@ -259,90 +263,86 @@
         </childnode>
         <childnode refid="1464" relation="include">
         </childnode>
-        <childnode refid="1465" relation="include">
-        </childnode>
-        <childnode refid="1466" relation="include">
-        </childnode>
       </node>
-      <node id="1444">
+      <node id="1442">
         <label>algorithm</label>
       </node>
-      <node id="1479">
+      <node id="1477">
         <label>boost/math/special_functions/sign.hpp</label>
       </node>
-      <node id="1456">
+      <node id="1454">
         <label>limbo/opt/nlopt_no_grad.hpp</label>
         <link refid="nlopt__no__grad_8hpp"/>
-        <childnode refid="1441" relation="include">
-        </childnode>
-        <childnode refid="1446" relation="include">
-        </childnode>
-        <childnode refid="1455" relation="include">
-        </childnode>
-        <childnode refid="1448" relation="include">
-        </childnode>
         <childnode refid="1439" relation="include">
         </childnode>
-      </node>
-      <node id="1445">
-        <label>limbo/opt/cmaes.hpp</label>
-        <link refid="cmaes_8hpp"/>
-        <childnode refid="1446" relation="include">
+        <childnode refid="1444" relation="include">
         </childnode>
-        <childnode refid="1447" relation="include">
-        </childnode>
-        <childnode refid="1441" relation="include">
-        </childnode>
-        <childnode refid="1448" relation="include">
-        </childnode>
-        <childnode refid="1450" relation="include">
-        </childnode>
-        <childnode refid="1439" relation="include">
-        </childnode>
-        <childnode refid="1451" relation="include">
-        </childnode>
-      </node>
-      <node id="1472">
-        <label>initializer_list</label>
-      </node>
-      <node id="1448">
-        <label>limbo/tools/macros.hpp</label>
-        <link refid="macros_8hpp"/>
-        <childnode refid="1449" relation="include">
-        </childnode>
-        <childnode refid="1441" relation="include">
-        </childnode>
-        <childnode refid="1447" relation="include">
-        </childnode>
-      </node>
-      <node id="1452">
-        <label>limbo/opt/grid_search.hpp</label>
-        <link refid="grid__search_8hpp"/>
         <childnode refid="1453" relation="include">
         </childnode>
-        <childnode refid="1441" relation="include">
+        <childnode refid="1446" relation="include">
+        </childnode>
+        <childnode refid="1437" relation="include">
+        </childnode>
+      </node>
+      <node id="1443">
+        <label>limbo/opt/cmaes.hpp</label>
+        <link refid="cmaes_8hpp"/>
+        <childnode refid="1444" relation="include">
+        </childnode>
+        <childnode refid="1445" relation="include">
+        </childnode>
+        <childnode refid="1439" relation="include">
+        </childnode>
+        <childnode refid="1446" relation="include">
         </childnode>
         <childnode refid="1448" relation="include">
         </childnode>
+        <childnode refid="1437" relation="include">
+        </childnode>
+        <childnode refid="1449" relation="include">
+        </childnode>
+      </node>
+      <node id="1470">
+        <label>initializer_list</label>
+      </node>
+      <node id="1446">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="1447" relation="include">
+        </childnode>
         <childnode refid="1439" relation="include">
+        </childnode>
+        <childnode refid="1445" relation="include">
+        </childnode>
+      </node>
+      <node id="1450">
+        <label>limbo/opt/grid_search.hpp</label>
+        <link refid="grid__search_8hpp"/>
+        <childnode refid="1451" relation="include">
+        </childnode>
+        <childnode refid="1439" relation="include">
+        </childnode>
+        <childnode refid="1446" relation="include">
+        </childnode>
+        <childnode refid="1437" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1483">
+      <node id="1481">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1482">
+      <node id="1480">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="1483" relation="include">
+        <childnode refid="1481" relation="include">
         </childnode>
       </node>
-      <node id="1481">
+      <node id="1479">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
         <link refid="opt.hpp"/>
-        <childnode refid="1482" relation="include">
+        <childnode refid="1480" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

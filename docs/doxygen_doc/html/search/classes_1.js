@@ -7,7 +7,6 @@ var searchData=
   ['bestaggregatedobservations',['BestAggregatedObservations',['../structlimbo_1_1stat_1_1_best_aggregated_observations.html',1,'limbo::stat']]],
   ['bestobservations',['BestObservations',['../structlimbo_1_1stat_1_1_best_observations.html',1,'limbo::stat']]],
   ['bestsamples',['BestSamples',['../structlimbo_1_1stat_1_1_best_samples.html',1,'limbo::stat']]],
-  ['blsamples',['BlSamples',['../structlimbo_1_1stat_1_1_bl_samples.html',1,'limbo::stat']]],
   ['bobase',['BoBase',['../classlimbo_1_1bayes__opt_1_1_bo_base.html',1,'limbo::bayes_opt']]],
   ['bobase_3c_20params_2c_20a1_2c_20a2_2c_20a3_2c_20a4_2c_20a5_20_3e',['BoBase&lt; Params, A1, A2, A3, A4, A5 &gt;',['../classlimbo_1_1bayes__opt_1_1_bo_base.html',1,'limbo::bayes_opt']]],
   ['bobase_3c_20params_2c_20a2_2c_20a3_2c_20a4_2c_20a5_2c_20a6_2c_20boost_3a_3aparameter_3a_3avoid_5f_20_3e',['BoBase&lt; Params, A2, A3, A4, A5, A6, boost::parameter::void_ &gt;',['../classlimbo_1_1bayes__opt_1_1_bo_base.html',1,'limbo::bayes_opt']]],

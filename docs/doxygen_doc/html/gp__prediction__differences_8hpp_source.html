@@ -147,9 +147,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
 <div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html">   57</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html">GPPredictionDifferences</a> : <span class="keyword">public</span> <a class="code" href="structlimbo_1_1stat_1_1_stat_base.html">StatBase</a>&lt;Params&gt; {</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO, <span class="keyword">typename</span> AggregatorFunction&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html#ace7f84e5c4058524e5d7de45ec97f618">   59</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html#ace7f84e5c4058524e5d7de45ec97f618">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun, <span class="keywordtype">bool</span> blacklisted)</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html#a91a2d59457d83adbbfa6138db9e200cd">   59</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html#a91a2d59457d83adbbfa6138db9e200cd">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun)</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">if</span> (!bo.stats_enabled() || bo.observations().empty() || blacklisted)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">if</span> (!bo.stats_enabled() || bo.observations().empty())</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                this-&gt;_create_log_file(bo, <span class="stringliteral">&quot;gp_prediction_differences.dat&quot;</span>);</div>
@@ -159,7 +159,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="keywordtype">double</span> pred = afun(bo.model().mu(bo.samples().back()));</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keywordtype">double</span> obs = afun(bo.observations().back());</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                (*this-&gt;_log_file) &lt;&lt; bo.total_iterations() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; pred &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; obs &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; fabs(pred - obs) &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                (*this-&gt;_log_file) &lt;&lt; bo.total_iterations() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; pred &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; obs &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; std::abs(pred - obs) &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        };</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
@@ -167,14 +167,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_g_p_prediction_differences_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html">limbo::stat::GPPredictionDifferences</a></div><div class="ttdef"><b>Definition:</b> gp_prediction_differences.hpp:57</div></div>
+<div class="ttc" id="structlimbo_1_1stat_1_1_g_p_prediction_differences_html_a91a2d59457d83adbbfa6138db9e200cd"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html#a91a2d59457d83adbbfa6138db9e200cd">limbo::stat::GPPredictionDifferences::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun)</div><div class="ttdef"><b>Definition:</b> gp_prediction_differences.hpp:59</div></div>
 <div class="ttc" id="stat__base_8hpp_html"><div class="ttname"><a href="stat__base_8hpp.html">stat_base.hpp</a></div></div>
-<div class="ttc" id="structlimbo_1_1stat_1_1_g_p_prediction_differences_html_ace7f84e5c4058524e5d7de45ec97f618"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_prediction_differences.html#ace7f84e5c4058524e5d7de45ec97f618">limbo::stat::GPPredictionDifferences::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</div><div class="ttdef"><b>Definition:</b> gp_prediction_differences.hpp:59</div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_stat_base_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_stat_base.html">limbo::stat::StatBase</a></div><div class="ttdef"><b>Definition:</b> stat_base.hpp:71</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 28 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

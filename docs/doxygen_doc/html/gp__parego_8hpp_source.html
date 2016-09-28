@@ -163,64 +163,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ac351d6798add22da5c6dd58ac4a00723">   80</a></span>&#160;                <a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ac351d6798add22da5c6dd58ac4a00723">GPParego</a>() {}</div>
 <div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a1f0eb578140f01874b13bfca124c085c">   81</a></span>&#160;                <a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a1f0eb578140f01874b13bfca124c085c">GPParego</a>(<span class="keywordtype">int</span> dim_in, <span class="keywordtype">int</span> dim_out) : Model(dim_in, 1), _nb_objs(dim_out) {}</div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a7a7998bd37de03f046b737113b952b65">   82</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a7a7998bd37de03f046b737113b952b65">compute</a>(<span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; samples,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; observations, <span class="keyword">const</span> Eigen::VectorXd&amp; noises,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    <span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; bl_samples = std::vector&lt;Eigen::VectorXd&gt;(),</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    <span class="keyword">const</span> Eigen::VectorXd&amp; noises_bl = Eigen::VectorXd())</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    _raw_observations = observations;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    _nb_objs = observations[0].size();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    <span class="keyword">auto</span> new_observations = _scalarize_obs(observations);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    Model::compute(samples, new_observations, noises, bl_samples);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                }</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">   93</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">add_sample</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; sample, <span class="keyword">const</span> Eigen::VectorXd&amp; observation, <span class="keywordtype">double</span> noise)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    this-&gt;_samples.push_back(sample);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    this-&gt;_noises.conservativeResize(this-&gt;_noises.size() + 1);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    this-&gt;_noises[this-&gt;_noises.size() - 1] = noise;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    _raw_observations.push_back(observation);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                    this-&gt;<a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a7a7998bd37de03f046b737113b952b65">compute</a>(this-&gt;_samples,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        _raw_observations, this-&gt;_noises,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        this-&gt;_bl_samples);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                }</div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#aee0ce034411e11614069718a3140a3f8">  105</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#aee0ce034411e11614069718a3140a3f8">add_bl_sample</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; bl_sample, <span class="keywordtype">double</span> noise)</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617">   82</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617">compute</a>(<span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; samples,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; observations, <span class="keyword">const</span> Eigen::VectorXd&amp; noises)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    _raw_observations = observations;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    _nb_objs = observations[0].size();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="keyword">auto</span> new_observations = _scalarize_obs(observations);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    Model::compute(samples, new_observations, noises);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                }</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">   91</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">add_sample</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; sample, <span class="keyword">const</span> Eigen::VectorXd&amp; observation, <span class="keywordtype">double</span> noise)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    this-&gt;_samples.push_back(sample);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    this-&gt;_noises.conservativeResize(this-&gt;_noises.size() + 1);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    this-&gt;_noises[this-&gt;_noises.size() - 1] = noise;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    _raw_observations.push_back(observation);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    this-&gt;<a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617">compute</a>(this-&gt;_samples,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                        _raw_observations, this-&gt;_noises);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                <span class="keywordtype">size_t</span> _nb_objs;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                std::vector&lt;Eigen::VectorXd&gt; _raw_observations;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                std::vector&lt;Eigen::VectorXd&gt; _scalarize_obs(<span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; observations)</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    Model::add_bl_sample(bl_sample, noise);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    this-&gt;<a class="code" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a7a7998bd37de03f046b737113b952b65">compute</a>(this-&gt;_samples,</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                        _raw_observations, this-&gt;_noises,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                        this-&gt;_bl_samples);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                <span class="keywordtype">size_t</span> _nb_objs;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                std::vector&lt;Eigen::VectorXd&gt; _raw_observations;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                std::vector&lt;Eigen::VectorXd&gt; _scalarize_obs(<span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; observations)</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    Eigen::VectorXd lambda = <a class="code" href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">tools::random_vector</a>(_nb_objs);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    <span class="keywordtype">double</span> sum = lambda.sum();</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                    lambda = lambda / sum;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                    <span class="comment">// scalarize (Tchebycheff)</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                    std::vector&lt;Eigen::VectorXd&gt; scalarized;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> x : observations) {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                        <span class="keywordtype">double</span> y = (lambda.array() * x.array()).maxCoeff();</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                        <span class="keywordtype">double</span> s = (lambda.array() * x.array()).sum();</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                        <span class="keyword">auto</span> v = <a class="code" href="group__tools.html#ga029807776f0b7f44f806e4f9d92e34e7">tools::make_vector</a>(y + Params::model_gp_parego::rho() * s);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                        scalarized.push_back(v);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                    }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    <span class="keywordflow">return</span> scalarized;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                }</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            };</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        }</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    Eigen::VectorXd lambda = <a class="code" href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">tools::random_vector</a>(_nb_objs);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    <span class="keywordtype">double</span> sum = lambda.sum();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    lambda = lambda / sum;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    <span class="comment">// scalarize (Tchebycheff)</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    std::vector&lt;Eigen::VectorXd&gt; scalarized;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> x : observations) {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                        <span class="keywordtype">double</span> y = (lambda.array() * x.array()).maxCoeff();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        <span class="keywordtype">double</span> s = (lambda.array() * x.array()).sum();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        <span class="keyword">auto</span> v = <a class="code" href="group__tools.html#ga029807776f0b7f44f806e4f9d92e34e7">tools::make_vector</a>(y + Params::model_gp_parego::rho() * s);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                        scalarized.push_back(v);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    <span class="keywordflow">return</span> scalarized;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            };</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structlimbo_1_1experimental_1_1defaults_1_1model__gp__parego_html_ad284d6ed4055b749d2257383a66159f7"><div class="ttname"><a href="structlimbo_1_1experimental_1_1defaults_1_1model__gp__parego.html#ad284d6ed4055b749d2257383a66159f7">limbo::experimental::defaults::model_gp_parego::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, rho, 0.05)</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_a7a7998bd37de03f046b737113b952b65"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a7a7998bd37de03f046b737113b952b65">limbo::experimental::model::GPParego::compute</a></div><div class="ttdeci">void compute(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises, const std::vector&lt; Eigen::VectorXd &gt; &amp;bl_samples=std::vector&lt; Eigen::VectorXd &gt;(), const Eigen::VectorXd &amp;noises_bl=Eigen::VectorXd())</div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:82</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_ae361cd8b8831e4364774dfdd05937617"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617">limbo::experimental::model::GPParego::compute</a></div><div class="ttdeci">void compute(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:82</div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_ac351d6798add22da5c6dd58ac4a00723"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ac351d6798add22da5c6dd58ac4a00723">limbo::experimental::model::GPParego::GPParego</a></div><div class="ttdeci">GPParego()</div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:80</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_a81955696f79b4ac11a17d0faf28ccc31"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">limbo::experimental::model::GPParego::add_sample</a></div><div class="ttdeci">void add_sample(const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation, double noise)</div><div class="ttdoc">add sample will NOT be incremental (we call compute each time) </div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:93</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_aee0ce034411e11614069718a3140a3f8"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#aee0ce034411e11614069718a3140a3f8">limbo::experimental::model::GPParego::add_bl_sample</a></div><div class="ttdeci">void add_bl_sample(const Eigen::VectorXd &amp;bl_sample, double noise)</div><div class="ttdoc">WARNING: Parego does not really work with blacklisted samples. </div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:105</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_a81955696f79b4ac11a17d0faf28ccc31"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">limbo::experimental::model::GPParego::add_sample</a></div><div class="ttdeci">void add_sample(const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation, double noise)</div><div class="ttdoc">add sample will NOT be incremental (we call compute each time) </div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:91</div></div>
 <div class="ttc" id="no__lf__opt_8hpp_html"><div class="ttname"><a href="no__lf__opt_8hpp.html">no_lf_opt.hpp</a></div></div>
 <div class="ttc" id="structlimbo_1_1experimental_1_1defaults_1_1model__gp__parego_html"><div class="ttname"><a href="structlimbo_1_1experimental_1_1defaults_1_1model__gp__parego.html">limbo::experimental::defaults::model_gp_parego</a></div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:62</div></div>
 <div class="ttc" id="group__tools_html_ga029807776f0b7f44f806e4f9d92e34e7"><div class="ttname"><a href="group__tools.html#ga029807776f0b7f44f806e4f9d92e34e7">limbo::tools::make_vector</a></div><div class="ttdeci">Eigen::VectorXd make_vector(double x)</div><div class="ttdef"><b>Definition:</b> math.hpp:69</div></div>
@@ -231,7 +220,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 28 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 00:00:17 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

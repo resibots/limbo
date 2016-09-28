@@ -5,53 +5,53 @@
     <includes refid="stat__base_8hpp" local="no">limbo/stat/stat_base.hpp</includes>
     <includedby refid="stat_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/stat.hpp</includedby>
     <incdepgraph>
-      <node id="1829">
+      <node id="1817">
         <label>string</label>
       </node>
-      <node id="1828">
+      <node id="1816">
         <label>fstream</label>
       </node>
-      <node id="1827">
+      <node id="1815">
         <label>limbo/stat/stat_base.hpp</label>
         <link refid="stat__base_8hpp"/>
-        <childnode refid="1828" relation="include">
+        <childnode refid="1816" relation="include">
         </childnode>
-        <childnode refid="1829" relation="include">
+        <childnode refid="1817" relation="include">
         </childnode>
-        <childnode refid="1830" relation="include">
+        <childnode refid="1818" relation="include">
         </childnode>
       </node>
-      <node id="1826">
+      <node id="1814">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat/observations.hpp</label>
         <link refid="observations.hpp"/>
-        <childnode refid="1827" relation="include">
+        <childnode refid="1815" relation="include">
         </childnode>
       </node>
-      <node id="1830">
+      <node id="1818">
         <label>memory</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1834">
+      <node id="1822">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1832">
+      <node id="1820">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat.hpp</label>
         <link refid="stat_8hpp"/>
-        <childnode refid="1833" relation="include">
+        <childnode refid="1821" relation="include">
         </childnode>
       </node>
-      <node id="1833">
+      <node id="1821">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="1834" relation="include">
+        <childnode refid="1822" relation="include">
         </childnode>
       </node>
-      <node id="1831">
+      <node id="1819">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat/observations.hpp</label>
         <link refid="observations.hpp"/>
-        <childnode refid="1832" relation="include">
+        <childnode refid="1820" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -117,7 +117,7 @@
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
 <codeline lineno="55" refid="structlimbo_1_1stat_1_1_observations" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1stat_1_1_observations" kindref="compound">Observations</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1stat_1_1_stat_base" kindref="compound">StatBase</ref>&lt;Params&gt;<sp/>{</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
-<codeline lineno="57" refid="structlimbo_1_1stat_1_1_observations_1a7da8caabd4bc846a6bc17c08b8b1e5ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1stat_1_1_observations_1a7da8caabd4bc846a6bc17c08b8b1e5ad" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted)</highlight></codeline>
+<codeline lineno="57" refid="structlimbo_1_1stat_1_1_observations_1ad39d50d8d1b6e7e699bb2bc6c775d391" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1stat_1_1_observations_1ad39d50d8d1b6e7e699bb2bc6c775d391" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;)</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!bo.stats_enabled()<sp/>||<sp/>bo.observations().empty())</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
@@ -130,14 +130,13 @@
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*this-&gt;_log_file)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;-1<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>bo.observations()[i].transpose()<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!blacklisted)</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*this-&gt;_log_file)<sp/>&lt;&lt;<sp/>bo.total_iterations()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>bo.observations().back().transpose()<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="75"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight></codeline>
-<codeline lineno="77"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*this-&gt;_log_file)<sp/>&lt;&lt;<sp/>bo.total_iterations()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>bo.observations().back().transpose()<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="/tmp/doc_limbo/limbo/src/limbo/stat/observations.hpp"/>
   </compounddef>

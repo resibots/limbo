@@ -10,7 +10,7 @@
       <node id="787">
         <label>libcmaes/cmaes.h</label>
       </node>
-      <node id="804">
+      <node id="803">
         <label>limbo/stop/max_predicted_value.hpp</label>
         <link refid="max__predicted__value_8hpp"/>
         <childnode refid="702" relation="include">
@@ -44,7 +44,7 @@
       <node id="727">
         <label>functional</label>
       </node>
-      <node id="797">
+      <node id="796">
         <label>limbo/stat/gp_acquisitions.hpp</label>
         <link refid="gp__acquisitions_8hpp"/>
         <childnode refid="708" relation="include">
@@ -247,7 +247,7 @@
         <childnode refid="771" relation="include">
         </childnode>
       </node>
-      <node id="798">
+      <node id="797">
         <label>limbo/stat/gp_kernel_hparams.hpp</label>
         <link refid="gp__kernel__hparams_8hpp"/>
         <childnode refid="708" relation="include">
@@ -290,11 +290,11 @@
         </childnode>
         <childnode refid="794" relation="include">
         </childnode>
-        <childnode refid="795" relation="include">
-        </childnode>
         <childnode refid="748" relation="include">
         </childnode>
         <childnode refid="747" relation="include">
+        </childnode>
+        <childnode refid="795" relation="include">
         </childnode>
         <childnode refid="796" relation="include">
         </childnode>
@@ -306,11 +306,9 @@
         </childnode>
         <childnode refid="800" relation="include">
         </childnode>
-        <childnode refid="801" relation="include">
-        </childnode>
         <childnode refid="742" relation="include">
         </childnode>
-        <childnode refid="802" relation="include">
+        <childnode refid="801" relation="include">
         </childnode>
       </node>
       <node id="751">
@@ -409,7 +407,7 @@
         </childnode>
         <childnode refid="791" relation="include">
         </childnode>
-        <childnode refid="803" relation="include">
+        <childnode refid="802" relation="include">
         </childnode>
         <childnode refid="758" relation="include">
         </childnode>
@@ -496,12 +494,6 @@
         <childnode refid="700" relation="include">
         </childnode>
       </node>
-      <node id="795">
-        <label>limbo/stat/bl_samples.hpp</label>
-        <link refid="bl__samples_8hpp"/>
-        <childnode refid="743" relation="include">
-        </childnode>
-      </node>
       <node id="709">
         <label>vector</label>
       </node>
@@ -530,7 +522,7 @@
         <childnode refid="699" relation="include">
         </childnode>
       </node>
-      <node id="800">
+      <node id="799">
         <label>limbo/stat/gp_mean_hparams.hpp</label>
         <link refid="gp__mean__hparams_8hpp"/>
         <childnode refid="708" relation="include">
@@ -693,7 +685,7 @@
       <node id="730">
         <label>chrono</label>
       </node>
-      <node id="801">
+      <node id="800">
         <label>limbo/stat/gp_prediction_differences.hpp</label>
         <link refid="gp__prediction__differences_8hpp"/>
         <childnode refid="708" relation="include">
@@ -704,7 +696,7 @@
       <node id="705">
         <label>boost/optional.hpp</label>
       </node>
-      <node id="796">
+      <node id="795">
         <label>limbo/stat/observations.hpp</label>
         <link refid="observations_8hpp"/>
         <childnode refid="743" relation="include">
@@ -713,7 +705,7 @@
       <node id="731">
         <label>thread</label>
       </node>
-      <node id="799">
+      <node id="798">
         <label>limbo/stat/gp_likelihood.hpp</label>
         <link refid="gp__likelihood_8hpp"/>
         <childnode refid="708" relation="include">
@@ -755,7 +747,7 @@
       <node id="712">
         <label>algorithm</label>
       </node>
-      <node id="802">
+      <node id="801">
         <label>limbo/stat/gp.hpp</label>
         <link refid="stat_2gp_8hpp"/>
         <childnode refid="708" relation="include">
@@ -886,14 +878,14 @@
         <childnode refid="702" relation="include">
         </childnode>
       </node>
-      <node id="803">
+      <node id="802">
         <label>limbo/stop.hpp</label>
         <link refid="stop_8hpp"/>
         <childnode refid="740" relation="include">
         </childnode>
         <childnode refid="741" relation="include">
         </childnode>
-        <childnode refid="804" relation="include">
+        <childnode refid="803" relation="include">
         </childnode>
       </node>
       <node id="788">
@@ -973,7 +965,7 @@
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F&gt;</highlight></codeline>
 <codeline lineno="54" refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark" kindref="compound">ParetoBenchmark</ref><sp/>{</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
-<codeline lineno="56" refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark_1a27b8cf1f9dcda186631fb0f37528028f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark_1a27b8cf1f9dcda186631fb0f37528028f" kindref="member">operator()</ref>(BO&amp;<sp/>opt,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted)</highlight></codeline>
+<codeline lineno="56" refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark_1a3dd593307f2093138335924b1618294f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark_1a3dd593307f2093138335924b1618294f" kindref="member">operator()</ref>(BO&amp;<sp/>opt,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun)</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>opt.update_pareto_data();</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>NSBO<sp/>//<sp/>this<sp/>is<sp/>already<sp/>done<sp/>is<sp/>NSBO</highlight><highlight class="normal"></highlight></codeline>

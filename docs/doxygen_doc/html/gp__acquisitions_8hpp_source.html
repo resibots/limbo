@@ -147,7 +147,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
 <div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_acquisitions.html">   57</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1stat_1_1_g_p_acquisitions.html">GPAcquisitions</a> : <span class="keyword">public</span> <a class="code" href="structlimbo_1_1stat_1_1_stat_base.html">StatBase</a>&lt;Params&gt; {</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO, <span class="keyword">typename</span> AggregatorFunction&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_acquisitions.html#a5b6d7301b0696e77a8a9276d1d12d614">   59</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1stat_1_1_g_p_acquisitions.html#a5b6d7301b0696e77a8a9276d1d12d614">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun, <span class="keywordtype">bool</span> blacklisted)</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_acquisitions.html#ac671f5f138d1545bd339068ec5fe4824">   59</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1stat_1_1_g_p_acquisitions.html#ac671f5f138d1545bd339068ec5fe4824">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun)</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">if</span> (!bo.stats_enabled())</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordflow">return</span>;</div>
@@ -160,34 +160,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                Eigen::VectorXd mu;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <span class="keywordtype">double</span> sigma, acqui;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">if</span> (!blacklisted &amp;&amp; !bo.samples().empty()) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">if</span> (!bo.samples().empty()) {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    std::tie(mu, sigma) = bo.model().query(bo.samples().back());</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    acqui = <a class="code" href="group__opt__tools.html#ga68ad00d7501bc26a2a0990bac762393e">opt::fun</a>(<span class="keyword">typename</span> BO::acquisition_function_t(bo.model(), bo.current_iteration())(bo.samples().back(), afun, <span class="keyword">false</span>));</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!bo.bl_samples().empty()) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    std::tie(mu, sigma) = bo.model().query(bo.bl_samples().back());</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    acqui = <a class="code" href="group__opt__tools.html#ga68ad00d7501bc26a2a0990bac762393e">opt::fun</a>(<span class="keyword">typename</span> BO::acquisition_function_t(bo.model(), bo.current_iteration())(bo.bl_samples().back(), afun, <span class="keyword">false</span>));</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                (*this-&gt;_log_file) &lt;&lt; bo.total_iterations() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; afun(mu) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; sigma &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; acqui &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        };</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structlimbo_1_1stat_1_1_g_p_acquisitions_html_a5b6d7301b0696e77a8a9276d1d12d614"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_acquisitions.html#a5b6d7301b0696e77a8a9276d1d12d614">limbo::stat::GPAcquisitions::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</div><div class="ttdef"><b>Definition:</b> gp_acquisitions.hpp:59</div></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                (*this-&gt;_log_file) &lt;&lt; bo.total_iterations() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; afun(mu) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; sigma &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; acqui &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        };</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_g_p_acquisitions_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_acquisitions.html">limbo::stat::GPAcquisitions</a></div><div class="ttdef"><b>Definition:</b> gp_acquisitions.hpp:57</div></div>
 <div class="ttc" id="group__opt__tools_html_ga68ad00d7501bc26a2a0990bac762393e"><div class="ttname"><a href="group__opt__tools.html#ga68ad00d7501bc26a2a0990bac762393e">limbo::opt::fun</a></div><div class="ttdeci">double fun(const eval_t &amp;fg)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:76</div></div>
 <div class="ttc" id="stat__base_8hpp_html"><div class="ttname"><a href="stat__base_8hpp.html">stat_base.hpp</a></div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
+<div class="ttc" id="structlimbo_1_1stat_1_1_g_p_acquisitions_html_ac671f5f138d1545bd339068ec5fe4824"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_acquisitions.html#ac671f5f138d1545bd339068ec5fe4824">limbo::stat::GPAcquisitions::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun)</div><div class="ttdef"><b>Definition:</b> gp_acquisitions.hpp:59</div></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_stat_base_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_stat_base.html">limbo::stat::StatBase</a></div><div class="ttdef"><b>Definition:</b> stat_base.hpp:71</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 28 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

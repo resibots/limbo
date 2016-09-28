@@ -145,7 +145,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
 <div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_aggregated_observations.html">   57</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1stat_1_1_aggregated_observations.html">AggregatedObservations</a> : <span class="keyword">public</span> <a class="code" href="structlimbo_1_1stat_1_1_stat_base.html">StatBase</a>&lt;Params&gt; {</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO, <span class="keyword">typename</span> AggregatorFunction&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_aggregated_observations.html#a859ec9c24060990d4bbf976485d57bf6">   59</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1stat_1_1_aggregated_observations.html#a859ec9c24060990d4bbf976485d57bf6">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun, <span class="keywordtype">bool</span> blacklisted)</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_aggregated_observations.html#a99c53c6147e0d5ae26a7d4707a978611">   59</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1stat_1_1_aggregated_observations.html#a99c53c6147e0d5ae26a7d4707a978611">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun)</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">if</span> (!bo.stats_enabled() || bo.observations().empty())</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordflow">return</span>;</div>
@@ -158,15 +158,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        (*this-&gt;_log_file) &lt;&lt; <span class="stringliteral">&quot;-1 &quot;</span> &lt;&lt; afun(bo.observations()[i]) &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">if</span> (!blacklisted)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    (*this-&gt;_log_file) &lt;&lt; bo.total_iterations() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; afun(bo.observations().back()) &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        };</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="structlimbo_1_1stat_1_1_aggregated_observations_html_a859ec9c24060990d4bbf976485d57bf6"><div class="ttname"><a href="structlimbo_1_1stat_1_1_aggregated_observations.html#a859ec9c24060990d4bbf976485d57bf6">limbo::stat::AggregatedObservations::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</div><div class="ttdef"><b>Definition:</b> aggregated_observations.hpp:59</div></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                (*this-&gt;_log_file) &lt;&lt; bo.total_iterations() &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; afun(bo.observations().back()) &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        };</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structlimbo_1_1stat_1_1_aggregated_observations_html_a99c53c6147e0d5ae26a7d4707a978611"><div class="ttname"><a href="structlimbo_1_1stat_1_1_aggregated_observations.html#a99c53c6147e0d5ae26a7d4707a978611">limbo::stat::AggregatedObservations::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun)</div><div class="ttdef"><b>Definition:</b> aggregated_observations.hpp:59</div></div>
 <div class="ttc" id="stat__base_8hpp_html"><div class="ttname"><a href="stat__base_8hpp.html">stat_base.hpp</a></div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_aggregated_observations_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_aggregated_observations.html">limbo::stat::AggregatedObservations</a></div><div class="ttdef"><b>Definition:</b> aggregated_observations.hpp:57</div></div>
@@ -174,7 +173,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 28 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

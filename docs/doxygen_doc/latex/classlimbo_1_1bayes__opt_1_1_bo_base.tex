@@ -53,17 +53,13 @@ const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \& \hyperlink{classlimbo_1_1bay
 \begin{DoxyCompactList}\small\item\em return the vector of points of observations (observations can be multi-\/dimensional, hence the Vector\+Xd) -- f(x) \end{DoxyCompactList}\item 
 const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \& \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_ad3ba0dba1418df0ed8e79d4dd3cc907a}{samples} () const 
 \begin{DoxyCompactList}\small\item\em return the list of the points that have been evaluated so far (x) \end{DoxyCompactList}\item 
-const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \& \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_aa84e215cffa97a4e287aad3690f89635}{bl\+\_\+samples} () const 
-\begin{DoxyCompactList}\small\item\em return the list of blacklisted points \end{DoxyCompactList}\item 
 int \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_ac3d643d5a668edf22ad053bfc54ea090}{current\+\_\+iteration} () const 
 \begin{DoxyCompactList}\small\item\em return the current iteration number \end{DoxyCompactList}\item 
 int \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a5470e106c4584a30636cafb6fbad6d73}{total\+\_\+iterations} () const 
 \item 
 void \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_ac533d6397b0c0fa5ba0a4d03e0545fa2}{add\+\_\+new\+\_\+sample} (const Eigen\+::\+Vector\+Xd \&s, const Eigen\+::\+Vector\+Xd \&v)
 \item 
-void \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a8694d4bbc5c373d067790ec31fb42a44}{add\+\_\+new\+\_\+bl\+\_\+sample} (const Eigen\+::\+Vector\+Xd \&s)
-\begin{DoxyCompactList}\small\item\em Add a new blacklisted sample. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename State\+Function $>$ }\\bool \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a387fba7bf70aa9410e1c04f035694f34}{eval\+\_\+and\+\_\+add} (const State\+Function \&seval, const Eigen\+::\+Vector\+Xd \&sample)
+{\footnotesize template$<$typename State\+Function $>$ }\\void \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_a70e8e4fea1b56aedc943fe62170659e4}{eval\+\_\+and\+\_\+add} (const State\+Function \&seval, const Eigen\+::\+Vector\+Xd \&sample)
 \begin{DoxyCompactList}\small\item\em Evaluate a sample and add the result to the \textquotesingle{}database\textquotesingle{} (sample / observations vectors) -- it does not update the model. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -170,17 +166,6 @@ copy is disabled (dangerous and useless)
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a8694d4bbc5c373d067790ec31fb42a44}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!add\+\_\+new\+\_\+bl\+\_\+sample@{add\+\_\+new\+\_\+bl\+\_\+sample}}
-\index{add\+\_\+new\+\_\+bl\+\_\+sample@{add\+\_\+new\+\_\+bl\+\_\+sample}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{add\+\_\+new\+\_\+bl\+\_\+sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ void {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::add\+\_\+new\+\_\+bl\+\_\+sample (
-\begin{DoxyParamCaption}
-\item[{const Eigen\+::\+Vector\+Xd \&}]{s}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a8694d4bbc5c373d067790ec31fb42a44}
-
-
-Add a new blacklisted sample. 
-
 \hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ac533d6397b0c0fa5ba0a4d03e0545fa2}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!add\+\_\+new\+\_\+sample@{add\+\_\+new\+\_\+sample}}
 \index{add\+\_\+new\+\_\+sample@{add\+\_\+new\+\_\+sample}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
 \subsubsection[{add\+\_\+new\+\_\+sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ void {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::add\+\_\+new\+\_\+sample (
@@ -193,18 +178,7 @@ Add a new sample / observation pair
 \begin{DoxyItemize}
 \item does not update the model!
 \item we don\textquotesingle{}t add Na\+N and inf observations 
-\end{DoxyItemize}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_aa84e215cffa97a4e287aad3690f89635}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!bl\+\_\+samples@{bl\+\_\+samples}}
-\index{bl\+\_\+samples@{bl\+\_\+samples}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{bl\+\_\+samples}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ const std\+::vector$<$Eigen\+::\+Vector\+Xd$>$\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::bl\+\_\+samples (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_aa84e215cffa97a4e287aad3690f89635}
-
-
-return the list of blacklisted points 
-
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ac3d643d5a668edf22ad053bfc54ea090}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!current\+\_\+iteration@{current\+\_\+iteration}}
+\end{DoxyItemize}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ac3d643d5a668edf22ad053bfc54ea090}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!current\+\_\+iteration@{current\+\_\+iteration}}
 \index{current\+\_\+iteration@{current\+\_\+iteration}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
 \subsubsection[{current\+\_\+iteration}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ int {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::current\+\_\+iteration (
 \begin{DoxyParamCaption}
@@ -215,14 +189,14 @@ return the list of blacklisted points
 
 return the current iteration number 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a387fba7bf70aa9410e1c04f035694f34}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!eval\+\_\+and\+\_\+add@{eval\+\_\+and\+\_\+add}}
+\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a70e8e4fea1b56aedc943fe62170659e4}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!eval\+\_\+and\+\_\+add@{eval\+\_\+and\+\_\+add}}
 \index{eval\+\_\+and\+\_\+add@{eval\+\_\+and\+\_\+add}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{eval\+\_\+and\+\_\+add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ template$<$typename State\+Function $>$ bool {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::eval\+\_\+and\+\_\+add (
+\subsubsection[{eval\+\_\+and\+\_\+add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ template$<$typename State\+Function $>$ void {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::eval\+\_\+and\+\_\+add (
 \begin{DoxyParamCaption}
 \item[{const State\+Function \&}]{seval, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{sample}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a387fba7bf70aa9410e1c04f035694f34}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a70e8e4fea1b56aedc943fe62170659e4}
 
 
 Evaluate a sample and add the result to the \textquotesingle{}database\textquotesingle{} (sample / observations vectors) -- it does not update the model. 

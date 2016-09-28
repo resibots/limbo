@@ -10,57 +10,115 @@
     <includedby refid="limbo_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</includedby>
     <includedby refid="model_2gp_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</includedby>
     <incdepgraph>
-      <node id="1992">
+      <node id="1979">
         <label>list</label>
       </node>
-      <node id="1982">
+      <node id="1969">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="2005">
+      <node id="1992">
         <label>functional</label>
       </node>
-      <node id="2008">
+      <node id="1995">
         <label>iterator</label>
       </node>
-      <node id="2003">
+      <node id="1990">
         <label>cstdint</label>
       </node>
-      <node id="1993">
+      <node id="1980">
         <label>stdlib.h</label>
       </node>
-      <node id="1990">
+      <node id="1977">
         <label>cmath</label>
       </node>
-      <node id="1983">
+      <node id="1970">
         <label>Eigen/Core</label>
       </node>
-      <node id="1999">
+      <node id="1986">
         <label>string</label>
       </node>
-      <node id="1985">
+      <node id="1972">
         <label>limbo/tools/parallel.hpp</label>
         <link refid="parallel_8hpp"/>
+        <childnode refid="1973" relation="include">
+        </childnode>
+        <childnode refid="1974" relation="include">
+        </childnode>
+      </node>
+      <node id="1984">
+        <label>limbo/tools/sys.hpp</label>
+        <link refid="sys_8hpp"/>
+        <childnode refid="1978" relation="include">
+        </childnode>
+        <childnode refid="1985" relation="include">
+        </childnode>
         <childnode refid="1986" relation="include">
+        </childnode>
+      </node>
+      <node id="1987">
+        <label>limbo/tools/random_generator.hpp</label>
+        <link refid="random__generator_8hpp"/>
+        <childnode refid="1976" relation="include">
+        </childnode>
+        <childnode refid="1977" relation="include">
+        </childnode>
+        <childnode refid="1978" relation="include">
+        </childnode>
+        <childnode refid="1979" relation="include">
+        </childnode>
+        <childnode refid="1980" relation="include">
+        </childnode>
+        <childnode refid="1981" relation="include">
+        </childnode>
+        <childnode refid="1982" relation="include">
+        </childnode>
+        <childnode refid="1983" relation="include">
+        </childnode>
+        <childnode refid="1988" relation="include">
+        </childnode>
+      </node>
+      <node id="1967">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
+        <link refid="tools.hpp"/>
+        <childnode refid="1968" relation="include">
+        </childnode>
+        <childnode refid="1972" relation="include">
+        </childnode>
+        <childnode refid="1975" relation="include">
+        </childnode>
+        <childnode refid="1984" relation="include">
         </childnode>
         <childnode refid="1987" relation="include">
         </childnode>
       </node>
-      <node id="1997">
-        <label>limbo/tools/sys.hpp</label>
-        <link refid="sys_8hpp"/>
-        <childnode refid="1991" relation="include">
-        </childnode>
-        <childnode refid="1998" relation="include">
-        </childnode>
-        <childnode refid="1999" relation="include">
-        </childnode>
+      <node id="1981">
+        <label>random</label>
       </node>
-      <node id="2000">
-        <label>limbo/tools/random_generator.hpp</label>
-        <link refid="random__generator_8hpp"/>
+      <node id="1978">
+        <label>ctime</label>
+      </node>
+      <node id="1985">
+        <label>unistd.h</label>
+      </node>
+      <node id="1973">
+        <label>vector</label>
+      </node>
+      <node id="1982">
+        <label>utility</label>
+      </node>
+      <node id="1991">
+        <label>array</label>
+      </node>
+      <node id="1988">
+        <label>limbo/tools/rand_utils.hpp</label>
+        <link refid="rand__utils_8hpp"/>
         <childnode refid="1989" relation="include">
         </childnode>
         <childnode refid="1990" relation="include">
+        </childnode>
+        <childnode refid="1976" relation="include">
+        </childnode>
+        <childnode refid="1981" relation="include">
         </childnode>
         <childnode refid="1991" relation="include">
         </childnode>
@@ -68,222 +126,164 @@
         </childnode>
         <childnode refid="1993" relation="include">
         </childnode>
+        <childnode refid="1982" relation="include">
+        </childnode>
         <childnode refid="1994" relation="include">
         </childnode>
         <childnode refid="1995" relation="include">
         </childnode>
         <childnode refid="1996" relation="include">
         </childnode>
-        <childnode refid="2001" relation="include">
-        </childnode>
-      </node>
-      <node id="1980">
-        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
-        <link refid="tools.hpp"/>
-        <childnode refid="1981" relation="include">
-        </childnode>
-        <childnode refid="1985" relation="include">
-        </childnode>
-        <childnode refid="1988" relation="include">
-        </childnode>
         <childnode refid="1997" relation="include">
         </childnode>
-        <childnode refid="2000" relation="include">
+        <childnode refid="1974" relation="include">
         </childnode>
+      </node>
+      <node id="1976">
+        <label>cstdlib</label>
+      </node>
+      <node id="1971">
+        <label>iostream</label>
+      </node>
+      <node id="1989">
+        <label>cstddef</label>
+      </node>
+      <node id="1983">
+        <label>mutex</label>
+      </node>
+      <node id="1996">
+        <label>chrono</label>
+      </node>
+      <node id="1997">
+        <label>thread</label>
       </node>
       <node id="1994">
-        <label>random</label>
+        <label>type_traits</label>
       </node>
-      <node id="1991">
-        <label>ctime</label>
-      </node>
-      <node id="1998">
-        <label>unistd.h</label>
-      </node>
-      <node id="1986">
-        <label>vector</label>
-      </node>
-      <node id="1995">
-        <label>utility</label>
-      </node>
-      <node id="2004">
-        <label>array</label>
-      </node>
-      <node id="2001">
-        <label>limbo/tools/rand_utils.hpp</label>
-        <link refid="rand__utils_8hpp"/>
-        <childnode refid="2002" relation="include">
+      <node id="1975">
+        <label>limbo/tools/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="1976" relation="include">
         </childnode>
-        <childnode refid="2003" relation="include">
+        <childnode refid="1977" relation="include">
         </childnode>
-        <childnode refid="1989" relation="include">
+        <childnode refid="1978" relation="include">
         </childnode>
-        <childnode refid="1994" relation="include">
+        <childnode refid="1979" relation="include">
         </childnode>
+        <childnode refid="1980" relation="include">
+        </childnode>
+        <childnode refid="1981" relation="include">
+        </childnode>
+        <childnode refid="1982" relation="include">
+        </childnode>
+        <childnode refid="1983" relation="include">
+        </childnode>
+      </node>
+      <node id="1974">
+        <label>algorithm</label>
+      </node>
+      <node id="1993">
+        <label>initializer_list</label>
+      </node>
+      <node id="1968">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="1969" relation="include">
+        </childnode>
+        <childnode refid="1970" relation="include">
+        </childnode>
+        <childnode refid="1971" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2008">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
+        <link refid="nsbo_8hpp"/>
+      </node>
+      <node id="2007">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
+        <link refid="bayes__opt_2ehvi_8hpp"/>
+      </node>
+      <node id="2003">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
+        <link refid="boptimizer_8hpp"/>
         <childnode refid="2004" relation="include">
         </childnode>
         <childnode refid="2005" relation="include">
         </childnode>
-        <childnode refid="2006" relation="include">
+      </node>
+      <node id="2005">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
+        <link refid="parego_8hpp"/>
+      </node>
+      <node id="2011">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
+        <link refid="model_8hpp"/>
+        <childnode refid="1999" relation="include">
         </childnode>
-        <childnode refid="1995" relation="include">
+      </node>
+      <node id="2000">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
+        <link refid="pareto__benchmark_8hpp"/>
+      </node>
+      <node id="2009">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp</label>
+        <link refid="cboptimizer_8hpp"/>
+      </node>
+      <node id="1998">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
+        <link refid="tools.hpp"/>
+        <childnode refid="1999" relation="include">
         </childnode>
+        <childnode refid="2001" relation="include">
+        </childnode>
+      </node>
+      <node id="1999">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+        <childnode refid="2000" relation="include">
+        </childnode>
+      </node>
+      <node id="2010">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
+        <link refid="imgpo_8hpp"/>
+      </node>
+      <node id="2001">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
+        <link refid="model_2gp_8hpp"/>
+        <childnode refid="2002" relation="include">
+        </childnode>
+        <childnode refid="2011" relation="include">
+        </childnode>
+      </node>
+      <node id="2006">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
+        <link refid="bo__multi_8hpp"/>
         <childnode refid="2007" relation="include">
         </childnode>
         <childnode refid="2008" relation="include">
+        </childnode>
+      </node>
+      <node id="2002">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="2003" relation="include">
+        </childnode>
+        <childnode refid="2006" relation="include">
         </childnode>
         <childnode refid="2009" relation="include">
         </childnode>
         <childnode refid="2010" relation="include">
         </childnode>
-        <childnode refid="1987" relation="include">
+        <childnode refid="2005" relation="include">
         </childnode>
       </node>
-      <node id="1989">
-        <label>cstdlib</label>
-      </node>
-      <node id="1984">
-        <label>iostream</label>
-      </node>
-      <node id="2002">
-        <label>cstddef</label>
-      </node>
-      <node id="1996">
-        <label>mutex</label>
-      </node>
-      <node id="2009">
-        <label>chrono</label>
-      </node>
-      <node id="2010">
-        <label>thread</label>
-      </node>
-      <node id="2007">
-        <label>type_traits</label>
-      </node>
-      <node id="1988">
-        <label>limbo/tools/math.hpp</label>
-        <link refid="math_8hpp"/>
-        <childnode refid="1989" relation="include">
-        </childnode>
-        <childnode refid="1990" relation="include">
-        </childnode>
-        <childnode refid="1991" relation="include">
-        </childnode>
-        <childnode refid="1992" relation="include">
-        </childnode>
-        <childnode refid="1993" relation="include">
-        </childnode>
-        <childnode refid="1994" relation="include">
-        </childnode>
-        <childnode refid="1995" relation="include">
-        </childnode>
-        <childnode refid="1996" relation="include">
-        </childnode>
-      </node>
-      <node id="1987">
-        <label>algorithm</label>
-      </node>
-      <node id="2006">
-        <label>initializer_list</label>
-      </node>
-      <node id="1981">
-        <label>limbo/tools/macros.hpp</label>
-        <link refid="macros_8hpp"/>
-        <childnode refid="1982" relation="include">
-        </childnode>
-        <childnode refid="1983" relation="include">
-        </childnode>
-        <childnode refid="1984" relation="include">
-        </childnode>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="2021">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
-        <link refid="nsbo_8hpp"/>
-      </node>
-      <node id="2020">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
-        <link refid="bayes__opt_2ehvi_8hpp"/>
-      </node>
-      <node id="2016">
-        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
-        <link refid="boptimizer_8hpp"/>
-        <childnode refid="2017" relation="include">
-        </childnode>
-        <childnode refid="2018" relation="include">
-        </childnode>
-      </node>
-      <node id="2018">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
-        <link refid="parego_8hpp"/>
-      </node>
-      <node id="2024">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
-        <link refid="model_8hpp"/>
-        <childnode refid="2012" relation="include">
-        </childnode>
-      </node>
-      <node id="2013">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
-        <link refid="pareto__benchmark_8hpp"/>
-      </node>
-      <node id="2022">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp</label>
-        <link refid="cboptimizer_8hpp"/>
-      </node>
-      <node id="2011">
-        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
-        <link refid="tools.hpp"/>
-        <childnode refid="2012" relation="include">
-        </childnode>
-        <childnode refid="2014" relation="include">
-        </childnode>
-      </node>
-      <node id="2012">
-        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
-        <link refid="limbo_8hpp"/>
-        <childnode refid="2013" relation="include">
-        </childnode>
-      </node>
-      <node id="2023">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
-        <link refid="imgpo_8hpp"/>
-      </node>
-      <node id="2014">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
-        <link refid="model_2gp_8hpp"/>
-        <childnode refid="2015" relation="include">
-        </childnode>
-        <childnode refid="2024" relation="include">
-        </childnode>
-      </node>
-      <node id="2019">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
-        <link refid="bo__multi_8hpp"/>
-        <childnode refid="2020" relation="include">
-        </childnode>
-        <childnode refid="2021" relation="include">
-        </childnode>
-      </node>
-      <node id="2015">
-        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
-        <link refid="bo__base_8hpp"/>
-        <childnode refid="2016" relation="include">
-        </childnode>
-        <childnode refid="2019" relation="include">
-        </childnode>
-        <childnode refid="2022" relation="include">
-        </childnode>
-        <childnode refid="2023" relation="include">
-        </childnode>
-        <childnode refid="2018" relation="include">
-        </childnode>
-      </node>
-      <node id="2017">
+      <node id="2004">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
         <link refid="bayes__opt_8hpp"/>
-        <childnode refid="2012" relation="include">
+        <childnode refid="1999" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

@@ -10,7 +10,7 @@
       </param>
     </templateparamlist>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="structlimbo_1_1stat_1_1_aggregated_observations_1a859ec9c24060990d4bbf976485d57bf6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structlimbo_1_1stat_1_1_aggregated_observations_1a99c53c6147e0d5ae26a7d4707a978611" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename BO</type>
@@ -21,7 +21,7 @@
         </templateparamlist>
         <type>void</type>
         <definition>void limbo::stat::AggregatedObservations&lt; Params &gt;::operator()</definition>
-        <argsstring>(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</argsstring>
+        <argsstring>(const BO &amp;bo, const AggregatorFunction &amp;afun)</argsstring>
         <name>operator()</name>
         <param>
           <type>const BO &amp;</type>
@@ -31,17 +31,13 @@
           <type>const AggregatorFunction &amp;</type>
           <declname>afun</declname>
         </param>
-        <param>
-          <type>bool</type>
-          <declname>blacklisted</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/aggregated_observations.hpp" line="59" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/aggregated_observations.hpp" bodystart="59" bodyend="74"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/aggregated_observations.hpp" line="59" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/aggregated_observations.hpp" bodystart="59" bodyend="73"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -72,10 +68,10 @@
         <link refid="structlimbo_1_1stat_1_1_stat_base"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/aggregated_observations.hpp" line="57" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/aggregated_observations.hpp" bodystart="57" bodyend="75"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/aggregated_observations.hpp" line="57" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/aggregated_observations.hpp" bodystart="57" bodyend="74"/>
     <listofallmembers>
-      <member refid="structlimbo_1_1stat_1_1_aggregated_observations_1a859ec9c24060990d4bbf976485d57bf6" prot="public" virt="non-virtual"><scope>limbo::stat::AggregatedObservations</scope><name>operator()</name></member>
-      <member refid="structlimbo_1_1stat_1_1_stat_base_1aaa6c2d6e3b520907955988daf73993ba" prot="public" virt="non-virtual" ambiguityscope="limbo::stat::StatBase::"><scope>limbo::stat::AggregatedObservations</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_aggregated_observations_1a99c53c6147e0d5ae26a7d4707a978611" prot="public" virt="non-virtual"><scope>limbo::stat::AggregatedObservations</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1a0d2a96eb80930e66a2d374160a20b040" prot="public" virt="non-virtual" ambiguityscope="limbo::stat::StatBase::"><scope>limbo::stat::AggregatedObservations</scope><name>operator()</name></member>
       <member refid="structlimbo_1_1stat_1_1_stat_base_1aac1bea59acf624ed728660823189006f" prot="public" virt="non-virtual"><scope>limbo::stat::AggregatedObservations</scope><name>StatBase</name></member>
     </listofallmembers>
   </compounddef>

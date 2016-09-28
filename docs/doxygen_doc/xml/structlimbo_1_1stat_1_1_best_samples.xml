@@ -10,7 +10,7 @@
       </param>
     </templateparamlist>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="structlimbo_1_1stat_1_1_best_samples_1a402f70a7663d3055ff618127443bc2dd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structlimbo_1_1stat_1_1_best_samples_1a432216d8c0eaeca98226e500c304e5fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename BO</type>
@@ -21,7 +21,7 @@
         </templateparamlist>
         <type>void</type>
         <definition>void limbo::stat::BestSamples&lt; Params &gt;::operator()</definition>
-        <argsstring>(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</argsstring>
+        <argsstring>(const BO &amp;bo, const AggregatorFunction &amp;afun)</argsstring>
         <name>operator()</name>
         <param>
           <type>const BO &amp;</type>
@@ -31,17 +31,13 @@
           <type>const AggregatorFunction &amp;</type>
           <declname>afun</declname>
         </param>
-        <param>
-          <type>bool</type>
-          <declname>blacklisted</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/best_samples.hpp" line="57" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/best_samples.hpp" bodystart="57" bodyend="69"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/stat/best_samples.hpp" line="57" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/best_samples.hpp" bodystart="57" bodyend="68"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -72,10 +68,10 @@
         <link refid="structlimbo_1_1stat_1_1_stat_base"/>
       </node>
     </collaborationgraph>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/best_samples.hpp" line="55" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/best_samples.hpp" bodystart="55" bodyend="70"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/stat/best_samples.hpp" line="55" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/stat/best_samples.hpp" bodystart="55" bodyend="69"/>
     <listofallmembers>
-      <member refid="structlimbo_1_1stat_1_1_best_samples_1a402f70a7663d3055ff618127443bc2dd" prot="public" virt="non-virtual"><scope>limbo::stat::BestSamples</scope><name>operator()</name></member>
-      <member refid="structlimbo_1_1stat_1_1_stat_base_1aaa6c2d6e3b520907955988daf73993ba" prot="public" virt="non-virtual" ambiguityscope="limbo::stat::StatBase::"><scope>limbo::stat::BestSamples</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_best_samples_1a432216d8c0eaeca98226e500c304e5fa" prot="public" virt="non-virtual"><scope>limbo::stat::BestSamples</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1stat_1_1_stat_base_1a0d2a96eb80930e66a2d374160a20b040" prot="public" virt="non-virtual" ambiguityscope="limbo::stat::StatBase::"><scope>limbo::stat::BestSamples</scope><name>operator()</name></member>
       <member refid="structlimbo_1_1stat_1_1_stat_base_1aac1bea59acf624ed728660823189006f" prot="public" virt="non-virtual"><scope>limbo::stat::BestSamples</scope><name>StatBase</name></member>
     </listofallmembers>
   </compounddef>

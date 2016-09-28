@@ -6,58 +6,58 @@
     <includes refid="stat__base_8hpp" local="no">limbo/stat/stat_base.hpp</includes>
     <includedby refid="stat_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/stat.hpp</includedby>
     <incdepgraph>
-      <node id="1254">
+      <node id="1252">
         <label>cmath</label>
       </node>
-      <node id="1257">
+      <node id="1255">
         <label>string</label>
       </node>
-      <node id="1256">
+      <node id="1254">
         <label>fstream</label>
       </node>
-      <node id="1255">
+      <node id="1253">
         <label>limbo/stat/stat_base.hpp</label>
         <link refid="stat__base_8hpp"/>
-        <childnode refid="1256" relation="include">
-        </childnode>
-        <childnode refid="1257" relation="include">
-        </childnode>
-        <childnode refid="1258" relation="include">
-        </childnode>
-      </node>
-      <node id="1253">
-        <label>/tmp/doc_limbo/limbo/src/limbo/stat/gp.hpp</label>
-        <link refid="stat/gp.hpp"/>
         <childnode refid="1254" relation="include">
         </childnode>
         <childnode refid="1255" relation="include">
         </childnode>
+        <childnode refid="1256" relation="include">
+        </childnode>
       </node>
-      <node id="1258">
+      <node id="1251">
+        <label>/tmp/doc_limbo/limbo/src/limbo/stat/gp.hpp</label>
+        <link refid="stat/gp.hpp"/>
+        <childnode refid="1252" relation="include">
+        </childnode>
+        <childnode refid="1253" relation="include">
+        </childnode>
+      </node>
+      <node id="1256">
         <label>memory</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1262">
+      <node id="1260">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1260">
+      <node id="1258">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat.hpp</label>
         <link refid="stat_8hpp"/>
-        <childnode refid="1261" relation="include">
-        </childnode>
-      </node>
-      <node id="1261">
-        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
-        <link refid="limbo_8hpp"/>
-        <childnode refid="1262" relation="include">
+        <childnode refid="1259" relation="include">
         </childnode>
       </node>
       <node id="1259">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+        <childnode refid="1260" relation="include">
+        </childnode>
+      </node>
+      <node id="1257">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat/gp.hpp</label>
         <link refid="stat/gp.hpp"/>
-        <childnode refid="1260" relation="include">
+        <childnode refid="1258" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -125,7 +125,7 @@
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
 <codeline lineno="57" refid="structlimbo_1_1stat_1_1_g_p" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1stat_1_1_g_p" kindref="compound">GP</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1stat_1_1_stat_base" kindref="compound">StatBase</ref>&lt;Params&gt;<sp/>{</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>BO,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>AggregatorFunction&gt;</highlight></codeline>
-<codeline lineno="59" refid="structlimbo_1_1stat_1_1_g_p_1ae4963dbd20077223711a646226091944" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1stat_1_1_g_p_1ae4963dbd20077223711a646226091944" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blacklisted)</highlight></codeline>
+<codeline lineno="59" refid="structlimbo_1_1stat_1_1_g_p_1ae1af2dda46c2aaca5f757871b038694e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1stat_1_1_g_p_1ae1af2dda46c2aaca5f757871b038694e" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BO&amp;<sp/>bo,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>AggregatorFunction&amp;<sp/>afun)</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!bo.stats_enabled())</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>

@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 546.623794
+%%BoundingBox: 0 0 500 514.469453
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 0.914706 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 0.971875 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 17 def
+/rows 16 def
 /cols 2 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -180,7 +180,6 @@ boxfont setfont
 (limbo::stat::BestAggregatedObservations< Params >) cw
 (limbo::stat::BestObservations< Params >) cw
 (limbo::stat::BestSamples< Params >) cw
-(limbo::stat::BlSamples< Params >) cw
 (limbo::stat::ConsoleSummary< Params >) cw
 (limbo::stat::GP< Params >) cw
 (limbo::stat::GPAcquisitions< Params >) cw
@@ -201,14 +200,13 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (limbo::stat::StatBase< Params >) 0.000000 16.000000 box
- (limbo::experimental::stat::HyperVolume< Params >) 1.000000 15.000000 box
- (limbo::experimental::stat::ParetoFront< Params >) 1.000000 14.000000 box
- (limbo::stat::AggregatedObservations< Params >) 1.000000 13.000000 box
- (limbo::stat::BestAggregatedObservations< Params >) 1.000000 12.000000 box
- (limbo::stat::BestObservations< Params >) 1.000000 11.000000 box
- (limbo::stat::BestSamples< Params >) 1.000000 10.000000 box
- (limbo::stat::BlSamples< Params >) 1.000000 9.000000 box
+ (limbo::stat::StatBase< Params >) 0.000000 15.000000 box
+ (limbo::experimental::stat::HyperVolume< Params >) 1.000000 14.000000 box
+ (limbo::experimental::stat::ParetoFront< Params >) 1.000000 13.000000 box
+ (limbo::stat::AggregatedObservations< Params >) 1.000000 12.000000 box
+ (limbo::stat::BestAggregatedObservations< Params >) 1.000000 11.000000 box
+ (limbo::stat::BestObservations< Params >) 1.000000 10.000000 box
+ (limbo::stat::BestSamples< Params >) 1.000000 9.000000 box
  (limbo::stat::ConsoleSummary< Params >) 1.000000 8.000000 box
  (limbo::stat::GP< Params >) 1.000000 7.000000 box
  (limbo::stat::GPAcquisitions< Params >) 1.000000 6.000000 box
@@ -222,9 +220,7 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- relations -----
 
 solid
-1 0.000000 15.250000 out
-solid
-0 0.000000 15.500000 hedge
+1 0.000000 14.250000 out
 solid
 0 0.000000 14.500000 hedge
 solid
@@ -256,4 +252,4 @@ solid
 solid
 0 0.000000 0.500000 hedge
 solid
-0.000000 16.000000 0.500000 vedge
+0.000000 15.000000 0.500000 vedge

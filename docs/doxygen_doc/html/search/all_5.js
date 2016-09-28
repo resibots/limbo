@@ -13,7 +13,7 @@ var searchData=
   ['engine',['engine',['../classrandutils_1_1random__generator.html#a85303ed792296a49a8f395fb3a71c2ed',1,'randutils::random_generator']]],
   ['engine_5ftype',['engine_type',['../classrandutils_1_1random__generator.html#a7ccbb95be67d7cd19f4b128be21b4ac3',1,'randutils::random_generator']]],
   ['eval',['eval',['../group__opt__tools.html#ga698d932ac52cab812742b1300f875372',1,'limbo::opt']]],
-  ['eval_5fand_5fadd',['eval_and_add',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#a387fba7bf70aa9410e1c04f035694f34',1,'limbo::bayes_opt::BoBase']]],
+  ['eval_5fand_5fadd',['eval_and_add',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#a70e8e4fea1b56aedc943fe62170659e4',1,'limbo::bayes_opt::BoBase']]],
   ['eval_5fgrad',['eval_grad',['../group__opt__tools.html#ga6abbcdf8d83abca89802881d883fb9e3',1,'limbo::opt']]],
   ['eval_5ft',['eval_t',['../group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0',1,'limbo::opt']]],
   ['evaluationerror',['EvaluationError',['../classlimbo_1_1_evaluation_error.html',1,'limbo']]],

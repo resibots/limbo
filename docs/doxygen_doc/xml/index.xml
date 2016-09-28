@@ -16,7 +16,7 @@
     <member refid="structlimbo_1_1defaults_1_1acqui__ucb__imgpo_1a46bb2590e6cbe7f330acb3ce703861a1" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_aggregated_observations" kind="struct"><name>limbo::stat::AggregatedObservations</name>
-    <member refid="structlimbo_1_1stat_1_1_aggregated_observations_1a859ec9c24060990d4bbf976485d57bf6" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_aggregated_observations_1a99c53c6147e0d5ae26a7d4707a978611" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classrandutils_1_1auto__seeded" kind="class"><name>randutils::auto_seeded</name>
     <member refid="classrandutils_1_1auto__seeded_1a129ae83a4176c2c9d88a6244cfb0eb17" kind="typedef"><name>default_seeds</name></member>
@@ -45,16 +45,13 @@
     <member refid="structlimbo_1_1bayes__opt_1_1experimental_1_1defaults_1_1bayes__opt__imgpo_1a51a05f33be921d51d35262b305c6173b" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_best_aggregated_observations" kind="struct"><name>limbo::stat::BestAggregatedObservations</name>
-    <member refid="structlimbo_1_1stat_1_1_best_aggregated_observations_1a1f2d6f8781b48e2840a2c6c69c99ef61" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_best_aggregated_observations_1a37ad22cd25f49bbec5109a6f1367057e" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_best_observations" kind="struct"><name>limbo::stat::BestObservations</name>
-    <member refid="structlimbo_1_1stat_1_1_best_observations_1a62490e2a957d770d30c8575e1c34ce76" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_best_observations_1aab6d5545f02eca0fd147c79b64f4a3f9" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_best_samples" kind="struct"><name>limbo::stat::BestSamples</name>
-    <member refid="structlimbo_1_1stat_1_1_best_samples_1a402f70a7663d3055ff618127443bc2dd" kind="function"><name>operator()</name></member>
-  </compound>
-  <compound refid="structlimbo_1_1stat_1_1_bl_samples" kind="struct"><name>limbo::stat::BlSamples</name>
-    <member refid="structlimbo_1_1stat_1_1_bl_samples_1a1671492ad1724364555d5b042cd81d15" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_best_samples_1a432216d8c0eaeca98226e500c304e5fa" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classlimbo_1_1bayes__opt_1_1_bo_base" kind="class"><name>limbo::bayes_opt::BoBase</name>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ae46fa6c574ca2a2c4368c8c9d3ff63e5" kind="typedef"><name>params_t</name></member>
@@ -73,7 +70,6 @@
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a09b5fbcfc790cc627b55f63a938435cd" kind="variable"><name>_stat</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3676c6bc6f38819c99486974bccf05fe" kind="variable"><name>_observations</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a778d3eaf7d64e2217f1fe37d0881fa34" kind="variable"><name>_samples</name></member>
-    <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8e827b9c219c05950993686248846206" kind="variable"><name>_bl_samples</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad361278c23693c4220eaa9a9de5d3333" kind="function"><name>BoBase</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a1a50eebb8a6efd528582ea871a0879a0" kind="function"><name>BoBase</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a69628ced9d71209a59dcdfb7f5637265" kind="function"><name>operator=</name></member>
@@ -81,15 +77,13 @@
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a4c87b7618144f99027c294db3eb803f6" kind="function"><name>res_dir</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a855dc5de1d0732a25f4c9730ac50d0bd" kind="function"><name>observations</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ad3ba0dba1418df0ed8e79d4dd3cc907a" kind="function"><name>samples</name></member>
-    <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aa84e215cffa97a4e287aad3690f89635" kind="function"><name>bl_samples</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac3d643d5a668edf22ad053bfc54ea090" kind="function"><name>current_iteration</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5470e106c4584a30636cafb6fbad6d73" kind="function"><name>total_iterations</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1ac533d6397b0c0fa5ba0a4d03e0545fa2" kind="function"><name>add_new_sample</name></member>
-    <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a8694d4bbc5c373d067790ec31fb42a44" kind="function"><name>add_new_bl_sample</name></member>
-    <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a387fba7bf70aa9410e1c04f035694f34" kind="function"><name>eval_and_add</name></member>
+    <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a70e8e4fea1b56aedc943fe62170659e4" kind="function"><name>eval_and_add</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1abe536fcebd87061aa4b53a3ed7866b0d" kind="function"><name>_init</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5d74170de29d0ec6621f13a3078f4733" kind="function"><name>_stop</name></member>
-    <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a3cf88b5fa2eff8a8590a8615ccf91338" kind="function"><name>_update_stats</name></member>
+    <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5e99d6f9477fb21579df54a4e11ae279" kind="function"><name>_update_stats</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_bo_base_1aac8bb14bc2c5c586e0392e9029e13921" kind="function"><name>_make_res_dir</name></member>
   </compound>
   <compound refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi" kind="class"><name>limbo::experimental::bayes_opt::BoMulti</name>
@@ -184,7 +178,7 @@
     <member refid="structpareto_1_1impl_1_1compare__objs__lex_1a9cf3c3888c0302c3aaca3056779cc4b9" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_console_summary" kind="struct"><name>limbo::stat::ConsoleSummary</name>
-    <member refid="structlimbo_1_1stat_1_1_console_summary_1a625436435af826082724dc112054c69a" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_console_summary_1a7c65e2f910881abe72e4bb181d357f4a" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1mean_1_1_constant" kind="struct"><name>limbo::mean::Constant</name>
     <member refid="structlimbo_1_1mean_1_1_constant_1a15cabf01ce91422e74ff8507ef0200ea" kind="variable"><name>_dim_out</name></member>
@@ -201,9 +195,6 @@
     <member refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1a6f42eec8660a35b4f1eb066af0c1b2b9" kind="typedef"><name>mean_t</name></member>
     <member refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults_1afbbb3a7663e1cabe65b094bca5bebc75" kind="typedef"><name>constraint_model_t</name></member>
   </compound>
-  <compound refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults" kind="struct"><name>limbo::experimental::bayes_opt::Ehvi::defaults</name>
-    <member refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_1a3d7a04bbbd73b4f95710c29fd88551bf" kind="typedef"><name>acquiopt_t</name></member>
-  </compound>
   <compound refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults" kind="struct"><name>limbo::bayes_opt::BoBase::defaults</name>
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a675d927a474fc77608cc63c8406448f7" kind="typedef"><name>init_t</name></member>
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a0a88a267bef731645079455cb11fa836" kind="typedef"><name>kf_t</name></member>
@@ -212,6 +203,9 @@
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a4cb9b80ab762b3b763fdd97e893886e5" kind="typedef"><name>acqui_t</name></member>
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ab8f3991474723d27b9c77d0e0a76fce2" kind="typedef"><name>stat_t</name></member>
     <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a66e1dbe1ccd9dbef0fdfc5c9faee9eff" kind="typedef"><name>stop_t</name></member>
+  </compound>
+  <compound refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults" kind="struct"><name>limbo::experimental::bayes_opt::Ehvi::defaults</name>
+    <member refid="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_1a3d7a04bbbd73b4f95710c29fd88551bf" kind="typedef"><name>acquiopt_t</name></member>
   </compound>
   <compound refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults" kind="struct"><name>limbo::bayes_opt::BOptimizer::defaults</name>
     <member refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults_1af714505103b93f5a2028030a192cc955" kind="typedef"><name>acquiopt_t</name></member>
@@ -267,7 +261,6 @@
     <member refid="classlimbo_1_1model_1_1_g_p_1a96d2c76aeaf5c47694b8d41297bfe0a2" kind="variable"><name>_mean_function</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1ab76d45049a594a4000cf682ae10304e1" kind="variable"><name>_samples</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a9a5a67dea2db81df27f5fbbc80e6e37b" kind="variable"><name>_observations</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1a99e861ae5a2fd002b2b9894b7264777e" kind="variable"><name>_bl_samples</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aaf43e8f6a03502a5dd9d2f82fa1fffc4" kind="variable"><name>_mean_vector</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a36e947a9bf0d61f00d4c17840fbca686" kind="variable"><name>_obs_mean</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a8044ad4148cdfa9a22d8f128c3f4835c" kind="variable"><name>_noises</name></member>
@@ -276,15 +269,13 @@
     <member refid="classlimbo_1_1model_1_1_g_p_1ab066cd502f90bb9b9ea35a5dd0cc80a3" kind="variable"><name>_mean_observation</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a126ccf98308dbae67f3096c5f15f9526" kind="variable"><name>_kernel</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aa922853cf7ce5a21a7602c2f9bdd961a" kind="variable"><name>_matrixL</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1a56acad1e7f839030b4a8dafdbe25c0a9" kind="variable"><name>_inv_bl_kernel</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a8bb1959df5645cd6ef3f2117f34254d5" kind="variable"><name>_lik</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a2213df810e55e09e44586c37a1e4e2ad" kind="variable"><name>_hp_optimize</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aa18de82f231f3aed6ce8cce4c778aedb" kind="function"><name>GP</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1ab36947c89e4f5ad92599656a21829755" kind="function"><name>GP</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1a3597b1c02b61d0ea1301808b08d8abb7" kind="function"><name>compute</name></member>
+    <member refid="classlimbo_1_1model_1_1_g_p_1a5e2ea732c8d93491433fcc838f67f41e" kind="function"><name>compute</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aa01b41e37de4def676cf6c79b08aac94" kind="function"><name>optimize_hyperparams</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a43e4e23d98c421d610df52ea6d3f3539" kind="function"><name>add_sample</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1a43b06658ba27a37e12c1addce9ab8569" kind="function"><name>add_bl_sample</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a33937ff7df97c01fdd9bf8911e0a6159" kind="function"><name>query</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0" kind="function"><name>mu</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d" kind="function"><name>sigma</name></member>
@@ -299,7 +290,6 @@
     <member refid="classlimbo_1_1model_1_1_g_p_1ade0d93b847e3d112735b3e8143470a55" kind="function"><name>mean_vector</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aa9d3799fdcd71a8ccc19bc43932fa321" kind="function"><name>obs_mean</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1ac490915c95cc78f6cd836f78e3638bf1" kind="function"><name>nb_samples</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1aa41665d2029a541ce5fe85647fe3662d" kind="function"><name>nb_bl_samples</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a55ea6fe353a12d4c788fac5f2e20e416" kind="function"><name>recompute</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a794ed0eeda29aaa7afe303b5e72d3927" kind="function"><name>get_lik</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a4dfc1807eb4f113191dbd3ae51c053ee" kind="function"><name>set_lik</name></member>
@@ -310,14 +300,12 @@
     <member refid="classlimbo_1_1model_1_1_g_p_1a979295bbd4890d5561d9c859db704ecd" kind="function"><name>_compute_full_kernel</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1ab91a58a8ed3d86b95fe78fe52a0b3023" kind="function"><name>_compute_incremental_kernel</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1aa71ac4adc879ccf5ed1d827563adb853" kind="function"><name>_compute_alpha</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1af2506dd2b0aa8a875f4dce09765ec6e1" kind="function"><name>_compute_bl_kernel</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a7bac678eec7b25fc028b4a16f4d15dcb" kind="function"><name>_mu</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a2f0475a0c6368ff1324bfa34626dc46c" kind="function"><name>_sigma</name></member>
     <member refid="classlimbo_1_1model_1_1_g_p_1a7586b65b5f55875f53aa49123b933564" kind="function"><name>_compute_k</name></member>
-    <member refid="classlimbo_1_1model_1_1_g_p_1adb22a4f0feded47ef09df9675dbd4501" kind="function"><name>_compute_k_bl</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_g_p" kind="struct"><name>limbo::stat::GP</name>
-    <member refid="structlimbo_1_1stat_1_1_g_p_1ae4963dbd20077223711a646226091944" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_g_p_1ae1af2dda46c2aaca5f757871b038694e" kind="function"><name>operator()</name></member>
     <member refid="structlimbo_1_1stat_1_1_g_p_1a9aec28dcdc629de9043ffc224a6dac9f" kind="function"><name>_explore</name></member>
   </compound>
   <compound refid="classlimbo_1_1acqui_1_1_g_p___u_c_b" kind="class"><name>limbo::acqui::GP_UCB</name>
@@ -329,29 +317,28 @@
     <member refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a81dbe2aae8aea9d463547ac4d9236741" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_g_p_acquisitions" kind="struct"><name>limbo::stat::GPAcquisitions</name>
-    <member refid="structlimbo_1_1stat_1_1_g_p_acquisitions_1a5b6d7301b0696e77a8a9276d1d12d614" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_g_p_acquisitions_1ac671f5f138d1545bd339068ec5fe4824" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_g_p_kernel_h_params" kind="struct"><name>limbo::stat::GPKernelHParams</name>
-    <member refid="structlimbo_1_1stat_1_1_g_p_kernel_h_params_1aea1e2090ba4344e6a7e1d94c467bc0c9" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_g_p_kernel_h_params_1aa69a6377279cb199ec043ad98b9d5db7" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_g_p_likelihood" kind="struct"><name>limbo::stat::GPLikelihood</name>
-    <member refid="structlimbo_1_1stat_1_1_g_p_likelihood_1a8c78ab1bd939bba755fd4b4c9a7a5113" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_g_p_likelihood_1ac5590ba5e63354d6318d78712c8f6074" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_g_p_mean_h_params" kind="struct"><name>limbo::stat::GPMeanHParams</name>
-    <member refid="structlimbo_1_1stat_1_1_g_p_mean_h_params_1ad2134995c9916a1474d2491e83950139" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_g_p_mean_h_params_1a668c9a82a1ae88273a44f48a4b6f4612" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego" kind="class"><name>limbo::experimental::model::GPParego</name>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1acb31231abaffaec8b2b1c57afe40639a" kind="variable"><name>_nb_objs</name></member>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aa17b4e92259ecb87446084b07964f890" kind="variable"><name>_raw_observations</name></member>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1ac351d6798add22da5c6dd58ac4a00723" kind="function"><name>GPParego</name></member>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a1f0eb578140f01874b13bfca124c085c" kind="function"><name>GPParego</name></member>
-    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a7a7998bd37de03f046b737113b952b65" kind="function"><name>compute</name></member>
+    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1ae361cd8b8831e4364774dfdd05937617" kind="function"><name>compute</name></member>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a81955696f79b4ac11a17d0faf28ccc31" kind="function"><name>add_sample</name></member>
-    <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aee0ce034411e11614069718a3140a3f8" kind="function"><name>add_bl_sample</name></member>
     <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aaab4351547dd1d119062f1a32e694a7b" kind="function"><name>_scalarize_obs</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_g_p_prediction_differences" kind="struct"><name>limbo::stat::GPPredictionDifferences</name>
-    <member refid="structlimbo_1_1stat_1_1_g_p_prediction_differences_1ace7f84e5c4058524e5d7de45ec97f618" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_g_p_prediction_differences_1a91a2d59457d83adbbfa6138db9e200cd" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1init_1_1_grid_sampling" kind="struct"><name>limbo::init::GridSampling</name>
     <member refid="structlimbo_1_1init_1_1_grid_sampling_1a9b17fba72e1ae09a3361e9dcb8ff3fe3" kind="function"><name>operator()</name></member>
@@ -367,7 +354,7 @@
     <member refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt_1a9dc7a6a24a0dfccf45e4f88ddab8797d" kind="function"><name>~HPOpt</name></member>
   </compound>
   <compound refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume" kind="struct"><name>limbo::experimental::stat::HyperVolume</name>
-    <member refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume_1ab3a05ba6796fde834b798d0330492346" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1experimental_1_1stat_1_1_hyper_volume_1a1ed1a3d3a92f8cdc115a34bb984466ce" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o" kind="class"><name>limbo::bayes_opt::experimental::IMGPO</name>
     <member refid="classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o_1a08e12049587eed6be7bc86f05da043f0" kind="typedef"><name>base_t</name></member>
@@ -489,7 +476,7 @@
     <member refid="structlimbo_1_1mean_1_1_null_function_1ab7991314a2f799af4133653f95b8e58f" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_observations" kind="struct"><name>limbo::stat::Observations</name>
-    <member refid="structlimbo_1_1stat_1_1_observations_1a7da8caabd4bc846a6bc17c08b8b1e5ad" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_observations_1ad39d50d8d1b6e7e699bb2bc6c775d391" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1defaults_1_1opt__cmaes" kind="struct"><name>limbo::defaults::opt_cmaes</name>
     <member refid="group__opt__defaults_1gaba7127b5e591a72095bd6c3a4155828d" kind="function"><name>BO_PARAM</name></member>
@@ -516,12 +503,12 @@
   <compound refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_parego" kind="class"><name>limbo::experimental::bayes_opt::Parego</name>
   </compound>
   <compound refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark" kind="struct"><name>limbo::experimental::stat::ParetoBenchmark</name>
-    <member refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark_1a27b8cf1f9dcda186631fb0f37528028f" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark_1a3dd593307f2093138335924b1618294f" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front" kind="struct"><name>limbo::experimental::stat::ParetoFront</name>
     <member refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1a07a9d1b38b8c942ec0666841ec310ed8" kind="typedef"><name>pareto_point_t</name></member>
     <member refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1ad43dd449215fa8e506851c3f7fc96940" kind="typedef"><name>pareto_t</name></member>
-    <member refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1aa9576e145574a7c7dede0d7497388fec" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1a341b34d96290a874818bbdb4f27f9f2b" kind="function"><name>operator()</name></member>
     <member refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1ac6a525586bac759e65d332792ca9cdd5" kind="function"><name>_pareto_data</name></member>
     <member refid="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_1a81f2f301fe38304ccc1bd3624432946f" kind="function"><name>_pack_data</name></member>
   </compound>
@@ -571,15 +558,14 @@
   <compound refid="structlimbo_1_1_refresh_stat__f" kind="struct"><name>limbo::RefreshStat_f</name>
     <member refid="structlimbo_1_1_refresh_stat__f_1ad94ccf3c46dbed8e9f8ab573af8fb258" kind="variable"><name>_bo</name></member>
     <member refid="structlimbo_1_1_refresh_stat__f_1af02fdc84a4066c199d26e823b9887531" kind="variable"><name>_afun</name></member>
-    <member refid="structlimbo_1_1_refresh_stat__f_1aa4cc189ccbdbcd4d3cbefa54fae1f9f3" kind="variable"><name>_blacklisted</name></member>
-    <member refid="structlimbo_1_1_refresh_stat__f_1af0f6e976aa3f357cdd4418d84e1e69ec" kind="function"><name>RefreshStat_f</name></member>
+    <member refid="structlimbo_1_1_refresh_stat__f_1aa457d1c9101974999487052fddec098c" kind="function"><name>RefreshStat_f</name></member>
     <member refid="structlimbo_1_1_refresh_stat__f_1a24498c1e97e8aa89a8180422a3ad9109" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1opt_1_1_rprop" kind="struct"><name>limbo::opt::Rprop</name>
     <member refid="structlimbo_1_1opt_1_1_rprop_1a6496d5e486ce1a5e8d0959194b8941bb" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structlimbo_1_1stat_1_1_samples" kind="struct"><name>limbo::stat::Samples</name>
-    <member refid="structlimbo_1_1stat_1_1_samples_1ad93fe002d60296abbd96f569dc1030ac" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_samples_1a456da8be91bd02cf82121d80d7531123" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structrandutils_1_1seed__seq__fe" kind="struct"><name>randutils::seed_seq_fe</name>
     <member refid="structrandutils_1_1seed__seq__fe_1ae485fbabe93091ea392c3bf777e64279" kind="typedef"><name>result_type</name></member>
@@ -623,7 +609,7 @@
   <compound refid="structlimbo_1_1stat_1_1_stat_base" kind="struct"><name>limbo::stat::StatBase</name>
     <member refid="structlimbo_1_1stat_1_1_stat_base_1a9701911e8794d411ccbe34c0e3b7f311" kind="variable"><name>_log_file</name></member>
     <member refid="structlimbo_1_1stat_1_1_stat_base_1aac1bea59acf624ed728660823189006f" kind="function"><name>StatBase</name></member>
-    <member refid="structlimbo_1_1stat_1_1_stat_base_1aaa6c2d6e3b520907955988daf73993ba" kind="function"><name>operator()</name></member>
+    <member refid="structlimbo_1_1stat_1_1_stat_base_1a0d2a96eb80930e66a2d374160a20b040" kind="function"><name>operator()</name></member>
     <member refid="structlimbo_1_1stat_1_1_stat_base_1ae07cc71e5a9b00620c1951a450feda9f" kind="function"><name>_create_log_file</name></member>
   </compound>
   <compound refid="structlimbo_1_1defaults_1_1stop__maxiterations" kind="struct"><name>limbo::defaults::stop_maxiterations</name>
@@ -879,8 +865,6 @@
   <compound refid="best__observations_8hpp" kind="file"><name>best_observations.hpp</name>
   </compound>
   <compound refid="best__samples_8hpp" kind="file"><name>best_samples.hpp</name>
-  </compound>
-  <compound refid="bl__samples_8hpp" kind="file"><name>bl_samples.hpp</name>
   </compound>
   <compound refid="console__summary_8hpp" kind="file"><name>console_summary.hpp</name>
   </compound>

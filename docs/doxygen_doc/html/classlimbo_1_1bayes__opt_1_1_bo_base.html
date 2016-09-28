@@ -162,9 +162,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad3ba0dba1418df0ed8e79d4dd3cc907a"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ad3ba0dba1418df0ed8e79d4dd3cc907a">samples</a> () const </td></tr>
 <tr class="memdesc:ad3ba0dba1418df0ed8e79d4dd3cc907a"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the list of the points that have been evaluated so far (x)  <a href="#ad3ba0dba1418df0ed8e79d4dd3cc907a">More...</a><br /></td></tr>
 <tr class="separator:ad3ba0dba1418df0ed8e79d4dd3cc907a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa84e215cffa97a4e287aad3690f89635"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#aa84e215cffa97a4e287aad3690f89635">bl_samples</a> () const </td></tr>
-<tr class="memdesc:aa84e215cffa97a4e287aad3690f89635"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the list of blacklisted points  <a href="#aa84e215cffa97a4e287aad3690f89635">More...</a><br /></td></tr>
-<tr class="separator:aa84e215cffa97a4e287aad3690f89635"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3d643d5a668edf22ad053bfc54ea090"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac3d643d5a668edf22ad053bfc54ea090">current_iteration</a> () const </td></tr>
 <tr class="memdesc:ac3d643d5a668edf22ad053bfc54ea090"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the current iteration number  <a href="#ac3d643d5a668edf22ad053bfc54ea090">More...</a><br /></td></tr>
 <tr class="separator:ac3d643d5a668edf22ad053bfc54ea090"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,13 +169,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5470e106c4584a30636cafb6fbad6d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac533d6397b0c0fa5ba0a4d03e0545fa2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac533d6397b0c0fa5ba0a4d03e0545fa2">add_new_sample</a> (const Eigen::VectorXd &amp;s, const Eigen::VectorXd &amp;v)</td></tr>
 <tr class="separator:ac533d6397b0c0fa5ba0a4d03e0545fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8694d4bbc5c373d067790ec31fb42a44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a8694d4bbc5c373d067790ec31fb42a44">add_new_bl_sample</a> (const Eigen::VectorXd &amp;s)</td></tr>
-<tr class="memdesc:a8694d4bbc5c373d067790ec31fb42a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new blacklisted sample.  <a href="#a8694d4bbc5c373d067790ec31fb42a44">More...</a><br /></td></tr>
-<tr class="separator:a8694d4bbc5c373d067790ec31fb42a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a387fba7bf70aa9410e1c04f035694f34"><td class="memTemplParams" colspan="2">template&lt;typename StateFunction &gt; </td></tr>
-<tr class="memitem:a387fba7bf70aa9410e1c04f035694f34"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a387fba7bf70aa9410e1c04f035694f34">eval_and_add</a> (const StateFunction &amp;seval, const Eigen::VectorXd &amp;sample)</td></tr>
-<tr class="memdesc:a387fba7bf70aa9410e1c04f035694f34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate a sample and add the result to the 'database' (sample / observations vectors) &ndash; it does not update the model.  <a href="#a387fba7bf70aa9410e1c04f035694f34">More...</a><br /></td></tr>
-<tr class="separator:a387fba7bf70aa9410e1c04f035694f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e8e4fea1b56aedc943fe62170659e4"><td class="memTemplParams" colspan="2">template&lt;typename StateFunction &gt; </td></tr>
+<tr class="memitem:a70e8e4fea1b56aedc943fe62170659e4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a70e8e4fea1b56aedc943fe62170659e4">eval_and_add</a> (const StateFunction &amp;seval, const Eigen::VectorXd &amp;sample)</td></tr>
+<tr class="memdesc:a70e8e4fea1b56aedc943fe62170659e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate a sample and add the result to the 'database' (sample / observations vectors) &ndash; it does not update the model.  <a href="#a70e8e4fea1b56aedc943fe62170659e4">More...</a><br /></td></tr>
+<tr class="separator:a70e8e4fea1b56aedc943fe62170659e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt;<br />
@@ -403,34 +397,6 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a8694d4bbc5c373d067790ec31fb42a44"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::add_new_bl_sample </td>
-          <td>(</td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Add a new blacklisted sample. </p>
-
-</div>
-</div>
 <a class="anchor" id="ac533d6397b0c0fa5ba0a4d03e0545fa2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -471,33 +437,6 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="aa84e215cffa97a4e287aad3690f89635"></a>
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt;Eigen::VectorXd&gt;&amp; <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::bl_samples </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>return the list of blacklisted points </p>
-
-</div>
-</div>
 <a class="anchor" id="ac3d643d5a668edf22ad053bfc54ea090"></a>
 <div class="memitem">
 <div class="memproto">
@@ -525,7 +464,7 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 
 </div>
 </div>
-<a class="anchor" id="a387fba7bf70aa9410e1c04f035694f34"></a>
+<a class="anchor" id="a70e8e4fea1b56aedc943fe62170659e4"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -537,7 +476,7 @@ template&lt;typename StateFunction &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::eval_and_add </td>
+          <td class="memname">void <a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a>&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::eval_and_add </td>
           <td>(</td>
           <td class="paramtype">const StateFunction &amp;&#160;</td>
           <td class="paramname"><em>seval</em>, </td>
@@ -732,7 +671,7 @@ template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 28 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

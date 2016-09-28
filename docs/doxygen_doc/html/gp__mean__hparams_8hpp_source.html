@@ -147,7 +147,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
 <div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html">   57</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html">GPMeanHParams</a> : <span class="keyword">public</span> <a class="code" href="structlimbo_1_1stat_1_1_stat_base.html">StatBase</a>&lt;Params&gt; {</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO, <span class="keyword">typename</span> AggregatorFunction&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html#ad2134995c9916a1474d2491e83950139">   59</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html#ad2134995c9916a1474d2491e83950139">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun, <span class="keywordtype">bool</span> blacklisted)</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html#a668c9a82a1ae88273a44f48a4b6f4612">   59</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html#a668c9a82a1ae88273a44f48a4b6f4612">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp; afun)</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">if</span> (!bo.stats_enabled() || bo.observations().empty())</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordflow">return</span>;</div>
@@ -164,15 +164,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structlimbo_1_1stat_1_1_g_p_mean_h_params_html_a668c9a82a1ae88273a44f48a4b6f4612"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html#a668c9a82a1ae88273a44f48a4b6f4612">limbo::stat::GPMeanHParams::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun)</div><div class="ttdef"><b>Definition:</b> gp_mean_hparams.hpp:59</div></div>
 <div class="ttc" id="stat__base_8hpp_html"><div class="ttname"><a href="stat__base_8hpp.html">stat_base.hpp</a></div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_stat_base_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_stat_base.html">limbo::stat::StatBase</a></div><div class="ttdef"><b>Definition:</b> stat_base.hpp:71</div></div>
 <div class="ttc" id="structlimbo_1_1stat_1_1_g_p_mean_h_params_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html">limbo::stat::GPMeanHParams</a></div><div class="ttdef"><b>Definition:</b> gp_mean_hparams.hpp:57</div></div>
-<div class="ttc" id="structlimbo_1_1stat_1_1_g_p_mean_h_params_html_ad2134995c9916a1474d2491e83950139"><div class="ttname"><a href="structlimbo_1_1stat_1_1_g_p_mean_h_params.html#ad2134995c9916a1474d2491e83950139">limbo::stat::GPMeanHParams::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;afun, bool blacklisted)</div><div class="ttdef"><b>Definition:</b> gp_mean_hparams.hpp:59</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 28 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

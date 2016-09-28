@@ -186,9 +186,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad3ba0dba1418df0ed8e79d4dd3cc907a inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ad3ba0dba1418df0ed8e79d4dd3cc907a">samples</a> () const </td></tr>
 <tr class="memdesc:ad3ba0dba1418df0ed8e79d4dd3cc907a inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the list of the points that have been evaluated so far (x)  <a href="#ad3ba0dba1418df0ed8e79d4dd3cc907a">More...</a><br /></td></tr>
 <tr class="separator:ad3ba0dba1418df0ed8e79d4dd3cc907a inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa84e215cffa97a4e287aad3690f89635 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#aa84e215cffa97a4e287aad3690f89635">bl_samples</a> () const </td></tr>
-<tr class="memdesc:aa84e215cffa97a4e287aad3690f89635 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the list of blacklisted points  <a href="#aa84e215cffa97a4e287aad3690f89635">More...</a><br /></td></tr>
-<tr class="separator:aa84e215cffa97a4e287aad3690f89635 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3d643d5a668edf22ad053bfc54ea090 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac3d643d5a668edf22ad053bfc54ea090">current_iteration</a> () const </td></tr>
 <tr class="memdesc:ac3d643d5a668edf22ad053bfc54ea090 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the current iteration number  <a href="#ac3d643d5a668edf22ad053bfc54ea090">More...</a><br /></td></tr>
 <tr class="separator:ac3d643d5a668edf22ad053bfc54ea090 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,13 +193,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5470e106c4584a30636cafb6fbad6d73 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac533d6397b0c0fa5ba0a4d03e0545fa2 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#ac533d6397b0c0fa5ba0a4d03e0545fa2">add_new_sample</a> (const Eigen::VectorXd &amp;s, const Eigen::VectorXd &amp;v)</td></tr>
 <tr class="separator:ac533d6397b0c0fa5ba0a4d03e0545fa2 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8694d4bbc5c373d067790ec31fb42a44 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a8694d4bbc5c373d067790ec31fb42a44">add_new_bl_sample</a> (const Eigen::VectorXd &amp;s)</td></tr>
-<tr class="memdesc:a8694d4bbc5c373d067790ec31fb42a44 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new blacklisted sample.  <a href="#a8694d4bbc5c373d067790ec31fb42a44">More...</a><br /></td></tr>
-<tr class="separator:a8694d4bbc5c373d067790ec31fb42a44 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a387fba7bf70aa9410e1c04f035694f34 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memTemplParams" colspan="2">template&lt;typename StateFunction &gt; </td></tr>
-<tr class="memitem:a387fba7bf70aa9410e1c04f035694f34 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a387fba7bf70aa9410e1c04f035694f34">eval_and_add</a> (const StateFunction &amp;seval, const Eigen::VectorXd &amp;sample)</td></tr>
-<tr class="memdesc:a387fba7bf70aa9410e1c04f035694f34 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate a sample and add the result to the 'database' (sample / observations vectors) &ndash; it does not update the model.  <a href="#a387fba7bf70aa9410e1c04f035694f34">More...</a><br /></td></tr>
-<tr class="separator:a387fba7bf70aa9410e1c04f035694f34 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e8e4fea1b56aedc943fe62170659e4 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memTemplParams" colspan="2">template&lt;typename StateFunction &gt; </td></tr>
+<tr class="memitem:a70e8e4fea1b56aedc943fe62170659e4 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a70e8e4fea1b56aedc943fe62170659e4">eval_and_add</a> (const StateFunction &amp;seval, const Eigen::VectorXd &amp;sample)</td></tr>
+<tr class="memdesc:a70e8e4fea1b56aedc943fe62170659e4 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate a sample and add the result to the 'database' (sample / observations vectors) &ndash; it does not update the model.  <a href="#a70e8e4fea1b56aedc943fe62170659e4">More...</a><br /></td></tr>
+<tr class="separator:a70e8e4fea1b56aedc943fe62170659e4 inherit pub_methods_classlimbo_1_1bayes__opt_1_1_bo_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class Params, class A1 = boost::parameter::void_, class A2 = boost::parameter::void_, class A3 = boost::parameter::void_, class A4 = boost::parameter::void_, class A5 = boost::parameter::void_, class A6 = boost::parameter::void_&gt;<br />
@@ -433,7 +427,7 @@ template&lt;typename StateFunction , typename AggregatorFunction  = FirstElem&gt
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 28 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 29 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

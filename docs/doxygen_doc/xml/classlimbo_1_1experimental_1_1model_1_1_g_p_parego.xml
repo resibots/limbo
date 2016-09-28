@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="114" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="114" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="103" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aa17b4e92259ecb87446084b07964f890" prot="private" static="no" mutable="no">
         <type>std::vector&lt; Eigen::VectorXd &gt;</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="115" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="115" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="104" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="104" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -75,10 +75,10 @@
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="81" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="81" bodyend="81"/>
       </memberdef>
-      <memberdef kind="function" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a7a7998bd37de03f046b737113b952b65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1ae361cd8b8831e4364774dfdd05937617" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void limbo::experimental::model::GPParego&lt; Params, Model &gt;::compute</definition>
-        <argsstring>(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises, const std::vector&lt; Eigen::VectorXd &gt; &amp;bl_samples=std::vector&lt; Eigen::VectorXd &gt;(), const Eigen::VectorXd &amp;noises_bl=Eigen::VectorXd())</argsstring>
+        <argsstring>(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</argsstring>
         <name>compute</name>
         <param>
           <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
@@ -92,23 +92,13 @@
           <type>const Eigen::VectorXd &amp;</type>
           <declname>noises</declname>
         </param>
-        <param>
-          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
-          <declname>bl_samples</declname>
-          <defval>std::vector&lt; Eigen::VectorXd &gt;()</defval>
-        </param>
-        <param>
-          <type>const Eigen::VectorXd &amp;</type>
-          <declname>noises_bl</declname>
-          <defval>Eigen::VectorXd()</defval>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="82" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="82" bodyend="91"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="82" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="82" bodyend="89"/>
       </memberdef>
       <memberdef kind="function" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a81955696f79b4ac11a17d0faf28ccc31" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -133,28 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="93" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="93" bodyend="103"/>
-      </memberdef>
-      <memberdef kind="function" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aee0ce034411e11614069718a3140a3f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void limbo::experimental::model::GPParego&lt; Params, Model &gt;::add_bl_sample</definition>
-        <argsstring>(const Eigen::VectorXd &amp;bl_sample, double noise)</argsstring>
-        <name>add_bl_sample</name>
-        <param>
-          <type>const Eigen::VectorXd &amp;</type>
-          <declname>bl_sample</declname>
-        </param>
-        <param>
-          <type>double</type>
-          <declname>noise</declname>
-        </param>
-        <briefdescription>
-<para>WARNING: Parego does not really work with blacklisted samples. </para>        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="105" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="105" bodyend="111"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="91" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="91" bodyend="100"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -173,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="116" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="116" bodyend="130"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="105" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="105" bodyend="119"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -183,35 +152,34 @@
 <listitem><para>this models aggregates all the objective values with the Tchebycheff distance</para></listitem><listitem><para>objectives are weighted using a random vector</para></listitem><listitem><para>a single model is built </para></listitem></itemizedlist>
 </para>    </detaileddescription>
     <inheritancegraph>
-      <node id="141">
+      <node id="137">
         <label>limbo::experimental::model::GPParego&lt; Params, Model &gt;</label>
         <link refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego"/>
-        <childnode refid="142" relation="public-inheritance">
+        <childnode refid="138" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="142">
+      <node id="138">
         <label>Model</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="143">
+      <node id="139">
         <label>limbo::experimental::model::GPParego&lt; Params, Model &gt;</label>
         <link refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego"/>
-        <childnode refid="144" relation="public-inheritance">
+        <childnode refid="140" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="144">
+      <node id="140">
         <label>Model</label>
       </node>
     </collaborationgraph>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="78" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="78" bodyend="131"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" line="78" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/gp_parego.hpp" bodystart="78" bodyend="120"/>
     <listofallmembers>
       <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1acb31231abaffaec8b2b1c57afe40639a" prot="private" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>_nb_objs</name></member>
       <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aa17b4e92259ecb87446084b07964f890" prot="private" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>_raw_observations</name></member>
       <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aaab4351547dd1d119062f1a32e694a7b" prot="private" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>_scalarize_obs</name></member>
-      <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1aee0ce034411e11614069718a3140a3f8" prot="public" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>add_bl_sample</name></member>
       <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a81955696f79b4ac11a17d0faf28ccc31" prot="public" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>add_sample</name></member>
-      <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a7a7998bd37de03f046b737113b952b65" prot="public" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>compute</name></member>
+      <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1ae361cd8b8831e4364774dfdd05937617" prot="public" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>compute</name></member>
       <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1ac351d6798add22da5c6dd58ac4a00723" prot="public" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>GPParego</name></member>
       <member refid="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_1a1f0eb578140f01874b13bfca124c085c" prot="public" virt="non-virtual"><scope>limbo::experimental::model::GPParego</scope><name>GPParego</name></member>
     </listofallmembers>
