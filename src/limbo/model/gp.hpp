@@ -74,17 +74,14 @@ namespace limbo {
             GP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
-            /// Compute the GP from samples, observation, noise. [optional: blacklisted samples]. This call needs to be explicit!
+            /// Compute the GP from samples, observation, noise. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations,
-                const Eigen::VectorXd& noises,
-                const std::vector<Eigen::VectorXd>& bl_samples = std::vector<Eigen::VectorXd>(),
-                const Eigen::VectorXd& noises_bl = Eigen::VectorXd())
+                const Eigen::VectorXd& noises)
             {
                 assert(samples.size() != 0);
                 assert(observations.size() != 0);
                 assert(samples.size() == observations.size());
-                assert(bl_samples.size() == (unsigned int)noises_bl.size());
 
                 _dim_in = samples[0].size();
                 _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
@@ -101,15 +98,9 @@ namespace limbo {
                 _mean_observation = _observations.colwise().mean();
 
                 _noises = noises;
-                _noises_bl = noises_bl;
-
-                _bl_samples = bl_samples;
 
                 this->_compute_obs_mean();
                 this->_compute_full_kernel();
-
-                if (!_bl_samples.empty())
-                    this->_compute_bl_kernel();
             }
 
             /// Do not forget to call this if you use hyper-prameters optimization!!
@@ -123,13 +114,8 @@ namespace limbo {
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
                 if (_samples.empty()) {
-                    if (_bl_samples.empty()) {
-                        _dim_in = sample.size();
-                        _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-                    }
-                    else {
-                        assert(sample.size() == _dim_in);
-                    }
+                    _dim_in = sample.size();
+                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
 
                     _dim_out = observation.size();
                     _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
@@ -152,31 +138,6 @@ namespace limbo {
 
                 this->_compute_obs_mean();
                 this->_compute_incremental_kernel();
-
-                if (!_bl_samples.empty())
-                    this->_compute_bl_kernel();
-            }
-
-            /// add blacklisted sample and update the GP
-            void add_bl_sample(const Eigen::VectorXd& bl_sample, double noise)
-            {
-                if (_samples.empty() && _bl_samples.empty()) {
-                    _dim_in = bl_sample.size();
-                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-                }
-                else {
-                    assert(bl_sample.size() == _dim_in);
-                }
-
-                _bl_samples.push_back(bl_sample);
-
-                _noises_bl.conservativeResize(_noises_bl.size() + 1);
-                _noises_bl[_noises_bl.size() - 1] = noise;
-                //_noise = noise;
-
-                if (!_samples.empty()) {
-                    this->_compute_bl_kernel();
-                }
             }
 
             /**
@@ -186,16 +147,12 @@ namespace limbo {
 	  		*/
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
-                if (_samples.size() == 0 && _bl_samples.size() == 0)
+                if (_samples.size() == 0)
                     return std::make_tuple(_mean_function(v, *this),
                         _kernel_function(v, v));
 
-                if (_samples.size() == 0)
-                    return std::make_tuple(_mean_function(v, *this),
-                        _sigma(v, _compute_k_bl(v, _compute_k(v))));
-
                 Eigen::VectorXd k = _compute_k(v);
-                return std::make_tuple(_mu(v, k), _sigma(v, _compute_k_bl(v, k)));
+                return std::make_tuple(_mu(v, k), _sigma(v, k));
             }
 
             /**
@@ -217,9 +174,9 @@ namespace limbo {
 	  		*/
             double sigma(const Eigen::VectorXd& v) const
             {
-                if (_samples.size() == 0 && _bl_samples.size() == 0)
+                if (_samples.size() == 0)
                     return _kernel_function(v, v);
-                return _sigma(v, _compute_k_bl(v, _compute_k(v)));
+                return _sigma(v, _compute_k(v));
             }
 
             /// return the number of dimensions of the input
@@ -269,13 +226,6 @@ namespace limbo {
             /// return the number of samples used to compute the GP
             int nb_samples() const { return _samples.size(); }
 
-            /** return the number of blacklisted samples used to compute the GP
-	     \\rst
-	     For the blacklist concept, see the Limbo-specific concept guide.
-	     \\endrst
-	     */
-            int nb_bl_samples() const { return _bl_samples.size(); }
-
             ///  recomputes the GP
             void recompute(bool update_obs_mean = true)
             {
@@ -285,9 +235,6 @@ namespace limbo {
                     this->_compute_obs_mean();
 
                 this->_compute_full_kernel();
-
-                if (!_bl_samples.empty())
-                    this->_compute_bl_kernel();
             }
 
             /// return the likelihood (do not compute it!)
@@ -314,11 +261,9 @@ namespace limbo {
 
             std::vector<Eigen::VectorXd> _samples;
             Eigen::MatrixXd _observations;
-            std::vector<Eigen::VectorXd> _bl_samples; // black listed samples
             Eigen::MatrixXd _mean_vector;
             Eigen::MatrixXd _obs_mean;
 
-            //double _noise;
             Eigen::VectorXd _noises;
             Eigen::VectorXd _noises_bl;
 
@@ -327,10 +272,7 @@ namespace limbo {
 
             Eigen::MatrixXd _kernel;
 
-            // Eigen::MatrixXd _inverted_kernel;
-
             Eigen::MatrixXd _matrixL;
-            Eigen::MatrixXd _inv_bl_kernel;
 
             double _lik;
 
@@ -401,46 +343,6 @@ namespace limbo {
                 triang.adjoint().solveInPlace(_alpha);
             }
 
-            void _compute_bl_kernel()
-            {
-                Eigen::MatrixXd A1 = Eigen::MatrixXd::Identity(this->_samples.size(), this->_samples.size());
-                _matrixL.template triangularView<Eigen::Lower>().solveInPlace(A1);
-                _matrixL.template triangularView<Eigen::Lower>().transpose().solveInPlace(A1);
-
-                _inv_bl_kernel.resize(_samples.size() + _bl_samples.size(),
-                    _samples.size() + _bl_samples.size());
-
-                Eigen::MatrixXd B(_samples.size(), _bl_samples.size());
-                for (size_t i = 0; i < _samples.size(); i++)
-                    for (size_t j = 0; j < _bl_samples.size(); ++j)
-                        B(i, j) = _kernel_function(_samples[i], _bl_samples[j]);
-
-                Eigen::MatrixXd D(_bl_samples.size(), _bl_samples.size());
-                for (size_t i = 0; i < _bl_samples.size(); i++)
-                    for (size_t j = 0; j < _bl_samples.size(); ++j)
-                        D(i, j) = _kernel_function(_bl_samples[i], _bl_samples[j]) + ((i == j) ? _noises_bl[i] : 0);
-
-                Eigen::MatrixXd comA = (D - B.transpose() * A1 * B);
-                Eigen::LLT<Eigen::MatrixXd> llt_bl(comA);
-                Eigen::MatrixXd comA1 = Eigen::MatrixXd::Identity(_bl_samples.size(), _bl_samples.size());
-                llt_bl.matrixL().solveInPlace(comA1);
-                llt_bl.matrixL().transpose().solveInPlace(comA1);
-
-                // fill the matrix block wise
-                _inv_bl_kernel.block(0, 0, _samples.size(), _samples.size()) = A1 + A1 * B * comA1 * B.transpose() * A1;
-                _inv_bl_kernel.block(0, _samples.size(), _samples.size(),
-                    _bl_samples.size())
-                    = -A1 * B * comA1;
-                _inv_bl_kernel.block(_samples.size(), 0, _bl_samples.size(),
-                    _samples.size())
-                    = _inv_bl_kernel.block(0, _samples.size(), _samples.size(),
-                                         _bl_samples.size())
-                          .transpose();
-                _inv_bl_kernel.block(_samples.size(), _samples.size(), _bl_samples.size(),
-                    _bl_samples.size())
-                    = comA1;
-            }
-
             Eigen::VectorXd _mu(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const
             {
                 return (k.transpose() * _alpha) + _mean_function(v, *this).transpose();
@@ -448,14 +350,8 @@ namespace limbo {
 
             double _sigma(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const
             {
-                double res;
-                if (_bl_samples.size() == 0) {
-                    Eigen::VectorXd z = _matrixL.triangularView<Eigen::Lower>().solve(k);
-                    res = _kernel_function(v, v) - z.dot(z);
-                }
-                else {
-                    res = _kernel_function(v, v) - k.transpose() * _inv_bl_kernel * k;
-                }
+                Eigen::VectorXd z = _matrixL.triangularView<Eigen::Lower>().solve(k);
+                double res = _kernel_function(v, v) - z.dot(z);
 
                 return (res <= std::numeric_limits<double>::epsilon()) ? 0 : res;
             }
@@ -466,21 +362,6 @@ namespace limbo {
                 for (int i = 0; i < k.size(); i++)
                     k[i] = _kernel_function(_samples[i], v);
                 return k;
-            }
-
-            Eigen::VectorXd _compute_k_bl(const Eigen::VectorXd& v,
-                const Eigen::VectorXd& k) const
-            {
-                if (_bl_samples.size() == 0) {
-                    return k;
-                }
-
-                Eigen::VectorXd k_bl(_samples.size() + _bl_samples.size());
-
-                k_bl.head(_samples.size()) = k;
-                for (size_t i = 0; i < _bl_samples.size(); i++)
-                    k_bl[i + this->_samples.size()] = this->_kernel_function(_bl_samples[i], v);
-                return k_bl;
             }
         };
     }

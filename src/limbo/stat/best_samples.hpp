@@ -54,7 +54,7 @@ namespace limbo {
         template <typename Params>
         struct BestSamples : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>
-            void operator()(const BO& bo, const AggregatorFunction& afun, bool blacklisted)
+            void operator()(const BO& bo, const AggregatorFunction& afun)
             {
                 if (!bo.stats_enabled() || bo.samples().empty())
                     return;
@@ -64,8 +64,7 @@ namespace limbo {
                 if (bo.total_iterations() == 0)
                     (*this->_log_file) << "#iteration best_sample" << std::endl;
 
-                if (!blacklisted)
-                    (*this->_log_file) << bo.total_iterations() << " " << bo.best_sample(afun).transpose() << std::endl;
+                (*this->_log_file) << bo.total_iterations() << " " << bo.best_sample(afun).transpose() << std::endl;
             }
         };
     }

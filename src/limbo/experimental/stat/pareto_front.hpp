@@ -58,7 +58,7 @@ namespace limbo {
                 typedef std::vector<pareto_point_t> pareto_t;
 
                 template <typename BO, typename AggregatorFunction>
-                void operator()(const BO& bo, const AggregatorFunction&, bool blacklisted)
+                void operator()(const BO& bo, const AggregatorFunction&)
                 {
                     if (!bo.stats_enabled() || bo.observations().empty())
                         return;

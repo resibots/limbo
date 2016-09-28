@@ -31,7 +31,7 @@ def create(bld):
 
     inits = ['NoInit', 'RandomSampling', 'RandomSamplingGrid', 'GridSampling']
     stats = ['Samples', 'Observations', 'AggregatedObservations', 'BestSamples', 'BestObservations', 'BestAggregatedObservations',
-             'BlSamples', 'GPPredictionDifferences', 'GPAcquisitions', 'GPLikelihood']
+             'GPPredictionDifferences', 'GPAcquisitions', 'GPLikelihood']
 
     stops = ['MaxIterations', 'MaxPredictedValue']
 

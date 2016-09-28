@@ -56,7 +56,7 @@ namespace limbo {
         template <typename Params>
         struct GPKernelHParams : public StatBase<Params> {
             template <typename BO, typename AggregatorFunction>
-            void operator()(const BO& bo, const AggregatorFunction& afun, bool blacklisted)
+            void operator()(const BO& bo, const AggregatorFunction& afun)
             {
                 if (!bo.stats_enabled() || bo.observations().empty())
                     return;

@@ -259,39 +259,6 @@ BOOST_AUTO_TEST_CASE(test_gp_no_samples_acqui_opt)
     BOOST_CHECK(test(1) < 1e-5);
 }
 
-BOOST_AUTO_TEST_CASE(test_gp_blacklist)
-{
-    using namespace limbo;
-
-    typedef kernel::MaternFiveHalves<Params> KF_t;
-    typedef mean::Constant<Params> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t> GP_t;
-
-    GP_t gp;
-    std::vector<Eigen::VectorXd> samples = {make_v1(1)};
-    std::vector<Eigen::VectorXd> observations = {make_v1(5)};
-    std::vector<Eigen::VectorXd> bl_samples = {make_v1(2)};
-
-    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
-
-    Eigen::VectorXd prev_mu1, mu1, prev_mu2, mu2;
-    double prev_sigma1, sigma1, prev_sigma2, sigma2;
-
-    std::tie(prev_mu1, prev_sigma1) = gp.query(make_v1(1));
-    std::tie(prev_mu2, prev_sigma2) = gp.query(make_v1(2));
-
-    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()), bl_samples, Eigen::VectorXd::Zero(bl_samples.size()));
-
-    std::tie(mu1, sigma1) = gp.query(make_v1(1));
-    std::tie(mu2, sigma2) = gp.query(make_v1(2));
-
-    BOOST_CHECK(prev_mu1 == mu1);
-    BOOST_CHECK(prev_sigma1 == sigma1);
-    BOOST_CHECK(prev_mu2 == mu2);
-    BOOST_CHECK(prev_sigma2 > sigma2);
-    BOOST_CHECK(sigma2 == 0);
-}
-
 BOOST_AUTO_TEST_CASE(test_gp_auto)
 {
     typedef kernel::SquaredExpARD<Params> KF_t;

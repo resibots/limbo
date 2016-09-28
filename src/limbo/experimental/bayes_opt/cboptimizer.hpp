@@ -155,9 +155,9 @@ namespace limbo {
 
                     if (!this->_observations.empty()) {
                         _split_observations();
-                        _model.compute(this->_samples, _obs[0], Eigen::VectorXd::Constant(_obs[0].size(), Params::cbayes_opt_boptimizer::noise()), this->_bl_samples, Eigen::VectorXd::Constant(this->_bl_samples.size(), Params::cbayes_opt_boptimizer::noise()));
+                        _model.compute(this->_samples, _obs[0], Eigen::VectorXd::Constant(_obs[0].size(), Params::cbayes_opt_boptimizer::noise()));
                         if (_nb_constraints > 0)
-                            _constraint_model.compute(this->_samples, _obs[1], Eigen::VectorXd::Constant(_obs[1].size(), Params::cbayes_opt_boptimizer::noise()), this->_bl_samples, Eigen::VectorXd::Constant(this->_bl_samples.size(), Params::cbayes_opt_boptimizer::noise()));
+                            _constraint_model.compute(this->_samples, _obs[1], Eigen::VectorXd::Constant(_obs[1].size(), Params::cbayes_opt_boptimizer::noise()));
                     }
                     else {
                         _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
@@ -175,20 +175,13 @@ namespace limbo {
                             [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(acqui(x, afun)); };
                         Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in);
                         Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, true);
-                        bool blacklisted = !this->eval_and_add(sfun, new_sample);
+                        this->eval_and_add(sfun, new_sample);
 
-                        this->_update_stats(*this, afun, blacklisted);
+                        this->_update_stats(*this, afun);
 
-                        if (blacklisted) {
-                            _model.add_bl_sample(this->_bl_samples.back(), Params::cbayes_opt_boptimizer::noise());
-                            if (_nb_constraints > 0)
-                                _constraint_model.add_bl_sample(this->_bl_samples.back(), Params::cbayes_opt_boptimizer::noise());
-                        }
-                        else {
-                            _model.add_sample(this->_samples.back(), _obs[0].back(), Params::cbayes_opt_boptimizer::noise());
-                            if (_nb_constraints > 0)
-                                _constraint_model.add_sample(this->_samples.back(), _obs[1].back(), Params::cbayes_opt_boptimizer::noise());
-                        }
+                        _model.add_sample(this->_samples.back(), _obs[0].back(), Params::cbayes_opt_boptimizer::noise());
+                        if (_nb_constraints > 0)
+                            _constraint_model.add_sample(this->_samples.back(), _obs[1].back(), Params::cbayes_opt_boptimizer::noise());
 
                         if (Params::cbayes_opt_boptimizer::hp_period() > 0
                             && (this->_current_iteration + 1) % Params::cbayes_opt_boptimizer::hp_period() == 0) {

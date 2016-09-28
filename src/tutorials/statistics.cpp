@@ -108,7 +108,7 @@ struct Eval {
 template <typename Params>
 struct WorstObservation : public stat::StatBase<Params> {
     template <typename BO, typename AggregatorFunction>
-    void operator()(const BO& bo, const AggregatorFunction& afun, bool blacklisted)
+    void operator()(const BO& bo, const AggregatorFunction& afun)
     {
         // [optional] if statistics have been disabled or if there are no observations, we do not do anything
         if (!bo.stats_enabled() || bo.observations().empty())

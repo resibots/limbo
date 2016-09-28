@@ -20,7 +20,6 @@ Limbo provides a few classes for common uses (see :ref:`statistics-stats` for de
 - ``Samples``: records the position in the search space of the evaluated points [filename: ``samples.dat``]
 - ``BestObservations``: records the best observation after each iteration? [filename ``best_observations.dat``]
 - ``BestSamples``: records the position in the search space of the best observation after each iteration [filename: ``best_samples.dat``]
-- ``BlSamples``: records the candidate solutions that have been blacklisted [filename: ``bl_samples.dat``]
 
 These statistics are for "advanced users":
 
@@ -45,7 +44,7 @@ All the statistics functors follow the same template:
   template <typename Params>
   struct Samples : public limbo::stat::StatBase<Params> {
       template <typename BO, typename AggregatorFunction>
-      void operator()(const BO& bo, const AggregatorFunction&, bool blacklisted)
+      void operator()(const BO& bo, const AggregatorFunction&)
       {
         // code
       }
