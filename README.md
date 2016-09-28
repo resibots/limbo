@@ -28,3 +28,9 @@ Main features
 Scientific articles that use Limbo
 --------------------------------
 Cully, A., Clune, J., Tarapore, D., & Mouret, J. B. (2015). Robots that can adapt like animals. *Nature*, 521(7553), 503-507.
+
+
+Research project that use Limbo
+--------------------------------
+- Resibots. ERC Starting Grant: http://www.resibots.eu/
+- PAL. H2020 EU project: http://www.pal4u.eu/
