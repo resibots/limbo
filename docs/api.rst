@@ -251,7 +251,7 @@ To call an optimizer (e.g. NLOptGrad):
   std::cout <<"Result with LBFGS:\t" << res_lbfgs.transpose()
             << " -> " << my_function(res_lbfgs).first << std::endl;
 
-Not all the algorithms support bounded optimization:
+Not all the algorithms support bounded optimization and/or initial point:
 
 
 +-------------+---------+-------+
@@ -259,14 +259,16 @@ Not all the algorithms support bounded optimization:
 +=============+=========+=======+
 |CMA-ES       | yes     | yes   |
 +-------------+---------+-------+
-| NLOptGrad   | ?       |   ?   |
+| NLOptGrad   |   \*    |  \*   |
 +-------------+---------+-------+
-| NLOptNoGrad | ?       |    ?  |
+| NLOptNoGrad |   \*    |  \*   |
 +-------------+---------+-------+
-|Rprop        | no      | ?     |
+|Rprop        | no      | yes   |
 +-------------+---------+-------+
 |RandomPoint  | yes     | no    |
 +-------------+---------+-------+
+
+\* All NLOpt's global optimizers must have bounds. Check `NLOpt's reference <http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms>`_ to see which algorithms support initial point.
 
 
 Available optimizers
