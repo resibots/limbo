@@ -90,7 +90,7 @@ namespace limbo {
                                   << this->_models[1].mu(best_v) << ")"
                                   << " sigma:" << this->_models[0].sigma(best_v) << " "
                                   << this->_models[1].sigma(best_v) << std::endl;
-                        this->_update_stats(*this, FirstElem(), false);
+                        this->_update_stats(*this, FirstElem());
                         this->_current_iteration++;
                         this->_total_iterations++;
                     }

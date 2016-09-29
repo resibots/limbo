@@ -53,7 +53,7 @@ namespace limbo {
             template <typename F>
             struct ParetoBenchmark {
                 template <typename BO, typename AggregatorFunction>
-                void operator()(BO& opt, const AggregatorFunction& afun, bool blacklisted)
+                void operator()(BO& opt, const AggregatorFunction& afun)
                 {
                     opt.update_pareto_data();
 #ifndef NSBO // this is already done is NSBO

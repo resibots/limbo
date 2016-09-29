@@ -154,7 +154,7 @@ namespace limbo {
 
                         // add sample
                         this->add_new_sample(new_sample, feval(new_sample));
-                        this->_update_stats(*this, FirstElem(), false);
+                        this->_update_stats(*this, FirstElem());
                         this->_current_iteration++;
                         this->_total_iterations++;
                     }

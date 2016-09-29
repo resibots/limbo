@@ -75,7 +75,6 @@ int main()
 
     using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
     using Stat_t = boost::fusion::vector<stat::Samples<Params>,
-        stat::BlSamples<Params>,
         stat::BestObservations<Params>,
         stat::AggregatedObservations<Params>>;
     using Mean_t = mean::Constant<Params>;

@@ -61,7 +61,7 @@ namespace limbo {
             template <typename Params>
             struct HyperVolume : public limbo::stat::StatBase<Params> {
                 template <typename BO, typename AggregatorFunction>
-                void operator()(const BO& bo, const AggregatorFunction&, bool blacklisted)
+                void operator()(const BO& bo, const AggregatorFunction&)
                 {
                     if (bo.observations().empty())
                         return;
