@@ -207,15 +207,25 @@ as a zip.</p>
 brew install boost
 </pre></div>
 </div>
-<p>We highly recommend that you install NLOpt. Infortunately, the Ubuntu packages are missing the C++. You can get NLOpt here: <a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">http://ab-initio.mit.edu/wiki/index.php/NLopt</a></p>
-<div class="highlight-python"><div class="highlight"><pre>wget http://ab-initio.mit.edu/wiki/index.php/NLopt/TODO
-tar zxvf TODO
-cd TODO
- ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
- sudo make install
+<p>We highly recommend that you install NLOpt. Unfortunately, the Ubuntu packages do not provide NLOpt&#8217;s C++ bindings. You can get NLOpt here: <a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">http://ab-initio.mit.edu/wiki/index.php/NLopt</a> [mirror: <a class="reference external" href="http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz">http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz</a>]</p>
+<p>For Ubuntu / Debian:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo apt-get -qq update
+sudo apt-get -qq --yes --force-yes install autoconf automake
+wget http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz
+tar -zxvf nlopt-2.4.2.tar.gz &amp;&amp; cd nlopt-2.4.2
+./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
+sudo make install
+sudo ldconfig
 </pre></div>
 </div>
-<p>For more options and troubleshootings, see the <a class="reference internal" href="compilation.html#compilation-tutorial"><span>Compilation tutorial</span></a>.</p>
+<p>For OSX:</p>
+<div class="highlight-python"><div class="highlight"><pre>wget http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz
+tar -zxvf nlopt-2.4.2.tar.gz &amp;&amp; cd nlopt-2.4.2
+./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
+sudo make install
+</pre></div>
+</div>
+<p>For more options and troubleshooting, see the <a class="reference internal" href="compilation.html#compilation-tutorial"><span>Compilation tutorial</span></a>.</p>
 </div>
 <div class="section" id="compile-limbo">
 <h2>Compile Limbo<a class="headerlink" href="#compile-limbo" title="Permalink to this headline">¶</a></h2>
@@ -223,6 +233,7 @@ cd TODO
 ./waf build
 </pre></div>
 </div>
+<p>For more options and troubleshooting, see the <a class="reference internal" href="compilation.html#compilation-tutorial"><span>Compilation tutorial</span></a>.</p>
 </div>
 <div class="section" id="create-a-new-experiment">
 <h2>Create a new experiment<a class="headerlink" href="#create-a-new-experiment" title="Permalink to this headline">¶</a></h2>
@@ -236,6 +247,18 @@ cd TODO
 <div class="highlight-python"><div class="highlight"><pre>$EDITOR exp/test/test.cpp
 </pre></div>
 </div>
+<p>The part to edit is between line 56 and line 63:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">// YOUR CODE HERE</span>
+  <span class="c1">// ...</span>
+  <span class="c1">// return a 1-dimensional vector</span>
+  <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For more information, see the <a class="reference internal" href="basic_example.html#basic-example"><span>Basic example</span></a>.</p>
 </div>
 <div class="section" id="build-your-experiment">
 <h2>Build your experiment<a class="headerlink" href="#build-your-experiment" title="Permalink to this headline">¶</a></h2>
@@ -251,6 +274,7 @@ cd TODO
 </div>
 <div class="section" id="analyze-the-results">
 <h2>Analyze the results<a class="headerlink" href="#analyze-the-results" title="Permalink to this headline">¶</a></h2>
+<p>The results are in yourcomputer-date-hour-pid. For instance: <code class="docutils literal"><span class="pre">wallepro-perso.loria.fr_2016-09-15_19_43_50_74198</span></code>.</p>
 </div>
 </div>
 

@@ -207,25 +207,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                    <span class="comment">// In theory it&#39;s ok to ignore this error</span></div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                    std::cerr &lt;&lt; <span class="stringliteral">&quot;[NLOptNoGrad]: &quot;</span> &lt;&lt; e.what() &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                }</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="keywordflow">return</span> Eigen::VectorXd::Map(x.data(), x.size());</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            }</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keyword">static</span> <span class="keywordtype">double</span> nlopt_func(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; x, std::vector&lt;double&gt;&amp; <a class="code" href="group__opt__tools.html#gaf28d9af930b2993024ab497b285e0521">grad</a>, <span class="keywordtype">void</span>* my_func_data)</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                F* f = (F*)(my_func_data);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                <span class="keywordtype">double</span> v = <a class="code" href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">eval</a>(*f, params);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                <span class="keywordflow">return</span> v;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            }</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        };</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                <span class="keywordflow">catch</span> (std::runtime_error&amp; e) {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                    <span class="comment">// In theory it&#39;s ok to ignore this error</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                    std::cerr &lt;&lt; <span class="stringliteral">&quot;[NLOptGrad]: &quot;</span> &lt;&lt; e.what() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                <span class="keywordflow">return</span> Eigen::VectorXd::Map(x.data(), x.size());</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <span class="keyword">static</span> <span class="keywordtype">double</span> nlopt_func(<span class="keyword">const</span> std::vector&lt;double&gt;&amp; x, std::vector&lt;double&gt;&amp; <a class="code" href="group__opt__tools.html#gaf28d9af930b2993024ab497b285e0521">grad</a>, <span class="keywordtype">void</span>* my_func_data)</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                F* f = (F*)(my_func_data);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                <span class="keywordtype">double</span> v = <a class="code" href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">eval</a>(*f, params);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                <span class="keywordflow">return</span> v;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        };</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:114</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1opt__nloptnograd_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1opt__nloptnograd.html">limbo::defaults::opt_nloptnograd</a></div><div class="ttdef"><b>Definition:</b> nlopt_no_grad.hpp:62</div></div>
 <div class="ttc" id="optimizer_8hpp_html"><div class="ttname"><a href="optimizer_8hpp.html">optimizer.hpp</a></div></div>
@@ -240,7 +244,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 30 2016 00:00:13 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Oct 1 2016 00:00:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -864,7 +864,7 @@
           <span class="o">&lt;&lt;</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">my_function</span><span class="p">(</span><span class="n">res_lbfgs</span><span class="p">).</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Not all the algorithms support bounded optimization:</p>
+<p>Not all the algorithms support bounded optimization and/or initial point:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="45%" />
@@ -883,16 +883,16 @@
 <td>yes</td>
 </tr>
 <tr class="row-odd"><td>NLOptGrad</td>
-<td>?</td>
-<td>?</td>
+<td>*</td>
+<td>*</td>
 </tr>
 <tr class="row-even"><td>NLOptNoGrad</td>
-<td>?</td>
-<td>?</td>
+<td>*</td>
+<td>*</td>
 </tr>
 <tr class="row-odd"><td>Rprop</td>
 <td>no</td>
-<td>?</td>
+<td>yes</td>
 </tr>
 <tr class="row-even"><td>RandomPoint</td>
 <td>yes</td>
@@ -900,6 +900,7 @@
 </tr>
 </tbody>
 </table>
+<p>* All NLOpt&#8217;s global optimizers must have bounds. Check <a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms">NLOpt&#8217;s reference</a> to see which algorithms support initial point.</p>
 </div>
 <div class="section" id="available-optimizers">
 <h3>Available optimizers<a class="headerlink" href="#available-optimizers" title="Permalink to this headline">¶</a></h3>
