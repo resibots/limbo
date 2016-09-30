@@ -23,7 +23,7 @@ For OSX with brew:
   brew install eigen3
   brew install boost
 
-We highly recommend that you install NLOpt. Infortunately, the Ubuntu packages are missing the C++. You can get NLOpt here: http://ab-initio.mit.edu/wiki/index.php/NLopt [mirror: http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz]
+We highly recommend that you install NLOpt. Unfortunately, the Ubuntu packages do not provide NLOpt's C++ bindings. You can get NLOpt here: http://ab-initio.mit.edu/wiki/index.php/NLopt [mirror: http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz]
 
 For Ubuntu / Debian:
 ::
@@ -45,7 +45,7 @@ For OSX:
   sudo make install
 
 
-For more options and troubleshootings, see the :ref:`Compilation tutorial <compilation-tutorial>`.
+For more options and troubleshooting, see the :ref:`Compilation tutorial <compilation-tutorial>`.
 
 Compile Limbo
 -----------------
@@ -55,7 +55,7 @@ Compile Limbo
   ./waf configure
   ./waf build
 
-For more options and troubleshootings, see the :ref:`Compilation tutorial <compilation-tutorial>`.
+For more options and troubleshooting, see the :ref:`Compilation tutorial <compilation-tutorial>`.
 
 
 Create a new experiment
