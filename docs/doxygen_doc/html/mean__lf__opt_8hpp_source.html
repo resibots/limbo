@@ -153,8 +153,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    this-&gt;_called = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    MeanLFOptimization&lt;GP&gt; optimization(gp);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    Optimizer optimizer;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    <span class="keyword">auto</span> params = optimizer(optimization, (gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().h_params().array() + 6.0) / 7.0, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().set_h_params(-6.0 + params.array() * 7.0);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    <span class="keyword">auto</span> params = optimizer(optimization, gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().h_params(), <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().set_h_params(params);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a4dfc1807eb4f113191dbd3ae51c053ee">set_lik</a>(<a class="code" href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">opt::eval</a>(optimization, params));</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a55ea6fe353a12d4c788fac5f2e20e416">recompute</a>(<span class="keyword">true</span>);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                }</div>
@@ -168,7 +168,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <a class="code" href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">opt::eval_t</a> <a class="code" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; params, <span class="keywordtype">bool</span> compute_grad)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">                    </span>{</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        <a class="code" href="classlimbo_1_1model_1_1_g_p.html">GP</a> gp(this-&gt;_original_gp);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        gp.mean_function().set_h_params(-6.0 + params.array() * 7.0);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        gp.mean_function().set_h_params(params);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        gp.recompute(<span class="keyword">true</span>);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
@@ -228,7 +228,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 5 2016 00:00:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 6 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
