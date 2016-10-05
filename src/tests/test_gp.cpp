@@ -44,6 +44,7 @@
 //|
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE test_gp
+#define protected public
 
 #include <boost/test/unit_test.hpp>
 
@@ -53,12 +54,37 @@
 #include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
+#include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
+#include <limbo/model/gp/kernel_mean_lf_opt.hpp>
+#include <limbo/model/gp/mean_lf_opt.hpp>
 #include <limbo/opt/grid_search.hpp>
 #include <limbo/tools/macros.hpp>
 
 using namespace limbo;
+
+// Check gradient via finite differences method
+template <typename F>
+std::tuple<double, Eigen::VectorXd, Eigen::VectorXd> check_grad(const F& f, const Eigen::VectorXd& x, double e = 1e-4)
+{
+    Eigen::VectorXd analytic_result, finite_diff_result;
+
+    opt::eval_t res = f(x, true);
+    analytic_result = opt::grad(res);
+
+    finite_diff_result = Eigen::VectorXd::Zero(x.size());
+    for (int j = 0; j < x.size(); j++) {
+        Eigen::VectorXd test1 = x, test2 = x;
+        test1[j] -= e;
+        test2[j] += e;
+        double res1 = opt::fun(f(test1, false));
+        double res2 = opt::fun(f(test2, false));
+        finite_diff_result[j] = (res2 - res1) / (2.0 * e);
+    }
+
+    return std::make_tuple((analytic_result - finite_diff_result).norm(), analytic_result, finite_diff_result);
+}
 
 Eigen::VectorXd make_v1(double x)
 {
@@ -96,6 +122,68 @@ struct Params {
     struct opt_gridsearch : public defaults::opt_gridsearch {
     };
 };
+
+BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
+{
+    using namespace limbo;
+
+    typedef kernel::SquaredExpARD<Params> KF_t;
+    typedef mean::FunctionARD<Params, mean::Constant<Params>> Mean_t;
+    typedef model::GP<Params, KF_t, Mean_t> GP_t;
+
+    GP_t gp(4, 2);
+
+    std::vector<Eigen::VectorXd> observations, samples, test_samples, test_samples_mean, test_samples_kernel_mean;
+    double e = 1e-4;
+
+    // Random samples and test samples
+    int N = 40, M = 10;
+
+    for (size_t i = 0; i < N; i++) {
+        samples.push_back(tools::random_vector(4));
+        observations.push_back(tools::random_vector(2));
+    }
+
+    for (size_t i = 0; i < M; i++) {
+        test_samples.push_back(tools::random_vector(4));
+        test_samples_mean.push_back(tools::random_vector(6));
+        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4));
+    }
+
+    gp.compute(samples, observations, Eigen::VectorXd::Ones(samples.size()) * 0.01);
+
+    model::gp::KernelLFOpt<Params>::KernelLFOptimization<GP_t> kernel_optimization(gp);
+
+    Eigen::VectorXd results(M);
+
+    for (size_t i = 0; i < M; i++) {
+        auto res = check_grad(kernel_optimization, test_samples[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+
+    model::gp::KernelMeanLFOpt<Params>::KernelMeanLFOptimization<GP_t> kernel_mean_optimization(gp);
+
+    for (size_t i = 0; i < M; i++) {
+        auto res = check_grad(kernel_mean_optimization, test_samples_kernel_mean[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+
+    model::gp::MeanLFOpt<Params>::MeanLFOptimization<GP_t> mean_optimization(gp);
+
+    for (size_t i = 0; i < M; i++) {
+        auto res = check_grad(mean_optimization, test_samples_mean[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+}
 
 BOOST_AUTO_TEST_CASE(test_gp_dim)
 {
