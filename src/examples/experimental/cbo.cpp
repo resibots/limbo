@@ -1,7 +1,7 @@
 #include <limbo/limbo.hpp>
 
 #include <limbo/experimental/bayes_opt/cboptimizer.hpp>
-#include <limbo/experimental/acqui/cei.hpp>
+#include <limbo/experimental/acqui/eci.hpp>
 
 using namespace limbo;
 
@@ -25,7 +25,7 @@ struct Params {
         BO_PARAM(int, iterations, 100);
     };
 
-    struct acqui_cei : public defaults::acqui_cei {
+    struct acqui_eci : public defaults::acqui_eci {
     };
 
     struct mean_constant {
@@ -82,7 +82,7 @@ int main()
     using GP_t = model::GP<Params, Kernel_t, Mean_t>;
     using Constrained_GP_t = model::GP<Params, Kernel_t, Mean_t>;
 
-    using Acqui_t = experimental::acqui::CEI<Params, GP_t, Constrained_GP_t>;
+    using Acqui_t = experimental::acqui::ECI<Params, GP_t, Constrained_GP_t>;
     using Init_t = init::RandomSampling<Params>;
 
     experimental::bayes_opt::CBOptimizer<Params,

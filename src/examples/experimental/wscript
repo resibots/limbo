@@ -80,8 +80,8 @@ def build(bld):
                       defines = 'NSBO',
                       use = 'limbo')
     obj = bld.program(features = 'cxx',
-                      source = 'constrained_ei.cpp',
+                      source = 'cbo.cpp',
                       includes = '.. ../.. ../../../',
-                      target = 'constrained_ei',
+                      target = 'cbo',
                       uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
                       use = 'limbo')
