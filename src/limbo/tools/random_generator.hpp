@@ -104,13 +104,36 @@ namespace limbo {
         ///
         /// - this function is thread safe because the random number generator we use is thread-safe
         /// - we use a C++11 random number generator
-        Eigen::VectorXd random_vector(int size)
+        Eigen::VectorXd random_vector_bounded(int size)
         {
             static rgen_double_t rgen(0.0, 1.0);
             Eigen::VectorXd res(size);
             for (int i = 0; i < size; ++i)
                 res[i] = rgen.rand();
             return res;
+        }
+
+        /// @ingroup tools
+        /// random vector in R
+        ///
+        /// - this function is thread safe because the random number generator we use is thread-safe
+        /// - we use a C++11 random number generator
+        Eigen::VectorXd random_vector_unbounded(int size)
+        {
+            static rgen_double_t rgen(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::max());
+            Eigen::VectorXd res(size);
+            for (int i = 0; i < size; ++i)
+                res[i] = rgen.rand();
+            return res;
+        }
+
+        /// @ingroup tools
+        /// random vector wrapper for both bounded and unbounded versions
+        Eigen::VectorXd random_vector(int size, bool bounded = true)
+        {
+            if (bounded)
+                return random_vector_bounded(size);
+            return random_vector_unbounded(size);
         }
     }
 }
