@@ -84,6 +84,9 @@ namespace limbo {
             opt::eval_t operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun, bool gradient) const
             {
                 assert(!gradient);
+                static int nb_samples = -1;
+                static double f_max = 0.0;
+
                 Eigen::VectorXd mu;
                 double sigma_sq;
                 std::tie(mu, sigma_sq) = _model.query(v);
@@ -94,12 +97,16 @@ namespace limbo {
                     return opt::no_grad(0.0);
 
                 // Compute EI(x)
-                // First find the best so far (predicted) observation
-                std::vector<double> rewards;
-                for (auto s : _model.samples()) {
-                    rewards.push_back(afun(_model.mu(s)));
+                // First find the best so far (predicted) observation -- if needed
+                if (nb_samples != _model.nb_samples()) {
+                    std::vector<double> rewards;
+                    for (auto s : _model.samples()) {
+                        rewards.push_back(afun(_model.mu(s)));
+                    }
+
+                    nb_samples = _model.nb_samples();
+                    f_max = *std::max_element(rewards.begin(), rewards.end());
                 }
-                double f_max = *std::max_element(rewards.begin(), rewards.end());
                 // Calculate Z and \Phi(Z) and \phi(Z)
                 double X = afun(mu) - f_max - Params::acqui_ei::jitter();
                 double Z = X / sigma;
