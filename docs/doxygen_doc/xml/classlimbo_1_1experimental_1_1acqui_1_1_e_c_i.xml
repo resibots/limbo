@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i" kind="class" language="C++" prot="public">
+    <compoundname>limbo::experimental::acqui::ECI</compoundname>
+    <includes refid="eci_8hpp" local="no">limbo/experimental/acqui/eci.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+      <param>
+        <type>typename Model</type>
+      </param>
+      <param>
+        <type>typename ConstraintModel</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1aaee76bea9d081b975fb3f97487d52818" prot="private" static="no" mutable="no">
+        <type>const Model &amp;</type>
+        <definition>const Model&amp; limbo::experimental::acqui::ECI&lt; Params, Model, ConstraintModel &gt;::_model</definition>
+        <argsstring></argsstring>
+        <name>_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" line="104" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a92cdc1ca38529fb162923a8be6dbf2a2" prot="private" static="no" mutable="no">
+        <type>const ConstraintModel &amp;</type>
+        <definition>const ConstraintModel&amp; limbo::experimental::acqui::ECI&lt; Params, Model, ConstraintModel &gt;::_constraint_model</definition>
+        <argsstring></argsstring>
+        <name>_constraint_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" line="105" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a96864d920ef5f6206a033407eda297a7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::experimental::acqui::ECI&lt; Params, Model, ConstraintModel &gt;::ECI</definition>
+        <argsstring>(const Model &amp;model, const ConstraintModel &amp;constraint_model, int iteration=0)</argsstring>
+        <name>ECI</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const ConstraintModel &amp;</type>
+          <declname>constraint_model</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iteration</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" line="67" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" bodystart="67" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a5ed54a0381396ba52665decfdfdb9fe3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::experimental::acqui::ECI&lt; Params, Model, ConstraintModel &gt;::dim_in</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_in</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" line="70" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1ab3ac302f62852bcd2167534de92a15fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::experimental::acqui::ECI&lt; Params, Model, ConstraintModel &gt;::dim_out</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_out</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" line="72" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1abd4322f84039e546bc0b9f803f3f97cc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double limbo::experimental::acqui::ECI&lt; Params, Model, ConstraintModel &gt;::operator()</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" line="75" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" bodystart="75" bodyend="101"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a0bd9d41ca572e681e9e5e0734ca6128b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename AggregatorFunction</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double limbo::experimental::acqui::ECI&lt; Params, Model, ConstraintModel &gt;::_pf</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </argsstring>
+        <name>_pf</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const AggregatorFunction &amp;</type>
+          <declname>afun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" line="108" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" bodystart="108" bodyend="122"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" line="65" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp" bodystart="65" bodyend="123"/>
+    <listofallmembers>
+      <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a92cdc1ca38529fb162923a8be6dbf2a2" prot="private" virt="non-virtual"><scope>limbo::experimental::acqui::ECI</scope><name>_constraint_model</name></member>
+      <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1aaee76bea9d081b975fb3f97487d52818" prot="private" virt="non-virtual"><scope>limbo::experimental::acqui::ECI</scope><name>_model</name></member>
+      <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a0bd9d41ca572e681e9e5e0734ca6128b" prot="private" virt="non-virtual"><scope>limbo::experimental::acqui::ECI</scope><name>_pf</name></member>
+      <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a5ed54a0381396ba52665decfdfdb9fe3" prot="public" virt="non-virtual"><scope>limbo::experimental::acqui::ECI</scope><name>dim_in</name></member>
+      <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1ab3ac302f62852bcd2167534de92a15fd" prot="public" virt="non-virtual"><scope>limbo::experimental::acqui::ECI</scope><name>dim_out</name></member>
+      <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a96864d920ef5f6206a033407eda297a7" prot="public" virt="non-virtual"><scope>limbo::experimental::acqui::ECI</scope><name>ECI</name></member>
+      <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1abd4322f84039e546bc0b9f803f3f97cc" prot="public" virt="non-virtual"><scope>limbo::experimental::acqui::ECI</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

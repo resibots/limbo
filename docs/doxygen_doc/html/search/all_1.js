@@ -2,8 +2,8 @@ var searchData=
 [
   ['acqui',['Acqui',['../group__acqui.html',1,'']]],
   ['acqui_2ehpp',['acqui.hpp',['../acqui_8hpp.html',1,'']]],
-  ['acqui_5fcei',['acqui_cei',['../structlimbo_1_1defaults_1_1acqui__cei.html',1,'limbo::defaults']]],
   ['acqui_5fdefaults',['Acqui_defaults',['../group__acqui__defaults.html',1,'']]],
+  ['acqui_5feci',['acqui_eci',['../structlimbo_1_1defaults_1_1acqui__eci.html',1,'limbo::defaults']]],
   ['acqui_5fei',['acqui_ei',['../structlimbo_1_1defaults_1_1acqui__ei.html',1,'limbo::defaults']]],
   ['acqui_5fgpucb',['acqui_gpucb',['../structlimbo_1_1defaults_1_1acqui__gpucb.html',1,'limbo::defaults']]],
   ['acqui_5foptimizer_5ft',['acqui_optimizer_t',['../classlimbo_1_1bayes__opt_1_1_b_optimizer.html#a18dc1b593c859b8f89450a31f80fb592',1,'limbo::bayes_opt::BOptimizer::acqui_optimizer_t()'],['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html#afc949eca6b8ea7a84b5e0b38e8c17a4d',1,'limbo::experimental::bayes_opt::CBOptimizer::acqui_optimizer_t()'],['../classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a73568ce8f21582499102ca29a8ccbc68',1,'limbo::experimental::bayes_opt::Ehvi::acqui_optimizer_t()']]],

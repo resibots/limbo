@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.9.1"/>
-<title>Limbo: /tmp/doc_limbo/limbo/src/limbo/experimental/acqui/cei.hpp Source File</title>
+<title>Limbo: /tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,10 +88,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">cei.hpp</div>  </div>
+<div class="title">eci.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="cei_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//| Copyright Inria May 2015</span></div>
+<a href="eci_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//| Copyright Inria May 2015</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//| This project has received funding from the European Research Council (ERC) under</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//| the European Union&#39;s Horizon 2020 research and innovation programme (grant</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//| agreement No 637972) - see http://www.resibots.eu</span></div>
@@ -135,8 +135,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//| The fact that you are presently reading this means that you have had</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//| knowledge of the CeCILL-C license and that you accept its terms.</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifndef LIMBO_ACQUI_CEI_HPP</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define LIMBO_ACQUI_CEI_HPP</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifndef LIMBO_ACQUI_ECI_HPP</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define LIMBO_ACQUI_ECI_HPP</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
@@ -146,25 +146,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">namespace </span>defaults {</div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1acqui__cei.html">   56</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1acqui__cei.html">acqui_cei</a> {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <a class="code" href="group__acqui__defaults.html#ga89ae5d0534c26df145a7d65eb7da7643">BO_PARAM</a>(<span class="keywordtype">double</span>, jitter, 0.0);</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1acqui__eci.html">   56</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1acqui__eci.html">acqui_eci</a> {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <a class="code" href="group__acqui__defaults.html#ga810b64e9658f27a5cf32463957599b69">BO_PARAM</a>(<span class="keywordtype">double</span>, jitter, 0.0);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        };</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
 <div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1experimental.html">   62</a></span>&#160;    <span class="keyword">namespace </span>experimental {</div>
 <div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1experimental_1_1acqui.html">   63</a></span>&#160;        <span class="keyword">namespace </span>acqui {</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params, <span class="keyword">typename</span> Model, <span class="keyword">typename</span> Constra<span class="keywordtype">int</span>Model&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html">   65</a></span>&#160;            <span class="keyword">class </span><a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html">CEI</a> {</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html">   65</a></span>&#160;            <span class="keyword">class </span><a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html">ECI</a> {</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a5418a21dc4d1d98b6099799d84e48486">   67</a></span>&#160;                <a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a5418a21dc4d1d98b6099799d84e48486">CEI</a>(<span class="keyword">const</span> Model&amp; model, <span class="keyword">const</span> ConstraintModel&amp; constraint_model, <span class="keywordtype">int</span> iteration = 0)</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#a96864d920ef5f6206a033407eda297a7">   67</a></span>&#160;                <a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#a96864d920ef5f6206a033407eda297a7">ECI</a>(<span class="keyword">const</span> Model&amp; model, <span class="keyword">const</span> ConstraintModel&amp; constraint_model, <span class="keywordtype">int</span> iteration = 0)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    : _model(model), _constraint_model(constraint_model) {}</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a096fc8105829ffc2d4fffc8df7dead01">   70</a></span>&#160;                <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a096fc8105829ffc2d4fffc8df7dead01">dim_in</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model.dim_in(); }</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#a5ed54a0381396ba52665decfdfdb9fe3">   70</a></span>&#160;                <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#a5ed54a0381396ba52665decfdfdb9fe3">dim_in</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model.dim_in(); }</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#aa82f5ffd825faa8df476d46f58fb9e48">   72</a></span>&#160;                <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#aa82f5ffd825faa8df476d46f58fb9e48">dim_out</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model.dim_out(); }</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#ab3ac302f62852bcd2167534de92a15fd">   72</a></span>&#160;                <span class="keywordtype">size_t</span> <a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#ab3ac302f62852bcd2167534de92a15fd">dim_out</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _model.dim_out(); }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> AggregatorFunction&gt;</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a225353e2dad5fdbdc172a951fe317c61">   75</a></span>&#160;                <span class="keywordtype">double</span> <a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a225353e2dad5fdbdc172a951fe317c61">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> AggregatorFunction&amp; afun)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#abd4322f84039e546bc0b9f803f3f97cc">   75</a></span>&#160;                <span class="keywordtype">double</span> <a class="code" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#abd4322f84039e546bc0b9f803f3f97cc">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; v, <span class="keyword">const</span> AggregatorFunction&amp; afun)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">                </span>{</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    Eigen::VectorXd mu;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    <span class="keywordtype">double</span> sigma_sq;</div>
@@ -175,7 +175,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keywordflow">if</span> (sigma &lt; 1e-10 || _model.samples().size() &lt; 1)</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        <span class="keywordflow">return</span> 0.0;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <span class="comment">// Compute constrained EI(x)</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <span class="comment">// Compute expected constrained improvement</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="comment">// First find the best (predicted) observation so far</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    <span class="comment">// (We are zeroing infeasible samples subject to the constraint value)</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    std::vector&lt;double&gt; rewards;</div>
@@ -184,7 +184,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    <span class="keywordtype">double</span> f_max = *std::max_element(rewards.begin(), rewards.end());</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    <span class="comment">// Calculate Z and \Phi(Z) and \phi(Z)</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    <span class="keywordtype">double</span> X = afun(mu) - f_max - Params::acqui_cei::jitter();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    <span class="keywordtype">double</span> X = afun(mu) - f_max - Params::acqui_eci::jitter();</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="keywordtype">double</span> Z = X / sigma;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    <span class="keywordtype">double</span> phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    <span class="keywordtype">double</span> Phi = 0.5 * std::erfc(-Z / std::sqrt(2));</div>
@@ -218,19 +218,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="group__acqui__defaults_html_ga89ae5d0534c26df145a7d65eb7da7643"><div class="ttname"><a href="group__acqui__defaults.html#ga89ae5d0534c26df145a7d65eb7da7643">limbo::defaults::acqui_cei::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, jitter, 0.0)</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_html_a5418a21dc4d1d98b6099799d84e48486"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a5418a21dc4d1d98b6099799d84e48486">limbo::experimental::acqui::CEI::CEI</a></div><div class="ttdeci">CEI(const Model &amp;model, const ConstraintModel &amp;constraint_model, int iteration=0)</div><div class="ttdef"><b>Definition:</b> cei.hpp:67</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_html_aa82f5ffd825faa8df476d46f58fb9e48"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#aa82f5ffd825faa8df476d46f58fb9e48">limbo::experimental::acqui::CEI::dim_out</a></div><div class="ttdeci">size_t dim_out() const </div><div class="ttdef"><b>Definition:</b> cei.hpp:72</div></div>
-<div class="ttc" id="structlimbo_1_1defaults_1_1acqui__cei_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1acqui__cei.html">limbo::defaults::acqui_cei</a></div><div class="ttdef"><b>Definition:</b> cei.hpp:56</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_html_a5ed54a0381396ba52665decfdfdb9fe3"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#a5ed54a0381396ba52665decfdfdb9fe3">limbo::experimental::acqui::ECI::dim_in</a></div><div class="ttdeci">size_t dim_in() const </div><div class="ttdef"><b>Definition:</b> eci.hpp:70</div></div>
+<div class="ttc" id="group__acqui__defaults_html_ga810b64e9658f27a5cf32463957599b69"><div class="ttname"><a href="group__acqui__defaults.html#ga810b64e9658f27a5cf32463957599b69">limbo::defaults::acqui_eci::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, jitter, 0.0)</div></div>
+<div class="ttc" id="structlimbo_1_1defaults_1_1acqui__eci_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1acqui__eci.html">limbo::defaults::acqui_eci</a></div><div class="ttdef"><b>Definition:</b> eci.hpp:56</div></div>
 <div class="ttc" id="macros_8hpp_html"><div class="ttname"><a href="macros_8hpp.html">macros.hpp</a></div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_html_a225353e2dad5fdbdc172a951fe317c61"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a225353e2dad5fdbdc172a951fe317c61">limbo::experimental::acqui::CEI::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </div><div class="ttdef"><b>Definition:</b> cei.hpp:75</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html">limbo::experimental::acqui::CEI</a></div><div class="ttdef"><b>Definition:</b> cei.hpp:65</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_html_a096fc8105829ffc2d4fffc8df7dead01"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i.html#a096fc8105829ffc2d4fffc8df7dead01">limbo::experimental::acqui::CEI::dim_in</a></div><div class="ttdeci">size_t dim_in() const </div><div class="ttdef"><b>Definition:</b> cei.hpp:70</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_html_a96864d920ef5f6206a033407eda297a7"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#a96864d920ef5f6206a033407eda297a7">limbo::experimental::acqui::ECI::ECI</a></div><div class="ttdeci">ECI(const Model &amp;model, const ConstraintModel &amp;constraint_model, int iteration=0)</div><div class="ttdef"><b>Definition:</b> eci.hpp:67</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_html_ab3ac302f62852bcd2167534de92a15fd"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#ab3ac302f62852bcd2167534de92a15fd">limbo::experimental::acqui::ECI::dim_out</a></div><div class="ttdeci">size_t dim_out() const </div><div class="ttdef"><b>Definition:</b> eci.hpp:72</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html">limbo::experimental::acqui::ECI</a></div><div class="ttdef"><b>Definition:</b> eci.hpp:65</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_html_abd4322f84039e546bc0b9f803f3f97cc"><div class="ttname"><a href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#abd4322f84039e546bc0b9f803f3f97cc">limbo::experimental::acqui::ECI::operator()</a></div><div class="ttdeci">double operator()(const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </div><div class="ttdef"><b>Definition:</b> eci.hpp:75</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 6 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 7 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

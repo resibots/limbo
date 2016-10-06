@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.9.1">
-  <compound refid="structlimbo_1_1defaults_1_1acqui__cei" kind="struct"><name>limbo::defaults::acqui_cei</name>
-    <member refid="group__acqui__defaults_1ga89ae5d0534c26df145a7d65eb7da7643" kind="function"><name>BO_PARAM</name></member>
+  <compound refid="structlimbo_1_1defaults_1_1acqui__eci" kind="struct"><name>limbo::defaults::acqui_eci</name>
+    <member refid="group__acqui__defaults_1ga810b64e9658f27a5cf32463957599b69" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="structlimbo_1_1defaults_1_1acqui__ei" kind="struct"><name>limbo::defaults::acqui_ei</name>
     <member refid="group__acqui__defaults_1gab43e714d9a9df7e92d6ff205e1d3edc9" kind="function"><name>BO_PARAM</name></member>
@@ -140,15 +140,6 @@
     <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a9fcc21a2c65822ba08f3f60532d42395" kind="function"><name>_feasible_observations</name></member>
     <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1aeee59e9645c791e84b3307eb75f69806" kind="function"><name>_split_observations</name></member>
   </compound>
-  <compound refid="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i" kind="class"><name>limbo::experimental::acqui::CEI</name>
-    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_1ad0fd5d436de356497ea8b293a47326a6" kind="variable"><name>_model</name></member>
-    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_1aaf7242d80a4d628c465a1a2de25ea01f" kind="variable"><name>_constraint_model</name></member>
-    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_1a5418a21dc4d1d98b6099799d84e48486" kind="function"><name>CEI</name></member>
-    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_1a096fc8105829ffc2d4fffc8df7dead01" kind="function"><name>dim_in</name></member>
-    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_1aa82f5ffd825faa8df476d46f58fb9e48" kind="function"><name>dim_out</name></member>
-    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_1a225353e2dad5fdbdc172a951fe317c61" kind="function"><name>operator()</name></member>
-    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_c_e_i_1a46ac29655e345933e15b920e4d261f78" kind="function"><name>_pf</name></member>
-  </compound>
   <compound refid="structlimbo_1_1stop_1_1_chain_criteria" kind="struct"><name>limbo::stop::ChainCriteria</name>
     <member refid="structlimbo_1_1stop_1_1_chain_criteria_1a2b3c7f6d2309ff6dd4e67fb28302a7e4" kind="typedef"><name>result_type</name></member>
     <member refid="structlimbo_1_1stop_1_1_chain_criteria_1a9dbfa0c4cb0718605852674da9a2762b" kind="variable"><name>_bo</name></member>
@@ -209,6 +200,15 @@
   </compound>
   <compound refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults" kind="struct"><name>limbo::bayes_opt::BOptimizer::defaults</name>
     <member refid="structlimbo_1_1bayes__opt_1_1_b_optimizer_1_1defaults_1af714505103b93f5a2028030a192cc955" kind="typedef"><name>acquiopt_t</name></member>
+  </compound>
+  <compound refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i" kind="class"><name>limbo::experimental::acqui::ECI</name>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1aaee76bea9d081b975fb3f97487d52818" kind="variable"><name>_model</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a92cdc1ca38529fb162923a8be6dbf2a2" kind="variable"><name>_constraint_model</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a96864d920ef5f6206a033407eda297a7" kind="function"><name>ECI</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a5ed54a0381396ba52665decfdfdb9fe3" kind="function"><name>dim_in</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1ab3ac302f62852bcd2167534de92a15fd" kind="function"><name>dim_out</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1abd4322f84039e546bc0b9f803f3f97cc" kind="function"><name>operator()</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a0bd9d41ca572e681e9e5e0734ca6128b" kind="function"><name>_pf</name></member>
   </compound>
   <compound refid="classlimbo_1_1acqui_1_1_ehvi" kind="class"><name>limbo::acqui::Ehvi</name>
     <member refid="classlimbo_1_1acqui_1_1_ehvi_1add82bbffb6b0748f68e933540150560a" kind="variable"><name>_models</name></member>
@@ -760,7 +760,7 @@
   </compound>
   <compound refid="boptimizer_8hpp" kind="file"><name>boptimizer.hpp</name>
   </compound>
-  <compound refid="cei_8hpp" kind="file"><name>cei.hpp</name>
+  <compound refid="eci_8hpp" kind="file"><name>eci.hpp</name>
   </compound>
   <compound refid="acqui_2ehvi_8hpp" kind="file"><name>ehvi.hpp</name>
   </compound>
@@ -927,7 +927,7 @@
     <member refid="group__acqui__defaults_1gab43e714d9a9df7e92d6ff205e1d3edc9" kind="function"><name>BO_PARAM</name></member>
     <member refid="group__acqui__defaults_1gace8b040a747dae17257aff4ab679bf5d" kind="function"><name>BO_PARAM</name></member>
     <member refid="group__acqui__defaults_1ga1f72be83648befc624f5468668e5728a" kind="function"><name>BO_PARAM</name></member>
-    <member refid="group__acqui__defaults_1ga89ae5d0534c26df145a7d65eb7da7643" kind="function"><name>BO_PARAM</name></member>
+    <member refid="group__acqui__defaults_1ga810b64e9658f27a5cf32463957599b69" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="group__init" kind="group"><name>init</name>
   </compound>

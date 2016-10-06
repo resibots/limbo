@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['eci',['ECI',['../classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#a96864d920ef5f6206a033407eda297a7',1,'limbo::experimental::acqui::ECI']]],
   ['ehvi',['Ehvi',['../classlimbo_1_1acqui_1_1_ehvi.html#a9868f015ef640e9406022b027a0d7683',1,'limbo::acqui::Ehvi']]],
   ['ei',['EI',['../classlimbo_1_1acqui_1_1_e_i.html#aa1e8c3ae70c75d10adf188e0c260a03a',1,'limbo::acqui::EI']]],
   ['ell',['ell',['../structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aad6902b522c4fdd9b5c5799a0c440c40',1,'limbo::kernel::SquaredExpARD']]],

@@ -5,6 +5,10 @@ kernel_maternthreehalves
 - double sigma_sq = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]
 - double l = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]
 
+acqui_eci
+^^^^^^^^^
+- double jitter = 0.0 [defined in src/limbo/experimental/acqui/eci.hpp]
+
 bayes_opt_bobase
 ^^^^^^^^^^^^^^^^
 - bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]
@@ -17,10 +21,6 @@ init_randomsamplinggrid
 ^^^^^^^^^^^^^^^^^^^^^^^
 - int bins = 5 [defined in src/limbo/init/random_sampling_grid.hpp]
 - int samples = 10 [defined in src/limbo/init/random_sampling_grid.hpp]
-
-acqui_cei
-^^^^^^^^^
-- double jitter = 0.0 [defined in src/limbo/experimental/acqui/cei.hpp]
 
 cbayes_opt_boptimizer
 ^^^^^^^^^^^^^^^^^^^^^

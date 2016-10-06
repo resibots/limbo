@@ -1,0 +1,59 @@
+\hypertarget{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i}{}\section{limbo\+:\+:experimental\+:\+:acqui\+:\+:E\+C\+I$<$ Params, Model, Constraint\+Model $>$ Class Template Reference}
+\label{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i}\index{limbo\+::experimental\+::acqui\+::\+E\+C\+I$<$ Params, Model, Constraint\+Model $>$@{limbo\+::experimental\+::acqui\+::\+E\+C\+I$<$ Params, Model, Constraint\+Model $>$}}
+
+
+{\ttfamily \#include $<$limbo/experimental/acqui/eci.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_a96864d920ef5f6206a033407eda297a7}{E\+C\+I} (const Model \&model, const Constraint\+Model \&constraint\+\_\+model, int iteration=0)
+\item 
+size\+\_\+t \hyperlink{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_a5ed54a0381396ba52665decfdfdb9fe3}{dim\+\_\+in} () const 
+\item 
+size\+\_\+t \hyperlink{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_ab3ac302f62852bcd2167534de92a15fd}{dim\+\_\+out} () const 
+\item 
+{\footnotesize template$<$typename Aggregator\+Function $>$ }\\double \hyperlink{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_abd4322f84039e546bc0b9f803f3f97cc}{operator()} (const Eigen\+::\+Vector\+Xd \&v, const Aggregator\+Function \&afun) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_a96864d920ef5f6206a033407eda297a7}{}\index{limbo\+::experimental\+::acqui\+::\+E\+C\+I@{limbo\+::experimental\+::acqui\+::\+E\+C\+I}!E\+C\+I@{E\+C\+I}}
+\index{E\+C\+I@{E\+C\+I}!limbo\+::experimental\+::acqui\+::\+E\+C\+I@{limbo\+::experimental\+::acqui\+::\+E\+C\+I}}
+\subsubsection[{E\+C\+I}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model , typename Constraint\+Model $>$ {\bf limbo\+::experimental\+::acqui\+::\+E\+C\+I}$<$ Params, Model, Constraint\+Model $>$\+::{\bf E\+C\+I} (
+\begin{DoxyParamCaption}
+\item[{const Model \&}]{model, }
+\item[{const Constraint\+Model \&}]{constraint\+\_\+model, }
+\item[{int}]{iteration = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_a96864d920ef5f6206a033407eda297a7}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_a5ed54a0381396ba52665decfdfdb9fe3}{}\index{limbo\+::experimental\+::acqui\+::\+E\+C\+I@{limbo\+::experimental\+::acqui\+::\+E\+C\+I}!dim\+\_\+in@{dim\+\_\+in}}
+\index{dim\+\_\+in@{dim\+\_\+in}!limbo\+::experimental\+::acqui\+::\+E\+C\+I@{limbo\+::experimental\+::acqui\+::\+E\+C\+I}}
+\subsubsection[{dim\+\_\+in}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model , typename Constraint\+Model $>$ size\+\_\+t {\bf limbo\+::experimental\+::acqui\+::\+E\+C\+I}$<$ Params, Model, Constraint\+Model $>$\+::dim\+\_\+in (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_a5ed54a0381396ba52665decfdfdb9fe3}
+\hypertarget{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_ab3ac302f62852bcd2167534de92a15fd}{}\index{limbo\+::experimental\+::acqui\+::\+E\+C\+I@{limbo\+::experimental\+::acqui\+::\+E\+C\+I}!dim\+\_\+out@{dim\+\_\+out}}
+\index{dim\+\_\+out@{dim\+\_\+out}!limbo\+::experimental\+::acqui\+::\+E\+C\+I@{limbo\+::experimental\+::acqui\+::\+E\+C\+I}}
+\subsubsection[{dim\+\_\+out}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model , typename Constraint\+Model $>$ size\+\_\+t {\bf limbo\+::experimental\+::acqui\+::\+E\+C\+I}$<$ Params, Model, Constraint\+Model $>$\+::dim\+\_\+out (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_ab3ac302f62852bcd2167534de92a15fd}
+\hypertarget{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_abd4322f84039e546bc0b9f803f3f97cc}{}\index{limbo\+::experimental\+::acqui\+::\+E\+C\+I@{limbo\+::experimental\+::acqui\+::\+E\+C\+I}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::experimental\+::acqui\+::\+E\+C\+I@{limbo\+::experimental\+::acqui\+::\+E\+C\+I}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model , typename Constraint\+Model $>$ template$<$typename Aggregator\+Function $>$ double {\bf limbo\+::experimental\+::acqui\+::\+E\+C\+I}$<$ Params, Model, Constraint\+Model $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v, }
+\item[{const Aggregator\+Function \&}]{afun}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_abd4322f84039e546bc0b9f803f3f97cc}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/experimental/acqui/\hyperlink{eci_8hpp}{eci.\+hpp}\end{DoxyCompactItemize}
