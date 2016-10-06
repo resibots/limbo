@@ -204,7 +204,7 @@ BOOST_AUTO_TEST_CASE(test_bo_unbounded)
     typedef kernel::Exp<Params> Kernel_t;
     typedef opt::Cmaes<Parameters> AcquiOpt_t;
     typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
-    typedef mean::Data<Params> Mean_t;
+    typedef mean::NullFunction<Params> Mean_t;
     typedef boost::fusion::vector<stat::ConsoleSummary<Params>> Stat_t;
     typedef init::RandomSampling<Params> Init_t;
     typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
