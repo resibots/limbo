@@ -42,8 +42,8 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_ACQUI_CEI_HPP
-#define LIMBO_ACQUI_CEI_HPP
+#ifndef LIMBO_ACQUI_ECI_HPP
+#define LIMBO_ACQUI_ECI_HPP
 
 #include <cmath>
 #include <vector>
@@ -53,7 +53,7 @@
 
 namespace limbo {
     namespace defaults {
-        struct acqui_cei {
+        struct acqui_eci {
             /// @ingroup acqui_defaults
             BO_PARAM(double, jitter, 0.0);
         };
@@ -62,9 +62,9 @@ namespace limbo {
     namespace experimental {
         namespace acqui {
             template <typename Params, typename Model, typename ConstraintModel>
-            class CEI {
+            class ECI {
             public:
-                CEI(const Model& model, const ConstraintModel& constraint_model, int iteration = 0)
+                ECI(const Model& model, const ConstraintModel& constraint_model, int iteration = 0)
                     : _model(model), _constraint_model(constraint_model) {}
 
                 size_t dim_in() const { return _model.dim_in(); }
@@ -83,7 +83,7 @@ namespace limbo {
                     if (sigma < 1e-10 || _model.samples().size() < 1)
                         return 0.0;
 
-                    // Compute constrained EI(x)
+                    // Compute expected constrained improvement
                     // First find the best (predicted) observation so far
                     // (We are zeroing infeasible samples subject to the constraint value)
                     std::vector<double> rewards;
@@ -92,7 +92,7 @@ namespace limbo {
 
                     double f_max = *std::max_element(rewards.begin(), rewards.end());
                     // Calculate Z and \Phi(Z) and \phi(Z)
-                    double X = afun(mu) - f_max - Params::acqui_cei::jitter();
+                    double X = afun(mu) - f_max - Params::acqui_eci::jitter();
                     double Z = X / sigma;
                     double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);
                     double Phi = 0.5 * std::erfc(-Z / std::sqrt(2));
