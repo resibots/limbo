@@ -66,9 +66,10 @@
 
 namespace limbo {
     namespace defaults {
-        struct cbayes_opt_boptimizer {
+        struct bayes_opt_cboptimizer {
             BO_PARAM(double, noise, 1e-6);
             BO_PARAM(int, hp_period, -1);
+            BO_PARAM(bool, bounded, true);
         };
     }
 
@@ -155,9 +156,9 @@ namespace limbo {
 
                     if (!this->_observations.empty()) {
                         _split_observations();
-                        _model.compute(this->_samples, _obs[0], Eigen::VectorXd::Constant(_obs[0].size(), Params::cbayes_opt_boptimizer::noise()));
+                        _model.compute(this->_samples, _obs[0], Eigen::VectorXd::Constant(_obs[0].size(), Params::bayes_opt_cboptimizer::noise()));
                         if (_nb_constraints > 0)
-                            _constraint_model.compute(this->_samples, _obs[1], Eigen::VectorXd::Constant(_obs[1].size(), Params::cbayes_opt_boptimizer::noise()));
+                            _constraint_model.compute(this->_samples, _obs[1], Eigen::VectorXd::Constant(_obs[1].size(), Params::bayes_opt_cboptimizer::noise()));
                     }
                     else {
                         _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
@@ -170,21 +171,20 @@ namespace limbo {
                     while (!this->_stop(*this, afun)) {
                         acquisition_function_t acqui(_model, _constraint_model, this->_current_iteration);
 
-                        // we do not have gradient in our current acquisition function
                         auto acqui_optimization =
-                            [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(acqui(x, afun)); };
-                        Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in);
-                        Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, true);
+                            [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun,g); };
+                        Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in, Params::bayes_opt_cboptimizer::bounded());
+                        Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, Params::bayes_opt_cboptimizer::bounded());
                         this->eval_and_add(sfun, new_sample);
 
                         this->_update_stats(*this, afun);
 
-                        _model.add_sample(this->_samples.back(), _obs[0].back(), Params::cbayes_opt_boptimizer::noise());
+                        _model.add_sample(this->_samples.back(), _obs[0].back(), Params::bayes_opt_cboptimizer::noise());
                         if (_nb_constraints > 0)
-                            _constraint_model.add_sample(this->_samples.back(), _obs[1].back(), Params::cbayes_opt_boptimizer::noise());
+                            _constraint_model.add_sample(this->_samples.back(), _obs[1].back(), Params::bayes_opt_cboptimizer::noise());
 
-                        if (Params::cbayes_opt_boptimizer::hp_period() > 0
-                            && (this->_current_iteration + 1) % Params::cbayes_opt_boptimizer::hp_period() == 0) {
+                        if (Params::bayes_opt_cboptimizer::hp_period() > 0
+                            && (this->_current_iteration + 1) % Params::bayes_opt_cboptimizer::hp_period() == 0) {
                             _model.optimize_hyperparams();
                             if (_nb_constraints > 0)
                                 _constraint_model.optimize_hyperparams();
