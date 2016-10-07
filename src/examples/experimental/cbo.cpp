@@ -6,7 +6,7 @@
 using namespace limbo;
 
 struct Params {
-    struct cbayes_opt_boptimizer : public defaults::cbayes_opt_boptimizer {
+    struct bayes_opt_cboptimizer : public defaults::bayes_opt_cboptimizer {
         BO_PARAM(double, noise, 0.01);
     };
 
