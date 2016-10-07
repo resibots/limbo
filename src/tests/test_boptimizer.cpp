@@ -106,8 +106,8 @@ BO_DECLARE_DYN_PARAM(int, Params::bayes_opt_boptimizer, hp_period);
 
 template <typename Params, int obs_size = 1>
 struct eval2 {
-    BOOST_STATIC_CONSTEXPR int dim_in = 2;
-    BOOST_STATIC_CONSTEXPR int dim_out = obs_size;
+    static constexpr int dim_in = 2;
+    static constexpr int dim_out = obs_size;
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -122,8 +122,8 @@ struct eval2 {
 
 template <typename Params, int obs_size = 1>
 struct eval1 {
-    BOOST_STATIC_CONSTEXPR int dim_in = 1;
-    BOOST_STATIC_CONSTEXPR int dim_out = obs_size;
+    static constexpr int dim_in = 1;
+    static constexpr int dim_out = obs_size;
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -139,8 +139,8 @@ struct eval1 {
 #ifdef USE_LIBCMAES
 template <typename Params, int obs_size = 1>
 struct eval_bounded {
-    BOOST_STATIC_CONSTEXPR int dim_in = 1;
-    BOOST_STATIC_CONSTEXPR int dim_out = obs_size;
+    static constexpr int dim_in = 1;
+    static constexpr int dim_out = obs_size;
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
