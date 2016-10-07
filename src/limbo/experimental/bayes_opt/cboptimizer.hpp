@@ -255,7 +255,7 @@ namespace limbo {
                     _obs.resize(2);
 
                     for (size_t i = 0; i < this->_observations.size(); ++i) {
-                        assert(this->_observations[i].size() == _dim_out + _nb_constraints);
+                        assert(size_t(this->_observations[i].size()) == _dim_out + _nb_constraints);
 
                         Eigen::VectorXd vec_obj(_dim_out);
                         for (size_t j = 0; j < _dim_out; ++j)
@@ -264,7 +264,7 @@ namespace limbo {
 
                         if (_nb_constraints > 0) {
                             Eigen::VectorXd vec_con(_nb_constraints);
-                            for (size_t j = _dim_out, ind = 0; j < this->_observations[i].size(); ++j, ++ind)
+                            for (int j = _dim_out, ind = 0; j < this->_observations[i].size(); ++j, ++ind)
                                 vec_con(ind) = this->_observations[i](j);
                             _obs[1].push_back(vec_con);
                         }

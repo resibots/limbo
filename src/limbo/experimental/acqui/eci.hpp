@@ -65,14 +65,14 @@ namespace limbo {
             class ECI {
             public:
                 ECI(const Model& model, const ConstraintModel& constraint_model, int iteration = 0)
-                    : _model(model), _constraint_model(constraint_model) {}
+                    : _model(model), _constraint_model(constraint_model), _nb_samples(-1) {}
 
                 size_t dim_in() const { return _model.dim_in(); }
 
                 size_t dim_out() const { return _model.dim_out(); }
 
                 template <typename AggregatorFunction>
-                double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
+                double operator()(const Eigen::VectorXd& v, const AggregatorFunction& afun)
                 {
                     Eigen::VectorXd mu;
                     double sigma_sq;
@@ -84,15 +84,18 @@ namespace limbo {
                         return 0.0;
 
                     // Compute expected constrained improvement
-                    // First find the best (predicted) observation so far
-                    // (We are zeroing infeasible samples subject to the constraint value)
-                    std::vector<double> rewards;
-                    for (auto s : _model.samples())
-                        rewards.push_back(afun(_model.mu(s)));
+                    // First find the best (predicted) observation so far -- if needed
+                    if (_nb_samples != _model.nb_samples()) {
+                        std::vector<double> rewards;
+                        for (auto s : _model.samples()) {
+                            rewards.push_back(afun(_model.mu(s)));
+                        }
 
-                    double f_max = *std::max_element(rewards.begin(), rewards.end());
+                        _nb_samples = _model.nb_samples();
+                        _f_max = *std::max_element(rewards.begin(), rewards.end());
+                    }
                     // Calculate Z and \Phi(Z) and \phi(Z)
-                    double X = afun(mu) - f_max - Params::acqui_eci::jitter();
+                    double X = afun(mu) - _f_max - Params::acqui_eci::jitter();
                     double Z = X / sigma;
                     double phi = std::exp(-0.5 * std::pow(Z, 2.0)) / std::sqrt(2.0 * M_PI);
                     double Phi = 0.5 * std::erfc(-Z / std::sqrt(2));
@@ -103,6 +106,8 @@ namespace limbo {
             protected:
                 const Model& _model;
                 const ConstraintModel& _constraint_model;
+                int _nb_samples;
+                double _f_max;
 
                 template <typename AggregatorFunction>
                 double _pf(const Eigen::VectorXd& v, const AggregatorFunction& afun) const
