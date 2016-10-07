@@ -69,6 +69,7 @@ namespace limbo {
         struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 1e-6);
             BO_PARAM(int, hp_period, -1);
+            BO_PARAM(bool, bounded, true);
         };
     }
 
@@ -153,8 +154,8 @@ namespace limbo {
 
                     auto acqui_optimization =
                         [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun,g); };
-                    Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in);
-                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, true);
+                    Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in, Params::bayes_opt_boptimizer::bounded());
+                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, Params::bayes_opt_boptimizer::bounded());
                     this->eval_and_add(sfun, new_sample);
 
                     this->_update_stats(*this, afun);

@@ -91,7 +91,7 @@ struct Params {
     };
 
     struct acqui_ei {
-        BO_PARAM(double, jitter, 0.0);
+        BO_PARAM(double, jitter, 0.001);
     };
 
     struct init_randomsampling {
@@ -136,6 +136,19 @@ struct eval1 {
     }
 };
 
+#ifdef USE_LIBCMAES
+template <typename Params, int obs_size = 1>
+struct eval_bounded {
+    BOOST_STATIC_CONSTEXPR int dim_in = 1;
+    BOOST_STATIC_CONSTEXPR int dim_out = obs_size;
+
+    Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
+    {
+        return tools::make_vector(-std::pow(x(0) - 2.5, 2.0));
+    }
+};
+#endif
+
 BOOST_AUTO_TEST_CASE(test_bo_inheritance)
 {
     using namespace limbo;
@@ -167,6 +180,42 @@ BOOST_AUTO_TEST_CASE(test_bo_inheritance)
 
     BOOST_CHECK(opt.total_iterations() == 1);
 }
+
+#ifdef USE_LIBCMAES
+BOOST_AUTO_TEST_CASE(test_bo_unbounded)
+{
+    using namespace limbo;
+
+    struct Parameters {
+        struct bayes_opt_bobase {
+            BO_PARAM(bool, stats_enabled, false);
+        };
+
+        struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
+            BO_PARAM(double, noise, 0.0);
+            BO_PARAM(int, hp_period, -1);
+            BO_PARAM(bool, bounded, false);
+        };
+
+        struct opt_cmaes : public defaults::opt_cmaes {
+        };
+    };
+
+    typedef kernel::Exp<Params> Kernel_t;
+    typedef opt::Cmaes<Parameters> AcquiOpt_t;
+    typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
+    typedef mean::NullFunction<Params> Mean_t;
+    typedef boost::fusion::vector<stat::ConsoleSummary<Params>> Stat_t;
+    typedef init::RandomSampling<Params> Init_t;
+    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
+    typedef acqui::UCB<Params, GP_t> Acqui_t;
+
+    bayes_opt::BOptimizer<Parameters, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
+    opt.optimize(eval_bounded<Params>());
+
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 2.5, 10);
+}
+#endif
 
 BOOST_AUTO_TEST_CASE(test_bo_gp)
 {
