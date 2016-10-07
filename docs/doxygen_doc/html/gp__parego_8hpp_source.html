@@ -187,7 +187,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                std::vector&lt;Eigen::VectorXd&gt; _raw_observations;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                std::vector&lt;Eigen::VectorXd&gt; _scalarize_obs(<span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; observations)</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    Eigen::VectorXd lambda = <a class="code" href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">tools::random_vector</a>(_nb_objs);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    Eigen::VectorXd lambda = <a class="code" href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">tools::random_vector</a>(_nb_objs);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    <span class="keywordtype">double</span> sum = lambda.sum();</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    lambda = lambda / sum;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                    <span class="comment">// scalarize (Tchebycheff)</span></div>
@@ -207,6 +207,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structlimbo_1_1experimental_1_1defaults_1_1model__gp__parego_html_ad284d6ed4055b749d2257383a66159f7"><div class="ttname"><a href="structlimbo_1_1experimental_1_1defaults_1_1model__gp__parego.html#ad284d6ed4055b749d2257383a66159f7">limbo::experimental::defaults::model_gp_parego::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, rho, 0.05)</div></div>
+<div class="ttc" id="group__tools_html_ga4db74517a1dead8a92f2f1482de106b8"><div class="ttname"><a href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size, bool bounded=true)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:132</div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_ae361cd8b8831e4364774dfdd05937617"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617">limbo::experimental::model::GPParego::compute</a></div><div class="ttdeci">void compute(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:82</div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_ac351d6798add22da5c6dd58ac4a00723"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ac351d6798add22da5c6dd58ac4a00723">limbo::experimental::model::GPParego::GPParego</a></div><div class="ttdeci">GPParego()</div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:80</div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_a81955696f79b4ac11a17d0faf28ccc31"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">limbo::experimental::model::GPParego::add_sample</a></div><div class="ttdeci">void add_sample(const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation, double noise)</div><div class="ttdoc">add sample will NOT be incremental (we call compute each time) </div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:91</div></div>
@@ -216,11 +217,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html">limbo::experimental::model::GPParego</a></div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:78</div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
 <div class="ttc" id="classlimbo_1_1experimental_1_1model_1_1_g_p_parego_html_a1f0eb578140f01874b13bfca124c085c"><div class="ttname"><a href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a1f0eb578140f01874b13bfca124c085c">limbo::experimental::model::GPParego::GPParego</a></div><div class="ttdeci">GPParego(int dim_in, int dim_out)</div><div class="ttdef"><b>Definition:</b> gp_parego.hpp:81</div></div>
-<div class="ttc" id="group__tools_html_ga2a64df3120a3ecd84e62640fb43722d0"><div class="ttname"><a href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:107</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 7 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Oct 8 2016 00:00:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

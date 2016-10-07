@@ -202,11 +202,11 @@
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/tools/math.hpp" line="110" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/math.hpp" bodystart="110" bodyend="116"/>
       </memberdef>
-      <memberdef kind="function" id="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group__tools_1ga15dc04885b7309c7ca794db2429fb3f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Eigen::VectorXd</type>
-        <definition>Eigen::VectorXd limbo::tools::random_vector</definition>
+        <definition>Eigen::VectorXd limbo::tools::random_vector_bounded</definition>
         <argsstring>(int size)</argsstring>
-        <name>random_vector</name>
+        <name>random_vector_bounded</name>
         <param>
           <type>int</type>
           <declname>size</declname>
@@ -220,6 +220,47 @@
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="107" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="107" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="group__tools_1ga0f1d777d8e14733853ffc5df7068246f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::tools::random_vector_unbounded</definition>
+        <argsstring>(int size)</argsstring>
+        <name>random_vector_unbounded</name>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>random vector in R</para><para><itemizedlist>
+<listitem><para>this function is thread safe because the random number generator we use is thread-safe</para></listitem><listitem><para>we use a C++11 random number generator </para></listitem></itemizedlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="121" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="121" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="group__tools_1ga4db74517a1dead8a92f2f1482de106b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::tools::random_vector</definition>
+        <argsstring>(int size, bool bounded=true)</argsstring>
+        <name>random_vector</name>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bounded</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>random vector wrapper for both bounded and unbounded versions </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="132" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="132" bodyend="137"/>
       </memberdef>
       <memberdef kind="function" id="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>

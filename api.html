@@ -1922,14 +1922,31 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N5limbo5tools13random_vectorEi">
-<span id="limbo::tools::random_vector__i"></span><span class="target" id="limbogroup__tools_1ga2a64df3120a3ecd84e62640fb43722d0"></span>Eigen::VectorXd <code class="descname">random_vector</code><span class="sig-paren">(</span>int <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools13random_vectorEi" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N5limbo5tools21random_vector_boundedEi">
+<span id="limbo::tools::random_vector_bounded__i"></span><span class="target" id="limbogroup__tools_1ga15dc04885b7309c7ca794db2429fb3f2"></span>Eigen::VectorXd <code class="descname">random_vector_bounded</code><span class="sig-paren">(</span>int <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools21random_vector_boundedEi" title="Permalink to this definition">¶</a></dt>
 <dd><p>random vector in [0, 1]</p>
 <p><ul class="simple">
 <li>this function is thread safe because the random number generator we use is thread-safe</li>
 <li>we use a C++11 random number generator </li>
 </ul>
 </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5tools23random_vector_unboundedEi">
+<span id="limbo::tools::random_vector_unbounded__i"></span><span class="target" id="limbogroup__tools_1ga0f1d777d8e14733853ffc5df7068246f"></span>Eigen::VectorXd <code class="descname">random_vector_unbounded</code><span class="sig-paren">(</span>int <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools23random_vector_unboundedEi" title="Permalink to this definition">¶</a></dt>
+<dd><p>random vector in R</p>
+<p><ul class="simple">
+<li>this function is thread safe because the random number generator we use is thread-safe</li>
+<li>we use a C++11 random number generator </li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5tools13random_vectorEib">
+<span id="limbo::tools::random_vector__i.b"></span><span class="target" id="limbogroup__tools_1ga4db74517a1dead8a92f2f1482de106b8"></span>Eigen::VectorXd <code class="descname">random_vector</code><span class="sig-paren">(</span>int <em>size</em>, bool <em>bounded</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools13random_vectorEib" title="Permalink to this definition">¶</a></dt>
+<dd><p>random vector wrapper for both bounded and unbounded versions </p>
 </dd></dl>
 
 <dl class="function">

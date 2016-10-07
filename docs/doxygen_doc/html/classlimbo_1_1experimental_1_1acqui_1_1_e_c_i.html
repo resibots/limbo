@@ -107,9 +107,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5ed54a0381396ba52665decfdfdb9fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3ac302f62852bcd2167534de92a15fd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#ab3ac302f62852bcd2167534de92a15fd">dim_out</a> () const </td></tr>
 <tr class="separator:ab3ac302f62852bcd2167534de92a15fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd4322f84039e546bc0b9f803f3f97cc"><td class="memTemplParams" colspan="2">template&lt;typename AggregatorFunction &gt; </td></tr>
-<tr class="memitem:abd4322f84039e546bc0b9f803f3f97cc"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#abd4322f84039e546bc0b9f803f3f97cc">operator()</a> (const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun) const </td></tr>
-<tr class="separator:abd4322f84039e546bc0b9f803f3f97cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c257b46c1b79322a00706a882867f05"><td class="memTemplParams" colspan="2">template&lt;typename AggregatorFunction &gt; </td></tr>
+<tr class="memitem:a9c257b46c1b79322a00706a882867f05"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">opt::eval_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html#a9c257b46c1b79322a00706a882867f05">operator()</a> (const Eigen::VectorXd &amp;v, const AggregatorFunction &amp;afun, bool gradient)</td></tr>
+<tr class="separator:a9c257b46c1b79322a00706a882867f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a96864d920ef5f6206a033407eda297a7"></a>
@@ -205,7 +205,7 @@ template&lt;typename Params , typename Model , typename ConstraintModel &gt; </d
 
 </div>
 </div>
-<a class="anchor" id="abd4322f84039e546bc0b9f803f3f97cc"></a>
+<a class="anchor" id="a9c257b46c1b79322a00706a882867f05"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -217,7 +217,7 @@ template&lt;typename AggregatorFunction &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html">limbo::experimental::acqui::ECI</a>&lt; Params, Model, ConstraintModel &gt;::operator() </td>
+          <td class="memname"><a class="el" href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">opt::eval_t</a> <a class="el" href="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i.html">limbo::experimental::acqui::ECI</a>&lt; Params, Model, ConstraintModel &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
           <td class="paramname"><em>v</em>, </td>
@@ -226,12 +226,18 @@ template&lt;typename AggregatorFunction &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const AggregatorFunction &amp;&#160;</td>
-          <td class="paramname"><em>afun</em>&#160;</td>
+          <td class="paramname"><em>afun</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>gradient</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -249,7 +255,7 @@ template&lt;typename AggregatorFunction &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 7 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Oct 8 2016 00:00:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

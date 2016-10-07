@@ -36,6 +36,12 @@
   <compound refid="structlimbo_1_1defaults_1_1bayes__opt__boptimizer" kind="struct"><name>limbo::defaults::bayes_opt_boptimizer</name>
     <member refid="structlimbo_1_1defaults_1_1bayes__opt__boptimizer_1a20e662092603c59dc5f72bdda49c19a2" kind="function"><name>BO_PARAM</name></member>
     <member refid="structlimbo_1_1defaults_1_1bayes__opt__boptimizer_1a7b2948599ccf1621d0dd96c21eda0d2a" kind="function"><name>BO_PARAM</name></member>
+    <member refid="structlimbo_1_1defaults_1_1bayes__opt__boptimizer_1a5e6acd5775a32725227f95def196e5bd" kind="function"><name>BO_PARAM</name></member>
+  </compound>
+  <compound refid="structlimbo_1_1defaults_1_1bayes__opt__cboptimizer" kind="struct"><name>limbo::defaults::bayes_opt_cboptimizer</name>
+    <member refid="structlimbo_1_1defaults_1_1bayes__opt__cboptimizer_1a67222ae866c135cc8246bbcae0977fd7" kind="function"><name>BO_PARAM</name></member>
+    <member refid="structlimbo_1_1defaults_1_1bayes__opt__cboptimizer_1aba51e361b3c731a9e98bdea8907c0668" kind="function"><name>BO_PARAM</name></member>
+    <member refid="structlimbo_1_1defaults_1_1bayes__opt__cboptimizer_1ab416ec0728f1c4d825200dde1908bcd2" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="structlimbo_1_1defaults_1_1bayes__opt__ehvi" kind="struct"><name>limbo::defaults::bayes_opt_ehvi</name>
     <member refid="structlimbo_1_1defaults_1_1bayes__opt__ehvi_1a1cb97e82bdc2c50e649cdff5f7869efc" kind="function"><name>BO_PARAM</name></member>
@@ -116,10 +122,6 @@
     <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1aac35dbb6504e5a1b7d5fc9252c5e6a51" kind="function"><name>best_observation</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1ad3a19271e9d00827648f83b0dccc66b0" kind="function"><name>best_sample</name></member>
     <member refid="classlimbo_1_1bayes__opt_1_1_b_optimizer_1a1f338242d56d6a2b97245ca3bcaf991f" kind="function"><name>model</name></member>
-  </compound>
-  <compound refid="structlimbo_1_1defaults_1_1cbayes__opt__boptimizer" kind="struct"><name>limbo::defaults::cbayes_opt_boptimizer</name>
-    <member refid="structlimbo_1_1defaults_1_1cbayes__opt__boptimizer_1aa1e5222bd5f1ce84a66d49c46a1e4e3d" kind="function"><name>BO_PARAM</name></member>
-    <member refid="structlimbo_1_1defaults_1_1cbayes__opt__boptimizer_1a36dc33153ce6d9cbae73dd908911955a" kind="function"><name>BO_PARAM</name></member>
   </compound>
   <compound refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer" kind="class"><name>limbo::experimental::bayes_opt::CBOptimizer</name>
     <member refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a52bd94f4487175ef317b4d35149ac3c9" kind="typedef"><name>base_t</name></member>
@@ -204,10 +206,12 @@
   <compound refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i" kind="class"><name>limbo::experimental::acqui::ECI</name>
     <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1aaee76bea9d081b975fb3f97487d52818" kind="variable"><name>_model</name></member>
     <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a92cdc1ca38529fb162923a8be6dbf2a2" kind="variable"><name>_constraint_model</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a6ade1bb652bf39b7a831d9309989172e" kind="variable"><name>_nb_samples</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1ab313a94d6202291bde2262f28e38ab94" kind="variable"><name>_f_max</name></member>
     <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a96864d920ef5f6206a033407eda297a7" kind="function"><name>ECI</name></member>
     <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a5ed54a0381396ba52665decfdfdb9fe3" kind="function"><name>dim_in</name></member>
     <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1ab3ac302f62852bcd2167534de92a15fd" kind="function"><name>dim_out</name></member>
-    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1abd4322f84039e546bc0b9f803f3f97cc" kind="function"><name>operator()</name></member>
+    <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a9c257b46c1b79322a00706a882867f05" kind="function"><name>operator()</name></member>
     <member refid="classlimbo_1_1experimental_1_1acqui_1_1_e_c_i_1a0bd9d41ca572e681e9e5e0734ca6128b" kind="function"><name>_pf</name></member>
   </compound>
   <compound refid="classlimbo_1_1acqui_1_1_ehvi" kind="class"><name>limbo::acqui::Ehvi</name>
@@ -228,10 +232,12 @@
   </compound>
   <compound refid="classlimbo_1_1acqui_1_1_e_i" kind="class"><name>limbo::acqui::EI</name>
     <member refid="classlimbo_1_1acqui_1_1_e_i_1ae23eaf02f04050a2bb22573e2bc09e23" kind="variable"><name>_model</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_e_i_1a1096435da9accee0ab92bebfb4513b61" kind="variable"><name>_nb_samples</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_e_i_1a03ee5690f13e7fcbf26aac19b2dccd94" kind="variable"><name>_f_max</name></member>
     <member refid="classlimbo_1_1acqui_1_1_e_i_1aa1e8c3ae70c75d10adf188e0c260a03a" kind="function"><name>EI</name></member>
     <member refid="classlimbo_1_1acqui_1_1_e_i_1a52d965602aa60609e3f4f447dbea285b" kind="function"><name>dim_in</name></member>
     <member refid="classlimbo_1_1acqui_1_1_e_i_1a7b030343c6dae9af80853cfab0868e8d" kind="function"><name>dim_out</name></member>
-    <member refid="classlimbo_1_1acqui_1_1_e_i_1a0ed3ce84deb35f7f00e5550f7ce502fc" kind="function"><name>operator()</name></member>
+    <member refid="classlimbo_1_1acqui_1_1_e_i_1a02e0c42197cd45d6b6bb1dc9c91af06d" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classlimbo_1_1_evaluation_error" kind="class"><name>limbo::EvaluationError</name>
   </compound>
@@ -710,7 +716,9 @@
     <member refid="group__tools_1ga156cca8d927600da93054c952247857b" kind="function"><name>signum</name></member>
     <member refid="group__tools_1gabcb0caa2ffabd42fa865c9ab0b624681" kind="function"><name>is_nan_or_inf</name></member>
     <member refid="group__tools_1gaf4ca69df04108670f0cc61e4a8ae7367" kind="function"><name>is_nan_or_inf</name></member>
-    <member refid="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" kind="function"><name>random_vector</name></member>
+    <member refid="group__tools_1ga15dc04885b7309c7ca794db2429fb3f2" kind="function"><name>random_vector_bounded</name></member>
+    <member refid="group__tools_1ga0f1d777d8e14733853ffc5df7068246f" kind="function"><name>random_vector_unbounded</name></member>
+    <member refid="group__tools_1ga4db74517a1dead8a92f2f1482de106b8" kind="function"><name>random_vector</name></member>
     <member refid="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" kind="function"><name>date</name></member>
     <member refid="group__tools_1ga4810ffa502d791d6ad750739a953f56f" kind="function"><name>hostname</name></member>
     <member refid="group__tools_1ga4ee13d198367d07cabd37316e671db09" kind="function"><name>getpid</name></member>
@@ -1003,7 +1011,9 @@
     <member refid="group__tools_1ga156cca8d927600da93054c952247857b" kind="function"><name>signum</name></member>
     <member refid="group__tools_1gabcb0caa2ffabd42fa865c9ab0b624681" kind="function"><name>is_nan_or_inf</name></member>
     <member refid="group__tools_1gaf4ca69df04108670f0cc61e4a8ae7367" kind="function"><name>is_nan_or_inf</name></member>
-    <member refid="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" kind="function"><name>random_vector</name></member>
+    <member refid="group__tools_1ga15dc04885b7309c7ca794db2429fb3f2" kind="function"><name>random_vector_bounded</name></member>
+    <member refid="group__tools_1ga0f1d777d8e14733853ffc5df7068246f" kind="function"><name>random_vector_unbounded</name></member>
+    <member refid="group__tools_1ga4db74517a1dead8a92f2f1482de106b8" kind="function"><name>random_vector</name></member>
     <member refid="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" kind="function"><name>date</name></member>
     <member refid="group__tools_1ga4810ffa502d791d6ad750739a953f56f" kind="function"><name>hostname</name></member>
     <member refid="group__tools_1ga4ee13d198367d07cabd37316e671db09" kind="function"><name>getpid</name></member>

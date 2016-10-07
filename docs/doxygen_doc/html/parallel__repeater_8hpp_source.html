@@ -163,7 +163,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <span class="keyword">typedef</span> std::pair&lt;Eigen::VectorXd, double&gt; pair_t;</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keyword">auto</span> body = [&amp;](<span class="keywordtype">int</span> i) {</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    <span class="comment">// clang-format off</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    Eigen::VectorXd r_init = <a class="code" href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">tools::random_vector</a>(init.size());</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    Eigen::VectorXd r_init = <a class="code" href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">tools::random_vector</a>(init.size());</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    Eigen::VectorXd v = Optimizer()(f, <a class="code" href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">init</a>, bounded);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keywordtype">double</span> lik = <a class="code" href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">opt::eval</a>(f, v);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    <span class="keywordflow">return</span> std::make_pair(v, lik);</div>
@@ -188,6 +188,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:114</div></div>
 <div class="ttc" id="optimizer_8hpp_html"><div class="ttname"><a href="optimizer_8hpp.html">optimizer.hpp</a></div></div>
+<div class="ttc" id="group__tools_html_ga4db74517a1dead8a92f2f1482de106b8"><div class="ttname"><a href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size, bool bounded=true)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:132</div></div>
 <div class="ttc" id="parallel_8hpp_html"><div class="ttname"><a href="parallel_8hpp.html">parallel.hpp</a></div></div>
 <div class="ttc" id="structlimbo_1_1opt_1_1_parallel_repeater_html"><div class="ttname"><a href="structlimbo_1_1opt_1_1_parallel_repeater.html">limbo::opt::ParallelRepeater</a></div><div class="ttdef"><b>Definition:</b> parallel_repeater.hpp:73</div></div>
 <div class="ttc" id="group__opt__defaults_html_ga4dfaebabf04a129cbb565807ed31f2de"><div class="ttname"><a href="group__opt__defaults.html#ga4dfaebabf04a129cbb565807ed31f2de">limbo::defaults::opt_parallelrepeater::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(int, repeats, 10)</div></div>
@@ -198,11 +199,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="group__par__tools_html_gaf3fdc36fc4e94ad4cac72c803234b6ac"><div class="ttname"><a href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">limbo::tools::par::max</a></div><div class="ttdeci">T max(const T &amp;init, int num_steps, const F &amp;f, const C &amp;comp)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:152</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1opt__parallelrepeater_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1opt__parallelrepeater.html">limbo::defaults::opt_parallelrepeater</a></div><div class="ttdef"><b>Definition:</b> parallel_repeater.hpp:59</div></div>
 <div class="ttc" id="structlimbo_1_1opt_1_1_parallel_repeater_html_ac50bb2fc1525495c2025f0ff1c0cb021"><div class="ttname"><a href="structlimbo_1_1opt_1_1_parallel_repeater.html#ac50bb2fc1525495c2025f0ff1c0cb021">limbo::opt::ParallelRepeater::operator()</a></div><div class="ttdeci">Eigen::VectorXd operator()(const F &amp;f, const Eigen::VectorXd &amp;init, bool bounded) const </div><div class="ttdef"><b>Definition:</b> parallel_repeater.hpp:75</div></div>
-<div class="ttc" id="group__tools_html_ga2a64df3120a3ecd84e62640fb43722d0"><div class="ttname"><a href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:107</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 7 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Oct 8 2016 00:00:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

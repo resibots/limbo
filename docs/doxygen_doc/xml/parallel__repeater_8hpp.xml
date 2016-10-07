@@ -11,56 +11,114 @@
     <includedby refid="hp__opt_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp</includedby>
     <includedby refid="opt_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/opt.hpp</includedby>
     <incdepgraph>
-      <node id="1598">
+      <node id="1590">
         <label>list</label>
       </node>
-      <node id="1590">
+      <node id="1582">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="1607">
+      <node id="1599">
         <label>functional</label>
       </node>
-      <node id="1610">
+      <node id="1602">
         <label>iterator</label>
       </node>
-      <node id="1605">
+      <node id="1597">
         <label>cstdint</label>
       </node>
-      <node id="1599">
+      <node id="1591">
         <label>stdlib.h</label>
       </node>
-      <node id="1613">
+      <node id="1605">
         <label>limbo/opt/optimizer.hpp</label>
         <link refid="optimizer_8hpp"/>
-        <childnode refid="1614" relation="include">
+        <childnode refid="1606" relation="include">
+        </childnode>
+        <childnode refid="1580" relation="include">
+        </childnode>
+        <childnode refid="1607" relation="include">
+        </childnode>
+      </node>
+      <node id="1588">
+        <label>cmath</label>
+      </node>
+      <node id="1580">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="1584">
+        <label>limbo/tools/parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
+        <childnode refid="1585" relation="include">
+        </childnode>
+        <childnode refid="1579" relation="include">
+        </childnode>
+      </node>
+      <node id="1586">
+        <label>limbo/tools/random_generator.hpp</label>
+        <link refid="random__generator_8hpp"/>
+        <childnode refid="1587" relation="include">
         </childnode>
         <childnode refid="1588" relation="include">
         </childnode>
-        <childnode refid="1615" relation="include">
+        <childnode refid="1589" relation="include">
         </childnode>
-      </node>
-      <node id="1596">
-        <label>cmath</label>
-      </node>
-      <node id="1588">
-        <label>Eigen/Core</label>
-      </node>
-      <node id="1592">
-        <label>limbo/tools/parallel.hpp</label>
-        <link refid="parallel_8hpp"/>
+        <childnode refid="1590" relation="include">
+        </childnode>
+        <childnode refid="1591" relation="include">
+        </childnode>
+        <childnode refid="1592" relation="include">
+        </childnode>
         <childnode refid="1593" relation="include">
         </childnode>
-        <childnode refid="1587" relation="include">
+        <childnode refid="1594" relation="include">
         </childnode>
-      </node>
-      <node id="1594">
-        <label>limbo/tools/random_generator.hpp</label>
-        <link refid="random__generator_8hpp"/>
         <childnode refid="1595" relation="include">
         </childnode>
+      </node>
+      <node id="1592">
+        <label>random</label>
+      </node>
+      <node id="1578">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp</label>
+        <link refid="parallel_repeater.hpp"/>
+        <childnode refid="1579" relation="include">
+        </childnode>
+        <childnode refid="1580" relation="include">
+        </childnode>
+        <childnode refid="1581" relation="include">
+        </childnode>
+        <childnode refid="1584" relation="include">
+        </childnode>
+        <childnode refid="1586" relation="include">
+        </childnode>
+        <childnode refid="1605" relation="include">
+        </childnode>
+      </node>
+      <node id="1606">
+        <label>tuple</label>
+      </node>
+      <node id="1589">
+        <label>ctime</label>
+      </node>
+      <node id="1585">
+        <label>vector</label>
+      </node>
+      <node id="1593">
+        <label>utility</label>
+      </node>
+      <node id="1598">
+        <label>array</label>
+      </node>
+      <node id="1595">
+        <label>limbo/tools/rand_utils.hpp</label>
+        <link refid="rand__utils_8hpp"/>
         <childnode refid="1596" relation="include">
         </childnode>
         <childnode refid="1597" relation="include">
+        </childnode>
+        <childnode refid="1587" relation="include">
+        </childnode>
+        <childnode refid="1592" relation="include">
         </childnode>
         <childnode refid="1598" relation="include">
         </childnode>
@@ -68,175 +126,117 @@
         </childnode>
         <childnode refid="1600" relation="include">
         </childnode>
+        <childnode refid="1593" relation="include">
+        </childnode>
         <childnode refid="1601" relation="include">
         </childnode>
         <childnode refid="1602" relation="include">
         </childnode>
         <childnode refid="1603" relation="include">
         </childnode>
-      </node>
-      <node id="1600">
-        <label>random</label>
-      </node>
-      <node id="1586">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp</label>
-        <link refid="parallel_repeater.hpp"/>
-        <childnode refid="1587" relation="include">
-        </childnode>
-        <childnode refid="1588" relation="include">
-        </childnode>
-        <childnode refid="1589" relation="include">
-        </childnode>
-        <childnode refid="1592" relation="include">
-        </childnode>
-        <childnode refid="1594" relation="include">
-        </childnode>
-        <childnode refid="1613" relation="include">
-        </childnode>
-      </node>
-      <node id="1614">
-        <label>tuple</label>
-      </node>
-      <node id="1597">
-        <label>ctime</label>
-      </node>
-      <node id="1593">
-        <label>vector</label>
-      </node>
-      <node id="1601">
-        <label>utility</label>
-      </node>
-      <node id="1606">
-        <label>array</label>
-      </node>
-      <node id="1603">
-        <label>limbo/tools/rand_utils.hpp</label>
-        <link refid="rand__utils_8hpp"/>
         <childnode refid="1604" relation="include">
         </childnode>
-        <childnode refid="1605" relation="include">
+        <childnode refid="1579" relation="include">
         </childnode>
-        <childnode refid="1595" relation="include">
-        </childnode>
-        <childnode refid="1600" relation="include">
-        </childnode>
-        <childnode refid="1606" relation="include">
-        </childnode>
-        <childnode refid="1607" relation="include">
-        </childnode>
-        <childnode refid="1608" relation="include">
-        </childnode>
-        <childnode refid="1601" relation="include">
-        </childnode>
-        <childnode refid="1609" relation="include">
-        </childnode>
-        <childnode refid="1610" relation="include">
-        </childnode>
-        <childnode refid="1611" relation="include">
-        </childnode>
-        <childnode refid="1612" relation="include">
-        </childnode>
-        <childnode refid="1587" relation="include">
-        </childnode>
-      </node>
-      <node id="1595">
-        <label>cstdlib</label>
-      </node>
-      <node id="1591">
-        <label>iostream</label>
-      </node>
-      <node id="1604">
-        <label>cstddef</label>
-      </node>
-      <node id="1602">
-        <label>mutex</label>
-      </node>
-      <node id="1611">
-        <label>chrono</label>
-      </node>
-      <node id="1615">
-        <label>boost/optional.hpp</label>
-      </node>
-      <node id="1612">
-        <label>thread</label>
-      </node>
-      <node id="1609">
-        <label>type_traits</label>
       </node>
       <node id="1587">
+        <label>cstdlib</label>
+      </node>
+      <node id="1583">
+        <label>iostream</label>
+      </node>
+      <node id="1596">
+        <label>cstddef</label>
+      </node>
+      <node id="1594">
+        <label>mutex</label>
+      </node>
+      <node id="1603">
+        <label>chrono</label>
+      </node>
+      <node id="1607">
+        <label>boost/optional.hpp</label>
+      </node>
+      <node id="1604">
+        <label>thread</label>
+      </node>
+      <node id="1601">
+        <label>type_traits</label>
+      </node>
+      <node id="1579">
         <label>algorithm</label>
       </node>
-      <node id="1608">
+      <node id="1600">
         <label>initializer_list</label>
       </node>
-      <node id="1589">
+      <node id="1581">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="1590" relation="include">
+        <childnode refid="1582" relation="include">
         </childnode>
-        <childnode refid="1588" relation="include">
+        <childnode refid="1580" relation="include">
         </childnode>
-        <childnode refid="1591" relation="include">
+        <childnode refid="1583" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1617">
+      <node id="1609">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp</label>
         <link refid="hp__opt_8hpp"/>
-        <childnode refid="1618" relation="include">
+        <childnode refid="1610" relation="include">
         </childnode>
-        <childnode refid="1622" relation="include">
+        <childnode refid="1614" relation="include">
         </childnode>
-        <childnode refid="1623" relation="include">
+        <childnode refid="1615" relation="include">
         </childnode>
       </node>
-      <node id="1619">
+      <node id="1611">
         <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
         <link refid="model_8hpp"/>
-        <childnode refid="1620" relation="include">
+        <childnode refid="1612" relation="include">
         </childnode>
       </node>
-      <node id="1621">
+      <node id="1613">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1620">
+      <node id="1612">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="1621" relation="include">
+        <childnode refid="1613" relation="include">
+        </childnode>
+      </node>
+      <node id="1608">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp</label>
+        <link refid="parallel_repeater.hpp"/>
+        <childnode refid="1609" relation="include">
+        </childnode>
+        <childnode refid="1616" relation="include">
+        </childnode>
+      </node>
+      <node id="1610">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_lf_opt.hpp</label>
+        <link refid="kernel__lf__opt_8hpp"/>
+        <childnode refid="1611" relation="include">
+        </childnode>
+      </node>
+      <node id="1615">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp</label>
+        <link refid="mean__lf__opt_8hpp"/>
+        <childnode refid="1611" relation="include">
         </childnode>
       </node>
       <node id="1616">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp</label>
-        <link refid="parallel_repeater.hpp"/>
-        <childnode refid="1617" relation="include">
-        </childnode>
-        <childnode refid="1624" relation="include">
-        </childnode>
-      </node>
-      <node id="1618">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_lf_opt.hpp</label>
-        <link refid="kernel__lf__opt_8hpp"/>
-        <childnode refid="1619" relation="include">
-        </childnode>
-      </node>
-      <node id="1623">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp</label>
-        <link refid="mean__lf__opt_8hpp"/>
-        <childnode refid="1619" relation="include">
-        </childnode>
-      </node>
-      <node id="1624">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
         <link refid="opt_8hpp"/>
-        <childnode refid="1620" relation="include">
+        <childnode refid="1612" relation="include">
         </childnode>
       </node>
-      <node id="1622">
+      <node id="1614">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
         <link refid="kernel__mean__lf__opt_8hpp"/>
-        <childnode refid="1619" relation="include">
+        <childnode refid="1611" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -322,7 +322,7 @@
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>std::pair&lt;Eigen::VectorXd,<sp/>double&gt;<sp/>pair_t;</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>body<sp/>=<sp/>[&amp;](</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i)<sp/>{</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>r_init<sp/>=<sp/><ref refid="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" kindref="member">tools::random_vector</ref>(init.size());</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>r_init<sp/>=<sp/><ref refid="group__tools_1ga4db74517a1dead8a92f2f1482de106b8" kindref="member">tools::random_vector</ref>(init.size());</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>v<sp/>=<sp/>Optimizer()(f,<sp/><ref refid="group__par__tools_1ga1d650a019b6c1bb551cb42f1c3f5ef82" kindref="member">init</ref>,<sp/>bounded);</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>lik<sp/>=<sp/><ref refid="group__opt__tools_1ga698d932ac52cab812742b1300f875372" kindref="member">opt::eval</ref>(f,<sp/>v);</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::make_pair(v,<sp/>lik);</highlight></codeline>

@@ -24,36 +24,76 @@
     <includedby refid="max__predicted__value_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp</includedby>
     <includedby refid="tools_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/tools.hpp</includedby>
     <incdepgraph>
-      <node id="2165">
+      <node id="2156">
         <label>list</label>
       </node>
-      <node id="2174">
+      <node id="2165">
         <label>functional</label>
       </node>
-      <node id="2177">
+      <node id="2168">
         <label>iterator</label>
       </node>
-      <node id="2172">
+      <node id="2163">
         <label>cstdint</label>
       </node>
-      <node id="2166">
+      <node id="2157">
         <label>stdlib.h</label>
       </node>
-      <node id="2163">
+      <node id="2154">
         <label>cmath</label>
       </node>
-      <node id="2161">
+      <node id="2152">
         <label>/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp</label>
         <link refid="random_generator.hpp"/>
+        <childnode refid="2153" relation="include">
+        </childnode>
+        <childnode refid="2154" relation="include">
+        </childnode>
+        <childnode refid="2155" relation="include">
+        </childnode>
+        <childnode refid="2156" relation="include">
+        </childnode>
+        <childnode refid="2157" relation="include">
+        </childnode>
+        <childnode refid="2158" relation="include">
+        </childnode>
+        <childnode refid="2159" relation="include">
+        </childnode>
+        <childnode refid="2160" relation="include">
+        </childnode>
+        <childnode refid="2161" relation="include">
+        </childnode>
+      </node>
+      <node id="2158">
+        <label>random</label>
+      </node>
+      <node id="2155">
+        <label>ctime</label>
+      </node>
+      <node id="2159">
+        <label>utility</label>
+      </node>
+      <node id="2164">
+        <label>array</label>
+      </node>
+      <node id="2161">
+        <label>limbo/tools/rand_utils.hpp</label>
+        <link refid="rand__utils_8hpp"/>
         <childnode refid="2162" relation="include">
         </childnode>
         <childnode refid="2163" relation="include">
+        </childnode>
+        <childnode refid="2153" relation="include">
+        </childnode>
+        <childnode refid="2158" relation="include">
         </childnode>
         <childnode refid="2164" relation="include">
         </childnode>
         <childnode refid="2165" relation="include">
         </childnode>
         <childnode refid="2166" relation="include">
+        </childnode>
+        <childnode refid="2159" relation="include">
         </childnode>
         <childnode refid="2167" relation="include">
         </childnode>
@@ -63,41 +103,103 @@
         </childnode>
         <childnode refid="2170" relation="include">
         </childnode>
-      </node>
-      <node id="2167">
-        <label>random</label>
-      </node>
-      <node id="2164">
-        <label>ctime</label>
-      </node>
-      <node id="2168">
-        <label>utility</label>
-      </node>
-      <node id="2173">
-        <label>array</label>
-      </node>
-      <node id="2170">
-        <label>limbo/tools/rand_utils.hpp</label>
-        <link refid="rand__utils_8hpp"/>
         <childnode refid="2171" relation="include">
         </childnode>
-        <childnode refid="2172" relation="include">
+      </node>
+      <node id="2153">
+        <label>cstdlib</label>
+      </node>
+      <node id="2162">
+        <label>cstddef</label>
+      </node>
+      <node id="2160">
+        <label>mutex</label>
+      </node>
+      <node id="2169">
+        <label>chrono</label>
+      </node>
+      <node id="2170">
+        <label>thread</label>
+      </node>
+      <node id="2167">
+        <label>type_traits</label>
+      </node>
+      <node id="2171">
+        <label>algorithm</label>
+      </node>
+      <node id="2166">
+        <label>initializer_list</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2195">
+        <label>/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp</label>
+        <link refid="max__predicted__value_8hpp"/>
+        <childnode refid="2196" relation="include">
         </childnode>
-        <childnode refid="2162" relation="include">
+      </node>
+      <node id="2184">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
+        <link refid="nsbo_8hpp"/>
+      </node>
+      <node id="2183">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
+        <link refid="bayes__opt_2ehvi_8hpp"/>
+      </node>
+      <node id="2192">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp</label>
+        <link refid="hp__opt_8hpp"/>
+        <childnode refid="2187" relation="include">
         </childnode>
-        <childnode refid="2167" relation="include">
+        <childnode refid="2189" relation="include">
         </childnode>
-        <childnode refid="2173" relation="include">
+        <childnode refid="2190" relation="include">
         </childnode>
+      </node>
+      <node id="2173">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
+        <link refid="boptimizer_8hpp"/>
         <childnode refid="2174" relation="include">
         </childnode>
+        <childnode refid="2177" relation="include">
+        </childnode>
+      </node>
+      <node id="2180">
+        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling.hpp</label>
+        <link refid="random__sampling_8hpp"/>
+        <childnode refid="2181" relation="include">
+        </childnode>
+        <childnode refid="2185" relation="include">
+        </childnode>
+      </node>
+      <node id="2185">
+        <label>/tmp/doc_limbo/limbo/src/limbo/init.hpp</label>
+        <link refid="init_8hpp"/>
         <childnode refid="2175" relation="include">
         </childnode>
-        <childnode refid="2168" relation="include">
+      </node>
+      <node id="2177">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
+        <link refid="parego_8hpp"/>
+      </node>
+      <node id="2188">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
+        <link refid="model_8hpp"/>
+        <childnode refid="2175" relation="include">
         </childnode>
-        <childnode refid="2176" relation="include">
-        </childnode>
-        <childnode refid="2177" relation="include">
+      </node>
+      <node id="2176">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
+        <link refid="pareto__benchmark_8hpp"/>
+      </node>
+      <node id="2178">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp</label>
+        <link refid="cboptimizer_8hpp"/>
+      </node>
+      <node id="2172">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp</label>
+        <link refid="random_generator.hpp"/>
+        <childnode refid="2173" relation="include">
         </childnode>
         <childnode refid="2178" relation="include">
         </childnode>
@@ -105,227 +207,125 @@
         </childnode>
         <childnode refid="2180" relation="include">
         </childnode>
-      </node>
-      <node id="2162">
-        <label>cstdlib</label>
-      </node>
-      <node id="2171">
-        <label>cstddef</label>
-      </node>
-      <node id="2169">
-        <label>mutex</label>
-      </node>
-      <node id="2178">
-        <label>chrono</label>
-      </node>
-      <node id="2179">
-        <label>thread</label>
-      </node>
-      <node id="2176">
-        <label>type_traits</label>
-      </node>
-      <node id="2180">
-        <label>algorithm</label>
-      </node>
-      <node id="2175">
-        <label>initializer_list</label>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="2204">
-        <label>/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp</label>
-        <link refid="max__predicted__value_8hpp"/>
-        <childnode refid="2205" relation="include">
-        </childnode>
-      </node>
-      <node id="2193">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
-        <link refid="nsbo_8hpp"/>
-      </node>
-      <node id="2192">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
-        <link refid="bayes__opt_2ehvi_8hpp"/>
-      </node>
-      <node id="2201">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp</label>
-        <link refid="hp__opt_8hpp"/>
-        <childnode refid="2196" relation="include">
-        </childnode>
-        <childnode refid="2198" relation="include">
-        </childnode>
-        <childnode refid="2199" relation="include">
-        </childnode>
-      </node>
-      <node id="2182">
-        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
-        <link refid="boptimizer_8hpp"/>
-        <childnode refid="2183" relation="include">
-        </childnode>
         <childnode refid="2186" relation="include">
-        </childnode>
-      </node>
-      <node id="2189">
-        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling.hpp</label>
-        <link refid="random__sampling_8hpp"/>
-        <childnode refid="2190" relation="include">
-        </childnode>
-        <childnode refid="2194" relation="include">
-        </childnode>
-      </node>
-      <node id="2194">
-        <label>/tmp/doc_limbo/limbo/src/limbo/init.hpp</label>
-        <link refid="init_8hpp"/>
-        <childnode refid="2184" relation="include">
-        </childnode>
-      </node>
-      <node id="2186">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
-        <link refid="parego_8hpp"/>
-      </node>
-      <node id="2197">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
-        <link refid="model_8hpp"/>
-        <childnode refid="2184" relation="include">
-        </childnode>
-      </node>
-      <node id="2185">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
-        <link refid="pareto__benchmark_8hpp"/>
-      </node>
-      <node id="2187">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp</label>
-        <link refid="cboptimizer_8hpp"/>
-      </node>
-      <node id="2181">
-        <label>/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp</label>
-        <link refid="random_generator.hpp"/>
-        <childnode refid="2182" relation="include">
         </childnode>
         <childnode refid="2187" relation="include">
         </childnode>
-        <childnode refid="2188" relation="include">
-        </childnode>
         <childnode refid="2189" relation="include">
+        </childnode>
+        <childnode refid="2190" relation="include">
+        </childnode>
+        <childnode refid="2191" relation="include">
+        </childnode>
+        <childnode refid="2194" relation="include">
         </childnode>
         <childnode refid="2195" relation="include">
         </childnode>
-        <childnode refid="2196" relation="include">
+        <childnode refid="2197" relation="include">
+        </childnode>
+      </node>
+      <node id="2194">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/random_point.hpp</label>
+        <link refid="random__point_8hpp"/>
+        <childnode refid="2193" relation="include">
+        </childnode>
+      </node>
+      <node id="2197">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
+        <link refid="tools_8hpp"/>
+        <childnode refid="2175" relation="include">
         </childnode>
         <childnode refid="2198" relation="include">
         </childnode>
-        <childnode refid="2199" relation="include">
-        </childnode>
-        <childnode refid="2200" relation="include">
-        </childnode>
-        <childnode refid="2203" relation="include">
-        </childnode>
-        <childnode refid="2204" relation="include">
-        </childnode>
-        <childnode refid="2206" relation="include">
-        </childnode>
       </node>
-      <node id="2203">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/random_point.hpp</label>
-        <link refid="random__point_8hpp"/>
-        <childnode refid="2202" relation="include">
-        </childnode>
-      </node>
-      <node id="2206">
-        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
-        <link refid="tools_8hpp"/>
-        <childnode refid="2184" relation="include">
-        </childnode>
-        <childnode refid="2207" relation="include">
-        </childnode>
-      </node>
-      <node id="2184">
+      <node id="2175">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="2185" relation="include">
-        </childnode>
-      </node>
-      <node id="2200">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp</label>
-        <link refid="parallel__repeater_8hpp"/>
-        <childnode refid="2201" relation="include">
-        </childnode>
-        <childnode refid="2202" relation="include">
-        </childnode>
-      </node>
-      <node id="2188">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
-        <link refid="imgpo_8hpp"/>
-      </node>
-      <node id="2196">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_lf_opt.hpp</label>
-        <link refid="kernel__lf__opt_8hpp"/>
-        <childnode refid="2197" relation="include">
-        </childnode>
-      </node>
-      <node id="2195">
-        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp</label>
-        <link refid="random__sampling__grid_8hpp"/>
-        <childnode refid="2194" relation="include">
-        </childnode>
-      </node>
-      <node id="2199">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp</label>
-        <link refid="mean__lf__opt_8hpp"/>
-        <childnode refid="2197" relation="include">
-        </childnode>
-      </node>
-      <node id="2207">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
-        <link refid="model_2gp_8hpp"/>
-        <childnode refid="2190" relation="include">
-        </childnode>
-        <childnode refid="2197" relation="include">
+        <childnode refid="2176" relation="include">
         </childnode>
       </node>
       <node id="2191">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
-        <link refid="bo__multi_8hpp"/>
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp</label>
+        <link refid="parallel__repeater_8hpp"/>
         <childnode refid="2192" relation="include">
         </childnode>
         <childnode refid="2193" relation="include">
         </childnode>
       </node>
-      <node id="2202">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
-        <link refid="opt_8hpp"/>
-        <childnode refid="2184" relation="include">
+      <node id="2179">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
+        <link refid="imgpo_8hpp"/>
+      </node>
+      <node id="2187">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_lf_opt.hpp</label>
+        <link refid="kernel__lf__opt_8hpp"/>
+        <childnode refid="2188" relation="include">
         </childnode>
       </node>
-      <node id="2198">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
-        <link refid="kernel__mean__lf__opt_8hpp"/>
-        <childnode refid="2197" relation="include">
+      <node id="2186">
+        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp</label>
+        <link refid="random__sampling__grid_8hpp"/>
+        <childnode refid="2185" relation="include">
         </childnode>
       </node>
       <node id="2190">
-        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
-        <link refid="bo__base_8hpp"/>
-        <childnode refid="2182" relation="include">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp</label>
+        <link refid="mean__lf__opt_8hpp"/>
+        <childnode refid="2188" relation="include">
         </childnode>
-        <childnode refid="2191" relation="include">
-        </childnode>
-        <childnode refid="2187" relation="include">
+      </node>
+      <node id="2198">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
+        <link refid="model_2gp_8hpp"/>
+        <childnode refid="2181" relation="include">
         </childnode>
         <childnode refid="2188" relation="include">
         </childnode>
-        <childnode refid="2186" relation="include">
+      </node>
+      <node id="2182">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
+        <link refid="bo__multi_8hpp"/>
+        <childnode refid="2183" relation="include">
+        </childnode>
+        <childnode refid="2184" relation="include">
         </childnode>
       </node>
-      <node id="2183">
+      <node id="2193">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
+        <link refid="opt_8hpp"/>
+        <childnode refid="2175" relation="include">
+        </childnode>
+      </node>
+      <node id="2189">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
+        <link refid="kernel__mean__lf__opt_8hpp"/>
+        <childnode refid="2188" relation="include">
+        </childnode>
+      </node>
+      <node id="2181">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="2173" relation="include">
+        </childnode>
+        <childnode refid="2182" relation="include">
+        </childnode>
+        <childnode refid="2178" relation="include">
+        </childnode>
+        <childnode refid="2179" relation="include">
+        </childnode>
+        <childnode refid="2177" relation="include">
+        </childnode>
+      </node>
+      <node id="2174">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
         <link refid="bayes__opt_8hpp"/>
-        <childnode refid="2184" relation="include">
+        <childnode refid="2175" relation="include">
         </childnode>
       </node>
-      <node id="2205">
+      <node id="2196">
         <label>/tmp/doc_limbo/limbo/src/limbo/stop.hpp</label>
         <link refid="stop_8hpp"/>
-        <childnode refid="2184" relation="include">
+        <childnode refid="2175" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -426,7 +426,7 @@
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
 <codeline lineno="100" refid="group__tools_1ga3df78ebcb864be91e73e840bb42b9208" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">rgen_int_t</ref><sp/>=<sp/><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">RandomGenerator&lt;rdist_int_t&gt;</ref>;</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107" refid="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__tools_1ga2a64df3120a3ecd84e62640fb43722d0" kindref="member">random_vector</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
+<codeline lineno="107" refid="group__tools_1ga15dc04885b7309c7ca794db2429fb3f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__tools_1ga15dc04885b7309c7ca794db2429fb3f2" kindref="member">random_vector_bounded</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">rgen_double_t</ref><sp/>rgen(0.0,<sp/>1.0);</highlight></codeline>
 <codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>res(size);</highlight></codeline>
@@ -434,10 +434,26 @@
 <codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res[i]<sp/>=<sp/>rgen.<ref refid="classlimbo_1_1tools_1_1_random_generator_1a8428af24ab2e4eb744563d12180b6246" kindref="member">rand</ref>();</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>res;</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="116"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="group__tools_1ga0f1d777d8e14733853ffc5df7068246f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__tools_1ga0f1d777d8e14733853ffc5df7068246f" kindref="member">random_vector_unbounded</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">rgen_double_t</ref><sp/>rgen(std::numeric_limits&lt;double&gt;::lowest(),<sp/><ref refid="group__par__tools_1gaf3fdc36fc4e94ad4cac72c803234b6ac" kindref="member">std::numeric_limits&lt;double&gt;::max</ref>());</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>res(size);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>size;<sp/>++i)</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>res[i]<sp/>=<sp/>rgen.<ref refid="classlimbo_1_1tools_1_1_random_generator_1a8428af24ab2e4eb744563d12180b6246" kindref="member">rand</ref>();</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>res;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="group__tools_1ga4db74517a1dead8a92f2f1482de106b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__tools_1ga4db74517a1dead8a92f2f1482de106b8" kindref="member">random_vector</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>bounded<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(bounded)</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__tools_1ga15dc04885b7309c7ca794db2429fb3f2" kindref="member">random_vector_bounded</ref>(size);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__tools_1ga0f1d777d8e14733853ffc5df7068246f" kindref="member">random_vector_unbounded</ref>(size);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp"/>
   </compounddef>

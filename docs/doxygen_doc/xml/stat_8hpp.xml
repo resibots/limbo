@@ -17,41 +17,57 @@
     <includes refid="stat_2gp_8hpp" local="no">limbo/stat/gp.hpp</includes>
     <includedby refid="limbo_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</includedby>
     <incdepgraph>
-      <node id="1690">
+      <node id="1681">
         <label>limbo/stat/gp_acquisitions.hpp</label>
         <link refid="gp__acquisitions_8hpp"/>
-        <childnode refid="1691" relation="include">
+        <childnode refid="1682" relation="include">
         </childnode>
-        <childnode refid="1681" relation="include">
+        <childnode refid="1672" relation="include">
         </childnode>
       </node>
-      <node id="1680">
+      <node id="1671">
         <label>limbo/stat/best_aggregated_observations.hpp</label>
         <link refid="best__aggregated__observations_8hpp"/>
-        <childnode refid="1681" relation="include">
-        </childnode>
-      </node>
-      <node id="1691">
-        <label>cmath</label>
-      </node>
-      <node id="1683">
-        <label>string</label>
-      </node>
-      <node id="1692">
-        <label>limbo/stat/gp_kernel_hparams.hpp</label>
-        <link refid="gp__kernel__hparams_8hpp"/>
-        <childnode refid="1691" relation="include">
-        </childnode>
-        <childnode refid="1681" relation="include">
+        <childnode refid="1672" relation="include">
         </childnode>
       </node>
       <node id="1682">
+        <label>cmath</label>
+      </node>
+      <node id="1674">
+        <label>string</label>
+      </node>
+      <node id="1683">
+        <label>limbo/stat/gp_kernel_hparams.hpp</label>
+        <link refid="gp__kernel__hparams_8hpp"/>
+        <childnode refid="1682" relation="include">
+        </childnode>
+        <childnode refid="1672" relation="include">
+        </childnode>
+      </node>
+      <node id="1673">
         <label>fstream</label>
       </node>
-      <node id="1679">
+      <node id="1670">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat.hpp</label>
         <link refid="stat.hpp"/>
+        <childnode refid="1671" relation="include">
+        </childnode>
+        <childnode refid="1676" relation="include">
+        </childnode>
+        <childnode refid="1677" relation="include">
+        </childnode>
+        <childnode refid="1678" relation="include">
+        </childnode>
+        <childnode refid="1679" relation="include">
+        </childnode>
         <childnode refid="1680" relation="include">
+        </childnode>
+        <childnode refid="1681" relation="include">
+        </childnode>
+        <childnode refid="1683" relation="include">
+        </childnode>
+        <childnode refid="1684" relation="include">
         </childnode>
         <childnode refid="1685" relation="include">
         </childnode>
@@ -61,120 +77,104 @@
         </childnode>
         <childnode refid="1688" relation="include">
         </childnode>
-        <childnode refid="1689" relation="include">
-        </childnode>
-        <childnode refid="1690" relation="include">
-        </childnode>
-        <childnode refid="1692" relation="include">
-        </childnode>
-        <childnode refid="1693" relation="include">
-        </childnode>
-        <childnode refid="1694" relation="include">
-        </childnode>
-        <childnode refid="1695" relation="include">
-        </childnode>
-        <childnode refid="1696" relation="include">
-        </childnode>
-        <childnode refid="1697" relation="include">
+      </node>
+      <node id="1676">
+        <label>limbo/stat/best_observations.hpp</label>
+        <link refid="best__observations_8hpp"/>
+        <childnode refid="1672" relation="include">
         </childnode>
       </node>
       <node id="1685">
-        <label>limbo/stat/best_observations.hpp</label>
-        <link refid="best__observations_8hpp"/>
-        <childnode refid="1681" relation="include">
-        </childnode>
-      </node>
-      <node id="1694">
         <label>limbo/stat/gp_mean_hparams.hpp</label>
         <link refid="gp__mean__hparams_8hpp"/>
-        <childnode refid="1691" relation="include">
-        </childnode>
-        <childnode refid="1681" relation="include">
-        </childnode>
-      </node>
-      <node id="1688">
-        <label>limbo/stat/aggregated_observations.hpp</label>
-        <link refid="aggregated__observations_8hpp"/>
-        <childnode refid="1681" relation="include">
-        </childnode>
-      </node>
-      <node id="1696">
-        <label>limbo/stat/samples.hpp</label>
-        <link refid="samples_8hpp"/>
-        <childnode refid="1681" relation="include">
-        </childnode>
-      </node>
-      <node id="1686">
-        <label>limbo/stat/best_samples.hpp</label>
-        <link refid="best__samples_8hpp"/>
-        <childnode refid="1681" relation="include">
-        </childnode>
-      </node>
-      <node id="1681">
-        <label>limbo/stat/stat_base.hpp</label>
-        <link refid="stat__base_8hpp"/>
         <childnode refid="1682" relation="include">
         </childnode>
-        <childnode refid="1683" relation="include">
+        <childnode refid="1672" relation="include">
         </childnode>
-        <childnode refid="1684" relation="include">
+      </node>
+      <node id="1679">
+        <label>limbo/stat/aggregated_observations.hpp</label>
+        <link refid="aggregated__observations_8hpp"/>
+        <childnode refid="1672" relation="include">
         </childnode>
       </node>
       <node id="1687">
+        <label>limbo/stat/samples.hpp</label>
+        <link refid="samples_8hpp"/>
+        <childnode refid="1672" relation="include">
+        </childnode>
+      </node>
+      <node id="1677">
+        <label>limbo/stat/best_samples.hpp</label>
+        <link refid="best__samples_8hpp"/>
+        <childnode refid="1672" relation="include">
+        </childnode>
+      </node>
+      <node id="1672">
+        <label>limbo/stat/stat_base.hpp</label>
+        <link refid="stat__base_8hpp"/>
+        <childnode refid="1673" relation="include">
+        </childnode>
+        <childnode refid="1674" relation="include">
+        </childnode>
+        <childnode refid="1675" relation="include">
+        </childnode>
+      </node>
+      <node id="1678">
         <label>limbo/stat/console_summary.hpp</label>
         <link refid="console__summary_8hpp"/>
-        <childnode refid="1681" relation="include">
+        <childnode refid="1672" relation="include">
         </childnode>
       </node>
-      <node id="1695">
+      <node id="1686">
         <label>limbo/stat/gp_prediction_differences.hpp</label>
         <link refid="gp__prediction__differences_8hpp"/>
-        <childnode refid="1691" relation="include">
+        <childnode refid="1682" relation="include">
         </childnode>
-        <childnode refid="1681" relation="include">
+        <childnode refid="1672" relation="include">
         </childnode>
       </node>
-      <node id="1689">
+      <node id="1680">
         <label>limbo/stat/observations.hpp</label>
         <link refid="observations_8hpp"/>
-        <childnode refid="1681" relation="include">
-        </childnode>
-      </node>
-      <node id="1693">
-        <label>limbo/stat/gp_likelihood.hpp</label>
-        <link refid="gp__likelihood_8hpp"/>
-        <childnode refid="1691" relation="include">
-        </childnode>
-        <childnode refid="1681" relation="include">
-        </childnode>
-      </node>
-      <node id="1697">
-        <label>limbo/stat/gp.hpp</label>
-        <link refid="stat_2gp_8hpp"/>
-        <childnode refid="1691" relation="include">
-        </childnode>
-        <childnode refid="1681" relation="include">
+        <childnode refid="1672" relation="include">
         </childnode>
       </node>
       <node id="1684">
+        <label>limbo/stat/gp_likelihood.hpp</label>
+        <link refid="gp__likelihood_8hpp"/>
+        <childnode refid="1682" relation="include">
+        </childnode>
+        <childnode refid="1672" relation="include">
+        </childnode>
+      </node>
+      <node id="1688">
+        <label>limbo/stat/gp.hpp</label>
+        <link refid="stat_2gp_8hpp"/>
+        <childnode refid="1682" relation="include">
+        </childnode>
+        <childnode refid="1672" relation="include">
+        </childnode>
+      </node>
+      <node id="1675">
         <label>memory</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1700">
+      <node id="1691">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1698">
+      <node id="1689">
         <label>/tmp/doc_limbo/limbo/src/limbo/stat.hpp</label>
         <link refid="stat.hpp"/>
-        <childnode refid="1699" relation="include">
+        <childnode refid="1690" relation="include">
         </childnode>
       </node>
-      <node id="1699">
+      <node id="1690">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="1700" relation="include">
+        <childnode refid="1691" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

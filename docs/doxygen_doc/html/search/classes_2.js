@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['cbayes_5fopt_5fboptimizer',['cbayes_opt_boptimizer',['../structlimbo_1_1defaults_1_1cbayes__opt__boptimizer.html',1,'limbo::defaults']]],
   ['cboptimizer',['CBOptimizer',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html',1,'limbo::experimental::bayes_opt']]],
   ['chaincriteria',['ChainCriteria',['../structlimbo_1_1stop_1_1_chain_criteria.html',1,'limbo::stop']]],
   ['chained',['Chained',['../structlimbo_1_1opt_1_1_chained.html',1,'limbo::opt']]],

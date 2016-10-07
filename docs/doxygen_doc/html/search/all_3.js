@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['cbayes_5fopt_5fboptimizer',['cbayes_opt_boptimizer',['../structlimbo_1_1defaults_1_1cbayes__opt__boptimizer.html',1,'limbo::defaults']]],
   ['cboptimizer',['CBOptimizer',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html',1,'limbo::experimental::bayes_opt']]],
   ['cboptimizer_2ehpp',['cboptimizer.hpp',['../cboptimizer_8hpp.html',1,'']]],
   ['cboptimizer_5fsignature',['cboptimizer_signature',['../namespacelimbo_1_1experimental_1_1bayes__opt.html#a5b88cfb36e71acb407ac2258966e57b1',1,'limbo::experimental::bayes_opt']]],
   ['chain_5fcriteria_2ehpp',['chain_criteria.hpp',['../chain__criteria_8hpp.html',1,'']]],
-  ['chaincriteria',['ChainCriteria',['../structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d',1,'limbo::stop::ChainCriteria']]],
   ['chaincriteria',['ChainCriteria',['../structlimbo_1_1stop_1_1_chain_criteria.html',1,'limbo::stop']]],
+  ['chaincriteria',['ChainCriteria',['../structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d',1,'limbo::stop::ChainCriteria']]],
   ['chained',['Chained',['../structlimbo_1_1opt_1_1_chained.html',1,'limbo::opt']]],
   ['chained_2ehpp',['chained.hpp',['../chained_8hpp.html',1,'']]],
   ['chained_3c_20params_2c_20optimizer_20_3e',['Chained&lt; Params, Optimizer &gt;',['../structlimbo_1_1opt_1_1_chained_3_01_params_00_01_optimizer_01_4.html',1,'limbo::opt']]],
@@ -16,8 +15,8 @@ var searchData=
   ['cmaes',['Cmaes',['../structlimbo_1_1opt_1_1_cmaes.html',1,'limbo::opt']]],
   ['cmaes_2ehpp',['cmaes.hpp',['../cmaes_8hpp.html',1,'']]],
   ['comp_5ffronts',['comp_fronts',['../structpareto_1_1impl_1_1comp__fronts.html',1,'pareto::impl']]],
-  ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html#a0141f68fca61380d69773bc6225622e3',1,'pareto::impl::compare_objs_lex']]],
   ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html',1,'pareto::impl']]],
+  ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html#a0141f68fca61380d69773bc6225622e3',1,'pareto::impl::compare_objs_lex']]],
   ['compute',['compute',['../classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617',1,'limbo::experimental::model::GPParego::compute()'],['../classlimbo_1_1model_1_1_g_p.html#a5e2ea732c8d93491433fcc838f67f41e',1,'limbo::model::GP::compute()']]],
   ['console_5fsummary_2ehpp',['console_summary.hpp',['../console__summary_8hpp.html',1,'']]],
   ['consolesummary',['ConsoleSummary',['../structlimbo_1_1stat_1_1_console_summary.html',1,'limbo::stat']]],

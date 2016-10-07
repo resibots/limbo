@@ -33,367 +33,367 @@
     <includedby refid="max__predicted__value_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp</includedby>
     <includedby refid="tools_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/tools.hpp</includedby>
     <incdepgraph>
-      <node id="2013">
+      <node id="2004">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="2014">
+      <node id="2005">
         <label>Eigen/Core</label>
       </node>
-      <node id="2015">
+      <node id="2006">
         <label>iostream</label>
       </node>
-      <node id="2012">
+      <node id="2003">
         <label>/tmp/doc_limbo/limbo/src/limbo/tools/macros.hpp</label>
         <link refid="macros.hpp"/>
+        <childnode refid="2004" relation="include">
+        </childnode>
+        <childnode refid="2005" relation="include">
+        </childnode>
+        <childnode refid="2006" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2023">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp</label>
+        <link refid="eci_8hpp"/>
+      </node>
+      <node id="2049">
+        <label>/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp</label>
+        <link refid="max__predicted__value_8hpp"/>
+        <childnode refid="2048" relation="include">
+        </childnode>
+      </node>
+      <node id="2008">
+        <label>/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp</label>
+        <link refid="ei_8hpp"/>
+        <childnode refid="2009" relation="include">
+        </childnode>
+      </node>
+      <node id="2012">
+        <label>/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp</label>
+        <link refid="gp__ucb_8hpp"/>
+        <childnode refid="2009" relation="include">
+        </childnode>
+      </node>
+      <node id="2009">
+        <label>/tmp/doc_limbo/limbo/src/limbo/acqui.hpp</label>
+        <link refid="acqui_8hpp"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+      </node>
+      <node id="2020">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
+        <link refid="nsbo_8hpp"/>
+      </node>
+      <node id="2019">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
+        <link refid="bayes__opt_2ehvi_8hpp"/>
+      </node>
+      <node id="2013">
+        <label>/tmp/doc_limbo/limbo/src/limbo/acqui/ucb.hpp</label>
+        <link refid="ucb_8hpp"/>
+        <childnode refid="2009" relation="include">
+        </childnode>
+        <childnode refid="2014" relation="include">
+        </childnode>
+      </node>
+      <node id="2033">
+        <label>/tmp/doc_limbo/limbo/src/limbo/mean/constant.hpp</label>
+        <link refid="constant_8hpp"/>
+        <childnode refid="2034" relation="include">
+        </childnode>
+      </node>
+      <node id="2041">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp</label>
+        <link refid="hp__opt_8hpp"/>
+        <childnode refid="2042" relation="include">
+        </childnode>
+        <childnode refid="2044" relation="include">
+        </childnode>
+        <childnode refid="2045" relation="include">
+        </childnode>
+      </node>
+      <node id="2046">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/rprop.hpp</label>
+        <link refid="rprop_8hpp"/>
+        <childnode refid="2041" relation="include">
+        </childnode>
+        <childnode refid="2036" relation="include">
+        </childnode>
+      </node>
+      <node id="2015">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
+        <link refid="boptimizer_8hpp"/>
+        <childnode refid="2016" relation="include">
+        </childnode>
+        <childnode refid="2017" relation="include">
+        </childnode>
+      </node>
+      <node id="2027">
+        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling.hpp</label>
+        <link refid="random__sampling_8hpp"/>
+        <childnode refid="2014" relation="include">
+        </childnode>
+        <childnode refid="2026" relation="include">
+        </childnode>
+      </node>
+      <node id="2038">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_grad.hpp</label>
+        <link refid="nlopt__grad_8hpp"/>
+        <childnode refid="2036" relation="include">
+        </childnode>
+      </node>
+      <node id="2026">
+        <label>/tmp/doc_limbo/limbo/src/limbo/init.hpp</label>
+        <link refid="init_8hpp"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+      </node>
+      <node id="2030">
+        <label>/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</label>
+        <link refid="kernel_8hpp"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+      </node>
+      <node id="2017">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
+        <link refid="parego_8hpp"/>
+      </node>
+      <node id="2043">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
+        <link refid="model_8hpp"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+      </node>
+      <node id="2011">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
+        <link refid="pareto__benchmark_8hpp"/>
+      </node>
+      <node id="2029">
+        <label>/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp</label>
+        <link refid="exp_8hpp"/>
+        <childnode refid="2014" relation="include">
+        </childnode>
+        <childnode refid="2030" relation="include">
+        </childnode>
+      </node>
+      <node id="2021">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp</label>
+        <link refid="cboptimizer_8hpp"/>
+      </node>
+      <node id="2050">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
+        <link refid="tools_8hpp"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+        <childnode refid="2051" relation="include">
+        </childnode>
+      </node>
+      <node id="2010">
+        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
+        <link refid="limbo_8hpp"/>
+        <childnode refid="2011" relation="include">
+        </childnode>
+      </node>
+      <node id="2024">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp</label>
+        <link refid="ucb__imgpo_8hpp"/>
+      </node>
+      <node id="2025">
+        <label>/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp</label>
+        <link refid="grid__sampling_8hpp"/>
+        <childnode refid="2026" relation="include">
+        </childnode>
+      </node>
+      <node id="2040">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp</label>
+        <link refid="parallel__repeater_8hpp"/>
+        <childnode refid="2041" relation="include">
+        </childnode>
+        <childnode refid="2036" relation="include">
+        </childnode>
+      </node>
+      <node id="2032">
+        <label>/tmp/doc_limbo/limbo/src/limbo/kernel/matern_three_halves.hpp</label>
+        <link refid="matern__three__halves_8hpp"/>
+        <childnode refid="2030" relation="include">
+        </childnode>
+      </node>
+      <node id="2022">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
+        <link refid="imgpo_8hpp"/>
+      </node>
+      <node id="2042">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_lf_opt.hpp</label>
+        <link refid="kernel__lf__opt_8hpp"/>
+        <childnode refid="2043" relation="include">
+        </childnode>
+      </node>
+      <node id="2031">
+        <label>/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp</label>
+        <link refid="matern__five__halves_8hpp"/>
+        <childnode refid="2030" relation="include">
+        </childnode>
+      </node>
+      <node id="2028">
+        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp</label>
+        <link refid="random__sampling__grid_8hpp"/>
+        <childnode refid="2026" relation="include">
+        </childnode>
+      </node>
+      <node id="2047">
+        <label>/tmp/doc_limbo/limbo/src/limbo/stop/max_iterations.hpp</label>
+        <link refid="max__iterations_8hpp"/>
+        <childnode refid="2014" relation="include">
+        </childnode>
+        <childnode refid="2048" relation="include">
+        </childnode>
+      </node>
+      <node id="2045">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp</label>
+        <link refid="mean__lf__opt_8hpp"/>
+        <childnode refid="2043" relation="include">
+        </childnode>
+      </node>
+      <node id="2051">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
+        <link refid="model_2gp_8hpp"/>
+        <childnode refid="2014" relation="include">
+        </childnode>
+        <childnode refid="2043" relation="include">
+        </childnode>
+      </node>
+      <node id="2018">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
+        <link refid="bo__multi_8hpp"/>
+        <childnode refid="2019" relation="include">
+        </childnode>
+        <childnode refid="2020" relation="include">
+        </childnode>
+      </node>
+      <node id="2036">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
+        <link refid="opt_8hpp"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+      </node>
+      <node id="2044">
+        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
+        <link refid="kernel__mean__lf__opt_8hpp"/>
+        <childnode refid="2043" relation="include">
+        </childnode>
+      </node>
+      <node id="2014">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="2015" relation="include">
+        </childnode>
+        <childnode refid="2018" relation="include">
+        </childnode>
+        <childnode refid="2021" relation="include">
+        </childnode>
+        <childnode refid="2022" relation="include">
+        </childnode>
+        <childnode refid="2017" relation="include">
+        </childnode>
+      </node>
+      <node id="2039">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_no_grad.hpp</label>
+        <link refid="nlopt__no__grad_8hpp"/>
+        <childnode refid="2015" relation="include">
+        </childnode>
+        <childnode refid="2021" relation="include">
+        </childnode>
+        <childnode refid="2036" relation="include">
+        </childnode>
+      </node>
+      <node id="2035">
+        <label>/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp</label>
+        <link refid="cmaes_8hpp"/>
+        <childnode refid="2036" relation="include">
+        </childnode>
+      </node>
+      <node id="2034">
+        <label>/tmp/doc_limbo/limbo/src/limbo/mean.hpp</label>
+        <link refid="mean_8hpp"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+      </node>
+      <node id="2016">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
+        <link refid="bayes__opt_8hpp"/>
+        <childnode refid="2010" relation="include">
+        </childnode>
+      </node>
+      <node id="2007">
+        <label>/tmp/doc_limbo/limbo/src/limbo/tools/macros.hpp</label>
+        <link refid="macros.hpp"/>
+        <childnode refid="2008" relation="include">
+        </childnode>
+        <childnode refid="2012" relation="include">
+        </childnode>
         <childnode refid="2013" relation="include">
         </childnode>
         <childnode refid="2014" relation="include">
         </childnode>
         <childnode refid="2015" relation="include">
         </childnode>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="2032">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/eci.hpp</label>
-        <link refid="eci_8hpp"/>
-      </node>
-      <node id="2058">
-        <label>/tmp/doc_limbo/limbo/src/limbo/stop/max_predicted_value.hpp</label>
-        <link refid="max__predicted__value_8hpp"/>
-        <childnode refid="2057" relation="include">
-        </childnode>
-      </node>
-      <node id="2017">
-        <label>/tmp/doc_limbo/limbo/src/limbo/acqui/ei.hpp</label>
-        <link refid="ei_8hpp"/>
-        <childnode refid="2018" relation="include">
-        </childnode>
-      </node>
-      <node id="2021">
-        <label>/tmp/doc_limbo/limbo/src/limbo/acqui/gp_ucb.hpp</label>
-        <link refid="gp__ucb_8hpp"/>
-        <childnode refid="2018" relation="include">
-        </childnode>
-      </node>
-      <node id="2018">
-        <label>/tmp/doc_limbo/limbo/src/limbo/acqui.hpp</label>
-        <link refid="acqui_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-      </node>
-      <node id="2029">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
-        <link refid="nsbo_8hpp"/>
-      </node>
-      <node id="2028">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
-        <link refid="bayes__opt_2ehvi_8hpp"/>
-      </node>
-      <node id="2022">
-        <label>/tmp/doc_limbo/limbo/src/limbo/acqui/ucb.hpp</label>
-        <link refid="ucb_8hpp"/>
-        <childnode refid="2018" relation="include">
-        </childnode>
         <childnode refid="2023" relation="include">
         </childnode>
-      </node>
-      <node id="2042">
-        <label>/tmp/doc_limbo/limbo/src/limbo/mean/constant.hpp</label>
-        <link refid="constant_8hpp"/>
-        <childnode refid="2043" relation="include">
+        <childnode refid="2024" relation="include">
         </childnode>
-      </node>
-      <node id="2050">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/hp_opt.hpp</label>
-        <link refid="hp__opt_8hpp"/>
-        <childnode refid="2051" relation="include">
+        <childnode refid="2021" relation="include">
         </childnode>
-        <childnode refid="2053" relation="include">
+        <childnode refid="2019" relation="include">
         </childnode>
-        <childnode refid="2054" relation="include">
+        <childnode refid="2022" relation="include">
         </childnode>
-      </node>
-      <node id="2055">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/rprop.hpp</label>
-        <link refid="rprop_8hpp"/>
-        <childnode refid="2050" relation="include">
+        <childnode refid="2017" relation="include">
         </childnode>
-        <childnode refid="2045" relation="include">
-        </childnode>
-      </node>
-      <node id="2024">
-        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
-        <link refid="boptimizer_8hpp"/>
         <childnode refid="2025" relation="include">
         </childnode>
-        <childnode refid="2026" relation="include">
+        <childnode refid="2027" relation="include">
         </childnode>
-      </node>
-      <node id="2036">
-        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling.hpp</label>
-        <link refid="random__sampling_8hpp"/>
-        <childnode refid="2023" relation="include">
-        </childnode>
-        <childnode refid="2035" relation="include">
-        </childnode>
-      </node>
-      <node id="2047">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_grad.hpp</label>
-        <link refid="nlopt__grad_8hpp"/>
-        <childnode refid="2045" relation="include">
-        </childnode>
-      </node>
-      <node id="2035">
-        <label>/tmp/doc_limbo/limbo/src/limbo/init.hpp</label>
-        <link refid="init_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-      </node>
-      <node id="2039">
-        <label>/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</label>
-        <link refid="kernel_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-      </node>
-      <node id="2026">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
-        <link refid="parego_8hpp"/>
-      </node>
-      <node id="2052">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
-        <link refid="model_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-      </node>
-      <node id="2020">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
-        <link refid="pareto__benchmark_8hpp"/>
-      </node>
-      <node id="2038">
-        <label>/tmp/doc_limbo/limbo/src/limbo/kernel/exp.hpp</label>
-        <link refid="exp_8hpp"/>
-        <childnode refid="2023" relation="include">
-        </childnode>
-        <childnode refid="2039" relation="include">
-        </childnode>
-      </node>
-      <node id="2030">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp</label>
-        <link refid="cboptimizer_8hpp"/>
-      </node>
-      <node id="2059">
-        <label>/tmp/doc_limbo/limbo/src/limbo/tools.hpp</label>
-        <link refid="tools_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-        <childnode refid="2060" relation="include">
-        </childnode>
-      </node>
-      <node id="2019">
-        <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
-        <link refid="limbo_8hpp"/>
-        <childnode refid="2020" relation="include">
-        </childnode>
-      </node>
-      <node id="2033">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/acqui/ucb_imgpo.hpp</label>
-        <link refid="ucb__imgpo_8hpp"/>
-      </node>
-      <node id="2034">
-        <label>/tmp/doc_limbo/limbo/src/limbo/init/grid_sampling.hpp</label>
-        <link refid="grid__sampling_8hpp"/>
-        <childnode refid="2035" relation="include">
-        </childnode>
-      </node>
-      <node id="2049">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/parallel_repeater.hpp</label>
-        <link refid="parallel__repeater_8hpp"/>
-        <childnode refid="2050" relation="include">
-        </childnode>
-        <childnode refid="2045" relation="include">
-        </childnode>
-      </node>
-      <node id="2041">
-        <label>/tmp/doc_limbo/limbo/src/limbo/kernel/matern_three_halves.hpp</label>
-        <link refid="matern__three__halves_8hpp"/>
-        <childnode refid="2039" relation="include">
-        </childnode>
-      </node>
-      <node id="2031">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
-        <link refid="imgpo_8hpp"/>
-      </node>
-      <node id="2051">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_lf_opt.hpp</label>
-        <link refid="kernel__lf__opt_8hpp"/>
-        <childnode refid="2052" relation="include">
-        </childnode>
-      </node>
-      <node id="2040">
-        <label>/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp</label>
-        <link refid="matern__five__halves_8hpp"/>
-        <childnode refid="2039" relation="include">
-        </childnode>
-      </node>
-      <node id="2037">
-        <label>/tmp/doc_limbo/limbo/src/limbo/init/random_sampling_grid.hpp</label>
-        <link refid="random__sampling__grid_8hpp"/>
-        <childnode refid="2035" relation="include">
-        </childnode>
-      </node>
-      <node id="2056">
-        <label>/tmp/doc_limbo/limbo/src/limbo/stop/max_iterations.hpp</label>
-        <link refid="max__iterations_8hpp"/>
-        <childnode refid="2023" relation="include">
-        </childnode>
-        <childnode refid="2057" relation="include">
-        </childnode>
-      </node>
-      <node id="2054">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/mean_lf_opt.hpp</label>
-        <link refid="mean__lf__opt_8hpp"/>
-        <childnode refid="2052" relation="include">
-        </childnode>
-      </node>
-      <node id="2060">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
-        <link refid="model_2gp_8hpp"/>
-        <childnode refid="2023" relation="include">
-        </childnode>
-        <childnode refid="2052" relation="include">
-        </childnode>
-      </node>
-      <node id="2027">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
-        <link refid="bo__multi_8hpp"/>
         <childnode refid="2028" relation="include">
         </childnode>
         <childnode refid="2029" relation="include">
         </childnode>
-      </node>
-      <node id="2045">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt.hpp</label>
-        <link refid="opt_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-      </node>
-      <node id="2053">
-        <label>/tmp/doc_limbo/limbo/src/limbo/model/gp/kernel_mean_lf_opt.hpp</label>
-        <link refid="kernel__mean__lf__opt_8hpp"/>
-        <childnode refid="2052" relation="include">
-        </childnode>
-      </node>
-      <node id="2023">
-        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
-        <link refid="bo__base_8hpp"/>
-        <childnode refid="2024" relation="include">
-        </childnode>
-        <childnode refid="2027" relation="include">
-        </childnode>
-        <childnode refid="2030" relation="include">
-        </childnode>
         <childnode refid="2031" relation="include">
-        </childnode>
-        <childnode refid="2026" relation="include">
-        </childnode>
-      </node>
-      <node id="2048">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/nlopt_no_grad.hpp</label>
-        <link refid="nlopt__no__grad_8hpp"/>
-        <childnode refid="2024" relation="include">
-        </childnode>
-        <childnode refid="2030" relation="include">
-        </childnode>
-        <childnode refid="2045" relation="include">
-        </childnode>
-      </node>
-      <node id="2044">
-        <label>/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp</label>
-        <link refid="cmaes_8hpp"/>
-        <childnode refid="2045" relation="include">
-        </childnode>
-      </node>
-      <node id="2043">
-        <label>/tmp/doc_limbo/limbo/src/limbo/mean.hpp</label>
-        <link refid="mean_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-      </node>
-      <node id="2025">
-        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
-        <link refid="bayes__opt_8hpp"/>
-        <childnode refid="2019" relation="include">
-        </childnode>
-      </node>
-      <node id="2016">
-        <label>/tmp/doc_limbo/limbo/src/limbo/tools/macros.hpp</label>
-        <link refid="macros.hpp"/>
-        <childnode refid="2017" relation="include">
-        </childnode>
-        <childnode refid="2021" relation="include">
-        </childnode>
-        <childnode refid="2022" relation="include">
-        </childnode>
-        <childnode refid="2023" relation="include">
-        </childnode>
-        <childnode refid="2024" relation="include">
         </childnode>
         <childnode refid="2032" relation="include">
         </childnode>
         <childnode refid="2033" relation="include">
         </childnode>
-        <childnode refid="2030" relation="include">
-        </childnode>
-        <childnode refid="2028" relation="include">
-        </childnode>
-        <childnode refid="2031" relation="include">
-        </childnode>
-        <childnode refid="2026" relation="include">
-        </childnode>
-        <childnode refid="2034" relation="include">
-        </childnode>
-        <childnode refid="2036" relation="include">
+        <childnode refid="2035" relation="include">
         </childnode>
         <childnode refid="2037" relation="include">
         </childnode>
         <childnode refid="2038" relation="include">
         </childnode>
+        <childnode refid="2039" relation="include">
+        </childnode>
         <childnode refid="2040" relation="include">
-        </childnode>
-        <childnode refid="2041" relation="include">
-        </childnode>
-        <childnode refid="2042" relation="include">
-        </childnode>
-        <childnode refid="2044" relation="include">
         </childnode>
         <childnode refid="2046" relation="include">
         </childnode>
         <childnode refid="2047" relation="include">
         </childnode>
-        <childnode refid="2048" relation="include">
-        </childnode>
         <childnode refid="2049" relation="include">
         </childnode>
-        <childnode refid="2055" relation="include">
-        </childnode>
-        <childnode refid="2056" relation="include">
-        </childnode>
-        <childnode refid="2058" relation="include">
-        </childnode>
-        <childnode refid="2059" relation="include">
+        <childnode refid="2050" relation="include">
         </childnode>
       </node>
-      <node id="2057">
+      <node id="2048">
         <label>/tmp/doc_limbo/limbo/src/limbo/stop.hpp</label>
         <link refid="stop_8hpp"/>
-        <childnode refid="2019" relation="include">
+        <childnode refid="2010" relation="include">
         </childnode>
       </node>
-      <node id="2046">
+      <node id="2037">
         <label>/tmp/doc_limbo/limbo/src/limbo/opt/grid_search.hpp</label>
         <link refid="grid__search_8hpp"/>
-        <childnode refid="2045" relation="include">
+        <childnode refid="2036" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

@@ -2,6 +2,7 @@ var searchData=
 [
   ['bayes_5fopt_5fbobase',['bayes_opt_bobase',['../structlimbo_1_1defaults_1_1bayes__opt__bobase.html',1,'limbo::defaults']]],
   ['bayes_5fopt_5fboptimizer',['bayes_opt_boptimizer',['../structlimbo_1_1defaults_1_1bayes__opt__boptimizer.html',1,'limbo::defaults']]],
+  ['bayes_5fopt_5fcboptimizer',['bayes_opt_cboptimizer',['../structlimbo_1_1defaults_1_1bayes__opt__cboptimizer.html',1,'limbo::defaults']]],
   ['bayes_5fopt_5fehvi',['bayes_opt_ehvi',['../structlimbo_1_1defaults_1_1bayes__opt__ehvi.html',1,'limbo::defaults']]],
   ['bayes_5fopt_5fimgpo',['bayes_opt_imgpo',['../structlimbo_1_1bayes__opt_1_1experimental_1_1defaults_1_1bayes__opt__imgpo.html',1,'limbo::bayes_opt::experimental::defaults']]],
   ['bestaggregatedobservations',['BestAggregatedObservations',['../structlimbo_1_1stat_1_1_best_aggregated_observations.html',1,'limbo::stat']]],

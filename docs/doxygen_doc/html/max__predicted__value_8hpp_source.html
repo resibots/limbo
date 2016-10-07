@@ -167,7 +167,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keyword">auto</span> optimizer = _get_optimizer(<span class="keyword">typename</span> BO::acqui_optimizer_t(), Optimizer());</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                Eigen::VectorXd starting_point = <a class="code" href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">tools::random_vector</a>(bo.model().dim_in());</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                Eigen::VectorXd starting_point = <a class="code" href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">tools::random_vector</a>(bo.model().dim_in());</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keyword">auto</span> model_optimization =</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    [&amp;](<span class="keyword">const</span> Eigen::VectorXd&amp; x, <span class="keywordtype">bool</span> g) { <span class="keywordflow">return</span> <a class="code" href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">opt::no_grad</a>(afun(bo.model().mu(x))); };</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keyword">auto</span> x = optimizer(model_optimization, starting_point, <span class="keyword">true</span>);</div>
@@ -234,6 +234,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:114</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1stop__maxpredictedvalue_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1stop__maxpredictedvalue.html">limbo::defaults::stop_maxpredictedvalue</a></div><div class="ttdef"><b>Definition:</b> max_predicted_value.hpp:59</div></div>
+<div class="ttc" id="group__tools_html_ga4db74517a1dead8a92f2f1482de106b8"><div class="ttname"><a href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size, bool bounded=true)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:132</div></div>
 <div class="ttc" id="structlimbo_1_1stop_1_1_max_predicted_value_html"><div class="ttname"><a href="structlimbo_1_1stop_1_1_max_predicted_value.html">limbo::stop::MaxPredictedValue</a></div><div class="ttdef"><b>Definition:</b> max_predicted_value.hpp:70</div></div>
 <div class="ttc" id="group__stop__defaults_html_ga65d82b10cd35e92f2df32c2dbed0f91b"><div class="ttname"><a href="group__stop__defaults.html#ga65d82b10cd35e92f2df32c2dbed0f91b">limbo::defaults::stop_maxpredictedvalue::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, ratio, 0.9)</div></div>
 <div class="ttc" id="group__opt__tools_html_ga38e53ccac21f452bd31e9b239985d456"><div class="ttname"><a href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">limbo::opt::no_grad</a></div><div class="ttdeci">eval_t no_grad(double x)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:64</div></div>
@@ -242,11 +243,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="macros_8hpp_html"><div class="ttname"><a href="macros_8hpp.html">macros.hpp</a></div></div>
 <div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
 <div class="ttc" id="structlimbo_1_1stop_1_1_max_predicted_value_html_a211e3d4d8935c84ddb27e09d76a1726a"><div class="ttname"><a href="structlimbo_1_1stop_1_1_max_predicted_value.html#a211e3d4d8935c84ddb27e09d76a1726a">limbo::stop::MaxPredictedValue::MaxPredictedValue</a></div><div class="ttdeci">MaxPredictedValue()</div><div class="ttdef"><b>Definition:</b> max_predicted_value.hpp:72</div></div>
-<div class="ttc" id="group__tools_html_ga2a64df3120a3ecd84e62640fb43722d0"><div class="ttname"><a href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:107</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 7 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Oct 8 2016 00:00:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

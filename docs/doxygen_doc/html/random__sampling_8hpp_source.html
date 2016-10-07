@@ -156,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structlimbo_1_1init_1_1_random_sampling.html#a4173b31aa6453a68f43aa7d24fbd0ca9">   72</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1init_1_1_random_sampling.html#a4173b31aa6453a68f43aa7d24fbd0ca9">operator()</a>(<span class="keyword">const</span> StateFunction&amp; seval, <span class="keyword">const</span> AggregatorFunction&amp;, Opt&amp; opt)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">            </span>{</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Params::init_randomsampling::samples(); i++) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="keyword">auto</span> new_sample = <a class="code" href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">tools::random_vector</a>(StateFunction::dim_in);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="keyword">auto</span> new_sample = <a class="code" href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">tools::random_vector</a>(StateFunction::dim_in);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    opt.eval_and_add(seval, new_sample);</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            }</div>
@@ -166,6 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:114</div></div>
+<div class="ttc" id="group__tools_html_ga4db74517a1dead8a92f2f1482de106b8"><div class="ttname"><a href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size, bool bounded=true)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:132</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1init__randomsampling_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1init__randomsampling.html">limbo::defaults::init_randomsampling</a></div><div class="ttdef"><b>Definition:</b> random_sampling.hpp:55</div></div>
 <div class="ttc" id="random__generator_8hpp_html"><div class="ttname"><a href="random__generator_8hpp.html">random_generator.hpp</a></div></div>
 <div class="ttc" id="macros_8hpp_html"><div class="ttname"><a href="macros_8hpp.html">macros.hpp</a></div></div>
@@ -173,11 +174,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="structlimbo_1_1init_1_1_random_sampling_html_a4173b31aa6453a68f43aa7d24fbd0ca9"><div class="ttname"><a href="structlimbo_1_1init_1_1_random_sampling.html#a4173b31aa6453a68f43aa7d24fbd0ca9">limbo::init::RandomSampling::operator()</a></div><div class="ttdeci">void operator()(const StateFunction &amp;seval, const AggregatorFunction &amp;, Opt &amp;opt) const </div><div class="ttdef"><b>Definition:</b> random_sampling.hpp:72</div></div>
 <div class="ttc" id="group__init__defaults_html_ga74c4af5541464b6d880589e40dddfd54"><div class="ttname"><a href="group__init__defaults.html#ga74c4af5541464b6d880589e40dddfd54">limbo::defaults::init_randomsampling::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(int, samples, 10)</div></div>
 <div class="ttc" id="structlimbo_1_1init_1_1_random_sampling_html"><div class="ttname"><a href="structlimbo_1_1init_1_1_random_sampling.html">limbo::init::RandomSampling</a></div><div class="ttdef"><b>Definition:</b> random_sampling.hpp:70</div></div>
-<div class="ttc" id="group__tools_html_ga2a64df3120a3ecd84e62640fb43722d0"><div class="ttname"><a href="group__tools.html#ga2a64df3120a3ecd84e62640fb43722d0">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:107</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 7 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Oct 8 2016 00:00:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

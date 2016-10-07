@@ -14,66 +14,72 @@
     <includedby refid="bo__base_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</includedby>
     <includedby refid="model_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/model.hpp</includedby>
     <incdepgraph>
-      <node id="1219">
+      <node id="1216">
         <label>list</label>
       </node>
-      <node id="1212">
+      <node id="1209">
         <label>boost/algorithm/string.hpp</label>
       </node>
-      <node id="1232">
+      <node id="1229">
         <label>functional</label>
       </node>
-      <node id="1206">
+      <node id="1203">
         <label>Eigen/Cholesky</label>
       </node>
-      <node id="1204">
+      <node id="1201">
         <label>limits</label>
       </node>
-      <node id="1208">
+      <node id="1205">
         <label>Eigen/LU</label>
       </node>
-      <node id="1235">
+      <node id="1232">
         <label>iterator</label>
       </node>
-      <node id="1230">
+      <node id="1227">
         <label>cstdint</label>
       </node>
-      <node id="1220">
+      <node id="1217">
         <label>stdlib.h</label>
       </node>
-      <node id="1217">
+      <node id="1214">
         <label>cmath</label>
       </node>
-      <node id="1202">
+      <node id="1199">
         <label>cassert</label>
       </node>
-      <node id="1207">
+      <node id="1204">
         <label>Eigen/Core</label>
       </node>
-      <node id="1226">
+      <node id="1223">
         <label>string</label>
       </node>
-      <node id="1213">
+      <node id="1210">
         <label>limbo/tools/parallel.hpp</label>
         <link refid="parallel_8hpp"/>
-        <childnode refid="1205" relation="include">
+        <childnode refid="1202" relation="include">
         </childnode>
-        <childnode refid="1214" relation="include">
+        <childnode refid="1211" relation="include">
+        </childnode>
+      </node>
+      <node id="1221">
+        <label>limbo/tools/sys.hpp</label>
+        <link refid="sys_8hpp"/>
+        <childnode refid="1215" relation="include">
+        </childnode>
+        <childnode refid="1222" relation="include">
+        </childnode>
+        <childnode refid="1223" relation="include">
         </childnode>
       </node>
       <node id="1224">
-        <label>limbo/tools/sys.hpp</label>
-        <link refid="sys_8hpp"/>
-        <childnode refid="1218" relation="include">
-        </childnode>
-        <childnode refid="1225" relation="include">
-        </childnode>
-        <childnode refid="1226" relation="include">
-        </childnode>
-      </node>
-      <node id="1227">
         <label>limbo/tools/random_generator.hpp</label>
         <link refid="random__generator_8hpp"/>
+        <childnode refid="1213" relation="include">
+        </childnode>
+        <childnode refid="1214" relation="include">
+        </childnode>
+        <childnode refid="1215" relation="include">
+        </childnode>
         <childnode refid="1216" relation="include">
         </childnode>
         <childnode refid="1217" relation="include">
@@ -84,57 +90,59 @@
         </childnode>
         <childnode refid="1220" relation="include">
         </childnode>
-        <childnode refid="1221" relation="include">
-        </childnode>
-        <childnode refid="1222" relation="include">
-        </childnode>
-        <childnode refid="1223" relation="include">
-        </childnode>
-        <childnode refid="1228" relation="include">
+        <childnode refid="1225" relation="include">
         </childnode>
       </node>
-      <node id="1210">
+      <node id="1207">
         <label>limbo/tools.hpp</label>
         <link refid="tools_8hpp"/>
-        <childnode refid="1211" relation="include">
+        <childnode refid="1208" relation="include">
         </childnode>
-        <childnode refid="1213" relation="include">
+        <childnode refid="1210" relation="include">
         </childnode>
-        <childnode refid="1215" relation="include">
+        <childnode refid="1212" relation="include">
+        </childnode>
+        <childnode refid="1221" relation="include">
         </childnode>
         <childnode refid="1224" relation="include">
         </childnode>
-        <childnode refid="1227" relation="include">
-        </childnode>
-      </node>
-      <node id="1221">
-        <label>random</label>
       </node>
       <node id="1218">
+        <label>random</label>
+      </node>
+      <node id="1215">
         <label>ctime</label>
       </node>
-      <node id="1225">
+      <node id="1222">
         <label>unistd.h</label>
       </node>
-      <node id="1205">
+      <node id="1202">
         <label>vector</label>
       </node>
-      <node id="1222">
+      <node id="1219">
         <label>utility</label>
       </node>
-      <node id="1231">
+      <node id="1228">
         <label>array</label>
       </node>
-      <node id="1228">
+      <node id="1225">
         <label>limbo/tools/rand_utils.hpp</label>
         <link refid="rand__utils_8hpp"/>
+        <childnode refid="1226" relation="include">
+        </childnode>
+        <childnode refid="1227" relation="include">
+        </childnode>
+        <childnode refid="1213" relation="include">
+        </childnode>
+        <childnode refid="1218" relation="include">
+        </childnode>
+        <childnode refid="1228" relation="include">
+        </childnode>
         <childnode refid="1229" relation="include">
         </childnode>
         <childnode refid="1230" relation="include">
         </childnode>
-        <childnode refid="1216" relation="include">
-        </childnode>
-        <childnode refid="1221" relation="include">
+        <childnode refid="1219" relation="include">
         </childnode>
         <childnode refid="1231" relation="include">
         </childnode>
@@ -142,28 +150,26 @@
         </childnode>
         <childnode refid="1233" relation="include">
         </childnode>
-        <childnode refid="1222" relation="include">
-        </childnode>
         <childnode refid="1234" relation="include">
         </childnode>
-        <childnode refid="1235" relation="include">
-        </childnode>
-        <childnode refid="1236" relation="include">
-        </childnode>
-        <childnode refid="1237" relation="include">
-        </childnode>
-        <childnode refid="1214" relation="include">
+        <childnode refid="1211" relation="include">
         </childnode>
       </node>
-      <node id="1216">
+      <node id="1213">
         <label>cstdlib</label>
       </node>
-      <node id="1203">
+      <node id="1200">
         <label>iostream</label>
       </node>
-      <node id="1201">
+      <node id="1198">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
         <link refid="model/gp.hpp"/>
+        <childnode refid="1199" relation="include">
+        </childnode>
+        <childnode refid="1200" relation="include">
+        </childnode>
+        <childnode refid="1201" relation="include">
+        </childnode>
         <childnode refid="1202" relation="include">
         </childnode>
         <childnode refid="1203" relation="include">
@@ -176,37 +182,37 @@
         </childnode>
         <childnode refid="1207" relation="include">
         </childnode>
-        <childnode refid="1208" relation="include">
-        </childnode>
-        <childnode refid="1209" relation="include">
-        </childnode>
-        <childnode refid="1210" relation="include">
-        </childnode>
       </node>
-      <node id="1229">
+      <node id="1226">
         <label>cstddef</label>
       </node>
-      <node id="1209">
+      <node id="1206">
         <label>limbo/model/gp/no_lf_opt.hpp</label>
         <link refid="no__lf__opt_8hpp"/>
-        <childnode refid="1203" relation="include">
+        <childnode refid="1200" relation="include">
         </childnode>
       </node>
-      <node id="1223">
+      <node id="1220">
         <label>mutex</label>
       </node>
-      <node id="1236">
+      <node id="1233">
         <label>chrono</label>
       </node>
-      <node id="1237">
+      <node id="1234">
         <label>thread</label>
       </node>
-      <node id="1234">
+      <node id="1231">
         <label>type_traits</label>
       </node>
-      <node id="1215">
+      <node id="1212">
         <label>limbo/tools/math.hpp</label>
         <link refid="math_8hpp"/>
+        <childnode refid="1213" relation="include">
+        </childnode>
+        <childnode refid="1214" relation="include">
+        </childnode>
+        <childnode refid="1215" relation="include">
+        </childnode>
         <childnode refid="1216" relation="include">
         </childnode>
         <childnode refid="1217" relation="include">
@@ -217,109 +223,103 @@
         </childnode>
         <childnode refid="1220" relation="include">
         </childnode>
-        <childnode refid="1221" relation="include">
-        </childnode>
-        <childnode refid="1222" relation="include">
-        </childnode>
-        <childnode refid="1223" relation="include">
-        </childnode>
-      </node>
-      <node id="1214">
-        <label>algorithm</label>
-      </node>
-      <node id="1233">
-        <label>initializer_list</label>
       </node>
       <node id="1211">
+        <label>algorithm</label>
+      </node>
+      <node id="1230">
+        <label>initializer_list</label>
+      </node>
+      <node id="1208">
         <label>limbo/tools/macros.hpp</label>
         <link refid="macros_8hpp"/>
-        <childnode refid="1212" relation="include">
+        <childnode refid="1209" relation="include">
         </childnode>
-        <childnode refid="1207" relation="include">
+        <childnode refid="1204" relation="include">
         </childnode>
-        <childnode refid="1203" relation="include">
+        <childnode refid="1200" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1247">
+      <node id="1244">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/nsbo.hpp</label>
         <link refid="nsbo_8hpp"/>
       </node>
-      <node id="1246">
+      <node id="1243">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/ehvi.hpp</label>
         <link refid="bayes__opt_2ehvi_8hpp"/>
       </node>
-      <node id="1240">
+      <node id="1237">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/boptimizer.hpp</label>
         <link refid="boptimizer_8hpp"/>
+        <childnode refid="1238" relation="include">
+        </childnode>
         <childnode refid="1241" relation="include">
         </childnode>
-        <childnode refid="1244" relation="include">
-        </childnode>
       </node>
-      <node id="1244">
+      <node id="1241">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/parego.hpp</label>
         <link refid="parego_8hpp"/>
       </node>
-      <node id="1250">
+      <node id="1247">
         <label>/tmp/doc_limbo/limbo/src/limbo/model.hpp</label>
         <link refid="model_8hpp"/>
-        <childnode refid="1242" relation="include">
+        <childnode refid="1239" relation="include">
         </childnode>
       </node>
-      <node id="1243">
+      <node id="1240">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1248">
+      <node id="1245">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/cboptimizer.hpp</label>
         <link refid="cboptimizer_8hpp"/>
       </node>
-      <node id="1242">
+      <node id="1239">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="1243" relation="include">
+        <childnode refid="1240" relation="include">
         </childnode>
       </node>
-      <node id="1249">
+      <node id="1246">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/imgpo.hpp</label>
         <link refid="imgpo_8hpp"/>
       </node>
-      <node id="1238">
+      <node id="1235">
         <label>/tmp/doc_limbo/limbo/src/limbo/model/gp.hpp</label>
         <link refid="model/gp.hpp"/>
-        <childnode refid="1239" relation="include">
-        </childnode>
-        <childnode refid="1250" relation="include">
-        </childnode>
-      </node>
-      <node id="1245">
-        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
-        <link refid="bo__multi_8hpp"/>
-        <childnode refid="1246" relation="include">
+        <childnode refid="1236" relation="include">
         </childnode>
         <childnode refid="1247" relation="include">
         </childnode>
       </node>
-      <node id="1239">
-        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
-        <link refid="bo__base_8hpp"/>
-        <childnode refid="1240" relation="include">
-        </childnode>
-        <childnode refid="1245" relation="include">
-        </childnode>
-        <childnode refid="1248" relation="include">
-        </childnode>
-        <childnode refid="1249" relation="include">
+      <node id="1242">
+        <label>/tmp/doc_limbo/limbo/src/limbo/experimental/bayes_opt/bo_multi.hpp</label>
+        <link refid="bo__multi_8hpp"/>
+        <childnode refid="1243" relation="include">
         </childnode>
         <childnode refid="1244" relation="include">
         </childnode>
       </node>
-      <node id="1241">
+      <node id="1236">
+        <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp</label>
+        <link refid="bo__base_8hpp"/>
+        <childnode refid="1237" relation="include">
+        </childnode>
+        <childnode refid="1242" relation="include">
+        </childnode>
+        <childnode refid="1245" relation="include">
+        </childnode>
+        <childnode refid="1246" relation="include">
+        </childnode>
+        <childnode refid="1241" relation="include">
+        </childnode>
+      </node>
+      <node id="1238">
         <label>/tmp/doc_limbo/limbo/src/limbo/bayes_opt.hpp</label>
         <link refid="bayes__opt_8hpp"/>
-        <childnode refid="1242" relation="include">
+        <childnode refid="1239" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

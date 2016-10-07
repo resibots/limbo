@@ -119,7 +119,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#bayes-opt-bobase">bayes_opt_bobase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-ucb-imgpo">acqui_ucb_imgpo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#init-randomsamplinggrid">init_randomsamplinggrid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cbayes-opt-boptimizer">cbayes_opt_boptimizer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mean-constant">mean_constant</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stop-maxpredictedvalue">stop_maxpredictedvalue</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stop-maxiterations">stop_maxiterations</a></li>
@@ -133,6 +132,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#opt-nloptgrad">opt_nloptgrad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-ei">acqui_ei</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#kernel-squared-exp-ard">kernel_squared_exp_ard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bayes-opt-cboptimizer">bayes_opt_cboptimizer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-ucb">acqui_ucb</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#init-gridsampling">init_gridsampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#opt-gridsearch">opt_gridsearch</a></li>
@@ -229,13 +229,6 @@
 <li>int samples = 10 [defined in src/limbo/init/random_sampling_grid.hpp]</li>
 </ul>
 </div>
-<div class="section" id="cbayes-opt-boptimizer">
-<h2>cbayes_opt_boptimizer<a class="headerlink" href="#cbayes-opt-boptimizer" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>double noise = 1e-6 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
-<li>int hp_period = -1 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
-</ul>
-</div>
 <div class="section" id="mean-constant">
 <h2>mean_constant<a class="headerlink" href="#mean-constant" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -264,6 +257,7 @@
 <h2>bayes_opt_boptimizer<a class="headerlink" href="#bayes-opt-boptimizer" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>double noise = 1e-6 [defined in src/limbo/bayes_opt/boptimizer.hpp]</li>
+<li>bool bounded = true [defined in src/limbo/bayes_opt/boptimizer.hpp]</li>
 <li>int hp_period = -1 [defined in src/limbo/bayes_opt/boptimizer.hpp]</li>
 </ul>
 </div>
@@ -315,6 +309,14 @@
 <h2>kernel_squared_exp_ard<a class="headerlink" href="#kernel-squared-exp-ard" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>double sigma_sq = 1 [defined in src/limbo/kernel/squared_exp_ard.hpp]</li>
+</ul>
+</div>
+<div class="section" id="bayes-opt-cboptimizer">
+<h2>bayes_opt_cboptimizer<a class="headerlink" href="#bayes-opt-cboptimizer" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double noise = 1e-6 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
+<li>bool bounded = true [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
+<li>int hp_period = -1 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
 </ul>
 </div>
 <div class="section" id="acqui-ucb">
