@@ -69,6 +69,7 @@ namespace limbo {
         struct cbayes_opt_boptimizer {
             BO_PARAM(double, noise, 1e-6);
             BO_PARAM(int, hp_period, -1);
+            BO_PARAM(bool, bounded, true);
         };
     }
 
@@ -170,11 +171,10 @@ namespace limbo {
                     while (!this->_stop(*this, afun)) {
                         acquisition_function_t acqui(_model, _constraint_model, this->_current_iteration);
 
-                        // we do not have gradient in our current acquisition function
                         auto acqui_optimization =
-                            [&](const Eigen::VectorXd& x, bool g) { return opt::no_grad(acqui(x, afun)); };
-                        Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in);
-                        Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, true);
+                            [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun,g); };
+                        Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in, Params::cbayes_opt_boptimizer::bounded());
+                        Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, Params::cbayes_opt_boptimizer::bounded());
                         this->eval_and_add(sfun, new_sample);
 
                         this->_update_stats(*this, afun);
