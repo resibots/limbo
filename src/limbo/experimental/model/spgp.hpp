@@ -43,7 +43,7 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 
-//| TODO: The original paper and implementation needs to be credited?
+//| TODO: Add credits to the original implementation
 #ifndef LIMBO_MODEL_SPGP_HPP
 #define LIMBO_MODEL_SPGP_HPP
 
@@ -259,7 +259,7 @@ namespace limbo {
                 }
             }
 
-        // protected: // TODO: Uncomment
+        protected:
             // Setted on initialization
             size_t _n;
             size_t _m;
