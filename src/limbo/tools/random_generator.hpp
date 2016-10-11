@@ -90,10 +90,16 @@ namespace limbo {
         using rdist_double_t = std::uniform_real_distribution<double>;
         /// @ingroup tools
         using rdist_int_t = std::uniform_int_distribution<int>;
+        /// @ingroup tools
+        using rdist_gauss_t = std::normal_distribution<>;
 
         /// @ingroup tools
         /// Double random number generator
         using rgen_double_t = RandomGenerator<rdist_double_t>;
+
+        /// @ingroup tools
+        /// Double random number generator (gaussian)
+        using rgen_gauss_t = RandomGenerator<rdist_gauss_t>;
 
         ///@ingroup tools
         ///integer random number generator
@@ -120,7 +126,7 @@ namespace limbo {
         /// - we use a C++11 random number generator
         Eigen::VectorXd random_vector_unbounded(int size)
         {
-            static rgen_double_t rgen(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::max());
+            static rgen_gauss_t rgen(0.0, 100.0);
             Eigen::VectorXd res(size);
             for (int i = 0; i < size; ++i)
                 res[i] = rgen.rand();
