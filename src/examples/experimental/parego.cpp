@@ -66,7 +66,7 @@ struct Params {
         BO_PARAM(double, l, 0.2);
     };
 
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, true);
     };
 

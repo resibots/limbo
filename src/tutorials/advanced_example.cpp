@@ -52,7 +52,7 @@ struct Params {
         BO_PARAM(double, noise, 1e-10);
         BO_PARAM(int, hp_period, 10);
     };
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(int, stats_enabled, true);
     };
     struct stop_maxiterations {

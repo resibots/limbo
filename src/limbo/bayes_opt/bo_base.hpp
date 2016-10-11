@@ -78,6 +78,7 @@ namespace limbo {
     namespace defaults {
         struct bayes_opt_bobase {
             BO_PARAM(bool, stats_enabled, true);
+            BO_PARAM(bool, bounded, true);
         };
     }
     template <typename BO, typename AggregatorFunction>

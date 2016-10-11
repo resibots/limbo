@@ -70,7 +70,7 @@ struct Params {
 #endif
 
     // enable / disable the writing of the result files
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(int, stats_enabled, true);
     };
 
