@@ -523,7 +523,7 @@
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">hp_period</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="p">};</span>
-    <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_bobase</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_bobase</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>

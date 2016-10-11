@@ -284,7 +284,7 @@
 <span class="cp">#endif</span>
 
     <span class="c1">// enable / disable the writing of the result files</span>
-    <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_bobase</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_bobase</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="p">};</span>
 
@@ -466,7 +466,7 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
 <span class="cp">#endif</span>
 
     <span class="c1">// enable / disable the writing of the result files</span>
-    <span class="k">struct</span> <span class="n">bayes_opt_bobase</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_bobase</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_bobase</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
     <span class="p">};</span>
 

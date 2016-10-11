@@ -12,6 +12,7 @@ acqui_eci
 bayes_opt_bobase
 ^^^^^^^^^^^^^^^^
 - bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]
+- bool bounded = true [defined in src/limbo/bayes_opt/bo_base.hpp]
 
 acqui_ucb_imgpo
 ^^^^^^^^^^^^^^^
@@ -41,7 +42,6 @@ opt_rprop
 bayes_opt_boptimizer
 ^^^^^^^^^^^^^^^^^^^^
 - double noise = 1e-6 [defined in src/limbo/bayes_opt/boptimizer.hpp]
-- bool bounded = true [defined in src/limbo/bayes_opt/boptimizer.hpp]
 - int hp_period = -1 [defined in src/limbo/bayes_opt/boptimizer.hpp]
 
 kernel_maternfivehalves

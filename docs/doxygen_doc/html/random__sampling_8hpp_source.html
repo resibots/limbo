@@ -156,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structlimbo_1_1init_1_1_random_sampling.html#a4173b31aa6453a68f43aa7d24fbd0ca9">   72</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1init_1_1_random_sampling.html#a4173b31aa6453a68f43aa7d24fbd0ca9">operator()</a>(<span class="keyword">const</span> StateFunction&amp; seval, <span class="keyword">const</span> AggregatorFunction&amp;, Opt&amp; opt)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">            </span>{</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; Params::init_randomsampling::samples(); i++) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="keyword">auto</span> new_sample = <a class="code" href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">tools::random_vector</a>(StateFunction::dim_in);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="keyword">auto</span> new_sample = <a class="code" href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">tools::random_vector</a>(StateFunction::dim_in, Params::bayes_opt_bobase::bounded());</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    opt.eval_and_add(seval, new_sample);</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                }</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            }</div>
@@ -166,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:114</div></div>
-<div class="ttc" id="group__tools_html_ga4db74517a1dead8a92f2f1482de106b8"><div class="ttname"><a href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size, bool bounded=true)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:132</div></div>
+<div class="ttc" id="group__tools_html_ga4db74517a1dead8a92f2f1482de106b8"><div class="ttname"><a href="group__tools.html#ga4db74517a1dead8a92f2f1482de106b8">limbo::tools::random_vector</a></div><div class="ttdeci">Eigen::VectorXd random_vector(int size, bool bounded=true)</div><div class="ttdef"><b>Definition:</b> random_generator.hpp:138</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1init__randomsampling_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1init__randomsampling.html">limbo::defaults::init_randomsampling</a></div><div class="ttdef"><b>Definition:</b> random_sampling.hpp:55</div></div>
 <div class="ttc" id="random__generator_8hpp_html"><div class="ttname"><a href="random__generator_8hpp.html">random_generator.hpp</a></div></div>
 <div class="ttc" id="macros_8hpp_html"><div class="ttname"><a href="macros_8hpp.html">macros.hpp</a></div></div>
@@ -177,7 +177,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 11 2016 00:00:15 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 12 2016 00:00:12 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -31,6 +31,19 @@
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="92" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="group__tools_1ga38a794bf956d6bdd1e55f43357826b79" prot="public" static="no">
+        <type>std::normal_distribution&lt;&gt;</type>
+        <definition>using limbo::tools::rdist_gauss_t = typedef std::normal_distribution&lt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>rdist_gauss_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="94" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="group__tools_1gacdb2963659056fc5fa9f94405f59a851" prot="public" static="no">
         <type><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">RandomGenerator</ref>&lt; <ref refid="group__tools_1gab2609bfef1e3bdb8b44c0d6c8c139927" kindref="member">rdist_double_t</ref> &gt;</type>
         <definition>using limbo::tools::rgen_double_t = typedef RandomGenerator&lt;rdist_double_t&gt;</definition>
@@ -42,7 +55,20 @@
 <para>Double random number generator </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="96" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="96" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="98" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__tools_1ga8d175579a371b13f2209fc21850c067b" prot="public" static="no">
+        <type><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">RandomGenerator</ref>&lt; <ref refid="group__tools_1ga38a794bf956d6bdd1e55f43357826b79" kindref="member">rdist_gauss_t</ref> &gt;</type>
+        <definition>using limbo::tools::rgen_gauss_t = typedef RandomGenerator&lt;rdist_gauss_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>rgen_gauss_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Double random number generator (gaussian) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="102" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group__tools_1ga3df78ebcb864be91e73e840bb42b9208" prot="public" static="no">
         <type><ref refid="classlimbo_1_1tools_1_1_random_generator" kindref="compound">RandomGenerator</ref>&lt; <ref refid="group__tools_1gacb322b4600b2e500dbcd24661a749f49" kindref="member">rdist_int_t</ref> &gt;</type>
@@ -55,7 +81,7 @@
 <para>integer random number generator </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="100" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="100" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="106" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -219,7 +245,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="107" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="107" bodyend="114"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="113" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="113" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="group__tools_1ga0f1d777d8e14733853ffc5df7068246f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Eigen::VectorXd</type>
@@ -238,7 +264,7 @@
 </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="121" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="121" bodyend="128"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="127" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="127" bodyend="134"/>
       </memberdef>
       <memberdef kind="function" id="group__tools_1ga4db74517a1dead8a92f2f1482de106b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Eigen::VectorXd</type>
@@ -260,7 +286,7 @@
 <para>random vector wrapper for both bounded and unbounded versions </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="132" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="132" bodyend="137"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" line="138" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/tools/random_generator.hpp" bodystart="138" bodyend="143"/>
       </memberdef>
       <memberdef kind="function" id="group__tools_1gafb48d3271e7423f8b8d94599869bd9cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
