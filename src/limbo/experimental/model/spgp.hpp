@@ -60,6 +60,14 @@
 #include <limbo/opt.hpp>
 
 namespace limbo {
+    namespace defaults {
+        struct model_spgp {
+            BO_PARAM(double, jitter, 0.000001);
+            BO_PARAM(double, samples_percent, 10);
+            BO_PARAM(double, min_m, 1);
+        };
+    }
+
     namespace model {
         /// @ingroup model
         /// A classic Gaussian process.
@@ -263,7 +271,9 @@ namespace limbo {
             // const std::vector<Eigen::VectorXd>& pseudo_samples() const { return _to_vector(_pseudo_samples); }
 
             /// test the likelihood function given a dataset
-            void test_likelihood(const Eigen::MatrixXd& data, const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations)
+            void test_likelihood(const Eigen::MatrixXd& data, 
+                const Eigen::MatrixXd& samples, 
+                const Eigen::MatrixXd& observations)
             {
                 size_t m = samples.rows()/10;
                 _init(samples, observations, m);
@@ -277,7 +287,8 @@ namespace limbo {
                     double rfw = std::get<0>(result);
                     Eigen::VectorXd rdfw = std::get<1>(result).get();
 
-                    std::cout << "[" << i+1 << "] " << "fw: " << std::abs(rfw+fw) << " dfw: " << (rdfw - dfw).norm() << std::endl;
+                    std::cout << "[" << i+1 << "] " << "fw: " << std::abs(rfw+fw) 
+                        << " dfw: " << (rdfw - dfw).norm() << std::endl;
                 }
             }
 
@@ -311,13 +322,11 @@ namespace limbo {
             Eigen::VectorXd _w_init;
             HyperParamsOptimizer _hp_optimize;
 
-            void _init(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, 
-                size_t m, double jitter, double dim_out)
+            void _init(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, double dim_out)
             {
-                _init(_to_matrix(samples), _to_matrix(observations), jitter, dim_out);
+                _init(_to_matrix(samples), _to_matrix(observations), dim_out);
             }
-            void _init(const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations, 
-                double jitter = 0.000001, double dim_out = 1)
+            void _init(const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations, double dim_out = 1)
             {
                 _samples = samples;
                 _obs_sum = observations.colwise().sum();
@@ -327,7 +336,7 @@ namespace limbo {
 
                 _dim_in = _samples.cols();
                 _dim_out = dim_out;
-                _del = jitter; // Parameter
+                _del = Params::model_spgp::jitter();
 
                 _optimize_init = true;
                 srand(time(NULL));
@@ -336,10 +345,8 @@ namespace limbo {
             void _update_m()
             {
                 // NOTE: We could add the option to use a function to change the m dinamycally based on the samples.
-                int percent = 10; // Parameter
-                int min_m = 1; // Parameter
-                _m = _samples.rows()/percent;
-                if (_m < min_m) _m = min_m;
+                _m = _samples.rows()/Params::model_spgp::samples_percent();
+                if (_m < Params::model_spgp::min_m()) _m = Params::model_spgp::min_m();;
             }
 
             void _compute(bool optimize = true)
