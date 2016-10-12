@@ -127,7 +127,25 @@ namespace limbo {
             /// add sample and recompute the SPGP
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
-                
+                // add the new sample
+                _samples.conservativeResize(_samples.rows()+1, _samples.cols());
+                _samples.row(_samples.rows()-1) = sample.transpose();
+                _update_m();
+
+                // calculate the mean difference in the observations
+                _obs_sum += observation;
+                Eigen::VectorXd obs_diff = this->_obs_sum/(_observations.rows()+1) - _obs_mean;
+
+                // update the mean and the observations
+                _obs_mean += obs_diff;
+                _observations -= obs_diff.replicate(_observations.rows(), 1);
+
+                // substract the updated mean and add the new observation
+                _observations.conservativeResize(_observations.rows()+1, _observations.cols());
+                _observations.row(_observations.rows()-1) = observation.transpose() - _obs_mean;
+
+                _optimize_init = true; // maybe we can add one random pseudo-input before optimizing to avoid re-initialization
+                _compute();
             }
 
             /**
