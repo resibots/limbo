@@ -78,8 +78,8 @@ namespace limbo {
                 Eigen::MatrixXd xb;
 
                 HyperParams(const Eigen::VectorXd& input, const size_t& m, const size_t& dim_in) {
-                    Eigen::VectorXd w = input;
-                    b =  w.segment(m*dim_in, dim_in).transpose().array().exp();
+                    Eigen::VectorXd w = input; // TODO: Improve
+                    b = w.segment(m*dim_in, dim_in).transpose().array().exp();
                     c = std::exp(w[(m+1)*dim_in]);
                     sig = std::exp(w[(m+1)*dim_in+1]);
                     xb = Eigen::Map<Eigen::MatrixXd>(w.segment(0, m).data(), m, dim_in);
@@ -93,10 +93,12 @@ namespace limbo {
             SPGP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out) {}
 
-            SPGP(const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations, 
-                size_t m, double jitter = 0.000001, double dim_out = 1)
+            /// useful to construct without optimizing
+            SPGP(const std::vector<Eigen::VectorXd>& samples,
+                const std::vector<Eigen::VectorXd>& observations,
+                const Eigen::VectorXd& noises)
             {
-                _init(samples, observations, m, jitter, dim_out);
+                _init(samples, observations);
             }
 
             /// only to match the interface
@@ -111,22 +113,21 @@ namespace limbo {
             }
             void compute(const Eigen::MatrixXd& samples,
                 const Eigen::MatrixXd& observations,
-                const Eigen::MatrixXd& noises)
+                const Eigen::MatrixXd& noises) // TODO: The noises are not beign used
             {
                 assert(samples.rows() != 0);
                 assert(observations.rows() != 0);
                 assert(samples.rows() == observations.rows());
 
-                size_t m = samples.rows()/10;
-                _init(samples, observations, m);
-
+                _optimize_init = true;
+                _init(samples, observations);
                 _compute();
             }
 
-            /// add sample and recompute the SPGP.
+            /// add sample and recompute the SPGP
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
-                // TODO: Recompute for each new sample
+                
             }
 
             /**
@@ -161,7 +162,7 @@ namespace limbo {
             }
             Eigen::MatrixXd mu(const Eigen::MatrixXd& v, bool add_mean = true) const
             {
-                // if (_samples.size() == 0)
+                // if (_observations.size() == 0)
                 //    return _mean_function(v, *this);
                 return _predict(v, true, false, add_mean).first;
             }
@@ -221,10 +222,13 @@ namespace limbo {
             int nb_pseudo_samples() const { return _pseudo_samples.rows(); }
 
             ///  recomputes the SPGP
-            void recompute(bool update_obs_mean = true) { }
+            void recompute(bool update_obs_mean = true) { 
+                _optimize_init = true;
+                _compute();
+            }
 
             /// return the likelihood (do not compute it!)
-            double get_lik() const { return _lik; }
+            // double get_lik() const { return _lik; }
 
             /// set the likelihood (you need to compute it from outside!)
             // TODO: This has any sense to keep? It's not gonna be used!
@@ -260,57 +264,64 @@ namespace limbo {
             }
 
         protected:
-            // Setted on initialization
-            size_t _n;
+            /// set on initialization
             size_t _m;
             size_t _dim_in;
             size_t _dim_out;
+            double _del;
             Eigen::MatrixXd _samples;
             Eigen::MatrixXd _observations;
-            double _del;
-            double _obs_mean;
+            Eigen::VectorXd _obs_sum;
+            Eigen::VectorXd _obs_mean;
 
-            // Setted after the hyperparameters calculation
+            /// set after the hyperparameters calculation
             Eigen::MatrixXd _pseudo_samples;
             Eigen::VectorXd _b;
             double _c;
             double _sig;
             Eigen::VectorXd _noises; // equals to del in all of them
 
-            // Calculated in _compute
+            /// calculated in _compute
             Eigen::MatrixXd _Lm;
             Eigen::MatrixXd _bet;
             Eigen::MatrixXd _kernel_m;
             Eigen::MatrixXd _kernel_mn;
             Eigen::MatrixXd _matrixL;
 
-            // Control variables
+            /// auxiliary variables
             bool _optimize_init = true;
             Eigen::VectorXd _w_init;
-
-            // To be used
-            double _lik;
             HyperParamsOptimizer _hp_optimize;
 
             void _init(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, 
                 size_t m, double jitter, double dim_out)
             {
-                _init(_to_matrix(samples), _to_matrix(observations), m, jitter, dim_out);
+                _init(_to_matrix(samples), _to_matrix(observations), jitter, dim_out);
             }
             void _init(const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations, 
-                size_t m, double jitter = 0.000001, double dim_out = 1)
+                double jitter = 0.000001, double dim_out = 1)
             {
-                this->_samples = samples;
-                this->_obs_mean = observations.col(0).mean(); // Zero mean the data
-                this->_observations = observations.array() - this->_obs_mean;
-                
-                this->_del = jitter;
-                this->_m = m;
-                this->_n = this->_samples.rows();
+                _samples = samples;
+                _obs_sum = observations.colwise().sum();
+                _obs_mean = _obs_sum/observations.rows();
+                _observations = observations - _obs_mean.replicate(observations.rows(), 1);
+                _update_m();
 
-                this->_dim_in = _samples.cols();
-                this->_dim_out = dim_out;
+                _dim_in = _samples.cols();
+                _dim_out = dim_out;
+                _del = jitter; // Parameter
+
+                _optimize_init = true;
                 srand(time(NULL));
+            }
+
+            void _update_m()
+            {
+                // NOTE: We could add the option to use a function to change the m dinamycally based on the samples.
+                int percent = 10; // Parameter
+                int min_m = 1; // Parameter
+                _m = _samples.rows()/percent;
+                if (_m < min_m) _m = min_m;
             }
 
             void _compute(bool optimize = true)
@@ -336,6 +347,7 @@ namespace limbo {
             void _optimize_hyperparams()
             {
                 if (_optimize_init) {
+
                     // Initialize parameter vector
                     _w_init = Eigen::VectorXd((_m+1)*_dim_in+2);
 
@@ -375,10 +387,11 @@ namespace limbo {
                 Eigen::MatrixXd& xb = hp.xb;
 
                 // Prepare xb and x
+                int n = _samples.rows();
                 Eigen::MatrixXd idm = Eigen::MatrixXd::Identity(_m, _m);
                 Eigen::MatrixXd b_sqrt = b.array().sqrt();
                 xb = xb.cwiseProduct(b_sqrt.replicate(_m,1));
-                Eigen::MatrixXd x = _samples.cwiseProduct(b_sqrt.replicate(_n,1));
+                Eigen::MatrixXd x = _samples.cwiseProduct(b_sqrt.replicate(n,1));
 
                 // Construct Q
                 Eigen::MatrixXd Q = xb*xb.transpose();
@@ -388,7 +401,7 @@ namespace limbo {
 
                 // Need to be changed for the generic kernel construction
                 Eigen::MatrixXd k_m = x.cwiseProduct(x).rowwise().sum().transpose().replicate(_m,1);
-                Eigen::MatrixXd k_n = xb.cwiseProduct(xb).rowwise().sum().replicate(1,_n);
+                Eigen::MatrixXd k_n = xb.cwiseProduct(xb).rowwise().sum().replicate(1,n);
                 Eigen::MatrixXd K = -2*xb*x.transpose() + k_m + k_n;
                 K = (K.array()*-0.5).exp()*c;
 
@@ -408,8 +421,8 @@ namespace limbo {
                 Eigen::MatrixXd bet = invLmV*y;
 
                 // Calculate likelihood
-                Eigen::MatrixXd fw = Lm.diagonal().array().log().colwise().sum() + (_n-_m)/2*std::log(sig) +
-                        (y.transpose()*y - bet.transpose()*bet).array()/(2*sig) + ep.array().log().sum()/2 + 0.5*_n*std::log(2*M_PI);
+                Eigen::MatrixXd fw = Lm.diagonal().array().log().colwise().sum() + (n-_m)/2*std::log(sig) +
+                        (y.transpose()*y - bet.transpose()*bet).array()/(2*sig) + ep.array().log().sum()/2 + 0.5*n*std::log(2*M_PI);
 
                 // ** Derivates calculation - precomputations
                 Eigen::MatrixXd Lt = L*Lm;
@@ -509,7 +522,7 @@ namespace limbo {
                         _sig*lmst.array().pow(2).colwise().sum().transpose();
 
                 if (add_mean)
-                    return {mu.array()+_obs_mean, s2.array()+_sig};
+                    return {mu+_obs_mean, s2.array()+_sig};
                 else
                     return {mu, s2};
             }
