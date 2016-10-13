@@ -85,12 +85,12 @@ namespace limbo {
                 double sig;
                 Eigen::MatrixXd xb;
 
-                HyperParams(const Eigen::VectorXd& input, const size_t& m, const size_t& dim_in) {
-                    Eigen::VectorXd w = input; // TODO: Improve
+                HyperParams(const Eigen::VectorXd& w, const size_t& m, const size_t& dim_in) {
                     b = w.segment(m*dim_in, dim_in).transpose().array().exp();
                     c = std::exp(w[(m+1)*dim_in]);
                     sig = std::exp(w[(m+1)*dim_in+1]);
-                    xb = Eigen::Map<Eigen::MatrixXd>(w.segment(0, m).data(), m, dim_in);
+                    xb = w.segment(0, m*dim_in);
+                    xb.resize(m, dim_in);
                 }
             };
 
@@ -223,11 +223,11 @@ namespace limbo {
                 return _dim_out;
             }
 
-            // TODO: This is worth keeping?
+            // NOTE: This is worth keeping?
             // const KernelFunction& kernel_function() const { return _kernel_function; }
             // KernelFunction& kernel_function() { return _kernel_function; }
 
-            // TODO: This is worth keeping?
+            // NOTE: This is worth keeping?
             // const MeanFunction& mean_function() const { return _mean_function; }
             // MeanFunction& mean_function() { return _mean_function; }
 
@@ -257,7 +257,7 @@ namespace limbo {
             // double get_lik() const { return _lik; }
 
             /// set the likelihood (you need to compute it from outside!)
-            // TODO: This has any sense to keep? It's not gonna be used!
+            // NOTE: This has any sense to keep? It's not gonna be used!
             // void set_lik(const double& lik) { _lik = lik; }
 
             /// TODO: set pseudo samples?
