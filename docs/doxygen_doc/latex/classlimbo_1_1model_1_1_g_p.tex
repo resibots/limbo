@@ -11,7 +11,7 @@
 \begin{DoxyCompactList}\small\item\em useful because the model might be created before knowing anything about the process \end{DoxyCompactList}\item 
 \hyperlink{classlimbo_1_1model_1_1_g_p_ab36947c89e4f5ad92599656a21829755}{G\+P} (int \hyperlink{classlimbo_1_1model_1_1_g_p_a41d99e6a69d53fc7d9260d295f787bc3}{dim\+\_\+in}, int \hyperlink{classlimbo_1_1model_1_1_g_p_a077144695f9f0b33b64d4feb8fb4e447}{dim\+\_\+out})
 \begin{DoxyCompactList}\small\item\em useful because the model might be created before having samples \end{DoxyCompactList}\item 
-void \hyperlink{classlimbo_1_1model_1_1_g_p_a5e2ea732c8d93491433fcc838f67f41e}{compute} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&\hyperlink{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}{samples}, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&observations, const Eigen\+::\+Vector\+Xd \&noises)
+void \hyperlink{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}{compute} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&\hyperlink{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}{samples}, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&observations, const Eigen\+::\+Vector\+Xd \&noises, bool compute\+\_\+kernel=true)
 \begin{DoxyCompactList}\small\item\em Compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} from samples, observation, noise. This call needs to be explicit! \end{DoxyCompactList}\item 
 void \hyperlink{classlimbo_1_1model_1_1_g_p_aa01b41e37de4def676cf6c79b08aac94}{optimize\+\_\+hyperparams} ()
 \begin{DoxyCompactList}\small\item\em Do not forget to call this if you use hyper-\/prameters optimization!! \end{DoxyCompactList}\item 
@@ -104,22 +104,23 @@ useful because the model might be created before having samples
 \item[{double}]{noise}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a43e4e23d98c421d610df52ea6d3f3539}
-add sample and update the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P}. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to \hyperlink{classlimbo_1_1model_1_1_g_p_a5e2ea732c8d93491433fcc838f67f41e}{compute()} \hypertarget{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!alpha@{alpha}}
+add sample and update the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P}. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to \hyperlink{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}{compute()} \hypertarget{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!alpha@{alpha}}
 \index{alpha@{alpha}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{alpha}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::alpha (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}
-\hypertarget{classlimbo_1_1model_1_1_g_p_a5e2ea732c8d93491433fcc838f67f41e}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!compute@{compute}}
+\hypertarget{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!compute@{compute}}
 \index{compute@{compute}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
 \subsubsection[{compute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::compute (
 \begin{DoxyParamCaption}
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{samples, }
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{observations, }
-\item[{const Eigen\+::\+Vector\+Xd \&}]{noises}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{noises, }
+\item[{bool}]{compute\+\_\+kernel = {\ttfamily true}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a5e2ea732c8d93491433fcc838f67f41e}
+)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}
 
 
 Compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} from samples, observation, noise. This call needs to be explicit! 

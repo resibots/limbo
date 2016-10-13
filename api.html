@@ -1131,8 +1131,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N5limbo5model2GP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEERKN5Eigen8VectorXdE">
-<span id="limbo::model::GP::compute__std::vector:Eigen::VectorXd:CR.std::vector:Eigen::VectorXd:CR.Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a5e2ea732c8d93491433fcc838f67f41e"></span>void <code class="descname">compute</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>samples</em>, <em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>observations</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>noises</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
+<dt id="_CPPv2N5limbo5model2GP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEERKN5Eigen8VectorXdEb">
+<span id="limbo::model::GP::compute__std::vector:Eigen::VectorXd:CR.std::vector:Eigen::VectorXd:CR.Eigen::VectorXdCR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a6ba14232cd8d845874b03037f19a740a"></span>void <code class="descname">compute</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>samples</em>, <em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>observations</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>noises</em>, bool <em>compute_kernel</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEERKN5Eigen8VectorXdEb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span>GP</span></a> from samples, observation, noise. This call needs to be explicit! </p>
 </dd></dl>
 
@@ -1145,7 +1145,7 @@
 <dl class="function">
 <dt id="_CPPv2N5limbo5model2GP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdEd">
 <span id="limbo::model::GP::add_sample__Eigen::VectorXdCR.Eigen::VectorXdCR.double"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a43e4e23d98c421d610df52ea6d3f3539"></span>void <code class="descname">add_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>sample</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>observation</em>, double <em>noise</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdEd" title="Permalink to this definition">¶</a></dt>
-<dd><p>add sample and update the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span>GP</span></a>. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5e2ea732c8d93491433fcc838f67f41e"><span>compute()</span></a> </p>
+<dd><p>add sample and update the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span>GP</span></a>. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a6ba14232cd8d845874b03037f19a740a"><span>compute()</span></a> </p>
 </dd></dl>
 
 <dl class="function">

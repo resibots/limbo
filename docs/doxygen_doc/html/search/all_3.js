@@ -17,7 +17,7 @@ var searchData=
   ['comp_5ffronts',['comp_fronts',['../structpareto_1_1impl_1_1comp__fronts.html',1,'pareto::impl']]],
   ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html',1,'pareto::impl']]],
   ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html#a0141f68fca61380d69773bc6225622e3',1,'pareto::impl::compare_objs_lex']]],
-  ['compute',['compute',['../classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617',1,'limbo::experimental::model::GPParego::compute()'],['../classlimbo_1_1model_1_1_g_p.html#a5e2ea732c8d93491433fcc838f67f41e',1,'limbo::model::GP::compute()']]],
+  ['compute',['compute',['../classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617',1,'limbo::experimental::model::GPParego::compute()'],['../classlimbo_1_1model_1_1_g_p.html#a6ba14232cd8d845874b03037f19a740a',1,'limbo::model::GP::compute()']]],
   ['console_5fsummary_2ehpp',['console_summary.hpp',['../console__summary_8hpp.html',1,'']]],
   ['consolesummary',['ConsoleSummary',['../structlimbo_1_1stat_1_1_console_summary.html',1,'limbo::stat']]],
   ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html#a263296f6d6b10aa360727137588735f7',1,'limbo::mean::Constant']]],

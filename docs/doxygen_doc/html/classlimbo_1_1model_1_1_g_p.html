@@ -107,9 +107,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab36947c89e4f5ad92599656a21829755"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#ab36947c89e4f5ad92599656a21829755">GP</a> (int <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a41d99e6a69d53fc7d9260d295f787bc3">dim_in</a>, int <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a077144695f9f0b33b64d4feb8fb4e447">dim_out</a>)</td></tr>
 <tr class="memdesc:ab36947c89e4f5ad92599656a21829755"><td class="mdescLeft">&#160;</td><td class="mdescRight">useful because the model might be created before having samples  <a href="#ab36947c89e4f5ad92599656a21829755">More...</a><br /></td></tr>
 <tr class="separator:ab36947c89e4f5ad92599656a21829755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e2ea732c8d93491433fcc838f67f41e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a5e2ea732c8d93491433fcc838f67f41e">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">samples</a>, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</td></tr>
-<tr class="memdesc:a5e2ea732c8d93491433fcc838f67f41e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> from samples, observation, noise. This call needs to be explicit!  <a href="#a5e2ea732c8d93491433fcc838f67f41e">More...</a><br /></td></tr>
-<tr class="separator:a5e2ea732c8d93491433fcc838f67f41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ba14232cd8d845874b03037f19a740a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a6ba14232cd8d845874b03037f19a740a">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">samples</a>, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises, bool compute_kernel=true)</td></tr>
+<tr class="memdesc:a6ba14232cd8d845874b03037f19a740a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a> from samples, observation, noise. This call needs to be explicit!  <a href="#a6ba14232cd8d845874b03037f19a740a">More...</a><br /></td></tr>
+<tr class="separator:a6ba14232cd8d845874b03037f19a740a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa01b41e37de4def676cf6c79b08aac94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#aa01b41e37de4def676cf6c79b08aac94">optimize_hyperparams</a> ()</td></tr>
 <tr class="memdesc:aa01b41e37de4def676cf6c79b08aac94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do not forget to call this if you use hyper-prameters optimization!!  <a href="#aa01b41e37de4def676cf6c79b08aac94">More...</a><br /></td></tr>
 <tr class="separator:aa01b41e37de4def676cf6c79b08aac94"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -280,7 +280,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
   </tr>
 </table>
 </div><div class="memdoc">
-<p>add sample and update the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a5e2ea732c8d93491433fcc838f67f41e" title="Compute the GP from samples, observation, noise. This call needs to be explicit! ">compute()</a> </p>
+<p>add sample and update the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to <a class="el" href="classlimbo_1_1model_1_1_g_p.html#a6ba14232cd8d845874b03037f19a740a" title="Compute the GP from samples, observation, noise. This call needs to be explicit! ">compute()</a> </p>
 
 </div>
 </div>
@@ -309,7 +309,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 
 </div>
 </div>
-<a class="anchor" id="a5e2ea732c8d93491433fcc838f67f41e"></a>
+<a class="anchor" id="a6ba14232cd8d845874b03037f19a740a"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -334,7 +334,13 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname"><em>noises</em>&#160;</td>
+          <td class="paramname"><em>noises</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>compute_kernel</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -889,7 +895,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 13 2016 00:00:14 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 14 2016 00:00:11 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

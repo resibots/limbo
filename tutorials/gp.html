@@ -306,12 +306,10 @@
     <span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
-<p>After calling the <code class="docutils literal"><span class="pre">compute()</span></code> method, the hyper-parameters can be optimized by calling the &#8216;optimize_hyperparams()&#8217; function. Once the new parameters are found, the GP needs to be recomputed:</p>
+<p>After calling the <code class="docutils literal"><span class="pre">compute()</span></code> method, the hyper-parameters can be optimized by calling the <code class="docutils literal"><span class="pre">optimize_hyperparams()</span></code> function. The GP does not need to be recomputed:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">gp_ard</span><span class="p">.</span><span class="n">compute</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">noises</span><span class="p">);</span>
+2</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">gp_ard</span><span class="p">.</span><span class="n">compute</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">noises</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
     <span class="n">gp_ard</span><span class="p">.</span><span class="n">optimize_hyperparams</span><span class="p">();</span>
-    <span class="n">gp_ard</span><span class="p">.</span><span class="n">recompute</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 </pre></div>
 </td></tr></table></div>
 <p>We can have a look at the difference between the two GPs:</p>
