@@ -118,9 +118,8 @@ int main(int argc, char** argv)
 
     GP2_t gp_ard(1, 1);
     // do not forget to call the optimization!
-    gp_ard.compute(samples, observations, noises);
+    gp_ard.compute(samples, observations, noises, false);
     gp_ard.optimize_hyperparams();
-    gp_ard.recompute(false);
 
     // write the predicted data in a file (e.g. to be plotted)
     std::ofstream ofs_ard("gp_ard.dat");

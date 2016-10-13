@@ -77,7 +77,7 @@ namespace limbo {
             /// Compute the GP from samples, observation, noise. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations,
-                const Eigen::VectorXd& noises)
+                const Eigen::VectorXd& noises, bool compute_kernel = true)
             {
                 assert(samples.size() != 0);
                 assert(observations.size() != 0);
@@ -100,7 +100,8 @@ namespace limbo {
                 _noises = noises;
 
                 this->_compute_obs_mean();
-                this->_compute_full_kernel();
+                if (compute_kernel)
+                    this->_compute_full_kernel();
             }
 
             /// Do not forget to call this if you use hyper-prameters optimization!!
