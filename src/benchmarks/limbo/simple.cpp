@@ -52,7 +52,7 @@
 using namespace limbo;
 
 struct Params {
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
     };
     struct bayes_opt_boptimizer {
@@ -62,7 +62,7 @@ struct Params {
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 190);
     };
-    struct kernel_maternfivehalfs {
+    struct kernel_maternfivehalves {
         BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 1);
     };
