@@ -140,17 +140,10 @@ namespace limbo {
                 _samples.row(_samples.rows()-1) = sample.transpose();
                 _update_m();
 
-                // calculate the mean difference in the observations
-                _obs_sum += observation;
-                Eigen::VectorXd obs_diff = this->_obs_sum/(_observations.rows()+1) - _obs_mean;
-
-                // update the mean and the observations
-                _obs_mean += obs_diff;
-                _observations -= obs_diff.replicate(_observations.rows(), 1);
-
-                // substract the updated mean and add the new observation
+                // add the new observation and update
                 _observations.conservativeResize(_observations.rows()+1, _observations.cols());
-                _observations.row(_observations.rows()-1) = observation.transpose() - _obs_mean;
+                _observations.row(_observations.rows()-1) = observation.transpose();
+                _compute_observations_zm(); // NOTE: if the mean function doesn't use _obs_mean we can do a partial calculation
 
                 _optimize_init = true; // maybe we can add one random pseudo-input before optimizing to avoid re-initialization
                 _compute();
@@ -163,8 +156,8 @@ namespace limbo {
 	  		*/
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v, bool add_mean = true) const
             {
-               std::pair<Eigen::MatrixXd, Eigen::MatrixXd>&& result = predict(v.transpose(), add_mean);
-               return std::make_tuple(result.first, result.second(0,0));
+                std::pair<Eigen::MatrixXd, Eigen::MatrixXd>&& result = predict(v.transpose(), add_mean);
+                return std::make_tuple(result.first, result.second(0,0));
             }
 
             /**
@@ -200,8 +193,6 @@ namespace limbo {
 	  		*/
             double sigma(const Eigen::VectorXd& v, bool add_sigma = true) const
             {
-                if (_samples.size() == 0)
-                    return _compute_kernel_matrix(v, v)(0);
                 return sigma(v, add_sigma);
             }
             Eigen::VectorXd sigma(const Eigen::MatrixXd& v, bool add_sigma = true) const
@@ -227,9 +218,8 @@ namespace limbo {
             // const KernelFunction& kernel_function() const { return _kernel_function; }
             // KernelFunction& kernel_function() { return _kernel_function; }
 
-            // NOTE: This is worth keeping?
-            // const MeanFunction& mean_function() const { return _mean_function; }
-            // MeanFunction& mean_function() { return _mean_function; }
+            const MeanFunction& mean_function() const { return _mean_function; }
+            MeanFunction& mean_function() { return _mean_function; }
 
             /// return the maximum observation (only call this if the output of the GP is of dimension 1)
             Eigen::VectorXd max_observation() const
@@ -239,6 +229,12 @@ namespace limbo {
                                  "observations doesn't make sense"
                               << std::endl;
                 return tools::make_vector(_observations.maxCoeff());
+            }
+
+            /// return the mean observation
+            Eigen::MatrixXd mean_observation() const
+            {
+                return _obs_mean;
             }
 
             /// return the number of samples used to compute the SPGP
@@ -300,8 +296,9 @@ namespace limbo {
             double _del;
             Eigen::MatrixXd _samples;
             Eigen::MatrixXd _observations;
-            Eigen::VectorXd _obs_sum;
-            Eigen::VectorXd _obs_mean;
+            Eigen::MatrixXd _observations_zm;
+            Eigen::MatrixXd _obs_mean;
+            MeanFunction _mean_function;
 
             /// set after the hyperparameters calculation
             Eigen::MatrixXd _pseudo_samples;
@@ -329,24 +326,35 @@ namespace limbo {
             void _init(const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations, double dim_out = 1)
             {
                 _samples = samples;
-                _obs_sum = observations.colwise().sum();
-                _obs_mean = _obs_sum/observations.rows();
-                _observations = observations - _obs_mean.replicate(observations.rows(), 1);
-                _update_m();
+                _observations = observations;
 
                 _dim_in = _samples.cols();
                 _dim_out = dim_out;
+                _mean_function = MeanFunction(_dim_out);
+
+                _compute_observations_zm();
+                _update_m();
+
                 _del = Params::model_spgp::jitter();
 
                 _optimize_init = true;
                 srand(time(NULL));
             }
 
+            void _compute_observations_zm()
+            {
+                _obs_mean = _observations.colwise().mean();
+                _observations_zm.resize(_observations.rows(), _observations.cols());
+                for (int i = 0; i < _observations.rows(); i++) {
+                    _observations_zm.row(i) = _observations.row(i) - _mean_function(_samples.row(i), *this);
+                }
+            }
+
             void _update_m()
             {
                 // NOTE: We could add the option to use a function to change the m dinamycally based on the samples.
                 _m = _samples.rows()/Params::model_spgp::samples_percent();
-                if (_m < Params::model_spgp::min_m()) _m = Params::model_spgp::min_m();;
+                if (_m < Params::model_spgp::min_m()) _m = Params::model_spgp::min_m();
             }
 
             void _compute(bool optimize = true)
@@ -358,11 +366,11 @@ namespace limbo {
                 _kernel_mn = _compute_kernel_matrix(_pseudo_samples, _samples);
 
                 Eigen::MatrixXd V = (_matrixL.template triangularView<Eigen::Lower>()).solve(_kernel_mn);
-                Eigen::MatrixXd ep = Eigen::MatrixXd::Ones(_observations.rows(), 1).array() + (_k_diag(_observations).array() - V.array().pow(2).colwise().sum().transpose())/_sig;
+                Eigen::MatrixXd ep = Eigen::MatrixXd::Ones(_observations_zm.rows(), 1).array() + (_k_diag(_observations_zm).array() - V.array().pow(2).colwise().sum().transpose())/_sig;
 
                 Eigen::MatrixXd ep_sqrt = ep.array().sqrt();
                 V = V.cwiseQuotient(ep_sqrt.transpose().replicate(_m, 1));
-                Eigen::MatrixXd y = _observations.cwiseQuotient(ep_sqrt);
+                Eigen::MatrixXd y = _observations_zm.cwiseQuotient(ep_sqrt);
 
                 _Lm = (_sig*Eigen::MatrixXd::Identity(_m, _m) + V*V.transpose()).llt().matrixL();
                 _bet = (_Lm.template triangularView<Eigen::Lower>()).solve(V*y);
@@ -383,8 +391,8 @@ namespace limbo {
 
                     // Initialize hyperparameters sensibly in log space
                     _w_init.segment(_m*_dim_in, _dim_in) = -2*((_samples.colwise().maxCoeff() - _samples.colwise().minCoeff()).array()/2).log();     // -2*log((max(x)-min(x))'/2)
-                    _w_init[(_m+1)*_dim_in] = std::log(_observations.array().pow(2).mean());
-                    _w_init[(_m+1)*_dim_in+1] = std::log((_observations.array().pow(2)/4).mean());
+                    _w_init[(_m+1)*_dim_in] = std::log(_observations_zm.array().pow(2).mean());
+                    _w_init[(_m+1)*_dim_in+1] = std::log((_observations_zm.array().pow(2)/4).mean());
 
                     _optimize_init = false;
                 }
@@ -438,7 +446,7 @@ namespace limbo {
                 Eigen::MatrixXd ep = 1 + (c - V.array().pow(2).colwise().sum().transpose())/sig; // ep = 1 + (c-sum(V.^2)')/sig;
                 K = K.array() / ep.array().sqrt().transpose().replicate(_m,1);
                 V = V.array() / ep.array().sqrt().transpose().replicate(_m,1);
-                Eigen::MatrixXd y = _observations.array() / ep.array().sqrt();
+                Eigen::MatrixXd y = _observations_zm.array() / ep.array().sqrt();
 
                 Eigen::MatrixXd Lm = (sig*idm + V*V.transpose()).llt().matrixL();
                 Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> Lm_t = Lm.template triangularView<Eigen::Lower>(); //NOTE: It's okey to solve the system like this?
@@ -533,23 +541,34 @@ namespace limbo {
 
             std::pair<Eigen::MatrixXd, Eigen::MatrixXd> _predict(const Eigen::MatrixXd& xt, bool calc_mu = true, bool calc_s2 = true, bool add_mean = true) const
             {
+                Eigen::MatrixXd mu(xt.rows(), _observations.cols());
+                Eigen::MatrixXd s2(xt.rows(), 1);
+
+                if (_samples.size() == 0) {
+                    for (size_t i = 0; i < xt.rows(); ++i) {
+                        if (calc_mu)
+                            mu.row(i) = _mean_function(xt.row(i), *this);
+                        if (calc_s2)
+                            s2(i,0) = _compute_kernel_matrix(xt.row(i), xt.row(i))(0,0);
+                    }
+                    return {mu, s2.array()};
+                }
+
                 Eigen::MatrixXd K = _compute_kernel_matrix(_pseudo_samples, xt);
                 Eigen::MatrixXd lst =  (_matrixL.template triangularView<Eigen::Lower>()).solve(K);
                 Eigen::MatrixXd lmst = (_Lm.template triangularView<Eigen::Lower>()).solve(lst);
 
-                Eigen::MatrixXd mu;
-                Eigen::MatrixXd s2;
-                if (calc_mu)
-                    mu = (_bet.transpose() * lmst).transpose();
+                if (calc_mu) {
+                    for (size_t i = 0; i < xt.rows(); ++i)
+                        mu.row(i) = _mean_function(xt.row(i), *this);
+                    mu += (_bet.transpose() * lmst).transpose();
+                }
                 if (calc_s2)
                     s2 = _k_diag(xt).array() - 
                         lst.array().pow(2).colwise().sum().transpose() + 
-                        _sig*lmst.array().pow(2).colwise().sum().transpose();
+                        _sig*lmst.array().pow(2).colwise().sum().transpose() + _sig;
 
-                if (add_mean)
-                    return {mu+_obs_mean, s2.array()+_sig};
-                else
-                    return {mu, s2};
+                return {mu, s2.array()};
             }
 
             Eigen::MatrixXd _compute_kernel_matrix(const Eigen::MatrixXd& p_1, const Eigen::MatrixXd& p_2) const
