@@ -181,8 +181,6 @@ namespace limbo {
             }
             Eigen::MatrixXd mu(const Eigen::MatrixXd& v, bool add_mean = true) const
             {
-                // if (_observations.size() == 0)
-                //    return _mean_function(v, *this);
                 return _predict(v, true, false, add_mean).first;
             }
 
@@ -232,7 +230,7 @@ namespace limbo {
             }
 
             /// return the mean observation
-            Eigen::MatrixXd mean_observation() const
+            Eigen::VectorXd mean_observation() const
             {
                 return _obs_mean;
             }
@@ -264,15 +262,15 @@ namespace limbo {
 
             /// return the list of pseudo-samples beign used
             const Eigen::MatrixXd& pseudo_samples() const { return _pseudo_samples; }
-            // const std::vector<Eigen::VectorXd>& pseudo_samples() const { return _to_vector(_pseudo_samples); }
+            // const std::vector<Eigen::VectorXd> pseudo_samples() const { return _to_vector(_pseudo_samples); }
 
-            /// test the likelihood function given a dataset
+            // test the likelihood function given a dataset
             void test_likelihood(const Eigen::MatrixXd& data, 
                 const Eigen::MatrixXd& samples, 
                 const Eigen::MatrixXd& observations)
             {
                 size_t m = samples.rows()/10;
-                _init(samples, observations, m);
+                _init(samples, observations);
                 int size_w = (m+1)*samples.cols()+2;
                 for (int i = 0; i < data.rows(); i++) {
                     Eigen::VectorXd w = data.row(i).segment(0, size_w);
@@ -297,7 +295,7 @@ namespace limbo {
             Eigen::MatrixXd _samples;
             Eigen::MatrixXd _observations;
             Eigen::MatrixXd _observations_zm;
-            Eigen::MatrixXd _obs_mean;
+            Eigen::VectorXd _obs_mean;
             MeanFunction _mean_function;
 
             /// set after the hyperparameters calculation
@@ -319,17 +317,17 @@ namespace limbo {
             Eigen::VectorXd _w_init;
             HyperParamsOptimizer _hp_optimize;
 
-            void _init(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, double dim_out)
+            void _init(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations)
             {
-                _init(_to_matrix(samples), _to_matrix(observations), dim_out);
+                _init(_to_matrix(samples), _to_matrix(observations));
             }
-            void _init(const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations, double dim_out = 1)
+            void _init(const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations)
             {
                 _samples = samples;
                 _observations = observations;
 
                 _dim_in = _samples.cols();
-                _dim_out = dim_out;
+                _dim_out = _observations.cols();
                 _mean_function = MeanFunction(_dim_out);
 
                 _compute_observations_zm();
@@ -346,7 +344,7 @@ namespace limbo {
                 _obs_mean = _observations.colwise().mean();
                 _observations_zm.resize(_observations.rows(), _observations.cols());
                 for (int i = 0; i < _observations.rows(); i++) {
-                    _observations_zm.row(i) = _observations.row(i) - _mean_function(_samples.row(i), *this);
+                    _observations_zm.row(i) = _observations.row(i) - (_mean_function(_samples.row(i), *this)).transpose();
                 }
             }
 
@@ -457,6 +455,9 @@ namespace limbo {
                 Eigen::MatrixXd fw = Lm.diagonal().array().log().colwise().sum() + (n-_m)/2*std::log(sig) +
                         (y.transpose()*y - bet.transpose()*bet).array()/(2*sig) + ep.array().log().sum()/2 + 0.5*n*std::log(2*M_PI);
 
+                if(!eval_grad) 
+                    return opt::no_grad(-fw(0));
+
                 // ** Derivates calculation - precomputations
                 Eigen::MatrixXd Lt = L*Lm;
                 Eigen::MatrixXd B1 = Lt.transpose().lu().solve(invLmV); // Lt is psd but Lt' it's not. We must use lu here. NOTE: Maybe it can be changed to solve the system with psd.
@@ -466,7 +467,7 @@ namespace limbo {
                 Eigen::MatrixXd invL = L.inverse(); Eigen::MatrixXd invQ = invL.transpose()*invL; // delete invL
                 Eigen::MatrixXd invLt = Lt.inverse(); Eigen::MatrixXd invA = invLt.transpose()*invLt; // delete invLt
 
-                //NOTE: Throws exception after solving an transpose if multiplied directly with V, that's why its beign casted.
+                //NOTE: Throws exception after solving a transpose if multiplied directly with V, that's why its beign casted.
                 Eigen::MatrixXd mu = (((Eigen::MatrixXd) Lm.transpose().lu().solve(bet).transpose())*V).transpose(); // NOTE: Check if the cast is correct here
                 Eigen::MatrixXd sumVsq = V.array().pow(2).colwise().sum().transpose();
 
@@ -541,7 +542,7 @@ namespace limbo {
 
             std::pair<Eigen::MatrixXd, Eigen::MatrixXd> _predict(const Eigen::MatrixXd& xt, bool calc_mu = true, bool calc_s2 = true, bool add_mean = true) const
             {
-                Eigen::MatrixXd mu(xt.rows(), _observations.cols());
+                Eigen::MatrixXd mu(xt.rows(), _dim_out);
                 Eigen::MatrixXd s2(xt.rows(), 1);
 
                 if (_samples.size() == 0) {
