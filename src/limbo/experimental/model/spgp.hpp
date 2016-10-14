@@ -98,8 +98,8 @@ namespace limbo {
             SPGP() : _dim_in(-1), _dim_out(-1) {}
 
             /// useful because the model might be created before having samples
-            SPGP(int dim_in, int dim_out)
-                : _dim_in(dim_in), _dim_out(dim_out) {}
+            SPGP(int dim_in, int dim_out, int id = 0)
+                : _dim_in(dim_in), _dim_out(dim_out), _id(id) {}
 
             /// useful to construct without optimizing
             SPGP(const std::vector<Eigen::VectorXd>& samples,
@@ -135,15 +135,28 @@ namespace limbo {
             /// add sample and recompute the SPGP
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
+                if (_samples.rows() == 0) {
+                    _dim_in = sample.size();
+                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+
+                    _dim_out = observation.size();
+                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                }
+                else {
+                    assert(sample.size() == _dim_in);
+                    assert(observation.size() == _dim_out);
+                }
                 // add the new sample
-                _samples.conservativeResize(_samples.rows()+1, _samples.cols());
+                _samples.conservativeResize(_samples.rows()+1, _dim_in);
                 _samples.row(_samples.rows()-1) = sample.transpose();
                 _update_m();
 
                 // add the new observation and update
-                _observations.conservativeResize(_observations.rows()+1, _observations.cols());
+                _observations.conservativeResize(_observations.rows()+1, _dim_out);
                 _observations.row(_observations.rows()-1) = observation.transpose();
                 _compute_observations_zm(); // NOTE: if the mean function doesn't use _obs_mean we can do a partial calculation
+
+                _del = Params::model_spgp::jitter();
 
                 _optimize_init = true; // maybe we can add one random pseudo-input before optimizing to avoid re-initialization
                 _compute();
@@ -286,17 +299,24 @@ namespace limbo {
                 }
             }
 
+            int id() const
+            {
+                return _id;
+            }
+
         protected:
             /// set on initialization
             size_t _m;
             size_t _dim_in;
             size_t _dim_out;
+            int _id;
             double _del;
             Eigen::MatrixXd _samples;
             Eigen::MatrixXd _observations;
             Eigen::MatrixXd _observations_zm;
             Eigen::VectorXd _obs_mean;
             MeanFunction _mean_function;
+            KernelFunction _kernel_function;
 
             /// set after the hyperparameters calculation
             Eigen::MatrixXd _pseudo_samples;
@@ -329,6 +349,7 @@ namespace limbo {
                 _dim_in = _samples.cols();
                 _dim_out = _observations.cols();
                 _mean_function = MeanFunction(_dim_out);
+                _kernel_function = KernelFunction(_dim_in);
 
                 _compute_observations_zm();
                 _update_m();
@@ -545,12 +566,12 @@ namespace limbo {
                 Eigen::MatrixXd mu(xt.rows(), _dim_out);
                 Eigen::MatrixXd s2(xt.rows(), 1);
 
-                if (_samples.size() == 0) {
+                if (_samples.rows() == 0) {
                     for (size_t i = 0; i < xt.rows(); ++i) {
                         if (calc_mu)
                             mu.row(i) = _mean_function(xt.row(i), *this);
                         if (calc_s2)
-                            s2(i,0) = _compute_kernel_matrix(xt.row(i), xt.row(i))(0,0);
+                            s2(i,0) = _kernel_function(xt.row(i), xt.row(i));
                     }
                     return {mu, s2.array()};
                 }
