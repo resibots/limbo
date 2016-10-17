@@ -238,6 +238,14 @@ namespace limbo {
                 this->_compute_full_kernel();
             }
 
+            /// recomputes the internal variable related to the mean object without recomputing the kernel
+            void recompute_mean_internal()
+            {
+                assert(!_samples.empty());
+                this->_compute_obs_mean();
+                this->_compute_alpha();
+            }
+
             /// return the likelihood (do not compute it!)
             double get_lik() const { return _lik; }
 
