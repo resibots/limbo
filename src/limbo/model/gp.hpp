@@ -86,8 +86,10 @@ namespace limbo {
                 _dim_in = samples[0].size();
                 _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
 
-                _dim_out = observations[0].size();
-                _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                if (_dim_out != observations[0].size()) {
+                    _dim_out = observations[0].size();
+                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                }
 
                 _samples = samples;
 
