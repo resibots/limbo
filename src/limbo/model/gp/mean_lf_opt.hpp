@@ -65,7 +65,7 @@ namespace limbo {
                     auto params = optimizer(optimization, gp.mean_function().h_params(), false);
                     gp.mean_function().set_h_params(params);
                     gp.set_lik(opt::eval(optimization, params));
-                    gp.recompute_mean_internal();
+                    gp.recompute(true, false);
                 }
 
             protected:
@@ -87,7 +87,7 @@ namespace limbo {
                         GP gp(this->_original_gp);
                         gp.mean_function().set_h_params(params);
 
-                        gp.recompute_mean_internal();
+                        gp.recompute(true, false);
 
                         size_t n = gp.obs_mean().rows();
 

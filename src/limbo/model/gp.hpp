@@ -228,22 +228,17 @@ namespace limbo {
             int nb_samples() const { return _samples.size(); }
 
             ///  recomputes the GP
-            void recompute(bool update_obs_mean = true)
+            void recompute(bool update_obs_mean = true, bool update_full_kernel = true)
             {
                 assert(!_samples.empty());
 
                 if (update_obs_mean)
                     this->_compute_obs_mean();
 
-                this->_compute_full_kernel();
-            }
-
-            /// recomputes the internal variable related to the mean object without recomputing the kernel
-            void recompute_mean_internal()
-            {
-                assert(!_samples.empty());
-                this->_compute_obs_mean();
-                this->_compute_alpha();
+                if (update_full_kernel)
+                    this->_compute_full_kernel();
+                else
+                    this->_compute_alpha();
             }
 
             /// return the likelihood (do not compute it!)
