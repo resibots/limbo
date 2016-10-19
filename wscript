@@ -142,9 +142,9 @@ def configure(conf):
         print '---------------'
         print '[users] To compile Limbo (inc. unit tests): ./waf build'
         print '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo'
-        print '[developpers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
-        print '[developpers] To compile the benchmarks: ./waf build_benchmarks'
-        print '[developpers] To compile the extensive tests: ./waf build_extensive_tests'
+        print '[developers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
+        print '[developers] To compile the benchmarks: ./waf build_benchmarks'
+        print '[developers] To compile the extensive tests: ./waf build_extensive_tests'
 
 
 def build(bld):
