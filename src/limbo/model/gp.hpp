@@ -83,11 +83,15 @@ namespace limbo {
                 assert(observations.size() != 0);
                 assert(samples.size() == observations.size());
 
-                _dim_in = samples[0].size();
-                _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                if (_dim_in != samples[0].size()) {
+                    _dim_in = samples[0].size();
+                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                }
 
-                _dim_out = observations[0].size();
-                _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                if (_dim_out != observations[0].size()) {
+                    _dim_out = observations[0].size();
+                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                }
 
                 _samples = samples;
 
@@ -115,11 +119,14 @@ namespace limbo {
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
                 if (_samples.empty()) {
-                    _dim_in = sample.size();
-                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-
-                    _dim_out = observation.size();
-                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                    if (_dim_in != sample.size()) {
+                        _dim_in = sample.size();
+                        _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                    }
+                    if (_dim_out != observation.size()) {
+                        _dim_out = observation.size();
+                        _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                    }
                 }
                 else {
                     assert(sample.size() == _dim_in);
