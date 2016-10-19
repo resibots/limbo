@@ -64,7 +64,12 @@ namespace limbo {
         struct model_spgp {
             BO_PARAM(double, jitter, 0.000001);
             BO_PARAM(double, samples_percent, 10);
-            BO_PARAM(double, min_m, 1);
+            BO_PARAM(int, min_m, 1);
+
+            /// kernel parameters
+            BO_PARAM(double, sig, 0.01);
+            BO_PARAM(double, pred_kernel_sigma_sq, 0.5);
+            BO_PARAM(double, pred_kernel_l, 0.5);
         };
     }
 
@@ -109,8 +114,11 @@ namespace limbo {
                 _init(samples, observations);
             }
 
-            /// only to match the interface
-            void optimize_hyperparams(){ }
+            /// execute the hyperparameters optimization
+            void optimize_hyperparams(){
+                _optimize_init = true;
+                _optimize_hyperparams();
+            }
 
             /// Compute the SPGP from samples, observation, noise. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
@@ -121,7 +129,7 @@ namespace limbo {
             }
             void compute(const Eigen::MatrixXd& samples,
                 const Eigen::MatrixXd& observations,
-                const Eigen::MatrixXd& noises) // TODO: The noises are not beign used
+                const Eigen::MatrixXd& noises) // TODO: The noises are not used
             {
                 assert(samples.rows() != 0);
                 assert(observations.rows() != 0);
@@ -135,15 +143,32 @@ namespace limbo {
             /// add sample and recompute the SPGP
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
+                if (_samples.rows() == 0) {
+                    _dim_in = sample.size();
+                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+
+                    _dim_out = observation.size();
+                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+
+                    // default values for the kernel
+                    _b = Eigen::VectorXd::Ones(_dim_in) * Params::model_spgp::pred_kernel_l();
+                    _c = Params::model_spgp::pred_kernel_sigma_sq();
+                    _sig = Params::model_spgp::sig();
+                }
+                else {
+                    assert(sample.size() == _dim_in);
+                    assert(observation.size() == _dim_out);
+                }
+
                 // add the new sample
-                _samples.conservativeResize(_samples.rows()+1, _samples.cols());
+                _samples.conservativeResize(_samples.rows()+1, _dim_in);
                 _samples.row(_samples.rows()-1) = sample.transpose();
                 _update_m();
 
                 // add the new observation and update
-                _observations.conservativeResize(_observations.rows()+1, _observations.cols());
+                _observations.conservativeResize(_observations.rows()+1, _dim_out);
                 _observations.row(_observations.rows()-1) = observation.transpose();
-                _compute_observations_zm(); // NOTE: if the mean function doesn't use _obs_mean we can do a partial calculation
+                _compute_observations_zm(); // TODO: if the mean function doesn't use _obs_mean we can do a partial calculation
 
                 _optimize_init = true; // maybe we can add one random pseudo-input before optimizing to avoid re-initialization
                 _compute();
@@ -154,9 +179,9 @@ namespace limbo {
              return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
              \\endrst
 	  		*/
-            std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v, bool add_mean = true) const
+            std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
-                std::pair<Eigen::MatrixXd, Eigen::MatrixXd>&& result = predict(v.transpose(), add_mean);
+                std::pair<Eigen::MatrixXd, Eigen::MatrixXd>&& result = predict(v.transpose());
                 return std::make_tuple(result.first, result.second(0,0));
             }
 
@@ -165,9 +190,9 @@ namespace limbo {
              return :math:`\mu`, :math:`\sigma^2`. Predict a bunch of points.
              \\endrst
             */
-            std::pair<Eigen::MatrixXd, Eigen::MatrixXd> predict(const Eigen::MatrixXd& xt, bool add_mean = true) const
+            std::pair<Eigen::MatrixXd, Eigen::MatrixXd> predict(const Eigen::MatrixXd& xt) const
             {
-                return _predict(xt, true, true, add_mean);
+                return _predict(xt, true, true);
             }
 
             /**
@@ -175,13 +200,13 @@ namespace limbo {
              return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
              \\endrst
 	  		*/
-            Eigen::VectorXd mu(const Eigen::VectorXd& v, bool add_mean = true) const
+            Eigen::VectorXd mu(const Eigen::VectorXd& v) const
             {
-                return mu(v, add_mean);
+                return mu(v);
             }
-            Eigen::MatrixXd mu(const Eigen::MatrixXd& v, bool add_mean = true) const
+            Eigen::MatrixXd mu(const Eigen::MatrixXd& v) const
             {
-                return _predict(v, true, false, add_mean).first;
+                return _predict(v, true, false).first;
             }
 
             /**
@@ -189,13 +214,13 @@ namespace limbo {
              return :math:`\sigma^2` (unormalized). If there is no sample, return the max :math:`\sigma^2`.
              \\endrst
 	  		*/
-            double sigma(const Eigen::VectorXd& v, bool add_sigma = true) const
+            double sigma(const Eigen::VectorXd& v) const
             {
-                return sigma(v, add_sigma);
+                return sigma(v);
             }
-            Eigen::VectorXd sigma(const Eigen::MatrixXd& v, bool add_sigma = true) const
+            Eigen::VectorXd sigma(const Eigen::MatrixXd& v) const
             {
-                return (_predict(v, false, true, add_sigma).second)(0,0);
+                return (_predict(v, false, true).second)(0,0);
             }
 
             /// return the number of dimensions of the input
@@ -232,7 +257,8 @@ namespace limbo {
             /// return the mean observation
             Eigen::VectorXd mean_observation() const
             {
-                return _obs_mean;
+                return _samples.size() > 0 ? _obs_mean
+                                           : Eigen::VectorXd::Zero(_dim_out);
             }
 
             /// return the number of samples used to compute the SPGP
@@ -289,14 +315,15 @@ namespace limbo {
         protected:
             /// set on initialization
             size_t _m;
-            size_t _dim_in;
-            size_t _dim_out;
+            size_t _dim_in = -1;
+            size_t _dim_out = -1;
             double _del;
             Eigen::MatrixXd _samples;
             Eigen::MatrixXd _observations;
             Eigen::MatrixXd _observations_zm;
             Eigen::VectorXd _obs_mean;
             MeanFunction _mean_function;
+            KernelFunction _kernel_function;
 
             /// set after the hyperparameters calculation
             Eigen::MatrixXd _pseudo_samples;
@@ -308,8 +335,6 @@ namespace limbo {
             /// calculated in _compute
             Eigen::MatrixXd _Lm;
             Eigen::MatrixXd _bet;
-            Eigen::MatrixXd _kernel_m;
-            Eigen::MatrixXd _kernel_mn;
             Eigen::MatrixXd _matrixL;
 
             /// auxiliary variables
@@ -329,6 +354,7 @@ namespace limbo {
                 _dim_in = _samples.cols();
                 _dim_out = _observations.cols();
                 _mean_function = MeanFunction(_dim_out);
+                _kernel_function = KernelFunction(_dim_in);
 
                 _compute_observations_zm();
                 _update_m();
@@ -359,12 +385,14 @@ namespace limbo {
             {
                 if (optimize) _optimize_hyperparams();
 
-                _kernel_m = _compute_kernel_matrix(_pseudo_samples, _pseudo_samples);
-                _matrixL = _kernel_m.llt().matrixL();
-                _kernel_mn = _compute_kernel_matrix(_pseudo_samples, _samples);
+                Eigen::MatrixXd kernel_m = _compute_kernel_matrix(_pseudo_samples, _pseudo_samples) + 
+                    Eigen::MatrixXd::Identity(_pseudo_samples.rows(), _pseudo_samples.rows())*Params::model_spgp::jitter();
+                _matrixL = kernel_m.llt().matrixL();
+				Eigen::MatrixXd kernel_mn = _compute_kernel_matrix(_pseudo_samples, _samples);
 
-                Eigen::MatrixXd V = (_matrixL.template triangularView<Eigen::Lower>()).solve(_kernel_mn);
-                Eigen::MatrixXd ep = Eigen::MatrixXd::Ones(_observations_zm.rows(), 1).array() + (_k_diag(_observations_zm).array() - V.array().pow(2).colwise().sum().transpose())/_sig;
+                Eigen::MatrixXd V = (_matrixL.template triangularView<Eigen::Lower>()).solve(kernel_mn);
+                Eigen::MatrixXd ep = Eigen::MatrixXd::Ones(_observations_zm.rows(), 1).array() + 
+                                (_k_diag(_observations_zm).array() - V.array().pow(2).colwise().sum().transpose())/_sig;
 
                 Eigen::MatrixXd ep_sqrt = ep.array().sqrt();
                 V = V.cwiseQuotient(ep_sqrt.transpose().replicate(_m, 1));
@@ -374,7 +402,6 @@ namespace limbo {
                 _bet = (_Lm.template triangularView<Eigen::Lower>()).solve(V*y);
             }
 
-            /// Do not forget to call this if you use hyper-prameters optimization!!
             void _optimize_hyperparams()
             {
                 if (_optimize_init) {
@@ -430,7 +457,7 @@ namespace limbo {
                 Q = (Q.array()*-0.5).exp()*c;
                 Q += _del*idm;
 
-                // Need to be changed for the generic kernel construction
+                // NOTE: Need to be changed for the generic kernel construction
                 Eigen::MatrixXd k_m = x.cwiseProduct(x).rowwise().sum().transpose().replicate(_m,1);
                 Eigen::MatrixXd k_n = xb.cwiseProduct(xb).rowwise().sum().replicate(1,n);
                 Eigen::MatrixXd K = -2*xb*x.transpose() + k_m + k_n;
@@ -540,17 +567,17 @@ namespace limbo {
                 return {-fw(0), rdfw}; // limbo maximizes instead of minimizing
             }
 
-            std::pair<Eigen::MatrixXd, Eigen::MatrixXd> _predict(const Eigen::MatrixXd& xt, bool calc_mu = true, bool calc_s2 = true, bool add_mean = true) const
+            std::pair<Eigen::MatrixXd, Eigen::MatrixXd> _predict(const Eigen::MatrixXd& xt, bool calc_mu = true, bool calc_s2 = true) const
             {
                 Eigen::MatrixXd mu(xt.rows(), _dim_out);
                 Eigen::MatrixXd s2(xt.rows(), 1);
 
-                if (_samples.size() == 0) {
+                if (_samples.rows() == 0) {
                     for (size_t i = 0; i < xt.rows(); ++i) {
                         if (calc_mu)
                             mu.row(i) = _mean_function(xt.row(i), *this);
                         if (calc_s2)
-                            s2(i,0) = _compute_kernel_matrix(xt.row(i), xt.row(i))(0,0);
+                            s2(i,0) = _kernel_function(xt.row(i), xt.row(i));
                     }
                     return {mu, s2.array()};
                 }
@@ -564,6 +591,7 @@ namespace limbo {
                         mu.row(i) = _mean_function(xt.row(i), *this);
                     mu += (_bet.transpose() * lmst).transpose();
                 }
+
                 if (calc_s2)
                     s2 = _k_diag(xt).array() - 
                         lst.array().pow(2).colwise().sum().transpose() + 
