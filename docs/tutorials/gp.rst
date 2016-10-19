@@ -80,7 +80,7 @@ It uses the default values for the parameters of ``SquaredExpARD``:
    :linenos:
    :lines: 63-64
 
-After calling the ``compute()`` method, the hyper-parameters can be optimized by calling the ``optimize_hyperparams()`` function. The GP does not need to be recomputed:
+After calling the ``compute()`` method, the hyper-parameters can be optimized by calling the ``optimize_hyperparams()`` function. The GP does not need to be recomputed and we pass ``false`` for the last parameter in ``compute()`` as we do not need to compute the kernel matrix again (it will be recomputed in the hyper-parameters optimization).
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
