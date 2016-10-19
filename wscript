@@ -117,7 +117,7 @@ def configure(conf):
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \
-            graph thread', min_version='1.39')
+            thread', min_version='1.39')
         conf.check_eigen()
         conf.check_tbb()
         conf.check_sferes()
