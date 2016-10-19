@@ -202,13 +202,19 @@ as a zip.</p>
 <div class="section" id="required">
 <h4>Required<a class="headerlink" href="#required" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><a class="reference external" href="http://www.boost.org">Boost</a> , with the following libraries: filesystem, system, unit_test_framework, program_options, and thread; <cite>Boost</cite> is mainly used for the interaction with the system.</li>
+<li><a class="reference external" href="http://www.boost.org">Boost</a> , with the following libraries: filesystem, system, unit_test_framework (test), program_options, and thread; <cite>Boost</cite> is mainly used for the interaction with the system.</li>
 <li><a class="reference external" href="http://eigen.tuxfamily.org">Eigen 3</a>, Eigen3 is a highly-efficient, templated-based C++ library for linear algebra.</li>
 </ul>
 </div>
 <div class="section" id="optional-but-highly-recommended">
 <h4>Optional but highly recommended<a class="headerlink" href="#optional-but-highly-recommended" title="Permalink to this headline">¶</a></h4>
 <ul>
+<li><p class="first"><a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">NLOpt</a> with C++ binding:</p>
+<div class="highlight-python"><div class="highlight"><pre>./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
+sudo make install
+</pre></div>
+</div>
+</li>
 <li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get). Follow the instructions <a class="reference external" href="https://github.com/beniz/libcmaes#build">here</a>, reproduced for your convenience:</p>
 <div class="highlight-python"><div class="highlight"><pre>sudo apt-get install libgtest-dev
 sudo cd /usr/src/gtest
@@ -219,18 +225,13 @@ sudo cp *.a /usr/lib
 </pre></div>
 </div>
 </li>
-<li><p class="first"><a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">NLOpt</a> with C++ binding:</p>
-<div class="highlight-python"><div class="highlight"><pre>./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
-sudo make install
-</pre></div>
-</div>
+<li><p class="first"><a class="reference external" href="https://www.threadingbuildingblocks.org">Intel TBB</a> is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.</p>
 </li>
 </ul>
 </div>
 <div class="section" id="optional">
 <h4>Optional<a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><a class="reference external" href="https://www.threadingbuildingblocks.org">Intel TBB</a> is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.</li>
 <li><a class="reference external" href="https://software.intel.com/en-us/intel-mkl">Intel MKL</a> is supported as backend for Eigen. In our experience, it provided best results when compiling with Intel&#8217;s Compiler (ICC)</li>
 <li><a class="reference external" href="https://github.com/sferes2/sferes2">Sferes2</a> if you plan to use the multi-objective bayesian optimization algorithms (experimental).</li>
 </ul>

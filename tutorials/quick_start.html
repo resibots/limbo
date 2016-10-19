@@ -199,7 +199,7 @@ as a zip.</p>
 <div class="section" id="install-the-dependencies">
 <h2>Install the dependencies:<a class="headerlink" href="#install-the-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>For Ubuntu:</p>
-<div class="highlight-python"><div class="highlight"><pre>apt-get install libeigen3-dev libboost* libtbb*
+<div class="highlight-python"><div class="highlight"><pre>apt-get install libeigen3-dev libboost-serialization-dev libboost-filesystem-dev libboost-test-dev libboost-program-options-dev libboost-thread-dev libtbb-dev
 </pre></div>
 </div>
 <p>For OSX with brew:</p>
@@ -221,7 +221,7 @@ sudo ldconfig
 <p>For OSX:</p>
 <div class="highlight-python"><div class="highlight"><pre>wget http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz
 tar -zxvf nlopt-2.4.2.tar.gz &amp;&amp; cd nlopt-2.4.2
-./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
+./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
 sudo make install
 </pre></div>
 </div>
@@ -258,7 +258,7 @@ sudo make install
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>For more information, see the <a class="reference internal" href="basic_example.html#basic-example"><span>Basic example</span></a>.</p>
+<p>By default limbo optimizes in <span class="math">\([0,1]\)</span>. For more information, see the <a class="reference internal" href="basic_example.html#basic-example"><span>Basic example</span></a>.</p>
 </div>
 <div class="section" id="build-your-experiment">
 <h2>Build your experiment<a class="headerlink" href="#build-your-experiment" title="Permalink to this headline">¶</a></h2>

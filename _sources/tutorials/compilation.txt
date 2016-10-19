@@ -14,11 +14,16 @@ Dependencies
 
 Required
 +++++++++++++
-* `Boost <http://www.boost.org>`_ , with the following libraries: filesystem, system, unit_test_framework, program_options, and thread; `Boost` is mainly used for the interaction with the system.
+* `Boost <http://www.boost.org>`_ , with the following libraries: filesystem, system, unit_test_framework (test), program_options, and thread; `Boost` is mainly used for the interaction with the system.
 * `Eigen 3 <http://eigen.tuxfamily.org>`_, Eigen3 is a highly-efficient, templated-based C++ library for linear algebra.
 
 Optional but highly recommended
 +++++++++++++++++++++++++++++++++
+* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
+
+    ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
+    sudo make install
+
 * `libcmaes <https://github.com/beniz/libcmaes>`_. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get). Follow the instructions `here <https://github.com/beniz/libcmaes#build>`_, reproduced for your convenience::
 
     sudo apt-get install libgtest-dev
@@ -28,15 +33,10 @@ Optional but highly recommended
     sudo make
     sudo cp *.a /usr/lib
 
-* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
-
-    ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
-    sudo make install
-
+* `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
 
 Optional
 +++++++++++++
-* `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
 * `Intel MKL <https://software.intel.com/en-us/intel-mkl>`_ is supported as backend for Eigen. In our experience, it provided best results when compiling with Intel's Compiler (ICC)
 * `Sferes2 <https://github.com/sferes2/sferes2>`_ if you plan to use the multi-objective bayesian optimization algorithms (experimental).
 

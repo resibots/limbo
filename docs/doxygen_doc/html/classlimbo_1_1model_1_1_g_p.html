@@ -148,9 +148,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac490915c95cc78f6cd836f78e3638bf1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#ac490915c95cc78f6cd836f78e3638bf1">nb_samples</a> () const </td></tr>
 <tr class="memdesc:ac490915c95cc78f6cd836f78e3638bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the number of samples used to compute the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>  <a href="#ac490915c95cc78f6cd836f78e3638bf1">More...</a><br /></td></tr>
 <tr class="separator:ac490915c95cc78f6cd836f78e3638bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55ea6fe353a12d4c788fac5f2e20e416"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a55ea6fe353a12d4c788fac5f2e20e416">recompute</a> (bool update_obs_mean=true)</td></tr>
-<tr class="memdesc:a55ea6fe353a12d4c788fac5f2e20e416"><td class="mdescLeft">&#160;</td><td class="mdescRight">recomputes the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>  <a href="#a55ea6fe353a12d4c788fac5f2e20e416">More...</a><br /></td></tr>
-<tr class="separator:a55ea6fe353a12d4c788fac5f2e20e416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff675b6136bdee1b907a1ca1c76699b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4">recompute</a> (bool update_obs_mean=true, bool update_full_kernel=true)</td></tr>
+<tr class="memdesc:aff675b6136bdee1b907a1ca1c76699b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">recomputes the <a class="el" href="classlimbo_1_1model_1_1_g_p.html">GP</a>  <a href="#aff675b6136bdee1b907a1ca1c76699b4">More...</a><br /></td></tr>
+<tr class="separator:aff675b6136bdee1b907a1ca1c76699b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a794ed0eeda29aaa7afe303b5e72d3927"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_g_p.html#a794ed0eeda29aaa7afe303b5e72d3927">get_lik</a> () const </td></tr>
 <tr class="memdesc:a794ed0eeda29aaa7afe303b5e72d3927"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the likelihood (do not compute it!)  <a href="#a794ed0eeda29aaa7afe303b5e72d3927">More...</a><br /></td></tr>
 <tr class="separator:a794ed0eeda29aaa7afe303b5e72d3927"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -779,7 +779,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 
 </div>
 </div>
-<a class="anchor" id="a55ea6fe353a12d4c788fac5f2e20e416"></a>
+<a class="anchor" id="aff675b6136bdee1b907a1ca1c76699b4"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -792,8 +792,18 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
           <td class="memname">void <a class="el" href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a>&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::recompute </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>update_obs_mean</em> = <code>true</code></td><td>)</td>
+          <td class="paramname"><em>update_obs_mean</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>update_full_kernel</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -895,7 +905,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 19 2016 00:00:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 20 2016 00:00:15 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
