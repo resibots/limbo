@@ -162,19 +162,18 @@ BOOST_AUTO_TEST_CASE(test_bo_inheritance)
 
     Params::bayes_opt_boptimizer::set_hp_period(-1);
 
-    typedef kernel::Exp<Params> Kernel_t;
+    using Kernel_t = kernel::Exp<Params>;
 #ifdef USE_NLOPT
-    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+    using AcquiOpt_t = opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>;
 #else
-    typedef opt::Cmaes<Params> AcquiOpt_t;
+    using AcquiOpt_t = opt::Cmaes<Params>;
 #endif
-    typedef boost::fusion::vector<stop::MaxIterations<Parameters>> Stop_t;
-    // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
-    typedef mean::Data<Params> Mean_t;
-    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
-    typedef init::NoInit<Params> Init_t;
-    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
-    typedef acqui::UCB<Params, GP_t> Acqui_t;
+    using Stop_t = boost::fusion::vector<stop::MaxIterations<Parameters>>;
+    using Mean_t = mean::Data<Params>;
+    using Stat_t = boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>>;
+    using Init_t = init::NoInit<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t>;
+    using Acqui_t = acqui::UCB<Params, GP_t>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
@@ -202,14 +201,14 @@ BOOST_AUTO_TEST_CASE(test_bo_unbounded)
         };
     };
 
-    typedef kernel::Exp<Params> Kernel_t;
-    typedef opt::Cmaes<Parameters> AcquiOpt_t;
-    typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
-    typedef mean::NullFunction<Params> Mean_t;
-    typedef boost::fusion::vector<stat::ConsoleSummary<Params>> Stat_t;
-    typedef init::RandomSampling<Params> Init_t;
-    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
-    typedef acqui::UCB<Params, GP_t> Acqui_t;
+    using Kernel_t = kernel::Exp<Params>;
+    using AcquiOpt_t = opt::Cmaes<Parameters>;
+    using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
+    using Mean_t = mean::NullFunction<Params>;
+    using Stat_t = boost::fusion::vector<stat::ConsoleSummary<Params>>;
+    using Init_t = init::RandomSampling<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t>;
+    using Acqui_t = acqui::UCB<Params, GP_t>;
 
     bayes_opt::BOptimizer<Parameters, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval_bounded<Params>());
@@ -224,19 +223,18 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
 
     Params::bayes_opt_boptimizer::set_hp_period(-1);
 
-    typedef kernel::Exp<Params> Kernel_t;
+    using Kernel_t = kernel::Exp<Params>;
 #ifdef USE_NLOPT
-    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+    using AcquiOpt_t = opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>;
 #else
-    typedef opt::Cmaes<Params> AcquiOpt_t;
+    using AcquiOpt_t = opt::Cmaes<Params>;
 #endif
-    typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
-    // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
-    typedef mean::Data<Params> Mean_t;
-    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
-    typedef init::RandomSampling<Params> Init_t;
-    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
-    typedef acqui::EI<Params, GP_t> Acqui_t;
+    using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
+    using Mean_t = mean::Data<Params>;
+    using Stat_t = boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>>;
+    using Init_t = init::RandomSampling<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t>;
+    using Acqui_t = acqui::EI<Params, GP_t>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
@@ -251,18 +249,18 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
 
     Params::bayes_opt_boptimizer::set_hp_period(50);
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
+    using Kernel_t = kernel::SquaredExpARD<Params>;
 #ifdef USE_NLOPT
-    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+    using AcquiOpt_t = opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>;
 #else
-    typedef opt::Cmaes<Params> AcquiOpt_t;
+    using AcquiOpt_t = opt::Cmaes<Params>;
 #endif
-    typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
-    typedef mean::Data<Params> Mean_t;
-    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
-    typedef init::RandomSampling<Params> Init_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params>> GP_t;
-    typedef acqui::UCB<Params, GP_t> Acqui_t;
+    using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
+    using Mean_t = mean::Data<Params>;
+    using Stat_t = boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>>;
+    using Init_t = init::RandomSampling<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params>>;
+    using Acqui_t = acqui::UCB<Params, GP_t>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
@@ -277,18 +275,18 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
 
     Params::bayes_opt_boptimizer::set_hp_period(50);
 
-    typedef kernel::Exp<Params> Kernel_t;
+    using Kernel_t = kernel::SquaredExpARD<Params>;
 #ifdef USE_NLOPT
-    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> AcquiOpt_t;
+    using AcquiOpt_t = opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>;
 #else
-    typedef opt::Cmaes<Params> AcquiOpt_t;
+    using AcquiOpt_t = opt::Cmaes<Params>;
 #endif
-    typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
-    typedef mean::FunctionARD<Params, mean::Data<Params>> Mean_t;
-    typedef boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>> Stat_t;
-    typedef init::RandomSampling<Params> Init_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::MeanLFOpt<Params>> GP_t;
-    typedef acqui::UCB<Params, GP_t> Acqui_t;
+    using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
+    using Mean_t = mean::FunctionARD<Params, mean::Data<Params>>;
+    using Stat_t = boost::fusion::vector<stat::Samples<Params>, stat::Observations<Params>>;
+    using Init_t = init::RandomSampling<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t, model::gp::MeanLFOpt<Params>>;
+    using Acqui_t = acqui::UCB<Params, GP_t>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());

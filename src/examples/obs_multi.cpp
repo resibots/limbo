@@ -102,7 +102,7 @@ struct StateEval {
 };
 
 struct Average {
-    typedef double result_type;
+    using result_type = double;
     double operator()(const Eigen::VectorXd& x) const
     {
         return x.sum() / x.size();
@@ -110,7 +110,7 @@ struct Average {
 };
 
 struct SecondElem {
-    typedef double result_type;
+    using result_type = double;
     double operator()(const Eigen::VectorXd& x) const
     {
         return x(1);
@@ -119,10 +119,10 @@ struct SecondElem {
 
 int main()
 {
-    typedef kernel::MaternFiveHalves<Params> Kernel_t;
-    typedef mean::Data<Params> Mean_t;
-    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
-    typedef acqui::GP_UCB<Params, GP_t> Acqui_t;
+    using Kernel_t = kernel::MaternFiveHalves<Params>;
+    using Mean_t = mean::Data<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t>;
+    using Acqui_t = acqui::GP_UCB<Params, GP_t>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
 

@@ -97,7 +97,7 @@
     {                                                    \
         return __VA_NARG__(__VA_ARGS__);                 \
     }                                                    \
-    typedef Type Name##_t;
+    using Name##_t = Type;
 
 #define BO_PARAM_VECTOR(Type, Name, ...)                                                    \
     static const Eigen::Matrix<Type, __VA_NARG__(__VA_ARGS__), 1> Name()                    \

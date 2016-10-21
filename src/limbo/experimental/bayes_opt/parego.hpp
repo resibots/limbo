@@ -59,7 +59,7 @@ namespace limbo {
 
             BOOST_PARAMETER_TEMPLATE_KEYWORD(parego_modelfun)
 
-            typedef boost::parameter::parameters<boost::parameter::optional<tag::parego_modelfun>> parego_signature;
+            using parego_signature = boost::parameter::parameters<boost::parameter::optional<tag::parego_modelfun>>;
 
             // clang-format off
             template <class Params,

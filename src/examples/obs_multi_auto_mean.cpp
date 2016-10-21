@@ -207,10 +207,10 @@ struct fit_eval {
 int main()
 {
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef mean::FunctionARD<Params, MeanComplet<Params>> Mean_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>> GP_t;
-    typedef UCB_multi<Params, GP_t> Acqui_t;
+    using Kernel_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::FunctionARD<Params, MeanComplet<Params>>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>>;
+    using Acqui_t = UCB_multi<Params, GP_t>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
     opt.optimize(fit_eval());

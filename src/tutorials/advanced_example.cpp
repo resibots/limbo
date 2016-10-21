@@ -134,7 +134,7 @@ struct MinTolerance {
 
 template <typename Params>
 struct DistanceToTarget {
-    typedef double result_type;
+    using result_type = double;
     DistanceToTarget(const Eigen::Vector2d& target) : _target(target) {}
 
     double operator()(const Eigen::VectorXd& x) const

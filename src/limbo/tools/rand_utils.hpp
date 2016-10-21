@@ -260,7 +260,7 @@ namespace randutils {
     struct seed_seq_fe {
     public:
         // types
-        typedef IntRep result_type;
+        using result_type = IntRep;
 
     private:
         static constexpr uint32_t INIT_A = 0x43b0d7e5;

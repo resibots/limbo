@@ -116,7 +116,7 @@ struct cosine {
 int main()
 {
     tools::par::init();
-    typedef cosine func_t;
+    using func_t = cosine;
 
     using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
     using Stat_t = boost::fusion::vector<stat::Samples<Params>,

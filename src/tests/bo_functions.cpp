@@ -321,16 +321,13 @@ int main(int argc, char** argv)
     tools::par::init();
 
 #ifdef USE_TBB
-    typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>
-        res_t;
+    using res_t = tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>;
 #else
-    typedef std::map<std::string,
-        std::vector<std::pair<double, double>>>
-        res_t;
+    using res_t = std::map<std::string, std::vector<std::pair<double, double>>>;
 #endif
     res_t results;
 
-    typedef bayes_opt::BOptimizer<Params> Opt_t;
+    using Opt_t = bayes_opt::BOptimizer<Params>;
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {
