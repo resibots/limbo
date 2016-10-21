@@ -33,9 +33,10 @@ Main features
 
 Scientific articles that use Limbo
 --------------------------------
-- Cully, A., Clune, J., Tarapore, D., & Mouret, J. B. (2015). Robots that can adapt like animals. *Nature*, 521(7553), 503-507.
-- Chatzilygeroudis, K., Cully, A. and Mouret, J.B. (2016). [Towards semi-episodic learning for robot damage recovery](https://arxiv.org/abs/1610.01407). Workshop on AI for Long-Term Autonomy at the IEEE International Conference on Robotics and Automation 2016.
+- Cully, A., Clune, J., Tarapore, D., & Mouret, J. B. (2015). [Robots that can adapt like animals](http://www.nature.com/nature/journal/v521/n7553/full/nature14422.html). *Nature*, 521(7553), 503-507.
+- Tarapore D, Clune J, Cully A, Mouret JB (2016). [How Do Different Encodings Influence the Performance of the MAP-Elites Algorithm?](http://www.evolvingai.org/files/gecco16_map_elites.pdf). In Proc. of Genetic and Evolutionary Computation Conference 2016 Jul.
 - Chatzilygeroudis, K., Vassiliades, V. and Mouret, J.B. (2016). [Reset-free Trial-and-Error Learning for Data-Efficient Robot Damage Recovery](https://arxiv.org/abs/1610.04213). arXiv preprint arXiv:1610.04213.
+- Chatzilygeroudis, K., Cully, A. and Mouret, J.B. (2016). [Towards semi-episodic learning for robot damage recovery](https://arxiv.org/abs/1610.01407). Workshop on AI for Long-Term Autonomy at the IEEE International Conference on Robotics and Automation 2016.
 
 Research project that use Limbo
 --------------------------------
