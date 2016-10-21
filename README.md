@@ -13,6 +13,8 @@ Authors
 - Jean-Baptiste Mouret (Inria): http://members.loria.fr/JBMouret
 - Konstantinos Chatzilygeroudis (Inria)
 - Federico Allocati (Inria)
+- Vaios Papaspyros (Inria)
+- Roberto Rama (Inria)
 
 Limbo is partly funded by the ResiBots ERC Project (http://www.resibots.eu).
 
