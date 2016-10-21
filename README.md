@@ -13,6 +13,9 @@ Authors
 - Jean-Baptiste Mouret (Inria): http://members.loria.fr/JBMouret
 - Konstantinos Chatzilygeroudis (Inria)
 - Federico Allocati (Inria)
+
+Other contributors
+-------------------
 - Vaios Papaspyros (Inria)
 - Roberto Rama (Inria)
 
