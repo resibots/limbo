@@ -11,6 +11,7 @@
 #|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 #|   - Federico Allocati (fede.allocati@gmail.com)
 #|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+#|   - Roberto Rama (bertoski@gmail.com)
 #|
 #| This software is a computer library whose purpose is to optimize continuous,
 #| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -111,7 +112,10 @@ def insert_header(fname, prefix, license, kept_header = []):
     for line in kept_header:
         output.write(line + '\n')
     for line in license.split('\n'):
-        output.write(prefix + line + "\n")
+        if len(line)>0:
+            output.write(prefix + ' ' + line + '\n')
+        else:
+            output.write(prefix + '\n')
     for line in input:
         header = len(filter(lambda x: x == line[0:len(x)], kept_header)) != 0
         if (line[0:len(prefix)] != prefix) and (not header):
@@ -123,9 +127,9 @@ def insert():
     # cpp
     cpp =  make_dirlist('src', ['.hpp', '.cpp'])
     for i in cpp:
-        insert_header(i, "//| ", license)
+        insert_header(i, '//|', license)
     # py
     py = make_dirlist('waf_tools', ['.py'])
     py += make_dirlist('.', ['wscript'])
     for i in py:
-        insert_header(i, "#| ", license, ['#!/usr/bin/env python', '# encoding: utf-8'])
+        insert_header(i, '#|', license, ['#!/usr/bin/env python', '# encoding: utf-8'])
