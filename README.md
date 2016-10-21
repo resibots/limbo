@@ -11,7 +11,7 @@ Authors
 ------
 - Antoine Cully (Imperial College): http://www.antoinecully.com
 - Jean-Baptiste Mouret (Inria): http://members.loria.fr/JBMouret
-- Konstantinos Chatzilygeroudis (Inria)
+- Konstantinos Chatzilygeroudis (Inria): http://costashatz.github.io/
 - Federico Allocati (Inria)
 
 Other contributors
