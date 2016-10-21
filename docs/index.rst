@@ -17,13 +17,12 @@ Limbo shares many ideas with `Sferes2 <http://github.com/sferes2>`_, a similar f
 Main features
 --------------
 
-- Bayesian optimization based on Gaussian processes
+- Implementation of the classic algorithms (Bayesian optimization, many kernels, likelihood maximization, etc.)
+- Modern C++-11
 - Generic framework (template-based / policy-based design), which allows for easy customization, to test novel ideas
-- Programming / experimental framework that allows users to easily test variants of experiments, compare treatments, submit jobs to clusters, etc.
+- Experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters (OAR scheduler), etc.
 - High performance (in particular, Limbo can exploit multicore computers via Intel TBB and vectorize some operations via Eigen3)
 - Purposely small to be easily maintained and quickly understood
-- Modern C++-11
-- Experimental support for multi-objective optimization and sparse Gaussian processes
 
 
 Contents:
