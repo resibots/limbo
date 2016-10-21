@@ -3,9 +3,10 @@ limbo [![Build Status](https://travis-ci.org/resibots/limbo.svg?branch=master)](
 
 A lightweight framework for Bayesian optimization of black-box functions (C++11) and, more generally, for data-efficient optimization. It is designed to be very fast and very flexible.
 
-Documentation
--------------
-Documentation is available here: http://www.resibots.eu/limbo
+Documentation & Versions
+------------------------
+The development branch is the [master](https://github.com/resibots/limbo/tree/master) branch. For the latest stable release, check the [release-1.0](https://github.com/resibots/limbo/tree/release-1.0) branch.
+Documentation is available at: http://www.resibots.eu/limbo
 
 Authors
 ------
