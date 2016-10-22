@@ -2,7 +2,7 @@ var searchData=
 [
   ['cboptimizer',['CBOptimizer',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html',1,'limbo::experimental::bayes_opt']]],
   ['cboptimizer_2ehpp',['cboptimizer.hpp',['../cboptimizer_8hpp.html',1,'']]],
-  ['cboptimizer_5fsignature',['cboptimizer_signature',['../namespacelimbo_1_1experimental_1_1bayes__opt.html#a5b88cfb36e71acb407ac2258966e57b1',1,'limbo::experimental::bayes_opt']]],
+  ['cboptimizer_5fsignature',['cboptimizer_signature',['../namespacelimbo_1_1experimental_1_1bayes__opt.html#ae227a617e3c612fe31b87959b23da719',1,'limbo::experimental::bayes_opt']]],
   ['chain_5fcriteria_2ehpp',['chain_criteria.hpp',['../chain__criteria_8hpp.html',1,'']]],
   ['chaincriteria',['ChainCriteria',['../structlimbo_1_1stop_1_1_chain_criteria.html',1,'limbo::stop']]],
   ['chaincriteria',['ChainCriteria',['../structlimbo_1_1stop_1_1_chain_criteria.html#a287a286866f5ddc83432f23dc1c7c63d',1,'limbo::stop::ChainCriteria']]],
@@ -23,7 +23,7 @@ var searchData=
   ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html#a263296f6d6b10aa360727137588735f7',1,'limbo::mean::Constant']]],
   ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html',1,'limbo::mean']]],
   ['constant_2ehpp',['constant.hpp',['../constant_8hpp.html',1,'']]],
-  ['constraint_5fmodel_5ft',['constraint_model_t',['../structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults.html#afbbb3a7663e1cabe65b094bca5bebc75',1,'limbo::experimental::bayes_opt::CBOptimizer::defaults::constraint_model_t()'],['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html#a1f820a8eb0aebd5eb8ff359b35b98bdc',1,'limbo::experimental::bayes_opt::CBOptimizer::constraint_model_t()']]],
+  ['constraint_5fmodel_5ft',['constraint_model_t',['../structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults.html#a732a30715b9697aad5c6587cca6acfd3',1,'limbo::experimental::bayes_opt::CBOptimizer::defaults::constraint_model_t()'],['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html#a5cb12c91d5ba4ea49768779178c6a2c6',1,'limbo::experimental::bayes_opt::CBOptimizer::constraint_model_t()']]],
   ['convert_5fvector',['convert_vector',['../namespacelimbo_1_1tools_1_1par.html#ae84275467a83e81f3201ce512c178c9c',1,'limbo::tools::par']]],
   ['current_5fiteration',['current_iteration',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#ac3d643d5a668edf22ad053bfc54ea090',1,'limbo::bayes_opt::BoBase']]]
 ];

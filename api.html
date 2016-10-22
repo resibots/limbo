@@ -352,10 +352,10 @@
 <p>(meaning: kernel with automatic relevance determination and mean equals to the mean of the input data, that is, center the data automatically)</p>
 <p>For Statistics, the default value is: <code class="docutils literal"><span class="pre">boost::fusion::vector&lt;</span><a class="reference internal" href="#limbostructlimbo_1_1stat_1_1_samples"><span><span class="pre">stat::Samples</span></span></a><span class="pre">&lt;Params&gt;,</span> <a class="reference internal" href="#limbostructlimbo_1_1stat_1_1_aggregated_observations"><span><span class="pre">stat::AggregatedObservations</span></span></a><span class="pre">&lt;Params&gt;,</span> <a class="reference internal" href="#limbostructlimbo_1_1stat_1_1_console_summary"><span><span class="pre">stat::ConsoleSummary</span></span></a><span class="pre">&lt;Params&gt;&gt;</span></code></p>
 <p>Example of customization:<ul class="simple">
-<li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_matern_five_halves"><span><span class="pre">kernel::MaternFiveHalves</span></span></a><span class="pre">&lt;Params&gt;</span> <span class="pre">Kernel_t;</span></code></li>
-<li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_data"><span><span class="pre">mean::Data</span></span></a><span class="pre">&lt;Params&gt;</span> <span class="pre">Mean_t;</span></code></li>
-<li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span><span class="pre">model::GP</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">Kernel_t,</span> <span class="pre">Mean_t&gt;</span> <span class="pre">GP_t;</span></code></li>
-<li><code class="docutils literal"><span class="pre">typedef</span> <a class="reference internal" href="#limboclasslimbo_1_1acqui_1_1_u_c_b"><span><span class="pre">acqui::UCB</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">GP_t&gt;</span> <span class="pre">Acqui_t;</span></code></li>
+<li><code class="docutils literal"><span class="pre">using</span> <span class="pre">Kernel_t</span> <span class="pre">=</span> <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_matern_five_halves"><span><span class="pre">kernel::MaternFiveHalves</span></span></a><span class="pre">&lt;Params&gt;;</span></code></li>
+<li><code class="docutils literal"><span class="pre">using</span> <span class="pre">Mean_t</span> <span class="pre">=</span> <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_data"><span><span class="pre">mean::Data</span></span></a><span class="pre">&lt;Params&gt;;</span></code></li>
+<li><code class="docutils literal"><span class="pre">using</span> <span class="pre">GP_t</span> <span class="pre">=</span> <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span><span class="pre">model::GP</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">Kernel_t,</span> <span class="pre">Mean_t&gt;;</span></code></li>
+<li><code class="docutils literal"><span class="pre">using</span> <span class="pre">Acqui_t</span> <span class="pre">=</span> <a class="reference internal" href="#limboclasslimbo_1_1acqui_1_1_u_c_b"><span><span class="pre">acqui::UCB</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">GP_t&gt;;</span></code></li>
 <li><code class="docutils literal"><a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_b_optimizer"><span><span class="pre">bayes_opt::BOptimizer</span></span></a><span class="pre">&lt;Params,</span> <span class="pre">modelfun&lt;GP_t&gt;,</span> <span class="pre">acquifun&lt;Acqui_t&gt;&gt;</span> <span class="pre">opt;</span></code> </li>
 </ul>
 </p>
@@ -471,8 +471,8 @@
 <div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Public Types</p>
 <dl class="type">
-<dt id="_CPPv2N5limbo9bayes_opt10BOptimizer6base_tE">
-<span id="limbo::bayes_opt::BOptimizer::base_t"></span><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_b_optimizer_1acfc58fcdd57f2f5520e6ba175677c319"></span><em class="property">typedef </em><a class="reference internal" href="#_CPPv2N5limbo9bayes_opt6BoBaseE" title="limbo::bayes_opt::BoBase">BoBase</a>&lt;Params, A1, A2, A3, A4, A5, A6&gt; <code class="descname">base_t</code><a class="headerlink" href="#_CPPv2N5limbo9bayes_opt10BOptimizer6base_tE" title="Permalink to this definition">¶</a></dt>
+<dt>
+<span class="target" id="limboclasslimbo_1_1bayes__opt_1_1_b_optimizer_1a85523f927879dc96892358bb27347523"></span><em class="property">typedef </em><code class="descname">using limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::base_t =  BoBase&lt;Params, A1, A2, A3, A4, A5, A6&gt;</code></dt>
 <dd><p>link to the corresponding <a class="reference internal" href="#limboclasslimbo_1_1bayes__opt_1_1_bo_base"><span>BoBase</span></a> (useful for typedefs) </p>
 </dd></dl>
 
@@ -751,7 +751,7 @@
 <p>Most algorithms are wrappers to external libraries (NLOpt and CMA-ES). Only the Rprop (and a few control algorithms like &#8216;RandomPoint&#8217;) is implemented in Limbo. Some optimizers require the gradient, some don&#8217;t.</p>
 <p>The tutorial <a class="reference internal" href="tutorials/opt.html#opt-tutorial"><span>Optimization sub-API</span></a> describes how to use the opt:: API in your own algorithms.</p>
 <p>The return type of the function to be optimized is <code class="docutils literal"><span class="pre">eval_t</span></code>, which is defined as a pair of a double (f(x)) and a vector (the gradient):</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;&gt;</span> <span class="kt">eval_t</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">using</span> <span class="kt">eval_t</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>To make it easy to work with <code class="docutils literal"><span class="pre">eval_t</span></code>, Limbo defines a few shortcuts:</p>
@@ -761,8 +761,8 @@
 <dd><div class="breathe-sectiondef container">
 <p class="breathe-sectiondef-title rubric">Typedefs</p>
 <dl class="type">
-<dt id="_CPPv2N5limbo3opt6eval_tE">
-<span id="limbo::opt::eval_t"></span><span class="target" id="limbogroup__opt__tools_1ga7fc87080ebf563d050fc547d25528ef0"></span><em class="property">typedef </em>std::pair&lt;double, boost::optional&lt;Eigen::VectorXd&gt;&gt; <code class="descname">eval_t</code><a class="headerlink" href="#_CPPv2N5limbo3opt6eval_tE" title="Permalink to this definition">¶</a></dt>
+<dt>
+<span class="target" id="limbogroup__opt__tools_1ga362b55973a38ac71f27a06f9d9c14f24"></span><em class="property">typedef </em><code class="descname">using limbo::opt::eval_t = typedef std::pair&lt;double, boost::optional&lt;Eigen::VectorXd&gt;&gt;</code></dt>
 <dd><p>return type of the function to optimize </p>
 </dd></dl>
 
@@ -771,19 +771,19 @@
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt id="_CPPv2N5limbo3opt7no_gradEd">
-<span id="limbo::opt::no_grad__double"></span><span class="target" id="limbogroup__opt__tools_1ga38e53ccac21f452bd31e9b239985d456"></span><a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> <code class="descname">no_grad</code><span class="sig-paren">(</span>double <em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt7no_gradEd" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::opt::no_grad__double"></span><span class="target" id="limbogroup__opt__tools_1ga38e53ccac21f452bd31e9b239985d456"></span>eval_t <code class="descname">no_grad</code><span class="sig-paren">(</span>double <em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt7no_gradEd" title="Permalink to this definition">¶</a></dt>
 <dd><p>return with opt::no_grad(your_val) if no gradient is available (to be used in functions to be optimized) </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo3opt4gradERK6eval_t">
-<span id="limbo::opt::grad__eval_tCR"></span><span class="target" id="limbogroup__opt__tools_1gaf28d9af930b2993024ab497b285e0521"></span><em class="property">const</em> Eigen::VectorXd &amp;<code class="descname">grad</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> &amp;<em>fg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt4gradERK6eval_t" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::opt::grad__eval_tCR"></span><span class="target" id="limbogroup__opt__tools_1gaf28d9af930b2993024ab497b285e0521"></span><em class="property">const</em> Eigen::VectorXd &amp;<code class="descname">grad</code><span class="sig-paren">(</span><em class="property">const</em> eval_t &amp;<em>fg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt4gradERK6eval_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the gradient from a function evaluation (eval_t) </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2N5limbo3opt3funERK6eval_t">
-<span id="limbo::opt::fun__eval_tCR"></span><span class="target" id="limbogroup__opt__tools_1ga68ad00d7501bc26a2a0990bac762393e"></span>double <code class="descname">fun</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> &amp;<em>fg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt3funERK6eval_t" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::opt::fun__eval_tCR"></span><span class="target" id="limbogroup__opt__tools_1ga68ad00d7501bc26a2a0990bac762393e"></span>double <code class="descname">fun</code><span class="sig-paren">(</span><em class="property">const</em> eval_t &amp;<em>fg</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt3funERK6eval_t" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the value from a function evaluation (eval_t) </p>
 </dd></dl>
 
@@ -799,7 +799,7 @@
 <dt>
 <em class="property">template </em>&lt;<em class="property">typename</em> F&gt;</dt>
 <dt id="_CPPv2N5limbo3opt9eval_gradERK1FRKN5Eigen8VectorXdE">
-<span id="limbo::opt::eval_grad__FCR.Eigen::VectorXdCR"></span><span class="target" id="limbogroup__opt__tools_1ga6abbcdf8d83abca89802881d883fb9e3"></span><a class="reference internal" href="#_CPPv2N5limbo3opt6eval_tE" title="limbo::opt::eval_t">eval_t</a> <code class="descname">eval_grad</code><span class="sig-paren">(</span><em class="property">const</em> F &amp;<em>f</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt9eval_gradERK1FRKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
+<span id="limbo::opt::eval_grad__FCR.Eigen::VectorXdCR"></span><span class="target" id="limbogroup__opt__tools_1ga6abbcdf8d83abca89802881d883fb9e3"></span>eval_t <code class="descname">eval_grad</code><span class="sig-paren">(</span><em class="property">const</em> F &amp;<em>f</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo3opt9eval_gradERK1FRKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate f with gradient (to be called from the optimization algorithms that use the gradient) </p>
 </dd></dl>
 
@@ -1986,7 +1986,7 @@ Computes the squared exponential covariance like this:</p>
 <span id="limbo::tools::RandomGenerator"></span><em class="property">class </em><code class="descname">RandomGenerator</code><a class="headerlink" href="#_CPPv2N5limbo5tools15RandomGeneratorE" title="Permalink to this definition">¶</a></dt>
 <dd><em>#include &lt;limbo/tools/random_generator.hpp&gt;</em><p>a mt19937-based random generator (mutex-protected)</p>
 <p>usage :<ul class="simple">
-<li>RandomGenerator&lt;double&gt;(0.0, 1.0);</li>
+<li><a class="reference internal" href="#limboclasslimbo_1_1tools_1_1_random_generator"><span>RandomGenerator</span></a>&lt;dist&lt;double&gt;&gt;(0.0, 1.0);</li>
 <li>double r = rgen.rand(); </li>
 </ul>
 </p>

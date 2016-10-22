@@ -102,192 +102,191 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//|   - Federico Allocati (fede.allocati@gmail.com)</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//|   - Vaios Papaspyros (b.papaspyros@gmail.com)</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//| This software is a computer library whose purpose is to optimize continuous,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//| black-box functions. It mainly implements Gaussian processes and Bayesian</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//| optimization.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//| Main repository: http://github.com/resibots/limbo</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//| Documentation: http://www.resibots.eu/limbo</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//| This software is governed by the CeCILL-C license under French law and</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//| abiding by the rules of distribution of free software.  You can  use,</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//| modify and/ or redistribute the software under the terms of the CeCILL-C</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//| license as circulated by CEA, CNRS and INRIA at the following URL</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//| &quot;http://www.cecill.info&quot;.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//| As a counterpart to the access to the source code and  rights to copy,</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//| modify and redistribute granted by the license, users are provided only</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//| with a limited warranty  and the software&#39;s author,  the holder of the</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//| economic rights,  and the successive licensors  have only  limited</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//| liability.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//| In this respect, the user&#39;s attention is drawn to the risks associated</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//| with loading,  using,  modifying and/or developing or reproducing the</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//| software by the user in light of its specific status of free software,</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//| that may mean  that it is complicated to manipulate,  and  that  also</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//| therefore means  that it is reserved for developers  and  experienced</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//| professionals having in-depth computer knowledge. Users are therefore</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//| encouraged to load and test the software&#39;s suitability as regards their</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//| requirements in conditions enabling the security of their systems and/or</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//| data to be ensured and,  more generally, to use and operate it in the</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//| same conditions as regards security.</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//| The fact that you are presently reading this means that you have had</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//| knowledge of the CeCILL-C license and that you accept its terms.</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifndef LIMBO_EXPERIMENTAL_BAYES_OPT_EHVI_HPP</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define LIMBO_EXPERIMENTAL_BAYES_OPT_EHVI_HPP</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;ehvi/ehvi_calculations.h&gt;</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;ehvi/ehvi_sliceupdate.h&gt;</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="macros_8hpp.html">limbo/tools/macros.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="bo__multi_8hpp.html">limbo/experimental/bayes_opt/bo_multi.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="acqui_2ehvi_8hpp.html">limbo/experimental/acqui/ehvi.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">namespace </span>defaults {</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html">   60</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html">bayes_opt_ehvi</a> {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html#a1cb97e82bdc2c50e649cdff5f7869efc">BO_PARAM</a>(<span class="keywordtype">double</span>, x_ref, -11);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <a class="code" href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html#a1cb97e82bdc2c50e649cdff5f7869efc">BO_PARAM</a>(<span class="keywordtype">double</span>, y_ref, -11);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        };</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">namespace </span>experimental {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keyword">namespace </span>bayes_opt {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            BOOST_PARAMETER_TEMPLATE_KEYWORD(acquiopt)</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1experimental_1_1bayes__opt.html#aa9273d3d9c89937c8da1850d0174d3ff">   71</a></span>&#160;            typedef boost::parameter::parameters&lt;boost::parameter::optional&lt;tag::acquiopt&gt;&gt; <a class="code" href="namespacelimbo_1_1experimental_1_1bayes__opt.html#aa9273d3d9c89937c8da1850d0174d3ff">ehvi_signature</a>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            template &lt;class Params,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                class A1 = boost::parameter::void_,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                class A2 = boost::parameter::void_,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                class A3 = boost::parameter::void_,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                class A4 = boost::parameter::void_,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                class A5 = boost::parameter::void_,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                class A6 = boost::parameter::void_&gt;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html">   81</a></span>&#160;            class <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html">Ehvi</a> : public <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html">BoMulti</a>&lt;Params, A1, A2, A3, A4, A5, A6&gt; {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html">   83</a></span>&#160;                <span class="keyword">struct </span><a class="code" href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html">defaults</a> {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef USE_NLOPT</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html#a3d7a04bbbd73b4f95710c29fd88551bf">   85</a></span>&#160;                    <span class="keyword">typedef</span> <a class="code" href="structlimbo_1_1opt_1_1_n_l_opt_no_grad.html">opt::NLOptNoGrad&lt;Params, nlopt::GN_DIRECT_L_RAND&gt;</a> <a class="code" href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html#a3d7a04bbbd73b4f95710c29fd88551bf">acquiopt_t</a>;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#elif defined(USE_LIBCMAES)</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="keyword">typedef</span> <a class="code" href="structlimbo_1_1opt_1_1_cmaes.html">opt::Cmaes&lt;Params&gt;</a> acquiopt_t;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <span class="keyword">typedef</span> <a class="code" href="structlimbo_1_1opt_1_1_grid_search.html">opt::GridSearch&lt;Params&gt;</a> acquiopt_t;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                };</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#ad5deb9cf89fe77464130cd2d400b5d7b">   94</a></span>&#160;                <span class="keyword">typedef</span> <span class="keyword">typename</span> ehvi_signature::bind&lt;A1, A2, A3, A4, A5, A6&gt;::type <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#ad5deb9cf89fe77464130cd2d400b5d7b">args</a>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a73568ce8f21582499102ca29a8ccbc68">   95</a></span>&#160;                <span class="keyword">typedef</span> <span class="keyword">typename</span> boost::parameter::binding&lt;args, tag::acquiopt, typename defaults::acquiopt_t&gt;::type <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a73568ce8f21582499102ca29a8ccbc68">acqui_optimizer_t</a>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a8e741bf553820c0f0af7b9545d2d773c">   97</a></span>&#160;                <span class="keyword">typedef</span> std::tuple&lt;Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd&gt; <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a8e741bf553820c0f0af7b9545d2d773c">pareto_point_t</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#ad0955fc65023479e48d85c50f1b2804d">   98</a></span>&#160;                <span class="keyword">typedef</span> <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html">limbo::experimental::bayes_opt::BoMulti&lt;Params, A1, A2, A3, A4, A5, A6&gt;</a> <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#ad0955fc65023479e48d85c50f1b2804d">base_t</a>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#af064e606073005f78ef0445d4ab4bc31">   99</a></span>&#160;                <span class="keyword">typedef</span> <span class="keyword">typename</span> <a class="code" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a151af5c7eef92a82d8813bb2e067d267">base_t::model_t</a> <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#af064e606073005f78ef0445d4ab4bc31">model_t</a>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> EvalFunction&gt;</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a44003c1ef6450cbcce18e5c978e30f2c">  102</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a44003c1ef6450cbcce18e5c978e30f2c">optimize</a>(<span class="keyword">const</span> EvalFunction&amp; feval, <span class="keywordtype">bool</span> reset = <span class="keyword">true</span>)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                    this-&gt;_init(feval, <a class="code" href="structlimbo_1_1_first_elem.html">FirstElem</a>(), reset);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    acqui_optimizer_t inner_opt;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    <span class="keywordflow">while</span> (this-&gt;_samples.size() == 0 || !this-&gt;_stop(*<span class="keyword">this</span>, <a class="code" href="structlimbo_1_1_first_elem.html">FirstElem</a>())) {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                        this-&gt;<span class="keyword">template</span> update_pareto_model&lt;EvalFunction::dim_in&gt;();</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                        this-&gt;update_pareto_data();</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                        <span class="comment">// copy in the ehvi structure to compute expected improvement</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                        std::deque&lt;individual*&gt; pop;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        <span class="keywordflow">for</span> (<span class="keyword">auto</span> x : this-&gt;pareto_data()) {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                            individual* ind = <span class="keyword">new</span> individual;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                            ind-&gt;f[0] = std::get&lt;1&gt;(x)(0);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                            ind-&gt;f[1] = std::get&lt;1&gt;(x)(1);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                            ind-&gt;f[2] = 0;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                            pop.push_back(ind);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                        }</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                        <span class="keyword">auto</span> acqui = <a class="code" href="classlimbo_1_1acqui_1_1_ehvi.html">acqui::Ehvi&lt;Params, model_t&gt;</a>(</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                            this-&gt;_models, pop,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                            Eigen::Vector3d(Params::bayes_opt_ehvi::x_ref(), Params::bayes_opt_ehvi::y_ref(), 0));</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                        <span class="comment">// maximize with inner opt</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                        <span class="keyword">typedef</span> std::pair&lt;Eigen::VectorXd, double&gt; pair_t;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                        pair_t <a class="code" href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">init</a>(Eigen::VectorXd::Zero(1), -<a class="code" href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">std::numeric_limits&lt;float&gt;::max</a>());</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                        <span class="keyword">auto</span> body = [&amp;](<span class="keywordtype">int</span> i) -&gt; pair_t {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                            <span class="keyword">auto</span> x = this-&gt;pareto_data()[i];</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                            <span class="keyword">auto</span> acqui_optimization =</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                                [&amp;](<span class="keyword">const</span> Eigen::VectorXd&amp; x, <span class="keywordtype">bool</span> g) { <span class="keywordflow">return</span> <a class="code" href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">opt::no_grad</a>(acqui(x)); };</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                            Eigen::VectorXd s = inner_opt(acqui_optimization, std::get&lt;0&gt;(x), <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                            <span class="keywordtype">double</span> hv = acqui(s);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                            <span class="keywordflow">return</span> std::make_pair(s, hv);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                        };</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                        <span class="keyword">auto</span> comp = [](<span class="keyword">const</span> pair_t&amp; v1, <span class="keyword">const</span> pair_t&amp; v2) {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                            <span class="keywordflow">return</span> v1.second &gt; v2.second;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                        };</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                        <span class="keyword">auto</span> m = <a class="code" href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">tools::par::max</a>(init, this-&gt;pareto_data().size(), body, comp);</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                        <span class="comment">// take the best</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                        Eigen::VectorXd new_sample = m.first;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                        <span class="comment">// delete pop</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                        <span class="keywordflow">for</span> (<span class="keyword">auto</span> x : pop)</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                            <span class="keyword">delete</span> x;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                        <span class="comment">// add sample</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                        this-&gt;add_new_sample(new_sample, feval(new_sample));</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                        this-&gt;_update_stats(*<span class="keyword">this</span>, <a class="code" href="structlimbo_1_1_first_elem.html">FirstElem</a>());</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                        this-&gt;_current_iteration++;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                        this-&gt;_total_iterations++;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                    }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                }</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            };</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:114</div></div>
-<div class="ttc" id="structlimbo_1_1defaults_1_1bayes__opt__ehvi_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html">limbo::defaults::bayes_opt_ehvi</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:60</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html_a44003c1ef6450cbcce18e5c978e30f2c"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a44003c1ef6450cbcce18e5c978e30f2c">limbo::experimental::bayes_opt::Ehvi::optimize</a></div><div class="ttdeci">void optimize(const EvalFunction &amp;feval, bool reset=true)</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:102</div></div>
-<div class="ttc" id="structlimbo_1_1opt_1_1_n_l_opt_no_grad_html"><div class="ttname"><a href="structlimbo_1_1opt_1_1_n_l_opt_no_grad.html">limbo::opt::NLOptNoGrad</a></div><div class="ttdef"><b>Definition:</b> nlopt_no_grad.hpp:100</div></div>
-<div class="ttc" id="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_html"><div class="ttname"><a href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html">limbo::experimental::bayes_opt::Ehvi::defaults</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:83</div></div>
-<div class="ttc" id="classlimbo_1_1acqui_1_1_ehvi_html"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_ehvi.html">limbo::acqui::Ehvi</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:58</div></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//|   - Roberto Rama (bertoski@gmail.com)</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//| This software is a computer library whose purpose is to optimize continuous,</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//| black-box functions. It mainly implements Gaussian processes and Bayesian</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//| optimization.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//| Main repository: http://github.com/resibots/limbo</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//| Documentation: http://www.resibots.eu/limbo</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//| This software is governed by the CeCILL-C license under French law and</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//| abiding by the rules of distribution of free software.  You can  use,</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//| modify and/ or redistribute the software under the terms of the CeCILL-C</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//| license as circulated by CEA, CNRS and INRIA at the following URL</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//| &quot;http://www.cecill.info&quot;.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//| As a counterpart to the access to the source code and  rights to copy,</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//| modify and redistribute granted by the license, users are provided only</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//| with a limited warranty  and the software&#39;s author,  the holder of the</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//| economic rights,  and the successive licensors  have only  limited</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//| liability.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//| In this respect, the user&#39;s attention is drawn to the risks associated</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//| with loading,  using,  modifying and/or developing or reproducing the</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//| software by the user in light of its specific status of free software,</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//| that may mean  that it is complicated to manipulate,  and  that  also</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//| therefore means  that it is reserved for developers  and  experienced</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//| professionals having in-depth computer knowledge. Users are therefore</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//| encouraged to load and test the software&#39;s suitability as regards their</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//| requirements in conditions enabling the security of their systems and/or</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//| data to be ensured and,  more generally, to use and operate it in the</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//| same conditions as regards security.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//| The fact that you are presently reading this means that you have had</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//| knowledge of the CeCILL-C license and that you accept its terms.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifndef LIMBO_EXPERIMENTAL_BAYES_OPT_EHVI_HPP</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define LIMBO_EXPERIMENTAL_BAYES_OPT_EHVI_HPP</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;ehvi/ehvi_calculations.h&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;ehvi/ehvi_sliceupdate.h&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="macros_8hpp.html">limbo/tools/macros.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="bo__multi_8hpp.html">limbo/experimental/bayes_opt/bo_multi.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="acqui_2ehvi_8hpp.html">limbo/experimental/acqui/ehvi.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">namespace </span>defaults {</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html">   61</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html">bayes_opt_ehvi</a> {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <a class="code" href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html#a1cb97e82bdc2c50e649cdff5f7869efc">BO_PARAM</a>(<span class="keywordtype">double</span>, x_ref, -11);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <a class="code" href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html#a1cb97e82bdc2c50e649cdff5f7869efc">BO_PARAM</a>(<span class="keywordtype">double</span>, y_ref, -11);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        };</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">namespace </span>experimental {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">namespace </span>bayes_opt {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            BOOST_PARAMETER_TEMPLATE_KEYWORD(acquiopt)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="namespacelimbo_1_1experimental_1_1bayes__opt.html#ae8eff4654db4ec2db25b12dcb2a18b52">   72</a></span>&#160;            using <a class="code" href="namespacelimbo_1_1experimental_1_1bayes__opt.html#ae8eff4654db4ec2db25b12dcb2a18b52">ehvi_signature</a> = boost::parameter::parameters&lt;boost::parameter::optional&lt;tag::acquiopt&gt;&gt;;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            template &lt;class Params,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                class A1 = boost::parameter::void_,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                class A2 = boost::parameter::void_,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                class A3 = boost::parameter::void_,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                class A4 = boost::parameter::void_,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                class A5 = boost::parameter::void_,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                class A6 = boost::parameter::void_&gt;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html">   82</a></span>&#160;            class <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html">Ehvi</a> : public <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html">BoMulti</a>&lt;Params, A1, A2, A3, A4, A5, A6&gt; {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html">   84</a></span>&#160;                <span class="keyword">struct </span><a class="code" href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html">defaults</a> {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#ifdef USE_NLOPT</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html#aa57e9da768ea83c6b467b8e9f31da835">   86</a></span>&#160;                    <span class="keyword">using</span> <a class="code" href="structlimbo_1_1opt_1_1_n_l_opt_no_grad.html">acquiopt_t</a> = <a class="code" href="structlimbo_1_1opt_1_1_n_l_opt_no_grad.html">opt::NLOptNoGrad&lt;Params, nlopt::GN_DIRECT_L_RAND&gt;</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#elif defined(USE_LIBCMAES)</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    <span class="keyword">using</span> <a class="code" href="structlimbo_1_1opt_1_1_n_l_opt_no_grad.html">acquiopt_t</a> = <a class="code" href="structlimbo_1_1opt_1_1_cmaes.html">opt::Cmaes&lt;Params&gt;</a>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <span class="keyword">using</span> <a class="code" href="structlimbo_1_1opt_1_1_n_l_opt_no_grad.html">acquiopt_t</a> = <a class="code" href="structlimbo_1_1opt_1_1_grid_search.html">opt::GridSearch&lt;Params&gt;</a>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                };</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a58d9809d76f0efc94ec9ec7a815e967b">   95</a></span>&#160;                <span class="keyword">using</span> <a class="code" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a800d7d9dec5ac0c12b93150f12db9be3">args</a> = <span class="keyword">typename</span> ehvi_signature::bind&lt;A1, A2, A3, A4, A5, A6&gt;::type;</div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a981a7ea28359721ff4a0c26d6d99a6c7">   96</a></span>&#160;                <span class="keyword">using</span> <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a981a7ea28359721ff4a0c26d6d99a6c7">acqui_optimizer_t</a> = <span class="keyword">typename</span> boost::parameter::binding&lt;args, tag::acquiopt, typename defaults::acquiopt_t&gt;::type;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a5014029489a3c6a510cf54632cce309b">   98</a></span>&#160;                <span class="keyword">using</span> <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html#a5592d2f8141fec88904c0f60beb7ff2d">pareto_point_t</a> = std::tuple&lt;Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd&gt;;</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#ab01f05dc353ef1ba698cf856bea5fcf5">   99</a></span>&#160;                <span class="keyword">using</span> <a class="code" href="classlimbo_1_1bayes__opt_1_1_bo_base.html">base_t</a> = <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html">limbo::experimental::bayes_opt::BoMulti&lt;Params, A1, A2, A3, A4, A5, A6&gt;</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a68c468aa4910dd82e2aeec342215f1ba">  100</a></span>&#160;                <span class="keyword">using</span> <a class="code" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a5e23d523dd2a16b866a2660721b937bb">model_t</a> = <span class="keyword">typename</span> <a class="code" href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a5e23d523dd2a16b866a2660721b937bb">base_t::model_t</a>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> EvalFunction&gt;</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a44003c1ef6450cbcce18e5c978e30f2c">  103</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a44003c1ef6450cbcce18e5c978e30f2c">optimize</a>(<span class="keyword">const</span> EvalFunction&amp; feval, <span class="keywordtype">bool</span> reset = <span class="keyword">true</span>)</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                    this-&gt;_init(feval, <a class="code" href="structlimbo_1_1_first_elem.html">FirstElem</a>(), reset);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    <a class="code" href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a981a7ea28359721ff4a0c26d6d99a6c7">acqui_optimizer_t</a> inner_opt;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    <span class="keywordflow">while</span> (this-&gt;_samples.size() == 0 || !this-&gt;_stop(*<span class="keyword">this</span>, <a class="code" href="structlimbo_1_1_first_elem.html">FirstElem</a>())) {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                        this-&gt;<span class="keyword">template</span> update_pareto_model&lt;EvalFunction::dim_in&gt;();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                        this-&gt;update_pareto_data();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                        <span class="comment">// copy in the ehvi structure to compute expected improvement</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        std::deque&lt;individual*&gt; pop;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        <span class="keywordflow">for</span> (<span class="keyword">auto</span> x : this-&gt;pareto_data()) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                            individual* ind = <span class="keyword">new</span> individual;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                            ind-&gt;f[0] = std::get&lt;1&gt;(x)(0);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                            ind-&gt;f[1] = std::get&lt;1&gt;(x)(1);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                            ind-&gt;f[2] = 0;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                            pop.push_back(ind);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                        }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                        <span class="keyword">auto</span> acqui = <a class="code" href="classlimbo_1_1acqui_1_1_ehvi.html">acqui::Ehvi&lt;Params, model_t&gt;</a>(</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                            this-&gt;_models, pop,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                            Eigen::Vector3d(Params::bayes_opt_ehvi::x_ref(), Params::bayes_opt_ehvi::y_ref(), 0));</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                        <span class="comment">// maximize with inner opt</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                        <span class="keyword">using</span> pair_t = std::pair&lt;Eigen::VectorXd, double&gt;;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                        pair_t <a class="code" href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">init</a>(Eigen::VectorXd::Zero(1), -<a class="code" href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">std::numeric_limits&lt;float&gt;::max</a>());</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                        <span class="keyword">auto</span> body = [&amp;](<span class="keywordtype">int</span> i) -&gt; pair_t {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                            <span class="keyword">auto</span> x = this-&gt;pareto_data()[i];</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                            <span class="keyword">auto</span> acqui_optimization =</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                                [&amp;](<span class="keyword">const</span> Eigen::VectorXd&amp; x, <span class="keywordtype">bool</span> g) { <span class="keywordflow">return</span> <a class="code" href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">opt::no_grad</a>(acqui(x)); };</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                            Eigen::VectorXd s = inner_opt(acqui_optimization, std::get&lt;0&gt;(x), <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                            <span class="keywordtype">double</span> hv = acqui(s);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                            <span class="keywordflow">return</span> std::make_pair(s, hv);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                        };</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                        <span class="keyword">auto</span> comp = [](<span class="keyword">const</span> pair_t&amp; v1, <span class="keyword">const</span> pair_t&amp; v2) {</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                            <span class="keywordflow">return</span> v1.second &gt; v2.second;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                        };</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                        <span class="keyword">auto</span> m = <a class="code" href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">tools::par::max</a>(init, this-&gt;pareto_data().size(), body, comp);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                        <span class="comment">// take the best</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                        Eigen::VectorXd new_sample = m.first;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                        <span class="comment">// delete pop</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                        <span class="keywordflow">for</span> (<span class="keyword">auto</span> x : pop)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                            <span class="keyword">delete</span> x;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                        <span class="comment">// add sample</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                        this-&gt;add_new_sample(new_sample, feval(new_sample));</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                        this-&gt;_update_stats(*<span class="keyword">this</span>, <a class="code" href="structlimbo_1_1_first_elem.html">FirstElem</a>());</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                        this-&gt;_current_iteration++;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                        this-&gt;_total_iterations++;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                    }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            };</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="group__par__tools_html_ga1d650a019b6c1bb551cb42f1c3f5ef82"><div class="ttname"><a href="group__par__tools.html#ga1d650a019b6c1bb551cb42f1c3f5ef82">limbo::tools::par::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> parallel.hpp:115</div></div>
+<div class="ttc" id="structlimbo_1_1defaults_1_1bayes__opt__ehvi_html"><div class="ttname"><a href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html">limbo::defaults::bayes_opt_ehvi</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:61</div></div>
+<div class="ttc" id="classlimbo_1_1bayes__opt_1_1_bo_base_html"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1_bo_base.html">limbo::bayes_opt::BoBase</a></div><div class="ttdef"><b>Definition:</b> bo_base.hpp:177</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html_a44003c1ef6450cbcce18e5c978e30f2c"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a44003c1ef6450cbcce18e5c978e30f2c">limbo::experimental::bayes_opt::Ehvi::optimize</a></div><div class="ttdeci">void optimize(const EvalFunction &amp;feval, bool reset=true)</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:103</div></div>
+<div class="ttc" id="structlimbo_1_1opt_1_1_n_l_opt_no_grad_html"><div class="ttname"><a href="structlimbo_1_1opt_1_1_n_l_opt_no_grad.html">limbo::opt::NLOptNoGrad</a></div><div class="ttdef"><b>Definition:</b> nlopt_no_grad.hpp:101</div></div>
+<div class="ttc" id="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_html"><div class="ttname"><a href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html">limbo::experimental::bayes_opt::Ehvi::defaults</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:84</div></div>
+<div class="ttc" id="namespacelimbo_1_1experimental_1_1bayes__opt_html_ae8eff4654db4ec2db25b12dcb2a18b52"><div class="ttname"><a href="namespacelimbo_1_1experimental_1_1bayes__opt.html#ae8eff4654db4ec2db25b12dcb2a18b52">limbo::experimental::bayes_opt::ehvi_signature</a></div><div class="ttdeci">boost::parameter::parameters&lt; boost::parameter::optional&lt; tag::acquiopt &gt;&gt; ehvi_signature</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:72</div></div>
+<div class="ttc" id="classlimbo_1_1acqui_1_1_ehvi_html"><div class="ttname"><a href="classlimbo_1_1acqui_1_1_ehvi.html">limbo::acqui::Ehvi</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:59</div></div>
 <div class="ttc" id="acqui_2ehvi_8hpp_html"><div class="ttname"><a href="acqui_2ehvi_8hpp.html">ehvi.hpp</a></div></div>
 <div class="ttc" id="bo__multi_8hpp_html"><div class="ttname"><a href="bo__multi_8hpp.html">bo_multi.hpp</a></div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html_a73568ce8f21582499102ca29a8ccbc68"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a73568ce8f21582499102ca29a8ccbc68">limbo::experimental::bayes_opt::Ehvi::acqui_optimizer_t</a></div><div class="ttdeci">boost::parameter::binding&lt; args, tag::acquiopt, typename defaults::acquiopt_t &gt;::type acqui_optimizer_t</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:95</div></div>
 <div class="ttc" id="structlimbo_1_1defaults_1_1bayes__opt__ehvi_html_a1cb97e82bdc2c50e649cdff5f7869efc"><div class="ttname"><a href="structlimbo_1_1defaults_1_1bayes__opt__ehvi.html#a1cb97e82bdc2c50e649cdff5f7869efc">limbo::defaults::bayes_opt_ehvi::BO_PARAM</a></div><div class="ttdeci">BO_PARAM(double, x_ref,-11)</div></div>
-<div class="ttc" id="classlimbo_1_1bayes__opt_1_1_bo_base_html_a151af5c7eef92a82d8813bb2e067d267"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a151af5c7eef92a82d8813bb2e067d267">limbo::bayes_opt::BoBase::model_t</a></div><div class="ttdeci">boost::parameter::binding&lt; args, tag::modelfun, typename defaults::model_t &gt;::type model_t</div><div class="ttdef"><b>Definition:</b> bo_base.hpp:197</div></div>
-<div class="ttc" id="structlimbo_1_1opt_1_1_cmaes_html"><div class="ttname"><a href="structlimbo_1_1opt_1_1_cmaes.html">limbo::opt::Cmaes</a></div><div class="ttdef"><b>Definition:</b> cmaes.hpp:85</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html">limbo::experimental::bayes_opt::BoMulti</a></div><div class="ttdef"><b>Definition:</b> bo_multi.hpp:150</div></div>
-<div class="ttc" id="group__opt__tools_html_ga38e53ccac21f452bd31e9b239985d456"><div class="ttname"><a href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">limbo::opt::no_grad</a></div><div class="ttdeci">eval_t no_grad(double x)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:64</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html_ad0955fc65023479e48d85c50f1b2804d"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#ad0955fc65023479e48d85c50f1b2804d">limbo::experimental::bayes_opt::Ehvi::base_t</a></div><div class="ttdeci">limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt; base_t</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:98</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html">limbo::experimental::bayes_opt::Ehvi</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:81</div></div>
+<div class="ttc" id="structlimbo_1_1opt_1_1_cmaes_html"><div class="ttname"><a href="structlimbo_1_1opt_1_1_cmaes.html">limbo::opt::Cmaes</a></div><div class="ttdef"><b>Definition:</b> cmaes.hpp:86</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html">limbo::experimental::bayes_opt::BoMulti</a></div><div class="ttdef"><b>Definition:</b> bo_multi.hpp:151</div></div>
+<div class="ttc" id="group__opt__tools_html_ga38e53ccac21f452bd31e9b239985d456"><div class="ttname"><a href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">limbo::opt::no_grad</a></div><div class="ttdeci">eval_t no_grad(double x)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:65</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi_html_a5592d2f8141fec88904c0f60beb7ff2d"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html#a5592d2f8141fec88904c0f60beb7ff2d">limbo::experimental::bayes_opt::BoMulti::pareto_point_t</a></div><div class="ttdeci">std::tuple&lt; Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd &gt; pareto_point_t</div><div class="ttdef"><b>Definition:</b> bo_multi.hpp:159</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html_a981a7ea28359721ff4a0c26d6d99a6c7"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a981a7ea28359721ff4a0c26d6d99a6c7">limbo::experimental::bayes_opt::Ehvi::acqui_optimizer_t</a></div><div class="ttdeci">typename boost::parameter::binding&lt; args, tag::acquiopt, typename defaults::acquiopt_t &gt;::type acqui_optimizer_t</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:96</div></div>
+<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html">limbo::experimental::bayes_opt::Ehvi</a></div><div class="ttdef"><b>Definition:</b> ehvi.hpp:82</div></div>
 <div class="ttc" id="macros_8hpp_html"><div class="ttname"><a href="macros_8hpp.html">macros.hpp</a></div></div>
-<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
-<div class="ttc" id="structlimbo_1_1_first_elem_html"><div class="ttname"><a href="structlimbo_1_1_first_elem.html">limbo::FirstElem</a></div><div class="ttdef"><b>Definition:</b> bo_base.hpp:96</div></div>
-<div class="ttc" id="group__par__tools_html_gaf3fdc36fc4e94ad4cac72c803234b6ac"><div class="ttname"><a href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">limbo::tools::par::max</a></div><div class="ttdeci">T max(const T &amp;init, int num_steps, const F &amp;f, const C &amp;comp)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:152</div></div>
-<div class="ttc" id="structlimbo_1_1opt_1_1_grid_search_html"><div class="ttname"><a href="structlimbo_1_1opt_1_1_grid_search.html">limbo::opt::GridSearch</a></div><div class="ttdef"><b>Definition:</b> grid_search.hpp:70</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html_a8e741bf553820c0f0af7b9545d2d773c"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a8e741bf553820c0f0af7b9545d2d773c">limbo::experimental::bayes_opt::Ehvi::pareto_point_t</a></div><div class="ttdeci">std::tuple&lt; Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd &gt; pareto_point_t</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:97</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html_ad5deb9cf89fe77464130cd2d400b5d7b"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#ad5deb9cf89fe77464130cd2d400b5d7b">limbo::experimental::bayes_opt::Ehvi::args</a></div><div class="ttdeci">ehvi_signature::bind&lt; A1, A2, A3, A4, A5, A6 &gt;::type args</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:94</div></div>
-<div class="ttc" id="namespacelimbo_1_1experimental_1_1bayes__opt_html_aa9273d3d9c89937c8da1850d0174d3ff"><div class="ttname"><a href="namespacelimbo_1_1experimental_1_1bayes__opt.html#aa9273d3d9c89937c8da1850d0174d3ff">limbo::experimental::bayes_opt::ehvi_signature</a></div><div class="ttdeci">boost::parameter::parameters&lt; boost::parameter::optional&lt; tag::acquiopt &gt; &gt; ehvi_signature</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:71</div></div>
-<div class="ttc" id="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults_html_a3d7a04bbbd73b4f95710c29fd88551bf"><div class="ttname"><a href="structlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_1_1defaults.html#a3d7a04bbbd73b4f95710c29fd88551bf">limbo::experimental::bayes_opt::Ehvi::defaults::acquiopt_t</a></div><div class="ttdeci">opt::NLOptNoGrad&lt; Params, nlopt::GN_DIRECT_L_RAND &gt; acquiopt_t</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:85</div></div>
-<div class="ttc" id="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi_html_af064e606073005f78ef0445d4ab4bc31"><div class="ttname"><a href="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#af064e606073005f78ef0445d4ab4bc31">limbo::experimental::bayes_opt::Ehvi::model_t</a></div><div class="ttdeci">base_t::model_t model_t</div><div class="ttdef"><b>Definition:</b> ehvi.hpp:99</div></div>
+<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:56</div></div>
+<div class="ttc" id="structlimbo_1_1_first_elem_html"><div class="ttname"><a href="structlimbo_1_1_first_elem.html">limbo::FirstElem</a></div><div class="ttdef"><b>Definition:</b> bo_base.hpp:97</div></div>
+<div class="ttc" id="group__par__tools_html_gaf3fdc36fc4e94ad4cac72c803234b6ac"><div class="ttname"><a href="group__par__tools.html#gaf3fdc36fc4e94ad4cac72c803234b6ac">limbo::tools::par::max</a></div><div class="ttdeci">T max(const T &amp;init, int num_steps, const F &amp;f, const C &amp;comp)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:153</div></div>
+<div class="ttc" id="structlimbo_1_1opt_1_1_grid_search_html"><div class="ttname"><a href="structlimbo_1_1opt_1_1_grid_search.html">limbo::opt::GridSearch</a></div><div class="ttdef"><b>Definition:</b> grid_search.hpp:71</div></div>
+<div class="ttc" id="classlimbo_1_1bayes__opt_1_1_bo_base_html_a800d7d9dec5ac0c12b93150f12db9be3"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a800d7d9dec5ac0c12b93150f12db9be3">limbo::bayes_opt::BoBase::args</a></div><div class="ttdeci">typename bobase_signature::bind&lt; A1, A2, A3, A4, A5, A6 &gt;::type args</div><div class="ttdef"><b>Definition:</b> bo_base.hpp:195</div></div>
+<div class="ttc" id="classlimbo_1_1bayes__opt_1_1_bo_base_html_a5e23d523dd2a16b866a2660721b937bb"><div class="ttname"><a href="classlimbo_1_1bayes__opt_1_1_bo_base.html#a5e23d523dd2a16b866a2660721b937bb">limbo::bayes_opt::BoBase::model_t</a></div><div class="ttdeci">typename boost::parameter::binding&lt; args, tag::modelfun, typename defaults::model_t &gt;::type model_t</div><div class="ttdef"><b>Definition:</b> bo_base.hpp:198</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 21 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 23 2016 00:00:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -257,8 +257,7 @@
 43
 44
 45
-46
-47</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+46</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
 
 <span class="c1">// you can also include &lt;limbo/limbo.hpp&gt; but it will slow down the compilation</span>
 <span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>
@@ -304,7 +303,6 @@
     <span class="c1">// we use the default parameters for acqui_ucb</span>
     <span class="k">struct</span> <span class="nl">acqui_ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_ucb</span> <span class="p">{</span>
     <span class="p">};</span>
-<span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
 <p>Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function), that we want to output the stats (by setting stats_enabled to <cite>true</cite>), that the model has to be initialized with 10 samples (that will be selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults. <strong>By default limbo optimizes in</strong> <span class="math">\([0,1]\)</span>, but you can optimize without bounds by setting <code class="docutils literal"><span class="pre">BO_PARAM(bool,</span> <span class="pre">bounded,</span> <span class="pre">false)</span></code> in <code class="docutils literal"><span class="pre">bayes_opt_bobase</span></code> parameters.</p>
@@ -321,8 +319,7 @@
 10
 11
 12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
     <span class="c1">// number of input dimension (x.size())</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="c1">// number of dimenions of the result (res.size())</span>
@@ -335,7 +332,6 @@
         <span class="c1">// we return a 1-dimensional vector</span>
         <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
 <p>It is required that the evaluation struct has the static members <code class="docutils literal"><span class="pre">dim_in</span></code> and <code class="docutils literal"><span class="pre">dim_out</span></code>, specifying the input and output dimensions.
@@ -350,7 +346,10 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="c1">// we use the default acquisition function / model / stat / etc.</span>
     <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
@@ -359,7 +358,6 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
     <span class="c1">// the best sample found</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Best sample: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_sample</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; - Best observation: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_observation</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 <p>Finally, from the root of limbo, run a build command, with the additional switch <code class="docutils literal"><span class="pre">--exp</span> <span class="pre">myExp</span></code>:</p>
@@ -440,7 +438,11 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
 70
 71
 72
-73</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+73
+74
+75</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// please see the explanation in the documentation</span>
+
+<span class="cp">#include &lt;iostream&gt;</span>
 
 <span class="c1">// you can also include &lt;limbo/limbo.hpp&gt; but it will slow down the compilation</span>
 <span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>

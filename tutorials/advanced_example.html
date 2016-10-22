@@ -343,7 +343,9 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
     <span class="n">MeanFWModel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
 
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">GP</span><span class="o">&gt;</span>
@@ -371,8 +373,10 @@
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
-    <span class="k">typedef</span> <span class="kt">double</span> <span class="n">result_type</span><span class="p">;</span>
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">result_type</span> <span class="o">=</span> <span class="kt">double</span><span class="p">;</span>
     <span class="n">DistanceToTarget</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span><span class="o">&amp;</span> <span class="n">target</span><span class="p">)</span> <span class="o">:</span> <span class="n">_target</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="p">{}</span>
 
     <span class="kt">double</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
@@ -390,15 +394,17 @@
 <div class="section" id="adding-custom-stop-criterion">
 <h2>Adding custom stop criterion<a class="headerlink" href="#adding-custom-stop-criterion" title="Permalink to this headline">¶</a></h2>
 <p>When our bayesian optimizer finds a solution that the end-effector of the arm is reasonably close to the target, we want it to stop. We can easily do this by creating our own stopping criterion:</p>
-<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
     <span class="n">MinTolerance</span><span class="p">()</span> <span class="p">{}</span>
 
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
@@ -426,7 +432,9 @@
 12
 13
 14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 

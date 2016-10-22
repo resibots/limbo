@@ -4,9 +4,9 @@
     <compoundname>limbo::bayes_opt::BoBase::defaults</compoundname>
     <includes refid="bo__base_8hpp" local="no">limbo/bayes_opt/bo_base.hpp</includes>
       <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a675d927a474fc77608cc63c8406448f7" prot="public" static="no">
+      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1afab889d523b8c28d1161079a5a453f79" prot="public" static="no">
         <type><ref refid="structlimbo_1_1init_1_1_random_sampling" kindref="compound">init::RandomSampling</ref>&lt; Params &gt;</type>
-        <definition>typedef init::RandomSampling&lt;Params&gt; limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::init_t</definition>
+        <definition>using limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::init_t =  init::RandomSampling&lt;Params&gt;</definition>
         <argsstring></argsstring>
         <name>init_t</name>
         <briefdescription>
@@ -15,11 +15,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="181" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="181" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="182" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="182" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a0a88a267bef731645079455cb11fa836" prot="public" static="no">
+      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a74f559358b99209461a1aac1e0dacb1f" prot="public" static="no">
         <type><ref refid="structlimbo_1_1kernel_1_1_exp" kindref="compound">kernel::Exp</ref>&lt; Params &gt;</type>
-        <definition>typedef kernel::Exp&lt;Params&gt; limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::kf_t</definition>
+        <definition>using limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::kf_t =  kernel::Exp&lt;Params&gt;</definition>
         <argsstring></argsstring>
         <name>kf_t</name>
         <briefdescription>
@@ -28,11 +28,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="183" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="183" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="184" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="184" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ae66c699015cb936c8c429c64154bf202" prot="public" static="no">
+      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ae8b922abc8e126f785e1001342cf47ae" prot="public" static="no">
         <type><ref refid="structlimbo_1_1mean_1_1_data" kindref="compound">mean::Data</ref>&lt; Params &gt;</type>
-        <definition>typedef mean::Data&lt;Params&gt; limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::mean_t</definition>
+        <definition>using limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::mean_t =  mean::Data&lt;Params&gt;</definition>
         <argsstring></argsstring>
         <name>mean_t</name>
         <briefdescription>
@@ -41,11 +41,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="184" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="184" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="185" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="185" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a07f65b6332c4f0c029069100feecb789" prot="public" static="no">
-        <type><ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">model::GP</ref>&lt; Params, <ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a0a88a267bef731645079455cb11fa836" kindref="member">kf_t</ref>, <ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ae66c699015cb936c8c429c64154bf202" kindref="member">mean_t</ref> &gt;</type>
-        <definition>typedef model::GP&lt;Params, kf_t, mean_t&gt; limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::model_t</definition>
+      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aa9a30c408b869fd46861b028b6325b4a" prot="public" static="no">
+        <type><ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">model::GP</ref>&lt; Params, <ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a74f559358b99209461a1aac1e0dacb1f" kindref="member">kf_t</ref>, <ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ae8b922abc8e126f785e1001342cf47ae" kindref="member">mean_t</ref> &gt;</type>
+        <definition>using limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::model_t =  model::GP&lt;Params, kf_t, mean_t&gt;</definition>
         <argsstring></argsstring>
         <name>model_t</name>
         <briefdescription>
@@ -54,11 +54,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="185" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="185" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="186" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="186" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a4cb9b80ab762b3b763fdd97e893886e5" prot="public" static="no">
-        <type><ref refid="classlimbo_1_1acqui_1_1_u_c_b" kindref="compound">acqui::UCB</ref>&lt; Params, <ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a07f65b6332c4f0c029069100feecb789" kindref="member">model_t</ref> &gt;</type>
-        <definition>typedef acqui::UCB&lt;Params, model_t&gt; limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::acqui_t</definition>
+      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a7728ece1763ffbcac4e37f219047dcb1" prot="public" static="no">
+        <type><ref refid="classlimbo_1_1acqui_1_1_u_c_b" kindref="compound">acqui::UCB</ref>&lt; Params, <ref refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aa9a30c408b869fd46861b028b6325b4a" kindref="member">model_t</ref> &gt;</type>
+        <definition>using limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::acqui_t =  acqui::UCB&lt;Params, model_t&gt;</definition>
         <argsstring></argsstring>
         <name>acqui_t</name>
         <briefdescription>
@@ -67,11 +67,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="188" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="188" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="189" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="189" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ab8f3991474723d27b9c77d0e0a76fce2" prot="public" static="no">
-        <type>boost::fusion::vector&lt; <ref refid="structlimbo_1_1stat_1_1_samples" kindref="compound">stat::Samples</ref>&lt; Params &gt;, <ref refid="structlimbo_1_1stat_1_1_aggregated_observations" kindref="compound">stat::AggregatedObservations</ref>&lt; Params &gt;, <ref refid="structlimbo_1_1stat_1_1_console_summary" kindref="compound">stat::ConsoleSummary</ref>&lt; Params &gt; &gt;</type>
-        <definition>typedef boost::fusion::vector&lt;stat::Samples&lt;Params&gt;, stat::AggregatedObservations&lt;Params&gt;, stat::ConsoleSummary&lt;Params&gt; &gt; limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::stat_t</definition>
+      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a3c475362a937e011e02c715e8edbf2d1" prot="public" static="no">
+        <type>boost::fusion::vector&lt; <ref refid="structlimbo_1_1stat_1_1_samples" kindref="compound">stat::Samples</ref>&lt; Params &gt;, <ref refid="structlimbo_1_1stat_1_1_aggregated_observations" kindref="compound">stat::AggregatedObservations</ref>&lt; Params &gt;, <ref refid="structlimbo_1_1stat_1_1_console_summary" kindref="compound">stat::ConsoleSummary</ref>&lt; Params &gt;&gt;</type>
+        <definition>using limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::stat_t =  boost::fusion::vector&lt;stat::Samples&lt;Params&gt;, stat::AggregatedObservations&lt;Params&gt;, stat::ConsoleSummary&lt;Params&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>stat_t</name>
         <briefdescription>
@@ -80,11 +80,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="189" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="189" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="190" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="190" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a66e1dbe1ccd9dbef0fdfc5c9faee9eff" prot="public" static="no">
-        <type>boost::fusion::vector&lt; <ref refid="structlimbo_1_1stop_1_1_max_iterations" kindref="compound">stop::MaxIterations</ref>&lt; Params &gt; &gt;</type>
-        <definition>typedef boost::fusion::vector&lt;stop::MaxIterations&lt;Params&gt; &gt; limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::stop_t</definition>
+      <memberdef kind="typedef" id="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aabb9a88029b7b3cba6d1bafe3dfadaf5" prot="public" static="no">
+        <type>boost::fusion::vector&lt; <ref refid="structlimbo_1_1stop_1_1_max_iterations" kindref="compound">stop::MaxIterations</ref>&lt; Params &gt;&gt;</type>
+        <definition>using limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;::defaults::stop_t =  boost::fusion::vector&lt;stop::MaxIterations&lt;Params&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>stop_t</name>
         <briefdescription>
@@ -93,22 +93,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="190" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="190" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="191" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="191" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="180" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="180" bodyend="191"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" line="181" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/bayes_opt/bo_base.hpp" bodystart="181" bodyend="192"/>
     <listofallmembers>
-      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a4cb9b80ab762b3b763fdd97e893886e5" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>acqui_t</name></member>
-      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a675d927a474fc77608cc63c8406448f7" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>init_t</name></member>
-      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a0a88a267bef731645079455cb11fa836" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>kf_t</name></member>
-      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ae66c699015cb936c8c429c64154bf202" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>mean_t</name></member>
-      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a07f65b6332c4f0c029069100feecb789" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>model_t</name></member>
-      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ab8f3991474723d27b9c77d0e0a76fce2" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>stat_t</name></member>
-      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a66e1dbe1ccd9dbef0fdfc5c9faee9eff" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>stop_t</name></member>
+      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a7728ece1763ffbcac4e37f219047dcb1" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>acqui_t</name></member>
+      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1afab889d523b8c28d1161079a5a453f79" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>init_t</name></member>
+      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a74f559358b99209461a1aac1e0dacb1f" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>kf_t</name></member>
+      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1ae8b922abc8e126f785e1001342cf47ae" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>mean_t</name></member>
+      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aa9a30c408b869fd46861b028b6325b4a" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>model_t</name></member>
+      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1a3c475362a937e011e02c715e8edbf2d1" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>stat_t</name></member>
+      <member refid="structlimbo_1_1bayes__opt_1_1_bo_base_1_1defaults_1aabb9a88029b7b3cba6d1bafe3dfadaf5" prot="public" virt="non-virtual"><scope>limbo::bayes_opt::BoBase::defaults</scope><name>stop_t</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

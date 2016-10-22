@@ -102,142 +102,143 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//|   - Federico Allocati (fede.allocati@gmail.com)</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//|   - Vaios Papaspyros (b.papaspyros@gmail.com)</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//| This software is a computer library whose purpose is to optimize continuous,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//| black-box functions. It mainly implements Gaussian processes and Bayesian</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//| optimization.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//| Main repository: http://github.com/resibots/limbo</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//| Documentation: http://www.resibots.eu/limbo</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//| This software is governed by the CeCILL-C license under French law and</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//| abiding by the rules of distribution of free software.  You can  use,</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//| modify and/ or redistribute the software under the terms of the CeCILL-C</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//| license as circulated by CEA, CNRS and INRIA at the following URL</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//| &quot;http://www.cecill.info&quot;.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//| As a counterpart to the access to the source code and  rights to copy,</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//| modify and redistribute granted by the license, users are provided only</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//| with a limited warranty  and the software&#39;s author,  the holder of the</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//| economic rights,  and the successive licensors  have only  limited</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//| liability.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//| In this respect, the user&#39;s attention is drawn to the risks associated</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//| with loading,  using,  modifying and/or developing or reproducing the</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//| software by the user in light of its specific status of free software,</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//| that may mean  that it is complicated to manipulate,  and  that  also</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//| therefore means  that it is reserved for developers  and  experienced</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//| professionals having in-depth computer knowledge. Users are therefore</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//| encouraged to load and test the software&#39;s suitability as regards their</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//| requirements in conditions enabling the security of their systems and/or</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//| data to be ensured and,  more generally, to use and operate it in the</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//| same conditions as regards security.</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//| The fact that you are presently reading this means that you have had</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//| knowledge of the CeCILL-C license and that you accept its terms.</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifndef LIMBO_MODEL_GP_MEAN_LF_OPT_HPP</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define LIMBO_MODEL_GP_MEAN_LF_OPT_HPP</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="hp__opt_8hpp.html">limbo/model/gp/hp_opt.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="random__generator_8hpp.html">limbo/tools/random_generator.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">namespace </span>model {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">namespace </span>gp {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params, <span class="keyword">typename</span> Optimizer = opt::ParallelRepeater&lt;Params, opt::Rprop&lt;Params&gt;&gt;&gt;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html">   57</a></span>&#160;            <span class="keyword">struct </span><a class="code" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html">MeanLFOpt</a> : <span class="keyword">public</span> <a class="code" href="structlimbo_1_1model_1_1gp_1_1_h_p_opt.html">HPOpt</a>&lt;Params, Optimizer&gt; {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> GP&gt;</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">   60</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">operator()</a>(<a class="code" href="classlimbo_1_1model_1_1_g_p.html">GP</a>&amp; gp)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    this-&gt;_called = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    MeanLFOptimization&lt;GP&gt; optimization(gp);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    Optimizer optimizer;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    <span class="keyword">auto</span> params = optimizer(optimization, gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().h_params(), <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().set_h_params(params);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a4dfc1807eb4f113191dbd3ae51c053ee">set_lik</a>(<a class="code" href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">opt::eval</a>(optimization, params));</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4">recompute</a>(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> GP&gt;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keyword">struct </span>MeanLFOptimization {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    MeanLFOptimization(<span class="keyword">const</span> <a class="code" href="classlimbo_1_1model_1_1_g_p.html">GP</a>&amp; gp) : _original_gp(gp)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        <span class="keywordtype">size_t</span> n = gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">obs_mean</a>().rows();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        <span class="comment">// K^{-1} using Cholesky decomposition</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        _K = Eigen::MatrixXd::Identity(n, n);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a>().template triangularView&lt;Eigen::Lower&gt;().solveInPlace(_K);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a>().template triangularView&lt;Eigen::Lower&gt;().transpose().solveInPlace(_K);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    <a class="code" href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">opt::eval_t</a> <a class="code" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; params, <span class="keywordtype">bool</span> compute_grad)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">                    </span>{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                        <a class="code" href="classlimbo_1_1model_1_1_g_p.html">GP</a> gp(this-&gt;_original_gp);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().set_h_params(params);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                        gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4">recompute</a>(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                        <span class="keywordtype">size_t</span> n = gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">obs_mean</a>().rows();</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        <span class="comment">// --- cholesky ---</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        <span class="comment">// see:</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                        <span class="comment">// http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                        Eigen::MatrixXd l = gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a>();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                        <span class="keywordtype">long</span> <span class="keywordtype">double</span> det = 2 * l.diagonal().array().log().sum();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        <span class="keywordtype">double</span> a = (gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">obs_mean</a>().transpose() * gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#adab606218ab9ef0c35babf8d1cc16d81">alpha</a>())</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                                       .trace(); <span class="comment">// generalization for multi dimensional observation</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        <span class="comment">// std::cout&lt;&lt;&quot; a: &quot;&lt;&lt;a &lt;&lt;&quot; det: &quot;&lt;&lt; det&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                        <span class="keywordtype">double</span> lik = -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                        <span class="keywordflow">if</span> (!compute_grad)</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                            <span class="keywordflow">return</span> <a class="code" href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">opt::no_grad</a>(lik);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                        Eigen::VectorXd <a class="code" href="group__opt__tools.html#gaf28d9af930b2993024ab497b285e0521">grad</a> = Eigen::VectorXd::Zero(params.size());</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i_obs = 0; i_obs &lt; gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a077144695f9f0b33b64d4feb8fb4e447">dim_out</a>(); ++i_obs)</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> n_obs = 0; n_obs &lt; n; n_obs++) {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                                grad.tail(gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().h_params_size()) += gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">obs_mean</a>().col(i_obs).transpose() * _K.col(n_obs) * gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().grad(gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">samples</a>()[n_obs], gp).row(i_obs);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                            }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        <span class="keywordflow">return</span> {lik, grad};</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    }</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    <span class="keyword">const</span> GP&amp; _original_gp;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    Eigen::MatrixXd _K;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                };</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            };</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a077144695f9f0b33b64d4feb8fb4e447"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a077144695f9f0b33b64d4feb8fb4e447">limbo::model::GP::dim_out</a></div><div class="ttdeci">int dim_out() const </div><div class="ttdoc">return the number of dimensions of the output </div><div class="ttdef"><b>Definition:</b> gp.hpp:198</div></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a4dfc1807eb4f113191dbd3ae51c053ee"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a4dfc1807eb4f113191dbd3ae51c053ee">limbo::model::GP::set_lik</a></div><div class="ttdeci">void set_lik(const double &amp;lik)</div><div class="ttdoc">set the likelihood (you need to compute it from outside!) </div><div class="ttdef"><b>Definition:</b> gp.hpp:255</div></div>
-<div class="ttc" id="structlimbo_1_1model_1_1gp_1_1_h_p_opt_html"><div class="ttname"><a href="structlimbo_1_1model_1_1gp_1_1_h_p_opt.html">limbo::model::gp::HPOpt</a></div><div class="ttdef"><b>Definition:</b> hp_opt.hpp:15</div></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//|   - Roberto Rama (bertoski@gmail.com)</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//| This software is a computer library whose purpose is to optimize continuous,</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//| black-box functions. It mainly implements Gaussian processes and Bayesian</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//| optimization.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//| Main repository: http://github.com/resibots/limbo</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//| Documentation: http://www.resibots.eu/limbo</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//| This software is governed by the CeCILL-C license under French law and</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//| abiding by the rules of distribution of free software.  You can  use,</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//| modify and/ or redistribute the software under the terms of the CeCILL-C</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//| license as circulated by CEA, CNRS and INRIA at the following URL</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//| &quot;http://www.cecill.info&quot;.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//| As a counterpart to the access to the source code and  rights to copy,</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//| modify and redistribute granted by the license, users are provided only</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//| with a limited warranty  and the software&#39;s author,  the holder of the</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//| economic rights,  and the successive licensors  have only  limited</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//| liability.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//| In this respect, the user&#39;s attention is drawn to the risks associated</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//| with loading,  using,  modifying and/or developing or reproducing the</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//| software by the user in light of its specific status of free software,</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//| that may mean  that it is complicated to manipulate,  and  that  also</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//| therefore means  that it is reserved for developers  and  experienced</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//| professionals having in-depth computer knowledge. Users are therefore</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//| encouraged to load and test the software&#39;s suitability as regards their</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//| requirements in conditions enabling the security of their systems and/or</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//| data to be ensured and,  more generally, to use and operate it in the</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//| same conditions as regards security.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//| The fact that you are presently reading this means that you have had</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//| knowledge of the CeCILL-C license and that you accept its terms.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifndef LIMBO_MODEL_GP_MEAN_LF_OPT_HPP</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define LIMBO_MODEL_GP_MEAN_LF_OPT_HPP</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="hp__opt_8hpp.html">limbo/model/gp/hp_opt.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="random__generator_8hpp.html">limbo/tools/random_generator.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">namespace </span>model {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">namespace </span>gp {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params, <span class="keyword">typename</span> Optimizer = opt::ParallelRepeater&lt;Params, opt::Rprop&lt;Params&gt;&gt;&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html">   58</a></span>&#160;            <span class="keyword">struct </span><a class="code" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html">MeanLFOpt</a> : <span class="keyword">public</span> <a class="code" href="structlimbo_1_1model_1_1gp_1_1_h_p_opt.html">HPOpt</a>&lt;Params, Optimizer&gt; {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> GP&gt;</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">   61</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">operator()</a>(<a class="code" href="classlimbo_1_1model_1_1_g_p.html">GP</a>&amp; gp)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    this-&gt;_called = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    MeanLFOptimization&lt;GP&gt; optimization(gp);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    Optimizer optimizer;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    <span class="keyword">auto</span> params = optimizer(optimization, gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().h_params(), <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().set_h_params(params);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a4dfc1807eb4f113191dbd3ae51c053ee">set_lik</a>(<a class="code" href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">opt::eval</a>(optimization, params));</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4">recompute</a>(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> GP&gt;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="keyword">struct </span>MeanLFOptimization {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                    MeanLFOptimization(<span class="keyword">const</span> <a class="code" href="classlimbo_1_1model_1_1_g_p.html">GP</a>&amp; gp) : _original_gp(gp)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        <span class="keywordtype">size_t</span> n = gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">obs_mean</a>().rows();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        <span class="comment">// K^{-1} using Cholesky decomposition</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        _K = Eigen::MatrixXd::Identity(n, n);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a>().template triangularView&lt;Eigen::Lower&gt;().solveInPlace(_K);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a>().template triangularView&lt;Eigen::Lower&gt;().transpose().solveInPlace(_K);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <a class="code" href="group__opt__tools.html#ga362b55973a38ac71f27a06f9d9c14f24">opt::eval_t</a> <a class="code" href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">operator()</a>(<span class="keyword">const</span> Eigen::VectorXd&amp; params, <span class="keywordtype">bool</span> compute_grad)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">                    </span>{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        <a class="code" href="classlimbo_1_1model_1_1_g_p.html">GP</a> gp(this-&gt;_original_gp);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().set_h_params(params);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                        gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4">recompute</a>(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        <span class="keywordtype">size_t</span> n = gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">obs_mean</a>().rows();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        <span class="comment">// --- cholesky ---</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                        <span class="comment">// see:</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                        <span class="comment">// http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                        Eigen::MatrixXd l = gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">matrixL</a>();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                        <span class="keywordtype">long</span> <span class="keywordtype">double</span> det = 2 * l.diagonal().array().log().sum();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        <span class="keywordtype">double</span> a = (gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">obs_mean</a>().transpose() * gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#adab606218ab9ef0c35babf8d1cc16d81">alpha</a>())</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                                       .trace(); <span class="comment">// generalization for multi dimensional observation</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                        <span class="comment">// std::cout&lt;&lt;&quot; a: &quot;&lt;&lt;a &lt;&lt;&quot; det: &quot;&lt;&lt; det&lt;&lt;std::endl;</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                        <span class="keywordtype">double</span> lik = -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                        <span class="keywordflow">if</span> (!compute_grad)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                            <span class="keywordflow">return</span> <a class="code" href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">opt::no_grad</a>(lik);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                        Eigen::VectorXd <a class="code" href="group__opt__tools.html#gaf28d9af930b2993024ab497b285e0521">grad</a> = Eigen::VectorXd::Zero(params.size());</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i_obs = 0; i_obs &lt; gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a077144695f9f0b33b64d4feb8fb4e447">dim_out</a>(); ++i_obs)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> n_obs = 0; n_obs &lt; n; n_obs++) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                                grad.tail(gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().h_params_size()) += gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">obs_mean</a>().col(i_obs).transpose() * _K.col(n_obs) * gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">mean_function</a>().grad(gp.<a class="code" href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">samples</a>()[n_obs], gp).row(i_obs);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                            }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                        <span class="keywordflow">return</span> {lik, grad};</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                    }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    <span class="keyword">const</span> GP&amp; _original_gp;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                    Eigen::MatrixXd _K;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                };</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            };</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a077144695f9f0b33b64d4feb8fb4e447"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a077144695f9f0b33b64d4feb8fb4e447">limbo::model::GP::dim_out</a></div><div class="ttdeci">int dim_out() const </div><div class="ttdoc">return the number of dimensions of the output </div><div class="ttdef"><b>Definition:</b> gp.hpp:199</div></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a4dfc1807eb4f113191dbd3ae51c053ee"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a4dfc1807eb4f113191dbd3ae51c053ee">limbo::model::GP::set_lik</a></div><div class="ttdeci">void set_lik(const double &amp;lik)</div><div class="ttdoc">set the likelihood (you need to compute it from outside!) </div><div class="ttdef"><b>Definition:</b> gp.hpp:256</div></div>
+<div class="ttc" id="structlimbo_1_1model_1_1gp_1_1_h_p_opt_html"><div class="ttname"><a href="structlimbo_1_1model_1_1gp_1_1_h_p_opt.html">limbo::model::gp::HPOpt</a></div><div class="ttdef"><b>Definition:</b> hp_opt.hpp:60</div></div>
 <div class="ttc" id="hp__opt_8hpp_html"><div class="ttname"><a href="hp__opt_8hpp.html">hp_opt.hpp</a></div></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_aff675b6136bdee1b907a1ca1c76699b4"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4">limbo::model::GP::recompute</a></div><div class="ttdeci">void recompute(bool update_obs_mean=true, bool update_full_kernel=true)</div><div class="ttdoc">recomputes the GP </div><div class="ttdef"><b>Definition:</b> gp.hpp:238</div></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_adab606218ab9ef0c35babf8d1cc16d81"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#adab606218ab9ef0c35babf8d1cc16d81">limbo::model::GP::alpha</a></div><div class="ttdeci">const Eigen::MatrixXd &amp; alpha() const </div><div class="ttdef"><b>Definition:</b> gp.hpp:261</div></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a></div><div class="ttdef"><b>Definition:</b> gp.hpp:68</div></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_abaa15a2e503bac670dd1a35fb377aa23"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">limbo::model::GP::samples</a></div><div class="ttdeci">const std::vector&lt; Eigen::VectorXd &gt; &amp; samples() const </div><div class="ttdoc">return the list of samples that have been tested so far </div><div class="ttdef"><b>Definition:</b> gp.hpp:264</div></div>
-<div class="ttc" id="group__opt__tools_html_ga698d932ac52cab812742b1300f875372"><div class="ttname"><a href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">limbo::opt::eval</a></div><div class="ttdeci">double eval(const F &amp;f, const Eigen::VectorXd &amp;x)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:84</div></div>
-<div class="ttc" id="group__opt__tools_html_ga38e53ccac21f452bd31e9b239985d456"><div class="ttname"><a href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">limbo::opt::no_grad</a></div><div class="ttdeci">eval_t no_grad(double x)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:64</div></div>
-<div class="ttc" id="group__opt__tools_html_gaf28d9af930b2993024ab497b285e0521"><div class="ttname"><a href="group__opt__tools.html#gaf28d9af930b2993024ab497b285e0521">limbo::opt::grad</a></div><div class="ttdeci">const Eigen::VectorXd &amp; grad(const eval_t &amp;fg)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:68</div></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_aff675b6136bdee1b907a1ca1c76699b4"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4">limbo::model::GP::recompute</a></div><div class="ttdeci">void recompute(bool update_obs_mean=true, bool update_full_kernel=true)</div><div class="ttdoc">recomputes the GP </div><div class="ttdef"><b>Definition:</b> gp.hpp:239</div></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_adab606218ab9ef0c35babf8d1cc16d81"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#adab606218ab9ef0c35babf8d1cc16d81">limbo::model::GP::alpha</a></div><div class="ttdeci">const Eigen::MatrixXd &amp; alpha() const </div><div class="ttdef"><b>Definition:</b> gp.hpp:262</div></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html">limbo::model::GP</a></div><div class="ttdef"><b>Definition:</b> gp.hpp:69</div></div>
+<div class="ttc" id="group__opt__tools_html_ga362b55973a38ac71f27a06f9d9c14f24"><div class="ttname"><a href="group__opt__tools.html#ga362b55973a38ac71f27a06f9d9c14f24">limbo::opt::eval_t</a></div><div class="ttdeci">std::pair&lt; double, boost::optional&lt; Eigen::VectorXd &gt;&gt; eval_t</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:61</div></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_abaa15a2e503bac670dd1a35fb377aa23"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#abaa15a2e503bac670dd1a35fb377aa23">limbo::model::GP::samples</a></div><div class="ttdeci">const std::vector&lt; Eigen::VectorXd &gt; &amp; samples() const </div><div class="ttdoc">return the list of samples that have been tested so far </div><div class="ttdef"><b>Definition:</b> gp.hpp:265</div></div>
+<div class="ttc" id="group__opt__tools_html_ga698d932ac52cab812742b1300f875372"><div class="ttname"><a href="group__opt__tools.html#ga698d932ac52cab812742b1300f875372">limbo::opt::eval</a></div><div class="ttdeci">double eval(const F &amp;f, const Eigen::VectorXd &amp;x)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:85</div></div>
+<div class="ttc" id="group__opt__tools_html_ga38e53ccac21f452bd31e9b239985d456"><div class="ttname"><a href="group__opt__tools.html#ga38e53ccac21f452bd31e9b239985d456">limbo::opt::no_grad</a></div><div class="ttdeci">eval_t no_grad(double x)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:65</div></div>
+<div class="ttc" id="group__opt__tools_html_gaf28d9af930b2993024ab497b285e0521"><div class="ttname"><a href="group__opt__tools.html#gaf28d9af930b2993024ab497b285e0521">limbo::opt::grad</a></div><div class="ttdeci">const Eigen::VectorXd &amp; grad(const eval_t &amp;fg)</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:69</div></div>
 <div class="ttc" id="random__generator_8hpp_html"><div class="ttname"><a href="random__generator_8hpp.html">random_generator.hpp</a></div></div>
-<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
-<div class="ttc" id="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_html"><div class="ttname"><a href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html">limbo::model::gp::MeanLFOpt</a></div><div class="ttdef"><b>Definition:</b> mean_lf_opt.hpp:57</div></div>
-<div class="ttc" id="group__opt__tools_html_ga7fc87080ebf563d050fc547d25528ef0"><div class="ttname"><a href="group__opt__tools.html#ga7fc87080ebf563d050fc547d25528ef0">limbo::opt::eval_t</a></div><div class="ttdeci">std::pair&lt; double, boost::optional&lt; Eigen::VectorXd &gt; &gt; eval_t</div><div class="ttdef"><b>Definition:</b> optimizer.hpp:60</div></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a29be4dfec28fbf0ab970529a18a20c34"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">limbo::model::GP::mean_function</a></div><div class="ttdeci">const MeanFunction &amp; mean_function() const </div><div class="ttdef"><b>Definition:</b> gp.hpp:208</div></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_aa9d3799fdcd71a8ccc19bc43932fa321"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">limbo::model::GP::obs_mean</a></div><div class="ttdeci">const Eigen::MatrixXd &amp; obs_mean() const </div><div class="ttdef"><b>Definition:</b> gp.hpp:232</div></div>
-<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a6f3a88531cc874a3a0cae0c218b0cf0a"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">limbo::model::GP::matrixL</a></div><div class="ttdeci">const Eigen::MatrixXd &amp; matrixL() const </div><div class="ttdoc">LLT matrix (from Cholesky decomposition) </div><div class="ttdef"><b>Definition:</b> gp.hpp:259</div></div>
-<div class="ttc" id="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_html_a3db7aa510b906aeacc851f984ceac1ca"><div class="ttname"><a href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">limbo::model::gp::MeanLFOpt::operator()</a></div><div class="ttdeci">void operator()(GP &amp;gp)</div><div class="ttdef"><b>Definition:</b> mean_lf_opt.hpp:60</div></div>
+<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:56</div></div>
+<div class="ttc" id="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_html"><div class="ttname"><a href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html">limbo::model::gp::MeanLFOpt</a></div><div class="ttdef"><b>Definition:</b> mean_lf_opt.hpp:58</div></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a29be4dfec28fbf0ab970529a18a20c34"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a29be4dfec28fbf0ab970529a18a20c34">limbo::model::GP::mean_function</a></div><div class="ttdeci">const MeanFunction &amp; mean_function() const </div><div class="ttdef"><b>Definition:</b> gp.hpp:209</div></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_aa9d3799fdcd71a8ccc19bc43932fa321"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#aa9d3799fdcd71a8ccc19bc43932fa321">limbo::model::GP::obs_mean</a></div><div class="ttdeci">const Eigen::MatrixXd &amp; obs_mean() const </div><div class="ttdef"><b>Definition:</b> gp.hpp:233</div></div>
+<div class="ttc" id="classlimbo_1_1model_1_1_g_p_html_a6f3a88531cc874a3a0cae0c218b0cf0a"><div class="ttname"><a href="classlimbo_1_1model_1_1_g_p.html#a6f3a88531cc874a3a0cae0c218b0cf0a">limbo::model::GP::matrixL</a></div><div class="ttdeci">const Eigen::MatrixXd &amp; matrixL() const </div><div class="ttdoc">LLT matrix (from Cholesky decomposition) </div><div class="ttdef"><b>Definition:</b> gp.hpp:260</div></div>
+<div class="ttc" id="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt_html_a3db7aa510b906aeacc851f984ceac1ca"><div class="ttname"><a href="structlimbo_1_1model_1_1gp_1_1_mean_l_f_opt.html#a3db7aa510b906aeacc851f984ceac1ca">limbo::model::gp::MeanLFOpt::operator()</a></div><div class="ttdeci">void operator()(GP &amp;gp)</div><div class="ttdef"><b>Definition:</b> mean_lf_opt.hpp:61</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 21 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 23 2016 00:00:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

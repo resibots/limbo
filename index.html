@@ -167,24 +167,18 @@
             
   <div class="section" id="limbo-s-documentation">
 <span id="limbo-doc"></span><h1>Limbo&#8217;s documentation<a class="headerlink" href="#limbo-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions.</p>
-<p>Limbo is primarily designed for <em>researchers</em> who need to experiment with novel ideas / algorithms. It is not designed for end-users who need a &#8220;black-box&#8221; to optimize a function (although Limbo can be used for this).</p>
-<p>Limbo has been used in several scientific publications, in particular:</p>
-<ul class="simple">
-<li>Cully A, Clune J, Tarapore DT, Mouret J-B. Robots that can adapt like animals. Nature, 2015. 521.7553.</li>
-</ul>
+<p>Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions. Github page (to report issues and/or help us to improve the library): <a class="reference external" href="http://github.com/resibots/limbo">Sferes2</a></p>
 <p>The development of Limbo is funded by the <a class="reference external" href="http://www.resibots.eu">ERC project ResiBots</a>.</p>
 <p>Limbo shares many ideas with <a class="reference external" href="http://github.com/sferes2">Sferes2</a>, a similar framework for evolutionary computation.</p>
 <div class="section" id="main-features">
 <h2>Main features<a class="headerlink" href="#main-features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Bayesian optimization based on Gaussian processes</li>
+<li>Implementation of the classic algorithms (Bayesian optimization, many kernels, likelihood maximization, etc.)</li>
+<li>Modern C++-11</li>
 <li>Generic framework (template-based / policy-based design), which allows for easy customization, to test novel ideas</li>
-<li>Programming / experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters, etc.</li>
+<li>Experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters (OAR scheduler), etc.</li>
 <li>High performance (in particular, Limbo can exploit multicore computers via Intel TBB and vectorize some operations via Eigen3)</li>
 <li>Purposely small to be easily maintained and quickly understood</li>
-<li>Modern C++-11</li>
-<li>Experimental support for multi-objective optimization</li>
 </ul>
 </div>
 <div class="section" id="contents">

@@ -102,112 +102,113 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//|   - Federico Allocati (fede.allocati@gmail.com)</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//|   - Vaios Papaspyros (b.papaspyros@gmail.com)</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//| This software is a computer library whose purpose is to optimize continuous,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//| black-box functions. It mainly implements Gaussian processes and Bayesian</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//| optimization.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//| Main repository: http://github.com/resibots/limbo</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//| Documentation: http://www.resibots.eu/limbo</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//| This software is governed by the CeCILL-C license under French law and</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//| abiding by the rules of distribution of free software.  You can  use,</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//| modify and/ or redistribute the software under the terms of the CeCILL-C</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//| license as circulated by CEA, CNRS and INRIA at the following URL</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//| &quot;http://www.cecill.info&quot;.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//| As a counterpart to the access to the source code and  rights to copy,</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//| modify and redistribute granted by the license, users are provided only</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//| with a limited warranty  and the software&#39;s author,  the holder of the</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//| economic rights,  and the successive licensors  have only  limited</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//| liability.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//| In this respect, the user&#39;s attention is drawn to the risks associated</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//| with loading,  using,  modifying and/or developing or reproducing the</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//| software by the user in light of its specific status of free software,</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//| that may mean  that it is complicated to manipulate,  and  that  also</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//| therefore means  that it is reserved for developers  and  experienced</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//| professionals having in-depth computer knowledge. Users are therefore</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//| encouraged to load and test the software&#39;s suitability as regards their</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//| requirements in conditions enabling the security of their systems and/or</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//| data to be ensured and,  more generally, to use and operate it in the</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//| same conditions as regards security.</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//| The fact that you are presently reading this means that you have had</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//| knowledge of the CeCILL-C license and that you accept its terms.</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//|</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifndef LIMBO_STAT_PARETO_FRONT_HPP</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define LIMBO_STAT_PARETO_FRONT_HPP</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="stat__base_8hpp.html">limbo/stat/stat_base.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pareto_8hpp.html">limbo/experimental/tools/pareto.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">namespace </span>experimental {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">namespace </span>stat {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html">   55</a></span>&#160;            <span class="keyword">struct </span><a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html">ParetoFront</a> : <span class="keyword">public</span> <a class="code" href="structlimbo_1_1stat_1_1_stat_base.html">limbo::stat::StatBase</a>&lt;Params&gt; {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="comment">// point, obj, sigma</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a07a9d1b38b8c942ec0666841ec310ed8">   57</a></span>&#160;                <span class="keyword">typedef</span> std::tuple&lt;Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd&gt; <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a07a9d1b38b8c942ec0666841ec310ed8">pareto_point_t</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#ad43dd449215fa8e506851c3f7fc96940">   58</a></span>&#160;                <span class="keyword">typedef</span> std::vector&lt;pareto_point_t&gt; <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#ad43dd449215fa8e506851c3f7fc96940">pareto_t</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO, <span class="keyword">typename</span> AggregatorFunction&gt;</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a341b34d96290a874818bbdb4f27f9f2b">   61</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a341b34d96290a874818bbdb4f27f9f2b">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp;)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                    <span class="keywordflow">if</span> (!bo.stats_enabled() || bo.observations().empty())</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    std::string fname = bo.res_dir() + <span class="stringliteral">&quot;/&quot;</span> + <span class="stringliteral">&quot;pareto_front_&quot;</span> + std::to_string(bo.current_iteration()) + <span class="stringliteral">&quot;.dat&quot;</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    std::ofstream ofs(fname.c_str());</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <span class="keyword">auto</span> <a class="code" href="namespacepareto.html">pareto</a> = _pareto_data(bo);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> x : pareto) {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        ofs &lt;&lt; std::get&lt;0&gt;(x).transpose() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                            &lt;&lt; std::get&lt;1&gt;(x).transpose() &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                    }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO&gt;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                pareto_t _pareto_data(<span class="keyword">const</span> BO&amp; bo)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    std::vector&lt;Eigen::VectorXd&gt; v(bo.samples().size());</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    <span class="keywordtype">size_t</span> dim = bo.observations().size();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    std::fill(v.begin(), v.end(), Eigen::VectorXd::Zero(dim));</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    <span class="keywordflow">return</span> pareto::pareto_set&lt;1&gt;(</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        _pack_data(bo.samples(), bo.observations(), v));</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                pareto_t _pack_data(<span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; points,</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    <span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; objs,</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; sigma)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">                </span>{</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    assert(points.size() == objs.size());</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    assert(sigma.size() == objs.size());</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    pareto_t p(points.size());</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <a class="code" href="group__par__tools.html#ga0e0d97b2a06005eac32290a846ccef91">tools::par::loop</a>(0, p.size(), [&amp;](<span class="keywordtype">size_t</span> k) {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    <span class="comment">// clang-format off</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    p[k] = std::make_tuple(points[k], objs[k], sigma[k]);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        <span class="comment">// clang-format on</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    });</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="keywordflow">return</span> p;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            };</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//|   - Roberto Rama (bertoski@gmail.com)</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//| This software is a computer library whose purpose is to optimize continuous,</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//| black-box functions. It mainly implements Gaussian processes and Bayesian</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//| optimization.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//| Main repository: http://github.com/resibots/limbo</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//| Documentation: http://www.resibots.eu/limbo</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//| This software is governed by the CeCILL-C license under French law and</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//| abiding by the rules of distribution of free software.  You can  use,</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//| modify and/ or redistribute the software under the terms of the CeCILL-C</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//| license as circulated by CEA, CNRS and INRIA at the following URL</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//| &quot;http://www.cecill.info&quot;.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//| As a counterpart to the access to the source code and  rights to copy,</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//| modify and redistribute granted by the license, users are provided only</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//| with a limited warranty  and the software&#39;s author,  the holder of the</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//| economic rights,  and the successive licensors  have only  limited</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//| liability.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//| In this respect, the user&#39;s attention is drawn to the risks associated</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//| with loading,  using,  modifying and/or developing or reproducing the</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//| software by the user in light of its specific status of free software,</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//| that may mean  that it is complicated to manipulate,  and  that  also</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//| therefore means  that it is reserved for developers  and  experienced</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//| professionals having in-depth computer knowledge. Users are therefore</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//| encouraged to load and test the software&#39;s suitability as regards their</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//| requirements in conditions enabling the security of their systems and/or</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//| data to be ensured and,  more generally, to use and operate it in the</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//| same conditions as regards security.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//| The fact that you are presently reading this means that you have had</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//| knowledge of the CeCILL-C license and that you accept its terms.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//|</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifndef LIMBO_STAT_PARETO_FRONT_HPP</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define LIMBO_STAT_PARETO_FRONT_HPP</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="stat__base_8hpp.html">limbo/stat/stat_base.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="pareto_8hpp.html">limbo/experimental/tools/pareto.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacelimbo.html">limbo</a> {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">namespace </span>experimental {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keyword">namespace </span>stat {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> Params&gt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html">   56</a></span>&#160;            <span class="keyword">struct </span><a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html">ParetoFront</a> : <span class="keyword">public</span> <a class="code" href="structlimbo_1_1stat_1_1_stat_base.html">limbo::stat::StatBase</a>&lt;Params&gt; {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="comment">// point, obj, sigma</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a2d872d2ad0a93b4c459bad640be158b9">   58</a></span>&#160;                <span class="keyword">using</span> <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a2d872d2ad0a93b4c459bad640be158b9">pareto_point_t</a> = std::tuple&lt;Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd&gt;;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a710260d53bff65b4841c348b074a6e23">   59</a></span>&#160;                <span class="keyword">using</span> <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a710260d53bff65b4841c348b074a6e23">pareto_t</a> = std::vector&lt;pareto_point_t&gt;;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO, <span class="keyword">typename</span> AggregatorFunction&gt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a341b34d96290a874818bbdb4f27f9f2b">   62</a></span>&#160;                <span class="keywordtype">void</span> <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a341b34d96290a874818bbdb4f27f9f2b">operator()</a>(<span class="keyword">const</span> BO&amp; bo, <span class="keyword">const</span> AggregatorFunction&amp;)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <span class="keywordflow">if</span> (!bo.stats_enabled() || bo.observations().empty())</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    std::string fname = bo.res_dir() + <span class="stringliteral">&quot;/&quot;</span> + <span class="stringliteral">&quot;pareto_front_&quot;</span> + std::to_string(bo.current_iteration()) + <span class="stringliteral">&quot;.dat&quot;</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    std::ofstream ofs(fname.c_str());</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <span class="keyword">auto</span> <a class="code" href="namespacepareto.html">pareto</a> = _pareto_data(bo);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> x : pareto) {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        ofs &lt;&lt; std::get&lt;0&gt;(x).transpose() &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                            &lt;&lt; std::get&lt;1&gt;(x).transpose() &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> BO&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a710260d53bff65b4841c348b074a6e23">pareto_t</a> _pareto_data(<span class="keyword">const</span> BO&amp; bo)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    std::vector&lt;Eigen::VectorXd&gt; v(bo.samples().size());</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    <span class="keywordtype">size_t</span> dim = bo.observations().size();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    std::fill(v.begin(), v.end(), Eigen::VectorXd::Zero(dim));</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    <span class="keywordflow">return</span> pareto::pareto_set&lt;1&gt;(</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        _pack_data(bo.samples(), bo.observations(), v));</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a710260d53bff65b4841c348b074a6e23">pareto_t</a> _pack_data(<span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; points,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; objs,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="keyword">const</span> std::vector&lt;Eigen::VectorXd&gt;&amp; sigma)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">                </span>{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    assert(points.size() == objs.size());</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    assert(sigma.size() == objs.size());</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <a class="code" href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a710260d53bff65b4841c348b074a6e23">pareto_t</a> p(points.size());</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    <a class="code" href="group__par__tools.html#ga0e0d97b2a06005eac32290a846ccef91">tools::par::loop</a>(0, p.size(), [&amp;](<span class="keywordtype">size_t</span> k) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    <span class="comment">// clang-format off</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    p[k] = std::make_tuple(points[k], objs[k], sigma[k]);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        <span class="comment">// clang-format on</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    });</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    <span class="keywordflow">return</span> p;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            };</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_html_a710260d53bff65b4841c348b074a6e23"><div class="ttname"><a href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a710260d53bff65b4841c348b074a6e23">limbo::experimental::stat::ParetoFront::pareto_t</a></div><div class="ttdeci">std::vector&lt; pareto_point_t &gt; pareto_t</div><div class="ttdef"><b>Definition:</b> pareto_front.hpp:59</div></div>
 <div class="ttc" id="pareto_8hpp_html"><div class="ttname"><a href="pareto_8hpp.html">pareto.hpp</a></div></div>
 <div class="ttc" id="stat__base_8hpp_html"><div class="ttname"><a href="stat__base_8hpp.html">stat_base.hpp</a></div></div>
-<div class="ttc" id="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_html"><div class="ttname"><a href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html">limbo::experimental::stat::ParetoFront</a></div><div class="ttdef"><b>Definition:</b> pareto_front.hpp:55</div></div>
-<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:55</div></div>
-<div class="ttc" id="namespacepareto_html"><div class="ttname"><a href="namespacepareto.html">pareto</a></div><div class="ttdef"><b>Definition:</b> pareto.hpp:52</div></div>
-<div class="ttc" id="group__par__tools_html_ga0e0d97b2a06005eac32290a846ccef91"><div class="ttname"><a href="group__par__tools.html#ga0e0d97b2a06005eac32290a846ccef91">limbo::tools::par::loop</a></div><div class="ttdeci">void loop(size_t begin, size_t end, const F &amp;f)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:122</div></div>
-<div class="ttc" id="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_html_ad43dd449215fa8e506851c3f7fc96940"><div class="ttname"><a href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#ad43dd449215fa8e506851c3f7fc96940">limbo::experimental::stat::ParetoFront::pareto_t</a></div><div class="ttdeci">std::vector&lt; pareto_point_t &gt; pareto_t</div><div class="ttdef"><b>Definition:</b> pareto_front.hpp:58</div></div>
-<div class="ttc" id="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_html_a07a9d1b38b8c942ec0666841ec310ed8"><div class="ttname"><a href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a07a9d1b38b8c942ec0666841ec310ed8">limbo::experimental::stat::ParetoFront::pareto_point_t</a></div><div class="ttdeci">std::tuple&lt; Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd &gt; pareto_point_t</div><div class="ttdef"><b>Definition:</b> pareto_front.hpp:57</div></div>
-<div class="ttc" id="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_html_a341b34d96290a874818bbdb4f27f9f2b"><div class="ttname"><a href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a341b34d96290a874818bbdb4f27f9f2b">limbo::experimental::stat::ParetoFront::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;)</div><div class="ttdef"><b>Definition:</b> pareto_front.hpp:61</div></div>
-<div class="ttc" id="structlimbo_1_1stat_1_1_stat_base_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_stat_base.html">limbo::stat::StatBase</a></div><div class="ttdef"><b>Definition:</b> stat_base.hpp:71</div></div>
+<div class="ttc" id="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_html"><div class="ttname"><a href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html">limbo::experimental::stat::ParetoFront</a></div><div class="ttdef"><b>Definition:</b> pareto_front.hpp:56</div></div>
+<div class="ttc" id="namespacelimbo_html"><div class="ttname"><a href="namespacelimbo.html">limbo</a></div><div class="ttdef"><b>Definition:</b> ei.hpp:56</div></div>
+<div class="ttc" id="namespacepareto_html"><div class="ttname"><a href="namespacepareto.html">pareto</a></div><div class="ttdef"><b>Definition:</b> pareto.hpp:53</div></div>
+<div class="ttc" id="group__par__tools_html_ga0e0d97b2a06005eac32290a846ccef91"><div class="ttname"><a href="group__par__tools.html#ga0e0d97b2a06005eac32290a846ccef91">limbo::tools::par::loop</a></div><div class="ttdeci">void loop(size_t begin, size_t end, const F &amp;f)</div><div class="ttdef"><b>Definition:</b> parallel.hpp:123</div></div>
+<div class="ttc" id="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_html_a341b34d96290a874818bbdb4f27f9f2b"><div class="ttname"><a href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a341b34d96290a874818bbdb4f27f9f2b">limbo::experimental::stat::ParetoFront::operator()</a></div><div class="ttdeci">void operator()(const BO &amp;bo, const AggregatorFunction &amp;)</div><div class="ttdef"><b>Definition:</b> pareto_front.hpp:62</div></div>
+<div class="ttc" id="structlimbo_1_1experimental_1_1stat_1_1_pareto_front_html_a2d872d2ad0a93b4c459bad640be158b9"><div class="ttname"><a href="structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a2d872d2ad0a93b4c459bad640be158b9">limbo::experimental::stat::ParetoFront::pareto_point_t</a></div><div class="ttdeci">std::tuple&lt; Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd &gt; pareto_point_t</div><div class="ttdef"><b>Definition:</b> pareto_front.hpp:58</div></div>
+<div class="ttc" id="structlimbo_1_1stat_1_1_stat_base_html"><div class="ttname"><a href="structlimbo_1_1stat_1_1_stat_base.html">limbo::stat::StatBase</a></div><div class="ttdef"><b>Definition:</b> stat_base.hpp:72</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 21 2016 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 23 2016 00:00:16 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

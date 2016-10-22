@@ -194,7 +194,9 @@
 5
 6
 7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// the maximum is [0.5, 0.5] (f([0.5, 0.5] = 0))</span>
+<span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">double</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">).</span><span class="n">square</span><span class="p">().</span><span class="n">sum</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">eval_grad</span><span class="p">)</span>
@@ -258,11 +260,11 @@
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">opt</span><span class="o">::</span><span class="n">NLOptGrad</span><span class="o">&lt;</span><span class="n">ParamsGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">LD_LBFGS</span><span class="o">&gt;</span> <span class="n">lbfgs</span><span class="p">;</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// the type of the optimizer (here NLOpt with the LN_LBGFGS algorithm)</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">NLOptGrad</span><span class="o">&lt;</span><span class="n">ParamsGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">LD_LBFGS</span><span class="o">&gt;</span> <span class="n">lbfgs</span><span class="p">;</span>
     <span class="c1">// we start from a random point (in 2D), and the search is not bounded</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_lbfgs</span> <span class="o">=</span> <span class="n">lbfgs</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with LBFGS:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_lbfgs</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
-              <span class="o">&lt;&lt;</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">my_function</span><span class="p">(</span><span class="n">res_lbfgs</span><span class="p">).</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
 <p>We can do the same with a gradient-free optimizer from NLOpt:</p>
@@ -271,22 +273,22 @@
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">opt</span><span class="o">::</span><span class="n">NLOptNoGrad</span><span class="o">&lt;</span><span class="n">ParamsNoGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">GN_DIRECT</span><span class="o">&gt;</span> <span class="n">direct</span><span class="p">;</span>
+6</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// we can also use a gradient-free algorith, like DIRECT</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">NLOptNoGrad</span><span class="o">&lt;</span><span class="n">ParamsNoGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">GN_DIRECT</span><span class="o">&gt;</span> <span class="n">direct</span><span class="p">;</span>
     <span class="c1">// we start from a random point (in 2D), and the search is bounded in [0,1]</span>
     <span class="c1">// be careful that DIRECT does not support unbounded search</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_direct</span> <span class="o">=</span> <span class="n">direct</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">true</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with DIRECT:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_direct</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
-              <span class="o">&lt;&lt;</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">my_function</span><span class="p">(</span><span class="n">res_direct</span><span class="p">).</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
 <p>Or with CMA-ES:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsCMAES</span><span class="o">&gt;</span> <span class="n">cmaes</span><span class="p">;</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// or Cmaes</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsCMAES</span><span class="o">&gt;</span> <span class="n">cmaes</span><span class="p">;</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_cmaes</span> <span class="o">=</span> <span class="n">cmaes</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with CMA-ES:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_cmaes</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
-              <span class="o">&lt;&lt;</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">my_function</span><span class="p">(</span><span class="n">res_cmaes</span><span class="p">).</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
 <p>See the <a class="reference internal" href="../api.html#opt-api"><span>API documentation</span></a> for more details.</p>
@@ -359,7 +361,9 @@
 66
 67
 68
-69</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;limbo/opt.hpp&gt;</span>
+69
+70</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">//|</span>
+<span class="cp">#include &lt;limbo/opt.hpp&gt;</span>
 <span class="cp">#include &lt;limbo/tools.hpp&gt;</span>
 
 <span class="c1">// this short tutorial shows how to use the optimization api of limbo (opt::)</span>
