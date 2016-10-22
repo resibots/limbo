@@ -76,6 +76,14 @@ def check_tbb(self, *k, **kw):
         self.end_msg('not found', 'YELLOW')
         return
 
+    self.start_msg('Checking Intel TBB libs (optional)')
+    try:
+        self.find_file('libtbb.so', libpath_tbb)
+        self.end_msg('ok')
+    except:
+        self.end_msg('not found', 'YELLOW')
+        return
+
     self.env.LIBPATH_TBB = libpath_tbb
     self.env.LIB_TBB = ['tbb']
     self.env.INCLUDES_TBB = includes_tbb
