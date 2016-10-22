@@ -76,7 +76,7 @@ namespace limbo {
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
                 tools::par::init();
-                typedef std::pair<Eigen::VectorXd, double> pair_t;
+                using pair_t = std::pair<Eigen::VectorXd, double>;
                 auto body = [&](int i) {
                     // clang-format off
                     Eigen::VectorXd r_init = tools::random_vector(init.size());

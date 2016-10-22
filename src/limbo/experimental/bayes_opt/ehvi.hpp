@@ -69,7 +69,7 @@ namespace limbo {
 
             BOOST_PARAMETER_TEMPLATE_KEYWORD(acquiopt)
 
-            typedef boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>> ehvi_signature;
+            using ehvi_signature = boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>>;
 
             template <class Params,
                 class A1 = boost::parameter::void_,
@@ -83,21 +83,21 @@ namespace limbo {
             public:
                 struct defaults {
 #ifdef USE_NLOPT
-                    typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+                    using acquiopt_t = opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>;
 #elif defined(USE_LIBCMAES)
-                    typedef opt::Cmaes<Params> acquiopt_t;
+                    using acquiopt_t = opt::Cmaes<Params>;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-                    typedef opt::GridSearch<Params> acquiopt_t;
+                    using acquiopt_t = opt::GridSearch<Params>;
 #endif
                 };
 
-                typedef typename ehvi_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
-                typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+                using args = typename ehvi_signature::bind<A1, A2, A3, A4, A5, A6>::type;
+                using acqui_optimizer_t = typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type;
 
-                typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
-                typedef limbo::experimental::bayes_opt::BoMulti<Params, A1, A2, A3, A4, A5, A6> base_t;
-                typedef typename base_t::model_t model_t;
+                using pareto_point_t = std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>;
+                using base_t = limbo::experimental::bayes_opt::BoMulti<Params, A1, A2, A3, A4, A5, A6>;
+                using model_t = typename base_t::model_t;
 
                 template <typename EvalFunction>
                 void optimize(const EvalFunction& feval, bool reset = true)
@@ -125,7 +125,7 @@ namespace limbo {
                             Eigen::Vector3d(Params::bayes_opt_ehvi::x_ref(), Params::bayes_opt_ehvi::y_ref(), 0));
 
                         // maximize with inner opt
-                        typedef std::pair<Eigen::VectorXd, double> pair_t;
+                        using pair_t = std::pair<Eigen::VectorXd, double>;
                         pair_t init(Eigen::VectorXd::Zero(1), -std::numeric_limits<float>::max());
 
                         auto body = [&](int i) -> pair_t {

@@ -73,8 +73,8 @@ namespace limbo {
 #ifdef USE_SFERES
                 struct SferesParams {
                     struct evo_float {
-                        typedef sferes::gen::evo_float::mutation_t mutation_t;
-                        typedef sferes::gen::evo_float::cross_over_t cross_over_t;
+                        using mutation_t = sferes::gen::evo_float::mutation_t;
+                        using cross_over_t = sferes::gen::evo_float::cross_over_t;
                         SFERES_CONST float cross_rate = 0.5f;
                         SFERES_CONST float mutation_rate = 0.1f;
                         SFERES_CONST float eta_m = 15.0f;
@@ -135,11 +135,11 @@ namespace limbo {
             BOOST_PARAMETER_TEMPLATE_KEYWORD(statsfun)
             BOOST_PARAMETER_TEMPLATE_KEYWORD(stopcrit)
 
-            typedef boost::parameter::parameters<boost::parameter::optional<tag::statsfun>,
+            using bo_multi_signature = boost::parameter::parameters<boost::parameter::optional<tag::statsfun>,
                 boost::parameter::optional<tag::initfun>,
                 boost::parameter::optional<tag::acquifun>,
                 boost::parameter::optional<tag::stopcrit>,
-                boost::parameter::optional<tag::modelfun>> bo_multi_signature;
+                boost::parameter::optional<tag::modelfun>>;
 
             template <class Params,
                 class A1 = boost::parameter::void_,
@@ -150,14 +150,14 @@ namespace limbo {
                 class A6 = boost::parameter::void_>
             class BoMulti : public limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> {
             public:
-                typedef typename bo_multi_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
+                using args = typename bo_multi_signature::bind<A1, A2, A3, A4, A5, A6>::type;
 
-                typedef limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
-                typedef typename base_t::model_t model_t;
-                typedef typename base_t::acquisition_function_t acquisition_function_t;
+                using base_t = limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6>;
+                using model_t = typename base_t::model_t;
+                using acquisition_function_t = typename base_t::acquisition_function_t;
                 // point, obj, sigma
-                typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
-                typedef std::vector<pareto_point_t> pareto_t;
+                using pareto_point_t = std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>;
+                using pareto_t = std::vector<pareto_point_t>;
 
                 size_t nb_objs() const { return this->_observations[0].size(); }
 
@@ -183,12 +183,12 @@ namespace limbo {
                 {
                     this->_update_models();
 #ifdef USE_SFERES
-                    typedef sferes::gen::EvoFloat<D, multi::SferesParams> gen_t;
-                    typedef sferes::phen::Parameters<gen_t, multi::SferesFit<model_t>, multi::SferesParams> phen_t;
-                    typedef sferes::eval::Parallel<multi::SferesParams> eval_t;
-                    typedef boost::fusion::vector<> stat_t;
-                    typedef sferes::modif::Dummy<> modifier_t;
-                    typedef sferes::ea::Nsga2<phen_t, eval_t, stat_t, modifier_t, multi::SferesParams> nsga2_t;
+                    using gen_t = sferes::gen::EvoFloat<D, multi::SferesParams>;
+                    using phen_t = sferes::phen::Parameters<gen_t, multi::SferesFit<model_t>, multi::SferesParams>;
+                    using eval_t = sferes::eval::Parallel<multi::SferesParams>;
+                    using stat_t = boost::fusion::vector<>;
+                    using modifier_t = sferes::modif::Dummy<>;
+                    using nsga2_t = sferes::ea::Nsga2<phen_t, eval_t, stat_t, modifier_t, multi::SferesParams>;
 
                     // commented to remove a dependency to a particular version of sferes
                     nsga2_t ea;

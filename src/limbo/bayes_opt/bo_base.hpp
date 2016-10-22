@@ -95,7 +95,7 @@ namespace limbo {
     };
 
     struct FirstElem {
-        typedef double result_type;
+        using result_type = double;
         double operator()(const Eigen::VectorXd& x) const
         {
             return x(0);
@@ -116,11 +116,11 @@ namespace limbo {
 
     namespace bayes_opt {
 
-        typedef boost::parameter::parameters<boost::parameter::optional<tag::statsfun>,
+        using bobase_signature = boost::parameter::parameters<boost::parameter::optional<tag::statsfun>,
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
-            boost::parameter::optional<tag::modelfun>> bobase_signature;
+            boost::parameter::optional<tag::modelfun>>;
 
         // clang-format off
         template <class Params,
@@ -167,40 +167,40 @@ namespace limbo {
         For Statistics, the default value is: ``boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>>``
 
         Example of customization:
-          - ``typedef kernel::MaternFiveHalves<Params> Kernel_t;``
-          - ``typedef mean::Data<Params> Mean_t;``
-          - ``typedef model::GP<Params, Kernel_t, Mean_t> GP_t;``
-          - ``typedef acqui::UCB<Params, GP_t> Acqui_t;``
+          - ``using Kernel_t = kernel::MaternFiveHalves<Params>;``
+          - ``using Mean_t = mean::Data<Params>;``
+          - ``using GP_t = model::GP<Params, Kernel_t, Mean_t>;``
+          - ``using Acqui_t = acqui::UCB<Params, GP_t>;``
           - ``bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;``
 
         */
         class BoBase {
         public:
-            typedef Params params_t;
+            using params_t = Params;
             // defaults
             struct defaults {
-                typedef init::RandomSampling<Params> init_t; // 1
+                using init_t = init::RandomSampling<Params>; // 1
 
-                typedef kernel::Exp<Params> kf_t;
-                typedef mean::Data<Params> mean_t;
-                typedef model::GP<Params, kf_t, mean_t> model_t; // 2
+                using kf_t = kernel::Exp<Params>;
+                using mean_t = mean::Data<Params>;
+                using model_t = model::GP<Params, kf_t, mean_t>; // 2
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
-                typedef acqui::UCB<Params, model_t> acqui_t; // 3
-                typedef boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>> stat_t; // 4
-                typedef boost::fusion::vector<stop::MaxIterations<Params>> stop_t; // 5
+                using acqui_t = acqui::UCB<Params, model_t>; // 3
+                using stat_t = boost::fusion::vector<stat::Samples<Params>, stat::AggregatedObservations<Params>, stat::ConsoleSummary<Params>>; // 4
+                using stop_t = boost::fusion::vector<stop::MaxIterations<Params>>; // 5
             };
 
             // extract the types
-            typedef typename bobase_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
-            typedef typename boost::parameter::binding<args, tag::initfun, typename defaults::init_t>::type init_function_t;
-            typedef typename boost::parameter::binding<args, tag::acquifun, typename defaults::acqui_t>::type acquisition_function_t;
-            typedef typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type model_t;
-            typedef typename boost::parameter::binding<args, tag::statsfun, typename defaults::stat_t>::type Stat;
-            typedef typename boost::parameter::binding<args, tag::stopcrit, typename defaults::stop_t>::type StoppingCriteria;
+            using args = typename bobase_signature::bind<A1, A2, A3, A4, A5, A6>::type;
+            using init_function_t = typename boost::parameter::binding<args, tag::initfun, typename defaults::init_t>::type;
+            using acquisition_function_t = typename boost::parameter::binding<args, tag::acquifun, typename defaults::acqui_t>::type;
+            using model_t = typename boost::parameter::binding<args, tag::modelfun, typename defaults::model_t>::type;
+            using Stat = typename boost::parameter::binding<args, tag::statsfun, typename defaults::stat_t>::type;
+            using StoppingCriteria = typename boost::parameter::binding<args, tag::stopcrit, typename defaults::stop_t>::type;
 
-            typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<StoppingCriteria>, StoppingCriteria, boost::fusion::vector<StoppingCriteria>>::type stopping_criteria_t;
-            typedef typename boost::mpl::if_<boost::fusion::traits::is_sequence<Stat>, Stat, boost::fusion::vector<Stat>>::type stat_t;
+            using stopping_criteria_t = typename boost::mpl::if_<boost::fusion::traits::is_sequence<StoppingCriteria>, StoppingCriteria, boost::fusion::vector<StoppingCriteria>>::type;
+            using stat_t = typename boost::mpl::if_<boost::fusion::traits::is_sequence<Stat>, Stat, boost::fusion::vector<Stat>>::type;
 
             /// default constructor
             BoBase() : _total_iterations(0) { _make_res_dir(); }

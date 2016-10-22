@@ -313,22 +313,19 @@ int main(int argc, char** argv)
     tools::par::init();
 
 #ifdef USE_TBB
-    typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>
-        res_t;
+    using res_t = tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>;
 #else
-    typedef std::map<std::string,
-        std::vector<std::pair<double, double>>>
-        res_t;
+    using res_t = std::map<std::string, std::vector<std::pair<double, double>>>;
 #endif
     res_t results;
 
-    typedef kernel::Exp<Params> kf_t;
-    typedef mean::Constant<Params> mean_t;
-    typedef model::GP<Params, kf_t, mean_t> model_t;
-    typedef init::NoInit<Params> init_t;
-    typedef acqui::experimental::UCB_IMGPO<Params, model_t> acqui_t;
+    using kf_t = kernel::Exp<Params>;
+    using mean_t = mean::Constant<Params>;
+    using model_t = model::GP<Params, kf_t, mean_t>;
+    using init_t = init::NoInit<Params>;
+    using acqui_t = acqui::experimental::UCB_IMGPO<Params, model_t>;
 
-    typedef bayes_opt::experimental::IMGPO<Params, modelfun<model_t>, initfun<init_t>, acquifun<acqui_t>> Opt_t;
+    using Opt_t = bayes_opt::experimental::IMGPO<Params, modelfun<model_t>, initfun<init_t>, acquifun<acqui_t>>;
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {

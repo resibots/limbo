@@ -179,7 +179,7 @@ The return type of the function to be optimized is ``eval_t``, which is defined 
 
 .. code-block:: cpp
 
-  typedef std::pair<double, boost::optional<Eigen::VectorXd>> eval_t;
+  using eval_t = std::pair<double, boost::optional<Eigen::VectorXd>>;
 
 To make it easy to work with ``eval_t``, Limbo defines a few shortcuts:
 

@@ -63,7 +63,7 @@ namespace limbo {
         */
         template <typename BO, typename AggregatorFunction>
         struct ChainCriteria {
-            typedef bool result_type;
+            using result_type = bool;
             ChainCriteria(const BO& bo, const AggregatorFunction& afun) : _bo(bo), _afun(afun) {}
 
             template <typename stopping_criterion>

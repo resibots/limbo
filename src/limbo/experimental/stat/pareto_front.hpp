@@ -55,8 +55,8 @@ namespace limbo {
             template <typename Params>
             struct ParetoFront : public limbo::stat::StatBase<Params> {
                 // point, obj, sigma
-                typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd> pareto_point_t;
-                typedef std::vector<pareto_point_t> pareto_t;
+                using pareto_point_t = std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>;
+                using pareto_t = std::vector<pareto_point_t>;
 
                 template <typename BO, typename AggregatorFunction>
                 void operator()(const BO& bo, const AggregatorFunction&)

@@ -63,13 +63,13 @@ namespace limbo {
         /// a mt19937-based random generator (mutex-protected)
         ///
         /// usage :
-        /// - RandomGenerator<double>(0.0, 1.0);
+        /// - RandomGenerator<dist<double>>(0.0, 1.0);
         /// - double r = rgen.rand();
         template <typename D>
         class RandomGenerator {
         public:
             using result_type = typename D::result_type;
-            RandomGenerator(result_type min, result_type max) : _dist(min, max), _rgen(randutils::auto_seed_128{}.base()) {}
+            RandomGenerator(result_type a, result_type b) : _dist(a, b), _rgen(randutils::auto_seed_128{}.base()) {}
             result_type rand()
             {
                 std::lock_guard<std::mutex> lock(_mutex);

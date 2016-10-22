@@ -139,7 +139,7 @@ struct MeanEval {
 };
 
 struct Average {
-    typedef double result_type;
+    using result_type = double;
     double operator()(const Eigen::VectorXd& x) const
     {
         return (x(0) + x(1)) / 2;

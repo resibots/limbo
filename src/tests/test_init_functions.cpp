@@ -107,8 +107,8 @@ struct fit_eval {
 BOOST_AUTO_TEST_CASE(no_init)
 {
     std::cout << "NoInit" << std::endl;
-    typedef init::NoInit<Params> Init_t;
-    typedef bayes_opt::BOptimizer<Params, initfun<Init_t>> Opt_t;
+    using Init_t = init::NoInit<Params>;
+    using Opt_t = bayes_opt::BOptimizer<Params, initfun<Init_t>>;
 
     Opt_t opt;
     opt.optimize(fit_eval());
@@ -125,8 +125,8 @@ BOOST_AUTO_TEST_CASE(random_sampling)
         };
     };
 
-    typedef init::RandomSampling<MyParams> Init_t;
-    typedef bayes_opt::BOptimizer<MyParams, initfun<Init_t>> Opt_t;
+    using Init_t = init::RandomSampling<MyParams>;
+    using Opt_t = bayes_opt::BOptimizer<MyParams, initfun<Init_t>>;
 
     Opt_t opt;
     opt.optimize(fit_eval());
@@ -152,8 +152,8 @@ BOOST_AUTO_TEST_CASE(random_sampling_grid)
         };
     };
 
-    typedef init::RandomSamplingGrid<MyParams> Init_t;
-    typedef bayes_opt::BOptimizer<MyParams, initfun<Init_t>> Opt_t;
+    using Init_t = init::RandomSamplingGrid<MyParams>;
+    using Opt_t = bayes_opt::BOptimizer<MyParams, initfun<Init_t>>;
 
     Opt_t opt;
     opt.optimize(fit_eval());
@@ -179,8 +179,8 @@ BOOST_AUTO_TEST_CASE(grid_sampling)
         };
     };
 
-    typedef init::GridSampling<MyParams> Init_t;
-    typedef bayes_opt::BOptimizer<MyParams, initfun<Init_t>> Opt_t;
+    using Init_t = init::GridSampling<MyParams>;
+    using Opt_t = bayes_opt::BOptimizer<MyParams, initfun<Init_t>>;
 
     Opt_t opt;
     opt.optimize(fit_eval());

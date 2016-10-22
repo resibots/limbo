@@ -64,8 +64,7 @@ namespace limbo {
             // clang-format on
             class Nsbo : public BoMulti<Params, A2, A3, A4, A5, A6> {
             public:
-                typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>
-                    pareto_point_t;
+                using pareto_point_t = std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>;
 
                 template <typename EvalFunction>
                 void optimize(const EvalFunction& feval, bool reset = true)

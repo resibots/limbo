@@ -58,7 +58,7 @@ namespace limbo {
 
         ///@ingroup opt_tools
         /// return type of the function to optimize
-        typedef std::pair<double, boost::optional<Eigen::VectorXd>> eval_t;
+        using eval_t = std::pair<double, boost::optional<Eigen::VectorXd>>;
 
         ///@ingroup opt_tools
         ///return with opt::no_grad(your_val) if no gradient is available (to be used in functions to be optimized)
