@@ -117,7 +117,7 @@ def create_exp(name, opt):
 
     cpp_params = {}
     cpp_params['BAYES_OPT_BOPTIMIZER_NOISE'] = '    BO_PARAM(double, noise, ' + str(opt.bayes_opt_boptimizer_noise) + ');\n    ' if opt.bayes_opt_boptimizer_noise and opt.bayes_opt_boptimizer_noise >= 0 else ''
-    cpp_params['BAYES_OPT_BOBASE_STATS_ENABLED'] = '    BO_PARAM(bool, stats_enabled, false);\n    ' if opt.bayes_opt_bobase_stats_disabled else ''
+    cpp_params['BAYES_OPT_BOBASE_STATS_DISABLED'] = '    BO_PARAM(bool, stats_enabled, false);\n    ' if opt.bayes_opt_bobase_stats_disabled else ''
     cpp_params['INIT_RANDOMSAMPLING_SAMPLES'] = '    BO_PARAM(int, samples, ' + str(opt.init_randomsampling_samples) + ');\n    ' if opt.init_randomsampling_samples and opt.init_randomsampling_samples > 0  else ''
     cpp_params['STOP_MAXITERATIONS_ITERATIONS'] = '    BO_PARAM(int, iterations, ' + str(opt.stop_maxiterations_iterations) + ');\n    ' if opt.stop_maxiterations_iterations and opt.stop_maxiterations_iterations > 0 else ''
 
