@@ -13,7 +13,7 @@ We assume that our samples are in a vector called ``samples`` and that our obser
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 75-84
+   :lines: 75-85
 
 Basic usage
 ------------
@@ -23,14 +23,14 @@ We first create a basic GP with an Exponential kernel (``kernel::Exp<Params>``) 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 58-62
+   :lines: 60-63
 
 The type of the GP is defined by the following lines:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 87-89
+   :lines: 87-90
 
 To use the GP, we need :
 
@@ -40,7 +40,7 @@ To use the GP, we need :
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 91-98
+   :lines: 92-99
 
 Here we assume that the noise is the same for all samples and that it is equal to 0.01.
 
@@ -57,7 +57,7 @@ To visualize the predictions of the GP, we can query it for many points and reco
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 101-111
+   :lines: 101-112
 
 
 Hyper-parameter optimization
@@ -71,21 +71,21 @@ A new GP type is defined as follows:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 115-117
+   :lines: 116-118
 
 It uses the default values for the parameters of ``SquaredExpARD``:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 63-64
+   :lines: 64-65
 
 After calling the ``compute()`` method, the hyper-parameters can be optimized by calling the ``optimize_hyperparams()`` function. The GP does not need to be recomputed and we pass ``false`` for the last parameter in ``compute()`` as we do not need to compute the kernel matrix again (it will be recomputed in the hyper-parameters optimization).
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 121-122
+   :lines: 122-123
 
 
 We can have a look at the difference between the two GPs:
