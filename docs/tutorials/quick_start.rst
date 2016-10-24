@@ -35,6 +35,7 @@ For Ubuntu / Debian:
   ./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
   sudo make install
   sudo ldconfig
+  cd ..
 
 For OSX:
 ::
@@ -43,6 +44,7 @@ For OSX:
   tar -zxvf nlopt-2.4.2.tar.gz && cd nlopt-2.4.2
   ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
   sudo make install
+  cd ..
 
 
 For more options and troubleshooting, see the :ref:`Compilation tutorial <compilation-tutorial>`.
@@ -50,6 +52,9 @@ For more options and troubleshooting, see the :ref:`Compilation tutorial <compil
 Compile Limbo
 -----------------
 
+To get **limbo**, simply clone the source code from https://github.com/resibots/limbo with git, or download it
+as a zip. To compile it:
+   
 ::
 
   ./waf configure

@@ -65,7 +65,7 @@ def add_create_options(opt):
     opt.add_option('--dim_in', type='int', dest='dim_in', help='Number of dimensions for the function to optimize [default: 1]')
     opt.add_option('--dim_out', type='int', dest='dim_out', help='Number of dimensions for the function to optimize [default: 1]')
     opt.add_option('--bayes_opt_boptimizer_noise', type='float', dest='bayes_opt_boptimizer_noise', help='Acquisition noise of the function to optimize [default: 1e-6]')
-    opt.add_option('--bayes_opt_bobase_stats_enabled', action='store_true', dest='bayes_opt_bobase_stats_enabled', help='Enable statistics [default: true]')
+    opt.add_option('--bayes_opt_bobase_stats_disabled', action='store_true', dest='bayes_opt_bobase_stats_disabled', help='Disable statistics [default: false]')
     opt.add_option('--init_randomsampling_samples', type='int', dest='init_randomsampling_samples', help='Number of samples used for the initialization [default: 10]')
     opt.add_option('--stop_maxiterations_iterations', type='int', dest='stop_maxiterations_iterations', help='Number of iterations performed before stopping the optimization [default: 190]')
 
@@ -117,7 +117,7 @@ def create_exp(name, opt):
 
     cpp_params = {}
     cpp_params['BAYES_OPT_BOPTIMIZER_NOISE'] = '    BO_PARAM(double, noise, ' + str(opt.bayes_opt_boptimizer_noise) + ');\n    ' if opt.bayes_opt_boptimizer_noise and opt.bayes_opt_boptimizer_noise >= 0 else ''
-    cpp_params['BAYES_OPT_BOBASE_STATS_ENABLED'] = '' if opt.bayes_opt_bobase_stats_enabled else '    BO_PARAM(bool, stats_enabled, false);\n    '
+    cpp_params['BAYES_OPT_BOBASE_STATS_ENABLED'] = '    BO_PARAM(bool, stats_enabled, false);\n    ' if opt.bayes_opt_bobase_stats_disabled else ''
     cpp_params['INIT_RANDOMSAMPLING_SAMPLES'] = '    BO_PARAM(int, samples, ' + str(opt.init_randomsampling_samples) + ');\n    ' if opt.init_randomsampling_samples and opt.init_randomsampling_samples > 0  else ''
     cpp_params['STOP_MAXITERATIONS_ITERATIONS'] = '    BO_PARAM(int, iterations, ' + str(opt.stop_maxiterations_iterations) + ');\n    ' if opt.stop_maxiterations_iterations and opt.stop_maxiterations_iterations > 0 else ''
 
