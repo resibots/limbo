@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -69,7 +70,6 @@ namespace limbo {
         struct bayes_opt_boptimizer {
             BO_PARAM(double, noise, 1e-6);
             BO_PARAM(int, hp_period, -1);
-            BO_PARAM(bool, bounded, true);
         };
     }
 
@@ -77,12 +77,12 @@ namespace limbo {
 
     namespace bayes_opt {
 
-        typedef boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>,
+        using boptimizer_signature = boost::parameter::parameters<boost::parameter::optional<tag::acquiopt>,
             boost::parameter::optional<tag::statsfun>,
             boost::parameter::optional<tag::initfun>,
             boost::parameter::optional<tag::acquifun>,
             boost::parameter::optional<tag::stopcrit>,
-            boost::parameter::optional<tag::modelfun>> boptimizer_signature;
+            boost::parameter::optional<tag::modelfun>>;
 
         // clang-format off
         /**
@@ -119,21 +119,21 @@ namespace limbo {
             // defaults
             struct defaults {
 #ifdef USE_NLOPT
-                typedef opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+                using acquiopt_t = opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>;
 #elif defined(USE_LIBCMAES)
-                typedef opt::Cmaes<Params> acquiopt_t;
+                using acquiopt_t = opt::Cmaes<Params>;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-                typedef opt::GridSearch<Params> acquiopt_t;
+                using acquiopt_t = opt::GridSearch<Params>;
 #endif
             };
             /// link to the corresponding BoBase (useful for typedefs)
-            typedef BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
-            typedef typename base_t::model_t model_t;
-            typedef typename base_t::acquisition_function_t acquisition_function_t;
+            using base_t = BoBase<Params, A1, A2, A3, A4, A5, A6>;
+            using model_t = typename base_t::model_t;
+            using acquisition_function_t = typename base_t::acquisition_function_t;
             // extract the types
-            typedef typename boptimizer_signature::bind<A1, A2, A3, A4, A5, A6>::type args;
-            typedef typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+            using args = typename boptimizer_signature::bind<A1, A2, A3, A4, A5, A6>::type;
+            using acqui_optimizer_t = typename boost::parameter::binding<args, tag::acquiopt, typename defaults::acquiopt_t>::type;
 
             /// The main function (run the Bayesian optimization algorithm)
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
@@ -154,8 +154,8 @@ namespace limbo {
 
                     auto acqui_optimization =
                         [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun,g); };
-                    Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in, Params::bayes_opt_boptimizer::bounded());
-                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, Params::bayes_opt_boptimizer::bounded());
+                    Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in, Params::bayes_opt_bobase::bounded());
+                    Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, Params::bayes_opt_bobase::bounded());
                     this->eval_and_add(sfun, new_sample);
 
                     this->_update_stats(*this, afun);

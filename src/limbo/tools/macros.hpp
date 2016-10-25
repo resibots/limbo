@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -96,7 +97,7 @@
     {                                                    \
         return __VA_NARG__(__VA_ARGS__);                 \
     }                                                    \
-    typedef Type Name##_t;
+    using Name##_t = Type;
 
 #define BO_PARAM_VECTOR(Type, Name, ...)                                                    \
     static const Eigen::Matrix<Type, __VA_NARG__(__VA_ARGS__), 1> Name()                    \

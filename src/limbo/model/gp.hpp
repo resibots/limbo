@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -54,7 +55,7 @@
 #include <Eigen/Core>
 #include <Eigen/LU>
 
-#include <limbo/experimental/model/spgp.hpp>
+#include <limbo/opt.hpp>
 #include <limbo/model/gp/no_lf_opt.hpp>
 #include <limbo/tools.hpp>
 
@@ -78,17 +79,21 @@ namespace limbo {
             /// Compute the GP from samples, observation, noise. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations,
-                const Eigen::VectorXd& noises)
+                const Eigen::VectorXd& noises, bool compute_kernel = true)
             {
                 assert(samples.size() != 0);
                 assert(observations.size() != 0);
                 assert(samples.size() == observations.size());
 
-                _dim_in = samples[0].size();
-                _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                if (_dim_in != samples[0].size()) {
+                    _dim_in = samples[0].size();
+                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                }
 
-                _dim_out = observations[0].size();
-                _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                if (_dim_out != observations[0].size()) {
+                    _dim_out = observations[0].size();
+                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                }
 
                 _samples = samples;
 
@@ -100,8 +105,9 @@ namespace limbo {
 
                 _noises = noises;
 
-                this->_compute_obs();
-                this->_compute_full_kernel();
+                this->_compute_obs_mean();
+                if (compute_kernel)
+                    this->_compute_full_kernel();
             }
 
             /// Do not forget to call this if you use hyper-prameters optimization!!
@@ -115,11 +121,14 @@ namespace limbo {
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
                 if (_samples.empty()) {
-                    _dim_in = sample.size();
-                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-
-                    _dim_out = observation.size();
-                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                    if (_dim_in != sample.size()) {
+                        _dim_in = sample.size();
+                        _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                    }
+                    if (_dim_out != observation.size()) {
+                        _dim_out = observation.size();
+                        _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                    }
                 }
                 else {
                     assert(sample.size() == _dim_in);
@@ -127,13 +136,9 @@ namespace limbo {
                 }
 
                 _samples.push_back(sample);
-                _original_samples.push_back(sample);
 
                 _observations.conservativeResize(_observations.rows() + 1, _dim_out);
                 _observations.bottomRows<1>() = observation.transpose();
-
-                _original_observations.conservativeResize(_original_observations.rows() + 1, _dim_out);
-                _original_observations.bottomRows<1>() = observation.transpose();
 
                 _mean_observation = _observations.colwise().mean();
 
@@ -141,20 +146,15 @@ namespace limbo {
                 _noises[_noises.size() - 1] = noise;
                 //_noise = noise;
 
-                this->_compute_obs();
+                this->_compute_obs_mean();
                 this->_compute_incremental_kernel();
-            }
-            
-            Eigen::MatrixXd pseudo_samples() {
-                Eigen::MatrixXd result;
-                return result;
             }
 
             /**
              \\rst
              return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
              \\endrst
-	  		*/
+            */
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
@@ -169,7 +169,7 @@ namespace limbo {
              \\rst
              return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
              \\endrst
-	  		*/
+            */
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
@@ -181,7 +181,7 @@ namespace limbo {
              \\rst
              return :math:`\sigma^2` (unormalized). If there is no sample, return the max :math:`\sigma^2`.
              \\endrst
-	  		*/
+            */
             double sigma(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
@@ -231,43 +231,29 @@ namespace limbo {
 
             const Eigen::MatrixXd& mean_vector() const { return _mean_vector; }
 
-            const Eigen::MatrixXd& obs_mean() const { return _obs; }
+            const Eigen::MatrixXd& obs_mean() const { return _obs_mean; }
 
             /// return the number of samples used to compute the GP
             int nb_samples() const { return _samples.size(); }
 
             ///  recomputes the GP
-            void recompute(bool update_obs = true)
+            void recompute(bool update_obs_mean = true, bool update_full_kernel = true)
             {
                 assert(!_samples.empty());
 
-                if (update_obs)
-                    this->_compute_obs();
+                if (update_obs_mean)
+                    this->_compute_obs_mean();
 
-                this->_compute_full_kernel();
+                if (update_full_kernel)
+                    this->_compute_full_kernel();
+                else
+                    this->_compute_alpha();
             }
-
-            /// experimental: use the spgps model to get speudosamples and pseudoobservations to replace the current ones
-            /*
-            void shrink()
-            {
-                typedef SPGP<Params, KernelFunction, MeanFunction, opt::NLOptGrad<Params, nlopt::LD_LBFGS>> SPGP_t;
-                SPGP_t model;
-
-                model.compute(_samples, _observations, _noises);
-
-                _samples = model.pseudo_samples();
-                _observations = model.mu(model.pseudo_samples_mat());
-
-                _compute_obs(); optimize_hyperparams();
-                recompute(true);
-            }
-            */
 
             void shrink()
             {
-                _compute_obs(); optimize_hyperparams();
-                recompute(false);
+                _compute_obs_mean(); 
+                optimize_hyperparams();
 
                 std::vector<std::pair<double, int>> scores(_samples.size());
                 for (size_t i = 0; i < _samples.size(); i++) {
@@ -296,8 +282,8 @@ namespace limbo {
                 _samples.resize(nn);
                 _observations.conservativeResize(nn, _observations.cols());
 
-                _compute_obs(); optimize_hyperparams();
-                recompute(false);
+                _compute_obs_mean(); 
+                optimize_hyperparams();
             }
 
             /// return the likelihood (do not compute it!)
@@ -317,9 +303,7 @@ namespace limbo {
             const Eigen::MatrixXd& observations() const { return _observations; }
 
         std::vector<Eigen::VectorXd> _samples;
-        std::vector<Eigen::VectorXd> _original_samples;
         Eigen::MatrixXd _observations;
-        Eigen::MatrixXd _original_observations;
         Eigen::VectorXd _noises;
 
         protected:
@@ -330,7 +314,7 @@ namespace limbo {
             MeanFunction _mean_function;
 
             Eigen::MatrixXd _mean_vector;
-            Eigen::MatrixXd _obs;
+            Eigen::MatrixXd _obs_mean;
 
             Eigen::MatrixXd _alpha;
             Eigen::VectorXd _mean_observation;
@@ -343,16 +327,12 @@ namespace limbo {
 
             HyperParamsOptimizer _hp_optimize;
 
-            void _compute_obs()
+            void _compute_obs_mean()
             {
                 _mean_vector.resize(_samples.size(), _dim_out);
                 for (int i = 0; i < _mean_vector.rows(); i++)
                     _mean_vector.row(i) = _mean_function(_samples[i], *this);
-
-                // std::cout << _mean_vector.rows() << " " << _mean_vector.cols() << std::endl;
-                // std::cout << _samples.size() << " " << _samples[0].size() << std::endl;
-                // std::cout << _observations.rows() << " " << _observations.cols() << std::endl;
-                _obs = _observations - _mean_vector;
+                _obs_mean = _observations - _mean_vector;
             }
 
             void _compute_full_kernel()
@@ -362,9 +342,8 @@ namespace limbo {
 
                 // O(n^2) [should be negligible]
                 for (size_t i = 0; i < n; i++)
-                    for (size_t j = 0; j <= i; ++j) {
+                    for (size_t j = 0; j <= i; ++j)
                         _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noises[i] : 0); // noise only on the diagonal
-                    }
 
                 for (size_t i = 0; i < n; i++)
                     for (size_t j = 0; j < i; ++j)
@@ -407,9 +386,9 @@ namespace limbo {
 
             void _compute_alpha()
             {
-                // alpha = K^{-1} * this->_obs;
+                // alpha = K^{-1} * this->_obs_mean;
                 Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> triang = _matrixL.template triangularView<Eigen::Lower>();
-                _alpha = triang.solve(_obs);
+                _alpha = triang.solve(_obs_mean);
                 triang.adjoint().solveInPlace(_alpha);
             }
 

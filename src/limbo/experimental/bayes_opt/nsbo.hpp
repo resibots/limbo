@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -63,8 +64,7 @@ namespace limbo {
             // clang-format on
             class Nsbo : public BoMulti<Params, A2, A3, A4, A5, A6> {
             public:
-                typedef std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>
-                    pareto_point_t;
+                using pareto_point_t = std::tuple<Eigen::VectorXd, Eigen::VectorXd, Eigen::VectorXd>;
 
                 template <typename EvalFunction>
                 void optimize(const EvalFunction& feval, bool reset = true)

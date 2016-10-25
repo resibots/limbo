@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -259,7 +260,7 @@ namespace randutils {
     struct seed_seq_fe {
     public:
         // types
-        typedef IntRep result_type;
+        using result_type = IntRep;
 
     private:
         static constexpr uint32_t INIT_A = 0x43b0d7e5;

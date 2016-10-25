@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -84,9 +85,9 @@ int main(int argc, char** argv)
         tools::make_vector(3.0)};
 
     // the type of the GP
-    typedef kernel::Exp<Params> Kernel_t;
-    typedef mean::Data<Params> Mean_t;
-    typedef model::GP<Params, Kernel_t, Mean_t> GP_t;
+    using Kernel_t = kernel::Exp<Params>;
+    using Mean_t = mean::Data<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t>;
 
     // 1-D inputs, 1-D outputs
     GP_t gp(1, 1);
@@ -112,15 +113,14 @@ int main(int argc, char** argv)
 
     // an alternative is to optimize the hyper-paramerers
     // in that case, we need a kernel with hyper-parameters that are designed to be optimized
-    typedef kernel::SquaredExpARD<Params> Kernel2_t;
-    typedef mean::Data<Params> Mean_t;
-    typedef model::GP<Params, Kernel2_t, Mean_t, model::gp::KernelLFOpt<Params>> GP2_t;
+    using Kernel2_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::Data<Params>;
+    using GP2_t = model::GP<Params, Kernel2_t, Mean_t, model::gp::KernelLFOpt<Params>>;
 
     GP2_t gp_ard(1, 1);
     // do not forget to call the optimization!
-    gp_ard.compute(samples, observations, noises);
+    gp_ard.compute(samples, observations, noises, false);
     gp_ard.optimize_hyperparams();
-    gp_ard.recompute(false);
 
     // write the predicted data in a file (e.g. to be plotted)
     std::ofstream ofs_ard("gp_ard.dat");

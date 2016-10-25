@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -73,7 +74,7 @@ struct Params {
         BO_PARAM(double, l, 0.2);
     };
 
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, true);
     };
 
@@ -206,10 +207,10 @@ struct fit_eval {
 int main()
 {
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef mean::FunctionARD<Params, MeanComplet<Params>> Mean_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>> GP_t;
-    typedef UCB_multi<Params, GP_t> Acqui_t;
+    using Kernel_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::FunctionARD<Params, MeanComplet<Params>>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t, model::gp::KernelMeanLFOpt<Params>>;
+    using Acqui_t = UCB_multi<Params, GP_t>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>> opt;
     opt.optimize(fit_eval());

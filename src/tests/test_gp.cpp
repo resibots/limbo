@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -127,9 +128,9 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
 {
     using namespace limbo;
 
-    typedef kernel::SquaredExpARD<Params> KF_t;
-    typedef mean::FunctionARD<Params, mean::Constant<Params>> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t> GP_t;
+    using KF_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::FunctionARD<Params, mean::Constant<Params>>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
 
     GP_t gp(4, 2);
 
@@ -189,9 +190,9 @@ BOOST_AUTO_TEST_CASE(test_gp_dim)
 {
     using namespace limbo;
 
-    typedef kernel::MaternFiveHalves<Params> KF_t;
-    typedef mean::Constant<Params> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t> GP_t;
+    using KF_t = kernel::MaternFiveHalves<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
 
     GP_t gp; // no init with dim
 
@@ -214,9 +215,9 @@ BOOST_AUTO_TEST_CASE(test_gp)
 {
     using namespace limbo;
 
-    typedef kernel::MaternFiveHalves<Params> KF_t;
-    typedef mean::Constant<Params> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t> GP_t;
+    using KF_t = kernel::MaternFiveHalves<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
 
     GP_t gp;
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10),
@@ -256,9 +257,9 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
     size_t N = 1000;
     size_t failures = 0;
 
-    typedef kernel::MaternFiveHalves<Params> KF_t;
-    typedef mean::Constant<Params> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t> GP_t;
+    using KF_t = kernel::MaternFiveHalves<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
 
     for (size_t i = 0; i < N; i++) {
 
@@ -319,19 +320,19 @@ BOOST_AUTO_TEST_CASE(test_gp_no_samples_acqui_opt)
     using namespace limbo;
 
     struct FirstElem {
-        typedef double result_type;
+        using result_type = double;
         double operator()(const Eigen::VectorXd& x) const
         {
             return x(0);
         }
     };
 
-    typedef opt::GridSearch<Params> acquiopt_t;
+    using acquiopt_t = opt::GridSearch<Params>;
 
-    typedef kernel::SquaredExpARD<Params> KF_t;
-    typedef mean::Constant<Params> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t> GP_t;
-    typedef acqui::UCB<Params, GP_t> acquisition_function_t;
+    using KF_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
+    using acquisition_function_t = acqui::UCB<Params, GP_t>;
 
     GP_t gp(2, 2);
 
@@ -349,9 +350,9 @@ BOOST_AUTO_TEST_CASE(test_gp_no_samples_acqui_opt)
 
 BOOST_AUTO_TEST_CASE(test_gp_auto)
 {
-    typedef kernel::SquaredExpARD<Params> KF_t;
-    typedef mean::Constant<Params> Mean_t;
-    typedef model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>> GP_t;
+    using KF_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using GP_t = model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>>;
 
     GP_t gp;
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10), make_v1(5)};
@@ -400,7 +401,7 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
     };
 
     // MaternThreeHalves
-    typedef model::GP<Params, kernel::MaternThreeHalves<Parameters>, mean::Constant<Params>> GP1_t;
+    using GP1_t = model::GP<Params, kernel::MaternThreeHalves<Parameters>, mean::Constant<Params>>;
 
     GP1_t gp1(1, 1);
 
@@ -409,7 +410,7 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
     BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
 
     // MaternFiveHalves
-    typedef model::GP<Params, kernel::MaternFiveHalves<Parameters>, mean::Constant<Params>> GP2_t;
+    using GP2_t = model::GP<Params, kernel::MaternFiveHalves<Parameters>, mean::Constant<Params>>;
 
     GP2_t gp2(1, 1);
 
@@ -418,7 +419,7 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
     BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
 
     // Exponential
-    typedef model::GP<Params, kernel::Exp<Parameters>, mean::Constant<Params>> GP3_t;
+    using GP3_t = model::GP<Params, kernel::Exp<Parameters>, mean::Constant<Params>>;
 
     GP3_t gp3(1, 1);
 
@@ -427,7 +428,7 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
     BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
 
     // ARD Squared Exponential
-    typedef model::GP<Params, kernel::SquaredExpARD<Parameters>, mean::Constant<Params>> GP4_t;
+    using GP4_t = model::GP<Params, kernel::SquaredExpARD<Parameters>, mean::Constant<Params>>;
 
     GP4_t gp4(1, 1);
 

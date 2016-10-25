@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -52,7 +53,7 @@
 using namespace limbo;
 
 struct Params {
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
     };
     struct bayes_opt_boptimizer {
@@ -62,7 +63,7 @@ struct Params {
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 190);
     };
-    struct kernel_maternfivehalfs {
+    struct kernel_maternfivehalves {
         BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 1);
     };
@@ -136,17 +137,16 @@ int main()
 {
     srand(time(NULL));
 
-    typedef kernel::SquaredExpARD<Params> Kernel_t;
-    typedef opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>> AcquiOpt_t;
-    typedef boost::fusion::vector<stop::MaxIterations<Params>> Stop_t;
-    // typedef mean_functions::MeanFunctionARD<Params, mean_functions::MeanData<Params>> Mean_t;
-    typedef mean::Constant<Params> Mean_t;
-    typedef boost::fusion::vector<> Stat_t;
-    typedef init::RandomSampling<Params> Init_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params, opt::NLOptNoGrad<BobyqaParams_HP, nlopt::LN_BOBYQA>>> GP_t;
-    typedef acqui::UCB<Params, GP_t> Acqui_t;
+    using Kernel_t = kernel::SquaredExpARD<Params>;
+    using AcquiOpt_t = opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>>;
+    using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
+    using Mean_t = mean::Constant<Params>;
+    using Stat_t = boost::fusion::vector<>;
+    using Init_t = init::RandomSampling<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params, opt::NLOptNoGrad<BobyqaParams_HP, nlopt::LN_BOBYQA>>>;
+    using Acqui_t = acqui::UCB<Params, GP_t>;
 
-    typedef bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> Opt_t;
+    using Opt_t = bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>>;
 
     benchmark<Opt_t, BraninNormalized>("branin");
     benchmark<Opt_t, Hartmann6>("hartmann6");

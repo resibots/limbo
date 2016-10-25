@@ -14,7 +14,7 @@ For Ubuntu:
 
 ::
 
-  apt-get install libeigen3-dev libboost* libtbb*
+  apt-get install libeigen3-dev libboost-serialization-dev libboost-filesystem-dev libboost-test-dev libboost-program-options-dev libboost-thread-dev libtbb-dev
 
 For OSX with brew:
 
@@ -35,14 +35,16 @@ For Ubuntu / Debian:
   ./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
   sudo make install
   sudo ldconfig
+  cd ..
 
 For OSX:
 ::
 
   wget http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz
   tar -zxvf nlopt-2.4.2.tar.gz && cd nlopt-2.4.2
-  ./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
+  ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
   sudo make install
+  cd ..
 
 
 For more options and troubleshooting, see the :ref:`Compilation tutorial <compilation-tutorial>`.
@@ -50,6 +52,9 @@ For more options and troubleshooting, see the :ref:`Compilation tutorial <compil
 Compile Limbo
 -----------------
 
+To get **limbo**, simply clone the source code from https://github.com/resibots/limbo with git, or download it
+as a zip. To compile it:
+   
 ::
 
   ./waf configure
@@ -87,7 +92,7 @@ The part to edit is between line 56 and line 63:
     return tools::make_vector(y);
   }
 
-For more information, see the :ref:`Basic example <basic-example>`.
+By default limbo optimizes in :math:`[0,1]`. For more information, see the :ref:`Basic example <basic-example>`.
 
 
 Build your experiment

@@ -59,15 +59,15 @@ def create(bld):
                                     additional_stats.append('GPKernelHParams')
                                 if mean == 'FunctionARD':
                                     additional_stats.append('GPMeanHParams')
-                                declarations = 'typedef boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats + additional_stats]) + '> stats_t;\n'
-                                declarations = declarations + '    typedef boost::fusion::vector<' + ', '.join(['stop::' + stop + '<Params>' for stop in stops]) + '> stops_t;\n'
-                                declarations = declarations + '    typedef kernel::' + kernel + '<Params> kernel_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef mean::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>' + ' mean_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef model::gp::' + gp_lf_opt + '<Params> gp_lf_opt_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef model::' + model + '<Params, kernel_' + str(i) + '_t, mean_' + str(i) + '_t, gp_lf_opt_' + str(i) + '_t> model_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef acqui::' + acqui + '<Params, model_' + str(i) + '_t> acqui_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef opt::' + acqui_opt + '<Params> acqui_opt_' + str(i) + '_t;\n'
-                                declarations = declarations + '    typedef init::' + init + '<Params> init_' + str(i) + '_t;\n'
+                                declarations = 'using stats_t = boost::fusion::vector<' + ', '.join(['stat::' + stat + '<Params>' for stat in stats + additional_stats]) + '>;\n'
+                                declarations = declarations + '    using stops_t = boost::fusion::vector<' + ', '.join(['stop::' + stop + '<Params>' for stop in stops]) + '>;\n'
+                                declarations = declarations + '    using kernel_' + str(i) + '_t = kernel::' + kernel + '<Params>;\n'
+                                declarations = declarations + '    using  mean_' + str(i) + '_t = mean::' + mean + '<Params' + ('' if (not mean in mean_additional_params) else ',' + ', '.join(mean_additional_params[mean])) + '>;\n'
+                                declarations = declarations + '    using gp_lf_opt_' + str(i) + '_t = model::gp::' + gp_lf_opt + '<Params>;\n'
+                                declarations = declarations + '    using model_' + str(i) + '_t = model::' + model + '<Params, kernel_' + str(i) + '_t, mean_' + str(i) + '_t, gp_lf_opt_' + str(i) + '_t>;\n'
+                                declarations = declarations + '    using acqui_' + str(i) + '_t = acqui::' + acqui + '<Params, model_' + str(i) + '_t>;\n'
+                                declarations = declarations + '    using acqui_opt_' + str(i) + '_t = opt::' + acqui_opt + '<Params>;\n'
+                                declarations = declarations + '    using init_' + str(i) + '_t = init::' + init + '<Params>;\n'
                                 declarations = declarations + '    bayes_opt::BOptimizer<Params, modelfun<model_' + str(i) + '_t>, acquifun<acqui_' + str(i) + '_t>, acquiopt<acqui_opt_' + str(i) + '_t>, initfun<init_' + str(i) + '_t>, statsfun<stats_t>, stopcrit<stops_t>> opt_' + str(i) + ';\n'
                                 with open(bld.path.abspath() + '/combinations/combinations_' + str(i) + '.cpp', 'w') as f:
                                     f.write(template.replace('@declarations', declarations).replace('@optimizer', 'opt_' + str(i)))

@@ -26,7 +26,7 @@ struct Params {
 #endif
 
     struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
-        @BAYES_OPT_BOBASE_STATS_ENABLED
+        @BAYES_OPT_BOBASE_STATS_DISABLED
     };
 
     struct kernel_exp : public defaults::kernel_exp {
