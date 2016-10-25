@@ -65,8 +65,10 @@ namespace limbo {
         struct model_spgp {
             BO_PARAM(double, jitter, 0.000001);
             BO_PARAM(double, samples_percent, 10);
+            BO_PARAM(double, samples_fixed_number, -1);
             BO_PARAM(int, min_m, 1);
             BO_PARAM(int, optimize_step, -1);
+            BO_PARAM(double, shrink_ratio, 0.7); // be carefull with this, it's acumulative!
 
             /// kernel parameters
             BO_PARAM(double, sig, 0.01);
@@ -128,6 +130,12 @@ namespace limbo {
                 const Eigen::VectorXd& noises)
             {
                 compute(_to_matrix(samples), _to_matrix(observations), noises);
+            }
+            void compute(const std::vector<Eigen::VectorXd>& samples,
+                const Eigen::MatrixXd& observations,
+                const Eigen::VectorXd& noises)
+            {
+                compute(_to_matrix(samples), observations, noises);
             }
             void compute(const Eigen::MatrixXd& samples,
                 const Eigen::MatrixXd& observations,
@@ -224,6 +232,10 @@ namespace limbo {
             {
                 return _predict(v, true, false).first;
             }
+            std::vector<Eigen::VectorXd> mu_mat(const Eigen::MatrixXd& v) const
+            {
+                return _to_vector(_predict(v, true, false).first);
+            }
 
             /**
              \\rst
@@ -284,7 +296,42 @@ namespace limbo {
             int nb_pseudo_samples() const { return _pseudo_samples.rows(); }
 
             ///  recomputes the SPGP
-            void shrink() { recompute(); }
+            void shrink() { 
+                recompute();
+
+                Eigen::MatrixXd xb = _pseudo_samples;
+                std::vector<std::pair<double, int>> scores(_samples.rows());
+                for (size_t i = 0; i < _samples.rows(); i++) {
+                    Eigen::MatrixXd samples = _remove_row(_samples, i);
+                    Eigen::MatrixXd observations_zm = _remove_row(_observations_zm, i);
+
+                    opt::eval_t result = _likelihood_wp(xb, _b.transpose(), _c, _sig, samples, observations_zm, false, false);
+                    scores[i] = std::make_pair(result.first, i);
+                }
+
+                auto comp = [](std::pair<double, int> a, std::pair<double, int> b) { return a.first < b.first; };
+                std::sort(scores.begin(), scores.end(), comp);
+
+                // Copy the values
+                size_t nn = _samples.rows() * Params::model_spgp::shrink_ratio();
+                size_t sn = (_samples.rows() - nn)/2 + nn;
+
+                Eigen::MatrixXd samples = _samples;
+                Eigen::MatrixXd observations = _observations;
+                Eigen::MatrixXd observations_zm = _observations_zm;
+                std::cout << _samples.rows() << std::endl;
+                std::cout << nn << std::endl;
+                for (size_t i = sn; i < nn+sn; i++) {
+                    _samples.row(i) = samples.row(scores[i].second);
+                    _observations_zm.row(i) = observations_zm.row(scores[i].second);
+                    _observations.row(i) = observations.row(scores[i].second);
+                }
+                _samples.conservativeResize(nn, _samples.cols());
+                _observations_zm.conservativeResize(nn, _observations_zm.cols());
+                _observations.conservativeResize(nn, _observations.cols());
+
+                // recompute();
+            }
             void recompute(bool update_obs_mean = true) { 
                 _optimize_init = true;
                 _compute();
@@ -301,11 +348,19 @@ namespace limbo {
 
             /// return the list of samples that have been tested so far
             // const Eigen::MatrixXd& samples() const { return _samples; } // cannot be overloaded ?
-            const std::vector<Eigen::VectorXd>& samples() const { return _to_vector(_samples); }
+            std::vector<Eigen::VectorXd> samples() const { return _to_vector(_samples); }
 
             /// return the list of pseudo-samples beign used
-            const Eigen::MatrixXd& pseudo_samples() const { return _pseudo_samples; }
-            // const std::vector<Eigen::VectorXd> pseudo_samples() const { return _to_vector(_pseudo_samples); }
+            const Eigen::MatrixXd& pseudo_samples_mat() const { return _pseudo_samples; }
+            std::vector<Eigen::VectorXd> pseudo_samples() const { return _to_vector(_pseudo_samples); }
+
+            Eigen::VectorXd h_params() {
+                Eigen::VectorXd result(_dim_in + 2);
+                result.segment(0, _dim_in) = _b.array();
+                result(_dim_in) = std::sqrt(_c);
+                result(_dim_in+1) = _sig;
+                return result;
+            }
 
             // test the likelihood function given a dataset
             void test_likelihood(const Eigen::MatrixXd& data, 
@@ -351,7 +406,7 @@ namespace limbo {
             /// set after the hyperparameters calculation
             Eigen::MatrixXd _pseudo_samples;
             Eigen::VectorXd _b;
-            double _c;
+            double _c; //sqrt and log it
             double _sig;
             Eigen::VectorXd _noises; // equals to del in all of them
 
@@ -402,7 +457,10 @@ namespace limbo {
             void _update_m()
             {
                 // NOTE: We could add the option to use a function to change the m dinamycally based on the samples.
-                _m = _samples.rows()/Params::model_spgp::samples_percent();
+                if (Params::model_spgp::samples_fixed_number() == -1)
+                    _m = _samples.rows()/Params::model_spgp::samples_percent();
+                else
+                    _m = Params::model_spgp::samples_fixed_number();
                 if (_m < Params::model_spgp::min_m()) _m = Params::model_spgp::min_m();
             }
 
@@ -447,7 +505,7 @@ namespace limbo {
                     // Initialize pseudo-inputs to a random subset of training inputs
                     Eigen::VectorXd positions = Eigen::VectorXd::LinSpaced(_samples.rows(), 0, _samples.rows()-1);
                     std::random_shuffle(positions.data(), positions.data()+positions.size());
-                    for (size_t i = 0; i < _m; ++i) _w_init.segment(i*_dim_in, _dim_in) = _samples.row(i);
+                    for (size_t i = 0; i < _m; ++i) _w_init.segment(i*_dim_in, _dim_in) = _samples.row(positions[i]);
 
                     // Initialize hyperparameters sensibly in log space
                     _w_init.segment(_m*_dim_in, _dim_in) = -2*((_samples.colwise().maxCoeff() - _samples.colwise().minCoeff()).array()/2).log();     // -2*log((max(x)-min(x))'/2)
@@ -473,21 +531,21 @@ namespace limbo {
                 _since_last_hopt = 0;
             }
 
-            opt::eval_t _likelihood(const Eigen::VectorXd& input, bool eval_grad = false) const
+            opt::eval_t _likelihood(const Eigen::VectorXd& input, bool eval_grad = false) const // opt wrapper
             {
-                // Unzip parameters
                 HyperParams hp(input, _m, _dim_in);
-                Eigen::MatrixXd& b =  hp.b;
-                double& c = hp.c;
-                double& sig = hp.sig;
-                Eigen::MatrixXd& xb = hp.xb;
+                return _likelihood_wp(hp.xb, hp.b, hp.c, hp.sig, _samples, _observations_zm, eval_grad, true);
+            }
 
+            opt::eval_t _likelihood_wp(Eigen::MatrixXd& xb, const Eigen::MatrixXd& b, const double& c, const double& sig, 
+                const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations_zm, bool eval_grad, bool inverse) const
+            {
                 // Prepare xb and x
-                int n = _samples.rows();
+                int n = samples.rows();
                 Eigen::MatrixXd idm = Eigen::MatrixXd::Identity(_m, _m);
                 Eigen::MatrixXd b_sqrt = b.array().sqrt();
                 xb = xb.cwiseProduct(b_sqrt.replicate(_m,1));
-                Eigen::MatrixXd x = _samples.cwiseProduct(b_sqrt.replicate(n,1));
+                Eigen::MatrixXd x = samples.cwiseProduct(b_sqrt.replicate(n,1));
 
                 // Construct Q
                 Eigen::MatrixXd Q = xb*xb.transpose();
@@ -509,7 +567,7 @@ namespace limbo {
                 Eigen::MatrixXd ep = 1 + (c - V.array().pow(2).colwise().sum().transpose())/sig; // ep = 1 + (c-sum(V.^2)')/sig;
                 K = K.array() / ep.array().sqrt().transpose().replicate(_m,1);
                 V = V.array() / ep.array().sqrt().transpose().replicate(_m,1);
-                Eigen::MatrixXd y = _observations_zm.array() / ep.array().sqrt();
+                Eigen::MatrixXd y = observations_zm.array() / ep.array().sqrt();
 
                 Eigen::MatrixXd Lm = (sig*idm + V*V.transpose()).llt().matrixL();
                 Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> Lm_t = Lm.template triangularView<Eigen::Lower>(); //NOTE: It's okey to solve the system like this?
@@ -520,8 +578,12 @@ namespace limbo {
                 Eigen::MatrixXd fw = Lm.diagonal().array().log().colwise().sum() + (n-_m)/2*std::log(sig) +
                         (y.transpose()*y - bet.transpose()*bet).array()/(2*sig) + ep.array().log().sum()/2 + 0.5*n*std::log(2*M_PI);
 
-                if(!eval_grad) 
-                    return opt::no_grad(-fw(0));
+                if(!eval_grad) {
+                    if (inverse)
+                        return opt::no_grad(-fw(0));
+                    else 
+                        return opt::no_grad(fw(0));
+                }
 
                 // ** Derivates calculation - precomputations
                 Eigen::MatrixXd Lt = L*Lm;
@@ -601,8 +663,12 @@ namespace limbo {
                 dfw.segment(dfxb.size()+dfb.size(), dfc.size()) = dfc;
                 dfw.segment(dfxb.size()+dfb.size()+dfc.size(), dfsig.size()) = dfsig;
                 
-                Eigen::VectorXd rdfw = dfw.array()*-1;
-                return {-fw(0), rdfw}; // limbo maximizes instead of minimizing
+                if (inverse) {
+                    Eigen::VectorXd rdfw = dfw.array()*-1;
+                    return {-fw(0), rdfw}; // limbo maximizes instead of minimizing
+                } else {
+                    return {fw(0), dfw};
+                }
             }
 
             std::pair<Eigen::MatrixXd, Eigen::MatrixXd> _predict(const Eigen::MatrixXd& xt, bool calc_mu = true, bool calc_s2 = true) const
@@ -686,13 +752,25 @@ namespace limbo {
             // NOTE: Maybe this could be done better?
             std::vector<Eigen::VectorXd> _to_vector(const Eigen::MatrixXd& m) const
             {
-                std::vector<Eigen::VectorXd> result(m.cols());
+                std::vector<Eigen::VectorXd> result(m.rows());
                 for (size_t i = 0; i < result.size(); ++i) {
-                    m[i] = m.row(i);
+                    result[i] = m.row(i);
                 }
                 return result;
             }
             std::vector<Eigen::VectorXd> _to_vector(Eigen::MatrixXd& m) const { return _to_vector(m); }
+
+            Eigen::MatrixXd _remove_row(const Eigen::MatrixXd& mat, const size_t i) const
+            {
+                size_t rows = mat.rows()-1;
+                size_t cols = mat.cols();
+                Eigen::MatrixXd res(rows, cols);
+
+                res.block(0, 0, i, cols) = mat.block(0, 0, i, cols);
+                if (i < rows) res.block(i, 0, rows-i, cols) = mat.block(i+1, 0, rows-i, cols);
+
+                return res;
+            }
 
             /*
             void _compute_kernel_m()

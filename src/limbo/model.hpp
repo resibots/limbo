@@ -54,4 +54,6 @@
 #include <limbo/model/gp/mean_lf_opt.hpp>
 #include <limbo/model/gp/no_lf_opt.hpp>
 
+#include <limbo/experimental/model/spgp.hpp>
+
 #endif

@@ -57,6 +57,16 @@ namespace limbo {
             struct KernelLFOpt : public HPOpt<Params, Optimizer> {
             public:
                 template <typename GP>
+                opt::eval_t operator()(GP& gp, 
+                        const std::vector<Eigen::VectorXd>& samples, 
+                        const Eigen::MatrixXd& observations, 
+                        const Eigen::VectorXd& noises) const 
+                {
+                    KernelLFOptimization<GP> likelihood(gp);
+                    return likelihood(gp.kernel_function().h_params(), samples, observations, noises, false, true);
+                }
+
+                template <typename GP>
                 void operator()(GP& gp)
                 {
                     this->_called = true;
@@ -76,10 +86,29 @@ namespace limbo {
 
                     opt::eval_t operator()(const Eigen::VectorXd& params, bool compute_grad) const
                     {
+                        return this->operator()(params, 
+                            this->_original_gp._samples, 
+                            this->_original_gp._observations, 
+                            this->_original_gp._noises, 
+                            compute_grad,
+                            true);
+                    }
+
+                    opt::eval_t operator()(const Eigen::VectorXd& params, 
+                        const std::vector<Eigen::VectorXd>& samples, 
+                        const Eigen::MatrixXd& observations, 
+                        const Eigen::VectorXd& noises,
+                        bool compute_grad = false,
+                        bool compute_obs = false) const
+                    {
                         GP gp(this->_original_gp);
+                        gp._samples = samples;
+                        gp._observations = observations;
+                        gp._noises = noises;
+
                         gp.kernel_function().set_h_params(params);
 
-                        gp.recompute(false);
+                        gp.recompute(compute_obs);
 
                         size_t n = gp.obs_mean().rows();
 

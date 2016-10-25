@@ -54,6 +54,7 @@
 #include <Eigen/Core>
 #include <Eigen/LU>
 
+#include <limbo/experimental/model/spgp.hpp>
 #include <limbo/model/gp/no_lf_opt.hpp>
 #include <limbo/tools.hpp>
 
@@ -99,7 +100,7 @@ namespace limbo {
 
                 _noises = noises;
 
-                this->_compute_obs_mean();
+                this->_compute_obs();
                 this->_compute_full_kernel();
             }
 
@@ -126,9 +127,13 @@ namespace limbo {
                 }
 
                 _samples.push_back(sample);
+                _original_samples.push_back(sample);
 
                 _observations.conservativeResize(_observations.rows() + 1, _dim_out);
                 _observations.bottomRows<1>() = observation.transpose();
+
+                _original_observations.conservativeResize(_original_observations.rows() + 1, _dim_out);
+                _original_observations.bottomRows<1>() = observation.transpose();
 
                 _mean_observation = _observations.colwise().mean();
 
@@ -136,8 +141,13 @@ namespace limbo {
                 _noises[_noises.size() - 1] = noise;
                 //_noise = noise;
 
-                this->_compute_obs_mean();
+                this->_compute_obs();
                 this->_compute_incremental_kernel();
+            }
+            
+            Eigen::MatrixXd pseudo_samples() {
+                Eigen::MatrixXd result;
+                return result;
             }
 
             /**
@@ -221,20 +231,73 @@ namespace limbo {
 
             const Eigen::MatrixXd& mean_vector() const { return _mean_vector; }
 
-            const Eigen::MatrixXd& obs_mean() const { return _obs_mean; }
+            const Eigen::MatrixXd& obs_mean() const { return _obs; }
 
             /// return the number of samples used to compute the GP
             int nb_samples() const { return _samples.size(); }
 
             ///  recomputes the GP
-            void recompute(bool update_obs_mean = true)
+            void recompute(bool update_obs = true)
             {
                 assert(!_samples.empty());
 
-                if (update_obs_mean)
-                    this->_compute_obs_mean();
+                if (update_obs)
+                    this->_compute_obs();
 
                 this->_compute_full_kernel();
+            }
+
+            /// experimental: use the spgps model to get speudosamples and pseudoobservations to replace the current ones
+            /*
+            void shrink()
+            {
+                typedef SPGP<Params, KernelFunction, MeanFunction, opt::NLOptGrad<Params, nlopt::LD_LBFGS>> SPGP_t;
+                SPGP_t model;
+
+                model.compute(_samples, _observations, _noises);
+
+                _samples = model.pseudo_samples();
+                _observations = model.mu(model.pseudo_samples_mat());
+
+                _compute_obs(); optimize_hyperparams();
+                recompute(true);
+            }
+            */
+
+            void shrink()
+            {
+                _compute_obs(); optimize_hyperparams();
+                recompute(false);
+
+                std::vector<std::pair<double, int>> scores(_samples.size());
+                for (size_t i = 0; i < _samples.size(); i++) {
+                    std::vector<Eigen::VectorXd> samples = _remove_row(_samples, i);
+                    Eigen::MatrixXd observations = _remove_row(_observations, i);
+                    Eigen::VectorXd noises = _remove_row(_noises, i);
+
+                    opt::eval_t result = _hp_optimize(*this, samples, observations, noises);
+
+                    scores[i] = std::make_pair(-result.first, i);
+                }
+
+                auto comp = [](std::pair<double, int> a, std::pair<double, int> b) { return a.first < b.first; };
+                std::sort(scores.begin(), scores.end(), comp);
+
+                // Copy the values
+                size_t nn = _samples.size() * 0.7;
+                size_t sn = (_samples.size() - nn)/2; // get the middle
+
+                std::vector<Eigen::VectorXd> samples = _samples;
+                Eigen::MatrixXd observations = _observations;
+                for (size_t i = sn; i < nn+sn; i++) {
+                    _samples[i] = samples[scores[i].second];
+                    _observations.row(i) = observations.row(scores[i].second);
+                }
+                _samples.resize(nn);
+                _observations.conservativeResize(nn, _observations.cols());
+
+                _compute_obs(); optimize_hyperparams();
+                recompute(false);
             }
 
             /// return the likelihood (do not compute it!)
@@ -251,6 +314,13 @@ namespace limbo {
 
             /// return the list of samples that have been tested so far
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
+            const Eigen::MatrixXd& observations() const { return _observations; }
+
+        std::vector<Eigen::VectorXd> _samples;
+        std::vector<Eigen::VectorXd> _original_samples;
+        Eigen::MatrixXd _observations;
+        Eigen::MatrixXd _original_observations;
+        Eigen::VectorXd _noises;
 
         protected:
             int _dim_in;
@@ -259,13 +329,8 @@ namespace limbo {
             KernelFunction _kernel_function;
             MeanFunction _mean_function;
 
-            std::vector<Eigen::VectorXd> _samples;
-            Eigen::MatrixXd _observations;
             Eigen::MatrixXd _mean_vector;
-            Eigen::MatrixXd _obs_mean;
-
-            Eigen::VectorXd _noises;
-            Eigen::VectorXd _noises_bl;
+            Eigen::MatrixXd _obs;
 
             Eigen::MatrixXd _alpha;
             Eigen::VectorXd _mean_observation;
@@ -278,12 +343,16 @@ namespace limbo {
 
             HyperParamsOptimizer _hp_optimize;
 
-            void _compute_obs_mean()
+            void _compute_obs()
             {
                 _mean_vector.resize(_samples.size(), _dim_out);
                 for (int i = 0; i < _mean_vector.rows(); i++)
                     _mean_vector.row(i) = _mean_function(_samples[i], *this);
-                _obs_mean = _observations - _mean_vector;
+
+                // std::cout << _mean_vector.rows() << " " << _mean_vector.cols() << std::endl;
+                // std::cout << _samples.size() << " " << _samples[0].size() << std::endl;
+                // std::cout << _observations.rows() << " " << _observations.cols() << std::endl;
+                _obs = _observations - _mean_vector;
             }
 
             void _compute_full_kernel()
@@ -293,8 +362,9 @@ namespace limbo {
 
                 // O(n^2) [should be negligible]
                 for (size_t i = 0; i < n; i++)
-                    for (size_t j = 0; j <= i; ++j)
+                    for (size_t j = 0; j <= i; ++j) {
                         _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noises[i] : 0); // noise only on the diagonal
+                    }
 
                 for (size_t i = 0; i < n; i++)
                     for (size_t j = 0; j < i; ++j)
@@ -337,9 +407,9 @@ namespace limbo {
 
             void _compute_alpha()
             {
-                // alpha = K^{-1} * this->_obs_mean;
+                // alpha = K^{-1} * this->_obs;
                 Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> triang = _matrixL.template triangularView<Eigen::Lower>();
-                _alpha = triang.solve(_obs_mean);
+                _alpha = triang.solve(_obs);
                 triang.adjoint().solveInPlace(_alpha);
             }
 
@@ -362,6 +432,35 @@ namespace limbo {
                 for (int i = 0; i < k.size(); i++)
                     k[i] = _kernel_function(_samples[i], v);
                 return k;
+            }
+
+            Eigen::MatrixXd _remove_row(const Eigen::MatrixXd& mat, const size_t i) const
+            {
+                size_t rows = mat.rows()-1;
+                size_t cols = mat.cols();
+                Eigen::MatrixXd res(rows, cols);
+
+                res.block(0, 0, i, cols) = mat.block(0, 0, i, cols);
+                if (i < rows) res.block(i, 0, rows-i, cols) = mat.block(i+1, 0, rows-i, cols);
+
+                return res;
+            }
+
+            std::vector<Eigen::VectorXd> _remove_row(const std::vector<Eigen::VectorXd>& vec, const size_t i) const
+            {
+                size_t rows = vec.size()-1;
+                std::vector<Eigen::VectorXd> res(rows);
+
+                for (size_t j = 0; j < i; j++) 
+                    res[j] = vec[j];
+
+                if (i < rows) {
+                    for (size_t j = i; j < rows; j++) {
+                        res[j] = vec[j+1];
+                    }
+                }
+
+                return res;
             }
         };
     }
