@@ -271,7 +271,8 @@ namespace limbo {
 
                 // Copy the values
                 size_t nn = _samples.size() * 0.7;
-                size_t sn = (_samples.size() - nn)/2; // get the middle
+                // size_t sn = (_samples.size() - nn)/2; // get the middle
+                size_t sn = 0;
 
                 std::vector<Eigen::VectorXd> samples = _samples;
                 Eigen::MatrixXd observations = _observations;
@@ -282,8 +283,9 @@ namespace limbo {
                 _samples.resize(nn);
                 _observations.conservativeResize(nn, _observations.cols());
 
-                _compute_obs_mean(); 
-                optimize_hyperparams();
+                recompute();
+                // _compute_obs_mean(); 
+                //optimize_hyperparams();
             }
 
             /// return the likelihood (do not compute it!)
