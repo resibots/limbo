@@ -294,14 +294,16 @@
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// define a special list of statistics which include our new statistics class</span>
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// define a special list of statistics which include our new statistics class</span>
     <span class="k">using</span> <span class="kt">stat_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="n">stat</span><span class="o">::</span><span class="n">Observations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">WorstObservation</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
 <p>Then, we use it to define the optimizer:</p>
-<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">/// remmeber to use the new statistics vector via statsfun&lt;&gt;!</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
 <p>The full source code is available in <cite>src/tutorials/statistics.cpp</cite> and reproduced here:</p>
@@ -416,11 +418,7 @@
 109
 110
 111
-112
-113
-114</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// please see the explanation in the documentation</span>
-
-<span class="cp">#include &lt;iostream&gt;</span>
+112</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
 <span class="cp">#include &lt;limbo/limbo.hpp&gt;</span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>

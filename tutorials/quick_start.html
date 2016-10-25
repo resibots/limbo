@@ -216,6 +216,7 @@ tar -zxvf nlopt-2.4.2.tar.gz &amp;&amp; cd nlopt-2.4.2
 ./configure -with-cxx --enable-shared --without-python --without-matlab --without-octave
 sudo make install
 sudo ldconfig
+cd ..
 </pre></div>
 </div>
 <p>For OSX:</p>
@@ -223,12 +224,15 @@ sudo ldconfig
 tar -zxvf nlopt-2.4.2.tar.gz &amp;&amp; cd nlopt-2.4.2
 ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
 sudo make install
+cd ..
 </pre></div>
 </div>
 <p>For more options and troubleshooting, see the <a class="reference internal" href="compilation.html#compilation-tutorial"><span>Compilation tutorial</span></a>.</p>
 </div>
 <div class="section" id="compile-limbo">
 <h2>Compile Limbo<a class="headerlink" href="#compile-limbo" title="Permalink to this headline">¶</a></h2>
+<p>To get <strong>limbo</strong>, simply clone the source code from <a class="reference external" href="https://github.com/resibots/limbo">https://github.com/resibots/limbo</a> with git, or download it
+as a zip. To compile it:</p>
 <div class="highlight-python"><div class="highlight"><pre>./waf configure
 ./waf build
 </pre></div>
