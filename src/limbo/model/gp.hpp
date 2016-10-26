@@ -76,6 +76,9 @@ namespace limbo {
             GP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
+            GP(int dim_in, int dim_out, int id)
+                : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out), _id(id) {}
+
             /// Compute the GP from samples, observation, noise. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations,
@@ -304,13 +307,16 @@ namespace limbo {
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
             const Eigen::MatrixXd& observations() const { return _observations; }
 
-        std::vector<Eigen::VectorXd> _samples;
-        Eigen::MatrixXd _observations;
-        Eigen::VectorXd _noises;
+            int id() const { return _id; }
+
+            std::vector<Eigen::VectorXd> _samples;
+            Eigen::MatrixXd _observations;
+            Eigen::VectorXd _noises;
 
         protected:
             int _dim_in;
             int _dim_out;
+            int _id;
 
             KernelFunction _kernel_function;
             MeanFunction _mean_function;
