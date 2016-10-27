@@ -255,6 +255,33 @@ namespace limbo {
 
             void shrink()
             {
+            #ifdef RANDOM_SHRINK
+                // NOTE: Maybe we can optimize after removing the samples. I'm optimizing here to make the better comparision possible.
+                _compute_obs_mean(); 
+                optimize_hyperparams();
+
+                // NOTE: I'm supposing that the random initialization it's already being made in another place.
+                Eigen::VectorXd indexes = Eigen::VectorXd::LinSpaced(_samples.size(), 0, _samples.size()-1);
+                std::mt19937 rgen(randutils::auto_seed_128{}.base());
+                std::shuffle(indexes.data(), indexes.data()+indexes.size(), rgen);
+                size_t nn = _samples.size() * 0.7;
+
+                std::vector<Eigen::VectorXd> samples = _samples;
+                Eigen::MatrixXd observations = _observations;
+                Eigen::VectorXd noises = _noises;
+                for (size_t i = 0; i < nn; i++) {
+                    _samples[i] = samples[indexes[i]];
+                    _observations.row(i) = observations.row(indexes[i]);
+                    _noises(i) = noises(indexes[i]);
+                }
+                _samples.resize(nn);
+                _observations.conservativeResize(nn, _observations.cols());
+                _noises.conservativeResize(nn);
+
+                recompute();
+
+            #else
+
                 _compute_obs_mean(); 
                 optimize_hyperparams();
 
@@ -279,16 +306,21 @@ namespace limbo {
 
                 std::vector<Eigen::VectorXd> samples = _samples;
                 Eigen::MatrixXd observations = _observations;
+                Eigen::VectorXd noises = _noises;
                 for (size_t i = sn; i < nn+sn; i++) {
                     _samples[i] = samples[scores[i].second];
                     _observations.row(i) = observations.row(scores[i].second);
+                    _noises(i) = noises(scores[i].second);
                 }
                 _samples.resize(nn);
                 _observations.conservativeResize(nn, _observations.cols());
+                _noises.conservativeResize(nn);
 
                 recompute();
                 // _compute_obs_mean(); 
                 //optimize_hyperparams();
+
+            #endif
             }
 
             /// return the likelihood (do not compute it!)
