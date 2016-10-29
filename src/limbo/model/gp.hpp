@@ -257,8 +257,8 @@ namespace limbo {
             {
             #ifdef RANDOM_SHRINK
                 // NOTE: Maybe we can optimize after removing the samples. I'm optimizing here to make the better comparision possible.
-                _compute_obs_mean(); 
-                optimize_hyperparams();
+                // _compute_obs_mean();
+                // optimize_hyperparams();
 
                 // NOTE: I'm supposing that the random initialization it's already being made in another place.
                 Eigen::VectorXd indexes = Eigen::VectorXd::LinSpaced(_samples.size(), 0, _samples.size()-1);
@@ -279,11 +279,13 @@ namespace limbo {
                 _noises.conservativeResize(nn);
 
                 recompute();
+                // _compute_obs_mean(); 
+                // optimize_hyperparams();
 
             #else
 
-                _compute_obs_mean(); 
-                optimize_hyperparams();
+                // _compute_obs_mean(); 
+                // optimize_hyperparams();
 
                 std::vector<std::pair<double, int>> scores(_samples.size());
                 for (size_t i = 0; i < _samples.size(); i++) {
@@ -317,8 +319,8 @@ namespace limbo {
                 _noises.conservativeResize(nn);
 
                 recompute();
-                // _compute_obs_mean(); 
-                //optimize_hyperparams();
+                // _compute_obs_mean();
+                // optimize_hyperparams();
 
             #endif
             }
