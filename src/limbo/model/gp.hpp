@@ -150,7 +150,11 @@ namespace limbo {
                 //_noise = noise;
 
                 this->_compute_obs_mean();
-                this->_compute_incremental_kernel();
+                if (_samples.size() == 1) {
+                    this->_compute_full_kernel();
+                } else {
+                    this->_compute_incremental_kernel();
+                }
             }
 
             /**
@@ -251,6 +255,12 @@ namespace limbo {
                     this->_compute_full_kernel();
                 else
                     this->_compute_alpha();
+            }
+
+            void clear() {
+                _samples.clear();
+                _observations.conservativeResize(0, _observations.cols());
+                _noises.conservativeResize(0);
             }
 
             void shrink()
