@@ -107,8 +107,13 @@ namespace limbo {
             SPGP() : _dim_in(-1), _dim_out(-1) {}
 
             /// useful because the model might be created before having samples
-            SPGP(int dim_in, int dim_out, int id = 0)
-                : _dim_in(dim_in), _dim_out(dim_out), _id(id) {}
+            SPGP(int dim_in, int dim_out, int id = 0) : _dim_in(dim_in), _dim_out(dim_out), _id(id) {
+                _mean_function = MeanFunction(_dim_out);
+                _kernel_function = KernelFunction(_dim_in);
+                _b = Eigen::VectorXd::Ones(_dim_in) * Params::model_spgp::pred_kernel_l();
+                _c = Params::model_spgp::pred_kernel_sigma_sq();
+                _sig = Params::model_spgp::sig();        
+            }
 
             /// useful to construct without optimizing
             SPGP(const std::vector<Eigen::VectorXd>& samples,
@@ -148,6 +153,21 @@ namespace limbo {
                 _optimize_init = true;
                 _init(samples, observations);
                 _compute();
+            }
+
+            void init(int dim_in, int dim_out) {
+                if (_dim_in == -1) {
+                    _dim_in = dim_in;
+                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+
+                    _dim_out = dim_out;
+                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+
+                    // default values for the kernel
+                    _b = Eigen::VectorXd::Ones(_dim_in) * Params::model_spgp::pred_kernel_l();
+                    _c = Params::model_spgp::pred_kernel_sigma_sq();
+                    _sig = Params::model_spgp::sig();
+                }
             }
 
             /// add sample and recompute the SPGP
@@ -224,10 +244,6 @@ namespace limbo {
              return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
              \\endrst
 	  		*/
-            Eigen::VectorXd mu(const Eigen::VectorXd& v) const
-            {
-                return mu(v);
-            }
             Eigen::MatrixXd mu(const Eigen::MatrixXd& v) const
             {
                 return _predict(v, true, false).first;
@@ -242,13 +258,9 @@ namespace limbo {
              return :math:`\sigma^2` (unormalized). If there is no sample, return the max :math:`\sigma^2`.
              \\endrst
 	  		*/
-            double sigma(const Eigen::VectorXd& v) const
-            {
-                return sigma(v);
-            }
             Eigen::VectorXd sigma(const Eigen::MatrixXd& v) const
             {
-                return (_predict(v, false, true).second)(0,0);
+                return (_predict(v, false, true).second);
             }
 
             /// return the number of dimensions of the input
@@ -296,7 +308,11 @@ namespace limbo {
             int nb_pseudo_samples() const { return _pseudo_samples.rows(); }
 
             ///  recomputes the SPGP
-            void shrink() { 
+            void shrink() {
+                recompute();
+            }
+
+            void remove_samples() { 
                 recompute();
 
                 Eigen::MatrixXd xb = _pseudo_samples;
@@ -319,8 +335,6 @@ namespace limbo {
                 Eigen::MatrixXd samples = _samples;
                 Eigen::MatrixXd observations = _observations;
                 Eigen::MatrixXd observations_zm = _observations_zm;
-                std::cout << _samples.rows() << std::endl;
-                std::cout << nn << std::endl;
                 for (size_t i = sn; i < nn+sn; i++) {
                     _samples.row(i) = samples.row(scores[i].second);
                     _observations_zm.row(i) = observations_zm.row(scores[i].second);
@@ -458,7 +472,7 @@ namespace limbo {
             {
                 // NOTE: We could add the option to use a function to change the m dinamycally based on the samples.
                 if (Params::model_spgp::samples_fixed_number() == -1)
-                    _m = _samples.rows()/Params::model_spgp::samples_percent();
+                    _m = Params::model_spgp::samples_percent()*_samples.rows()/100;
                 else
                     _m = Params::model_spgp::samples_fixed_number();
                 if (_m < Params::model_spgp::min_m()) _m = Params::model_spgp::min_m();
@@ -500,6 +514,7 @@ namespace limbo {
                 if (_optimize_init) {
 
                     // Initialize parameter vector
+                    _update_m();
                     _w_init = Eigen::VectorXd((_m+1)*_dim_in+2);
 
                     // Initialize pseudo-inputs to a random subset of training inputs
@@ -671,8 +686,13 @@ namespace limbo {
                 }
             }
 
-            std::pair<Eigen::MatrixXd, Eigen::MatrixXd> _predict(const Eigen::MatrixXd& xt, bool calc_mu = true, bool calc_s2 = true) const
-            {
+            std::pair<Eigen::MatrixXd, Eigen::MatrixXd> _predict(Eigen::MatrixXd xt, bool calc_mu = true, bool calc_s2 = true) const
+            {   
+                // TODO: Hack, must be solved properly
+                if (xt.rows() == _dim_in && xt.cols() != _dim_in) {
+                    xt.transposeInPlace();
+                }
+
                 Eigen::MatrixXd mu(xt.rows(), _dim_out);
                 Eigen::MatrixXd s2(xt.rows(), 1);
 
