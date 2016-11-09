@@ -169,7 +169,7 @@ namespace limbo {
                         _kernel_function(v, v));
 
                 Eigen::VectorXd k = _compute_k(v);
-                return std::make_tuple(_mu(v, k), _sigma(v, k));
+                return std::make_tuple(_mu(v, k), _sigma(v, k)*_mean_function.sigma(v));
             }
 
             /**
@@ -193,7 +193,7 @@ namespace limbo {
             {
                 if (_samples.size() == 0)
                     return _kernel_function(v, v);
-                return _sigma(v, _compute_k(v));
+                return _sigma(v, _compute_k(v)*_mean_function.sigma(v));
             }
 
             /// return the number of dimensions of the input
