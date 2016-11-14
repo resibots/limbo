@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -43,7 +44,10 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 
-//| TODO: Add credits to the original implementation
+//| Reference and credits for this code:
+//| Sparse Gaussian Processes using Pseudo-inputs (NIPS, 2005)
+//| Edward Snelson and Zoubin Ghahramani
+
 #ifndef LIMBO_MODEL_SPGP_HPP
 #define LIMBO_MODEL_SPGP_HPP
 
@@ -668,18 +672,6 @@ namespace limbo {
                 return result;
             }
             std::vector<Eigen::VectorXd> _to_vector(Eigen::MatrixXd& m) const { return _to_vector(m); }
-
-            Eigen::MatrixXd _remove_row(const Eigen::MatrixXd& mat, const size_t i) const
-            {
-                size_t rows = mat.rows()-1;
-                size_t cols = mat.cols();
-                Eigen::MatrixXd res(rows, cols);
-
-                res.block(0, 0, i, cols) = mat.block(0, 0, i, cols);
-                if (i < rows) res.block(i, 0, rows-i, cols) = mat.block(i+1, 0, rows-i, cols);
-
-                return res;
-            }
 
             /*
             void _compute_kernel_m()
