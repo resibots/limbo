@@ -103,8 +103,13 @@ namespace limbo {
             SPGP() : _dim_in(-1), _dim_out(-1) {}
 
             /// useful because the model might be created before having samples
-            SPGP(int dim_in, int dim_out)
-                : _dim_in(dim_in), _dim_out(dim_out) {}
+            SPGP(int dim_in, int dim_out) : _dim_in(dim_in), _dim_out(dim_out) {
+                _mean_function = MeanFunction(_dim_out);
+                _kernel_function = KernelFunction(_dim_in);
+                _b = Eigen::VectorXd::Ones(_dim_in) * Params::model_spgp::pred_kernel_l();
+                _c = Params::model_spgp::pred_kernel_sigma_sq();
+                _sig = Params::model_spgp::sig();        
+            }
 
             /// useful to construct without optimizing
             SPGP(const std::vector<Eigen::VectorXd>& samples,
@@ -126,6 +131,12 @@ namespace limbo {
                 const Eigen::VectorXd& noises)
             {
                 compute(_to_matrix(samples), _to_matrix(observations), noises);
+            }
+            void compute(const std::vector<Eigen::VectorXd>& samples,
+                const Eigen::MatrixXd& observations,
+                const Eigen::VectorXd& noises)
+            {
+                compute(_to_matrix(samples), observations, noises);
             }
             void compute(const Eigen::MatrixXd& samples,
                 const Eigen::MatrixXd& observations,
@@ -200,13 +211,13 @@ namespace limbo {
              return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
              \\endrst
 	  		*/
-            Eigen::VectorXd mu(const Eigen::VectorXd& v) const
-            {
-                return mu(v);
-            }
             Eigen::MatrixXd mu(const Eigen::MatrixXd& v) const
             {
                 return _predict(v, true, false).first;
+            }
+            std::vector<Eigen::VectorXd> mu_mult(const Eigen::MatrixXd& v) const
+            {
+                return _to_vector(_predict(v, true, false).first);
             }
 
             /**
@@ -216,11 +227,12 @@ namespace limbo {
 	  		*/
             double sigma(const Eigen::VectorXd& v) const
             {
-                return sigma(v);
-            }
-            Eigen::VectorXd sigma(const Eigen::MatrixXd& v) const
-            {
                 return (_predict(v, false, true).second)(0,0);
+            }
+			// TODO: Deberia machear la interfaz de la GP
+            Eigen::VectorXd sigma_mult(const Eigen::MatrixXd& v) const
+            {
+                return (_predict(v, false, true).second);
             }
 
             /// return the number of dimensions of the input
@@ -273,22 +285,11 @@ namespace limbo {
                 _compute();
             }
 
-            /// return the likelihood (do not compute it!)
-            // double get_lik() const { return _lik; }
-
-            /// set the likelihood (you need to compute it from outside!)
-            // NOTE: This has any sense to keep? It's not gonna be used!
-            // void set_lik(const double& lik) { _lik = lik; }
-
-            /// TODO: set pseudo samples?
-
             /// return the list of samples that have been tested so far
-            // const Eigen::MatrixXd& samples() const { return _samples; } // cannot be overloaded ?
-            const std::vector<Eigen::VectorXd>& samples() const { return _to_vector(_samples); }
+            std::vector<Eigen::VectorXd> samples() const { return _to_vector(_samples); }
 
             /// return the list of pseudo-samples beign used
-            const Eigen::MatrixXd& pseudo_samples() const { return _pseudo_samples; }
-            // const std::vector<Eigen::VectorXd> pseudo_samples() const { return _to_vector(_pseudo_samples); }
+            std::vector<Eigen::VectorXd> pseudo_samples() const { return _to_vector(_pseudo_samples); }
 
             // test the likelihood function given a dataset
             void test_likelihood(const Eigen::MatrixXd& data, 
@@ -330,7 +331,7 @@ namespace limbo {
             Eigen::VectorXd _b;
             double _c;
             double _sig;
-            Eigen::VectorXd _noises; // equals to del in all of them
+            Eigen::VectorXd _noises;
 
             /// calculated in _compute
             Eigen::MatrixXd _Lm;
@@ -339,6 +340,7 @@ namespace limbo {
 
             /// auxiliary variables
             bool _optimize_init = true;
+            bool _optimized = false;
             Eigen::VectorXd _w_init;
             HyperParamsOptimizer _hp_optimize;
 
@@ -377,7 +379,7 @@ namespace limbo {
             void _update_m()
             {
                 // NOTE: We could add the option to use a function to change the m dinamycally based on the samples.
-                _m = _samples.rows()/Params::model_spgp::samples_percent();
+                _m = Params::model_spgp::samples_percent()*_samples.rows()/100;
                 if (_m < Params::model_spgp::min_m()) _m = Params::model_spgp::min_m();
             }
 
@@ -407,12 +409,13 @@ namespace limbo {
                 if (_optimize_init) {
 
                     // Initialize parameter vector
+                    _update_m();
                     _w_init = Eigen::VectorXd((_m+1)*_dim_in+2);
 
                     // Initialize pseudo-inputs to a random subset of training inputs
                     Eigen::VectorXd positions = Eigen::VectorXd::LinSpaced(_samples.rows(), 0, _samples.rows()-1);
                     std::random_shuffle(positions.data(), positions.data()+positions.size());
-                    for (size_t i = 0; i < _m; ++i) _w_init.segment(i*_dim_in, _dim_in) = _samples.row(i);
+                    for (size_t i = 0; i < _m; ++i) _w_init.segment(i*_dim_in, _dim_in) = _samples.row(positions[i]);
 
                     // Initialize hyperparameters sensibly in log space
                     _w_init.segment(_m*_dim_in, _dim_in) = -2*((_samples.colwise().maxCoeff() - _samples.colwise().minCoeff()).array()/2).log();     // -2*log((max(x)-min(x))'/2)
@@ -433,23 +436,26 @@ namespace limbo {
                 _c = hp.c;
                 _sig = hp.sig;
                 _noises = hp.sig * Eigen::VectorXd::Ones(_m);
+
+                _optimized = true;
             }
 
-            opt::eval_t _likelihood(const Eigen::VectorXd& input, bool eval_grad = false) const
+            opt::eval_t _likelihood(const Eigen::VectorXd& input, bool eval_grad = false) const // opt wrapper
             {
                 // Unzip parameters
                 HyperParams hp(input, _m, _dim_in);
-                Eigen::MatrixXd& b =  hp.b;
-                double& c = hp.c;
-                double& sig = hp.sig;
-                Eigen::MatrixXd& xb = hp.xb;
+                return _likelihood_wp(hp.xb, hp.b, hp.c, hp.sig, _samples, _observations_zm, eval_grad, true);
+            }
 
+            opt::eval_t _likelihood_wp(Eigen::MatrixXd& xb, const Eigen::MatrixXd& b, const double& c, const double& sig, 
+                const Eigen::MatrixXd& samples, const Eigen::MatrixXd& observations_zm, bool eval_grad, bool inverse) const
+            {
                 // Prepare xb and x
-                int n = _samples.rows();
+                int n = samples.rows();
                 Eigen::MatrixXd idm = Eigen::MatrixXd::Identity(_m, _m);
                 Eigen::MatrixXd b_sqrt = b.array().sqrt();
                 xb = xb.cwiseProduct(b_sqrt.replicate(_m,1));
-                Eigen::MatrixXd x = _samples.cwiseProduct(b_sqrt.replicate(n,1));
+                Eigen::MatrixXd x = samples.cwiseProduct(b_sqrt.replicate(n,1));
 
                 // Construct Q
                 Eigen::MatrixXd Q = xb*xb.transpose();
@@ -471,10 +477,10 @@ namespace limbo {
                 Eigen::MatrixXd ep = 1 + (c - V.array().pow(2).colwise().sum().transpose())/sig; // ep = 1 + (c-sum(V.^2)')/sig;
                 K = K.array() / ep.array().sqrt().transpose().replicate(_m,1);
                 V = V.array() / ep.array().sqrt().transpose().replicate(_m,1);
-                Eigen::MatrixXd y = _observations_zm.array() / ep.array().sqrt();
+                Eigen::MatrixXd y = observations_zm.array() / ep.array().sqrt();
 
                 Eigen::MatrixXd Lm = (sig*idm + V*V.transpose()).llt().matrixL();
-                Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> Lm_t = Lm.template triangularView<Eigen::Lower>(); //NOTE: It's okey to solve the system like this?
+                Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> Lm_t = Lm.template triangularView<Eigen::Lower>();
                 Eigen::MatrixXd invLmV = Lm_t.solve(V);
                 Eigen::MatrixXd bet = invLmV*y;
 
@@ -482,8 +488,12 @@ namespace limbo {
                 Eigen::MatrixXd fw = Lm.diagonal().array().log().colwise().sum() + (n-_m)/2*std::log(sig) +
                         (y.transpose()*y - bet.transpose()*bet).array()/(2*sig) + ep.array().log().sum()/2 + 0.5*n*std::log(2*M_PI);
 
-                if(!eval_grad) 
-                    return opt::no_grad(-fw(0));
+                if(!eval_grad) {
+                    if (inverse)
+                        return opt::no_grad(-fw(0));
+                    else 
+                        return opt::no_grad(fw(0));
+                }
 
                 // ** Derivates calculation - precomputations
                 Eigen::MatrixXd Lt = L*Lm;
@@ -563,8 +573,12 @@ namespace limbo {
                 dfw.segment(dfxb.size()+dfb.size(), dfc.size()) = dfc;
                 dfw.segment(dfxb.size()+dfb.size()+dfc.size(), dfsig.size()) = dfsig;
                 
-                Eigen::VectorXd rdfw = dfw.array()*-1;
-                return {-fw(0), rdfw}; // limbo maximizes instead of minimizing
+                if (inverse) {
+                    Eigen::VectorXd rdfw = dfw.array()*-1;
+                    return {-fw(0), rdfw}; // limbo maximizes instead of minimizing
+                } else {
+                    return {fw(0), dfw};
+                }
             }
 
             std::pair<Eigen::MatrixXd, Eigen::MatrixXd> _predict(const Eigen::MatrixXd& xt, bool calc_mu = true, bool calc_s2 = true) const
@@ -595,8 +609,7 @@ namespace limbo {
                 if (calc_s2)
                     s2 = _k_diag(xt).array() - 
                         lst.array().pow(2).colwise().sum().transpose() + 
-                        _sig*lmst.array().pow(2).colwise().sum().transpose() + _sig;
-
+                        _sig*lmst.array().pow(2).colwise().sum().transpose() + (_optimized ? _sig : 0);
                 return {mu, s2.array()};
             }
 
@@ -648,9 +661,9 @@ namespace limbo {
             // NOTE: Maybe this could be done better?
             std::vector<Eigen::VectorXd> _to_vector(const Eigen::MatrixXd& m) const
             {
-                std::vector<Eigen::VectorXd> result(m.cols());
+                std::vector<Eigen::VectorXd> result(m.rows());
                 for (size_t i = 0; i < result.size(); ++i) {
-                    m[i] = m.row(i);
+                    result[i] = m.row(i);
                 }
                 return result;
             }
