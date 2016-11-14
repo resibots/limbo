@@ -144,7 +144,7 @@ namespace limbo {
             }
             void compute(const Eigen::MatrixXd& samples,
                 const Eigen::MatrixXd& observations,
-                const Eigen::MatrixXd& noises) // TODO: The noises are not used
+                const Eigen::MatrixXd& noises) // NOTE: The noises are not used
             {
                 assert(samples.rows() != 0);
                 assert(observations.rows() != 0);
@@ -332,9 +332,9 @@ namespace limbo {
 
             /// set after the hyperparameters calculation
             Eigen::MatrixXd _pseudo_samples;
-            Eigen::VectorXd _b;
-            double _c;
-            double _sig;
+            Eigen::VectorXd _b; // lengthscales
+            double _c;          // noise
+            double _sig;        // signal variance
             Eigen::VectorXd _noises;
 
             /// calculated in _compute
