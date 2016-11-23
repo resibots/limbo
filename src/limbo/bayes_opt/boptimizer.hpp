@@ -97,7 +97,7 @@ namespace limbo {
         +---------------------+------------+----------+---------------+
         |type                 |typedef     | argument | default       |
         +=====================+============+==========+===============+
-        |acqui. optimizer     |acqui_opt_t | acquiopt | see below     |
+        |acqui. optimizer     |acquiopt_t  | acquiopt | see below     |
         +---------------------+------------+----------+---------------+
         \endrst
 
