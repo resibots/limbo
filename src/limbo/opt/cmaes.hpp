@@ -115,8 +115,6 @@ namespace limbo {
 
                 CMAParameters<> cmaparams(x0, sigma);
                 _set_common_params(cmaparams, dim);
-                // used by restart I think
-                cmaparams.set_x0(-1.0, 1.0);
 
                 // the optimization itself
                 CMASolutions cmasols = cmaes<>(f_cmaes, cmaparams);
@@ -143,8 +141,6 @@ namespace limbo {
                 // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
                 CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, -1, 0, gp);
                 _set_common_params(cmaparams, dim);
-                // used by restart I think
-                cmaparams.set_x0(0, 1.0);
 
                 // the optimization itself
                 CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(f_cmaes, cmaparams);

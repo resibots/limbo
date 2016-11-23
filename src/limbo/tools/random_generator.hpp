@@ -122,7 +122,7 @@ namespace limbo {
         /// - we use a C++11 random number generator
         Eigen::VectorXd random_vector_unbounded(int size)
         {
-            static rgen_gauss_t rgen(0.0, 100.0);
+            static rgen_gauss_t rgen(0.0, 10.0);
             Eigen::VectorXd res(size);
             for (int i = 0; i < size; ++i)
                 res[i] = rgen.rand();
