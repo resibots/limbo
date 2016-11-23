@@ -15,7 +15,7 @@ Citing Limbo
 If you use Limbo in a scientific paper, please cite:
 
 
-    Cully, A., Chatzilygeroudis, K., Allocati, F., and Mouret J.-B., (2016). [Limbo: A Fast and Flexible Library for Bayesian Optimization](https://arxiv.org/abs/1611.07343). *arXiv preprint arXiv:1611.07343*.
+Cully, A., Chatzilygeroudis, K., Allocati, F., and Mouret J.-B., (2016). [Limbo: A Fast and Flexible Library for Bayesian Optimization](https://arxiv.org/abs/1611.07343). *arXiv preprint arXiv:1611.07343*.
 
 In BibTex:
   
