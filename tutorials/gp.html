@@ -216,14 +216,30 @@
 </div>
 <div class="section" id="basic-usage">
 <h2>Basic usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
-<p>We first create a basic GP with an Exponential kernel (<code class="docutils literal"><span class="pre">kernel::Exp&lt;Params&gt;</span></code>) and a mean function equals to the mean of the obsevations (<code class="docutils literal"><span class="pre">mean::Data&lt;Params&gt;</span></code>). The <code class="docutils literal"><span class="pre">Exp</span></code> kernel needs a few parameters to be defined in a <code class="docutils literal"><span class="pre">Params</span></code> structure:</p>
-<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="k">struct</span> <span class="n">kernel_exp</span> <span class="p">{</span>
+<p>We first create a basic GP with an Exponential kernel (<code class="docutils literal"><span class="pre">kernel::Exp&lt;Params&gt;</span></code>) and a mean function equals to the mean of the observations (<code class="docutils literal"><span class="pre">mean::Data&lt;Params&gt;</span></code>). The <code class="docutils literal"><span class="pre">Exp</span></code> kernel needs a few parameters to be defined in a <code class="docutils literal"><span class="pre">Params</span></code> structure:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">kernel_exp</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">sigma_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">);</span>
     <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="p">};</span>
 </pre></div>
 </td></tr></table></div>
 <p>The type of the GP is defined by the following lines:</p>
@@ -424,6 +440,288 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;0.9&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;gp.png&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Here is the complete <code class="docutils literal"><span class="pre">main.cpp</span></code> file of this tutorial:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">//| Copyright Inria May 2015</span>
+<span class="c1">//| This project has received funding from the European Research Council (ERC) under</span>
+<span class="c1">//| the European Union&#39;s Horizon 2020 research and innovation programme (grant</span>
+<span class="c1">//| agreement No 637972) - see http://www.resibots.eu</span>
+<span class="c1">//|</span>
+<span class="c1">//| Contributor(s):</span>
+<span class="c1">//|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)</span>
+<span class="c1">//|   - Antoine Cully (antoinecully@gmail.com)</span>
+<span class="c1">//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)</span>
+<span class="c1">//|   - Federico Allocati (fede.allocati@gmail.com)</span>
+<span class="c1">//|   - Vaios Papaspyros (b.papaspyros@gmail.com)</span>
+<span class="c1">//|   - Roberto Rama (bertoski@gmail.com)</span>
+<span class="c1">//|</span>
+<span class="c1">//| This software is a computer library whose purpose is to optimize continuous,</span>
+<span class="c1">//| black-box functions. It mainly implements Gaussian processes and Bayesian</span>
+<span class="c1">//| optimization.</span>
+<span class="c1">//| Main repository: http://github.com/resibots/limbo</span>
+<span class="c1">//| Documentation: http://www.resibots.eu/limbo</span>
+<span class="c1">//|</span>
+<span class="c1">//| This software is governed by the CeCILL-C license under French law and</span>
+<span class="c1">//| abiding by the rules of distribution of free software.  You can  use,</span>
+<span class="c1">//| modify and/ or redistribute the software under the terms of the CeCILL-C</span>
+<span class="c1">//| license as circulated by CEA, CNRS and INRIA at the following URL</span>
+<span class="c1">//| &quot;http://www.cecill.info&quot;.</span>
+<span class="c1">//|</span>
+<span class="c1">//| As a counterpart to the access to the source code and  rights to copy,</span>
+<span class="c1">//| modify and redistribute granted by the license, users are provided only</span>
+<span class="c1">//| with a limited warranty  and the software&#39;s author,  the holder of the</span>
+<span class="c1">//| economic rights,  and the successive licensors  have only  limited</span>
+<span class="c1">//| liability.</span>
+<span class="c1">//|</span>
+<span class="c1">//| In this respect, the user&#39;s attention is drawn to the risks associated</span>
+<span class="c1">//| with loading,  using,  modifying and/or developing or reproducing the</span>
+<span class="c1">//| software by the user in light of its specific status of free software,</span>
+<span class="c1">//| that may mean  that it is complicated to manipulate,  and  that  also</span>
+<span class="c1">//| therefore means  that it is reserved for developers  and  experienced</span>
+<span class="c1">//| professionals having in-depth computer knowledge. Users are therefore</span>
+<span class="c1">//| encouraged to load and test the software&#39;s suitability as regards their</span>
+<span class="c1">//| requirements in conditions enabling the security of their systems and/or</span>
+<span class="c1">//| data to be ensured and,  more generally, to use and operate it in the</span>
+<span class="c1">//| same conditions as regards security.</span>
+<span class="c1">//|</span>
+<span class="c1">//| The fact that you are presently reading this means that you have had</span>
+<span class="c1">//| knowledge of the CeCILL-C license and that you accept its terms.</span>
+<span class="c1">//|</span>
+<span class="cp">#include &lt;limbo/tools/macros.hpp&gt;</span>
+<span class="cp">#include &lt;limbo/kernel/exp.hpp&gt;</span>
+<span class="cp">#include &lt;limbo/kernel/squared_exp_ard.hpp&gt;</span>
+<span class="cp">#include &lt;limbo/mean/data.hpp&gt;</span>
+<span class="cp">#include &lt;limbo/model/gp.hpp&gt;</span>
+<span class="cp">#include &lt;limbo/model/gp/kernel_lf_opt.hpp&gt;</span>
+<span class="cp">#include &lt;limbo/tools.hpp&gt;</span>
+<span class="cp">#include &lt;fstream&gt;</span>
+
+<span class="c1">// this tutorials shows how to use a Gaussian process for regression</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">kernel_exp</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">sigma_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="c1">// our data (1-D inputs, 1-D outputs)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;</span> <span class="n">samples</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+        <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mf">0.25</span><span class="p">),</span>
+        <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+        <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)};</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;</span> <span class="n">observations</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>
+        <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mf">2.0</span><span class="p">),</span>
+        <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span>
+        <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)};</span>
+
+    <span class="c1">// the type of the GP</span>
+    <span class="k">using</span> <span class="n">Kernel_t</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">::</span><span class="n">Exp</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">Mean_t</span> <span class="o">=</span> <span class="n">mean</span><span class="o">::</span><span class="n">Data</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">GP_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Kernel_t</span><span class="p">,</span> <span class="n">Mean_t</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="c1">// 1-D inputs, 1-D outputs</span>
+    <span class="n">GP_t</span> <span class="n">gp</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="c1">// noise is the same for all the samples (0.01)</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">noises</span> <span class="o">=</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">::</span><span class="n">Ones</span><span class="p">(</span><span class="n">samples</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">;</span>
+
+    <span class="c1">// compute the GP</span>
+    <span class="n">gp</span><span class="p">.</span><span class="n">compute</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">noises</span><span class="p">);</span>
+
+    <span class="c1">// write the predicted data in a file (e.g. to be plotted)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">ofs</span><span class="p">(</span><span class="s">&quot;gp.dat&quot;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">v</span> <span class="o">=</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">);</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">mu</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">sigma</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">=</span> <span class="n">gp</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+        <span class="c1">// an alternative (slower) is to query mu and sigma separately:</span>
+        <span class="c1">//  double mu = gp.mu(v)[0]; // mu() returns a 1-D vector</span>
+        <span class="c1">//  double s2 = gp.sigma(v);</span>
+        <span class="n">ofs</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">mu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// an alternative is to optimize the hyper-paramerers</span>
+    <span class="c1">// in that case, we need a kernel with hyper-parameters that are designed to be optimized</span>
+    <span class="k">using</span> <span class="n">Kernel2_t</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">::</span><span class="n">SquaredExpARD</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">Mean_t</span> <span class="o">=</span> <span class="n">mean</span><span class="o">::</span><span class="n">Data</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">GP2_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Kernel2_t</span><span class="p">,</span> <span class="n">Mean_t</span><span class="p">,</span> <span class="n">model</span><span class="o">::</span><span class="n">gp</span><span class="o">::</span><span class="n">KernelLFOpt</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+    <span class="n">GP2_t</span> <span class="n">gp_ard</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// do not forget to call the optimization!</span>
+    <span class="n">gp_ard</span><span class="p">.</span><span class="n">compute</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="n">noises</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">gp_ard</span><span class="p">.</span><span class="n">optimize_hyperparams</span><span class="p">();</span>
+
+    <span class="c1">// write the predicted data in a file (e.g. to be plotted)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">ofs_ard</span><span class="p">(</span><span class="s">&quot;gp_ard.dat&quot;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">v</span> <span class="o">=</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">);</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">mu</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">sigma</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">=</span> <span class="n">gp_ard</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+        <span class="n">ofs_ard</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">mu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// write the data to a file (useful for plotting)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">ofs_data</span><span class="p">(</span><span class="s">&quot;data.dat&quot;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">samples</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">ofs_data</span> <span class="o">&lt;&lt;</span> <span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 </div>

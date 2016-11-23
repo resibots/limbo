@@ -18,12 +18,12 @@ We assume that our samples are in a vector called ``samples`` and that our obser
 Basic usage
 ------------
 
-We first create a basic GP with an Exponential kernel (``kernel::Exp<Params>``) and a mean function equals to the mean of the obsevations (``mean::Data<Params>``). The ``Exp`` kernel needs a few parameters to be defined in a ``Params`` structure:
+We first create a basic GP with an Exponential kernel (``kernel::Exp<Params>``) and a mean function equals to the mean of the observations (``mean::Data<Params>``). The ``Exp`` kernel needs a few parameters to be defined in a ``Params`` structure:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 60-63
+   :lines: 59-70
 
 The type of the GP is defined by the following lines:
 
@@ -99,4 +99,10 @@ This plot is generated using matplotlib:
 
 .. literalinclude:: ../../src/tutorials/plot_gp.py
    :language: python
+   :linenos:
+
+Here is the complete ``main.cpp`` file of this tutorial:
+
+.. literalinclude:: ../../src/tutorials/gp.cpp
+   :language: c++
    :linenos:
