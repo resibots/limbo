@@ -169,7 +169,7 @@ namespace limbo {
                         _kernel_function(v, v));
 
                 Eigen::VectorXd k = _compute_k(v);
-                return std::make_tuple(_mu(v, k), _sigma(v, k)*_mean_function.sigma(v));
+                return std::make_tuple(_mu(v, k), _sigma(v, k));
             }
 
             /**
@@ -193,7 +193,7 @@ namespace limbo {
             {
                 if (_samples.size() == 0)
                     return _kernel_function(v, v);
-                return _sigma(v, _compute_k(v)*_mean_function.sigma(v));
+                return _sigma(v, _compute_k(v));
             }
 
             /// return the number of dimensions of the input
@@ -289,12 +289,12 @@ namespace limbo {
                 _noises.conservativeResize(nn);
 
                 recompute();
-                // _compute_obs_mean(); 
+                // _compute_obs_mean();
                 // optimize_hyperparams();
 
             #else
 
-                // _compute_obs_mean(); 
+                // _compute_obs_mean();
                 // optimize_hyperparams();
 
                 std::vector<std::pair<double, int>> scores(_samples.size());
@@ -482,7 +482,7 @@ namespace limbo {
                 size_t rows = vec.size()-1;
                 std::vector<Eigen::VectorXd> res(rows);
 
-                for (size_t j = 0; j < i; j++) 
+                for (size_t j = 0; j < i; j++)
                     res[j] = vec[j];
 
                 if (i < rows) {
