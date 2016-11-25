@@ -274,7 +274,7 @@ namespace limbo {
                 Eigen::VectorXd indexes = Eigen::VectorXd::LinSpaced(_samples.size(), 0, _samples.size()-1);
                 std::mt19937 rgen(randutils::auto_seed_128{}.base());
                 std::shuffle(indexes.data(), indexes.data()+indexes.size(), rgen);
-                size_t nn = _samples.size() * 0.7;
+                size_t nn = _samples.size() * 0.9;
 
                 std::vector<Eigen::VectorXd> samples = _samples;
                 Eigen::MatrixXd observations = _observations;
@@ -294,8 +294,10 @@ namespace limbo {
 
             #else
 
-                // _compute_obs_mean();
-                // optimize_hyperparams();
+                Eigen::VectorXd hp = _kernel_function.h_params();
+                std::cout << hp << std::endl;
+                _compute_obs_mean();
+                optimize_hyperparams();
 
                 std::vector<std::pair<double, int>> scores(_samples.size());
                 for (size_t i = 0; i < _samples.size(); i++) {
@@ -312,7 +314,7 @@ namespace limbo {
                 std::sort(scores.begin(), scores.end(), comp);
 
                 // Copy the values
-                size_t nn = _samples.size() * 0.7;
+                size_t nn = _samples.size() * 0.9;
                 // size_t sn = (_samples.size() - nn)/2; // get the middle
                 size_t sn = 0;
 
@@ -328,7 +330,9 @@ namespace limbo {
                 _observations.conservativeResize(nn, _observations.cols());
                 _noises.conservativeResize(nn);
 
+                _kernel_function.set_h_params(hp);
                 recompute();
+                std::cout << hp << std::endl;
                 // _compute_obs_mean();
                 // optimize_hyperparams();
 
