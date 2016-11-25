@@ -97,7 +97,7 @@ namespace limbo {
                 _h_params = p;
                 for (size_t i = 0; i < _input_dim; ++i)
                     _ell(i) = std::exp(p(i));
-                for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
+                for (size_t j = 0; j < (size_t) Params::kernel_squared_exp_ard::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
                         _A(i, j) = std::exp(p((j + 1) * _input_dim + i));
             }
