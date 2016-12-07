@@ -79,6 +79,9 @@ namespace limbo {
             /// @ingroup opt_defaults
             /// enables or disables verbose mode for cmaes
             BO_PARAM(bool, verbose, false);
+            /// @ingroup opt_defaults
+            /// function value target
+            BO_PARAM(double, fun_target, -1);
         };
     }
     namespace opt {
@@ -188,6 +191,12 @@ namespace limbo {
                   // the FTARGET criteria also allows us to enable ftolerance
                   cmaparams.set_stopping_criteria(FTARGET, true);
                   cmaparams.set_ftolerance(1);
+                }
+
+                // we allow to set the ftarget parameter
+                if (Params::opt_cmaes::fun_target() != -1) {
+                  cmaparams.set_stopping_criteria(FTARGET, true);
+                  cmaparams.set_ftarget(-Params::opt_cmaes::fun_target());
                 }
 
                 // enable stopping criteria by several equalfunvals and maxfevals
