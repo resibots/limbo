@@ -69,6 +69,16 @@ namespace limbo {
             /// @ingroup opt_defaults
             /// number of calls to the function to be optimized
             BO_PARAM(double, max_fun_evals, -1);
+            /// @ingroup opt_defaults
+            /// threshold based on the difference in value of a fixed number
+            /// of trials
+            BO_PARAM(double, fun_tolerance, -1);
+            /// @ingroup opt_defaults
+            /// sets the version of cmaes to use
+            BO_PARAM(int, cmaes_variant, aIPOP_CMAES);
+            /// @ingroup opt_defaults
+            /// enables or disables verbose mode for cmaes
+            BO_PARAM(bool, verbose, false);
         };
     }
     namespace opt {
@@ -159,8 +169,9 @@ namespace limbo {
                 // aCMAES should be the best choice
                 // [see: https://github.com/beniz/libcmaes/wiki/Practical-hints ]
                 // but we want the restart -> aIPOP_CMAES
-                cmaparams.set_algo(aIPOP_CMAES);
+                cmaparams.set_algo(Params::opt_cmaes::cmaes_variant());
                 cmaparams.set_restarts(Params::opt_cmaes::restarts());
+
                 // if no max fun evals provided, we compute a recommended value
                 size_t max_evals = Params::opt_cmaes::max_fun_evals() < 0
                     ? (900.0 * (dim + 3.0) * (dim + 3.0))
@@ -168,9 +179,23 @@ namespace limbo {
                 cmaparams.set_max_fevals(max_evals);
                 // max iteration is here only for security
                 cmaparams.set_max_iter(100000);
-                // we do not know if what is the actual maximum / minimum of the function
-                // therefore we deactivate this stopping criterion
-                cmaparams.set_stopping_criteria(FTARGET, false);
+
+                if (Params::opt_cmaes::fun_tolerance() == -1) {
+                  // we do not know if what is the actual maximum / minimum of the function
+                  // therefore we deactivate this stopping criterion
+                  cmaparams.set_stopping_criteria(FTARGET, false);
+                } else {
+                  // the FTARGET criteria also allows us to enable ftolerance
+                  cmaparams.set_stopping_criteria(FTARGET, true);
+                  cmaparams.set_ftolerance(1);
+                }
+
+                // enable stopping criteria by several equalfunvals and maxfevals
+                cmaparams.set_stopping_criteria(EQUALFUNVALS, true);
+                cmaparams.set_stopping_criteria(MAXFEVALS, true);
+
+                // enable verbose mode of cmaes
+                cmaparams.set_quiet(!Params::opt_cmaes::verbose());
             }
         };
     }
