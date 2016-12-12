@@ -77,11 +77,17 @@ namespace limbo {
             /// sets the version of cmaes to use
             BO_PARAM(int, cmaes_variant, aIPOP_CMAES);
             /// @ingroup opt_defaults
-            /// enables or disables verbose mode for cmaes
-            BO_PARAM(bool, verbose, false);
-            /// @ingroup opt_defaults
             /// function value target
             BO_PARAM(double, fun_target, -1);
+            /// @ingroup opt_defaults
+            /// computes initial objective function value
+            BO_PARAM(bool, fun_compute_initial, false);
+            /// @ingroup opt_defaults
+            /// enables or disables uncertainty handling
+            BO_PARAM(bool, handle_uncertainty, false);
+            /// @ingroup opt_defaults
+            /// enables or disables verbose mode for cmaes
+            BO_PARAM(bool, verbose, false);
         };
     }
     namespace opt {
@@ -203,7 +209,9 @@ namespace limbo {
                 cmaparams.set_stopping_criteria(EQUALFUNVALS, true);
                 cmaparams.set_stopping_criteria(MAXFEVALS, true);
 
-                // enable verbose mode of cmaes
+                // enable or disable different parameters
+                cmaparams.set_initial_fvalue(Params::opt_cmaes::fun_compute_initial());
+                cmaparams.set_uh(Params::opt_cmaes::handle_uncertainty());
                 cmaparams.set_quiet(!Params::opt_cmaes::verbose());
             }
         };
