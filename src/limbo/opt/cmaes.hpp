@@ -196,7 +196,7 @@ namespace limbo {
                 } else {
                   // the FTARGET criteria also allows us to enable ftolerance
                   cmaparams.set_stopping_criteria(FTARGET, true);
-                  cmaparams.set_ftolerance(1);
+                  cmaparams.set_ftolerance(Params::opt_cmaes::fun_tolerance());
                 }
 
                 // we allow to set the ftarget parameter
