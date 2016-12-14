@@ -74,14 +74,22 @@ namespace limbo {
             /// of trials
             BO_PARAM(double, fun_tolerance, -1);
             /// @ingroup opt_defaults
-            /// sets the version of cmaes to use
-            BO_PARAM(int, cmaes_variant, aIPOP_CMAES);
-            /// @ingroup opt_defaults
             /// function value target
             BO_PARAM(double, fun_target, -1);
             /// @ingroup opt_defaults
             /// computes initial objective function value
             BO_PARAM(bool, fun_compute_initial, false);
+            /// @ingroup opt_defaults
+            /// sets the version of cmaes to use
+            BO_PARAM(int, cmaes_variant, aIPOP_CMAES);
+            /// @ingroup opt_defaults
+            /// defines elitism strategy:
+            /// 0 -> no elitism
+            /// 1 -> elitism: reinjects the best-ever seen solution
+            /// 2 -> initial elitism: reinject x0 as long as it is not improved upon
+            /// 3 -> initial elitism on restart: restart if best encountered solution is not the the final
+            /// solution and reinjects the best solution until the population has better fitness, in its majority
+            BO_PARAM(int, elitism, 0);
             /// @ingroup opt_defaults
             /// enables or disables uncertainty handling
             BO_PARAM(bool, handle_uncertainty, false);
@@ -180,6 +188,7 @@ namespace limbo {
                 // but we want the restart -> aIPOP_CMAES
                 cmaparams.set_algo(Params::opt_cmaes::cmaes_variant());
                 cmaparams.set_restarts(Params::opt_cmaes::restarts());
+                cmaparams.set_elitism(Params::opt_cmaes::elitism());
 
                 // if no max fun evals provided, we compute a recommended value
                 size_t max_evals = Params::opt_cmaes::max_fun_evals() < 0
@@ -190,24 +199,28 @@ namespace limbo {
                 cmaparams.set_max_iter(100000);
 
                 if (Params::opt_cmaes::fun_tolerance() == -1) {
-                  // we do not know if what is the actual maximum / minimum of the function
-                  // therefore we deactivate this stopping criterion
-                  cmaparams.set_stopping_criteria(FTARGET, false);
+                    // we do not know if what is the actual maximum / minimum of the function
+                    // therefore we deactivate this stopping criterion
+                    cmaparams.set_stopping_criteria(FTARGET, false);
                 } else {
-                  // the FTARGET criteria also allows us to enable ftolerance
-                  cmaparams.set_stopping_criteria(FTARGET, true);
-                  cmaparams.set_ftolerance(Params::opt_cmaes::fun_tolerance());
+                    // the FTARGET criteria also allows us to enable ftolerance
+                    cmaparams.set_stopping_criteria(FTARGET, true);
+                    cmaparams.set_ftolerance(Params::opt_cmaes::fun_tolerance());
                 }
 
                 // we allow to set the ftarget parameter
                 if (Params::opt_cmaes::fun_target() != -1) {
-                  cmaparams.set_stopping_criteria(FTARGET, true);
-                  cmaparams.set_ftarget(-Params::opt_cmaes::fun_target());
+                    cmaparams.set_stopping_criteria(FTARGET, true);
+                    cmaparams.set_ftarget(-Params::opt_cmaes::fun_target());
                 }
 
                 // enable stopping criteria by several equalfunvals and maxfevals
                 cmaparams.set_stopping_criteria(EQUALFUNVALS, true);
                 cmaparams.set_stopping_criteria(MAXFEVALS, true);
+
+                // enable additional criterias to stop
+                cmaparams.set_stopping_criteria(TOLX, true);
+                cmaparams.set_stopping_criteria(CONDITIONCOV, true);
 
                 // enable or disable different parameters
                 cmaparams.set_initial_fvalue(Params::opt_cmaes::fun_compute_initial());
