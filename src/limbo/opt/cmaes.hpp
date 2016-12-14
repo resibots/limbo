@@ -46,13 +46,13 @@
 #ifndef LIMBO_OPT_CMAES_HPP
 #define LIMBO_OPT_CMAES_HPP
 
-#include <vector>
-#include <iostream>
 #include <Eigen/Core>
+#include <iostream>
+#include <vector>
 
+#include <limbo/opt/optimizer.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
-#include <limbo/opt/optimizer.hpp>
 
 #ifndef USE_LIBCMAES
 #warning NO libcmaes support
@@ -119,9 +119,9 @@ namespace limbo {
 
                 // wrap the function
                 libcmaes::FitFunc f_cmaes = [&](const double* x, const int n) {
-		Eigen::Map<const Eigen::VectorXd> m(x, n);
-		// remember that our optimizers maximize
-		return -eval(f, m);
+                    Eigen::Map<const Eigen::VectorXd> m(x, n);
+                    // remember that our optimizers maximize
+                    return -eval(f, m);
                 };
 
                 if (bounded)
@@ -202,7 +202,8 @@ namespace limbo {
                     // we do not know if what is the actual maximum / minimum of the function
                     // therefore we deactivate this stopping criterion
                     cmaparams.set_stopping_criteria(FTARGET, false);
-                } else {
+                }
+                else {
                     // the FTARGET criteria also allows us to enable ftolerance
                     cmaparams.set_stopping_criteria(FTARGET, true);
                     cmaparams.set_ftolerance(Params::opt_cmaes::fun_tolerance());
