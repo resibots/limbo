@@ -81,7 +81,7 @@ namespace limbo {
             BO_PARAM(bool, fun_compute_initial, false);
             /// @ingroup opt_defaults
             /// sets the version of cmaes to use
-            BO_PARAM(int, cmaes_variant, aIPOP_CMAES);
+            BO_PARAM(int, variant, aIPOP_CMAES);
             /// @ingroup opt_defaults
             /// defines elitism strategy:
             /// 0 -> no elitism
@@ -98,6 +98,7 @@ namespace limbo {
             BO_PARAM(bool, verbose, false);
         };
     }
+
     namespace opt {
         /// @ingroup opt
         /// Covariance Matrix Adaptation Evolution Strategy by Hansen et al.
@@ -186,7 +187,7 @@ namespace limbo {
                 // aCMAES should be the best choice
                 // [see: https://github.com/beniz/libcmaes/wiki/Practical-hints ]
                 // but we want the restart -> aIPOP_CMAES
-                cmaparams.set_algo(Params::opt_cmaes::cmaes_variant());
+                cmaparams.set_algo(Params::opt_cmaes::variant());
                 cmaparams.set_restarts(Params::opt_cmaes::restarts());
                 cmaparams.set_elitism(Params::opt_cmaes::elitism());
 
