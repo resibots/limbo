@@ -67,17 +67,20 @@ namespace limbo {
             /// number of restarts of CMA-ES
             BO_PARAM(int, restarts, 1);
             /// @ingroup opt_defaults
-            /// number of calls to the function to be optimized
+            /// maximum number of calls to the function to be optimized
             BO_PARAM(double, max_fun_evals, -1);
             /// @ingroup opt_defaults
             /// threshold based on the difference in value of a fixed number
-            /// of trials
+            /// of trials: if different to -1, it enables the tolerance criteria
+            /// for stopping based in the history of rewards.
             BO_PARAM(double, fun_tolerance, -1);
             /// @ingroup opt_defaults
-            /// function value target
+            /// function value target: if different to -1, enables the function
+            /// target criteria for stopping if the performance is greater than this value.
             BO_PARAM(double, fun_target, -1);
             /// @ingroup opt_defaults
-            /// computes initial objective function value
+            /// computes initial objective function value: if true, it evaluates the
+            /// provided starting point (if any).
             BO_PARAM(bool, fun_compute_initial, false);
             /// @ingroup opt_defaults
             /// sets the version of cmaes to use
@@ -91,7 +94,7 @@ namespace limbo {
             /// solution and reinjects the best solution until the population has better fitness, in its majority
             BO_PARAM(int, elitism, 0);
             /// @ingroup opt_defaults
-            /// enables or disables uncertainty handling
+            /// enables or disables uncertainty handling: https://hal.inria.fr/file/index/docid/276216/filename/TEC2008.pdf
             BO_PARAM(bool, handle_uncertainty, false);
             /// @ingroup opt_defaults
             /// enables or disables verbose mode for cmaes
