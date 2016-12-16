@@ -44,10 +44,166 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>number of calls to the function to be optimized </para>        </detaileddescription>
+<para>maximum number of calls to the function to be optimized </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="71" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1ga5f980ba02cafe6ee52d6b9cd485e3d05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(double, fun_tolerance,-1)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>double</type>
+        </param>
+        <param>
+          <type>fun_tolerance</type>
+        </param>
+        <param>
+          <type>-</type>
+          <declname>1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>threshold based on the difference in value of a fixed number of trials: if different to -1, it enables the tolerance criteria for stopping based in the history of rewards. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="76" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1ga1b4276da9161bb04b84b4cd9307a37ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(double, fun_target,-1)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>double</type>
+        </param>
+        <param>
+          <type>fun_target</type>
+        </param>
+        <param>
+          <type>-</type>
+          <declname>1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>function value target: if different to -1, enables the function target criteria for stopping if the performance is greater than this value. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="80" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1ga14aff955e1360233e5ac361bdd2f3118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(bool, fun_compute_initial, false)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>bool</type>
+        </param>
+        <param>
+          <type>fun_compute_initial</type>
+        </param>
+        <param>
+          <type>false</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>computes initial objective function value: if true, it evaluates the provided starting point (if any). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="84" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1gaf6fe5f409527ed056cee8cf8df52da9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(int, variant, aIPOP_CMAES)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>variant</type>
+        </param>
+        <param>
+          <type>aIPOP_CMAES</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>sets the version of cmaes to use </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="87" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1ga660850db2d1f35863416f9790fe5125e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(int, elitism, 0)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>elitism</type>
+        </param>
+        <param>
+          <type>0</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>defines elitism strategy: 0 -&gt; no elitism 1 -&gt; elitism: reinjects the best-ever seen solution 2 -&gt; initial elitism: reinject x0 as long as it is not improved upon 3 -&gt; initial elitism on restart: restart if best encountered solution is not the the final solution and reinjects the best solution until the population has better fitness, in its majority </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="95" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1gad4f97065dd716df6c84e093059ab39f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(bool, handle_uncertainty, false)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>bool</type>
+        </param>
+        <param>
+          <type>handle_uncertainty</type>
+        </param>
+        <param>
+          <type>false</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>enables or disables uncertainty handling: <ulink url="https://hal.inria.fr/file/index/docid/276216/filename/TEC2008.pdf">https://hal.inria.fr/file/index/docid/276216/filename/TEC2008.pdf</ulink> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="98" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__opt__defaults_1gae78e735b53742e438847fb63817f2ed1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>limbo::defaults::opt_cmaes::BO_PARAM</definition>
+        <argsstring>(bool, verbose, false)</argsstring>
+        <name>BO_PARAM</name>
+        <param>
+          <type>bool</type>
+        </param>
+        <param>
+          <type>verbose</type>
+        </param>
+        <param>
+          <type>false</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>enables or disables verbose mode for cmaes </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="101" column="1"/>
       </memberdef>
       <memberdef kind="function" id="group__opt__defaults_1ga0ce56e9b25771d8a1b381b6ec132b8fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>

@@ -114,8 +114,15 @@ struct limbo::opt::Cmaes&lt; Params &gt;</h3>
 <li>Support bounded and unbounded optimization</li>
 <li>Only available if libcmaes is installed (see the compilation instructions)</li>
 <li>Parameters :<ul>
+<li>int variant</li>
+<li>int elitism</li>
+<li>int restarts</li>
 <li>double max_fun_evals</li>
-<li>int restarts </li>
+<li>double fun_tolerance</li>
+<li>double fun_target</li>
+<li>bool fun_compute_initial</li>
+<li>bool handle_uncertainty</li>
+<li>bool verbose </li>
 </ul>
 </li>
 </ul>
@@ -170,7 +177,7 @@ template&lt;typename F &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 16 2016 00:00:17 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Dec 17 2016 00:00:15 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="89" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="89" bodyend="104"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="127" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="127" bodyend="142"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="109" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="109" bodyend="122"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="147" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="147" bodyend="160"/>
       </memberdef>
       <memberdef kind="function" id="structlimbo_1_1opt_1_1_cmaes_1a697b08f2fdc3f2bffb0d9cb4b720f16c" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="126" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="126" bodyend="150"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="164" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="164" bodyend="188"/>
       </memberdef>
       <memberdef kind="function" id="structlimbo_1_1opt_1_1_cmaes_1a545a819461daf8f39b9f29e0e749ce83" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="153" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="153" bodyend="174"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="191" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="191" bodyend="241"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -133,10 +133,10 @@
     <detaileddescription>
 <para>Covariance Matrix Adaptation Evolution Strategy by Hansen et al. (See: <ulink url="https://www.lri.fr/~hansen/cmaesintro.html">https://www.lri.fr/~hansen/cmaesintro.html</ulink>)<itemizedlist>
 <listitem><para>our implementation is based on libcmaes (<ulink url="https://github.com/beniz/libcmaes">https://github.com/beniz/libcmaes</ulink>)</para></listitem><listitem><para>Support bounded and unbounded optimization</para></listitem><listitem><para>Only available if libcmaes is installed (see the compilation instructions)</para></listitem><listitem><para>Parameters :<itemizedlist>
-<listitem><para>double max_fun_evals</para></listitem><listitem><para>int restarts </para></listitem></itemizedlist>
+<listitem><para>int variant</para></listitem><listitem><para>int elitism</para></listitem><listitem><para>int restarts</para></listitem><listitem><para>double max_fun_evals</para></listitem><listitem><para>double fun_tolerance</para></listitem><listitem><para>double fun_target</para></listitem><listitem><para>bool fun_compute_initial</para></listitem><listitem><para>bool handle_uncertainty</para></listitem><listitem><para>bool verbose </para></listitem></itemizedlist>
 </para></listitem></itemizedlist>
 </para>    </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="86" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="86" bodyend="175"/>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" line="124" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/opt/cmaes.hpp" bodystart="124" bodyend="242"/>
     <listofallmembers>
       <member refid="structlimbo_1_1opt_1_1_cmaes_1a697b08f2fdc3f2bffb0d9cb4b720f16c" prot="private" virt="non-virtual"><scope>limbo::opt::Cmaes</scope><name>_opt_bounded</name></member>
       <member refid="structlimbo_1_1opt_1_1_cmaes_1a8437014f4bad1fddbd701b084d3613c9" prot="private" virt="non-virtual"><scope>limbo::opt::Cmaes</scope><name>_opt_unbounded</name></member>

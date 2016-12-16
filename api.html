@@ -917,8 +917,15 @@
 <li>Support bounded and unbounded optimization</li>
 <li>Only available if libcmaes is installed (see the compilation instructions)</li>
 <li>Parameters :<ul>
+<li>int variant</li>
+<li>int elitism</li>
+<li>int restarts</li>
 <li>double max_fun_evals</li>
-<li>int restarts </li>
+<li>double fun_tolerance</li>
+<li>double fun_target</li>
+<li>bool fun_compute_initial</li>
+<li>bool handle_uncertainty</li>
+<li>bool verbose </li>
 </ul>
 </li>
 </ul>
@@ -1066,7 +1073,49 @@
 <dl class="function">
 <dt>
 <span class="target" id="limbogroup__opt__defaults_1ga5130bd236acff913c59380059474ebab"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, max_fun_evals, - 1)</code></dt>
-<dd><p>number of calls to the function to be optimized </p>
+<dd><p>maximum number of calls to the function to be optimized </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga5f980ba02cafe6ee52d6b9cd485e3d05"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, fun_tolerance, - 1)</code></dt>
+<dd><p>threshold based on the difference in value of a fixed number of trials: if different to -1, it enables the tolerance criteria for stopping based in the history of rewards. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga1b4276da9161bb04b84b4cd9307a37ab"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, fun_target, - 1)</code></dt>
+<dd><p>function value target: if different to -1, enables the function target criteria for stopping if the performance is greater than this value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga14aff955e1360233e5ac361bdd2f3118"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(bool, fun_compute_initial, false)</code></dt>
+<dd><p>computes initial objective function value: if true, it evaluates the provided starting point (if any). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo8defaults9opt_cmaes8BO_PARAMEi7variant11aIPOP_CMAES">
+<span id="limbo::defaults::opt_cmaes::BO_PARAM__i.variant.aIPOP_CMAES"></span><span class="target" id="limbogroup__opt__defaults_1gaf6fe5f409527ed056cee8cf8df52da9e"></span><code class="descname">BO_PARAM</code><span class="sig-paren">(</span>int, variant, aIPOP_CMAES<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo8defaults9opt_cmaes8BO_PARAMEi7variant11aIPOP_CMAES" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the version of cmaes to use </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga660850db2d1f35863416f9790fe5125e"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(int, elitism, 0)</code></dt>
+<dd><p>defines elitism strategy: 0 -&gt; no elitism 1 -&gt; elitism: reinjects the best-ever seen solution 2 -&gt; initial elitism: reinject x0 as long as it is not improved upon 3 -&gt; initial elitism on restart: restart if best encountered solution is not the the final solution and reinjects the best solution until the population has better fitness, in its majority </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1gad4f97065dd716df6c84e093059ab39f6"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(bool, handle_uncertainty, false)</code></dt>
+<dd><p>enables or disables uncertainty handling: <a class="reference external" href="https://hal.inria.fr/file/index/docid/276216/filename/TEC2008.pdf">https://hal.inria.fr/file/index/docid/276216/filename/TEC2008.pdf</a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1gae78e735b53742e438847fb63817f2ed1"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(bool, verbose, false)</code></dt>
+<dd><p>enables or disables verbose mode for cmaes </p>
 </dd></dl>
 
 <dl class="function">
