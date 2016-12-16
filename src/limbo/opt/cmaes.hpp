@@ -111,8 +111,15 @@ namespace limbo {
         /// - Only available if libcmaes is installed (see the compilation instructions)
         ///
         /// - Parameters :
-        ///   - double max_fun_evals
         ///   - int restarts
+        ///   - double max_fun_evals
+        ///   - fun_tolerance
+        ///   - fun_target
+        ///   - fun_compute_initial
+        ///   - variant
+        ///   - elitism
+        ///   - handle_uncertainty
+        ///   - verbose
         template <typename Params>
         struct Cmaes {
         public:
