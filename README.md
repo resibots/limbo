@@ -58,6 +58,7 @@ Scientific articles that use Limbo
 - Tarapore D, Clune J, Cully A, Mouret JB (2016). [How Do Different Encodings Influence the Performance of the MAP-Elites Algorithm?](https://hal.inria.fr/hal-01302658/document). *In Proc. of Genetic and Evolutionary Computation Conference*.
 - Chatzilygeroudis, K., Vassiliades, V. and Mouret, J.B. (2016). [Reset-free Trial-and-Error Learning for Data-Efficient Robot Damage Recovery](https://arxiv.org/abs/1610.04213). *arXiv preprint arXiv:1610.04213*.
 - Chatzilygeroudis, K., Cully, A. and Mouret, J.B. (2016). [Towards semi-episodic learning for robot damage recovery](https://arxiv.org/abs/1610.01407). *Workshop on AI for Long-Term Autonomy at the IEEE International Conference on Robotics and Automation 2016*.
+- Papaspyros V., Chatzilygeroudis K., Vassiliades V., and Mouret JB. (2016). [Safety-Aware Robot Damage Recovery Using Constrained Bayesian Optimization and Simulated Priors](https://arxiv.org/pdf/1611.09419v3). *Workshop on Bayesian Optimization at the Annual Conference on Neural Information Processing Systems (NIPS) 2016.*
 
 Research projects that use Limbo
 --------------------------------
