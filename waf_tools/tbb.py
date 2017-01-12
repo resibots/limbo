@@ -66,7 +66,7 @@ def check_tbb(self, *k, **kw):
         libpath_tbb = [self.options.tbb + '/lib']
     else:
         includes_tbb = ['/usr/local/include', '/usr/include', '/opt/intel/tbb/include']
-        libpath_tbb = ['/usr/local/lib/', '/usr/lib', '/opt/intel/tbb/lib']
+        libpath_tbb = ['/usr/local/lib/', '/usr/lib', '/opt/intel/tbb/lib', '/usr/lib/x86_64-linux-gnu/']
 
     self.start_msg('Checking Intel TBB includes (optional)')
     try:

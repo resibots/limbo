@@ -66,7 +66,7 @@ def check_mkl(conf):
         libpath_mkl = [conf.options.mkl + '/lib/intel64']
     else:
         includes_mkl = ['/usr/local/include', '/usr/include', '/opt/intel/mkl/include']
-        libpath_mkl = ['/usr/local/lib/', '/usr/lib', '/opt/intel/mkl/lib/intel64']
+        libpath_mkl = ['/usr/local/lib/', '/usr/lib', '/opt/intel/mkl/lib/intel64', '/usr/lib/x86_64-linux-gnu/']
 
     conf.start_msg('Checking Intel MKL includes (optional)')
     try:

@@ -67,7 +67,7 @@ def check_libcmaes(conf):
 		libs_check = [conf.options.libcmaes + '/lib']
 	else:
 		includes_check = ['/usr/local/include', '/usr/include']
-		libs_check = ['/usr/local/lib', '/usr/lib']
+		libs_check = ['/usr/local/lib', '/usr/lib', '/usr/lib/x86_64-linux-gnu/']
 
 	try:
 		conf.start_msg('Checking for libcmaes includes (optional)')
