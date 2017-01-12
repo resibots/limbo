@@ -101,10 +101,10 @@ namespace limbo {
             BO_PARAM(bool, verbose, false);
             /// @ingroup opt_defaults
             /// lower bound (in input) for cmaes
-            BO_PARAM(double, lb, 0.0);
+            BO_PARAM(double, lbound, 0.0);
             /// @ingroup opt_defaults
             /// upper bound (in input) for cmaes
-            BO_PARAM(double, ub, 1.0);
+            BO_PARAM(double, ubound, 1.0);
         };
     }
 
@@ -176,8 +176,8 @@ namespace limbo {
                 // boundary_transformation
                 double lbounds[dim], ubounds[dim]; // arrays for lower and upper parameter bounds, respectively
                 for (int i = 0; i < dim; i++) {
-                    lbounds[i] = Params::opt_cmaes::lb();
-                    ubounds[i] = Params::opt_cmaes::ub();
+                    lbounds[i] = Params::opt_cmaes::lbound();
+                    ubounds[i] = Params::opt_cmaes::ubound();
                 }
                 GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
                 // initial step-size, i.e. estimated initial parameter error.
