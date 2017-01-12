@@ -99,6 +99,12 @@ namespace limbo {
             /// @ingroup opt_defaults
             /// enables or disables verbose mode for cmaes
             BO_PARAM(bool, verbose, false);
+            /// @ingroup opt_defaults
+            /// lower bound (in input) for cmaes
+            BO_PARAM(double, lb, 0.0);
+            /// @ingroup opt_defaults
+            /// upper bound (in input) for cmaes
+            BO_PARAM(double, ub, 1.0);
         };
     }
 
@@ -120,6 +126,8 @@ namespace limbo {
         ///   - bool fun_compute_initial
         ///   - bool handle_uncertainty
         ///   - bool verbose
+        ///   - double lb (lower bounds)
+        ///   - double ub (upper bounds)
         template <typename Params>
         struct Cmaes {
         public:
@@ -168,8 +176,8 @@ namespace limbo {
                 // boundary_transformation
                 double lbounds[dim], ubounds[dim]; // arrays for lower and upper parameter bounds, respectively
                 for (int i = 0; i < dim; i++) {
-                    lbounds[i] = 0.0;
-                    ubounds[i] = 1.0;
+                    lbounds[i] = Params::opt_cmaes::lb();
+                    ubounds[i] = Params::opt_cmaes::ub();
                 }
                 GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
                 // initial step-size, i.e. estimated initial parameter error.
