@@ -104,6 +104,10 @@ Functions</h2></td></tr>
 <tr class="separator:gad4f97065dd716df6c84e093059ab39f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae78e735b53742e438847fb63817f2ed1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__opt__defaults.html#gae78e735b53742e438847fb63817f2ed1">limbo::defaults::opt_cmaes::BO_PARAM</a> (bool, verbose, false)</td></tr>
 <tr class="separator:gae78e735b53742e438847fb63817f2ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0af64a0a2ea5ba01473e0cf284154dea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__opt__defaults.html#ga0af64a0a2ea5ba01473e0cf284154dea">limbo::defaults::opt_cmaes::BO_PARAM</a> (double, lbound, 0.0)</td></tr>
+<tr class="separator:ga0af64a0a2ea5ba01473e0cf284154dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4d61ad0b07412ab14a72c008a8f99455"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__opt__defaults.html#ga4d61ad0b07412ab14a72c008a8f99455">limbo::defaults::opt_cmaes::BO_PARAM</a> (double, ubound, 1.0)</td></tr>
+<tr class="separator:ga4d61ad0b07412ab14a72c008a8f99455"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0ce56e9b25771d8a1b381b6ec132b8fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__opt__defaults.html#ga0ce56e9b25771d8a1b381b6ec132b8fe">limbo::defaults::opt_gridsearch::BO_PARAM</a> (int, bins, 5)</td></tr>
 <tr class="separator:ga0ce56e9b25771d8a1b381b6ec132b8fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4b0e251e3b7440148225201bcfc61f26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__opt__defaults.html#ga4b0e251e3b7440148225201bcfc61f26">limbo::defaults::opt_nloptgrad::BO_PARAM</a> (int, iterations, 500)</td></tr>
@@ -215,12 +219,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga4b0e251e3b7440148225201bcfc61f26"></a>
+<a class="anchor" id="gae76755c949c322e0a8a33806c811b6f2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">limbo::defaults::opt_nloptgrad::BO_PARAM </td>
+          <td class="memname">limbo::defaults::opt_nloptnograd::BO_PARAM </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname">, </td>
@@ -248,12 +252,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="gae76755c949c322e0a8a33806c811b6f2"></a>
+<a class="anchor" id="ga4b0e251e3b7440148225201bcfc61f26"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">limbo::defaults::opt_nloptnograd::BO_PARAM </td>
+          <td class="memname">limbo::defaults::opt_nloptgrad::BO_PARAM </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname">, </td>
@@ -578,10 +582,76 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga0af64a0a2ea5ba01473e0cf284154dea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">limbo::defaults::opt_cmaes::BO_PARAM </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">lbound&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0.&#160;</td>
+          <td class="paramname"><em>0</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>lower bound (in input) for cmaes </p>
+
+</div>
+</div>
+<a class="anchor" id="ga4d61ad0b07412ab14a72c008a8f99455"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">limbo::defaults::opt_cmaes::BO_PARAM </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ubound&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">1.&#160;</td>
+          <td class="paramname"><em>0</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>upper bound (in input) for cmaes </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 12 2017 00:00:19 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 13 2017 00:00:18 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

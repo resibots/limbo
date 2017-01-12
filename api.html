@@ -925,7 +925,9 @@
 <li>double fun_target</li>
 <li>bool fun_compute_initial</li>
 <li>bool handle_uncertainty</li>
-<li>bool verbose </li>
+<li>bool verbose</li>
+<li>double lb (lower bounds)</li>
+<li>double ub (upper bounds) </li>
 </ul>
 </li>
 </ul>
@@ -1116,6 +1118,18 @@
 <dt>
 <span class="target" id="limbogroup__opt__defaults_1gae78e735b53742e438847fb63817f2ed1"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(bool, verbose, false)</code></dt>
 <dd><p>enables or disables verbose mode for cmaes </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga0af64a0a2ea5ba01473e0cf284154dea"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, lbound, 0. 0)</code></dt>
+<dd><p>lower bound (in input) for cmaes </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga4d61ad0b07412ab14a72c008a8f99455"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, ubound, 1. 0)</code></dt>
+<dd><p>upper bound (in input) for cmaes </p>
 </dd></dl>
 
 <dl class="function">
