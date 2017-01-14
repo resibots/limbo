@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -42,11 +43,6 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-//|
-//|
-//|
-//|
-//|
 
 #ifndef LIMBO_TOOLS_RANDOM_GENERATOR_HPP
 #define LIMBO_TOOLS_RANDOM_GENERATOR_HPP
@@ -67,13 +63,13 @@ namespace limbo {
         /// a mt19937-based random generator (mutex-protected)
         ///
         /// usage :
-        /// - RandomGenerator<double>(0.0, 1.0);
+        /// - RandomGenerator<dist<double>>(0.0, 1.0);
         /// - double r = rgen.rand();
         template <typename D>
         class RandomGenerator {
         public:
             using result_type = typename D::result_type;
-            RandomGenerator(result_type min, result_type max) : _dist(min, max), _rgen(randutils::auto_seed_128{}.base()) {}
+            RandomGenerator(result_type a, result_type b) : _dist(a, b), _rgen(randutils::auto_seed_128{}.base()) {}
             result_type rand()
             {
                 std::lock_guard<std::mutex> lock(_mutex);
@@ -90,10 +86,16 @@ namespace limbo {
         using rdist_double_t = std::uniform_real_distribution<double>;
         /// @ingroup tools
         using rdist_int_t = std::uniform_int_distribution<int>;
+        /// @ingroup tools
+        using rdist_gauss_t = std::normal_distribution<>;
 
         /// @ingroup tools
         /// Double random number generator
         using rgen_double_t = RandomGenerator<rdist_double_t>;
+
+        /// @ingroup tools
+        /// Double random number generator (gaussian)
+        using rgen_gauss_t = RandomGenerator<rdist_gauss_t>;
 
         ///@ingroup tools
         ///integer random number generator
@@ -120,7 +122,7 @@ namespace limbo {
         /// - we use a C++11 random number generator
         Eigen::VectorXd random_vector_unbounded(int size)
         {
-            static rgen_double_t rgen(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::max());
+            static rgen_gauss_t rgen(0.0, 10.0);
             Eigen::VectorXd res(size);
             for (int i = 0; i < size; ++i)
                 res[i] = rgen.rand();

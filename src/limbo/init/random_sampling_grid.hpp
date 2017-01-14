@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -62,8 +63,8 @@ namespace limbo {
     namespace init {
         /** @ingroup init
           \rst
-          Grid-based random sampling: in effect, define a grid and takes random samples from this grid. The number of bins in the grid is ``bins``^number_of_dimensions 
-          
+          Grid-based random sampling: in effect, define a grid and takes random samples from this grid. The number of bins in the grid is ``bins``^number_of_dimensions
+
           For instance, if bins = 5 and there are 3 inputs dimensions, then the grid is 5*5*5=125, and random points will all be points of this grid.
 
           Parameters:
@@ -76,6 +77,9 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>
             void operator()(const StateFunction& seval, const AggregatorFunction&, Opt& opt) const
             {
+                // Only works with bounded BO
+                assert(Params::bayes_opt_bobase::bounded());
+
                 tools::rgen_int_t rgen(0, Params::init_randomsamplinggrid::bins());
                 for (int i = 0; i < Params::init_randomsamplinggrid::samples(); i++) {
                     Eigen::VectorXd new_sample(StateFunction::dim_in);

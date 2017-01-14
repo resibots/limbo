@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -52,7 +53,7 @@ struct Params {
         BO_PARAM(double, noise, 1e-10);
         BO_PARAM(int, hp_period, 10);
     };
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(int, stats_enabled, true);
     };
     struct stop_maxiterations {
@@ -73,7 +74,7 @@ struct Params {
     };
     struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
-    struct opt_cmaes {
+    struct opt_cmaes : public defaults::opt_cmaes {
         BO_PARAM(int, restarts, 1);
         BO_PARAM(int, max_fun_evals, -1);
     };
@@ -133,7 +134,7 @@ struct MinTolerance {
 
 template <typename Params>
 struct DistanceToTarget {
-    typedef double result_type;
+    using result_type = double;
     DistanceToTarget(const Eigen::Vector2d& target) : _target(target) {}
 
     double operator()(const Eigen::VectorXd& x) const

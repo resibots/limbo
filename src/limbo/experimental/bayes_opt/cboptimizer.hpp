@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -78,14 +79,13 @@ namespace limbo {
 
         namespace bayes_opt {
 
-            typedef boost::parameter::parameters<boost::parameter::optional<limbo::tag::acquiopt>,
+            using cboptimizer_signature = boost::parameter::parameters<boost::parameter::optional<limbo::tag::acquiopt>,
                 boost::parameter::optional<limbo::tag::statsfun>,
                 boost::parameter::optional<limbo::tag::initfun>,
                 boost::parameter::optional<limbo::tag::acquifun>,
                 boost::parameter::optional<limbo::tag::stopcrit>,
                 boost::parameter::optional<limbo::tag::modelfun>,
-                boost::parameter::optional<limbo::experimental::tag::constraint_modelfun>>
-                cboptimizer_signature;
+                boost::parameter::optional<limbo::experimental::tag::constraint_modelfun>>;
 
             // clang-format off
         /**
@@ -123,27 +123,27 @@ namespace limbo {
                 // defaults
                 struct defaults {
 #ifdef USE_NLOPT
-                    typedef limbo::opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND> acquiopt_t;
+                    using acquiopt_t = limbo::opt::NLOptNoGrad<Params, nlopt::GN_DIRECT_L_RAND>;
 #elif defined(USE_LIBCMAES)
-                    typedef limbo::opt::Cmaes<Params> acquiopt_t;
+                    using acquiopt_t = limbo::opt::Cmaes<Params>;
 #else
 #warning NO NLOpt, and NO Libcmaes: the acquisition function will be optimized by a grid search algorithm (which is usually bad). Please install at least NLOpt or libcmaes to use limbo!.
-                    typedef limbo::opt::GridSearch<Params> acquiopt_t;
+                    using acquiopt_t = limbo::opt::GridSearch<Params>;
 #endif
-                    typedef limbo::kernel::Exp<Params> kf_t;
-                    typedef limbo::mean::Constant<Params> mean_t;
-                    typedef limbo::model::GP<Params, kf_t, mean_t> constraint_model_t;
+                    using kf_t = limbo::kernel::Exp<Params>;
+                    using mean_t = limbo::mean::Constant<Params>;
+                    using constraint_model_t = limbo::model::GP<Params, kf_t, mean_t>;
                 };
                 /// link to the corresponding BoBase (useful for typedefs)
-                typedef limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6> base_t;
-                typedef typename base_t::model_t model_t;
+                using base_t = limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5, A6>;
+                using model_t = typename base_t::model_t;
 
-                typedef typename base_t::acquisition_function_t acquisition_function_t;
+                using acquisition_function_t = typename base_t::acquisition_function_t;
                 // extract the types
-                typedef typename cboptimizer_signature::bind<A1, A2, A3, A4, A5, A6, A7>::type args;
-                typedef typename boost::parameter::binding<args, limbo::tag::acquiopt, typename defaults::acquiopt_t>::type acqui_optimizer_t;
+                using args = typename cboptimizer_signature::bind<A1, A2, A3, A4, A5, A6, A7>::type;
+                using acqui_optimizer_t = typename boost::parameter::binding<args, limbo::tag::acquiopt, typename defaults::acquiopt_t>::type;
 
-                typedef typename boost::parameter::binding<args, limbo::experimental::tag::constraint_modelfun, typename defaults::constraint_model_t>::type constraint_model_t;
+                using constraint_model_t = typename boost::parameter::binding<args, limbo::experimental::tag::constraint_modelfun, typename defaults::constraint_model_t>::type;
 
                 /// The main function (run the Bayesian optimization algorithm)
                 template <typename StateFunction, typename AggregatorFunction = FirstElem>

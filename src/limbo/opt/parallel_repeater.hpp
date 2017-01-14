@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -75,7 +76,7 @@ namespace limbo {
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
                 tools::par::init();
-                typedef std::pair<Eigen::VectorXd, double> pair_t;
+                using pair_t = std::pair<Eigen::VectorXd, double>;
                 auto body = [&](int i) {
                     // clang-format off
                     Eigen::VectorXd r_init = tools::random_vector(init.size());

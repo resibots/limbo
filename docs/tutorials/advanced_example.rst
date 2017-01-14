@@ -185,7 +185,7 @@ Setting the parameter structure
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 51-81
+   :lines: 50-81
 
 Creating and running the Bayesian Optimizer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

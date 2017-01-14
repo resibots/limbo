@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -55,7 +56,7 @@
 using namespace limbo;
 
 struct Params {
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
     };
 
@@ -106,8 +107,8 @@ struct fit_eval {
 BOOST_AUTO_TEST_CASE(no_init)
 {
     std::cout << "NoInit" << std::endl;
-    typedef init::NoInit<Params> Init_t;
-    typedef bayes_opt::BOptimizer<Params, initfun<Init_t>> Opt_t;
+    using Init_t = init::NoInit<Params>;
+    using Opt_t = bayes_opt::BOptimizer<Params, initfun<Init_t>>;
 
     Opt_t opt;
     opt.optimize(fit_eval());
@@ -124,8 +125,8 @@ BOOST_AUTO_TEST_CASE(random_sampling)
         };
     };
 
-    typedef init::RandomSampling<MyParams> Init_t;
-    typedef bayes_opt::BOptimizer<MyParams, initfun<Init_t>> Opt_t;
+    using Init_t = init::RandomSampling<MyParams>;
+    using Opt_t = bayes_opt::BOptimizer<MyParams, initfun<Init_t>>;
 
     Opt_t opt;
     opt.optimize(fit_eval());
@@ -151,8 +152,8 @@ BOOST_AUTO_TEST_CASE(random_sampling_grid)
         };
     };
 
-    typedef init::RandomSamplingGrid<MyParams> Init_t;
-    typedef bayes_opt::BOptimizer<MyParams, initfun<Init_t>> Opt_t;
+    using Init_t = init::RandomSamplingGrid<MyParams>;
+    using Opt_t = bayes_opt::BOptimizer<MyParams, initfun<Init_t>>;
 
     Opt_t opt;
     opt.optimize(fit_eval());
@@ -178,8 +179,8 @@ BOOST_AUTO_TEST_CASE(grid_sampling)
         };
     };
 
-    typedef init::GridSampling<MyParams> Init_t;
-    typedef bayes_opt::BOptimizer<MyParams, initfun<Init_t>> Opt_t;
+    using Init_t = init::GridSampling<MyParams>;
+    using Opt_t = bayes_opt::BOptimizer<MyParams, initfun<Init_t>>;
 
     Opt_t opt;
     opt.optimize(fit_eval());

@@ -119,12 +119,12 @@ Then, when declaring the types to use:
 
 ::
 
-    typedef opt::Cmaes<ParamsAcquiOpt> Acqui_opt_t;
-    typedef opt::Cmaes<ParamsGPOpt> Gp_opt_t;
+    using Acqui_opt_t = opt::Cmaes<ParamsAcquiOpt>;
+    using Gp_opt_t = opt::Cmaes<ParamsGPOpt>;
 
-    typedef kernel::MaternFiveHalfs<Params> Kernel_t;
-    typedef mean::Data<Params> Mean_t;
-    typedef model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params, Gp_opt_t>> GP_t;
-    typedef acqui::UCB<Params, GP_t> Acqui_t;
+    using Kernel_t = kernel::MaternFiveHalfs<Params>;
+    using Mean_t = mean::Data<Params>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t, model::gp::KernelLFOpt<Params, Gp_opt_t>>;
+    using Acqui_t = acqui::UCB<Params, GP_t>;
 
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, acquifun<Acqui_t>, acquiopt<Acqui_opt_t>> opt;

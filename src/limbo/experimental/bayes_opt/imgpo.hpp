@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -84,9 +85,9 @@ namespace limbo {
             // http://papers.nips.cc/paper/5715-bayesian-optimization-with-exponential-convergence
             class IMGPO : public limbo::bayes_opt::BoBase<Params, A1, A2, A3, A4, A5> {
             public:
-                typedef BoBase<Params, A1, A2, A3, A4, A5> base_t;
-                typedef typename base_t::model_t model_t;
-                typedef typename base_t::acquisition_function_t acquisition_function_t;
+                using base_t = BoBase<Params, A1, A2, A3, A4, A5>;
+                using model_t = typename base_t::model_t;
+                using acquisition_function_t = typename base_t::acquisition_function_t;
 
                 template <typename StateFunction, typename AggregatorFunction = FirstElem>
                 void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)

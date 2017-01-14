@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -64,7 +65,7 @@ struct Params {
     struct kernel_exp : public defaults::kernel_exp {
     };
 
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, true);
     };
 
@@ -196,13 +197,13 @@ int main()
     tools::par::init();
 
 #ifdef ZDT1
-    typedef zdt1 func_t;
+    using func_t = zdt1;
 #elif defined ZDT2
-    typedef zdt2 func_t;
+    using func_t = zdt2;
 #elif defined ZDT3
-    typedef zdt3 func_t;
+    using func_t = zdt3;
 #else
-    typedef mop2 func_t;
+    using func_t = mop2;
 #endif
 
 #ifdef PAREGO

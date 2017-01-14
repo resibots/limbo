@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -58,7 +59,7 @@ namespace limbo {
 
             BOOST_PARAMETER_TEMPLATE_KEYWORD(parego_modelfun)
 
-            typedef boost::parameter::parameters<boost::parameter::optional<tag::parego_modelfun>> parego_signature;
+            using parego_signature = boost::parameter::parameters<boost::parameter::optional<tag::parego_modelfun>>;
 
             // clang-format off
             template <class Params,

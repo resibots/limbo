@@ -11,6 +11,7 @@
 #|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 #|   - Federico Allocati (fede.allocati@gmail.com)
 #|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+#|   - Roberto Rama (bertoski@gmail.com)
 #|
 #| This software is a computer library whose purpose is to optimize continuous,
 #| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -113,11 +114,11 @@ def configure(conf):
                 common_flags = "-Wall -std=c++11"
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
-            opt_flags = " -O3 -march=native -g"
+            opt_flags = " -O3 -g"
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \
-            graph thread', min_version='1.39')
+            thread', min_version='1.39')
         conf.check_eigen()
         conf.check_tbb()
         conf.check_sferes()
@@ -142,9 +143,9 @@ def configure(conf):
         print '---------------'
         print '[users] To compile Limbo (inc. unit tests): ./waf build'
         print '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo'
-        print '[developpers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
-        print '[developpers] To compile the benchmarks: ./waf build_benchmarks'
-        print '[developpers] To compile the extensive tests: ./waf build_extensive_tests'
+        print '[developers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
+        print '[developers] To compile the benchmarks: ./waf build_benchmarks'
+        print '[developers] To compile the extensive tests: ./waf build_extensive_tests'
 
 
 def build(bld):

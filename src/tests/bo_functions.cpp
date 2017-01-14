@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -224,7 +225,7 @@ struct GoldenPrice {
 };
 
 struct Params {
-    struct bayes_opt_bobase {
+    struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(bool, stats_enabled, false);
     };
 
@@ -320,16 +321,13 @@ int main(int argc, char** argv)
     tools::par::init();
 
 #ifdef USE_TBB
-    typedef tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>
-        res_t;
+    using res_t = tbb::concurrent_hash_map<std::string, std::vector<std::pair<double, double>>>;
 #else
-    typedef std::map<std::string,
-        std::vector<std::pair<double, double>>>
-        res_t;
+    using res_t = std::map<std::string, std::vector<std::pair<double, double>>>;
 #endif
     res_t results;
 
-    typedef bayes_opt::BOptimizer<Params> Opt_t;
+    using Opt_t = bayes_opt::BOptimizer<Params>;
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {

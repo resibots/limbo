@@ -66,18 +66,18 @@ In order to configure the Bayesian optimizer to use our new statistics class, we
 .. literalinclude:: ../../src/tutorials/statistics.cpp
    :language: c++
    :linenos:
-   :lines: 144-147
+   :lines: 144-148
 
 Then, we use it to define the optimizer:
 
 .. literalinclude:: ../../src/tutorials/statistics.cpp
    :language: c++
    :linenos:
-   :lines: 150
+   :lines: 151
 
 The full source code is available in `src/tutorials/statistics.cpp` and reproduced here:
 
 .. literalinclude:: ../../src/tutorials/statistics.cpp
    :language: c++
    :linenos:
-   :lines: 46-
+   :lines: 48-

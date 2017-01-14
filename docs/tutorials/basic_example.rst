@@ -41,18 +41,18 @@ To begin, the ``main`` file has to include the necessary files, and declare the 
 .. literalinclude:: ../../src/tutorials/basic_example.cpp
    :language: c++
    :linenos:
-   :lines: 47-93
+   :lines: 55-94
 
 
 
-Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function), that we want to output the stats (by setting stats_enabled to `true`), that the model has to be initialized with 10 samples (that will be selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults.
+Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function), that we want to output the stats (by setting stats_enabled to `true`), that the model has to be initialized with 10 samples (that will be selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults. **By default limbo optimizes in** :math:`[0,1]`, but you can optimize without bounds by setting ``BO_PARAM(bool, bounded, false)`` in ``bayes_opt_bobase`` parameters. If you do so, limbo outputs random numbers, wherever needed, sampled from a gaussian centered in zero with a standard deviation of :math:`10`, instead of uniform random numbers in :math:`[0,1]` (in the bounded case).
 
 Then, we have to define the evaluation function for the optimizer to call:
 
 .. literalinclude:: ../../src/tutorials/basic_example.cpp
    :language: c++
    :linenos:
-   :lines: 95-108
+   :lines: 95-109
 
 It is required that the evaluation struct has the static members ``dim_in`` and ``dim_out``, specifying the input and output dimensions.
 Also, it should have the ``operator()`` expecting a ``const Eigen::VectorXd&`` of size ``dim_in``, and return another one, of size ``dim_out``.
@@ -62,7 +62,7 @@ With this, we can declare the main function:
 .. literalinclude:: ../../src/tutorials/basic_example.cpp
    :language: c++
    :linenos:
-   :lines: 109-119
+   :lines: 111-120
 
 
 Finally, from the root of limbo, run a build command, with the additional switch ``--exp myExp``: ::
@@ -76,4 +76,4 @@ Full ``main.cpp``:
 .. literalinclude:: ../../src/tutorials/basic_example.cpp
    :language: c++
    :linenos:
-   :lines: 46-
+   :lines: 48-

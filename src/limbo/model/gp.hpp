@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -77,17 +78,21 @@ namespace limbo {
             /// Compute the GP from samples, observation, noise. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
                 const std::vector<Eigen::VectorXd>& observations,
-                const Eigen::VectorXd& noises)
+                const Eigen::VectorXd& noises, bool compute_kernel = true)
             {
                 assert(samples.size() != 0);
                 assert(observations.size() != 0);
                 assert(samples.size() == observations.size());
 
-                _dim_in = samples[0].size();
-                _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                if (_dim_in != samples[0].size()) {
+                    _dim_in = samples[0].size();
+                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                }
 
-                _dim_out = observations[0].size();
-                _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                if (_dim_out != observations[0].size()) {
+                    _dim_out = observations[0].size();
+                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                }
 
                 _samples = samples;
 
@@ -100,7 +105,8 @@ namespace limbo {
                 _noises = noises;
 
                 this->_compute_obs_mean();
-                this->_compute_full_kernel();
+                if (compute_kernel)
+                    this->_compute_full_kernel();
             }
 
             /// Do not forget to call this if you use hyper-prameters optimization!!
@@ -114,11 +120,14 @@ namespace limbo {
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
             {
                 if (_samples.empty()) {
-                    _dim_in = sample.size();
-                    _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
-
-                    _dim_out = observation.size();
-                    _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                    if (_dim_in != sample.size()) {
+                        _dim_in = sample.size();
+                        _kernel_function = KernelFunction(_dim_in); // the cost of building a functor should be relatively low
+                    }
+                    if (_dim_out != observation.size()) {
+                        _dim_out = observation.size();
+                        _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                    }
                 }
                 else {
                     assert(sample.size() == _dim_in);
@@ -227,14 +236,17 @@ namespace limbo {
             int nb_samples() const { return _samples.size(); }
 
             ///  recomputes the GP
-            void recompute(bool update_obs_mean = true)
+            void recompute(bool update_obs_mean = true, bool update_full_kernel = true)
             {
                 assert(!_samples.empty());
 
                 if (update_obs_mean)
                     this->_compute_obs_mean();
 
-                this->_compute_full_kernel();
+                if (update_full_kernel)
+                    this->_compute_full_kernel();
+                else
+                    this->_compute_alpha();
             }
 
             /// return the likelihood (do not compute it!)

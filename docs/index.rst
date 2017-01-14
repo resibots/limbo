@@ -8,13 +8,7 @@
 Limbo's documentation
 =================================
 
-Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions.
-
-Limbo is primarily designed for *researchers* who need to experiment with novel ideas / algorithms. It is not designed for end-users who need a "black-box" to optimize a function (although Limbo can be used for this).
-
-Limbo has been used in several scientific publications, in particular:
-
-- Cully A, Clune J, Tarapore DT, Mouret J-B. Robots that can adapt like animals. Nature, 2015. 521.7553.
+Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions. Github page (to report issues and/or help us to improve the library): `[Github repository] <http://github.com/resibots/limbo>`_
 
 The development of Limbo is funded by the `ERC project ResiBots <http://www.resibots.eu>`_.
 
@@ -23,13 +17,12 @@ Limbo shares many ideas with `Sferes2 <http://github.com/sferes2>`_, a similar f
 Main features
 --------------
 
-- Bayesian optimization based on Gaussian processes
+- Implementation of the classic algorithms (Bayesian optimization, many kernels, likelihood maximization, etc.)
+- Modern C++-11
 - Generic framework (template-based / policy-based design), which allows for easy customization, to test novel ideas
-- Programming / experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters, etc.
+- Experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters (OAR scheduler), etc.
 - High performance (in particular, Limbo can exploit multicore computers via Intel TBB and vectorize some operations via Eigen3)
 - Purposely small to be easily maintained and quickly understood
-- Modern C++-11
-- Experimental support for multi-objective optimization
 
 
 Contents:

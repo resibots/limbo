@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -45,13 +46,13 @@
 #ifndef LIMBO_OPT_CMAES_HPP
 #define LIMBO_OPT_CMAES_HPP
 
-#include <vector>
-#include <iostream>
 #include <Eigen/Core>
+#include <iostream>
+#include <vector>
 
+#include <limbo/opt/optimizer.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
-#include <limbo/opt/optimizer.hpp>
 
 #ifndef USE_LIBCMAES
 #warning NO libcmaes support
@@ -66,10 +67,47 @@ namespace limbo {
             /// number of restarts of CMA-ES
             BO_PARAM(int, restarts, 1);
             /// @ingroup opt_defaults
-            /// number of calls to the function to be optimized
+            /// maximum number of calls to the function to be optimized
             BO_PARAM(double, max_fun_evals, -1);
+            /// @ingroup opt_defaults
+            /// threshold based on the difference in value of a fixed number
+            /// of trials: if different to -1, it enables the tolerance criteria
+            /// for stopping based in the history of rewards.
+            BO_PARAM(double, fun_tolerance, -1);
+            /// @ingroup opt_defaults
+            /// function value target: if different to -1, enables the function
+            /// target criteria for stopping if the performance is greater than this value.
+            BO_PARAM(double, fun_target, -1);
+            /// @ingroup opt_defaults
+            /// computes initial objective function value: if true, it evaluates the
+            /// provided starting point (if any).
+            BO_PARAM(bool, fun_compute_initial, false);
+            /// @ingroup opt_defaults
+            /// sets the version of cmaes to use
+            BO_PARAM(int, variant, aIPOP_CMAES);
+            /// @ingroup opt_defaults
+            /// defines elitism strategy:
+            /// 0 -> no elitism
+            /// 1 -> elitism: reinjects the best-ever seen solution
+            /// 2 -> initial elitism: reinject x0 as long as it is not improved upon
+            /// 3 -> initial elitism on restart: restart if best encountered solution is not the the final
+            /// solution and reinjects the best solution until the population has better fitness, in its majority
+            BO_PARAM(int, elitism, 0);
+            /// @ingroup opt_defaults
+            /// enables or disables uncertainty handling: https://hal.inria.fr/file/index/docid/276216/filename/TEC2008.pdf
+            BO_PARAM(bool, handle_uncertainty, false);
+            /// @ingroup opt_defaults
+            /// enables or disables verbose mode for cmaes
+            BO_PARAM(bool, verbose, false);
+            /// @ingroup opt_defaults
+            /// lower bound (in input) for cmaes
+            BO_PARAM(double, lbound, 0.0);
+            /// @ingroup opt_defaults
+            /// upper bound (in input) for cmaes
+            BO_PARAM(double, ubound, 1.0);
         };
     }
+
     namespace opt {
         /// @ingroup opt
         /// Covariance Matrix Adaptation Evolution Strategy by Hansen et al.
@@ -79,8 +117,17 @@ namespace limbo {
         /// - Only available if libcmaes is installed (see the compilation instructions)
         ///
         /// - Parameters :
-        ///   - double max_fun_evals
+        ///   - int variant
+        ///   - int elitism
         ///   - int restarts
+        ///   - double max_fun_evals
+        ///   - double fun_tolerance
+        ///   - double fun_target
+        ///   - bool fun_compute_initial
+        ///   - bool handle_uncertainty
+        ///   - bool verbose
+        ///   - double lb (lower bounds)
+        ///   - double ub (upper bounds)
         template <typename Params>
         struct Cmaes {
         public:
@@ -91,9 +138,9 @@ namespace limbo {
 
                 // wrap the function
                 libcmaes::FitFunc f_cmaes = [&](const double* x, const int n) {
-		Eigen::Map<const Eigen::VectorXd> m(x, n);
-		// remember that our optimizers maximize
-		return -eval(f, m);
+                    Eigen::Map<const Eigen::VectorXd> m(x, n);
+                    // remember that our optimizers maximize
+                    return -eval(f, m);
                 };
 
                 if (bounded)
@@ -114,8 +161,6 @@ namespace limbo {
 
                 CMAParameters<> cmaparams(x0, sigma);
                 _set_common_params(cmaparams, dim);
-                // used by restart I think
-                cmaparams.set_x0(-1.0, 1.0);
 
                 // the optimization itself
                 CMASolutions cmasols = cmaes<>(f_cmaes, cmaparams);
@@ -131,19 +176,16 @@ namespace limbo {
                 // boundary_transformation
                 double lbounds[dim], ubounds[dim]; // arrays for lower and upper parameter bounds, respectively
                 for (int i = 0; i < dim; i++) {
-                    lbounds[i] = 0.0;
-                    ubounds[i] = 1.0;
+                    lbounds[i] = Params::opt_cmaes::lbound();
+                    ubounds[i] = Params::opt_cmaes::ubound();
                 }
                 GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
                 // initial step-size, i.e. estimated initial parameter error.
-                // we suppose we are optimizing on [0, 1], but we have no idea where to start
-                double sigma = 0.5;
+                double sigma = 0.5 * std::abs(Params::opt_cmaes::ubound() - Params::opt_cmaes::lbound());
                 std::vector<double> x0(init.data(), init.data() + init.size());
                 // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
                 CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, -1, 0, gp);
                 _set_common_params(cmaparams, dim);
-                // used by restart I think
-                cmaparams.set_x0(0, 1.0);
 
                 // the optimization itself
                 CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(f_cmaes, cmaparams);
@@ -162,8 +204,10 @@ namespace limbo {
                 // aCMAES should be the best choice
                 // [see: https://github.com/beniz/libcmaes/wiki/Practical-hints ]
                 // but we want the restart -> aIPOP_CMAES
-                cmaparams.set_algo(aIPOP_CMAES);
+                cmaparams.set_algo(Params::opt_cmaes::variant());
                 cmaparams.set_restarts(Params::opt_cmaes::restarts());
+                cmaparams.set_elitism(Params::opt_cmaes::elitism());
+
                 // if no max fun evals provided, we compute a recommended value
                 size_t max_evals = Params::opt_cmaes::max_fun_evals() < 0
                     ? (900.0 * (dim + 3.0) * (dim + 3.0))
@@ -171,9 +215,36 @@ namespace limbo {
                 cmaparams.set_max_fevals(max_evals);
                 // max iteration is here only for security
                 cmaparams.set_max_iter(100000);
-                // we do not know if what is the actual maximum / minimum of the function
-                // therefore we deactivate this stopping criterion
-                cmaparams.set_stopping_criteria(FTARGET, false);
+
+                if (Params::opt_cmaes::fun_tolerance() == -1) {
+                    // we do not know if what is the actual maximum / minimum of the function
+                    // therefore we deactivate this stopping criterion
+                    cmaparams.set_stopping_criteria(FTARGET, false);
+                }
+                else {
+                    // the FTARGET criteria also allows us to enable ftolerance
+                    cmaparams.set_stopping_criteria(FTARGET, true);
+                    cmaparams.set_ftolerance(Params::opt_cmaes::fun_tolerance());
+                }
+
+                // we allow to set the ftarget parameter
+                if (Params::opt_cmaes::fun_target() != -1) {
+                    cmaparams.set_stopping_criteria(FTARGET, true);
+                    cmaparams.set_ftarget(-Params::opt_cmaes::fun_target());
+                }
+
+                // enable stopping criteria by several equalfunvals and maxfevals
+                cmaparams.set_stopping_criteria(EQUALFUNVALS, true);
+                cmaparams.set_stopping_criteria(MAXFEVALS, true);
+
+                // enable additional criterias to stop
+                cmaparams.set_stopping_criteria(TOLX, true);
+                cmaparams.set_stopping_criteria(CONDITIONCOV, true);
+
+                // enable or disable different parameters
+                cmaparams.set_initial_fvalue(Params::opt_cmaes::fun_compute_initial());
+                cmaparams.set_uh(Params::opt_cmaes::handle_uncertainty());
+                cmaparams.set_quiet(!Params::opt_cmaes::verbose());
             }
         };
     }

@@ -9,6 +9,7 @@
 //|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
+//|   - Roberto Rama (bertoski@gmail.com)
 //|
 //| This software is a computer library whose purpose is to optimize continuous,
 //| black-box functions. It mainly implements Gaussian processes and Bayesian
@@ -147,10 +148,10 @@ BOOST_AUTO_TEST_CASE(test_chained)
 {
     using namespace limbo;
 
-    typedef opt::GridSearch<Params> opt_1_t;
-    typedef opt::RandomPoint<Params> opt_2_t;
-    typedef opt::GridSearch<Params> opt_3_t;
-    typedef opt::GridSearch<Params> opt_4_t;
+    using opt_1_t = opt::GridSearch<Params>;
+    using opt_2_t = opt::RandomPoint<Params>;
+    using opt_3_t = opt::GridSearch<Params>;
+    using opt_4_t = opt::GridSearch<Params>;
     opt::Chained<Params, opt_1_t, opt_2_t, opt_3_t, opt_4_t> optimizer;
 
     monodim_calls = 0;
