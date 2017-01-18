@@ -23,7 +23,7 @@ var searchData=
   ['rdist_5fdouble_5ft',['rdist_double_t',['../group__tools.html#gab2609bfef1e3bdb8b44c0d6c8c139927',1,'limbo::tools']]],
   ['rdist_5fgauss_5ft',['rdist_gauss_t',['../group__tools.html#ga38a794bf956d6bdd1e55f43357826b79',1,'limbo::tools']]],
   ['rdist_5fint_5ft',['rdist_int_t',['../group__tools.html#gacb322b4600b2e500dbcd24661a749f49',1,'limbo::tools']]],
-  ['recompute',['recompute',['../classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4',1,'limbo::model::GP']]],
+  ['recompute',['recompute',['../classlimbo_1_1model_1_1_s_p_g_p.html#a7443e10b67b9e4934572401ef099a517',1,'limbo::model::SPGP::recompute()'],['../classlimbo_1_1model_1_1_g_p.html#aff675b6136bdee1b907a1ca1c76699b4',1,'limbo::model::GP::recompute()']]],
   ['refreshstat_5ff',['RefreshStat_f',['../structlimbo_1_1_refresh_stat__f.html',1,'limbo']]],
   ['refreshstat_5ff',['RefreshStat_f',['../structlimbo_1_1_refresh_stat__f.html#aa457d1c9101974999487052fddec098c',1,'limbo::RefreshStat_f']]],
   ['replicate',['replicate',['../group__par__tools.html#gade6005a5ea74ca5203203d30210c0f22',1,'limbo::tools::par']]],

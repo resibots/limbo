@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['c',['c',['../structlimbo_1_1model_1_1_s_p_g_p_1_1_hyper_params.html#ac7851b66eb3556f595b949ca241fef09',1,'limbo::model::SPGP::HyperParams']]],
   ['cboptimizer',['CBOptimizer',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html',1,'limbo::experimental::bayes_opt']]],
   ['cboptimizer_2ehpp',['cboptimizer.hpp',['../cboptimizer_8hpp.html',1,'']]],
   ['cboptimizer_5fsignature',['cboptimizer_signature',['../namespacelimbo_1_1experimental_1_1bayes__opt.html#ae227a617e3c612fe31b87959b23da719',1,'limbo::experimental::bayes_opt']]],
@@ -17,11 +18,11 @@ var searchData=
   ['comp_5ffronts',['comp_fronts',['../structpareto_1_1impl_1_1comp__fronts.html',1,'pareto::impl']]],
   ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html',1,'pareto::impl']]],
   ['compare_5fobjs_5flex',['compare_objs_lex',['../structpareto_1_1impl_1_1compare__objs__lex.html#a0141f68fca61380d69773bc6225622e3',1,'pareto::impl::compare_objs_lex']]],
-  ['compute',['compute',['../classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617',1,'limbo::experimental::model::GPParego::compute()'],['../classlimbo_1_1model_1_1_g_p.html#a6ba14232cd8d845874b03037f19a740a',1,'limbo::model::GP::compute()']]],
+  ['compute',['compute',['../classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617',1,'limbo::experimental::model::GPParego::compute()'],['../classlimbo_1_1model_1_1_s_p_g_p.html#ae947bef5bb27d3cc10bc4206cf552b45',1,'limbo::model::SPGP::compute(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)'],['../classlimbo_1_1model_1_1_s_p_g_p.html#af6f266cb123980286d8c2a445cf61825',1,'limbo::model::SPGP::compute(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const Eigen::MatrixXd &amp;observations, const Eigen::VectorXd &amp;noises)'],['../classlimbo_1_1model_1_1_s_p_g_p.html#a2729a11aedaa9373908e009387e7ca96',1,'limbo::model::SPGP::compute(const Eigen::MatrixXd &amp;samples, const Eigen::MatrixXd &amp;observations, const Eigen::MatrixXd &amp;noises)'],['../classlimbo_1_1model_1_1_g_p.html#a6ba14232cd8d845874b03037f19a740a',1,'limbo::model::GP::compute()']]],
   ['console_5fsummary_2ehpp',['console_summary.hpp',['../console__summary_8hpp.html',1,'']]],
   ['consolesummary',['ConsoleSummary',['../structlimbo_1_1stat_1_1_console_summary.html',1,'limbo::stat']]],
-  ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html#a263296f6d6b10aa360727137588735f7',1,'limbo::mean::Constant']]],
   ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html',1,'limbo::mean']]],
+  ['constant',['Constant',['../structlimbo_1_1mean_1_1_constant.html#a263296f6d6b10aa360727137588735f7',1,'limbo::mean::Constant']]],
   ['constant_2ehpp',['constant.hpp',['../constant_8hpp.html',1,'']]],
   ['constraint_5fmodel_5ft',['constraint_model_t',['../structlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1_1defaults.html#a732a30715b9697aad5c6587cca6acfd3',1,'limbo::experimental::bayes_opt::CBOptimizer::defaults::constraint_model_t()'],['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html#a5cb12c91d5ba4ea49768779178c6a2c6',1,'limbo::experimental::bayes_opt::CBOptimizer::constraint_model_t()']]],
   ['convert_5fvector',['convert_vector',['../namespacelimbo_1_1tools_1_1par.html#ae84275467a83e81f3201ce512c178c9c',1,'limbo::tools::par']]],

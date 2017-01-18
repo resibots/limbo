@@ -2,6 +2,7 @@ var searchData=
 [
   ['samples',['Samples',['../structlimbo_1_1stat_1_1_samples.html',1,'limbo::stat']]],
   ['seed_5fseq_5ffe',['seed_seq_fe',['../structrandutils_1_1seed__seq__fe.html',1,'randutils']]],
+  ['spgp',['SPGP',['../classlimbo_1_1model_1_1_s_p_g_p.html',1,'limbo::model']]],
   ['squaredexpard',['SquaredExpARD',['../structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html',1,'limbo::kernel']]],
   ['stat_5fhyper_5fvolume',['stat_hyper_volume',['../structlimbo_1_1experimental_1_1stat_1_1defaults_1_1stat__hyper__volume.html',1,'limbo::experimental::stat::defaults']]],
   ['statbase',['StatBase',['../structlimbo_1_1stat_1_1_stat_base.html',1,'limbo::stat']]],

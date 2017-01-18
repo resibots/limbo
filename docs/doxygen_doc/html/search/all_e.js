@@ -17,6 +17,6 @@ var searchData=
   ['opt_5frprop',['opt_rprop',['../structlimbo_1_1defaults_1_1opt__rprop.html',1,'limbo::defaults']]],
   ['opt_5ftools',['Opt_tools',['../group__opt__tools.html',1,'']]],
   ['optimize',['optimize',['../classlimbo_1_1bayes__opt_1_1_b_optimizer.html#a731de253fe21749b9a00e609aae0386f',1,'limbo::bayes_opt::BOptimizer::optimize()'],['../classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer.html#ae401a10958d1ff8f378f8a4947863a5a',1,'limbo::experimental::bayes_opt::CBOptimizer::optimize()'],['../classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi.html#a44003c1ef6450cbcce18e5c978e30f2c',1,'limbo::experimental::bayes_opt::Ehvi::optimize()'],['../classlimbo_1_1bayes__opt_1_1experimental_1_1_i_m_g_p_o.html#afbee4ff7950e1f0f2f98962211fb4ae4',1,'limbo::bayes_opt::experimental::IMGPO::optimize()'],['../classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo.html#a58cae8a4e4902070ef05e9320604805f',1,'limbo::experimental::bayes_opt::Nsbo::optimize()']]],
-  ['optimize_5fhyperparams',['optimize_hyperparams',['../classlimbo_1_1model_1_1_g_p.html#aa01b41e37de4def676cf6c79b08aac94',1,'limbo::model::GP']]],
+  ['optimize_5fhyperparams',['optimize_hyperparams',['../classlimbo_1_1model_1_1_s_p_g_p.html#a942a3f77cffebf2210203da69d2329d4',1,'limbo::model::SPGP::optimize_hyperparams()'],['../classlimbo_1_1model_1_1_g_p.html#aa01b41e37de4def676cf6c79b08aac94',1,'limbo::model::GP::optimize_hyperparams()']]],
   ['optimizer_2ehpp',['optimizer.hpp',['../optimizer_8hpp.html',1,'']]]
 ];

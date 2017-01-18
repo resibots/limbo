@@ -1,0 +1,1159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classlimbo_1_1model_1_1_s_p_g_p" kind="class" language="C++" prot="public">
+    <compoundname>limbo::model::SPGP</compoundname>
+    <includes refid="spgp_8hpp" local="no">limbo/experimental/model/spgp.hpp</includes>
+    <innerclass refid="structlimbo_1_1model_1_1_s_p_g_p_1_1_hyper_params" prot="public">limbo::model::SPGP::HyperParams</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Params</type>
+      </param>
+      <param>
+        <type>typename KernelFunction</type>
+      </param>
+      <param>
+        <type>typename MeanFunction</type>
+      </param>
+      <param>
+        <type>class HyperParamsOptimizer</type>
+        <defval><ref refid="structlimbo_1_1opt_1_1_n_l_opt_grad" kindref="compound">opt::NLOptGrad</ref>&lt;Params, nlopt::LD_LBFGS&gt;</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1af7732cada911327067204eff96de3d9f" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_m</definition>
+        <argsstring></argsstring>
+        <name>_m</name>
+        <briefdescription>
+<para>set on initialization </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="325" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="325" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a6f0bd4953cfe33e3f4fd72161746b5a9" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_dim_in</definition>
+        <argsstring></argsstring>
+        <name>_dim_in</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="326" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="326" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a97860835ae506a735554193f6abf8fb6" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_dim_out</definition>
+        <argsstring></argsstring>
+        <name>_dim_out</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="327" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="327" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a028a497888607c4ed37c98cdfc27ff18" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_del</definition>
+        <argsstring></argsstring>
+        <name>_del</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="328" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="328" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a42930d25a507936b592d97578bcf9d5a" prot="private" static="no" mutable="no">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_samples</definition>
+        <argsstring></argsstring>
+        <name>_samples</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="329" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="329" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a5d708f51ec10b13b583c14f4911ae497" prot="private" static="no" mutable="no">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_observations</definition>
+        <argsstring></argsstring>
+        <name>_observations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="330" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a70d9d83951bc759dea11e107173c4a81" prot="private" static="no" mutable="no">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_observations_zm</definition>
+        <argsstring></argsstring>
+        <name>_observations_zm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="331" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="331" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a70408353da19fdf77ff1a4a21563a49d" prot="private" static="no" mutable="no">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_obs_mean</definition>
+        <argsstring></argsstring>
+        <name>_obs_mean</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="332" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="332" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a5b9725afd7d8bda848de2cbe355cd6bd" prot="private" static="no" mutable="no">
+        <type>MeanFunction</type>
+        <definition>MeanFunction limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_mean_function</definition>
+        <argsstring></argsstring>
+        <name>_mean_function</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="333" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="333" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1ae363a3fd27b8eb151e9f36ac395486f6" prot="private" static="no" mutable="no">
+        <type>KernelFunction</type>
+        <definition>KernelFunction limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_kernel_function</definition>
+        <argsstring></argsstring>
+        <name>_kernel_function</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="334" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="334" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a6b5392d0b0a42d80db53d1a19570469d" prot="private" static="no" mutable="no">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_pseudo_samples</definition>
+        <argsstring></argsstring>
+        <name>_pseudo_samples</name>
+        <briefdescription>
+<para>set after the hyperparameters calculation </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="337" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="337" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1ab18b311f4130379eedbce62ba0adb77e" prot="private" static="no" mutable="no">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_b</definition>
+        <argsstring></argsstring>
+        <name>_b</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="338" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="338" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1ad04af10d900d00bea91acdfa05cb522e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_c</definition>
+        <argsstring></argsstring>
+        <name>_c</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="339" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="339" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a071318d362daf62bafdd53ad0b9a68b7" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_sig</definition>
+        <argsstring></argsstring>
+        <name>_sig</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="340" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="340" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a4d8d787c663e45d0c6792e866346c504" prot="private" static="no" mutable="no">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_noises</definition>
+        <argsstring></argsstring>
+        <name>_noises</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="341" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="341" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a47f66f00a7ebf56f6af21a93c59b90ed" prot="private" static="no" mutable="no">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_Lm</definition>
+        <argsstring></argsstring>
+        <name>_Lm</name>
+        <briefdescription>
+<para>calculated in _compute </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="344" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="344" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1ad1c26250ae889d68bf2b3e36180b9e77" prot="private" static="no" mutable="no">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_bet</definition>
+        <argsstring></argsstring>
+        <name>_bet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="345" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="345" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a74f5412ac200cddfb897ddb92254dbf9" prot="private" static="no" mutable="no">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_matrixL</definition>
+        <argsstring></argsstring>
+        <name>_matrixL</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="346" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="346" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a300d8744cbd6bedfe31438776f840386" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_optimize_init</definition>
+        <argsstring></argsstring>
+        <name>_optimize_init</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>auxiliary variables </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="349" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="349" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1af17f8c7752bdde6160adefff8b472b66" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_optimized</definition>
+        <argsstring></argsstring>
+        <name>_optimized</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="350" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="350" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a68ce952249467dade422d8fb3b08eeea" prot="private" static="no" mutable="no">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_w_init</definition>
+        <argsstring></argsstring>
+        <name>_w_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="351" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlimbo_1_1model_1_1_s_p_g_p_1a0465b3427af08498e04be5029ea92afb" prot="private" static="no" mutable="no">
+        <type>HyperParamsOptimizer</type>
+        <definition>HyperParamsOptimizer limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_hp_optimize</definition>
+        <argsstring></argsstring>
+        <name>_hp_optimize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="352" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="352" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a7052cad1d905c48e673f2a843d2643c9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::SPGP</definition>
+        <argsstring>()</argsstring>
+        <name>SPGP</name>
+        <briefdescription>
+<para>useful because the model might be created before knowing anything about the process </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="106" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a6fe55238f690cfba7dc1de3e6ad25ac3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::SPGP</definition>
+        <argsstring>(int dim_in, int dim_out)</argsstring>
+        <name>SPGP</name>
+        <param>
+          <type>int</type>
+          <declname>dim_in</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dim_out</declname>
+        </param>
+        <briefdescription>
+<para>useful because the model might be created before having samples </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="109" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="109" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ada07822c26ef5b1f954af3650b5b3a93" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::SPGP</definition>
+        <argsstring>(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</argsstring>
+        <name>SPGP</name>
+        <param>
+          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>samples</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>noises</declname>
+        </param>
+        <briefdescription>
+<para>useful to construct without optimizing </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="119" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="119" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a942a3f77cffebf2210203da69d2329d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::optimize_hyperparams</definition>
+        <argsstring>()</argsstring>
+        <name>optimize_hyperparams</name>
+        <briefdescription>
+<para>execute the hyperparameters optimization </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="127" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="127" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ae947bef5bb27d3cc10bc4206cf552b45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::compute</definition>
+        <argsstring>(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</argsstring>
+        <name>compute</name>
+        <param>
+          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>samples</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>noises</declname>
+        </param>
+        <briefdescription>
+<para>Compute the <ref refid="classlimbo_1_1model_1_1_s_p_g_p" kindref="compound">SPGP</ref> from samples, observation, noise. This call needs to be explicit! </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="134" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="134" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1af6f266cb123980286d8c2a445cf61825" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::compute</definition>
+        <argsstring>(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const Eigen::MatrixXd &amp;observations, const Eigen::VectorXd &amp;noises)</argsstring>
+        <name>compute</name>
+        <param>
+          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>samples</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>noises</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="140" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="140" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a2729a11aedaa9373908e009387e7ca96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::compute</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;samples, const Eigen::MatrixXd &amp;observations, const Eigen::MatrixXd &amp;noises)</argsstring>
+        <name>compute</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>samples</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>noises</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="146" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="146" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a2d12288884fadcd922c56718f70801a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::add_sample</definition>
+        <argsstring>(const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation, double noise)</argsstring>
+        <name>add_sample</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>sample</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>observation</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>noise</declname>
+        </param>
+        <briefdescription>
+<para>add sample and recompute the <ref refid="classlimbo_1_1model_1_1_s_p_g_p" kindref="compound">SPGP</ref> </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="160" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="160" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a42182a521e79e95b7e9cc4f1cd256650" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::tuple&lt; Eigen::VectorXd, double &gt;</type>
+        <definition>std::tuple&lt;Eigen::VectorXd, double&gt; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::query</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v) const </argsstring>
+        <name>query</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>\rst return :math:<computeroutput>\mu</computeroutput>, :math:<computeroutput>\sigma^2</computeroutput> (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to <ref refid="classlimbo_1_1model_1_1_s_p_g_p_1a93dc0f879b84a302382edf103fa00da9" kindref="member">mu()</ref> and <ref refid="classlimbo_1_1model_1_1_s_p_g_p_1a69e98f453f5bcb2cf2c76469f91fab24" kindref="member">sigma()</ref> is more efficient because some computations are shared between <ref refid="classlimbo_1_1model_1_1_s_p_g_p_1a93dc0f879b84a302382edf103fa00da9" kindref="member">mu()</ref> and <ref refid="classlimbo_1_1model_1_1_s_p_g_p_1a69e98f453f5bcb2cf2c76469f91fab24" kindref="member">sigma()</ref>. \endrst </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="198" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="198" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ad699ef0c60c08ad24513d16d6c4f0c26" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::pair&lt; Eigen::MatrixXd, Eigen::MatrixXd &gt;</type>
+        <definition>std::pair&lt;Eigen::MatrixXd, Eigen::MatrixXd&gt; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::predict</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;xt) const </argsstring>
+        <name>predict</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>xt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>\rst return :math:<computeroutput>\mu</computeroutput>, :math:<computeroutput>\sigma^2</computeroutput>. Predict a bunch of points. \endrst </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="209" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="209" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a93dc0f879b84a302382edf103fa00da9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::mu</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;v) const </argsstring>
+        <name>mu</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>\rst return :math:<computeroutput>\mu</computeroutput> (unormalized). If there is no sample, return the value according to the mean function. \endrst </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="219" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="219" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ab7cd17b138cae0693ebec8101b401ee0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; Eigen::VectorXd &gt;</type>
+        <definition>std::vector&lt;Eigen::VectorXd&gt; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::mu_mult</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;v) const </argsstring>
+        <name>mu_mult</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="223" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="223" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a69e98f453f5bcb2cf2c76469f91fab24" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::sigma</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v) const </argsstring>
+        <name>sigma</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>\rst return :math:<computeroutput>\sigma^2</computeroutput> (unormalized). If there is no sample, return the max :math:<computeroutput>\sigma^2</computeroutput>. \endrst </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="233" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="233" bodyend="236"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1aed832adbf5fcfa305aac4699d809677e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::sigma_mult</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;v) const </argsstring>
+        <name>sigma_mult</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="238" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="238" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ab84d7663a814757766c2d630e0bacd9e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::dim_in</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_in</name>
+        <briefdescription>
+<para>return the number of dimensions of the input </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="244" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="244" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a605b47cf6ecf50c2436cbad531099d16" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::dim_out</definition>
+        <argsstring>() const </argsstring>
+        <name>dim_out</name>
+        <briefdescription>
+<para>return the number of dimensions of the output </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="251" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="251" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a4bb34b4001647ebbfd0e949b35c39a0c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const MeanFunction &amp;</type>
+        <definition>const MeanFunction&amp; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::mean_function</definition>
+        <argsstring>() const </argsstring>
+        <name>mean_function</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="261" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="261" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1afd6a1362afffaff3ed58ab17b49bd0b4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>MeanFunction &amp;</type>
+        <definition>MeanFunction&amp; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::mean_function</definition>
+        <argsstring>()</argsstring>
+        <name>mean_function</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="262" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="262" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a579bcd7df20371291633b45be1ec73b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::max_observation</definition>
+        <argsstring>() const </argsstring>
+        <name>max_observation</name>
+        <briefdescription>
+<para>return the maximum observation (only call this if the output of the <ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">GP</ref> is of dimension 1) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="265" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="265" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a1d586dd8c2b9a1bce6ab3b39ba42c380" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::mean_observation</definition>
+        <argsstring>() const </argsstring>
+        <name>mean_observation</name>
+        <briefdescription>
+<para>return the mean observation </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="275" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="275" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a9d3bcefa04f22fef8ad518358512154d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::nb_samples</definition>
+        <argsstring>() const </argsstring>
+        <name>nb_samples</name>
+        <briefdescription>
+<para>return the number of samples used to compute the <ref refid="classlimbo_1_1model_1_1_s_p_g_p" kindref="compound">SPGP</ref> </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="282" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="282" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a43c26bf3d36965be388aa4814cf144c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::nb_pseudo_samples</definition>
+        <argsstring>() const </argsstring>
+        <name>nb_pseudo_samples</name>
+        <briefdescription>
+<para>return the number of pseudo samples used to compute the <ref refid="classlimbo_1_1model_1_1_s_p_g_p" kindref="compound">SPGP</ref> </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="285" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="285" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a7443e10b67b9e4934572401ef099a517" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::recompute</definition>
+        <argsstring>(bool update_obs_mean=true)</argsstring>
+        <name>recompute</name>
+        <param>
+          <type>bool</type>
+          <declname>update_obs_mean</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>recomputes the <ref refid="classlimbo_1_1model_1_1_s_p_g_p" kindref="compound">SPGP</ref> </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="288" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="288" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a867505eb41e8fe971eb7de28b2cea50f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; Eigen::VectorXd &gt;</type>
+        <definition>std::vector&lt;Eigen::VectorXd&gt; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::samples</definition>
+        <argsstring>() const </argsstring>
+        <name>samples</name>
+        <briefdescription>
+<para>return the list of samples that have been tested so far </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="295" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="295" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1aa5b380d8bd02f7a4a7a759038469b20b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; Eigen::VectorXd &gt;</type>
+        <definition>std::vector&lt;Eigen::VectorXd&gt; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::pseudo_samples</definition>
+        <argsstring>() const </argsstring>
+        <name>pseudo_samples</name>
+        <briefdescription>
+<para>return the list of pseudo-samples beign used </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="298" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="298" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a0f36e61908b422052019819cb8c8e57d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::test_likelihood</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;data, const Eigen::MatrixXd &amp;samples, const Eigen::MatrixXd &amp;observations)</argsstring>
+        <name>test_likelihood</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>samples</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="301" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="301" bodyend="321"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ae5a54e9182e0c4ae6da4513a0b7e9c18" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_init</definition>
+        <argsstring>(const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations)</argsstring>
+        <name>_init</name>
+        <param>
+          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>samples</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="354" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="354" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a7269532d093198ca05cc207553b4d0b3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_init</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;samples, const Eigen::MatrixXd &amp;observations)</argsstring>
+        <name>_init</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>samples</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>observations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="358" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="358" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a620e853d703c6deab494cfd144b4e0f1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_compute_observations_zm</definition>
+        <argsstring>()</argsstring>
+        <name>_compute_observations_zm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="377" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="377" bodyend="384"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1abbc2548ce6fda4900c2a0ef353fd258e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_update_m</definition>
+        <argsstring>()</argsstring>
+        <name>_update_m</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="386" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="386" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a2d21e07cdfdb513109031d22d4ee030d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_compute</definition>
+        <argsstring>(bool optimize=true)</argsstring>
+        <name>_compute</name>
+        <param>
+          <type>bool</type>
+          <declname>optimize</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="394" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="394" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a461713d9653467a9036c4da4ed93ef68" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_optimize_hyperparams</definition>
+        <argsstring>()</argsstring>
+        <name>_optimize_hyperparams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="414" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="414" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a7d1867cf8e2b77750ccc9dccd579326b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group__opt__tools_1ga362b55973a38ac71f27a06f9d9c14f24" kindref="member">opt::eval_t</ref></type>
+        <definition>opt::eval_t limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_likelihood</definition>
+        <argsstring>(const Eigen::VectorXd &amp;input, bool eval_grad=false) const </argsstring>
+        <name>_likelihood</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>eval_grad</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="451" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="451" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a58ab361e0f9803db6ccb8f6e6370070a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group__opt__tools_1ga362b55973a38ac71f27a06f9d9c14f24" kindref="member">opt::eval_t</ref></type>
+        <definition>opt::eval_t limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_likelihood_wp</definition>
+        <argsstring>(Eigen::MatrixXd &amp;xb, const Eigen::MatrixXd &amp;b, const double &amp;c, const double &amp;sig, const Eigen::MatrixXd &amp;samples, const Eigen::MatrixXd &amp;observations_zm, bool eval_grad, bool inverse) const </argsstring>
+        <name>_likelihood_wp</name>
+        <param>
+          <type>Eigen::MatrixXd &amp;</type>
+          <declname>xb</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>sig</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>samples</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>observations_zm</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>eval_grad</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>inverse</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="458" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="458" bodyend="585"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a9ac2f9a73d818f50859b2f6032b7cb33" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::pair&lt; Eigen::MatrixXd, Eigen::MatrixXd &gt;</type>
+        <definition>std::pair&lt;Eigen::MatrixXd, Eigen::MatrixXd&gt; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_predict</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;xt, bool calc_mu=true, bool calc_s2=true) const </argsstring>
+        <name>_predict</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>xt</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>calc_mu</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>calc_s2</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="587" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="587" bodyend="615"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1aa42f76c834648c549ff310218b94e8f4" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_compute_kernel_matrix</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;p_1, const Eigen::MatrixXd &amp;p_2) const </argsstring>
+        <name>_compute_kernel_matrix</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>p_1</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>p_2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="617" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="617" bodyend="633"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a5142aee59df9a86c321fcbdcbec25304" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_k_diag</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;x) const </argsstring>
+        <name>_k_diag</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="635" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="635" bodyend="639"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ad8d8799b7123ff1e97f6f811b0b68dbe" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_dist</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;x_0, const Eigen::MatrixXd &amp;x_1) const </argsstring>
+        <name>_dist</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>x_0</declname>
+        </param>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>x_1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="642" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="642" bodyend="645"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ac577ca1ebd40b15871fa869e68b54f7a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_to_matrix</definition>
+        <argsstring>(const std::vector&lt; Eigen::VectorXd &gt; &amp;xs) const </argsstring>
+        <name>_to_matrix</name>
+        <param>
+          <type>const std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>xs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="649" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="649" bodyend="656"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a3089c6e2fbe3cabe80b3c1d51c899cc1" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::MatrixXd</type>
+        <definition>Eigen::MatrixXd limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_to_matrix</definition>
+        <argsstring>(std::vector&lt; Eigen::VectorXd &gt; &amp;xs) const </argsstring>
+        <name>_to_matrix</name>
+        <param>
+          <type>std::vector&lt; Eigen::VectorXd &gt; &amp;</type>
+          <declname>xs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="657" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="657" bodyend="657"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1ae5cc9b5366531041071f60f58885205b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; Eigen::VectorXd &gt;</type>
+        <definition>std::vector&lt;Eigen::VectorXd&gt; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_to_vector</definition>
+        <argsstring>(const Eigen::MatrixXd &amp;m) const </argsstring>
+        <name>_to_vector</name>
+        <param>
+          <type>const Eigen::MatrixXd &amp;</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="661" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="661" bodyend="668"/>
+      </memberdef>
+      <memberdef kind="function" id="classlimbo_1_1model_1_1_s_p_g_p_1a1dcbd412dc54090bcaa9ecadf00cb2f9" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; Eigen::VectorXd &gt;</type>
+        <definition>std::vector&lt;Eigen::VectorXd&gt; limbo::model::SPGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;::_to_vector</definition>
+        <argsstring>(Eigen::MatrixXd &amp;m) const </argsstring>
+        <name>_to_vector</name>
+        <param>
+          <type>Eigen::MatrixXd &amp;</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="669" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="669" bodyend="669"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A classic Gaussian process. It is parametrized by:<itemizedlist>
+<listitem><para>a mean function</para></listitem><listitem><para>[optionnal] an optimizer for the hyper-parameters </para></listitem></itemizedlist>
+</para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" line="87" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/experimental/model/spgp.hpp" bodystart="87" bodyend="722"/>
+    <listofallmembers>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ab18b311f4130379eedbce62ba0adb77e" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_b</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ad1c26250ae889d68bf2b3e36180b9e77" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_bet</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ad04af10d900d00bea91acdfa05cb522e" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_c</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a2d21e07cdfdb513109031d22d4ee030d" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_compute</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1aa42f76c834648c549ff310218b94e8f4" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_compute_kernel_matrix</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a620e853d703c6deab494cfd144b4e0f1" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_compute_observations_zm</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a028a497888607c4ed37c98cdfc27ff18" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_del</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a6f0bd4953cfe33e3f4fd72161746b5a9" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_dim_in</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a97860835ae506a735554193f6abf8fb6" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_dim_out</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ad8d8799b7123ff1e97f6f811b0b68dbe" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_dist</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a0465b3427af08498e04be5029ea92afb" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_hp_optimize</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ae5a54e9182e0c4ae6da4513a0b7e9c18" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_init</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a7269532d093198ca05cc207553b4d0b3" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_init</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a5142aee59df9a86c321fcbdcbec25304" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_k_diag</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ae363a3fd27b8eb151e9f36ac395486f6" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_kernel_function</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a7d1867cf8e2b77750ccc9dccd579326b" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_likelihood</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a58ab361e0f9803db6ccb8f6e6370070a" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_likelihood_wp</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a47f66f00a7ebf56f6af21a93c59b90ed" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_Lm</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1af7732cada911327067204eff96de3d9f" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_m</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a74f5412ac200cddfb897ddb92254dbf9" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_matrixL</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a5b9725afd7d8bda848de2cbe355cd6bd" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_mean_function</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a4d8d787c663e45d0c6792e866346c504" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_noises</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a70408353da19fdf77ff1a4a21563a49d" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_obs_mean</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a5d708f51ec10b13b583c14f4911ae497" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_observations</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a70d9d83951bc759dea11e107173c4a81" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_observations_zm</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a461713d9653467a9036c4da4ed93ef68" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_optimize_hyperparams</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a300d8744cbd6bedfe31438776f840386" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_optimize_init</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1af17f8c7752bdde6160adefff8b472b66" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_optimized</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a9ac2f9a73d818f50859b2f6032b7cb33" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_predict</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a6b5392d0b0a42d80db53d1a19570469d" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_pseudo_samples</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a42930d25a507936b592d97578bcf9d5a" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_samples</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a071318d362daf62bafdd53ad0b9a68b7" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_sig</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ac577ca1ebd40b15871fa869e68b54f7a" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_to_matrix</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a3089c6e2fbe3cabe80b3c1d51c899cc1" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_to_matrix</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ae5cc9b5366531041071f60f58885205b" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_to_vector</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a1dcbd412dc54090bcaa9ecadf00cb2f9" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_to_vector</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1abbc2548ce6fda4900c2a0ef353fd258e" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_update_m</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a68ce952249467dade422d8fb3b08eeea" prot="private" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>_w_init</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a2d12288884fadcd922c56718f70801a9" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>add_sample</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ae947bef5bb27d3cc10bc4206cf552b45" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>compute</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1af6f266cb123980286d8c2a445cf61825" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>compute</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a2729a11aedaa9373908e009387e7ca96" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>compute</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ab84d7663a814757766c2d630e0bacd9e" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>dim_in</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a605b47cf6ecf50c2436cbad531099d16" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>dim_out</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a579bcd7df20371291633b45be1ec73b4" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>max_observation</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a4bb34b4001647ebbfd0e949b35c39a0c" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>mean_function</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1afd6a1362afffaff3ed58ab17b49bd0b4" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>mean_function</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a1d586dd8c2b9a1bce6ab3b39ba42c380" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>mean_observation</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a93dc0f879b84a302382edf103fa00da9" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>mu</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ab7cd17b138cae0693ebec8101b401ee0" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>mu_mult</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a43c26bf3d36965be388aa4814cf144c5" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>nb_pseudo_samples</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a9d3bcefa04f22fef8ad518358512154d" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>nb_samples</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a942a3f77cffebf2210203da69d2329d4" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>optimize_hyperparams</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ad699ef0c60c08ad24513d16d6c4f0c26" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>predict</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1aa5b380d8bd02f7a4a7a759038469b20b" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>pseudo_samples</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a42182a521e79e95b7e9cc4f1cd256650" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>query</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a7443e10b67b9e4934572401ef099a517" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>recompute</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a867505eb41e8fe971eb7de28b2cea50f" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>samples</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a69e98f453f5bcb2cf2c76469f91fab24" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>sigma</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1aed832adbf5fcfa305aac4699d809677e" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>sigma_mult</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a7052cad1d905c48e673f2a843d2643c9" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>SPGP</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a6fe55238f690cfba7dc1de3e6ad25ac3" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>SPGP</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1ada07822c26ef5b1f954af3650b5b3a93" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>SPGP</name></member>
+      <member refid="classlimbo_1_1model_1_1_s_p_g_p_1a0f36e61908b422052019819cb8c8e57d" prot="public" virt="non-virtual"><scope>limbo::model::SPGP</scope><name>test_likelihood</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -22,5 +22,7 @@ var searchData=
   ['pareto_5ft',['pareto_t',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi.html#aba7172aa379e749ea5cb85c8773e6408',1,'limbo::experimental::bayes_opt::BoMulti::pareto_t()'],['../structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html#a710260d53bff65b4841c348b074a6e23',1,'limbo::experimental::stat::ParetoFront::pareto_t()']]],
   ['paretobenchmark',['ParetoBenchmark',['../structlimbo_1_1experimental_1_1stat_1_1_pareto_benchmark.html',1,'limbo::experimental::stat']]],
   ['paretofront',['ParetoFront',['../structlimbo_1_1experimental_1_1stat_1_1_pareto_front.html',1,'limbo::experimental::stat']]],
-  ['pick',['pick',['../classrandutils_1_1random__generator.html#a6d9a9002b313cf8126bf640f728f3c49',1,'randutils::random_generator::pick(Range &amp;&amp;range) -&gt; decltype(*std::begin(range))'],['../classrandutils_1_1random__generator.html#aab0a1c9def1a609d5739eddf5ca8caeb',1,'randutils::random_generator::pick(std::initializer_list&lt; T &gt; range) -&gt; decltype(*range.begin())']]]
+  ['pick',['pick',['../classrandutils_1_1random__generator.html#a6d9a9002b313cf8126bf640f728f3c49',1,'randutils::random_generator::pick(Range &amp;&amp;range) -&gt; decltype(*std::begin(range))'],['../classrandutils_1_1random__generator.html#aab0a1c9def1a609d5739eddf5ca8caeb',1,'randutils::random_generator::pick(std::initializer_list&lt; T &gt; range) -&gt; decltype(*range.begin())']]],
+  ['predict',['predict',['../classlimbo_1_1model_1_1_s_p_g_p.html#ad699ef0c60c08ad24513d16d6c4f0c26',1,'limbo::model::SPGP']]],
+  ['pseudo_5fsamples',['pseudo_samples',['../classlimbo_1_1model_1_1_s_p_g_p.html#aa5b380d8bd02f7a4a7a759038469b20b',1,'limbo::model::SPGP']]]
 ];

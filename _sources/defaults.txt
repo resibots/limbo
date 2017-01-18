@@ -27,6 +27,15 @@ mean_constant
 ^^^^^^^^^^^^^
 - double constant = 1 [defined in src/limbo/mean/constant.hpp]
 
+model_spgp
+^^^^^^^^^^
+- double jitter = 0.000001 [defined in src/limbo/experimental/model/spgp.hpp]
+- double samples_percent = 10 [defined in src/limbo/experimental/model/spgp.hpp]
+- int min_m = 1 [defined in src/limbo/experimental/model/spgp.hpp]
+- double pred_kernel_sigma_sq = 0.5 [defined in src/limbo/experimental/model/spgp.hpp]
+- double sig = 0.01 [defined in src/limbo/experimental/model/spgp.hpp]
+- double pred_kernel_l = 0.5 [defined in src/limbo/experimental/model/spgp.hpp]
+
 stop_maxpredictedvalue
 ^^^^^^^^^^^^^^^^^^^^^^
 - double ratio = 0.9 [defined in src/limbo/stop/max_predicted_value.hpp]

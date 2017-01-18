@@ -43,18 +43,6 @@
     <detaileddescription>
 <para>optimize the likelihood of both the kernel and the mean (try to align the mean function) </para>    </detaileddescription>
     <inheritancegraph>
-      <node id="183">
-        <label>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</label>
-        <link refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt"/>
-      </node>
-      <node id="182">
-        <label>limbo::model::gp::KernelMeanLFOpt&lt; Params, Optimizer &gt;</label>
-        <link refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"/>
-        <childnode refid="183" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
       <node id="185">
         <label>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</label>
         <link refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt"/>
@@ -63,6 +51,18 @@
         <label>limbo::model::gp::KernelMeanLFOpt&lt; Params, Optimizer &gt;</label>
         <link refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"/>
         <childnode refid="185" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="187">
+        <label>limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_h_p_opt"/>
+      </node>
+      <node id="186">
+        <label>limbo::model::gp::KernelMeanLFOpt&lt; Params, Optimizer &gt;</label>
+        <link refid="structlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"/>
+        <childnode refid="187" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

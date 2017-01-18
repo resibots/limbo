@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['f',['f',['../structlimbo_1_1bayes__opt_1_1experimental_1_1_tree_node.html#a5c863b76ba45e3eefd34b8a284f7a892',1,'limbo::bayes_opt::experimental::TreeNode']]]
+  ['b',['b',['../structlimbo_1_1model_1_1_s_p_g_p_1_1_hyper_params.html#aa0f5678cadcdfc619c75282c967106ce',1,'limbo::model::SPGP::HyperParams']]]
 ];
