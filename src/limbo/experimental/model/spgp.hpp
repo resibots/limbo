@@ -590,7 +590,7 @@ namespace limbo {
                 Eigen::MatrixXd s2(xt.rows(), 1);
 
                 if (_samples.rows() == 0) {
-                    for (size_t i = 0; i < xt.rows(); ++i) {
+                    for (size_t i = 0; i < (size_t)xt.rows(); ++i) {
                         if (calc_mu)
                             mu.row(i) = _mean_function(xt.row(i), *this);
                         if (calc_s2)
@@ -604,7 +604,7 @@ namespace limbo {
                 Eigen::MatrixXd lmst = (_Lm.template triangularView<Eigen::Lower>()).solve(lst);
 
                 if (calc_mu) {
-                    for (size_t i = 0; i < xt.rows(); ++i)
+                    for (size_t i = 0; i < (size_t)xt.rows(); ++i)
                         mu.row(i) = _mean_function(xt.row(i), *this);
                     mu += (_bet.transpose() * lmst).transpose();
                 }
