@@ -83,7 +83,7 @@ namespace limbo {
             /// provided starting point (if any).
             BO_PARAM(bool, fun_compute_initial, false);
             /// @ingroup opt_defaults
-            /// sets the version of cmaes to use
+            /// sets the version of cmaes to use (possible values are: CMAES_DEFAULT, IPOP_CMAES, BIPOP_CMAES, aCMAES, aIPOP_CMAES, aBIPOP_CMAES, sepCMAES, sepIPOP_CMAES, sepBIPOP_CMAES, sepaCMAES, sepaIPOP_CMAES, sepaBIPOP_CMAES, VD_CMAES, VD_IPOP_CMAES, VD_BIPOP_CMAES
             BO_PARAM(int, variant, aIPOP_CMAES);
             /// @ingroup opt_defaults
             /// defines elitism strategy:
