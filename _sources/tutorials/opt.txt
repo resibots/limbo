@@ -8,6 +8,7 @@ Optimization Sub-API
 Limbo uses optimizers in several situations, most notably to optimize hyper-parameters of Gaussian processes and to optimize acquisition functions. Nevertheless, these optimizers might be useful in other contexts. This tutorial briefly explains how to use it.
 
 Optimizers in Limbo are wrappers around:
+
 - NLOpt (which provides many local, global, gradient-based, gradient-free algorithms)
 - libcmaes (which provides the Covariance Matrix Adaptation Evolutionary Strategy, that is, CMA-ES)
 - a few other algorithms that are implemented in Limbo (in particular, RPROP, which is gradient-based optimization algorithm)
