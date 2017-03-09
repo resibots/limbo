@@ -57,11 +57,13 @@ struct Params {
         BO_PARAM(bool, stats_enabled, false);
     };
     struct bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 1e-10);
         BO_PARAM(int, hp_period, -1);
     };
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 190);
+    };
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 1e-10);
     };
     struct kernel_maternfivehalves {
         BO_PARAM(double, sigma_sq, 1);
