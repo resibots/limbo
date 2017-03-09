@@ -63,7 +63,7 @@ namespace limbo {
                     this->_called = true;
                     KernelLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
-                    auto params = optimizer(optimization, gp.kernel_function().h_params(), false);
+                    Eigen::VectorXd params = optimizer(optimization, gp.kernel_function().h_params(), false);
                     gp.kernel_function().set_h_params(params);
                     gp.set_lik(opt::eval(optimization, params));
                     gp.recompute(false);

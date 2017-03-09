@@ -68,7 +68,6 @@
 namespace limbo {
     namespace defaults {
         struct bayes_opt_boptimizer {
-            BO_PARAM(double, noise, 1e-6);
             BO_PARAM(int, hp_period, -1);
         };
     }
@@ -143,7 +142,7 @@ namespace limbo {
                 this->_init(sfun, afun, reset);
 
                 if (!this->_observations.empty())
-                    _model.compute(this->_samples, this->_observations, Eigen::VectorXd::Constant(this->_observations.size(), Params::bayes_opt_boptimizer::noise()));
+                    _model.compute(this->_samples, this->_observations);
                 else
                     _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
 
@@ -160,7 +159,7 @@ namespace limbo {
 
                     this->_update_stats(*this, afun);
 
-                    _model.add_sample(this->_samples.back(), this->_observations.back(), Params::bayes_opt_boptimizer::noise());
+                    _model.add_sample(this->_samples.back(), this->_observations.back());
 
                     if (Params::bayes_opt_boptimizer::hp_period() > 0
                         && (this->_current_iteration + 1) % Params::bayes_opt_boptimizer::hp_period() == 0)

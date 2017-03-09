@@ -46,9 +46,7 @@
 #ifndef LIMBO_KERNEL_EXP_HPP
 #define LIMBO_KERNEL_EXP_HPP
 
-#include <Eigen/Core>
-
-#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/kernel.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -73,9 +71,10 @@ namespace limbo {
           \endrst
         */
         template <typename Params>
-        struct Exp {
+        struct Exp : public BaseKernel<Params, Exp<Params>> {
             Exp(size_t dim = 1) {}
-            double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
+
+            double kernel(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double _l = Params::kernel_exp::l();
                 return Params::kernel_exp::sigma_sq() * (std::exp(-(1 / (2 * std::pow(_l, 2))) * std::pow((v1 - v2).norm(), 2)));

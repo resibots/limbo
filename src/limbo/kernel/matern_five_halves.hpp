@@ -46,9 +46,7 @@
 #ifndef LIMBO_KERNEL_MATERN_FIVE_HALVES_HPP
 #define LIMBO_KERNEL_MATERN_FIVE_HALVES_HPP
 
-#include <Eigen/Core>
-
-#include <limbo/tools/macros.hpp>
+#include <limbo/kernel/kernel.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -83,10 +81,10 @@ namespace limbo {
           \endrst
         */
         template <typename Params>
-        struct MaternFiveHalves {
+        struct MaternFiveHalves : public BaseKernel<Params, MaternFiveHalves<Params>> {
             MaternFiveHalves(size_t dim = 1) {}
 
-            double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
+            double kernel(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double d = (v1 - v2).norm();
                 return Params::kernel_maternfivehalves::sigma_sq() * (1 + std::sqrt(5) * d / Params::kernel_maternfivehalves::l() + 5 * d * d / (3 * Params::kernel_maternfivehalves::l() * Params::kernel_maternfivehalves::l())) * std::exp(-std::sqrt(5) * d / Params::kernel_maternfivehalves::l());

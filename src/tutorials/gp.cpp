@@ -59,7 +59,9 @@ using namespace limbo;
 struct Params {
     struct kernel_exp {
         BO_PARAM(double, sigma_sq, 1.0);
-        BO_PARAM(double, l, 0.15);
+        BO_PARAM(double, l, 1.0);
+    };
+    struct kernel : public defaults::kernel {
     };
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
@@ -73,16 +75,15 @@ int main(int argc, char** argv)
 {
 
     // our data (1-D inputs, 1-D outputs)
-    std::vector<Eigen::VectorXd> samples = {
-        tools::make_vector(0),
-        tools::make_vector(0.25),
-        tools::make_vector(0.5),
-        tools::make_vector(1.0)};
-    std::vector<Eigen::VectorXd> observations = {
-        tools::make_vector(-1.0),
-        tools::make_vector(2.0),
-        tools::make_vector(1.0),
-        tools::make_vector(3.0)};
+    std::vector<Eigen::VectorXd> samples;
+    std::vector<Eigen::VectorXd> observations;
+
+    size_t N = 8;
+    for (size_t i = 0; i < N; i++) {
+        Eigen::VectorXd s = tools::random_vector(1).array() * 4.0 - 2.0;
+        samples.push_back(s);
+        observations.push_back(tools::make_vector(std::cos(s(0))));
+    }
 
     // the type of the GP
     using Kernel_t = kernel::Exp<Params>;
@@ -92,16 +93,13 @@ int main(int argc, char** argv)
     // 1-D inputs, 1-D outputs
     GP_t gp(1, 1);
 
-    // noise is the same for all the samples (0.01)
-    Eigen::VectorXd noises = Eigen::VectorXd::Ones(samples.size()) * 0.01;
-
     // compute the GP
-    gp.compute(samples, observations, noises);
+    gp.compute(samples, observations);
 
     // write the predicted data in a file (e.g. to be plotted)
     std::ofstream ofs("gp.dat");
     for (int i = 0; i < 100; ++i) {
-        Eigen::VectorXd v = tools::make_vector(i / 100.0);
+        Eigen::VectorXd v = tools::make_vector(i / 100.0).array() * 4.0 - 2.0;
         Eigen::VectorXd mu;
         double sigma;
         std::tie(mu, sigma) = gp.query(v);
@@ -119,13 +117,13 @@ int main(int argc, char** argv)
 
     GP2_t gp_ard(1, 1);
     // do not forget to call the optimization!
-    gp_ard.compute(samples, observations, noises, false);
+    gp_ard.compute(samples, observations, false);
     gp_ard.optimize_hyperparams();
 
     // write the predicted data in a file (e.g. to be plotted)
     std::ofstream ofs_ard("gp_ard.dat");
     for (int i = 0; i < 100; ++i) {
-        Eigen::VectorXd v = tools::make_vector(i / 100.0);
+        Eigen::VectorXd v = tools::make_vector(i / 100.0).array() * 4.0 - 2.0;
         Eigen::VectorXd mu;
         double sigma;
         std::tie(mu, sigma) = gp_ard.query(v);

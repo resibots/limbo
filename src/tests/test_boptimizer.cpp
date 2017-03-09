@@ -70,12 +70,15 @@ struct Params {
     };
 
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 0.0);
         BO_DYN_PARAM(int, hp_period);
     };
 
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 190);
+    };
+
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 0.0);
     };
 
     struct kernel_exp : public defaults::kernel_exp {
