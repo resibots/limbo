@@ -53,6 +53,10 @@ using namespace limbo;
 
 struct Params {
 
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 0.001);
+    };
+
     struct kernel_exp {
         BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 1);
@@ -121,7 +125,6 @@ struct Params {
     };
 
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 0.001);
     };
 };
 
