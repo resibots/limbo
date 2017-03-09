@@ -189,6 +189,85 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
     BOOST_CHECK(results.array().sum() < M * e);
 }
 
+BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
+{
+    using namespace limbo;
+    struct Parameters {
+        struct kernel : public defaults::kernel {
+            BO_PARAM(bool, optimize_noise, true);
+        };
+
+        struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+        };
+
+        struct kernel_maternfivehalves {
+            BO_PARAM(double, sigma_sq, 1);
+            BO_PARAM(double, l, 0.25);
+        };
+
+        struct mean_constant : public defaults::mean_constant {
+        };
+
+        struct opt_rprop : public defaults::opt_rprop {
+        };
+
+        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
+        };
+
+        struct acqui_ucb : public defaults::acqui_ucb {
+        };
+
+        struct opt_gridsearch : public defaults::opt_gridsearch {
+        };
+    };
+
+    using KF_t = kernel::SquaredExpARD<Parameters>;
+    using Mean_t = mean::FunctionARD<Params, mean::Constant<Parameters>>;
+    using GP_t = model::GP<Parameters, KF_t, Mean_t>;
+
+    GP_t gp(4, 2);
+
+    std::vector<Eigen::VectorXd> observations, samples, test_samples, test_samples_kernel_mean;
+    double e = 1e-4;
+
+    // Random samples and test samples
+    int N = 40, M = 10;
+
+    for (int i = 0; i < N; i++) {
+        samples.push_back(tools::random_vector(4));
+        observations.push_back(tools::random_vector(2));
+    }
+
+    for (int i = 0; i < M; i++) {
+        test_samples.push_back(tools::random_vector(4 + 2));
+        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4 + 2));
+    }
+
+    gp.compute(samples, observations);
+
+    model::gp::KernelLFOpt<Parameters>::KernelLFOptimization<GP_t> kernel_optimization(gp);
+
+    Eigen::VectorXd results(M);
+
+    for (int i = 0; i < M; i++) {
+        auto res = check_grad(kernel_optimization, test_samples[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+
+    model::gp::KernelMeanLFOpt<Parameters>::KernelMeanLFOptimization<GP_t> kernel_mean_optimization(gp);
+
+    for (int i = 0; i < M; i++) {
+        auto res = check_grad(kernel_mean_optimization, test_samples_kernel_mean[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+}
+
 BOOST_AUTO_TEST_CASE(test_gp_dim)
 {
     using namespace limbo;
