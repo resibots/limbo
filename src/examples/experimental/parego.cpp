@@ -72,8 +72,11 @@ struct Params {
     };
 
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 0.001);
         BO_PARAM(bool, stats_enabled, true);
+    };
+
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 0.001);
     };
 
     struct kernel_exp : public defaults::kernel_exp {

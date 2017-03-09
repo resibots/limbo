@@ -81,23 +81,20 @@ namespace limbo {
                 GPParego() {}
                 GPParego(int dim_in, int dim_out) : Model(dim_in, 1), _nb_objs(dim_out) {}
                 void compute(const std::vector<Eigen::VectorXd>& samples,
-                    const std::vector<Eigen::VectorXd>& observations, const Eigen::VectorXd& noises)
+                    const std::vector<Eigen::VectorXd>& observations)
                 {
                     _raw_observations = observations;
                     _nb_objs = observations[0].size();
                     auto new_observations = _scalarize_obs(observations);
-                    Model::compute(samples, new_observations, noises);
+                    Model::compute(samples, new_observations);
                 }
                 /// add sample will NOT be incremental (we call compute each time)
-                void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
+                void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation)
                 {
                     this->_samples.push_back(sample);
-                    this->_noises.conservativeResize(this->_noises.size() + 1);
-                    this->_noises[this->_noises.size() - 1] = noise;
                     _raw_observations.push_back(observation);
 
-                    this->compute(this->_samples,
-                        _raw_observations, this->_noises);
+                    this->compute(this->_samples, _raw_observations);
                 }
 
             protected:

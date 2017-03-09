@@ -232,8 +232,11 @@ struct Params {
         BO_PARAM(bool, stats_enabled, false);
     };
 
-    struct bayes_opt_imgpo {
-        BO_PARAM(double, noise, 0.0);
+    struct bayes_opt_imgpo : public defaults::bayes_opt_imgpo {
+    };
+
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 1e-10);
     };
 
     struct kernel_exp : public defaults::kernel_exp {
