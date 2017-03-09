@@ -63,13 +63,12 @@ namespace limbo {
         /**
           @ingroup kernel
           \rst
-          Base struct for kernel definition
-          Handles the noise and its optimization
+          Base struct for kernel definition. It handles the noise and its optimization (only if the kernel allows hyper-parameters optimization).
           \endrst
 
           Parameters:
-             - ``double noise`` (initial signal noise)
-             - ``optimize_noise`` (whether we are optimizing for the noise or not)
+             - ``double noise`` (initial signal noise squared)
+             - ``bool optimize_noise`` (whether we are optimizing for the noise or not)
         */
         template <typename Params, typename Kernel>
         struct BaseKernel {
