@@ -89,7 +89,7 @@ namespace limbo {
 
                 if (Params::kernel::optimize_noise()) {
                     g.conservativeResize(g.size() + 1);
-                    g(g.size() - 1) = (((x1 - x2).norm() < 1e-8) ? 2.0 * _noise + 1e-8 : 0.0);
+                    g(g.size() - 1) = (((x1 - x2).norm() < 1e-8) ? 2.0 * _noise : 0.0);
                 }
 
                 return g;
