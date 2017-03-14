@@ -1,0 +1,8 @@
+
+def build(bld):
+    obj = bld.program(features='cxx',
+                      source='test_spt.cpp',
+                      includes='. .. ../../',
+                      target='test_spt',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      use='limbo')
