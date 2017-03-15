@@ -21,7 +21,8 @@ rcParams.update(params)
 points = np.loadtxt('out.dat')
 num = np.loadtxt('num.dat')
 splits = np.loadtxt('split.dat')
-# bounds = np.loadtxt('bounds.dat')
+bp = np.loadtxt('bp.dat')
+bp_num = np.loadtxt('bp_num.dat')
 
 fig = figure() # no frame
 ax = fig.add_subplot(111)
@@ -65,6 +66,13 @@ for i in range(N):
 
 for i in range(N):
     ax.plot(px[i], py[i], 'o', linewidth=2, color=colors[i%len(colors)], alpha=0.75, label=str(i+1))
+
+kk = 0
+for i in range(len(bp_num)):
+    for j in range(kk, kk+int(bp_num[i])):
+        # if i >= 0:#== 27:
+        ax.plot(bp[j,0], bp[j,1], '.', markerSize=12, color='red')
+    kk = kk + int(bp_num[i])
 
 handles, labels = ax.get_legend_handles_labels()
 ax.legend(handles, labels)
@@ -151,8 +159,8 @@ ax.legend(handles, labels)
 #     # ax.plot(sp_dir_x2, sp_dir_y2, linewidth=8, color=colors[i])#color=colors[int(sp[4])])
 #     # ax.plot(bd[0], bd[1], '*', markersize=20, color=colors[i])
 
-xlim([-40,40])
-ylim([-40,40])
+# xlim([-40,40])
+# ylim([-40,40])
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.spines['left'].set_visible(False)

@@ -19,7 +19,7 @@ int main()
 
     std::vector<Eigen::VectorXd> points;
     for (size_t i = 0; i < N; i++) {
-        // Eigen::VectorXd p = limbo::tools::random_vector(2).array() * 10.0 - 5.0;
+        // Eigen::VectorXd p = limbo::tools::random_vector(D).array() * 10.0 - 5.0;
         Eigen::VectorXd p(D);
         for (int j = 0; j < D; j++) {
             p(j) = gaussian_rand(0.0, 10.0);
@@ -42,6 +42,19 @@ int main()
 
     std::cout << "Num of leaves: " << leaves.size() << std::endl;
     // std::cout << leaves[0]->points().size() << std::endl;
+
+    std::ofstream ofs0("bp.dat");
+    std::ofstream ofs02("bp_num.dat");
+    for (size_t i = 0; i < leaves.size(); i++) {
+        for (size_t j = i + 1; j < leaves.size(); j++) {
+            std::vector<Eigen::VectorXd> bp = spt::get_shared_boundaries(leaves[i], leaves[j]);
+            // std::cout << i + 1 << ", " << j + 1 << ": " << bp.size() << std::endl;
+            ofs02 << bp.size() << std::endl;
+            for (auto b : bp)
+                ofs0 << b(0) << " " << b(1) << std::endl;
+            // std::cout << "----------------------" << std::endl;
+        }
+    }
 
     std::ofstream ofs("out.dat");
     std::ofstream ofs2("num.dat");
