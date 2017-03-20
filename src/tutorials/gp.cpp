@@ -59,7 +59,7 @@ using namespace limbo;
 struct Params {
     struct kernel_exp {
         BO_PARAM(double, sigma_sq, 1.0);
-        BO_PARAM(double, l, 1.0);
+        BO_PARAM(double, l, 0.2);
     };
     struct kernel : public defaults::kernel {
     };
