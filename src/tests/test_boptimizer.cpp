@@ -115,34 +115,14 @@ struct eval2 {
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
-        Eigen::VectorXd v(1);
-        Eigen::VectorXd t(2);
-        t << 0.25, 0.75;
-        double y = (x - t).norm();
-        v(0) = -y;
-        return v;
-    }
-};
-
-template <typename Params, int obs_size = 1>
-struct eval1 {
-    static constexpr int dim_in = 1;
-    static constexpr int dim_out = obs_size;
-
-    Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
-    {
-        Eigen::VectorXd v(1);
-        Eigen::VectorXd t(1);
-        t(0) = 0.25;
-        double y = (x - t).norm();
-        v(0) = -y;
-        return v;
+        Eigen::Vector2d opt(0.25, 0.75);
+        return tools::make_vector(-(x - opt).squaredNorm());
     }
 };
 
 #ifdef USE_LIBCMAES
 template <typename Params, int obs_size = 1>
-struct eval_bounded {
+struct eval_unbounded {
     static constexpr int dim_in = 1;
     static constexpr int dim_out = obs_size;
 
@@ -213,7 +193,7 @@ BOOST_AUTO_TEST_CASE(test_bo_unbounded)
     using Acqui_t = acqui::UCB<Params, GP_t>;
 
     bayes_opt::BOptimizer<Parameters, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
-    opt.optimize(eval_bounded<Params>());
+    opt.optimize(eval_unbounded<Params>());
 
     BOOST_CHECK_CLOSE(opt.best_sample()(0), 2.5, 10);
 }
@@ -241,8 +221,8 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 10);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 10);
+    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
+    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
