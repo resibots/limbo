@@ -74,15 +74,15 @@ struct Params {
     };
 
     struct stop_maxiterations {
-        BO_PARAM(int, iterations, 190);
+        BO_PARAM(int, iterations, 200);
     };
 
     struct kernel : public defaults::kernel {
-        BO_PARAM(double, noise, 0.0);
+        BO_PARAM(double, noise, 1e-8);
     };
 
     struct kernel_exp : public defaults::kernel_exp {
-        BO_PARAM(double, l, 0.1);
+        BO_PARAM(double, l, 0.2);
         BO_PARAM(double, sigma_sq, 0.25);
     };
 
@@ -99,7 +99,7 @@ struct Params {
     };
 
     struct init_randomsampling {
-        BO_PARAM(int, samples, 10);
+        BO_PARAM(int, samples, 50);
     };
 
     struct opt_parallelrepeater : defaults::opt_parallelrepeater {
@@ -196,7 +196,6 @@ BOOST_AUTO_TEST_CASE(test_bo_unbounded)
         };
 
         struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-            BO_PARAM(double, noise, 0.0);
             BO_PARAM(int, hp_period, -1);
         };
 
