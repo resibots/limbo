@@ -64,7 +64,8 @@ void \hyperlink{classlimbo_1_1bayes__opt_1_1_bo_base_ac533d6397b0c0fa5ba0a4d03e0
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$class limbo\+::bayes\+\_\+opt\+::\+Bo\+Base$<$ Params, A1, A2, A3, A4, A5, A6 $>$}
+\subsubsection*{template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$\\*
+class limbo\+::bayes\+\_\+opt\+::\+Bo\+Base$<$ Params, A1, A2, A3, A4, A5, A6 $>$}
 
 \begin{DoxyVerb}embed:rst
 
@@ -90,9 +91,9 @@ This class is templated by several types with default values (thanks to boost::p
 +----------------+---------+---------+---------------+\end{DoxyVerb}
 
 
-For G\+P, the default value is\+: {\ttfamily \hyperlink{classlimbo_1_1model_1_1_g_p}{model\+::\+G\+P}$<$Params, kf\+\_\+t, mean\+\_\+t, opt\+\_\+t$>$$>$},
+For GP, the default value is\+: {\ttfamily \hyperlink{classlimbo_1_1model_1_1_g_p}{model\+::\+GP}$<$Params, kf\+\_\+t, mean\+\_\+t, opt\+\_\+t$>$$>$},
 \begin{DoxyItemize}
-\item with {\ttfamily kf\+\_\+t = \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d}{kernel\+::\+Squared\+Exp\+A\+R\+D}$<$Params$>$}
+\item with {\ttfamily kf\+\_\+t = \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d}{kernel\+::\+Squared\+Exp\+A\+RD}$<$Params$>$}
 \item with {\ttfamily mean\+\_\+t = \hyperlink{structlimbo_1_1mean_1_1_data}{mean\+::\+Data}$<$Params$>$}
 \item with {\ttfamily opt\+\_\+t = \hyperlink{structlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt}{model\+::gp\+::\+Kernel\+L\+F\+Opt}$<$Params$>$}
 \end{DoxyItemize}
@@ -105,60 +106,60 @@ Example of customization\+:
 \begin{DoxyItemize}
 \item {\ttfamily using Kernel\+\_\+t = \hyperlink{structlimbo_1_1kernel_1_1_matern_five_halves}{kernel\+::\+Matern\+Five\+Halves}$<$Params$>$;}
 \item {\ttfamily using Mean\+\_\+t = \hyperlink{structlimbo_1_1mean_1_1_data}{mean\+::\+Data}$<$Params$>$;}
-\item {\ttfamily using G\+P\+\_\+t = \hyperlink{classlimbo_1_1model_1_1_g_p}{model\+::\+G\+P}$<$Params, Kernel\+\_\+t, Mean\+\_\+t$>$;}
-\item {\ttfamily using Acqui\+\_\+t = \hyperlink{classlimbo_1_1acqui_1_1_u_c_b}{acqui\+::\+U\+C\+B}$<$Params, G\+P\+\_\+t$>$;}
+\item {\ttfamily using G\+P\+\_\+t = \hyperlink{classlimbo_1_1model_1_1_g_p}{model\+::\+GP}$<$Params, Kernel\+\_\+t, Mean\+\_\+t$>$;}
+\item {\ttfamily using Acqui\+\_\+t = \hyperlink{classlimbo_1_1acqui_1_1_u_c_b}{acqui\+::\+U\+CB}$<$Params, G\+P\+\_\+t$>$;}
 \item {\ttfamily \hyperlink{classlimbo_1_1bayes__opt_1_1_b_optimizer}{bayes\+\_\+opt\+::\+B\+Optimizer}$<$Params, modelfun$<$G\+P\+\_\+t$>$, acquifun$<$Acqui\+\_\+t$>$$>$ opt;} 
 \end{DoxyItemize}
 
 \subsection{Member Typedef Documentation}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a5abe502b49e1ee70d5e00f27f95f5dff}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!acquisition\+\_\+function\+\_\+t@{acquisition\+\_\+function\+\_\+t}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!acquisition\+\_\+function\+\_\+t@{acquisition\+\_\+function\+\_\+t}}
 \index{acquisition\+\_\+function\+\_\+t@{acquisition\+\_\+function\+\_\+t}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{acquisition\+\_\+function\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf acquisition\+\_\+function\+\_\+t} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::acquifun, typename {\bf defaults\+::acqui\+\_\+t}$>$\+::type}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a5abe502b49e1ee70d5e00f27f95f5dff}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a800d7d9dec5ac0c12b93150f12db9be3}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!args@{args}}
+\subsubsection[{\texorpdfstring{acquisition\+\_\+function\+\_\+t}{acquisition_function_t}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf acquisition\+\_\+function\+\_\+t} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::acquifun, typename {\bf defaults\+::acqui\+\_\+t}$>$\+::type}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a5abe502b49e1ee70d5e00f27f95f5dff}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a5abe502b49e1ee70d5e00f27f95f5dff}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!args@{args}}
 \index{args@{args}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{args}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf args} =  typename bobase\+\_\+signature\+::bind$<$A1, A2, A3, A4, A5, A6$>$\+::type}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a800d7d9dec5ac0c12b93150f12db9be3}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a0cd0e388e42c62bc38e02c096d8ae245}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!init\+\_\+function\+\_\+t@{init\+\_\+function\+\_\+t}}
+\subsubsection[{\texorpdfstring{args}{args}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf args} =  typename bobase\+\_\+signature\+::bind$<$A1, A2, A3, A4, A5, A6$>$\+::type}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a800d7d9dec5ac0c12b93150f12db9be3}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a800d7d9dec5ac0c12b93150f12db9be3}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!init\+\_\+function\+\_\+t@{init\+\_\+function\+\_\+t}}
 \index{init\+\_\+function\+\_\+t@{init\+\_\+function\+\_\+t}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{init\+\_\+function\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf init\+\_\+function\+\_\+t} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::initfun, typename {\bf defaults\+::init\+\_\+t}$>$\+::type}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a0cd0e388e42c62bc38e02c096d8ae245}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a5e23d523dd2a16b866a2660721b937bb}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!model\+\_\+t@{model\+\_\+t}}
+\subsubsection[{\texorpdfstring{init\+\_\+function\+\_\+t}{init_function_t}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf init\+\_\+function\+\_\+t} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::initfun, typename {\bf defaults\+::init\+\_\+t}$>$\+::type}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a0cd0e388e42c62bc38e02c096d8ae245}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a0cd0e388e42c62bc38e02c096d8ae245}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!model\+\_\+t@{model\+\_\+t}}
 \index{model\+\_\+t@{model\+\_\+t}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{model\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf model\+\_\+t} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::modelfun, typename {\bf defaults\+::model\+\_\+t}$>$\+::type}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a5e23d523dd2a16b866a2660721b937bb}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ad64c1fe61c97f4540914018439f96a0a}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!params\+\_\+t@{params\+\_\+t}}
+\subsubsection[{\texorpdfstring{model\+\_\+t}{model_t}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf model\+\_\+t} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::modelfun, typename {\bf defaults\+::model\+\_\+t}$>$\+::type}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a5e23d523dd2a16b866a2660721b937bb}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a5e23d523dd2a16b866a2660721b937bb}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!params\+\_\+t@{params\+\_\+t}}
 \index{params\+\_\+t@{params\+\_\+t}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{params\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf params\+\_\+t} =  Params}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ad64c1fe61c97f4540914018439f96a0a}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a4dfe2a37a52a4a964bce83cc580bff2e}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!Stat@{Stat}}
+\subsubsection[{\texorpdfstring{params\+\_\+t}{params_t}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf params\+\_\+t} =  Params}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ad64c1fe61c97f4540914018439f96a0a}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ad64c1fe61c97f4540914018439f96a0a}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!Stat@{Stat}}
 \index{Stat@{Stat}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{Stat}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf Stat} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::statsfun, typename {\bf defaults\+::stat\+\_\+t}$>$\+::type}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a4dfe2a37a52a4a964bce83cc580bff2e}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a407dede091900c86f4bf8001273c26e2}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!stat\+\_\+t@{stat\+\_\+t}}
+\subsubsection[{\texorpdfstring{Stat}{Stat}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf Stat} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::statsfun, typename {\bf defaults\+::stat\+\_\+t}$>$\+::type}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a4dfe2a37a52a4a964bce83cc580bff2e}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a4dfe2a37a52a4a964bce83cc580bff2e}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!stat\+\_\+t@{stat\+\_\+t}}
 \index{stat\+\_\+t@{stat\+\_\+t}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{stat\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf stat\+\_\+t} =  typename boost\+::mpl\+::if\+\_\+$<$boost\+::fusion\+::traits\+::is\+\_\+sequence$<${\bf Stat}$>$, {\bf Stat}, boost\+::fusion\+::vector$<${\bf Stat}$>$$>$\+::type}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a407dede091900c86f4bf8001273c26e2}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_af3ce6ecc075e643cb1bdde0fb139ce21}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!stopping\+\_\+criteria\+\_\+t@{stopping\+\_\+criteria\+\_\+t}}
+\subsubsection[{\texorpdfstring{stat\+\_\+t}{stat_t}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf stat\+\_\+t} =  typename boost\+::mpl\+::if\+\_\+$<$boost\+::fusion\+::traits\+::is\+\_\+sequence$<${\bf Stat}$>$, {\bf Stat}, boost\+::fusion\+::vector$<${\bf Stat}$>$$>$\+::type}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a407dede091900c86f4bf8001273c26e2}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a407dede091900c86f4bf8001273c26e2}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!stopping\+\_\+criteria\+\_\+t@{stopping\+\_\+criteria\+\_\+t}}
 \index{stopping\+\_\+criteria\+\_\+t@{stopping\+\_\+criteria\+\_\+t}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{stopping\+\_\+criteria\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf stopping\+\_\+criteria\+\_\+t} =  typename boost\+::mpl\+::if\+\_\+$<$boost\+::fusion\+::traits\+::is\+\_\+sequence$<${\bf Stopping\+Criteria}$>$, {\bf Stopping\+Criteria}, boost\+::fusion\+::vector$<${\bf Stopping\+Criteria}$>$$>$\+::type}\label{classlimbo_1_1bayes__opt_1_1_bo_base_af3ce6ecc075e643cb1bdde0fb139ce21}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a313e0d0d1eeceb3d090fbc2aafcc1984}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!Stopping\+Criteria@{Stopping\+Criteria}}
+\subsubsection[{\texorpdfstring{stopping\+\_\+criteria\+\_\+t}{stopping_criteria_t}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf stopping\+\_\+criteria\+\_\+t} =  typename boost\+::mpl\+::if\+\_\+$<$boost\+::fusion\+::traits\+::is\+\_\+sequence$<${\bf Stopping\+Criteria}$>$, {\bf Stopping\+Criteria}, boost\+::fusion\+::vector$<${\bf Stopping\+Criteria}$>$$>$\+::type}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_af3ce6ecc075e643cb1bdde0fb139ce21}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_af3ce6ecc075e643cb1bdde0fb139ce21}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!Stopping\+Criteria@{Stopping\+Criteria}}
 \index{Stopping\+Criteria@{Stopping\+Criteria}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{Stopping\+Criteria}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf Stopping\+Criteria} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::stopcrit, typename {\bf defaults\+::stop\+\_\+t}$>$\+::type}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a313e0d0d1eeceb3d090fbc2aafcc1984}
+\subsubsection[{\texorpdfstring{Stopping\+Criteria}{StoppingCriteria}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ using {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf Stopping\+Criteria} =  typename boost\+::parameter\+::binding$<${\bf args}, tag\+::stopcrit, typename {\bf defaults\+::stop\+\_\+t}$>$\+::type}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a313e0d0d1eeceb3d090fbc2aafcc1984}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a313e0d0d1eeceb3d090fbc2aafcc1984}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ad361278c23693c4220eaa9a9de5d3333}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!Bo\+Base@{Bo\+Base}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!Bo\+Base@{Bo\+Base}}
 \index{Bo\+Base@{Bo\+Base}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{Bo\+Base}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf Bo\+Base} (
+\subsubsection[{\texorpdfstring{Bo\+Base()}{BoBase()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf Bo\+Base} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ad361278c23693c4220eaa9a9de5d3333}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ad361278c23693c4220eaa9a9de5d3333}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ad361278c23693c4220eaa9a9de5d3333}
 
 
 default constructor 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a1a50eebb8a6efd528582ea871a0879a0}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!Bo\+Base@{Bo\+Base}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!Bo\+Base@{Bo\+Base}}
 \index{Bo\+Base@{Bo\+Base}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{Bo\+Base}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf Bo\+Base} (
+\subsubsection[{\texorpdfstring{Bo\+Base(const Bo\+Base \&other)=delete}{BoBase(const BoBase &other)=delete}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::{\bf Bo\+Base} (
 \begin{DoxyParamCaption}
 \item[{const {\bf Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$ \&}]{other}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [delete]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a1a50eebb8a6efd528582ea871a0879a0}
+)\hspace{0.3cm}{\ttfamily [delete]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a1a50eebb8a6efd528582ea871a0879a0}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a1a50eebb8a6efd528582ea871a0879a0}
 
 
 copy is disabled (dangerous and useless) 
@@ -166,103 +167,103 @@ copy is disabled (dangerous and useless)
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ac533d6397b0c0fa5ba0a4d03e0545fa2}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!add\+\_\+new\+\_\+sample@{add\+\_\+new\+\_\+sample}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!add\+\_\+new\+\_\+sample@{add\+\_\+new\+\_\+sample}}
 \index{add\+\_\+new\+\_\+sample@{add\+\_\+new\+\_\+sample}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{add\+\_\+new\+\_\+sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ void {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::add\+\_\+new\+\_\+sample (
+\subsubsection[{\texorpdfstring{add\+\_\+new\+\_\+sample(const Eigen\+::\+Vector\+Xd \&s, const Eigen\+::\+Vector\+Xd \&v)}{add_new_sample(const Eigen::VectorXd &s, const Eigen::VectorXd &v)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ void {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::add\+\_\+new\+\_\+sample (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{s, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{v}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ac533d6397b0c0fa5ba0a4d03e0545fa2}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ac533d6397b0c0fa5ba0a4d03e0545fa2}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ac533d6397b0c0fa5ba0a4d03e0545fa2}
 Add a new sample / observation pair
 \begin{DoxyItemize}
 \item does not update the model!
-\item we don\textquotesingle{}t add Na\+N and inf observations 
-\end{DoxyItemize}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ac3d643d5a668edf22ad053bfc54ea090}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!current\+\_\+iteration@{current\+\_\+iteration}}
+\item we don\textquotesingle{}t add NaN and inf observations 
+\end{DoxyItemize}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!current\+\_\+iteration@{current\+\_\+iteration}}
 \index{current\+\_\+iteration@{current\+\_\+iteration}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{current\+\_\+iteration}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ int {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::current\+\_\+iteration (
+\subsubsection[{\texorpdfstring{current\+\_\+iteration() const }{current_iteration() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ int {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::current\+\_\+iteration (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ac3d643d5a668edf22ad053bfc54ea090}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ac3d643d5a668edf22ad053bfc54ea090}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ac3d643d5a668edf22ad053bfc54ea090}
 
 
 return the current iteration number 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a70e8e4fea1b56aedc943fe62170659e4}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!eval\+\_\+and\+\_\+add@{eval\+\_\+and\+\_\+add}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!eval\+\_\+and\+\_\+add@{eval\+\_\+and\+\_\+add}}
 \index{eval\+\_\+and\+\_\+add@{eval\+\_\+and\+\_\+add}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{eval\+\_\+and\+\_\+add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ template$<$typename State\+Function $>$ void {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::eval\+\_\+and\+\_\+add (
+\subsubsection[{\texorpdfstring{eval\+\_\+and\+\_\+add(const State\+Function \&seval, const Eigen\+::\+Vector\+Xd \&sample)}{eval_and_add(const StateFunction &seval, const Eigen::VectorXd &sample)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ template$<$typename State\+Function $>$ void {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::eval\+\_\+and\+\_\+add (
 \begin{DoxyParamCaption}
 \item[{const State\+Function \&}]{seval, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{sample}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a70e8e4fea1b56aedc943fe62170659e4}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a70e8e4fea1b56aedc943fe62170659e4}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a70e8e4fea1b56aedc943fe62170659e4}
 
 
 Evaluate a sample and add the result to the \textquotesingle{}database\textquotesingle{} (sample / observations vectors) -- it does not update the model. 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a855dc5de1d0732a25f4c9730ac50d0bd}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!observations@{observations}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!observations@{observations}}
 \index{observations@{observations}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{observations}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ const std\+::vector$<$Eigen\+::\+Vector\+Xd$>$\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::observations (
+\subsubsection[{\texorpdfstring{observations() const }{observations() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ const std\+::vector$<$Eigen\+::\+Vector\+Xd$>$\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::observations (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a855dc5de1d0732a25f4c9730ac50d0bd}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a855dc5de1d0732a25f4c9730ac50d0bd}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a855dc5de1d0732a25f4c9730ac50d0bd}
 
 
 return the vector of points of observations (observations can be multi-\/dimensional, hence the Vector\+Xd) -- f(x) 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a69628ced9d71209a59dcdfb7f5637265}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!operator=@{operator=}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!operator=@{operator=}}
 \index{operator=@{operator=}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ {\bf Bo\+Base}\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::operator= (
+\subsubsection[{\texorpdfstring{operator=(const Bo\+Base \&other)=delete}{operator=(const BoBase &other)=delete}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ {\bf Bo\+Base}\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::operator= (
 \begin{DoxyParamCaption}
 \item[{const {\bf Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$ \&}]{other}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [delete]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a69628ced9d71209a59dcdfb7f5637265}
+)\hspace{0.3cm}{\ttfamily [delete]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a69628ced9d71209a59dcdfb7f5637265}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a69628ced9d71209a59dcdfb7f5637265}
 
 
 copy is disabled (dangerous and useless) 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a4c87b7618144f99027c294db3eb803f6}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!res\+\_\+dir@{res\+\_\+dir}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!res\+\_\+dir@{res\+\_\+dir}}
 \index{res\+\_\+dir@{res\+\_\+dir}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{res\+\_\+dir}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ const std\+::string\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::res\+\_\+dir (
+\subsubsection[{\texorpdfstring{res\+\_\+dir() const }{res_dir() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ const std\+::string\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::res\+\_\+dir (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a4c87b7618144f99027c294db3eb803f6}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a4c87b7618144f99027c294db3eb803f6}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a4c87b7618144f99027c294db3eb803f6}
 
 
 return the name of the directory in which results (statistics) are written 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ad3ba0dba1418df0ed8e79d4dd3cc907a}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!samples@{samples}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!samples@{samples}}
 \index{samples@{samples}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{samples}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ const std\+::vector$<$Eigen\+::\+Vector\+Xd$>$\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::samples (
+\subsubsection[{\texorpdfstring{samples() const }{samples() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ const std\+::vector$<$Eigen\+::\+Vector\+Xd$>$\& {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::samples (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ad3ba0dba1418df0ed8e79d4dd3cc907a}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_ad3ba0dba1418df0ed8e79d4dd3cc907a}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_ad3ba0dba1418df0ed8e79d4dd3cc907a}
 
 
 return the list of the points that have been evaluated so far (x) 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a4d94db5c40b35bec292aebfd19b8fb3d}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!stats\+\_\+enabled@{stats\+\_\+enabled}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!stats\+\_\+enabled@{stats\+\_\+enabled}}
 \index{stats\+\_\+enabled@{stats\+\_\+enabled}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{stats\+\_\+enabled}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ bool {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::stats\+\_\+enabled (
+\subsubsection[{\texorpdfstring{stats\+\_\+enabled() const }{stats_enabled() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ bool {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::stats\+\_\+enabled (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a4d94db5c40b35bec292aebfd19b8fb3d}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a4d94db5c40b35bec292aebfd19b8fb3d}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a4d94db5c40b35bec292aebfd19b8fb3d}
 
 
 return true if the statitics are enabled (they can be disabled to avoid dumping data, e.\+g. for unit tests) 
 
-\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a5470e106c4584a30636cafb6fbad6d73}{}\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!total\+\_\+iterations@{total\+\_\+iterations}}
+\index{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}!total\+\_\+iterations@{total\+\_\+iterations}}
 \index{total\+\_\+iterations@{total\+\_\+iterations}!limbo\+::bayes\+\_\+opt\+::\+Bo\+Base@{limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}}
-\subsubsection[{total\+\_\+iterations}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ int {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::total\+\_\+iterations (
+\subsubsection[{\texorpdfstring{total\+\_\+iterations() const }{total_iterations() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Params, class A1 = boost\+::parameter\+::void\+\_\+, class A2 = boost\+::parameter\+::void\+\_\+, class A3 = boost\+::parameter\+::void\+\_\+, class A4 = boost\+::parameter\+::void\+\_\+, class A5 = boost\+::parameter\+::void\+\_\+, class A6 = boost\+::parameter\+::void\+\_\+$>$ int {\bf limbo\+::bayes\+\_\+opt\+::\+Bo\+Base}$<$ Params, A1, A2, A3, A4, A5, A6 $>$\+::total\+\_\+iterations (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a5470e106c4584a30636cafb6fbad6d73}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1bayes__opt_1_1_bo_base_a5470e106c4584a30636cafb6fbad6d73}{}\label{classlimbo_1_1bayes__opt_1_1_bo_base_a5470e106c4584a30636cafb6fbad6d73}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="cboptimizer_8hpp" kind="file" language="C++">
     <compoundname>cboptimizer.hpp</compoundname>
     <includes local="no">iostream</includes>
@@ -534,7 +534,7 @@
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">experimental<sp/>{</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BOOST_PARAMETER_TEMPLATE_KEYWORD(constraint_modelfun)</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>namespace<sp/>bayes_opt<sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">bayes_opt<sp/>{</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespacelimbo_1_1experimental_1_1bayes__opt_1ae227a617e3c612fe31b87959b23da719" kindref="member">cboptimizer_signature</ref><sp/>=<sp/>boost::parameter::parameters&lt;boost::parameter::optional&lt;limbo::tag::acquiopt&gt;,</highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::parameter::optional&lt;limbo::tag::statsfun&gt;,</highlight></codeline>
@@ -663,8 +663,8 @@
 <codeline lineno="231"><highlight class="normal"></highlight></codeline>
 <codeline lineno="232" refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1ae79ff606897d20e23f9749a968b8fe10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5e23d523dd2a16b866a2660721b937bb" kindref="member">model_t</ref>&amp;<sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1ae79ff606897d20e23f9749a968b8fe10" kindref="member">model</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_model;<sp/>}<sp/></highlight><highlight class="comment">//<sp/>returns<sp/>model<sp/>for<sp/>the<sp/>objective<sp/>function</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>model_t<sp/>_model;</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>constraint_model_t<sp/>_constraint_model;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1bayes__opt_1_1_bo_base_1a5e23d523dd2a16b866a2660721b937bb" kindref="member">model_t</ref><sp/>_model;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer_1a5cb12c91d5ba4ea49768779178c6a2c6" kindref="member">constraint_model_t</ref><sp/>_constraint_model;</highlight></codeline>
 <codeline lineno="236"><highlight class="normal"></highlight></codeline>
 <codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>_nb_constraints;</highlight></codeline>
 <codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>_dim_out;</highlight></codeline>

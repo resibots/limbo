@@ -228,29 +228,29 @@
 <li>add a directory for your experiment (e.g. <code class="docutils literal"><span class="pre">my_experiment</span></code>)</li>
 <li>add a <code class="docutils literal"><span class="pre">wscript</span></code> in this directory:</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># encoding: utf-8</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
 
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="kn">import</span> <span class="nn">commands</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
-  <span class="c"># you add command line options here</span>
+  <span class="c1"># you add command line options here</span>
   <span class="k">pass</span>
 
 
 <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-    <span class="c"># you can add configurations here</span>
-    <span class="c"># for instance, to link with ncurses:</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&#39;LIB_NCURSE&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="s">&#39;ncurses&#39;</span><span class="p">]</span>
+    <span class="c1"># you can add configurations here</span>
+    <span class="c1"># for instance, to link with ncurses:</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;LIB_NCURSE&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;ncurses&#39;</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
-    <span class="n">obj</span> <span class="o">=</span> <span class="n">bld</span><span class="o">.</span><span class="n">program</span><span class="p">(</span><span class="n">features</span> <span class="o">=</span> <span class="s">&#39;cxx&#39;</span><span class="p">,</span>
-                      <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;my_file1.cpp my_file2.cpp&#39;</span><span class="p">,</span><span class="c"># separate with spaces</span>
-                      <span class="n">includes</span> <span class="o">=</span> <span class="s">&#39;. ../../src/&#39;</span><span class="p">,</span>
-                      <span class="n">target</span> <span class="o">=</span> <span class="s">&#39;belty&#39;</span><span class="p">,</span>
-                      <span class="n">uselib</span> <span class="o">=</span>  <span class="s">&#39;BOOST EIGEN TBB NCURSE&#39;</span><span class="p">,</span> <span class="c"># add NCURSE here to actually link with it</span>
-                      <span class="n">use</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">)</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">bld</span><span class="o">.</span><span class="n">program</span><span class="p">(</span><span class="n">features</span> <span class="o">=</span> <span class="s1">&#39;cxx&#39;</span><span class="p">,</span>
+                      <span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;my_file1.cpp my_file2.cpp&#39;</span><span class="p">,</span><span class="c1"># separate with spaces</span>
+                      <span class="n">includes</span> <span class="o">=</span> <span class="s1">&#39;. ../../src/&#39;</span><span class="p">,</span>
+                      <span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;belty&#39;</span><span class="p">,</span>
+                      <span class="n">uselib</span> <span class="o">=</span>  <span class="s1">&#39;BOOST EIGEN TBB NCURSE&#39;</span><span class="p">,</span> <span class="c1"># add NCURSE here to actually link with it</span>
+                      <span class="n">use</span> <span class="o">=</span> <span class="s1">&#39;limbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -318,24 +318,24 @@
 <p>For instance, let&#8217;s say we have a file called <code class="docutils literal"><span class="pre">multi.cpp</span></code> for which we want to compare two algorithms, <code class="docutils literal"><span class="pre">Parego</span></code> and <code class="docutils literal"><span class="pre">EHVI</span></code>:</p>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//.... code</span>
 <span class="cp">#ifdef PAREGO</span>
-  <span class="n">Parego</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">stat_fun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
+  <span class="n">Parego</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">stat_fun</span><span class="o">&lt;</span><span class="n">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
 <span class="cp">#else</span>
-  <span class="n">Ehvi</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">stat_fun</span><span class="o">&lt;</span><span class="kt">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
+  <span class="n">Ehvi</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">stat_fun</span><span class="o">&lt;</span><span class="n">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
 <span class="cp">#endif</span>
 <span class="c1">// ...</span>
 </pre></div>
 </div>
 <p>We can create two variants in the <code class="docutils literal"><span class="pre">wscript</span></code>, as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
 
   <span class="n">limbo</span><span class="o">.</span><span class="n">create_variants</span><span class="p">(</span><span class="n">bld</span><span class="p">,</span>
-                      <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;multi.cpp&#39;</span><span class="p">,</span>
-                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">,</span>
-                      <span class="n">uselib</span> <span class="o">=</span> <span class="s">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
-                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;PAREGO&#39;</span><span class="p">,</span>
-                                  <span class="s">&#39;EHVI&#39;</span><span class="p">])</span>
+                      <span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;multi.cpp&#39;</span><span class="p">,</span>
+                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s1">&#39;limbo&#39;</span><span class="p">,</span>
+                      <span class="n">uselib</span> <span class="o">=</span> <span class="s1">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
+                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PAREGO&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;EHVI&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Limbo will create two binaries:</p>
@@ -344,16 +344,16 @@
 <li><code class="docutils literal"><span class="pre">multi_ehvi</span></code>, which is the compilation of <code class="docutils literal"><span class="pre">multi.cpp</span></code> file with a <code class="docutils literal"><span class="pre">#define</span> <span class="pre">EHVI</span></code> at the first line</li>
 </ul>
 <p>You can add as many defines as you like (or even generate them with python code), for instance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
 
   <span class="n">limbo</span><span class="o">.</span><span class="n">create_variants</span><span class="p">(</span><span class="n">bld</span><span class="p">,</span>
-                      <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;multi.cpp&#39;</span><span class="p">,</span>
-                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">,</span>
-                      <span class="n">uselib</span> <span class="o">=</span> <span class="s">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
-                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;PAREGO MOP2 DIM2&#39;</span><span class="p">,</span>
-                                  <span class="s">&#39;EHVI ZDT2 DIM6&#39;</span><span class="p">])</span>
+                      <span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;multi.cpp&#39;</span><span class="p">,</span>
+                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s1">&#39;limbo&#39;</span><span class="p">,</span>
+                      <span class="n">uselib</span> <span class="o">=</span> <span class="s1">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
+                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PAREGO MOP2 DIM2&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;EHVI ZDT2 DIM6&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>This will create <code class="docutils literal"><span class="pre">multi_parego_mop2_dim2</span></code> and <code class="docutils literal"><span class="pre">multi_ehvi_zdt2_dim6</span></code>.</p>
@@ -363,16 +363,16 @@
 <li>First compile a static library, then link with it in the variant.</li>
 <li>Add them in sequence in the source input. The name of the first file is used for the variant target names. Example:</li>
 </ul>
-<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
 
   <span class="n">limbo</span><span class="o">.</span><span class="n">create_variants</span><span class="p">(</span><span class="n">bld</span><span class="p">,</span>
-                      <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;multi.cpp dep.cpp impl.cpp&#39;</span><span class="p">,</span>
-                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">,</span>
-                      <span class="n">uselib</span> <span class="o">=</span> <span class="s">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
-                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;PAREGO&#39;</span><span class="p">,</span>
-                                  <span class="s">&#39;EHVI&#39;</span><span class="p">])</span>
+                      <span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;multi.cpp dep.cpp impl.cpp&#39;</span><span class="p">,</span>
+                      <span class="n">uselib_local</span> <span class="o">=</span> <span class="s1">&#39;limbo&#39;</span><span class="p">,</span>
+                      <span class="n">uselib</span> <span class="o">=</span> <span class="s1">&#39;BOOST EIGEN TBB SFERES&#39;</span><span class="p">,</span>
+                      <span class="n">variants</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PAREGO&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;EHVI&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Limbo will create two binaries:</p>

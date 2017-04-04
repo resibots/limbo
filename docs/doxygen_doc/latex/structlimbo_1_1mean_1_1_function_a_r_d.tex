@@ -1,4 +1,4 @@
-\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d}{}\section{limbo\+:\+:mean\+:\+:Function\+A\+R\+D$<$ Params, Mean\+Function $>$ Struct Template Reference}
+\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d}{}\section{limbo\+:\+:mean\+:\+:Function\+A\+RD$<$ Params, Mean\+Function $>$ Struct Template Reference}
 \label{structlimbo_1_1mean_1_1_function_a_r_d}\index{limbo\+::mean\+::\+Function\+A\+R\+D$<$ Params, Mean\+Function $>$@{limbo\+::mean\+::\+Function\+A\+R\+D$<$ Params, Mean\+Function $>$}}
 
 
@@ -7,7 +7,7 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{structlimbo_1_1mean_1_1_function_a_r_d_ae43aef0e74455e5c97dd2d8cda17a0a1}{Function\+A\+R\+D} (size\+\_\+t dim\+\_\+out=1)
+\hyperlink{structlimbo_1_1mean_1_1_function_a_r_d_ae43aef0e74455e5c97dd2d8cda17a0a1}{Function\+A\+RD} (size\+\_\+t dim\+\_\+out=1)
 \item 
 size\+\_\+t \hyperlink{structlimbo_1_1mean_1_1_function_a_r_d_aaf1b474fc0a0c7b9738da60bca99b45b}{h\+\_\+params\+\_\+size} () const 
 \item 
@@ -15,14 +15,15 @@ const Eigen\+::\+Vector\+Xd \& \hyperlink{structlimbo_1_1mean_1_1_function_a_r_d
 \item 
 void \hyperlink{structlimbo_1_1mean_1_1_function_a_r_d_a02dabc2cbdf001450cdd893f578c042d}{set\+\_\+h\+\_\+params} (const Eigen\+::\+Vector\+Xd \&p)
 \item 
-{\footnotesize template$<$typename G\+P $>$ }\\Eigen\+::\+Matrix\+Xd \hyperlink{structlimbo_1_1mean_1_1_function_a_r_d_a5bd1343c7f3616c066296813361d9a96}{grad} (const Eigen\+::\+Vector\+Xd \&x, const G\+P \&gp) const 
+{\footnotesize template$<$typename GP $>$ }\\Eigen\+::\+Matrix\+Xd \hyperlink{structlimbo_1_1mean_1_1_function_a_r_d_a5bd1343c7f3616c066296813361d9a96}{grad} (const Eigen\+::\+Vector\+Xd \&x, const GP \&gp) const 
 \item 
-{\footnotesize template$<$typename G\+P $>$ }\\Eigen\+::\+Vector\+Xd \hyperlink{structlimbo_1_1mean_1_1_function_a_r_d_acfc9ce5670a247a35a1f09e5f0a09adb}{operator()} (const Eigen\+::\+Vector\+Xd \&x, const G\+P \&gp) const 
+{\footnotesize template$<$typename GP $>$ }\\Eigen\+::\+Vector\+Xd \hyperlink{structlimbo_1_1mean_1_1_function_a_r_d_acfc9ce5670a247a35a1f09e5f0a09adb}{operator()} (const Eigen\+::\+Vector\+Xd \&x, const GP \&gp) const 
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$typename Params, typename Mean\+Function$>$struct limbo\+::mean\+::\+Function\+A\+R\+D$<$ Params, Mean\+Function $>$}
+\subsubsection*{template$<$typename Params, typename Mean\+Function$>$\\*
+struct limbo\+::mean\+::\+Function\+A\+R\+D$<$ Params, Mean\+Function $>$}
 
 Functor used to optimize the mean function using the maximum likelihood principle
 
@@ -32,53 +33,53 @@ Functor used to optimize the mean function using the maximum likelihood principl
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_ae43aef0e74455e5c97dd2d8cda17a0a1}{}\index{limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}!Function\+A\+R\+D@{Function\+A\+R\+D}}
-\index{Function\+A\+R\+D@{Function\+A\+R\+D}!limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}}
-\subsubsection[{Function\+A\+R\+D}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ {\bf limbo\+::mean\+::\+Function\+A\+R\+D}$<$ Params, Mean\+Function $>$\+::{\bf Function\+A\+R\+D} (
+\index{limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}!Function\+A\+RD@{Function\+A\+RD}}
+\index{Function\+A\+RD@{Function\+A\+RD}!limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}}
+\subsubsection[{\texorpdfstring{Function\+A\+R\+D(size\+\_\+t dim\+\_\+out=1)}{FunctionARD(size_t dim_out=1)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ {\bf limbo\+::mean\+::\+Function\+A\+RD}$<$ Params, Mean\+Function $>$\+::{\bf Function\+A\+RD} (
 \begin{DoxyParamCaption}
 \item[{size\+\_\+t}]{dim\+\_\+out = {\ttfamily 1}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1mean_1_1_function_a_r_d_ae43aef0e74455e5c97dd2d8cda17a0a1}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_ae43aef0e74455e5c97dd2d8cda17a0a1}{}\label{structlimbo_1_1mean_1_1_function_a_r_d_ae43aef0e74455e5c97dd2d8cda17a0a1}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_a5bd1343c7f3616c066296813361d9a96}{}\index{limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}!grad@{grad}}
-\index{grad@{grad}!limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}}
-\subsubsection[{grad}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ template$<$typename G\+P $>$ Eigen\+::\+Matrix\+Xd {\bf limbo\+::mean\+::\+Function\+A\+R\+D}$<$ Params, Mean\+Function $>$\+::grad (
+\index{limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}!grad@{grad}}
+\index{grad@{grad}!limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}}
+\subsubsection[{\texorpdfstring{grad(const Eigen\+::\+Vector\+Xd \&x, const G\+P \&gp) const }{grad(const Eigen::VectorXd &x, const GP &gp) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ template$<$typename GP $>$ Eigen\+::\+Matrix\+Xd {\bf limbo\+::mean\+::\+Function\+A\+RD}$<$ Params, Mean\+Function $>$\+::grad (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{x, }
-\item[{const G\+P \&}]{gp}
+\item[{const GP \&}]{gp}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1mean_1_1_function_a_r_d_a5bd1343c7f3616c066296813361d9a96}
-\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_a4b8676c860264932e5ebd302e46e1a42}{}\index{limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}!h\+\_\+params@{h\+\_\+params}}
-\index{h\+\_\+params@{h\+\_\+params}!limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}}
-\subsubsection[{h\+\_\+params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ const Eigen\+::\+Vector\+Xd\& {\bf limbo\+::mean\+::\+Function\+A\+R\+D}$<$ Params, Mean\+Function $>$\+::h\+\_\+params (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_a5bd1343c7f3616c066296813361d9a96}{}\label{structlimbo_1_1mean_1_1_function_a_r_d_a5bd1343c7f3616c066296813361d9a96}
+\index{limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}!h\+\_\+params@{h\+\_\+params}}
+\index{h\+\_\+params@{h\+\_\+params}!limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}}
+\subsubsection[{\texorpdfstring{h\+\_\+params() const }{h_params() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ const Eigen\+::\+Vector\+Xd\& {\bf limbo\+::mean\+::\+Function\+A\+RD}$<$ Params, Mean\+Function $>$\+::h\+\_\+params (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1mean_1_1_function_a_r_d_a4b8676c860264932e5ebd302e46e1a42}
-\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_aaf1b474fc0a0c7b9738da60bca99b45b}{}\index{limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}!h\+\_\+params\+\_\+size@{h\+\_\+params\+\_\+size}}
-\index{h\+\_\+params\+\_\+size@{h\+\_\+params\+\_\+size}!limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}}
-\subsubsection[{h\+\_\+params\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ size\+\_\+t {\bf limbo\+::mean\+::\+Function\+A\+R\+D}$<$ Params, Mean\+Function $>$\+::h\+\_\+params\+\_\+size (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_a4b8676c860264932e5ebd302e46e1a42}{}\label{structlimbo_1_1mean_1_1_function_a_r_d_a4b8676c860264932e5ebd302e46e1a42}
+\index{limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}!h\+\_\+params\+\_\+size@{h\+\_\+params\+\_\+size}}
+\index{h\+\_\+params\+\_\+size@{h\+\_\+params\+\_\+size}!limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}}
+\subsubsection[{\texorpdfstring{h\+\_\+params\+\_\+size() const }{h_params_size() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ size\+\_\+t {\bf limbo\+::mean\+::\+Function\+A\+RD}$<$ Params, Mean\+Function $>$\+::h\+\_\+params\+\_\+size (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1mean_1_1_function_a_r_d_aaf1b474fc0a0c7b9738da60bca99b45b}
-\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_acfc9ce5670a247a35a1f09e5f0a09adb}{}\index{limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}!operator()@{operator()}}
-\index{operator()@{operator()}!limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}}
-\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ template$<$typename G\+P $>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::mean\+::\+Function\+A\+R\+D}$<$ Params, Mean\+Function $>$\+::operator() (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_aaf1b474fc0a0c7b9738da60bca99b45b}{}\label{structlimbo_1_1mean_1_1_function_a_r_d_aaf1b474fc0a0c7b9738da60bca99b45b}
+\index{limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}}
+\subsubsection[{\texorpdfstring{operator()(const Eigen\+::\+Vector\+Xd \&x, const G\+P \&gp) const }{operator()(const Eigen::VectorXd &x, const GP &gp) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ template$<$typename GP $>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::mean\+::\+Function\+A\+RD}$<$ Params, Mean\+Function $>$\+::operator() (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{x, }
-\item[{const G\+P \&}]{gp}
+\item[{const GP \&}]{gp}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1mean_1_1_function_a_r_d_acfc9ce5670a247a35a1f09e5f0a09adb}
-\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_a02dabc2cbdf001450cdd893f578c042d}{}\index{limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}!set\+\_\+h\+\_\+params@{set\+\_\+h\+\_\+params}}
-\index{set\+\_\+h\+\_\+params@{set\+\_\+h\+\_\+params}!limbo\+::mean\+::\+Function\+A\+R\+D@{limbo\+::mean\+::\+Function\+A\+R\+D}}
-\subsubsection[{set\+\_\+h\+\_\+params}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ void {\bf limbo\+::mean\+::\+Function\+A\+R\+D}$<$ Params, Mean\+Function $>$\+::set\+\_\+h\+\_\+params (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_acfc9ce5670a247a35a1f09e5f0a09adb}{}\label{structlimbo_1_1mean_1_1_function_a_r_d_acfc9ce5670a247a35a1f09e5f0a09adb}
+\index{limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}!set\+\_\+h\+\_\+params@{set\+\_\+h\+\_\+params}}
+\index{set\+\_\+h\+\_\+params@{set\+\_\+h\+\_\+params}!limbo\+::mean\+::\+Function\+A\+RD@{limbo\+::mean\+::\+Function\+A\+RD}}
+\subsubsection[{\texorpdfstring{set\+\_\+h\+\_\+params(const Eigen\+::\+Vector\+Xd \&p)}{set_h_params(const Eigen::VectorXd &p)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Mean\+Function $>$ void {\bf limbo\+::mean\+::\+Function\+A\+RD}$<$ Params, Mean\+Function $>$\+::set\+\_\+h\+\_\+params (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{p}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1mean_1_1_function_a_r_d_a02dabc2cbdf001450cdd893f578c042d}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1mean_1_1_function_a_r_d_a02dabc2cbdf001450cdd893f578c042d}{}\label{structlimbo_1_1mean_1_1_function_a_r_d_a02dabc2cbdf001450cdd893f578c042d}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

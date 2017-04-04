@@ -204,12 +204,12 @@
 
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
-    <span class="n">bld</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="s">&#39;cxx cxxprogram&#39;</span><span class="p">,</span>
-        <span class="n">source</span><span class="o">=</span><span class="s">&#39;main.cpp&#39;</span><span class="p">,</span>
-        <span class="n">includes</span><span class="o">=</span><span class="s">&#39;. ../../src&#39;</span><span class="p">,</span>
-        <span class="n">target</span><span class="o">=</span><span class="s">&#39;myExp&#39;</span><span class="p">,</span>
-        <span class="n">uselib</span><span class="o">=</span><span class="s">&#39;BOOST EIGEN TBB LIBCMAES NLOPT&#39;</span><span class="p">,</span>
-        <span class="n">use</span><span class="o">=</span><span class="s">&#39;limbo&#39;</span><span class="p">)</span>
+    <span class="n">bld</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="s1">&#39;cxx cxxprogram&#39;</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="s1">&#39;main.cpp&#39;</span><span class="p">,</span>
+        <span class="n">includes</span><span class="o">=</span><span class="s1">&#39;. ../../src&#39;</span><span class="p">,</span>
+        <span class="n">target</span><span class="o">=</span><span class="s1">&#39;myExp&#39;</span><span class="p">,</span>
+        <span class="n">uselib</span><span class="o">=</span><span class="s1">&#39;BOOST EIGEN TBB LIBCMAES NLOPT&#39;</span><span class="p">,</span>
+        <span class="n">use</span><span class="o">=</span><span class="s1">&#39;limbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For this example, we will optimize a simple function: <span class="math">\(-{(5 * x - 2.5)}^2 + 5\)</span>, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from &#8216;uselib&#8217;.</p>
@@ -428,10 +428,10 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
 70
 71
 72
-73</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;iostream&gt;</span>
+73</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="c1">// you can also include &lt;limbo/limbo.hpp&gt; but it will slow down the compilation</span>
-<span class="cp">#include &lt;limbo/bayes_opt/boptimizer.hpp&gt;</span>
+<span class="cp">#include</span> <span class="cpf">&lt;limbo/bayes_opt/boptimizer.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
 

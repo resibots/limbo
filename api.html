@@ -229,14 +229,14 @@
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
 
 <span class="c1">// here stop_t is a user-defined list of stopping criteria</span>
-<span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">stopcrit</span><span class="o">&lt;</span><span class="kt">stop_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+<span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">stopcrit</span><span class="o">&lt;</span><span class="n">stop_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Or to define a custom acquisition function:</p>
 <div class="highlight-c++"><div class="highlight"><pre><span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
 
 <span class="c1">// here acqui_t is a user-defined acquisition function</span>
-<span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="kt">acqui_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+<span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="n">acqui_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
 </pre></div>
 </div>
 <div class="section" id="class-structure">
@@ -521,7 +521,7 @@
     <span class="kt">size_t</span> <span class="n">dim_in</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_model</span><span class="p">.</span><span class="n">dim_in</span><span class="p">();</span> <span class="p">}</span>
     <span class="kt">size_t</span> <span class="n">dim_out</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_model</span><span class="p">.</span><span class="n">dim_out</span><span class="p">();</span> <span class="p">}</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
-    <span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">gradient</span><span class="p">)</span> <span class="k">const</span>
+    <span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">gradient</span><span class="p">)</span> <span class="k">const</span>
     <span class="p">{</span>
       <span class="c1">// code</span>
     <span class="p">}</span>
@@ -753,7 +753,7 @@
 <p>Most algorithms are wrappers to external libraries (NLOpt and CMA-ES). Only the Rprop (and a few control algorithms like &#8216;RandomPoint&#8217;) is implemented in Limbo. Some optimizers require the gradient, some don&#8217;t.</p>
 <p>The tutorial <a class="reference internal" href="tutorials/opt.html#opt-tutorial"><span>Optimization sub-API</span></a> describes how to use the opt:: API in your own algorithms.</p>
 <p>The return type of the function to be optimized is <code class="docutils literal"><span class="pre">eval_t</span></code>, which is defined as a pair of a double (f(x)) and a vector (the gradient):</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="k">using</span> <span class="kt">eval_t</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">using</span> <span class="n">eval_t</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>To make it easy to work with <code class="docutils literal"><span class="pre">eval_t</span></code>, Limbo defines a few shortcuts:</p>
@@ -823,7 +823,7 @@
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">f</span></code> is the function to be optimized. If the gradient is known, the function should look like this:</li>
 </ul>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">fx</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">function_value</span><span class="o">&gt;</span><span class="p">;</span>
   <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">gradient</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">gradient</span><span class="o">&gt;</span><span class="p">;</span>
@@ -832,7 +832,7 @@
 </pre></div>
 </div>
 <p>It is possible to make it a bit more generic by not computing the gradient when it is not asked, that is:</p>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">fx</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">function_value</span><span class="o">&gt;</span><span class="p">;</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">eval_grad</span><span class="p">)</span>
@@ -845,7 +845,7 @@
 <ul class="simple">
 <li>If the gradient of <code class="docutils literal"><span class="pre">f</span></code> is not known:</li>
 </ul>
-<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">function_value</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
   <span class="k">return</span> <span class="n">limbo</span><span class="o">::</span><span class="n">opt</span><span class="o">::</span><span class="n">no_grad</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
@@ -1658,7 +1658,7 @@ Computes the squared exponential covariance like this:</p>
 <h3>Internals<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt>
-<span class="target" id="limbostructlimbo_1_1stop_1_1_chain_criteria"></span><em class="property">template </em>&lt;<em class="property">typename</em> BO, <em class="property">typename</em> AggregatorFunction&gt;</dt>
+<span class="target" id="limbostructlimbo_1_1stop_1_1_chain_criteria"></span><em class="property">template </em>&lt;typename <em>BO</em>, typename <em>AggregatorFunction</em>&gt;</dt>
 <dt id="_CPPv2N5limbo4stop13ChainCriteriaE">
 <span id="limbo::stop::ChainCriteria"></span><em class="property">struct </em><code class="descclassname">limbo::stop::</code><code class="descname">ChainCriteria</code><a class="headerlink" href="#_CPPv2N5limbo4stop13ChainCriteriaE" title="Permalink to this definition">¶</a></dt>
 <dd><p><p>Utility functor for boost::fusion::accumulate, e.g.:</p>

@@ -200,7 +200,7 @@
 7
 8
 9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// the maximum is [0.5, 0.5] (f([0.5, 0.5] = 0))</span>
-<span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">double</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">).</span><span class="n">square</span><span class="p">().</span><span class="n">sum</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">eval_grad</span><span class="p">)</span>
@@ -365,8 +365,8 @@
 66
 67
 68
-69</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;limbo/opt.hpp&gt;</span>
-<span class="cp">#include &lt;limbo/tools.hpp&gt;</span>
+69</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;limbo/opt.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;limbo/tools.hpp&gt;</span><span class="cp"></span>
 
 <span class="c1">// this short tutorial shows how to use the optimization api of limbo (opt::)</span>
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
@@ -394,7 +394,7 @@
 
 <span class="c1">// we maximize -(x_1-0.5)^2 - (x_2-0.5)^2</span>
 <span class="c1">// the maximum is [0.5, 0.5] (f([0.5, 0.5] = 0))</span>
-<span class="n">opt</span><span class="o">::</span><span class="kt">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">double</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">).</span><span class="n">square</span><span class="p">().</span><span class="n">sum</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">eval_grad</span><span class="p">)</span>

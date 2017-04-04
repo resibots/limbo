@@ -220,6 +220,7 @@
       <xsd:element name="defname" minOccurs="0" />
       <xsd:element name="array" minOccurs="0" />
       <xsd:element name="defval" type="linkedTextType" minOccurs="0" />
+      <xsd:element name="typeconstraint" type="linkedTextType" minOccurs="0" />
       <xsd:element name="briefdescription" type="descriptionType" minOccurs="0" />
     </xsd:sequence>
   </xsd:complexType>
@@ -897,6 +898,7 @@
       <xsd:enumeration value="public-inheritance" />
       <xsd:enumeration value="protected-inheritance" />
       <xsd:enumeration value="private-inheritance" />
+      <xsd:enumeration value="type-constraint" />
     </xsd:restriction>
   </xsd:simpleType>
 

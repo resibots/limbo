@@ -203,116 +203,116 @@
 </div>
 </div>
 <p>This new file should have the following structure:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># encoding: utf-8</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
 
 <span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="kn">import</span> <span class="n">conf</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-    <span class="c"># check if libname exists in the system</span>
+    <span class="c1"># check if libname exists in the system</span>
     <span class="k">try</span><span class="p">:</span>
       <span class="n">res</span> <span class="o">=</span> <span class="n">check_if_libname_exists</span>
     <span class="k">except</span><span class="p">:</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;libname not found&#39;</span><span class="p">)</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s1">&#39;libname not found&#39;</span><span class="p">)</span>
       <span class="k">return</span>
 </pre></div>
 </div>
 <p>Where <code class="docutils literal"><span class="pre">check_if_libname_exists</span></code> is replaced with logic to find our library, as explained later. If the library is optional, the <code class="docutils literal"><span class="pre">conf.fatal</span></code> line can be removed.</p>
 <p>Then add the following lines in the <code class="docutils literal"><span class="pre">wscript</span></code>:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># imports, etc, ...</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># imports, etc, ...</span>
 
-<span class="c"># we assume that the configuration file is saved as libname.py</span>
+<span class="c1"># we assume that the configuration file is saved as libname.py</span>
 <span class="kn">import</span> <span class="nn">libname</span>
 
 <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;libname&#39;</span><span class="p">)</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;libname&#39;</span><span class="p">)</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">check_libname</span><span class="p">()</span>
-    <span class="c"># rest of the configuration</span>
+    <span class="c1"># rest of the configuration</span>
 
-<span class="c"># rest of code</span>
+<span class="c1"># rest of code</span>
 </pre></div>
 </div>
 <p>Libraries usually have the headers and the lib files in two different directories. However, header-only libraries only have includes, in this case, you can ignore the following section named &#8220;Check for lib files&#8221;.</p>
 <div class="section" id="check-for-headers">
 <h3>Check for headers<a class="headerlink" href="#check-for-headers" title="Permalink to this headline">¶</a></h3>
 <p>To check for the headers of the library, you can add the following code to the <code class="docutils literal"><span class="pre">check_libname</span></code> function:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># previous code</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># previous code</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-    <span class="c"># possible path to find headers</span>
-    <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;path1&#39;</span><span class="p">,</span> <span class="s">&#39;path2&#39;</span><span class="p">]</span>
+    <span class="c1"># possible path to find headers</span>
+    <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;path1&#39;</span><span class="p">,</span> <span class="s1">&#39;path2&#39;</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for libname includes&#39;</span><span class="p">)</span>
-      <span class="c"># include_files is a list with the headers we expect to find</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s1">&#39;Checking for libname includes&#39;</span><span class="p">)</span>
+      <span class="c1"># include_files is a list with the headers we expect to find</span>
       <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">include_files</span><span class="p">:</span>
         <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">INCLUDES_LIBNAME</span> <span class="o">=</span> <span class="n">includes_check</span>
     <span class="k">except</span><span class="p">:</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;Not found&#39;</span><span class="p">,</span> <span class="s">&#39;RED&#39;</span><span class="p">)</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;Not found&#39;</span><span class="p">,</span> <span class="s1">&#39;RED&#39;</span><span class="p">)</span>
       <span class="k">return</span>
-    <span class="c"># rest of check_libname</span>
+    <span class="c1"># rest of check_libname</span>
 
-<span class="c"># rest of code</span>
+<span class="c1"># rest of code</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="check-for-lib-files">
 <h3>Check for lib files<a class="headerlink" href="#check-for-lib-files" title="Permalink to this headline">¶</a></h3>
 <p>To check for the lib files of the library, you can add the following code to the <code class="docutils literal"><span class="pre">check_libname</span></code> function:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># previous code</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># previous code</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-    <span class="c"># possible path to find lib files</span>
-    <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;path1&#39;</span><span class="p">,</span> <span class="s">&#39;path2&#39;</span><span class="p">]</span>
+    <span class="c1"># possible path to find lib files</span>
+    <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;path1&#39;</span><span class="p">,</span> <span class="s1">&#39;path2&#39;</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for libname libs&#39;</span><span class="p">)</span>
-      <span class="c"># lib_files is a list with the lib files we expect to find</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s1">&#39;Checking for libname libs&#39;</span><span class="p">)</span>
+      <span class="c1"># lib_files is a list with the lib files we expect to find</span>
       <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">lib_files</span><span class="p">:</span>
         <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIBPATH_LIBNAME</span> <span class="o">=</span> <span class="n">libs_check</span>
-      <span class="c"># list with the lib names the library has</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIB_LIBNAME</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;libname1&#39;</span><span class="p">,</span> <span class="s">&#39;libname2&#39;</span><span class="p">]</span>
+      <span class="c1"># list with the lib names the library has</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIB_LIBNAME</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;libname1&#39;</span><span class="p">,</span> <span class="s1">&#39;libname2&#39;</span><span class="p">]</span>
     <span class="k">except</span><span class="p">:</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;Not found&#39;</span><span class="p">,</span> <span class="s">&#39;RED&#39;</span><span class="p">)</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;Not found&#39;</span><span class="p">,</span> <span class="s1">&#39;RED&#39;</span><span class="p">)</span>
       <span class="k">return</span>
-    <span class="c"># rest of check_libname</span>
+    <span class="c1"># rest of check_libname</span>
 
-<span class="c"># rest of code</span>
+<span class="c1"># rest of code</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="add-configuration-options">
 <h3>Add configuration options<a class="headerlink" href="#add-configuration-options" title="Permalink to this headline">¶</a></h3>
 <p>Additional configuration options are often needed when adding new libraries. For example, one useful option is to specify the location of the library headers and lib files. Adding options is easy: you only need to define a new function named <code class="docutils literal"><span class="pre">options</span></code> in the <code class="docutils literal"><span class="pre">wscript</span></code> and another one in the library configuration file. In the library&#8217;s configuration file (e.g., <code class="docutils literal"><span class="pre">libname.py</span></code>):</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#imports, etc, ...</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c1">#imports, etc, ...</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
-    <span class="c"># add options to the configuration</span>
-    <span class="n">opt</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;cmd_option&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;option_type&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;info message&#39;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s">&#39;destination_variable&#39;</span><span class="p">)</span>
+    <span class="c1"># add options to the configuration</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;cmd_option&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;option_type&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;info message&#39;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;destination_variable&#39;</span><span class="p">)</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-    <span class="c"># access options</span>
-    <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">destination_variable</span> <span class="o">==</span> <span class="s">&#39;yes&#39;</span><span class="p">:</span>
-      <span class="k">print</span> <span class="s">&#39;destination_variable found&#39;</span>
-    <span class="c"># rest of check_libname</span>
+    <span class="c1"># access options</span>
+    <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">destination_variable</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
+      <span class="k">print</span> <span class="s1">&#39;destination_variable found&#39;</span>
+    <span class="c1"># rest of check_libname</span>
 </pre></div>
 </div>
 <p>The options in the waf build system are using the python&#8217;s <code class="docutils literal"><span class="pre">optparse</span></code>. Check the official <a class="reference external" href="https://docs.python.org/2/library/optparse.html">optparse</a> documentation for more information.</p>
 <p>Then add the following lines in the <code class="docutils literal"><span class="pre">wscript</span></code> of your experiment:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># imports, etc, ...</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># imports, etc, ...</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
-    <span class="n">opt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;libname&#39;</span><span class="p">)</span>
-    <span class="c"># rest of the options</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;libname&#39;</span><span class="p">)</span>
+    <span class="c1"># rest of the options</span>
 
-<span class="c"># rest of the code</span>
+<span class="c1"># rest of the code</span>
 </pre></div>
 </div>
 </div>
@@ -331,74 +331,74 @@
 </pre></div>
 </div>
 <p><strong>wscript:</strong></p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="kn">import</span> <span class="nn">ros</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
-    <span class="n">opt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;ros&#39;</span><span class="p">)</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ros&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;ros&#39;</span><span class="p">)</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ros&#39;</span><span class="p">)</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">check_ros</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
-    <span class="n">libs</span> <span class="o">=</span> <span class="s">&#39;EIGEN BOOST ROS LIMBO&#39;</span>
+    <span class="n">libs</span> <span class="o">=</span> <span class="s1">&#39;EIGEN BOOST ROS LIMBO&#39;</span>
 
-    <span class="n">obj</span> <span class="o">=</span> <span class="n">bld</span><span class="p">(</span><span class="n">features</span> <span class="o">=</span> <span class="s">&#39;cxx cxxstlib&#39;</span><span class="p">,</span>
-              <span class="n">source</span> <span class="o">=</span> <span class="s">&#39;main.cpp&#39;</span><span class="p">,</span>
-              <span class="n">includes</span> <span class="o">=</span> <span class="s">&#39;. .. ../../ ../../src&#39;</span><span class="p">,</span>
-              <span class="n">target</span> <span class="o">=</span> <span class="s">&#39;test_exec&#39;</span><span class="p">,</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">bld</span><span class="p">(</span><span class="n">features</span> <span class="o">=</span> <span class="s1">&#39;cxx cxxstlib&#39;</span><span class="p">,</span>
+              <span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;main.cpp&#39;</span><span class="p">,</span>
+              <span class="n">includes</span> <span class="o">=</span> <span class="s1">&#39;. .. ../../ ../../src&#39;</span><span class="p">,</span>
+              <span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;test_exec&#39;</span><span class="p">,</span>
               <span class="n">uselib</span> <span class="o">=</span>  <span class="n">libs</span><span class="p">,</span>
-              <span class="n">use</span> <span class="o">=</span> <span class="s">&#39;limbo&#39;</span><span class="p">)</span>
+              <span class="n">use</span> <span class="o">=</span> <span class="s1">&#39;limbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>ros.py:</strong></p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/env python</span>
-<span class="c"># encoding: utf-8</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># encoding: utf-8</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="kn">import</span> <span class="n">conf</span>
 
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
-  <span class="n">opt</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;--ros&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;string&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&#39;path to ros&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;ros&#39;</span><span class="p">)</span>
+  <span class="n">opt</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;--ros&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;path to ros&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;ros&#39;</span><span class="p">)</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_ros</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-  <span class="c"># Get locations where to search for ROS&#39;s header and lib files</span>
+  <span class="c1"># Get locations where to search for ROS&#39;s header and lib files</span>
   <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ros</span><span class="p">:</span>
-    <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ros</span> <span class="o">+</span> <span class="s">&#39;/include&#39;</span><span class="p">]</span>
-    <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ros</span> <span class="o">+</span> <span class="s">&#39;/lib&#39;</span><span class="p">]</span>
+    <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ros</span> <span class="o">+</span> <span class="s1">&#39;/include&#39;</span><span class="p">]</span>
+    <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ros</span> <span class="o">+</span> <span class="s1">&#39;/lib&#39;</span><span class="p">]</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="k">if</span> <span class="s">&#39;ROS_DISTRO&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for ROS&#39;</span><span class="p">)</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ROS_DISTRO not in environmental variables&#39;</span><span class="p">,</span> <span class="s">&#39;RED&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s1">&#39;ROS_DISTRO&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s1">&#39;Checking for ROS&#39;</span><span class="p">)</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;ROS_DISTRO not in environmental variables&#39;</span><span class="p">,</span> <span class="s1">&#39;RED&#39;</span><span class="p">)</span>
       <span class="k">return</span>
-    <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/opt/ros/&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;ROS_DISTRO&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/include&#39;</span><span class="p">]</span>
-    <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/opt/ros/&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;ROS_DISTRO&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/lib/&#39;</span><span class="p">]</span>
+    <span class="n">includes_check</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/opt/ros/&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;ROS_DISTRO&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/include&#39;</span><span class="p">]</span>
+    <span class="n">libs_check</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;/opt/ros/&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;ROS_DISTRO&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/lib/&#39;</span><span class="p">]</span>
 
   <span class="k">try</span><span class="p">:</span>
-    <span class="c"># Find the header for ROS</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for ROS includes&#39;</span><span class="p">)</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s">&#39;ros/ros.h&#39;</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
+    <span class="c1"># Find the header for ROS</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s1">&#39;Checking for ROS includes&#39;</span><span class="p">)</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s1">&#39;ros/ros.h&#39;</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
 
-    <span class="c"># Find the lib files</span>
-    <span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;roscpp&#39;</span><span class="p">,</span><span class="s">&#39;rosconsole&#39;</span><span class="p">,</span><span class="s">&#39;roscpp_serialization&#39;</span><span class="p">,</span><span class="s">&#39;rostime&#39;</span><span class="p">,</span><span class="s">&#39;xmlrpcpp&#39;</span><span class="p">,</span>
-            <span class="s">&#39;rosconsole_log4cxx&#39;</span><span class="p">,</span> <span class="s">&#39;rosconsole_backend_interface&#39;</span><span class="p">]</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s">&#39;Checking for ROS libs&#39;</span><span class="p">)</span>
+    <span class="c1"># Find the lib files</span>
+    <span class="n">libs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;roscpp&#39;</span><span class="p">,</span><span class="s1">&#39;rosconsole&#39;</span><span class="p">,</span><span class="s1">&#39;roscpp_serialization&#39;</span><span class="p">,</span><span class="s1">&#39;rostime&#39;</span><span class="p">,</span><span class="s1">&#39;xmlrpcpp&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rosconsole_log4cxx&#39;</span><span class="p">,</span> <span class="s1">&#39;rosconsole_backend_interface&#39;</span><span class="p">]</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s1">&#39;Checking for ROS libs&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">lib</span> <span class="ow">in</span> <span class="n">libs</span><span class="p">:</span>
-      <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s">&#39;lib&#39;</span><span class="o">+</span><span class="n">lib</span><span class="o">+</span><span class="s">&#39;.so&#39;</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;ok&#39;</span><span class="p">)</span>
+      <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="s1">&#39;lib&#39;</span><span class="o">+</span><span class="n">lib</span><span class="o">+</span><span class="s1">&#39;.so&#39;</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
 
     <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">INCLUDES_ROS</span> <span class="o">=</span> <span class="n">includes_check</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIBPATH_ROS</span> <span class="o">=</span> <span class="n">libs_check</span>
     <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIB_ROS</span> <span class="o">=</span> <span class="n">libs</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">DEFINES_ROS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;USE_ROS&#39;</span><span class="p">]</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">DEFINES_ROS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;USE_ROS&#39;</span><span class="p">]</span>
   <span class="k">except</span><span class="p">:</span>
-    <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s">&#39;Not found&#39;</span><span class="p">,</span> <span class="s">&#39;RED&#39;</span><span class="p">)</span>
+    <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;Not found&#39;</span><span class="p">,</span> <span class="s1">&#39;RED&#39;</span><span class="p">)</span>
     <span class="k">return</span>
 </pre></div>
 </div>

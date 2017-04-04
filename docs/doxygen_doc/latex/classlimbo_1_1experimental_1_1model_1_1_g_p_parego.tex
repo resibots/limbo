@@ -20,13 +20,14 @@ Inheritance diagram for limbo\+:\+:experimental\+:\+:model\+:\+:G\+P\+Parego$<$ 
 void \hyperlink{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae361cd8b8831e4364774dfdd05937617}{compute} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&samples, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&observations, const Eigen\+::\+Vector\+Xd \&noises)
 \item 
 void \hyperlink{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81955696f79b4ac11a17d0faf28ccc31}{add\+\_\+sample} (const Eigen\+::\+Vector\+Xd \&sample, const Eigen\+::\+Vector\+Xd \&observation, double noise)
-\begin{DoxyCompactList}\small\item\em add sample will N\+O\+T be incremental (we call compute each time) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em add sample will N\+OT be incremental (we call compute each time) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$typename Params, typename Model$>$class limbo\+::experimental\+::model\+::\+G\+P\+Parego$<$ Params, Model $>$}
+\subsubsection*{template$<$typename Params, typename Model$>$\\*
+class limbo\+::experimental\+::model\+::\+G\+P\+Parego$<$ Params, Model $>$}
 
-this is the model used in Parego reference\+: Knowles, J. (2006). Par\+E\+G\+O\+: A hybrid algorithm with on-\/line landscape approximation for expensive multiobjective optimization problems. I\+E\+E\+E Transactions On Evolutionary Computation, 10(1), 50-\/66. Main idea\+:
+this is the model used in Parego reference\+: Knowles, J. (2006). Par\+E\+GO\+: A hybrid algorithm with on-\/line landscape approximation for expensive multiobjective optimization problems. I\+E\+EE Transactions On Evolutionary Computation, 10(1), 50-\/66. Main idea\+:
 \begin{DoxyItemize}
 \item this models aggregates all the objective values with the Tchebycheff distance
 \item objectives are weighted using a random vector
@@ -34,46 +35,46 @@ this is the model used in Parego reference\+: Knowles, J. (2006). Par\+E\+G\+O\+
 \end{DoxyItemize}
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ac351d6798add22da5c6dd58ac4a00723}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!G\+P\+Parego@{G\+P\+Parego}}
+\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!G\+P\+Parego@{G\+P\+Parego}}
 \index{G\+P\+Parego@{G\+P\+Parego}!limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}}
-\subsubsection[{G\+P\+Parego}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::{\bf G\+P\+Parego} (
+\subsubsection[{\texorpdfstring{G\+P\+Parego()}{GPParego()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::{\bf G\+P\+Parego} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ac351d6798add22da5c6dd58ac4a00723}
-\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a1f0eb578140f01874b13bfca124c085c}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!G\+P\+Parego@{G\+P\+Parego}}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ac351d6798add22da5c6dd58ac4a00723}{}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ac351d6798add22da5c6dd58ac4a00723}
+\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!G\+P\+Parego@{G\+P\+Parego}}
 \index{G\+P\+Parego@{G\+P\+Parego}!limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}}
-\subsubsection[{G\+P\+Parego}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::{\bf G\+P\+Parego} (
+\subsubsection[{\texorpdfstring{G\+P\+Parego(int dim\+\_\+in, int dim\+\_\+out)}{GPParego(int dim_in, int dim_out)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::{\bf G\+P\+Parego} (
 \begin{DoxyParamCaption}
 \item[{int}]{dim\+\_\+in, }
 \item[{int}]{dim\+\_\+out}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a1f0eb578140f01874b13bfca124c085c}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a1f0eb578140f01874b13bfca124c085c}{}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a1f0eb578140f01874b13bfca124c085c}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81955696f79b4ac11a17d0faf28ccc31}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!add\+\_\+sample@{add\+\_\+sample}}
+\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!add\+\_\+sample@{add\+\_\+sample}}
 \index{add\+\_\+sample@{add\+\_\+sample}!limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}}
-\subsubsection[{add\+\_\+sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ void {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::add\+\_\+sample (
+\subsubsection[{\texorpdfstring{add\+\_\+sample(const Eigen\+::\+Vector\+Xd \&sample, const Eigen\+::\+Vector\+Xd \&observation, double noise)}{add_sample(const Eigen::VectorXd &sample, const Eigen::VectorXd &observation, double noise)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ void {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::add\+\_\+sample (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{sample, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{observation, }
 \item[{double}]{noise}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81955696f79b4ac11a17d0faf28ccc31}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81955696f79b4ac11a17d0faf28ccc31}{}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_a81955696f79b4ac11a17d0faf28ccc31}
 
 
-add sample will N\+O\+T be incremental (we call compute each time) 
+add sample will N\+OT be incremental (we call compute each time) 
 
-\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae361cd8b8831e4364774dfdd05937617}{}\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!compute@{compute}}
+\index{limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}!compute@{compute}}
 \index{compute@{compute}!limbo\+::experimental\+::model\+::\+G\+P\+Parego@{limbo\+::experimental\+::model\+::\+G\+P\+Parego}}
-\subsubsection[{compute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ void {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::compute (
+\subsubsection[{\texorpdfstring{compute(const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&samples, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&observations, const Eigen\+::\+Vector\+Xd \&noises)}{compute(const std::vector< Eigen::VectorXd > &samples, const std::vector< Eigen::VectorXd > &observations, const Eigen::VectorXd &noises)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Model $>$ void {\bf limbo\+::experimental\+::model\+::\+G\+P\+Parego}$<$ Params, Model $>$\+::compute (
 \begin{DoxyParamCaption}
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{samples, }
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{observations, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{noises}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae361cd8b8831e4364774dfdd05937617}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae361cd8b8831e4364774dfdd05937617}{}\label{classlimbo_1_1experimental_1_1model_1_1_g_p_parego_ae361cd8b8831e4364774dfdd05937617}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

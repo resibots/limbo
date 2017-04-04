@@ -1,4 +1,4 @@
-\hypertarget{structlimbo_1_1stop_1_1_chain_criteria}{}\section{limbo\+:\+:stop\+:\+:Chain\+Criteria$<$ B\+O, Aggregator\+Function $>$ Struct Template Reference}
+\hypertarget{structlimbo_1_1stop_1_1_chain_criteria}{}\section{limbo\+:\+:stop\+:\+:Chain\+Criteria$<$ BO, Aggregator\+Function $>$ Struct Template Reference}
 \label{structlimbo_1_1stop_1_1_chain_criteria}\index{limbo\+::stop\+::\+Chain\+Criteria$<$ B\+O, Aggregator\+Function $>$@{limbo\+::stop\+::\+Chain\+Criteria$<$ B\+O, Aggregator\+Function $>$}}
 
 
@@ -12,14 +12,15 @@ using \hyperlink{structlimbo_1_1stop_1_1_chain_criteria_a3e9b4e7191e4568a44bba75
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{structlimbo_1_1stop_1_1_chain_criteria_a287a286866f5ddc83432f23dc1c7c63d}{Chain\+Criteria} (const B\+O \&bo, const Aggregator\+Function \&afun)
+\hyperlink{structlimbo_1_1stop_1_1_chain_criteria_a287a286866f5ddc83432f23dc1c7c63d}{Chain\+Criteria} (const BO \&bo, const Aggregator\+Function \&afun)
 \item 
 {\footnotesize template$<$typename stopping\+\_\+criterion $>$ }\\bool \hyperlink{structlimbo_1_1stop_1_1_chain_criteria_a1d95f89ebcc61121482a372d37c3a62f}{operator()} (bool state, stopping\+\_\+criterion stop) const 
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$typename B\+O, typename Aggregator\+Function$>$struct limbo\+::stop\+::\+Chain\+Criteria$<$ B\+O, Aggregator\+Function $>$}
+\subsubsection*{template$<$typename BO, typename Aggregator\+Function$>$\\*
+struct limbo\+::stop\+::\+Chain\+Criteria$<$ B\+O, Aggregator\+Function $>$}
 
 \begin{DoxyVerb}embed:rst
 Utility functor for boost::fusion::accumulate, e.g.:
@@ -33,31 +34,31 @@ Where ``_stopping_criteria` is a ``boost::fusion::vector`` of classes.\end{DoxyV
  
 
 \subsection{Member Typedef Documentation}
-\hypertarget{structlimbo_1_1stop_1_1_chain_criteria_a3e9b4e7191e4568a44bba75647bf0fb5}{}\index{limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}!result\+\_\+type@{result\+\_\+type}}
+\index{limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}!result\+\_\+type@{result\+\_\+type}}
 \index{result\+\_\+type@{result\+\_\+type}!limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}}
-\subsubsection[{result\+\_\+type}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename B\+O , typename Aggregator\+Function $>$ using {\bf limbo\+::stop\+::\+Chain\+Criteria}$<$ B\+O, Aggregator\+Function $>$\+::{\bf result\+\_\+type} =  bool}\label{structlimbo_1_1stop_1_1_chain_criteria_a3e9b4e7191e4568a44bba75647bf0fb5}
+\subsubsection[{\texorpdfstring{result\+\_\+type}{result_type}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename BO, typename Aggregator\+Function$>$ using {\bf limbo\+::stop\+::\+Chain\+Criteria}$<$ BO, Aggregator\+Function $>$\+::{\bf result\+\_\+type} =  bool}\hypertarget{structlimbo_1_1stop_1_1_chain_criteria_a3e9b4e7191e4568a44bba75647bf0fb5}{}\label{structlimbo_1_1stop_1_1_chain_criteria_a3e9b4e7191e4568a44bba75647bf0fb5}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{structlimbo_1_1stop_1_1_chain_criteria_a287a286866f5ddc83432f23dc1c7c63d}{}\index{limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}!Chain\+Criteria@{Chain\+Criteria}}
+\index{limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}!Chain\+Criteria@{Chain\+Criteria}}
 \index{Chain\+Criteria@{Chain\+Criteria}!limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}}
-\subsubsection[{Chain\+Criteria}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename B\+O , typename Aggregator\+Function $>$ {\bf limbo\+::stop\+::\+Chain\+Criteria}$<$ B\+O, Aggregator\+Function $>$\+::{\bf Chain\+Criteria} (
+\subsubsection[{\texorpdfstring{Chain\+Criteria(const B\+O \&bo, const Aggregator\+Function \&afun)}{ChainCriteria(const BO &bo, const AggregatorFunction &afun)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename BO, typename Aggregator\+Function$>$ {\bf limbo\+::stop\+::\+Chain\+Criteria}$<$ BO, Aggregator\+Function $>$\+::{\bf Chain\+Criteria} (
 \begin{DoxyParamCaption}
-\item[{const B\+O \&}]{bo, }
+\item[{const BO \&}]{bo, }
 \item[{const Aggregator\+Function \&}]{afun}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1stop_1_1_chain_criteria_a287a286866f5ddc83432f23dc1c7c63d}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1stop_1_1_chain_criteria_a287a286866f5ddc83432f23dc1c7c63d}{}\label{structlimbo_1_1stop_1_1_chain_criteria_a287a286866f5ddc83432f23dc1c7c63d}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{structlimbo_1_1stop_1_1_chain_criteria_a1d95f89ebcc61121482a372d37c3a62f}{}\index{limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}!operator()@{operator()}}
+\index{limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}!operator()@{operator()}}
 \index{operator()@{operator()}!limbo\+::stop\+::\+Chain\+Criteria@{limbo\+::stop\+::\+Chain\+Criteria}}
-\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename B\+O , typename Aggregator\+Function $>$ template$<$typename stopping\+\_\+criterion $>$ bool {\bf limbo\+::stop\+::\+Chain\+Criteria}$<$ B\+O, Aggregator\+Function $>$\+::operator() (
+\subsubsection[{\texorpdfstring{operator()(bool state, stopping\+\_\+criterion stop) const }{operator()(bool state, stopping_criterion stop) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename BO, typename Aggregator\+Function$>$ template$<$typename stopping\+\_\+criterion $>$ bool {\bf limbo\+::stop\+::\+Chain\+Criteria}$<$ BO, Aggregator\+Function $>$\+::operator() (
 \begin{DoxyParamCaption}
 \item[{bool}]{state, }
 \item[{stopping\+\_\+criterion}]{stop}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{structlimbo_1_1stop_1_1_chain_criteria_a1d95f89ebcc61121482a372d37c3a62f}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1stop_1_1_chain_criteria_a1d95f89ebcc61121482a372d37c3a62f}{}\label{structlimbo_1_1stop_1_1_chain_criteria_a1d95f89ebcc61121482a372d37c3a62f}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

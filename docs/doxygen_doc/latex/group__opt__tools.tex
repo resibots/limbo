@@ -24,47 +24,47 @@ double \hyperlink{group__opt__tools_ga68ad00d7501bc26a2a0990bac762393e}{limbo\+:
 
 
 \subsection{Typedef Documentation}
-\hypertarget{group__opt__tools_ga362b55973a38ac71f27a06f9d9c14f24}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval\+\_\+t@{eval\+\_\+t}}
+\index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval\+\_\+t@{eval\+\_\+t}}
 \index{eval\+\_\+t@{eval\+\_\+t}!Opt\+\_\+tools@{Opt\+\_\+tools}}
-\subsubsection[{eval\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf limbo\+::opt\+::eval\+\_\+t} = typedef std\+::pair$<$double, boost\+::optional$<$Eigen\+::\+Vector\+Xd$>$$>$}\label{group__opt__tools_ga362b55973a38ac71f27a06f9d9c14f24}
+\subsubsection[{\texorpdfstring{eval\+\_\+t}{eval_t}}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf limbo\+::opt\+::eval\+\_\+t} = typedef std\+::pair$<$double, boost\+::optional$<$Eigen\+::\+Vector\+Xd$>$$>$}\hypertarget{group__opt__tools_ga362b55973a38ac71f27a06f9d9c14f24}{}\label{group__opt__tools_ga362b55973a38ac71f27a06f9d9c14f24}
 return type of the function to optimize 
 
 \subsection{Function Documentation}
-\hypertarget{group__opt__tools_ga698d932ac52cab812742b1300f875372}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval@{eval}}
+\index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval@{eval}}
 \index{eval@{eval}!Opt\+\_\+tools@{Opt\+\_\+tools}}
-\subsubsection[{eval}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ double limbo\+::opt\+::eval (
+\subsubsection[{\texorpdfstring{eval(const F \&f, const Eigen\+::\+Vector\+Xd \&x)}{eval(const F &f, const Eigen::VectorXd &x)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ double limbo\+::opt\+::eval (
 \begin{DoxyParamCaption}
 \item[{const F \&}]{f, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{x}
 \end{DoxyParamCaption}
-)}\label{group__opt__tools_ga698d932ac52cab812742b1300f875372}
-Evaluate f without gradient (to be called from the optimization algorithms that do not use the gradient) \hypertarget{group__opt__tools_ga6abbcdf8d83abca89802881d883fb9e3}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval\+\_\+grad@{eval\+\_\+grad}}
+)}\hypertarget{group__opt__tools_ga698d932ac52cab812742b1300f875372}{}\label{group__opt__tools_ga698d932ac52cab812742b1300f875372}
+Evaluate f without gradient (to be called from the optimization algorithms that do not use the gradient) \index{Opt\+\_\+tools@{Opt\+\_\+tools}!eval\+\_\+grad@{eval\+\_\+grad}}
 \index{eval\+\_\+grad@{eval\+\_\+grad}!Opt\+\_\+tools@{Opt\+\_\+tools}}
-\subsubsection[{eval\+\_\+grad}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ eval\+\_\+t limbo\+::opt\+::eval\+\_\+grad (
+\subsubsection[{\texorpdfstring{eval\+\_\+grad(const F \&f, const Eigen\+::\+Vector\+Xd \&x)}{eval_grad(const F &f, const Eigen::VectorXd &x)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename F $>$ eval\+\_\+t limbo\+::opt\+::eval\+\_\+grad (
 \begin{DoxyParamCaption}
 \item[{const F \&}]{f, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{x}
 \end{DoxyParamCaption}
-)}\label{group__opt__tools_ga6abbcdf8d83abca89802881d883fb9e3}
-Evaluate f with gradient (to be called from the optimization algorithms that use the gradient) \hypertarget{group__opt__tools_ga68ad00d7501bc26a2a0990bac762393e}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!fun@{fun}}
+)}\hypertarget{group__opt__tools_ga6abbcdf8d83abca89802881d883fb9e3}{}\label{group__opt__tools_ga6abbcdf8d83abca89802881d883fb9e3}
+Evaluate f with gradient (to be called from the optimization algorithms that use the gradient) \index{Opt\+\_\+tools@{Opt\+\_\+tools}!fun@{fun}}
 \index{fun@{fun}!Opt\+\_\+tools@{Opt\+\_\+tools}}
-\subsubsection[{fun}]{\setlength{\rightskip}{0pt plus 5cm}double limbo\+::opt\+::fun (
+\subsubsection[{\texorpdfstring{fun(const eval\+\_\+t \&fg)}{fun(const eval_t &fg)}}]{\setlength{\rightskip}{0pt plus 5cm}double limbo\+::opt\+::fun (
 \begin{DoxyParamCaption}
 \item[{const {\bf eval\+\_\+t} \&}]{fg}
 \end{DoxyParamCaption}
-)}\label{group__opt__tools_ga68ad00d7501bc26a2a0990bac762393e}
-get the value from a function evaluation (eval\+\_\+t) \hypertarget{group__opt__tools_gaf28d9af930b2993024ab497b285e0521}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!grad@{grad}}
+)}\hypertarget{group__opt__tools_ga68ad00d7501bc26a2a0990bac762393e}{}\label{group__opt__tools_ga68ad00d7501bc26a2a0990bac762393e}
+get the value from a function evaluation (eval\+\_\+t) \index{Opt\+\_\+tools@{Opt\+\_\+tools}!grad@{grad}}
 \index{grad@{grad}!Opt\+\_\+tools@{Opt\+\_\+tools}}
-\subsubsection[{grad}]{\setlength{\rightskip}{0pt plus 5cm}const Eigen\+::\+Vector\+Xd\& limbo\+::opt\+::grad (
+\subsubsection[{\texorpdfstring{grad(const eval\+\_\+t \&fg)}{grad(const eval_t &fg)}}]{\setlength{\rightskip}{0pt plus 5cm}const Eigen\+::\+Vector\+Xd\& limbo\+::opt\+::grad (
 \begin{DoxyParamCaption}
 \item[{const {\bf eval\+\_\+t} \&}]{fg}
 \end{DoxyParamCaption}
-)}\label{group__opt__tools_gaf28d9af930b2993024ab497b285e0521}
-get the gradient from a function evaluation (eval\+\_\+t) \hypertarget{group__opt__tools_ga38e53ccac21f452bd31e9b239985d456}{}\index{Opt\+\_\+tools@{Opt\+\_\+tools}!no\+\_\+grad@{no\+\_\+grad}}
+)}\hypertarget{group__opt__tools_gaf28d9af930b2993024ab497b285e0521}{}\label{group__opt__tools_gaf28d9af930b2993024ab497b285e0521}
+get the gradient from a function evaluation (eval\+\_\+t) \index{Opt\+\_\+tools@{Opt\+\_\+tools}!no\+\_\+grad@{no\+\_\+grad}}
 \index{no\+\_\+grad@{no\+\_\+grad}!Opt\+\_\+tools@{Opt\+\_\+tools}}
-\subsubsection[{no\+\_\+grad}]{\setlength{\rightskip}{0pt plus 5cm}eval\+\_\+t limbo\+::opt\+::no\+\_\+grad (
+\subsubsection[{\texorpdfstring{no\+\_\+grad(double x)}{no_grad(double x)}}]{\setlength{\rightskip}{0pt plus 5cm}eval\+\_\+t limbo\+::opt\+::no\+\_\+grad (
 \begin{DoxyParamCaption}
 \item[{double}]{x}
 \end{DoxyParamCaption}
-)}\label{group__opt__tools_ga38e53ccac21f452bd31e9b239985d456}
+)}\hypertarget{group__opt__tools_ga38e53ccac21f452bd31e9b239985d456}{}\label{group__opt__tools_ga38e53ccac21f452bd31e9b239985d456}
 return with opt\+::no\+\_\+grad(your\+\_\+val) if no gradient is available (to be used in functions to be optimized) 

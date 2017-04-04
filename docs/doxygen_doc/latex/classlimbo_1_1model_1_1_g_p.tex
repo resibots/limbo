@@ -1,4 +1,4 @@
-\hypertarget{classlimbo_1_1model_1_1_g_p}{}\section{limbo\+:\+:model\+:\+:G\+P$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$ Class Template Reference}
+\hypertarget{classlimbo_1_1model_1_1_g_p}{}\section{limbo\+:\+:model\+:\+:GP$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$ Class Template Reference}
 \label{classlimbo_1_1model_1_1_g_p}\index{limbo\+::model\+::\+G\+P$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$@{limbo\+::model\+::\+G\+P$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$}}
 
 
@@ -7,12 +7,12 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classlimbo_1_1model_1_1_g_p_aa18de82f231f3aed6ce8cce4c778aedb}{G\+P} ()
+\hyperlink{classlimbo_1_1model_1_1_g_p_aa18de82f231f3aed6ce8cce4c778aedb}{GP} ()
 \begin{DoxyCompactList}\small\item\em useful because the model might be created before knowing anything about the process \end{DoxyCompactList}\item 
-\hyperlink{classlimbo_1_1model_1_1_g_p_ab36947c89e4f5ad92599656a21829755}{G\+P} (int \hyperlink{classlimbo_1_1model_1_1_g_p_a41d99e6a69d53fc7d9260d295f787bc3}{dim\+\_\+in}, int \hyperlink{classlimbo_1_1model_1_1_g_p_a077144695f9f0b33b64d4feb8fb4e447}{dim\+\_\+out})
+\hyperlink{classlimbo_1_1model_1_1_g_p_ab36947c89e4f5ad92599656a21829755}{GP} (int \hyperlink{classlimbo_1_1model_1_1_g_p_a41d99e6a69d53fc7d9260d295f787bc3}{dim\+\_\+in}, int \hyperlink{classlimbo_1_1model_1_1_g_p_a077144695f9f0b33b64d4feb8fb4e447}{dim\+\_\+out})
 \begin{DoxyCompactList}\small\item\em useful because the model might be created before having samples \end{DoxyCompactList}\item 
 void \hyperlink{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}{compute} (const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&\hyperlink{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}{samples}, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&observations, const Eigen\+::\+Vector\+Xd \&noises, bool compute\+\_\+kernel=true)
-\begin{DoxyCompactList}\small\item\em Compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} from samples, observation, noise. This call needs to be explicit! \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} from samples, observation, noise. This call needs to be explicit! \end{DoxyCompactList}\item 
 void \hyperlink{classlimbo_1_1model_1_1_g_p_aa01b41e37de4def676cf6c79b08aac94}{optimize\+\_\+hyperparams} ()
 \begin{DoxyCompactList}\small\item\em Do not forget to call this if you use hyper-\/prameters optimization!! \end{DoxyCompactList}\item 
 void \hyperlink{classlimbo_1_1model_1_1_g_p_a43e4e23d98c421d610df52ea6d3f3539}{add\+\_\+sample} (const Eigen\+::\+Vector\+Xd \&sample, const Eigen\+::\+Vector\+Xd \&observation, double noise)
@@ -36,23 +36,23 @@ const Mean\+Function \& \hyperlink{classlimbo_1_1model_1_1_g_p_a29be4dfec28fbf0a
 Mean\+Function \& \hyperlink{classlimbo_1_1model_1_1_g_p_ad4a56a3630793def38840ea1c85c091e}{mean\+\_\+function} ()
 \item 
 Eigen\+::\+Vector\+Xd \hyperlink{classlimbo_1_1model_1_1_g_p_a480f1b249edf89bc6960512e8baceab8}{max\+\_\+observation} () const 
-\begin{DoxyCompactList}\small\item\em return the maximum observation (only call this if the output of the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} is of dimension 1) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em return the maximum observation (only call this if the output of the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} is of dimension 1) \end{DoxyCompactList}\item 
 Eigen\+::\+Vector\+Xd \hyperlink{classlimbo_1_1model_1_1_g_p_a802d8d4750626e6d38d83d36166000ac}{mean\+\_\+observation} () const 
-\begin{DoxyCompactList}\small\item\em return the mean observation (only call this if the output of the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} is of dimension 1) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em return the mean observation (only call this if the output of the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} is of dimension 1) \end{DoxyCompactList}\item 
 const Eigen\+::\+Matrix\+Xd \& \hyperlink{classlimbo_1_1model_1_1_g_p_ade0d93b847e3d112735b3e8143470a55}{mean\+\_\+vector} () const 
 \item 
 const Eigen\+::\+Matrix\+Xd \& \hyperlink{classlimbo_1_1model_1_1_g_p_aa9d3799fdcd71a8ccc19bc43932fa321}{obs\+\_\+mean} () const 
 \item 
 int \hyperlink{classlimbo_1_1model_1_1_g_p_ac490915c95cc78f6cd836f78e3638bf1}{nb\+\_\+samples} () const 
-\begin{DoxyCompactList}\small\item\em return the number of samples used to compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em return the number of samples used to compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} \end{DoxyCompactList}\item 
 void \hyperlink{classlimbo_1_1model_1_1_g_p_aff675b6136bdee1b907a1ca1c76699b4}{recompute} (bool update\+\_\+obs\+\_\+mean=true, bool update\+\_\+full\+\_\+kernel=true)
-\begin{DoxyCompactList}\small\item\em recomputes the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em recomputes the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} \end{DoxyCompactList}\item 
 double \hyperlink{classlimbo_1_1model_1_1_g_p_a794ed0eeda29aaa7afe303b5e72d3927}{get\+\_\+lik} () const 
 \begin{DoxyCompactList}\small\item\em return the likelihood (do not compute it!) \end{DoxyCompactList}\item 
 void \hyperlink{classlimbo_1_1model_1_1_g_p_a4dfc1807eb4f113191dbd3ae51c053ee}{set\+\_\+lik} (const double \&lik)
 \begin{DoxyCompactList}\small\item\em set the likelihood (you need to compute it from outside!) \end{DoxyCompactList}\item 
-const Eigen\+::\+Matrix\+Xd \& \hyperlink{classlimbo_1_1model_1_1_g_p_a6f3a88531cc874a3a0cae0c218b0cf0a}{matrix\+L} () const 
-\begin{DoxyCompactList}\small\item\em L\+L\+T matrix (from Cholesky decomposition) \end{DoxyCompactList}\item 
+const Eigen\+::\+Matrix\+Xd \& \hyperlink{classlimbo_1_1model_1_1_g_p_a6f3a88531cc874a3a0cae0c218b0cf0a}{matrixL} () const 
+\begin{DoxyCompactList}\small\item\em L\+LT matrix (from Cholesky decomposition) \end{DoxyCompactList}\item 
 const Eigen\+::\+Matrix\+Xd \& \hyperlink{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}{alpha} () const 
 \item 
 const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \& \hyperlink{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}{samples} () const 
@@ -60,7 +60,8 @@ const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \& \hyperlink{classlimbo_1_1mod
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$typename Params, typename Kernel\+Function, typename Mean\+Function, class Hyper\+Params\+Optimizer = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$class limbo\+::model\+::\+G\+P$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$}
+\subsubsection*{template$<$typename Params, typename Kernel\+Function, typename Mean\+Function, class Hyper\+Params\+Optimizer = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$\\*
+class limbo\+::model\+::\+G\+P$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$}
 
 A classic Gaussian process. It is parametrized by\+:
 \begin{DoxyItemize}
@@ -69,25 +70,25 @@ A classic Gaussian process. It is parametrized by\+:
 \end{DoxyItemize}
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classlimbo_1_1model_1_1_g_p_aa18de82f231f3aed6ce8cce4c778aedb}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!G\+P@{G\+P}}
-\index{G\+P@{G\+P}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{G\+P}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::{\bf G\+P} (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!GP@{GP}}
+\index{GP@{GP}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{G\+P()}{GP()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::{\bf GP} (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_aa18de82f231f3aed6ce8cce4c778aedb}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_aa18de82f231f3aed6ce8cce4c778aedb}{}\label{classlimbo_1_1model_1_1_g_p_aa18de82f231f3aed6ce8cce4c778aedb}
 
 
 useful because the model might be created before knowing anything about the process 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_ab36947c89e4f5ad92599656a21829755}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!G\+P@{G\+P}}
-\index{G\+P@{G\+P}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{G\+P}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::{\bf G\+P} (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!GP@{GP}}
+\index{GP@{GP}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{G\+P(int dim\+\_\+in, int dim\+\_\+out)}{GP(int dim_in, int dim_out)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::{\bf GP} (
 \begin{DoxyParamCaption}
 \item[{int}]{dim\+\_\+in, }
 \item[{int}]{dim\+\_\+out}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_ab36947c89e4f5ad92599656a21829755}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_ab36947c89e4f5ad92599656a21829755}{}\label{classlimbo_1_1model_1_1_g_p_ab36947c89e4f5ad92599656a21829755}
 
 
 useful because the model might be created before having samples 
@@ -95,221 +96,221 @@ useful because the model might be created before having samples
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classlimbo_1_1model_1_1_g_p_a43e4e23d98c421d610df52ea6d3f3539}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!add\+\_\+sample@{add\+\_\+sample}}
-\index{add\+\_\+sample@{add\+\_\+sample}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{add\+\_\+sample}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::add\+\_\+sample (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!add\+\_\+sample@{add\+\_\+sample}}
+\index{add\+\_\+sample@{add\+\_\+sample}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{add\+\_\+sample(const Eigen\+::\+Vector\+Xd \&sample, const Eigen\+::\+Vector\+Xd \&observation, double noise)}{add_sample(const Eigen::VectorXd &sample, const Eigen::VectorXd &observation, double noise)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::add\+\_\+sample (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{sample, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{observation, }
 \item[{double}]{noise}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a43e4e23d98c421d610df52ea6d3f3539}
-add sample and update the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P}. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to \hyperlink{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}{compute()} \hypertarget{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!alpha@{alpha}}
-\index{alpha@{alpha}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{alpha}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::alpha (
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a43e4e23d98c421d610df52ea6d3f3539}{}\label{classlimbo_1_1model_1_1_g_p_a43e4e23d98c421d610df52ea6d3f3539}
+add sample and update the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP}. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to \hyperlink{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}{compute()} \index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!alpha@{alpha}}
+\index{alpha@{alpha}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{alpha() const }{alpha() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::alpha (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}
-\hypertarget{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!compute@{compute}}
-\index{compute@{compute}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{compute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::compute (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}{}\label{classlimbo_1_1model_1_1_g_p_adab606218ab9ef0c35babf8d1cc16d81}
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!compute@{compute}}
+\index{compute@{compute}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{compute(const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&samples, const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&observations, const Eigen\+::\+Vector\+Xd \&noises, bool compute\+\_\+kernel=true)}{compute(const std::vector< Eigen::VectorXd > &samples, const std::vector< Eigen::VectorXd > &observations, const Eigen::VectorXd &noises, bool compute_kernel=true)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::compute (
 \begin{DoxyParamCaption}
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{samples, }
 \item[{const std\+::vector$<$ Eigen\+::\+Vector\+Xd $>$ \&}]{observations, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{noises, }
 \item[{bool}]{compute\+\_\+kernel = {\ttfamily true}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}{}\label{classlimbo_1_1model_1_1_g_p_a6ba14232cd8d845874b03037f19a740a}
 
 
-Compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} from samples, observation, noise. This call needs to be explicit! 
+Compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} from samples, observation, noise. This call needs to be explicit! 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_a41d99e6a69d53fc7d9260d295f787bc3}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!dim\+\_\+in@{dim\+\_\+in}}
-\index{dim\+\_\+in@{dim\+\_\+in}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{dim\+\_\+in}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ int {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::dim\+\_\+in (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!dim\+\_\+in@{dim\+\_\+in}}
+\index{dim\+\_\+in@{dim\+\_\+in}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{dim\+\_\+in() const }{dim_in() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ int {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::dim\+\_\+in (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a41d99e6a69d53fc7d9260d295f787bc3}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a41d99e6a69d53fc7d9260d295f787bc3}{}\label{classlimbo_1_1model_1_1_g_p_a41d99e6a69d53fc7d9260d295f787bc3}
 
 
 return the number of dimensions of the input 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_a077144695f9f0b33b64d4feb8fb4e447}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!dim\+\_\+out@{dim\+\_\+out}}
-\index{dim\+\_\+out@{dim\+\_\+out}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{dim\+\_\+out}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ int {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::dim\+\_\+out (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!dim\+\_\+out@{dim\+\_\+out}}
+\index{dim\+\_\+out@{dim\+\_\+out}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{dim\+\_\+out() const }{dim_out() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ int {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::dim\+\_\+out (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a077144695f9f0b33b64d4feb8fb4e447}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a077144695f9f0b33b64d4feb8fb4e447}{}\label{classlimbo_1_1model_1_1_g_p_a077144695f9f0b33b64d4feb8fb4e447}
 
 
 return the number of dimensions of the output 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_a794ed0eeda29aaa7afe303b5e72d3927}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!get\+\_\+lik@{get\+\_\+lik}}
-\index{get\+\_\+lik@{get\+\_\+lik}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{get\+\_\+lik}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ double {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::get\+\_\+lik (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!get\+\_\+lik@{get\+\_\+lik}}
+\index{get\+\_\+lik@{get\+\_\+lik}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{get\+\_\+lik() const }{get_lik() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ double {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::get\+\_\+lik (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a794ed0eeda29aaa7afe303b5e72d3927}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a794ed0eeda29aaa7afe303b5e72d3927}{}\label{classlimbo_1_1model_1_1_g_p_a794ed0eeda29aaa7afe303b5e72d3927}
 
 
 return the likelihood (do not compute it!) 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_aaf794227fb4b8ba92bc22f15ec379d87}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!kernel\+\_\+function@{kernel\+\_\+function}}
-\index{kernel\+\_\+function@{kernel\+\_\+function}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{kernel\+\_\+function}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Kernel\+Function\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::kernel\+\_\+function (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!kernel\+\_\+function@{kernel\+\_\+function}}
+\index{kernel\+\_\+function@{kernel\+\_\+function}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{kernel\+\_\+function() const }{kernel_function() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Kernel\+Function\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::kernel\+\_\+function (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_aaf794227fb4b8ba92bc22f15ec379d87}
-\hypertarget{classlimbo_1_1model_1_1_g_p_a442ffded72288fd9ea360ce1456f72a4}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!kernel\+\_\+function@{kernel\+\_\+function}}
-\index{kernel\+\_\+function@{kernel\+\_\+function}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{kernel\+\_\+function}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Kernel\+Function\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::kernel\+\_\+function (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_aaf794227fb4b8ba92bc22f15ec379d87}{}\label{classlimbo_1_1model_1_1_g_p_aaf794227fb4b8ba92bc22f15ec379d87}
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!kernel\+\_\+function@{kernel\+\_\+function}}
+\index{kernel\+\_\+function@{kernel\+\_\+function}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{kernel\+\_\+function()}{kernel_function()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Kernel\+Function\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::kernel\+\_\+function (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a442ffded72288fd9ea360ce1456f72a4}
-\hypertarget{classlimbo_1_1model_1_1_g_p_a6f3a88531cc874a3a0cae0c218b0cf0a}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!matrix\+L@{matrix\+L}}
-\index{matrix\+L@{matrix\+L}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{matrix\+L}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::matrix\+L (
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a442ffded72288fd9ea360ce1456f72a4}{}\label{classlimbo_1_1model_1_1_g_p_a442ffded72288fd9ea360ce1456f72a4}
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!matrixL@{matrixL}}
+\index{matrixL@{matrixL}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{matrix\+L() const }{matrixL() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::matrixL (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a6f3a88531cc874a3a0cae0c218b0cf0a}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a6f3a88531cc874a3a0cae0c218b0cf0a}{}\label{classlimbo_1_1model_1_1_g_p_a6f3a88531cc874a3a0cae0c218b0cf0a}
 
 
-L\+L\+T matrix (from Cholesky decomposition) 
+L\+LT matrix (from Cholesky decomposition) 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_a480f1b249edf89bc6960512e8baceab8}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!max\+\_\+observation@{max\+\_\+observation}}
-\index{max\+\_\+observation@{max\+\_\+observation}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{max\+\_\+observation}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::max\+\_\+observation (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!max\+\_\+observation@{max\+\_\+observation}}
+\index{max\+\_\+observation@{max\+\_\+observation}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{max\+\_\+observation() const }{max_observation() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::max\+\_\+observation (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a480f1b249edf89bc6960512e8baceab8}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a480f1b249edf89bc6960512e8baceab8}{}\label{classlimbo_1_1model_1_1_g_p_a480f1b249edf89bc6960512e8baceab8}
 
 
-return the maximum observation (only call this if the output of the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} is of dimension 1) 
+return the maximum observation (only call this if the output of the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} is of dimension 1) 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_a29be4dfec28fbf0ab970529a18a20c34}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!mean\+\_\+function@{mean\+\_\+function}}
-\index{mean\+\_\+function@{mean\+\_\+function}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{mean\+\_\+function}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Mean\+Function\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mean\+\_\+function (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!mean\+\_\+function@{mean\+\_\+function}}
+\index{mean\+\_\+function@{mean\+\_\+function}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{mean\+\_\+function() const }{mean_function() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Mean\+Function\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mean\+\_\+function (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a29be4dfec28fbf0ab970529a18a20c34}
-\hypertarget{classlimbo_1_1model_1_1_g_p_ad4a56a3630793def38840ea1c85c091e}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!mean\+\_\+function@{mean\+\_\+function}}
-\index{mean\+\_\+function@{mean\+\_\+function}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{mean\+\_\+function}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Mean\+Function\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mean\+\_\+function (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a29be4dfec28fbf0ab970529a18a20c34}{}\label{classlimbo_1_1model_1_1_g_p_a29be4dfec28fbf0ab970529a18a20c34}
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!mean\+\_\+function@{mean\+\_\+function}}
+\index{mean\+\_\+function@{mean\+\_\+function}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{mean\+\_\+function()}{mean_function()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Mean\+Function\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mean\+\_\+function (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_ad4a56a3630793def38840ea1c85c091e}
-\hypertarget{classlimbo_1_1model_1_1_g_p_a802d8d4750626e6d38d83d36166000ac}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!mean\+\_\+observation@{mean\+\_\+observation}}
-\index{mean\+\_\+observation@{mean\+\_\+observation}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{mean\+\_\+observation}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mean\+\_\+observation (
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_ad4a56a3630793def38840ea1c85c091e}{}\label{classlimbo_1_1model_1_1_g_p_ad4a56a3630793def38840ea1c85c091e}
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!mean\+\_\+observation@{mean\+\_\+observation}}
+\index{mean\+\_\+observation@{mean\+\_\+observation}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{mean\+\_\+observation() const }{mean_observation() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mean\+\_\+observation (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a802d8d4750626e6d38d83d36166000ac}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a802d8d4750626e6d38d83d36166000ac}{}\label{classlimbo_1_1model_1_1_g_p_a802d8d4750626e6d38d83d36166000ac}
 
 
-return the mean observation (only call this if the output of the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} is of dimension 1) 
+return the mean observation (only call this if the output of the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} is of dimension 1) 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_ade0d93b847e3d112735b3e8143470a55}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!mean\+\_\+vector@{mean\+\_\+vector}}
-\index{mean\+\_\+vector@{mean\+\_\+vector}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{mean\+\_\+vector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mean\+\_\+vector (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!mean\+\_\+vector@{mean\+\_\+vector}}
+\index{mean\+\_\+vector@{mean\+\_\+vector}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{mean\+\_\+vector() const }{mean_vector() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mean\+\_\+vector (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_ade0d93b847e3d112735b3e8143470a55}
-\hypertarget{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!mu@{mu}}
-\index{mu@{mu}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{mu}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mu (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_ade0d93b847e3d112735b3e8143470a55}{}\label{classlimbo_1_1model_1_1_g_p_ade0d93b847e3d112735b3e8143470a55}
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!mu@{mu}}
+\index{mu@{mu}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{mu(const Eigen\+::\+Vector\+Xd \&v) const }{mu(const Eigen::VectorXd &v) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::mu (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{v}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}
-\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}mu} (unormalized). If there is no sample, return the value according to the mean function. \textbackslash{}endrst \hypertarget{classlimbo_1_1model_1_1_g_p_ac490915c95cc78f6cd836f78e3638bf1}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!nb\+\_\+samples@{nb\+\_\+samples}}
-\index{nb\+\_\+samples@{nb\+\_\+samples}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{nb\+\_\+samples}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ int {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::nb\+\_\+samples (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{}\label{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}
+\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}mu} (unormalized). If there is no sample, return the value according to the mean function. \textbackslash{}endrst \index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!nb\+\_\+samples@{nb\+\_\+samples}}
+\index{nb\+\_\+samples@{nb\+\_\+samples}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{nb\+\_\+samples() const }{nb_samples() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ int {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::nb\+\_\+samples (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_ac490915c95cc78f6cd836f78e3638bf1}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_ac490915c95cc78f6cd836f78e3638bf1}{}\label{classlimbo_1_1model_1_1_g_p_ac490915c95cc78f6cd836f78e3638bf1}
 
 
-return the number of samples used to compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} 
+return the number of samples used to compute the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_aa9d3799fdcd71a8ccc19bc43932fa321}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!obs\+\_\+mean@{obs\+\_\+mean}}
-\index{obs\+\_\+mean@{obs\+\_\+mean}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{obs\+\_\+mean}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::obs\+\_\+mean (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!obs\+\_\+mean@{obs\+\_\+mean}}
+\index{obs\+\_\+mean@{obs\+\_\+mean}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{obs\+\_\+mean() const }{obs_mean() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const Eigen\+::\+Matrix\+Xd\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::obs\+\_\+mean (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_aa9d3799fdcd71a8ccc19bc43932fa321}
-\hypertarget{classlimbo_1_1model_1_1_g_p_aa01b41e37de4def676cf6c79b08aac94}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!optimize\+\_\+hyperparams@{optimize\+\_\+hyperparams}}
-\index{optimize\+\_\+hyperparams@{optimize\+\_\+hyperparams}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{optimize\+\_\+hyperparams}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::optimize\+\_\+hyperparams (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_aa9d3799fdcd71a8ccc19bc43932fa321}{}\label{classlimbo_1_1model_1_1_g_p_aa9d3799fdcd71a8ccc19bc43932fa321}
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!optimize\+\_\+hyperparams@{optimize\+\_\+hyperparams}}
+\index{optimize\+\_\+hyperparams@{optimize\+\_\+hyperparams}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{optimize\+\_\+hyperparams()}{optimize_hyperparams()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::optimize\+\_\+hyperparams (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_aa01b41e37de4def676cf6c79b08aac94}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_aa01b41e37de4def676cf6c79b08aac94}{}\label{classlimbo_1_1model_1_1_g_p_aa01b41e37de4def676cf6c79b08aac94}
 
 
 Do not forget to call this if you use hyper-\/prameters optimization!! 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_a33937ff7df97c01fdd9bf8911e0a6159}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!query@{query}}
-\index{query@{query}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{query}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ std\+::tuple$<$Eigen\+::\+Vector\+Xd, double$>$ {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::query (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!query@{query}}
+\index{query@{query}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{query(const Eigen\+::\+Vector\+Xd \&v) const }{query(const Eigen::VectorXd &v) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ std\+::tuple$<$Eigen\+::\+Vector\+Xd, double$>$ {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::query (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{v}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a33937ff7df97c01fdd9bf8911e0a6159}
-\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}mu}, \+:math\+:{\ttfamily \textbackslash{}sigma$^\wedge$2} (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to \hyperlink{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{mu()} and \hyperlink{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{sigma()} is more efficient because some computations are shared between \hyperlink{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{mu()} and \hyperlink{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{sigma()}. \textbackslash{}endrst \hypertarget{classlimbo_1_1model_1_1_g_p_aff675b6136bdee1b907a1ca1c76699b4}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!recompute@{recompute}}
-\index{recompute@{recompute}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{recompute}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::recompute (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a33937ff7df97c01fdd9bf8911e0a6159}{}\label{classlimbo_1_1model_1_1_g_p_a33937ff7df97c01fdd9bf8911e0a6159}
+\textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}mu}, \+:math\+:{\ttfamily \textbackslash{}sigma$^\wedge$2} (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to \hyperlink{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{mu()} and \hyperlink{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{sigma()} is more efficient because some computations are shared between \hyperlink{classlimbo_1_1model_1_1_g_p_a5d26e30b8c53400cdf12058d83dc41f0}{mu()} and \hyperlink{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{sigma()}. \textbackslash{}endrst \index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!recompute@{recompute}}
+\index{recompute@{recompute}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{recompute(bool update\+\_\+obs\+\_\+mean=true, bool update\+\_\+full\+\_\+kernel=true)}{recompute(bool update_obs_mean=true, bool update_full_kernel=true)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::recompute (
 \begin{DoxyParamCaption}
 \item[{bool}]{update\+\_\+obs\+\_\+mean = {\ttfamily true}, }
 \item[{bool}]{update\+\_\+full\+\_\+kernel = {\ttfamily true}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_aff675b6136bdee1b907a1ca1c76699b4}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_aff675b6136bdee1b907a1ca1c76699b4}{}\label{classlimbo_1_1model_1_1_g_p_aff675b6136bdee1b907a1ca1c76699b4}
 
 
-recomputes the \hyperlink{classlimbo_1_1model_1_1_g_p}{G\+P} 
+recomputes the \hyperlink{classlimbo_1_1model_1_1_g_p}{GP} 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!samples@{samples}}
-\index{samples@{samples}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{samples}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const std\+::vector$<$Eigen\+::\+Vector\+Xd$>$\& {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::samples (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!samples@{samples}}
+\index{samples@{samples}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{samples() const }{samples() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ const std\+::vector$<$Eigen\+::\+Vector\+Xd$>$\& {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::samples (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}{}\label{classlimbo_1_1model_1_1_g_p_abaa15a2e503bac670dd1a35fb377aa23}
 
 
 return the list of samples that have been tested so far 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_a4dfc1807eb4f113191dbd3ae51c053ee}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!set\+\_\+lik@{set\+\_\+lik}}
-\index{set\+\_\+lik@{set\+\_\+lik}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{set\+\_\+lik}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::set\+\_\+lik (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!set\+\_\+lik@{set\+\_\+lik}}
+\index{set\+\_\+lik@{set\+\_\+lik}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{set\+\_\+lik(const double \&lik)}{set_lik(const double &lik)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ void {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::set\+\_\+lik (
 \begin{DoxyParamCaption}
 \item[{const double \&}]{lik}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a4dfc1807eb4f113191dbd3ae51c053ee}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a4dfc1807eb4f113191dbd3ae51c053ee}{}\label{classlimbo_1_1model_1_1_g_p_a4dfc1807eb4f113191dbd3ae51c053ee}
 
 
 set the likelihood (you need to compute it from outside!) 
 
-\hypertarget{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{}\index{limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}!sigma@{sigma}}
-\index{sigma@{sigma}!limbo\+::model\+::\+G\+P@{limbo\+::model\+::\+G\+P}}
-\subsubsection[{sigma}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ double {\bf limbo\+::model\+::\+G\+P}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::sigma (
+\index{limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}!sigma@{sigma}}
+\index{sigma@{sigma}!limbo\+::model\+::\+GP@{limbo\+::model\+::\+GP}}
+\subsubsection[{\texorpdfstring{sigma(const Eigen\+::\+Vector\+Xd \&v) const }{sigma(const Eigen::VectorXd &v) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params , typename Kernel\+Function , typename Mean\+Function , class Hyper\+Params\+Optimizer  = gp\+::\+No\+L\+F\+Opt$<$\+Params$>$$>$ double {\bf limbo\+::model\+::\+GP}$<$ Params, Kernel\+Function, Mean\+Function, Hyper\+Params\+Optimizer $>$\+::sigma (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{v}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}{}\label{classlimbo_1_1model_1_1_g_p_a2ea153c1de2021740235cfa10822395d}
 \textbackslash{}rst return \+:math\+:{\ttfamily \textbackslash{}sigma$^\wedge$2} (unormalized). If there is no sample, return the max \+:math\+:{\ttfamily \textbackslash{}sigma$^\wedge$2}. \textbackslash{}endrst 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="gp__ucb_8hpp" kind="file" language="C++">
     <compoundname>gp_ucb.hpp</compoundname>
     <includes local="no">Eigen/Core</includes>
@@ -152,7 +152,7 @@
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="83" refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a9846faaa39b1d1d7b039284f2c905205" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a9846faaa39b1d1d7b039284f2c905205" kindref="member">GP_UCB</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Model&amp;<sp/>model,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>iteration)<sp/>:<sp/>_model(model)</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>nt<sp/>=<sp/>std::pow(iteration,<sp/><ref refid="classlimbo_1_1acqui_1_1_g_p___u_c_b_1a30c58b2f857da76de61e8cf555e73d06" kindref="member">dim_in</ref>()<sp/>/<sp/>2.0<sp/>+<sp/>2.0);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>nt<sp/>=<sp/>std::pow(iteration,<sp/>dim_in()<sp/>/<sp/>2.0<sp/>+<sp/>2.0);</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>delta3<sp/>=<sp/>Params::acqui_gpucb::delta()<sp/>*<sp/>3;</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>pi2<sp/>=<sp/>M_PI<sp/>*<sp/>M_PI;</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_beta<sp/>=<sp/>std::sqrt(2.0<sp/>*<sp/>std::log(nt<sp/>*<sp/>pi2<sp/>/<sp/>delta3));</highlight></codeline>
