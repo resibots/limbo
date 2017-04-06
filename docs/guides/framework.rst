@@ -103,7 +103,7 @@ The json file should look like this (for both OAR or Torque):
      "email" : "JBM",
      "wall_time" : "270:00:00",
      "nb_runs" : 2,
-     "nb_cores" : 24,
+     "nb_cores" : 24
     },
 
     {
@@ -113,7 +113,7 @@ The json file should look like this (for both OAR or Torque):
      "email" : "JBM",
      "wall_time" : "270:00:00",
      "nb_runs" : 2,
-     "nb_cores" : 24,
+     "nb_cores" : 24
     }]
 
 Explanations:
