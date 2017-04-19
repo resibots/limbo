@@ -282,7 +282,7 @@ namespace spt {
     }
 
     // Do not call it on leaves
-    inline void sample_boundary_points(const std::shared_ptr<SPTNode>& node, int N = 500)
+    inline void sample_boundary_points(const std::shared_ptr<SPTNode>& node, int N = 1000)
     {
         Eigen::VectorXd min_p = node->min();
         Eigen::VectorXd max_p = node->max();
@@ -296,13 +296,19 @@ namespace spt {
             bool b;
             do {
                 b = true;
+                int index = min_p.size() - 1;
+                while (index >= 0 && std::abs(sp(index)) < 1e-6)
+                    index--;
+                assert(index >= 0);
                 // sample points on the hyper-plane
                 point = limbo::tools::random_vector(min_p.size()).array() * (max_p - min_p).array() + min_p.array();
-                point(point.size() - 1) = (m - sp.head(point.size() - 1).dot(point.head(point.size() - 1))) / double(sp(point.size() - 1));
+                Eigen::VectorXd sp_new = sp;
+                sp_new(index) = 0.0;
+                point(index) = (m - sp_new.dot(point)) / double(sp(index));
 
-                if (point(point.size() - 1) > max_p(point.size() - 1))
+                if (point(index) > max_p(index))
                     b = false;
-                if (point(point.size() - 1) < min_p(point.size() - 1))
+                if (point(index) < min_p(index))
                     b = false;
             } while (!b || !in_bounds(node, point));
 
@@ -327,6 +333,9 @@ namespace spt {
             p1 = p1->parent();
             p2 = p2->parent();
         }
+
+        if (p1 != p2)
+            return std::vector<Eigen::VectorXd>();
 
         // common ancestor
         auto p = p1;

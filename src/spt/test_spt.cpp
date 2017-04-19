@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limbo/limbo.hpp>
+#include <chrono>
 #include "spt.hpp"
 
 template <typename T>
@@ -36,13 +37,18 @@ int main()
     int d = std::ceil(std::log(N / double(n)) / std::log(2.0));
     std::cout << "We want tree of depth: " << d << std::endl;
 
+    auto start = std::chrono::high_resolution_clock::now();
     auto tree = spt::make_spt(points, d);
+    auto time1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
 
+    start = std::chrono::high_resolution_clock::now();
     auto leaves = get_leaves(tree);
+    auto time2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
 
     std::cout << "Num of leaves: " << leaves.size() << std::endl;
     // std::cout << leaves[0]->points().size() << std::endl;
 
+    start = std::chrono::high_resolution_clock::now();
     std::ofstream ofs0("bp.dat");
     std::ofstream ofs02("bp_num.dat");
     for (size_t i = 0; i < leaves.size(); i++) {
@@ -55,6 +61,10 @@ int main()
             // std::cout << "----------------------" << std::endl;
         }
     }
+    auto time3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
+
+    std::cout << time1 / 1000.0 << " " << time2 / 1000.0 << " " << time3 / 1000.0 << std::endl;
+    std::cout << (time1 + time2 + time3) / 1000.0 << std::endl;
 
     std::ofstream ofs("out.dat");
     std::ofstream ofs2("num.dat");
