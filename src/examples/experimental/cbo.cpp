@@ -47,6 +47,7 @@
 
 #include <limbo/experimental/bayes_opt/cboptimizer.hpp>
 #include <limbo/experimental/acqui/eci.hpp>
+#include <limbo/experimental/model/mgp.hpp>
 
 using namespace limbo;
 
@@ -124,14 +125,17 @@ int main()
         stat::AggregatedObservations<Params>>;
     using Mean_t = mean::Constant<Params>;
     using Kernel_t = kernel::Exp<Params>;
-    using GP_t = model::GP<Params, Kernel_t, Mean_t>;
+    using Objective_GP_t = model::GP<Params, Kernel_t, Mean_t>;
     using Constrained_GP_t = model::GP<Params, Kernel_t, Mean_t>;
 
-    using Acqui_t = experimental::acqui::ECI<Params, GP_t, Constrained_GP_t>;
+    using gps_vec_t = boost::fusion::vector<Objective_GP_t, Constrained_GP_t>;
+    using MGP_t = experimental::model::MGP<Params, gps_vec_t>;
+
+    using Acqui_t = experimental::acqui::ECI<Params, MGP_t, Constrained_GP_t>;
     using Init_t = init::RandomSampling<Params>;
 
     experimental::bayes_opt::CBOptimizer<Params,
-        modelfun<GP_t>,
+        modelfun<MGP_t>,
         acquifun<Acqui_t>,
         statsfun<Stat_t>,
         initfun<Init_t>,

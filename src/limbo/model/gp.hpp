@@ -277,7 +277,6 @@ namespace limbo {
             Eigen::MatrixXd _obs_mean;
 
             Eigen::VectorXd _noises;
-            Eigen::VectorXd _noises_bl;
 
             Eigen::MatrixXd _alpha;
             Eigen::VectorXd _mean_observation;
