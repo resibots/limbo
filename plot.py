@@ -71,7 +71,7 @@ kk = 0
 for i in range(len(bp_num)):
     for j in range(kk, kk+int(bp_num[i])):
         if i >= 0:#== 27:
-            ax.plot(bp[j,0], bp[j,1], '.', markerSize=5, color='red')
+            ax.plot(bp[j,0], bp[j,1], '.', markerSize=10, color='red')
     kk = kk + int(bp_num[i])
 
 handles, labels = ax.get_legend_handles_labels()

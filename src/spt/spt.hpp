@@ -19,14 +19,15 @@ namespace spt {
             _is_left = 0;
         }
 
-        SPTNode(const std::vector<Eigen::VectorXd>& points)
-            : _parent(nullptr), _left(nullptr), _right(nullptr), _points(points)
+        SPTNode(const std::vector<Eigen::VectorXd>& points, const std::vector<Eigen::VectorXd>& observations)
+            : _parent(nullptr), _left(nullptr), _right(nullptr), _points(points), _observations(observations)
         {
             _boundary_points = std::vector<Eigen::VectorXd>();
             _is_left = 0;
         }
 
         std::vector<Eigen::VectorXd> points() { return _points; }
+        std::vector<Eigen::VectorXd> observations() { return _observations; }
 
         double split_median() { return _split_median; }
         void set_split_median(double sp_med) { _split_median = sp_med; }
@@ -58,7 +59,7 @@ namespace spt {
 
     protected:
         std::shared_ptr<SPTNode> _parent, _left, _right;
-        std::vector<Eigen::VectorXd> _points;
+        std::vector<Eigen::VectorXd> _points, _observations;
         Eigen::VectorXd _split_dir, _split_vector;
         Eigen::VectorXd _max, _min;
         double _split_median;
@@ -352,9 +353,9 @@ namespace spt {
         return res;
     }
 
-    inline std::shared_ptr<SPTNode> make_spt(const std::vector<Eigen::VectorXd>& points, int max_depth = 2, int depth = 0)
+    inline std::shared_ptr<SPTNode> make_spt(const std::vector<Eigen::VectorXd>& points, const std::vector<Eigen::VectorXd>& observations, int max_depth = 2, int depth = 0)
     {
-        auto spt_node = std::make_shared<SPTNode>(points);
+        auto spt_node = std::make_shared<SPTNode>(points, observations);
         spt_node->_depth = depth;
 
         if (max_depth == 0) {
@@ -374,7 +375,7 @@ namespace spt {
         // get new points
         double min = std::numeric_limits<double>::max();
         int min_i = -1;
-        std::vector<Eigen::VectorXd> left_points, right_points;
+        std::vector<Eigen::VectorXd> left_points, right_points, left_obs, right_obs;
 
         Eigen::VectorXd min_left = Eigen::VectorXd::Constant(points[0].size(), std::numeric_limits<double>::max());
         Eigen::VectorXd max_left = Eigen::VectorXd::Constant(points[0].size(), -std::numeric_limits<double>::max());
@@ -402,6 +403,7 @@ namespace spt {
 
             if (transformed_points[i] <= split_median) {
                 left_points.push_back(points[i]);
+                left_obs.push_back(observations[i]);
                 // // this is needed for the boundaries computation
                 // for (int j = 0; j < points[0].size(); j++) {
                 //     if (points[i](j) < min_left(j)) {
@@ -420,6 +422,7 @@ namespace spt {
             }
             else {
                 right_points.push_back(points[i]);
+                right_obs.push_back(observations[i]);
                 // // this is needed for the boundaries computation
                 // for (int j = 0; j < points[0].size(); j++) {
                 //     if (points[i](j) < min_right(j)) {
@@ -453,7 +456,7 @@ namespace spt {
         sample_boundary_points(spt_node); //, max_depth * max_depth * 7);
 
         // Make left node
-        auto left_node = make_spt(left_points, max_depth - 1, depth + 1);
+        auto left_node = make_spt(left_points, left_obs, max_depth - 1, depth + 1);
         left_node->set_parent(spt_node);
         left_node->_is_left = 1;
         spt_node->set_left(left_node);
@@ -463,7 +466,7 @@ namespace spt {
         // left_node->set_split_vector(points[min_i_left]);
 
         // Make right node
-        auto right_node = make_spt(right_points, max_depth - 1, depth + 1);
+        auto right_node = make_spt(right_points, right_obs, max_depth - 1, depth + 1);
         right_node->set_parent(spt_node);
         spt_node->set_right(right_node);
 
