@@ -67,7 +67,7 @@ public:
 
         _root = spt::make_spt(_samples, observations, d);
         _leaves = spt::get_leaves(_root);
-        std::cout << "Regions: " << _leaves.size() << std::endl;
+        // std::cout << "Regions: " << _leaves.size() << std::endl;
         _boundaries.clear();
 
         _observations.resize(observations.size(), _dim_out);
@@ -81,8 +81,11 @@ public:
 
         _mean_observation = _observations.colwise().mean();
 
+        int s = 0;
         for (size_t i = 0; i < _leaves.size(); i++) {
-            std::cout << _leaves[i]->points().size() << ((i < _leaves.size() - 1) ? ", " : "");
+            // std::cout << _leaves[i]->points().size() << ((i < _leaves.size() - 1) ? ", " : "");
+            for (int k = 0; k < _leaves[i]->points().size(); k++)
+                _samples[s++] = _leaves[i]->points()[k];
             for (size_t j = i + 1; j < _leaves.size(); j++) {
                 std::vector<Eigen::VectorXd> bp = spt::get_shared_boundaries(_leaves[i], _leaves[j]);
                 limbo::tools::rgen_int_t rgen(0.0, bp.size() - 1);
@@ -98,78 +101,84 @@ public:
                     _boundaries.push_back(std::vector<Eigen::VectorXd>());
             }
         }
-        std::cout << std::endl;
-        std::cout << "Boundaries: " << _boundaries.size() << std::endl;
+        // std::cout << std::endl;
+        // std::cout << "Boundaries: " << _boundaries.size() << std::endl;
 
-        // Query point -- just for testing
-        Eigen::VectorXd v = Eigen::VectorXd::Zero(2);
-        // query GP
-        int kk = 0;
+        // // Query point -- just for testing
+        // Eigen::VectorXd v = Eigen::VectorXd::Zero(2);
+        // // query GP
+        // int kk = 0;
 
         int num = 0;
 
-        Eigen::VectorXd c_D_star;
-        for (int i = 0; i < _leaves.size(); i++) {
-            // std::cout << _leaves[i]->points().size() << std::endl;
-            Eigen::VectorXd k(_leaves[i]->points().size());
-            // TO-DO: Fix kernels
-            for (int j = 0; j < k.size(); j++)
-                k[j] = _kernel_function(_leaves[i]->points()[j], v);
-            // c_d_star.push_back(k);
-            c_D_star.conservativeResize(c_D_star.size() + k.size());
-            c_D_star.tail(k.size()) = k;
-            // std::cout << k.size() << std::endl;
-            // num += k.size();
-        }
-        std::cout << "Whole cD*(k): " << c_D_star.size() << "x1" << std::endl;
-        // std::cout << c_D_star.transpose() << std::endl;
+        // Eigen::VectorXd c_D_star;
+        // for (int i = 0; i < _leaves.size(); i++) {
+        //     // std::cout << _leaves[i]->points().size() << std::endl;
+        //     Eigen::VectorXd k(_leaves[i]->points().size());
+        //     // TO-DO: Fix kernels
+        //     for (int j = 0; j < k.size(); j++)
+        //         k[j] = _kernel_function(_leaves[i]->points()[j], v);
+        //     // c_d_star.push_back(k);
+        //     c_D_star.conservativeResize(c_D_star.size() + k.size());
+        //     c_D_star.tail(k.size()) = k;
+        //     // std::cout << k.size() << std::endl;
+        //     // num += k.size();
+        // }
+        // std::cout << "Whole cD*(k): " << c_D_star.size() << "x1" << std::endl;
+        // // std::cout << c_D_star.transpose() << std::endl;
 
         int b = 0;
-        // std::vector<Eigen::VectorXd> c_delta_star;
-        Eigen::VectorXd c_delta_star(B * _boundaries.size());
-        for (size_t i = 0; i < _leaves.size(); i++) {
-            for (size_t j = i + 1; j < _leaves.size(); j++) {
-                if (_boundaries[b].size() == 0) {
-                    // c_delta_star.push_back(Eigen::VectorXd::Zero(B));
-                    c_delta_star.segment(b * B, B) = Eigen::VectorXd::Zero(B);
-                    // std::cout << B << std::endl;
-                }
-                else {
-                    Eigen::VectorXd k(_boundaries[b].size());
-                    // TO-DO: Fix kernels
-                    for (int kkk = 0; kkk < k.size(); kkk++) {
-                        if (kk == i)
-                            k[kkk] = _kernel_function(_boundaries[b][kkk], v);
-                        else if (kk == j)
-                            k[kkk] = -_kernel_function(_boundaries[b][kkk], v);
-                        else
-                            k[kkk] = 0.0;
-                    }
-                    // c_delta_star.push_back(k);
-                    c_delta_star.segment(b * B, B) = k;
-                    // std::cout << k.size() << std::endl;
-                }
-                b++;
-            }
-        }
-        std::cout << "Whole δ*(k): " << c_delta_star.size() << "x1" << std::endl;
-        // std::cout << c_delta_star.transpose() << std::endl;
+        // // std::vector<Eigen::VectorXd> c_delta_star;
+        // Eigen::VectorXd c_delta_star(B * _boundaries.size());
+        // for (size_t i = 0; i < _leaves.size(); i++) {
+        //     for (size_t j = i + 1; j < _leaves.size(); j++) {
+        //         if (_boundaries[b].size() == 0) {
+        //             // c_delta_star.push_back(Eigen::VectorXd::Zero(B));
+        //             c_delta_star.segment(b * B, B) = Eigen::VectorXd::Zero(B);
+        //             // std::cout << B << std::endl;
+        //         }
+        //         else {
+        //             Eigen::VectorXd k(_boundaries[b].size());
+        //             // TO-DO: Fix kernels
+        //             for (int kkk = 0; kkk < k.size(); kkk++) {
+        //                 if (kk == i)
+        //                     k[kkk] = _kernel_function(_boundaries[b][kkk], v);
+        //                 else if (kk == j)
+        //                     k[kkk] = -_kernel_function(_boundaries[b][kkk], v);
+        //                 else
+        //                     k[kkk] = 0.0;
+        //             }
+        //             // c_delta_star.push_back(k);
+        //             c_delta_star.segment(b * B, B) = k;
+        //             // std::cout << k.size() << std::endl;
+        //         }
+        //         b++;
+        //     }
+        // }
+        // std::cout << "Whole δ*(k): " << c_delta_star.size() << "x1" << std::endl;
+        // // std::cout << c_delta_star.transpose() << std::endl;
 
         int num1 = 0;
         int num2 = 0;
         b = 0;
         // std::vector<Eigen::MatrixXd> c_D_D;
+        // auto start = std::chrono::high_resolution_clock::now();
         _DD_blocks.clear();
         Eigen::MatrixXd c_D_D;
         for (size_t i = 0; i < _leaves.size(); i++) {
             // for (size_t j = i + 1; j < _leaves.size(); j++) {
+            std::vector<Eigen::VectorXd> points = _leaves[i]->points();
             Eigen::MatrixXd DD(_leaves[i]->points().size(), _leaves[i]->points().size());
             for (int k1 = 0; k1 < _leaves[i]->points().size(); k1++) {
-                for (int k2 = 0; k2 < _leaves[i]->points().size(); k2++) {
+                for (int k2 = 0; k2 <= k1; k2++) {
                     // TO-DO: Fix kernels
-                    DD(k1, k2) = _kernel_function(_leaves[i]->points()[k1], _leaves[i]->points()[k2]);
+                    DD(k1, k2) = _kernel_function(points[k1], points[k2]);
                 }
             }
+
+            for (int k1 = 0; k1 < _leaves[i]->points().size(); k1++)
+                for (int k2 = 0; k2 < k1; k2++)
+                    DD(k2, k1) = DD(k1, k2);
 
             // c_D_D.push_back(DD);
             int r = c_D_D.rows(), c = c_D_D.cols();
@@ -183,7 +192,9 @@ public:
             b++;
             // }
         }
-        std::cout << "Whole cDD: " << c_D_D.rows() << "x" << c_D_D.cols() << std::endl;
+        // auto time1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
+        // std::cout << "Time cDD: " << time1 / double(1000.0) << std::endl;
+        // std::cout << "Whole cDD: " << c_D_D.rows() << "x" << c_D_D.cols() << std::endl;
         // std::cout << c_D_D << std::endl;
         // Eigen::Block<Eigen::MatrixXd> block = _DD_blocks[0].get_block(c_D_D);
         // for (int i = 0; i < block.rows(); i++)
@@ -193,34 +204,39 @@ public:
         // std::cout << c_D_D << std::endl;
 
         // TO-DO: Fix the inversion (use parallel if possible and proper inversion with cholesky)
+        _c_D_D_inverse = c_D_D;
         for (int i = 0; i < _DD_blocks.size(); i++) {
-            Eigen::Block<Eigen::MatrixXd> block = _DD_blocks[i].get_block(c_D_D);
-            block = block.inverse();
+            Eigen::Block<Eigen::MatrixXd> block = _DD_blocks[i].get_block(_c_D_D_inverse);
+            // block = block.inverse();
+            block = block.llt().solve(Eigen::MatrixXd::Identity(block.rows(), block.cols()));
         }
 
         b = 0;
         // num1 = 0;
         // num2 = 0;
         // std::vector<Eigen::MatrixXd> c_d_D;
-        Eigen::MatrixXd c_d_D = Eigen::MatrixXd::Zero(_boundaries.size() * B, _samples.size());
+        // auto start3 = std::chrono::high_resolution_clock::now();
+        _c_d_D = Eigen::MatrixXd::Zero(_boundaries.size() * B, _samples.size());
         for (size_t i = 0; i < _leaves.size(); i++) {
             for (size_t j = i + 1; j < _leaves.size(); j++) {
                 // for (int b = 0; b < _boundaries.size(); b++) {
                 num = 0;
                 for (int k = 0; k < _leaves.size(); k++) {
-                    Eigen::MatrixXd DD(B, _leaves[k]->points().size());
-                    for (int s = 0; s < _leaves[k]->points().size(); s++) {
-                        if (_boundaries[b].size() == 0) {
-                            for (int kkk = 0; kkk < B; kkk++)
-                                DD(kkk, s) = 0.0;
-                        }
-                        else {
+                    std::vector<Eigen::VectorXd> points = _leaves[k]->points();
+                    Eigen::MatrixXd DD = Eigen::MatrixXd::Zero(B, _leaves[k]->points().size());
+                    if (_boundaries[b].size() > 0) {
+                        //     // for (int kkk = 0; kkk < B; kkk++)
+                        //     DD.block(0, 0, B, DD.cols()) = Eigen::MatrixXd::Zero(1, DD.cols());
+                        //     // DD(kkk, s) = 0.0;
+                        // }
+                        // else {
+                        for (int s = 0; s < _leaves[k]->points().size(); s++) {
                             // TO-DO: Fix kernels
                             for (int kkk = 0; kkk < B; kkk++) {
                                 if (k == i)
-                                    DD(kkk, s) = _kernel_function(_boundaries[b][kkk], _leaves[k]->points()[s]);
+                                    DD(kkk, s) = _kernel_function(_boundaries[b][kkk], points[s]);
                                 else if (k == j)
-                                    DD(kkk, s) = -_kernel_function(_boundaries[b][kkk], _leaves[k]->points()[s]);
+                                    DD(kkk, s) = -_kernel_function(_boundaries[b][kkk], points[s]);
                                 else
                                     DD(kkk, s) = 0.0;
                             }
@@ -228,7 +244,7 @@ public:
                     }
                     // c_d_D.push_back(DD);
                     // std::cout << b* B << "," << num << " -> " << B << "x" << _leaves[k]->points().size() << std::endl;
-                    c_d_D.block(b * B, num, B, _leaves[k]->points().size()) = DD;
+                    _c_d_D.block(b * B, num, B, _leaves[k]->points().size()) = DD;
                     num += _leaves[k]->points().size();
                 }
                 // num2 = num; // / _boundaries.size();
@@ -236,7 +252,9 @@ public:
                 b++;
             }
         }
-        std::cout << "Whole cδD: " << c_d_D.rows() << "x" << c_d_D.cols() << std::endl;
+        // auto time3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start3).count();
+        // std::cout << "Time cδD: " << time3 / double(1000.0) << std::endl;
+        // std::cout << "Whole cδD: " << _c_d_D.rows() << "x" << _c_d_D.cols() << std::endl;
         // std::cout << c_d_D << std::endl;
 
         // std::vector<Eigen::MatrixXd> c_d_d;
@@ -245,6 +263,7 @@ public:
         // num1 = 0;
         // num2 = 0;
         int b1 = 0, b2 = 0;
+        // auto start2 = std::chrono::high_resolution_clock::now();
         // for (int b1 = 0; b1 < _boundaries.size(); b1++)
         for (size_t i1 = 0; i1 < _leaves.size(); i1++) {
             for (size_t j1 = i1 + 1; j1 < _leaves.size(); j1++) {
@@ -279,8 +298,10 @@ public:
                 b1++;
             }
         }
+        // auto time2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start2).count();
+        // std::cout << "Time cdd: " << time2 / double(1000.0) << std::endl;
 
-        std::cout << "Whole cδδ: " << c_d_d.rows() << "x" << c_d_d.cols() << std::endl;
+        // std::cout << "Whole cδδ: " << c_d_d.rows() << "x" << c_d_d.cols() << std::endl;
         // std::cout << c_d_d << std::endl;
         // Eigen::Block<Eigen::MatrixXd> block = _dd_blocks[0].get_block(c_d_d);
         // // for (int i = 0; i < block.rows(); i++)
@@ -289,17 +310,14 @@ public:
         // block = block.inverse();
 
         // TO-DO: Fix the inversion (use parallel if possible and proper inversion with cholesky)
+        _c_d_d_inverse = c_d_d;
         for (int i = 0; i < _dd_blocks.size(); i++) {
-            Eigen::Block<Eigen::MatrixXd> block = _dd_blocks[i].get_block(c_D_D);
-            block = block.inverse();
+            Eigen::Block<Eigen::MatrixXd> block = _dd_blocks[i].get_block(_c_d_d_inverse);
+            // block = block.inverse();
+            block = block.llt().solve(Eigen::MatrixXd::Identity(block.rows(), block.cols()));
         }
 
-        // Eigen::MatrixXd tmp = c_d_d.fullPivLu().solve(Eigen::MatrixXd::Identity(c_d_d.rows(), c_d_d.cols()));
-        // std::cout << (c_d_d * tmp) << std::endl;
-
-        // this->_compute_obs_mean();
-        // if (compute_kernel)
-        //     this->_compute_full_kernel();
+        this->_compute_obs_mean();
     }
 
 protected:
@@ -322,7 +340,20 @@ protected:
 
     Eigen::VectorXd _mean_observation;
 
+    Eigen::MatrixXd _c_d_D;
+    Eigen::MatrixXd _c_d_d_inverse;
+    Eigen::MatrixXd _c_D_D_inverse;
+    Eigen::MatrixXd _matrixL;
+
     HyperParamsOptimizer _hp_optimize;
+
+    void _compute_obs_mean()
+    {
+        _mean_vector.resize(_samples.size(), _dim_out);
+        for (int i = 0; i < _mean_vector.rows(); i++)
+            _mean_vector.row(i) = _mean_function(_samples[i], *this);
+        _obs_mean = _observations - _mean_vector;
+    }
 };
 
 struct Params {
@@ -339,7 +370,11 @@ struct Params {
 
 int main()
 {
-    int N = 1000;
+    // std::vector<double> test = {2, 5, 1, 20, -2, 6, 6, 4, 20, -10, -30, 50, 100, -200, -42, 1.5};
+    // for (double p = 0.0; p <= 1.01; p += 0.05)
+    //     std::cout << p << ": " << spt::get_quantile(test, p) << std::endl;
+    // // std::cout << spt::get_median(test) << std::endl;
+    int N = 7000;
     // int n = 500;
     int D = 2;
 
@@ -362,6 +397,12 @@ int main()
     gp.compute(points, obs);
     auto time1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
     std::cout << "Time: " << time1 / double(1000.0) << std::endl;
+
+    limbo::model::GP<Params, limbo::kernel::Exp<Params>, limbo::mean::NullFunction<Params>> gp_old;
+    start = std::chrono::high_resolution_clock::now();
+    gp_old.compute(points, obs);
+    time1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
+    std::cout << "Time (old gp): " << time1 / double(1000.0) << std::endl;
 
     // // Eigen::MatrixXd cov = spt::sample_covariance(points);
     // // std::cout << cov << std::endl;

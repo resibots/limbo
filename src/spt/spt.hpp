@@ -173,10 +173,40 @@ namespace spt {
 
         std::sort(p_i.begin(), p_i.end());
 
-        median = (size % 2) ? p_i[size / 2] : (p_i[size / 2 - 1] + p_i[size / 2]) / 2;
+        median = (size % 2) ? p_i[size / 2] : (p_i[size / 2 - 1] + p_i[size / 2]) / 2.0;
         // }
 
         return median;
+    }
+
+    inline double get_quantile(const std::vector<double>& points, double perc = 0.5)
+    {
+        assert(points.size());
+
+        int size = points.size();
+
+        std::vector<double> p_i = points;
+
+        std::sort(p_i.begin(), p_i.end());
+
+        // OLD IMPLEMENTATION -- no linear interpolation
+        // double index = perc * size;
+        // int i = std::floor(index);
+        // // std::cout << i << " " << index << std::endl;
+        // if (i == index && i > 0) {
+        //     return (p_i[i - 1] + p_i[i]) / 2.0;
+        // }
+        //
+        // return p_i[i];
+
+        double pp = perc * (size - 1.0);
+        int ind_below = std::floor(pp);
+        int ind_above = std::ceil(pp);
+
+        if (ind_below == ind_above)
+            return p_i[ind_below];
+
+        return p_i[ind_below] * (double(ind_above) - pp) + p_i[ind_above] * (pp - double(ind_below));
     }
 
     // // call it only for leaves
