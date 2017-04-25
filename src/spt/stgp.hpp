@@ -12,7 +12,7 @@ namespace spt {
 
         void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations)
         {
-            int n = 80;
+            int n = 100;
             int N = samples.size();
             int d = std::ceil(std::log(N / double(n)) / std::log(2.0));
             std::cout << "We want tree of depth: " << d << std::endl;
