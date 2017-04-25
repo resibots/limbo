@@ -347,21 +347,37 @@ void benchmark(const std::string& name)
     }
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    std::string function = "Rastrigin";
+    if (argc >= 2)
+        function = std::string(argv[1]);
     limbo::tools::par::init();
 
-    benchmark<Rastrigin>("rastrigin");
-    benchmark<Ackley>("ackley");
-    benchmark<Bukin>("bukin");
-    benchmark<CrossInTray>("crossintray");
-    benchmark<DropWave>("dropwave");
-    benchmark<GramacyLee>("gramacylee");
-    benchmark<HolderTable>("holdertable");
-    benchmark<Levy>("levy");
-    benchmark<Schwefel>("schwefel");
-    benchmark<SixHumpCamel>("sixhumpcamel");
-    benchmark<Hartmann6>("hartmann6");
+    if (function == "Rastrigin")
+        benchmark<Rastrigin>("rastrigin");
+    else if (function == "Ackley")
+        benchmark<Ackley>("ackley");
+    else if (function == "Bukin")
+        benchmark<Bukin>("bukin");
+    else if (function == "CrossInTray")
+        benchmark<CrossInTray>("crossintray");
+    else if (function == "DropWave")
+        benchmark<DropWave>("dropwave");
+    else if (function == "GramacyLee")
+        benchmark<GramacyLee>("gramacylee");
+    else if (function == "HolderTable")
+        benchmark<HolderTable>("holdertable");
+    else if (function == "Levy")
+        benchmark<Levy>("levy");
+    else if (function == "Schwefel")
+        benchmark<Schwefel>("schwefel");
+    else if (function == "SixHumpCamel")
+        benchmark<SixHumpCamel>("sixhumpcamel");
+    else if (function == "Hartmann6")
+        benchmark<Hartmann6>("hartmann6");
+    else
+        std::cerr << "Unknown function...!" << std::endl;
 
     // OLD EXPERIMENTS
     // // std::vector<double> test = {2, 5, 1, 20, -2, 6, 6, 4, 20, -10, -30, 50, 100, -200, -42, 1.5};
