@@ -32,6 +32,12 @@ namespace spt {
         double split_median() { return _split_median; }
         void set_split_median(double sp_med) { _split_median = sp_med; }
 
+        double split_median_left() { return _split_median_left; }
+        void set_split_median_left(double sp_med) { _split_median_left = sp_med; }
+
+        double split_median_right() { return _split_median_right; }
+        void set_split_median_right(double sp_med) { _split_median_right = sp_med; }
+
         Eigen::VectorXd split_dir() { return _split_dir; }
         void set_split_dir(const Eigen::VectorXd& sp_dir) { _split_dir = sp_dir; }
 
@@ -62,7 +68,7 @@ namespace spt {
         std::vector<Eigen::VectorXd> _points, _observations;
         Eigen::VectorXd _split_dir, _split_vector;
         Eigen::VectorXd _max, _min;
-        double _split_median;
+        double _split_median, _split_median_left, _split_median_right;
     };
 
     inline Eigen::MatrixXd sample_covariance(const std::vector<Eigen::VectorXd>& points)
@@ -200,6 +206,7 @@ namespace spt {
         // return p_i[i];
 
         double pp = perc * (size - 1.0);
+        pp = std::round(pp * 1000.0) / 1000.0;
         int ind_below = std::floor(pp);
         int ind_above = std::ceil(pp);
 
@@ -383,7 +390,7 @@ namespace spt {
         return res;
     }
 
-    inline std::shared_ptr<SPTNode> make_spt(const std::vector<Eigen::VectorXd>& points, const std::vector<Eigen::VectorXd>& observations, int max_depth = 2, int depth = 0)
+    inline std::shared_ptr<SPTNode> make_spt(const std::vector<Eigen::VectorXd>& points, const std::vector<Eigen::VectorXd>& observations, int max_depth = 2, double tau = 0.1, int depth = 0)
     {
         auto spt_node = std::make_shared<SPTNode>(points, observations);
         spt_node->_depth = depth;
@@ -398,9 +405,13 @@ namespace spt {
         // calculate median
         std::vector<double> transformed_points = transform_points(points, split_dir);
         double split_median = get_median(transformed_points);
+        double split_median_left = get_quantile(transformed_points, 0.5 + tau); //get_median(transformed_points);
+        double split_median_right = get_quantile(transformed_points, 0.5 - tau);
 
         spt_node->set_split_dir(split_dir);
         spt_node->set_split_median(split_median);
+        spt_node->set_split_median_left(split_median_left);
+        spt_node->set_split_median_right(split_median_right);
 
         // get new points
         double min = std::numeric_limits<double>::max();
@@ -431,7 +442,7 @@ namespace spt {
                 }
             }
 
-            if (transformed_points[i] <= split_median) {
+            if (transformed_points[i] <= split_median_left) {
                 left_points.push_back(points[i]);
                 left_obs.push_back(observations[i]);
                 // // this is needed for the boundaries computation
@@ -450,7 +461,7 @@ namespace spt {
                 //     min_i_left = i;
                 // }
             }
-            else {
+            if (transformed_points[i] > split_median_right) {
                 right_points.push_back(points[i]);
                 right_obs.push_back(observations[i]);
                 // // this is needed for the boundaries computation
@@ -483,10 +494,11 @@ namespace spt {
         spt_node->set_min(min_p);
         // std::cout << depth << ": " << min_p.transpose() << " -> " << max_p.transpose() << std::endl;
 
-        sample_boundary_points(spt_node); //, max_depth * max_depth * 7);
+        // TO-DO: Check if we should put it back
+        // sample_boundary_points(spt_node); //, max_depth * max_depth * 7);
 
         // Make left node
-        auto left_node = make_spt(left_points, left_obs, max_depth - 1, depth + 1);
+        auto left_node = make_spt(left_points, left_obs, max_depth - 1, tau, depth + 1);
         left_node->set_parent(spt_node);
         left_node->_is_left = 1;
         spt_node->set_left(left_node);
@@ -496,7 +508,7 @@ namespace spt {
         // left_node->set_split_vector(points[min_i_left]);
 
         // Make right node
-        auto right_node = make_spt(right_points, right_obs, max_depth - 1, depth + 1);
+        auto right_node = make_spt(right_points, right_obs, max_depth - 1, tau, depth + 1);
         right_node->set_parent(spt_node);
         spt_node->set_right(right_node);
 
