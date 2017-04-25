@@ -199,7 +199,7 @@ void benchmark(const std::string& name)
     if (func.dims() > 0)
         dims.push_back(func.dims());
     else {
-        for (int i = 1; i <= 24; i += 2) {
+        for (int i = 1; i <= 32; i *= 2) {
             dims.push_back(i);
         }
     }
