@@ -45,16 +45,54 @@ namespace spt {
         std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
         {
             return _gps[_find_gp(v)].query(v);
+            // std::vector<int> ids = _find_gps(_root, v);
+            // assert(ids.size());
+            // Eigen::VectorXd mu = Eigen::VectorXd::Zero(1);
+            // double sigma = 0.0;
+            // for (int i = 0; i < ids.size(); i++) {
+            //     Eigen::VectorXd tmu;
+            //     double ts;
+            //     std::tie(tmu, ts) = _gps[ids[i]].query(v);
+            //     mu += tmu;
+            //     sigma += ts;
+            // }
+            //
+            // mu = mu.array() / double(ids.size());
+            // sigma /= double(ids.size());
+            //
+            // return std::make_tuple(mu, sigma);
         }
 
         Eigen::VectorXd mu(const Eigen::VectorXd& v) const
         {
             return _gps[_find_gp(v)].mu(v);
+            // std::vector<int> ids = _find_gps(_root, v);
+            // assert(ids.size());
+            // Eigen::VectorXd mu = Eigen::VectorXd::Zero(1);
+            // for (int i = 0; i < ids.size(); i++) {
+            //     Eigen::VectorXd tmu = _gps[ids[i]].mu(v);
+            //     mu += tmu;
+            // }
+            //
+            // mu = mu.array() / double(ids.size());
+            //
+            // return mu;
         }
 
         double sigma(const Eigen::VectorXd& v) const
         {
             return _gps[_find_gp(v)].sigma(v);
+            // std::vector<int> ids = _find_gps(_root, v);
+            // assert(ids.size());
+            // double sigma = 0.0;
+            // for (int i = 0; i < ids.size(); i++) {
+            //     double ts = _gps[ids[i]].sigma(v);
+            //     sigma += ts;
+            // }
+            //
+            // sigma /= double(ids.size());
+            //
+            // return sigma;
         }
 
     protected:
@@ -79,6 +117,38 @@ namespace spt {
                     break;
 
             return i;
+        }
+
+        std::vector<int> _find_gps(const std::shared_ptr<spt::SPTNode>& node, const Eigen::VectorXd& v) const
+        {
+            std::vector<int> ids;
+            if (!node->right() || !node->left()) {
+                int i = 0;
+                for (; i < _leaves.size(); i++)
+                    if (node == _leaves[i])
+                        break;
+                ids.push_back(i);
+            }
+            else {
+                std::vector<int> left_ids, right_ids;
+
+                Eigen::VectorXd split_dir = node->split_dir();
+                double val = split_dir.dot(v);
+                if (val <= node->split_median_left()) {
+                    left_ids = _find_gps(node->left(), v);
+                }
+
+                if (val > node->split_median_right()) {
+                    right_ids = _find_gps(node->right(), v);
+                }
+
+                for (int i = 0; i < left_ids.size(); i++)
+                    ids.push_back(left_ids[i]);
+                for (int i = 0; i < right_ids.size(); i++)
+                    ids.push_back(right_ids[i]);
+            }
+
+            return ids;
         }
     };
 }

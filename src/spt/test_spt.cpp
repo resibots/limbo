@@ -213,7 +213,7 @@ void benchmark(const std::string& name)
         bool one_bound = (bounds.size() == 1);
         int D = dims[dim];
 
-        for (int N = 400; N <= 12800; N = 2 * N) {
+        for (int N = 400; N <= 6400; N = 2 * N) {
             std::cout << name << " in dim: " << D << " and # of points: " << N << std::endl;
             std::string file_name = name + "_" + std::to_string(D) + "_" + std::to_string(N);
 
