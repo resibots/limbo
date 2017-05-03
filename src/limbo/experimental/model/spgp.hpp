@@ -117,8 +117,7 @@ namespace limbo {
 
             /// useful to construct without optimizing
             SPGP(const std::vector<Eigen::VectorXd>& samples,
-                const std::vector<Eigen::VectorXd>& observations,
-                const Eigen::VectorXd& noises)
+                const std::vector<Eigen::VectorXd>& observations)
             {
                 _init(samples, observations);
             }
@@ -130,22 +129,19 @@ namespace limbo {
                 _optimize_hyperparams();
             }
 
-            /// Compute the SPGP from samples, observation, noise. This call needs to be explicit!
+            /// Compute the SPGP from samples and observations. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
-                const std::vector<Eigen::VectorXd>& observations,
-                const Eigen::VectorXd& noises)
+                const std::vector<Eigen::VectorXd>& observations)
             {
-                compute(_to_matrix(samples), _to_matrix(observations), noises);
+                compute(_to_matrix(samples), _to_matrix(observations));
             }
             void compute(const std::vector<Eigen::VectorXd>& samples,
-                const Eigen::MatrixXd& observations,
-                const Eigen::VectorXd& noises)
+                const Eigen::MatrixXd& observations)
             {
-                compute(_to_matrix(samples), observations, noises);
+                compute(_to_matrix(samples), observations);
             }
             void compute(const Eigen::MatrixXd& samples,
-                const Eigen::MatrixXd& observations,
-                const Eigen::MatrixXd& noises) // NOTE: The noises are not used
+                const Eigen::MatrixXd& observations)
             {
                 assert(samples.rows() != 0);
                 assert(observations.rows() != 0);
@@ -157,7 +153,7 @@ namespace limbo {
             }
 
             /// add sample and recompute the SPGP
-            void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
+            void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation)
             {
                 if (_samples.rows() == 0) {
                     _dim_in = sample.size();
@@ -338,7 +334,7 @@ namespace limbo {
             Eigen::VectorXd _b; // lengthscales
             double _c; // noise
             double _sig; // signal variance
-            Eigen::VectorXd _noises;
+            // Eigen::VectorXd _noises;
 
             /// calculated in _compute
             Eigen::MatrixXd _Lm;
@@ -443,7 +439,7 @@ namespace limbo {
                 _b = hp.b.transpose();
                 _c = hp.c;
                 _sig = hp.sig;
-                _noises = hp.sig * Eigen::VectorXd::Ones(_m);
+                // _noises = hp.sig * Eigen::VectorXd::Ones(_m);
 
                 _optimized = true;
             }

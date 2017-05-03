@@ -66,6 +66,10 @@ struct Params {
     struct opt_gridsearch : public defaults::opt_gridsearch {
     };
 #endif
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 0.001);
+    };
+
     struct kernel_maternfivehalves {
         BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.2);
@@ -76,7 +80,6 @@ struct Params {
     };
 
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 0.001);
     };
 
     struct init_randomsampling {

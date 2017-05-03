@@ -68,7 +68,6 @@
 namespace limbo {
     namespace defaults {
         struct bayes_opt_cboptimizer {
-            BO_PARAM(double, noise, 1e-6);
             BO_PARAM(int, hp_period, -1);
             BO_PARAM(bool, bounded, true);
         };
@@ -156,9 +155,9 @@ namespace limbo {
 
                     if (!this->_observations.empty()) {
                         _split_observations();
-                        _model.compute(this->_samples, _obs[0], Eigen::VectorXd::Constant(_obs[0].size(), Params::bayes_opt_cboptimizer::noise()));
+                        _model.compute(this->_samples, _obs[0]);
                         if (_nb_constraints > 0)
-                            _constraint_model.compute(this->_samples, _obs[1], Eigen::VectorXd::Constant(_obs[1].size(), Params::bayes_opt_cboptimizer::noise()));
+                            _constraint_model.compute(this->_samples, _obs[1]);
                     }
                     else {
                         _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
@@ -179,9 +178,9 @@ namespace limbo {
 
                         this->_update_stats(*this, afun);
 
-                        _model.add_sample(this->_samples.back(), _obs[0].back(), Params::bayes_opt_cboptimizer::noise());
+                        _model.add_sample(this->_samples.back(), _obs[0].back());
                         if (_nb_constraints > 0)
-                            _constraint_model.add_sample(this->_samples.back(), _obs[1].back(), Params::bayes_opt_cboptimizer::noise());
+                            _constraint_model.add_sample(this->_samples.back(), _obs[1].back());
 
                         if (Params::bayes_opt_cboptimizer::hp_period() > 0
                             && (this->_current_iteration + 1) % Params::bayes_opt_cboptimizer::hp_period() == 0) {

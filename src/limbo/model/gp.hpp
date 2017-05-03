@@ -75,10 +75,9 @@ namespace limbo {
             GP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
 
-            /// Compute the GP from samples, observation, noise. This call needs to be explicit!
+            /// Compute the GP from samples and observations. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
-                const std::vector<Eigen::VectorXd>& observations,
-                const Eigen::VectorXd& noises, bool compute_kernel = true)
+                const std::vector<Eigen::VectorXd>& observations, bool compute_kernel = true)
             {
                 assert(samples.size() != 0);
                 assert(observations.size() != 0);
@@ -102,8 +101,6 @@ namespace limbo {
 
                 _mean_observation = _observations.colwise().mean();
 
-                _noises = noises;
-
                 this->_compute_obs_mean();
                 if (compute_kernel)
                     this->_compute_full_kernel();
@@ -117,7 +114,7 @@ namespace limbo {
 
             /// add sample and update the GP. This code uses an incremental implementation of the Cholesky
             /// decomposition. It is therefore much faster than a call to compute()
-            void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation, double noise)
+            void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation)
             {
                 if (_samples.empty()) {
                     if (_dim_in != sample.size()) {
@@ -140,10 +137,6 @@ namespace limbo {
                 _observations.bottomRows<1>() = observation.transpose();
 
                 _mean_observation = _observations.colwise().mean();
-
-                _noises.conservativeResize(_noises.size() + 1);
-                _noises[_noises.size() - 1] = noise;
-                //_noise = noise;
 
                 this->_compute_obs_mean();
                 this->_compute_incremental_kernel();
@@ -276,9 +269,6 @@ namespace limbo {
             Eigen::MatrixXd _mean_vector;
             Eigen::MatrixXd _obs_mean;
 
-            Eigen::VectorXd _noises;
-            Eigen::VectorXd _noises_bl;
-
             Eigen::MatrixXd _alpha;
             Eigen::VectorXd _mean_observation;
 
@@ -306,7 +296,7 @@ namespace limbo {
                 // O(n^2) [should be negligible]
                 for (size_t i = 0; i < n; i++)
                     for (size_t j = 0; j <= i; ++j)
-                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j]) + ((i == j) ? _noises[i] : 0); // noise only on the diagonal
+                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j]);
 
                 for (size_t i = 0; i < n; i++)
                     for (size_t j = 0; j < i; ++j)
@@ -329,7 +319,7 @@ namespace limbo {
                 _kernel.conservativeResize(n, n);
 
                 for (size_t i = 0; i < n; ++i) {
-                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]) + ((i == n - 1) ? _noises[i] : 0); // noise only on the diagonal
+                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]);
                     _kernel(n - 1, i) = _kernel(i, n - 1);
                 }
 

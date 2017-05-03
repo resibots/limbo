@@ -53,9 +53,7 @@
 using namespace limbo;
 
 struct Params {
-    // no noise
     struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-        BO_PARAM(double, noise, 1e-10);
     };
 
 // depending on which internal optimizer we use, we need to import different parameters
@@ -73,6 +71,11 @@ struct Params {
     // enable / disable the writing of the result files
     struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         BO_PARAM(int, stats_enabled, true);
+    };
+
+    // no noise
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 1e-10);
     };
 
     struct kernel_exp : public defaults::kernel_exp {

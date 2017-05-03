@@ -72,6 +72,10 @@ BO_PARAMS(std::cout,
                   BO_PARAM(double, alpha, 0.1);
               };
 
+              struct kernel : public defaults::kernel {
+                  BO_PARAM(double, noise, 0.001);
+              };
+
               struct kernel_maternfivehalves {
                   BO_PARAM(double, sigma_sq, 1);
                   BO_PARAM(double, l, 0.2);
@@ -82,7 +86,6 @@ BO_PARAMS(std::cout,
               };
 
               struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
-                  BO_PARAM(double, noise, 0.001);
               };
 
               struct init_randomsampling {

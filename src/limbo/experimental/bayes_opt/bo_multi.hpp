@@ -238,7 +238,7 @@ namespace limbo {
                     std::vector<model_t> models(nb_objs(), model_t(dim, 1));
                     _models = models;
                     for (size_t i = 0; i < uni_obs.size(); ++i) {
-                        _models[i].compute(this->_samples, uni_obs[i], Eigen::VectorXd::Constant(this->_samples.size(), 1e-5));
+                        _models[i].compute(this->_samples, uni_obs[i]);
                     }
                 }
             };

@@ -100,6 +100,9 @@ Eigen::VectorXd make_v2(double x1, double x2)
 }
 
 struct Params {
+    struct kernel : public defaults::kernel {
+    };
+
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
     };
 
@@ -146,12 +149,12 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4));
+        test_samples.push_back(tools::random_vector(4 + 1));
         test_samples_mean.push_back(tools::random_vector(6));
-        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4));
+        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4 + 1));
     }
 
-    gp.compute(samples, observations, Eigen::VectorXd::Ones(samples.size()) * 0.01);
+    gp.compute(samples, observations);
 
     model::gp::KernelLFOpt<Params>::KernelLFOptimization<GP_t> kernel_optimization(gp);
 
@@ -186,6 +189,85 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
     BOOST_CHECK(results.array().sum() < M * e);
 }
 
+BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
+{
+    using namespace limbo;
+    struct Parameters {
+        struct kernel : public defaults::kernel {
+            BO_PARAM(bool, optimize_noise, true);
+        };
+
+        struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+        };
+
+        struct kernel_maternfivehalves {
+            BO_PARAM(double, sigma_sq, 1);
+            BO_PARAM(double, l, 0.25);
+        };
+
+        struct mean_constant : public defaults::mean_constant {
+        };
+
+        struct opt_rprop : public defaults::opt_rprop {
+        };
+
+        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
+        };
+
+        struct acqui_ucb : public defaults::acqui_ucb {
+        };
+
+        struct opt_gridsearch : public defaults::opt_gridsearch {
+        };
+    };
+
+    using KF_t = kernel::SquaredExpARD<Parameters>;
+    using Mean_t = mean::FunctionARD<Params, mean::Constant<Parameters>>;
+    using GP_t = model::GP<Parameters, KF_t, Mean_t>;
+
+    GP_t gp(4, 2);
+
+    std::vector<Eigen::VectorXd> observations, samples, test_samples, test_samples_kernel_mean;
+    double e = 1e-4;
+
+    // Random samples and test samples
+    int N = 40, M = 10;
+
+    for (int i = 0; i < N; i++) {
+        samples.push_back(tools::random_vector(4));
+        observations.push_back(tools::random_vector(2));
+    }
+
+    for (int i = 0; i < M; i++) {
+        test_samples.push_back(tools::random_vector(4 + 2));
+        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4 + 2));
+    }
+
+    gp.compute(samples, observations);
+
+    model::gp::KernelLFOpt<Parameters>::KernelLFOptimization<GP_t> kernel_optimization(gp);
+
+    Eigen::VectorXd results(M);
+
+    for (int i = 0; i < M; i++) {
+        auto res = check_grad(kernel_optimization, test_samples[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+
+    model::gp::KernelMeanLFOpt<Parameters>::KernelMeanLFOptimization<GP_t> kernel_mean_optimization(gp);
+
+    for (int i = 0; i < M; i++) {
+        auto res = check_grad(kernel_mean_optimization, test_samples_kernel_mean[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+}
+
 BOOST_AUTO_TEST_CASE(test_gp_dim)
 {
     using namespace limbo;
@@ -200,7 +282,7 @@ BOOST_AUTO_TEST_CASE(test_gp_dim)
         make_v2(5, 5)};
     std::vector<Eigen::VectorXd> samples = {make_v2(1, 1), make_v2(2, 2), make_v2(3, 3)};
 
-    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+    gp.compute(samples, observations);
 
     Eigen::VectorXd mu;
     double sigma;
@@ -224,7 +306,7 @@ BOOST_AUTO_TEST_CASE(test_gp)
         make_v1(5)};
     std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
 
-    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+    gp.compute(samples, observations);
 
     Eigen::VectorXd mu;
     double sigma;
@@ -273,7 +355,7 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
 
         GP_t gp;
         auto t1 = std::chrono::steady_clock::now();
-        gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+        gp.compute(samples, observations);
         auto time_init = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
         std::cout.precision(17);
         std::cout << "Time running first batch: " << time_init << "us" << std::endl
@@ -283,7 +365,7 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
         samples.push_back(make_v1(rgen.rand()));
 
         t1 = std::chrono::steady_clock::now();
-        gp.add_sample(samples.back(), observations.back(), 0.0);
+        gp.add_sample(samples.back(), observations.back());
         auto time_increment = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
         std::cout << "Time running increment: " << time_increment << "us" << std::endl
                   << std::endl;
@@ -296,7 +378,7 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
 
         GP_t gp2;
         t1 = std::chrono::steady_clock::now();
-        gp2.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+        gp2.compute(samples, observations);
         auto time_full = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
         std::cout << "Time running whole batch: " << time_full << "us" << std::endl
                   << std::endl;
@@ -358,7 +440,7 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10), make_v1(5)};
     std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
 
-    gp.compute(samples, observations, Eigen::VectorXd::Zero(samples.size()));
+    gp.compute(samples, observations);
     gp.optimize_hyperparams();
     gp.recompute(false);
 
@@ -382,6 +464,9 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
     using namespace limbo;
 
     struct Parameters {
+        struct kernel : public defaults::kernel {
+        };
+
         struct kernel_squared_exp_ard {
             BO_PARAM(int, k, 0);
             BO_PARAM(double, sigma_sq, 10);
@@ -407,7 +492,7 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
 
     double sigma = gp1.sigma(tools::random_vector(1));
 
-    BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
+    BOOST_CHECK_CLOSE(sigma, 10.0, 1);
 
     // MaternFiveHalves
     using GP2_t = model::GP<Params, kernel::MaternFiveHalves<Parameters>, mean::Constant<Params>>;
@@ -416,7 +501,7 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
 
     sigma = gp2.sigma(tools::random_vector(1));
 
-    BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
+    BOOST_CHECK_CLOSE(sigma, 10.0, 1);
 
     // Exponential
     using GP3_t = model::GP<Params, kernel::Exp<Parameters>, mean::Constant<Params>>;
@@ -425,7 +510,7 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
 
     sigma = gp3.sigma(tools::random_vector(1));
 
-    BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
+    BOOST_CHECK_CLOSE(sigma, 10.0, 1);
 
     // ARD Squared Exponential
     using GP4_t = model::GP<Params, kernel::SquaredExpARD<Parameters>, mean::Constant<Params>>;
@@ -434,5 +519,5 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
 
     sigma = gp4.sigma(tools::random_vector(1));
 
-    BOOST_CHECK_CLOSE(sigma, 10.0, 1e-5);
+    BOOST_CHECK_CLOSE(sigma, 10.0, 1);
 }

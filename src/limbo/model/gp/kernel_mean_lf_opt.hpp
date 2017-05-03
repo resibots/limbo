@@ -67,7 +67,7 @@ namespace limbo {
                     Eigen::VectorXd init(dim);
                     init.head(gp.kernel_function().h_params_size()) = gp.kernel_function().h_params();
                     init.tail(gp.mean_function().h_params_size()) = gp.mean_function().h_params();
-                    auto params = optimizer(optimization, init, false);
+                    Eigen::VectorXd params = optimizer(optimization, init, false);
                     gp.kernel_function().set_h_params(params.head(gp.kernel_function().h_params_size()));
                     gp.mean_function().set_h_params(params.tail(gp.mean_function().h_params_size()));
                     gp.set_lik(opt::eval(optimization, params));
