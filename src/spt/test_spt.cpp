@@ -189,6 +189,13 @@ struct Params {
     struct opt_parallelrepeater : public limbo::defaults::opt_parallelrepeater {
         BO_PARAM(int, repeats, 3);
     };
+
+    struct spt_stgp : public spt::defaults::spt_stgp {
+        BO_PARAM(int, leaf_size, 100);
+        BO_PARAM(double, tau, 0.2);
+        BO_PARAM(bool, global_gp, true);
+        BO_PARAM(bool, multi_query, false);
+    };
 };
 
 template <typename Function>
