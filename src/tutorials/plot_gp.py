@@ -22,16 +22,22 @@ gp = np.loadtxt('gp.dat')
 gp_ard = np.loadtxt('gp_ard.dat')
 data = np.loadtxt('data.dat')
 
+actual = []
+
+for i in gp:
+    actual.append(math.cos(i[0]))
+
 fig = figure() # no frame
 ax = fig.add_subplot(111)
 
 ax.fill_between(gp[:,0], gp[:,1] - gp[:,2],  gp[:,1] + gp[:,2], alpha=0.25, linewidth=0, color=colors[0])
 ax.fill_between(gp_ard[:,0], gp_ard[:,1] - gp_ard[:,2],  gp_ard[:,1] + gp_ard[:,2], alpha=0.25, linewidth=0, color=colors[1])
 ax.plot(gp[:,0], gp[:,1], linewidth=2, color=colors[0])
-ax.plot(gp_ard[:,0], gp_ard[:,1], linewidth=2, linestyle='--', color=colors[1])
+ax.plot(gp_ard[:,0], gp_ard[:,1], linewidth=2, color=colors[1])
+ax.plot(gp[:,0], actual, linewidth=2, linestyle='--', color=colors[3])
 ax.plot(data[:,0], data[:, 1], 'o', color=colors[2])
 
-legend = ax.legend(["GP/exp", "GP/expARD", 'Data'], loc=4);
+legend = ax.legend(["GP/exp", "GP/expARD", 'cos(x)', 'Data'], loc=4);
 frame = legend.get_frame()
 frame.set_facecolor('1.0')
 frame.set_edgecolor('1.0')
