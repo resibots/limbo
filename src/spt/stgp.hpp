@@ -39,7 +39,8 @@ namespace spt {
                 for (int i = 0; i < ids.size(); i++)
                     ids[i] = i;
                 std::random_shuffle(ids.begin(), ids.end());
-                for (int i = 0; i < 2 * n; i++) {
+                int N_sub = std::min(2 * n, N);
+                for (int i = 0; i < N_sub; i++) {
                     int id = ids[i];
                     subsamples.push_back(samples[id]);
                     subobservations.push_back(observations[id]);
