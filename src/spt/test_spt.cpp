@@ -1,7 +1,11 @@
 #include <iostream>
 #include <limbo/limbo.hpp>
 #include <chrono>
+#include <algorithm>
+#include <string>
 #include "stgp.hpp"
+#include "poegp.hpp"
+#include "poegp_lf_opt.hpp"
 #include "test_functions.hpp"
 
 template <typename T>
@@ -196,6 +200,11 @@ struct Params {
         BO_PARAM(bool, global_gp, true);
         BO_PARAM(bool, multi_query, false);
     };
+
+    struct spt_poegp : public spt::defaults::spt_poegp {
+        BO_PARAM(int, leaf_size, 100);
+        BO_PARAM(double, tau, 0.05);
+    };
 };
 
 template <typename Function>
@@ -225,7 +234,7 @@ void benchmark(const std::string& name)
             std::string file_name = name + "_" + std::to_string(D) + "_" + std::to_string(N);
 
             std::vector<Eigen::VectorXd> points, obs;
-            for (size_t i = 0; i < N; i++) {
+            for (int i = 0; i < N; i++) {
                 Eigen::VectorXd p = limbo::tools::random_vector(D); //.array() * 10.24 - 5.12;
                 if (one_bound)
                     p = p.array() * (bounds[0](1) - bounds[0](0)) + bounds[0](0);
@@ -248,17 +257,23 @@ void benchmark(const std::string& name)
 
             std::cout << "Adding noise of: " << sigma << std::endl;
 
-            for (size_t i = 0; i < N; i++)
+            for (int i = 0; i < N; i++)
                 obs[i] = obs[i].array() + gaussian_rand(0.0, sigma);
 
             std::ofstream ofs_res(file_name + ".dat");
 
-            spt::STGP<Params, limbo::kernel::SquaredExpARD<Params>, limbo::mean::NullFunction<Params>, limbo::model::gp::KernelLFOpt<Params>> gp;
+            spt::POEGP<Params, limbo::kernel::SquaredExpARD<Params>, limbo::mean::NullFunction<Params>, limbo::model::gp::POEKernelLFOpt<Params>> gp;
 
             auto start = std::chrono::high_resolution_clock::now();
             gp.compute(points, obs);
+            gp.optimize_hyperparams();
+            Eigen::VectorXd ppk = gp.h_params();
+            std::cout << "gp : ";
+            for (int j = 0; j < ppk.size() - 2; j++)
+                std::cout << std::exp(ppk(j)) << " ";
+            std::cout << std::exp(2 * ppk(ppk.size() - 2)) << " " << std::exp(2 * ppk(ppk.size() - 1)) << std::endl;
             auto time1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
-            std::cout << "Time: " << time1 / double(1000.0) << std::endl;
+            std::cout << "Time in secs: " << time1 / double(1000.0) << std::endl;
             ofs_res << time1 / double(1000.0) << std::endl;
 
             limbo::model::GP<Params, limbo::kernel::SquaredExpARD<Params>, limbo::mean::NullFunction<Params>, limbo::model::gp::KernelLFOpt<Params>> gp_old;
@@ -271,12 +286,12 @@ void benchmark(const std::string& name)
                 std::cout << std::exp(pk(j)) << " ";
             std::cout << std::exp(2 * pk(pk.size() - 2)) << " " << std::exp(2 * pk(pk.size() - 1)) << std::endl;
             time1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
-            std::cout << "Time (old gp): " << time1 / double(1000.0) << std::endl;
+            std::cout << "Time (old gp) in secs: " << time1 / double(1000.0) << std::endl;
             ofs_res << time1 / double(1000.0) << std::endl;
 
             std::vector<Eigen::VectorXd> test_points, test_obs, stgp, old_gp;
             std::vector<double> stgp_err, old_gp_err;
-            for (size_t i = 0; i < N_test; i++) {
+            for (int i = 0; i < N_test; i++) {
                 Eigen::VectorXd p = limbo::tools::random_vector(D);
                 if (one_bound)
                     p = p.array() * (bounds[0](1) - bounds[0](0)) + bounds[0](0);
@@ -295,24 +310,30 @@ void benchmark(const std::string& name)
 
             start = std::chrono::high_resolution_clock::now();
             double err = 0.0;
-            for (size_t i = 0; i < N_test; i++) {
-                stgp.push_back(gp.mu(test_points[i]));
+            for (int i = 0; i < N_test; i++) {
+                Eigen::VectorXd mm;
+                double ss;
+                std::tie(mm, ss) = gp.query(test_points[i]);
+                stgp.push_back(mm);
                 stgp_err.push_back((stgp.back() - test_obs[i]).norm());
                 err += stgp_err.back();
             }
             time1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
-            std::cout << "Time (query) in ms: " << time1 / double(N_test) << " average mse: " << err / double(N_test) << std::endl;
+            std::cout << "Time (query) in ms: " << time1 / double(N_test) << " MSE: " << err / double(N_test) << std::endl;
             ofs_res << time1 / double(N_test) << " " << err / double(N_test) << std::endl;
 
             start = std::chrono::high_resolution_clock::now();
             err = 0.0;
-            for (size_t i = 0; i < N_test; i++) {
-                old_gp.push_back(gp_old.mu(test_points[i]));
+            for (int i = 0; i < N_test; i++) {
+                Eigen::VectorXd mm;
+                double ss;
+                std::tie(mm, ss) = gp_old.query(test_points[i]);
+                old_gp.push_back(mm);
                 old_gp_err.push_back((old_gp.back() - test_obs[i]).norm());
                 err += old_gp_err.back();
             }
             time1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
-            std::cout << "Time (old_gp-query) in ms: " << time1 / double(N_test) << " average mse: " << err / double(N_test) << std::endl;
+            std::cout << "Time (old_gp-query) in ms: " << time1 / double(N_test) << " MSE: " << err / double(N_test) << std::endl;
             ofs_res << time1 / double(N_test) << " " << err / double(N_test) << std::endl;
 
             std::cout << "Saving data..." << std::endl;
@@ -359,30 +380,34 @@ int main(int argc, char* argv[])
     std::string function = "Rastrigin";
     if (argc >= 2)
         function = std::string(argv[1]);
+    std::transform(function.begin(), function.end(), function.begin(), ::tolower);
+
     limbo::tools::par::init();
 
-    if (function == "Rastrigin")
+    if (function == "rastrigin")
         benchmark<Rastrigin>("rastrigin");
-    else if (function == "Ackley")
+    else if (function == "ackley")
         benchmark<Ackley>("ackley");
-    else if (function == "Bukin")
+    else if (function == "bukin")
         benchmark<Bukin>("bukin");
-    else if (function == "CrossInTray")
+    else if (function == "crossintray")
         benchmark<CrossInTray>("crossintray");
-    else if (function == "DropWave")
+    else if (function == "dropwave")
         benchmark<DropWave>("dropwave");
-    else if (function == "GramacyLee")
+    else if (function == "gramacylee")
         benchmark<GramacyLee>("gramacylee");
-    else if (function == "HolderTable")
+    else if (function == "holdertable")
         benchmark<HolderTable>("holdertable");
-    else if (function == "Levy")
+    else if (function == "levy")
         benchmark<Levy>("levy");
-    else if (function == "Schwefel")
+    else if (function == "schwefel")
         benchmark<Schwefel>("schwefel");
-    else if (function == "SixHumpCamel")
+    else if (function == "sixhumpcamel")
         benchmark<SixHumpCamel>("sixhumpcamel");
-    else if (function == "Hartmann6")
+    else if (function == "hartmann6")
         benchmark<Hartmann6>("hartmann6");
+    else if (function == "step")
+        benchmark<Step>("step");
     else
         std::cerr << "Unknown function...!" << std::endl;
 

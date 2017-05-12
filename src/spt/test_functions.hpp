@@ -5,7 +5,7 @@ struct Rastrigin {
     double operator()(const Eigen::VectorXd& x) const
     {
         double f = 10 * x.size();
-        for (size_t i = 0; i < x.size(); ++i)
+        for (int i = 0; i < x.size(); ++i)
             f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));
         return f;
     }
@@ -30,7 +30,7 @@ struct Ackley {
     {
         double a = 20, b = 0.2, c = 2 * M_PI;
         double A = 0.0, B = 0.0;
-        for (size_t i = 0; i < x.size(); i++) {
+        for (int i = 0; i < x.size(); i++) {
             A += x(i) * x(i);
             B += std::cos(c * x(i));
         }
@@ -145,6 +145,30 @@ struct GramacyLee {
     }
 };
 
+struct Step {
+    double operator()(const Eigen::VectorXd& x) const
+    {
+        if (x(0) <= 0.0)
+            return 0.0;
+        else
+            return 1.0;
+    }
+
+    std::vector<Eigen::VectorXd> bounds() const
+    {
+        Eigen::VectorXd tmp(2);
+        tmp << -2.0, 2.0;
+        std::vector<Eigen::VectorXd> b;
+        b.push_back(tmp);
+        return b;
+    }
+
+    int dims() const
+    {
+        return 1;
+    }
+};
+
 struct HolderTable {
     double operator()(const Eigen::VectorXd& x) const
     {
@@ -176,7 +200,7 @@ struct Levy {
 
         double A = std::sin(M_PI * w(0)) * std::sin(M_PI * w(0));
         double B = 0.0;
-        for (size_t i = 0; i < x.size() - 1; i++) {
+        for (int i = 0; i < x.size() - 1; i++) {
             double tmp = 1.0 + 10.0 * std::sin(M_PI * w(i) + 1) * std::sin(M_PI * w(i) + 1);
             B += (w(i) - 1.0) * (w(i) - 1.0) * tmp;
         }
@@ -206,7 +230,7 @@ struct Schwefel {
     {
         double A = 418.9829 * x.size();
         double B = 0.0;
-        for (size_t i = 0; i < x.size(); i++) {
+        for (int i = 0; i < x.size(); i++) {
             B += x(i) * std::sin(std::sqrt(std::abs(x(i))));
         }
 

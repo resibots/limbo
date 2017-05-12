@@ -78,7 +78,7 @@ namespace spt {
         // Get the sample means
         Eigen::VectorXd means = Eigen::VectorXd::Zero(points[0].size());
 
-        for (int i = 0; i < points.size(); i++) {
+        for (size_t i = 0; i < points.size(); i++) {
             // for (size_t j = 0; j < points.size(); j++) {
             //     means(i) += points[j][i];
             // }
@@ -90,7 +90,7 @@ namespace spt {
 
         // Calculate the sample covariance matrix
         Eigen::MatrixXd cov = Eigen::MatrixXd::Zero(points[0].size(), points[0].size());
-        for (int i = 0; i < points.size(); i++) {
+        for (size_t i = 0; i < points.size(); i++) {
             cov = cov + points[i] * points[i].transpose();
             // for (int j = 0; j < means.size(); j++) {
             //     for (size_t k = 0; k < points.size(); k++) {
@@ -174,7 +174,7 @@ namespace spt {
         double median;
         // for (int i = 0; i < medians.size(); i++) {
         std::vector<double> p_i;
-        for (size_t j = 0; j < size; j++)
+        for (int j = 0; j < size; j++)
             p_i.push_back(points[j]);
 
         std::sort(p_i.begin(), p_i.end());
