@@ -37,7 +37,7 @@ ax.plot(gp_ard[:,0], gp_ard[:,1], linewidth=2, color=colors[1])
 ax.plot(gp[:,0], actual, linewidth=2, linestyle='--', color=colors[3])
 ax.plot(data[:,0], data[:, 1], 'o', color=colors[2])
 
-legend = ax.legend(["GP/exp", "GP/expARD", 'cos(x)', 'Data'], loc=4);
+legend = ax.legend(["GP/exp", "GP/expARD", 'cos(x)', 'Data'], loc=8);
 frame = legend.get_frame()
 frame.set_facecolor('1.0')
 frame.set_edgecolor('1.0')
