@@ -337,6 +337,44 @@ BOOST_AUTO_TEST_CASE(test_gp)
     }
 }
 
+BOOST_AUTO_TEST_CASE(test_gp_identical_samples)
+{
+    using namespace limbo;
+
+    using KF_t = kernel::MaternFiveHalves<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
+
+    GP_t gp;
+    std::vector<Eigen::VectorXd> observations;
+    std::vector<Eigen::VectorXd> samples;
+    for (int i = 0; i < 10; i++) {
+        samples.push_back(make_v1(1));
+        observations.push_back(make_v1(std::cos(1)));
+    }
+
+    gp.compute(samples, observations);
+
+    // Compute kernel matrix
+    Eigen::MatrixXd kernel;
+    size_t n = samples.size();
+    kernel.resize(n, n);
+
+    for (size_t i = 0; i < n; i++)
+        for (size_t j = 0; j <= i; ++j)
+            kernel(i, j) = gp.kernel_function()(samples[i], samples[j], i, j);
+
+    for (size_t i = 0; i < n; i++)
+        for (size_t j = 0; j < i; ++j)
+            kernel(j, i) = kernel(i, j);
+
+    // Reconstruct kernel from cholesky decomposition
+    Eigen::MatrixXd computed_kernel = gp.matrixL() * gp.matrixL().transpose();
+
+    // Check if kernels match
+    BOOST_CHECK(kernel.isApprox(computed_kernel, 1e-5));
+}
+
 BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
 {
     using namespace limbo;
