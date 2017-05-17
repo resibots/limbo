@@ -355,6 +355,11 @@ BOOST_AUTO_TEST_CASE(test_gp_identical_samples)
 
     gp.compute(samples, observations);
 
+    GP_t gp2;
+    for (int i = 0; i < 10; i++) {
+        gp2.add_sample(make_v1(1), make_v1(std::cos(1)));
+    }
+
     // Compute kernel matrix
     Eigen::MatrixXd kernel;
     size_t n = samples.size();
@@ -368,18 +373,15 @@ BOOST_AUTO_TEST_CASE(test_gp_identical_samples)
         for (size_t j = 0; j < i; ++j)
             kernel(j, i) = kernel(i, j);
 
-    // Reconstruct kernel from cholesky decomposition
-    Eigen::MatrixXd computed_kernel = gp.matrixL() * gp.matrixL().transpose();
+    // Reconstruct kernels from cholesky decomposition
+    Eigen::MatrixXd reconstructed_kernel = gp.matrixL() * gp.matrixL().transpose();
+    Eigen::MatrixXd reconstructed_kernel2 = gp2.matrixL() * gp2.matrixL().transpose();
 
-    // Check if kernels match
-    BOOST_CHECK(kernel.isApprox(computed_kernel, 1e-5));
+    // Check if the reconstructed kernels match the actual one
+    BOOST_CHECK(kernel.isApprox(reconstructed_kernel, 1e-5));
+    BOOST_CHECK(kernel.isApprox(reconstructed_kernel2, 1e-5));
 
     // Check if incremental cholesky produces the same result
-    GP_t gp2;
-    for (int i = 0; i < 10; i++) {
-        gp2.add_sample(make_v1(1), make_v1(std::cos(1)));
-    }
-
     Eigen::VectorXd mu1, mu2;
     double s1, s2;
 
