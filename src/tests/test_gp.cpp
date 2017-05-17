@@ -373,6 +373,21 @@ BOOST_AUTO_TEST_CASE(test_gp_identical_samples)
 
     // Check if kernels match
     BOOST_CHECK(kernel.isApprox(computed_kernel, 1e-5));
+
+    // Check if incremental cholesky produces the same result
+    GP_t gp2;
+    for (int i = 0; i < 10; i++) {
+        gp2.add_sample(make_v1(1), make_v1(std::cos(1)));
+    }
+
+    Eigen::VectorXd mu1, mu2;
+    double s1, s2;
+
+    std::tie(mu1, s1) = gp.query(make_v1(1));
+    std::tie(mu2, s2) = gp2.query(make_v1(1));
+
+    BOOST_CHECK((mu1 - mu2).norm() < 1e-4);
+    BOOST_CHECK(std::sqrt((s1 - s2) * (s1 - s2)) < 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
