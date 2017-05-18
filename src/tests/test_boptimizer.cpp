@@ -221,8 +221,9 @@ BOOST_AUTO_TEST_CASE(test_bo_gp)
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
+    Eigen::VectorXd sol(2);
+    sol << 0.25, 0.75;
+    BOOST_CHECK((sol - opt.best_sample()).squaredNorm() < 1e-3);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
@@ -247,8 +248,9 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_auto)
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
+    Eigen::VectorXd sol(2);
+    sol << 0.25, 0.75;
+    BOOST_CHECK((sol - opt.best_sample()).squaredNorm() < 1e-3);
 }
 
 BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
@@ -273,6 +275,7 @@ BOOST_AUTO_TEST_CASE(test_bo_gp_mean)
     bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>> opt;
     opt.optimize(eval2<Params>());
 
-    BOOST_CHECK_CLOSE(opt.best_sample()(0), 0.25, 20);
-    BOOST_CHECK_CLOSE(opt.best_sample()(1), 0.75, 20);
+    Eigen::VectorXd sol(2);
+    sol << 0.25, 0.75;
+    BOOST_CHECK((sol - opt.best_sample()).squaredNorm() < 1e-3);
 }

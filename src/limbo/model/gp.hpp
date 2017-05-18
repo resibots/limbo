@@ -296,7 +296,7 @@ namespace limbo {
                 // O(n^2) [should be negligible]
                 for (size_t i = 0; i < n; i++)
                     for (size_t j = 0; j <= i; ++j)
-                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j]);
+                        _kernel(i, j) = _kernel_function(_samples[i], _samples[j], i, j);
 
                 for (size_t i = 0; i < n; i++)
                     for (size_t j = 0; j < i; ++j)
@@ -319,7 +319,7 @@ namespace limbo {
                 _kernel.conservativeResize(n, n);
 
                 for (size_t i = 0; i < n; ++i) {
-                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1]);
+                    _kernel(i, n - 1) = _kernel_function(_samples[i], _samples[n - 1], i, n - 1);
                     _kernel(n - 1, i) = _kernel(i, n - 1);
                 }
 

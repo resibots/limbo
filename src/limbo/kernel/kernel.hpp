@@ -78,18 +78,18 @@ namespace limbo {
                 _noise_p = std::log(std::sqrt(_noise));
             }
 
-            double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
+            double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2, int i = -1, int j = -2) const
             {
-                return static_cast<const Kernel*>(this)->kernel(v1, v2) + (((v1 - v2).norm() < 1e-8) ? _noise + 1e-8 : 0.0);
+                return static_cast<const Kernel*>(this)->kernel(v1, v2) + ((i == j) ? _noise + 1e-8 : 0.0);
             }
 
-            Eigen::VectorXd grad(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
+            Eigen::VectorXd grad(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2, int i = -1, int j = -2) const
             {
                 Eigen::VectorXd g = static_cast<const Kernel*>(this)->gradient(x1, x2);
 
                 if (Params::kernel::optimize_noise()) {
                     g.conservativeResize(g.size() + 1);
-                    g(g.size() - 1) = (((x1 - x2).norm() < 1e-8) ? 2.0 * _noise : 0.0);
+                    g(g.size() - 1) = ((i == j) ? 2.0 * _noise : 0.0);
                 }
 
                 return g;

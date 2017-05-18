@@ -145,7 +145,9 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
 
     for (int i = 0; i < N; i++) {
         samples.push_back(tools::random_vector(4));
-        observations.push_back(tools::random_vector(2));
+        Eigen::VectorXd ob(2);
+        ob << std::cos(samples[i](0)), std::sin(samples[i](1));
+        observations.push_back(ob);
     }
 
     for (int i = 0; i < M; i++) {
@@ -235,7 +237,9 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
 
     for (int i = 0; i < N; i++) {
         samples.push_back(tools::random_vector(4));
-        observations.push_back(tools::random_vector(2));
+        Eigen::VectorXd ob(2);
+        ob << std::cos(samples[i](0)), std::sin(samples[i](1));
+        observations.push_back(ob);
     }
 
     for (int i = 0; i < M; i++) {
@@ -290,7 +294,7 @@ BOOST_AUTO_TEST_CASE(test_gp_dim)
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(std::abs((mu(1) - 5)) < 1);
 
-    BOOST_CHECK(sigma < 1e-5);
+    BOOST_CHECK(sigma <= Params::kernel::noise() + 1e-8);
 }
 
 BOOST_AUTO_TEST_CASE(test_gp)
@@ -312,15 +316,15 @@ BOOST_AUTO_TEST_CASE(test_gp)
     double sigma;
     std::tie(mu, sigma) = gp.query(make_v1(1));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-    BOOST_CHECK(sigma < 1e-5);
+    BOOST_CHECK(sigma <= Params::kernel::noise() + 1e-8);
 
     std::tie(mu, sigma) = gp.query(make_v1(2));
     BOOST_CHECK(std::abs((mu(0) - 10)) < 1);
-    BOOST_CHECK(sigma < 1e-5);
+    BOOST_CHECK(sigma <= Params::kernel::noise() + 1e-8);
 
     std::tie(mu, sigma) = gp.query(make_v1(3));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-    BOOST_CHECK(sigma < 1e-5);
+    BOOST_CHECK(sigma <= Params::kernel::noise() + 1e-8);
 
     for (double x = 0; x < 4; x += 0.05) {
         Eigen::VectorXd mu;
@@ -328,9 +332,64 @@ BOOST_AUTO_TEST_CASE(test_gp)
         std::tie(mu, sigma) = gp.query(make_v1(x));
         BOOST_CHECK(gp.mu(make_v1(x)) == mu);
         BOOST_CHECK(gp.sigma(make_v1(x)) == sigma);
-        std::cout << x << " " << mu << " " << mu.array() - sigma << " "
-                  << mu.array() + sigma << std::endl;
+        // std::cout << x << " " << mu << " " << mu.array() - sigma << " "
+        //           << mu.array() + sigma << std::endl;
     }
+}
+
+BOOST_AUTO_TEST_CASE(test_gp_identical_samples)
+{
+    using namespace limbo;
+
+    using KF_t = kernel::MaternFiveHalves<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
+
+    GP_t gp;
+    std::vector<Eigen::VectorXd> observations;
+    std::vector<Eigen::VectorXd> samples;
+    for (int i = 0; i < 10; i++) {
+        samples.push_back(make_v1(1));
+        observations.push_back(make_v1(std::cos(1)));
+    }
+
+    gp.compute(samples, observations);
+
+    GP_t gp2;
+    for (int i = 0; i < 10; i++) {
+        gp2.add_sample(make_v1(1), make_v1(std::cos(1)));
+    }
+
+    // Compute kernel matrix
+    Eigen::MatrixXd kernel;
+    size_t n = samples.size();
+    kernel.resize(n, n);
+
+    for (size_t i = 0; i < n; i++)
+        for (size_t j = 0; j <= i; ++j)
+            kernel(i, j) = gp.kernel_function()(samples[i], samples[j], i, j);
+
+    for (size_t i = 0; i < n; i++)
+        for (size_t j = 0; j < i; ++j)
+            kernel(j, i) = kernel(i, j);
+
+    // Reconstruct kernels from cholesky decomposition
+    Eigen::MatrixXd reconstructed_kernel = gp.matrixL() * gp.matrixL().transpose();
+    Eigen::MatrixXd reconstructed_kernel2 = gp2.matrixL() * gp2.matrixL().transpose();
+
+    // Check if the reconstructed kernels match the actual one
+    BOOST_CHECK(kernel.isApprox(reconstructed_kernel, 1e-5));
+    BOOST_CHECK(kernel.isApprox(reconstructed_kernel2, 1e-5));
+
+    // Check if incremental cholesky produces the same result
+    Eigen::VectorXd mu1, mu2;
+    double s1, s2;
+
+    std::tie(mu1, s1) = gp.query(make_v1(1));
+    std::tie(mu2, s2) = gp2.query(make_v1(1));
+
+    BOOST_CHECK((mu1 - mu2).norm() < 1e-4);
+    BOOST_CHECK(std::sqrt((s1 - s2) * (s1 - s2)) < 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
@@ -357,9 +416,9 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
         auto t1 = std::chrono::steady_clock::now();
         gp.compute(samples, observations);
         auto time_init = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
-        std::cout.precision(17);
-        std::cout << "Time running first batch: " << time_init << "us" << std::endl
-                  << std::endl;
+        // std::cout.precision(17);
+        // std::cout << "Time running first batch: " << time_init << "us" << std::endl
+        //           << std::endl;
 
         observations.push_back(make_v1(rgen.rand()));
         samples.push_back(make_v1(rgen.rand()));
@@ -367,21 +426,21 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
         t1 = std::chrono::steady_clock::now();
         gp.add_sample(samples.back(), observations.back());
         auto time_increment = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
-        std::cout << "Time running increment: " << time_increment << "us" << std::endl
-                  << std::endl;
+        // std::cout << "Time running increment: " << time_increment << "us" << std::endl
+        //           << std::endl;
 
         t1 = std::chrono::steady_clock::now();
         gp.recompute(true);
         auto time_recompute = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
-        std::cout << "Time recomputing: " << time_recompute << "us" << std::endl
-                  << std::endl;
+        // std::cout << "Time recomputing: " << time_recompute << "us" << std::endl
+        //           << std::endl;
 
         GP_t gp2;
         t1 = std::chrono::steady_clock::now();
         gp2.compute(samples, observations);
         auto time_full = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
-        std::cout << "Time running whole batch: " << time_full << "us" << std::endl
-                  << std::endl;
+        // std::cout << "Time running whole batch: " << time_full << "us" << std::endl
+        //           << std::endl;
 
         Eigen::VectorXd s = make_v1(rgen.rand());
         if ((gp.mu(s) - gp2.mu(s)).norm() >= 1e-5)
@@ -440,23 +499,22 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     std::vector<Eigen::VectorXd> observations = {make_v1(5), make_v1(10), make_v1(5)};
     std::vector<Eigen::VectorXd> samples = {make_v1(1), make_v1(2), make_v1(3)};
 
-    gp.compute(samples, observations);
+    gp.compute(samples, observations, false);
     gp.optimize_hyperparams();
-    gp.recompute(false);
 
     Eigen::VectorXd mu;
     double sigma;
     std::tie(mu, sigma) = gp.query(make_v1(1));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-    BOOST_CHECK(sigma < 1e-5);
+    BOOST_CHECK(sigma <= gp.kernel_function().noise() + 1e-8);
 
     std::tie(mu, sigma) = gp.query(make_v1(2));
     BOOST_CHECK(std::abs((mu(0) - 10)) < 1);
-    BOOST_CHECK(sigma < 1e-5);
+    BOOST_CHECK(sigma <= gp.kernel_function().noise() + 1e-8);
 
     std::tie(mu, sigma) = gp.query(make_v1(3));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-    BOOST_CHECK(sigma < 1e-5);
+    BOOST_CHECK(sigma <= gp.kernel_function().noise() + 1e-8);
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_init_variance)
