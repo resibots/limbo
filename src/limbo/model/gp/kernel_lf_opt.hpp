@@ -111,7 +111,7 @@ namespace limbo {
                         Eigen::VectorXd grad = Eigen::VectorXd::Zero(params.size());
                         for (size_t i = 0; i < n; ++i) {
                             for (size_t j = 0; j <= i; ++j) {
-                                Eigen::VectorXd g = gp.kernel_function().grad(gp.samples()[i], gp.samples()[j]);
+                                Eigen::VectorXd g = gp.kernel_function().grad(gp.samples()[i], gp.samples()[j], i, j);
                                 if (i == j)
                                     grad += w(i, j) * g * 0.5;
                                 else
