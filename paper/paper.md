@@ -41,12 +41,19 @@ output: pdf_document
 				 
 # Summary
 
-Limbo (LIbrary for Model-based Bayesian Optimization) is  an  open-source  C++11  library  for  Bayesian optimization  which  is  designed  to  be  both  highly  flexible and very fast.  It can be used to optimize functions for which the gradient is unknown, evaluations are expensive, and runtime cost matters (e.g., on embedded systems or robots). 
+Limbo (LIbrary for Model-based Bayesian Optimization) is an open-source C++11 library for Bayesian optimization and Gaussian Processes which is designed to be both highly flexible and very fast. It can be used to optimize functions for which the gradient is unknown, evaluations are expensive, and runtime cost matters (e.g., on embedded systems or robots). 
 In particular, Bayesian optimization recently attracted a lot of interest for direct policy search in robot learning [@lizotte2007automatic] and online adaptation; for example, it was used to allow a legged robot to learn a new gait after a mechanical damage in about 10-15 trials (2 minutes) [@cully2015robots].
 
 The implementation of Limbo follows a policy-based design [@alexandrescu2001modern] relying on templates, which allows it to be highly flexible without paying the cost induced by classic object-oriented designs [@driesen1996direct] (cost of virtual functions). Benchmarks on standard functions demonstrate that Limbo is about 2 times faster than BayesOpt (another C++ library, [@martinezcantin14a]) for a similar accuracy. In practice, changing one of the components of the algorithms in Limbo (e.g., changing the acquisition function) usually requires changing only a template definition in the source code. This design allows users to rapidly experiment and test new ideas while being as fast as specialized code.
 
-The library is distributed via a GitHub repository ^[<http://github.com/resibots/limbo>], with an extensive documentation ^[<http://www.resibots.eu/limbo>] containing guides, examples, and tutorials. New contributors can rely on a full API reference, while their developments are checked via a continuous integration platform (automatic unit-testing routines). 
+In addition to Bayesian Optimization functions, Limbo implements a high-performing Gaussian Processes (GP) framework including, among other features, an incremental Cholesky decomposition for the update of the GP, and an automatic update of the hyper-parameters via the optimization of the log-likelihood of the GP.
+A special attention has been given to the internal optimization operations that are inherent to Bayesian Optimization and Gaussian processes (e.g., for the optimization of the acquisition function or the for Hyper-parameters update). In particular, all these internal optimization steps can be automatically replicated and executed in parallel to mitigate the effects of local optimums. Moreover, optimizers in Limbo are wrappers around standard optimization libraries:
+
+* NLOpt (which provides many local, global, gradient-based, gradient-free algorithms [@nlopt])
+* libcmaes (which provides the Covariance Matrix Adaptation Evolutionary Strategy, that is, CMA-ES [@hansen1996adapting])
+* a few other algorithms that are implemented in Limbo (in particular, RPROP [@riedmiller1993direct], which is gradient-based optimization algorithm)
+			
+The library is distributed via a GitHub repository ^[<http://github.com/resibots/limbo>], with an extensive documentation ^[<http://www.resibots.eu/limbo>] containing guides, examples, and tutorials. The code is standard-compliant but it is currently mostly developed for GNU/Linux and Mac OS X with both the GCC and Clang compilers. New contributors can rely on a full API reference, while their developments are checked via a continuous integration platform (automatic unit-testing routines). 
 				 
 # References
 				 
