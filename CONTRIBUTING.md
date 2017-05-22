@@ -22,8 +22,7 @@ We chose to abide by the following coding style rules.
 8. Setters should start with "set\_" followed by the name of the attribute:
   `set_objs(const std::vector& ov)`
 9. The public section should be the first section of a class
-10. Type names defined using typedefs/aliases should end with "\_t"
-  iterator_t
+10. Type names defined using typedefs/aliases should end with "\_t": `iterator_t`
 
 ## Code formatting
 We also follow the coding style rules enforced by `clang-format` and a custom configuration. See the [format_code](https://github.com/resibots/format_code) repository and software to follow this standard.
