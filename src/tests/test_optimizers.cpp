@@ -49,7 +49,9 @@
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/opt/chained.hpp>
+#include <limbo/opt/parallel_repeater.hpp>
 #include <limbo/opt/cmaes.hpp>
+#include <limbo/opt/rprop.hpp>
 #include <limbo/opt/grid_search.hpp>
 #include <limbo/opt/random_point.hpp>
 #include <limbo/tools/macros.hpp>
@@ -59,6 +61,15 @@ using namespace limbo;
 struct Params {
     struct opt_gridsearch {
         BO_PARAM(int, bins, 20);
+    };
+
+    struct opt_parallelrepeater {
+        BO_PARAM(int, repeats, 2);
+        BO_PARAM(double, epsilon, 0.1);
+    };
+
+    struct opt_rprop {
+        BO_PARAM(int, iterations, 150);
     };
 };
 
@@ -81,6 +92,16 @@ struct FakeAcquiBi {
         return opt::no_grad(3 * v(0) + 5 - 2 * v(1) - 5 * v(1) + 2);
     }
 };
+
+// test with gradient
+int simple_calls = 0;
+std::vector<Eigen::VectorXd> starting_points;
+opt::eval_t simple_func(const Eigen::VectorXd& v, bool eval_grad)
+{
+    simple_calls++;
+    starting_points.push_back(v);
+    return {-(v(0) * v(0) + 2. * v(0)), limbo::tools::make_vector(-(2 * v(0) + 2.))};
+}
 
 BOOST_AUTO_TEST_CASE(test_random_mono_dim)
 {
@@ -142,6 +163,42 @@ BOOST_AUTO_TEST_CASE(test_grid_search_bi_dim)
     BOOST_CHECK_SMALL(best_point(1), 0.000001);
     // TO-DO: Maybe alter a little grid search so not to call more times the utility function
     BOOST_CHECK_EQUAL(bidim_calls, (Params::opt_gridsearch::bins() + 1) * (Params::opt_gridsearch::bins() + 1) + 21);
+}
+
+BOOST_AUTO_TEST_CASE(test_gradient)
+{
+    using namespace limbo;
+
+    opt::Rprop<Params> optimizer;
+
+    simple_calls = 0;
+    Eigen::VectorXd best_point = optimizer(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
+    BOOST_CHECK_EQUAL(best_point.size(), 1);
+    BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
+    BOOST_CHECK_EQUAL(simple_calls, Params::opt_rprop::iterations());
+}
+
+BOOST_AUTO_TEST_CASE(test_parallel_repeater)
+{
+#ifdef USE_TBB
+    static tbb::task_scheduler_init init(1);
+#endif
+    using namespace limbo;
+
+    opt::ParallelRepeater<Params, opt::Rprop<Params>> optimizer;
+
+    simple_calls = 0;
+    starting_points.clear();
+    Eigen::VectorXd best_point = optimizer(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
+    BOOST_CHECK_EQUAL(best_point.size(), 1);
+    BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
+    BOOST_CHECK_EQUAL(simple_calls, Params::opt_parallelrepeater::repeats() * Params::opt_rprop::iterations() + Params::opt_parallelrepeater::repeats());
+    BOOST_CHECK_EQUAL(starting_points.size(), simple_calls);
+    BOOST_CHECK(starting_points[0](0) >= 2. - Params::opt_parallelrepeater::epsilon() && starting_points[0](0) <= 2. + Params::opt_parallelrepeater::epsilon());
+    BOOST_CHECK(starting_points[Params::opt_rprop::iterations() + 1](0) >= 2. - Params::opt_parallelrepeater::epsilon() && starting_points[Params::opt_rprop::iterations() + 1](0) <= 2. + Params::opt_parallelrepeater::epsilon());
+#ifdef USE_TBB
+    tools::par::init();
+#endif
 }
 
 BOOST_AUTO_TEST_CASE(test_chained)
