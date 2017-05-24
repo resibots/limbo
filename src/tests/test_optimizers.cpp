@@ -68,7 +68,7 @@ struct Params {
         BO_PARAM(double, epsilon, 0.1);
     };
 
-    struct opt_rprop {
+    struct opt_rprop : public defaults::opt_rprop {
         BO_PARAM(int, iterations, 150);
     };
 };
@@ -95,9 +95,11 @@ struct FakeAcquiBi {
 
 // test with gradient
 int simple_calls = 0;
+bool check_grad = false;
 std::vector<Eigen::VectorXd> starting_points;
 opt::eval_t simple_func(const Eigen::VectorXd& v, bool eval_grad)
 {
+    assert(!check_grad || eval_grad);
     simple_calls++;
     starting_points.push_back(v);
     return {-(v(0) * v(0) + 2. * v(0)), limbo::tools::make_vector(-(2 * v(0) + 2.))};
@@ -172,6 +174,7 @@ BOOST_AUTO_TEST_CASE(test_gradient)
     opt::Rprop<Params> optimizer;
 
     simple_calls = 0;
+    check_grad = true;
     Eigen::VectorXd best_point = optimizer(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
@@ -188,6 +191,7 @@ BOOST_AUTO_TEST_CASE(test_parallel_repeater)
     opt::ParallelRepeater<Params, opt::Rprop<Params>> optimizer;
 
     simple_calls = 0;
+    check_grad = false;
     starting_points.clear();
     Eigen::VectorXd best_point = optimizer(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
     BOOST_CHECK_EQUAL(best_point.size(), 1);
