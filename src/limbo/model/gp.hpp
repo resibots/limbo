@@ -242,6 +242,21 @@ namespace limbo {
                     this->_compute_alpha();
             }
 
+            // compute likelihood
+            double compute_lik() const
+            {
+                size_t n = _obs_mean.rows();
+                // --- cholesky ---
+                // see:
+                // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
+                long double det = 2 * _matrixL.diagonal().array().log().sum();
+
+                double a = (_obs_mean.transpose() * _alpha)
+                               .trace(); // generalization for multi dimensional observation
+                // std::cout << " a: " << a << " det: " << det << std::endl;
+                return -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
+            }
+
             /// return the likelihood (do not compute it!)
             double get_lik() const { return _lik; }
 

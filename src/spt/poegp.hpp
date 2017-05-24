@@ -18,9 +18,15 @@ namespace spt {
     public:
         using GP_t = limbo::model::GP<Params, KernelFunction, MeanFunction, limbo::model::gp::NoLFOpt<Params>>;
 
-        POEGP(int dim_in = -1, int dim_out = -1) {}
+        POEGP() {}
 
-        void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations)
+        POEGP(int dim_in, int dim_out)
+        {
+            _gps.resize(1);
+            _gps[0] = GP_t(dim_in, dim_out);
+        }
+
+        void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, bool compute_kernel = true)
         {
             int n = Params::spt_poegp::leaf_size();
             int N = samples.size();
@@ -52,10 +58,16 @@ namespace spt {
             _root = root;
             _leaves = leaves;
 
+            KernelFunction kernel_func = _gps[0].kernel_function();
+            MeanFunction mean_func = _gps[0].mean_function();
+
             _gps.resize(leaves.size());
-            // for (size_t i = 0; i < _leaves.size(); i++)
+            _gps[0].kernel_function() = kernel_func;
+            _gps[0].mean_function() = mean_func;
+            _update_kernel_and_mean_functions();
+
             limbo::tools::par::loop(0, leaves.size(), [&](size_t i) {
-              _gps[i].compute(leaves[i]->points(), leaves[i]->observations(), false);
+              _gps[i].compute(leaves[i]->points(), leaves[i]->observations(), compute_kernel);
             });
 
             if (!_h_params.size())
@@ -64,9 +76,11 @@ namespace spt {
 
         void set_h_params(const Eigen::VectorXd& params)
         {
-            limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
-                _gps[i].kernel_function().set_h_params(params);
-            });
+            assert(_gps.size());
+            // limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
+            //     _gps[i].kernel_function().set_h_params(params);
+            // });
+            _gps[0].kernel_function().set_h_params(params);
 
             _h_params = params;
         }
@@ -76,9 +90,35 @@ namespace spt {
             return _h_params;
         }
 
+        const KernelFunction& kernel_function() const
+        {
+            assert(_gps.size());
+            return _gps[0].kernel_function();
+        }
+
+        KernelFunction& kernel_function()
+        {
+            assert(_gps.size());
+            return _gps[0].kernel_function();
+        }
+
+        const MeanFunction& mean_function() const
+        {
+            assert(_gps.size());
+            return _gps[0].mean_function();
+        }
+
+        MeanFunction& mean_function()
+        {
+            assert(_gps.size());
+            return _gps[0].mean_function();
+        }
+
         ///  recomputes the GP
         void recompute(bool update_obs_mean = true, bool update_full_kernel = true)
         {
+            _update_kernel_and_mean_functions();
+
             limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
               _gps[i].recompute(update_obs_mean, update_full_kernel);
             });
@@ -183,6 +223,16 @@ namespace spt {
             return multi_sg;
         }
 
+        double compute_lik() const
+        {
+            double lik_all = 0.0;
+            for (auto gp : _gps) {
+                lik_all += gp.compute_lik();
+            }
+
+            return lik_all;
+        }
+
     protected:
         std::vector<GP_t> _gps;
         HyperParamsOptimizer _hp_optimize;
@@ -190,6 +240,16 @@ namespace spt {
 
         std::shared_ptr<spt::SPTNode> _root;
         std::vector<std::shared_ptr<spt::SPTNode>> _leaves;
+
+        void _update_kernel_and_mean_functions()
+        {
+            assert(_gps.size());
+
+            limbo::tools::par::loop(1, _gps.size(), [&](size_t i) {
+              _gps[i].kernel_function() = _gps[0].kernel_function();
+              _gps[i].mean_function() = _gps[0].mean_function();
+            });
+        }
 
         std::vector<int> _find_gps(const std::shared_ptr<spt::SPTNode>& node, const Eigen::VectorXd& v) const
         {
