@@ -101,7 +101,7 @@ def extract_params(fname):
         if '}' in line:
             level.pop(-1)
         if '#if' in line:
-			ifdefs += [line]
+            ifdefs += [line]
         if '#else' in line:
             ifdefs[-1] = 'NOT ' + ifdefs[-1]
         if '#elif' in line:

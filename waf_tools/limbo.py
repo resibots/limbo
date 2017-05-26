@@ -52,6 +52,7 @@ import time
 import threading
 import params
 import license
+from waflib import Logs
 from waflib.Tools import waf_unit_test
 
 json_ok = True
@@ -59,7 +60,7 @@ try:
     import simplejson
 except:
     json_ok = False
-    print "WARNING simplejson not found some function may not work"
+    Logs.pprint('YELLOW', 'WARNING: simplejson not found some function may not work')
 
 def add_create_options(opt):
     opt.add_option('--dim_in', type='int', dest='dim_in', help='Number of dimensions for the function to optimize [default: 1]')
@@ -99,7 +100,7 @@ def create_exp(name, opt):
     if not os.path.exists('exp'):
         os.makedirs('exp')
     if os.path.exists('exp/' + name):
-        print 'ERROR: experiment ' + name + ' already exists. Please remove it if you want to re-create it from scratch.'
+        Logs.pprint('RED', 'ERROR: experiment \'%s\' already exists. Please remove it if you want to re-create it from scratch.' % name)
         return
     os.mkdir('exp/' + name)
 
@@ -161,7 +162,7 @@ def _sub_script(tpl, conf_file):
         ld_lib_path = os.environ['LD_LIBRARY_PATH']
     else:
         ld_lib_path = "''"
-    print 'LD_LIBRARY_PATH=' + ld_lib_path
+    Logs.pprint('NORMAL', 'LD_LIBRARY_PATH=%s' % ld_lib_path)
      # parse conf
     list_exps = simplejson.load(open(conf_file))
     fnames = []
@@ -200,7 +201,7 @@ def _sub_script(tpl, conf_file):
                 try:
                     os.makedirs(directory)
                 except:
-                    print "WARNING, dir:" + directory + " not be created"
+                    Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created' % directory)
                 subprocess.call('cp ' + bin_dir + '/' + e + ' ' + directory, shell=True)
                 src_dir = bin_dir.replace('build/',  '')
                 subprocess.call('cp ' + src_dir + '/params_*.txt '  + directory, shell=True)
@@ -225,7 +226,7 @@ def _sub_script_local(conf_file):
         ld_lib_path = os.environ['LD_LIBRARY_PATH']
     else:
         ld_lib_path = "''"
-    print 'LD_LIBRARY_PATH=' + ld_lib_path
+    Logs.pprint('NORMAL', 'LD_LIBRARY_PATH=%s' % ld_lib_path)
      # parse conf
     list_exps = simplejson.load(open(conf_file))
     fnames = []
@@ -264,7 +265,7 @@ def _sub_script_local(conf_file):
                 try:
                     os.makedirs(directory)
                 except:
-                    print "WARNING, dir:" + directory + " not be created"
+                    Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created' % directory)
                 subprocess.call('cp ' + bin_dir + '/' + e + ' ' + '"' + directory + '"', shell=True)
                 src_dir = bin_dir.replace('build/',  '')
                 subprocess.call('cp ' + src_dir + '/params_*.txt '  + directory, shell=True)
@@ -282,7 +283,7 @@ def run_local(conf_file, serial = True):
     threads = []
     for (fname, directory) in fnames:
         s = "cd " + '"' + directory + '"' + " && " + "./" + fname + ' ' + arguments
-        print "Executing " + s
+        Logs.pprint('NORMAL', "Executing: %s" % s)
         if not serial:
             t = threading.Thread(target=run_local_one, args=(directory,s,))
             threads.append(t)
@@ -315,9 +316,9 @@ exec @exec
     fnames = _sub_script(tpl, conf_file)
     for (fname, directory) in fnames:
         s = "qsub -d " + directory + " " + fname
-        print "executing:" + s
+        Logs.pprint('NORMAL', 'executing: %s' % s)
         retcode = subprocess.call(s, shell=True, env=None)
-        print "qsub returned:" + str(retcode)
+        Logs.pprint('NORMAL', 'qsub returned: %s' % str(retcode))
 
 
 def oar(conf_file):
@@ -329,13 +330,13 @@ def oar(conf_file):
 export LD_LIBRARY_PATH=@ld_lib_path
 exec @exec
 """
-    print 'WARNING [oar]: MPI not supported yet'
+    Logs.pprint('YELLOW', 'WARNING [oar]: MPI not supported yet')
     fnames = _sub_script(tpl, conf_file)
     for (fname, directory) in fnames:
         s = "oarsub -d " + directory + " -S " + fname
-        print "executing:" + s
+        Logs.pprint('NORMAL', 'executing: %s' % s)
         retcode = subprocess.call(s, shell=True, env=None)
-        print "oarsub returned:" + str(retcode)
+        Logs.pprint('NORMAL', 'oarsub returned: %s' % str(retcode))
 
 def output_params(folder):
     files = [each for each in os.listdir(folder) if each.endswith('.cpp')]
