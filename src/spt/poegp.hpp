@@ -50,6 +50,7 @@ namespace spt {
             //     _gps[i].compute(s, o, false);
             //     // _gps[i].optimize_hyperparams();
             // });
+            _samples = samples;
 
             auto root = spt::make_spt(samples, observations, d, Params::spt_poegp::tau());
 
@@ -233,6 +234,9 @@ namespace spt {
             return lik_all;
         }
 
+        /// return the list of samples that have been tested so far
+        const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
+
     protected:
         std::vector<GP_t> _gps;
         HyperParamsOptimizer _hp_optimize;
@@ -240,6 +244,7 @@ namespace spt {
 
         std::shared_ptr<spt::SPTNode> _root;
         std::vector<std::shared_ptr<spt::SPTNode>> _leaves;
+        std::vector<Eigen::VectorXd> _samples;
 
         void _update_kernel_and_mean_functions()
         {
