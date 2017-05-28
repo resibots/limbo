@@ -59,8 +59,13 @@ namespace spt {
             _root = root;
             _leaves = leaves;
 
-            KernelFunction kernel_func = _gps[0].kernel_function();
-            MeanFunction mean_func = _gps[0].mean_function();
+            KernelFunction kernel_func(_samples[0].size());
+            MeanFunction mean_func(observations[0].size());
+
+            if (_gps.size() > 0) {
+                kernel_func = _gps[0].kernel_function();
+                mean_func = _gps[0].mean_function();
+            }
 
             _gps.resize(leaves.size());
             _gps[0].kernel_function() = kernel_func;
