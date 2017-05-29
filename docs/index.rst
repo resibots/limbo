@@ -40,6 +40,7 @@ Contents:
    guides/index
    api
    defaults
+   benchmarks
    faq
 
 
