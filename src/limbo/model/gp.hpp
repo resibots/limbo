@@ -275,6 +275,7 @@ namespace limbo {
             Eigen::MatrixXd _kernel;
 
             Eigen::MatrixXd _matrixL;
+            Eigen::LDLT<Eigen::MatrixXd> _solver;
 
             double _lik;
 
@@ -303,7 +304,8 @@ namespace limbo {
                         _kernel(j, i) = _kernel(i, j);
 
                 // O(n^3)
-                _matrixL = Eigen::LLT<Eigen::MatrixXd>(_kernel).matrixL();
+                _solver = Eigen::LDLT<Eigen::MatrixXd>(_kernel);
+                _matrixL = _solver.matrixL();
 
                 this->_compute_alpha();
             }
@@ -352,7 +354,8 @@ namespace limbo {
 
             double _sigma(const Eigen::VectorXd& v, const Eigen::VectorXd& k) const
             {
-                Eigen::VectorXd z = _matrixL.triangularView<Eigen::Lower>().solve(k);
+                std::cout << "called" << std::endl;
+                Eigen::VectorXd z = _solver.solve(k); //_matrixL.triangularView<Eigen::Lower>().solve(k);
                 double res = _kernel_function(v, v) - z.dot(z);
 
                 return (res <= std::numeric_limits<double>::epsilon()) ? 0 : res;
