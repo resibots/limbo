@@ -116,6 +116,7 @@ def configure(conf):
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
             opt_flags = " -O3 -g"
+            # Ideally we should put also "-mavx -mfma", but libcmaes segfaults (also some minor issues in compilation with static constexpr)
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \

@@ -53,6 +53,7 @@ Quick n dirty eigen3 detection
 """
 
 import os, glob, types
+import commands
 from waflib.Configure import conf
 
 
@@ -63,15 +64,35 @@ def options(opt):
 @conf
 def check_eigen(conf):
 	conf.start_msg('Checking for Eigen')
+	includes_check = ['/usr/include/eigen3', '/usr/local/include/eigen3', '/usr/include', '/usr/local/include']
+
 	if conf.options.eigen:
-		conf.env.INCLUDES_EIGEN = [conf.options.eigen]
-		conf.env.LIBPATH_EIGEN = [conf.options.eigen]
-	else:
-		conf.env.INCLUDES_EIGEN = ['/usr/include/eigen3',
-                                           '/usr/local/include/eigen3',
-                                           '/usr/include', '/usr/local/include']
+		includes_check = [conf.options.eigen]
+
 	try:
-		res = conf.find_file('Eigen/Core', conf.env.INCLUDES_EIGEN)
+		res = conf.find_file('Eigen/Core', includes_check)
+		incl = res[:-len('Eigen/Core')-1]
+		conf.env.INCLUDES_EIGEN = [incl]
+		cmdWR = 'cat ' + incl + '/Eigen/src/Core/util/Macros.h | grep "#define EIGEN_WORLD_VERSION"'
+		cmdMJ = 'cat ' + incl + '/Eigen/src/Core/util/Macros.h | grep "#define EIGEN_MAJOR_VERSION"'
+		world_version = int(commands.getoutput(cmdWR).strip()[-1])
+		major_version = int(commands.getoutput(cmdMJ).strip()[-1])
+		if world_version == 3 and major_version >= 3:
+			# Check for lapacke and blas
+			extra_libs = ['/usr/lib', '/usr/local/lib']
+			blas_libs = ['blas', 'openblas']
+			try:
+				blas_lib = ''
+				for b in blas_libs:
+					conf.find_file('lib'+b+'.so', extra_libs)
+					blas_lib = b
+					break
+				conf.find_file('liblapacke.so', extra_libs)
+				conf.env.DEFINES_EIGEN = ['EIGEN_USE_LAPACKE', 'EIGEN_USE_BLAS']
+				conf.env.LIBPATH_EIGEN = extra_libs
+				conf.env.LIB_EIGEN = ['lapacke', blas_lib]
+			except:
+				pass
 		conf.end_msg('ok')
 	except:
 		conf.end_msg('Not found', 'RED')
