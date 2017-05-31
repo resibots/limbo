@@ -320,3 +320,6 @@ intersphinx_mapping = {
     'python': ('https://docs.python.org/', None),
     'resibots': ('http://www.resibots.eu/', None),
 }
+
+# for versioning
+scv_whitelist_branches = ('master', 'release-1.0')

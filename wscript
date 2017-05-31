@@ -226,10 +226,14 @@ def insert_license(ctx):
     limbo.insert_license()
 
 def build_docs(ctx):
-    print 'extracting default params...'
+    print('extracting default params...')
     limbo.write_default_params('docs/defaults.rst')
-    print "generating HTML doc..."
-    s = "cd docs; make html"
+    print('Running doxygen')
+    s = "cd docs; doxygen Doxyfile; cd .."
+    retcode = subprocess.call(s, shell=True, env=None)
+    print("generating HTML doc with versioning...")
+    print("to install sphinx-versioning: sudo pip3 install git+https://github.com/resibots/sphinxcontrib-versioning.git@resibots-theme")
+    s = 'sphinx-versioning build --whitelist-branches "(master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
