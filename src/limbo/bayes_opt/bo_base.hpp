@@ -51,6 +51,8 @@
 #include <limits>
 #include <exception>
 
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
 #include <boost/parameter.hpp>
 #include <boost/fusion/include/vector.hpp>
 #include <boost/fusion/include/accumulate.hpp>

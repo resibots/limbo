@@ -53,7 +53,7 @@ Quick n dirty eigen3 detection
 """
 
 import os, glob, types
-import commands
+import subprocess
 from waflib.Configure import conf
 
 
@@ -73,10 +73,16 @@ def check_eigen(conf):
 		res = conf.find_file('Eigen/Core', includes_check)
 		incl = res[:-len('Eigen/Core')-1]
 		conf.env.INCLUDES_EIGEN = [incl]
-		cmdWR = 'cat ' + incl + '/Eigen/src/Core/util/Macros.h | grep "#define EIGEN_WORLD_VERSION"'
-		cmdMJ = 'cat ' + incl + '/Eigen/src/Core/util/Macros.h | grep "#define EIGEN_MAJOR_VERSION"'
-		world_version = int(commands.getoutput(cmdWR).strip()[-1])
-		major_version = int(commands.getoutput(cmdMJ).strip()[-1])
+		p1 = subprocess.Popen(["cat", incl+"/Eigen/src/Core/util/Macros.h"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		p2 = subprocess.Popen(["grep", "#define EIGEN_WORLD_VERSION"], stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		p1.stdout.close()
+		out1, err = p2.communicate()
+		p1 = subprocess.Popen(["cat", incl+"/Eigen/src/Core/util/Macros.h"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		p2 = subprocess.Popen(["grep", "#define EIGEN_MAJOR_VERSION"], stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		p1.stdout.close()
+		out2, err = p2.communicate()
+		world_version = int(out1.strip()[-1])
+		major_version = int(out2.strip()[-1])
 		if world_version == 3 and major_version >= 3:
 			# Check for lapacke and blas
 			extra_libs = ['/usr/lib', '/usr/local/lib']
