@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="structlimbo_1_1kernel_1_1_matern_five_halves" kind="struct" language="C++" prot="public">
     <compoundname>limbo::kernel::MaternFiveHalves</compoundname>
+    <basecompoundref refid="structlimbo_1_1kernel_1_1_base_kernel" prot="public" virt="non-virtual">limbo::kernel::BaseKernel&lt; Params, MaternFiveHalves&lt; Params &gt; &gt;</basecompoundref>
     <includes refid="matern__five__halves_8hpp" local="no">limbo/kernel/matern_five_halves.hpp</includes>
     <templateparamlist>
       <param>
@@ -25,13 +26,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" line="87" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" bodystart="87" bodyend="87"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" line="85" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" bodystart="85" bodyend="85"/>
       </memberdef>
-      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_matern_five_halves_1a2949874230e0cd3f8116de67c3824987" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_matern_five_halves_1a1cf740c6bd0ec87fdae0ede9d097dfc7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
-        <definition>double limbo::kernel::MaternFiveHalves&lt; Params &gt;::operator()</definition>
+        <definition>double limbo::kernel::MaternFiveHalves&lt; Params &gt;::kernel</definition>
         <argsstring>(const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2) const </argsstring>
-        <name>operator()</name>
+        <name>kernel</name>
         <param>
           <type>const Eigen::VectorXd &amp;</type>
           <declname>v1</declname>
@@ -46,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" line="89" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" bodystart="89" bodyend="93"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" line="87" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" bodystart="87" bodyend="91"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -70,10 +71,41 @@ Parameters:
 
 Reference: :cite:`matern1960spatial` &amp; :cite:`brochu2010tutorial` p.10 &amp; https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function
 </verbatim> </para>    </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" line="86" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" bodystart="86" bodyend="94"/>
+    <inheritancegraph>
+      <node id="196">
+        <label>limbo::kernel::MaternFiveHalves&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1kernel_1_1_matern_five_halves"/>
+        <childnode refid="197" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="197">
+        <label>limbo::kernel::BaseKernel&lt; Params, MaternFiveHalves&lt; Params &gt; &gt;</label>
+        <link refid="structlimbo_1_1kernel_1_1_base_kernel"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="198">
+        <label>limbo::kernel::MaternFiveHalves&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1kernel_1_1_matern_five_halves"/>
+        <childnode refid="199" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="199">
+        <label>limbo::kernel::BaseKernel&lt; Params, MaternFiveHalves&lt; Params &gt; &gt;</label>
+        <link refid="structlimbo_1_1kernel_1_1_base_kernel"/>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" line="84" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/matern_five_halves.hpp" bodystart="84" bodyend="92"/>
     <listofallmembers>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1aa147d007671f11249dd2126325107fb3" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>BaseKernel</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a99e4fde45a031017e9916bdd8d662b8c" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>grad</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a5547c4409191381d10dc034f26d5d2ba" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>h_params</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a1ffc58d9493a13ec3685c2bb4f8d997e" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>h_params_size</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_matern_five_halves_1a1cf740c6bd0ec87fdae0ede9d097dfc7" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>kernel</name></member>
       <member refid="structlimbo_1_1kernel_1_1_matern_five_halves_1ad574e55051fb4728271945cb46ea11f0" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>MaternFiveHalves</name></member>
-      <member refid="structlimbo_1_1kernel_1_1_matern_five_halves_1a2949874230e0cd3f8116de67c3824987" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1ad75f586e3a358b6b09dbd054bb4e3c9c" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>noise</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1ab9a0aba134c22cb8c6b25571e648b9bf" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a520f7aaa4d1de0391f85fd3fb36291e6" prot="public" virt="non-virtual"><scope>limbo::kernel::MaternFiveHalves</scope><name>set_h_params</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -141,6 +141,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -345,9 +346,7 @@
  7
  8
  9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
     <span class="n">MeanFWModel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
 
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">GP</span><span class="o">&gt;</span>
@@ -375,9 +374,7 @@
  9
 10
 11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
     <span class="k">using</span> <span class="n">result_type</span> <span class="o">=</span> <span class="kt">double</span><span class="p">;</span>
     <span class="n">DistanceToTarget</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span><span class="o">&amp;</span> <span class="n">target</span><span class="p">)</span> <span class="o">:</span> <span class="n">_target</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="p">{}</span>
 
@@ -396,17 +393,15 @@
 <div class="section" id="adding-custom-stop-criterion">
 <h2>Adding custom stop criterion<a class="headerlink" href="#adding-custom-stop-criterion" title="Permalink to this headline">¶</a></h2>
 <p>When our bayesian optimizer finds a solution that the end-effector of the arm is reasonably close to the target, we want it to stop. We can easily do this by creating our own stopping criterion:</p>
-<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
     <span class="n">MinTolerance</span><span class="p">()</span> <span class="p">{}</span>
 
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
@@ -434,9 +429,7 @@
 12
 13
 14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
+15</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
@@ -530,9 +523,10 @@
 28
 29
 30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">hp_period</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="nl">bayes_opt_bobase</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_bobase</span> <span class="p">{</span>
@@ -549,6 +543,9 @@
     <span class="p">};</span>
     <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">kernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
     <span class="p">};</span>

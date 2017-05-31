@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
+  <compounddef id="structlimbo_1_1kernel_1_1_base_kernel" kind="struct" language="C++" prot="public">
+    <compoundname>limbo::kernel::BaseKernel</compoundname>
+    <includes refid="kernel_2kernel_8hpp" local="no">limbo/kernel/kernel.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>Params</declname>
+        <defname>Params</defname>
+      </param>
+      <param>
+        <type>typename</type>
+        <declname>Kernel</declname>
+        <defname>Kernel</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structlimbo_1_1kernel_1_1_base_kernel_1aa7ac8b7e8716125721ed867d48b9ad7a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::_noise</definition>
+        <argsstring></argsstring>
+        <name>_noise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="129" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlimbo_1_1kernel_1_1_base_kernel_1aed678e0a4923ffccced3fc139755ae92" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::_noise_p</definition>
+        <argsstring></argsstring>
+        <name>_noise_p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="130" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_base_kernel_1aa147d007671f11249dd2126325107fb3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::BaseKernel</definition>
+        <argsstring>(size_t dim=1)</argsstring>
+        <name>BaseKernel</name>
+        <param>
+          <type>size_t</type>
+          <declname>dim</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="76" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="76" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_base_kernel_1ab9a0aba134c22cb8c6b25571e648b9bf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::operator()</definition>
+        <argsstring>(const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2, int i=-1, int j=-2) const </argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v1</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>v2</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+          <defval>-1</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>j</declname>
+          <defval>-2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="81" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_base_kernel_1a99e4fde45a031017e9916bdd8d662b8c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::grad</definition>
+        <argsstring>(const Eigen::VectorXd &amp;x1, const Eigen::VectorXd &amp;x2, int i=-1, int j=-2) const </argsstring>
+        <name>grad</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>x2</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+          <defval>-1</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>j</declname>
+          <defval>-2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="86" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="86" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_base_kernel_1a1ffc58d9493a13ec3685c2bb4f8d997e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::h_params_size</definition>
+        <argsstring>() const </argsstring>
+        <name>h_params_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="99" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="99" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_base_kernel_1a5547c4409191381d10dc034f26d5d2ba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::h_params</definition>
+        <argsstring>() const </argsstring>
+        <name>h_params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="105" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="105" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_base_kernel_1a520f7aaa4d1de0391f85fd3fb36291e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::set_h_params</definition>
+        <argsstring>(const Eigen::VectorXd &amp;p)</argsstring>
+        <name>set_h_params</name>
+        <param>
+          <type>const Eigen::VectorXd &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="116" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="116" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_base_kernel_1ad75f586e3a358b6b09dbd054bb4e3c9c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double limbo::kernel::BaseKernel&lt; Params, Kernel &gt;::noise</definition>
+        <argsstring>() const </argsstring>
+        <name>noise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="126" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="126" bodyend="126"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>embed:rst
+Base struct for kernel definition. It handles the noise and its optimization (only if the kernel allows hyper-parameters optimization).
+</verbatim></para><para>Parameters:<itemizedlist>
+<listitem><para><computeroutput>double noise</computeroutput> (initial signal noise squared)</para></listitem><listitem><para><computeroutput>bool optimize_noise</computeroutput> (whether we are optimizing for the noise or not) </para></listitem></itemizedlist>
+</para>    </detaileddescription>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" line="74" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/kernel.hpp" bodystart="74" bodyend="131"/>
+    <listofallmembers>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1aa7ac8b7e8716125721ed867d48b9ad7a" prot="private" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>_noise</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1aed678e0a4923ffccced3fc139755ae92" prot="private" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>_noise_p</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1aa147d007671f11249dd2126325107fb3" prot="public" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>BaseKernel</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a99e4fde45a031017e9916bdd8d662b8c" prot="public" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>grad</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a5547c4409191381d10dc034f26d5d2ba" prot="public" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>h_params</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a1ffc58d9493a13ec3685c2bb4f8d997e" prot="public" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>h_params_size</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1ad75f586e3a358b6b09dbd054bb4e3c9c" prot="public" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>noise</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1ab9a0aba134c22cb8c6b25571e648b9bf" prot="public" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a520f7aaa4d1de0391f85fd3fb36291e6" prot="public" virt="non-virtual"><scope>limbo::kernel::BaseKernel</scope><name>set_h_params</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

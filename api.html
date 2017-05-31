@@ -167,6 +167,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -1161,7 +1162,8 @@
 <dl class="function">
 <dt>
 <span class="target" id="limbogroup__opt__defaults_1gadf6a8058cda20130ad992631e561eb5a"></span><code class="descname">limbo::defaults::opt_rprop::BO_PARAM(int, iterations, 300)</code></dt>
-<dd></dd></dl>
+<dd><p>number of max iterations </p>
+</dd></dl>
 
 </div>
 </dd></dl>
@@ -1196,9 +1198,9 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N5limbo5model2GP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEERKN5Eigen8VectorXdEb">
-<span id="limbo::model::GP::compute__std::vector:Eigen::VectorXd:CR.std::vector:Eigen::VectorXd:CR.Eigen::VectorXdCR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a6ba14232cd8d845874b03037f19a740a"></span>void <code class="descname">compute</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>samples</em>, <em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>observations</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>noises</em>, bool <em>compute_kernel</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEERKN5Eigen8VectorXdEb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span>GP</span></a> from samples, observation, noise. This call needs to be explicit! </p>
+<dt id="_CPPv2N5limbo5model2GP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEEb">
+<span id="limbo::model::GP::compute__std::vector:Eigen::VectorXd:CR.std::vector:Eigen::VectorXd:CR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a68bf0f4fdf3cfa5dd37e192e3cdf31c8"></span>void <code class="descname">compute</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>samples</em>, <em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>observations</em>, bool <em>compute_kernel</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEEb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span>GP</span></a> from samples and observations. This call needs to be explicit! </p>
 </dd></dl>
 
 <dl class="function">
@@ -1208,9 +1210,9 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N5limbo5model2GP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdEd">
-<span id="limbo::model::GP::add_sample__Eigen::VectorXdCR.Eigen::VectorXdCR.double"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a43e4e23d98c421d610df52ea6d3f3539"></span>void <code class="descname">add_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>sample</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>observation</em>, double <em>noise</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdEd" title="Permalink to this definition">¶</a></dt>
-<dd><p>add sample and update the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span>GP</span></a>. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a6ba14232cd8d845874b03037f19a740a"><span>compute()</span></a> </p>
+<dt id="_CPPv2N5limbo5model2GP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE">
+<span id="limbo::model::GP::add_sample__Eigen::VectorXdCR.Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1ae48c4db7c797a6844c18fdd7878a7b4b"></span>void <code class="descname">add_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>sample</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>observation</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a></dt>
+<dd><p>add sample and update the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span>GP</span></a>. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a68bf0f4fdf3cfa5dd37e192e3cdf31c8"><span>compute()</span></a> </p>
 </dd></dl>
 
 <dl class="function">
@@ -1351,9 +1353,10 @@
 <div class="section" id="kernel-api">
 <span id="id12"></span><h3>Template<a class="headerlink" href="#kernel-api" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">Kernel</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="nl">Kernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">BaseKernel</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Kernel</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
   <span class="n">Kernel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
-  <span class="kt">double</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v2</span><span class="p">)</span> <span class="k">const</span>
+
+  <span class="kt">double</span> <span class="n">kernel</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v2</span><span class="p">)</span> <span class="k">const</span>
   <span class="p">{</span>
       <span class="c1">// code</span>
   <span class="p">}</span>
@@ -1383,6 +1386,20 @@
 </dd>
 </dl>
  </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_base_kernel"><span>limbo::kernel::BaseKernel&lt; Params, Exp&lt; Params &gt; &gt;</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="limbostructlimbo_1_1kernel_1_1_base_kernel"></span><em class="property">template </em>&lt;typename <em>Params</em>, typename <em>Kernel</em>&gt;</dt>
+<dt id="_CPPv2N5limbo6kernel10BaseKernelE">
+<span id="limbo::kernel::BaseKernel"></span><em class="property">struct </em><code class="descname">BaseKernel</code><a class="headerlink" href="#_CPPv2N5limbo6kernel10BaseKernelE" title="Permalink to this definition">¶</a></dt>
+<dd><em>#include &lt;limbo/kernel/kernel.hpp&gt;</em><p>Base struct for kernel definition. It handles the noise and its optimization (only if the kernel allows hyper-parameters optimization).</p>
+<p>Parameters:<ul class="simple">
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">noise</span></code> (initial signal noise squared)</li>
+<li><code class="docutils literal"><span class="pre">bool</span> <span class="pre">optimize_noise</span></code> (whether we are optimizing for the noise or not) </li>
+</ul>
+</p>
 </dd></dl>
 
 <dl class="class">
@@ -1403,6 +1420,7 @@
 </dl>
 <p>Reference: [matern1960spatial] &amp; [brochu2010tutorial] p.10 &amp; <a class="reference external" href="https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function">https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function</a></p>
  </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_base_kernel"><span>limbo::kernel::BaseKernel&lt; Params, MaternFiveHalves&lt; Params &gt; &gt;</span></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -1425,6 +1443,7 @@
 </div></blockquote>
 <p>Reference: [matern1960spatial] &amp; [brochu2010tutorial] p.10 &amp; <a class="reference external" href="https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function">https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function</a></p>
  </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_base_kernel"><span>limbo::kernel::BaseKernel&lt; Params, MaternThreeHalves&lt; Params &gt; &gt;</span></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -1432,25 +1451,22 @@
 <span class="target" id="limbostructlimbo_1_1kernel_1_1_squared_exp_a_r_d"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
 <dt id="_CPPv2N5limbo6kernel13SquaredExpARDE">
 <span id="limbo::kernel::SquaredExpARD"></span><em class="property">struct </em><code class="descname">SquaredExpARD</code><a class="headerlink" href="#_CPPv2N5limbo6kernel13SquaredExpARDE" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;limbo/kernel/squared_exp_ard.hpp&gt;</em><p><blockquote>
-<div><p>Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
+<dd><em>#include &lt;limbo/kernel/squared_exp_ard.hpp&gt;</em><p><p>Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
 Computes the squared exponential covariance like this:</p>
 <div class="math">
-\[k_{SE}(x, y) = \sigma^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),\]</div>
-</div></blockquote>
-<p>with <span class="math">\(M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})\)</span> being the characteristic length scales and <span class="math">\(\alpha\)</span> describing the variability of the latent function. The parameters <span class="math">\(l_1^2, \dots, l_n^2, \Lambda\)</span> are expected in this order in the parameter array. <span class="math">\(\Lambda\)</span> is a <span class="math">\(D\times k\)</span> matrix with <span class="math">\(k&lt;D\)</span>.</p>
-<blockquote>
-<div><dl class="docutils">
+\[k_{SE}(v1, v2) = \sigma^2 \exp \Big(-\frac{1}{2}(v1-v2)^TM(v1-v2)\Big),\]</div>
+<p>with <span class="math">\(M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})\)</span> being the characteristic length scales and <span class="math">\(\alpha\)</span> describing the variability of the latent function. The parameters <span class="math">\(l_1^2, \dots, l_n^2, \Lambda,\sigma^2\)</span> are expected in this order in the parameter array. <span class="math">\(\Lambda\)</span> is a <span class="math">\(D\times k\)</span> matrix with <span class="math">\(k&lt;D\)</span>.</p>
+<dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma_sq</span></code> (signal variance)</li>
+<li><code class="docutils literal"><span class="pre">double</span> <span class="pre">sigma_sq</span></code> (initial signal variance)</li>
 <li><code class="docutils literal"><span class="pre">int</span> <span class="pre">k</span></code> (number of columns of <span class="math">\(\Lambda\)</span> matrix)</li>
 </ul>
 </dd>
 </dl>
 <p>Reference: [Rasmussen2006], p. 106 &amp; [brochu2010tutorial], p. 10</p>
-</div></blockquote>
  </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_base_kernel"><span>limbo::kernel::BaseKernel&lt; Params, SquaredExpARD&lt; Params &gt; &gt;</span></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -1466,6 +1482,11 @@ Computes the squared exponential covariance like this:</p>
 <dl class="function">
 <dt>
 <span class="target" id="limbogroup__kernel__defaults_1ga202b52540fa68b47005cd9e3ef61a3fe"></span><code class="descname">limbo::defaults::kernel_exp::BO_PARAM(double, sigma_sq, 1)</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__kernel__defaults_1ga1e00e239557bb13005f591458aa41ac7"></span><code class="descname">limbo::defaults::kernel::BO_PARAM(double, noise, 0. 01)</code></dt>
 <dd></dd></dl>
 
 <dl class="function">

@@ -12,6 +12,7 @@ var searchData=
   ['no_5finit_2ehpp',['no_init.hpp',['../no__init_8hpp.html',1,'']]],
   ['no_5flf_5fopt_2ehpp',['no_lf_opt.hpp',['../no__lf__opt_8hpp.html',1,'']]],
   ['noinit',['NoInit',['../structlimbo_1_1init_1_1_no_init.html',1,'limbo::init']]],
+  ['noise',['noise',['../structlimbo_1_1kernel_1_1_base_kernel.html#ad75f586e3a358b6b09dbd054bb4e3c9c',1,'limbo::kernel::BaseKernel']]],
   ['nolfopt',['NoLFOpt',['../structlimbo_1_1model_1_1gp_1_1_no_l_f_opt.html',1,'limbo::model::gp']]],
   ['non_5fdominated',['non_dominated',['../namespacepareto_1_1impl.html#a6e03440a64bc1f6df847a2bbfa9984e9',1,'pareto::impl']]],
   ['nsbo',['Nsbo',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_nsbo.html',1,'limbo::experimental::bayes_opt']]],

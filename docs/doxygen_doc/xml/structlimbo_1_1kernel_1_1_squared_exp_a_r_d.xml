@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d" kind="struct" language="C++" prot="public">
     <compoundname>limbo::kernel::SquaredExpARD</compoundname>
+    <basecompoundref refid="structlimbo_1_1kernel_1_1_base_kernel" prot="public" virt="non-virtual">limbo::kernel::BaseKernel&lt; Params, SquaredExpARD&lt; Params &gt; &gt;</basecompoundref>
     <includes refid="squared__exp__ard_8hpp" local="no">limbo/kernel/squared_exp_ard.hpp</includes>
     <templateparamlist>
       <param>
@@ -20,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="149" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="149" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="154" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a58ebedcc9d926593fedd851ba5ea2c10" prot="private" static="no" mutable="no">
         <type>Eigen::VectorXd</type>
@@ -33,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="150" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="150" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="155" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="155" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a36aac45a14454b9a4c5b964124c59d9f" prot="private" static="no" mutable="no">
         <type>Eigen::MatrixXd</type>
@@ -46,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="151" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="151" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="156" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="156" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ab0436ae8990145ea6796a315502bf746" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -59,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="152" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="152" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="157" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="157" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa1c0262252f92bdc14d5857aabfff3e6" prot="private" static="no" mutable="no">
         <type>Eigen::VectorXd</type>
@@ -72,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="153" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="153" bodyend="-1"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="158" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="158" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -94,11 +95,11 @@
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="83" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="83" bodyend="88"/>
       </memberdef>
-      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a42d0d653ef61abce8713acdec5c876a5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a42d4f438fd7902fddd4873ed16a2da60" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>size_t</type>
-        <definition>size_t limbo::kernel::SquaredExpARD&lt; Params &gt;::h_params_size</definition>
+        <definition>size_t limbo::kernel::SquaredExpARD&lt; Params &gt;::params_size</definition>
         <argsstring>() const </argsstring>
-        <name>h_params_size</name>
+        <name>params_size</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -107,11 +108,11 @@
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="90" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="90" bodyend="90"/>
       </memberdef>
-      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a528af96c67834d1ee6bfb8594fcc2956" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>const Eigen::VectorXd &amp;</type>
-        <definition>const Eigen::VectorXd&amp; limbo::kernel::SquaredExpARD&lt; Params &gt;::h_params</definition>
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ace1e53f432d5e2446d34b5fb4df8f4f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::VectorXd</type>
+        <definition>Eigen::VectorXd limbo::kernel::SquaredExpARD&lt; Params &gt;::params</definition>
         <argsstring>() const </argsstring>
-        <name>h_params</name>
+        <name>params</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -120,11 +121,11 @@
         </inbodydescription>
         <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="93" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="93" bodyend="93"/>
       </memberdef>
-      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a0275e61c4ce395b988c903302d8e088e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a91ed1b24f3399296ea414c71e8e59f3f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void limbo::kernel::SquaredExpARD&lt; Params &gt;::set_h_params</definition>
+        <definition>void limbo::kernel::SquaredExpARD&lt; Params &gt;::set_params</definition>
         <argsstring>(const Eigen::VectorXd &amp;p)</argsstring>
-        <name>set_h_params</name>
+        <name>set_params</name>
         <param>
           <type>const Eigen::VectorXd &amp;</type>
           <declname>p</declname>
@@ -135,13 +136,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="96" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="96" bodyend="104"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="96" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="96" bodyend="105"/>
       </memberdef>
-      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa7dd2fbe6e8d5e84101eb3ccce15359e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aef88458f56aedf047a93d9196149a3b0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::VectorXd</type>
-        <definition>Eigen::VectorXd limbo::kernel::SquaredExpARD&lt; Params &gt;::grad</definition>
+        <definition>Eigen::VectorXd limbo::kernel::SquaredExpARD&lt; Params &gt;::gradient</definition>
         <argsstring>(const Eigen::VectorXd &amp;x1, const Eigen::VectorXd &amp;x2) const </argsstring>
-        <name>grad</name>
+        <name>gradient</name>
         <param>
           <type>const Eigen::VectorXd &amp;</type>
           <declname>x1</declname>
@@ -156,13 +157,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="106" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="106" bodyend="129"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="107" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="107" bodyend="134"/>
       </memberdef>
-      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ab3021822831528a6dbb4fcaf0d1c157e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa29a76c0fd6e79d2437f001076a18228" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
-        <definition>double limbo::kernel::SquaredExpARD&lt; Params &gt;::operator()</definition>
+        <definition>double limbo::kernel::SquaredExpARD&lt; Params &gt;::kernel</definition>
         <argsstring>(const Eigen::VectorXd &amp;x1, const Eigen::VectorXd &amp;x2) const </argsstring>
-        <name>operator()</name>
+        <name>kernel</name>
         <param>
           <type>const Eigen::VectorXd &amp;</type>
           <declname>x1</declname>
@@ -177,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="131" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="131" bodyend="144"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="136" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="136" bodyend="149"/>
       </memberdef>
       <memberdef kind="function" id="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aad6902b522c4fdd9b5c5799a0c440c40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const Eigen::VectorXd &amp;</type>
@@ -190,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="146" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="146" bodyend="146"/>
+        <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="151" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="151" bodyend="151"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -198,32 +199,64 @@
     <detaileddescription>
 <para><verbatim>embed:rst
 
-   Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
-   Computes the squared exponential covariance like this:
+Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
+Computes the squared exponential covariance like this:
 
-   .. math::
-       k_{SE}(x, y) = \sigma^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),
+.. math::
+    k_{SE}(v1, v2) = \sigma^2 \exp \Big(-\frac{1}{2}(v1-v2)^TM(v1-v2)\Big),
 
-with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \Lambda` are expected in this order in the parameter array. :math:`\Lambda` is a :math:`D\times k` matrix with :math:`k&lt;D`.
+with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \Lambda,\sigma^2` are expected in this order in the parameter array. :math:`\Lambda` is a :math:`D\times k` matrix with :math:`k&lt;D`.
 
-   Parameters:
-      - ``double sigma_sq`` (signal variance)
-      - ``int k`` (number of columns of :math:`\Lambda` matrix)
+Parameters:
+   - ``double sigma_sq`` (initial signal variance)
+   - ``int k`` (number of columns of :math:`\Lambda` matrix)
 
-   Reference: :cite:`Rasmussen2006`, p. 106 &amp; :cite:`brochu2010tutorial`, p. 10</verbatim> </para>    </detaileddescription>
-    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="82" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="82" bodyend="154"/>
+Reference: :cite:`Rasmussen2006`, p. 106 &amp; :cite:`brochu2010tutorial`, p. 10
+</verbatim> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="291">
+        <label>limbo::kernel::BaseKernel&lt; Params, SquaredExpARD&lt; Params &gt; &gt;</label>
+        <link refid="structlimbo_1_1kernel_1_1_base_kernel"/>
+      </node>
+      <node id="290">
+        <label>limbo::kernel::SquaredExpARD&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d"/>
+        <childnode refid="291" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="293">
+        <label>limbo::kernel::BaseKernel&lt; Params, SquaredExpARD&lt; Params &gt; &gt;</label>
+        <link refid="structlimbo_1_1kernel_1_1_base_kernel"/>
+      </node>
+      <node id="292">
+        <label>limbo::kernel::SquaredExpARD&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d"/>
+        <childnode refid="293" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" line="82" column="1" bodyfile="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp" bodystart="82" bodyend="159"/>
     <listofallmembers>
       <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a36aac45a14454b9a4c5b964124c59d9f" prot="private" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>_A</name></member>
       <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a58ebedcc9d926593fedd851ba5ea2c10" prot="private" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>_ell</name></member>
       <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa1c0262252f92bdc14d5857aabfff3e6" prot="private" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>_h_params</name></member>
       <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ab0436ae8990145ea6796a315502bf746" prot="private" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>_input_dim</name></member>
       <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a5c3c458ea6c80a146a02145762f1211c" prot="private" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>_sf2</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1aa147d007671f11249dd2126325107fb3" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>BaseKernel</name></member>
       <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aad6902b522c4fdd9b5c5799a0c440c40" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>ell</name></member>
-      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa7dd2fbe6e8d5e84101eb3ccce15359e" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>grad</name></member>
-      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a528af96c67834d1ee6bfb8594fcc2956" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>h_params</name></member>
-      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a42d0d653ef61abce8713acdec5c876a5" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>h_params_size</name></member>
-      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ab3021822831528a6dbb4fcaf0d1c157e" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>operator()</name></member>
-      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a0275e61c4ce395b988c903302d8e088e" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>set_h_params</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a99e4fde45a031017e9916bdd8d662b8c" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>grad</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aef88458f56aedf047a93d9196149a3b0" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>gradient</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a5547c4409191381d10dc034f26d5d2ba" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>h_params</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a1ffc58d9493a13ec3685c2bb4f8d997e" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>h_params_size</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa29a76c0fd6e79d2437f001076a18228" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>kernel</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1ad75f586e3a358b6b09dbd054bb4e3c9c" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>noise</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1ab9a0aba134c22cb8c6b25571e648b9bf" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>operator()</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ace1e53f432d5e2446d34b5fb4df8f4f9" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>params</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a42d4f438fd7902fddd4873ed16a2da60" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>params_size</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_base_kernel_1a520f7aaa4d1de0391f85fd3fb36291e6" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>set_h_params</name></member>
+      <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a91ed1b24f3399296ea414c71e8e59f3f" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>set_params</name></member>
       <member refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a33d5c074a487792a305a0ae89e864f34" prot="public" virt="non-virtual"><scope>limbo::kernel::SquaredExpARD</scope><name>SquaredExpARD</name></member>
     </listofallmembers>
   </compounddef>

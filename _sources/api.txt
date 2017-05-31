@@ -308,9 +308,10 @@ Template
 .. code-block:: cpp
 
   template <typename Params>
-  struct Kernel {
+  struct Kernel : public BaseKernel<Params, Kernel<Params>> {
     Kernel(size_t dim = 1) {}
-    double operator()(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
+
+    double kernel(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
     {
         // code
     }

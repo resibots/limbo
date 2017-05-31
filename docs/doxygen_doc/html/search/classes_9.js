@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['kernel',['kernel',['../structlimbo_1_1defaults_1_1kernel.html',1,'limbo::defaults']]],
   ['kernel_5fexp',['kernel_exp',['../structlimbo_1_1defaults_1_1kernel__exp.html',1,'limbo::defaults']]],
   ['kernel_5fmaternfivehalves',['kernel_maternfivehalves',['../structlimbo_1_1defaults_1_1kernel__maternfivehalves.html',1,'limbo::defaults']]],
   ['kernel_5fmaternthreehalves',['kernel_maternthreehalves',['../structlimbo_1_1defaults_1_1kernel__maternthreehalves.html',1,'limbo::defaults']]],

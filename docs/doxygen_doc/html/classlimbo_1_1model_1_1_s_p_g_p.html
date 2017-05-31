@@ -113,22 +113,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6fe55238f690cfba7dc1de3e6ad25ac3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a6fe55238f690cfba7dc1de3e6ad25ac3">SPGP</a> (int <a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#ab84d7663a814757766c2d630e0bacd9e">dim_in</a>, int <a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a605b47cf6ecf50c2436cbad531099d16">dim_out</a>)</td></tr>
 <tr class="memdesc:a6fe55238f690cfba7dc1de3e6ad25ac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">useful because the model might be created before having samples  <a href="#a6fe55238f690cfba7dc1de3e6ad25ac3">More...</a><br /></td></tr>
 <tr class="separator:a6fe55238f690cfba7dc1de3e6ad25ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada07822c26ef5b1f954af3650b5b3a93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#ada07822c26ef5b1f954af3650b5b3a93">SPGP</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a867505eb41e8fe971eb7de28b2cea50f">samples</a>, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</td></tr>
-<tr class="memdesc:ada07822c26ef5b1f954af3650b5b3a93"><td class="mdescLeft">&#160;</td><td class="mdescRight">useful to construct without optimizing  <a href="#ada07822c26ef5b1f954af3650b5b3a93">More...</a><br /></td></tr>
-<tr class="separator:ada07822c26ef5b1f954af3650b5b3a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fd5b3f449fd1a17e8699e9771ceae7d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a9fd5b3f449fd1a17e8699e9771ceae7d">SPGP</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a867505eb41e8fe971eb7de28b2cea50f">samples</a>, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations)</td></tr>
+<tr class="memdesc:a9fd5b3f449fd1a17e8699e9771ceae7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">useful to construct without optimizing  <a href="#a9fd5b3f449fd1a17e8699e9771ceae7d">More...</a><br /></td></tr>
+<tr class="separator:a9fd5b3f449fd1a17e8699e9771ceae7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a942a3f77cffebf2210203da69d2329d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a942a3f77cffebf2210203da69d2329d4">optimize_hyperparams</a> ()</td></tr>
 <tr class="memdesc:a942a3f77cffebf2210203da69d2329d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">execute the hyperparameters optimization  <a href="#a942a3f77cffebf2210203da69d2329d4">More...</a><br /></td></tr>
 <tr class="separator:a942a3f77cffebf2210203da69d2329d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae947bef5bb27d3cc10bc4206cf552b45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#ae947bef5bb27d3cc10bc4206cf552b45">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a867505eb41e8fe971eb7de28b2cea50f">samples</a>, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</td></tr>
-<tr class="memdesc:ae947bef5bb27d3cc10bc4206cf552b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html">SPGP</a> from samples, observation, noise. This call needs to be explicit!  <a href="#ae947bef5bb27d3cc10bc4206cf552b45">More...</a><br /></td></tr>
-<tr class="separator:ae947bef5bb27d3cc10bc4206cf552b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6f266cb123980286d8c2a445cf61825"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#af6f266cb123980286d8c2a445cf61825">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a867505eb41e8fe971eb7de28b2cea50f">samples</a>, const Eigen::MatrixXd &amp;observations, const Eigen::VectorXd &amp;noises)</td></tr>
-<tr class="separator:af6f266cb123980286d8c2a445cf61825"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2729a11aedaa9373908e009387e7ca96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a2729a11aedaa9373908e009387e7ca96">compute</a> (const Eigen::MatrixXd &amp;<a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a867505eb41e8fe971eb7de28b2cea50f">samples</a>, const Eigen::MatrixXd &amp;observations, const Eigen::MatrixXd &amp;noises)</td></tr>
-<tr class="separator:a2729a11aedaa9373908e009387e7ca96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d12288884fadcd922c56718f70801a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a2d12288884fadcd922c56718f70801a9">add_sample</a> (const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation, double noise)</td></tr>
-<tr class="memdesc:a2d12288884fadcd922c56718f70801a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">add sample and recompute the <a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html">SPGP</a>  <a href="#a2d12288884fadcd922c56718f70801a9">More...</a><br /></td></tr>
-<tr class="separator:a2d12288884fadcd922c56718f70801a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8113b7d23df0d1c2c7d5190a95490e9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a8113b7d23df0d1c2c7d5190a95490e9c">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a867505eb41e8fe971eb7de28b2cea50f">samples</a>, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations)</td></tr>
+<tr class="memdesc:a8113b7d23df0d1c2c7d5190a95490e9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the <a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html">SPGP</a> from samples and observations. This call needs to be explicit!  <a href="#a8113b7d23df0d1c2c7d5190a95490e9c">More...</a><br /></td></tr>
+<tr class="separator:a8113b7d23df0d1c2c7d5190a95490e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e05bf3a425ddd15fb0ad44b28bc2d56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a4e05bf3a425ddd15fb0ad44b28bc2d56">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;<a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a867505eb41e8fe971eb7de28b2cea50f">samples</a>, const Eigen::MatrixXd &amp;observations)</td></tr>
+<tr class="separator:a4e05bf3a425ddd15fb0ad44b28bc2d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd0309a5bb2380abc49d0fa26db1e631"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#acd0309a5bb2380abc49d0fa26db1e631">compute</a> (const Eigen::MatrixXd &amp;<a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a867505eb41e8fe971eb7de28b2cea50f">samples</a>, const Eigen::MatrixXd &amp;observations)</td></tr>
+<tr class="separator:acd0309a5bb2380abc49d0fa26db1e631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d983fbcf5c625446065dbc939571c3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a4d983fbcf5c625446065dbc939571c3d">add_sample</a> (const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation)</td></tr>
+<tr class="memdesc:a4d983fbcf5c625446065dbc939571c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">add sample and recompute the <a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html">SPGP</a>  <a href="#a4d983fbcf5c625446065dbc939571c3d">More...</a><br /></td></tr>
+<tr class="separator:a4d983fbcf5c625446065dbc939571c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42182a521e79e95b7e9cc4f1cd256650"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; Eigen::VectorXd, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#a42182a521e79e95b7e9cc4f1cd256650">query</a> (const Eigen::VectorXd &amp;v) const </td></tr>
 <tr class="separator:a42182a521e79e95b7e9cc4f1cd256650"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad699ef0c60c08ad24513d16d6c4f0c26"><td class="memItemLeft" align="right" valign="top">std::pair&lt; Eigen::MatrixXd, Eigen::MatrixXd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html#ad699ef0c60c08ad24513d16d6c4f0c26">predict</a> (const Eigen::MatrixXd &amp;xt) const </td></tr>
@@ -249,7 +249,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 
 </div>
 </div>
-<a class="anchor" id="ada07822c26ef5b1f954af3650b5b3a93"></a>
+<a class="anchor" id="a9fd5b3f449fd1a17e8699e9771ceae7d"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -268,13 +268,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td>
-          <td class="paramname"><em>observations</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname"><em>noises</em>&#160;</td>
+          <td class="paramname"><em>observations</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -294,7 +288,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a2d12288884fadcd922c56718f70801a9"></a>
+<a class="anchor" id="a4d983fbcf5c625446065dbc939571c3d"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -313,13 +307,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname"><em>observation</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>noise</em>&#160;</td>
+          <td class="paramname"><em>observation</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -338,7 +326,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 
 </div>
 </div>
-<a class="anchor" id="ae947bef5bb27d3cc10bc4206cf552b45"></a>
+<a class="anchor" id="a8113b7d23df0d1c2c7d5190a95490e9c"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -357,13 +345,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td>
-          <td class="paramname"><em>observations</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname"><em>noises</em>&#160;</td>
+          <td class="paramname"><em>observations</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -378,11 +360,11 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 </table>
 </div><div class="memdoc">
 
-<p>Compute the <a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html">SPGP</a> from samples, observation, noise. This call needs to be explicit! </p>
+<p>Compute the <a class="el" href="classlimbo_1_1model_1_1_s_p_g_p.html">SPGP</a> from samples and observations. This call needs to be explicit! </p>
 
 </div>
 </div>
-<a class="anchor" id="af6f266cb123980286d8c2a445cf61825"></a>
+<a class="anchor" id="a4e05bf3a425ddd15fb0ad44b28bc2d56"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -401,13 +383,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const Eigen::MatrixXd &amp;&#160;</td>
-          <td class="paramname"><em>observations</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname"><em>noises</em>&#160;</td>
+          <td class="paramname"><em>observations</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -424,7 +400,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 
 </div>
 </div>
-<a class="anchor" id="a2729a11aedaa9373908e009387e7ca96"></a>
+<a class="anchor" id="acd0309a5bb2380abc49d0fa26db1e631"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -443,13 +419,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const Eigen::MatrixXd &amp;&#160;</td>
-          <td class="paramname"><em>observations</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Eigen::MatrixXd &amp;&#160;</td>
-          <td class="paramname"><em>noises</em>&#160;</td>
+          <td class="paramname"><em>observations</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -995,7 +965,7 @@ template&lt;typename Params , typename KernelFunction , typename MeanFunction , 
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 6 2017 00:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 31 2017 15:15:08 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

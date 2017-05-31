@@ -6,6 +6,8 @@ var searchData=
   ['parallel_5frepeater_2ehpp',['parallel_repeater.hpp',['../parallel__repeater_8hpp.html',1,'']]],
   ['parallelrepeater',['ParallelRepeater',['../structlimbo_1_1opt_1_1_parallel_repeater.html',1,'limbo::opt']]],
   ['param',['param',['../structrandutils_1_1seed__seq__fe.html#a8b35797e2f894d92bd02cc5eb45f6915',1,'randutils::seed_seq_fe']]],
+  ['params',['params',['../structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#ace1e53f432d5e2446d34b5fb4df8f4f9',1,'limbo::kernel::SquaredExpARD']]],
+  ['params_5fsize',['params_size',['../structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#a42d4f438fd7902fddd4873ed16a2da60',1,'limbo::kernel::SquaredExpARD']]],
   ['params_5ft',['params_t',['../classlimbo_1_1bayes__opt_1_1_bo_base.html#ad64c1fe61c97f4540914018439f96a0a',1,'limbo::bayes_opt::BoBase']]],
   ['parego',['Parego',['../classlimbo_1_1experimental_1_1bayes__opt_1_1_parego.html',1,'limbo::experimental::bayes_opt']]],
   ['parego_2ehpp',['parego.hpp',['../parego_8hpp.html',1,'']]],

@@ -1,10 +1,15 @@
 var searchData=
 [
+  ['basekernel',['BaseKernel',['../structlimbo_1_1kernel_1_1_base_kernel.html',1,'limbo::kernel']]],
+  ['basekernel_3c_20params_2c_20exp_3c_20params_20_3e_20_3e',['BaseKernel&lt; Params, Exp&lt; Params &gt; &gt;',['../structlimbo_1_1kernel_1_1_base_kernel.html',1,'limbo::kernel']]],
+  ['basekernel_3c_20params_2c_20maternfivehalves_3c_20params_20_3e_20_3e',['BaseKernel&lt; Params, MaternFiveHalves&lt; Params &gt; &gt;',['../structlimbo_1_1kernel_1_1_base_kernel.html',1,'limbo::kernel']]],
+  ['basekernel_3c_20params_2c_20maternthreehalves_3c_20params_20_3e_20_3e',['BaseKernel&lt; Params, MaternThreeHalves&lt; Params &gt; &gt;',['../structlimbo_1_1kernel_1_1_base_kernel.html',1,'limbo::kernel']]],
+  ['basekernel_3c_20params_2c_20squaredexpard_3c_20params_20_3e_20_3e',['BaseKernel&lt; Params, SquaredExpARD&lt; Params &gt; &gt;',['../structlimbo_1_1kernel_1_1_base_kernel.html',1,'limbo::kernel']]],
   ['bayes_5fopt_5fbobase',['bayes_opt_bobase',['../structlimbo_1_1defaults_1_1bayes__opt__bobase.html',1,'limbo::defaults']]],
   ['bayes_5fopt_5fboptimizer',['bayes_opt_boptimizer',['../structlimbo_1_1defaults_1_1bayes__opt__boptimizer.html',1,'limbo::defaults']]],
   ['bayes_5fopt_5fcboptimizer',['bayes_opt_cboptimizer',['../structlimbo_1_1defaults_1_1bayes__opt__cboptimizer.html',1,'limbo::defaults']]],
   ['bayes_5fopt_5fehvi',['bayes_opt_ehvi',['../structlimbo_1_1defaults_1_1bayes__opt__ehvi.html',1,'limbo::defaults']]],
-  ['bayes_5fopt_5fimgpo',['bayes_opt_imgpo',['../structlimbo_1_1bayes__opt_1_1experimental_1_1defaults_1_1bayes__opt__imgpo.html',1,'limbo::bayes_opt::experimental::defaults']]],
+  ['bayes_5fopt_5fimgpo',['bayes_opt_imgpo',['../structlimbo_1_1defaults_1_1bayes__opt__imgpo.html',1,'limbo::defaults']]],
   ['bestaggregatedobservations',['BestAggregatedObservations',['../structlimbo_1_1stat_1_1_best_aggregated_observations.html',1,'limbo::stat']]],
   ['bestobservations',['BestObservations',['../structlimbo_1_1stat_1_1_best_observations.html',1,'limbo::stat']]],
   ['bestsamples',['BestSamples',['../structlimbo_1_1stat_1_1_best_samples.html',1,'limbo::stat']]],

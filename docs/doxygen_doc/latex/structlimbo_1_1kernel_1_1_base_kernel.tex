@@ -1,0 +1,104 @@
+\hypertarget{structlimbo_1_1kernel_1_1_base_kernel}{}\section{limbo\+:\+:kernel\+:\+:Base\+Kernel$<$ Params, Kernel $>$ Struct Template Reference}
+\label{structlimbo_1_1kernel_1_1_base_kernel}\index{limbo\+::kernel\+::\+Base\+Kernel$<$ Params, Kernel $>$@{limbo\+::kernel\+::\+Base\+Kernel$<$ Params, Kernel $>$}}
+
+
+{\ttfamily \#include $<$limbo/kernel/kernel.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structlimbo_1_1kernel_1_1_base_kernel_aa147d007671f11249dd2126325107fb3}{Base\+Kernel} (size\+\_\+t dim=1)
+\item 
+double \hyperlink{structlimbo_1_1kernel_1_1_base_kernel_ab9a0aba134c22cb8c6b25571e648b9bf}{operator()} (const Eigen\+::\+Vector\+Xd \&v1, const Eigen\+::\+Vector\+Xd \&v2, int i=-\/1, int j=-\/2) const 
+\item 
+Eigen\+::\+Vector\+Xd \hyperlink{structlimbo_1_1kernel_1_1_base_kernel_a99e4fde45a031017e9916bdd8d662b8c}{grad} (const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2, int i=-\/1, int j=-\/2) const 
+\item 
+size\+\_\+t \hyperlink{structlimbo_1_1kernel_1_1_base_kernel_a1ffc58d9493a13ec3685c2bb4f8d997e}{h\+\_\+params\+\_\+size} () const 
+\item 
+Eigen\+::\+Vector\+Xd \hyperlink{structlimbo_1_1kernel_1_1_base_kernel_a5547c4409191381d10dc034f26d5d2ba}{h\+\_\+params} () const 
+\item 
+void \hyperlink{structlimbo_1_1kernel_1_1_base_kernel_a520f7aaa4d1de0391f85fd3fb36291e6}{set\+\_\+h\+\_\+params} (const Eigen\+::\+Vector\+Xd \&p)
+\item 
+double \hyperlink{structlimbo_1_1kernel_1_1_base_kernel_ad75f586e3a358b6b09dbd054bb4e3c9c}{noise} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Params, typename Kernel$>$\\*
+struct limbo\+::kernel\+::\+Base\+Kernel$<$ Params, Kernel $>$}
+
+\begin{DoxyVerb}embed:rst
+Base struct for kernel definition. It handles the noise and its optimization (only if the kernel allows hyper-parameters optimization).
+\end{DoxyVerb}
+
+
+Parameters\+:
+\begin{DoxyItemize}
+\item {\ttfamily double noise} (initial signal noise squared)
+\item {\ttfamily bool optimize\+\_\+noise} (whether we are optimizing for the noise or not) 
+\end{DoxyItemize}
+
+\subsection{Constructor \& Destructor Documentation}
+\index{limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}!Base\+Kernel@{Base\+Kernel}}
+\index{Base\+Kernel@{Base\+Kernel}!limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}}
+\subsubsection[{\texorpdfstring{Base\+Kernel(size\+\_\+t dim=1)}{BaseKernel(size_t dim=1)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params, typename Kernel$>$ {\bf limbo\+::kernel\+::\+Base\+Kernel}$<$ Params, Kernel $>$\+::{\bf Base\+Kernel} (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{dim = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_base_kernel_aa147d007671f11249dd2126325107fb3}{}\label{structlimbo_1_1kernel_1_1_base_kernel_aa147d007671f11249dd2126325107fb3}
+
+
+\subsection{Member Function Documentation}
+\index{limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}!grad@{grad}}
+\index{grad@{grad}!limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}}
+\subsubsection[{\texorpdfstring{grad(const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2, int i=-\/1, int j=-\/2) const }{grad(const Eigen::VectorXd &x1, const Eigen::VectorXd &x2, int i=-1, int j=-2) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params, typename Kernel$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::kernel\+::\+Base\+Kernel}$<$ Params, Kernel $>$\+::grad (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{x1, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{x2, }
+\item[{int}]{i = {\ttfamily -\/1}, }
+\item[{int}]{j = {\ttfamily -\/2}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_base_kernel_a99e4fde45a031017e9916bdd8d662b8c}{}\label{structlimbo_1_1kernel_1_1_base_kernel_a99e4fde45a031017e9916bdd8d662b8c}
+\index{limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}!h\+\_\+params@{h\+\_\+params}}
+\index{h\+\_\+params@{h\+\_\+params}!limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}}
+\subsubsection[{\texorpdfstring{h\+\_\+params() const }{h_params() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params, typename Kernel$>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::kernel\+::\+Base\+Kernel}$<$ Params, Kernel $>$\+::h\+\_\+params (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_base_kernel_a5547c4409191381d10dc034f26d5d2ba}{}\label{structlimbo_1_1kernel_1_1_base_kernel_a5547c4409191381d10dc034f26d5d2ba}
+\index{limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}!h\+\_\+params\+\_\+size@{h\+\_\+params\+\_\+size}}
+\index{h\+\_\+params\+\_\+size@{h\+\_\+params\+\_\+size}!limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}}
+\subsubsection[{\texorpdfstring{h\+\_\+params\+\_\+size() const }{h_params_size() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params, typename Kernel$>$ size\+\_\+t {\bf limbo\+::kernel\+::\+Base\+Kernel}$<$ Params, Kernel $>$\+::h\+\_\+params\+\_\+size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_base_kernel_a1ffc58d9493a13ec3685c2bb4f8d997e}{}\label{structlimbo_1_1kernel_1_1_base_kernel_a1ffc58d9493a13ec3685c2bb4f8d997e}
+\index{limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}!noise@{noise}}
+\index{noise@{noise}!limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}}
+\subsubsection[{\texorpdfstring{noise() const }{noise() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params, typename Kernel$>$ double {\bf limbo\+::kernel\+::\+Base\+Kernel}$<$ Params, Kernel $>$\+::noise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_base_kernel_ad75f586e3a358b6b09dbd054bb4e3c9c}{}\label{structlimbo_1_1kernel_1_1_base_kernel_ad75f586e3a358b6b09dbd054bb4e3c9c}
+\index{limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}!operator()@{operator()}}
+\index{operator()@{operator()}!limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}}
+\subsubsection[{\texorpdfstring{operator()(const Eigen\+::\+Vector\+Xd \&v1, const Eigen\+::\+Vector\+Xd \&v2, int i=-\/1, int j=-\/2) const }{operator()(const Eigen::VectorXd &v1, const Eigen::VectorXd &v2, int i=-1, int j=-2) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params, typename Kernel$>$ double {\bf limbo\+::kernel\+::\+Base\+Kernel}$<$ Params, Kernel $>$\+::operator() (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v1, }
+\item[{const Eigen\+::\+Vector\+Xd \&}]{v2, }
+\item[{int}]{i = {\ttfamily -\/1}, }
+\item[{int}]{j = {\ttfamily -\/2}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_base_kernel_ab9a0aba134c22cb8c6b25571e648b9bf}{}\label{structlimbo_1_1kernel_1_1_base_kernel_ab9a0aba134c22cb8c6b25571e648b9bf}
+\index{limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}!set\+\_\+h\+\_\+params@{set\+\_\+h\+\_\+params}}
+\index{set\+\_\+h\+\_\+params@{set\+\_\+h\+\_\+params}!limbo\+::kernel\+::\+Base\+Kernel@{limbo\+::kernel\+::\+Base\+Kernel}}
+\subsubsection[{\texorpdfstring{set\+\_\+h\+\_\+params(const Eigen\+::\+Vector\+Xd \&p)}{set_h_params(const Eigen::VectorXd &p)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params, typename Kernel$>$ void {\bf limbo\+::kernel\+::\+Base\+Kernel}$<$ Params, Kernel $>$\+::set\+\_\+h\+\_\+params (
+\begin{DoxyParamCaption}
+\item[{const Eigen\+::\+Vector\+Xd \&}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_base_kernel_a520f7aaa4d1de0391f85fd3fb36291e6}{}\label{structlimbo_1_1kernel_1_1_base_kernel_a520f7aaa4d1de0391f85fd3fb36291e6}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/tmp/doc\+\_\+limbo/limbo/src/limbo/kernel/\hyperlink{kernel_2kernel_8hpp}{kernel.\+hpp}\end{DoxyCompactItemize}

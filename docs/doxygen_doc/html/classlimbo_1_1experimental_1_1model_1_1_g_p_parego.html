@@ -113,11 +113,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac351d6798add22da5c6dd58ac4a00723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f0eb578140f01874b13bfca124c085c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a1f0eb578140f01874b13bfca124c085c">GPParego</a> (int dim_in, int dim_out)</td></tr>
 <tr class="separator:a1f0eb578140f01874b13bfca124c085c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae361cd8b8831e4364774dfdd05937617"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#ae361cd8b8831e4364774dfdd05937617">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations, const Eigen::VectorXd &amp;noises)</td></tr>
-<tr class="separator:ae361cd8b8831e4364774dfdd05937617"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81955696f79b4ac11a17d0faf28ccc31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a81955696f79b4ac11a17d0faf28ccc31">add_sample</a> (const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation, double noise)</td></tr>
-<tr class="memdesc:a81955696f79b4ac11a17d0faf28ccc31"><td class="mdescLeft">&#160;</td><td class="mdescRight">add sample will NOT be incremental (we call compute each time)  <a href="#a81955696f79b4ac11a17d0faf28ccc31">More...</a><br /></td></tr>
-<tr class="separator:a81955696f79b4ac11a17d0faf28ccc31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a42fd7f4617395296b703eb89ad30f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a72a42fd7f4617395296b703eb89ad30f">compute</a> (const std::vector&lt; Eigen::VectorXd &gt; &amp;samples, const std::vector&lt; Eigen::VectorXd &gt; &amp;observations)</td></tr>
+<tr class="separator:a72a42fd7f4617395296b703eb89ad30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1203886482ddc7939ff1d22f0da20772"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlimbo_1_1experimental_1_1model_1_1_g_p_parego.html#a1203886482ddc7939ff1d22f0da20772">add_sample</a> (const Eigen::VectorXd &amp;sample, const Eigen::VectorXd &amp;observation)</td></tr>
+<tr class="memdesc:a1203886482ddc7939ff1d22f0da20772"><td class="mdescLeft">&#160;</td><td class="mdescRight">add sample will NOT be incremental (we call compute each time)  <a href="#a1203886482ddc7939ff1d22f0da20772">More...</a><br /></td></tr>
+<tr class="separator:a1203886482ddc7939ff1d22f0da20772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Params, typename Model&gt;<br />
@@ -191,7 +191,7 @@ template&lt;typename Params , typename Model &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a81955696f79b4ac11a17d0faf28ccc31"></a>
+<a class="anchor" id="a1203886482ddc7939ff1d22f0da20772"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -210,13 +210,7 @@ template&lt;typename Params , typename Model &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname"><em>observation</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>noise</em>&#160;</td>
+          <td class="paramname"><em>observation</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -235,7 +229,7 @@ template&lt;typename Params , typename Model &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ae361cd8b8831e4364774dfdd05937617"></a>
+<a class="anchor" id="a72a42fd7f4617395296b703eb89ad30f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -254,13 +248,7 @@ template&lt;typename Params , typename Model &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::vector&lt; Eigen::VectorXd &gt; &amp;&#160;</td>
-          <td class="paramname"><em>observations</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
-          <td class="paramname"><em>noises</em>&#160;</td>
+          <td class="paramname"><em>observations</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -283,7 +271,7 @@ template&lt;typename Params , typename Model &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 6 2017 00:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 31 2017 15:15:08 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

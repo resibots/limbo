@@ -4,20 +4,26 @@
 
 {\ttfamily \#include $<$limbo/kernel/squared\+\_\+exp\+\_\+ard.\+hpp$>$}
 
+Inheritance diagram for limbo\+:\+:kernel\+:\+:Squared\+Exp\+A\+RD$<$ Params $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{structlimbo_1_1kernel_1_1_squared_exp_a_r_d}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a33d5c074a487792a305a0ae89e864f34}{Squared\+Exp\+A\+RD} (int dim=1)
 \item 
-size\+\_\+t \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a42d0d653ef61abce8713acdec5c876a5}{h\+\_\+params\+\_\+size} () const 
+size\+\_\+t \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a42d4f438fd7902fddd4873ed16a2da60}{params\+\_\+size} () const 
 \item 
-const Eigen\+::\+Vector\+Xd \& \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a528af96c67834d1ee6bfb8594fcc2956}{h\+\_\+params} () const 
+Eigen\+::\+Vector\+Xd \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_ace1e53f432d5e2446d34b5fb4df8f4f9}{params} () const 
 \item 
-void \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a0275e61c4ce395b988c903302d8e088e}{set\+\_\+h\+\_\+params} (const Eigen\+::\+Vector\+Xd \&p)
+void \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a91ed1b24f3399296ea414c71e8e59f3f}{set\+\_\+params} (const Eigen\+::\+Vector\+Xd \&p)
 \item 
-Eigen\+::\+Vector\+Xd \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aa7dd2fbe6e8d5e84101eb3ccce15359e}{grad} (const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2) const 
+Eigen\+::\+Vector\+Xd \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aef88458f56aedf047a93d9196149a3b0}{gradient} (const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2) const 
 \item 
-double \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_ab3021822831528a6dbb4fcaf0d1c157e}{operator()} (const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2) const 
+double \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aa29a76c0fd6e79d2437f001076a18228}{kernel} (const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2) const 
 \item 
 const Eigen\+::\+Vector\+Xd \& \hyperlink{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aad6902b522c4fdd9b5c5799a0c440c40}{ell} () const 
 \end{DoxyCompactItemize}
@@ -29,19 +35,20 @@ struct limbo\+::kernel\+::\+Squared\+Exp\+A\+R\+D$<$ Params $>$}
 
 \begin{DoxyVerb}embed:rst
 
-   Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
-   Computes the squared exponential covariance like this:
+Squared exponential covariance function with automatic relevance detection (to be used with a likelihood optimizer)
+Computes the squared exponential covariance like this:
 
-   .. math::
-       k_{SE}(x, y) = \sigma^2 \exp \Big(-\frac{1}{2}(x-y)^TM(x-y)\Big),
+.. math::
+    k_{SE}(v1, v2) = \sigma^2 \exp \Big(-\frac{1}{2}(v1-v2)^TM(v1-v2)\Big),
 
-with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \Lambda` are expected in this order in the parameter array. :math:`\Lambda` is a :math:`D\times k` matrix with :math:`k<D`.
+with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the characteristic length scales and :math:`\alpha` describing the variability of the latent function. The parameters :math:`l_1^2, \dots, l_n^2, \Lambda,\sigma^2` are expected in this order in the parameter array. :math:`\Lambda` is a :math:`D\times k` matrix with :math:`k<D`.
 
-   Parameters:
-      - ``double sigma_sq`` (signal variance)
-      - ``int k`` (number of columns of :math:`\Lambda` matrix)
+Parameters:
+   - ``double sigma_sq`` (initial signal variance)
+   - ``int k`` (number of columns of :math:`\Lambda` matrix)
 
-   Reference: :cite:`Rasmussen2006`, p. 106 & :cite:`brochu2010tutorial`, p. 10\end{DoxyVerb}
+Reference: :cite:`Rasmussen2006`, p. 106 & :cite:`brochu2010tutorial`, p. 10
+\end{DoxyVerb}
  
 
 \subsection{Constructor \& Destructor Documentation}
@@ -62,43 +69,43 @@ with :math:`M = \Lambda\Lambda^T + diag(l_1^{-2}, \dots, l_n^{-2})` being the ch
 {}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aad6902b522c4fdd9b5c5799a0c440c40}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aad6902b522c4fdd9b5c5799a0c440c40}
-\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!grad@{grad}}
-\index{grad@{grad}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
-\subsubsection[{\texorpdfstring{grad(const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2) const }{grad(const Eigen::VectorXd &x1, const Eigen::VectorXd &x2) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::grad (
+\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!gradient@{gradient}}
+\index{gradient@{gradient}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
+\subsubsection[{\texorpdfstring{gradient(const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2) const }{gradient(const Eigen::VectorXd &x1, const Eigen::VectorXd &x2) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::gradient (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{x1, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{x2}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aa7dd2fbe6e8d5e84101eb3ccce15359e}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aa7dd2fbe6e8d5e84101eb3ccce15359e}
-\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!h\+\_\+params@{h\+\_\+params}}
-\index{h\+\_\+params@{h\+\_\+params}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
-\subsubsection[{\texorpdfstring{h\+\_\+params() const }{h_params() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ const Eigen\+::\+Vector\+Xd\& {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::h\+\_\+params (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a528af96c67834d1ee6bfb8594fcc2956}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a528af96c67834d1ee6bfb8594fcc2956}
-\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!h\+\_\+params\+\_\+size@{h\+\_\+params\+\_\+size}}
-\index{h\+\_\+params\+\_\+size@{h\+\_\+params\+\_\+size}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
-\subsubsection[{\texorpdfstring{h\+\_\+params\+\_\+size() const }{h_params_size() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ size\+\_\+t {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::h\+\_\+params\+\_\+size (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a42d0d653ef61abce8713acdec5c876a5}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a42d0d653ef61abce8713acdec5c876a5}
-\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!operator()@{operator()}}
-\index{operator()@{operator()}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
-\subsubsection[{\texorpdfstring{operator()(const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2) const }{operator()(const Eigen::VectorXd &x1, const Eigen::VectorXd &x2) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ double {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::operator() (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aef88458f56aedf047a93d9196149a3b0}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aef88458f56aedf047a93d9196149a3b0}
+\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!kernel@{kernel}}
+\index{kernel@{kernel}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
+\subsubsection[{\texorpdfstring{kernel(const Eigen\+::\+Vector\+Xd \&x1, const Eigen\+::\+Vector\+Xd \&x2) const }{kernel(const Eigen::VectorXd &x1, const Eigen::VectorXd &x2) const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ double {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::kernel (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{x1, }
 \item[{const Eigen\+::\+Vector\+Xd \&}]{x2}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_ab3021822831528a6dbb4fcaf0d1c157e}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_ab3021822831528a6dbb4fcaf0d1c157e}
-\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!set\+\_\+h\+\_\+params@{set\+\_\+h\+\_\+params}}
-\index{set\+\_\+h\+\_\+params@{set\+\_\+h\+\_\+params}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
-\subsubsection[{\texorpdfstring{set\+\_\+h\+\_\+params(const Eigen\+::\+Vector\+Xd \&p)}{set_h_params(const Eigen::VectorXd &p)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ void {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::set\+\_\+h\+\_\+params (
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aa29a76c0fd6e79d2437f001076a18228}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_aa29a76c0fd6e79d2437f001076a18228}
+\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!params@{params}}
+\index{params@{params}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
+\subsubsection[{\texorpdfstring{params() const }{params() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ Eigen\+::\+Vector\+Xd {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::params (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_ace1e53f432d5e2446d34b5fb4df8f4f9}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_ace1e53f432d5e2446d34b5fb4df8f4f9}
+\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!params\+\_\+size@{params\+\_\+size}}
+\index{params\+\_\+size@{params\+\_\+size}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
+\subsubsection[{\texorpdfstring{params\+\_\+size() const }{params_size() const }}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ size\+\_\+t {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::params\+\_\+size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a42d4f438fd7902fddd4873ed16a2da60}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a42d4f438fd7902fddd4873ed16a2da60}
+\index{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}!set\+\_\+params@{set\+\_\+params}}
+\index{set\+\_\+params@{set\+\_\+params}!limbo\+::kernel\+::\+Squared\+Exp\+A\+RD@{limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}}
+\subsubsection[{\texorpdfstring{set\+\_\+params(const Eigen\+::\+Vector\+Xd \&p)}{set_params(const Eigen::VectorXd &p)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Params $>$ void {\bf limbo\+::kernel\+::\+Squared\+Exp\+A\+RD}$<$ Params $>$\+::set\+\_\+params (
 \begin{DoxyParamCaption}
 \item[{const Eigen\+::\+Vector\+Xd \&}]{p}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a0275e61c4ce395b988c903302d8e088e}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a0275e61c4ce395b988c903302d8e088e}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a91ed1b24f3399296ea414c71e8e59f3f}{}\label{structlimbo_1_1kernel_1_1_squared_exp_a_r_d_a91ed1b24f3399296ea414c71e8e59f3f}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

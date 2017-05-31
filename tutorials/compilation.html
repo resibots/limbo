@@ -137,6 +137,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -217,7 +218,7 @@ sudo make install
 </pre></div>
 </div>
 </li>
-<li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get). Follow the instructions <a class="reference external" href="https://github.com/beniz/libcmaes#build">here</a>, reproduced for your convenience:</p>
+<li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. Make sure that you install with <strong>sudo</strong> or configure the <strong>LD_LIBRARY_PATH</strong> accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get). Follow the instructions <a class="reference external" href="https://github.com/beniz/libcmaes#build">here</a>, reproduced for your convenience:</p>
 <div class="highlight-python"><div class="highlight"><pre>sudo apt-get install libgtest-dev
 sudo cd /usr/src/gtest
 sudo mkdir build &amp;&amp; cd build

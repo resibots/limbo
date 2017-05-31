@@ -2,40 +2,64 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.11">
   <compounddef id="squared__exp__ard_8hpp" kind="file" language="C++">
     <compoundname>squared_exp_ard.hpp</compoundname>
-    <includes local="no">Eigen/Core</includes>
+    <includes refid="kernel_2kernel_8hpp" local="no">limbo/kernel/kernel.hpp</includes>
     <includedby refid="kernel_8hpp" local="no">/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</includedby>
     <incdepgraph>
-      <node id="1037">
+      <node id="1076">
+        <label>boost/algorithm/string.hpp</label>
+      </node>
+      <node id="1074">
         <label>Eigen/Core</label>
       </node>
-      <node id="1036">
+      <node id="1072">
         <label>/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp</label>
         <link refid="squared_exp_ard.hpp"/>
-        <childnode refid="1037" relation="include">
+        <childnode refid="1073" relation="include">
+        </childnode>
+      </node>
+      <node id="1073">
+        <label>limbo/kernel/kernel.hpp</label>
+        <link refid="kernel_2kernel_8hpp"/>
+        <childnode refid="1074" relation="include">
+        </childnode>
+        <childnode refid="1075" relation="include">
+        </childnode>
+      </node>
+      <node id="1077">
+        <label>iostream</label>
+      </node>
+      <node id="1075">
+        <label>limbo/tools/macros.hpp</label>
+        <link refid="macros_8hpp"/>
+        <childnode refid="1076" relation="include">
+        </childnode>
+        <childnode refid="1074" relation="include">
+        </childnode>
+        <childnode refid="1077" relation="include">
         </childnode>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="1039">
+      <node id="1079">
         <label>/tmp/doc_limbo/limbo/src/limbo/kernel.hpp</label>
         <link refid="kernel_8hpp"/>
-        <childnode refid="1040" relation="include">
+        <childnode refid="1080" relation="include">
         </childnode>
       </node>
-      <node id="1041">
+      <node id="1081">
         <label>/tmp/doc_limbo/limbo/src/limbo/experimental/stat/pareto_benchmark.hpp</label>
         <link refid="pareto__benchmark_8hpp"/>
       </node>
-      <node id="1040">
+      <node id="1080">
         <label>/tmp/doc_limbo/limbo/src/limbo/limbo.hpp</label>
         <link refid="limbo_8hpp"/>
-        <childnode refid="1041" relation="include">
+        <childnode refid="1081" relation="include">
         </childnode>
       </node>
-      <node id="1038">
+      <node id="1078">
         <label>/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp</label>
         <link refid="squared_exp_ard.hpp"/>
-        <childnode refid="1039" relation="include">
+        <childnode refid="1079" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -97,7 +121,7 @@
 <codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>LIMBO_KERNEL_SQUARED_EXP_ARD_HPP</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LIMBO_KERNEL_SQUARED_EXP_ARD_HPP</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Eigen/Core&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="kernel_2kernel_8hpp" kindref="compound">limbo/kernel/kernel.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"></highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacelimbo" kindref="compound">limbo</ref><sp/>{</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">defaults<sp/>{</highlight></codeline>
@@ -107,23 +131,23 @@
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">kernel<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1defaults_1_1kernel" kindref="compound">kernel</ref><sp/>{</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Params&gt;</highlight></codeline>
-<codeline lineno="82" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d" kindref="compound">SquaredExpARD</ref><sp/>{</highlight></codeline>
-<codeline lineno="83" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a33d5c074a487792a305a0ae89e864f34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a33d5c074a487792a305a0ae89e864f34" kindref="member">SquaredExpARD</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dim<sp/>=<sp/>1)<sp/>:<sp/>_sf2(0),<sp/>_ell(dim),<sp/>_A(dim,<sp/>Params::kernel_squared_exp_ard::k()),<sp/>_input_dim(dim)</highlight></codeline>
+<codeline lineno="82" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d" kindref="compound">SquaredExpARD</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_base_kernel" kindref="compound">BaseKernel</ref>&lt;Params,<sp/>SquaredExpARD&lt;Params&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="83" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a33d5c074a487792a305a0ae89e864f34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a33d5c074a487792a305a0ae89e864f34" kindref="member">SquaredExpARD</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dim<sp/>=<sp/>1)<sp/>:<sp/>_ell(dim),<sp/>_A(dim,<sp/>Params::kernel_squared_exp_ard::k()),<sp/>_input_dim(dim)</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>p<sp/>=<sp/>Eigen::VectorXd::Zero(_ell.size()<sp/>+<sp/>_ell.size()<sp/>*<sp/>Params::kernel_squared_exp_ard::k());</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;set_h_params(p);</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_sf2<sp/>=<sp/>Params::kernel_squared_exp_ard::sigma_sq();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>p<sp/>=<sp/>Eigen::VectorXd::Zero(_ell.size()<sp/>+<sp/>_ell.size()<sp/>*<sp/>Params::kernel_squared_exp_ard::k()<sp/>+<sp/>1);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p(p.size()<sp/>-<sp/>1)<sp/>=<sp/>std::log(std::sqrt(Params::kernel_squared_exp_ard::sigma_sq()));</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;set_params(p);</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"></highlight></codeline>
-<codeline lineno="90" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a42d0d653ef61abce8713acdec5c876a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a42d0d653ef61abce8713acdec5c876a5" kindref="member">h_params_size</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_ell.size()<sp/>+<sp/>_ell.size()<sp/>*<sp/>Params::kernel_squared_exp_ard::k();<sp/>}</highlight></codeline>
+<codeline lineno="90" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a42d4f438fd7902fddd4873ed16a2da60" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a42d4f438fd7902fddd4873ed16a2da60" kindref="member">params_size</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_ell.size()<sp/>+<sp/>_ell.size()<sp/>*<sp/>Params::kernel_squared_exp_ard::k()<sp/>+<sp/>1;<sp/>}</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"></highlight></codeline>
 <codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Return<sp/>the<sp/>hyper<sp/>parameters<sp/>in<sp/>log-space</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a528af96c67834d1ee6bfb8594fcc2956" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a528af96c67834d1ee6bfb8594fcc2956" kindref="member">h_params</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_h_params;<sp/>}</highlight></codeline>
+<codeline lineno="93" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ace1e53f432d5e2446d34b5fb4df8f4f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ace1e53f432d5e2446d34b5fb4df8f4f9" kindref="member">params</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_h_params;<sp/>}</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"></highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>We<sp/>expect<sp/>the<sp/>input<sp/>parameters<sp/>to<sp/>be<sp/>in<sp/>log-space</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="96" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a0275e61c4ce395b988c903302d8e088e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a0275e61c4ce395b988c903302d8e088e" kindref="member">set_h_params</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>p)</highlight></codeline>
+<codeline lineno="96" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a91ed1b24f3399296ea414c71e8e59f3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1a91ed1b24f3399296ea414c71e8e59f3f" kindref="member">set_params</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>p)</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_h_params<sp/>=<sp/>p;</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>_input_dim;<sp/>++i)</highlight></codeline>
@@ -131,61 +155,66 @@
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>int)Params::kernel_squared_exp_ard::k();<sp/>++j)</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>_input_dim;<sp/>++i)</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_A(i,<sp/>j)<sp/>=<sp/>std::exp(p((j<sp/>+<sp/>1)<sp/>*<sp/>_input_dim<sp/>+<sp/>i));</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa7dd2fbe6e8d5e84101eb3ccce15359e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa7dd2fbe6e8d5e84101eb3ccce15359e" kindref="member">grad</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x2)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="107"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Params::kernel_squared_exp_ard::k()<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref><sp/>=<sp/>Eigen::VectorXd::Zero(this-&gt;h_params_size());</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>K<sp/>=<sp/>(_A<sp/>*<sp/>_A.transpose());</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>K.diagonal()<sp/>+=<sp/>(Eigen::MatrixXd)(_ell.array().inverse().square());</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>((x1<sp/>-<sp/>x2).transpose()<sp/>*<sp/>K<sp/>*<sp/>(x1<sp/>-<sp/>x2)).norm();</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>k<sp/>=<sp/>_sf2<sp/>*<sp/>std::exp(-0.5<sp/>*<sp/>z);</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.head(_input_dim)<sp/>=<sp/>(x1<sp/>-<sp/>x2).cwiseQuotient(_ell).array().square()<sp/>*<sp/>k;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>G<sp/>=<sp/>-k<sp/>*<sp/>(x1<sp/>-<sp/>x2)<sp/>*<sp/>(x1<sp/>-<sp/>x2).transpose()<sp/>*<sp/>_A;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>Params::kernel_squared_exp_ard::k();<sp/>++j)</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.segment((1<sp/>+<sp/>j)<sp/>*<sp/>_input_dim,<sp/>_input_dim)<sp/>=<sp/>G.col(j);</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref>;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref>(_input_dim);</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>z<sp/>=<sp/>(x1<sp/>-<sp/>x2).cwiseQuotient(_ell).array().square();</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>k<sp/>=<sp/>_sf2<sp/>*<sp/>std::exp(-0.5<sp/>*<sp/>z.sum());</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.head(_input_dim)<sp/>=<sp/>z<sp/>*<sp/>k;</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref>;</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_sf2<sp/>=<sp/>std::exp(2.0<sp/>*<sp/>p(params_size()<sp/>-<sp/>1));</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aef88458f56aedf047a93d9196149a3b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aef88458f56aedf047a93d9196149a3b0" kindref="member">gradient</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x2)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="108"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Params::kernel_squared_exp_ard::k()<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref><sp/>=<sp/>Eigen::VectorXd::Zero(this-&gt;params_size());</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>K<sp/>=<sp/>(_A<sp/>*<sp/>_A.transpose());</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>K.diagonal()<sp/>+=<sp/>(Eigen::MatrixXd)(_ell.array().inverse().square());</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>((x1<sp/>-<sp/>x2).transpose()<sp/>*<sp/>K<sp/>*<sp/>(x1<sp/>-<sp/>x2)).norm();</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>k<sp/>=<sp/>_sf2<sp/>*<sp/>std::exp(-0.5<sp/>*<sp/>z);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.head(_input_dim)<sp/>=<sp/>(x1<sp/>-<sp/>x2).cwiseQuotient(_ell).array().square()<sp/>*<sp/>k;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>G<sp/>=<sp/>-k<sp/>*<sp/>(x1<sp/>-<sp/>x2)<sp/>*<sp/>(x1<sp/>-<sp/>x2).transpose()<sp/>*<sp/>_A;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>Params::kernel_squared_exp_ard::k();<sp/>++j)</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.segment((1<sp/>+<sp/>j)<sp/>*<sp/>_input_dim,<sp/>_input_dim)<sp/>=<sp/>G.col(j);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref>(grad.size()<sp/>-<sp/>1)<sp/>=<sp/>2<sp/>*<sp/>k;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref>(this-&gt;params_size());</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>z<sp/>=<sp/>(x1<sp/>-<sp/>x2).cwiseQuotient(_ell).array().square();</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>k<sp/>=<sp/>_sf2<sp/>*<sp/>std::exp(-0.5<sp/>*<sp/>z.sum());</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>grad.head(_input_dim)<sp/>=<sp/>z<sp/>*<sp/>k;</highlight></codeline>
 <codeline lineno="130"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ab3021822831528a6dbb4fcaf0d1c157e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1ab3021822831528a6dbb4fcaf0d1c157e" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x2)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="132"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(x1.size()<sp/>==<sp/>_ell.size());</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>z;</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Params::kernel_squared_exp_ard::k()<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>K<sp/>=<sp/>(_A<sp/>*<sp/>_A.transpose());</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>K.diagonal()<sp/>+=<sp/>(Eigen::MatrixXd)(_ell.array().inverse().square());</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>z<sp/>=<sp/>((x1<sp/>-<sp/>x2).transpose()<sp/>*<sp/>K<sp/>*<sp/>(x1<sp/>-<sp/>x2)).norm();</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>z<sp/>=<sp/>(x1<sp/>-<sp/>x2).cwiseQuotient(_ell).squaredNorm();</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_sf2<sp/>*<sp/>std::exp(-0.5<sp/>*<sp/>z);</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"></highlight></codeline>
-<codeline lineno="146" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aad6902b522c4fdd9b5c5799a0c440c40" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aad6902b522c4fdd9b5c5799a0c440c40" kindref="member">ell</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_ell;<sp/>}</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"></highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_sf2;</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>_ell;</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>_A;</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>_input_dim;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>_h_params;</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="156"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref>(grad.size()<sp/>-<sp/>1)<sp/>=<sp/>2<sp/>*<sp/>k;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__opt__tools_1gaf28d9af930b2993024ab497b285e0521" kindref="member">grad</ref>;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa29a76c0fd6e79d2437f001076a18228" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aa29a76c0fd6e79d2437f001076a18228" kindref="member">kernel</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/>x2)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="137"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(x1.size()<sp/>==<sp/>_ell.size());</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>z;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Params::kernel_squared_exp_ard::k()<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>K<sp/>=<sp/>(_A<sp/>*<sp/>_A.transpose());</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>K.diagonal()<sp/>+=<sp/>(Eigen::MatrixXd)(_ell.array().inverse().square());</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>z<sp/>=<sp/>((x1<sp/>-<sp/>x2).transpose()<sp/>*<sp/>K<sp/>*<sp/>(x1<sp/>-<sp/>x2)).norm();</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>z<sp/>=<sp/>(x1<sp/>-<sp/>x2).cwiseQuotient(_ell).squaredNorm();</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_sf2<sp/>*<sp/>std::exp(-0.5<sp/>*<sp/>z);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151" refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aad6902b522c4fdd9b5c5799a0c440c40" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Eigen::VectorXd&amp;<sp/><ref refid="structlimbo_1_1kernel_1_1_squared_exp_a_r_d_1aad6902b522c4fdd9b5c5799a0c440c40" kindref="member">ell</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_ell;<sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>_sf2;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>_ell;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::MatrixXd<sp/>_A;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>_input_dim;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Eigen::VectorXd<sp/>_h_params;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="/tmp/doc_limbo/limbo/src/limbo/kernel/squared_exp_ard.hpp"/>
   </compounddef>

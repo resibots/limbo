@@ -98,13 +98,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="exp_8hpp_source.html">limbo/kernel/exp.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for limbo::kernel::Exp&lt; Params &gt;:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="structlimbo_1_1kernel_1_1_exp.png" usemap="#limbo::kernel::Exp_3C_20Params_20_3E_map" alt=""/>
+  <map id="limbo::kernel::Exp_3C_20Params_20_3E_map" name="limbo::kernel::Exp&lt; Params &gt;_map">
+<area href="structlimbo_1_1kernel_1_1_base_kernel.html" alt="limbo::kernel::BaseKernel&lt; Params, Exp&lt; Params &gt; &gt;" shape="rect" coords="0,0,315,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abec48720f518fa51be7f74bf102add09"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_exp.html#abec48720f518fa51be7f74bf102add09">Exp</a> (size_t dim=1)</td></tr>
 <tr class="separator:abec48720f518fa51be7f74bf102add09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50951330db2210da72d2ea8fc9ef8b96"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_exp.html#a50951330db2210da72d2ea8fc9ef8b96">operator()</a> (const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2) const </td></tr>
-<tr class="separator:a50951330db2210da72d2ea8fc9ef8b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb1accd4f07243ef60fbd9441ebeb323"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_exp.html#abb1accd4f07243ef60fbd9441ebeb323">kernel</a> (const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2) const </td></tr>
+<tr class="separator:abb1accd4f07243ef60fbd9441ebeb323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structlimbo_1_1kernel_1_1_base_kernel')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="structlimbo_1_1kernel_1_1_base_kernel.html">limbo::kernel::BaseKernel&lt; Params, Exp&lt; Params &gt; &gt;</a></td></tr>
+<tr class="memitem:aa147d007671f11249dd2126325107fb3 inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_base_kernel.html#aa147d007671f11249dd2126325107fb3">BaseKernel</a> (size_t dim=1)</td></tr>
+<tr class="separator:aa147d007671f11249dd2126325107fb3 inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a0aba134c22cb8c6b25571e648b9bf inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_base_kernel.html#ab9a0aba134c22cb8c6b25571e648b9bf">operator()</a> (const Eigen::VectorXd &amp;v1, const Eigen::VectorXd &amp;v2, int i=-1, int j=-2) const</td></tr>
+<tr class="separator:ab9a0aba134c22cb8c6b25571e648b9bf inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e4fde45a031017e9916bdd8d662b8c inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_base_kernel.html#a99e4fde45a031017e9916bdd8d662b8c">grad</a> (const Eigen::VectorXd &amp;x1, const Eigen::VectorXd &amp;x2, int i=-1, int j=-2) const</td></tr>
+<tr class="separator:a99e4fde45a031017e9916bdd8d662b8c inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ffc58d9493a13ec3685c2bb4f8d997e inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_base_kernel.html#a1ffc58d9493a13ec3685c2bb4f8d997e">h_params_size</a> () const</td></tr>
+<tr class="separator:a1ffc58d9493a13ec3685c2bb4f8d997e inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5547c4409191381d10dc034f26d5d2ba inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memItemLeft" align="right" valign="top">Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_base_kernel.html#a5547c4409191381d10dc034f26d5d2ba">h_params</a> () const</td></tr>
+<tr class="separator:a5547c4409191381d10dc034f26d5d2ba inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a520f7aaa4d1de0391f85fd3fb36291e6 inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_base_kernel.html#a520f7aaa4d1de0391f85fd3fb36291e6">set_h_params</a> (const Eigen::VectorXd &amp;p)</td></tr>
+<tr class="separator:a520f7aaa4d1de0391f85fd3fb36291e6 inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad75f586e3a358b6b09dbd054bb4e3c9c inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlimbo_1_1kernel_1_1_base_kernel.html#ad75f586e3a358b6b09dbd054bb4e3c9c">noise</a> () const</td></tr>
+<tr class="separator:ad75f586e3a358b6b09dbd054bb4e3c9c inherit pub_methods_structlimbo_1_1kernel_1_1_base_kernel"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename Params&gt;<br />
@@ -147,7 +171,7 @@ template&lt;typename Params &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a50951330db2210da72d2ea8fc9ef8b96"></a>
+<a class="anchor" id="abb1accd4f07243ef60fbd9441ebeb323"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -157,7 +181,7 @@ template&lt;typename Params &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double <a class="el" href="structlimbo_1_1kernel_1_1_exp.html">limbo::kernel::Exp</a>&lt; Params &gt;::operator() </td>
+          <td class="memname">double <a class="el" href="structlimbo_1_1kernel_1_1_exp.html">limbo::kernel::Exp</a>&lt; Params &gt;::kernel </td>
           <td>(</td>
           <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
           <td class="paramname"><em>v1</em>, </td>
@@ -189,7 +213,7 @@ template&lt;typename Params &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 6 2017 00:00:27 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 31 2017 15:15:08 for Limbo by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

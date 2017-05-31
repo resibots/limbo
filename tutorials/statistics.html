@@ -128,6 +128,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -420,15 +421,16 @@
 109
 110
 111
-112</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+112
+113
+114
+115</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;limbo/limbo.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
 
 <span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-    <span class="c1">// no noise</span>
     <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
     <span class="p">};</span>
 
 <span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
@@ -446,6 +448,11 @@
     <span class="c1">// enable / disable the writing of the result files</span>
     <span class="k">struct</span> <span class="nl">bayes_opt_bobase</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_bobase</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="c1">// no noise</span>
+    <span class="k">struct</span> <span class="nl">kernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
     <span class="p">};</span>
 
     <span class="k">struct</span> <span class="nl">kernel_exp</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_exp</span> <span class="p">{</span>

@@ -575,32 +575,32 @@ This class is templated by several types with default values (thanks to boost::p
 <listitem><para><computeroutput>using Kernel_t = <ref refid="structlimbo_1_1kernel_1_1_matern_five_halves" kindref="compound">kernel::MaternFiveHalves</ref>&lt;Params&gt;;</computeroutput></para></listitem><listitem><para><computeroutput>using Mean_t = <ref refid="structlimbo_1_1mean_1_1_data" kindref="compound">mean::Data</ref>&lt;Params&gt;;</computeroutput></para></listitem><listitem><para><computeroutput>using GP_t = <ref refid="classlimbo_1_1model_1_1_g_p" kindref="compound">model::GP</ref>&lt;Params, Kernel_t, Mean_t&gt;;</computeroutput></para></listitem><listitem><para><computeroutput>using Acqui_t = <ref refid="classlimbo_1_1acqui_1_1_u_c_b" kindref="compound">acqui::UCB</ref>&lt;Params, GP_t&gt;;</computeroutput></para></listitem><listitem><para><computeroutput><ref refid="classlimbo_1_1bayes__opt_1_1_b_optimizer" kindref="compound">bayes_opt::BOptimizer</ref>&lt;Params, modelfun&lt;GP_t&gt;, acquifun&lt;Acqui_t&gt;&gt; opt;</computeroutput> </para></listitem></itemizedlist>
 </para>    </detaileddescription>
     <inheritancegraph>
-      <node id="43">
+      <node id="45">
         <label>limbo::experimental::bayes_opt::Ehvi&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
         <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_ehvi"/>
+        <childnode refid="44" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>limbo::experimental::bayes_opt::CBOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer"/>
+        <childnode refid="42" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
+      </node>
+      <node id="43">
+        <label>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
+        <link refid="classlimbo_1_1bayes__opt_1_1_b_optimizer"/>
         <childnode refid="42" relation="public-inheritance">
         </childnode>
       </node>
       <node id="44">
-        <label>limbo::experimental::bayes_opt::CBOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
-        <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_c_b_optimizer"/>
-        <childnode refid="40" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="40">
-        <label>limbo::bayes_opt::BoBase&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
-        <link refid="classlimbo_1_1bayes__opt_1_1_bo_base"/>
-      </node>
-      <node id="41">
-        <label>limbo::bayes_opt::BOptimizer&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
-        <link refid="classlimbo_1_1bayes__opt_1_1_b_optimizer"/>
-        <childnode refid="40" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="42">
         <label>limbo::experimental::bayes_opt::BoMulti&lt; Params, A1, A2, A3, A4, A5, A6 &gt;</label>
         <link refid="classlimbo_1_1experimental_1_1bayes__opt_1_1_bo_multi"/>
-        <childnode refid="40" relation="public-inheritance">
+        <childnode refid="42" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

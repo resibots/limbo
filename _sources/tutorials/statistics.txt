@@ -58,7 +58,7 @@ For instance, we could add a statistics class that writes the worst observation 
 .. literalinclude:: ../../src/tutorials/statistics.cpp
    :language: c++
    :linenos:
-   :lines: 109-138
+   :lines: 112-141
 
 In order to configure the Bayesian optimizer to use our new statistics class, we first need to define a new statistics list which includes our new `WorstObservation`:
 
@@ -66,14 +66,14 @@ In order to configure the Bayesian optimizer to use our new statistics class, we
 .. literalinclude:: ../../src/tutorials/statistics.cpp
    :language: c++
    :linenos:
-   :lines: 144-148
+   :lines: 147-151
 
 Then, we use it to define the optimizer:
 
 .. literalinclude:: ../../src/tutorials/statistics.cpp
    :language: c++
    :linenos:
-   :lines: 151
+   :lines: 154
 
 The full source code is available in `src/tutorials/statistics.cpp` and reproduced here:
 

@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['kernel',['Kernel',['../group__kernel.html',1,'']]],
+  ['kernel',['kernel',['../structlimbo_1_1defaults_1_1kernel.html',1,'limbo::defaults']]],
+  ['kernel',['kernel',['../structlimbo_1_1kernel_1_1_exp.html#abb1accd4f07243ef60fbd9441ebeb323',1,'limbo::kernel::Exp::kernel()'],['../structlimbo_1_1kernel_1_1_matern_five_halves.html#a1cf740c6bd0ec87fdae0ede9d097dfc7',1,'limbo::kernel::MaternFiveHalves::kernel()'],['../structlimbo_1_1kernel_1_1_matern_three_halves.html#aa94330a95c9e901b371e431ee640dc91',1,'limbo::kernel::MaternThreeHalves::kernel()'],['../structlimbo_1_1kernel_1_1_squared_exp_a_r_d.html#aa29a76c0fd6e79d2437f001076a18228',1,'limbo::kernel::SquaredExpARD::kernel()'],['../group__kernel.html',1,'(Global Namespace)']]],
+  ['kernel_2ehpp',['kernel.hpp',['../kernel_2kernel_8hpp.html',1,'']]],
   ['kernel_2ehpp',['kernel.hpp',['../kernel_8hpp.html',1,'']]],
   ['kernel_5fdefaults',['Kernel_defaults',['../group__kernel__defaults.html',1,'']]],
   ['kernel_5fexp',['kernel_exp',['../structlimbo_1_1defaults_1_1kernel__exp.html',1,'limbo::defaults']]],

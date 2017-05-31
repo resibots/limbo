@@ -45,18 +45,6 @@
     <detaileddescription>
 <para>TODO fallocati Write the best observation at each iteration filename: <computeroutput>best_aggregated_observations.dat</computeroutput> </para>    </detaileddescription>
     <inheritancegraph>
-      <node id="29">
-        <label>limbo::stat::StatBase&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
-      </node>
-      <node id="28">
-        <label>limbo::stat::BestAggregatedObservations&lt; Params &gt;</label>
-        <link refid="structlimbo_1_1stat_1_1_best_aggregated_observations"/>
-        <childnode refid="29" relation="public-inheritance">
-        </childnode>
-      </node>
-    </inheritancegraph>
-    <collaborationgraph>
       <node id="31">
         <label>limbo::stat::StatBase&lt; Params &gt;</label>
         <link refid="structlimbo_1_1stat_1_1_stat_base"/>
@@ -65,6 +53,18 @@
         <label>limbo::stat::BestAggregatedObservations&lt; Params &gt;</label>
         <link refid="structlimbo_1_1stat_1_1_best_aggregated_observations"/>
         <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="33">
+        <label>limbo::stat::StatBase&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_stat_base"/>
+      </node>
+      <node id="32">
+        <label>limbo::stat::BestAggregatedObservations&lt; Params &gt;</label>
+        <link refid="structlimbo_1_1stat_1_1_best_aggregated_observations"/>
+        <childnode refid="33" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

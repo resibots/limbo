@@ -1,5 +1,10 @@
 Default values
 ===============
+kernel
+^^^^^^
+- bool optimize_noise = false [defined in src/limbo/kernel/kernel.hpp]
+- double noise = 0.01 [defined in src/limbo/kernel/kernel.hpp]
+
 kernel_maternthreehalves
 ^^^^^^^^^^^^^^^^^^^^^^^^
 - double sigma_sq = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]
@@ -46,11 +51,11 @@ stop_maxiterations
 
 opt_rprop
 ^^^^^^^^^
+- double eps_stop = 0.0 [defined in src/limbo/opt/rprop.hpp]
 - int iterations = 300 [defined in src/limbo/opt/rprop.hpp]
 
 bayes_opt_boptimizer
 ^^^^^^^^^^^^^^^^^^^^
-- double noise = 1e-6 [defined in src/limbo/bayes_opt/boptimizer.hpp]
 - int hp_period = -1 [defined in src/limbo/bayes_opt/boptimizer.hpp]
 
 kernel_maternfivehalves
@@ -64,10 +69,11 @@ opt_nloptnograd
 
 bayes_opt_imgpo
 ^^^^^^^^^^^^^^^
-- double noise = 1e-6 [defined in src/limbo/experimental/bayes_opt/imgpo.hpp]
+- bool hp_opt = false [defined in src/limbo/experimental/bayes_opt/imgpo.hpp]
 
 opt_parallelrepeater
 ^^^^^^^^^^^^^^^^^^^^
+- double epsilon = 1e-2 [defined in src/limbo/opt/parallel_repeater.hpp]
 - int repeats = 10 [defined in src/limbo/opt/parallel_repeater.hpp]
 
 opt_cmaes
@@ -98,7 +104,6 @@ kernel_squared_exp_ard
 
 bayes_opt_cboptimizer
 ^^^^^^^^^^^^^^^^^^^^^
-- double noise = 1e-6 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]
 - bool bounded = true [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]
 - int hp_period = -1 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]
 

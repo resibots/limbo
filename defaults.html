@@ -28,7 +28,7 @@
 
   
     <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
-        <link rel="next" title="Frequently Asked Questions" href="faq.html"/>
+        <link rel="next" title="Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries" href="benchmarks.html"/>
         <link rel="prev" title="API" href="api.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Default values</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kernel">kernel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#kernel-maternthreehalves">kernel_maternthreehalves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-eci">acqui_eci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bayes-opt-bobase">bayes_opt_bobase</a></li>
@@ -144,6 +145,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#init-randomsampling">init_randomsampling</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -200,6 +202,13 @@
             
   <div class="section" id="default-values">
 <h1>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="kernel">
+<h2>kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>bool optimize_noise = false [defined in src/limbo/kernel/kernel.hpp]</li>
+<li>double noise = 0.01 [defined in src/limbo/kernel/kernel.hpp]</li>
+</ul>
+</div>
 <div class="section" id="kernel-maternthreehalves">
 <h2>kernel_maternthreehalves<a class="headerlink" href="#kernel-maternthreehalves" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -265,13 +274,13 @@
 <div class="section" id="opt-rprop">
 <h2>opt_rprop<a class="headerlink" href="#opt-rprop" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>double eps_stop = 0.0 [defined in src/limbo/opt/rprop.hpp]</li>
 <li>int iterations = 300 [defined in src/limbo/opt/rprop.hpp]</li>
 </ul>
 </div>
 <div class="section" id="bayes-opt-boptimizer">
 <h2>bayes_opt_boptimizer<a class="headerlink" href="#bayes-opt-boptimizer" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>double noise = 1e-6 [defined in src/limbo/bayes_opt/boptimizer.hpp]</li>
 <li>int hp_period = -1 [defined in src/limbo/bayes_opt/boptimizer.hpp]</li>
 </ul>
 </div>
@@ -291,12 +300,13 @@
 <div class="section" id="bayes-opt-imgpo">
 <h2>bayes_opt_imgpo<a class="headerlink" href="#bayes-opt-imgpo" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>double noise = 1e-6 [defined in src/limbo/experimental/bayes_opt/imgpo.hpp]</li>
+<li>bool hp_opt = false [defined in src/limbo/experimental/bayes_opt/imgpo.hpp]</li>
 </ul>
 </div>
 <div class="section" id="opt-parallelrepeater">
 <h2>opt_parallelrepeater<a class="headerlink" href="#opt-parallelrepeater" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>double epsilon = 1e-2 [defined in src/limbo/opt/parallel_repeater.hpp]</li>
 <li>int repeats = 10 [defined in src/limbo/opt/parallel_repeater.hpp]</li>
 </ul>
 </div>
@@ -337,7 +347,6 @@
 <div class="section" id="bayes-opt-cboptimizer">
 <h2>bayes_opt_cboptimizer<a class="headerlink" href="#bayes-opt-cboptimizer" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>double noise = 1e-6 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
 <li>bool bounded = true [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
 <li>int hp_period = -1 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
 </ul>
@@ -401,7 +410,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="benchmarks.html" class="btn btn-neutral float-right" title="Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="api.html" class="btn btn-neutral" title="API" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
