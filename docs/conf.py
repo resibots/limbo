@@ -58,14 +58,14 @@ master_doc = 'index'
 # General information about the project.
 project = u'limbo'
 copyright = u'2014-2015, UPMC/Inria'
-author = u'Jean-Baptiste Mouret, Antoine Cully'
+author = u'Jean-Baptiste Mouret, Antoine Cully, Konstantinos Chatzilygeroudis'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '0.0'
+version = '1.0'
 # The full version, including alpha/beta/rc tags.
 release = '0.1'
 

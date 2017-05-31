@@ -233,7 +233,7 @@ def build_docs(ctx):
     retcode = subprocess.call(s, shell=True, env=None)
     print("generating HTML doc with versioning...")
     print("to install sphinx-versioning: sudo pip3 install git+https://github.com/resibots/sphinxcontrib-versioning.git@resibots-theme")
-    s = 'sphinx-versioning build --whitelist-branches "(master|release-*)" docs docs/_build/html'
+    s = 'sphinx-versioning -v build --whitelist-branches "(master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
