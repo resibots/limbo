@@ -63,7 +63,7 @@ namespace limbo {
           Exponential kernel (see :cite:`brochu2010tutorial` p. 9).
 
           .. math::
-              k(v_1, v_2)  = \sigma^2\exp \Big(-\frac{1}{l^2} ||v_1 - v_2||^2\Big)
+              k(v_1, v_2)  = \sigma^2\exp \Big(-\frac{||v_1 - v_2||^2}{2l^2}\Big)
 
           Parameters:
             - ``double sigma_sq`` (signal variance)
