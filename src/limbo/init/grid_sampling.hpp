@@ -71,7 +71,7 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction, typename Opt>
             void operator()(const StateFunction& seval, const AggregatorFunction&, Opt& opt) const
             {
-                _explore(0, seval, Eigen::VectorXd::Constant(StateFunction::dim_in, 0), opt);
+                _explore(0, seval, Eigen::VectorXd::Constant(StateFunction::dim_in(), 0), opt);
             }
 
         private:

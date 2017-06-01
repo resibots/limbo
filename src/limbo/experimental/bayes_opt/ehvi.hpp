@@ -107,7 +107,7 @@ namespace limbo {
                     acqui_optimizer_t inner_opt;
 
                     while (this->_samples.size() == 0 || !this->_stop(*this, FirstElem())) {
-                        this->template update_pareto_model<EvalFunction::dim_in>();
+                        this->template update_pareto_model<EvalFunction::dim_in()>();
                         this->update_pareto_data();
 
                         // copy in the ehvi structure to compute expected improvement
