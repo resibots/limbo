@@ -18,6 +18,8 @@ env:
   matrix:
     # Test python3
     - LIBCMAES=ON NLOPT=ON TBB=ON EXPERIMENTAL=OFF SFERES=OFF PYTHON=python3
+    # Test LAPACK/BLAS
+    - LIBCMAES=ON NLOPT=ON TBB=ON EXPERIMENTAL=OFF SFERES=OFF PYTHON=python2 EIGEN33=ON LAPACKE=--lapacke_blas
     # Eigen3.3
     - LIBCMAES=ON NLOPT=ON TBB=ON EXPERIMENTAL=OFF SFERES=OFF PYTHON=python2 EIGEN33=ON
     - LIBCMAES=ON NLOPT=ON TBB=OFF EXPERIMENTAL=OFF SFERES=OFF PYTHON=python2 EIGEN33=ON
@@ -73,5 +75,5 @@ install:
 
 # Change this to your needs
 script:
-  - if [ "$SFERES" = "OFF" ]; then $PYTHON ./waf configure ; else $PYTHON ./waf configure --sferes=$CI_HOME/sferes2 ; fi
+  - if [ "$SFERES" = "OFF" ]; then $PYTHON ./waf configure $LAPACKE ; else $PYTHON ./waf configure --sferes=$CI_HOME/sferes2 ; fi
   - if [ "$EXPERIMENTAL" = "OFF" ]; then $PYTHON ./waf --tests --alltests -v ; else $PYTHON ./waf --experimental ; fi

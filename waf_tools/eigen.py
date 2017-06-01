@@ -59,6 +59,7 @@ from waflib.Configure import conf
 
 def options(opt):
 	opt.add_option('--eigen', type='string', help='path to eigen', dest='eigen')
+	opt.add_option('--lapacke_blas', action='store_true', help='enable lapacke/blas if found (required Eigen>=3.3)', dest='lapacke_blas')
 
 
 @conf
@@ -73,33 +74,56 @@ def check_eigen(conf):
 		res = conf.find_file('Eigen/Core', includes_check)
 		incl = res[:-len('Eigen/Core')-1]
 		conf.env.INCLUDES_EIGEN = [incl]
-		p1 = subprocess.Popen(["cat", incl+"/Eigen/src/Core/util/Macros.h"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		p2 = subprocess.Popen(["grep", "#define EIGEN_WORLD_VERSION"], stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		p1.stdout.close()
-		out1, err = p2.communicate()
-		p1 = subprocess.Popen(["cat", incl+"/Eigen/src/Core/util/Macros.h"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		p2 = subprocess.Popen(["grep", "#define EIGEN_MAJOR_VERSION"], stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		p1.stdout.close()
-		out2, err = p2.communicate()
-		world_version = int(out1.strip()[-1])
-		major_version = int(out2.strip()[-1])
-		if world_version == 3 and major_version >= 3:
-			# Check for lapacke and blas
-			extra_libs = ['/usr/lib', '/usr/local/lib']
-			blas_libs = ['blas', 'openblas']
-			try:
+		conf.end_msg('ok')
+		if conf.options.lapacke_blas:
+			conf.start_msg('Checking for LAPACKE/BLAS')
+			p1 = subprocess.Popen(["cat", incl+"/Eigen/src/Core/util/Macros.h"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+			p2 = subprocess.Popen(["grep", "#define EIGEN_WORLD_VERSION"], stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+			p1.stdout.close()
+			out1, err = p2.communicate()
+			p1 = subprocess.Popen(["cat", incl+"/Eigen/src/Core/util/Macros.h"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+			p2 = subprocess.Popen(["grep", "#define EIGEN_MAJOR_VERSION"], stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+			p1.stdout.close()
+			out2, err = p2.communicate()
+			world_version = int(out1.strip()[-1])
+			major_version = int(out2.strip()[-1])
+			if world_version == 3 and major_version >= 3:
+				# Check for lapacke and blas
+				extra_libs = ['/usr/lib', '/usr/local/lib']
+				blas_libs = ['blas', 'openblas']
 				blas_lib = ''
 				for b in blas_libs:
-					conf.find_file('lib'+b+'.so', extra_libs)
+					try:
+						conf.find_file('lib'+b+'.so', extra_libs)
+					except:
+						continue
 					blas_lib = b
 					break
-				conf.find_file('liblapacke.so', extra_libs)
-				conf.env.DEFINES_EIGEN = ['EIGEN_USE_LAPACKE', 'EIGEN_USE_BLAS']
-				conf.env.LIBPATH_EIGEN = extra_libs
-				conf.env.LIB_EIGEN = ['lapacke', blas_lib]
-			except:
-				pass
-		conf.end_msg('ok')
+				lapacke = False
+				try:
+					conf.find_file('liblapacke.so', extra_libs)
+					lapacke = True
+				except:
+					lapacke = False
+				if lapacke or blas_lib != '':
+					conf.env.DEFINES_EIGEN = []
+					conf.env.LIBPATH_EIGEN = extra_libs
+					conf.env.LIB_EIGEN = []
+					conf.end_msg('ok')
+				elif lapacke:
+					conf.end_msg('Found only LAPACKE', 'YELLOW')
+				elif blas_lib != '':
+					conf.end_msg('Found only BLAS', 'YELLOW')
+				else:
+					conf.end_msg('Not found', 'RED')
+				if lapacke:
+					conf.env.DEFINES_EIGEN.append('EIGEN_USE_LAPACKE')
+					conf.env.LIB_EIGEN.append('lapacke')
+				if blas_lib != '':
+					conf.env.DEFINES_EIGEN.append('EIGEN_USE_BLAS')
+					conf.env.LIB_EIGEN.append(blas_lib)
+			else:
+				conf.end_msg('LAPACKE/BLAS can be used only with Eigen>=3.3', 'RED')
 	except:
 		conf.end_msg('Not found', 'RED')
 	return 1
