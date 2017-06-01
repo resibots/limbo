@@ -58,7 +58,11 @@ namespace limbo {
     namespace defaults {
         struct opt_rprop {
             /// @ingroup opt_defaults
+            /// number of max iterations
             BO_PARAM(int, iterations, 300);
+
+            /// gradient norm epsilon for stopping
+            BO_PARAM(double, eps_stop, 0.0);
         };
     }
     namespace opt {
@@ -78,14 +82,15 @@ namespace limbo {
             template <typename F>
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
-                // params
+                assert(Params::opt_rprop::eps_stop() >= 0.);
+
                 size_t param_dim = init.size();
                 double delta0 = 0.1;
                 double deltamin = 1e-6;
                 double deltamax = 50;
                 double etaminus = 0.5;
                 double etaplus = 1.2;
-                double eps_stop = 0.0;
+                double eps_stop = Params::opt_rprop::eps_stop();
 
                 Eigen::VectorXd delta = Eigen::VectorXd::Ones(param_dim) * delta0;
                 Eigen::VectorXd grad_old = Eigen::VectorXd::Zero(param_dim);
