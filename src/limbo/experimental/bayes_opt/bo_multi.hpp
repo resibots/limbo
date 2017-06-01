@@ -57,6 +57,8 @@
 #ifndef USE_TBB
 #define NO_PARALLEL
 #endif
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
 #include <sferes/phen/parameters.hpp>
 #include <sferes/gen/evo_float.hpp>
 #ifdef USE_TBB
