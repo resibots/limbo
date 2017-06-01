@@ -48,6 +48,9 @@
 
 #include <Eigen/Core>
 
+#include <limbo/bayes_opt/bo_base.hpp>
+#include <limbo/experimental/tools/pareto.hpp>
+
 #ifndef USE_SFERES
 #warning No sferes
 #else
@@ -62,9 +65,6 @@
 #include <sferes/modif/dummy.hpp>
 #include <sferes/ea/nsga2.hpp>
 #endif
-
-#include <limbo/bayes_opt/bo_base.hpp>
-#include <limbo/experimental/tools/pareto.hpp>
 
 namespace limbo {
     namespace experimental {

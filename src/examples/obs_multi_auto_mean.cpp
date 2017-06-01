@@ -195,7 +195,7 @@ struct fit_eval {
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
-        Eigen::VectorXd res(dim_out);
+        Eigen::VectorXd res(2);
         res(0) = 0;
         res(1) = 0;
         for (int i = 0; i < x.size(); i++) {
