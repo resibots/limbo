@@ -49,8 +49,8 @@ The basic layout of your ``main.cpp`` file should look like this:
 
     template <typename Params>
     struct eval_func {
-      static constexpr int dim_in = sample_dimensions;
-      static constexpr int dim_out = output_dimensions;
+      BO_PARAM(size_t, dim_in, sample_dimensions);
+      BO_PARAM(size_t, dim_out, output_dimensions);
       // Here we define the evaluation function
     };
 

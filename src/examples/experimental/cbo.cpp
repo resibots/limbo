@@ -93,9 +93,9 @@ struct Params {
 };
 
 struct cosine {
-    static constexpr size_t dim_in = 1;
-    static constexpr size_t dim_out = 1;
-    static constexpr size_t nb_constraints = 1;
+    BO_PARAM(size_t, dim_in, 1);
+    BO_PARAM(size_t, dim_out, 1);
+    BO_PARAM(size_t, nb_constraints, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {

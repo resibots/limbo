@@ -91,8 +91,8 @@ inline Eigen::VectorXd t_osz(const Eigen::VectorXd& x)
 }
 
 struct Sphere {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     double operator()(const Eigen::VectorXd& x) const
     {
@@ -111,8 +111,8 @@ struct Sphere {
 };
 
 struct Ellipsoid {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     double operator()(const Eigen::VectorXd& x) const
     {
@@ -120,8 +120,8 @@ struct Ellipsoid {
         opt << 0.5, 0.5;
         Eigen::VectorXd z = t_osz(x - opt);
         double r = 0;
-        for (size_t i = 0; i < dim_in; ++i)
-            r += std::pow(10, ((double)i) / (dim_in - 1.0)) * z(i) * z(i) + 1;
+        for (size_t i = 0; i < dim_in(); ++i)
+            r += std::pow(10, ((double)i) / (dim_in() - 1.0)) * z(i) * z(i) + 1;
         return r;
     }
 
@@ -134,14 +134,14 @@ struct Ellipsoid {
 };
 
 struct Rastrigin {
-    static constexpr size_t dim_in = 4;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 4);
+    BO_PARAM(size_t, dim_out, 1);
 
     double operator()(const Eigen::VectorXd& x) const
     {
-        double f = 10 * dim_in;
-        for (size_t i = 0; i < dim_in; ++i)
-            f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));
+        double f = 10 * dim_in();
+        for (size_t i = 0; i < dim_in(); ++i)
+            f += x(i) * x(i) - 10 * std::cos(2 * M_PI * x(i));
         return f;
     }
 
@@ -156,8 +156,8 @@ struct Rastrigin {
 
 // see : http://www.sfu.ca/~ssurjano/hart3.html
 struct Hartmann3 {
-    static constexpr size_t dim_in = 3;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 3);
+    BO_PARAM(size_t, dim_out, 1);
 
     double operator()(const Eigen::VectorXd& x) const
     {
@@ -190,8 +190,8 @@ struct Hartmann3 {
 
 // see : http://www.sfu.ca/~ssurjano/hart6.html
 struct Hartmann6 {
-    static constexpr size_t dim_in = 6;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 6);
+    BO_PARAM(size_t, dim_out, 1);
 
     double operator()(const Eigen::VectorXd& x) const
     {
@@ -228,8 +228,8 @@ struct Hartmann6 {
 // see : http://www.sfu.ca/~ssurjano/goldpr.html
 // (with ln, as suggested in Jones et al.)
 struct GoldsteinPrice {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     double operator()(const Eigen::VectorXd& xx) const
     {
@@ -250,8 +250,8 @@ struct GoldsteinPrice {
 };
 
 struct BraninNormalized {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     double operator()(const Eigen::VectorXd& x) const
     {
@@ -271,8 +271,9 @@ struct BraninNormalized {
 };
 
 struct SixHumpCamel {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
+
     double operator()(const Eigen::VectorXd& x) const
     {
         double x1 = -3 + 6 * x(0);
@@ -302,8 +303,8 @@ struct SixHumpCamel {
 template <typename Function>
 class Benchmark {
 public:
-    static constexpr size_t dim_in = Function::dim_in;
-    static constexpr size_t dim_out = Function::dim_out;
+    BO_PARAM(size_t, dim_in, Function::dim_in());
+    BO_PARAM(size_t, dim_out, Function::dim_out());
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {

@@ -54,8 +54,8 @@ Then, we have to define the evaluation function for the optimizer to call:
    :linenos:
    :lines: 98-112
 
-It is required that the evaluation struct has the static members ``dim_in`` and ``dim_out``, specifying the input and output dimensions.
-Also, it should have the ``operator()`` expecting a ``const Eigen::VectorXd&`` of size ``dim_in``, and return another one, of size ``dim_out``.
+It is required that the evaluation struct has the static function members ``dim_in()`` and ``dim_out()``, specifying the input and output dimensions.
+Also, it should have the ``operator()`` expecting a ``const Eigen::VectorXd&`` of size ``dim_in()``, and return another one, of size ``dim_out()``.
 
 With this, we can declare the main function:
 

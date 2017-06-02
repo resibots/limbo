@@ -109,10 +109,10 @@ template <typename Optimizer, typename Function>
 void benchmark(const std::string& name)
 {
     int iters_base = 250;
-    DirectParams::opt_nloptnograd::set_iterations(static_cast<int>(iters_base * Function::dim_in * 0.9));
-    BobyqaParams::opt_nloptnograd::set_iterations(iters_base * Function::dim_in - DirectParams::opt_nloptnograd::iterations());
+    DirectParams::opt_nloptnograd::set_iterations(static_cast<int>(iters_base * Function::dim_in() * 0.9));
+    BobyqaParams::opt_nloptnograd::set_iterations(iters_base * Function::dim_in() - DirectParams::opt_nloptnograd::iterations());
 
-    BobyqaParams_HP::opt_nloptnograd::set_iterations(10 * Function::dim_in * Function::dim_in);
+    BobyqaParams_HP::opt_nloptnograd::set_iterations(10 * Function::dim_in() * Function::dim_in());
 
     auto t1 = std::chrono::steady_clock::now();
     Optimizer opt;

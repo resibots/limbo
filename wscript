@@ -59,6 +59,7 @@ import os
 import subprocess
 import limbo
 import inspect
+from waflib import Logs
 from waflib.Build import BuildContext
 
 def options(opt):
@@ -114,7 +115,7 @@ def configure(conf):
                 common_flags = "-Wall -std=c++11"
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
-            opt_flags = " -O3 -g"
+            opt_flags = " -O3 -g -mavx -mfma -march=native"
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \
@@ -131,31 +132,32 @@ def configure(conf):
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
-        print 'CXXFLAGS:', conf.env['CXXFLAGS']
+        Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
-                        print 'configuring for exp: ' + i
+                        Logs.pprint('NORMAL', 'configuring for exp: %s' % i)
                         conf.recurse('exp/' + i)
         conf.recurse('src/benchmarks')
-        print ''
-        print 'WHAT TO DO NOW?'
-        print '---------------'
-        print '[users] To compile Limbo (inc. unit tests): ./waf build'
-        print '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo'
-        print '[developers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
-        print '[developers] To compile the benchmarks: ./waf build_benchmarks'
-        print '[developers] To compile the extensive tests: ./waf build_extensive_tests'
+        Logs.pprint('NORMAL', '')
+        Logs.pprint('NORMAL', 'WHAT TO DO NOW?')
+        Logs.pprint('NORMAL', '---------------')
+        Logs.pprint('NORMAL', '[users] To compile Limbo: ./waf build')
+        Logs.pprint('NORMAL', '[users] To compile and run unit tests: ./waf --tests')
+        Logs.pprint('NORMAL', '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo')
+        Logs.pprint('NORMAL', '[developers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf docs')
+        Logs.pprint('NORMAL', '[developers] To compile the benchmarks: ./waf build_benchmark')
+        Logs.pprint('NORMAL', '[developers] To compile the extensive tests: ./waf build_extensive_tests')
 
 
 def build(bld):
     if bld.options.write_params:
         limbo.write_default_params(bld.options.write_params)
-        print 'default parameters written in ' + bld.options.write_params
+        Logs.pprint('NORMAL', 'default parameters written in %s' % bld.options.write_params)
     bld.recurse('src/')
     if bld.options.exp:
         for i in bld.options.exp.split(','):
-            print 'Building exp: ' + i
+            Logs.pprint('NORMAL', 'Building exp: %d' % i)
             bld.recurse('exp/' + i)
             limbo.output_params('exp/'+i)
     bld.add_post_fun(limbo.summary)
@@ -171,7 +173,7 @@ def run_extensive_tests(ctx):
     for fullname in glob.glob('build/src/tests/combinations/*'):
         if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
             fpath, fname = os.path.split(fullname)
-            print "Running: " + fname
+            Logs.pprint('NORMAL', 'Running: %s' % fname)
             s = "cd " + fpath + "; ./" + fname
             retcode = subprocess.call(s, shell=True, env=None)
 
@@ -181,7 +183,7 @@ def submit_extensive_tests(ctx):
             fpath, fname = os.path.split(fullname)
             s = "cd " + fpath + ";oarsub -l /nodes=1/core=2,walltime=00:15:00 -n " + fname + " -O " + fname + ".stdout.%jobid%.log -E " + fname + ".stderr.%jobid%.log ./" + fname
             retcode = subprocess.call(s, shell=True, env=None)
-            print "oarsub returned:" + str(retcode)
+            Logs.pprint('NORMAL', 'oarsub returned: %s' % str(retcode))
 
 def run_benchmark(ctx):
     HEADER='\033[95m'
@@ -190,7 +192,7 @@ def run_benchmark(ctx):
     try:
         os.makedirs(res_dir)
     except:
-        print "WARNING, dir:" + res_dir + " not be created"
+        Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created!' % res_dir)
     for fullname in glob.glob('build/src/benchmarks/*'):
         if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
             fpath, fname = os.path.split(fullname)
@@ -198,7 +200,7 @@ def run_benchmark(ctx):
             try:
                 os.makedirs(directory)
             except:
-                print "WARNING, dir:" + directory + " not be created, the new results will be concatenated to the old ones"
+                Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created, the new results will be concatenated to the old ones' % directory)
             s = "cp " + fullname + " " + directory
             retcode = subprocess.call(s, shell=True, env=None)
             if ctx.options.nb_rep:
@@ -206,7 +208,7 @@ def run_benchmark(ctx):
             else:
                 nb_rep = 10
             for i in range(0,nb_rep):
-                print HEADER+" Running: " + fname + " for the "+str(i)+"th time"+NC
+                Logs.pprint('NORMAL', '%s Running: %s for the %s th time %s' % (HEADER, fname, str(i), NC))
                 s="cd " + directory +";./" + fname
                 retcode = subprocess.call(s, shell=True, env=None)
 
@@ -226,9 +228,9 @@ def insert_license(ctx):
     limbo.insert_license()
 
 def build_docs(ctx):
-    print 'extracting default params...'
+    Logs.pprint('NORMAL', 'extracting default params...')
     limbo.write_default_params('docs/defaults.rst')
-    print "generating HTML doc..."
+    Logs.pprint('NORMAL', 'generating HTML doc...')
     s = "cd docs; make html"
     retcode = subprocess.call(s, shell=True, env=None)
 

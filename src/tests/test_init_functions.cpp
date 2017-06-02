@@ -95,8 +95,8 @@ struct Params {
 };
 
 struct fit_eval {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
