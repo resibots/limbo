@@ -157,7 +157,7 @@ def build(bld):
     bld.recurse('src/')
     if bld.options.exp:
         for i in bld.options.exp.split(','):
-            Logs.pprint('NORMAL', 'Building exp: %d' % i)
+            Logs.pprint('NORMAL', 'Building exp: %s' % i)
             bld.recurse('exp/' + i)
             limbo.output_params('exp/'+i)
     bld.add_post_fun(limbo.summary)
