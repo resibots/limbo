@@ -115,7 +115,7 @@ def configure(conf):
                 common_flags = "-Wall -std=c++11"
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
-            opt_flags = " -O3 -g"
+            opt_flags = " -O3 -g -mavx -mfma -march=native"
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \

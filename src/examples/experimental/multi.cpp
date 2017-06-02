@@ -118,8 +118,8 @@ struct Params {
 #endif
 
 struct zdt1 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    static constexpr size_t dim_out = 2;
+    BO_PARAM(size_t, dim_in, ZDT_DIM);
+    BO_PARAM(size_t, dim_out, 2);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -137,8 +137,8 @@ struct zdt1 {
 };
 
 struct zdt2 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    static constexpr size_t dim_out = 2;
+    BO_PARAM(size_t, dim_in, ZDT_DIM);
+    BO_PARAM(size_t, dim_out, 2);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -156,8 +156,8 @@ struct zdt2 {
 };
 
 struct zdt3 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    static constexpr size_t dim_out = 2;
+    BO_PARAM(size_t, dim_in, ZDT_DIM);
+    BO_PARAM(size_t, dim_out, 2);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -175,8 +175,8 @@ struct zdt3 {
 };
 
 struct mop2 {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 2;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 2);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {

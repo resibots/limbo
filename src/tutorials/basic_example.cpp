@@ -98,9 +98,9 @@ struct Params {
 
 struct Eval {
     // number of input dimension (x.size())
-    static constexpr size_t dim_in = 1;
+    BO_PARAM(size_t, dim_in, 1);
     // number of dimenions of the result (res.size())
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_out, 1);
 
     // the function to be optimized
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const

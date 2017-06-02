@@ -58,7 +58,7 @@ namespace limbo {
                 {
                     opt.update_pareto_data();
 #ifndef NSBO // this is already done is NSBO
-                    opt.template update_pareto_model<F::dim_in>();
+                    opt.template update_pareto_model<F::dim_in()>();
 #endif
                     auto dir = opt.res_dir() + "/";
                     auto p_model = opt.pareto_model();

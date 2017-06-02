@@ -148,8 +148,8 @@ namespace limbo {
                 template <typename StateFunction, typename AggregatorFunction = FirstElem>
                 void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
                 {
-                    _nb_constraints = StateFunction::nb_constraints;
-                    _dim_out = StateFunction::dim_out;
+                    _nb_constraints = StateFunction::nb_constraints();
+                    _dim_out = StateFunction::dim_out();
 
                     this->_init(sfun, afun, reset);
 
@@ -160,9 +160,9 @@ namespace limbo {
                             _constraint_model.compute(this->_samples, _obs[1]);
                     }
                     else {
-                        _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
+                        _model = model_t(StateFunction::dim_in(), StateFunction::dim_out());
                         if (_nb_constraints > 0)
-                            _constraint_model = constraint_model_t(StateFunction::dim_in, _nb_constraints);
+                            _constraint_model = constraint_model_t(StateFunction::dim_in(), _nb_constraints);
                     }
 
                     acqui_optimizer_t acqui_optimizer;
@@ -172,7 +172,7 @@ namespace limbo {
 
                         auto acqui_optimization =
                             [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun,g); };
-                        Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in, Params::bayes_opt_cboptimizer::bounded());
+                        Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in(), Params::bayes_opt_cboptimizer::bounded());
                         Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, Params::bayes_opt_cboptimizer::bounded());
                         this->eval_and_add(sfun, new_sample);
 

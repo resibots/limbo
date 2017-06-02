@@ -50,6 +50,8 @@
 #include <algorithm>
 
 #ifdef USE_TBB
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
 #include <tbb/concurrent_vector.h>
 #include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>

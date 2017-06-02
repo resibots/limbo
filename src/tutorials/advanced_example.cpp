@@ -150,8 +150,8 @@ protected:
 
 template <typename Params>
 struct eval_func {
-    static constexpr int dim_in = 6;
-    static constexpr int dim_out = 2;
+    BO_PARAM(size_t, dim_in, 6);
+    BO_PARAM(size_t, dim_out, 2);
 
     eval_func() {}
 

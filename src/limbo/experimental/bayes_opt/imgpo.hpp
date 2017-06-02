@@ -99,12 +99,12 @@ namespace limbo {
                         _init_tree(h_upper);
 
                     // Init model
-                    _model = model_t(StateFunction::dim_in, StateFunction::dim_out);
+                    _model = model_t(StateFunction::dim_in(), StateFunction::dim_out());
 
                     // Init root
-                    _tree[0].x_max.push_back(Eigen::VectorXd::Ones(StateFunction::dim_in));
-                    _tree[0].x_min.push_back(Eigen::VectorXd::Zero(StateFunction::dim_in));
-                    _tree[0].x.push_back(Eigen::VectorXd::Ones(StateFunction::dim_in) * 0.5);
+                    _tree[0].x_max.push_back(Eigen::VectorXd::Ones(StateFunction::dim_in()));
+                    _tree[0].x_min.push_back(Eigen::VectorXd::Zero(StateFunction::dim_in()));
+                    _tree[0].x.push_back(Eigen::VectorXd::Ones(StateFunction::dim_in()) * 0.5);
                     _tree[0].f.push_back(sfun(_tree[0].x[0]));
                     _tree[0].leaf.push_back(true);
                     _tree[0].samp.push_back(true);
