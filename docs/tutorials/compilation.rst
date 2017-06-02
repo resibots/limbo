@@ -46,7 +46,7 @@ Optional but highly recommended
 Optional
 +++++++++++++
 * `Intel MKL <https://software.intel.com/en-us/intel-mkl>`_ is supported as backend for Eigen. In our experience, it provided best results when compiling with Intel's Compiler (ICC)
-* `LAPACKE/BLAS <http://www.netlib.org/lapack/lapacke.html>`_ is supported as a backed for Eigen (`version>=3.3 <https://eigen.tuxfamily.org/dox/TopicUsingBlasLapack.html>`_). In our experience, it gives high speed-ups with **big** matrices (i.e., more than 1200 dimensions) and hurts a bit the performance with **small** matrices (i.e., less than 800 dimensions). You can enable LAPACKE/BLAS by using the ``--lapacke_blas`` option (if you have Eigen3.3 or later).
+* `LAPACKE/BLAS <http://www.netlib.org/lapack/lapacke.html>`_ is supported as a backend for Eigen (`version>=3.3 <https://eigen.tuxfamily.org/dox/TopicUsingBlasLapack.html>`_). In our experience, it gives high speed-ups with **big** matrices (i.e., more than 1200 dimensions) and hurts a bit the performance with **small** matrices (i.e., less than 800 dimensions). You can enable LAPACKE/BLAS by using the ``--lapacke_blas`` option (if you have Eigen3.3 or later).
 * `Sferes2 <https://github.com/sferes2/sferes2>`_ if you plan to use the multi-objective bayesian optimization algorithms (experimental).
 
 Compilation
