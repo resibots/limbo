@@ -33,11 +33,20 @@ Optional but highly recommended
     sudo make
     sudo cp *.a /usr/lib
 
+  In addition, you should be careful to configure **libcmaes** to use the same Eigen3 version as what you intend to use with Limbo (configuring with Makefiles)::
+
+    ./configure --with-eigen3-include=YOUR_DESIRED_DIR/include/eigen3
+
+  or (configure with CMake)::
+
+    cmake -DEIGEN3_INCLUDE_DIR=YOUR_DESIRED_DIR/include/eigen3 ..
+
 * `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
 
 Optional
 +++++++++++++
 * `Intel MKL <https://software.intel.com/en-us/intel-mkl>`_ is supported as backend for Eigen. In our experience, it provided best results when compiling with Intel's Compiler (ICC)
+* `LAPACKE/BLAS <http://www.netlib.org/lapack/lapacke.html>`_ is supported as a backed for Eigen (`version>=3.3 <https://eigen.tuxfamily.org/dox/TopicUsingBlasLapack.html>`_). In our experience, it gives high speed-ups with **big** matrices (i.e., more than 1200 dimensions) and hurts a bit the performance with **small** matrices (i.e., less than 800 dimensions). You can enable LAPACKE/BLAS by using the ``--lapacke_blas`` option (if you have Eigen3.3 or later).
 * `Sferes2 <https://github.com/sferes2/sferes2>`_ if you plan to use the multi-objective bayesian optimization algorithms (experimental).
 
 Compilation
