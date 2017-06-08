@@ -242,8 +242,8 @@ namespace limbo {
                     this->_compute_alpha();
             }
 
-            // compute likelihood
-            double compute_lik() const
+            // compute loglikelihood
+            double compute_log_lik() const
             {
                 size_t n = _obs_mean.rows();
                 // --- cholesky ---
@@ -255,6 +255,21 @@ namespace limbo {
                                .trace(); // generalization for multi dimensional observation
                 // std::cout << " a: " << a << " det: " << det << std::endl;
                 return -0.5 * a - 0.5 * det - 0.5 * n * log(2 * M_PI);
+            }
+
+            // compute likelihood
+            double compute_lik() const
+            {
+                int n = _obs_mean.rows();
+
+                // --- cholesky ---
+                const Eigen::TriangularView<const Eigen::MatrixXd, Eigen::Lower> triang = _matrixL.template triangularView<Eigen::Lower>();
+                long double sqrt_det = triang.determinant();
+
+                double a = (_obs_mean.transpose() * _alpha)
+                               .trace(); // generalization for multi dimensional observation
+                // std::cout << " a: " << a << " square root of det: " << sqrt_det << std::endl;
+                return std::exp(-0.5 * a) / sqrt_det / std::pow(std::sqrt(2 * M_PI), n);
             }
 
             /// return the likelihood (do not compute it!)

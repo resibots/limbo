@@ -229,11 +229,21 @@ namespace spt {
             return multi_sg;
         }
 
-        double compute_lik() const
+        double compute_log_lik() const
         {
             double lik_all = 0.0;
             for (auto gp : _gps) {
-                lik_all += gp.compute_lik();
+                lik_all += gp.compute_log_lik();
+            }
+
+            return lik_all;
+        }
+
+        double compute_lik() const
+        {
+            double lik_all = 1.0;
+            for (auto gp : _gps) {
+                lik_all *= gp.compute_lik();
             }
 
             return lik_all;
