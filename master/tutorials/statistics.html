@@ -1,0 +1,652 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Statistics / Writing results &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Add External Library" href="external_libs.html"/>
+        <link rel="prev" title="Advanced Example" href="advanced_example.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Statistics / Writing results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#writing-your-own-statistics-class">Writing your own statistics class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization Sub-API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Tutorials</a> &raquo;</li>
+    
+    <li>Statistics / Writing results</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/tutorials/statistics.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="statistics-writing-results">
+<h1>Statistics / Writing results<a class="headerlink" href="#statistics-writing-results" title="Permalink to this headline">¶</a></h1>
+<p>Statistics are functors that are called at the end of each iteration of the Bayesian optimizer. Their job is to:</p>
+<ul class="simple">
+<li>write the results to files;</li>
+<li>write the current state of the optimization;</li>
+<li>write the data that are useful for your own analyses.</li>
+</ul>
+<p>All the statistics are written in a directory called <code class="docutils literal"><span class="pre">hostname_date_pid-number</span></code>. For instance: <code class="docutils literal"><span class="pre">wallepro-perso.loria.fr_2016-05-13_16_16_09_72226</span></code></p>
+<p>Limbo provides a few classes for common uses (see <a class="reference internal" href="../api.html#statistics-stats"><span class="std std-ref">Statistics (stats)</span></a> for details):</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">ConsoleSummary</span></code>: writes a summary to <code class="docutils literal"><span class="pre">std::cout</span></code> at each iteration of the algorithm</li>
+<li><code class="docutils literal"><span class="pre">AggregatedObservations</span></code>: records the value of each evaluation of the function (after aggregation) [filename <code class="docutils literal"><span class="pre">aggregated_observations.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">BestAggregatedObservations</span></code>: records the best value observed so far after each iteration [filename <code class="docutils literal"><span class="pre">aggregated_observations.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">Observations</span></code>: records the value of each evaluation of the function (before aggregation) [filename: <code class="docutils literal"><span class="pre">observations.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">Samples</span></code>: records the position in the search space of the evaluated points [filename: <code class="docutils literal"><span class="pre">samples.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">BestObservations</span></code>: records the best observation after each iteration? [filename <code class="docutils literal"><span class="pre">best_observations.dat</span></code>]</li>
+<li><code class="docutils literal"><span class="pre">BestSamples</span></code>: records the position in the search space of the best observation after each iteration [filename: <code class="docutils literal"><span class="pre">best_samples.dat</span></code>]</li>
+</ul>
+<p>These statistics are for “advanced users”:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">GPAcquisitions</span></code></li>
+<li><code class="docutils literal"><span class="pre">GPKernelHParams</span></code></li>
+<li><code class="docutils literal"><span class="pre">GPLikelihood</span></code></li>
+<li><code class="docutils literal"><span class="pre">GPMeanHParams</span></code></li>
+</ul>
+<p>The default statistics list is:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">AggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="writing-your-own-statistics-class">
+<h2>Writing your own statistics class<a class="headerlink" href="#writing-your-own-statistics-class" title="Permalink to this headline">¶</a></h2>
+<p>Limbo only provides generic statistics classes. However, it is often useful to add user-defined statistics classes that are specific to a particular experiment.</p>
+<p>All the statistics functors follow the same template:</p>
+<div class="code c++ highlight-c++"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nl">Samples</span> <span class="p">:</span> <span class="k">public</span> <span class="n">limbo</span><span class="o">::</span><span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="c1">// code</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>In a few words, they take a <cite>BO</cite> object (instance of the Bayesian optimizer) and do what they want.</p>
+<p>For instance, we could add a statistics class that writes the worst observation at each iteration. Here is how to write this functor:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nl">WorstObservation</span> <span class="p">:</span> <span class="k">public</span> <span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// [optional] if statistics have been disabled or if there are no observations, we do not do anything</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bo</span><span class="p">.</span><span class="n">stats_enabled</span><span class="p">()</span> <span class="o">||</span> <span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">empty</span><span class="p">())</span>
+            <span class="k">return</span><span class="p">;</span>
+
+        <span class="c1">// [optional] we create a file to write / you can use your own file but remember that this method is called at each iteration (you need to create it in the constructor)</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_create_log_file</span><span class="p">(</span><span class="n">bo</span><span class="p">,</span> <span class="s">&quot;worst_observations.dat&quot;</span><span class="p">);</span>
+
+        <span class="c1">// [optional] we add a header to the file to make it easier to read later</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bo</span><span class="p">.</span><span class="n">total_iterations</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_log_file</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;#iteration worst_observation sample&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+        <span class="c1">// ----- search for the worst observation ----</span>
+        <span class="c1">// 1. get the aggregated observations</span>
+        <span class="k">auto</span> <span class="n">rewards</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">begin</span><span class="p">(),</span> <span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">end</span><span class="p">(),</span> <span class="n">rewards</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">afun</span><span class="p">);</span>
+        <span class="c1">// 2. search for the worst element</span>
+        <span class="k">auto</span> <span class="n">min_e</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min_element</span><span class="p">(</span><span class="n">rewards</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">rewards</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="k">auto</span> <span class="n">min_obs</span> <span class="o">=</span> <span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">()[</span><span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">rewards</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">min_e</span><span class="p">)];</span>
+        <span class="k">auto</span> <span class="n">min_sample</span> <span class="o">=</span> <span class="n">bo</span><span class="p">.</span><span class="n">samples</span><span class="p">()[</span><span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">rewards</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">min_e</span><span class="p">)];</span>
+
+        <span class="c1">// ----- write what we have found ------</span>
+        <span class="c1">// the file is (*this-&gt;_log_file)</span>
+        <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_log_file</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">bo</span><span class="p">.</span><span class="n">total_iterations</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">min_obs</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">min_sample</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>In order to configure the Bayesian optimizer to use our new statistics class, we first need to define a new statistics list which includes our new <cite>WorstObservation</cite>:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// define a special list of statistics which include our new statistics class</span>
+    <span class="k">using</span> <span class="n">stat_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">stat</span><span class="o">::</span><span class="n">Observations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">WorstObservation</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Then, we use it to define the optimizer:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="n">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The full source code is available in <cite>src/tutorials/statistics.cpp</cite> and reproduced here:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;limbo/limbo.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+    <span class="p">};</span>
+
+<span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
+<span class="cp">#ifdef USE_NLOPT</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#elif defined(USE_LIBCMAES)</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#else</span>
+    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="cp">#endif</span>
+
+    <span class="c1">// enable / disable the writing of the result files</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_bobase</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_bobase</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="c1">// no noise</span>
+    <span class="k">struct</span> <span class="nl">kernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="k">struct</span> <span class="nl">kernel_exp</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_exp</span> <span class="p">{</span>
+    <span class="p">};</span>
+
+    <span class="c1">// we use 10 random samples to initialize the algorithm</span>
+    <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="c1">// we stop after 40 iterations</span>
+    <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="c1">// we use the default parameters for acqui_ucb</span>
+    <span class="k">struct</span> <span class="nl">acqui_ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_ucb</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
+    <span class="c1">// number of input dimension (x.size())</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_in</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// number of dimenions of the result (res.size())</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="c1">// the function to be optimized</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="c1">// we return a 1-dimensional vector</span>
+        <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nl">WorstObservation</span> <span class="p">:</span> <span class="k">public</span> <span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// [optional] if statistics have been disabled or if there are no observations, we do not do anything</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">bo</span><span class="p">.</span><span class="n">stats_enabled</span><span class="p">()</span> <span class="o">||</span> <span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">empty</span><span class="p">())</span>
+            <span class="k">return</span><span class="p">;</span>
+
+        <span class="c1">// [optional] we create a file to write / you can use your own file but remember that this method is called at each iteration (you need to create it in the constructor)</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">_create_log_file</span><span class="p">(</span><span class="n">bo</span><span class="p">,</span> <span class="s">&quot;worst_observations.dat&quot;</span><span class="p">);</span>
+
+        <span class="c1">// [optional] we add a header to the file to make it easier to read later</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bo</span><span class="p">.</span><span class="n">total_iterations</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_log_file</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;#iteration worst_observation sample&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+        <span class="c1">// ----- search for the worst observation ----</span>
+        <span class="c1">// 1. get the aggregated observations</span>
+        <span class="k">auto</span> <span class="n">rewards</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">begin</span><span class="p">(),</span> <span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">().</span><span class="n">end</span><span class="p">(),</span> <span class="n">rewards</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">afun</span><span class="p">);</span>
+        <span class="c1">// 2. search for the worst element</span>
+        <span class="k">auto</span> <span class="n">min_e</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min_element</span><span class="p">(</span><span class="n">rewards</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">rewards</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="k">auto</span> <span class="n">min_obs</span> <span class="o">=</span> <span class="n">bo</span><span class="p">.</span><span class="n">observations</span><span class="p">()[</span><span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">rewards</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">min_e</span><span class="p">)];</span>
+        <span class="k">auto</span> <span class="n">min_sample</span> <span class="o">=</span> <span class="n">bo</span><span class="p">.</span><span class="n">samples</span><span class="p">()[</span><span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">rewards</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">min_e</span><span class="p">)];</span>
+
+        <span class="c1">// ----- write what we have found ------</span>
+        <span class="c1">// the file is (*this-&gt;_log_file)</span>
+        <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">_log_file</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">bo</span><span class="p">.</span><span class="n">total_iterations</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">min_obs</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">min_sample</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// we use the default acquisition function / model / stat / etc.</span>
+
+    <span class="c1">// define a special list of statistics which include our new statistics class</span>
+    <span class="k">using</span> <span class="n">stat_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">stat</span><span class="o">::</span><span class="n">Observations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">WorstObservation</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+    <span class="c1">/// remmeber to use the new statistics vector via statsfun&lt;&gt;!</span>
+    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="n">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+
+    <span class="c1">// run the evaluation</span>
+    <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">Eval</span><span class="p">());</span>
+
+    <span class="c1">// the best sample found</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Best sample: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_sample</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; - Best observation: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_observation</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="external_libs.html" class="btn btn-neutral float-right" title="Add External Library" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="advanced_example.html" class="btn btn-neutral" title="Advanced Example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../v1.0.0/tutorials/statistics.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../doc_versioning/tutorials/statistics.html">doc_versioning</a></dd>
+            <dd><a href="statistics.html">master</a></dd>
+            <dd><a href="../../release-1.0/tutorials/statistics.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

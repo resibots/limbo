@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parameters &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Guides" href="index.html"/>
+        <link rel="next" title="API" href="../api.html"/>
+        <link rel="prev" title="Using Limbo as an environment for scientific experiments" href="framework.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bo.html">Introduction to Bayesian Optimization (BO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="limbo_concepts.html">Limbo-specific concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework.html">Using Limbo as an environment for scientific experiments</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-parameters">Default parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dynamic-parameters">Dynamic parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arrays">Arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-sets-of-parameters">Multiple sets of parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Guides</a> &raquo;</li>
+    
+    <li>Parameters</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/guides/parameters.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parameters">
+<h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
+<p>Bayesian Optimization algorithms, acquisition functions, etc. all have many parameters. The traditionnal approach is to use a configuration file (e.g. XML, or json, .ini, …). However,  each time a developer adds a parameter, some code has to be added to parse the configuration file: there is often more code to parse and check the configuration file than <em>real code</em> (that is, code that actually does something). As a result, scientists often either skip this part until they have  “final” version of their code (often, never), or do it in a “quick and dirty way” (e.g. without checking the syntax, without checking that the parameter value is in the right range, etc.).</p>
+<p>Put differently, using a configuration file is nice for the user, but not for the developer. Since <strong>limbo</strong> is targeted to scientists who want to <em>easily</em> test  new code, we need a way to separate parameters from code that do not require any boilerplate code.</p>
+<p>In <strong>limbo</strong>, every class takes a structure (usually called <code class="docutils literal"><span class="pre">Params</span></code>) that contains the parameters. By doing so, we rely on the compiler to check the types, and we require very little work to separate parameters values from algorithms.</p>
+<p>From the user’s point of view, this looks like this:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="n">acqui_ucb</span> <span class="p">{</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+<span class="c1">// ...</span>
+<span class="c1">// ... instantiate an optimizer:</span>
+<span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">opt</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>(do not forget the semi-colons!). This structure says that the value of the parameter <code class="docutils literal"><span class="pre">alpha</span></code> for the class “UCB” is <code class="docutils literal"><span class="pre">0.1</span></code>.</p>
+<p>In the UCB class, the value can be accessed like this:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">Params</span><span class="o">::</span><span class="n">acqui_ucb</span><span class="o">::</span><span class="n">alpha</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>No need to write any parsing code!</p>
+<div class="section" id="default-parameters">
+<h2>Default parameters<a class="headerlink" href="#default-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Many limbo classes provide default parameters. To use them, the parameter sub-structure has to inherit from the default structure:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="nl">acqui_ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_ucb</span> <span class="p">{</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>That way, the <code class="docutils literal"><span class="pre">acqui_ucb::alpha()</span></code> exists, but with the default value.</p>
+</div>
+<div class="section" id="dynamic-parameters">
+<h2>Dynamic parameters<a class="headerlink" href="#dynamic-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, we need to define parameters that can be changed at runtime. In that case, we can use a <code class="docutils literal"><span class="pre">BO_DYN_PARAM</span></code> instead of a <code class="docutils literal"><span class="pre">BO_PARAM</span></code>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="k">struct</span> <span class="n">acqui_ucb</span> <span class="p">{</span>
+    <span class="n">BO_DYN_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>However, for dynamic parameters, we need to call <code class="docutils literal"><span class="pre">BO_DECLARE_DYN_PARAM</span></code> in our <code class="docutils literal"><span class="pre">.cpp</span></code> file (typically, just before the main function):</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">BO_DECLARE_DYN_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">Params</span><span class="o">::</span><span class="n">acqui_ucb</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Dynamic parameters are not thread-safe! (standard parameters are thread safe and add no overhead – they are equivalent to writing a constant).</p>
+</div>
+</div>
+<div class="section" id="arrays">
+<h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
+<p>Last, we can also use arrays, Eigen vectors, and strings as follows:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">test</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">BO_DYN_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+        <span class="n">BO_PARAM_ARRAY</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">);</span>
+        <span class="n">BO_PARAM_VECTOR</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">);</span>
+        <span class="n">BO_PARAM_STRING</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s">&quot;e&quot;</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="n">BO_DECLARE_DYN_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">Params</span><span class="o">::</span><span class="n">test</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>All these macros are defined in <code class="docutils literal"><span class="pre">tools/macros.hpp</span></code>.</p>
+</div>
+<div class="section" id="multiple-sets-of-parameters">
+<h2>Multiple sets of parameters<a class="headerlink" href="#multiple-sets-of-parameters" title="Permalink to this headline">¶</a></h2>
+<p>In some rare cases, you may have 2 different instances of the same algorithm, for example, if you choose to use the same optimizer for the acquisition optimization and the GP hyperparametrs optimization.  In such cases, you may also wish to set different parameters for each instance. This can be easily accomplished in the following way:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="c1">// All the other parameters</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">ParamsAcquiOpt</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">opt_cmaes</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">restarts</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ParamsGPOpt</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">opt_cmaes</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">restarts</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Then, when declaring the types to use:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Acqui_opt_t</span> <span class="o">=</span> <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsAcquiOpt</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">Gp_opt_t</span> <span class="o">=</span> <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsGPOpt</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">using</span> <span class="n">Kernel_t</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">::</span><span class="n">MaternFiveHalfs</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">Mean_t</span> <span class="o">=</span> <span class="n">mean</span><span class="o">::</span><span class="n">Data</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">GP_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Kernel_t</span><span class="p">,</span> <span class="n">Mean_t</span><span class="p">,</span> <span class="n">model</span><span class="o">::</span><span class="n">gp</span><span class="o">::</span><span class="n">KernelLFOpt</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Gp_opt_t</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">Acqui_t</span> <span class="o">=</span> <span class="n">acqui</span><span class="o">::</span><span class="n">UCB</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">GP_t</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="n">GP_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="n">Acqui_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquiopt</span><span class="o">&lt;</span><span class="n">Acqui_opt_t</span><span class="o">&gt;&gt;</span> <span class="n">opt</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../api.html" class="btn btn-neutral float-right" title="API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="framework.html" class="btn btn-neutral" title="Using Limbo as an environment for scientific experiments" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../v1.0.0/guides/parameters.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../doc_versioning/guides/parameters.html">doc_versioning</a></dd>
+            <dd><a href="parameters.html">master</a></dd>
+            <dd><a href="../../release-1.0/guides/parameters.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

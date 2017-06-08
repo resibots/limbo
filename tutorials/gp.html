@@ -25,8 +25,13 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
         <link rel="next" title="Optimization Sub-API" href="opt.html"/>
@@ -106,11 +111,8 @@
 
             
             
-                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
-<ul class="simple">
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
@@ -118,7 +120,7 @@
 <li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Gaussian Process</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Gaussian Process</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#data">Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hyper-parameter-optimization">Hyper-parameter optimization</a></li>
@@ -129,7 +131,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -177,7 +178,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="../_sources/tutorials/gp.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/tutorials/gp.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -189,7 +190,7 @@
             
   <div class="section" id="gaussian-process">
 <span id="gp-tutorial"></span><h1>Gaussian Process<a class="headerlink" href="#gaussian-process" title="Permalink to this headline">¶</a></h1>
-<p>Limbo relies on our C++-11 implementation of Gaussian processes (See <a class="reference internal" href="../guides/bo.html#gaussian-process"><span>Gaussian Process</span></a> for a short introduction ) which can be useful by itself. This tutorial explains how to create and use a Gaussian Process (GP).</p>
+<p>Limbo relies on our C++-11 implementation of Gaussian processes (See <a class="reference internal" href="../guides/bo.html#gaussian-process"><span class="std std-ref">Gaussian Process</span></a> for a short introduction ) which can be useful by itself. This tutorial explains how to create and use a Gaussian Process (GP).</p>
 <div class="section" id="data">
 <h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
 <p>We assume that our samples are in a vector called <code class="docutils literal"><span class="pre">samples</span></code> and that our observations are in a vector called <code class="docutils literal"><span class="pre">observations</span></code>. Please note that the type of both observations and samples is Eigen::VectorXd (in this example, they are 1-D vectors).</p>
@@ -202,7 +203,7 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// our data (1-D inputs, 1-D outputs)</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// our data (1-D inputs, 1-D outputs)</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;</span> <span class="n">samples</span><span class="p">;</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&gt;</span> <span class="n">observations</span><span class="p">;</span>
 
@@ -231,7 +232,7 @@
 11
 12
 13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="n">kernel_exp</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">sigma_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">);</span>
@@ -251,7 +252,7 @@
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// the type of the GP</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// the type of the GP</span>
     <span class="k">using</span> <span class="n">Kernel_t</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">::</span><span class="n">Exp</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="k">using</span> <span class="n">Mean_t</span> <span class="o">=</span> <span class="n">mean</span><span class="o">::</span><span class="n">Data</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="k">using</span> <span class="n">GP_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">Kernel_t</span><span class="p">,</span> <span class="n">Mean_t</span><span class="o">&gt;</span><span class="p">;</span>
@@ -266,7 +267,7 @@
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// 1-D inputs, 1-D outputs</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// 1-D inputs, 1-D outputs</span>
     <span class="n">GP_t</span> <span class="nf">gp</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
     <span class="c1">// compute the GP</span>
@@ -290,7 +291,7 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">v</span> <span class="o">=</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">).</span><span class="n">array</span><span class="p">()</span> <span class="o">*</span> <span class="mf">4.0</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">;</span>
         <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">mu</span><span class="p">;</span>
         <span class="kt">double</span> <span class="n">sigma</span><span class="p">;</span>
@@ -305,14 +306,14 @@
 </div>
 <div class="section" id="hyper-parameter-optimization">
 <h2>Hyper-parameter optimization<a class="headerlink" href="#hyper-parameter-optimization" title="Permalink to this headline">¶</a></h2>
-<p>Most kernel functions have some parameters. It is common in the GP literature to set them by maximizing the log-likelihood of the data knowing the model (see <a class="reference internal" href="../guides/bo.html#gaussian-process"><span>Gaussian Process</span></a> for a description of this concept).</p>
+<p>Most kernel functions have some parameters. It is common in the GP literature to set them by maximizing the log-likelihood of the data knowing the model (see <a class="reference internal" href="../guides/bo.html#gaussian-process"><span class="std std-ref">Gaussian Process</span></a> for a description of this concept).</p>
 <p>In limbo, only a subset of the kernel functions can have their hyper-parameters optimized. The most common one is <code class="docutils literal"><span class="pre">SquaredExpARD</span></code> (Squared Exponential with Automatic Relevance Determination).</p>
 <p>A new GP type is defined as follows:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// an alternative is to optimize the hyper-paramerers</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// an alternative is to optimize the hyper-paramerers</span>
     <span class="c1">// in that case, we need a kernel with hyper-parameters that are designed to be optimized</span>
     <span class="k">using</span> <span class="n">Kernel2_t</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">::</span><span class="n">SquaredExpARD</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="k">using</span> <span class="n">Mean_t</span> <span class="o">=</span> <span class="n">mean</span><span class="o">::</span><span class="n">Data</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
@@ -323,7 +324,7 @@
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="k">struct</span> <span class="nl">kernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel</span> <span class="p">{</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">struct</span> <span class="nl">kernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel</span> <span class="p">{</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
     <span class="p">};</span>
@@ -332,7 +333,7 @@
 <p>After calling the <code class="docutils literal"><span class="pre">compute()</span></code> method, the hyper-parameters can be optimized by calling the <code class="docutils literal"><span class="pre">optimize_hyperparams()</span></code> function. The GP does not need to be recomputed and we pass <code class="docutils literal"><span class="pre">false</span></code> for the last parameter in <code class="docutils literal"><span class="pre">compute()</span></code> as we do not need to compute the kernel matrix again (it will be recomputed in the hyper-parameters optimization).</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// do not forget to call the optimization!</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// do not forget to call the optimization!</span>
     <span class="n">gp_ard</span><span class="p">.</span><span class="n">compute</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">observations</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
     <span class="n">gp_ard</span><span class="p">.</span><span class="n">optimize_hyperparams</span><span class="p">();</span>
 </pre></div>
@@ -398,7 +399,7 @@
 54
 55
 56
-57</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">glob</span>
+57</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">brewer2mpl</span>
 
@@ -458,7 +459,7 @@
 </pre></div>
 </td></tr></table></div>
 <p>Here is the complete <code class="docutils literal"><span class="pre">main.cpp</span></code> file of this tutorial:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;limbo/kernel/squared_exp_ard.hpp&gt;</span><span class="cp"></span>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;limbo/kernel/squared_exp_ard.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;limbo/mean/data.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;limbo/model/gp.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;limbo/model/gp/kernel_lf_opt.hpp&gt;</span><span class="cp"></span>
@@ -606,7 +607,26 @@
     </section>
 
   </div>
-  
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/tutorials/gp.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../doc_versioning/tutorials/gp.html">doc_versioning</a></dd>
+            <dd><a href="../master/tutorials/gp.html">master</a></dd>
+            <dd><a href="../release-1.0/tutorials/gp.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -623,7 +643,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

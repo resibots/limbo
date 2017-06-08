@@ -25,8 +25,13 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
         <link rel="next" title="Add External Library" href="external_libs.html"/>
@@ -106,17 +111,14 @@
 
             
             
-                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
-<ul class="simple">
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Statistics / Writing results</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Statistics / Writing results</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#writing-your-own-statistics-class">Writing your own statistics class</a></li>
 </ul>
 </li>
@@ -127,7 +129,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -175,7 +176,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="../_sources/tutorials/statistics.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/tutorials/statistics.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -194,7 +195,7 @@
 <li>write the data that are useful for your own analyses.</li>
 </ul>
 <p>All the statistics are written in a directory called <code class="docutils literal"><span class="pre">hostname_date_pid-number</span></code>. For instance: <code class="docutils literal"><span class="pre">wallepro-perso.loria.fr_2016-05-13_16_16_09_72226</span></code></p>
-<p>Limbo provides a few classes for common uses (see <a class="reference internal" href="../api.html#statistics-stats"><span>Statistics (stats)</span></a> for details):</p>
+<p>Limbo provides a few classes for common uses (see <a class="reference internal" href="../api.html#statistics-stats"><span class="std std-ref">Statistics (stats)</span></a> for details):</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">ConsoleSummary</span></code>: writes a summary to <code class="docutils literal"><span class="pre">std::cout</span></code> at each iteration of the algorithm</li>
 <li><code class="docutils literal"><span class="pre">AggregatedObservations</span></code>: records the value of each evaluation of the function (after aggregation) [filename <code class="docutils literal"><span class="pre">aggregated_observations.dat</span></code>]</li>
@@ -204,7 +205,7 @@
 <li><code class="docutils literal"><span class="pre">BestObservations</span></code>: records the best observation after each iteration? [filename <code class="docutils literal"><span class="pre">best_observations.dat</span></code>]</li>
 <li><code class="docutils literal"><span class="pre">BestSamples</span></code>: records the position in the search space of the best observation after each iteration [filename: <code class="docutils literal"><span class="pre">best_samples.dat</span></code>]</li>
 </ul>
-<p>These statistics are for &#8220;advanced users&#8221;:</p>
+<p>These statistics are for “advanced users”:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">GPAcquisitions</span></code></li>
 <li><code class="docutils literal"><span class="pre">GPKernelHParams</span></code></li>
@@ -212,7 +213,7 @@
 <li><code class="docutils literal"><span class="pre">GPMeanHParams</span></code></li>
 </ul>
 <p>The default statistics list is:</p>
-<div class="highlight-c++"><div class="highlight"><pre><span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">AggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">AggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
   <span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span>
 </pre></div>
 </div>
@@ -220,7 +221,7 @@
 <h2>Writing your own statistics class<a class="headerlink" href="#writing-your-own-statistics-class" title="Permalink to this headline">¶</a></h2>
 <p>Limbo only provides generic statistics classes. However, it is often useful to add user-defined statistics classes that are specific to a particular experiment.</p>
 <p>All the statistics functors follow the same template:</p>
-<div class="code c++ highlight-c++"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<div class="code c++ highlight-c++"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nl">Samples</span> <span class="p">:</span> <span class="k">public</span> <span class="n">limbo</span><span class="o">::</span><span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span><span class="p">)</span>
@@ -261,7 +262,7 @@
 27
 28
 29
-30</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nl">WorstObservation</span> <span class="p">:</span> <span class="k">public</span> <span class="n">stat</span><span class="o">::</span><span class="n">StatBase</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">)</span>
@@ -298,7 +299,7 @@
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// define a special list of statistics which include our new statistics class</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// define a special list of statistics which include our new statistics class</span>
     <span class="k">using</span> <span class="n">stat_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="n">stat</span><span class="o">::</span><span class="n">Observations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
@@ -306,7 +307,7 @@
 </pre></div>
 </td></tr></table></div>
 <p>Then, we use it to define the optimizer:</p>
-<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="n">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="n">stat_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
 </pre></div>
 </td></tr></table></div>
 <p>The full source code is available in <cite>src/tutorials/statistics.cpp</cite> and reproduced here:</p>
@@ -424,7 +425,7 @@
 112
 113
 114
-115</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+115</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;limbo/limbo.hpp&gt;</span><span class="cp"></span>
 
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
@@ -475,9 +476,9 @@
 
 <span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
     <span class="c1">// number of input dimension (x.size())</span>
-    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_in</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_in</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
     <span class="c1">// number of dimenions of the result (res.size())</span>
-    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
     <span class="c1">// the function to be optimized</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
@@ -596,7 +597,26 @@
     </section>
 
   </div>
-  
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/tutorials/statistics.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../doc_versioning/tutorials/statistics.html">doc_versioning</a></dd>
+            <dd><a href="../master/tutorials/statistics.html">master</a></dd>
+            <dd><a href="../release-1.0/tutorials/statistics.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -613,7 +633,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

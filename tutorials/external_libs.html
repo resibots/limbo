@@ -25,8 +25,13 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
         <link rel="next" title="Gaussian Process" href="gp.html"/>
@@ -106,18 +111,15 @@
 
             
             
-                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
-<ul class="simple">
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Add External Library</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Add External Library</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#add-external-library-to-the-wscript-of-your-experiment">Add external library to the wscript of your experiment</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#check-for-headers">Check for headers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#check-for-lib-files">Check for lib files</a></li>
@@ -133,7 +135,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -181,7 +182,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="../_sources/tutorials/external_libs.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/tutorials/external_libs.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -199,15 +200,15 @@
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>to activate this script, you need to activate your experiment <strong>when configuring limbo</strong>:</p>
-<div class="last highlight-python"><div class="highlight"><pre>./waf configure --exp your_exp
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">waf</span> <span class="n">configure</span> <span class="o">--</span><span class="n">exp</span> <span class="n">your_exp</span>
 </pre></div>
 </div>
 </div>
 <p>This new file should have the following structure:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># encoding: utf-8</span>
 
-<span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="kn">import</span> <span class="n">conf</span>
+<span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="k">import</span> <span class="n">conf</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
@@ -221,7 +222,7 @@
 </div>
 <p>Where <code class="docutils literal"><span class="pre">check_if_libname_exists</span></code> is replaced with logic to find our library, as explained later. If the library is optional, the <code class="docutils literal"><span class="pre">conf.fatal</span></code> line can be removed.</p>
 <p>Then add the following lines in the <code class="docutils literal"><span class="pre">wscript</span></code>:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># imports, etc, ...</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># imports, etc, ...</span>
 
 <span class="c1"># we assume that the configuration file is saved as libname.py</span>
 <span class="kn">import</span> <span class="nn">libname</span>
@@ -234,11 +235,11 @@
 <span class="c1"># rest of code</span>
 </pre></div>
 </div>
-<p>Libraries usually have the headers and the lib files in two different directories. However, header-only libraries only have includes, in this case, you can ignore the following section named &#8220;Check for lib files&#8221;.</p>
+<p>Libraries usually have the headers and the lib files in two different directories. However, header-only libraries only have includes, in this case, you can ignore the following section named “Check for lib files”.</p>
 <div class="section" id="check-for-headers">
 <h3>Check for headers<a class="headerlink" href="#check-for-headers" title="Permalink to this headline">¶</a></h3>
 <p>To check for the headers of the library, you can add the following code to the <code class="docutils literal"><span class="pre">check_libname</span></code> function:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># previous code</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># previous code</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
@@ -247,8 +248,8 @@
     <span class="k">try</span><span class="p">:</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s1">&#39;Checking for libname includes&#39;</span><span class="p">)</span>
       <span class="c1"># include_files is a list with the headers we expect to find</span>
-      <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">include_files</span><span class="p">:</span>
-        <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">include_files</span><span class="p">:</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">includes_check</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">INCLUDES_LIBNAME</span> <span class="o">=</span> <span class="n">includes_check</span>
     <span class="k">except</span><span class="p">:</span>
@@ -263,7 +264,7 @@
 <div class="section" id="check-for-lib-files">
 <h3>Check for lib files<a class="headerlink" href="#check-for-lib-files" title="Permalink to this headline">¶</a></h3>
 <p>To check for the lib files of the library, you can add the following code to the <code class="docutils literal"><span class="pre">check_libname</span></code> function:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># previous code</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># previous code</span>
 
 <span class="nd">@conf</span>
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
@@ -272,8 +273,8 @@
     <span class="k">try</span><span class="p">:</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">start_msg</span><span class="p">(</span><span class="s1">&#39;Checking for libname libs&#39;</span><span class="p">)</span>
       <span class="c1"># lib_files is a list with the lib files we expect to find</span>
-      <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">lib_files</span><span class="p">:</span>
-        <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">lib_files</span><span class="p">:</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">find_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">libs_check</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">end_msg</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">)</span>
       <span class="n">conf</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">LIBPATH_LIBNAME</span> <span class="o">=</span> <span class="n">libs_check</span>
       <span class="c1"># list with the lib names the library has</span>
@@ -289,8 +290,8 @@
 </div>
 <div class="section" id="add-configuration-options">
 <h3>Add configuration options<a class="headerlink" href="#add-configuration-options" title="Permalink to this headline">¶</a></h3>
-<p>Additional configuration options are often needed when adding new libraries. For example, one useful option is to specify the location of the library headers and lib files. Adding options is easy: you only need to define a new function named <code class="docutils literal"><span class="pre">options</span></code> in the <code class="docutils literal"><span class="pre">wscript</span></code> and another one in the library configuration file. In the library&#8217;s configuration file (e.g., <code class="docutils literal"><span class="pre">libname.py</span></code>):</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c1">#imports, etc, ...</span>
+<p>Additional configuration options are often needed when adding new libraries. For example, one useful option is to specify the location of the library headers and lib files. Adding options is easy: you only need to define a new function named <code class="docutils literal"><span class="pre">options</span></code> in the <code class="docutils literal"><span class="pre">wscript</span></code> and another one in the library configuration file. In the library’s configuration file (e.g., <code class="docutils literal"><span class="pre">libname.py</span></code>):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1">#imports, etc, ...</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
     <span class="c1"># add options to the configuration</span>
@@ -301,13 +302,13 @@
 <span class="k">def</span> <span class="nf">check_libname</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
     <span class="c1"># access options</span>
     <span class="k">if</span> <span class="n">conf</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">destination_variable</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
-      <span class="k">print</span> <span class="s1">&#39;destination_variable found&#39;</span>
+      <span class="nb">print</span> <span class="s1">&#39;destination_variable found&#39;</span>
     <span class="c1"># rest of check_libname</span>
 </pre></div>
 </div>
-<p>The options in the waf build system are using the python&#8217;s <code class="docutils literal"><span class="pre">optparse</span></code>. Check the official <a class="reference external" href="https://docs.python.org/2/library/optparse.html">optparse</a> documentation for more information.</p>
+<p>The options in the waf build system are using the python’s <code class="docutils literal"><span class="pre">optparse</span></code>. Check the official <a class="reference external" href="https://docs.python.org/2/library/optparse.html">optparse</a> documentation for more information.</p>
 <p>Then add the following lines in the <code class="docutils literal"><span class="pre">wscript</span></code> of your experiment:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c1"># imports, etc, ...</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># imports, etc, ...</span>
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
     <span class="n">opt</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;libname&#39;</span><span class="p">)</span>
@@ -320,19 +321,19 @@
 </div>
 <div class="section" id="example-add-ros-as-external-library">
 <h2>Example: Add ROS as external library<a class="headerlink" href="#example-add-ros-as-external-library" title="Permalink to this headline">¶</a></h2>
-<p>Here&#8217;s a small and quick example to add <a class="reference external" href="http://www.ros.org/">ROS</a> as an external library to our experiment. We assume the following file structure (where <code class="docutils literal"><span class="pre">main.cpp</span></code> is C++ source code using <strong>limbo</strong> and <strong>ROS</strong>):</p>
-<div class="highlight-python"><div class="highlight"><pre>limbo
-|-- exp
-     |-- example
-          +-- wscript
-          +-- ros.py
-          +-- main.cpp
-|-- src
-...
+<p>Here’s a small and quick example to add <a class="reference external" href="http://www.ros.org/">ROS</a> as an external library to our experiment. We assume the following file structure (where <code class="docutils literal"><span class="pre">main.cpp</span></code> is C++ source code using <strong>limbo</strong> and <strong>ROS</strong>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">limbo</span>
+<span class="o">|--</span> <span class="n">exp</span>
+     <span class="o">|--</span> <span class="n">example</span>
+          <span class="o">+--</span> <span class="n">wscript</span>
+          <span class="o">+--</span> <span class="n">ros</span><span class="o">.</span><span class="n">py</span>
+          <span class="o">+--</span> <span class="n">main</span><span class="o">.</span><span class="n">cpp</span>
+<span class="o">|--</span> <span class="n">src</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <p><strong>wscript:</strong></p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">limbo</span>
 <span class="kn">import</span> <span class="nn">ros</span>
@@ -356,11 +357,11 @@
 </pre></div>
 </div>
 <p><strong>ros.py:</strong></p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="ch">#!/usr/bin/env python</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># encoding: utf-8</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="kn">import</span> <span class="n">conf</span>
+<span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="k">import</span> <span class="n">conf</span>
 
 
 <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
@@ -404,8 +405,8 @@
 </pre></div>
 </div>
 <p>The configuration and compilation of the experiment follows the usual procedure (assuming that we are in the <strong>limbo</strong> root folder):</p>
-<div class="highlight-python"><div class="highlight"><pre>./waf configure --exp example
-./waf --exp example
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">waf</span> <span class="n">configure</span> <span class="o">--</span><span class="n">exp</span> <span class="n">example</span>
+<span class="o">./</span><span class="n">waf</span> <span class="o">--</span><span class="n">exp</span> <span class="n">example</span>
 </pre></div>
 </div>
 </div>
@@ -463,7 +464,26 @@
     </section>
 
   </div>
-  
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/tutorials/external_libs.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../doc_versioning/tutorials/external_libs.html">doc_versioning</a></dd>
+            <dd><a href="../master/tutorials/external_libs.html">master</a></dd>
+            <dd><a href="../release-1.0/tutorials/external_libs.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -480,7 +500,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

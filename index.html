@@ -25,8 +25,13 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="#"/>
         <link rel="next" title="Tutorials" href="tutorials/index.html"/>
 <style type="text/css">
@@ -104,15 +109,11 @@
 
             
             
-                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
-<ul class="simple">
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Limbo&#8217;s documentation</a></li>
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Limbo’s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -154,11 +155,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="#">Limbo</a> &raquo;</li>
     
-    <li>Limbo&#8217;s documentation</li>
+    <li>Limbo’s documentation</li>
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+          <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -169,7 +170,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="limbo-s-documentation">
-<span id="limbo-doc"></span><h1>Limbo&#8217;s documentation<a class="headerlink" href="#limbo-s-documentation" title="Permalink to this headline">¶</a></h1>
+<span id="limbo-doc"></span><h1>Limbo’s documentation<a class="headerlink" href="#limbo-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions. Github page (to report issues and/or help us to improve the library): <a class="reference external" href="http://github.com/resibots/limbo">[Github repository]</a></p>
 <p>The development of Limbo is funded by the <a class="reference external" href="http://www.resibots.eu">ERC project ResiBots</a>.</p>
 <p>Limbo shares many ideas with <a class="reference external" href="http://github.com/sferes2">Sferes2</a>, a similar framework for evolutionary computation.</p>
@@ -186,11 +187,11 @@
 </div>
 <div class="section" id="contents">
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound" id="limbo-bo-library">
+<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Limbo&#8217;s documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Limbo’s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/quick_start.html">Quick Start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/compilation.html">Download and Compilation</a></li>
@@ -226,38 +227,6 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#misc-tools-tools">Misc tools (tools)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel">kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-maternthreehalves">kernel_maternthreehalves</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-eci">acqui_eci</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-bobase">bayes_opt_bobase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ucb-imgpo">acqui_ucb_imgpo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-randomsamplinggrid">init_randomsamplinggrid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#mean-constant">mean_constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-spgp">model_spgp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#stop-maxpredictedvalue">stop_maxpredictedvalue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#stop-maxiterations">stop_maxiterations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-rprop">opt_rprop</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-boptimizer">bayes_opt_boptimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-maternfivehalves">kernel_maternfivehalves</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-nloptnograd">opt_nloptnograd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-imgpo">bayes_opt_imgpo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-parallelrepeater">opt_parallelrepeater</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-cmaes">opt_cmaes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-nloptgrad">opt_nloptgrad</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ei">acqui_ei</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-squared-exp-ard">kernel_squared_exp_ard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-cboptimizer">bayes_opt_cboptimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ucb">acqui_ucb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-gridsampling">init_gridsampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-gridsearch">opt_gridsearch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-exp">kernel_exp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-ehvi">bayes_opt_ehvi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-gp-parego">model_gp_parego</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-gpucb">acqui_gpucb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-randomsampling">init_randomsampling</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="benchmarks.html#bayesopt-c-bayesian-optimization-library">BayesOpt C++ Bayesian Optimization Library</a></li>
 </ul>
@@ -265,8 +234,8 @@
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-waf-and-not-cmake-or-insert-your-favorite-build-system">Why waf (and not Cmake, or &lt;insert your favorite build system&gt;)?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#where-is-the-configuration-file">Where is the configuration file?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#why-am-i-getting-nolfopt-should-never-be-called-assertion-failure">Why am I getting &#8220;&#8216;NoLFOpt&#8217; should never be called!&#8221; assertion failure?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faq.html#why-am-i-getting-xxxlfopt-was-never-called-errors">Why am I getting &#8220;&#8216;XXXLFOpt&#8217; was never called!&#8221; errors?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-am-i-getting-nolfopt-should-never-be-called-assertion-failure">Why am I getting “‘NoLFOpt’ should never be called!” assertion failure?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-am-i-getting-xxxlfopt-was-never-called-errors">Why am I getting “‘XXXLFOpt’ was never called!” errors?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#why-c-11-and-not-insert-your-favorite-language">Why C++11? (and not &lt;insert your favorite language&gt;)?</a></li>
 </ul>
 </li>
@@ -325,7 +294,26 @@
     </section>
 
   </div>
-  
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="v1.0.0/index.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="doc_versioning/index.html">doc_versioning</a></dd>
+            <dd><a href="master/index.html">master</a></dd>
+            <dd><a href="release-1.0/index.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -342,7 +330,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

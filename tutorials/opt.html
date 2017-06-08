@@ -25,8 +25,13 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Tutorials" href="index.html"/>
         <link rel="next" title="Guides" href="../guides/index.html"/>
@@ -106,11 +111,8 @@
 
             
             
-                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
-<ul class="simple">
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
@@ -119,12 +121,11 @@
 <li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Optimization Sub-API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Optimization Sub-API</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -172,7 +173,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="../_sources/tutorials/opt.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/tutorials/opt.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -200,7 +201,7 @@
 6
 7
 8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">// the maximum is [0.5, 0.5] (f([0.5, 0.5] = 0))</span>
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// the maximum is [0.5, 0.5] (f([0.5, 0.5] = 0))</span>
 <span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kt">double</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">).</span><span class="n">square</span><span class="p">().</span><span class="n">sum</span><span class="p">();</span>
@@ -238,7 +239,7 @@
 17
 18
 19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#ifdef USE_NLOPT</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifdef USE_NLOPT</span>
 <span class="k">struct</span> <span class="n">ParamsGrad</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="n">opt_nloptgrad</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
@@ -265,7 +266,7 @@
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// the type of the optimizer (here NLOpt with the LN_LBGFGS algorithm)</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// the type of the optimizer (here NLOpt with the LN_LBGFGS algorithm)</span>
     <span class="n">opt</span><span class="o">::</span><span class="n">NLOptGrad</span><span class="o">&lt;</span><span class="n">ParamsGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">LD_LBFGS</span><span class="o">&gt;</span> <span class="n">lbfgs</span><span class="p">;</span>
     <span class="c1">// we start from a random point (in 2D), and the search is not bounded</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_lbfgs</span> <span class="o">=</span> <span class="n">lbfgs</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
@@ -278,7 +279,7 @@
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// we can also use a gradient-free algorith, like DIRECT</span>
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// we can also use a gradient-free algorith, like DIRECT</span>
     <span class="n">opt</span><span class="o">::</span><span class="n">NLOptNoGrad</span><span class="o">&lt;</span><span class="n">ParamsNoGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">GN_DIRECT</span><span class="o">&gt;</span> <span class="n">direct</span><span class="p">;</span>
     <span class="c1">// we start from a random point (in 2D), and the search is bounded in [0,1]</span>
     <span class="c1">// be careful that DIRECT does not support unbounded search</span>
@@ -290,13 +291,13 @@
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre>    <span class="c1">// or Cmaes</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// or Cmaes</span>
     <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsCMAES</span><span class="o">&gt;</span> <span class="n">cmaes</span><span class="p">;</span>
     <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_cmaes</span> <span class="o">=</span> <span class="n">cmaes</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with CMA-ES:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_cmaes</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div>
-<p>See the <a class="reference internal" href="../api.html#opt-api"><span>API documentation</span></a> for more details.</p>
+<p>See the <a class="reference internal" href="../api.html#opt-api"><span class="std std-ref">API documentation</span></a> for more details.</p>
 <p>Here is the full file.</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -366,7 +367,7 @@
 66
 67
 68
-69</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&lt;limbo/opt.hpp&gt;</span><span class="cp"></span>
+69</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;limbo/opt.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;limbo/tools.hpp&gt;</span><span class="cp"></span>
 
 <span class="c1">// this short tutorial shows how to use the optimization api of limbo (opt::)</span>
@@ -491,7 +492,26 @@
     </section>
 
   </div>
-  
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/tutorials/opt.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../doc_versioning/tutorials/opt.html">doc_versioning</a></dd>
+            <dd><a href="../master/tutorials/opt.html">master</a></dd>
+            <dd><a href="../release-1.0/tutorials/opt.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -508,7 +528,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

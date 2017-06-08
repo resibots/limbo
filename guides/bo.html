@@ -25,8 +25,13 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Guides" href="index.html"/>
         <link rel="next" title="Limbo-specific concepts" href="limbo_concepts.html"/>
@@ -106,14 +111,11 @@
 
             
             
-                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
-<ul class="simple">
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo&#8217;s documentation</a></li>
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Introduction to Bayesian Optimization (BO)</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction to Bayesian Optimization (BO)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#gaussian-process">Gaussian Process</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optimizing-the-hyper-parameters-of-a-gaussian-process">Optimizing the hyper-parameters of a Gaussian process</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#kernel-function">Kernel function</a></li>
@@ -126,7 +128,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -174,7 +175,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="../_sources/guides/bo.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/guides/bo.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -197,7 +198,7 @@
 <div class="math">
 \[P(f(\mathbf{x})|\mathbf{x}) = \mathcal{N}(\mu(\mathbf{x}), \sigma^2(\mathbf{x}))\]</div>
 <p>where <span class="math">\(\mathcal{N}\)</span> denotes the standard normal distribution.</p>
-<p>To estimate <span class="math">\(\mu(\mathbf{x})\)</span> and <span class="math">\(\sigma(\mathbf{x})\)</span>, we need to fit the Gaussian process to the data. To do so, we assume that each observation <span class="math">\(f(\mathbf{\chi})\)</span> is a sample from a normal distribution. If we have a data set made of several observations, that is, <span class="math">\(f(\mathbf{\chi}_1), f(\mathbf{\chi}_2), ..., f(\mathbf{\chi}_t)\)</span>, then the vector <span class="math">\(\left[f(\mathbf{\chi}_1), f(\mathbf{\chi}_2), ..., f(\mathbf{\chi}_t)\right]\)</span> is a sample from a <em>multivariate</em> normal distribution, which is defined by a mean vector and a covariance matrix. A Gaussian process is therefore a generalization of a <span class="math">\(n\)</span>-variate normal distribution, where <span class="math">\(n\)</span> is the number of observations. The covariance matrix is what relates one observation to another: two observations that correspond to nearby values of <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> are likely to be correlated (this is a prior assumption based on the fact that functions tend to be smooth, and is injected into the algorithm via a prior on the likelihood of functions), two observations that correspond to distant values of <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> should not influence each other (i.e. their distributions are not correlated). Put differently, the covariance matrix represents that distant samples are almost uncorrelated and nearby samples are strongly correlated. This covariance matrix is defined via a <em>kernel function</em>, called <span class="math">\(k(\chi_1, \chi_2)\)</span>, which is usually based on the Euclidean distance between <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> (see the &#8220;kernel function&#8221; sub-section below).</p>
+<p>To estimate <span class="math">\(\mu(\mathbf{x})\)</span> and <span class="math">\(\sigma(\mathbf{x})\)</span>, we need to fit the Gaussian process to the data. To do so, we assume that each observation <span class="math">\(f(\mathbf{\chi})\)</span> is a sample from a normal distribution. If we have a data set made of several observations, that is, <span class="math">\(f(\mathbf{\chi}_1), f(\mathbf{\chi}_2), ..., f(\mathbf{\chi}_t)\)</span>, then the vector <span class="math">\(\left[f(\mathbf{\chi}_1), f(\mathbf{\chi}_2), ..., f(\mathbf{\chi}_t)\right]\)</span> is a sample from a <em>multivariate</em> normal distribution, which is defined by a mean vector and a covariance matrix. A Gaussian process is therefore a generalization of a <span class="math">\(n\)</span>-variate normal distribution, where <span class="math">\(n\)</span> is the number of observations. The covariance matrix is what relates one observation to another: two observations that correspond to nearby values of <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> are likely to be correlated (this is a prior assumption based on the fact that functions tend to be smooth, and is injected into the algorithm via a prior on the likelihood of functions), two observations that correspond to distant values of <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> should not influence each other (i.e. their distributions are not correlated). Put differently, the covariance matrix represents that distant samples are almost uncorrelated and nearby samples are strongly correlated. This covariance matrix is defined via a <em>kernel function</em>, called <span class="math">\(k(\chi_1, \chi_2)\)</span>, which is usually based on the Euclidean distance between <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> (see the “kernel function” sub-section below).</p>
 <p>Given a set of observations <span class="math">\(\mathbf{P}_{1:t}=f(\mathbf{\chi}_{1:t})\)</span> and a sampling noise <span class="math">\(\sigma^2_{noise}\)</span> (which is a user-specified parameter), the Gaussian process is computed as follows <a class="reference internal" href="#a-brochu2010tutorial" id="id7">[1]</a><a class="reference internal" href="#a-rasmussen2006" id="id8">[4]</a>:</p>
 <div class="math">
 \[\begin{split}\begin{gathered}
@@ -214,35 +215,35 @@
  \mathbf{k}=\left[ \begin{array}{ c c c c }k(\mathbf{x},\mathbf{\chi}_1) &amp; k(\mathbf{x},\mathbf{\chi}_2) &amp; \cdots &amp; k(\mathbf{x},\mathbf{\chi}_{t}) \end{array} \right]
  \end{array}
 \end{gathered}\end{split}\]</div>
-<p>Our implementation of Bayesian optimization uses this Gaussian process model to search for the maximum  of the unknown objective function <span class="math">\(f(\mathbf{x})\)</span>. It selects the next <span class="math">\(\chi\)</span> to test by selecting the maximum of the <em>acquisition function</em>, which balances exploration &#8211; improving the model in the less explored parts of the search space &#8211; and exploitation &#8211; favoring parts that the models predicts as promising. Once an observation is made, the algorithm updates the Gaussian process to take the new data into account. In classic Bayesian optimization, the Gaussian process is initialized with a constant mean because it is assumed that all the points of the search space are equally likely to be good. The model is progressively refined after each observation.</p>
+<p>Our implementation of Bayesian optimization uses this Gaussian process model to search for the maximum  of the unknown objective function <span class="math">\(f(\mathbf{x})\)</span>. It selects the next <span class="math">\(\chi\)</span> to test by selecting the maximum of the <em>acquisition function</em>, which balances exploration – improving the model in the less explored parts of the search space – and exploitation – favoring parts that the models predicts as promising. Once an observation is made, the algorithm updates the Gaussian process to take the new data into account. In classic Bayesian optimization, the Gaussian process is initialized with a constant mean because it is assumed that all the points of the search space are equally likely to be good. The model is progressively refined after each observation.</p>
 </div>
 <div class="section" id="optimizing-the-hyper-parameters-of-a-gaussian-process">
 <span id="likelihood"></span><h2>Optimizing the hyper-parameters of a Gaussian process<a class="headerlink" href="#optimizing-the-hyper-parameters-of-a-gaussian-process" title="Permalink to this headline">¶</a></h2>
 <p>A GP is fully specified by its mean function <span class="math">\(\mu(\mathbf{x})\)</span> and covariance function <span class="math">\(k(\chi_1, \chi_2)\)</span> (a.k.a. <em>kernell function</em>). Nevertheless, the kernel function often includes some parameters, called <em>hyperparameters</em>, that need to be tuned. For instance, one of the most common kernel is the Squared Exponential covariance function:</p>
 <div class="math">
-\[k_{SE}(\chi_1, \chi_2) = \sigma_f^2 \cdot \exp\left( \frac{\left|\left|\chi_1, \chi_2\right|\right|^2}{2 l^2}  \right)\]</div>
+\[k_{SE}(\chi_1, \chi_2) = \sigma_f^2 \cdot \exp\left( -\frac{\left|\left|\chi_1 - \chi_2\right|\right|^2}{2 l^2}  \right)\]</div>
 <p>For some datasets, it makes sense to hand-tune these parameters (e.g., when there are very few samples). Ideally, our objective should be to learn <span class="math">\(l^2\)</span> (characteristic length scale) and <span class="math">\(\sigma_f^2\)</span> (overall variance).</p>
 <p>A classic way to do so is to maximize the probability of the data given the hyper-parameters <span class="math">\(\mathbf{\vartheta}\)</span> (there are other ways, e.g. cross-validation). We use a log because it makes the optimization simpler and does not change the result.</p>
 <p>The marginal likelihood can be computed as follows:</p>
 <div class="math">
 \[\log p(\mathbf{P}_{1:t}\mid\boldsymbol{\chi}_{1:t},\boldsymbol{\theta})= -\frac{1}{2}(\mathbf{P}_{1:t}-\mu_0)^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mu_0) - \frac{1}{2}\log\mid\mathbf{K}\mid - \frac{n}{2}\log2\pi\]</div>
 <p>where <span class="math">\(\mu_0\)</span> is the mean function (prior).</p>
-<p>Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop), see <a class="reference internal" href="../tutorials/opt.html#opt-tutorial"><span>Optimization Sub-API</span></a> and the <a class="reference internal" href="../api.html#opt-api"><span>the Limbo implementation guide</span></a>.</p>
+<p>Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop), see <a class="reference internal" href="../tutorials/opt.html#opt-tutorial"><span class="std std-ref">Optimization Sub-API</span></a> and the <a class="reference internal" href="../api.html#opt-api"><span class="std std-ref">the Limbo implementation guide</span></a>.</p>
 <p>For more details, see <a class="reference internal" href="#a-rasmussen2006" id="id9">[4]</a> (chapter 5).</p>
 </div>
 <div class="section" id="kernel-function">
 <span id="kernel-functions"></span><h2>Kernel function<a class="headerlink" href="#kernel-function" title="Permalink to this headline">¶</a></h2>
 <p>The kernel function is the covariance function of the Gaussian
-process. It defines the influence of a solution&#8217;s performance on the performance and confidence estimations of
+process. It defines the influence of a solution’s performance on the performance and confidence estimations of
 not-yet-tested solutions that are nearby.</p>
-<p>The Squared Exponential covariance function and the Matern kernel are the most common kernels for Gaussian processes <a class="reference internal" href="#a-brochu2010tutorial" id="id10">[1]</a><a class="reference internal" href="#a-rasmussen2006" id="id11">[4]</a>. Both kernels are variants of the &#8220;bell curve&#8221;. The Matern kernel is more general (it includes the Squared Exponential function as a special case) and  allows us to control not only the distance at which effects become nearly zero (as a function of parameter <span class="math">\(\rho\)</span>), but also the rate at which distance effects decrease (as a function of parameter <span class="math">\(\nu\)</span>).</p>
+<p>The Squared Exponential covariance function and the Matern kernel are the most common kernels for Gaussian processes <a class="reference internal" href="#a-brochu2010tutorial" id="id10">[1]</a><a class="reference internal" href="#a-rasmussen2006" id="id11">[4]</a>. Both kernels are variants of the “bell curve”. The Matern kernel is more general (it includes the Squared Exponential function as a special case) and  allows us to control not only the distance at which effects become nearly zero (as a function of parameter <span class="math">\(\rho\)</span>), but also the rate at which distance effects decrease (as a function of parameter <span class="math">\(\nu\)</span>).</p>
 <p>The Matern kernel function is computed as follows <a class="reference internal" href="#a-matern1960spatial" id="id12">[2]</a><a class="reference internal" href="#a-stein1999interpolation" id="id13">[5]</a> (with <span class="math">\(\nu=5/2\)</span>):</p>
 <div class="math">
 \[\begin{split}\begin{array}{l}
 k(\mathbf{x}_1,\mathbf{x}_2)=\left(1+ \frac{\sqrt{5}d(\mathbf{x}_1,\mathbf{x}_2)}{\rho}+\frac{5d(\mathbf{x}_1,\mathbf{x}_2)^2}{3\rho^2}\right)\exp\left(-\frac{\sqrt{5}d(\mathbf{x}_1,\mathbf{x}_2)}{\rho}\right)\\
 \textrm{where }d(\mathbf{x}_1,\mathbf{x}_2) \textrm{ is the Euclidean distance.}
 \end{array}\end{split}\]</div>
-<p id="acqui-functions">There are other kernel functions in Limbo, and it is easy to define more. See <a class="reference internal" href="../api.html#kernel-api"><span>the Limbo implementation guide</span></a> for the available kernel functions.</p>
+<p id="acqui-functions">There are other kernel functions in Limbo, and it is easy to define more. See <a class="reference internal" href="../api.html#kernel-api"><span class="std std-ref">the Limbo implementation guide</span></a> for the available kernel functions.</p>
 </div>
 <div class="section" id="acquisition-function">
 <h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this headline">¶</a></h2>
@@ -258,7 +259,7 @@ equation for the UCB is:</p>
 <p>Here, the emphasis on exploitation vs. exploration is explicit and easy to adjust. The UCB function can be seen as the maximum value (argmax) across all solutions of the weighted sum of the expected performance (mean of the Gaussian, <span class="math">\(\mu_{t}(\mathbf{x})\)</span>) and of the uncertainty (standard deviation of the Gaussian, <span class="math">\(\sigma_t(\mathbf{x})\)</span>) of each solution. This sum is weighted by the <span class="math">\(\kappa\)</span> factor. With a low <span class="math">\(\kappa\)</span>, the algorithm will choose solutions that are expected to be high-performing. Conversely, with a high <span class="math">\(\kappa\)</span>, the algorithm will focus its search on unexplored areas of the search space that may have high-performing solutions. The
 <span class="math">\(\kappa\)</span> factor enables fine adjustments to the
 exploitation/exploration trade-off of the algorithm.</p>
-<p>There are other acquisition functions in Limbo, and it is easy to define more. See <a class="reference internal" href="../api.html#acqui-api"><span>the Limbo implementation guide</span></a> for the available acquisition functions.</p>
+<p>There are other acquisition functions in Limbo, and it is easy to define more. See <a class="reference internal" href="../api.html#acqui-api"><span class="std std-ref">the Limbo implementation guide</span></a> for the available acquisition functions.</p>
 <hr class="docutils" />
 <p id="bibtex-bibliography-guides/bo-0"><table class="docutils citation" frame="void" id="a-brochu2010tutorial" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -346,7 +347,26 @@ exploitation/exploration trade-off of the algorithm.</p>
     </section>
 
   </div>
-  
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/guides/bo.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../doc_versioning/guides/bo.html">doc_versioning</a></dd>
+            <dd><a href="../master/guides/bo.html">master</a></dd>
+            <dd><a href="../release-1.0/guides/bo.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -363,7 +383,7 @@ exploitation/exploration trade-off of the algorithm.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
