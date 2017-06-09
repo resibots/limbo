@@ -385,6 +385,72 @@ BOOST_AUTO_TEST_CASE(test_gp_check_loo_grad_noise)
     BOOST_CHECK(results.array().sum() < M * e);
 }
 
+BOOST_AUTO_TEST_CASE(test_gp_check_inv_kernel_computation)
+{
+    using namespace limbo;
+
+    using KF_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::FunctionARD<Params, mean::Constant<Params>>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
+
+    GP_t gp(4, 2);
+
+    std::vector<Eigen::VectorXd> observations, samples;
+
+    // Random samples
+    int N = 10;
+
+    for (int i = 0; i < N; i++) {
+        samples.push_back(tools::random_vector(4));
+        Eigen::VectorXd ob(2);
+        ob << std::cos(samples[i](0)), std::sin(samples[i](1));
+        observations.push_back(ob);
+    }
+
+    gp.compute(samples, observations);
+
+    // Check that variable is properly initialized
+    BOOST_CHECK(!gp.inv_kernel_computed());
+
+    // Check that kernel is computed
+    gp.compute_inv_kernel();
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    // Check recompute alternatives
+    gp.recompute(false, false);
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute(true, false);
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute(true, true);
+    BOOST_CHECK(!gp.inv_kernel_computed());
+
+    // Check add_sample
+    gp.compute_inv_kernel();
+    gp.add_sample(samples.back(), observations.back());
+    BOOST_CHECK(!gp.inv_kernel_computed());
+
+    // Check different implicit computations of inverse kernel
+    gp.compute_kernel_grad_log_lik();
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute();
+    BOOST_CHECK(!gp.inv_kernel_computed());
+    gp.compute_mean_grad_log_lik();
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute();
+    BOOST_CHECK(!gp.inv_kernel_computed());
+    gp.compute_log_loo_cv();
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute();
+    BOOST_CHECK(!gp.inv_kernel_computed());
+    gp.compute_kernel_grad_log_loo_cv();
+    BOOST_CHECK(gp.inv_kernel_computed());
+}
+
 BOOST_AUTO_TEST_CASE(test_gp_dim)
 {
     using namespace limbo;

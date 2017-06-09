@@ -66,6 +66,7 @@ namespace limbo {
                     Eigen::VectorXd params = optimizer(optimization, gp.kernel_function().h_params(), false);
                     gp.kernel_function().set_h_params(params);
                     gp.recompute(false);
+                    gp.compute_log_loo_cv();
                 }
 
             protected:
@@ -81,64 +82,12 @@ namespace limbo {
 
                         gp.recompute(false);
 
-                        size_t n = gp.obs_mean().rows();
-
-                        Eigen::MatrixXd l = gp.matrixL();
-
-                        // K^{-1} using Cholesky decomposition
-                        Eigen::MatrixXd w = Eigen::MatrixXd::Identity(n, n);
-
-                        l.template triangularView<Eigen::Lower>().solveInPlace(w);
-                        l.template triangularView<Eigen::Lower>().transpose().solveInPlace(w);
-
-                        // alpha
-                        Eigen::MatrixXd alpha = gp.alpha();
-                        Eigen::VectorXd inv_diag = w.diagonal().array().inverse();
-
-                        double loo = (((-0.5 * (alpha.array().square().array().colwise() * inv_diag.array())).array().colwise() - 0.5 * inv_diag.array().log().array()) - 0.5 * std::log(2 * M_PI)).colwise().sum().sum(); //LOO.rowwise().sum();
-
-                        // double loo_total = 0.0;
-                        // for (int K = 0; K < gp.obs_mean().cols(); K++) {
-                        //     double loo_tmp = (-0.5 * alpha.col(K).array().square() / w.diagonal().array() - 0.5 * w.diagonal().array().inverse().log()).sum() - 0.5 * n * std::log(2 * M_PI);
-                        //     loo_total += loo_tmp;
-                        // }
-                        //
-                        // std::cout << loo << " vs " << loo_total << std::endl;
+                        double loo = gp.compute_log_loo_cv();
 
                         if (!compute_grad)
                             return opt::no_grad(loo);
 
-                        Eigen::VectorXd grad = Eigen::VectorXd::Zero(params.size());
-                        Eigen::MatrixXd grads = Eigen::MatrixXd::Zero(params.size(), gp.obs_mean().cols());
-                        // only compute half of the matrix (symmetrical matrix)
-                        // TO-DO: Make it better
-                        std::vector<std::vector<Eigen::VectorXd>> full_dk;
-                        for (size_t i = 0; i < n; i++) {
-                            full_dk.push_back(std::vector<Eigen::VectorXd>());
-                            for (size_t j = 0; j <= i; j++)
-                                full_dk[i].push_back(gp.kernel_function().grad(gp.samples()[i], gp.samples()[j], i, j));
-                            for (size_t j = i + 1; j < n; j++)
-                                full_dk[i].push_back(Eigen::VectorXd::Zero(params.size()));
-                        }
-
-                        for (size_t i = 0; i < n; i++)
-                            for (size_t j = 0; j < i; ++j)
-                                full_dk[j][i] = full_dk[i][j];
-
-                        for (int j = 0; j < grad.size(); j++) {
-                            Eigen::MatrixXd dKdTheta_j = Eigen::MatrixXd::Zero(n, n);
-                            for (size_t i = 0; i < n; i++) {
-                                for (size_t k = 0; k < n; k++)
-                                    dKdTheta_j(i, k) = full_dk[i][k](j);
-                            }
-                            Eigen::MatrixXd Zeta_j = w * dKdTheta_j;
-                            Eigen::MatrixXd Zeta_j_alpha = Zeta_j * alpha;
-                            Eigen::MatrixXd Zeta_j_K = Zeta_j * w;
-                            for (size_t i = 0; i < n; i++)
-                                grads.row(j).array() += (alpha.row(i).array() * Zeta_j_alpha.row(i).array() - 0.5 * (1. + alpha.row(i).array().square() / w.diagonal()(i)) * Zeta_j_K.diagonal()(i)) / w.diagonal()(i);
-                        }
-
-                        grad = grads.rowwise().sum();
+                        Eigen::VectorXd grad = gp.compute_kernel_grad_log_loo_cv();
 
                         return {loo, grad};
                     }
