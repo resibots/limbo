@@ -12,3 +12,4 @@ Tutorials
    external_libs
    gp
    opt
+   building_docs

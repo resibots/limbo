@@ -81,7 +81,7 @@
             
             
               <div class="version">
-                0.0
+                1.0
               </div>
             
           
@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -201,6 +202,7 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorials/external_libs.html">Add External Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/gp.html">Gaussian Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/opt.html">Optimization Sub-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/building_docs.html">Building the documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a><ul>
@@ -225,6 +227,38 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#statistics-stats">Statistics (stats)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#parallel-tools-par">Parallel tools (par)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#misc-tools-tools">Misc tools (tools)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel">kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-maternthreehalves">kernel_maternthreehalves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-eci">acqui_eci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-bobase">bayes_opt_bobase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ucb-imgpo">acqui_ucb_imgpo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-randomsamplinggrid">init_randomsamplinggrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#mean-constant">mean_constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-spgp">model_spgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#stop-maxpredictedvalue">stop_maxpredictedvalue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#stop-maxiterations">stop_maxiterations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-rprop">opt_rprop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-boptimizer">bayes_opt_boptimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-maternfivehalves">kernel_maternfivehalves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-nloptnograd">opt_nloptnograd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-imgpo">bayes_opt_imgpo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-parallelrepeater">opt_parallelrepeater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-cmaes">opt_cmaes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-nloptgrad">opt_nloptgrad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ei">acqui_ei</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-squared-exp-ard">kernel_squared_exp_ard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-cboptimizer">bayes_opt_cboptimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ucb">acqui_ucb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-gridsampling">init_gridsampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-gridsearch">opt_gridsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-exp">kernel_exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-ehvi">bayes_opt_ehvi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-gp-parego">model_gp_parego</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-gpucb">acqui_gpucb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-randomsampling">init_randomsampling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a><ul>
@@ -308,7 +342,6 @@
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="doc_versioning/index.html">doc_versioning</a></dd>
             <dd><a href="master/index.html">master</a></dd>
             <dd><a href="release-1.0/index.html">release-1.0</a></dd>
         </dl>

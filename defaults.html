@@ -25,8 +25,13 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
         <link rel="next" title="Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries" href="benchmarks.html"/>
         <link rel="prev" title="API" href="api.html"/>
@@ -77,7 +82,7 @@
             
             
               <div class="version">
-                0.0
+                1.0
               </div>
             
           
@@ -105,15 +110,12 @@
 
             
             
-                <p class="caption"><span class="caption-text">Limbo (BO library)</span></p>
-<ul class="simple">
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Limbo&#8217;s documentation</a></li>
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Limbo’s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Default values</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Default values</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#kernel">kernel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#kernel-maternthreehalves">kernel_maternthreehalves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-eci">acqui_eci</a></li>
@@ -190,7 +192,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="_sources/defaults.txt" rel="nofollow"> View page source</a>
+          <a href="_sources/defaults.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -294,7 +296,7 @@
 <div class="section" id="opt-nloptnograd">
 <h2>opt_nloptnograd<a class="headerlink" href="#opt-nloptnograd" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>int iterations = 500 [defined in src/limbo/opt/nlopt_no_grad.hpp] [&#8216;#ifdef USE_NLOPT&#8217;]</li>
+<li>int iterations = 500 [defined in src/limbo/opt/nlopt_no_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
 </ul>
 </div>
 <div class="section" id="bayes-opt-imgpo">
@@ -313,23 +315,23 @@
 <div class="section" id="opt-cmaes">
 <h2>opt_cmaes<a class="headerlink" href="#opt-cmaes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>bool verbose = false [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>double max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>int variant = aIPOP_CMAES [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>int elitism = 0 [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>bool fun_compute_initial = false [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>int restarts = 1 [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>double fun_target = -1 [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>double ubound = 1.0 [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>double fun_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
-<li>bool handle_uncertainty = false [defined in src/limbo/opt/cmaes.hpp] [&#8216;#ifdef USE_LIBCMAES&#8217;]</li>
+<li>bool verbose = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>int variant = aIPOP_CMAES [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>int elitism = 0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>bool fun_compute_initial = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>int restarts = 1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double fun_target = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double ubound = 1.0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double fun_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>bool handle_uncertainty = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 </ul>
 </div>
 <div class="section" id="opt-nloptgrad">
 <h2>opt_nloptgrad<a class="headerlink" href="#opt-nloptgrad" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>int iterations = 500 [defined in src/limbo/opt/nlopt_grad.hpp] [&#8216;#ifdef USE_NLOPT&#8217;]</li>
+<li>int iterations = 500 [defined in src/limbo/opt/nlopt_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
 </ul>
 </div>
 <div class="section" id="acqui-ei">
@@ -455,7 +457,25 @@
     </section>
 
   </div>
-  
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="v1.0.0/index.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="master/defaults.html">master</a></dd>
+            <dd><a href="release-1.0/index.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -472,7 +492,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

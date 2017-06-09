@@ -83,7 +83,7 @@
             
             
               <div class="version">
-                0.0
+                1.0
               </div>
             
           
@@ -123,7 +123,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#compilation">Compilation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build">Build</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -134,10 +133,12 @@
 <li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization Sub-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_docs.html">Building the documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -309,50 +310,6 @@ You can also specify a different compiler than the default, setting the environm
 </pre></div>
 </div>
 </div>
-<div class="section" id="building-the-documentation">
-<h3>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This section is only useful for developers who need to update the documentation.</p>
-</div>
-<p>Install sphinx via pip:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">Sphinx</span>
-<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">bibtex</span>
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">On Mac OSX, do not use <cite>brew install sphinx</cite> because this is not the right sphinx</p>
-</div>
-<p>Install the Resibots theme for Sphinx:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">resibots</span><span class="o">/</span><span class="n">sphinx_resibots_theme</span>
-<span class="n">export</span> <span class="n">SPHINX_RESIBOTS_THEME</span><span class="o">=</span><span class="s2">&quot;/home/me/path/to/sphinx_resibots_theme&quot;</span>
-</pre></div>
-</div>
-<p>Install <a class="reference external" href="https://breathe.readthedocs.io/en/latest/">breathe</a> via pip:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">breathe</span>
-</pre></div>
-</div>
-<p>Install <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a> via your package manager (e.g. apt-get / brew):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">doxygen</span>
-</pre></div>
-</div>
-<p>In the <cite>doc</cite> directory:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
-</pre></div>
-</div>
-<dl class="docutils">
-<dt>About sphinx and ReStructuredText:</dt>
-<dd><ul class="first last simple">
-<li><a class="reference external" href="http://sphinx-doc.org/tutorial.html">There is a tutorial</a>,</li>
-<li><a class="reference external" href="http://sphinx-doc.org/rest.html">Primer for ReStructuredText</a>, the markup language of Sphinx,</li>
-<li><a class="reference external" href="http://sphinx-doc.org/markup/index.html">markup specific to Sphinx</a>,</li>
-<li><a class="reference external" href="http://sphinx-doc.org/domains.html#id2">About C++ in Sphinx</a></li>
-<li><a class="reference external" href="https://breathe.readthedocs.org/en/latest/">Breathe (bridge between sphinx and doxygen)</a></li>
-</ul>
-</dd>
-</dl>
-</div>
 </div>
 </div>
 
@@ -422,7 +379,6 @@ You can also specify a different compiler than the default, setting the environm
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../../doc_versioning/tutorials/compilation.html">doc_versioning</a></dd>
             <dd><a href="compilation.html">master</a></dd>
             <dd><a href="../../release-1.0/tutorials/compilation.html">release-1.0</a></dd>
         </dl>
