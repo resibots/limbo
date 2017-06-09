@@ -44,6 +44,13 @@ Why am I getting "'XXXLFOpt' was never called!" errors?
 
 Most probably, you are using the `BOptimizer` class and you have set an `hp_period` (rate at which the hyperparams are optimized) less than 1, but you are using a Gaussian Process model that optimizes the hyperparameters. This should never happen. If you want use a Gaussian Process model that does optimize the hyperparameters, set the `hp_period` parameter to a value bigger than 0. On the other hand, if you do not want to optimize any hyperparameters, set `hp_period` parameter to -1 and use a Gaussian Process model that does not optimize the hyperparameters. Check :ref:`here <gp-hpopt>` for available hyperparameters optimization options.
 
+Why do I get "[NLOptNoGrad]: nlopt invalid argument"
+----------------------------------------------------
+We need optimizers to optimize the hyper-parameters; by default, we use unbounded optimization... but many optimizers in NLOpt do not support bounds (in particular, DIRECT). In that case, they just return and throw an exception "[NLOptNoGrad]: nlopt invalid argument". No optimization is performed.
+
+The easiest fix is to use another optimizer (we suggest RProp). You can also add bounds.
+
+
 Why C++11? (and not <insert your favorite language>)?
 -----------------------------------------------------
 We have specific needs that mainly revolve around high-performance, minimzing boilerplate code, and easy interface with hardware and existing libraries:
