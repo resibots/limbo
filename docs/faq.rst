@@ -46,10 +46,9 @@ Most probably, you are using the `BOptimizer` class and you have set an `hp_peri
 
 Why do I get "[NLOptNoGrad]: nlopt invalid argument"
 ----------------------------------------------------
-We need optimizers to optimize the hyper-parameters; by default, we use unbounded optimization... but many optimizers in NLOpt do not support bounds (in particular, DIRECT). In that case, they just return and throw an exception "[NLOptNoGrad]: nlopt invalid argument". No optimization is performed.
+We need optimizers to optimize the hyper-parameters; by default, we use unbounded optimization... but many optimizers in NLOpt do not support unbounded optimization (in particular, DIRECT). In that case, they just return and throw an exception "[NLOptNoGrad]: nlopt invalid argument". No optimization is performed.
 
-The easiest fix is to use another optimizer (we suggest RProp). You can also add bounds.
-
+The easiest fix is to use another optimizer (we suggest RProp). You can also add bounds (by creating a new hyper-parameter optimization procedure).
 
 Why C++11? (and not <insert your favorite language>)?
 -----------------------------------------------------
