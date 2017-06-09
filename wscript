@@ -227,11 +227,13 @@ def shutdown(ctx):
 def insert_license(ctx):
     limbo.insert_license()
 
-def build_docs(ctx):
-    Logs.pprint('NORMAL', 'extracting default params...')
+def write_default_params(ctx):
+    Logs.pprint('NORMAL', 'extracting default params to docs/defaults.rst')
     limbo.write_default_params('docs/defaults.rst')
-    Logs.pprint('NORMAL', 'generating HTML doc...')
-    s = "cd docs; make html"
+
+def build_docs(ctx): 
+    Logs.pprint('NORMAL', "generating HTML doc with versioning...")
+    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(master|doc_versioning|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
@@ -249,3 +251,7 @@ class InsertLicense(BuildContext):
 class BuildDoc(BuildContext):
     cmd = 'docs'
     fun = 'build_docs'
+
+class BuildDoc(BuildContext):
+    cmd = 'default_params'
+    fun = 'write_default_params'
