@@ -65,7 +65,7 @@ def configure(conf):
         conf.get_env()['USE_BAYESOPT'] = True
 
 
-def build_benchmark(bld):
+def build_bo_benchmarks(bld):
 
     if bld.env.DEFINES_NLOPT == ['USE_NLOPT']:
         bld.program(features='cxx',
