@@ -89,19 +89,26 @@ def check_eigen(conf):
 			major_version = int(out2.strip()[-1])
 			if world_version == 3 and major_version >= 3:
 				# Check for lapacke and blas
-				extra_libs = ['/usr/lib', '/usr/local/lib']
+				extra_libs = ['/usr/lib', '/usr/local/lib', '/usr/local/opt/openblas/lib']
 				blas_libs = ['blas', 'openblas']
 				blas_lib = ''
 				for b in blas_libs:
-					try:
-						conf.find_file('lib'+b+'.so', extra_libs)
+                                        try:
+                                                if conf.env['DEST_OS']=='darwin':
+                                                        conf.find_file('lib'+b+'.dylib', extra_libs)
+                                                else:
+						        conf.find_file('lib'+b+'.so', extra_libs)
+
 					except:
 						continue
 					blas_lib = b
 					break
 				lapacke = False
 				try:
-					conf.find_file('liblapacke.so', extra_libs)
+                                        if conf.env['DEST_OS']=='darwin':
+                                                conf.find_file('liblapacke.dylib', extra_libs)
+                                        else:
+                                                conf.find_file('liblapacke.so', extra_libs)
 					lapacke = True
 				except:
 					lapacke = False

@@ -78,7 +78,10 @@ def check_tbb(self, *k, **kw):
 
     self.start_msg('Checking Intel TBB libs (optional)')
     try:
-        self.find_file('libtbb.so', libpath_tbb)
+        if self.env['DEST_OS']=='darwin':
+            self.find_file('libtbb.dylib', libpath_tbb)
+        else:
+            self.find_file('libtbb.so', libpath_tbb)
         self.end_msg('ok')
     except:
         self.end_msg('not found', 'YELLOW')
