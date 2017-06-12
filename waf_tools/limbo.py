@@ -352,6 +352,20 @@ def run_regression_benchmarks(ctx):
     for config in configs:
         names.append(config['name'])
 
+    funcs = config['functions']
+    dims = config['dimensions']
+    pts = config['points']
+
+    if len(dims) != len(funcs):
+        dims = [dims]*len(funcs)
+    if len(pts) != len(funcs):
+        pts = [pts]*len(funcs)
+
+    if ctx.options.nb_rep:
+        nb_rep = ctx.options.nb_rep
+    else:
+        nb_rep = 5
+
     res_dir=os.getcwd()+"/regression_benchmark_results/"
     try:
         os.makedirs(res_dir)
@@ -362,10 +376,6 @@ def run_regression_benchmarks(ctx):
         if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
             fpath, fname = os.path.split(fullname)
             directory = res_dir + "/" + fname
-            if ctx.options.nb_rep:
-                nb_rep = ctx.options.nb_rep
-            else:
-                nb_rep = 5
 
             # create directories first
             for i in range(0,nb_rep):
@@ -376,15 +386,28 @@ def run_regression_benchmarks(ctx):
                     Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created' % exp_i)
                 s = "cp " + fullname + " " + exp_i
                 retcode = subprocess.call(s, shell=True, env=None)
+                gpy_name = os.getcwd()+"/src/benchmarks/regression/gpy.py"
+                s = "cp " + gpy_name + " " + exp_i
+                retcode = subprocess.call(s, shell=True, env=None)
 
-    for name in names:
+    for n in range(len(names)):
+        name = names[n]
+        directory = res_dir + "/" + name
         fullname = 'build/' + name
         # run experiments
         for i in range(0,nb_rep):
-            Logs.pprint('NORMAL', '%s Running: %s for the %s th time %s' % (HEADER, fname, str(i), NC))
+            Logs.pprint('NORMAL', '%s Running (limbo): %s for the %s-th time %s' % (HEADER, name, str(i), NC))
             exp_i = directory + "/exp_" + str(i)
             s="cd " + exp_i +";./" + fname
             retcode = subprocess.call(s, shell=True, env=None)
+
+        # run GPy experiments
+        for i in range(0,nb_rep):
+            Logs.pprint('NORMAL', '%s Running (GPy): %s for the %s-th time %s' % (HEADER, name, str(i), NC))
+            exp_i = directory + "/exp_" + str(i)
+            for k in range(len(funcs)):
+                s="cd " + exp_i +"; python gpy.py " + funcs[k] + " '" + str(dims[k]) + "' '" + str(pts[k]) + "'"
+                retcode = subprocess.call(s, shell=True, env=None)
 
 def summary(bld):
     lst = getattr(bld, 'utest_results', [])
