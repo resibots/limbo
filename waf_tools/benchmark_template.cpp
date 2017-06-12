@@ -3,6 +3,8 @@
 #include <chrono>
 #include <algorithm>
 #include <string>
+#include <iomanip>
+#include <limits>
 #include "test_functions.hpp"
 
 using namespace limbo;

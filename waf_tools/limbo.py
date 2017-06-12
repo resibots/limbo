@@ -259,19 +259,30 @@ def compile_regression_benchmarks(bld, json_file):
             for key, value in mean_params.items():
                 params +=  "        BO_PARAM(" + value[0] + ", " + key + ", " + str(value[1]) + ");\n"
             params += "    };\n"
+
+            NLOptIds = []
             for o in range(len(optimizer)):
+                if (o-1) in NLOptIds:
+                    continue
                 opt = optimizer[o]
                 opt_find = opt.rfind('::')
                 opt_underscore = convert(opt[opt_find if opt_find>=0 else 0:])
                 # TO-DO: Maybe fix it in the code
                 if opt == "ParallelRepeater":
                     opt_underscore = "parallelrepeater"
+                if opt == "NLOptGrad":
+                    opt_underscore = "nloptgrad"
+                if opt == "NLOptNoGrad":
+                    opt_underscore = "nloptnograd"
                 if opt_find == -1:
                     opt = 'limbo::opt::' + opt
                 params += "\n    struct opt_" + opt_underscore + " : public defaults::opt_" + opt_underscore + " {\n"
-                for key, value in optimizer_params[o].items():
-                    params +=  "        BO_PARAM(" + value[0] + ", " + key + ", " + str(value[1]) + ");\n"
+                if len(optimizer_params) > o:
+                    for key, value in optimizer_params[o].items():
+                        params +=  "        BO_PARAM(" + value[0] + ", " + key + ", " + str(value[1]) + ");\n"
                 params += "    };\n"
+                if optimizer[o] == "NLOptGrad" or optimizer[o] == "NLOptNoGrad":
+                    NLOptIds.append(o)
             params += "};"
 
             gp_code =  'using GP_' + str(m) + '_t = ' + gp_type+'<Params'+str(m)+', '+kernel_type+'<Params'+str(m)+'>, '+mean_type+'<Params'+str(m)+'>, '+hp_opt+'<Params'+str(m)+', '
@@ -282,17 +293,23 @@ def compile_regression_benchmarks(bld, json_file):
             gp_code += opt + '<Params'+str(m)+''
             for o in range(1, len(optimizer)):
                 opt = optimizer[o]
-                opt_find = opt.rfind('::')
-                if opt_find == -1:
-                    opt = 'limbo::opt::' + opt
-                gp_code += ', ' + opt + '<Params'+str(m)+'>'
-            gp_code += '>>>;\n'
+                if (o-1) not in NLOptIds:
+                    opt_find = opt.rfind('::')
+                    if opt_find == -1:
+                        opt = 'limbo::opt::' + opt
+                    gp_code += ', ' + opt + '<Params'+str(m)+'>'
+                else:
+                    gp_code += ', ' + opt + '>'
+            if 0 not in NLOptIds:
+                gp_code += '>'
+            gp_code += '>>;\n'
             gp_code += '            GP_' + str(m) + '_t gp_' + str(m) + ';\n\n'
             gp_code += '            auto start_' + str(m) + ' = std::chrono::high_resolution_clock::now();\n'
             gp_code += '            gp_' + str(m) + '.compute(points, obs, false);\n'
             gp_code += '            gp_' + str(m) + '.optimize_hyperparams();\n'
-            gp_code += '            auto time_' + str(m) + ' = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start_' + str(m) + ').count();\n'
-            gp_code += '            std::cout << "Time_' + str(m) + ' in secs: " << time_' + str(m) + '/ double(1000.0) << std::endl;\n'
+            gp_code += '            auto time_' + str(m) + ' = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_' + str(m) + ').count();\n'
+            gp_code += '            std::cout << std::setprecision(std::numeric_limits<long double>::digits10 + 1);\n'
+            gp_code += '            std::cout << "Time_' + str(m) + ' in secs: " << time_' + str(m) + '/ double(1000000.0) << std::endl;\n'
 
             gp_query_code =  'start_' + str(m) + ' = std::chrono::high_resolution_clock::now();\n'
             gp_query_code += '            std::vector<Eigen::VectorXd> predict_' + str(m) + '(N_test);\n'
@@ -300,8 +317,8 @@ def compile_regression_benchmarks(bld, json_file):
             gp_query_code += '                double ss;\n'
             gp_query_code += '                std::tie(predict_' + str(m) +'[i], ss) = gp_' + str(m) + '.query(test_points[i]);\n'
             gp_query_code += '            }\n'
-            gp_query_code += '            auto time2_' + str(m) + ' = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start_' + str(m) + ').count();\n'
-            gp_query_code += '            std::cout << "Time_' + str(m) + '(query) in ms: " << time2_' + str(m) + '/ double(N_test) << std::endl;\n\n'
+            gp_query_code += '            auto time2_' + str(m) + ' = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_' + str(m) + ').count();\n'
+            gp_query_code += '            std::cout << "Time_' + str(m) + '(query) in ms: " << time2_' + str(m) + ' * 1e-3 / double(N_test) << std::endl;\n\n'
             gp_query_code += '            double err_' + str(m) + ' = 0.0;\n'
             gp_query_code += '            for (int i = 0; i < N_test; i++) {\n'
             gp_query_code += '                err_' + str(m) + ' += (predict_' + str(m) +'[i] - test_obs[i]).squaredNorm();\n'
@@ -313,6 +330,7 @@ def compile_regression_benchmarks(bld, json_file):
             gps_learn_code += gp_code
             gps_query_code += gp_query_code
 
+        gps_query_code += '            ofs_res << std::setprecision(std::numeric_limits<long double>::digits10 + 1);\n'
         for m in range(len(models)):
             gps_query_code += '            ofs_res << time_' + str(m) + ' / double(1000.0) << \" \" << time2_' + str(m) + ' / double(N_test) << \" \" << err_' + str(m) + ' << std::endl;\n'
 
@@ -327,6 +345,7 @@ def compile_regression_benchmarks(bld, json_file):
             os.makedirs(name + "_dir/")
 
         cpp = open(name + "_dir/" + name + ".cpp", "w")
+        cpp.truncate()
         cpp.write(cpp_tpl)
         cpp.close()
 
