@@ -76,7 +76,7 @@ def check_eigen(conf):
         conf.env.INCLUDES_EIGEN = [incl]
         conf.end_msg(incl)
         if conf.options.lapacke_blas:
-            conf.start_msg('Checking for LAPACKE/BLAS')
+            conf.start_msg('Checking for LAPACKE/BLAS (optional)')
             p1 = subprocess.Popen(["cat", incl+"/Eigen/src/Core/util/Macros.h"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             p2 = subprocess.Popen(["grep", "#define EIGEN_WORLD_VERSION"], stdin=p1.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             p1.stdout.close()

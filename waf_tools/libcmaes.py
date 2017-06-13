@@ -76,9 +76,9 @@ def check_libcmaes(conf):
 		incl = res[:-len('libcmaes/cmaes.h')-1]
 		conf.end_msg(incl)
 	except:
-		conf.end_msg('Not found in %s' % str(includes_check), 'RED')
+		conf.end_msg('Not found in %s' % str(includes_check), 'YELLOW')
 		return 1
-	conf.start_msg('Checking for libcmaes libs')
+	conf.start_msg('Checking for libcmaes libs (optional)')
 	lib_path = ''
 	for lib in ['libcmaes.so', 'libcmaes.a', 'libcmaes.dylib']:
 		try:
@@ -87,7 +87,7 @@ def check_libcmaes(conf):
 		except:
 			continue
 	if lib_path == '':
-		conf.end_msg('Not found in %s' % str(libs_check), 'RED')
+		conf.end_msg('Not found in %s' % str(libs_check), 'YELLOW')
 		return 1
 	else:
 		conf.end_msg(lib_path)

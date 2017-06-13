@@ -79,7 +79,7 @@ def check_nlopt(conf):
 		incl = res[:-len('nlopt.hpp')-1]
 		conf.end_msg(incl)
 	except:
-		conf.end_msg('Not found in %s' % str(includes_check), 'RED')
+		conf.end_msg('Not found in %s' % str(includes_check), 'YELLOW')
 		return 1
 	conf.start_msg('Checking for NLOpt C++ libs (optional)')
 	lib_path = ''
@@ -90,7 +90,7 @@ def check_nlopt(conf):
 		except:
 			continue
 	if lib_path == '':
-		conf.end_msg('Not found in %s' % str(libs_check), 'RED')
+		conf.end_msg('Not found in %s' % str(libs_check), 'YELLOW')
 		return 1
 	else:
 		conf.end_msg(lib_path)
