@@ -74,7 +74,7 @@ def check_eigen(conf):
         res = conf.find_file('Eigen/Core', includes_check)
         incl = res[:-len('Eigen/Core')-1]
         conf.env.INCLUDES_EIGEN = [incl]
-        conf.end_msg('ok')
+        conf.end_msg(incl)
         if conf.options.lapacke_blas:
             conf.start_msg('Checking for LAPACKE/BLAS')
             p1 = subprocess.Popen(["cat", incl+"/Eigen/src/Core/util/Macros.h"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -95,38 +95,47 @@ def check_eigen(conf):
                 extra_libs = ['/usr/lib', '/usr/local/lib', '/usr/local/opt/openblas/lib']
                 blas_libs = ['blas', 'openblas']
                 blas_lib = ''
+                blas_path = ''
                 for b in blas_libs:
                     try:
                         if conf.env['DEST_OS']=='darwin':
-                            conf.find_file('lib'+b+'.dylib', extra_libs)
+                            res = conf.find_file('lib'+b+'.dylib', extra_libs)
+                            blas_path = res[:-len('lib'+b+'.dylib')-1]
                         else:
-                            conf.find_file('lib'+b+'.so', extra_libs)
+                            res = conf.find_file('lib'+b+'.so', extra_libs)
+                            blas_path = res[:-len('lib'+b+'.so')-1]
                     except:
                         continue
                     blas_lib = b
                     break
 
                 lapacke = False
+                lapacke_path = ''
                 try:
                     if conf.env['DEST_OS']=='darwin':
-                            conf.find_file('liblapacke.dylib', extra_libs)
+                            res = conf.find_file('liblapacke.dylib', extra_libs)
+                            lapacke_path = res[:-len('liblapacke.dylib')-1]
                     else:
-                            conf.find_file('liblapacke.so', extra_libs)
+                            res = conf.find_file('liblapacke.so', extra_libs)
+                            lapacke_path = res[:-len('liblapacke.so')-1]
                     lapacke = True
                 except:
                     lapacke = False
 
                 if lapacke or blas_lib != '':
                     conf.env.DEFINES_EIGEN = []
-                    conf.env.LIBPATH_EIGEN = extra_libs
+                    if lapacke_path != blas_path:
+                        conf.env.LIBPATH_EIGEN = [lapacke_path, blas_path]
+                    else:
+                        conf.env.LIBPATH_EIGEN = [lapacke_path]
                     conf.env.LIB_EIGEN = []
-                    conf.end_msg('ok')
+                    conf.end_msg('LAPACKE: \'%s\', BLAS: \'%s\'' % (lapacke_path, blas_path))
                 elif lapacke:
-                    conf.end_msg('Found only LAPACKE', 'YELLOW')
+                    conf.end_msg('Found only LAPACKE: %s' % lapacke_path, 'YELLOW')
                 elif blas_lib != '':
-                    conf.end_msg('Found only BLAS', 'YELLOW')
+                    conf.end_msg('Found only BLAS: %s' % blas_path, 'YELLOW')
                 else:
-                    conf.end_msg('Not found', 'RED')
+                    conf.end_msg('Not found in %s' % str(extra_libs), 'RED')
                 if lapacke:
                     conf.env.DEFINES_EIGEN.append('EIGEN_USE_LAPACKE')
                     conf.env.LIB_EIGEN.append('lapacke')
@@ -136,5 +145,5 @@ def check_eigen(conf):
             else:
                 conf.end_msg('LAPACKE/BLAS can be used only with Eigen>=3.3', 'RED')
     except:
-        conf.end_msg('Not found', 'RED')
+        conf.fatal('Not found in %s' % str(includes_check))
     return 1
