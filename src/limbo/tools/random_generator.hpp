@@ -55,7 +55,7 @@
 #include <random>
 #include <utility>
 #include <mutex>
-#include <limbo/tools/rand_utils.hpp>
+#include <external/rand_utils.hpp>
 
 namespace limbo {
     namespace tools {
