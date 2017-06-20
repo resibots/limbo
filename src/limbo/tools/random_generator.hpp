@@ -78,7 +78,6 @@ namespace limbo {
         private:
             D _dist;
             std::mt19937 _rgen;
-            std::mutex _mutex;
         };
 
         /// @ingroup tools
