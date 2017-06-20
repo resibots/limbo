@@ -100,7 +100,7 @@ namespace limbo {
         using rgen_int_t = RandomGenerator<rdist_int_t>;
 
         /// @ingroup tools
-        /// random vector in [0, 1]
+        /// random vector in [0, 1.0]
         ///
         /// - this function is thread safe because we use a random generator for each thread
         /// - we use a C++11 random number generator
@@ -114,7 +114,7 @@ namespace limbo {
         }
 
         /// @ingroup tools
-        /// random vector in R
+        /// random vector in [0, 10.0]
         ///
         /// - this function is thread safe because we use a random generator for each thread
         /// - we use a C++11 random number generator
