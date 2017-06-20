@@ -72,7 +72,6 @@ namespace limbo {
             RandomGenerator(result_type a, result_type b) : _dist(a, b), _rgen(randutils::auto_seed_128{}.base()) {}
             result_type rand()
             {
-                std::lock_guard<std::mutex> lock(_mutex);
                 return _dist(_rgen);
             }
 
@@ -104,11 +103,11 @@ namespace limbo {
         /// @ingroup tools
         /// random vector in [0, 1]
         ///
-        /// - this function is thread safe because the random number generator we use is thread-safe
+        /// - this function is thread safe because we use a random generator for each thread
         /// - we use a C++11 random number generator
         Eigen::VectorXd random_vector_bounded(int size)
         {
-            static rgen_double_t rgen(0.0, 1.0);
+            static thread_local rgen_double_t rgen(0.0, 1.0);
             Eigen::VectorXd res(size);
             for (int i = 0; i < size; ++i)
                 res[i] = rgen.rand();
@@ -118,11 +117,11 @@ namespace limbo {
         /// @ingroup tools
         /// random vector in R
         ///
-        /// - this function is thread safe because the random number generator we use is thread-safe
+        /// - this function is thread safe because we use a random generator for each thread
         /// - we use a C++11 random number generator
         Eigen::VectorXd random_vector_unbounded(int size)
         {
-            static rgen_gauss_t rgen(0.0, 10.0);
+            static thread_local rgen_gauss_t rgen(0.0, 10.0);
             Eigen::VectorXd res(size);
             for (int i = 0; i < size; ++i)
                 res[i] = rgen.rand();
