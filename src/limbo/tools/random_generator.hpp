@@ -114,7 +114,7 @@ namespace limbo {
         }
 
         /// @ingroup tools
-        /// random vector in [0, 10.0]
+        /// random vector generated with a normal distribution centered on 0, with standard deviation of 10.0
         ///
         /// - this function is thread safe because we use a random generator for each thread
         /// - we use a C++11 random number generator
