@@ -24,6 +24,10 @@ Optional but highly recommended
     ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
     sudo make install
 
+.. caution::
+
+  The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (`brew install homebrew/science/nlop`).
+
 * `libcmaes <https://github.com/beniz/libcmaes>`_. Make sure that you install with **sudo** or configure the **LD_LIBRARY_PATH** accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get). Follow the instructions `here <https://github.com/beniz/libcmaes#build>`_, reproduced for your convenience::
 
     sudo apt-get install libgtest-dev
