@@ -55,8 +55,8 @@
 
 #include <nlopt.hpp>
 
-#include <limbo/tools/macros.hpp>
 #include <limbo/opt/optimizer.hpp>
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -65,9 +65,9 @@ namespace limbo {
             /// number of calls to the optimized function
             BO_PARAM(int, iterations, 500);
             /// @ingroup opt_defaults
-            /// tolerance for convergence: stop when an optimization step (or an 
-            /// estimate of the optimum) changes the objective function value by 
-            /// less than tol multiplied by the absolute value of the function 
+            /// tolerance for convergence: stop when an optimization step (or an
+            /// estimate of the optimum) changes the objective function value by
+            /// less than tol multiplied by the absolute value of the function
             /// value.
             /// IGNORED if negative (no tolerance, only maximum iteration)
             BO_PARAM(double, fun_tolerance, -1);
@@ -135,7 +135,7 @@ namespace limbo {
                 Eigen::VectorXd::Map(&x[0], dim) = init;
 
                 opt.set_maxeval(Params::opt_nloptnograd::iterations());
-                opt.set_xtol_rel(Params::opt_nloptnograd::fun_tolerance());
+                opt.set_ftol_rel(Params::opt_nloptnograd::fun_tolerance());
 
                 if (bounded) {
                     opt.set_lower_bounds(std::vector<double>(dim, 0));
