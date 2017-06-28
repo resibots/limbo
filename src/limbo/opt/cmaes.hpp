@@ -129,6 +129,7 @@ namespace limbo {
         ///   - int restarts
         ///   - double max_fun_evals
         ///   - double fun_tolerance
+        ///   - double xrel_tolerance
         ///   - double fun_target
         ///   - bool fun_compute_initial
         ///   - bool handle_uncertainty

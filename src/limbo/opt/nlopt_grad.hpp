@@ -91,7 +91,6 @@ namespace limbo {
          - GD_STOGO_RAND
          - LD_LBFGS_NOCEDAL
          - LD_LBFGS
-         - LN_PRAXIS
          - LD_VAR1
          - LD_VAR2
          - LD_TNEWTON
@@ -99,7 +98,6 @@ namespace limbo {
          - LD_TNEWTON_PRECOND
          - LD_TNEWTON_PRECOND_RESTART
          - GD_MLSL
-         - GN_MLSL_LDS
          - GD_MLSL_LDS
          - LD_MMA
          - LD_AUGLAG
@@ -109,6 +107,8 @@ namespace limbo {
 
          Parameters :
          - int iterations
+         - double fun_tolerance
+         - double xrel_tolerance
         */
         template <typename Params, nlopt::algorithm Algorithm = nlopt::LD_LBFGS>
         struct NLOptGrad {
@@ -122,7 +122,11 @@ namespace limbo {
                     Algorithm == nlopt::LD_LBFGS || Algorithm == nlopt::LD_TNEWTON_PRECOND_RESTART ||
                     Algorithm == nlopt::LD_TNEWTON_PRECOND || Algorithm == nlopt::LD_TNEWTON_RESTART ||
                     Algorithm == nlopt::LD_TNEWTON || Algorithm == nlopt::LD_VAR2 ||
-                    Algorithm == nlopt::LD_VAR1, "NLOptGrad accepts gradient-based nlopt algorithms only");
+                    Algorithm == nlopt::LD_VAR1 || Algorithm == nlopt::GD_STOGO ||
+                    Algorithm == nlopt::GD_STOGO_RAND || Algorithm == nlopt::LD_LBFGS_NOCEDAL ||
+                    Algorithm == nlopt::GD_MLSL || Algorithm == nlopt::GD_MLSL_LDS ||
+                    Algorithm == nlopt::LD_AUGLAG || Algorithm == nlopt::LD_AUGLAG_EQ ||
+                    Algorithm == nlopt::LD_CCSAQ, "NLOptGrad accepts gradient-based nlopt algorithms only");
                 // clang-format on
                 int dim = init.size();
                 nlopt::opt opt(Algorithm, dim);

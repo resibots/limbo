@@ -104,12 +104,15 @@ namespace limbo {
          - LN_BOBYQA
          - LN_NEWUOA
          - LN_NEWUOA_BOUND
+         - LN_PRAXIS
          - LN_NELDERMEAD
          - LN_SBPLX
          - LN_AUGLAG
 
          Parameters:
          - int iterations
+         - double fun_tolerance
+         - double xrel_tolerance
         */
         template <typename Params, nlopt::algorithm Algorithm = nlopt::GN_DIRECT_L_RAND>
         struct NLOptNoGrad {
@@ -119,6 +122,7 @@ namespace limbo {
             {
                 // Assert that the algorithm is non-gradient
                 // TO-DO: Add support for MLSL (Multi-Level Single-Linkage)
+                // TO-DO: Add support for AUGLAG and AUGLAG_EQ
                 // TO-DO: Add better support for ISRES (Improved Stochastic Ranking Evolution Strategy)
                 // clang-format off
                 static_assert(Algorithm == nlopt::LN_COBYLA || Algorithm == nlopt::LN_BOBYQA ||
