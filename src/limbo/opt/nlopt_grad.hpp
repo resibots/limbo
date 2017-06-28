@@ -116,6 +116,14 @@ namespace limbo {
             template <typename F>
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
+                // Assert that the algorithm is gradient-based
+                // clang-format off
+                static_assert(Algorithm == nlopt::LD_MMA || Algorithm == nlopt::LD_SLSQP ||
+                    Algorithm == nlopt::LD_LBFGS || Algorithm == nlopt::LD_TNEWTON_PRECOND_RESTART ||
+                    Algorithm == nlopt::LD_TNEWTON_PRECOND || Algorithm == nlopt::LD_TNEWTON_RESTART ||
+                    Algorithm == nlopt::LD_TNEWTON || Algorithm == nlopt::LD_VAR2 ||
+                    Algorithm == nlopt::LD_VAR1, "NLOptGrad accepts gradient-based nlopt algorithms only");
+                // clang-format on
                 int dim = init.size();
                 nlopt::opt opt(Algorithm, dim);
 
