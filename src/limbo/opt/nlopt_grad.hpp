@@ -69,8 +69,15 @@ namespace limbo {
             /// estimate of the optimum) changes the objective function value by
             /// less than tol multiplied by the absolute value of the function
             /// value.
-            /// IGNORED if negative (no tolerance, only maximum iteration)
+            /// IGNORED if negative
             BO_PARAM(double, fun_tolerance, -1);
+            /// @ingroup opt_defaults
+            /// tolerance for convergence: stop when an optimization step (or an
+            /// estimate of the optimum) changes all the parameter values by
+            /// less than tol multiplied by the absolute value of the parameter
+            /// value.
+            /// IGNORED if negative
+            BO_PARAM(double, xrel_tolerance, -1);
         };
     }
     namespace opt {
@@ -119,6 +126,7 @@ namespace limbo {
 
                 opt.set_maxeval(Params::opt_nloptgrad::iterations());
                 opt.set_ftol_rel(Params::opt_nloptgrad::fun_tolerance());
+                opt.set_xtol_rel(Params::opt_nloptgrad::xrel_tolerance());
 
                 if (bounded) {
                     opt.set_lower_bounds(std::vector<double>(dim, 0));
