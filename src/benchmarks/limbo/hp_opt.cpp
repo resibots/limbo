@@ -65,12 +65,16 @@ struct Params {
     struct kernel : public defaults::kernel {
         BO_PARAM(double, noise, 1e-10);
     };
+    struct kernel_exp : public defaults::kernel_exp {
+    };
     struct kernel_maternfivehalves {
         BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 1);
     };
-    struct acqui_ucb {
+    struct acqui_ucb : public defaults::acqui_ucb {
         BO_PARAM(double, alpha, 0.125);
+    };
+    struct acqui_ei : public defaults::acqui_ei {
     };
     struct init_randomsampling {
         BO_PARAM(int, samples, 10);
@@ -82,21 +86,25 @@ struct Params {
     };
     struct opt_rprop : public defaults::opt_rprop {
     };
+    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
+    };
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
+    };
 };
 
 struct DirectParams {
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
     };
 };
 
 struct BobyqaParams {
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
     };
 };
 struct BobyqaParams_HP {
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
     };
 };
@@ -139,6 +147,7 @@ int main()
 {
     srand(time(NULL));
 
+#ifdef BAYESOPT_PARAMS
     using Kernel_t = kernel::SquaredExpARD<Params>;
     using AcquiOpt_t = opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>>;
     using Stop_t = boost::fusion::vector<stop::MaxIterations<Params>>;
@@ -149,6 +158,32 @@ int main()
     using Acqui_t = acqui::UCB<Params, GP_t>;
 
     using Opt_t = bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>>;
+
+// benchmark different optimization algorithms
+#elif defined(OPT_CMAES)
+    using AcquiOpt_t = opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>>;
+    using Opt_t = bayes_opt::BOptimizer<Params, acquiopt<AcquiOpt_t>>;
+
+#elif defined(OPT_DIRECT)
+    using AcquiOpt_t = opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>>;
+    using Opt_t = bayes_opt::BOptimizer<Params, acquiopt<AcquiOpt_t>>;
+
+//benchmark different acquisition functions
+#elif defined(ACQ_UCB)
+    using GP_t = model::GP<Params>;
+    using Acqui_t = acqui::UCB<Params, GP_t>;
+    using Opt_t =  bayes_opt::BOptimizer<Params, acquifun<Acqui_t>> ;
+#elif defined(ACQ_EI)
+    using GP_t = model::GP<Params>;
+    using Acqui_t = acqui::EI<Params, GP_t>;
+    using Opt_t =  bayes_opt::BOptimizer<Params, acquifun<Acqui_t>> ;
+
+// limbo default parameters
+#elif defined(LIMBO_PARAMS) // default limbo params
+    using Opt_t = bayes_opt::BOptimizer<Params>;
+#else
+    #error "Unknown variant in benchmark"
+#endif
 
     benchmark<Opt_t, BraninNormalized>("branin");
     benchmark<Opt_t, Hartmann6>("hartmann6");

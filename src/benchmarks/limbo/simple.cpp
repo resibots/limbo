@@ -81,13 +81,13 @@ struct Params {
 };
 
 struct DirectParams {
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
     };
 };
 
 struct BobyqaParams {
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
     };
 };
@@ -133,7 +133,7 @@ int main()
     using Mean_t = mean::Constant<Params>;
     using Stat_t = boost::fusion::vector<>;
     using Init_t = init::RandomSampling<Params>;
-    using GP_t = model::GP<Params, Kernel_t, Mean_t>;
+    using GP_t = model::GP<Params, Kernel_t, Mean_t, model::gp::NoLFOpt<Params>>;
     using Acqui_t = acqui::UCB<Params, GP_t>;
 
     using Opt_t = bayes_opt::BOptimizer<Params, modelfun<GP_t>, initfun<Init_t>, acquifun<Acqui_t>, acquiopt<AcquiOpt_t>, statsfun<Stat_t>, stopcrit<Stop_t>>;

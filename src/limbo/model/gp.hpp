@@ -56,6 +56,10 @@
 #include <Eigen/LU>
 
 #include <limbo/model/gp/no_lf_opt.hpp>
+#include <limbo/kernel/squared_exp_ard.hpp>
+#include <limbo/model/gp/kernel_lf_opt.hpp>
+#include <limbo/mean/data.hpp>
+
 #include <limbo/tools.hpp>
 
 namespace limbo {
@@ -63,9 +67,10 @@ namespace limbo {
         /// @ingroup model
         /// A classic Gaussian process.
         /// It is parametrized by:
+        /// - a kernel function
         /// - a mean function
         /// - [optionnal] an optimizer for the hyper-parameters
-        template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = gp::NoLFOpt<Params>>
+        template <typename Params, typename KernelFunction = kernel::SquaredExpARD<Params>, typename MeanFunction = mean::Data<Params>, typename HyperParamsOptimizer = gp::KernelLFOpt<Params>>
         class GP {
         public:
             /// useful because the model might be created before knowing anything about the process
