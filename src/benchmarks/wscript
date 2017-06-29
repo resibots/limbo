@@ -85,16 +85,16 @@ def build_bo_benchmarks(bld):
         #Quick and dirty way to add Bayesopt
 
         if bld.get_env()['USE_BAYESOPT'] == True:
-            bld(features='cxx',
-                source='bayesopt/simple.cpp',
-                includes='.',
-                target='benchmark_bayesopt',
-                uselib='BOOST EIGEN TBB NLOPT BAYESOPT LIMBO',
-                use='')
+            bld.program(features='cxx',
+                        source='bayesopt/simple.cpp',
+                        includes='.',
+                        target='benchmark_bayesopt',
+                        uselib='BOOST EIGEN TBB NLOPT BAYESOPT LIMBO',
+                        use='')
 
-            bld(features='cxx',
-                source='bayesopt/hp_opt.cpp',
-                includes='.',
-                target='benchmark_bayesopt_hp_opt',
-                uselib='BOOST EIGEN TBB NLOPT BAYESOPT LIMBO',
-                use='')
+            bld.program(features='cxx',
+                        source='bayesopt/hp_opt.cpp',
+                        includes='.',
+                        target='benchmark_bayesopt_hp_opt',
+                        uselib='BOOST EIGEN TBB NLOPT BAYESOPT LIMBO',
+                        use='')

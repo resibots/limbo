@@ -57,7 +57,7 @@ blddir = 'build'
 import glob
 import os
 import subprocess
-import limbo
+import limbo, benchmarks
 import inspect
 from waflib import Logs
 from waflib.Build import BuildContext
@@ -192,34 +192,10 @@ def submit_extensive_tests(ctx):
             Logs.pprint('NORMAL', 'oarsub returned: %s' % str(retcode))
 
 def run_bo_benchmarks(ctx):
-    HEADER='\033[95m'
-    NC='\033[0m'
-    res_dir=os.getcwd()+"/benchmark_results/"
-    try:
-        os.makedirs(res_dir)
-    except:
-        Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created!' % res_dir)
-    for fullname in glob.glob('build/src/benchmarks/*'):
-        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
-            fpath, fname = os.path.split(fullname)
-            directory = res_dir + "/" + fname
-            try:
-                os.makedirs(directory)
-            except:
-                Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created, the new results will be concatenated to the old ones' % directory)
-            s = "cp " + fullname + " " + directory
-            retcode = subprocess.call(s, shell=True, env=None)
-            if ctx.options.nb_rep:
-                nb_rep = ctx.options.nb_rep
-            else:
-                nb_rep = 10
-            for i in range(0,nb_rep):
-                Logs.pprint('NORMAL', '%s Running: %s for the %s th time %s' % (HEADER, fname, str(i), NC))
-                s="cd " + directory +";./" + fname
-                retcode = subprocess.call(s, shell=True, env=None)
+    benchmarks.run_bo_benchmarks(ctx)
 
 def run_regression_benchmarks(ctx):
-    limbo.run_regression_benchmarks(ctx)
+    benchmarks.run_regression_benchmarks(ctx)
 
 def shutdown(ctx):
     if ctx.options.create_exp:
