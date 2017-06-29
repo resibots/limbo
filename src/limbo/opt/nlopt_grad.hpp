@@ -117,6 +117,7 @@ namespace limbo {
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
                 // Assert that the algorithm is gradient-based
+                // TO-DO: Add support for MLSL (Multi-Level Single-Linkage)
                 // clang-format off
                 static_assert(Algorithm == nlopt::LD_MMA || Algorithm == nlopt::LD_SLSQP ||
                     Algorithm == nlopt::LD_LBFGS || Algorithm == nlopt::LD_TNEWTON_PRECOND_RESTART ||
@@ -124,7 +125,7 @@ namespace limbo {
                     Algorithm == nlopt::LD_TNEWTON || Algorithm == nlopt::LD_VAR2 ||
                     Algorithm == nlopt::LD_VAR1 || Algorithm == nlopt::GD_STOGO ||
                     Algorithm == nlopt::GD_STOGO_RAND || Algorithm == nlopt::LD_LBFGS_NOCEDAL ||
-                    Algorithm == nlopt::GD_MLSL || Algorithm == nlopt::GD_MLSL_LDS ||
+                    // Algorithm == nlopt::GD_MLSL || Algorithm == nlopt::GD_MLSL_LDS ||
                     Algorithm == nlopt::LD_AUGLAG || Algorithm == nlopt::LD_AUGLAG_EQ ||
                     Algorithm == nlopt::LD_CCSAQ, "NLOptGrad accepts gradient-based nlopt algorithms only");
                 // clang-format on
