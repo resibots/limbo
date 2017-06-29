@@ -14,10 +14,11 @@ def run_bo_benchmarks(ctx):
         os.makedirs(res_dir)
     except:
         Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created!' % res_dir)
-    for fullname in glob.glob('build/src/benchmarks/*'):
+    for fullname in glob.glob('build/src/benchmarks/*/*'):
         if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
             fpath, fname = os.path.split(fullname)
-            directory = res_dir + "/" + fname
+            fpath, dir_name = os.path.split(fpath)
+            directory = res_dir + "/" + dir_name + '/' + fname
             try:
                 os.makedirs(directory)
             except:
