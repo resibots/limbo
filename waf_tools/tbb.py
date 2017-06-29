@@ -53,7 +53,7 @@ Quick n dirty tbb detection
 """
 
 from waflib.Configure import conf
-
+import limbo
 
 def options(opt):
     opt.add_option('--tbb', type='string', help='path to Intel TBB', dest='tbb')
@@ -81,12 +81,7 @@ def check_tbb(self, *k, **kw):
 
     self.start_msg('Checking Intel TBB libs (optional)')
     try:
-        if self.env['DEST_OS']=='darwin':
-            res = self.find_file('libtbb.dylib', libpath_tbb)
-            lib = res[:-len('libtbb.dylib')-1]
-        else:
-            res = self.find_file('libtbb.so', libpath_tbb)
-            lib = res[:-len('libtbb.so')-1]
+        res, lib = limbo.check_lib(self, 'libtbb', libpath_tbb)
         self.end_msg(lib)
     except:
         self.end_msg('Not found in %s' % str(libpath_tbb), 'YELLOW')

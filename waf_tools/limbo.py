@@ -70,6 +70,15 @@ def add_create_options(opt):
     opt.add_option('--init_randomsampling_samples', type='int', dest='init_randomsampling_samples', help='Number of samples used for the initialization [default: 10]')
     opt.add_option('--stop_maxiterations_iterations', type='int', dest='stop_maxiterations_iterations', help='Number of iterations performed before stopping the optimization [default: 190]')
 
+# check if a lib exists for both osx (darwin) and GNU/linux
+def check_lib(self, name, path):
+    if self.env['DEST_OS']=='darwin':
+        libname = name + '.dylib'
+    else:
+        libname = name + '.so'
+    res = self.find_file(libname, path)
+    lib = res[:-len(libname)-1]
+    return res, lib
 
 def create_variants(bld, source, uselib_local,
                     uselib, variants, includes=". ../",
