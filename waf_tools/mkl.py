@@ -76,8 +76,7 @@ def check_mkl(conf):
         conf.start_msg('Checking Intel MKL libs (optional)')
         limbo.check_lib(conf, 'libmkl_core', libpath_mkl)
         conf.end_msg('ok')
-    except Exception, e:
-        print e
+    except:
         conf.end_msg('Not found', 'RED')
         return
     conf.env.LIB_MKL_SEQ = ["mkl_intel_lp64", "mkl_core", "mkl_sequential", "pthread", "m"]
