@@ -81,13 +81,13 @@ struct Params {
 };
 
 struct DirectParams {
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
     };
 };
 
 struct BobyqaParams {
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_DYN_PARAM(int, iterations);
     };
 };
