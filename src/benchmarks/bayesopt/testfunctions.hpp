@@ -50,6 +50,9 @@
 #include <boost/numeric/ublas/matrix_proxy.hpp>
 #include <bayesopt/bayesopt.hpp>
 
+// for BO_PARAM
+#include "limbo/limbo.hpp"
+
 using namespace bayesopt;
 
 // support functions
