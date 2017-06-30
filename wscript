@@ -165,7 +165,7 @@ def build(bld):
             bld.recurse('exp/' + i)
             limbo.output_params('exp/'+i)
     if bld.options.regression_benchmarks:
-        limbo.compile_regression_benchmarks(bld, bld.options.regression_benchmarks)
+        benchmarks.compile_regression_benchmarks(bld, bld.options.regression_benchmarks)
     bld.add_post_fun(limbo.summary)
 
 def build_extensive_tests(ctx):

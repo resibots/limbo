@@ -1,10 +1,16 @@
 import os, glob
-import simplejson
 import stat
 import subprocess
 import time
 import threading
 from waflib import Logs
+
+json_ok = True
+try:
+    import simplejson
+except:
+    json_ok = False
+    Logs.pprint('YELLOW', 'WARNING: simplejson not found some function may not work')
 
 def run_bo_benchmarks(ctx):
     HEADER='\033[95m'
@@ -37,6 +43,9 @@ def run_bo_benchmarks(ctx):
 
 
 def compile_regression_benchmarks(bld, json_file):
+    if not json_ok:
+        Logs.pprint('RED', 'ERROR: simplejson is not installed and as such you cannot read the json configuration file for compiling the benchmarks.')
+        return
     import types
 
     def convert(name):
@@ -250,6 +259,10 @@ def compile_regression_benchmarks(bld, json_file):
 def run_regression_benchmarks(ctx):
     HEADER='\033[95m'
     NC='\033[0m'
+
+    if not json_ok:
+        Logs.pprint('RED', 'ERROR: simplejson is not installed and as such you cannot read the json configuration file for running the benchmarks.')
+        return
 
     if not ctx.options.regression_benchmarks:
         Logs.pprint('RED', 'ERROR: No json file with configurations is provided. Nothing will run!')
