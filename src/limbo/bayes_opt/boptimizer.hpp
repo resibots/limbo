@@ -46,17 +46,17 @@
 #ifndef LIMBO_BAYES_OPT_BOPTIMIZER_HPP
 #define LIMBO_BAYES_OPT_BOPTIMIZER_HPP
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <iterator>
 
 #include <boost/parameter/aux_/void.hpp>
 
 #include <Eigen/Core>
 
+#include <limbo/bayes_opt/bo_base.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/random_generator.hpp>
-#include <limbo/bayes_opt/bo_base.hpp>
 #ifdef USE_NLOPT
 #include <limbo/opt/nlopt_no_grad.hpp>
 #elif defined USE_LIBCMAES
@@ -152,7 +152,7 @@ namespace limbo {
                     acquisition_function_t acqui(_model, this->_current_iteration);
 
                     auto acqui_optimization =
-                        [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun,g); };
+                        [&](const Eigen::VectorXd& x, bool g) { return acqui(x, afun, g); };
                     Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in(), Params::bayes_opt_bobase::bounded());
                     Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, Params::bayes_opt_bobase::bounded());
                     this->eval_and_add(sfun, new_sample);
@@ -195,7 +195,22 @@ namespace limbo {
         protected:
             model_t _model;
         };
+
+        namespace _default_hp {
+            template <typename Params>
+            using model_t = model::GPOpt<Params>;
+            template <typename Params>
+            using acqui_t = acqui::UCB<Params, model_t<Params>>;
+        }
+
+        /// A shortcut for a BOptimizer with UCB + GPOpt
+        /// The acquisition function and the model CANNOT be tuned (use BOptimizer for this)
+        template <class Params,
+            class A1 = boost::parameter::void_,
+            class A2 = boost::parameter::void_,
+            class A3 = boost::parameter::void_,
+            class A4 = boost::parameter::void_>
+        using BOptimizerHPOpt = BOptimizer<Params, A1, A2, A3, A4, modelfun<_default_hp::model_t<Params>>, acquifun<_default_hp::acqui_t<Params>>>;
     }
 }
-
 #endif

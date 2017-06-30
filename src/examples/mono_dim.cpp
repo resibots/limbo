@@ -80,7 +80,8 @@ BO_PARAMS(std::cout,
                   BO_PARAM(double, sigma_sq, 1);
                   BO_PARAM(double, l, 0.2);
               };
-
+              struct kernel_exp : public defaults::kernel_exp {
+              };
               struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
                 BO_PARAM(bool, stats_enabled, true);
               };
@@ -128,5 +129,11 @@ int main()
     opt.optimize(fit_eval());
     std::cout << opt.best_observation() << " res  "
               << opt.best_sample().transpose() << std::endl;
+
+    // example with basic HP opt
+    bayes_opt::BOptimizerHPOpt<Params> opt_hp;
+    opt_hp.optimize(fit_eval());
+    std::cout << opt_hp.best_observation() << " res  "
+              << opt_hp.best_sample().transpose() << std::endl;
     return 0;
 }
