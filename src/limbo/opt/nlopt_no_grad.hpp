@@ -55,8 +55,8 @@
 
 #include <nlopt.hpp>
 
-#include <limbo/tools/macros.hpp>
 #include <limbo/opt/optimizer.hpp>
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -64,6 +64,20 @@ namespace limbo {
             /// @ingroup opt_defaults
             /// number of calls to the optimized function
             BO_PARAM(int, iterations, 500);
+            /// @ingroup opt_defaults
+            /// tolerance for convergence: stop when an optimization step (or an
+            /// estimate of the optimum) changes the objective function value by
+            /// less than tol multiplied by the absolute value of the function
+            /// value.
+            /// IGNORED if negative
+            BO_PARAM(double, fun_tolerance, -1);
+            /// @ingroup opt_defaults
+            /// tolerance for convergence: stop when an optimization step (or an
+            /// estimate of the optimum) changes all the parameter values by
+            /// less than tol multiplied by the absolute value of the parameter
+            /// value.
+            /// IGNORED if negative
+            BO_PARAM(double, xrel_tolerance, -1);
         };
     }
     namespace opt {
@@ -90,12 +104,15 @@ namespace limbo {
          - LN_BOBYQA
          - LN_NEWUOA
          - LN_NEWUOA_BOUND
+         - LN_PRAXIS
          - LN_NELDERMEAD
          - LN_SBPLX
          - LN_AUGLAG
 
          Parameters:
          - int iterations
+         - double fun_tolerance
+         - double xrel_tolerance
         */
         template <typename Params, nlopt::algorithm Algorithm = nlopt::GN_DIRECT_L_RAND>
         struct NLOptNoGrad {
@@ -105,6 +122,7 @@ namespace limbo {
             {
                 // Assert that the algorithm is non-gradient
                 // TO-DO: Add support for MLSL (Multi-Level Single-Linkage)
+                // TO-DO: Add better support for AUGLAG and AUGLAG_EQ
                 // TO-DO: Add better support for ISRES (Improved Stochastic Ranking Evolution Strategy)
                 // clang-format off
                 static_assert(Algorithm == nlopt::LN_COBYLA || Algorithm == nlopt::LN_BOBYQA ||
@@ -115,7 +133,7 @@ namespace limbo {
                     Algorithm == nlopt::GN_DIRECT_NOSCAL || Algorithm == nlopt::GN_DIRECT_L_NOSCAL ||
                     Algorithm == nlopt::GN_DIRECT_L_RAND_NOSCAL || Algorithm == nlopt::GN_ORIG_DIRECT ||
                     Algorithm == nlopt::GN_ORIG_DIRECT_L || Algorithm == nlopt::GN_CRS2_LM ||
-                    Algorithm == nlopt::GD_STOGO || Algorithm == nlopt::GD_STOGO_RAND ||
+                    Algorithm == nlopt::LN_AUGLAG || Algorithm == nlopt::LN_AUGLAG_EQ ||
                     Algorithm == nlopt::GN_ISRES || Algorithm == nlopt::GN_ESCH, "NLOptNoGrad accepts gradient free nlopt algorithms only");
                 // clang-format on
 
@@ -128,6 +146,8 @@ namespace limbo {
                 Eigen::VectorXd::Map(&x[0], dim) = init;
 
                 opt.set_maxeval(Params::opt_nloptnograd::iterations());
+                opt.set_ftol_rel(Params::opt_nloptnograd::fun_tolerance());
+                opt.set_xtol_rel(Params::opt_nloptnograd::xrel_tolerance());
 
                 if (bounded) {
                     opt.set_lower_bounds(std::vector<double>(dim, 0));

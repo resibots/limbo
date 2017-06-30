@@ -51,13 +51,13 @@ using namespace limbo;
 
 #ifdef USE_NLOPT
 struct ParamsGrad {
-    struct opt_nloptgrad {
+    struct opt_nloptgrad : public defaults::opt_nloptgrad {
         BO_PARAM(int, iterations, 80);
     };
 };
 
 struct ParamsNoGrad {
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_PARAM(int, iterations, 80);
     };
 };

@@ -24,6 +24,10 @@ Optional but highly recommended
     ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
     sudo make install
 
+.. caution::
+
+  The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (`brew install homebrew/science/nlopt`).
+
 * `libcmaes <https://github.com/beniz/libcmaes>`_. Make sure that you install with **sudo** or configure the **LD_LIBRARY_PATH** accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get). Follow the instructions `here <https://github.com/beniz/libcmaes#build>`_, reproduced for your convenience::
 
     sudo apt-get install libgtest-dev
@@ -111,42 +115,3 @@ The second step is to run the build command::
 Depending on your compiler, there may be some warnings, but the output should end with the following lines: ::
 
     'build' finished successfully (time in sec)
-
-
-Building the documentation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. note::
-    This section is only useful for developers who need to update the documentation.
-
-Install sphinx via pip: ::
-
-    sudo pip install Sphinx
-    sudo pip install sphinxcontrib-bibtex
-
-.. warning::
-
-  On Mac OSX, do not use `brew install sphinx` because this is not the right sphinx
-
-Install the Resibots theme for Sphinx::
-
-    git clone https://github.com/resibots/sphinx_resibots_theme
-    export SPHINX_RESIBOTS_THEME="/home/me/path/to/sphinx_resibots_theme"
-
-Install `breathe <https://breathe.readthedocs.io/en/latest/>`_ via pip::
-
-    sudo pip install breathe
-
-Install `doxygen <http://www.stack.nl/~dimitri/doxygen/>`_ via your package manager (e.g. apt-get / brew)::
-
-    apt-get install doxygen
-
-In the `doc` directory::
-
-    make html
-
-About sphinx and ReStructuredText:
-  - `There is a tutorial <http://sphinx-doc.org/tutorial.html>`_,
-  - `Primer for ReStructuredText <http://sphinx-doc.org/rest.html>`_, the markup language of Sphinx,
-  - `markup specific to Sphinx <http://sphinx-doc.org/markup/index.html>`_,
-  - `About C++ in Sphinx <http://sphinx-doc.org/domains.html#id2>`_
-  - `Breathe (bridge between sphinx and doxygen) <https://breathe.readthedocs.org/en/latest/>`_

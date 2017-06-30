@@ -105,9 +105,11 @@ def configure(conf):
         conf.load('nlopt')
         conf.load('libcmaes')
 
+        native_flags = "-mavx -mfma -march=native"
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
-            opt_flags = " -O3 -xHost -mtune=native -unroll -fma -g"
+            opt_flags = " -O3 -xHost -g"
+            native_flags = "-mtune=native -unroll -fma"
         else:
             if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
                 common_flags = "-Wall -std=c++0x"
@@ -115,7 +117,13 @@ def configure(conf):
                 common_flags = "-Wall -std=c++11"
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
-            opt_flags = " -O3 -g -mavx -mfma -march=native"
+            opt_flags = " -O3 -g"
+
+        native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
+        if native:
+            opt_flags = opt_flags + ' ' + native_flags
+        else:
+            Logs.pprint('YELLOW', 'WARNING: Native flags not supported. The performance might be a bit deteriorated.')
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \
@@ -227,11 +235,13 @@ def shutdown(ctx):
 def insert_license(ctx):
     limbo.insert_license()
 
-def build_docs(ctx):
-    Logs.pprint('NORMAL', 'extracting default params...')
+def write_default_params(ctx):
+    Logs.pprint('NORMAL', 'extracting default params to docs/defaults.rst')
     limbo.write_default_params('docs/defaults.rst')
-    Logs.pprint('NORMAL', 'generating HTML doc...')
-    s = "cd docs; make html"
+
+def build_docs(ctx):
+    Logs.pprint('NORMAL', "generating HTML doc with versioning...")
+    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
@@ -249,3 +259,7 @@ class InsertLicense(BuildContext):
 class BuildDoc(BuildContext):
     cmd = 'docs'
     fun = 'build_docs'
+
+class BuildDoc(BuildContext):
+    cmd = 'default_params'
+    fun = 'write_default_params'

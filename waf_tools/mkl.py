@@ -54,6 +54,7 @@ Quick n dirty intel mkl detection
 
 import os, glob, types
 from waflib.Configure import conf
+import limbo
 
 def options(opt):
     opt.add_option('--mkl', type='string', help='path to Intel Math Kernel Library', dest='mkl')
@@ -63,17 +64,17 @@ def options(opt):
 def check_mkl(conf):
     if conf.options.mkl:
         includes_mkl = [conf.options.mkl + '/include']
-        libpath_mkl = [conf.options.mkl + '/lib/intel64']
+        libpath_mkl = [conf.options.mkl + '/lib/intel64', conf.options.mkl + '/lib/']
     else:
         includes_mkl = ['/usr/local/include', '/usr/include', '/opt/intel/mkl/include']
-        libpath_mkl = ['/usr/local/lib/', '/usr/lib', '/opt/intel/mkl/lib/intel64', '/usr/lib/x86_64-linux-gnu/']
+        libpath_mkl = ['/usr/local/lib/', '/usr/lib', '/opt/intel/mkl/lib/intel64', '/usr/lib/x86_64-linux-gnu/', '/opt/intel/mkl/lib']
 
     conf.start_msg('Checking Intel MKL includes (optional)')
     try:
         res = conf.find_file('mkl.h', includes_mkl)
         conf.end_msg('ok')
         conf.start_msg('Checking Intel MKL libs (optional)')
-        res = res and conf.find_file('libmkl_core.so', libpath_mkl)
+        limbo.check_lib(conf, 'libmkl_core', libpath_mkl)
         conf.end_msg('ok')
     except:
         conf.end_msg('Not found', 'RED')

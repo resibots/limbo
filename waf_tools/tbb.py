@@ -53,7 +53,7 @@ Quick n dirty tbb detection
 """
 
 from waflib.Configure import conf
-
+import limbo
 
 def options(opt):
     opt.add_option('--tbb', type='string', help='path to Intel TBB', dest='tbb')
@@ -69,22 +69,25 @@ def check_tbb(self, *k, **kw):
         libpath_tbb = ['/usr/local/lib/', '/usr/lib', '/opt/intel/tbb/lib', '/usr/lib/x86_64-linux-gnu/']
 
     self.start_msg('Checking Intel TBB includes (optional)')
+    incl = ''
+    lib = ''
     try:
-        self.find_file('tbb/parallel_for.h', includes_tbb)
-        self.end_msg('ok')
+        res = self.find_file('tbb/parallel_for.h', includes_tbb)
+        incl = res[:-len('tbb/parallel_for.h')-1]
+        self.end_msg(incl)
     except:
-        self.end_msg('not found', 'YELLOW')
+        self.end_msg('Not found in %s' % str(includes_tbb), 'YELLOW')
         return
 
     self.start_msg('Checking Intel TBB libs (optional)')
     try:
-        self.find_file('libtbb.so', libpath_tbb)
-        self.end_msg('ok')
+        res, lib = limbo.check_lib(self, 'libtbb', libpath_tbb)
+        self.end_msg(lib)
     except:
-        self.end_msg('not found', 'YELLOW')
+        self.end_msg('Not found in %s' % str(libpath_tbb), 'YELLOW')
         return
 
-    self.env.LIBPATH_TBB = libpath_tbb
+    self.env.LIBPATH_TBB = [lib]
     self.env.LIB_TBB = ['tbb']
-    self.env.INCLUDES_TBB = includes_tbb
+    self.env.INCLUDES_TBB = [incl]
     self.env.DEFINES_TBB = ['USE_TBB']
