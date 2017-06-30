@@ -252,16 +252,6 @@ namespace limbo {
                     return lik_all;
                 }
 
-                double compute_lik() const
-                {
-                    double lik_all = 1.0;
-                    for (auto gp : _gps) {
-                        lik_all *= gp.compute_lik();
-                    }
-
-                    return lik_all;
-                }
-
                 /// return the list of samples that have been tested so far
                 const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
 
