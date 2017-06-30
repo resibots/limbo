@@ -62,9 +62,10 @@ namespace limbo {
     namespace model {
         /// @ingroup model
         /// A classic Gaussian process.
-        /// It is parametrized by:
+        /// It is parameterized by:
+        /// - a kernel function
         /// - a mean function
-        /// - [optionnal] an optimizer for the hyper-parameters
+        /// - [optional] an optimizer for the hyper-parameters
         template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = gp::NoLFOpt<Params>>
         class GP {
         public:

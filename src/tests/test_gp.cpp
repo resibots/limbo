@@ -50,15 +50,15 @@
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/acqui/ucb.hpp>
+#include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/kernel/matern_three_halves.hpp>
-#include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
 #include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp.hpp>
-#include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
+#include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
 #include <limbo/model/gp/mean_lf_opt.hpp>
 #include <limbo/opt/grid_search.hpp>

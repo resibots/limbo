@@ -86,3 +86,9 @@ def build(bld):
                       target = 'cbo',
                       uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
                       use = 'limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'poegp.cpp',
+                      includes = '.. ../.. ../../../',
+                      target = 'poegp',
+                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      use = 'limbo')

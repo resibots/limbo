@@ -48,7 +48,6 @@
 
 
 def build(bld):
-    bld.recurse('spt')
     bld.recurse('examples')
     bld.recurse('tutorials')
     if bld.options.tests:

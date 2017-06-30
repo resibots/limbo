@@ -1,8 +1,8 @@
 #ifndef SPT_STGP_HPP
 #define SPT_STGP_HPP
 
-#include <limbo/limbo.hpp>
 #include "spt.hpp"
+#include <limbo/limbo.hpp>
 
 namespace spt {
 
@@ -15,6 +15,7 @@ namespace spt {
         };
     }
 
+    // THIS IS NOT WORKING -- JUST SAVING
     template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
     class STGP {
     public:
@@ -68,14 +69,14 @@ namespace spt {
             _gps.resize(_leaves.size());
             // for (size_t i = 0; i < _leaves.size(); i++)
             limbo::tools::par::loop(0, _leaves.size(), [&](size_t i) {
-              _gps[i].compute(_leaves[i]->points(), _leaves[i]->observations(), false);
-              if (Params::spt_stgp::global_gp()) {
-                  _gps[i].kernel_function().set_h_params(big_gp.kernel_function().h_params());
-                  _gps[i].recompute(false);
-              }
-              else {
-                  _gps[i].optimize_hyperparams();
-              }
+                _gps[i].compute(_leaves[i]->points(), _leaves[i]->observations(), false);
+                if (Params::spt_stgp::global_gp()) {
+                    _gps[i].kernel_function().set_h_params(big_gp.kernel_function().h_params());
+                    _gps[i].recompute(false);
+                }
+                else {
+                    _gps[i].optimize_hyperparams();
+                }
             });
 
             if (!Params::spt_stgp::global_gp()) {
