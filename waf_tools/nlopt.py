@@ -72,27 +72,30 @@ def check_nlopt(conf):
 			includes_check = [os.environ['RESIBOTS_DIR'] + '/include'] + includes_check
 			libs_check = [os.environ['RESIBOTS_DIR'] + '/lib'] + libs_check
 
+	incl = ''
 	try:
 		conf.start_msg('Checking for NLOpt C++ includes (optional)')
 		res = conf.find_file('nlopt.hpp', includes_check)
-		conf.end_msg('ok')
+		incl = res[:-len('nlopt.hpp')-1]
+		conf.end_msg(incl)
 	except:
-		conf.end_msg('Not found', 'RED')
+		conf.end_msg('Not found in %s' % str(includes_check), 'YELLOW')
 		return 1
 	conf.start_msg('Checking for NLOpt C++ libs (optional)')
-	found = False
+	lib_path = ''
 	for lib in ['libnlopt_cxx.so', 'libnlopt_cxx.a', 'libnlopt_cxx.dylib']:
 		try:
-			found = found or conf.find_file(lib, libs_check)
+			res = conf.find_file(lib, libs_check)
+			lib_path = res[:-len(lib)-1]
 		except:
 			continue
-	if not found:
-		conf.end_msg('Not found', 'RED')
+	if lib_path == '':
+		conf.end_msg('Not found in %s' % str(libs_check), 'YELLOW')
 		return 1
 	else:
-		conf.end_msg('ok')
-		conf.env.INCLUDES_NLOPT = includes_check
-		conf.env.LIBPATH_NLOPT = libs_check
+		conf.end_msg(lib_path)
+		conf.env.INCLUDES_NLOPT = [incl]
+		conf.env.LIBPATH_NLOPT = [lib_path]
 		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
 		conf.env.LIB_NLOPT = ['nlopt_cxx']
 	return 1

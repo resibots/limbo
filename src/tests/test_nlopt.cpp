@@ -55,11 +55,11 @@
 using namespace limbo;
 
 struct Params {
-    struct opt_nloptgrad {
+    struct opt_nloptgrad : public defaults::opt_nloptgrad {
         BO_PARAM(int, iterations, 80);
     };
 
-    struct opt_nloptnograd {
+    struct opt_nloptnograd : public defaults::opt_nloptnograd {
         BO_PARAM(int, iterations, 80);
     };
 };
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_CASE(test_nlopt_grad_simple)
 
 BOOST_AUTO_TEST_CASE(test_nlopt_no_grad_simple)
 {
-    opt::NLOptGrad<Params, nlopt::LN_COBYLA> optimizer;
+    opt::NLOptNoGrad<Params, nlopt::LN_COBYLA> optimizer;
     Eigen::VectorXd best(2);
     best << 1, 1;
     size_t N = 10;

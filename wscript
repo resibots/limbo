@@ -106,9 +106,11 @@ def configure(conf):
         conf.load('nlopt')
         conf.load('libcmaes')
 
+        native_flags = "-mavx -mfma -march=native"
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
-            opt_flags = " -O3 -xHost -mtune=native -unroll -fma -g"
+            opt_flags = " -O3 -xHost -g"
+            native_flags = "-mtune=native -unroll -fma"
         else:
             if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
                 common_flags = "-Wall -std=c++0x"
@@ -116,7 +118,13 @@ def configure(conf):
                 common_flags = "-Wall -std=c++11"
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
-            opt_flags = " -O3 -g -mavx -mfma -march=native"
+            opt_flags = " -O3 -g"
+
+        native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
+        if native:
+            opt_flags = opt_flags + ' ' + native_flags
+        else:
+            Logs.pprint('YELLOW', 'WARNING: Native flags not supported. The performance might be a bit deteriorated.')
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \

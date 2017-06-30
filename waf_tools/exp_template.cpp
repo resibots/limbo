@@ -25,6 +25,10 @@ struct Params {
     };
 #endif
 
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 0.001);
+    };
+
     struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
         @BAYES_OPT_BOBASE_STATS_DISABLED
     };
@@ -47,9 +51,9 @@ struct Params {
 
 struct Eval {
     // number of input dimension (x.size())
-    static constexpr size_t dim_in = @DIM_IN;
-    // number of dimenions of the result (res.size())
-    static constexpr size_t dim_out = @DIM_OUT;
+    BO_PARAM(size_t,dim_in, @DIM_IN);
+    // number of dimensions of the result (res.size())
+    BO_PARAM(size_t, dim_out, @DIM_OUT);
 
     // the function to be optimized
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
