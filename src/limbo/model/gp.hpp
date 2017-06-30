@@ -69,11 +69,11 @@ namespace limbo {
         class GP {
         public:
             /// useful because the model might be created before knowing anything about the process
-            GP() : _dim_in(-1), _dim_out(-1) {}
+            GP() : _dim_in(-1), _dim_out(-1), _inv_kernel_updated(false) {}
 
             /// useful because the model might be created  before having samples
             GP(int dim_in, int dim_out)
-                : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out) {}
+                : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out), _inv_kernel_updated(false) {}
 
             /// Compute the GP from samples and observations. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples,
@@ -146,7 +146,7 @@ namespace limbo {
              \\rst
              return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
              \\endrst
-	  		*/
+            */
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
@@ -161,7 +161,7 @@ namespace limbo {
              \\rst
              return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
              \\endrst
-	  		*/
+            */
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
@@ -173,7 +173,7 @@ namespace limbo {
              \\rst
              return :math:`\sigma^2` (unormalized). If there is no sample, return the max :math:`\sigma^2`.
              \\endrst
-	  		*/
+            */
             double sigma(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
@@ -242,11 +242,161 @@ namespace limbo {
                     this->_compute_alpha();
             }
 
-            /// return the likelihood (do not compute it!)
-            double get_lik() const { return _lik; }
+            void compute_inv_kernel()
+            {
+                size_t n = _obs_mean.rows();
+                // K^{-1} using Cholesky decomposition
+                _inv_kernel = Eigen::MatrixXd::Identity(n, n);
 
-            /// set the likelihood (you need to compute it from outside!)
-            void set_lik(const double& lik) { _lik = lik; }
+                _matrixL.template triangularView<Eigen::Lower>().solveInPlace(_inv_kernel);
+                _matrixL.template triangularView<Eigen::Lower>().transpose().solveInPlace(_inv_kernel);
+
+                _inv_kernel_updated = true;
+            }
+
+            /// compute and return the log likelihood
+            double compute_log_lik()
+            {
+                size_t n = _obs_mean.rows();
+
+                // --- cholesky ---
+                // see:
+                // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
+                long double det = 2 * _matrixL.diagonal().array().log().sum();
+
+                double a = (_obs_mean.transpose() * _alpha)
+                               .trace(); // generalization for multi dimensional observation
+
+                _log_lik = -0.5 * a - 0.5 * det - 0.5 * n * std::log(2 * M_PI);
+
+                return _log_lik;
+            }
+
+            /// compute and return the gradient of the log likelihood wrt to the kernel parameters
+            Eigen::VectorXd compute_kernel_grad_log_lik()
+            {
+                size_t n = _obs_mean.rows();
+
+                // compute K^{-1} only if needed
+                if (!_inv_kernel_updated) {
+                    compute_inv_kernel();
+                }
+                Eigen::MatrixXd w = _inv_kernel;
+
+                // alpha * alpha.transpose() - K^{-1}
+                w = _alpha * _alpha.transpose() - w;
+
+                // only compute half of the matrix (symmetrical matrix)
+                Eigen::VectorXd grad = Eigen::VectorXd::Zero(_kernel_function.h_params_size());
+                for (size_t i = 0; i < n; ++i) {
+                    for (size_t j = 0; j <= i; ++j) {
+                        Eigen::VectorXd g = _kernel_function.grad(_samples[i], _samples[j], i, j);
+                        if (i == j)
+                            grad += w(i, j) * g * 0.5;
+                        else
+                            grad += w(i, j) * g;
+                    }
+                }
+
+                return grad;
+            }
+
+            /// compute and return the gradient of the log likelihood wrt to the mean parameters
+            Eigen::VectorXd compute_mean_grad_log_lik()
+            {
+                size_t n = _obs_mean.rows();
+
+                // compute K^{-1} only if needed
+                if (!_inv_kernel_updated) {
+                    compute_inv_kernel();
+                }
+
+                Eigen::VectorXd grad = Eigen::VectorXd::Zero(_mean_function.h_params_size());
+                for (int i_obs = 0; i_obs < _dim_out; ++i_obs)
+                    for (size_t n_obs = 0; n_obs < n; n_obs++) {
+                        grad += _obs_mean.col(i_obs).transpose() * _inv_kernel.col(n_obs) * _mean_function.grad(_samples[n_obs], *this).row(i_obs);
+                    }
+
+                return grad;
+            }
+
+            /// return the likelihood (do not compute it -- return last computed)
+            double get_log_lik() const { return _log_lik; }
+
+            /// set the log likelihood (e.g. computed from outside)
+            void set_log_lik(double log_lik) { _log_lik = log_lik; }
+
+            /// compute and return the log probability of LOO CV
+            double compute_log_loo_cv()
+            {
+                // compute K^{-1} only if needed
+                if (!_inv_kernel_updated) {
+                    compute_inv_kernel();
+                }
+
+                Eigen::VectorXd inv_diag = _inv_kernel.diagonal().array().inverse();
+
+                _log_loo_cv = (((-0.5 * (_alpha.array().square().array().colwise() * inv_diag.array())).array().colwise() - 0.5 * inv_diag.array().log().array()) - 0.5 * std::log(2 * M_PI)).colwise().sum().sum();
+
+                return _log_loo_cv;
+            }
+
+            /// compute and return the gradient of the log probability of LOO CV wrt to the kernel parameters
+            Eigen::VectorXd compute_kernel_grad_log_loo_cv()
+            {
+                size_t n = _obs_mean.rows();
+                size_t n_params = _kernel_function.h_params_size();
+
+                // compute K^{-1} only if needed
+                if (!_inv_kernel_updated) {
+                    compute_inv_kernel();
+                }
+
+                Eigen::VectorXd grad = Eigen::VectorXd::Zero(n_params);
+                Eigen::MatrixXd grads = Eigen::MatrixXd::Zero(n_params, _dim_out);
+
+                // only compute half of the matrix (symmetrical matrix)
+                // TO-DO: Make it better
+                std::vector<std::vector<Eigen::VectorXd>> full_dk;
+                for (size_t i = 0; i < n; i++) {
+                    full_dk.push_back(std::vector<Eigen::VectorXd>());
+                    for (size_t j = 0; j <= i; j++)
+                        full_dk[i].push_back(_kernel_function.grad(_samples[i], _samples[j], i, j));
+                    for (size_t j = i + 1; j < n; j++)
+                        full_dk[i].push_back(Eigen::VectorXd::Zero(n_params));
+                }
+                for (size_t i = 0; i < n; i++)
+                    for (size_t j = 0; j < i; ++j)
+                        full_dk[j][i] = full_dk[i][j];
+
+                Eigen::VectorXd inv_diag = _inv_kernel.diagonal().array().inverse();
+
+                for (int j = 0; j < grad.size(); j++) {
+                    Eigen::MatrixXd dKdTheta_j = Eigen::MatrixXd::Zero(n, n);
+                    for (size_t i = 0; i < n; i++) {
+                        for (size_t k = 0; k < n; k++)
+                            dKdTheta_j(i, k) = full_dk[i][k](j);
+                    }
+                    Eigen::MatrixXd Zeta_j = _inv_kernel * dKdTheta_j;
+                    Eigen::MatrixXd Zeta_j_alpha = Zeta_j * _alpha;
+                    Eigen::MatrixXd Zeta_j_K = Zeta_j * _inv_kernel;
+
+                    grads.row(j) = ((_alpha.array() * Zeta_j_alpha.array() - 0.5 * ((1. + _alpha.array().square().array().colwise() * inv_diag.array()).array().colwise() * Zeta_j_K.diagonal().array())).array().colwise() * inv_diag.array()).colwise().sum();
+
+                    // for (size_t i = 0; i < n; i++)
+                    //     grads.row(j).array() += (_alpha.row(i).array() * Zeta_j_alpha.row(i).array() - 0.5 * (1. + _alpha.row(i).array().square() / _inv_kernel.diagonal()(i)) * Zeta_j_K.diagonal()(i)) / _inv_kernel.diagonal()(i);
+                }
+
+                grad = grads.rowwise().sum();
+
+                return grad;
+            }
+
+            /// return the LOO-CV log probability (do not compute it -- return last computed)
+            double get_log_loo_cv() const { return _log_loo_cv; }
+
+            /// set the LOO-CV log probability (e.g. computed from outside)
+            void set_log_loo_cv(double log_loo_cv) { _log_loo_cv = log_loo_cv; }
 
             /// LLT matrix (from Cholesky decomposition)
             //const Eigen::LLT<Eigen::MatrixXd>& llt() const { return _llt; }
@@ -256,6 +406,8 @@ namespace limbo {
 
             /// return the list of samples that have been tested so far
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
+
+            bool inv_kernel_computed() { return _inv_kernel_updated; }
 
         protected:
             int _dim_in;
@@ -272,11 +424,12 @@ namespace limbo {
             Eigen::MatrixXd _alpha;
             Eigen::VectorXd _mean_observation;
 
-            Eigen::MatrixXd _kernel;
+            Eigen::MatrixXd _kernel, _inv_kernel;
 
             Eigen::MatrixXd _matrixL;
 
-            double _lik;
+            double _log_lik, _log_loo_cv;
+            bool _inv_kernel_updated;
 
             HyperParamsOptimizer _hp_optimize;
 
@@ -306,6 +459,9 @@ namespace limbo {
                 _matrixL = Eigen::LLT<Eigen::MatrixXd>(_kernel).matrixL();
 
                 this->_compute_alpha();
+
+                // notify change of kernel
+                _inv_kernel_updated = false;
             }
 
             void _compute_incremental_kernel()
@@ -335,6 +491,9 @@ namespace limbo {
                 _matrixL(n - 1, n - 1) = sqrt(L_j);
 
                 this->_compute_alpha();
+
+                // notify change of kernel
+                _inv_kernel_updated = false;
             }
 
             void _compute_alpha()

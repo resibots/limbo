@@ -43,17 +43,61 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_MODEL_HPP
-#define LIMBO_MODEL_HPP
+#ifndef LIMBO_MODEL_GP_KERNEL_LOO_OPT_HPP
+#define LIMBO_MODEL_GP_KERNEL_LOO_OPT_HPP
 
-///@defgroup model_opt
-///@defgroup model_opt_defaults
+#include <limbo/model/gp/hp_opt.hpp>
+#include <limbo/tools/random_generator.hpp>
 
-#include <limbo/model/gp.hpp>
-#include <limbo/model/gp/kernel_loo_opt.hpp>
-#include <limbo/model/gp/kernel_lf_opt.hpp>
-#include <limbo/model/gp/kernel_mean_lf_opt.hpp>
-#include <limbo/model/gp/mean_lf_opt.hpp>
-#include <limbo/model/gp/no_lf_opt.hpp>
+namespace limbo {
+    namespace model {
+        namespace gp {
+            ///@ingroup model_opt
+            ///optimize the likelihood of the kernel only
+            template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
+            struct KernelLooOpt : public HPOpt<Params, Optimizer> {
+            public:
+                template <typename GP>
+                void operator()(GP& gp)
+                {
+                    this->_called = true;
+                    KernelLooOptimization<GP> optimization(gp);
+                    Optimizer optimizer;
+                    Eigen::VectorXd params = optimizer(optimization, gp.kernel_function().h_params(), false);
+                    gp.kernel_function().set_h_params(params);
+                    gp.recompute(false);
+                    gp.compute_log_loo_cv();
+                }
+
+            protected:
+                template <typename GP>
+                struct KernelLooOptimization {
+                public:
+                    KernelLooOptimization(const GP& gp) : _original_gp(gp) {}
+
+                    opt::eval_t operator()(const Eigen::VectorXd& params, bool compute_grad) const
+                    {
+                        GP gp(this->_original_gp);
+                        gp.kernel_function().set_h_params(params);
+
+                        gp.recompute(false);
+
+                        double loo = gp.compute_log_loo_cv();
+
+                        if (!compute_grad)
+                            return opt::no_grad(loo);
+
+                        Eigen::VectorXd grad = gp.compute_kernel_grad_log_loo_cv();
+
+                        return {loo, grad};
+                    }
+
+                protected:
+                    const GP& _original_gp;
+                };
+            };
+        }
+    }
+}
 
 #endif
