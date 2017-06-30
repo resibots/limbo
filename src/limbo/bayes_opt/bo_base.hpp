@@ -182,7 +182,9 @@ namespace limbo {
             // defaults
             struct defaults {
                 using init_t = init::RandomSampling<Params>; // 1
-                using model_t = model::GPBasic<Params>; // 2
+                using kf_t = kernel::Exp<Params>;
+                using mean_t = mean::Data<Params>;
+                using model_t = model::GP<Params, kf_t, mean_t>; // 2
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
                 using acqui_t = acqui::UCB<Params, model_t>; // 3
