@@ -39,6 +39,7 @@ def custom_ax(ax):
     ax.spines['bottom'].set_visible(False)
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
+    ax.set_axisbelow(True)
     ax.grid(axis='x', color="0.9", linestyle='-')
 
 def custom_boxes(ax, bp):
