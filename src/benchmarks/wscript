@@ -69,29 +69,18 @@ def build_bo_benchmarks(bld):
 
     if bld.env.DEFINES_NLOPT == ['USE_NLOPT']:
         limbo.create_variants(bld,
-                      source = 'limbo/hp_opt.cpp',
+                      source = 'limbo/bench.cpp',
                       uselib_local = 'limbo',
                       uselib = 'BOOST EIGEN TBB NLOPT CMAES',
-                      variants = ['BAYESOPT_PARAMS',
-                                  'LIMBO_PARAMS',
+                      variants = ['BAYESOPT_DEF',
+                                  'BAYESOPT_DEF_HPOPT',
+                                  'LIMBO_DEF',
+                                  'LIMBO_DEF_HPOPT',
                                   'OPT_CMAES',
                                   'OPT_DIRECT',
                                   'ACQ_UCB',
                                   'ACQ_EI'
                                   ])
-        bld.program(features='cxx',
-                    source='limbo/simple.cpp',
-                    includes='. .. ../../ ../../src',
-                    target='benchmark_limbo',
-                    uselib='BOOST EIGEN TBB SFERES NLOPT',
-                    use='limbo')
-
-        # bld.program(features='cxx',
-        #             source='limbo/hp_opt.cpp',
-        #             includes='. .. ../../ ../../src',
-        #             target='benchmark_limbo_hp_opt',
-        #             uselib='BOOST EIGEN TBB SFERES NLOPT',
-        #             use='limbo')
 
         #Quick and dirty way to add Bayesopt
 
