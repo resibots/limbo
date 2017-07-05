@@ -99,13 +99,13 @@ def build_bo_benchmarks(bld):
             bld.program(features='cxx',
                         source='bayesopt/simple.cpp',
                         includes='.',
-                        target='bayesopt/benchmark_bayesopt',
+                        target='bayesopt/default',
                         uselib='BOOST EIGEN TBB NLOPT BAYESOPT LIMBO',
                         use='')
 
             bld.program(features='cxx',
                         source='bayesopt/hp_opt.cpp',
                         includes='.',
-                        target='bayesopt/benchmark_bayesopt_hp_opt',
+                        target='bayesopt/hp_opt',
                         uselib='BOOST EIGEN TBB NLOPT BAYESOPT LIMBO',
                         use='')
