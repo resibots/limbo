@@ -8,11 +8,7 @@ import brewer2mpl
 bmap = brewer2mpl.get_map('Set2', 'qualitative', 8)
 
 colors = bmap.mpl_colors
-print len(colors)
 
-
-
-print colors
 params = {
     'axes.labelsize' : 8,
     'text.fontsize' : 8,
@@ -25,7 +21,7 @@ params = {
 rcParams.update(params)
 
 def load_data():
-    files = glob("../benchmark_results/*/*/*.dat")
+    files = glob("benchmark_results/*/*/*.dat")
     data = defaultdict(lambda : defaultdict(dict))
     for f in files:
         fs = f.split("/")
@@ -102,12 +98,16 @@ def plot(func_name, data):
     ax.set_yticklabels([])
     ax.set_title("Wall clock time")
 
-    fig.savefig("../benchmark_results/" + func_name.split('.')[0] + ".png")    
+    fig.savefig("benchmark_results/" + func_name.split('.')[0] + ".png")    
 
 
-def main():
+def plot_all():
+    print('loading data...')
     data = load_data()
+    print('data loaded')
     for k in data.keys():
+        print('plotting for ' + k + '...')
         plot(k, data)
 
-main()
+if __name__ == "__main__":
+    plot_all()
