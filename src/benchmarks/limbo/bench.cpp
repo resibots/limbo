@@ -43,8 +43,8 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#include <iostream>
 #include <chrono>
+#include <iostream>
 
 #include <limbo/limbo.hpp>
 
@@ -57,7 +57,11 @@ struct Params {
         BO_PARAM(bool, stats_enabled, false);
     };
     struct bayes_opt_boptimizer {
+#if defined(LIMBO_DEF_HPOPT) || defined(BAYESOPT_DEF_HPOPT)
         BO_PARAM(int, hp_period, 50);
+#else
+        BO_PARAM(int, hp_period, -1);
+#endif
     };
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 190);
@@ -151,7 +155,6 @@ int main()
 {
     srand(time(NULL));
 
-
 // limbo default parameters
 #ifdef LIMBO_DEF
     using Opt_t = bayes_opt::BOptimizer<Params>;
@@ -194,13 +197,13 @@ int main()
 #elif defined(ACQ_UCB)
     using GP_t = model::GP<Params>;
     using Acqui_t = acqui::UCB<Params, GP_t>;
-    using Opt_t =  bayes_opt::BOptimizer<Params, acquifun<Acqui_t>> ;
+    using Opt_t = bayes_opt::BOptimizer<Params, acquifun<Acqui_t>>;
 #elif defined(ACQ_EI)
     using GP_t = model::GP<Params>;
     using Acqui_t = acqui::EI<Params, GP_t>;
-    using Opt_t =  bayes_opt::BOptimizer<Params, acquifun<Acqui_t>> ;
+    using Opt_t = bayes_opt::BOptimizer<Params, acquifun<Acqui_t>>;
 #else
-    #error "Unknown variant in benchmark"
+#error "Unknown variant in benchmark"
 #endif
 
     benchmark<Opt_t, BraninNormalized>("branin");
