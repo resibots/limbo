@@ -90,6 +90,10 @@ struct Params {
     };
     struct opt_nloptnograd : public defaults::opt_nloptnograd {
     };
+#ifdef USE_LIBCMAES
+    struct opt_cmaes : public defaults::opt_cmaes {
+    };
+#endif
 };
 
 struct DirectParams {
@@ -180,7 +184,7 @@ int main()
 
 // benchmark different optimization algorithms
 #elif defined(OPT_CMAES)
-    using AcquiOpt_t = opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>>;
+    using AcquiOpt_t = opt::Cmaes<Params>;
     using Opt_t = bayes_opt::BOptimizer<Params, acquiopt<AcquiOpt_t>>;
 #elif defined(OPT_DIRECT)
     using AcquiOpt_t = opt::Chained<Params, opt::NLOptNoGrad<DirectParams, nlopt::GN_DIRECT_L>, opt::NLOptNoGrad<BobyqaParams, nlopt::LN_BOBYQA>>;
