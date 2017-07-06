@@ -62,25 +62,26 @@ def custom_boxes(ax, bp):
             boxPolygon = Polygon(boxCoords, facecolor = colors[i % len(colors)], linewidth=0)
             ax.add_patch(boxPolygon)
 
-        for i in range(0, len(bp['boxes'])):
-            bp['boxes'][i].set_color(colors[i])
-            # we have two whiskers!
-            bp['whiskers'][i*2].set_color(colors[i])
-            bp['whiskers'][i*2 + 1].set_color(colors[i])
-            bp['whiskers'][i*2].set_linewidth(2)
-            bp['whiskers'][i*2 + 1].set_linewidth(2)
-            # top and bottom fliers
-            bp['fliers'][i * 2].set(markerfacecolor=colors[i],
-                            marker='o', alpha=0.75, markersize=6,
-                            markeredgecolor='none')
-            bp['fliers'][i * 2 + 1].set(markerfacecolor=colors[i],
-                            marker='o', alpha=0.75, markersize=6,
-                            markeredgecolor='none')
-            bp['medians'][i].set_color('black')
-            bp['medians'][i].set_linewidth(2)
-            # and 4 caps to remove
-            for c in bp['caps']:
-                c.set_linewidth(0)
+    for i in range(0, len(bp['boxes'])):
+        c_i = colors[i%len(colors)]
+        bp['boxes'][i].set_color(c_i)
+        # we have two whiskers!
+        bp['whiskers'][i*2].set_color(c_i)
+        bp['whiskers'][i*2 + 1].set_color(c_i)
+        bp['whiskers'][i*2].set_linewidth(2)
+        bp['whiskers'][i*2 + 1].set_linewidth(2)
+        # top and bottom fliers
+        bp['fliers'][i*2].set(markerfacecolor=c_i,
+                        marker='o', alpha=0.75, markersize=6,
+                        markeredgecolor='none')
+        bp['fliers'][i * 2 + 1].set(markerfacecolor=c_i,
+                        marker='o', alpha=0.75, markersize=6,
+                        markeredgecolor='none')
+        bp['medians'][i].set_color('black')
+        bp['medians'][i].set_linewidth(2)
+        # and 4 caps to remove
+        for c in bp['caps']:
+            c.set_linewidth(0)
 
 
 # plot a single function
