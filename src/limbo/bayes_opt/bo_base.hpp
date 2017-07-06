@@ -182,7 +182,6 @@ namespace limbo {
             // defaults
             struct defaults {
                 using init_t = init::RandomSampling<Params>; // 1
-
                 using kf_t = kernel::Exp<Params>;
                 using mean_t = mean::Data<Params>;
                 using model_t = model::GP<Params, kf_t, mean_t>; // 2
