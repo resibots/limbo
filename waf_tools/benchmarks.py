@@ -4,7 +4,13 @@ import subprocess
 import time
 import threading
 from waflib import Logs
-import plot_bo_benchmarks
+
+plotting_ok = True
+try:
+    import plot_bo_benchmarks
+except:
+    plotting_ok = False
+    Logs.pprint('YELLOW', 'YELLOW: Could not import plot_bo_benchmarks! Will not plot anything!')
 
 json_ok = True
 try:
@@ -40,8 +46,9 @@ def run_bo_benchmarks(ctx):
                 Logs.pprint('NORMAL', '%s Running: %s for the %s th time %s' % (HEADER, fname, str(i), NC))
                 s="cd " + directory +";./" + fname
                 retcode = subprocess.call(s, shell=True, env=None)
-    # plot all
-    plot_bo_benchmarks.plot_all()
+    # plot all if possible
+    if plotting_ok:
+        plot_bo_benchmarks.plot_all()
 
 
 def compile_regression_benchmarks(bld, json_file):
