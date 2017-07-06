@@ -2,12 +2,23 @@
 # plot the results of the Bayesian Optimization benchmarks
 from glob import glob
 from collections import defaultdict
-import numpy as np
-from pylab import *
-import brewer2mpl
-bmap = brewer2mpl.get_map('Set2', 'qualitative', 8)
 
-colors = bmap.mpl_colors
+try:
+    from waflib import Logs
+    def print_log(c, s): Logs.pprint(c, s)
+except: # not in waf
+    def print_log(c, s): print(s)
+
+try:
+    import numpy as np
+    from pylab import *
+    import brewer2mpl
+    bmap = brewer2mpl.get_map('Set2', 'qualitative', 8)
+    colors = bmap.mpl_colors
+    plot_ok = True
+except:
+    plot_ok = False
+    Logs.pprint('YELLOW', 'WARNING: numpy/matplotlib not found: no plot of the BO benchmark results')
 
 params = {
     'axes.labelsize' : 8,
@@ -102,6 +113,9 @@ def plot(func_name, data):
 
 
 def plot_all():
+    if not plot_ok:
+        print_log('YELLOW', "No plot")
+        return
     print('loading data...')
     data = load_data()
     print('data loaded')
