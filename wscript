@@ -106,7 +106,7 @@ def configure(conf):
         conf.load('nlopt')
         conf.load('libcmaes')
 
-        native_flags = "-mavx -mfma -march=native"
+        native_flags = "-march=native"
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
             opt_flags = " -O3 -xHost -g"
