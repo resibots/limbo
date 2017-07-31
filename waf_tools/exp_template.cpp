@@ -33,7 +33,7 @@ struct Params {
         @BAYES_OPT_BOBASE_STATS_DISABLED
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
     };
 
     struct init_randomsampling : public defaults::init_randomsampling {
@@ -51,7 +51,7 @@ struct Params {
 
 struct Eval {
     // number of input dimension (x.size())
-    BO_PARAM(size_t,dim_in, @DIM_IN);
+    BO_PARAM(size_t, dim_in, @DIM_IN);
     // number of dimensions of the result (res.size())
     BO_PARAM(size_t, dim_out, @DIM_OUT);
 

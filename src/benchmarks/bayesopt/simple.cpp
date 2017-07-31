@@ -44,10 +44,11 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 #define SKIP_TRICKS
+#define BAYES_OPT
+#include "../limbo/testfunctions.hpp"
 #include <chrono>
 #include <fstream>
 #include <string>
-#include "testfunctions.hpp"
 
 template <typename Function>
 void benchmark(const bopt_params& par, const std::string& name)

@@ -55,13 +55,13 @@
 #include <Eigen/Core>
 #include <Eigen/LU>
 
-#include <limbo/tools.hpp>
-#include <limbo/model/gp/no_lf_opt.hpp>
+#include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
-#include <limbo/kernel/exp.hpp>
-#include <limbo/model/gp/kernel_lf_opt.hpp>
-#include <limbo/mean/data.hpp>
 #include <limbo/mean/constant.hpp>
+#include <limbo/mean/data.hpp>
+#include <limbo/model/gp/kernel_lf_opt.hpp>
+#include <limbo/model/gp/no_lf_opt.hpp>
+#include <limbo/tools.hpp>
 
 namespace limbo {
     namespace model {
@@ -71,7 +71,7 @@ namespace limbo {
         /// - a kernel function
         /// - a mean function
         /// - [optionnal] an optimizer for the hyper-parameters
-        template <typename Params, typename KernelFunction = kernel::Exp<Params>, typename MeanFunction = mean::Data<Params>, typename HyperParamsOptimizer = gp::NoLFOpt<Params>>
+        template <typename Params, typename KernelFunction = kernel::MaternFiveHalves<Params>, typename MeanFunction = mean::Data<Params>, typename HyperParamsOptimizer = gp::NoLFOpt<Params>>
         class GP {
         public:
             /// useful because the model might be created before knowing anything about the process
@@ -531,10 +531,10 @@ namespace limbo {
                 return k;
             }
         };
-        /// GPBasic is a GP with a "mean data" mean function, Exponential kernel, 
+        /// GPBasic is a GP with a "mean data" mean function, Exponential kernel,
         /// and NO hyper-parameter optimization
         template <typename Params>
-        using GPBasic = GP <Params, kernel::Exp<Params>, mean::Data<Params>, gp::NoLFOpt<Params>>;
+        using GPBasic = GP<Params, kernel::MaternFiveHalves<Params>, mean::Data<Params>, gp::NoLFOpt<Params>>;
 
         /// GPOpt is a GP with a "mean data" mean function, Exponential kernel with Automatic Relevance
         /// Determination (ARD), and hyper-parameter optimization based on Rprop

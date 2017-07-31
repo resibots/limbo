@@ -71,11 +71,8 @@ struct Params {
         BO_PARAM(double, noise, 0.01);
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
-    };
-
-    struct kernel_maternfivehalves {
-        BO_PARAM(double, sigma, 1);
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
+        BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.25);
     };
 

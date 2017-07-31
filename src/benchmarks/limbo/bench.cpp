@@ -89,13 +89,19 @@ struct Params {
         BO_PARAM(double, constant, 1);
     };
     struct opt_rprop : public defaults::opt_rprop {
+        BO_PARAM(double, eps_stop, 1e-6);
     };
     struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
     };
     struct opt_nloptnograd : public defaults::opt_nloptnograd {
+        BO_PARAM(double, fun_tolerance, 1e-6);
+        BO_PARAM(double, xrel_tolerance, 1e-6);
     };
 #ifdef USE_LIBCMAES
     struct opt_cmaes : public defaults::opt_cmaes {
+        BO_PARAM(double, max_fun_evals, 500);
+        BO_PARAM(double, fun_tolerance, 1e-6);
+        BO_PARAM(double, xrel_tolerance, 1e-6);
     };
 #endif
 };
@@ -138,7 +144,7 @@ void benchmark(const std::string& name)
     std::cout.precision(17);
     std::cout << std::endl;
     auto best = opt.best_observation();
-    double accuracy = target.accuracy(best);
+    double accuracy = target.accuracy(best[0]);
 
     std::cout << name << std::endl;
     std::cout << "Result: " << std::fixed << opt.best_sample().transpose() << " -> " << best << std::endl;
