@@ -8,6 +8,7 @@ from waflib import Logs
 plotting_ok = True
 try:
     import plot_bo_benchmarks
+    import plot_regression_benchmarks
 except:
     plotting_ok = False
     Logs.pprint('YELLOW', 'YELLOW: Could not import plot_bo_benchmarks! Will not plot anything!')
@@ -240,7 +241,7 @@ def compile_regression_benchmarks(bld, json_file):
 
         gps_query_code += '            ofs_res << std::setprecision(std::numeric_limits<long double>::digits10 + 1);\n'
         for m in range(len(models)):
-            gps_query_code += '            ofs_res << time_' + str(m) + ' / double(1000.0) << \" \" << time2_' + str(m) + ' / double(N_test) << \" \" << err_' + str(m) + ' << std::endl;\n'
+            gps_query_code += '            ofs_res << time_' + str(m) + ' / double(1000000.0) << \" \" << time2_' + str(m) + ' * 1e-3 / double(N_test) << \" \" << err_' + str(m) + ' << std::endl;\n'
 
         cpp_tpl = cpp_tpl.replace('@NMODELS', str(len(models)))
         cpp_tpl = cpp_tpl.replace('@FUNCS', cpp_body)
@@ -339,3 +340,7 @@ def run_regression_benchmarks(ctx):
             for k in range(len(funcs)):
                 s="cd " + exp_i +"; python gpy.py " + funcs[k] + " '" + str(dims[k]) + "' '" + str(pts[k]) + "'"
                 retcode = subprocess.call(s, shell=True, env=None)
+
+    # plot all if possible
+    if plotting_ok:
+        plot_regression_benchmarks.plot_all()

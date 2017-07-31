@@ -2,6 +2,7 @@ import GPy
 import numpy as np
 import time
 import sys
+import os.path
 
 def benchmark(name, dims, points):
     # dir_prefix = 'regression_benchmarks/'+name
@@ -14,7 +15,10 @@ def benchmark(name, dims, points):
 
     for D in dims:
         for N in Ns:
-            file_results.write(str(D) + " " + str(N) + "1\n")
+            fname = dir_prefix+'/'+name+'_'+str(D)+'_'+str(N)+'_data.dat'
+            if not os.path.isfile(fname):
+                continue
+            file_results.write(str(D) + " " + str(N) + " 1\n")
             # Load training data
             samples = np.zeros((N,D))
             observations = np.zeros((N,1))

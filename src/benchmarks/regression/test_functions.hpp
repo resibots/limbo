@@ -6,7 +6,7 @@ struct Rastrigin {
     {
         double f = 10 * x.size();
         for (int i = 0; i < x.size(); ++i)
-            f += x(i) * x(i) - 10 * cos(2 * M_PI * x(i));
+            f += x(i) * x(i) - 10 * std::cos(2 * M_PI * x(i));
         return f;
     }
 
@@ -260,7 +260,7 @@ struct SixHumpCamel {
         double x1_2 = x1 * x1;
         double x2_2 = x2 * x2;
 
-        double tmp1 = (4 - 2.1 * x1_2 + (x1_2 * x1_2) / 3) * x1_2;
+        double tmp1 = (4 - 2.1 * x1_2 + (x1_2 * x1_2) / 3.) * x1_2;
         double tmp2 = x1 * x2;
         double tmp3 = (-4 + 4 * x2_2) * x2_2;
         return tmp1 + tmp2 + tmp3;
