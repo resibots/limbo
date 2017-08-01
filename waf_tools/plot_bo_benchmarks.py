@@ -82,7 +82,7 @@ def load_data():
     for f in files:
         fs = f.split("/")
         func, var, lib = fs[-1], fs[-2], fs[-3]
-        print func, var, lib
+        print(func, var, lib)
         data[func][lib][var] = np.loadtxt(f)
     return data
 
