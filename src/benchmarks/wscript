@@ -71,7 +71,7 @@ def build_bo_benchmarks(bld):
         limbo.create_variants(bld,
                       source = 'limbo/bench.cpp',
                       uselib_local = 'limbo',
-                      uselib = 'BOOST EIGEN TBB NLOPT LIBCMAES',
+                      uselib = 'BOOST EIGEN TBB NLOPT LIBCMAES MKL_TBB',
                       variants = ['BAYESOPT_DEF',
                                   'BAYESOPT_DEF_HPOPT',
                                   'LIMBO_DEF',

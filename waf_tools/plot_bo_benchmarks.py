@@ -56,12 +56,30 @@ except: # not in waf
 
 try:
     import numpy as np
+    numpy_found = True
+except:
+    Logs.pprint('YELLOW', 'WARNING: numpy not found')
+
+try:
+    import matplotlib
+    matplotlib.use('Agg') # for headless generation    
     from pylab import *
+    pylab_found = True
+except:
+    Logs.pprint('YELLOW', 'WARNING: pylab/matplotlib not found')
+
+try:
     import brewer2mpl
     bmap = brewer2mpl.get_map('Set2', 'qualitative', 8)
     colors = bmap.mpl_colors
-    plot_ok = True
+    brewer2mpl_found = True;
 except:
+    Logs.pprint('YELLOW', 'WARNING: brewer2mpl (colors) not found')
+
+
+if numpy_found and pylab_found and brewer2mpl_found:
+    plot_ok = True
+else:
     plot_ok = False
     Logs.pprint('YELLOW', 'WARNING: numpy/matplotlib not found: no plot of the BO benchmark results')
 
