@@ -91,31 +91,36 @@ def load_data():
                 func = func[:-4]
                 var = 'GPy'
             exp = exp[4:]
-            # print(bench, func, var)
-            # if not func in data[bench][var]:
-            #     data[bench][var][func] = []
-            # data[bench][var][func].append(np.loadtxt(f))
+
             text_file = open(f, "r")
             txt_d = text_file.readlines()
-            for i in range(0, len(txt_d), 2):
+            n_models = int(txt_d[0].strip().split()[-1])
+            var_base = var
+            for i in range(0, len(txt_d), n_models+1):
                 line = txt_d[i].strip().split()
-                line2 = txt_d[i+1].strip().split()
                 dim = int(line[0])
                 pts = int(line[1])
-                time_learn = float(line2[0])
-                time_query = float(line2[1])
-                mse = float(line2[2])
-                # print(bench,var,func,dim)
-                if not (var in points[bench][func][dim]):
-                    points[bench][func][dim][var] = []
-                    times_learn[bench][func][dim][var] = []
-                    times_query[bench][func][dim][var] = []
-                    mses[bench][func][dim][var] = []
 
-                points[bench][func][dim][var].append(pts)
-                times_learn[bench][func][dim][var].append(time_learn)
-                times_query[bench][func][dim][var].append(time_query)
-                mses[bench][func][dim][var].append(mse)
+                for j in range(0, n_models):
+                    if n_models > 1:
+                        var = var_base + '-' + str(j+1)
+                    line2 = txt_d[i+j+1].strip().split()
+                    time_learn = float(line2[0])
+                    time_query = float(line2[1])
+                    mse = float(line2[2])
+                    if len(line2) == 4:
+                        var = var_base + '-' + line2[-1]
+                    # print(bench,var,func,dim)
+                    if not (var in points[bench][func][dim]):
+                        points[bench][func][dim][var] = []
+                        times_learn[bench][func][dim][var] = []
+                        times_query[bench][func][dim][var] = []
+                        mses[bench][func][dim][var] = []
+
+                    points[bench][func][dim][var].append(pts)
+                    times_learn[bench][func][dim][var].append(time_learn)
+                    times_query[bench][func][dim][var].append(time_query)
+                    mses[bench][func][dim][var].append(mse)
     return points,times_learn,times_query,mses
 
 def custom_ax(ax):
@@ -181,8 +186,6 @@ def plot(points,times_learn,times_query,mses):
                 fig.tight_layout()
                 fig.savefig(name+'.png')
                 close()
-
-
 
 def plot_all():
     if not plot_ok:

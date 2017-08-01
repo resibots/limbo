@@ -103,9 +103,12 @@ def compile_regression_benchmarks(bld, json_file):
         gps_learn_code = ""
         gps_query_code = ""
 
+        model_names = []
+
         for m in range(len(models)):
             model = models[m]
             gp_type = 'GP'
+            model_name = 'GP'
             kernel_type = 'SquaredExpARD'
             optimize_noise = 'true'
             kernel_params = {}
@@ -116,6 +119,9 @@ def compile_regression_benchmarks(bld, json_file):
             optimizer = 'Rprop'
             optimizer_params = []
 
+            if 'name' in model:
+                model_name = model['name']
+            model_names.append(model_name)
             if 'type' in model:
                 gp_type = model['type']
             if 'kernel' in model:
@@ -241,7 +247,7 @@ def compile_regression_benchmarks(bld, json_file):
 
         gps_query_code += '            ofs_res << std::setprecision(std::numeric_limits<long double>::digits10 + 1);\n'
         for m in range(len(models)):
-            gps_query_code += '            ofs_res << time_' + str(m) + ' / double(1000000.0) << \" \" << time2_' + str(m) + ' * 1e-3 / double(N_test) << \" \" << err_' + str(m) + ' << std::endl;\n'
+            gps_query_code += '            ofs_res << time_' + str(m) + ' / double(1000000.0) << \" \" << time2_' + str(m) + ' * 1e-3 / double(N_test) << \" \" << err_' + str(m) + ' << " ' + model_names[m] + '" << std::endl;\n'
 
         cpp_tpl = cpp_tpl.replace('@NMODELS', str(len(models)))
         cpp_tpl = cpp_tpl.replace('@FUNCS', cpp_body)
