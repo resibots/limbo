@@ -131,6 +131,51 @@ def custom_ax(ax):
     ax.set_axisbelow(True)
     ax.grid(axis='x', color="0.9", linestyle='-')
 
+def plot_data(name, data, points, labely):
+    fig = figure()
+    ax = gca()
+
+    labels = []
+    kk = 0
+    # for each variant
+    for var in points.keys():
+        labels.append(var)
+        var_p = points[var]
+        var_mses = data[var]
+
+        pp = {}
+
+        for i in range(len(var_p)):
+            if var_p[i] not in pp:
+                pp[var_p[i]] = []
+            pp[var_p[i]].append(var_mses[i])
+        
+        pp = OrderedDict(sorted(pp.items()))
+
+        x_axis = pp.keys()
+        dd = pp.values()
+
+        y_axis = []
+        y_axis_75 = []
+        y_axis_25 = []
+        for i in range(len(dd)):
+            y_axis.append(np.median(dd[i]))
+            y_axis_75.append(np.percentile(dd[i], 75))
+            y_axis_25.append(np.percentile(dd[i], 25))
+
+        c_kk = colors[kk%len(colors)]
+        ax.plot(x_axis, y_axis, '-', color=c_kk, linewidth=3)
+        ax.fill_between(x_axis, y_axis_75, y_axis_25, color=c_kk, alpha=0.15, linewidth=2)
+        kk = kk + 1
+    
+    ax.legend(labels)
+    ax.set_xlabel('Number of points')
+    ax.set_ylabel(labely)
+    custom_ax(ax)
+    fig.tight_layout()
+    fig.savefig(name+'.png')
+    close()
+
 def plot(points,times_learn,times_query,mses):
     # for each benchmark configuration
     for bench in points.keys():
@@ -139,53 +184,16 @@ def plot(points,times_learn,times_query,mses):
             # for each dimension
             for dim in points[bench][func].keys():
                 print('plotting for benchmark: ' + bench + ', the function: ' + func + ' for dimension: ' + str(dim))
-                name = bench+'_'+func+'_'+str(dim)+'_mse'
-                fig = figure()
-                ax = gca()
+                name = bench+'_'+func+'_'+str(dim)
 
-                labels = []
-                kk = 0
-                # for each variant
-                for var in points[bench][func][dim].keys():
-                    labels.append(var)
-                    # print bench,func,var
-                    var_p = points[bench][func][dim][var]
-                    # var_times_learn = times_learn[bench][func][var][1]
-                    # var_times_query = times_query[bench][func][var][1]
-                    var_mses = mses[bench][func][dim][var]
+                # plotting MSE
+                plot_data(name+'_mse', mses[bench][func][dim], points[bench][func][dim], 'Mean Squared Error')
 
-                    pp = {}
+                # plotting learning times
+                plot_data(name+'_learn_time', times_learn[bench][func][dim], points[bench][func][dim], 'Learning time in seconds')
 
-                    for i in range(len(var_p)):
-                        if var_p[i] not in pp:
-                            pp[var_p[i]] = []
-                        pp[var_p[i]].append(var_mses[i])
-                    
-                    pp = OrderedDict(sorted(pp.items()))
-
-                    x_axis = pp.keys()
-                    data = pp.values()
-
-                    y_axis = []
-                    y_axis_75 = []
-                    y_axis_25 = []
-                    for i in range(len(data)):
-                        y_axis.append(np.median(data[i]))
-                        y_axis_75.append(np.percentile(data[i], 75))
-                        y_axis_25.append(np.percentile(data[i], 25))
-
-                    c_kk = colors[kk%len(colors)]
-                    ax.plot(x_axis, y_axis, '-', color=c_kk, linewidth=3)
-                    ax.fill_between(x_axis, y_axis_75, y_axis_25, color=c_kk, alpha=0.15, linewidth=2)
-                    kk = kk + 1
-                
-                ax.legend(labels)
-                ax.set_xlabel('Number of points')
-                ax.set_ylabel('Mean Squared Error')
-                custom_ax(ax)
-                fig.tight_layout()
-                fig.savefig(name+'.png')
-                close()
+                # plotting querying times
+                plot_data(name+'_query_time', times_query[bench][func][dim], points[bench][func][dim], 'Querying time in ms')
 
 def plot_all():
     if not plot_ok:
