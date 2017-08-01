@@ -1,0 +1,10 @@
+[
+{ "name" : "regression_benchmark",
+  "functions" : ["Rastrigin", "Ackley", "GramacyLee", "Step", "Levy", "SixHumpCamel", "RobotArm", "OTLCircuit", "PistonSimulation", "PlanarInverseDynamicsI", "PlanarInverseDynamicsII"],
+  "dimensions" : [[1,2,4,8], [1,2,4,8], [1], [1], [1,2,4,8], [2], [8], [6], [7], [6], [6]],
+  "points" : [40, 80, 100, 200, 400, 600],
+  "randomness": ["uniform"],
+  "noise" : "true",
+  "models" : [{"name" : "GP-ARD-Full", "type" : "GP", "kernel" : {"type": "SquaredExpARD", "optimize_noise" : "true", "params" : {"sigma_sq" : ["double", 1.0]}}, "mean" : {"type": "NullFunction", "has_defaults" : "false"}, "hp_opt" : {"type" : "KernelLFOpt", "optimizer" : "Rprop", "params" : {"eps_stop" : ["double", 1e-6]}}},
+        {"name" : "GP-ARD", "type" : "GP", "kernel" : {"type": "SquaredExpARD", "optimize_noise" : "false", "params" : {"sigma_sq" : ["double", 1.0]}}, "mean" : {"type": "NullFunction", "has_defaults" : "false"}, "hp_opt" : {"type" : "KernelLFOpt", "optimizer" : "Rprop", "params" : {"eps_stop" : ["double", 1e-6]}}}]
+}]
