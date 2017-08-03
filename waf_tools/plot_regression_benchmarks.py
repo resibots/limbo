@@ -203,3 +203,6 @@ def plot_all():
     points,times_learn,times_query,mses = load_data()
     print('data loaded')
     plot(points,times_learn,times_query,mses)
+
+if __name__ == "__main__":
+    plot_all()
