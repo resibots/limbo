@@ -158,7 +158,7 @@ def configure(conf):
         Logs.pprint('NORMAL', '[developers] To compile the BO benchmarks: ./waf build_bo_benchmarks')
         Logs.pprint('NORMAL', '[developers] To run the BO benchmarks: ./waf run_bo_benchmarks')
         Logs.pprint('NORMAL', '[developers] To compile the regression benchmarks (requires a json file with the setup): ./waf --regression_benchmarks file.json')
-        Logs.pprint('NORMAL', '[developers] To run the regression benchmarks: ./waf run_regression_benchmarks')
+        Logs.pprint('NORMAL', '[developers] To run the regression benchmarks: ./waf run_regression_benchmarks --regression_benchmarks file.json')
         Logs.pprint('NORMAL', '[developers] To compile the extensive tests: ./waf build_extensive_tests')
 
 
