@@ -220,6 +220,12 @@ as a zip.</p>
 </pre></div>
 </div>
 </li>
+</ul>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (<cite>brew install homebrew/science/nlopt</cite>).</p>
+</div>
+<ul>
 <li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. Make sure that you install with <strong>sudo</strong> or configure the <strong>LD_LIBRARY_PATH</strong> accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get). Follow the instructions <a class="reference external" href="https://github.com/beniz/libcmaes#build">here</a>, reproduced for your convenience:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libgtest</span><span class="o">-</span><span class="n">dev</span>
 <span class="n">sudo</span> <span class="n">cd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">gtest</span>

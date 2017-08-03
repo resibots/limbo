@@ -296,6 +296,8 @@
 <div class="section" id="opt-nloptnograd">
 <h2>opt_nloptnograd<a class="headerlink" href="#opt-nloptnograd" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
+<li>double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
 <li>int iterations = 500 [defined in src/limbo/opt/nlopt_no_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
 </ul>
 </div>
@@ -315,6 +317,7 @@
 <div class="section" id="opt-cmaes">
 <h2>opt_cmaes<a class="headerlink" href="#opt-cmaes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>double xrel_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>bool verbose = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>double max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
@@ -331,6 +334,8 @@
 <div class="section" id="opt-nloptgrad">
 <h2>opt_nloptgrad<a class="headerlink" href="#opt-nloptgrad" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
+<li>double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
 <li>int iterations = 500 [defined in src/limbo/opt/nlopt_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
 </ul>
 </div>

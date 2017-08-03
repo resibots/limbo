@@ -121,6 +121,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#where-is-the-configuration-file">Where is the configuration file?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-am-i-getting-nolfopt-should-never-be-called-assertion-failure">Why am I getting “‘NoLFOpt’ should never be called!” assertion failure?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-am-i-getting-xxxlfopt-was-never-called-errors">Why am I getting “‘XXXLFOpt’ was never called!” errors?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-do-i-get-nloptnograd-nlopt-invalid-argument">Why do I get “[NLOptNoGrad]: nlopt invalid argument”</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-c-11-and-not-insert-your-favorite-language">Why C++11? (and not &lt;insert your favorite language&gt;)?</a></li>
 </ul>
 </li>
@@ -206,6 +207,11 @@
 <div class="section" id="why-am-i-getting-xxxlfopt-was-never-called-errors">
 <h2>Why am I getting “‘XXXLFOpt’ was never called!” errors?<a class="headerlink" href="#why-am-i-getting-xxxlfopt-was-never-called-errors" title="Permalink to this headline">¶</a></h2>
 <p>Most probably, you are using the <cite>BOptimizer</cite> class and you have set an <cite>hp_period</cite> (rate at which the hyperparams are optimized) less than 1, but you are using a Gaussian Process model that optimizes the hyperparameters. This should never happen. If you want use a Gaussian Process model that does optimize the hyperparameters, set the <cite>hp_period</cite> parameter to a value bigger than 0. On the other hand, if you do not want to optimize any hyperparameters, set <cite>hp_period</cite> parameter to -1 and use a Gaussian Process model that does not optimize the hyperparameters. Check <a class="reference internal" href="api.html#gp-hpopt"><span class="std std-ref">here</span></a> for available hyperparameters optimization options.</p>
+</div>
+<div class="section" id="why-do-i-get-nloptnograd-nlopt-invalid-argument">
+<h2>Why do I get “[NLOptNoGrad]: nlopt invalid argument”<a class="headerlink" href="#why-do-i-get-nloptnograd-nlopt-invalid-argument" title="Permalink to this headline">¶</a></h2>
+<p>We need optimizers to optimize the hyper-parameters; by default, we use unbounded optimization… but many optimizers in NLOpt do not support unbounded optimization (in particular, DIRECT). In that case, they just return and throw an exception “[NLOptNoGrad]: nlopt invalid argument”. No optimization is performed.</p>
+<p>The easiest fix is to use another optimizer (we suggest RProp). You can also add bounds (by creating a new hyper-parameter optimization procedure).</p>
 </div>
 <div class="section" id="why-c-11-and-not-insert-your-favorite-language">
 <h2>Why C++11? (and not &lt;insert your favorite language&gt;)?<a class="headerlink" href="#why-c-11-and-not-insert-your-favorite-language" title="Permalink to this headline">¶</a></h2>

@@ -927,6 +927,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <li>int restarts</li>
 <li>double max_fun_evals</li>
 <li>double fun_tolerance</li>
+<li>double xrel_tolerance</li>
 <li>double fun_target</li>
 <li>bool fun_compute_initial</li>
 <li>bool handle_uncertainty</li>
@@ -962,7 +963,6 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <li>GD_STOGO_RAND</li>
 <li>LD_LBFGS_NOCEDAL</li>
 <li>LD_LBFGS</li>
-<li>LN_PRAXIS</li>
 <li>LD_VAR1</li>
 <li>LD_VAR2</li>
 <li>LD_TNEWTON</li>
@@ -970,7 +970,6 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <li>LD_TNEWTON_PRECOND</li>
 <li>LD_TNEWTON_PRECOND_RESTART</li>
 <li>GD_MLSL</li>
-<li>GN_MLSL_LDS</li>
 <li>GD_MLSL_LDS</li>
 <li>LD_MMA</li>
 <li>LD_AUGLAG</li>
@@ -980,7 +979,9 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 </ul>
 </p>
 <p>Parameters :<ul class="simple">
-<li>int iterations </li>
+<li>int iterations</li>
+<li>double fun_tolerance</li>
+<li>double xrel_tolerance </li>
 </ul>
 </p>
 </dd></dl>
@@ -1009,13 +1010,16 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <li>LN_BOBYQA</li>
 <li>LN_NEWUOA</li>
 <li>LN_NEWUOA_BOUND</li>
+<li>LN_PRAXIS</li>
 <li>LN_NELDERMEAD</li>
 <li>LN_SBPLX</li>
 <li>LN_AUGLAG</li>
 </ul>
 </p>
 <p>Parameters:<ul class="simple">
-<li>int iterations </li>
+<li>int iterations</li>
+<li>double fun_tolerance</li>
+<li>double xrel_tolerance </li>
 </ul>
 </p>
 </dd></dl>
@@ -1086,13 +1090,19 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dl class="function">
 <dt>
 <span class="target" id="limbogroup__opt__defaults_1ga5f980ba02cafe6ee52d6b9cd485e3d05"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, fun_tolerance, - 1)</code></dt>
-<dd><p>threshold based on the difference in value of a fixed number of trials: if different to -1, it enables the tolerance criteria for stopping based in the history of rewards. </p>
+<dd><p>threshold based on the difference in value of a fixed number of trials: if bigger than 0, it enables the tolerance criteria for stopping based in the history of rewards. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga53a2606c967aab872621311a9ca96927"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, xrel_tolerance, - 1)</code></dt>
+<dd><p>tolerance for convergence: stop when an optimization step (or an estimate of the optimum) changes all the parameter values by less than tol multiplied by the absolute value of the parameter value. IGNORED if negative </p>
 </dd></dl>
 
 <dl class="function">
 <dt>
 <span class="target" id="limbogroup__opt__defaults_1ga1b4276da9161bb04b84b4cd9307a37ab"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, fun_target, - 1)</code></dt>
-<dd><p>function value target: if different to -1, enables the function target criteria for stopping if the performance is greater than this value. </p>
+<dd><p>function value target: if bigger than 0, enables the function target criteria for stopping if the performance is greater than this value. </p>
 </dd></dl>
 
 <dl class="function">
@@ -1151,8 +1161,32 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="function">
 <dt>
+<span class="target" id="limbogroup__opt__defaults_1gafcc821af20ea5f4ec4c9e38e10796b8d"></span><code class="descname">limbo::defaults::opt_nloptgrad::BO_PARAM(double, fun_tolerance, - 1)</code></dt>
+<dd><p>tolerance for convergence: stop when an optimization step (or an estimate of the optimum) changes the objective function value by less than tol multiplied by the absolute value of the function value. IGNORED if negative </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga6263b80573843ea72a35389065e4d6dc"></span><code class="descname">limbo::defaults::opt_nloptgrad::BO_PARAM(double, xrel_tolerance, - 1)</code></dt>
+<dd><p>tolerance for convergence: stop when an optimization step (or an estimate of the optimum) changes all the parameter values by less than tol multiplied by the absolute value of the parameter value. IGNORED if negative </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
 <span class="target" id="limbogroup__opt__defaults_1gae76755c949c322e0a8a33806c811b6f2"></span><code class="descname">limbo::defaults::opt_nloptnograd::BO_PARAM(int, iterations, 500)</code></dt>
 <dd><p>number of calls to the optimized function </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga9e41207e4638cc11f653bbf0033f47e9"></span><code class="descname">limbo::defaults::opt_nloptnograd::BO_PARAM(double, fun_tolerance, - 1)</code></dt>
+<dd><p>tolerance for convergence: stop when an optimization step (or an estimate of the optimum) changes the objective function value by less than tol multiplied by the absolute value of the function value. IGNORED if negative </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga11dfb62802af87454405bd8ad69ecc36"></span><code class="descname">limbo::defaults::opt_nloptnograd::BO_PARAM(double, xrel_tolerance, - 1)</code></dt>
+<dd><p>tolerance for convergence: stop when an optimization step (or an estimate of the optimum) changes all the parameter values by less than tol multiplied by the absolute value of the parameter value. IGNORED if negative </p>
 </dd></dl>
 
 <dl class="function">
@@ -1177,7 +1211,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <p>Currently, Limbo only includes Gaussian processes as models. More may come in the future.</p>
 <dl class="class">
 <dt>
-<span class="target" id="limboclasslimbo_1_1model_1_1_g_p"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> KernelFunction, <em class="property">typename</em> MeanFunction, <em class="property">class</em> HyperParamsOptimizer = <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_no_l_f_opt"><span class="std std-ref">gp::NoLFOpt</span></a>&lt;Params&gt;&gt;</dt>
+<span class="target" id="limboclasslimbo_1_1model_1_1_g_p"></span><em class="property">template </em>&lt;typename <em>Params</em>, typename <em>KernelFunction</em>, typename <em>MeanFunction</em>, class <em>HyperParamsOptimizer</em> = <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_no_l_f_opt"><span class="std std-ref">gp::NoLFOpt</span></a>&lt;Params&gt;&gt;</dt>
 <dt id="_CPPv2N5limbo5model2GPE">
 <span id="limbo::model::GP"></span><em class="property">class </em><code class="descclassname">limbo::model::</code><code class="descname">GP</code><a class="headerlink" href="#_CPPv2N5limbo5model2GPE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A classic Gaussian process. It is parametrized by:<ul class="simple">
@@ -1272,15 +1306,57 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2NK5limbo5model2GP7get_likEv">
-<span id="limbo::model::GP::get_likC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a794ed0eeda29aaa7afe303b5e72d3927"></span>double <code class="descname">get_lik</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP7get_likEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>return the likelihood (do not compute it!) </p>
+<dt id="_CPPv2N5limbo5model2GP15compute_log_likEv">
+<span id="limbo::model::GP::compute_log_lik"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a968cc6d7079b6bbefdd6f458015ae550"></span>double <code class="descname">compute_log_lik</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP15compute_log_likEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>compute and return the log likelihood </p>
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv2N5limbo5model2GP7set_likERKd">
-<span id="limbo::model::GP::set_lik__doubleCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a4dfc1807eb4f113191dbd3ae51c053ee"></span>void <code class="descname">set_lik</code><span class="sig-paren">(</span><em class="property">const</em> double &amp;<em>lik</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP7set_likERKd" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>set the likelihood (you need to compute it from outside!) </p>
+<dt id="_CPPv2N5limbo5model2GP27compute_kernel_grad_log_likEv">
+<span id="limbo::model::GP::compute_kernel_grad_log_lik"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1af6af4a328bcdb3f067da3b9f06761aa0"></span>Eigen::VectorXd <code class="descname">compute_kernel_grad_log_lik</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP27compute_kernel_grad_log_likEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>compute and return the gradient of the log likelihood wrt to the kernel parameters </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model2GP25compute_mean_grad_log_likEv">
+<span id="limbo::model::GP::compute_mean_grad_log_lik"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1addeeabaf7f280d5defcc54c0320cf018"></span>Eigen::VectorXd <code class="descname">compute_mean_grad_log_lik</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP25compute_mean_grad_log_likEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>compute and return the gradient of the log likelihood wrt to the mean parameters </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model2GP11get_log_likEv">
+<span id="limbo::model::GP::get_log_likC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a401d5c5b0c711ba2a3bc41e9069e9c74"></span>double <code class="descname">get_log_lik</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP11get_log_likEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the likelihood (do not compute it  return last computed) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model2GP11set_log_likEd">
+<span id="limbo::model::GP::set_log_lik__double"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1ae1907d29b26fdfaf28ad3b38f3c177aa"></span>void <code class="descname">set_log_lik</code><span class="sig-paren">(</span>double <em>log_lik</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP11set_log_likEd" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>set the log likelihood (e.g. computed from outside) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model2GP18compute_log_loo_cvEv">
+<span id="limbo::model::GP::compute_log_loo_cv"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a9f78fb18b84561b6a4149d0b1cf9ede4"></span>double <code class="descname">compute_log_loo_cv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP18compute_log_loo_cvEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>compute and return the log probability of LOO CV </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model2GP30compute_kernel_grad_log_loo_cvEv">
+<span id="limbo::model::GP::compute_kernel_grad_log_loo_cv"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a8faa118d0516ca3ac636d92d5d40d988"></span>Eigen::VectorXd <code class="descname">compute_kernel_grad_log_loo_cv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP30compute_kernel_grad_log_loo_cvEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>compute and return the gradient of the log probability of LOO CV wrt to the kernel parameters </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model2GP14get_log_loo_cvEv">
+<span id="limbo::model::GP::get_log_loo_cvC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a68fad2033d91bbb0289005a11b2f3f53"></span>double <code class="descname">get_log_loo_cv</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP14get_log_loo_cvEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the LOO-CV log probability (do not compute it  return last computed) </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model2GP14set_log_loo_cvEd">
+<span id="limbo::model::GP::set_log_loo_cv__double"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1ae4f46ae52d745516420a222224c24554"></span>void <code class="descname">set_log_loo_cv</code><span class="sig-paren">(</span>double <em>log_loo_cv</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP14set_log_loo_cvEd" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>set the LOO-CV log probability (e.g. computed from outside) </p>
 </dd></dl>
 
 <dl class="function">
@@ -1308,7 +1384,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dt id="_CPPv2N5limbo5model2gp5HPOptE">
 <span id="limbo::model::gp::HPOpt"></span><em class="property">struct </em><code class="descname">HPOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp5HPOptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/model/gp/hp_opt.hpp&gt;</em><p>optimize the likelihood of the kernel only </p>
-<p>Subclassed by <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt"><span class="std std-ref">limbo::model::gp::KernelLFOpt&lt; Params, Optimizer &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"><span class="std std-ref">limbo::model::gp::KernelMeanLFOpt&lt; Params, Optimizer &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"><span class="std std-ref">limbo::model::gp::MeanLFOpt&lt; Params, Optimizer &gt;</span></a></p>
+<p>Subclassed by <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt"><span class="std std-ref">limbo::model::gp::KernelLFOpt&lt; Params, Optimizer &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_kernel_loo_opt"><span class="std std-ref">limbo::model::gp::KernelLooOpt&lt; Params, Optimizer &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"><span class="std std-ref">limbo::model::gp::KernelMeanLFOpt&lt; Params, Optimizer &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"><span class="std std-ref">limbo::model::gp::MeanLFOpt&lt; Params, Optimizer &gt;</span></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -1317,6 +1393,15 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dt id="_CPPv2N5limbo5model2gp11KernelLFOptE">
 <span id="limbo::model::gp::KernelLFOpt"></span><em class="property">struct </em><code class="descname">KernelLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp11KernelLFOptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/model/gp/kernel_lf_opt.hpp&gt;</em><p>optimize the likelihood of the kernel only </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"><span class="std std-ref">limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_kernel_loo_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_parallel_repeater"><span class="std std-ref">opt::ParallelRepeater</span></a>&lt;Params, <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;&gt;</dt>
+<dt id="_CPPv2N5limbo5model2gp12KernelLooOptE">
+<span id="limbo::model::gp::KernelLooOpt"></span><em class="property">struct </em><code class="descname">KernelLooOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp12KernelLooOptE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;limbo/model/gp/kernel_loo_opt.hpp&gt;</em><p>optimize the likelihood of the kernel only </p>
 <p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"><span class="std std-ref">limbo::model::gp::HPOpt&lt; Params, Optimizer &gt;</span></a></p>
 </dd></dl>
 
@@ -2023,9 +2108,9 @@ Computes the squared exponential covariance like this:</p>
 <dl class="function">
 <dt id="_CPPv2N5limbo5tools21random_vector_boundedEi">
 <span id="limbo::tools::random_vector_bounded__i"></span><span class="target" id="limbogroup__tools_1ga15dc04885b7309c7ca794db2429fb3f2"></span>Eigen::VectorXd <code class="descname">random_vector_bounded</code><span class="sig-paren">(</span>int <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools21random_vector_boundedEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>random vector in [0, 1]</p>
+<dd><p>random vector in [0, 1.0]</p>
 <p><ul class="simple">
-<li>this function is thread safe because the random number generator we use is thread-safe</li>
+<li>this function is thread safe because we use a random generator for each thread</li>
 <li>we use a C++11 random number generator </li>
 </ul>
 </p>
@@ -2034,9 +2119,9 @@ Computes the squared exponential covariance like this:</p>
 <dl class="function">
 <dt id="_CPPv2N5limbo5tools23random_vector_unboundedEi">
 <span id="limbo::tools::random_vector_unbounded__i"></span><span class="target" id="limbogroup__tools_1ga0f1d777d8e14733853ffc5df7068246f"></span>Eigen::VectorXd <code class="descname">random_vector_unbounded</code><span class="sig-paren">(</span>int <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools23random_vector_unboundedEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>random vector in R</p>
+<dd><p>random vector generated with a normal distribution centered on 0, with standard deviation of 10.0</p>
 <p><ul class="simple">
-<li>this function is thread safe because the random number generator we use is thread-safe</li>
+<li>this function is thread safe because we use a random generator for each thread</li>
 <li>we use a C++11 random number generator </li>
 </ul>
 </p>

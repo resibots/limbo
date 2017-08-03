@@ -65,6 +65,8 @@ kernel_maternfivehalves
 
 opt_nloptnograd
 ^^^^^^^^^^^^^^^
+- double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] ['#ifdef USE_NLOPT']
+- double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] ['#ifdef USE_NLOPT']
 - int iterations = 500 [defined in src/limbo/opt/nlopt_no_grad.hpp] ['#ifdef USE_NLOPT']
 
 bayes_opt_imgpo
@@ -78,6 +80,7 @@ opt_parallelrepeater
 
 opt_cmaes
 ^^^^^^^^^
+- double xrel_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - bool verbose = false [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - double max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
@@ -92,6 +95,8 @@ opt_cmaes
 
 opt_nloptgrad
 ^^^^^^^^^^^^^
+- double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] ['#ifdef USE_NLOPT']
+- double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] ['#ifdef USE_NLOPT']
 - int iterations = 500 [defined in src/limbo/opt/nlopt_grad.hpp] ['#ifdef USE_NLOPT']
 
 acqui_ei

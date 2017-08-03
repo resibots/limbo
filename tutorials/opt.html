@@ -243,13 +243,13 @@
 19
 20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifdef USE_NLOPT</span>
 <span class="k">struct</span> <span class="n">ParamsGrad</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">opt_nloptgrad</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptgrad</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptgrad</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
     <span class="p">};</span>
 <span class="p">};</span>
 
 <span class="k">struct</span> <span class="n">ParamsNoGrad</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">opt_nloptnograd</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
     <span class="p">};</span>
 <span class="p">};</span>
@@ -377,13 +377,13 @@
 
 <span class="cp">#ifdef USE_NLOPT</span>
 <span class="k">struct</span> <span class="n">ParamsGrad</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">opt_nloptgrad</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptgrad</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptgrad</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
     <span class="p">};</span>
 <span class="p">};</span>
 
 <span class="k">struct</span> <span class="n">ParamsNoGrad</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">opt_nloptnograd</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
     <span class="p">};</span>
 <span class="p">};</span>
