@@ -336,7 +336,7 @@ def run_regression_benchmarks(ctx):
         for i in range(0,nb_rep):
             Logs.pprint('NORMAL', '%s Running (limbo): %s for the %s-th time %s' % (HEADER, name, str(i), NC))
             exp_i = directory + "/exp_" + str(i)
-            s="cd " + exp_i +";./" + fname
+            s="cd " + exp_i +";./" + name
             retcode = subprocess.call(s, shell=True, env=None)
 
         # run GPy experiments

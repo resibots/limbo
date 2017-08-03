@@ -322,4 +322,4 @@ intersphinx_mapping = {
 }
 
 # for versioning
-scv_whitelist_branches = ('master', 'release-1.0')
+scv_whitelist_branches = ('master', 'release-1.0', 'new_benchmarks')
