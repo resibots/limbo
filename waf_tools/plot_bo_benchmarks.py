@@ -46,6 +46,7 @@
 #| knowledge of the CeCILL-C license and that you accept its terms.
 #|# plot the results of the Bayesian Optimization benchmarks
 from glob import glob
+import os
 from collections import defaultdict
 from datetime import datetime
 import platform
@@ -103,7 +104,7 @@ def load_data():
     for f in files:
         fs = f.split("/")
         func, var, lib = fs[-1], fs[-2], fs[-3]
-        print(func, var, lib)
+        #print(func, var, lib)
         data[func][lib][var] = np.loadtxt(f)
     return data
 
@@ -175,34 +176,56 @@ def plot(func_name, data, rst_file):
     bp = ax.boxplot(da_time, 0, 'rs', 0)
     custom_boxes(ax, bp)
     ax.set_yticklabels([])
-    ax.set_title("Wall clock time")
+    ax.set_title("Wall clock time (s)")
 
     name = func_name.split('.')[0]
-    fig.savefig("benchmark_results/fig_benchmarks" + name + ".png")    
+    fig.savefig("benchmark_results/fig_benchmarks/" + name + ".png")    
     rst_file.write(name + "\n")
     rst_file.write("-----------------\n\n")
-    rst_file.write(str(len(da_ac)) + " replicates \n\n")
+    rst_file.write(str(len(da_acc[0])) + " replicates \n\n")
     rst_file.write(".. figure:: fig_benchmarks/" + name + ".png\n\n")
 
 def plot_all():
     if not plot_ok:
         print_log('YELLOW', "No plot")
         return
+    fig_dir = os.getcwd() + '/benchmark_results/fig_benchmarks/'
     try:
-        os.makedirs('benchmark_results/fig_benchmarks')
+        os.makedirs(fig_dir)
+        print("created :" + fig_dir)
     except:
-        print('WARNING: directory \'%s\' could not be created! (it probably exists already)' % res_dir)
+        print('WARNING: directory \'%s\' could not be created! (it probably exists already)' % fig_dir)
 
     rst_file = open("benchmark_results/bo_benchmarks.rst", "w")
     rst_file.write("Bayesian optimization benchmarks\n")
     rst_file.write("===============================\n\n")
-    date = "{:%B %d, %Y}".format(datetime.now())
+    date = "{:%B %d, %Y}".format(datetime.datetime.now())
     node = platform.node()
-    rst_file.write("/" + date + " / -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
+    rst_file.write("*" + date + "* -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
+
+    rst_file.write("- We compare to BayesOpt (https://github.com/rmcantin/bayesopt) \n")
+    rst_file.write("- Accuracy: lower is better (difference with the optimum)\n")
+    rst_file.write("- Wall time: lower is better\n\n")
+    rst_file.write("- In each replicate, 10 random samples + 190 function evaluations\n")
+    rst_file.write("- see `src/benchmarks/limbo/bench.cpp` and `src/benchmarks/bayesopt/bench.cpp`\n\n")
+
+    rst_file.write("Naming convention\n")
+    rst_file.write("------------------\n\n")
+
+    rst_file.write("- limbo_def: default Limbo parameters\n\n")
+    rst_file.write("- opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function\n")
+    rst_file.write("- opt_direct: use DIRECT (from NLopt) to optimize the acquisition function\n")
+    rst_file.write("- acq_ucb: use UCB for the acquisition function\n")
+    rst_file.write("- acq_ei: use EI for the acquisition function\n")
+    rst_file.write("- hp_opt: use hyper-parameter optimization\n")
+    rst_file.write("- bayesopt_def: same parameters as default parameters in BayesOpt\n")
+    
+    
+    
     print('loading data...')
     data = load_data()
     print('data loaded')
-    for k in data.keys():
+    for k in sorted(data.keys()):
         print('plotting for ' + k + '...')
         plot(k, data, rst_file)
 

@@ -40,7 +40,7 @@ Contents:
    guides/index
    api
    defaults
-   benchmarks
+   bo_benchmarks
    faq
 
 
