@@ -47,6 +47,9 @@
 #|# plot the results of the Bayesian Optimization benchmarks
 from glob import glob
 from collections import defaultdict
+from datetime import datetime
+import platform
+import multiprocessing
 
 try:
     from waflib import Logs
@@ -149,7 +152,7 @@ def custom_boxes(ax, bp):
 
 
 # plot a single function
-def plot(func_name, data):
+def plot(func_name, data, rst_file):
     d = data[func_name]
     da_acc = []
     da_time = []
@@ -174,19 +177,34 @@ def plot(func_name, data):
     ax.set_yticklabels([])
     ax.set_title("Wall clock time")
 
-    fig.savefig("benchmark_results/" + func_name.split('.')[0] + ".png")    
-
+    name = func_name.split('.')[0]
+    fig.savefig("benchmark_results/fig_benchmarks" + name + ".png")    
+    rst_file.write(name + "\n")
+    rst_file.write("-----------------\n\n")
+    rst_file.write(str(len(da_ac)) + " replicates \n\n")
+    rst_file.write(".. figure:: fig_benchmarks/" + name + ".png\n\n")
 
 def plot_all():
     if not plot_ok:
         print_log('YELLOW', "No plot")
         return
+    try:
+        os.makedirs('benchmark_results/fig_benchmarks')
+    except:
+        print('WARNING: directory \'%s\' could not be created! (it probably exists already)' % res_dir)
+
+    rst_file = open("benchmark_results/bo_benchmarks.rst", "w")
+    rst_file.write("Bayesian optimization benchmarks\n")
+    rst_file.write("===============================\n\n")
+    date = "{:%B %d, %Y}".format(datetime.now())
+    node = platform.node()
+    rst_file.write("/" + date + " / -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
     print('loading data...')
     data = load_data()
     print('data loaded')
     for k in data.keys():
         print('plotting for ' + k + '...')
-        plot(k, data)
+        plot(k, data, rst_file)
 
 if __name__ == "__main__":
     plot_all()
