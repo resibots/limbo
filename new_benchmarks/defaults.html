@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Default values &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Frequently Asked Questions" href="faq.html"/>
+        <link rel="prev" title="API" href="api.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Default values</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#kernel">kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-maternthreehalves">kernel_maternthreehalves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acqui-eci">acqui_eci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bayes-opt-bobase">bayes_opt_bobase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acqui-ucb-imgpo">acqui_ucb_imgpo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#init-randomsamplinggrid">init_randomsamplinggrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mean-constant">mean_constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-spgp">model_spgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stop-maxpredictedvalue">stop_maxpredictedvalue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stop-maxiterations">stop_maxiterations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-rprop">opt_rprop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bayes-opt-boptimizer">bayes_opt_boptimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-maternfivehalves">kernel_maternfivehalves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-nloptnograd">opt_nloptnograd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bayes-opt-imgpo">bayes_opt_imgpo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-parallelrepeater">opt_parallelrepeater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-cmaes">opt_cmaes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-nloptgrad">opt_nloptgrad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acqui-ei">acqui_ei</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-squared-exp-ard">kernel_squared_exp_ard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bayes-opt-cboptimizer">bayes_opt_cboptimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acqui-ucb">acqui_ucb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#init-gridsampling">init_gridsampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-gridsearch">opt_gridsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kernel-exp">kernel_exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bayes-opt-ehvi">bayes_opt_ehvi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-gp-parego">model_gp_parego</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acqui-gpucb">acqui_gpucb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#init-randomsampling">init_randomsampling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Limbo</a> &raquo;</li>
+    
+    <li>Default values</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/defaults.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="default-values">
+<h1>Default values<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="kernel">
+<h2>kernel<a class="headerlink" href="#kernel" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>bool optimize_noise = false [defined in src/limbo/kernel/kernel.hpp]</li>
+<li>double noise = 0.01 [defined in src/limbo/kernel/kernel.hpp]</li>
+</ul>
+</div>
+<div class="section" id="kernel-maternthreehalves">
+<h2>kernel_maternthreehalves<a class="headerlink" href="#kernel-maternthreehalves" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double sigma_sq = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]</li>
+<li>double l = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]</li>
+</ul>
+</div>
+<div class="section" id="acqui-eci">
+<h2>acqui_eci<a class="headerlink" href="#acqui-eci" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double jitter = 0.0 [defined in src/limbo/experimental/acqui/eci.hpp]</li>
+</ul>
+</div>
+<div class="section" id="bayes-opt-bobase">
+<h2>bayes_opt_bobase<a class="headerlink" href="#bayes-opt-bobase" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]</li>
+<li>bool bounded = true [defined in src/limbo/bayes_opt/bo_base.hpp]</li>
+</ul>
+</div>
+<div class="section" id="acqui-ucb-imgpo">
+<h2>acqui_ucb_imgpo<a class="headerlink" href="#acqui-ucb-imgpo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double nu = 0.05 [defined in src/limbo/experimental/acqui/ucb_imgpo.hpp]</li>
+</ul>
+</div>
+<div class="section" id="init-randomsamplinggrid">
+<h2>init_randomsamplinggrid<a class="headerlink" href="#init-randomsamplinggrid" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>int bins = 5 [defined in src/limbo/init/random_sampling_grid.hpp]</li>
+<li>int samples = 10 [defined in src/limbo/init/random_sampling_grid.hpp]</li>
+</ul>
+</div>
+<div class="section" id="mean-constant">
+<h2>mean_constant<a class="headerlink" href="#mean-constant" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double constant = 1 [defined in src/limbo/mean/constant.hpp]</li>
+</ul>
+</div>
+<div class="section" id="model-spgp">
+<h2>model_spgp<a class="headerlink" href="#model-spgp" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double jitter = 0.000001 [defined in src/limbo/experimental/model/spgp.hpp]</li>
+<li>double samples_percent = 10 [defined in src/limbo/experimental/model/spgp.hpp]</li>
+<li>int min_m = 1 [defined in src/limbo/experimental/model/spgp.hpp]</li>
+<li>double pred_kernel_sigma_sq = 0.5 [defined in src/limbo/experimental/model/spgp.hpp]</li>
+<li>double sig = 0.01 [defined in src/limbo/experimental/model/spgp.hpp]</li>
+<li>double pred_kernel_l = 0.5 [defined in src/limbo/experimental/model/spgp.hpp]</li>
+</ul>
+</div>
+<div class="section" id="stop-maxpredictedvalue">
+<h2>stop_maxpredictedvalue<a class="headerlink" href="#stop-maxpredictedvalue" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double ratio = 0.9 [defined in src/limbo/stop/max_predicted_value.hpp]</li>
+</ul>
+</div>
+<div class="section" id="stop-maxiterations">
+<h2>stop_maxiterations<a class="headerlink" href="#stop-maxiterations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>int iterations = 190 [defined in src/limbo/stop/max_iterations.hpp]</li>
+</ul>
+</div>
+<div class="section" id="opt-rprop">
+<h2>opt_rprop<a class="headerlink" href="#opt-rprop" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double eps_stop = 0.0 [defined in src/limbo/opt/rprop.hpp]</li>
+<li>int iterations = 300 [defined in src/limbo/opt/rprop.hpp]</li>
+</ul>
+</div>
+<div class="section" id="bayes-opt-boptimizer">
+<h2>bayes_opt_boptimizer<a class="headerlink" href="#bayes-opt-boptimizer" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>int hp_period = -1 [defined in src/limbo/bayes_opt/boptimizer.hpp]</li>
+</ul>
+</div>
+<div class="section" id="kernel-maternfivehalves">
+<h2>kernel_maternfivehalves<a class="headerlink" href="#kernel-maternfivehalves" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double sigma_sq = 1 [defined in src/limbo/kernel/matern_five_halves.hpp]</li>
+<li>double l = 1 [defined in src/limbo/kernel/matern_five_halves.hpp]</li>
+</ul>
+</div>
+<div class="section" id="opt-nloptnograd">
+<h2>opt_nloptnograd<a class="headerlink" href="#opt-nloptnograd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
+<li>double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
+<li>int iterations = 500 [defined in src/limbo/opt/nlopt_no_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
+</ul>
+</div>
+<div class="section" id="bayes-opt-imgpo">
+<h2>bayes_opt_imgpo<a class="headerlink" href="#bayes-opt-imgpo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>bool hp_opt = false [defined in src/limbo/experimental/bayes_opt/imgpo.hpp]</li>
+</ul>
+</div>
+<div class="section" id="opt-parallelrepeater">
+<h2>opt_parallelrepeater<a class="headerlink" href="#opt-parallelrepeater" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double epsilon = 1e-2 [defined in src/limbo/opt/parallel_repeater.hpp]</li>
+<li>int repeats = 10 [defined in src/limbo/opt/parallel_repeater.hpp]</li>
+</ul>
+</div>
+<div class="section" id="opt-cmaes">
+<h2>opt_cmaes<a class="headerlink" href="#opt-cmaes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double xrel_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>bool verbose = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>int variant = aIPOP_CMAES [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>int elitism = 0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>bool fun_compute_initial = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>int restarts = 1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double fun_target = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double ubound = 1.0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>double fun_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>bool handle_uncertainty = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+</ul>
+</div>
+<div class="section" id="opt-nloptgrad">
+<h2>opt_nloptgrad<a class="headerlink" href="#opt-nloptgrad" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
+<li>double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
+<li>int iterations = 500 [defined in src/limbo/opt/nlopt_grad.hpp] [‘#ifdef USE_NLOPT’]</li>
+</ul>
+</div>
+<div class="section" id="acqui-ei">
+<h2>acqui_ei<a class="headerlink" href="#acqui-ei" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double jitter = 0.0 [defined in src/limbo/acqui/ei.hpp]</li>
+</ul>
+</div>
+<div class="section" id="kernel-squared-exp-ard">
+<h2>kernel_squared_exp_ard<a class="headerlink" href="#kernel-squared-exp-ard" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double sigma_sq = 1 [defined in src/limbo/kernel/squared_exp_ard.hpp]</li>
+</ul>
+</div>
+<div class="section" id="bayes-opt-cboptimizer">
+<h2>bayes_opt_cboptimizer<a class="headerlink" href="#bayes-opt-cboptimizer" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>bool bounded = true [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
+<li>int hp_period = -1 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]</li>
+</ul>
+</div>
+<div class="section" id="acqui-ucb">
+<h2>acqui_ucb<a class="headerlink" href="#acqui-ucb" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double alpha = 0.5 [defined in src/limbo/acqui/ucb.hpp]</li>
+</ul>
+</div>
+<div class="section" id="init-gridsampling">
+<h2>init_gridsampling<a class="headerlink" href="#init-gridsampling" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>int bins = 5 [defined in src/limbo/init/grid_sampling.hpp]</li>
+</ul>
+</div>
+<div class="section" id="opt-gridsearch">
+<h2>opt_gridsearch<a class="headerlink" href="#opt-gridsearch" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>int bins = 5 [defined in src/limbo/opt/grid_search.hpp]</li>
+</ul>
+</div>
+<div class="section" id="kernel-exp">
+<h2>kernel_exp<a class="headerlink" href="#kernel-exp" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double sigma_sq = 1 [defined in src/limbo/kernel/exp.hpp]</li>
+<li>double l = 1 [defined in src/limbo/kernel/exp.hpp]</li>
+</ul>
+</div>
+<div class="section" id="bayes-opt-ehvi">
+<h2>bayes_opt_ehvi<a class="headerlink" href="#bayes-opt-ehvi" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double x_ref = -11 [defined in src/limbo/experimental/bayes_opt/ehvi.hpp]</li>
+<li>double y_ref = -11 [defined in src/limbo/experimental/bayes_opt/ehvi.hpp]</li>
+</ul>
+</div>
+<div class="section" id="model-gp-parego">
+<h2>model_gp_parego<a class="headerlink" href="#model-gp-parego" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double rho = 0.05 [defined in src/limbo/experimental/model/gp_parego.hpp]</li>
+</ul>
+</div>
+<div class="section" id="acqui-gpucb">
+<h2>acqui_gpucb<a class="headerlink" href="#acqui-gpucb" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double delta = 0.1 [defined in src/limbo/acqui/gp_ucb.hpp]</li>
+</ul>
+</div>
+<div class="section" id="init-randomsampling">
+<h2>init_randomsampling<a class="headerlink" href="#init-randomsampling" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>int samples = 10 [defined in src/limbo/init/random_sampling.hpp]</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="api.html" class="btn btn-neutral" title="API" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: new_benchmarks
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/index.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/defaults.html">master</a></dd>
+            <dd><a href="defaults.html">new_benchmarks</a></dd>
+            <dd><a href="../release-1.0/index.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

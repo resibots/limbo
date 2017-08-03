@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Optimization Sub-API &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Building the documentation" href="building_docs.html"/>
+        <link rel="prev" title="Gaussian Process" href="gp.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Optimization Sub-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_docs.html">Building the documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Tutorials</a> &raquo;</li>
+    
+    <li>Optimization Sub-API</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/tutorials/opt.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="optimization-sub-api">
+<span id="opt-tutorial"></span><h1>Optimization Sub-API<a class="headerlink" href="#optimization-sub-api" title="Permalink to this headline">¶</a></h1>
+<p>Limbo uses optimizers in several situations, most notably to optimize hyper-parameters of Gaussian processes and to optimize acquisition functions. Nevertheless, these optimizers might be useful in other contexts. This tutorial briefly explains how to use it.</p>
+<p>Optimizers in Limbo are wrappers around:</p>
+<ul class="simple">
+<li>NLOpt (which provides many local, global, gradient-based, gradient-free algorithms)</li>
+<li>libcmaes (which provides the Covariance Matrix Adaptation Evolutionary Strategy, that is, CMA-ES)</li>
+<li>a few other algorithms that are implemented in Limbo (in particular, RPROP, which is gradient-based optimization algorithm)</li>
+</ul>
+<p>We first need to define a function to be optimized. Here we chose <span class="math">\(-(x_1-0.5)^2 - (x_2-0.5)^2\)</span>, whose maximum is [0.5, 0.5]:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">// the maximum is [0.5, 0.5] (f([0.5, 0.5] = 0))</span>
+<span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">).</span><span class="n">square</span><span class="p">().</span><span class="n">sum</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">eval_grad</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">opt</span><span class="o">::</span><span class="n">no_grad</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">params</span><span class="p">).</span><span class="n">array</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">v</span><span class="p">,</span> <span class="n">grad</span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Limbo optimizers always MAXIMIZE f(x), whereas many libraries MINIMIZE f(x)</p>
+</div>
+<p>The first thing to note is that the functions needs to return an object of type <code class="docutils literal"><span class="pre">eval_t</span></code>, which is actually a pair made of a double (<span class="math">\(f(x)\)</span>) and a vector (the gradient). We need to do so because (1) many fast algorithm use the gradient, (2) the gradient and the function often share some computations, therefore it is often faster to compute both the function value and the gradient at the same time (this is, for instance, the case with the log-likelihood that we optimize to find the hyper-parameters of Gaussian processes).</p>
+<p>Thanks to c++11, we can simply return <code class="docutils literal"><span class="pre">{v,</span> <span class="pre">grad}</span></code> and an object of type <code class="docutils literal"><span class="pre">eval_t</span></code> will be created. When we do not know how to compute the gradient, we return <code class="docutils literal"><span class="pre">opt::no_grad(v)</span></code>, which creates a special object without the gradient information (using boost::optional).</p>
+<p>The boolean <code class="docutils literal"><span class="pre">eval_grad</span></code> is true when we need to evaluate the gradient for x, and false otherwise. This is useful because some algorithms do not need the gradient: there is no need to compute this value.</p>
+<p>As usual, each algorithm has some parameters (typically the number of iterations to perform). They are defined like the other parameters in Limbo (see <span class="xref std std-ref">Parameters</span>):</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#ifdef USE_NLOPT</span>
+<span class="k">struct</span> <span class="n">ParamsGrad</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptgrad</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptgrad</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ParamsNoGrad</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef USE_LIBCMAES</span>
+<span class="k">struct</span> <span class="n">ParamsCMAES</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="cp">#endif</span>
+</pre></div>
+</td></tr></table></div>
+<p>Now we can instantiate our optimizer and call it:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// the type of the optimizer (here NLOpt with the LN_LBGFGS algorithm)</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">NLOptGrad</span><span class="o">&lt;</span><span class="n">ParamsGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">LD_LBFGS</span><span class="o">&gt;</span> <span class="n">lbfgs</span><span class="p">;</span>
+    <span class="c1">// we start from a random point (in 2D), and the search is not bounded</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_lbfgs</span> <span class="o">=</span> <span class="n">lbfgs</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with LBFGS:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_lbfgs</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>We can do the same with a gradient-free optimizer from NLOpt:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// we can also use a gradient-free algorith, like DIRECT</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">NLOptNoGrad</span><span class="o">&lt;</span><span class="n">ParamsNoGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">GN_DIRECT</span><span class="o">&gt;</span> <span class="n">direct</span><span class="p">;</span>
+    <span class="c1">// we start from a random point (in 2D), and the search is bounded in [0,1]</span>
+    <span class="c1">// be careful that DIRECT does not support unbounded search</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_direct</span> <span class="o">=</span> <span class="n">direct</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with DIRECT:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_direct</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Or with CMA-ES:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="c1">// or Cmaes</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsCMAES</span><span class="o">&gt;</span> <span class="n">cmaes</span><span class="p">;</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_cmaes</span> <span class="o">=</span> <span class="n">cmaes</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with CMA-ES:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_cmaes</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>See the <a class="reference internal" href="../api.html#opt-api"><span class="std std-ref">API documentation</span></a> for more details.</p>
+<p>Here is the full file.</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;limbo/opt.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;limbo/tools.hpp&gt;</span><span class="cp"></span>
+
+<span class="c1">// this short tutorial shows how to use the optimization api of limbo (opt::)</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
+
+<span class="cp">#ifdef USE_NLOPT</span>
+<span class="k">struct</span> <span class="n">ParamsGrad</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptgrad</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptgrad</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ParamsNoGrad</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef USE_LIBCMAES</span>
+<span class="k">struct</span> <span class="n">ParamsCMAES</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+<span class="cp">#endif</span>
+
+<span class="c1">// we maximize -(x_1-0.5)^2 - (x_2-0.5)^2</span>
+<span class="c1">// the maximum is [0.5, 0.5] (f([0.5, 0.5] = 0))</span>
+<span class="n">opt</span><span class="o">::</span><span class="n">eval_t</span> <span class="n">my_function</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">eval_grad</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">double</span> <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">).</span><span class="n">square</span><span class="p">().</span><span class="n">sum</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">eval_grad</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">opt</span><span class="o">::</span><span class="n">no_grad</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">params</span><span class="p">).</span><span class="n">array</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">v</span><span class="p">,</span> <span class="n">grad</span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="cp">#ifdef USE_NLOPT</span>
+    <span class="c1">// the type of the optimizer (here NLOpt with the LN_LBGFGS algorithm)</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">NLOptGrad</span><span class="o">&lt;</span><span class="n">ParamsGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">LD_LBFGS</span><span class="o">&gt;</span> <span class="n">lbfgs</span><span class="p">;</span>
+    <span class="c1">// we start from a random point (in 2D), and the search is not bounded</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_lbfgs</span> <span class="o">=</span> <span class="n">lbfgs</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with LBFGS:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_lbfgs</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">my_function</span><span class="p">(</span><span class="n">res_lbfgs</span><span class="p">).</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="c1">// we can also use a gradient-free algorith, like DIRECT</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">NLOptNoGrad</span><span class="o">&lt;</span><span class="n">ParamsNoGrad</span><span class="p">,</span> <span class="n">nlopt</span><span class="o">::</span><span class="n">GN_DIRECT</span><span class="o">&gt;</span> <span class="n">direct</span><span class="p">;</span>
+    <span class="c1">// we start from a random point (in 2D), and the search is bounded in [0,1]</span>
+    <span class="c1">// be careful that DIRECT does not support unbounded search</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_direct</span> <span class="o">=</span> <span class="n">direct</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with DIRECT:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_direct</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">my_function</span><span class="p">(</span><span class="n">res_direct</span><span class="p">).</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef USE_LIBCMAES</span>
+    <span class="c1">// or Cmaes</span>
+    <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">ParamsCMAES</span><span class="o">&gt;</span> <span class="n">cmaes</span><span class="p">;</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">res_cmaes</span> <span class="o">=</span> <span class="n">cmaes</span><span class="p">(</span><span class="n">my_function</span><span class="p">,</span> <span class="n">tools</span><span class="o">::</span><span class="n">random_vector</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Result with CMA-ES:</span><span class="se">\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">res_cmaes</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>
+              <span class="o">&lt;&lt;</span> <span class="s">&quot; -&gt; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">my_function</span><span class="p">(</span><span class="n">res_cmaes</span><span class="p">).</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="cp">#endif</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="building_docs.html" class="btn btn-neutral float-right" title="Building the documentation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gp.html" class="btn btn-neutral" title="Gaussian Process" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: new_benchmarks
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../v1.0.0/tutorials/opt.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../master/tutorials/opt.html">master</a></dd>
+            <dd><a href="opt.html">new_benchmarks</a></dd>
+            <dd><a href="../../release-1.0/tutorials/opt.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
