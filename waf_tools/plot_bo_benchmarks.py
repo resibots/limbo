@@ -139,18 +139,18 @@ def custom_boxes(ax, bp):
         bp['whiskers'][i*2].set_linewidth(2)
         bp['whiskers'][i*2 + 1].set_linewidth(2)
         # top and bottom fliers
-        bp['fliers'][i*2].set(markerfacecolor=c_i,
-                        marker='o', alpha=0.75, markersize=6,
-                        markeredgecolor='none')
-        bp['fliers'][i * 2 + 1].set(markerfacecolor=c_i,
-                        marker='o', alpha=0.75, markersize=6,
-                        markeredgecolor='none')
+        if (i * 2 + 1 < len(bp['fliers'])):
+            bp['fliers'][i*2].set(markerfacecolor=c_i,
+                                  marker='o', alpha=0.75, markersize=6,
+                                  markeredgecolor='none')
+            bp['fliers'][i * 2 + 1].set(markerfacecolor=c_i,
+                                        marker='o', alpha=0.75, markersize=6,
+                                        markeredgecolor='none')
         bp['medians'][i].set_color('black')
         bp['medians'][i].set_linewidth(2)
         # and 4 caps to remove
         for c in bp['caps']:
             c.set_linewidth(0)
-
 
 # plot a single function
 def plot(func_name, data, rst_file):
