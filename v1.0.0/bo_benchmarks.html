@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; limbo 0.1 documentation</title>
+  <title>Bayesian optimization benchmarks &mdash; limbo 0.1 documentation</title>
   
 
   
@@ -31,7 +31,7 @@
   
         <link rel="index" title="Index"
               href="genindex.html"/>
-        <link rel="search" title="Search" href="#"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
@@ -80,14 +80,14 @@
             
             
               <div class="version">
-                1.0
+                0.0
               </div>
             
           
 
           
 <div role="search">
-  <form id="resibots-search-form" class="wy-form" action="#" method="get">
+  <form id="resibots-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -113,8 +113,6 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -122,8 +120,6 @@
 
             
             
-              
-                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
               
                 <a class="caption" href="http://github.com/resibots">github</a>
               
@@ -155,8 +151,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Limbo</a> &raquo;</li>
     
-    <li>Search</li>
+    <li>Bayesian optimization benchmarks</li>
     <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/bo_benchmarks.rst.txt" rel="nofollow"> View page source</a>
+        
       
     </li>
   </ul>
@@ -165,19 +165,86 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="bayesian-optimization-benchmarks">
+<h1>Bayesian optimization benchmarks<a class="headerlink" href="#bayesian-optimization-benchmarks" title="Permalink to this headline">¶</a></h1>
+<p><em>August 04, 2017</em> – hal01 (24 cores)</p>
+<ul class="simple">
+<li>We compare to BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a>)</li>
+<li>Accuracy: lower is better (difference with the optimum)</li>
+<li>Wall time: lower is better</li>
+<li>In each replicate, 10 random samples + 190 function evaluations</li>
+<li>see <cite>src/benchmarks/limbo/bench.cpp</cite> and <cite>src/benchmarks/bayesopt/bench.cpp</cite></li>
+</ul>
+<div class="section" id="naming-convention">
+<h2>Naming convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>limbo_def: default Limbo parameters</li>
+<li>opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function</li>
+<li>opt_direct: use DIRECT (from NLopt) to optimize the acquisition function</li>
+<li>acq_ucb: use UCB for the acquisition function</li>
+<li>acq_ei: use EI for the acquisition function</li>
+<li>hp_opt: use hyper-parameter optimization</li>
+<li>bayesopt_def: same parameters as default parameters in BayesOpt</li>
+</ul>
+</div>
+<div class="section" id="branin">
+<h2>branin<a class="headerlink" href="#branin" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/branin.png" src="_images/branin.png" />
+</div>
+</div>
+<div class="section" id="ellipsoid">
+<h2>ellipsoid<a class="headerlink" href="#ellipsoid" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/ellipsoid.png" src="_images/ellipsoid.png" />
+</div>
+</div>
+<div class="section" id="goldsteinprice">
+<h2>goldsteinprice<a class="headerlink" href="#goldsteinprice" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/goldsteinprice.png" src="_images/goldsteinprice.png" />
+</div>
+</div>
+<div class="section" id="hartmann3">
+<h2>hartmann3<a class="headerlink" href="#hartmann3" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/hartmann3.png" src="_images/hartmann3.png" />
+</div>
+</div>
+<div class="section" id="hartmann6">
+<h2>hartmann6<a class="headerlink" href="#hartmann6" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/hartmann6.png" src="_images/hartmann6.png" />
+</div>
+</div>
+<div class="section" id="rastrigin">
+<h2>rastrigin<a class="headerlink" href="#rastrigin" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/rastrigin.png" src="_images/rastrigin.png" />
+</div>
+</div>
+<div class="section" id="sixhumpcamel">
+<h2>sixhumpcamel<a class="headerlink" href="#sixhumpcamel" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/sixhumpcamel.png" src="_images/sixhumpcamel.png" />
+</div>
+</div>
+<div class="section" id="sphere">
+<h2>sphere<a class="headerlink" href="#sphere" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/sphere.png" src="_images/sphere.png" />
+</div>
+</div>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
           </div>
@@ -225,19 +292,19 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: master
+        v: v1.0.0
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="v1.0.0/index.html">v1.0.0</a></dd>
+            <dd><a href="bo_benchmarks.html">v1.0.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="master/search.html">master</a></dd>
-            <dd><a href="new_benchmarks/index.html">new_benchmarks</a></dd>
-            <dd><a href="release-1.0/index.html">release-1.0</a></dd>
+            <dd><a href="../master/bo_benchmarks.html">master</a></dd>
+            <dd><a href="../new_benchmarks/bo_benchmarks.html">new_benchmarks</a></dd>
+            <dd><a href="../release-1.0/bo_benchmarks.html">release-1.0</a></dd>
         </dl>
     </div>
 </div>
@@ -258,7 +325,6 @@
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-      <script type="text/javascript" src="_static/searchtools.js"></script>
 
   
 
@@ -271,14 +337,7 @@
           SphinxResibotsTheme.StickyNav.enable();
       });
   </script>
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>

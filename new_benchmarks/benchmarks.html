@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Bayesian optimization benchmarks &mdash; limbo 0.1 documentation</title>
+  <title>Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries &mdash; limbo 0.1 documentation</title>
   
 
   
@@ -114,6 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -154,7 +155,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Limbo</a> &raquo;</li>
     
-    <li>Bayesian optimization benchmarks</li>
+    <li>Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -168,82 +169,54 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="bayesian-optimization-benchmarks">
-<h1>Bayesian optimization benchmarks<a class="headerlink" href="#bayesian-optimization-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>August 04, 2017</em> – hal01 (24 cores)</p>
-<ul class="simple">
-<li>We compare to BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a>)</li>
-<li>Accuracy: lower is better (difference with the optimum)</li>
-<li>Wall time: lower is better</li>
-<li>In each replicate, 10 random samples + 190 function evaluations</li>
-<li>see <cite>src/benchmarks/limbo/bench.cpp</cite> and <cite>src/benchmarks/bayesopt/bench.cpp</cite></li>
-</ul>
-<div class="section" id="naming-convention">
-<h2>Naming convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>limbo_def: default Limbo parameters</li>
-<li>opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function</li>
-<li>opt_direct: use DIRECT (from NLopt) to optimize the acquisition function</li>
-<li>acq_ucb: use UCB for the acquisition function</li>
-<li>acq_ei: use EI for the acquisition function</li>
-<li>hp_opt: use hyper-parameter optimization</li>
-<li>bayesopt_def: same parameters as default parameters in BayesOpt</li>
-</ul>
+  <div class="section" id="benchmarking-with-other-bayesian-optimization-gaussian-processes-libraries">
+<h1>Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries<a class="headerlink" href="#benchmarking-with-other-bayesian-optimization-gaussian-processes-libraries" title="Permalink to this headline">¶</a></h1>
+<p>In this section, we will compared the performance (both in accuracy and speed) of our library to the one of other Bayesian Optimization (BO) and Gaussian Processes (GP) libraries in several test functions.</p>
+<div class="section" id="bayesopt-c-bayesian-optimization-library">
+<span id="bench-bayes-opt"></span><h2>BayesOpt C++ Bayesian Optimization Library<a class="headerlink" href="#bayesopt-c-bayesian-optimization-library" title="Permalink to this headline">¶</a></h2>
+<p><strong>Last updated: 27/05/2017</strong></p>
+<p>The BayesOpt library and information about it can be found <a class="reference external" href="https://bitbucket.org/rmcantin/bayesopt">here</a>.</p>
+<div class="section" id="parameters-setup">
+<h3>Parameters/Setup<a class="headerlink" href="#parameters-setup" title="Permalink to this headline">¶</a></h3>
+<p>Limbo was configured to replicate BayesOpt’s default parameters:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Kernel*</strong></td>
+<td>Matern5 (<span class="math">\(\sigma^2 = 1, l = 1\)</span>)</td>
+</tr>
+<tr class="row-even"><td><strong>Acquisition Function</strong></td>
+<td>UCB (<span class="math">\(\alpha = 0.125\)</span>)</td>
+</tr>
+<tr class="row-odd"><td><strong>Initialization</strong></td>
+<td>RandomSampling (10 Samples)</td>
+</tr>
+<tr class="row-even"><td rowspan="2"><strong>Mean function</strong></td>
+<td rowspan="2">Constant (value of 1)</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><strong>Sample noise</strong></td>
+<td rowspan="2">1e-10</td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><strong>Max iterations</strong></td>
+<td rowspan="2">190</td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+<p><strong>*</strong> <em>When the hyperparameters are optimized, the kernel parameters are learnt.</em></p>
+<p>The acquisition function is optimized as follows: an outer optimization process uses <strong>DIRECT</strong> for <span class="math">\(225d\)</span> iterations (where <span class="math">\(d\)</span> is the input dimension) and the solution found is fed as the initial point to an inner optimization process that uses <strong>BOBYQA</strong> for <span class="math">\(25d\)</span> iterations.</p>
 </div>
-<div class="section" id="branin">
-<h2>branin<a class="headerlink" href="#branin" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="results">
+<h3>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h3>
 <div class="figure">
-<img alt="_images/branin.png" src="_images/branin.png" />
+<a class="reference external image-reference" href="./_images/benchmark_limbo_bayes_opt.png"><img alt="Benchmarks vs BayesOpt C++ library" src="_images/benchmark_limbo_bayes_opt.png" /></a>
 </div>
-</div>
-<div class="section" id="ellipsoid">
-<h2>ellipsoid<a class="headerlink" href="#ellipsoid" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
-<div class="figure">
-<img alt="_images/ellipsoid.png" src="_images/ellipsoid.png" />
-</div>
-</div>
-<div class="section" id="goldsteinprice">
-<h2>goldsteinprice<a class="headerlink" href="#goldsteinprice" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
-<div class="figure">
-<img alt="_images/goldsteinprice.png" src="_images/goldsteinprice.png" />
-</div>
-</div>
-<div class="section" id="hartmann3">
-<h2>hartmann3<a class="headerlink" href="#hartmann3" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
-<div class="figure">
-<img alt="_images/hartmann3.png" src="_images/hartmann3.png" />
-</div>
-</div>
-<div class="section" id="hartmann6">
-<h2>hartmann6<a class="headerlink" href="#hartmann6" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
-<div class="figure">
-<img alt="_images/hartmann6.png" src="_images/hartmann6.png" />
-</div>
-</div>
-<div class="section" id="rastrigin">
-<h2>rastrigin<a class="headerlink" href="#rastrigin" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
-<div class="figure">
-<img alt="_images/rastrigin.png" src="_images/rastrigin.png" />
-</div>
-</div>
-<div class="section" id="sixhumpcamel">
-<h2>sixhumpcamel<a class="headerlink" href="#sixhumpcamel" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
-<div class="figure">
-<img alt="_images/sixhumpcamel.png" src="_images/sixhumpcamel.png" />
-</div>
-</div>
-<div class="section" id="sphere">
-<h2>sphere<a class="headerlink" href="#sphere" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
-<div class="figure">
-<img alt="_images/sphere.png" src="_images/sphere.png" />
+<p>Two configurations are tested: with and without optimization of the hyper-parameters of the Gaussian Process. Each experiment has been replicated 250 times. The median of the data is pictured with a thick dot, while the box represents the first and third quartiles. The most extreme data points are delimited by the whiskers and the outliers are individually depicted as smaller circles. According to the benchmarks we performed (see figure above), Limbo finds solutions with the same level of quality as BayesOpt, within a significantly lower amount of time: for the same accuracy (less than 2.10−3 between the optimized solutions found by Limbo and BayesOpt), Limbo is between 1.47 and 1.76 times faster (median values) than BayesOpt when the hyperparameters are not optimized, and between 2.05 and 2.54 times faster when they are.</p>
 </div>
 </div>
 </div>
@@ -301,13 +274,13 @@
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../v1.0.0/benchmarks.html">v1.0.0</a></dd>
+            <dd><a href="../v1.0.0/index.html">v1.0.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="../master/benchmarks.html">master</a></dd>
             <dd><a href="benchmarks.html">new_benchmarks</a></dd>
-            <dd><a href="../release-1.0/benchmarks.html">release-1.0</a></dd>
+            <dd><a href="../release-1.0/index.html">release-1.0</a></dd>
         </dl>
     </div>
 </div>

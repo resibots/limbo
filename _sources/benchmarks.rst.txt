@@ -1,79 +1,46 @@
-Bayesian optimization benchmarks
-===============================
+Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries
+==========================================================================
 
-*August 04, 2017* -- hal01 (24 cores)
+In this section, we will compared the performance (both in accuracy and speed) of our library to the one of other Bayesian Optimization (BO) and Gaussian Processes (GP) libraries in several test functions.
 
-- We compare to BayesOpt (https://github.com/rmcantin/bayesopt) 
-- Accuracy: lower is better (difference with the optimum)
-- Wall time: lower is better
+.. _bench_bayes_opt:
 
-- In each replicate, 10 random samples + 190 function evaluations
-- see `src/benchmarks/limbo/bench.cpp` and `src/benchmarks/bayesopt/bench.cpp`
+BayesOpt C++ Bayesian Optimization Library
+-------------------------------------------
 
-Naming convention
-------------------
+**Last updated: 27/05/2017**
 
-- limbo_def: default Limbo parameters
+The BayesOpt library and information about it can be found `here <https://bitbucket.org/rmcantin/bayesopt>`_.
 
-- opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function
-- opt_direct: use DIRECT (from NLopt) to optimize the acquisition function
-- acq_ucb: use UCB for the acquisition function
-- acq_ei: use EI for the acquisition function
-- hp_opt: use hyper-parameter optimization
-- bayesopt_def: same parameters as default parameters in BayesOpt
-branin
------------------
+Parameters/Setup
+~~~~~~~~~~~~~~~~~
 
-40 replicates 
+Limbo was configured to replicate BayesOpt's default parameters:
 
-.. figure:: fig_benchmarks/branin.png
 
-ellipsoid
------------------
++------------------------+---------------------------------------+
+|      **Kernel\***      | Matern5 (:math:`\sigma^2 = 1, l = 1`) |
++------------------------+---------------------------------------+
+|**Acquisition Function**|       UCB (:math:`\alpha = 0.125`)    |
++------------------------+---------------------------------------+
+|   **Initialization**   |     RandomSampling (10 Samples)       |
++------------------------+---------------------------------------+
+|    **Mean function**   |         Constant (value of 1)         +
++------------------------+---------------------------------------+
+|    **Sample noise**    |                 1e-10                 +
++------------------------+---------------------------------------+
+|   **Max iterations**   |                  190                  +
++------------------------+---------------------------------------+
 
-40 replicates 
+**\*** *When the hyperparameters are optimized, the kernel parameters are learnt.*
 
-.. figure:: fig_benchmarks/ellipsoid.png
+The acquisition function is optimized as follows: an outer optimization process uses **DIRECT** for :math:`225d` iterations (where :math:`d` is the input dimension) and the solution found is fed as the initial point to an inner optimization process that uses **BOBYQA** for :math:`25d` iterations.
 
-goldsteinprice
------------------
+Results
+~~~~~~~~
 
-40 replicates 
+.. figure:: ./pics/benchmark_limbo_bayes_opt.png
+   :alt: Benchmarks vs BayesOpt C++ library
+   :target: ./_images/benchmark_limbo_bayes_opt.png
 
-.. figure:: fig_benchmarks/goldsteinprice.png
-
-hartmann3
------------------
-
-40 replicates 
-
-.. figure:: fig_benchmarks/hartmann3.png
-
-hartmann6
------------------
-
-40 replicates 
-
-.. figure:: fig_benchmarks/hartmann6.png
-
-rastrigin
------------------
-
-40 replicates 
-
-.. figure:: fig_benchmarks/rastrigin.png
-
-sixhumpcamel
------------------
-
-40 replicates 
-
-.. figure:: fig_benchmarks/sixhumpcamel.png
-
-sphere
------------------
-
-40 replicates 
-
-.. figure:: fig_benchmarks/sphere.png
-
+Two configurations are tested: with and without optimization of the hyper-parameters of the Gaussian Process. Each experiment has been replicated 250 times. The median of the data is pictured with a thick dot, while the box represents the first and third quartiles. The most extreme data points are delimited by the whiskers and the outliers are individually depicted as smaller circles. According to the benchmarks we performed (see figure above), Limbo finds solutions with the same level of quality as BayesOpt, within a significantly lower amount of time: for the same accuracy (less than 2.10−3 between the optimized solutions found by Limbo and BayesOpt), Limbo is between 1.47 and 1.76 times faster (median values) than BayesOpt when the hyperparameters are not optimized, and between 2.05 and 2.54 times faster when they are.
