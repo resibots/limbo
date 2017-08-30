@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bayesian optimization benchmarks &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Limbo</a> &raquo;</li>
+    
+    <li>Bayesian optimization benchmarks</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/benchmarks.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bayesian-optimization-benchmarks">
+<h1>Bayesian optimization benchmarks<a class="headerlink" href="#bayesian-optimization-benchmarks" title="Permalink to this headline">¶</a></h1>
+<p><em>August 04, 2017</em> – hal01 (24 cores)</p>
+<ul class="simple">
+<li>We compare to BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a>)</li>
+<li>Accuracy: lower is better (difference with the optimum)</li>
+<li>Wall time: lower is better</li>
+<li>In each replicate, 10 random samples + 190 function evaluations</li>
+<li>see <cite>src/benchmarks/limbo/bench.cpp</cite> and <cite>src/benchmarks/bayesopt/bench.cpp</cite></li>
+</ul>
+<div class="section" id="naming-convention">
+<h2>Naming convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>limbo_def: default Limbo parameters</li>
+<li>opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function</li>
+<li>opt_direct: use DIRECT (from NLopt) to optimize the acquisition function</li>
+<li>acq_ucb: use UCB for the acquisition function</li>
+<li>acq_ei: use EI for the acquisition function</li>
+<li>hp_opt: use hyper-parameter optimization</li>
+<li>bayesopt_def: same parameters as default parameters in BayesOpt</li>
+</ul>
+</div>
+<div class="section" id="branin">
+<h2>branin<a class="headerlink" href="#branin" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/branin.png" src="_images/branin.png" />
+</div>
+</div>
+<div class="section" id="ellipsoid">
+<h2>ellipsoid<a class="headerlink" href="#ellipsoid" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/ellipsoid.png" src="_images/ellipsoid.png" />
+</div>
+</div>
+<div class="section" id="goldsteinprice">
+<h2>goldsteinprice<a class="headerlink" href="#goldsteinprice" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/goldsteinprice.png" src="_images/goldsteinprice.png" />
+</div>
+</div>
+<div class="section" id="hartmann3">
+<h2>hartmann3<a class="headerlink" href="#hartmann3" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/hartmann3.png" src="_images/hartmann3.png" />
+</div>
+</div>
+<div class="section" id="hartmann6">
+<h2>hartmann6<a class="headerlink" href="#hartmann6" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/hartmann6.png" src="_images/hartmann6.png" />
+</div>
+</div>
+<div class="section" id="rastrigin">
+<h2>rastrigin<a class="headerlink" href="#rastrigin" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/rastrigin.png" src="_images/rastrigin.png" />
+</div>
+</div>
+<div class="section" id="sixhumpcamel">
+<h2>sixhumpcamel<a class="headerlink" href="#sixhumpcamel" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/sixhumpcamel.png" src="_images/sixhumpcamel.png" />
+</div>
+</div>
+<div class="section" id="sphere">
+<h2>sphere<a class="headerlink" href="#sphere" title="Permalink to this headline">¶</a></h2>
+<p>40 replicates</p>
+<div class="figure">
+<img alt="_images/sphere.png" src="_images/sphere.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: release-1.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/benchmarks.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/benchmarks.html">master</a></dd>
+            <dd><a href="../new_benchmarks/benchmarks.html">new_benchmarks</a></dd>
+            <dd><a href="benchmarks.html">release-1.0</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
