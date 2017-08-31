@@ -47,6 +47,10 @@
 #|# plot the results of the Bayesian Optimization benchmarks
 from glob import glob
 from collections import defaultdict, OrderedDict
+from datetime import datetime
+import platform
+import multiprocessing
+import os
 
 try:
     from waflib import Logs
@@ -133,6 +137,7 @@ def custom_ax(ax):
 
 def plot_ax(ax, data, points, labely, disp_legend=True, disp_xaxis=False):
     labels = []
+    replicates = 0
     kk = 0
     # for each variant
     for var in points.keys():
@@ -156,6 +161,7 @@ def plot_ax(ax, data, points, labely, disp_legend=True, disp_xaxis=False):
         y_axis_75 = []
         y_axis_25 = []
         for i in range(len(dd)):
+            replicates = len(dd[i])
             y_axis.append(np.median(dd[i]))
             y_axis_75.append(np.percentile(dd[i], 75))
             y_axis_25.append(np.percentile(dd[i], 25))
@@ -172,21 +178,34 @@ def plot_ax(ax, data, points, labely, disp_legend=True, disp_xaxis=False):
     ax.set_ylabel(labely)
     custom_ax(ax)
 
-def plot_data(bench, func, dim, mses, query_times, learning_times, points):
+    return replicates
+
+def plot_data(bench, func, dim, mses, query_times, learning_times, points, rst_file):
     name = func+'_'+str(dim)
     fig, ax = plt.subplots(3, sharex=True)
 
-    plot_ax(ax[0], mses, points, 'Mean Squared Error')
+    replicates = plot_ax(ax[0], mses, points, 'Mean Squared Error')
     plot_ax(ax[1], query_times, points, 'Querying time in ms', False)
     plot_ax(ax[2], learning_times, points, 'Learning time in seconds', False, True)
 
     fig.tight_layout()
-    fig.savefig('regression_benchmark_results/'+bench+'/'+name+'.png')
+    fig.savefig('regression_benchmark_results/'+bench+'_figs/'+name+'.png')
     close()
 
-def plot(points,times_learn,times_query,mses):
+    rst_file.write(func.title() + " in " + str(dim) + "D\n")
+    rst_file.write("-----------------\n\n")
+    rst_file.write(str(replicates) + " replicates \n\n")
+    rst_file.write(".. figure:: fig_benchmarks/" + bench + "_figs/" + name + ".png\n\n")
+
+def plot(points,times_learn,times_query,mses,rst_file):
     # for each benchmark configuration
     for bench in points.keys():
+        fig_dir = os.getcwd() + '/regression_benchmark_results/'+bench+'_figs/'
+        try:
+            os.makedirs(fig_dir)
+            print("created :" + fig_dir)
+        except:
+            print('WARNING: directory \'%s\' could not be created! (it probably exists already)' % fig_dir)
         # for each function
         for func in points[bench].keys():
             # for each dimension
@@ -194,16 +213,37 @@ def plot(points,times_learn,times_query,mses):
                 print('plotting for benchmark: ' + bench + ', the function: ' + func + ' for dimension: ' + str(dim))
                 name = bench+'_'+func+'_'+str(dim)
 
-                plot_data(bench, func, dim, mses[bench][func][dim], times_query[bench][func][dim], times_learn[bench][func][dim], points[bench][func][dim])
+                plot_data(bench, func, dim, mses[bench][func][dim], times_query[bench][func][dim], times_learn[bench][func][dim], points[bench][func][dim], rst_file)
 
 def plot_all():
     if not plot_ok:
         print_log('YELLOW', "No plot")
         return
+
+    rst_file = open("regression_benchmark_results/regression_benchmarks.rst", "w")
+    rst_file.write("Gaussian process regression benchmarks\n")
+    rst_file.write("======================================\n\n")
+    date = "{:%B %d, %Y}".format(datetime.datetime.now())
+    node = platform.node()
+    rst_file.write("*" + date + "* -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
+
+    rst_file.write("- We compare to GPy (https://github.com/SheffieldML/GPy) \n")
+    rst_file.write("- Mean Squared Error: lower is better\n")
+    rst_file.write("- Learning time: lower is better\n")
+    rst_file.write("- Querying time (for 1 by 1 query points): lower is better\n\n")
+    rst_file.write("- In each replicate, all the variants (see below for the variants available) are using exactly the same data\n\n")
+
+    rst_file.write("Naming convention\n")
+    rst_file.write("------------------\n\n")
+
+    rst_file.write("- GP-SE-Full: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation\n")
+    rst_file.write("- GP-SE: Same as above but the signal noise is not optimized and set to a default value: 0.01\n")
+    rst_file.write("- GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation\n\n")
+
     print('loading data...')
     points,times_learn,times_query,mses = load_data()
     print('data loaded')
-    plot(points,times_learn,times_query,mses)
+    plot(points,times_learn,times_query,mses,rst_file)
 
 if __name__ == "__main__":
     plot_all()
