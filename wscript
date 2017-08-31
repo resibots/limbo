@@ -226,7 +226,7 @@ def write_default_params(ctx):
 
 def build_docs(ctx):
     Logs.pprint('NORMAL', "generating HTML doc with versioning...")
-    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(master|release-*)" docs docs/_build/html'
+    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(new_benchmarks|master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
