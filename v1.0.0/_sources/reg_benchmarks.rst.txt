@@ -1,0 +1,96 @@
+Gaussian process regression benchmarks
+======================================
+
+*September 02, 2017* -- hal28 (32 cores)
+
+- We compare to GPy (https://github.com/SheffieldML/GPy) 
+- Mean Squared Error: lower is better
+- Learning time: lower is better
+- Querying time (for 1 by 1 query points): lower is better
+
+- In each replicate, all the variants (see below for the variants available) are using exactly the same data
+
+Naming convention
+------------------
+
+- GP-SE-Full: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation
+- GP-SE: Same as above but the signal noise is not optimized and set to a default value: 0.01
+- GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation
+
+Rastrigin in 8D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/rastrigin_8.png
+
+Rastrigin in 1D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/rastrigin_1.png
+
+Rastrigin in 2D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/rastrigin_2.png
+
+Rastrigin in 4D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/rastrigin_4.png
+
+Pistonsimulation in 7D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/pistonsimulation_7.png
+
+Step in 1D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/step_1.png
+
+Robotarm in 8D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/robotarm_8.png
+
+Gramacylee in 1D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/gramacylee_1.png
+
+Planarinversedynamicsii in 6D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/planarinversedynamicsii_6.png
+
+Otlcircuit in 6D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/otlcircuit_6.png
+
+Planarinversedynamicsi in 6D
+-----------------
+
+30 replicates 
+
+.. figure:: fig_benchmarks/regression_benchmark_figs/planarinversedynamicsi_6.png
+

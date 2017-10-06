@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; limbo 0.1 documentation</title>
+  <title>Gaussian process regression benchmarks &mdash; limbo 0.1 documentation</title>
   
 
   
@@ -31,7 +31,7 @@
   
         <link rel="index" title="Index"
               href="genindex.html"/>
-        <link rel="search" title="Search" href="#"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
@@ -87,7 +87,7 @@
 
           
 <div role="search">
-  <form id="resibots-search-form" class="wy-form" action="#" method="get">
+  <form id="resibots-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -114,8 +114,7 @@
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -156,8 +155,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Limbo</a> &raquo;</li>
     
-    <li>Search</li>
+    <li>Gaussian process regression benchmarks</li>
     <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/reg_benchmarks.rst.txt" rel="nofollow"> View page source</a>
+        
       
     </li>
   </ul>
@@ -166,19 +169,103 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="gaussian-process-regression-benchmarks">
+<h1>Gaussian process regression benchmarks<a class="headerlink" href="#gaussian-process-regression-benchmarks" title="Permalink to this headline">¶</a></h1>
+<p><em>September 02, 2017</em> – hal28 (32 cores)</p>
+<ul class="simple">
+<li>We compare to GPy (<a class="reference external" href="https://github.com/SheffieldML/GPy">https://github.com/SheffieldML/GPy</a>)</li>
+<li>Mean Squared Error: lower is better</li>
+<li>Learning time: lower is better</li>
+<li>Querying time (for 1 by 1 query points): lower is better</li>
+<li>In each replicate, all the variants (see below for the variants available) are using exactly the same data</li>
+</ul>
+<div class="section" id="naming-convention">
+<h2>Naming convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>GP-SE-Full: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation</li>
+<li>GP-SE: Same as above but the signal noise is not optimized and set to a default value: 0.01</li>
+<li>GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation</li>
+</ul>
+</div>
+<div class="section" id="rastrigin-in-8d">
+<h2>Rastrigin in 8D<a class="headerlink" href="#rastrigin-in-8d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/rastrigin_8.png" src="fig_benchmarks/regression_benchmark_figs/rastrigin_8.png" />
+</div>
+</div>
+<div class="section" id="rastrigin-in-1d">
+<h2>Rastrigin in 1D<a class="headerlink" href="#rastrigin-in-1d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/rastrigin_1.png" src="fig_benchmarks/regression_benchmark_figs/rastrigin_1.png" />
+</div>
+</div>
+<div class="section" id="rastrigin-in-2d">
+<h2>Rastrigin in 2D<a class="headerlink" href="#rastrigin-in-2d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/rastrigin_2.png" src="fig_benchmarks/regression_benchmark_figs/rastrigin_2.png" />
+</div>
+</div>
+<div class="section" id="rastrigin-in-4d">
+<h2>Rastrigin in 4D<a class="headerlink" href="#rastrigin-in-4d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/rastrigin_4.png" src="fig_benchmarks/regression_benchmark_figs/rastrigin_4.png" />
+</div>
+</div>
+<div class="section" id="pistonsimulation-in-7d">
+<h2>Pistonsimulation in 7D<a class="headerlink" href="#pistonsimulation-in-7d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/pistonsimulation_7.png" src="fig_benchmarks/regression_benchmark_figs/pistonsimulation_7.png" />
+</div>
+</div>
+<div class="section" id="step-in-1d">
+<h2>Step in 1D<a class="headerlink" href="#step-in-1d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/step_1.png" src="fig_benchmarks/regression_benchmark_figs/step_1.png" />
+</div>
+</div>
+<div class="section" id="robotarm-in-8d">
+<h2>Robotarm in 8D<a class="headerlink" href="#robotarm-in-8d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/robotarm_8.png" src="fig_benchmarks/regression_benchmark_figs/robotarm_8.png" />
+</div>
+</div>
+<div class="section" id="gramacylee-in-1d">
+<h2>Gramacylee in 1D<a class="headerlink" href="#gramacylee-in-1d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/gramacylee_1.png" src="fig_benchmarks/regression_benchmark_figs/gramacylee_1.png" />
+</div>
+</div>
+<div class="section" id="planarinversedynamicsii-in-6d">
+<h2>Planarinversedynamicsii in 6D<a class="headerlink" href="#planarinversedynamicsii-in-6d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/planarinversedynamicsii_6.png" src="fig_benchmarks/regression_benchmark_figs/planarinversedynamicsii_6.png" />
+</div>
+</div>
+<div class="section" id="otlcircuit-in-6d">
+<h2>Otlcircuit in 6D<a class="headerlink" href="#otlcircuit-in-6d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/otlcircuit_6.png" src="fig_benchmarks/regression_benchmark_figs/otlcircuit_6.png" />
+</div>
+</div>
+<div class="section" id="planarinversedynamicsi-in-6d">
+<h2>Planarinversedynamicsi in 6D<a class="headerlink" href="#planarinversedynamicsi-in-6d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/planarinversedynamicsi_6.png" src="fig_benchmarks/regression_benchmark_figs/planarinversedynamicsi_6.png" />
+</div>
+</div>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
           </div>
@@ -226,19 +313,19 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: new_benchmarks
+        v: master
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../v1.0.0/index.html">v1.0.0</a></dd>
+            <dd><a href="../v1.0.0/reg_benchmarks.html">v1.0.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../master/index.html">master</a></dd>
-            <dd><a href="search.html">new_benchmarks</a></dd>
-            <dd><a href="../release-1.0/index.html">release-1.0</a></dd>
+            <dd><a href="reg_benchmarks.html">master</a></dd>
+            <dd><a href="../new_benchmarks/reg_benchmarks.html">new_benchmarks</a></dd>
+            <dd><a href="../release-1.0/reg_benchmarks.html">release-1.0</a></dd>
         </dl>
     </div>
 </div>
@@ -259,7 +346,6 @@
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-      <script type="text/javascript" src="_static/searchtools.js"></script>
 
   
 
@@ -272,14 +358,7 @@
           SphinxResibotsTheme.StickyNav.enable();
       });
   </script>
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>

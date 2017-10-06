@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Bayesian optimization benchmarks &mdash; limbo 0.1 documentation</title>
+  <title>Gaussian process regression benchmarks &mdash; limbo 0.1 documentation</title>
   
 
   
@@ -33,8 +33,6 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
-        <link rel="next" title="Gaussian process regression benchmarks" href="reg_benchmarks.html"/>
-        <link rel="prev" title="Default values" href="defaults.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
 
@@ -82,7 +80,7 @@
             
             
               <div class="version">
-                1.0
+                0.0
               </div>
             
           
@@ -110,25 +108,11 @@
 
             
             
-                <ul class="current">
+                <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Limbo’s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian optimization benchmarks</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#naming-convention">Naming convention</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#branin">branin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ellipsoid">ellipsoid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#goldsteinprice">goldsteinprice</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hartmann3">hartmann3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hartmann6">hartmann6</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rastrigin">rastrigin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sixhumpcamel">sixhumpcamel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sphere">sphere</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -136,8 +120,6 @@
 
             
             
-              
-                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
               
                 <a class="caption" href="http://github.com/resibots">github</a>
               
@@ -169,11 +151,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Limbo</a> &raquo;</li>
     
-    <li>Bayesian optimization benchmarks</li>
+    <li>Gaussian process regression benchmarks</li>
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="_sources/bo_benchmarks.rst.txt" rel="nofollow"> View page source</a>
+          <a href="_sources/reg_benchmarks.rst.txt" rel="nofollow"> View page source</a>
         
       
     </li>
@@ -183,82 +165,99 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="bayesian-optimization-benchmarks">
-<h1>Bayesian optimization benchmarks<a class="headerlink" href="#bayesian-optimization-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>August 04, 2017</em> – hal01 (24 cores)</p>
+  <div class="section" id="gaussian-process-regression-benchmarks">
+<h1>Gaussian process regression benchmarks<a class="headerlink" href="#gaussian-process-regression-benchmarks" title="Permalink to this headline">¶</a></h1>
+<p><em>September 02, 2017</em> – hal28 (32 cores)</p>
 <ul class="simple">
-<li>We compare to BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a>)</li>
-<li>Accuracy: lower is better (difference with the optimum)</li>
-<li>Wall time: lower is better</li>
-<li>In each replicate, 10 random samples + 190 function evaluations</li>
-<li>see <cite>src/benchmarks/limbo/bench.cpp</cite> and <cite>src/benchmarks/bayesopt/bench.cpp</cite></li>
+<li>We compare to GPy (<a class="reference external" href="https://github.com/SheffieldML/GPy">https://github.com/SheffieldML/GPy</a>)</li>
+<li>Mean Squared Error: lower is better</li>
+<li>Learning time: lower is better</li>
+<li>Querying time (for 1 by 1 query points): lower is better</li>
+<li>In each replicate, all the variants (see below for the variants available) are using exactly the same data</li>
 </ul>
 <div class="section" id="naming-convention">
 <h2>Naming convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>limbo_def: default Limbo parameters</li>
-<li>opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function</li>
-<li>opt_direct: use DIRECT (from NLopt) to optimize the acquisition function</li>
-<li>acq_ucb: use UCB for the acquisition function</li>
-<li>acq_ei: use EI for the acquisition function</li>
-<li>hp_opt: use hyper-parameter optimization</li>
-<li>bayesopt_def: same parameters as default parameters in BayesOpt</li>
+<li>GP-SE-Full: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation</li>
+<li>GP-SE: Same as above but the signal noise is not optimized and set to a default value: 0.01</li>
+<li>GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation</li>
 </ul>
 </div>
-<div class="section" id="branin">
-<h2>branin<a class="headerlink" href="#branin" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="rastrigin-in-8d">
+<h2>Rastrigin in 8D<a class="headerlink" href="#rastrigin-in-8d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
 <div class="figure">
-<img alt="_images/branin.png" src="_images/branin.png" />
+<img alt="fig_benchmarks/regression_benchmark_figs/rastrigin_8.png" src="fig_benchmarks/regression_benchmark_figs/rastrigin_8.png" />
 </div>
 </div>
-<div class="section" id="ellipsoid">
-<h2>ellipsoid<a class="headerlink" href="#ellipsoid" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="rastrigin-in-1d">
+<h2>Rastrigin in 1D<a class="headerlink" href="#rastrigin-in-1d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
 <div class="figure">
-<img alt="_images/ellipsoid.png" src="_images/ellipsoid.png" />
+<img alt="fig_benchmarks/regression_benchmark_figs/rastrigin_1.png" src="fig_benchmarks/regression_benchmark_figs/rastrigin_1.png" />
 </div>
 </div>
-<div class="section" id="goldsteinprice">
-<h2>goldsteinprice<a class="headerlink" href="#goldsteinprice" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="rastrigin-in-2d">
+<h2>Rastrigin in 2D<a class="headerlink" href="#rastrigin-in-2d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
 <div class="figure">
-<img alt="_images/goldsteinprice.png" src="_images/goldsteinprice.png" />
+<img alt="fig_benchmarks/regression_benchmark_figs/rastrigin_2.png" src="fig_benchmarks/regression_benchmark_figs/rastrigin_2.png" />
 </div>
 </div>
-<div class="section" id="hartmann3">
-<h2>hartmann3<a class="headerlink" href="#hartmann3" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="rastrigin-in-4d">
+<h2>Rastrigin in 4D<a class="headerlink" href="#rastrigin-in-4d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
 <div class="figure">
-<img alt="_images/hartmann3.png" src="_images/hartmann3.png" />
+<img alt="fig_benchmarks/regression_benchmark_figs/rastrigin_4.png" src="fig_benchmarks/regression_benchmark_figs/rastrigin_4.png" />
 </div>
 </div>
-<div class="section" id="hartmann6">
-<h2>hartmann6<a class="headerlink" href="#hartmann6" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="pistonsimulation-in-7d">
+<h2>Pistonsimulation in 7D<a class="headerlink" href="#pistonsimulation-in-7d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
 <div class="figure">
-<img alt="_images/hartmann6.png" src="_images/hartmann6.png" />
+<img alt="fig_benchmarks/regression_benchmark_figs/pistonsimulation_7.png" src="fig_benchmarks/regression_benchmark_figs/pistonsimulation_7.png" />
 </div>
 </div>
-<div class="section" id="rastrigin">
-<h2>rastrigin<a class="headerlink" href="#rastrigin" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="step-in-1d">
+<h2>Step in 1D<a class="headerlink" href="#step-in-1d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
 <div class="figure">
-<img alt="_images/rastrigin.png" src="_images/rastrigin.png" />
+<img alt="fig_benchmarks/regression_benchmark_figs/step_1.png" src="fig_benchmarks/regression_benchmark_figs/step_1.png" />
 </div>
 </div>
-<div class="section" id="sixhumpcamel">
-<h2>sixhumpcamel<a class="headerlink" href="#sixhumpcamel" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="robotarm-in-8d">
+<h2>Robotarm in 8D<a class="headerlink" href="#robotarm-in-8d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
 <div class="figure">
-<img alt="_images/sixhumpcamel.png" src="_images/sixhumpcamel.png" />
+<img alt="fig_benchmarks/regression_benchmark_figs/robotarm_8.png" src="fig_benchmarks/regression_benchmark_figs/robotarm_8.png" />
 </div>
 </div>
-<div class="section" id="sphere">
-<h2>sphere<a class="headerlink" href="#sphere" title="Permalink to this headline">¶</a></h2>
-<p>40 replicates</p>
+<div class="section" id="gramacylee-in-1d">
+<h2>Gramacylee in 1D<a class="headerlink" href="#gramacylee-in-1d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
 <div class="figure">
-<img alt="_images/sphere.png" src="_images/sphere.png" />
+<img alt="fig_benchmarks/regression_benchmark_figs/gramacylee_1.png" src="fig_benchmarks/regression_benchmark_figs/gramacylee_1.png" />
+</div>
+</div>
+<div class="section" id="planarinversedynamicsii-in-6d">
+<h2>Planarinversedynamicsii in 6D<a class="headerlink" href="#planarinversedynamicsii-in-6d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/planarinversedynamicsii_6.png" src="fig_benchmarks/regression_benchmark_figs/planarinversedynamicsii_6.png" />
+</div>
+</div>
+<div class="section" id="otlcircuit-in-6d">
+<h2>Otlcircuit in 6D<a class="headerlink" href="#otlcircuit-in-6d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/otlcircuit_6.png" src="fig_benchmarks/regression_benchmark_figs/otlcircuit_6.png" />
+</div>
+</div>
+<div class="section" id="planarinversedynamicsi-in-6d">
+<h2>Planarinversedynamicsi in 6D<a class="headerlink" href="#planarinversedynamicsi-in-6d" title="Permalink to this headline">¶</a></h2>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="fig_benchmarks/regression_benchmark_figs/planarinversedynamicsi_6.png" src="fig_benchmarks/regression_benchmark_figs/planarinversedynamicsi_6.png" />
 </div>
 </div>
 </div>
@@ -267,15 +266,6 @@
            </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="reg_benchmarks.html" class="btn btn-neutral float-right" title="Gaussian process regression benchmarks" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="defaults.html" class="btn btn-neutral" title="Default values" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -319,19 +309,19 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: new_benchmarks
+        v: v1.0.0
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Tags</dt>
-            <dd><a href="../v1.0.0/bo_benchmarks.html">v1.0.0</a></dd>
+            <dd><a href="reg_benchmarks.html">v1.0.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../master/bo_benchmarks.html">master</a></dd>
-            <dd><a href="bo_benchmarks.html">new_benchmarks</a></dd>
-            <dd><a href="../release-1.0/bo_benchmarks.html">release-1.0</a></dd>
+            <dd><a href="../master/reg_benchmarks.html">master</a></dd>
+            <dd><a href="../new_benchmarks/reg_benchmarks.html">new_benchmarks</a></dd>
+            <dd><a href="../release-1.0/reg_benchmarks.html">release-1.0</a></dd>
         </dl>
     </div>
 </div>
