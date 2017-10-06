@@ -19,5 +19,5 @@ echo "getting the latest regression benchmark result (needs to be in $HOME/limbo
 DIR=$HOME/limbo_reg_benchmarks
 BENCHMARKS=$DIR/`ls $DIR|sort -n|head -n 1`
 cp $BENCHMARKS/regression_benchmarks.rst docs/reg_benchmarks.rst
-cp -r $BENCHMARKS/regression_benchmarks_figs docs
+cp -r $BENCHMARKS/regression_benchmarks_figs docs/fig_benchmarks
 
