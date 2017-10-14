@@ -139,8 +139,13 @@ def plot_ax(ax, data, points, labely, disp_legend=True, disp_xaxis=False):
     labels = []
     replicates = 0
     kk = 0
+
+    # sort the variants
+    sorted_keys = sorted(points.keys(), reverse=True)
+
     # for each variant
-    for var in points.keys():
+    for vv in range(len(sorted_keys)):
+        var = sorted_keys[vv]
         labels.append(var)
         var_p = points[var]
         var_data = data[var]
@@ -232,13 +237,15 @@ def plot_all():
     rst_file.write("- Learning time: lower is better\n")
     rst_file.write("- Querying time (for 1 by 1 query points): lower is better\n\n")
     rst_file.write("- In each replicate, all the variants (see below for the variants available) are using exactly the same data\n\n")
+    rst_file.write("- The data are uniformly sampled and some noise is added (according to the variance of the data).\n\n")
 
     rst_file.write("Naming convention\n")
     rst_file.write("------------------\n\n")
 
-    rst_file.write("- GP-SE-Full: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation\n")
-    rst_file.write("- GP-SE: Same as above but the signal noise is not optimized and set to a default value: 0.01\n")
-    rst_file.write("- GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation\n\n")
+    rst_file.write("- GP-SE-Full-Rprop: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo)\n")
+    rst_file.write("- GP-SE-Full-SLSQP: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the SLSQP optimizer (provided by NLOpt)\n")
+    rst_file.write("- GP-SE-Rprop: Limbo with Squared Exponential kernel where the signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo) and where the signal noise is not optimized but set to a default value: 0.01\n")
+    rst_file.write("- GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation (with the L-BFGS-B optimizer --- `check scipy.optimize.fmin_l_bfgs_b= <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html>`_)\n\n")
 
     print('loading data...')
     points,times_learn,times_query,mses = load_data()

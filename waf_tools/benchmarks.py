@@ -146,6 +146,8 @@ def compile_regression_benchmarks(bld, json_file):
                 optimizer = [optimizer]
                 if len(optimizer_params) > 0:
                     optimizer_params = [optimizer_params]
+            if not isinstance(optimizer_params, types.ListType):
+                optimizer_params = [optimizer_params]
 
             kernel_find = kernel_type.rfind('::')
             mean_find = mean_type.rfind('::')
