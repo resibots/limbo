@@ -112,6 +112,12 @@ namespace limbo {
                     this->_full_compute();
                 }
 
+                /// return the number of samples used to compute the GP
+                int nb_samples() const { return _samples.size(); }
+
+                /// return the list of samples that have been tested so far
+                const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
+
                 double compute_log_lik()
                 {
                     assert(_samples.size() > 0);
