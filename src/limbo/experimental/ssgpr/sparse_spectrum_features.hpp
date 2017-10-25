@@ -9,6 +9,15 @@
 #include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
+
+    namespace defaults {
+        struct sparse_spectrum_features {
+            BO_PARAM(int, nproj, 20);
+            BO_PARAM(double, sigma_o, 0.1);
+            BO_PARAM(bool, fixed, true);
+        };
+    }
+
     namespace experimental {
 
         template <typename Params>

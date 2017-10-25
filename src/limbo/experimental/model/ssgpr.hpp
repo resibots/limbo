@@ -38,30 +38,33 @@ namespace limbo {
                     _W = Eigen::MatrixXd::Zero(n, _dim_out);
                 }
 
-                std::tuple<Eigen::VectorXd, double> predict(const Eigen::VectorXd& x) const
+                std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& x) const
                 {
-                    double sigma_n_2 = _sigma_n * _sigma_n;
-
                     if (_samples.size() == 0)
-                        return std::make_tuple(_mean_function(x, *this), sigma_n_2);
+                        return std::make_tuple(_mean_function(x, *this), _sigma_n * _sigma_n);
 
                     Eigen::VectorXd PhiStar = _mapping.evaluate(x);
 
-                    // std::cout << PhiStar.rows() << "x" << PhiStar.cols() << " " << _W.rows() << "x" << _W.cols() << std::endl;
-                    Eigen::VectorXd mean = PhiStar.transpose() * _W;
-
-                    // std::cout << _L.rows() << "x" << _L.cols() << " " << PhiStar.rows() << "x" << PhiStar.cols() << std::endl;
-                    Eigen::VectorXd sol = _L.template triangularView<Eigen::Lower>().solve(PhiStar);
-
-                    // Eigen::VectorXd var(_p);
-                    // Eigen::VectorXd tmp = sol; //sol.array().square().colwise().sum();
-                    // std::cout << tmp.rows() << "x" << tmp.cols() << std::endl;
-                    double var = sigma_n_2 * (1. + sol.array().square().sum());
-
-                    return std::make_tuple(mean + _mean_function(x, *this), var);
+                    return std::make_tuple(_mu(x, PhiStar), _sigma(x, PhiStar));
                 }
 
-                void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations)
+                Eigen::VectorXd mu(const Eigen::VectorXd& x) const
+                {
+                    if (_samples.size() == 0)
+                        return _mean_function(x, *this);
+
+                    return _mu(x, _mapping.evaluate(x));
+                }
+
+                double sigma(const Eigen::VectorXd& x) const
+                {
+                    if (_samples.size() == 0)
+                        return _sigma_n * _sigma_n;
+
+                    return _sigma(x, _mapping.evaluate(x));
+                }
+
+                void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, bool compute_full = true)
                 {
                     assert(samples.size() != 0);
                     assert(observations.size() != 0);
@@ -82,13 +85,14 @@ namespace limbo {
                     _samples = samples;
 
                     _observations.resize(observations.size(), _dim_out);
-                    for (int i = 0; i < observations.size(); ++i)
+                    for (size_t i = 0; i < observations.size(); ++i)
                         _observations.row(i) = observations[i];
 
                     // _mean_observation = _observations.colwise().mean();
 
                     this->_compute_obs_mean();
-                    this->_full_compute();
+                    if (compute_full)
+                        this->_full_compute();
                 }
 
                 /// Do not forget to call this if you use hyper-prameters optimization!!
@@ -245,6 +249,23 @@ namespace limbo {
 
                     _LPhiY = _L.template triangularView<Eigen::Lower>().solve(_B);
                     _W = _L.template triangularView<Eigen::Lower>().adjoint().solve(_LPhiY);
+                }
+
+                Eigen::VectorXd _mu(const Eigen::VectorXd& x, const Eigen::VectorXd& PhiStar) const
+                {
+                    // std::cout << PhiStar.rows() << "x" << PhiStar.cols() << " " << _W.rows() << "x" << _W.cols() << std::endl;
+                    Eigen::VectorXd mean = PhiStar.transpose() * _W;
+
+                    return mean + _mean_function(x, *this);
+                }
+
+                double _sigma(const Eigen::VectorXd& x, const Eigen::VectorXd& PhiStar) const
+                {
+                    double sigma_n_2 = _sigma_n * _sigma_n;
+
+                    Eigen::VectorXd sol = _L.template triangularView<Eigen::Lower>().solve(PhiStar);
+
+                    return sigma_n_2 * (1. + sol.array().square().sum());
                 }
             };
         }

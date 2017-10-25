@@ -92,3 +92,10 @@ def build(bld):
                       target = 'poegp',
                       uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
                       use = 'limbo')
+
+    obj = bld.program(features = 'cxx',
+                      source = 'ssgpr.cpp',
+                      includes = '.. ../.. ../../../',
+                      target = 'ssgpr',
+                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      use = 'limbo')
