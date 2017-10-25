@@ -14,6 +14,10 @@ namespace limbo {
     namespace experimental {
         namespace model {
 
+            // Sparse Spectrum Gaussian Process Regression
+            // Original paper: QuiÃ±onero-Candela, Joaquin, Carl Edward Rasmussen, and AnÃbal R. Figueiras-Vidal. "Sparse spectrum Gaussian process regression." Journal of Machine Learning Research 11.Jun (2010): 1865-1881.
+            // Paper that this implementation is based on: Gijsberts, Arjan, and Giorgio Metta. "Real-time model learning using incremental sparse spectrum gaussian process regression." Neural networks 41 (2013): 59-69.
+            // Code tested against: https://github.com/robotology/icub-main/tree/master/src/modules/learningMachine/scripts/ssgprtune
             template <typename Params, typename Mapping, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
             class SSGPR {
             public:
