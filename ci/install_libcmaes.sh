@@ -5,8 +5,9 @@ sudo mkdir build && cd build
 sudo cmake ..
 sudo make
 sudo cp *.a /usr/lib
-cd && git clone https://github.com/beniz/libcmaes.git
+cd && git clone https://github.com/resibots/libcmaes.git
 cd libcmaes
+git checkout fix_flags_native
 mkdir build
 cd build
 cmake ..
