@@ -10,7 +10,7 @@ cd libcmaes
 git checkout fix_flags_native
 mkdir build
 cd build
-cmake ..
+cmake -DUSE_TBB=ON -DUSE_OPENMP=OFF ..
 make
 sudo make install
 sudo ldconfig
