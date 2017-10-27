@@ -7,8 +7,9 @@ sudo make
 sudo cp *.a /usr/lib
 cd && git clone https://github.com/beniz/libcmaes.git
 cd libcmaes
-./autogen.sh
-./configure
+mkdir build
+cd build
+cmake ..
 make
 sudo make install
 sudo ldconfig
