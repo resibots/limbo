@@ -65,36 +65,36 @@ def configure(conf):
         conf.get_env()['USE_BAYESOPT'] = True
 
 
-def build_benchmark(bld):
+def build_bo_benchmarks(bld):
 
     if bld.env.DEFINES_NLOPT == ['USE_NLOPT']:
-        bld.program(features='cxx',
-                    source='limbo/simple.cpp',
-                    includes='. .. ../../ ../../src',
-                    target='benchmark_limbo',
-                    uselib='BOOST EIGEN TBB SFERES NLOPT',
-                    use='limbo')
-
-        bld.program(features='cxx',
-                    source='limbo/hp_opt.cpp',
-                    includes='. .. ../../ ../../src',
-                    target='benchmark_limbo_hp_opt',
-                    uselib='BOOST EIGEN TBB SFERES NLOPT',
-                    use='limbo')
+        limbo.create_variants(bld,
+                      source = 'limbo/bench.cpp',
+                      uselib_local = 'limbo',
+                      uselib = 'BOOST EIGEN TBB NLOPT LIBCMAES MKL_TBB',
+                      variants = ['BAYESOPT_DEF',
+                                  'BAYESOPT_DEF_HPOPT',
+                                  'LIMBO_DEF',
+                                  'LIMBO_DEF_HPOPT',
+                                  'OPT_CMAES',
+                                  'OPT_DIRECT',
+                                  'ACQ_UCB',
+                                  'ACQ_EI'
+                                  ])
 
         #Quick and dirty way to add Bayesopt
 
         if bld.get_env()['USE_BAYESOPT'] == True:
-            bld(features='cxx',
-                source='bayesopt/simple.cpp',
-                includes='.',
-                target='benchmark_bayesopt',
-                uselib='BOOST EIGEN TBB NLOPT BAYESOPT',
-                use='')
+            bld.program(features='cxx',
+                        source='bayesopt/simple.cpp',
+                        includes='.',
+                        target='bayesopt/bayesopt_default',
+                        uselib='BOOST EIGEN TBB NLOPT BAYESOPT LIMBO',
+                        use='')
 
-            bld(features='cxx',
-                source='bayesopt/hp_opt.cpp',
-                includes='.',
-                target='benchmark_bayesopt_hp_opt',
-                uselib='BOOST EIGEN TBB NLOPT BAYESOPT',
-                use='')
+            bld.program(features='cxx',
+                        source='bayesopt/hp_opt.cpp',
+                        includes='.',
+                        target='bayesopt/bayesopt_hp_opt',
+                        uselib='BOOST EIGEN TBB NLOPT BAYESOPT LIMBO',
+                        use='')

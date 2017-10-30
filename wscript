@@ -57,7 +57,7 @@ blddir = 'build'
 import glob
 import os
 import subprocess
-import limbo
+import limbo, benchmarks
 import inspect
 from waflib import Logs
 from waflib.Build import BuildContext
@@ -86,6 +86,7 @@ def options(opt):
         opt.add_option('--nb_replicates', type='int', help='number of replicates performed during the benchmark', dest='nb_rep')
         opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
+        opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
 
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
@@ -154,7 +155,10 @@ def configure(conf):
         Logs.pprint('NORMAL', '[users] To compile and run unit tests: ./waf --tests')
         Logs.pprint('NORMAL', '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo')
         Logs.pprint('NORMAL', '[developers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf docs')
-        Logs.pprint('NORMAL', '[developers] To compile the benchmarks: ./waf build_benchmark')
+        Logs.pprint('NORMAL', '[developers] To compile the BO benchmarks: ./waf build_bo_benchmarks')
+        Logs.pprint('NORMAL', '[developers] To run the BO benchmarks: ./waf run_bo_benchmarks')
+        Logs.pprint('NORMAL', '[developers] To compile the regression benchmarks (requires a json file with the setup): ./waf --regression_benchmarks file.json')
+        Logs.pprint('NORMAL', '[developers] To run the regression benchmarks: ./waf run_regression_benchmarks --regression_benchmarks file.json')
         Logs.pprint('NORMAL', '[developers] To compile the extensive tests: ./waf build_extensive_tests')
 
 
@@ -168,13 +172,15 @@ def build(bld):
             Logs.pprint('NORMAL', 'Building exp: %s' % i)
             bld.recurse('exp/' + i)
             limbo.output_params('exp/'+i)
+    if bld.options.regression_benchmarks:
+        benchmarks.compile_regression_benchmarks(bld, bld.options.regression_benchmarks)
     bld.add_post_fun(limbo.summary)
 
 def build_extensive_tests(ctx):
     ctx.recurse('src/')
     ctx.recurse('src/tests')
 
-def build_benchmark(ctx):
+def build_bo_benchmarks(ctx):
     ctx.recurse('src/benchmarks')
 
 def run_extensive_tests(ctx):
@@ -193,32 +199,11 @@ def submit_extensive_tests(ctx):
             retcode = subprocess.call(s, shell=True, env=None)
             Logs.pprint('NORMAL', 'oarsub returned: %s' % str(retcode))
 
-def run_benchmark(ctx):
-    HEADER='\033[95m'
-    NC='\033[0m'
-    res_dir=os.getcwd()+"/benchmark_results/"
-    try:
-        os.makedirs(res_dir)
-    except:
-        Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created!' % res_dir)
-    for fullname in glob.glob('build/src/benchmarks/*'):
-        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
-            fpath, fname = os.path.split(fullname)
-            directory = res_dir + "/" + fname
-            try:
-                os.makedirs(directory)
-            except:
-                Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created, the new results will be concatenated to the old ones' % directory)
-            s = "cp " + fullname + " " + directory
-            retcode = subprocess.call(s, shell=True, env=None)
-            if ctx.options.nb_rep:
-                nb_rep = ctx.options.nb_rep
-            else:
-                nb_rep = 10
-            for i in range(0,nb_rep):
-                Logs.pprint('NORMAL', '%s Running: %s for the %s th time %s' % (HEADER, fname, str(i), NC))
-                s="cd " + directory +";./" + fname
-                retcode = subprocess.call(s, shell=True, env=None)
+def run_bo_benchmarks(ctx):
+    benchmarks.run_bo_benchmarks(ctx)
+
+def run_regression_benchmarks(ctx):
+    benchmarks.run_regression_benchmarks(ctx)
 
 def shutdown(ctx):
     if ctx.options.create_exp:
@@ -241,7 +226,7 @@ def write_default_params(ctx):
 
 def build_docs(ctx):
     Logs.pprint('NORMAL', "generating HTML doc with versioning...")
-    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(new_benchmarks|master|release-*)" docs docs/_build/html'
+    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
@@ -249,8 +234,8 @@ class BuildExtensiveTestsContext(BuildContext):
     fun = 'build_extensive_tests'
 
 class BuildBenchmark(BuildContext):
-    cmd = 'build_benchmark'
-    fun = 'build_benchmark'
+    cmd = 'build_bo_benchmarks'
+    fun = 'build_bo_benchmarks'
 
 class InsertLicense(BuildContext):
     cmd = 'insert_license'

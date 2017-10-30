@@ -76,8 +76,9 @@ namespace limbo {
 
             double kernel(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
-                double _l = Params::kernel_exp::l();
-                return Params::kernel_exp::sigma_sq() * (std::exp(-(1 / (2 * std::pow(_l, 2))) * std::pow((v1 - v2).norm(), 2)));
+                double l_sq = Params::kernel_exp::l() * Params::kernel_exp::l();
+                double r = (v1 - v2).squaredNorm();
+                return Params::kernel_exp::sigma_sq() * (std::exp(-0.5 * r / l_sq));
             }
         };
     }

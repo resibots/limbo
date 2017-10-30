@@ -76,7 +76,7 @@ struct Params {
         BO_PARAM(double, noise, 1e-10);
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
     };
 
     // we use 10 random samples to initialize the algorithm

@@ -44,7 +44,8 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 #define SKIP_TRICKS
-#include "testfunctions.hpp"
+#define BAYES_OPT
+#include "../limbo/testfunctions.hpp"
 #include <chrono>
 #include <fstream>
 #include <string>

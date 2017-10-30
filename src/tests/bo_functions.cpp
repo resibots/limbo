@@ -244,7 +244,7 @@ struct Params {
         BO_PARAM(double, noise, 1e-6);
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
     };
 
     struct acqui_ucb : public defaults::acqui_ucb {
@@ -275,7 +275,7 @@ void print_res(const T& r)
         std::vector<std::pair<double, double>>& v = x.second;
         std::sort(v.begin(), v.end(),
             [](const std::pair<double, double>& x1,
-                      const std::pair<double, double>& x2) {
+                const std::pair<double, double>& x2) {
                 // clang-format off
                 return x1.second < x2.second;
                 // clang-format on
