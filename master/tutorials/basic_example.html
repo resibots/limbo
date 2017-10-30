@@ -128,7 +128,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -286,7 +287,7 @@
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="k">struct</span> <span class="nl">kernel_exp</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_exp</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">kernel_maternfivehalves</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_maternfivehalves</span> <span class="p">{</span>
     <span class="p">};</span>
 
     <span class="c1">// we use 10 random samples to initialize the algorithm</span>
@@ -474,7 +475,7 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
     <span class="p">};</span>
 
-    <span class="k">struct</span> <span class="nl">kernel_exp</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_exp</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">kernel_maternfivehalves</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_maternfivehalves</span> <span class="p">{</span>
     <span class="p">};</span>
 
     <span class="c1">// we use 10 random samples to initialize the algorithm</span>
@@ -588,7 +589,6 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
         <dl>
             <dt>Branches</dt>
             <dd><a href="basic_example.html">master</a></dd>
-            <dd><a href="../../new_benchmarks/tutorials/basic_example.html">new_benchmarks</a></dd>
             <dd><a href="../../release-1.0/tutorials/basic_example.html">release-1.0</a></dd>
         </dl>
     </div>

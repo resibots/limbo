@@ -139,7 +139,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -214,7 +215,9 @@ as a zip.</p>
 <div class="section" id="optional-but-highly-recommended">
 <h4>Optional but highly recommended<a class="headerlink" href="#optional-but-highly-recommended" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first"><a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">NLOpt</a> with C++ binding:</p>
+<li><p class="first"><a class="reference external" href="https://www.threadingbuildingblocks.org">Intel TBB</a> is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt">NLOpt</a> [mirror: <a class="reference external" href="http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz">http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz</a>] with C++ binding:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">cxx</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">shared</span> <span class="o">--</span><span class="n">without</span><span class="o">-</span><span class="n">python</span> <span class="o">--</span><span class="n">without</span><span class="o">-</span><span class="n">matlab</span> <span class="o">--</span><span class="n">without</span><span class="o">-</span><span class="n">octave</span>
 <span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span>
 </pre></div>
@@ -226,7 +229,7 @@ as a zip.</p>
 <p class="last">The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (<cite>brew install homebrew/science/nlopt</cite>).</p>
 </div>
 <ul>
-<li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. Make sure that you install with <strong>sudo</strong> or configure the <strong>LD_LIBRARY_PATH</strong> accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get). Follow the instructions <a class="reference external" href="https://github.com/beniz/libcmaes#build">here</a>, reproduced for your convenience:</p>
+<li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. We advise you to use our own <a class="reference external" href="https://github.com/resibots/libcmaes">fork of libcmaes</a> (branch <strong>fix_flags_native</strong>). Make sure that you install with <strong>sudo</strong> or configure the <strong>LD_LIBRARY_PATH</strong> accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get):</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libgtest</span><span class="o">-</span><span class="n">dev</span>
 <span class="n">sudo</span> <span class="n">cd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">gtest</span>
 <span class="n">sudo</span> <span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>
@@ -235,18 +238,43 @@ as a zip.</p>
 <span class="n">sudo</span> <span class="n">cp</span> <span class="o">*.</span><span class="n">a</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span>
 </pre></div>
 </div>
+</li>
+</ul>
+<p>Follow the instructions below (you can also have a look <a class="reference external" href="https://github.com/resibots/libcmaes#build">here</a>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">resibots</span><span class="o">/</span><span class="n">libcmaes</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">libcmaes</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">fix_flags_native</span>
+</pre></div>
+</div>
+<p>Configuring with Makefiles:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
+<span class="o">./</span><span class="n">configure</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
+<p>or CMake:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">j4</span>
+</pre></div>
+</div>
 <p>In addition, you should be careful to configure <strong>libcmaes</strong> to use the same Eigen3 version as what you intend to use with Limbo (configuring with Makefiles):</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">eigen3</span><span class="o">-</span><span class="n">include</span><span class="o">=</span><span class="n">YOUR_DESIRED_DIR</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">eigen3</span>
 </pre></div>
 </div>
-<p>or (configure with CMake):</p>
+<p>or (configuring with CMake):</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">DEIGEN3_INCLUDE_DIR</span><span class="o">=</span><span class="n">YOUR_DESIRED_DIR</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">eigen3</span> <span class="o">..</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first"><a class="reference external" href="https://www.threadingbuildingblocks.org">Intel TBB</a> is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.</p>
-</li>
-</ul>
+<p>Additionally, you can enable the usage of TBB for parallelization (configuring with Makefiles):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">tbb</span>
+</pre></div>
+</div>
+<p>or (configuring with CMake):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">DUSE_TBB</span><span class="o">=</span><span class="n">ON</span> <span class="o">-</span><span class="n">DUSE_OPENMP</span><span class="o">=</span><span class="n">OFF</span> <span class="o">..</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="optional">
 <h4>Optional<a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h4>
@@ -386,7 +414,6 @@ You can also specify a different compiler than the default, setting the environm
         <dl>
             <dt>Branches</dt>
             <dd><a href="compilation.html">master</a></dd>
-            <dd><a href="../../new_benchmarks/tutorials/compilation.html">new_benchmarks</a></dd>
             <dd><a href="../../release-1.0/tutorials/compilation.html">release-1.0</a></dd>
         </dl>
     </div>

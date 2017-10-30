@@ -169,7 +169,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -1211,10 +1212,11 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <p>Currently, Limbo only includes Gaussian processes as models. More may come in the future.</p>
 <dl class="class">
 <dt>
-<span class="target" id="limboclasslimbo_1_1model_1_1_g_p"></span><em class="property">template </em>&lt;typename <em>Params</em>, typename <em>KernelFunction</em>, typename <em>MeanFunction</em>, class <em>HyperParamsOptimizer</em> = <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_no_l_f_opt"><span class="std std-ref">gp::NoLFOpt</span></a>&lt;Params&gt;&gt;</dt>
+<span class="target" id="limboclasslimbo_1_1model_1_1_g_p"></span><em class="property">template </em>&lt;typename <em>Params</em>, typename <em>KernelFunction</em> = <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_matern_five_halves"><span class="std std-ref">kernel::MaternFiveHalves</span></a>&lt;Params&gt;, typename <em>MeanFunction</em> = <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_data"><span class="std std-ref">mean::Data</span></a>&lt;Params&gt;, typename <em>HyperParamsOptimizer</em> = <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_no_l_f_opt"><span class="std std-ref">gp::NoLFOpt</span></a>&lt;Params&gt;&gt;</dt>
 <dt id="_CPPv2N5limbo5model2GPE">
 <span id="limbo::model::GP"></span><em class="property">class </em><code class="descclassname">limbo::model::</code><code class="descname">GP</code><a class="headerlink" href="#_CPPv2N5limbo5model2GPE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>A classic Gaussian process. It is parametrized by:<ul class="simple">
+<li>a kernel function</li>
 <li>a mean function</li>
 <li>[optionnal] an optimizer for the hyper-parameters </li>
 </ul>
@@ -2306,7 +2308,6 @@ Computes the squared exponential covariance like this:</p>
         <dl>
             <dt>Branches</dt>
             <dd><a href="master/api.html">master</a></dd>
-            <dd><a href="new_benchmarks/api.html">new_benchmarks</a></dd>
             <dd><a href="release-1.0/api.html">release-1.0</a></dd>
         </dl>
     </div>

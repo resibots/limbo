@@ -39,8 +39,10 @@ Contents:
    tutorials/index
    guides/index
    api
+   bo
    defaults
-   benchmarks
+   bo_benchmarks
+   reg_benchmarks
    faq
 
 

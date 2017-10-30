@@ -33,6 +33,8 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Frequently Asked Questions" href="faq.html"/>
+        <link rel="prev" title="Bayesian optimization benchmarks" href="bo_benchmarks.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
 
@@ -108,13 +110,28 @@
 
             
             
-                <ul>
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Limbo’s documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarking with other Bayesian Optimization/Gaussian Processes Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Gaussian process regression benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#naming-convention">Naming convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rastrigin-in-8d">Rastrigin in 8D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rastrigin-in-1d">Rastrigin in 1D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rastrigin-in-2d">Rastrigin in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rastrigin-in-4d">Rastrigin in 4D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pistonsimulation-in-7d">Pistonsimulation in 7D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-in-1d">Step in 1D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#robotarm-in-8d">Robotarm in 8D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gramacylee-in-1d">Gramacylee in 1D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planarinversedynamicsii-in-6d">Planarinversedynamicsii in 6D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#otlcircuit-in-6d">Otlcircuit in 6D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planarinversedynamicsi-in-6d">Planarinversedynamicsi in 6D</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
@@ -171,7 +188,7 @@
             
   <div class="section" id="gaussian-process-regression-benchmarks">
 <h1>Gaussian process regression benchmarks<a class="headerlink" href="#gaussian-process-regression-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>October 14, 2017</em> – hal13 (32 cores)</p>
+<p><em>October 25, 2017</em> – hal29 (32 cores)</p>
 <ul class="simple">
 <li>We compare to GPy (<a class="reference external" href="https://github.com/SheffieldML/GPy">https://github.com/SheffieldML/GPy</a>)</li>
 <li>Mean Squared Error: lower is better</li>
@@ -273,6 +290,15 @@
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bo_benchmarks.html" class="btn btn-neutral" title="Bayesian optimization benchmarks" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -326,7 +352,6 @@
         <dl>
             <dt>Branches</dt>
             <dd><a href="reg_benchmarks.html">master</a></dd>
-            <dd><a href="../new_benchmarks/reg_benchmarks.html">new_benchmarks</a></dd>
             <dd><a href="../release-1.0/reg_benchmarks.html">release-1.0</a></dd>
         </dl>
     </div>

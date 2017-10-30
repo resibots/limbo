@@ -19,7 +19,9 @@ Required
 
 Optional but highly recommended
 +++++++++++++++++++++++++++++++++
-* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
+* `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
+
+* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ [mirror: http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz] with C++ binding: ::
 
     ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
     sudo make install
@@ -28,7 +30,7 @@ Optional but highly recommended
 
   The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (`brew install homebrew/science/nlopt`).
 
-* `libcmaes <https://github.com/beniz/libcmaes>`_. Make sure that you install with **sudo** or configure the **LD_LIBRARY_PATH** accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get). Follow the instructions `here <https://github.com/beniz/libcmaes#build>`_, reproduced for your convenience::
+* `libcmaes <https://github.com/beniz/libcmaes>`_. We advise you to use our own `fork of libcmaes <https://github.com/resibots/libcmaes>`_ (branch **fix_flags_native**). Make sure that you install with **sudo** or configure the **LD_LIBRARY_PATH** accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get): ::
 
     sudo apt-get install libgtest-dev
     sudo cd /usr/src/gtest
@@ -37,15 +39,40 @@ Optional but highly recommended
     sudo make
     sudo cp *.a /usr/lib
 
-  In addition, you should be careful to configure **libcmaes** to use the same Eigen3 version as what you intend to use with Limbo (configuring with Makefiles)::
+Follow the instructions below (you can also have a look `here <https://github.com/resibots/libcmaes#build>`_): ::
+
+    git clone https://github.com/resibots/libcmaes.git
+    cd libcmaes
+    git checkout fix_flags_native
+
+Configuring with Makefiles: ::
+
+   ./autogen.sh
+   ./configure
+   make -j4
+
+or CMake: ::
+
+    mkdir build
+    cd build
+    cmake ..
+    make -j4
+
+In addition, you should be careful to configure **libcmaes** to use the same Eigen3 version as what you intend to use with Limbo (configuring with Makefiles): ::
 
     ./configure --with-eigen3-include=YOUR_DESIRED_DIR/include/eigen3
 
-  or (configure with CMake)::
+or (configuring with CMake): ::
 
     cmake -DEIGEN3_INCLUDE_DIR=YOUR_DESIRED_DIR/include/eigen3 ..
 
-* `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
+Additionally, you can enable the usage of TBB for parallelization (configuring with Makefiles): ::
+
+    ./configure --enable-tbb
+
+or (configuring with CMake): ::
+
+    cmake -DUSE_TBB=ON -DUSE_OPENMP=OFF ..
 
 Optional
 +++++++++++++
