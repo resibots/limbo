@@ -8,7 +8,9 @@
 Limbo's documentation
 =================================
 
-Limbo is a lightweight framework for Bayesian Optimization, a powerful approach for global optimization of expensive, non-convex functions. Github page (to report issues and/or help us to improve the library): `[Github repository] <http://github.com/resibots/limbo>`_
+Limbo is a lightweight, high-performance C++11 framework for Gaussian processes and Bayesian Optimization. 
+
+Github page (to report issues and/or help us to improve the library): `[Github repository] <http://github.com/resibots/limbo>`_
 
 The development of Limbo is funded by the `ERC project ResiBots <http://www.resibots.eu>`_.
 
