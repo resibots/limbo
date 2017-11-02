@@ -34,21 +34,21 @@ archive_doi:
 
 paper_url:
 
-date: 20 Mai 2017
+date: 2nd of November, 2017
 bibliography: paper.bib
 output: pdf_document
 ---
 
 # Summary
 
-Limbo (LIbrary for Model-Based Optimization) is an open-source C++11 library for Gaussian Processes and data-efficient optimization (e.g., Bayesian optimization [@shahriari2016taking]) that is designed to be both highly flexible and very fast. It can be used as a state-of-the-art optimization library or to experiment with novel algorithms with "plugin" components. Limbo is currently mostly used for data-efficient policy search in robot learning [@lizotte2007automatic] and online adaptation because computation time matters when using the low-power embedded computers of robots. For example, Limbo was the key library to develop a new algorithm that allows a legged robot to learn a new gait after a mechanical damage in about 10-15 trials (2 minutes) [@cully2015robots], and a 4-DOF manipulator to learn neural networks policies for goal reaching in about 5 trials [@chatzilygeroudis2017].
+Limbo (LIbrary for Model-Based Optimization) is an open-source C++11 library for Gaussian Processes and data-efficient optimization (e.g., Bayesian optimization, see [@shahriari2016taking]) that is designed to be both highly flexible and very fast. It can be used as a state-of-the-art optimization library or to experiment with novel algorithms with "plugin" components. Limbo is currently mostly used for data-efficient policy search in robot learning [@lizotte2007automatic] and online adaptation because computation time matters when using the low-power embedded computers of robots. For example, Limbo was the key library to develop a new algorithm that allows a legged robot to learn a new gait after a mechanical damage in about 10-15 trials (2 minutes) [@cully2015robots], and a 4-DOF manipulator to learn neural networks policies for goal reaching in about 5 trials [@chatzilygeroudis2017].
 
 The implementation of Limbo follows a policy-based design [@alexandrescu2001modern] that leverages C++ templates: this allows it to be highly flexible without the cost induced by classic object-oriented designs [@driesen1996direct] (cost of virtual functions). The regression benchmarks^[<http://www.resibots.eu/limbo/reg_benchmarks.html>] show that the query time of Limbo's Gaussian processes is several orders of magnitude better than the one of GPy (a state-of-the-art Python library for Gaussian processes^[<https://sheffieldml.github.io/GPy/>] for a similar accuracy (the learning time highly depends on the optimization algorithm chosen to optimize the hyper-parameters). The black-box optimization benchmarks^[<http://www.resibots.eu/limbo/bo_benchmarks.html>] demonstrate that Limbo is about 2 times faster than BayesOpt (a C++ library for data-efficient optimization, [@martinezcantin14a]) for a similar accuracy and data-efficiency. In practice, changing one of the components of the algorithms in Limbo (e.g., changing the acquisition function) usually requires changing only a template definition in the source code. This design allows users to rapidly experiment and test new ideas while keeping the software as fast as specialized code.
 
 Limbo takes advantage of multi-core architectures to parallelize the internal optimization processes (optimization of the acquisition function, optimization of the hyper-parameters of a Gaussian process) and it vectorizes many of the linear algebra operations (via the Eigen 3 library and optional bindings to Intel's MKL). To keep the library lightweight, most of the optimizers in Limbo are wrappers around external optimization libraries:
 
-* NLOpt (which provides many local, global, gradient-based, gradient-free algorithms [@nlopt])
-* libcmaes (which provides the Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES), and several variants of it [@hansen1996adapting])
+* NLOpt^[<http://ab-initio.mit.edu/nlopt>] (which provides many local, global, gradient-based, gradient-free algorithms)
+* libcmaes^[<https://github.com/beniz/libcmaes>] (which provides the Covariance Matrix Adaptation Evolutionary Strategy (CMA-ES), and several variants of it [@hansen1996adapting])
 * a few other algorithms that are implemented in Limbo (in particular, RPROP [@riedmiller1993direct], which is a gradient-based optimization algorithm)
 
 The library is distributed under the CeCILL-C license^[<http://www.cecill.info/index.en.html>] via a GitHub repository ^[<http://github.com/resibots/limbo>], with an extensive documentation ^[<http://www.resibots.eu/limbo>] that contains guides, examples, and tutorials. The code is standard-compliant but it is currently mostly developed for GNU/Linux and Mac OS X with both the GCC and Clang compilers. New contributors can rely on a full API reference, while their developments are checked via a continuous integration platform (automatic unit-testing routines).
