@@ -55,7 +55,7 @@ A GP is fully specified by its mean function :math:`\mu(\mathbf{x})` and covaria
 
 .. math::
 
-    k_{SE}(\chi_1, \chi_2) = \sigma_f^2 \cdot \exp\left( \frac{\left|\left|\chi_1, \chi_2\right|\right|^2}{2 l^2}  \right)
+    k_{SE}(\chi_1, \chi_2) = \sigma_f^2 \cdot \exp\left( -\frac{\left|\left|\chi_1 - \chi_2\right|\right|^2}{2 l^2}  \right)
 
 For some datasets, it makes sense to hand-tune these parameters (e.g., when there are very few samples). Ideally, our objective should be to learn :math:`l^2` (characteristic length scale) and :math:`\sigma_f^2` (overall variance).
 

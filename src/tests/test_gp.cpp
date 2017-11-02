@@ -57,6 +57,7 @@
 #include <limbo/mean/constant.hpp>
 #include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp.hpp>
+#include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
 #include <limbo/model/gp/mean_lf_opt.hpp>
@@ -141,7 +142,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
     double e = 1e-4;
 
     // Random samples and test samples
-    int N = 40, M = 10;
+    int N = 40, M = 100;
 
     for (int i = 0; i < N; i++) {
         samples.push_back(tools::random_vector(4));
@@ -233,7 +234,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
     double e = 1e-4;
 
     // Random samples and test samples
-    int N = 40, M = 10;
+    int N = 40, M = 100;
 
     for (int i = 0; i < N; i++) {
         samples.push_back(tools::random_vector(4));
@@ -270,6 +271,184 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
     }
 
     BOOST_CHECK(results.array().sum() < M * e);
+}
+
+BOOST_AUTO_TEST_CASE(test_gp_check_loo_grad)
+{
+    using namespace limbo;
+
+    using KF_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
+
+    GP_t gp(4, 2);
+
+    std::vector<Eigen::VectorXd> observations, samples, test_samples;
+    double e = 1e-4;
+
+    // Random samples and test samples
+    int N = 40, M = 100;
+
+    for (int i = 0; i < N; i++) {
+        samples.push_back(tools::random_vector(4));
+        Eigen::VectorXd ob(2);
+        ob << std::cos(samples[i](0)), std::sin(samples[i](1));
+        observations.push_back(ob);
+    }
+
+    for (int i = 0; i < M; i++) {
+        test_samples.push_back(tools::random_vector(4 + 1));
+    }
+
+    gp.compute(samples, observations);
+
+    model::gp::KernelLooOpt<Params>::KernelLooOptimization<GP_t> kernel_optimization(gp);
+
+    Eigen::VectorXd results(M);
+
+    for (int i = 0; i < M; i++) {
+        auto res = check_grad(kernel_optimization, test_samples[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+}
+
+BOOST_AUTO_TEST_CASE(test_gp_check_loo_grad_noise)
+{
+    using namespace limbo;
+    struct Parameters {
+        struct kernel : public defaults::kernel {
+            BO_PARAM(bool, optimize_noise, true);
+        };
+
+        struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+        };
+
+        struct kernel_maternfivehalves {
+            BO_PARAM(double, sigma_sq, 1);
+            BO_PARAM(double, l, 0.25);
+        };
+
+        struct mean_constant : public defaults::mean_constant {
+        };
+
+        struct opt_rprop : public defaults::opt_rprop {
+        };
+
+        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
+        };
+
+        struct acqui_ucb : public defaults::acqui_ucb {
+        };
+
+        struct opt_gridsearch : public defaults::opt_gridsearch {
+        };
+    };
+
+    using KF_t = kernel::SquaredExpARD<Parameters>;
+    using Mean_t = mean::Constant<Parameters>;
+    using GP_t = model::GP<Parameters, KF_t, Mean_t>;
+
+    GP_t gp(4, 2);
+
+    std::vector<Eigen::VectorXd> observations, samples, test_samples;
+    double e = 1e-4;
+
+    // Random samples and test samples
+    int N = 40, M = 100;
+
+    for (int i = 0; i < N; i++) {
+        samples.push_back(tools::random_vector(4));
+        Eigen::VectorXd ob(2);
+        ob << std::cos(samples[i](0)), std::sin(samples[i](1));
+        observations.push_back(ob);
+    }
+
+    for (int i = 0; i < M; i++) {
+        test_samples.push_back(tools::random_vector(4 + 2));
+    }
+
+    gp.compute(samples, observations);
+
+    model::gp::KernelLooOpt<Parameters>::KernelLooOptimization<GP_t> kernel_optimization(gp);
+
+    Eigen::VectorXd results(M);
+
+    for (int i = 0; i < M; i++) {
+        auto res = check_grad(kernel_optimization, test_samples[i], 1e-4);
+        results(i) = std::get<0>(res);
+        // std::cout << std::get<1>(res).transpose() << " vs " << std::get<2>(res).transpose() << " --> " << results(i) << std::endl;
+    }
+
+    BOOST_CHECK(results.array().sum() < M * e);
+}
+
+BOOST_AUTO_TEST_CASE(test_gp_check_inv_kernel_computation)
+{
+    using namespace limbo;
+
+    using KF_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::FunctionARD<Params, mean::Constant<Params>>;
+    using GP_t = model::GP<Params, KF_t, Mean_t>;
+
+    GP_t gp(4, 2);
+
+    std::vector<Eigen::VectorXd> observations, samples;
+
+    // Random samples
+    int N = 10;
+
+    for (int i = 0; i < N; i++) {
+        samples.push_back(tools::random_vector(4));
+        Eigen::VectorXd ob(2);
+        ob << std::cos(samples[i](0)), std::sin(samples[i](1));
+        observations.push_back(ob);
+    }
+
+    gp.compute(samples, observations);
+
+    // Check that variable is properly initialized
+    BOOST_CHECK(!gp.inv_kernel_computed());
+
+    // Check that kernel is computed
+    gp.compute_inv_kernel();
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    // Check recompute alternatives
+    gp.recompute(false, false);
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute(true, false);
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute(true, true);
+    BOOST_CHECK(!gp.inv_kernel_computed());
+
+    // Check add_sample
+    gp.compute_inv_kernel();
+    gp.add_sample(samples.back(), observations.back());
+    BOOST_CHECK(!gp.inv_kernel_computed());
+
+    // Check different implicit computations of inverse kernel
+    gp.compute_kernel_grad_log_lik();
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute();
+    BOOST_CHECK(!gp.inv_kernel_computed());
+    gp.compute_mean_grad_log_lik();
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute();
+    BOOST_CHECK(!gp.inv_kernel_computed());
+    gp.compute_log_loo_cv();
+    BOOST_CHECK(gp.inv_kernel_computed());
+
+    gp.recompute();
+    BOOST_CHECK(!gp.inv_kernel_computed());
+    gp.compute_kernel_grad_log_loo_cv();
+    BOOST_CHECK(gp.inv_kernel_computed());
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_dim)

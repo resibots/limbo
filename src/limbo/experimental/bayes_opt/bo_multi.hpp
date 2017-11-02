@@ -48,12 +48,17 @@
 
 #include <Eigen/Core>
 
+#include <limbo/bayes_opt/bo_base.hpp>
+#include <limbo/experimental/tools/pareto.hpp>
+
 #ifndef USE_SFERES
 #warning No sferes
 #else
 #ifndef USE_TBB
 #define NO_PARALLEL
 #endif
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
 #include <sferes/phen/parameters.hpp>
 #include <sferes/gen/evo_float.hpp>
 #ifdef USE_TBB
@@ -62,9 +67,6 @@
 #include <sferes/modif/dummy.hpp>
 #include <sferes/ea/nsga2.hpp>
 #endif
-
-#include <limbo/bayes_opt/bo_base.hpp>
-#include <limbo/experimental/tools/pareto.hpp>
 
 namespace limbo {
     namespace experimental {

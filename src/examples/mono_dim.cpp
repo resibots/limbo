@@ -43,13 +43,13 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#include <limbo/tools/macros.hpp>
+#include <limbo/acqui/gp_ucb.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 #include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/mean/data.hpp>
 #include <limbo/model/gp.hpp>
-#include <limbo/acqui/gp_ucb.hpp>
-#include <limbo/bayes_opt/boptimizer.hpp>
 #include <limbo/stat.hpp>
+#include <limbo/tools/macros.hpp>
 
 using namespace limbo;
 
@@ -66,7 +66,7 @@ BO_PARAMS(std::cout,
               };
 #else
               struct opt_gridsearch : public defaults::opt_gridsearch {
-	            };
+              };
 #endif
               struct acqui_ucb {
                   BO_PARAM(double, alpha, 0.1);
@@ -80,9 +80,10 @@ BO_PARAMS(std::cout,
                   BO_PARAM(double, sigma_sq, 1);
                   BO_PARAM(double, l, 0.2);
               };
-
+              struct kernel_exp : public defaults::kernel_exp {
+              };
               struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
-                BO_PARAM(bool, stats_enabled, true);
+                  BO_PARAM(bool, stats_enabled, true);
               };
 
               struct bayes_opt_boptimizer : public defaults::bayes_opt_boptimizer {
@@ -96,13 +97,22 @@ BO_PARAMS(std::cout,
                   BO_PARAM(int, iterations, 20);
               };
               struct stat_gp {
-                BO_PARAM(int, bins, 20);
+                  BO_PARAM(int, bins, 20);
+              };
+
+              struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+              };
+
+              struct opt_rprop : public defaults::opt_rprop {
+              };
+
+              struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
               };
           };)
 
 struct fit_eval {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -128,5 +138,11 @@ int main()
     opt.optimize(fit_eval());
     std::cout << opt.best_observation() << " res  "
               << opt.best_sample().transpose() << std::endl;
+
+    // example with basic HP opt
+    bayes_opt::BOptimizerHPOpt<Params> opt_hp;
+    opt_hp.optimize(fit_eval());
+    std::cout << opt_hp.best_observation() << " res  "
+              << opt_hp.best_sample().transpose() << std::endl;
     return 0;
 }

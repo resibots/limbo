@@ -57,8 +57,9 @@ blddir = 'build'
 import glob
 import os
 import subprocess
-import limbo
+import limbo, benchmarks
 import inspect
+from waflib import Logs
 from waflib.Build import BuildContext
 
 def options(opt):
@@ -85,6 +86,7 @@ def options(opt):
         opt.add_option('--nb_replicates', type='int', help='number of replicates performed during the benchmark', dest='nb_rep')
         opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
+        opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
 
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
@@ -104,9 +106,11 @@ def configure(conf):
         conf.load('nlopt')
         conf.load('libcmaes')
 
+        native_flags = "-march=native"
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
-            opt_flags = " -O3 -xHost -mtune=native -unroll -fma -g"
+            opt_flags = " -O3 -xHost -g"
+            native_flags = "-mtune=native -unroll -fma"
         else:
             if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
                 common_flags = "-Wall -std=c++0x"
@@ -115,6 +119,12 @@ def configure(conf):
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
             opt_flags = " -O3 -g"
+
+        native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
+        if native:
+            opt_flags = opt_flags + ' ' + native_flags
+        else:
+            Logs.pprint('YELLOW', 'WARNING: Native flags not supported. The performance might be a bit deteriorated.')
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \
@@ -131,47 +141,53 @@ def configure(conf):
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
-        print 'CXXFLAGS:', conf.env['CXXFLAGS']
+        Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
-                        print 'configuring for exp: ' + i
+                        Logs.pprint('NORMAL', 'configuring for exp: %s' % i)
                         conf.recurse('exp/' + i)
         conf.recurse('src/benchmarks')
-        print ''
-        print 'WHAT TO DO NOW?'
-        print '---------------'
-        print '[users] To compile Limbo (inc. unit tests): ./waf build'
-        print '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo'
-        print '[developers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf doc'
-        print '[developers] To compile the benchmarks: ./waf build_benchmarks'
-        print '[developers] To compile the extensive tests: ./waf build_extensive_tests'
+        Logs.pprint('NORMAL', '')
+        Logs.pprint('NORMAL', 'WHAT TO DO NOW?')
+        Logs.pprint('NORMAL', '---------------')
+        Logs.pprint('NORMAL', '[users] To compile Limbo: ./waf build')
+        Logs.pprint('NORMAL', '[users] To compile and run unit tests: ./waf --tests')
+        Logs.pprint('NORMAL', '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo')
+        Logs.pprint('NORMAL', '[developers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf docs')
+        Logs.pprint('NORMAL', '[developers] To compile the BO benchmarks: ./waf build_bo_benchmarks')
+        Logs.pprint('NORMAL', '[developers] To run the BO benchmarks: ./waf run_bo_benchmarks')
+        Logs.pprint('NORMAL', '[developers] To compile the regression benchmarks (requires a json file with the setup): ./waf --regression_benchmarks file.json')
+        Logs.pprint('NORMAL', '[developers] To run the regression benchmarks: ./waf run_regression_benchmarks --regression_benchmarks file.json')
+        Logs.pprint('NORMAL', '[developers] To compile the extensive tests: ./waf build_extensive_tests')
 
 
 def build(bld):
     if bld.options.write_params:
         limbo.write_default_params(bld.options.write_params)
-        print 'default parameters written in ' + bld.options.write_params
+        Logs.pprint('NORMAL', 'default parameters written in %s' % bld.options.write_params)
     bld.recurse('src/')
     if bld.options.exp:
         for i in bld.options.exp.split(','):
-            print 'Building exp: ' + i
+            Logs.pprint('NORMAL', 'Building exp: %s' % i)
             bld.recurse('exp/' + i)
             limbo.output_params('exp/'+i)
+    if bld.options.regression_benchmarks:
+        benchmarks.compile_regression_benchmarks(bld, bld.options.regression_benchmarks)
     bld.add_post_fun(limbo.summary)
 
 def build_extensive_tests(ctx):
     ctx.recurse('src/')
     ctx.recurse('src/tests')
 
-def build_benchmark(ctx):
+def build_bo_benchmarks(ctx):
     ctx.recurse('src/benchmarks')
 
 def run_extensive_tests(ctx):
     for fullname in glob.glob('build/src/tests/combinations/*'):
         if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
             fpath, fname = os.path.split(fullname)
-            print "Running: " + fname
+            Logs.pprint('NORMAL', 'Running: %s' % fname)
             s = "cd " + fpath + "; ./" + fname
             retcode = subprocess.call(s, shell=True, env=None)
 
@@ -181,34 +197,13 @@ def submit_extensive_tests(ctx):
             fpath, fname = os.path.split(fullname)
             s = "cd " + fpath + ";oarsub -l /nodes=1/core=2,walltime=00:15:00 -n " + fname + " -O " + fname + ".stdout.%jobid%.log -E " + fname + ".stderr.%jobid%.log ./" + fname
             retcode = subprocess.call(s, shell=True, env=None)
-            print "oarsub returned:" + str(retcode)
+            Logs.pprint('NORMAL', 'oarsub returned: %s' % str(retcode))
 
-def run_benchmark(ctx):
-    HEADER='\033[95m'
-    NC='\033[0m'
-    res_dir=os.getcwd()+"/benchmark_results/"
-    try:
-        os.makedirs(res_dir)
-    except:
-        print "WARNING, dir:" + res_dir + " not be created"
-    for fullname in glob.glob('build/src/benchmarks/*'):
-        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
-            fpath, fname = os.path.split(fullname)
-            directory = res_dir + "/" + fname
-            try:
-                os.makedirs(directory)
-            except:
-                print "WARNING, dir:" + directory + " not be created, the new results will be concatenated to the old ones"
-            s = "cp " + fullname + " " + directory
-            retcode = subprocess.call(s, shell=True, env=None)
-            if ctx.options.nb_rep:
-                nb_rep = ctx.options.nb_rep
-            else:
-                nb_rep = 10
-            for i in range(0,nb_rep):
-                print HEADER+" Running: " + fname + " for the "+str(i)+"th time"+NC
-                s="cd " + directory +";./" + fname
-                retcode = subprocess.call(s, shell=True, env=None)
+def run_bo_benchmarks(ctx):
+    benchmarks.run_bo_benchmarks(ctx)
+
+def run_regression_benchmarks(ctx):
+    benchmarks.run_regression_benchmarks(ctx)
 
 def shutdown(ctx):
     if ctx.options.create_exp:
@@ -225,11 +220,13 @@ def shutdown(ctx):
 def insert_license(ctx):
     limbo.insert_license()
 
-def build_docs(ctx):
-    print 'extracting default params...'
+def write_default_params(ctx):
+    Logs.pprint('NORMAL', 'extracting default params to docs/defaults.rst')
     limbo.write_default_params('docs/defaults.rst')
-    print "generating HTML doc..."
-    s = "cd docs; make html"
+
+def build_docs(ctx):
+    Logs.pprint('NORMAL', "generating HTML doc with versioning...")
+    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
@@ -237,8 +234,8 @@ class BuildExtensiveTestsContext(BuildContext):
     fun = 'build_extensive_tests'
 
 class BuildBenchmark(BuildContext):
-    cmd = 'build_benchmark'
-    fun = 'build_benchmark'
+    cmd = 'build_bo_benchmarks'
+    fun = 'build_bo_benchmarks'
 
 class InsertLicense(BuildContext):
     cmd = 'insert_license'
@@ -247,3 +244,7 @@ class InsertLicense(BuildContext):
 class BuildDoc(BuildContext):
     cmd = 'docs'
     fun = 'build_docs'
+
+class BuildDoc(BuildContext):
+    cmd = 'default_params'
+    fun = 'write_default_params'

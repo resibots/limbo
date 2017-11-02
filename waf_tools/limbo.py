@@ -52,6 +52,7 @@ import time
 import threading
 import params
 import license
+from waflib import Logs
 from waflib.Tools import waf_unit_test
 
 json_ok = True
@@ -59,7 +60,7 @@ try:
     import simplejson
 except:
     json_ok = False
-    print "WARNING simplejson not found some function may not work"
+    Logs.pprint('YELLOW', 'WARNING: simplejson not found some function may not work')
 
 def add_create_options(opt):
     opt.add_option('--dim_in', type='int', dest='dim_in', help='Number of dimensions for the function to optimize [default: 1]')
@@ -69,6 +70,15 @@ def add_create_options(opt):
     opt.add_option('--init_randomsampling_samples', type='int', dest='init_randomsampling_samples', help='Number of samples used for the initialization [default: 10]')
     opt.add_option('--stop_maxiterations_iterations', type='int', dest='stop_maxiterations_iterations', help='Number of iterations performed before stopping the optimization [default: 190]')
 
+# check if a lib exists for both osx (darwin) and GNU/linux
+def check_lib(self, name, path):
+    if self.env['DEST_OS']=='darwin':
+        libname = name + '.dylib'
+    else:
+        libname = name + '.so'
+    res = self.find_file(libname, path)
+    lib = res[:-len(libname)-1]
+    return res, lib
 
 def create_variants(bld, source, uselib_local,
                     uselib, variants, includes=". ../",
@@ -99,7 +109,7 @@ def create_exp(name, opt):
     if not os.path.exists('exp'):
         os.makedirs('exp')
     if os.path.exists('exp/' + name):
-        print 'ERROR: experiment ' + name + ' already exists. Please remove it if you want to re-create it from scratch.'
+        Logs.pprint('RED', 'ERROR: experiment \'%s\' already exists. Please remove it if you want to re-create it from scratch.' % name)
         return
     os.mkdir('exp/' + name)
 
@@ -161,7 +171,7 @@ def _sub_script(tpl, conf_file):
         ld_lib_path = os.environ['LD_LIBRARY_PATH']
     else:
         ld_lib_path = "''"
-    print 'LD_LIBRARY_PATH=' + ld_lib_path
+    Logs.pprint('NORMAL', 'LD_LIBRARY_PATH=%s' % ld_lib_path)
      # parse conf
     list_exps = simplejson.load(open(conf_file))
     fnames = []
@@ -200,7 +210,7 @@ def _sub_script(tpl, conf_file):
                 try:
                     os.makedirs(directory)
                 except:
-                    print "WARNING, dir:" + directory + " not be created"
+                    Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created' % directory)
                 subprocess.call('cp ' + bin_dir + '/' + e + ' ' + directory, shell=True)
                 src_dir = bin_dir.replace('build/',  '')
                 subprocess.call('cp ' + src_dir + '/params_*.txt '  + directory, shell=True)
@@ -225,7 +235,7 @@ def _sub_script_local(conf_file):
         ld_lib_path = os.environ['LD_LIBRARY_PATH']
     else:
         ld_lib_path = "''"
-    print 'LD_LIBRARY_PATH=' + ld_lib_path
+    Logs.pprint('NORMAL', 'LD_LIBRARY_PATH=%s' % ld_lib_path)
      # parse conf
     list_exps = simplejson.load(open(conf_file))
     fnames = []
@@ -264,7 +274,7 @@ def _sub_script_local(conf_file):
                 try:
                     os.makedirs(directory)
                 except:
-                    print "WARNING, dir:" + directory + " not be created"
+                    Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created' % directory)
                 subprocess.call('cp ' + bin_dir + '/' + e + ' ' + '"' + directory + '"', shell=True)
                 src_dir = bin_dir.replace('build/',  '')
                 subprocess.call('cp ' + src_dir + '/params_*.txt '  + directory, shell=True)
@@ -278,11 +288,14 @@ def run_local_one(directory, s):
     retcode = subprocess.call(s, shell=True, env=None, stdout=std_out, stderr=std_err)
 
 def run_local(conf_file, serial = True):
+    if not json_ok:
+        Logs.pprint('RED', 'ERROR: simplejson is not installed and as such you cannot read the json configuration file for running your experiments.')
+        return
     fnames,arguments = _sub_script_local(conf_file)
     threads = []
     for (fname, directory) in fnames:
         s = "cd " + '"' + directory + '"' + " && " + "./" + fname + ' ' + arguments
-        print "Executing " + s
+        Logs.pprint('NORMAL', "Executing: %s" % s)
         if not serial:
             t = threading.Thread(target=run_local_one, args=(directory,s,))
             threads.append(t)
@@ -312,12 +325,15 @@ def qsub(conf_file):
 export LD_LIBRARY_PATH=@ld_lib_path
 exec @exec
 """
+    if not json_ok:
+        Logs.pprint('RED', 'ERROR: simplejson is not installed and as such you cannot read the json configuration file for running your experiments.')
+        return
     fnames = _sub_script(tpl, conf_file)
     for (fname, directory) in fnames:
         s = "qsub -d " + directory + " " + fname
-        print "executing:" + s
+        Logs.pprint('NORMAL', 'executing: %s' % s)
         retcode = subprocess.call(s, shell=True, env=None)
-        print "qsub returned:" + str(retcode)
+        Logs.pprint('NORMAL', 'qsub returned: %s' % str(retcode))
 
 
 def oar(conf_file):
@@ -329,13 +345,16 @@ def oar(conf_file):
 export LD_LIBRARY_PATH=@ld_lib_path
 exec @exec
 """
-    print 'WARNING [oar]: MPI not supported yet'
+    if not json_ok:
+        Logs.pprint('RED', 'ERROR: simplejson is not installed and as such you cannot read the json configuration file for running your experiments.')
+        return
+    Logs.pprint('YELLOW', 'WARNING [oar]: MPI not supported yet')
     fnames = _sub_script(tpl, conf_file)
     for (fname, directory) in fnames:
         s = "oarsub -d " + directory + " -S " + fname
-        print "executing:" + s
+        Logs.pprint('NORMAL', 'executing: %s' % s)
         retcode = subprocess.call(s, shell=True, env=None)
-        print "oarsub returned:" + str(retcode)
+        Logs.pprint('NORMAL', 'oarsub returned: %s' % str(retcode))
 
 def output_params(folder):
     files = [each for each in os.listdir(folder) if each.endswith('.cpp')]

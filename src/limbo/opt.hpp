@@ -53,6 +53,8 @@
 #include <limbo/opt/chained.hpp>
 #ifdef USE_LIBCMAES
 #include <limbo/opt/cmaes.hpp>
+#else
+ #warning NO CMA-ES
 #endif
 #include <limbo/opt/grid_search.hpp>
 #ifdef USE_NLOPT

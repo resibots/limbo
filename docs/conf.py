@@ -58,14 +58,14 @@ master_doc = 'index'
 # General information about the project.
 project = u'limbo'
 copyright = u'2014-2015, UPMC/Inria'
-author = u'Jean-Baptiste Mouret, Antoine Cully'
+author = u'Jean-Baptiste Mouret, Antoine Cully, Konstantinos Chatzilygeroudis'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '0.0'
+version = '1.0'
 # The full version, including alpha/beta/rc tags.
 release = '0.1'
 
@@ -178,6 +178,8 @@ html_static_path = ['_static']
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
 #html_last_updated_fmt = '%b %d, %Y'
+# remove timestamp to avoid too many commits
+html_last_updated_fmt = None
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
@@ -320,3 +322,6 @@ intersphinx_mapping = {
     'python': ('https://docs.python.org/', None),
     'resibots': ('http://www.resibots.eu/', None),
 }
+
+# for versioning
+scv_whitelist_branches = ('master', 'release-1.0', 'new_benchmarks')

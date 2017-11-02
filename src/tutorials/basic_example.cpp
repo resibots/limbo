@@ -78,7 +78,7 @@ struct Params {
         BO_PARAM(double, noise, 1e-10);
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
     };
 
     // we use 10 random samples to initialize the algorithm
@@ -98,9 +98,9 @@ struct Params {
 
 struct Eval {
     // number of input dimension (x.size())
-    static constexpr size_t dim_in = 1;
+    BO_PARAM(size_t, dim_in, 1);
     // number of dimenions of the result (res.size())
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_out, 1);
 
     // the function to be optimized
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const

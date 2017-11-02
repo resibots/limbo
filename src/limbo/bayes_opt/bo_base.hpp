@@ -46,34 +46,36 @@
 #ifndef LIMBO_BAYES_OPT_BO_BASE_HPP
 #define LIMBO_BAYES_OPT_BO_BASE_HPP
 
-#include <vector>
+#include <exception>
 #include <iostream>
 #include <limits>
-#include <exception>
+#include <vector>
 
-#include <boost/parameter.hpp>
-#include <boost/fusion/include/vector.hpp>
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
 #include <boost/fusion/include/accumulate.hpp>
 #include <boost/fusion/include/for_each.hpp>
+#include <boost/fusion/include/vector.hpp>
+#include <boost/parameter.hpp>
 #define BOOST_NO_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
 
 #include <Eigen/Core>
 
 // we need everything to have the defaults
-#include <limbo/tools/macros.hpp>
-#include <limbo/stop/chain_criteria.hpp>
-#include <limbo/stop/max_iterations.hpp>
-#include <limbo/stat/samples.hpp>
-#include <limbo/stat/aggregated_observations.hpp>
-#include <limbo/stat/console_summary.hpp>
-#include <limbo/tools/sys.hpp>
-#include <limbo/kernel/exp.hpp>
 #include <limbo/acqui/ucb.hpp>
+#include <limbo/init/random_sampling.hpp>
+#include <limbo/kernel/exp.hpp>
 #include <limbo/mean/data.hpp>
 #include <limbo/model/gp.hpp>
-#include <limbo/init/random_sampling.hpp>
+#include <limbo/stat/aggregated_observations.hpp>
+#include <limbo/stat/console_summary.hpp>
+#include <limbo/stat/samples.hpp>
+#include <limbo/stop/chain_criteria.hpp>
+#include <limbo/stop/max_iterations.hpp>
+#include <limbo/tools/macros.hpp>
 #include <limbo/tools/math.hpp>
+#include <limbo/tools/sys.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -180,10 +182,7 @@ namespace limbo {
             // defaults
             struct defaults {
                 using init_t = init::RandomSampling<Params>; // 1
-
-                using kf_t = kernel::Exp<Params>;
-                using mean_t = mean::Data<Params>;
-                using model_t = model::GP<Params, kf_t, mean_t>; // 2
+                using model_t = model::GP<Params>; // 2
                 // WARNING: you have to specify the acquisition  function
                 // if you use a custom model
                 using acqui_t = acqui::UCB<Params, model_t>; // 3

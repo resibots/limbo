@@ -5,10 +5,12 @@ sudo mkdir build && cd build
 sudo cmake ..
 sudo make
 sudo cp *.a /usr/lib
-cd && git clone https://github.com/beniz/libcmaes.git
+cd && git clone https://github.com/resibots/libcmaes.git
 cd libcmaes
-./autogen.sh
-./configure
+git checkout fix_flags_native
+mkdir build
+cd build
+cmake -DUSE_TBB=ON -DUSE_OPENMP=OFF ..
 make
 sudo make install
 sudo ldconfig

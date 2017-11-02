@@ -44,7 +44,8 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 #define SKIP_TRICKS
-#include "testfunctions.hpp"
+#define BAYES_OPT
+#include "../limbo/testfunctions.hpp"
 #include <chrono>
 #include <fstream>
 #include <string>
@@ -54,7 +55,7 @@ void benchmark(const bopt_params& par, const std::string& name)
 {
     auto t1 = std::chrono::steady_clock::now();
     Benchmark<Function> benchmark(par);
-    vectord result(Function::dim_in);
+    vectord result(Function::dim_in());
     benchmark.optimize(result);
     auto time_running = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - t1).count();
     std::cout.precision(17);

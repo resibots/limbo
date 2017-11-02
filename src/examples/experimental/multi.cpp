@@ -44,12 +44,13 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 #include <limbo/limbo.hpp>
-#include <limbo/experimental/bayes_opt/parego.hpp>
-#include <limbo/experimental/bayes_opt/nsbo.hpp>
+
 #include <limbo/experimental/bayes_opt/ehvi.hpp>
-#include <limbo/experimental/stat/pareto_front.hpp>
-#include <limbo/experimental/stat/pareto_benchmark.hpp>
+#include <limbo/experimental/bayes_opt/nsbo.hpp>
+#include <limbo/experimental/bayes_opt/parego.hpp>
 #include <limbo/experimental/stat/hyper_volume.hpp>
+#include <limbo/experimental/stat/pareto_benchmark.hpp>
+#include <limbo/experimental/stat/pareto_front.hpp>
 
 using namespace limbo;
 
@@ -65,7 +66,7 @@ struct Params {
         BO_PARAM(double, noise, 0.01);
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
     };
 
     struct bayes_opt_bobase : public defaults::bayes_opt_bobase {
@@ -118,8 +119,8 @@ struct Params {
 #endif
 
 struct zdt1 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    static constexpr size_t dim_out = 2;
+    BO_PARAM(size_t, dim_in, ZDT_DIM);
+    BO_PARAM(size_t, dim_out, 2);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -137,8 +138,8 @@ struct zdt1 {
 };
 
 struct zdt2 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    static constexpr size_t dim_out = 2;
+    BO_PARAM(size_t, dim_in, ZDT_DIM);
+    BO_PARAM(size_t, dim_out, 2);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -156,8 +157,8 @@ struct zdt2 {
 };
 
 struct zdt3 {
-    static constexpr size_t dim_in = ZDT_DIM;
-    static constexpr size_t dim_out = 2;
+    BO_PARAM(size_t, dim_in, ZDT_DIM);
+    BO_PARAM(size_t, dim_out, 2);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -175,8 +176,8 @@ struct zdt3 {
 };
 
 struct mop2 {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 2;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 2);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {

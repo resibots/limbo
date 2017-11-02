@@ -85,7 +85,9 @@ namespace limbo {
             double kernel(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double d = (v1 - v2).norm();
-                return Params::kernel_maternthreehalves::sigma_sq() * (1 + std::sqrt(3) * d / Params::kernel_maternthreehalves::l()) * std::exp(-std::sqrt(3) * d / Params::kernel_maternthreehalves::l());
+                double term = std::sqrt(3) * d / Params::kernel_maternthreehalves::l();
+
+                return Params::kernel_maternthreehalves::sigma_sq() * (1 + term) * std::exp(-term);
             }
         };
     }

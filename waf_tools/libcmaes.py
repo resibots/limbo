@@ -69,27 +69,30 @@ def check_libcmaes(conf):
 		includes_check = ['/usr/local/include', '/usr/include']
 		libs_check = ['/usr/local/lib', '/usr/lib', '/usr/lib/x86_64-linux-gnu/']
 
+	incl = ''
 	try:
 		conf.start_msg('Checking for libcmaes includes (optional)')
 		res = conf.find_file('libcmaes/cmaes.h', includes_check)
-		conf.end_msg('ok')
+		incl = res[:-len('libcmaes/cmaes.h')-1]
+		conf.end_msg(incl)
 	except:
-		conf.end_msg('Not found', 'RED')
+		conf.end_msg('Not found in %s' % str(includes_check), 'YELLOW')
 		return 1
-	conf.start_msg('Checking for libcmaes libs')
-	found = False
+	conf.start_msg('Checking for libcmaes libs (optional)')
+	lib_path = ''
 	for lib in ['libcmaes.so', 'libcmaes.a', 'libcmaes.dylib']:
 		try:
-			found = found or conf.find_file(lib, libs_check)
+			res = conf.find_file(lib, libs_check)
+			lib_path = res[:-len(lib)-1]
 		except:
 			continue
-	if not found:
-		conf.end_msg('Not found', 'RED')
+	if lib_path == '':
+		conf.end_msg('Not found in %s' % str(libs_check), 'YELLOW')
 		return 1
 	else:
-		conf.end_msg('ok')
-		conf.env.INCLUDES_LIBCMAES = includes_check
-		conf.env.LIBPATH_LIBCMAES = libs_check
+		conf.end_msg(lib_path)
+		conf.env.INCLUDES_LIBCMAES = [incl]
+		conf.env.LIBPATH_LIBCMAES = [lib_path]
 		conf.env.DEFINES_LIBCMAES = ['USE_LIBCMAES']
 		conf.env.LIB_LIBCMAES= ['cmaes']
 	return 1

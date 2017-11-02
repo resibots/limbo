@@ -19,12 +19,18 @@ Required
 
 Optional but highly recommended
 +++++++++++++++++++++++++++++++++
-* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ with C++ binding: ::
+* `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
+
+* `NLOpt <http://ab-initio.mit.edu/wiki/index.php/NLopt>`_ [mirror: http://members.loria.fr/JBMouret/mirrors/nlopt-2.4.2.tar.gz] with C++ binding: ::
 
     ./configure --with-cxx --enable-shared --without-python --without-matlab --without-octave
     sudo make install
 
-* `libcmaes <https://github.com/beniz/libcmaes>`_. Make sure that you install with **sudo** or configure the **LD_LIBRARY_PATH** accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get). Follow the instructions `here <https://github.com/beniz/libcmaes#build>`_, reproduced for your convenience::
+.. caution::
+
+  The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (`brew install homebrew/science/nlopt`).
+
+* `libcmaes <https://github.com/beniz/libcmaes>`_. We advise you to use our own `fork of libcmaes <https://github.com/resibots/libcmaes>`_ (branch **fix_flags_native**). Make sure that you install with **sudo** or configure the **LD_LIBRARY_PATH** accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get): ::
 
     sudo apt-get install libgtest-dev
     sudo cd /usr/src/gtest
@@ -33,11 +39,45 @@ Optional but highly recommended
     sudo make
     sudo cp *.a /usr/lib
 
-* `Intel TBB <https://www.threadingbuildingblocks.org>`_ is not mandatory, but highly recommended; TBB is used in Limbo to take advantage of multicore architectures.
+Follow the instructions below (you can also have a look `here <https://github.com/resibots/libcmaes#build>`_): ::
+
+    git clone https://github.com/resibots/libcmaes.git
+    cd libcmaes
+    git checkout fix_flags_native
+
+Configuring with Makefiles: ::
+
+   ./autogen.sh
+   ./configure
+   make -j4
+
+or CMake: ::
+
+    mkdir build
+    cd build
+    cmake ..
+    make -j4
+
+In addition, you should be careful to configure **libcmaes** to use the same Eigen3 version as what you intend to use with Limbo (configuring with Makefiles): ::
+
+    ./configure --with-eigen3-include=YOUR_DESIRED_DIR/include/eigen3
+
+or (configuring with CMake): ::
+
+    cmake -DEIGEN3_INCLUDE_DIR=YOUR_DESIRED_DIR/include/eigen3 ..
+
+Additionally, you can enable the usage of TBB for parallelization (configuring with Makefiles): ::
+
+    ./configure --enable-tbb
+
+or (configuring with CMake): ::
+
+    cmake -DUSE_TBB=ON -DUSE_OPENMP=OFF ..
 
 Optional
 +++++++++++++
 * `Intel MKL <https://software.intel.com/en-us/intel-mkl>`_ is supported as backend for Eigen. In our experience, it provided best results when compiling with Intel's Compiler (ICC)
+* `LAPACKE/BLAS <http://www.netlib.org/lapack/lapacke.html>`_ is supported as a backend for Eigen (`version>=3.3 <https://eigen.tuxfamily.org/dox/TopicUsingBlasLapack.html>`_). In our experience, it gives high speed-ups with **big** matrices (i.e., more than 1200 dimensions) and hurts a bit the performance with **small** matrices (i.e., less than 800 dimensions). You can enable LAPACKE/BLAS by using the ``--lapacke_blas`` option (if you have Eigen3.3 or later).
 * `Sferes2 <https://github.com/sferes2/sferes2>`_ if you plan to use the multi-objective bayesian optimization algorithms (experimental).
 
 Compilation
@@ -102,42 +142,3 @@ The second step is to run the build command::
 Depending on your compiler, there may be some warnings, but the output should end with the following lines: ::
 
     'build' finished successfully (time in sec)
-
-
-Building the documentation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. note::
-    This section is only useful for developers who need to update the documentation.
-
-Install sphinx via pip: ::
-
-    sudo pip install Sphinx
-    sudo pip install sphinxcontrib-bibtex
-
-.. warning::
-
-  On Mac OSX, do not use `brew install sphinx` because this is not the right sphinx
-
-Install the Resibots theme for Sphinx::
-
-    git clone https://github.com/resibots/sphinx_resibots_theme
-    export SPHINX_RESIBOTS_THEME="/home/me/path/to/sphinx_resibots_theme"
-
-Install `breathe <https://breathe.readthedocs.io/en/latest/>`_ via pip::
-
-    sudo pip install breathe
-
-Install `doxygen <http://www.stack.nl/~dimitri/doxygen/>`_ via your package manager (e.g. apt-get / brew)::
-
-    apt-get install doxygen
-
-In the `doc` directory::
-
-    make html
-
-About sphinx and ReStructuredText:
-  - `There is a tutorial <http://sphinx-doc.org/tutorial.html>`_,
-  - `Primer for ReStructuredText <http://sphinx-doc.org/rest.html>`_, the markup language of Sphinx,
-  - `markup specific to Sphinx <http://sphinx-doc.org/markup/index.html>`_,
-  - `About C++ in Sphinx <http://sphinx-doc.org/domains.html#id2>`_
-  - `Breathe (bridge between sphinx and doxygen) <https://breathe.readthedocs.org/en/latest/>`_

@@ -116,8 +116,8 @@ inline Eigen::VectorXd t_osz(const Eigen::VectorXd& x)
 }
 
 struct Sphere {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -127,23 +127,23 @@ struct Sphere {
 };
 
 struct Ellipsoid {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
         Eigen::Vector2d opt(0.5, 0.5);
         Eigen::Vector2d z = t_osz(x - opt);
         double r = 0;
-        for (size_t i = 0; i < dim_in; ++i)
-            r += std::pow(10, ((double)i) / (dim_in - 1.0)) * z(i) * z(i) + 1;
+        for (size_t i = 0; i < dim_in(); ++i)
+            r += std::pow(10, ((double)i) / (dim_in() - 1.0)) * z(i) * z(i) + 1;
         return tools::make_vector(-r);
     }
 };
 
 struct Rastrigin {
-    static constexpr size_t dim_in = 4;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 4);
+    BO_PARAM(size_t, dim_out, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -156,8 +156,8 @@ struct Rastrigin {
 
 // see : http://www.sfu.ca/~ssurjano/hart3.html
 struct Hartman3 {
-    static constexpr size_t dim_in = 3;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 3);
+    BO_PARAM(size_t, dim_out, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -182,8 +182,8 @@ struct Hartman3 {
 
 // see : http://www.sfu.ca/~ssurjano/hart6.html
 struct Hartman6 {
-    static constexpr size_t dim_in = 6;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 6);
+    BO_PARAM(size_t, dim_out, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& x) const
     {
@@ -212,8 +212,8 @@ struct Hartman6 {
 // see : http://www.sfu.ca/~ssurjano/goldpr.html
 // (with ln, as suggested in Jones et al.)
 struct GoldenPrice {
-    static constexpr size_t dim_in = 2;
-    static constexpr size_t dim_out = 1;
+    BO_PARAM(size_t, dim_in, 2);
+    BO_PARAM(size_t, dim_out, 1);
 
     Eigen::VectorXd operator()(const Eigen::VectorXd& xx) const
     {
@@ -244,7 +244,7 @@ struct Params {
         BO_PARAM(double, noise, 1e-6);
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
     };
 
     struct acqui_ucb : public defaults::acqui_ucb {
@@ -275,7 +275,7 @@ void print_res(const T& r)
         std::vector<std::pair<double, double>>& v = x.second;
         std::sort(v.begin(), v.end(),
             [](const std::pair<double, double>& x1,
-                      const std::pair<double, double>& x2) {
+                const std::pair<double, double>& x2) {
                 // clang-format off
                 return x1.second < x2.second;
                 // clang-format on
