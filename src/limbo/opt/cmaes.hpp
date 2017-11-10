@@ -112,8 +112,15 @@ namespace limbo {
             /// @ingroup opt_defaults
             /// upper bound (in input) for cmaes
             BO_PARAM(double, ubound, 1.0);
+            /// @ingroup opt_defaults
+            /// if stochastic, the mean of the
+            /// last distribution is returned
+            /// otherwise, the best ever candidate
+            /// is returned. If handle_uncertainty is on,
+            /// this is also enabled.
+            BO_PARAM(bool, stochastic, false);
         };
-    }
+    } // namespace defaults
 
     namespace opt {
         /// @ingroup opt
@@ -172,6 +179,9 @@ namespace limbo {
 
                 // the optimization itself
                 CMASolutions cmasols = cmaes<>(f_cmaes, cmaparams);
+                if (Params::opt_cmaes::stochastic() || Params::opt_cmaes::handle_uncertainty())
+                    return cmasols.xmean();
+
                 return cmasols.get_best_seen_candidate().get_x_dvec();
             }
 
@@ -199,6 +209,9 @@ namespace limbo {
                 CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(f_cmaes, cmaparams);
                 //cmasols.print(std::cout, 1, gp);
                 //to_f_representation
+                if (Params::opt_cmaes::stochastic() || Params::opt_cmaes::handle_uncertainty())
+                    return gp.pheno(cmasols.xmean());
+
                 return gp.pheno(cmasols.get_best_seen_candidate().get_x_dvec());
             }
 
@@ -259,7 +272,7 @@ namespace limbo {
                 cmaparams.set_quiet(!Params::opt_cmaes::verbose());
             }
         };
-    }
-}
+    } // namespace opt
+} // namespace limbo
 #endif
 #endif
