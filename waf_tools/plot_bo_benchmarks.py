@@ -87,17 +87,6 @@ else:
     plot_ok = False
     Logs.pprint('YELLOW', 'WARNING: numpy/matplotlib not found: no plot of the BO benchmark results')
 
-params = {
-    'axes.labelsize' : 8,
-    'text.fontsize' : 8,
-    'axes.titlesize': 10,
-    'legend.fontsize' : 10,
-    'xtick.labelsize': 5,
-    'ytick.labelsize' : 10,
-    'figure.figsize' : [9, 2.5]
-}
-rcParams.update(params)
-
 def load_data():
     files = glob("benchmark_results/*/*/*.dat")
     data = defaultdict(lambda : defaultdict(dict))
@@ -154,6 +143,19 @@ def custom_boxes(ax, bp):
 
 # plot a single function
 def plot(func_name, data, rst_file):
+    # set the figure size
+    params = {
+        'axes.labelsize' : 8,
+        'text.fontsize' : 8,
+        'axes.titlesize': 10,
+        'legend.fontsize' : 10,
+        'xtick.labelsize': 5,
+        'ytick.labelsize' : 10,
+        'figure.figsize' : [9, 2.5]
+    }
+    rcParams.update(params)
+    
+    # plot
     d = data[func_name]
     da_acc = []
     da_time = []
