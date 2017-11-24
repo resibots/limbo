@@ -68,8 +68,8 @@ namespace limbo {
         /// easy way to get the hostame
         inline std::string hostname()
         {
-            char hostname[30];
-            int res = gethostname(hostname, 30);
+            char hostname[50];
+            int res = gethostname(hostname, 50);
             assert(res == 0);
             res = 0; // avoid a warning in opt mode
             return std::string(hostname);
