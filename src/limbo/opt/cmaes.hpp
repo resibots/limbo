@@ -68,7 +68,7 @@ namespace limbo {
             BO_PARAM(int, restarts, 1);
             /// @ingroup opt_defaults
             /// maximum number of calls to the function to be optimized
-            BO_PARAM(double, max_fun_evals, -1);
+            BO_PARAM(int, max_fun_evals, -1);
             /// @ingroup opt_defaults
             /// threshold based on the difference in value of a fixed number
             /// of trials: if bigger than 0, it enables the tolerance criteria
@@ -119,6 +119,11 @@ namespace limbo {
             /// is returned. If handle_uncertainty is on,
             /// this is also enabled.
             BO_PARAM(bool, stochastic, false);
+
+            /// @ingroup opt_defaults
+            /// number of parent population
+            /// -1 to automatically determine
+            BO_PARAM(int, lambda, -1);
         };
     } // namespace defaults
 
@@ -134,7 +139,7 @@ namespace limbo {
         ///   - int variant
         ///   - int elitism
         ///   - int restarts
-        ///   - double max_fun_evals
+        ///   - int max_fun_evals
         ///   - double fun_tolerance
         ///   - double xrel_tolerance
         ///   - double fun_target
@@ -143,6 +148,8 @@ namespace limbo {
         ///   - bool verbose
         ///   - double lb (lower bounds)
         ///   - double ub (upper bounds)
+        ///   - bool stochastic
+        ///   - int lambda
         template <typename Params>
         struct Cmaes {
         public:
@@ -174,7 +181,7 @@ namespace limbo {
                 double sigma = 0.5;
                 std::vector<double> x0(init.data(), init.data() + init.size());
 
-                CMAParameters<> cmaparams(x0, sigma);
+                CMAParameters<> cmaparams(x0, sigma, Params::opt_cmaes::lambda());
                 _set_common_params(cmaparams, dim);
 
                 // the optimization itself
@@ -202,7 +209,7 @@ namespace limbo {
                 double sigma = 0.5 * std::abs(Params::opt_cmaes::ubound() - Params::opt_cmaes::lbound());
                 std::vector<double> x0(init.data(), init.data() + init.size());
                 // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
-                CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, -1, 0, gp);
+                CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, Params::opt_cmaes::lambda(), 0, gp);
                 _set_common_params(cmaparams, dim);
 
                 // the optimization itself
