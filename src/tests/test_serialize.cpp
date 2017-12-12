@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(test_text_archive)
     for (size_t i = 0; i < n; i++) {
         Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
         samples.push_back(s);
-        observations.push_back(tools::make_vector(std::cos(s(0)*s(1)*s(2))));
+        observations.push_back(tools::make_vector(std::cos(s(0) * s(1) * s(2))));
     }
     // 3-D inputs, 1-D outputs
     model::GPOpt<Params> gp(3, 1);
@@ -95,7 +95,31 @@ BOOST_AUTO_TEST_CASE(test_text_archive)
     model::GPOpt<Params> gp2(3, 1);
     serialize::TextArchive a2("/tmp/test_model.dat");
     gp2.load(a2);
-    
+
+    // check that the 2 GPs match
+    size_t N = 100;
+
+    double diff_mu = 0.;
+    double diff_sigma = 0.;
+    for (size_t i = 0; i < N; i++) {
+        Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
+        samples.push_back(s);
+
+        Eigen::VectorXd mu1, mu2;
+        double s1, s2;
+
+        std::tie(mu1, s1) = gp.query(s);
+        std::tie(mu2, s2) = gp2.query(s);
+
+        diff_mu += std::abs(mu1(0) - mu2(0));
+        diff_sigma += std::abs(s1 - s2);
+    }
+
+    diff_mu /= double(N);
+    diff_sigma /= double(N);
+
+    BOOST_CHECK(diff_mu < 1e-6);
+    BOOST_CHECK(diff_sigma < 1e-6);
 }
 
 BOOST_AUTO_TEST_CASE(test_bin_archive)
