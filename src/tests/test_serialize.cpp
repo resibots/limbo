@@ -49,7 +49,10 @@
 #include <cstring>
 #include <fstream>
 
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
 #include <boost/test/unit_test.hpp>
+
 #include <limbo/model/gp.hpp>
 #include <limbo/serialize/text_archive.hpp>
 

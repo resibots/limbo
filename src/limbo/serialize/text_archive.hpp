@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+
 // Quick hack for definition of 'I' in <complex.h>
 #undef I
 #include <boost/filesystem.hpp>
