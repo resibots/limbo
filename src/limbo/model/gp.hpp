@@ -241,11 +241,10 @@ namespace limbo {
 
                 if (update_obs_mean)
                     this->_compute_obs_mean();
-
                 if (update_full_kernel)
                     this->_compute_full_kernel();
                 else
-                    this->_compute_alpha();
+                    this->_compute_alpha();                    
             }
 
             void compute_inv_kernel()
@@ -415,6 +414,34 @@ namespace limbo {
 
             bool inv_kernel_computed() { return _inv_kernel_updated; }
 
+            /// save the parameters and the data for the GP to the archive (text or binary)
+            template<typename A>
+            void save(A& archive) 
+            {
+                archive.save(_kernel_function.h_params(), "kernel_params");
+//                archive.save(_mean_function.h_params(), "mean_params");
+                archive.save(_samples, "samples");
+                archive.save(_observations, "observations");
+            }
+            /// load the parameters and the data for the GP from the archive (text or binary)
+            template <typename A>
+            void load(A& archive)
+            {
+                Eigen::VectorXd h_params;
+                archive.load(h_params, "kernel_params");
+                assert(h_params.size() == _kernel_function.h_params().size());
+                _kernel_function.set_h_params(h_params);
+
+                // should we save parameters of the mean function as well?
+                std::vector<Eigen::VectorXd> samples;
+                archive.load(samples, "samples");
+
+                std::vector<Eigen::VectorXd> observations;                
+                archive.load(observations, "observations");
+                
+                compute(samples, observations);
+            }
+
         protected:
             int _dim_in;
             int _dim_out;
@@ -441,9 +468,14 @@ namespace limbo {
 
             void _compute_obs_mean()
             {
+                assert(!_samples.empty());
                 _mean_vector.resize(_samples.size(), _dim_out);
-                for (int i = 0; i < _mean_vector.rows(); i++)
+                for (int i = 0; i < _mean_vector.rows(); i++){
+                    assert(_samples[i].cols() == 1);
+                    assert(_samples[i].rows() != 0);
+                    assert(_samples[i].rows() == _dim_in);
                     _mean_vector.row(i) = _mean_function(_samples[i], *this);
+                }
                 _obs_mean = _observations - _mean_vector;
             }
 
