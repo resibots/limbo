@@ -125,10 +125,6 @@ namespace limbo {
             // Get signal noise
             double noise() const { return _noise; }
 
-            template<typename A>
-            void save(A& a) {
-                a.save(h_params());
-            }
         protected:
             double _noise;
             double _noise_p;
