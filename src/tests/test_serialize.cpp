@@ -51,8 +51,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-// Quick hack for definition of 'I' in <complex.h>
-#undef I
 #include <limbo/model/gp.hpp>
 #include <limbo/serialize/text_archive.hpp>
 

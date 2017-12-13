@@ -55,6 +55,9 @@
 #include <Eigen/Core>
 #include <Eigen/LU>
 
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
+
 #include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
