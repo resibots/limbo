@@ -55,6 +55,9 @@
 #include <Eigen/Core>
 #include <Eigen/LU>
 
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
+
 #include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
@@ -244,7 +247,7 @@ namespace limbo {
                 if (update_full_kernel)
                     this->_compute_full_kernel();
                 else
-                    this->_compute_alpha();                    
+                    this->_compute_alpha();
             }
 
             void compute_inv_kernel()
@@ -415,11 +418,11 @@ namespace limbo {
             bool inv_kernel_computed() { return _inv_kernel_updated; }
 
             /// save the parameters and the data for the GP to the archive (text or binary)
-            template<typename A>
-            void save(A& archive) 
+            template <typename A>
+            void save(A& archive)
             {
                 archive.save(_kernel_function.h_params(), "kernel_params");
-//                archive.save(_mean_function.h_params(), "mean_params");
+                // archive.save(_mean_function.h_params(), "mean_params");
                 archive.save(_samples, "samples");
                 archive.save(_observations, "observations");
             }
@@ -436,9 +439,9 @@ namespace limbo {
                 std::vector<Eigen::VectorXd> samples;
                 archive.load(samples, "samples");
 
-                std::vector<Eigen::VectorXd> observations;                
+                std::vector<Eigen::VectorXd> observations;
                 archive.load(observations, "observations");
-                
+
                 compute(samples, observations);
             }
 
@@ -470,7 +473,7 @@ namespace limbo {
             {
                 assert(!_samples.empty());
                 _mean_vector.resize(_samples.size(), _dim_out);
-                for (int i = 0; i < _mean_vector.rows(); i++){
+                for (int i = 0; i < _mean_vector.rows(); i++) {
                     assert(_samples[i].cols() == 1);
                     assert(_samples[i].rows() != 0);
                     assert(_samples[i].rows() == _dim_in);
@@ -572,7 +575,7 @@ namespace limbo {
         /// Determination (ARD), and hyper-parameter optimization based on Rprop
         template <typename Params>
         using GPOpt = GP<Params, kernel::SquaredExpARD<Params>, mean::Data<Params>, gp::KernelLFOpt<Params>>;
-    }
-}
+    } // namespace model
+} // namespace limbo
 
 #endif

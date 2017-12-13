@@ -50,6 +50,7 @@
 #include <fstream>
 
 #include <boost/test/unit_test.hpp>
+
 #include <limbo/model/gp.hpp>
 #include <limbo/serialize/text_archive.hpp>
 
@@ -80,7 +81,7 @@ BOOST_AUTO_TEST_CASE(test_text_archive)
     for (size_t i = 0; i < n; i++) {
         Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
         samples.push_back(s);
-        observations.push_back(tools::make_vector(std::cos(s(0)*s(1)*s(2))));
+        observations.push_back(tools::make_vector(std::cos(s(0) * s(1) * s(2))));
     }
     // 3-D inputs, 1-D outputs
     model::GPOpt<Params> gp(3, 1);
@@ -108,7 +109,6 @@ BOOST_AUTO_TEST_CASE(test_text_archive)
         BOOST_CHECK_CLOSE(std::get<0>(v1)[0], std::get<0>(v2)[0], 1e-10);
         BOOST_CHECK_CLOSE(std::get<1>(v1), std::get<1>(v2), 1e-10);
     }
-    
 }
 
 BOOST_AUTO_TEST_CASE(test_bin_archive)

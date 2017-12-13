@@ -2,7 +2,11 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
 #include <boost/filesystem.hpp>
+
 #include <Eigen/Core>
 
 namespace limbo {
@@ -11,7 +15,7 @@ namespace limbo {
         class TextArchive {
         public:
             TextArchive(const std::string& dir_name) : _dir_name(dir_name),
-            _fmt(Eigen::FullPrecision, Eigen::DontAlignCols, " ", "\n", "", "") {}
+                                                       _fmt(Eigen::FullPrecision, Eigen::DontAlignCols, " ", "\n", "", "") {}
 
             /// write an Eigen::Matrix*
             void save(const Eigen::MatrixXd& v, const std::string& object_name)
@@ -27,7 +31,7 @@ namespace limbo {
                 _create_directory();
                 std::ofstream ofs(fname(object_name).c_str());
                 for (auto& x : v) {
-                    ofs << x.transpose().format(_fmt) << std::endl;                    
+                    ofs << x.transpose().format(_fmt) << std::endl;
                 }
             }
 
@@ -47,7 +51,7 @@ namespace limbo {
             void load(std::vector<V>& m_list, const std::string& object_name)
             {
                 m_list.clear();
-                auto values = _load(object_name);                
+                auto values = _load(object_name);
                 assert(!values.empty());
                 for (size_t i = 0; i < values.size(); ++i) {
                     V v(values[i].size());
@@ -65,8 +69,8 @@ namespace limbo {
 
         protected:
             std::string _dir_name;
-            Eigen::IOFormat _fmt;            
-            //
+            Eigen::IOFormat _fmt;
+
             void _create_directory()
             {
                 boost::filesystem::path my_path(_dir_name);
