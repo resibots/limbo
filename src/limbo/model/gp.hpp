@@ -244,6 +244,7 @@ namespace limbo {
 
                 if (update_obs_mean)
                     this->_compute_obs_mean();
+
                 if (update_full_kernel)
                     this->_compute_full_kernel();
                 else
@@ -422,10 +423,12 @@ namespace limbo {
             void save(A& archive)
             {
                 archive.save(_kernel_function.h_params(), "kernel_params");
+                // should we save parameters of the mean function as well?
                 // archive.save(_mean_function.h_params(), "mean_params");
                 archive.save(_samples, "samples");
                 archive.save(_observations, "observations");
             }
+
             /// load the parameters and the data for the GP from the archive (text or binary)
             template <typename A>
             void load(A& archive)
@@ -436,13 +439,20 @@ namespace limbo {
                 _kernel_function.set_h_params(h_params);
 
                 // should we save parameters of the mean function as well?
-                std::vector<Eigen::VectorXd> samples;
-                archive.load(samples, "samples");
+                _samples.clear();
+                archive.load(_samples, "samples");
 
-                std::vector<Eigen::VectorXd> observations;
-                archive.load(observations, "observations");
+                archive.load(_observations, "observations");
 
-                compute(samples, observations);
+                _dim_in = _samples[0].size();
+                _kernel_function = KernelFunction(_dim_in);
+
+                _dim_out = _observations.cols();
+                _mean_function = MeanFunction(_dim_out);
+
+                _mean_observation = _observations.colwise().mean();
+
+                recompute(true, true);
             }
 
         protected:

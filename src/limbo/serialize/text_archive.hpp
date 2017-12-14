@@ -24,6 +24,7 @@ namespace limbo {
                 std::ofstream ofs(fname(object_name).c_str());
                 ofs << v.format(_fmt) << std::endl;
             }
+
             /// write a vector of Eigen::Vector*
             template <typename T>
             void save(const std::vector<T>& v, const std::string& object_name)
@@ -76,6 +77,7 @@ namespace limbo {
                 boost::filesystem::path my_path(_dir_name);
                 boost::filesystem::create_directory(my_path);
             }
+
             std::vector<std::vector<double>> _load(const std::string& object_name)
             {
                 std::ifstream ifs(fname(object_name).c_str());
