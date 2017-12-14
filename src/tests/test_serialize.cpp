@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_CASE(test_text_archive)
     for (size_t i = 0; i < k; i++) {
         Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
         auto v1 = gp.query(s);
-        auto v2 = gp.query(s);
+        auto v2 = gp2.query(s);
         BOOST_CHECK_CLOSE(std::get<0>(v1)[0], std::get<0>(v2)[0], 1e-10);
         BOOST_CHECK_CLOSE(std::get<1>(v1), std::get<1>(v2), 1e-10);
     }
@@ -146,7 +146,7 @@ BOOST_AUTO_TEST_CASE(test_bin_archive)
     for (size_t i = 0; i < k; i++) {
         Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
         auto v1 = gp.query(s);
-        auto v2 = gp.query(s);
+        auto v2 = gp2.query(s);
         BOOST_CHECK_CLOSE(std::get<0>(v1)[0], std::get<0>(v2)[0], 1e-10);
         BOOST_CHECK_CLOSE(std::get<1>(v1), std::get<1>(v2), 1e-10);
     }

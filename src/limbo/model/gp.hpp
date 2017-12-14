@@ -435,8 +435,6 @@ namespace limbo {
             {
                 Eigen::VectorXd h_params;
                 archive.load(h_params, "kernel_params");
-                assert(h_params.size() == _kernel_function.h_params().size());
-                _kernel_function.set_h_params(h_params);
 
                 // should we save parameters of the mean function as well?
                 _samples.clear();
@@ -446,6 +444,9 @@ namespace limbo {
 
                 _dim_in = _samples[0].size();
                 _kernel_function = KernelFunction(_dim_in);
+
+                assert(h_params.size() == _kernel_function.h_params().size());
+                _kernel_function.set_h_params(h_params);
 
                 _dim_out = _observations.cols();
                 _mean_function = MeanFunction(_dim_out);
