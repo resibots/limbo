@@ -17,7 +17,7 @@ namespace limbo {
             BinaryArchive(const std::string& dir_name) : _dir_name(dir_name) {}
 
             /// write an Eigen::Matrix*
-            void save(const Eigen::MatrixXd& v, const std::string& object_name)
+            void save(const Eigen::MatrixXd& v, const std::string& object_name) const
             {
                 _create_directory();
 
@@ -28,7 +28,7 @@ namespace limbo {
 
             /// write a vector of Eigen::Vector*
             template <typename T>
-            void save(const std::vector<T>& v, const std::string& object_name)
+            void save(const std::vector<T>& v, const std::string& object_name) const
             {
                 _create_directory();
 
@@ -47,7 +47,7 @@ namespace limbo {
 
             /// load an Eigen matrix (or vector)
             template <typename M>
-            void load(M& m, const std::string& object_name)
+            void load(M& m, const std::string& object_name) const
             {
                 std::ifstream in(fname(object_name).c_str(), std::ios::in | std::ios::binary);
                 _read_binary(in, m);
@@ -56,7 +56,7 @@ namespace limbo {
 
             /// load a vector of Eigen::Vector*
             template <typename V>
-            void load(std::vector<V>& m_list, const std::string& object_name)
+            void load(std::vector<V>& m_list, const std::string& object_name) const
             {
                 m_list.clear();
 
@@ -81,16 +81,15 @@ namespace limbo {
 
         protected:
             std::string _dir_name;
-            Eigen::IOFormat _fmt;
 
-            void _create_directory()
+            void _create_directory() const
             {
                 boost::filesystem::path my_path(_dir_name);
                 boost::filesystem::create_directory(my_path);
             }
 
             template <class Matrix, class Stream>
-            void _write_binary(Stream& out, const Matrix& matrix)
+            void _write_binary(Stream& out, const Matrix& matrix) const
             {
                 typename Matrix::Index rows = matrix.rows(), cols = matrix.cols();
                 out.write((char*)(&rows), sizeof(typename Matrix::Index));
@@ -99,7 +98,7 @@ namespace limbo {
             }
 
             template <class Matrix, class Stream>
-            void _read_binary(Stream& in, Matrix& matrix)
+            void _read_binary(Stream& in, Matrix& matrix) const
             {
                 typename Matrix::Index rows = 0, cols = 0;
                 in.read((char*)(&rows), sizeof(typename Matrix::Index));

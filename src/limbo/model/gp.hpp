@@ -428,7 +428,7 @@ namespace limbo {
 
             /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
-            void save(A& archive)
+            void save(const A& archive)
             {
                 if (_kernel_function.h_params_size() > 0) {
                     archive.save(_kernel_function.h_params(), "kernel_params");
@@ -446,13 +446,13 @@ namespace limbo {
             template <typename A>
             void load(const std::string& directory, bool recompute = true)
             {
-                A archive(directory, recompute);
-                load(archive);
+                A archive(directory);
+                load(archive, recompute);
             }
 
             /// load the parameters and the data for the GP from the archive (text or binary)
             template <typename A>
-            void load(A& archive, bool recompute = true)
+            void load(const A& archive, bool recompute = true)
             {
                 _samples.clear();
                 archive.load(_samples, "samples");

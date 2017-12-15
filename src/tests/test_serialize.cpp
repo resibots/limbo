@@ -106,11 +106,12 @@ void test_gp(const std::string& name, bool optimize_hp = true)
     // attempt to save
     Archive a1(name);
     gp.save(a1);
+    // We can also save like this
+    // gp.template save<Archive>(name);
 
-    // attempt to load
+    // attempt to load -- use only the name
     GP gp2(3, 1);
-    Archive a2(name);
-    gp2.load(a2);
+    gp2.template load<Archive>(name);
 
     BOOST_CHECK_EQUAL(gp.nb_samples(), gp2.nb_samples());
 

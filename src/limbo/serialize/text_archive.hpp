@@ -18,7 +18,7 @@ namespace limbo {
                                                        _fmt(Eigen::FullPrecision, Eigen::DontAlignCols, " ", "\n", "", "") {}
 
             /// write an Eigen::Matrix*
-            void save(const Eigen::MatrixXd& v, const std::string& object_name)
+            void save(const Eigen::MatrixXd& v, const std::string& object_name) const
             {
                 _create_directory();
                 std::ofstream ofs(fname(object_name).c_str());
@@ -27,7 +27,7 @@ namespace limbo {
 
             /// write a vector of Eigen::Vector*
             template <typename T>
-            void save(const std::vector<T>& v, const std::string& object_name)
+            void save(const std::vector<T>& v, const std::string& object_name) const
             {
                 _create_directory();
                 std::ofstream ofs(fname(object_name).c_str());
@@ -38,7 +38,7 @@ namespace limbo {
 
             /// load an Eigen matrix (or vector)
             template <typename M>
-            void load(M& m, const std::string& object_name)
+            void load(M& m, const std::string& object_name) const
             {
                 auto values = _load(object_name);
                 m.resize(values.size(), values[0].size());
@@ -49,7 +49,7 @@ namespace limbo {
 
             /// load a vector of Eigen::Vector*
             template <typename V>
-            void load(std::vector<V>& m_list, const std::string& object_name)
+            void load(std::vector<V>& m_list, const std::string& object_name) const
             {
                 m_list.clear();
                 auto values = _load(object_name);
@@ -72,13 +72,13 @@ namespace limbo {
             std::string _dir_name;
             Eigen::IOFormat _fmt;
 
-            void _create_directory()
+            void _create_directory() const
             {
                 boost::filesystem::path my_path(_dir_name);
                 boost::filesystem::create_directory(my_path);
             }
 
-            std::vector<std::vector<double>> _load(const std::string& object_name)
+            std::vector<std::vector<double>> _load(const std::string& object_name) const
             {
                 std::ifstream ifs(fname(object_name).c_str());
                 assert(ifs.good() && "file not found");
