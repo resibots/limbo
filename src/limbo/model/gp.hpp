@@ -418,6 +418,13 @@ namespace limbo {
 
             bool inv_kernel_computed() { return _inv_kernel_updated; }
 
+            /// TODO
+            template <typename A>
+            void save(const std::string& directory){
+                A archive(directory);
+                save(archive);
+            }
+
             /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
             void save(A& archive)
@@ -427,6 +434,13 @@ namespace limbo {
                 // archive.save(_mean_function.h_params(), "mean_params");
                 archive.save(_samples, "samples");
                 archive.save(_observations, "observations");
+            }
+
+            /// TODO
+            template<typename A>
+            void load(const std::string& directory){
+                A archive(directory);
+                load(archive);
             }
 
             /// load the parameters and the data for the GP from the archive (text or binary)
