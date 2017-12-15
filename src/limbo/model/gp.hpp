@@ -418,9 +418,10 @@ namespace limbo {
 
             bool inv_kernel_computed() { return _inv_kernel_updated; }
 
-            /// TODO
+            /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
-            void save(const std::string& directory){
+            void save(const std::string& directory)
+            {
                 A archive(directory);
                 save(archive);
             }
@@ -429,28 +430,30 @@ namespace limbo {
             template <typename A>
             void save(A& archive)
             {
-                archive.save(_kernel_function.h_params(), "kernel_params");
-                // should we save parameters of the mean function as well?
-                // archive.save(_mean_function.h_params(), "mean_params");
+                if (_kernel_function.h_params_size() > 0) {
+                    archive.save(_kernel_function.h_params(), "kernel_params");
+                }
+                if (_mean_function.h_params_size() > 0) {
+                    archive.save(_mean_function.h_params(), "mean_params");
+                }
                 archive.save(_samples, "samples");
                 archive.save(_observations, "observations");
+                archive.save(_matrixL, "matrixL");
+                archive.save(_alpha, "alpha");
             }
 
-            /// TODO
-            template<typename A>
-            void load(const std::string& directory){
-                A archive(directory);
+            /// load the parameters and the data for the GP from the archive (text or binary)
+            template <typename A>
+            void load(const std::string& directory, bool recompute = true)
+            {
+                A archive(directory, recompute);
                 load(archive);
             }
 
             /// load the parameters and the data for the GP from the archive (text or binary)
             template <typename A>
-            void load(A& archive)
+            void load(A& archive, bool recompute = true)
             {
-                Eigen::VectorXd h_params;
-                archive.load(h_params, "kernel_params");
-
-                // should we save parameters of the mean function as well?
                 _samples.clear();
                 archive.load(_samples, "samples");
 
@@ -459,15 +462,31 @@ namespace limbo {
                 _dim_in = _samples[0].size();
                 _kernel_function = KernelFunction(_dim_in);
 
-                assert(h_params.size() == _kernel_function.h_params().size());
-                _kernel_function.set_h_params(h_params);
+                if (_kernel_function.h_params_size() > 0) {
+                    Eigen::VectorXd h_params;
+                    archive.load(h_params, "kernel_params");
+                    assert(h_params.size() == (int)_kernel_function.h_params_size());
+                    _kernel_function.set_h_params(h_params);
+                }
 
                 _dim_out = _observations.cols();
                 _mean_function = MeanFunction(_dim_out);
 
+                if (_mean_function.h_params_size() > 0) {
+                    Eigen::VectorXd h_params;
+                    archive.load(h_params, "mean_params");
+                    assert(h_params.size() == (int)_mean_function.h_params_size());
+                    _mean_function.set_h_params(h_params);
+                }
+
                 _mean_observation = _observations.colwise().mean();
 
-                recompute(true, true);
+                if (recompute)
+                    this->recompute(true, true);
+                else {
+                    archive.load(_matrixL, "matrixL");
+                    archive.load(_alpha, "alpha");
+                }
             }
 
         protected:

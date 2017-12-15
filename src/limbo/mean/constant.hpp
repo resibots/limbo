@@ -46,9 +46,7 @@
 #ifndef LIMBO_MEAN_CONSTANT_HPP
 #define LIMBO_MEAN_CONSTANT_HPP
 
-#include <Eigen/Core>
-
-#include <limbo/tools/macros.hpp>
+#include <limbo/mean/mean.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -56,7 +54,8 @@ namespace limbo {
             ///@ingroup mean_defaults
             BO_PARAM(double, constant, 1);
         };
-    }
+    } // namespace defaults
+
     namespace mean {
         /** @ingroup mean
           A constant mean (the traditionnal choice for Bayesian optimization)
@@ -65,7 +64,7 @@ namespace limbo {
             - ``double constant`` (the value of the constant)
         */
         template <typename Params>
-        struct Constant {
+        struct Constant : public BaseMean<Params> {
             Constant(size_t dim_out = 1) : _dim_out(dim_out) {}
 
             template <typename GP>
@@ -77,7 +76,7 @@ namespace limbo {
         protected:
             size_t _dim_out;
         };
-    }
-}
+    } // namespace mean
+} // namespace limbo
 
 #endif

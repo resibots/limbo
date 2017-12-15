@@ -57,7 +57,7 @@ namespace limbo {
             BO_PARAM(double, noise, 0.01);
             BO_PARAM(bool, optimize_noise, false);
         };
-    }
+    } // namespace defaults
 
     namespace kernel {
         /**
@@ -128,8 +128,20 @@ namespace limbo {
         protected:
             double _noise;
             double _noise_p;
+
+            virtual size_t params_size() const
+            {
+                return 0;
+            }
+
+            virtual Eigen::VectorXd params() const
+            {
+                return Eigen::VectorXd();
+            }
+
+            virtual void set_params(const Eigen::VectorXd&) {}
         };
-    }
-}
+    } // namespace kernel
+} // namespace limbo
 
 #endif

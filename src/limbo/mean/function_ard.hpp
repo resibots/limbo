@@ -46,7 +46,7 @@
 #ifndef LIMBO_MEAN_FUNCTION_ARD_HPP
 #define LIMBO_MEAN_FUNCTION_ARD_HPP
 
-#include <Eigen/Core>
+#include <limbo/mean/mean.hpp>
 
 namespace limbo {
     namespace mean {
@@ -55,7 +55,7 @@ namespace limbo {
         ///
         /// @see limbo::model::gp::KernelMeanLFOpt, limbo::model::gp::MeanLFOpt
         template <typename Params, typename MeanFunction>
-        struct FunctionARD {
+        struct FunctionARD : public BaseMean<Params> {
             FunctionARD(size_t dim_out = 1)
                 : _mean_function(dim_out), _tr(dim_out, dim_out + 1)
             {
@@ -67,7 +67,7 @@ namespace limbo {
 
             size_t h_params_size() const { return _tr.rows() * _tr.cols(); }
 
-            const Eigen::VectorXd& h_params() const { return _h_params; }
+            Eigen::VectorXd h_params() const { return _h_params; }
 
             void set_h_params(const Eigen::VectorXd& p)
             {

@@ -51,7 +51,10 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <limbo/mean/constant.hpp>
+#include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp.hpp>
+#include <limbo/model/gp/mean_lf_opt.hpp>
 #include <limbo/serialize/binary_archive.hpp>
 #include <limbo/serialize/text_archive.hpp>
 
@@ -68,9 +71,19 @@ struct Params {
     };
     struct opt_parallelrepeater : public limbo::defaults::opt_parallelrepeater {
     };
+
+    struct kernel_maternfivehalves {
+        BO_PARAM(double, sigma_sq, 1);
+        BO_PARAM(double, l, 1);
+    };
+
+    struct mean_constant {
+        BO_PARAM(double, constant, 1);
+    };
 };
 
-BOOST_AUTO_TEST_CASE(test_text_archive)
+template <typename GP, typename Archive>
+void test_gp(const std::string& name, bool optimize_hp = true)
 {
     using namespace limbo;
 
@@ -85,17 +98,18 @@ BOOST_AUTO_TEST_CASE(test_text_archive)
         observations.push_back(tools::make_vector(std::cos(s(0) * s(1) * s(2))));
     }
     // 3-D inputs, 1-D outputs
-    model::GPOpt<Params> gp(3, 1);
+    GP gp(3, 1);
     gp.compute(samples, observations);
-    gp.optimize_hyperparams();
+    if (optimize_hp)
+        gp.optimize_hyperparams();
 
     // attempt to save
-    serialize::TextArchive a1("/tmp/test_model_text");
+    Archive a1(name);
     gp.save(a1);
 
     // attempt to load
-    model::GPOpt<Params> gp2(3, 1);
-    serialize::TextArchive a2("/tmp/test_model_text");
+    GP gp2(3, 1);
+    Archive a2(name);
     gp2.load(a2);
 
     BOOST_CHECK_EQUAL(gp.nb_samples(), gp2.nb_samples());
@@ -106,48 +120,41 @@ BOOST_AUTO_TEST_CASE(test_text_archive)
         Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
         auto v1 = gp.query(s);
         auto v2 = gp2.query(s);
+        BOOST_CHECK_SMALL(std::abs(std::get<0>(v1)[0] - std::get<0>(v2)[0]), 1e-10);
+        BOOST_CHECK_SMALL(std::abs(std::get<1>(v1) - std::get<1>(v2)), 1e-10);
+    }
+
+    // attempt to load without recomputing
+    GP gp3(3, 1);
+    Archive a3(name);
+    gp3.load(a3, false);
+
+    BOOST_CHECK_EQUAL(gp.nb_samples(), gp3.nb_samples());
+
+    // check that the two GPs make the same predictions
+    for (size_t i = 0; i < k; i++) {
+        Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
+        auto v1 = gp.query(s);
+        auto v2 = gp3.query(s);
         BOOST_CHECK_SMALL(std::abs(std::get<0>(v1)[0] - std::get<0>(v2)[0]), 1e-10);
         BOOST_CHECK_SMALL(std::abs(std::get<1>(v1) - std::get<1>(v2)), 1e-10);
     }
 }
 
+BOOST_AUTO_TEST_CASE(test_text_archive)
+{
+    test_gp<limbo::model::GPOpt<Params>, limbo::serialize::TextArchive>("/tmp/gp_opt_text");
+    test_gp<limbo::model::GPBasic<Params>, limbo::serialize::TextArchive>("/tmp/gp_basic_text", false);
+
+    using GPMean = limbo::model::GP<Params, limbo::kernel::MaternFiveHalves<Params>, limbo::mean::FunctionARD<Params, limbo::mean::Constant<Params>>, limbo::model::gp::MeanLFOpt<Params>>;
+    test_gp<GPMean, limbo::serialize::TextArchive>("/tmp/gp_mean_text");
+}
+
 BOOST_AUTO_TEST_CASE(test_bin_archive)
 {
-    using namespace limbo;
+    test_gp<limbo::model::GPOpt<Params>, limbo::serialize::BinaryArchive>("/tmp/gp_opt_bin");
+    test_gp<limbo::model::GPBasic<Params>, limbo::serialize::BinaryArchive>("/tmp/gp_basic_bin", false);
 
-    // our data (3-D inputs, 1-D outputs)
-    std::vector<Eigen::VectorXd> samples;
-    std::vector<Eigen::VectorXd> observations;
-
-    size_t n = 8;
-    for (size_t i = 0; i < n; i++) {
-        Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
-        samples.push_back(s);
-        observations.push_back(tools::make_vector(std::cos(s(0) * s(1) * s(2))));
-    }
-    // 3-D inputs, 1-D outputs
-    model::GPOpt<Params> gp(3, 1);
-    gp.compute(samples, observations);
-    gp.optimize_hyperparams();
-
-    // attempt to save
-    serialize::BinaryArchive a1("/tmp/test_model_bin");
-    gp.save(a1);
-
-    // attempt to load
-    model::GPOpt<Params> gp2(3, 1);
-    serialize::BinaryArchive a2("/tmp/test_model_bin");
-    gp2.load(a2);
-
-    BOOST_CHECK_EQUAL(gp.nb_samples(), gp2.nb_samples());
-
-    // check that the two GPs make the same predictions
-    size_t k = 1000;
-    for (size_t i = 0; i < k; i++) {
-        Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
-        auto v1 = gp.query(s);
-        auto v2 = gp2.query(s);
-        BOOST_CHECK_SMALL(std::abs(std::get<0>(v1)[0] - std::get<0>(v2)[0]), 1e-10);
-        BOOST_CHECK_SMALL(std::abs(std::get<1>(v1) - std::get<1>(v2)), 1e-10);
-    }
+    using GPMean = limbo::model::GP<Params, limbo::kernel::MaternFiveHalves<Params>, limbo::mean::FunctionARD<Params, limbo::mean::Constant<Params>>, limbo::model::gp::MeanLFOpt<Params>>;
+    test_gp<GPMean, limbo::serialize::BinaryArchive>("/tmp/gp_mean_bin");
 }
