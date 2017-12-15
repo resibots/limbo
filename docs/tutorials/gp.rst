@@ -117,7 +117,7 @@ We can also save our optimized GP model:
    :linenos:
    :lines: 140-141
 
-If we want a binary format (i.e., more compact), we can replace the ``TextArchive`` by ``BinaryArchive``.
+This will create a directory called ``myGP`` with several files (the GP data, kernel hyperparameters etc.). If we want a binary format (i.e., more compact), we can replace the ``TextArchive`` by ``BinaryArchive``.
 
 To the load a saved model, we can do the following:
 
