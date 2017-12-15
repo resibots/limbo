@@ -61,19 +61,11 @@ namespace limbo {
         struct BaseMean {
             BaseMean(size_t dim_out = 1) : _dim_out(dim_out) {}
 
-            template <typename GP>
-            Eigen::VectorXd operator()(const Eigen::VectorXd& v, const GP&) const
-            {
-                std::cerr << "'BaseMean' should never be called!" << std::endl;
-                assert(false);
-                return Eigen::VectorXd();
-            }
+            size_t h_params_size() const { return 0; }
 
-            virtual size_t h_params_size() const { return 0; }
+            Eigen::VectorXd h_params() const { return Eigen::VectorXd(); }
 
-            virtual Eigen::VectorXd h_params() const { return Eigen::VectorXd(); }
-
-            virtual void set_h_params(const Eigen::VectorXd& p) {}
+            void set_h_params(const Eigen::VectorXd& p) {}
 
         protected:
             size_t _dim_out;

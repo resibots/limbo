@@ -129,17 +129,17 @@ namespace limbo {
             double _noise;
             double _noise_p;
 
-            virtual size_t params_size() const
+            size_t params_size() const
             {
                 return 0;
             }
 
-            virtual Eigen::VectorXd params() const
+            Eigen::VectorXd params() const
             {
                 return Eigen::VectorXd();
             }
 
-            virtual void set_params(const Eigen::VectorXd&) {}
+            void set_params(const Eigen::VectorXd&) {}
         };
     } // namespace kernel
 } // namespace limbo
