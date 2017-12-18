@@ -67,6 +67,13 @@ namespace limbo {
 
             void set_h_params(const Eigen::VectorXd& p) {}
 
+            template <typename GP>
+            Eigen::MatrixXd grad(const Eigen::VectorXd& x, const GP& gp) const
+            {
+                // This should never be called!
+                assert(false);
+            }
+
         protected:
             size_t _dim_out;
         };
