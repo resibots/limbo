@@ -129,17 +129,19 @@ namespace limbo {
             double _noise;
             double _noise_p;
 
-            size_t params_size() const
-            {
-                return 0;
-            }
+            // Functions for compilation issues
+            // They should never be called like this
+            size_t params_size() const { return 0; }
 
-            Eigen::VectorXd params() const
-            {
-                return Eigen::VectorXd();
-            }
+            Eigen::VectorXd params() const { return Eigen::VectorXd(); }
 
-            void set_params(const Eigen::VectorXd&) {}
+            void set_params(const Eigen::VectorXd& p) {}
+
+            Eigen::VectorXd gradient(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
+            {
+                // This should never be called!
+                assert(false);
+            }
         };
     } // namespace kernel
 } // namespace limbo

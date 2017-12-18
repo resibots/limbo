@@ -56,7 +56,7 @@ namespace limbo {
             /// @ingroup kernel_defaults
             BO_PARAM(double, l, 1);
         };
-    }
+    } // namespace defaults
     namespace kernel {
         /**
           @ingroup kernel
@@ -82,21 +82,42 @@ namespace limbo {
         */
         template <typename Params>
         struct MaternFiveHalves : public BaseKernel<Params, MaternFiveHalves<Params>> {
-            MaternFiveHalves(size_t dim = 1) {}
+            MaternFiveHalves(size_t dim = 1) : _sf2(Params::kernel_maternfivehalves::sigma_sq()), _l(Params::kernel_maternfivehalves::l())
+            {
+                _h_params = Eigen::VectorXd(2);
+                _h_params << std::log(_l), std::log(std::sqrt(_sf2));
+            }
+
+            size_t params_size() const { return 2; }
+
+            // Return the hyper parameters in log-space
+            Eigen::VectorXd params() const { return _h_params; }
+
+            // We expect the input parameters to be in log-space
+            void set_params(const Eigen::VectorXd& p)
+            {
+                _h_params = p;
+                _l = std::exp(p(0));
+                _sf2 = std::exp(2.0 * p(1));
+            }
 
             double kernel(const Eigen::VectorXd& v1, const Eigen::VectorXd& v2) const
             {
                 double d = (v1 - v2).norm();
                 double d_sq = d * d;
-                double l = Params::kernel_maternfivehalves::l();
-                double l_sq = l * l;
-                double term1 = std::sqrt(5) * d / l;
+                double l_sq = _l * _l;
+                double term1 = std::sqrt(5) * d / _l;
                 double term2 = 5. * d_sq / (3. * l_sq);
 
-                return Params::kernel_maternfivehalves::sigma_sq() * (1 + term1 + term2) * std::exp(-term1);
+                return _sf2 * (1 + term1 + term2) * std::exp(-term1);
             }
+
+        protected:
+            double _sf2, _l;
+
+            Eigen::VectorXd _h_params;
         };
-    }
-}
+    } // namespace kernel
+} // namespace limbo
 
 #endif

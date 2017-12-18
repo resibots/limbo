@@ -53,6 +53,7 @@ namespace limbo {
 
         /// Functor used to optimize the mean function using the maximum likelihood principle
         ///
+        /// For the moment, it ignores the hyperparameters of the underlying mean function, if any
         /// @see limbo::model::gp::KernelMeanLFOpt, limbo::model::gp::MeanLFOpt
         template <typename Params, typename MeanFunction>
         struct FunctionARD : public BaseMean<Params> {
@@ -104,7 +105,7 @@ namespace limbo {
             Eigen::MatrixXd _tr;
             Eigen::VectorXd _h_params;
         };
-    }
-}
+    } // namespace mean
+} // namespace limbo
 
 #endif

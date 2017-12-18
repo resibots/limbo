@@ -443,6 +443,8 @@ namespace limbo {
             }
 
             /// load the parameters and the data for the GP from the archive (text or binary)
+            /// if recompute is true, we do not read the kernel matrix
+            /// but we recompute it given the data and the hyperparameters
             template <typename A>
             void load(const std::string& directory, bool recompute = true)
             {
@@ -451,6 +453,8 @@ namespace limbo {
             }
 
             /// load the parameters and the data for the GP from the archive (text or binary)
+            /// if recompute is true, we do not read the kernel matrix
+            /// but we recompute it given the data and the hyperparameters
             template <typename A>
             void load(const A& archive, bool recompute = true)
             {

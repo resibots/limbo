@@ -82,7 +82,33 @@ struct Params {
     };
 };
 
-template <typename GP, typename Archive>
+// Different parameters in load to test
+struct LoadParams {
+    struct kernel_exp {
+        BO_PARAM(double, sigma_sq, 10.0);
+        BO_PARAM(double, l, 1.);
+    };
+    struct kernel : public limbo::defaults::kernel {
+    };
+    struct kernel_squared_exp_ard : public limbo::defaults::kernel_squared_exp_ard {
+        BO_PARAM(double, sigma_sq, 10.0);
+    };
+    struct opt_rprop : public limbo::defaults::opt_rprop {
+    };
+    struct opt_parallelrepeater : public limbo::defaults::opt_parallelrepeater {
+    };
+
+    struct kernel_maternfivehalves {
+        BO_PARAM(double, sigma_sq, 2.);
+        BO_PARAM(double, l, 0.1);
+    };
+
+    struct mean_constant {
+        BO_PARAM(double, constant, -1);
+    };
+};
+
+template <typename GP, typename GPLoad, typename Archive>
 void test_gp(const std::string& name, bool optimize_hp = true)
 {
     using namespace limbo;
@@ -110,7 +136,7 @@ void test_gp(const std::string& name, bool optimize_hp = true)
     // gp.template save<Archive>(name);
 
     // attempt to load -- use only the name
-    GP gp2(3, 1);
+    GPLoad gp2(3, 1);
     gp2.template load<Archive>(name);
 
     BOOST_CHECK_EQUAL(gp.nb_samples(), gp2.nb_samples());
@@ -126,7 +152,7 @@ void test_gp(const std::string& name, bool optimize_hp = true)
     }
 
     // attempt to load without recomputing
-    GP gp3(3, 1);
+    GPLoad gp3(3, 1);
     Archive a3(name);
     gp3.load(a3, false);
 
@@ -144,18 +170,20 @@ void test_gp(const std::string& name, bool optimize_hp = true)
 
 BOOST_AUTO_TEST_CASE(test_text_archive)
 {
-    test_gp<limbo::model::GPOpt<Params>, limbo::serialize::TextArchive>("/tmp/gp_opt_text");
-    test_gp<limbo::model::GPBasic<Params>, limbo::serialize::TextArchive>("/tmp/gp_basic_text", false);
+    test_gp<limbo::model::GPOpt<Params>, limbo::model::GPOpt<LoadParams>, limbo::serialize::TextArchive>("/tmp/gp_opt_text");
+    test_gp<limbo::model::GPBasic<Params>, limbo::model::GPBasic<LoadParams>, limbo::serialize::TextArchive>("/tmp/gp_basic_text", false);
 
-    using GPMean = limbo::model::GP<Params, limbo::kernel::MaternFiveHalves<Params>, limbo::mean::FunctionARD<Params, limbo::mean::Constant<Params>>, limbo::model::gp::MeanLFOpt<Params>>;
-    test_gp<GPMean, limbo::serialize::TextArchive>("/tmp/gp_mean_text");
+    using GPMean = limbo::model::GP<Params, limbo::kernel::MaternFiveHalves<Params>, limbo::mean::Constant<Params>, limbo::model::gp::MeanLFOpt<Params>>;
+    using GPMeanLoad = limbo::model::GP<LoadParams, limbo::kernel::MaternFiveHalves<LoadParams>, limbo::mean::Constant<LoadParams>, limbo::model::gp::MeanLFOpt<LoadParams>>;
+    test_gp<GPMean, GPMeanLoad, limbo::serialize::TextArchive>("/tmp/gp_mean_text");
 }
 
 BOOST_AUTO_TEST_CASE(test_bin_archive)
 {
-    test_gp<limbo::model::GPOpt<Params>, limbo::serialize::BinaryArchive>("/tmp/gp_opt_bin");
-    test_gp<limbo::model::GPBasic<Params>, limbo::serialize::BinaryArchive>("/tmp/gp_basic_bin", false);
+    test_gp<limbo::model::GPOpt<Params>, limbo::model::GPOpt<LoadParams>, limbo::serialize::BinaryArchive>("/tmp/gp_opt_bin");
+    test_gp<limbo::model::GPBasic<Params>, limbo::model::GPBasic<LoadParams>, limbo::serialize::BinaryArchive>("/tmp/gp_basic_bin", false);
 
-    using GPMean = limbo::model::GP<Params, limbo::kernel::MaternFiveHalves<Params>, limbo::mean::FunctionARD<Params, limbo::mean::Constant<Params>>, limbo::model::gp::MeanLFOpt<Params>>;
-    test_gp<GPMean, limbo::serialize::BinaryArchive>("/tmp/gp_mean_bin");
+    using GPMean = limbo::model::GP<Params, limbo::kernel::MaternFiveHalves<Params>, limbo::mean::Constant<Params>, limbo::model::gp::MeanLFOpt<Params>>;
+    using GPMeanLoad = limbo::model::GP<LoadParams, limbo::kernel::MaternFiveHalves<LoadParams>, limbo::mean::Constant<LoadParams>, limbo::model::gp::MeanLFOpt<LoadParams>>;
+    test_gp<GPMean, GPMeanLoad, limbo::serialize::BinaryArchive>("/tmp/gp_mean_bin");
 }
