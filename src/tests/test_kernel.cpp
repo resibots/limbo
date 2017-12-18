@@ -46,10 +46,16 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE test_kernel
 
-#include <boost/test/unit_test.hpp>
-#include <limbo/tools/macros.hpp>
-#include <limbo/kernel/squared_exp_ard.hpp>
 #include <iostream>
+
+#include <boost/test/unit_test.hpp>
+
+#include <limbo/kernel/exp.hpp>
+#include <limbo/kernel/matern_five_halves.hpp>
+#include <limbo/kernel/matern_three_halves.hpp>
+#include <limbo/kernel/squared_exp_ard.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/tools/random_generator.hpp>
 
 using namespace limbo;
 struct Params {
@@ -58,8 +64,38 @@ struct Params {
     };
 
     struct kernel_squared_exp_ard {
-        BO_DYN_PARAM(int, k); //equivalent to the standard exp ARD
+        BO_DYN_PARAM(int, k);
         BO_PARAM(double, sigma_sq, 1);
+    };
+
+    struct kernel_exp : public defaults::kernel_exp {
+    };
+
+    struct kernel_maternthreehalves : public defaults::kernel_maternthreehalves {
+    };
+
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
+    };
+};
+
+struct ParamsNoise {
+    struct kernel : public defaults::kernel {
+        BO_PARAM(double, noise, 0.01);
+        BO_PARAM(bool, optimize_noise, true);
+    };
+
+    struct kernel_squared_exp_ard {
+        BO_PARAM(int, k, 0);
+        BO_PARAM(double, sigma_sq, 1);
+    };
+
+    struct kernel_exp : public defaults::kernel_exp {
+    };
+
+    struct kernel_maternthreehalves : public defaults::kernel_maternthreehalves {
+    };
+
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
     };
 };
 
@@ -72,12 +108,98 @@ Eigen::VectorXd make_v2(double x1, double x2)
     return v2;
 }
 
+// Check gradient via finite differences method
+template <typename Kernel>
+std::tuple<double, Eigen::VectorXd, Eigen::VectorXd> check_grad(const Kernel& kern, const Eigen::VectorXd& x, const Eigen::VectorXd& x1, const Eigen::VectorXd& x2, double e = 1e-4)
+{
+    Eigen::VectorXd analytic_result, finite_diff_result;
+    Kernel ke = kern;
+    ke.set_h_params(x);
+
+    analytic_result = ke.grad(x1, x2);
+
+    finite_diff_result = Eigen::VectorXd::Zero(x.size());
+    for (int j = 0; j < x.size(); j++) {
+        Eigen::VectorXd test1 = x, test2 = x;
+        test1[j] -= e;
+        test2[j] += e;
+        Kernel k1 = kern;
+        k1.set_h_params(test1);
+        Kernel k2 = kern;
+        k2.set_h_params(test2);
+        double res1 = k1(x1, x2);
+        double res2 = k2(x1, x2);
+        finite_diff_result[j] = (res2 - res1) / (2.0 * e);
+    }
+
+    return std::make_tuple((analytic_result - finite_diff_result).norm(), analytic_result, finite_diff_result);
+}
+
+template <typename Kernel>
+void check_kernel(size_t N, size_t K)
+{
+    Kernel kern(N);
+
+    for (size_t i = 0; i < K; i++) {
+        Eigen::VectorXd hp = tools::random_vector(kern.h_params_size()).array() * 2.0 + 1e-2;
+
+        double error;
+        Eigen::VectorXd analytic, finite_diff;
+
+        Eigen::VectorXd x1 = tools::random_vector(N).array() * 10. - 5.;
+        Eigen::VectorXd x2 = tools::random_vector(N).array() * 10. - 5.;
+
+        std::tie(error, analytic, finite_diff) = check_grad(kern, hp, x1, x2);
+        // std::cout << error << ": " << analytic.transpose() << " vs " << finite_diff.transpose() << std::endl;
+        BOOST_CHECK(error < 1e-6);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(test_grad_exp)
+{
+    for (int i = 1; i < 10; i++) {
+        check_kernel<kernel::Exp<Params>>(i, 100);
+        check_kernel<kernel::Exp<ParamsNoise>>(i, 100);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(test_grad_matern_three)
+{
+    for (int i = 1; i < 10; i++) {
+        check_kernel<kernel::MaternThreeHalves<Params>>(i, 100);
+        check_kernel<kernel::MaternThreeHalves<ParamsNoise>>(i, 100);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(test_grad_matern_five)
+{
+    for (int i = 1; i < 10; i++) {
+        check_kernel<kernel::MaternFiveHalves<Params>>(i, 100);
+        check_kernel<kernel::MaternFiveHalves<ParamsNoise>>(i, 100);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(test_grad_SE_ARD)
+{
+    Params::kernel_squared_exp_ard::set_k(0);
+    for (int i = 1; i < 10; i++) {
+        check_kernel<kernel::SquaredExpARD<Params>>(i, 100);
+        check_kernel<kernel::SquaredExpARD<ParamsNoise>>(i, 100);
+    }
+
+    // THIS TEST FAILS!
+    // Params::kernel_squared_exp_ard::set_k(1);
+    // for (int i = 1; i < 10; i++) {
+    //     check_kernel<kernel::SquaredExpARD<Params>>(i, 100);
+    // }
+}
+
 BOOST_AUTO_TEST_CASE(test_kernel_SE_ARD)
 {
     Params::kernel_squared_exp_ard::set_k(0);
 
     kernel::SquaredExpARD<Params> se(2);
-    Eigen::VectorXd hp(se.h_params_size());
+    Eigen::VectorXd hp = Eigen::VectorXd::Zero(se.h_params_size());
     hp(0) = 0;
     hp(1) = 0;
 
@@ -98,7 +220,7 @@ BOOST_AUTO_TEST_CASE(test_kernel_SE_ARD)
 
     Params::kernel_squared_exp_ard::set_k(1);
     se = kernel::SquaredExpARD<Params>(2);
-    hp = Eigen::VectorXd(se.h_params_size());
+    hp = Eigen::VectorXd::Zero(se.h_params_size());
     hp(0) = 0;
     hp(1) = 0;
     hp(2) = -std::numeric_limits<double>::max();

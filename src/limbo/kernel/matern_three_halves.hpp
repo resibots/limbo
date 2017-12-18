@@ -107,6 +107,22 @@ namespace limbo {
                 return _sf2 * (1 + term) * std::exp(-term);
             }
 
+            Eigen::VectorXd gradient(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
+            {
+                Eigen::VectorXd grad(this->params_size());
+
+                double d = (x1 - x2).norm();
+                double term = std::sqrt(3) * d / _l;
+                double r = std::exp(-term);
+
+                // derivative of (1+term) = -term
+                // derivative of e^(-term) = term*r
+                grad(0) = _sf2 * (-term * r + (1 + term) * term * r);
+                grad(1) = 2 * _sf2 * (1 + term) * r;
+
+                return grad;
+            }
+
         protected:
             double _sf2, _l;
 

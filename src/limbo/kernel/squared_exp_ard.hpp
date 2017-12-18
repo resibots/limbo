@@ -56,7 +56,7 @@ namespace limbo {
             /// @ingroup kernel_defaults
             BO_PARAM(double, sigma_sq, 1);
         };
-    }
+    } // namespace defaults
 
     namespace kernel {
         /**
@@ -115,8 +115,8 @@ namespace limbo {
 
                     grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;
                     Eigen::MatrixXd G = -k * (x1 - x2) * (x1 - x2).transpose() * _A;
-                    for (size_t j = 0; j < Params::kernel_squared_exp_ard::k(); ++j)
-                        grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);
+                    for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
+                        grad.segment((j + 1) * _input_dim, _input_dim) = G.col(j);
 
                     grad(grad.size() - 1) = 2 * k;
 
@@ -157,7 +157,7 @@ namespace limbo {
             size_t _input_dim;
             Eigen::VectorXd _h_params;
         };
-    }
-}
+    } // namespace kernel
+} // namespace limbo
 
 #endif
