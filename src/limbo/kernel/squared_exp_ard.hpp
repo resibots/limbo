@@ -100,7 +100,7 @@ namespace limbo {
                     _ell(i) = std::exp(p(i));
                 for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
-                        _A(i, j) = std::exp(p((j + 1) * _input_dim + i));
+                        _A(i, j) = p((j + 1) * _input_dim + i);
                 _sf2 = std::exp(2.0 * p(params_size() - 1));
             }
 
@@ -116,7 +116,7 @@ namespace limbo {
                     grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;
 
                     for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j) {
-                        Eigen::MatrixXd G = -(x1 - x2).transpose() * _A.col(j) * (x1 - x2).cwiseProduct(_A.col(j)).array() * k;
+                        Eigen::MatrixXd G = -(x1 - x2).transpose() * _A.col(j) * (x1 - x2) * k;
                         grad.segment((j + 1) * _input_dim, _input_dim) = G;
                     }
 
