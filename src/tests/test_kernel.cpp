@@ -199,8 +199,6 @@ BOOST_AUTO_TEST_CASE(test_kernel_SE_ARD)
 
     kernel::SquaredExpARD<Params> se(2);
     Eigen::VectorXd hp = Eigen::VectorXd::Zero(se.h_params_size());
-    hp(0) = 0;
-    hp(1) = 0;
 
     se.set_h_params(hp);
 
@@ -220,10 +218,6 @@ BOOST_AUTO_TEST_CASE(test_kernel_SE_ARD)
     Params::kernel_squared_exp_ard::set_k(1);
     se = kernel::SquaredExpARD<Params>(2);
     hp = Eigen::VectorXd::Zero(se.h_params_size());
-    hp(0) = 0;
-    hp(1) = 0;
-    hp(2) = -std::numeric_limits<double>::max();
-    hp(3) = -std::numeric_limits<double>::max();
 
     se.set_h_params(hp);
     BOOST_CHECK(s1 == se(v1, v2));

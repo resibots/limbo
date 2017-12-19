@@ -116,7 +116,7 @@ namespace limbo {
                     grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;
 
                     for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j) {
-                        Eigen::MatrixXd G = -(x1 - x2).transpose() * _A.col(j) * (x1 - x2) * k;
+                        Eigen::VectorXd G = -((x1 - x2).transpose() * _A.col(j))(0) * (x1 - x2) * k;
                         grad.segment((j + 1) * _input_dim, _input_dim) = G;
                     }
 
