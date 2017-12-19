@@ -188,10 +188,11 @@ BOOST_AUTO_TEST_CASE(test_grad_SE_ARD)
     }
 
     // THIS TEST FAILS!
-    // Params::kernel_squared_exp_ard::set_k(1);
-    // for (int i = 1; i <= 10; i++) {
-    //     check_kernel<kernel::SquaredExpARD<Params>>(i, 100);
-    // }
+    std::cout << "START" << std::endl;
+    Params::kernel_squared_exp_ard::set_k(1);
+    for (int i = 1; i <= 10; i++) {
+        check_kernel<kernel::SquaredExpARD<Params>>(i, 100);
+    }
 }
 
 BOOST_AUTO_TEST_CASE(test_kernel_SE_ARD)

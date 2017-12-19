@@ -114,9 +114,11 @@ namespace limbo {
                     double k = _sf2 * std::exp(-0.5 * z);
 
                     grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;
-                    Eigen::MatrixXd G = -k * (x1 - x2).norm() * _A;
-                    for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
-                        grad.segment((j + 1) * _input_dim, _input_dim) = G.col(j);
+
+                    for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j) {
+                        Eigen::MatrixXd G = -(x1 - x2).transpose() * _A.col(j) * (x1 - x2).cwiseProduct(_A.col(j)) * k;
+                        grad.segment((j + 1) * _input_dim, _input_dim) = G;
+                    }
 
                     grad(grad.size() - 1) = 2 * k;
 
