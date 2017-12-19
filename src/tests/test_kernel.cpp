@@ -136,7 +136,7 @@ std::tuple<double, Eigen::VectorXd, Eigen::VectorXd> check_grad(const Kernel& ke
 }
 
 template <typename Kernel>
-void check_kernel(size_t N, size_t K)
+void check_kernel(size_t N, size_t K, double e = 1e-4)
 {
     Kernel kern(N);
 
@@ -149,8 +149,8 @@ void check_kernel(size_t N, size_t K)
         Eigen::VectorXd x1 = tools::random_vector(N).array() * 10. - 5.;
         Eigen::VectorXd x2 = tools::random_vector(N).array() * 10. - 5.;
 
-        std::tie(error, analytic, finite_diff) = check_grad(kern, hp, x1, x2);
-        std::cout << error << ": " << analytic.transpose() << " vs " << finite_diff.transpose() << std::endl;
+        std::tie(error, analytic, finite_diff) = check_grad(kern, hp, x1, x2, e);
+        // std::cout << error << ": " << analytic.transpose() << " vs " << finite_diff.transpose() << std::endl;
         BOOST_CHECK(error < 1e-6);
     }
 }
@@ -187,11 +187,9 @@ BOOST_AUTO_TEST_CASE(test_grad_SE_ARD)
         check_kernel<kernel::SquaredExpARD<ParamsNoise>>(i, 100);
     }
 
-    // THIS TEST FAILS!
-    std::cout << "START" << std::endl;
     Params::kernel_squared_exp_ard::set_k(1);
     for (int i = 1; i <= 10; i++) {
-        check_kernel<kernel::SquaredExpARD<Params>>(i, 100);
+        check_kernel<kernel::SquaredExpARD<Params>>(i, 100, 1e-6);
     }
 }
 
