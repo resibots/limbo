@@ -50,15 +50,15 @@
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/acqui/ucb.hpp>
+#include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/kernel/matern_three_halves.hpp>
-#include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/constant.hpp>
 #include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp.hpp>
-#include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
+#include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
 #include <limbo/model/gp/mean_lf_opt.hpp>
 #include <limbo/opt/grid_search.hpp>
@@ -152,9 +152,9 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4 + 1));
-        test_samples_mean.push_back(tools::random_vector(6));
-        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4 + 1));
+        test_samples.push_back(tools::random_vector(gp.kernel_function().h_params_size()));
+        test_samples_mean.push_back(tools::random_vector(gp.mean_function().h_params_size()));
+        test_samples_kernel_mean.push_back(tools::random_vector(gp.kernel_function().h_params_size() + gp.mean_function().h_params_size()));
     }
 
     gp.compute(samples, observations);
@@ -244,8 +244,8 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4 + 2));
-        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4 + 2));
+        test_samples.push_back(tools::random_vector(gp.kernel_function().h_params_size()));
+        test_samples_kernel_mean.push_back(tools::random_vector(gp.kernel_function().h_params_size() + gp.mean_function().h_params_size()));
     }
 
     gp.compute(samples, observations);
@@ -297,7 +297,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_loo_grad)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4 + 1));
+        test_samples.push_back(tools::random_vector(gp.kernel_function().h_params_size()));
     }
 
     gp.compute(samples, observations);
@@ -367,7 +367,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_loo_grad_noise)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4 + 2));
+        test_samples.push_back(tools::random_vector(gp.kernel_function().h_params_size()));
     }
 
     gp.compute(samples, observations);

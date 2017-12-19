@@ -52,6 +52,7 @@
 
 #include <limbo/mean/constant.hpp>
 #include <limbo/mean/function_ard.hpp>
+#include <limbo/mean/null_function.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/random_generator.hpp>
 
@@ -103,21 +104,32 @@ void check_mean(size_t N, size_t K)
         Eigen::VectorXd v = tools::random_vector(N).array() * 10. - 5.;
 
         std::tie(error, analytic, finite_diff) = check_grad(mean, hp, v);
-        // std::cout << error << ": " << analytic.transpose() << " vs " << finite_diff.transpose() << std::endl;
+        // std::cout << error << ": " << analytic << " vs " << finite_diff << std::endl;
         BOOST_CHECK(error < 1e-6);
     }
 }
 
 BOOST_AUTO_TEST_CASE(test_mean_constant)
 {
-    for (int i = 1; i < 10; i++) {
+    for (int i = 1; i <= 10; i++) {
         check_mean<mean::Constant<Params>>(i, 100);
     }
 }
 
 BOOST_AUTO_TEST_CASE(test_mean_function_ard)
 {
-    for (int i = 1; i < 10; i++) {
+    // This test checks the gradients computation of FunctionARD when the base mean function
+    // also has tunable parameters
+    for (int i = 1; i <= 10; i++) {
         check_mean<mean::FunctionARD<Params, mean::Constant<Params>>>(i, 100);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(test_mean_function_ard_dummy)
+{
+    // This test checks the gradients computation of FunctionARD when the base mean function
+    // has no tunable parameters
+    for (int i = 1; i <= 10; i++) {
+        check_mean<mean::FunctionARD<Params, mean::NullFunction<Params>>>(i, 100);
     }
 }

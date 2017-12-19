@@ -157,7 +157,7 @@ void check_kernel(size_t N, size_t K)
 
 BOOST_AUTO_TEST_CASE(test_grad_exp)
 {
-    for (int i = 1; i < 10; i++) {
+    for (int i = 1; i <= 10; i++) {
         check_kernel<kernel::Exp<Params>>(i, 100);
         check_kernel<kernel::Exp<ParamsNoise>>(i, 100);
     }
@@ -165,7 +165,7 @@ BOOST_AUTO_TEST_CASE(test_grad_exp)
 
 BOOST_AUTO_TEST_CASE(test_grad_matern_three)
 {
-    for (int i = 1; i < 10; i++) {
+    for (int i = 1; i <= 10; i++) {
         check_kernel<kernel::MaternThreeHalves<Params>>(i, 100);
         check_kernel<kernel::MaternThreeHalves<ParamsNoise>>(i, 100);
     }
@@ -173,7 +173,7 @@ BOOST_AUTO_TEST_CASE(test_grad_matern_three)
 
 BOOST_AUTO_TEST_CASE(test_grad_matern_five)
 {
-    for (int i = 1; i < 10; i++) {
+    for (int i = 1; i <= 10; i++) {
         check_kernel<kernel::MaternFiveHalves<Params>>(i, 100);
         check_kernel<kernel::MaternFiveHalves<ParamsNoise>>(i, 100);
     }
@@ -182,15 +182,15 @@ BOOST_AUTO_TEST_CASE(test_grad_matern_five)
 BOOST_AUTO_TEST_CASE(test_grad_SE_ARD)
 {
     Params::kernel_squared_exp_ard::set_k(0);
-    for (int i = 1; i < 10; i++) {
+    for (int i = 1; i <= 10; i++) {
         check_kernel<kernel::SquaredExpARD<Params>>(i, 100);
         check_kernel<kernel::SquaredExpARD<ParamsNoise>>(i, 100);
     }
 
     // THIS TEST FAILS!
     // Params::kernel_squared_exp_ard::set_k(1);
-    // for (int i = 1; i < 2; i++) {
-    //     check_kernel<kernel::SquaredExpARD<Params>>(i, 10);
+    // for (int i = 1; i <= 10; i++) {
+    //     check_kernel<kernel::SquaredExpARD<Params>>(i, 100);
     // }
 }
 
