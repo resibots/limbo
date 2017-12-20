@@ -69,6 +69,12 @@ def build(bld):
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
     bld.program(features='cxx test',
+                source='test_mean.cpp',
+                includes='. .. ../../',
+                target='test_mean',
+                uselib='BOOST EIGEN TBB',
+                use='limbo')
+    bld.program(features='cxx test',
                 source='test_init_functions.cpp',
                 includes='. .. ../../',
                 target='test_init_functions',
@@ -84,6 +90,12 @@ def build(bld):
                 source='test_macros.cpp',
                 includes='. .. ../../',
                 target='test_macros',
+                uselib='BOOST EIGEN TBB',
+                use='limbo')
+    bld.program(features='cxx test',
+                source='test_serialize.cpp',
+                includes='. .. ../../',
+                target='test_serialize',
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
     if bld.env.DEFINES_NLOPT or bld.env.DEFINES_LIBCMAES:

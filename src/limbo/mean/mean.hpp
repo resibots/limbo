@@ -43,24 +43,39 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_MEAN_DATA_HPP
-#define LIMBO_MEAN_DATA_HPP
+#ifndef LIMBO_MEAN_MEAN_HPP
+#define LIMBO_MEAN_MEAN_HPP
 
-#include <limbo/mean/mean.hpp>
+#include <Eigen/Core>
+
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
     namespace mean {
-        ///@ingroup mean
-        ///Use the mean of the observation as a constant mean
+        /** @ingroup mean
+          \rst
+          Base struct for mean definition.
+          \endrst
+        */
         template <typename Params>
-        struct Data : public BaseMean<Params> {
-            Data(size_t dim_out = 1) {}
+        struct BaseMean {
+            BaseMean(size_t dim_out = 1) : _dim_out(dim_out) {}
+
+            size_t h_params_size() const { return 0; }
+
+            Eigen::VectorXd h_params() const { return Eigen::VectorXd(); }
+
+            void set_h_params(const Eigen::VectorXd& p) {}
 
             template <typename GP>
-            Eigen::VectorXd operator()(const Eigen::VectorXd& v, const GP& gp) const
+            Eigen::MatrixXd grad(const Eigen::VectorXd& x, const GP& gp) const
             {
-                return gp.mean_observation().array();
+                // This should never be called!
+                assert(false);
             }
+
+        protected:
+            size_t _dim_out;
         };
     } // namespace mean
 } // namespace limbo
