@@ -44,7 +44,7 @@
 #|
 #| The fact that you are presently reading this means that you have had
 #| knowledge of the CeCILL-C license and that you accept its terms.
-#|# plot the results of the Bayesian Optimization benchmarks
+#|
 from glob import glob
 from collections import defaultdict, OrderedDict
 from datetime import datetime

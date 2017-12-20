@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -44,9 +44,6 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 
-//| Reference and credits for this code:
-//| Sparse Gaussian Processes using Pseudo-inputs (NIPS, 2005)
-//| Edward Snelson and Zoubin Ghahramani
 
 #ifndef LIMBO_MODEL_SPGP_HPP
 #define LIMBO_MODEL_SPGP_HPP
@@ -79,7 +76,10 @@ namespace limbo {
 
     namespace model {
         /// @ingroup model
-        /// A classic Gaussian process.
+        /// Sparse Gaussian process.
+        /// Reference and credits for this code:
+        /// Sparse Gaussian Processes using Pseudo-inputs (NIPS, 2005)
+        /// Edward Snelson and Zoubin Ghahramani
         /// It is parametrized by:
         /// - a mean function
         /// - [optionnal] an optimizer for the hyper-parameters
