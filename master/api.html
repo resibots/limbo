@@ -1373,6 +1373,38 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dd><p>return the list of samples that have been tested so far </p>
 </dd></dl>
 
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
+<dt id="_CPPv2N5limbo5model2GP4saveERKNSt6stringE">
+<span id="limbo::model::GP::save__ssCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a31f627d39b869fd2f9aad2feffa47142"></span>void <code class="descname">save</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>directory</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP4saveERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>save the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> to the archive (text or binary) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
+<dt id="_CPPv2N5limbo5model2GP4saveERK1A">
+<span id="limbo::model::GP::save__ACR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1af67e1ec271464672e3bd8e164c069272"></span>void <code class="descname">save</code><span class="sig-paren">(</span><em class="property">const</em> A &amp;<em>archive</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP4saveERK1A" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>save the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> to the archive (text or binary) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
+<dt id="_CPPv2N5limbo5model2GP4loadERKNSt6stringEb">
+<span id="limbo::model::GP::load__ssCR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1ab5922491d1894e383aef6d953961c9aa"></span>void <code class="descname">load</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>directory</em>, bool <em>recompute</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP4loadERKNSt6stringEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>load the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> from the archive (text or binary) if recompute is true, we do not read the kernel matrix but we recompute it given the data and the hyperparameters </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
+<dt id="_CPPv2N5limbo5model2GP4loadERK1Ab">
+<span id="limbo::model::GP::load__ACR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a1024c87e0369a6d7a198f12870ebac84"></span>void <code class="descname">load</code><span class="sig-paren">(</span><em class="property">const</em> A &amp;<em>archive</em>, bool <em>recompute</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP4loadERK1Ab" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>load the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> from the archive (text or binary) if recompute is true, we do not read the kernel matrix but we recompute it given the data and the hyperparameters </p>
+</dd></dl>
+
 </div>
 </dd></dl>
 
@@ -1647,6 +1679,7 @@ Computes the squared exponential covariance like this:</p>
 <li><code class="docutils literal"><span class="pre">double</span> <span class="pre">constant</span></code> (the value of the constant) </li>
 </ul>
 </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_base_mean"><span class="std std-ref">limbo::mean::BaseMean&lt; Params &gt;</span></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -1655,6 +1688,17 @@ Computes the squared exponential covariance like this:</p>
 <dt id="_CPPv2N5limbo4mean4DataE">
 <span id="limbo::mean::Data"></span><em class="property">struct </em><code class="descname">Data</code><a class="headerlink" href="#_CPPv2N5limbo4mean4DataE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/mean/data.hpp&gt;</em><p>Use the mean of the observation as a constant mean </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_base_mean"><span class="std std-ref">limbo::mean::BaseMean&lt; Params &gt;</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="limbostructlimbo_1_1mean_1_1_base_mean"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
+<dt id="_CPPv2N5limbo4mean8BaseMeanE">
+<span id="limbo::mean::BaseMean"></span><em class="property">struct </em><code class="descname">BaseMean</code><a class="headerlink" href="#_CPPv2N5limbo4mean8BaseMeanE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;limbo/mean/mean.hpp&gt;</em><p><p>Base struct for mean definition.</p>
+ </p>
+<p>Subclassed by <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_constant"><span class="std std-ref">limbo::mean::Constant&lt; Params &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_data"><span class="std std-ref">limbo::mean::Data&lt; Params &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_function_a_r_d"><span class="std std-ref">limbo::mean::FunctionARD&lt; Params, MeanFunction &gt;</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_null_function"><span class="std std-ref">limbo::mean::NullFunction&lt; Params &gt;</span></a></p>
 </dd></dl>
 
 <dl class="class">
@@ -1663,6 +1707,7 @@ Computes the squared exponential covariance like this:</p>
 <dt id="_CPPv2N5limbo4mean12NullFunctionE">
 <span id="limbo::mean::NullFunction"></span><em class="property">struct </em><code class="descname">NullFunction</code><a class="headerlink" href="#_CPPv2N5limbo4mean12NullFunctionE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/mean/null_function.hpp&gt;</em><p><a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_constant"><span class="std std-ref">Constant</span></a> with m=0 </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_base_mean"><span class="std std-ref">limbo::mean::BaseMean&lt; Params &gt;</span></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -1692,11 +1737,12 @@ Computes the squared exponential covariance like this:</p>
 <dt id="_CPPv2N5limbo4mean11FunctionARDE">
 <span id="limbo::mean::FunctionARD"></span><em class="property">struct </em><code class="descclassname">limbo::mean::</code><code class="descname">FunctionARD</code><a class="headerlink" href="#_CPPv2N5limbo4mean11FunctionARDE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Functor used to optimize the mean function using the maximum likelihood principle</p>
-<p><dl class="docutils">
+<p>It incorporates the hyperparameters of the underlying mean function, if any <dl class="docutils">
 <dt><strong>See</strong></dt>
 <dd><a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"><span class="std std-ref">limbo::model::gp::KernelMeanLFOpt</span></a>, <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"><span class="std std-ref">limbo::model::gp::MeanLFOpt</span></a> </dd>
 </dl>
 </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_base_mean"><span class="std std-ref">limbo::mean::BaseMean&lt; Params &gt;</span></a></p>
 </dd></dl>
 
 </div>
