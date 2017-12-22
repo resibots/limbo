@@ -1,8 +1,8 @@
 ---
 title: 'Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization'
 tags:
-  - Bayesian Optimization
   - Gaussian Processes
+  - Bayesian Optimization
   - C++11
 authors:
   - name: Antoine Cully
