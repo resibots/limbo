@@ -59,7 +59,7 @@ namespace limbo {
         */
         template <typename Params>
         struct BaseMean {
-            BaseMean(size_t dim_out = 1) : _dim_out(dim_out) {}
+            BaseMean(size_t dim_out = 1) {}
 
             size_t h_params_size() const { return 0; }
 
@@ -73,9 +73,6 @@ namespace limbo {
                 // This should never be called!
                 assert(false);
             }
-
-        protected:
-            size_t _dim_out;
         };
     } // namespace mean
 } // namespace limbo
