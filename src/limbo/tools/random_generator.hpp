@@ -47,15 +47,15 @@
 #ifndef LIMBO_TOOLS_RANDOM_GENERATOR_HPP
 #define LIMBO_TOOLS_RANDOM_GENERATOR_HPP
 
-#include <cstdlib>
 #include <cmath>
+#include <cstdlib>
 #include <ctime>
-#include <list>
-#include <stdlib.h>
-#include <random>
-#include <utility>
-#include <mutex>
 #include <external/rand_utils.hpp>
+#include <list>
+#include <mutex>
+#include <random>
+#include <stdlib.h>
+#include <utility>
 
 namespace limbo {
     namespace tools {
@@ -135,7 +135,38 @@ namespace limbo {
                 return random_vector_bounded(size);
             return random_vector_unbounded(size);
         }
-    }
-}
+
+        /// @ingroup tools
+        /// generate random samples with LHS in [0, 1]^n
+        Eigen::MatrixXd random_lhs(int dim, int samples)
+        {
+            Eigen::VectorXd cut = Eigen::VectorXd::LinSpaced(samples + 1, 0., 1.);
+            Eigen::MatrixXd u = Eigen::MatrixXd::Zero(samples, dim);
+
+            for (int i = 0; i < samples; i++) {
+                u.row(i) = tools::random_vector(dim, true);
+            }
+
+            Eigen::VectorXd a = cut.head(samples);
+            Eigen::VectorXd b = cut.tail(samples);
+
+            Eigen::MatrixXd rdpoints = Eigen::MatrixXd::Zero(samples, dim);
+            for (int i = 0; i < dim; i++) {
+                rdpoints.col(i) = u.col(i).array() * (b - a).array() + a.array();
+            }
+
+            Eigen::MatrixXd H = Eigen::MatrixXd::Zero(samples, dim);
+            Eigen::PermutationMatrix<Eigen::Dynamic, Eigen::Dynamic> perm(samples);
+            for (int i = 0; i < dim; i++) {
+                perm.setIdentity();
+                std::random_shuffle(perm.indices().data(), perm.indices().data() + perm.indices().size());
+                Eigen::MatrixXd tmp = perm * rdpoints;
+                H.col(i) = tmp.col(i);
+            }
+
+            return H;
+        }
+    } // namespace tools
+} // namespace limbo
 
 #endif
