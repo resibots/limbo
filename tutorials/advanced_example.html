@@ -350,7 +350,7 @@
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">MeanFWModel</span> <span class="p">{</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nl">MeanFWModel</span> <span class="p">:</span> <span class="n">mean</span><span class="o">::</span><span class="n">BaseMean</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="n">MeanFWModel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
 
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">GP</span><span class="o">&gt;</span>

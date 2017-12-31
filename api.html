@@ -1651,7 +1651,7 @@ Computes the squared exponential covariance like this:</p>
 <div class="section" id="id21">
 <h3>Template<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-cpp"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">MeanFunction</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="nl">MeanFunction</span> <span class="p">:</span> <span class="k">public</span> <span class="n">BaseMean</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
   <span class="n">MeanFunction</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="n">_dim_out</span><span class="p">(</span><span class="n">dim_out</span><span class="p">)</span> <span class="p">{}</span>
   <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">GP</span><span class="o">&gt;</span>
   <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="k">const</span> <span class="n">GP</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span>
