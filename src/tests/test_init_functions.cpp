@@ -138,6 +138,7 @@ BOOST_AUTO_TEST_CASE(random_lhs)
         for (int i = 0; i < x.size(); ++i) {
             BOOST_CHECK(x[i] >= 0);
             BOOST_CHECK(x[i] <= 1);
+            BOOST_CHECK(i == 0 || x[i] != x[0]);
         }
     }
 }
@@ -164,6 +165,7 @@ BOOST_AUTO_TEST_CASE(random_sampling)
         for (int i = 0; i < x.size(); ++i) {
             BOOST_CHECK(x[i] >= 0);
             BOOST_CHECK(x[i] <= 1);
+            BOOST_CHECK(i == 0 || x[i] != x[0]);
         }
     }
 }
