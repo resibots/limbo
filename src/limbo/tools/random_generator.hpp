@@ -74,7 +74,6 @@ namespace limbo {
             {
                 return _dist(_rgen);
             }
-
         private:
             D _dist;
             std::mt19937 _rgen;
@@ -137,29 +136,30 @@ namespace limbo {
         }
 
         /// @ingroup tools
-        /// generate random samples with LHS in [0, 1]^n
-        Eigen::MatrixXd random_lhs(int dim, int samples)
+        /// generate n random samples with Latin Hypercube Sampling (LHS) in [0, 1]^dim
+        Eigen::MatrixXd random_lhs(int dim, int n)
         {
-            Eigen::VectorXd cut = Eigen::VectorXd::LinSpaced(samples + 1, 0., 1.);
-            Eigen::MatrixXd u = Eigen::MatrixXd::Zero(samples, dim);
+            Eigen::VectorXd cut = Eigen::VectorXd::LinSpaced(n + 1, 0., 1.);
+            Eigen::MatrixXd u = Eigen::MatrixXd::Zero(n, dim);
 
-            for (int i = 0; i < samples; i++) {
+            for (int i = 0; i < n; i++) {
                 u.row(i) = tools::random_vector(dim, true);
             }
 
-            Eigen::VectorXd a = cut.head(samples);
-            Eigen::VectorXd b = cut.tail(samples);
+            Eigen::VectorXd a = cut.head(n);
+            Eigen::VectorXd b = cut.tail(n);
 
-            Eigen::MatrixXd rdpoints = Eigen::MatrixXd::Zero(samples, dim);
+            Eigen::MatrixXd rdpoints = Eigen::MatrixXd::Zero(n, dim);
             for (int i = 0; i < dim; i++) {
                 rdpoints.col(i) = u.col(i).array() * (b - a).array() + a.array();
             }
 
-            Eigen::MatrixXd H = Eigen::MatrixXd::Zero(samples, dim);
-            Eigen::PermutationMatrix<Eigen::Dynamic, Eigen::Dynamic> perm(samples);
+            Eigen::MatrixXd H = Eigen::MatrixXd::Zero(n, dim);
+            Eigen::PermutationMatrix<Eigen::Dynamic, Eigen::Dynamic> perm(n);
+            static thread_local std::mt19937 rgen(randutils::auto_seed_128{}.base());
             for (int i = 0; i < dim; i++) {
                 perm.setIdentity();
-                std::random_shuffle(perm.indices().data(), perm.indices().data() + perm.indices().size());
+                std::shuffle(perm.indices().data(), perm.indices().data() + perm.indices().size(), rgen);
                 Eigen::MatrixXd tmp = perm * rdpoints;
                 H.col(i) = tmp.col(i);
             }
