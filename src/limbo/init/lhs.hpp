@@ -61,7 +61,7 @@ namespace limbo {
     namespace init {
         /** @ingroup init
           \rst
-          LHS sampling in [0, 1]^n
+          Latin Hypercube sampling in [0, 1]^n (LHS)
 
           Parameters:
             - ``int samples`` (total number of samples)
