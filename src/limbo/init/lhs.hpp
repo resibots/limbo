@@ -43,16 +43,45 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_INIT_HPP
-#define LIMBO_INIT_HPP
+#ifndef LIMBO_INIT_LHS_HPP
+#define LIMBO_INIT_LHS_HPP
 
-///@defgroup init
-///@defgroup init_defaults
+#include <Eigen/Core>
 
-#include <limbo/init/grid_sampling.hpp>
-#include <limbo/init/lhs.hpp>
-#include <limbo/init/no_init.hpp>
-#include <limbo/init/random_sampling.hpp>
-#include <limbo/init/random_sampling_grid.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/tools/random_generator.hpp>
+
+namespace limbo {
+    namespace defaults {
+        struct init_lhs {
+            ///@ingroup init_defaults
+            BO_PARAM(int, samples, 10);
+        };
+    } // namespace defaults
+    namespace init {
+        /** @ingroup init
+          \rst
+          Latin Hypercube sampling in [0, 1]^n (LHS)
+
+          Parameters:
+            - ``int samples`` (total number of samples)
+          \endrst
+        */
+        template <typename Params>
+        struct LHS {
+            template <typename StateFunction, typename AggregatorFunction, typename Opt>
+            void operator()(const StateFunction& seval, const AggregatorFunction&, Opt& opt) const
+            {
+                assert(Params::bayes_opt_bobase::bounded());
+
+                Eigen::MatrixXd H = tools::random_lhs(StateFunction::dim_in(), Params::init_lhs::samples());
+
+                for (int i = 0; i < Params::init_lhs::samples(); i++) {
+                    opt.eval_and_add(seval, H.row(i));
+                }
+            }
+        };
+    } // namespace init
+} // namespace limbo
 
 #endif
