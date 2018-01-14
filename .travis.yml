@@ -65,6 +65,7 @@ addons:
 
 before_install:
   - sudo sed -i -e 's/^Defaults\tsecure_path.*$//' /etc/sudoers
+  - sudo rm /etc/apt/sources.list.d/mongodb-3.2.list
 
 install:
   - if [ "$EIGEN33" = "ON" ]; then 'ci/install_eigen3_3.sh' ; else 'ci/install_eigen3.sh' ; fi
