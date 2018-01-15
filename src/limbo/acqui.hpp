@@ -49,8 +49,8 @@
 ///@defgroup acqui
 ///@defgroup acqui_defaults
 
-#include <limbo/acqui/ucb.hpp>
-#include <limbo/acqui/gp_ucb.hpp>
 #include <limbo/acqui/ei.hpp>
+#include <limbo/acqui/gp_ucb.hpp>
+#include <limbo/acqui/ucb.hpp>
 
 #endif

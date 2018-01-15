@@ -44,18 +44,17 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 
-
 #ifndef LIMBO_TOOLS_MATH_HPP
 #define LIMBO_TOOLS_MATH_HPP
 
-#include <cstdlib>
 #include <cmath>
+#include <cstdlib>
 #include <ctime>
 #include <list>
-#include <stdlib.h>
-#include <random>
-#include <utility>
 #include <mutex>
+#include <random>
+#include <stdlib.h>
+#include <utility>
 
 namespace limbo {
     namespace tools {

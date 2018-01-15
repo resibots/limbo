@@ -43,29 +43,29 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#include <cmath>
 #include <algorithm>
-#include <string>
-#include <vector>
-#include <utility>
+#include <cmath>
 #include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include <Eigen/Core>
 
 #ifdef USE_TBB
-#include <tbb/task_scheduler_init.h>
-#include <tbb/parallel_for.h>
 #include <tbb/concurrent_hash_map.h>
+#include <tbb/parallel_for.h>
+#include <tbb/task_scheduler_init.h>
 #else
 #include <map>
 #endif
 
-#include <limbo/tools/macros.hpp>
-#include <limbo/experimental/bayes_opt/imgpo.hpp>
 #include <limbo/experimental/acqui/ucb_imgpo.hpp>
-#include <limbo/tools/parallel.hpp>
-#include <limbo/mean/constant.hpp>
+#include <limbo/experimental/bayes_opt/imgpo.hpp>
 #include <limbo/init/no_init.hpp>
+#include <limbo/mean/constant.hpp>
+#include <limbo/tools/macros.hpp>
+#include <limbo/tools/parallel.hpp>
 
 using namespace limbo;
 
@@ -332,7 +332,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "sphere"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Sphere());
                 Eigen::Vector2d s_val(0.5, 0.5);
@@ -343,7 +343,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "ellipsoid"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Ellipsoid());
                 Eigen::Vector2d s_val(0.5, 0.5);
@@ -354,7 +354,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "rastrigin"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Rastrigin());
                 Eigen::Vector4d s_val(0, 0, 0, 0);
@@ -365,7 +365,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman3"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman3());
                 // double s_max = 3.86278;
@@ -377,7 +377,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "hartman6"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(Hartman6());
                 Eigen::Matrix<double, 6, 1> s_val;
@@ -390,7 +390,7 @@ int main(int argc, char** argv)
 
     if (!is_in_argv(argc, argv, "--only") || is_in_argv(argc, argv, "golden_price"))
         tools::par::replicate(nb_replicates, [&]() {
-                // clang-format off
+            // clang-format off
                 Opt_t opt;
                 opt.optimize(GoldenPrice());
                 //    double s_max = -log(3);

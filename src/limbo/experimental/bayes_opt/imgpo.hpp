@@ -46,18 +46,18 @@
 #ifndef LIMBO_BAYES_OPT_IMGPO_HPP
 #define LIMBO_BAYES_OPT_IMGPO_HPP
 
-#include <iostream>
 #include <algorithm>
-#include <iterator>
 #include <cmath>
+#include <iostream>
+#include <iterator>
 
 #include <boost/parameter/aux_/void.hpp>
 
 #include <Eigen/Core>
 
+#include <limbo/bayes_opt/bo_base.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/random_generator.hpp>
-#include <limbo/bayes_opt/bo_base.hpp>
 
 namespace limbo {
     namespace defaults {

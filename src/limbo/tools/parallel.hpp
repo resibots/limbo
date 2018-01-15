@@ -46,19 +46,19 @@
 #ifndef LIMBO_TOOLS_PARALLEL_HPP
 #define LIMBO_TOOLS_PARALLEL_HPP
 
-#include <vector>
 #include <algorithm>
+#include <vector>
 
 #ifdef USE_TBB
 // Quick hack for definition of 'I' in <complex.h>
 #undef I
+#include <tbb/blocked_range.h>
 #include <tbb/concurrent_vector.h>
-#include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>
 #include <tbb/parallel_for_each.h>
-#include <tbb/parallel_sort.h>
 #include <tbb/parallel_reduce.h>
-#include <tbb/blocked_range.h>
+#include <tbb/parallel_sort.h>
+#include <tbb/task_scheduler_init.h>
 #endif
 
 ///@defgroup par_tools
@@ -126,7 +126,7 @@ namespace limbo {
             {
 #ifdef USE_TBB
                 tbb::parallel_for(size_t(begin), end, size_t(1), [&](size_t i) {
-                  // clang-format off
+                    // clang-format off
                 f(i);
                     // clang-format on
                 });
@@ -156,7 +156,7 @@ namespace limbo {
             {
 #ifdef USE_TBB
                 auto body = [&](const tbb::blocked_range<size_t>& r, T current_max) -> T {
-    // clang-format off
+                    // clang-format off
             for (size_t i = r.begin(); i != r.end(); ++i)
             {
                 T v = f(i);
@@ -167,7 +167,7 @@ namespace limbo {
                     // clang-format on
                 };
                 auto joint = [&](const T& p1, const T& p2) -> T {
-    // clang-format off
+                    // clang-format off
             if (comp(p1, p2))
                 return p1;
             return p2;

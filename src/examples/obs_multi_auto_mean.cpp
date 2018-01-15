@@ -43,12 +43,12 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#include <limbo/tools/macros.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
-#include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/tools/macros.hpp>
 
 using namespace limbo;
 

@@ -74,6 +74,7 @@ namespace limbo {
             {
                 return _dist(_rgen);
             }
+
         private:
             D _dist;
             std::mt19937 _rgen;

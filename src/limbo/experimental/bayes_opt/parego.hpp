@@ -48,10 +48,10 @@
 
 #include <algorithm>
 
-#include <limbo/tools/macros.hpp>
-#include <limbo/experimental/model/gp_parego.hpp>
 #include <limbo/bayes_opt/bo_base.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/experimental/model/gp_parego.hpp>
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
     namespace experimental {

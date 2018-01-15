@@ -48,8 +48,8 @@
 #define LIMBO_TOOLS_SYS_HPP
 
 #include <ctime>
-#include <unistd.h>
 #include <string>
+#include <unistd.h>
 
 namespace limbo {
     namespace tools {

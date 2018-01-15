@@ -46,12 +46,12 @@
 #ifndef LIMBO_ACQUI_EI_HPP
 #define LIMBO_ACQUI_EI_HPP
 
+#include <Eigen/Core>
 #include <cmath>
 #include <vector>
-#include <Eigen/Core>
 
-#include <limbo/tools/macros.hpp>
 #include <limbo/opt/optimizer.hpp>
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
     namespace defaults {

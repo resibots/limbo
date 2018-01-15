@@ -46,9 +46,9 @@
 #ifndef LIMBO_ACQUI_ECI_HPP
 #define LIMBO_ACQUI_ECI_HPP
 
+#include <Eigen/Core>
 #include <cmath>
 #include <vector>
-#include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
 

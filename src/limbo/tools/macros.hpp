@@ -46,8 +46,8 @@
 #ifndef LIMBO_TOOLS_MACROS_HPP
 #define LIMBO_TOOLS_MACROS_HPP
 
-#include <boost/algorithm/string.hpp>
 #include <Eigen/Core>
+#include <boost/algorithm/string.hpp>
 #include <iostream>
 
 #define BO_PARAM(Type, Name, Value) \

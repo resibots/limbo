@@ -44,7 +44,6 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 
-
 #ifndef LIMBO_MODEL_SPGP_HPP
 #define LIMBO_MODEL_SPGP_HPP
 

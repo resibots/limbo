@@ -53,8 +53,8 @@
 
 #include <limbo/tools/macros.hpp>
 
-#include <limbo/experimental/bayes_opt/bo_multi.hpp>
 #include <limbo/experimental/acqui/ehvi.hpp>
+#include <limbo/experimental/bayes_opt/bo_multi.hpp>
 
 namespace limbo {
     namespace defaults {

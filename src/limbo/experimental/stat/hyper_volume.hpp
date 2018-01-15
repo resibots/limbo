@@ -46,9 +46,9 @@
 #ifndef LIMBO_STAT_HYPER_VOLUME_HPP
 #define LIMBO_STAT_HYPER_VOLUME_HPP
 
-#include <limbo/stat/stat_base.hpp>
-#include <limbo/experimental/tools/pareto.hpp>
 #include <hv/hypervol.h>
+#include <limbo/experimental/tools/pareto.hpp>
+#include <limbo/stat/stat_base.hpp>
 
 namespace limbo {
     namespace experimental {
@@ -69,7 +69,7 @@ namespace limbo {
                     if (!bo.stats_enabled())
                         return;
                     // convert the data to C arrays
-                    double** data = new double* [bo.observations().size()];
+                    double** data = new double*[bo.observations().size()];
                     for (size_t i = 0; i < bo.observations().size(); ++i) {
                         size_t dim = bo.observations()[i].size();
                         data[i] = new double[dim];

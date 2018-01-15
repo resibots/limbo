@@ -46,14 +46,14 @@
 #ifndef LIMBO_MODEL_GP_PAREGO_HPP
 #define LIMBO_MODEL_GP_PAREGO_HPP
 
-#include <iostream>
 #include <cassert>
+#include <iostream>
 #include <limits>
 #include <vector>
 
+#include <Eigen/Cholesky>
 #include <Eigen/Core>
 #include <Eigen/LU>
-#include <Eigen/Cholesky>
 
 #include <limbo/model/gp/no_lf_opt.hpp>
 

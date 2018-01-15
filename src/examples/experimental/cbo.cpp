@@ -45,8 +45,8 @@
 //|
 #include <limbo/limbo.hpp>
 
-#include <limbo/experimental/bayes_opt/cboptimizer.hpp>
 #include <limbo/experimental/acqui/eci.hpp>
+#include <limbo/experimental/bayes_opt/cboptimizer.hpp>
 
 using namespace limbo;
 

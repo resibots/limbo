@@ -46,17 +46,17 @@
 #ifndef LIMBO_BAYES_OPT_CBOPTIMIZER_HPP
 #define LIMBO_BAYES_OPT_CBOPTIMIZER_HPP
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <iterator>
 
 #include <boost/parameter/aux_/void.hpp>
 
 #include <Eigen/Core>
 
+#include <limbo/bayes_opt/bo_base.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/random_generator.hpp>
-#include <limbo/bayes_opt/bo_base.hpp>
 #ifdef USE_NLOPT
 #include <limbo/opt/nlopt_no_grad.hpp>
 #elif defined USE_LIBCMAES
@@ -171,7 +171,7 @@ namespace limbo {
                         acquisition_function_t acqui(_model, _constraint_model, this->_current_iteration);
 
                         auto acqui_optimization =
-                            [&](const Eigen::VectorXd& x, bool g) { return acqui(x,afun,g); };
+                            [&](const Eigen::VectorXd& x, bool g) { return acqui(x, afun, g); };
                         Eigen::VectorXd starting_point = tools::random_vector(StateFunction::dim_in(), Params::bayes_opt_cboptimizer::bounded());
                         Eigen::VectorXd new_sample = acqui_optimizer(acqui_optimization, starting_point, Params::bayes_opt_cboptimizer::bounded());
                         this->eval_and_add(sfun, new_sample);

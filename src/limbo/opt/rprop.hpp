@@ -50,9 +50,9 @@
 
 #include <Eigen/Core>
 
+#include <limbo/opt/optimizer.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/math.hpp>
-#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {

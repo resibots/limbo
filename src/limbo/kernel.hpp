@@ -49,8 +49,8 @@
 ///@defgroup kernel
 ///@defgroup kernel_defaults
 
-#include <limbo/kernel/kernel.hpp>
 #include <limbo/kernel/exp.hpp>
+#include <limbo/kernel/kernel.hpp>
 #include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/kernel/matern_three_halves.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
