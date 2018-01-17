@@ -57,6 +57,6 @@ Limbo is currently used in the ERC project ResiBots^[<http://www.resibots.eu>], 
 
 
 # Acknowledgments
-This work received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (GA no. 637972, project ``ResiBots'') and from the European Commission through the project H2020 AnDy (GA no. 731540) and PAL (GA no. ??).
+This work received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (GA no. 637972, project ``ResiBots'') and from the European Commission through the H2020 projects AnDy (GA no. 731540) and PAL (GA no. 643783).
 
 # References
