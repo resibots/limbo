@@ -1,7 +1,7 @@
 limbo [![Build Status](https://travis-ci.org/resibots/limbo.svg?branch=master)](https://travis-ci.org/resibots/limbo)
 =====
 
-A lightweight framework for Bayesian optimization of black-box functions (C++11) and, more generally, for data-efficient optimization. It is designed to be very fast and very flexible.
+Limbo (LIbrary for Model-Based Optimization) is an open-source C++11 library for Gaussian Processes and data-efficient optimization (e.g., Bayesian optimization) that is designed to be both highly flexible and very fast. It can be used as a state-of-the-art optimization library or to experiment with novel algorithms with "plugin" components.
 
 Documentation & Versions
 ------------------------
