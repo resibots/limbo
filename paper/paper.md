@@ -34,7 +34,7 @@ archive_doi:
 
 paper_url:
 
-date: 2nd of November, 2017
+date: 17th of January, 2018
 bibliography: paper.bib
 output: pdf_document
 ---
@@ -53,6 +53,6 @@ Limbo takes advantage of multi-core architectures to parallelize the internal op
 
 The library is distributed under the CeCILL-C license^[<http://www.cecill.info/index.en.html>] via a GitHub repository ^[<http://github.com/resibots/limbo>], with an extensive documentation ^[<http://www.resibots.eu/limbo>] that contains guides, examples, and tutorials. The code is standard-compliant but it is currently mostly developed for GNU/Linux and Mac OS X with both the GCC and Clang compilers. New contributors can rely on a full API reference, while their developments are checked via a continuous integration platform (automatic unit-testing routines).
 
-Limbo is currently used in the ERC project ResiBots^[<http://www.resibots.eu>], which is focused on data-efficient trial-and-error learning for robot damage recovery, and in the H2020 projet PAL^[<http://www.pal4u.eu/>], which uses social robots to help coping with diabetes. It has been instrumental in many scientific publications since 2015 [@cully2015robots] [@chatzilygeroudis2016] [@tarapore2016] [@chatzilygeroudis2017] [@pautrat2017bayesian] [@chatzilygeroudis2017using]
+Limbo is currently used in the ERC project ResiBots^[<http://www.resibots.eu>], which is focused on data-efficient trial-and-error learning for robot damage recovery, and in the H2020 projet PAL^[<http://www.pal4u.eu/>], which uses social robots to help coping with diabetes. It has been instrumental in many scientific publications since 2015 [@cully2015robots] [@chatzilygeroudis2018resetfree] [@tarapore2016] [@chatzilygeroudis2017] [@pautrat2018bayesian] [@chatzilygeroudis2018using]
 
 # References
