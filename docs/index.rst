@@ -41,8 +41,8 @@ Contents:
    api
    bo
    defaults
-   bo_benchmarks
    reg_benchmarks
+   bo_benchmarks
    faq
 
 

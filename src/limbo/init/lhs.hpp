@@ -43,29 +43,45 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_OPT_RANDOM_POINT_HPP
-#define LIMBO_OPT_RANDOM_POINT_HPP
+#ifndef LIMBO_INIT_LHS_HPP
+#define LIMBO_INIT_LHS_HPP
 
 #include <Eigen/Core>
+
+#include <limbo/tools/macros.hpp>
 #include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
-    namespace opt {
-        /// @ingroup opt
-        /// - return a random point in [0, 1]
-        /// - no parameters
-        /// - useful for control experiments (do not use this otherwise!)
+    namespace defaults {
+        struct init_lhs {
+            ///@ingroup init_defaults
+            BO_PARAM(int, samples, 10);
+        };
+    } // namespace defaults
+    namespace init {
+        /** @ingroup init
+          \rst
+          Latin Hypercube sampling in [0, 1]^n (LHS)
+
+          Parameters:
+            - ``int samples`` (total number of samples)
+          \endrst
+        */
         template <typename Params>
-        struct RandomPoint {
-            template <typename F>
-            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
+        struct LHS {
+            template <typename StateFunction, typename AggregatorFunction, typename Opt>
+            void operator()(const StateFunction& seval, const AggregatorFunction&, Opt& opt) const
             {
-                // Random point does not support unbounded search
-                assert(bounded);
-                return tools::random_vector(init.size());
+                assert(Params::bayes_opt_bobase::bounded());
+
+                Eigen::MatrixXd H = tools::random_lhs(StateFunction::dim_in(), Params::init_lhs::samples());
+
+                for (int i = 0; i < Params::init_lhs::samples(); i++) {
+                    opt.eval_and_add(seval, H.row(i));
+                }
             }
         };
-    }
-}
+    } // namespace init
+} // namespace limbo
 
 #endif

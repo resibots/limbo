@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -43,10 +43,10 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#include <limbo/limbo.hpp>
 #include <limbo/experimental/bayes_opt/parego.hpp>
-#include <limbo/experimental/stat/pareto_front.hpp>
 #include <limbo/experimental/stat/hyper_volume.hpp>
+#include <limbo/experimental/stat/pareto_front.hpp>
+#include <limbo/limbo.hpp>
 
 using namespace limbo;
 

@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -275,7 +275,7 @@ void print_res(const T& r)
         std::vector<std::pair<double, double>>& v = x.second;
         std::sort(v.begin(), v.end(),
             [](const std::pair<double, double>& x1,
-                const std::pair<double, double>& x2) {
+                      const std::pair<double, double>& x2) {
                 // clang-format off
                 return x1.second < x2.second;
                 // clang-format on

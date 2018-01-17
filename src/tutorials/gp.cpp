@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -51,6 +51,8 @@
 #include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/tools.hpp>
 #include <limbo/tools/macros.hpp>
+
+#include <limbo/serialize/text_archive.hpp>
 
 // this tutorials shows how to use a Gaussian process for regression
 
@@ -134,5 +136,11 @@ int main(int argc, char** argv)
     std::ofstream ofs_data("data.dat");
     for (size_t i = 0; i < samples.size(); ++i)
         ofs_data << samples[i].transpose() << " " << observations[i].transpose() << std::endl;
+
+    // Sometimes is useful to save an optimized GP
+    gp_ard.save<serialize::TextArchive>("myGP");
+
+    // Later we can load -- we need to make sure that the type is identical to the one saved
+    gp_ard.load<serialize::TextArchive>("myGP");
     return 0;
 }

@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -46,12 +46,12 @@
 #ifndef LIMBO_ACQUI_EI_HPP
 #define LIMBO_ACQUI_EI_HPP
 
+#include <Eigen/Core>
 #include <cmath>
 #include <vector>
-#include <Eigen/Core>
 
-#include <limbo/tools/macros.hpp>
 #include <limbo/opt/optimizer.hpp>
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
     namespace defaults {

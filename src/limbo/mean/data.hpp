@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -46,14 +46,14 @@
 #ifndef LIMBO_MEAN_DATA_HPP
 #define LIMBO_MEAN_DATA_HPP
 
-#include <Eigen/Core>
+#include <limbo/mean/mean.hpp>
 
 namespace limbo {
     namespace mean {
         ///@ingroup mean
         ///Use the mean of the observation as a constant mean
         template <typename Params>
-        struct Data {
+        struct Data : public BaseMean<Params> {
             Data(size_t dim_out = 1) {}
 
             template <typename GP>
@@ -62,7 +62,7 @@ namespace limbo {
                 return gp.mean_observation().array();
             }
         };
-    }
-}
+    } // namespace mean
+} // namespace limbo
 
 #endif

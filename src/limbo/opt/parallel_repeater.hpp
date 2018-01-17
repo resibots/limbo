@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -50,10 +50,10 @@
 
 #include <Eigen/Core>
 
+#include <limbo/opt/optimizer.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/parallel.hpp>
 #include <limbo/tools/random_generator.hpp>
-#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {

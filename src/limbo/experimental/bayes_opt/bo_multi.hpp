@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -59,13 +59,13 @@
 #endif
 // Quick hack for definition of 'I' in <complex.h>
 #undef I
-#include <sferes/phen/parameters.hpp>
 #include <sferes/gen/evo_float.hpp>
+#include <sferes/phen/parameters.hpp>
 #ifdef USE_TBB
 #include <sferes/eval/parallel.hpp>
 #endif
-#include <sferes/modif/dummy.hpp>
 #include <sferes/ea/nsga2.hpp>
+#include <sferes/modif/dummy.hpp>
 #endif
 
 namespace limbo {

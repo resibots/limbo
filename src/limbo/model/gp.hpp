@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -54,6 +54,9 @@
 #include <Eigen/Cholesky>
 #include <Eigen/Core>
 #include <Eigen/LU>
+
+// Quick hack for definition of 'I' in <complex.h>
+#undef I
 
 #include <limbo/kernel/matern_five_halves.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
@@ -415,6 +418,81 @@ namespace limbo {
 
             bool inv_kernel_computed() { return _inv_kernel_updated; }
 
+            /// save the parameters and the data for the GP to the archive (text or binary)
+            template <typename A>
+            void save(const std::string& directory)
+            {
+                A archive(directory);
+                save(archive);
+            }
+
+            /// save the parameters and the data for the GP to the archive (text or binary)
+            template <typename A>
+            void save(const A& archive)
+            {
+                if (_kernel_function.h_params_size() > 0) {
+                    archive.save(_kernel_function.h_params(), "kernel_params");
+                }
+                if (_mean_function.h_params_size() > 0) {
+                    archive.save(_mean_function.h_params(), "mean_params");
+                }
+                archive.save(_samples, "samples");
+                archive.save(_observations, "observations");
+                archive.save(_matrixL, "matrixL");
+                archive.save(_alpha, "alpha");
+            }
+
+            /// load the parameters and the data for the GP from the archive (text or binary)
+            /// if recompute is true, we do not read the kernel matrix
+            /// but we recompute it given the data and the hyperparameters
+            template <typename A>
+            void load(const std::string& directory, bool recompute = true)
+            {
+                A archive(directory);
+                load(archive, recompute);
+            }
+
+            /// load the parameters and the data for the GP from the archive (text or binary)
+            /// if recompute is true, we do not read the kernel matrix
+            /// but we recompute it given the data and the hyperparameters
+            template <typename A>
+            void load(const A& archive, bool recompute = true)
+            {
+                _samples.clear();
+                archive.load(_samples, "samples");
+
+                archive.load(_observations, "observations");
+
+                _dim_in = _samples[0].size();
+                _kernel_function = KernelFunction(_dim_in);
+
+                if (_kernel_function.h_params_size() > 0) {
+                    Eigen::VectorXd h_params;
+                    archive.load(h_params, "kernel_params");
+                    assert(h_params.size() == (int)_kernel_function.h_params_size());
+                    _kernel_function.set_h_params(h_params);
+                }
+
+                _dim_out = _observations.cols();
+                _mean_function = MeanFunction(_dim_out);
+
+                if (_mean_function.h_params_size() > 0) {
+                    Eigen::VectorXd h_params;
+                    archive.load(h_params, "mean_params");
+                    assert(h_params.size() == (int)_mean_function.h_params_size());
+                    _mean_function.set_h_params(h_params);
+                }
+
+                _mean_observation = _observations.colwise().mean();
+
+                if (recompute)
+                    this->recompute(true, true);
+                else {
+                    archive.load(_matrixL, "matrixL");
+                    archive.load(_alpha, "alpha");
+                }
+            }
+
         protected:
             int _dim_in;
             int _dim_out;
@@ -441,9 +519,14 @@ namespace limbo {
 
             void _compute_obs_mean()
             {
+                assert(!_samples.empty());
                 _mean_vector.resize(_samples.size(), _dim_out);
-                for (int i = 0; i < _mean_vector.rows(); i++)
+                for (int i = 0; i < _mean_vector.rows(); i++) {
+                    assert(_samples[i].cols() == 1);
+                    assert(_samples[i].rows() != 0);
+                    assert(_samples[i].rows() == _dim_in);
                     _mean_vector.row(i) = _mean_function(_samples[i], *this);
+                }
                 _obs_mean = _observations - _mean_vector;
             }
 
@@ -540,7 +623,7 @@ namespace limbo {
         /// Determination (ARD), and hyper-parameter optimization based on Rprop
         template <typename Params>
         using GPOpt = GP<Params, kernel::SquaredExpARD<Params>, mean::Data<Params>, gp::KernelLFOpt<Params>>;
-    }
-}
+    } // namespace model
+} // namespace limbo
 
 #endif

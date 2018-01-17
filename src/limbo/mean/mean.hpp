@@ -43,29 +43,38 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_OPT_RANDOM_POINT_HPP
-#define LIMBO_OPT_RANDOM_POINT_HPP
+#ifndef LIMBO_MEAN_MEAN_HPP
+#define LIMBO_MEAN_MEAN_HPP
 
 #include <Eigen/Core>
-#include <limbo/tools/random_generator.hpp>
+
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
-    namespace opt {
-        /// @ingroup opt
-        /// - return a random point in [0, 1]
-        /// - no parameters
-        /// - useful for control experiments (do not use this otherwise!)
+    namespace mean {
+        /** @ingroup mean
+          \rst
+          Base struct for mean definition.
+          \endrst
+        */
         template <typename Params>
-        struct RandomPoint {
-            template <typename F>
-            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
+        struct BaseMean {
+            BaseMean(size_t dim_out = 1) {}
+
+            size_t h_params_size() const { return 0; }
+
+            Eigen::VectorXd h_params() const { return Eigen::VectorXd(); }
+
+            void set_h_params(const Eigen::VectorXd& p) {}
+
+            template <typename GP>
+            Eigen::MatrixXd grad(const Eigen::VectorXd& x, const GP& gp) const
             {
-                // Random point does not support unbounded search
-                assert(bounded);
-                return tools::random_vector(init.size());
+                // This should never be called!
+                assert(false);
             }
         };
-    }
-}
+    } // namespace mean
+} // namespace limbo
 
 #endif
