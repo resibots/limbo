@@ -55,4 +55,8 @@ The library is distributed under the CeCILL-C license^[<http://www.cecill.info/i
 
 Limbo is currently used in the ERC project ResiBots^[<http://www.resibots.eu>], which is focused on data-efficient trial-and-error learning for robot damage recovery, and in the H2020 projet PAL^[<http://www.pal4u.eu/>], which uses social robots to help coping with diabetes. It has been instrumental in many scientific publications since 2015 [@cully2015robots] [@chatzilygeroudis2018resetfree] [@tarapore2016] [@chatzilygeroudis2017] [@pautrat2018bayesian] [@chatzilygeroudis2018using]
 
+
+# Acknowledgments
+This work received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (GA no. 637972, project ``ResiBots'') and from the European Commission through the project H2020 AnDy (GA no. 731540) and PAL (GA no. ??).
+
 # References
