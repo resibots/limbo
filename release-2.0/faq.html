@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Frequently Asked Questions &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
+        <link rel="prev" title="Bayesian optimization benchmarks" href="bo_benchmarks.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-waf-and-not-cmake-or-insert-your-favorite-build-system">Why waf (and not Cmake, or &lt;insert your favorite build system&gt;)?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-is-the-configuration-file">Where is the configuration file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-am-i-getting-nolfopt-should-never-be-called-assertion-failure">Why am I getting “‘NoLFOpt’ should never be called!” assertion failure?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-am-i-getting-xxxlfopt-was-never-called-errors">Why am I getting “‘XXXLFOpt’ was never called!” errors?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-do-i-get-nloptnograd-nlopt-invalid-argument">Why do I get “[NLOptNoGrad]: nlopt invalid argument”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-c-11-and-not-insert-your-favorite-language">Why C++11? (and not &lt;insert your favorite language&gt;)?</a></li>
+</ul>
+</li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Limbo</a> &raquo;</li>
+    
+    <li>Frequently Asked Questions</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/faq.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="why-waf-and-not-cmake-or-insert-your-favorite-build-system">
+<span id="faq-waf"></span><h2>Why waf (and not Cmake, or &lt;insert your favorite build system&gt;)?<a class="headerlink" href="#why-waf-and-not-cmake-or-insert-your-favorite-build-system" title="Permalink to this headline">¶</a></h2>
+<p>Short answer: because we used it in <a class="reference external" href="http://www.github.com/sferes2/sferes">Sferes2</a> and we liked it!</p>
+<p>Here is the longer answer. When we started Sferes2, around 2007, the free software community was starting to be tired of Automake/Autoconf (the <em>de facto</em> standard at that time) and it was looking for more modern alternatives. Two/Three software had some tractions:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.cmake.org">Cmake</a>, which generates makefiles (like Autoconf / Automake), uses a custom language, and emphasizes Windows/Unix portability;</li>
+<li><a class="reference external" href="http://www.scons.org">Scons</a>, which can be seen as a set of high level python functions / objects to build software;</li>
+<li><a class="reference external" href="http://www.waf.org">Waf</a>, which was a bit like “a simpler scons”</li>
+</ul>
+<p>We tried all of them.</p>
+<p>Cmake uses a custom language that is not especially well designed in our opinion (it looks like a language from the 70s and it ignores most of the research in computer languages of the last 30 years). Generating makefiles is nice, but (1) it is slow (because generating files is slow), (2) it is a 40 year old syntax (which does the job, OK), and (3) it is not designed for parallel build (whereas all our computers are now multi-core). Compiling on both Unix and MS Windows is easy, but Windows is not our target platform. On the contrary, cross-compiling for embedded platforms (e.g. an ARM-based Raspberry Pi or a robot) was very hard with the first versions of Cmake (whereas it was easy with Autoconf / Automake!).</p>
+<p>Scons is nice because it is based on Python, a nice, general purpose language that almost everybody know. It makes it easy to build complex build frameworks, but simple things can be not-that-simple to do (at least, in 2007, it probably improved since then). In addition, Scons does not generate makefiles, which makes it faster and more adapted to parallel builds.</p>
+<p>Waf has all the advantages of Scons but the learning curve was less steep. It is based on Python, it has a nice modern feel, it is fast, and it parallelizes the builds by default. More importantly, using python also allows us to easily add services that is not typically part of a build system, for instance, to submit jobs to a cluster (we have to parse a JSON file, etc., which is trivial in python, but not in Cmake!). See <a class="reference internal" href="guides/framework.html"><span class="doc">Using Limbo as an environment for scientific experiments</span></a>.</p>
+<p>Overall, it seems that cmake won the “war” in the free software world, mainly because a few high-profile projects chose it instead of Scons or Waf – the most prominent (and “contagious”) project is most probably QT. However, the battle was tough. For instance, I remember that no build system was perfect for QT and someone even made a waf-based version of QT. Also, keep in mind that QT needs a build system that works very well on MS Windows, while we do not care (we have no Windows-based clusters and no Windows-based robots…). They have different goals. In robotics, ROS heavily relies on Cmake, but one could wonder if Catkin would have been faster/nicer/better if it had been based on waf or scons. Last, a few high profile projects chose waf. For instance, <a class="reference external" href="http://www.pebble.com">Pebble</a>, the smart watches, or <a class="reference external" href="http://www.samba.org">Samba</a>, the Windows-compatible file sharing system for Unix.</p>
+</div>
+<div class="section" id="where-is-the-configuration-file">
+<h2>Where is the configuration file?<a class="headerlink" href="#where-is-the-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>Short answer: There is no configuration file because we target developpers/researchers who want to write the smallest amount of code when they add a new functionnality/concept, and not “end-users” who want an external optimizer that they can easily call on their problem.</p>
+<p>Long answer is in the <a class="reference internal" href="guides/parameters.html#params-guide"><span class="std std-ref">Parameters guide</span></a>.</p>
+</div>
+<div class="section" id="why-am-i-getting-nolfopt-should-never-be-called-assertion-failure">
+<h2>Why am I getting “‘NoLFOpt’ should never be called!” assertion failure?<a class="headerlink" href="#why-am-i-getting-nolfopt-should-never-be-called-assertion-failure" title="Permalink to this headline">¶</a></h2>
+<p>Most probably, you are using the <cite>BOptimizer</cite> class and you have set an <cite>hp_period</cite> (rate at which the hyperparams are optimized) bigger than 0, but you are using a Gaussian Process model with no hyperparameters optimization. This should never happen. So, if you do not want to optimize any hyperparameters, set <cite>hp_period</cite> parameter to -1. On the other hand, if you want use a Gaussian Process model that does optimize the hyperparameters, check <a class="reference internal" href="api.html#gp-hpopt"><span class="std std-ref">here</span></a> for available hyperparameters optimization options.</p>
+</div>
+<div class="section" id="why-am-i-getting-xxxlfopt-was-never-called-errors">
+<h2>Why am I getting “‘XXXLFOpt’ was never called!” errors?<a class="headerlink" href="#why-am-i-getting-xxxlfopt-was-never-called-errors" title="Permalink to this headline">¶</a></h2>
+<p>Most probably, you are using the <cite>BOptimizer</cite> class and you have set an <cite>hp_period</cite> (rate at which the hyperparams are optimized) less than 1, but you are using a Gaussian Process model that optimizes the hyperparameters. This should never happen. If you want use a Gaussian Process model that does optimize the hyperparameters, set the <cite>hp_period</cite> parameter to a value bigger than 0. On the other hand, if you do not want to optimize any hyperparameters, set <cite>hp_period</cite> parameter to -1 and use a Gaussian Process model that does not optimize the hyperparameters. Check <a class="reference internal" href="api.html#gp-hpopt"><span class="std std-ref">here</span></a> for available hyperparameters optimization options.</p>
+</div>
+<div class="section" id="why-do-i-get-nloptnograd-nlopt-invalid-argument">
+<h2>Why do I get “[NLOptNoGrad]: nlopt invalid argument”<a class="headerlink" href="#why-do-i-get-nloptnograd-nlopt-invalid-argument" title="Permalink to this headline">¶</a></h2>
+<p>We need optimizers to optimize the hyper-parameters; by default, we use unbounded optimization… but many optimizers in NLOpt do not support unbounded optimization (in particular, DIRECT). In that case, they just return and throw an exception “[NLOptNoGrad]: nlopt invalid argument”. No optimization is performed.</p>
+<p>The easiest fix is to use another optimizer (we suggest RProp). You can also add bounds (by creating a new hyper-parameter optimization procedure).</p>
+</div>
+<div class="section" id="why-c-11-and-not-insert-your-favorite-language">
+<h2>Why C++11? (and not &lt;insert your favorite language&gt;)?<a class="headerlink" href="#why-c-11-and-not-insert-your-favorite-language" title="Permalink to this headline">¶</a></h2>
+<p>We have specific needs that mainly revolve around high-performance, minimzing boilerplate code, and easy interface with hardware and existing libraries:</p>
+<ul class="simple">
+<li>Easy interface with high-performance libraries (Intel MKL, multi-core parallelization, MPI, etc.), with hardware (robots, ROS, etc.), and with our existing code (e.g. Sferes2): we want to focus on the ‘real code’, and avoid writing interface code as much as possible;</li>
+<li>High-efficiency: template-based C++ provides a way to write algorithms in a very abstract way with zero or almost zero overhead (abstraction without the cost!);</li>
+<li>Static typing: we need as much help as possible from the compiler to avoid bugs in scientific code;</li>
+<li>Easy to install on remote clusters;</li>
+<li>Long-term use: our libraries will be used for at least 10 years in our group, therefore we want to use a language that will still exist in 10 years and that is not moving too fast (we do not want to rewrite our code every other month).</li>
+</ul>
+<p>Modern C++11 appears to be a good choice to fulfill all these criteria: it is reasonably easy to use, very easy to interface with everything, and very high-performance… but we keep a close eye on <a class="reference external" href="http://julialang.org">Julia</a>, <a class="reference external" href="http://www.scala-lang.org">Scala</a>, and <a class="reference external" href="http://www.rust-lang.org">Rust</a>!</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="bo_benchmarks.html" class="btn btn-neutral" title="Bayesian optimization benchmarks" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: release-2.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/faq.html">v1.0.0</a></dd>
+            <dd><a href="../v2.0.0/faq.html">v2.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/faq.html">master</a></dd>
+            <dd><a href="../release-1.0/faq.html">release-1.0</a></dd>
+            <dd><a href="faq.html">release-2.0</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

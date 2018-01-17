@@ -672,6 +672,22 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="class">
 <dt>
+<span class="target" id="limbostructlimbo_1_1init_1_1_l_h_s"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
+<dt id="_CPPv2N5limbo4init3LHSE">
+<span id="limbo::init::LHS"></span><em class="property">struct </em><code class="descname">LHS</code><a class="headerlink" href="#_CPPv2N5limbo4init3LHSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;limbo/init/lhs.hpp&gt;</em><p><p>Latin Hypercube sampling in [0, 1]^n (LHS)</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">int</span> <span class="pre">samples</span></code> (total number of samples)</li>
+</ul>
+</dd>
+</dl>
+ </p>
+</dd></dl>
+
+<dl class="class">
+<dt>
 <span class="target" id="limbostructlimbo_1_1init_1_1_no_init"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
 <dt id="_CPPv2N5limbo4init6NoInitE">
 <span id="limbo::init::NoInit"></span><em class="property">struct </em><code class="descname">NoInit</code><a class="headerlink" href="#_CPPv2N5limbo4init6NoInitE" title="Permalink to this definition">¶</a><br /></dt>
@@ -725,6 +741,11 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dl class="function">
 <dt>
 <span class="target" id="limbogroup__init__defaults_1ga4f3f478d00343baf0a0d3d0f227bf9db"></span><code class="descname">limbo::defaults::init_gridsampling::BO_PARAM(int, bins, 5)</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__init__defaults_1gafe5b3c0126c10c74153c206670bc258f"></span><code class="descname">limbo::defaults::init_lhs::BO_PARAM(int, samples, 10)</code></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -2182,6 +2203,12 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="_CPPv2N5limbo5tools10random_lhsEii">
+<span id="limbo::tools::random_lhs__i.i"></span><span class="target" id="limbogroup__tools_1ga7a7a1cc21e67d3ce7c712c3da2f84102"></span>Eigen::MatrixXd <code class="descname">random_lhs</code><span class="sig-paren">(</span>int <em>dim</em>, int <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools10random_lhsEii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>generate n random samples with Latin Hypercube Sampling (LHS) in [0, 1]^dim </p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv2N5limbo5tools4dateEv">
 <span id="limbo::tools::date"></span><span class="target" id="limbogroup__tools_1gafb48d3271e7423f8b8d94599869bd9cb"></span>std::string <code class="descname">date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools4dateEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>easy way to get the current date </p>
@@ -2350,11 +2377,13 @@ Computes the squared exponential covariance like this:</p>
         <dl>
             <dt>Tags</dt>
             <dd><a href="../v1.0.0/api.html">v1.0.0</a></dd>
+            <dd><a href="../v2.0.0/api.html">v2.0.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="api.html">master</a></dd>
             <dd><a href="../release-1.0/api.html">release-1.0</a></dd>
+            <dd><a href="../release-2.0/api.html">release-2.0</a></dd>
         </dl>
     </div>
 </div>

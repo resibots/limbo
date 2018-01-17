@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Advanced Example &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Statistics / Writing results" href="statistics.html"/>
+        <link rel="prev" title="Basic Example" href="basic_example.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Advanced Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#problem-statement">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-layout">Basic Layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-the-forward-kinematic-model-as-prior">Adding the forward kinematic model as prior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-state-based-bayesian-optimization">Using State-based bayesian optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-custom-stop-criterion">Adding custom stop criterion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-the-evaluation-function">Creating the evaluation function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-the-experiment">Creating the experiment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-the-gp-model">Creating the GP model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acquisition-initialization-and-other-aliases">Acquisition, Initialization and other aliases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-the-parameter-structure">Setting the parameter structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-and-running-the-bayesian-optimizer">Creating and running the Bayesian Optimizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-the-experiment">Running the experiment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization Sub-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_docs.html">Building the documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Tutorials</a> &raquo;</li>
+    
+    <li>Advanced Example</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/tutorials/advanced_example.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="advanced-example">
+<h1>Advanced Example<a class="headerlink" href="#advanced-example" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="problem-statement">
+<h2>Problem Statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a></h2>
+<div class="figure">
+<a class="reference external image-reference" href="../_images/arm.svg"><img alt="6-DOF planar arm" src="../_images/arm.svg" /></a>
+</div>
+<p>Let’s say we have a planar 6-DOF arm manipulator and we want its end-effector to reach a target position (i.e. catch an object). Now, imagine that a joint is broken (or not working properly). We want to use Bayesian Optimization to learn a compensatory behavior that will allow our arm to reach the target in spite of damage. Moreover, once we have learned how to reach one target, we want to reach another (different) one. We will use state-based bayesian optimization to transfer knowledge between the two tasks. We will use the following:</p>
+<ul class="simple">
+<li>The forward kinematic model as prior knowledge (mean of Gaussian Process).</li>
+<li>The <strong>Squared exponential covariance function with automatic relevance detection</strong> as the kernel function of the GP.</li>
+<li>Likelihood optimization for the hyperparameters of the GP kernel.</li>
+<li>Use Expected Improvement as the acquisition function.</li>
+<li>Use different optimizer for the acquisition optimization.</li>
+<li>Initialize the GP with random samples.</li>
+<li>Custom stopping criterion.</li>
+</ul>
+<p>Also, we assume that all of our arm’s links are <strong>1cm long</strong>.</p>
+</div>
+<div class="section" id="basic-layout">
+<h2>Basic Layout<a class="headerlink" href="#basic-layout" title="Permalink to this headline">¶</a></h2>
+<p>The file structure should look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">limbo</span>
+<span class="o">|--</span> <span class="n">exp</span>
+     <span class="o">|--</span> <span class="n">arm_example</span>
+          <span class="o">+--</span> <span class="n">wscript</span>
+          <span class="o">+--</span> <span class="n">main</span><span class="o">.</span><span class="n">cpp</span>
+<span class="o">|--</span> <span class="n">src</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The basic layout of your <code class="docutils literal"><span class="pre">main.cpp</span></code> file should look like this:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;limbo/bayes_opt/boptimizer.hpp&gt;</span><span class="cp"></span>
+<span class="c1">// Here we have to include other needed limbo headers</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+  <span class="c1">// Here go the parameters</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Params</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
+  <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_in</span><span class="p">,</span> <span class="n">sample_dimensions</span><span class="p">);</span>
+  <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">,</span> <span class="n">output_dimensions</span><span class="p">);</span>
+  <span class="c1">// Here we define the evaluation function</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Defines, etc.</span>
+  <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="p">...</span><span class="o">&gt;</span> <span class="n">opt</span><span class="p">;</span>
+  <span class="n">opt</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eval_func</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">());</span>
+  <span class="k">auto</span> <span class="n">val</span> <span class="o">=</span> <span class="n">opt</span><span class="p">.</span><span class="n">best_observation</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">wscript</span></code> will have the following form:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="kn">import</span> <span class="n">conf</span>
+
+<span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="nd">@conf</span>
+<span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">blah</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
+    <span class="n">bld</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="s1">&#39;cxx cxxprogram&#39;</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="s1">&#39;main.cpp&#39;</span><span class="p">,</span>
+        <span class="n">includes</span><span class="o">=</span><span class="s1">&#39;. ../../src&#39;</span><span class="p">,</span>
+        <span class="n">target</span><span class="o">=</span><span class="s1">&#39;arm_example&#39;</span><span class="p">,</span>
+        <span class="n">uselib</span><span class="o">=</span><span class="s1">&#39;BOOST EIGEN TBB LIBCMAES NLOPT&#39;</span><span class="p">,</span>
+        <span class="n">use</span><span class="o">=</span><span class="s1">&#39;limbo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-the-forward-kinematic-model-as-prior">
+<h2>Adding the forward kinematic model as prior<a class="headerlink" href="#adding-the-forward-kinematic-model-as-prior" title="Permalink to this headline">¶</a></h2>
+<p>To compute the forward kinematics of our simple planar arm we use the following code:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">rads</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">M_PI</span><span class="p">;</span>
+
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span> <span class="n">dh_mat</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+
+    <span class="n">dh_mat</span> <span class="o">&lt;&lt;</span> <span class="n">rads</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">rads</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span> <span class="n">mat</span> <span class="o">=</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dh_mat</span><span class="p">.</span><span class="n">rows</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">dh</span> <span class="o">=</span> <span class="n">dh_mat</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">Matrix4d</span> <span class="n">submat</span><span class="p">;</span>
+        <span class="n">submat</span> <span class="o">&lt;&lt;</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">dh</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+            <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">dh</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span>
+            <span class="mi">0</span><span class="p">,</span> <span class="n">sin</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="n">cos</span><span class="p">(</span><span class="n">dh</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span> <span class="n">dh</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+            <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span> <span class="o">*</span> <span class="n">submat</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">mat</span> <span class="o">*</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector4d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)).</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>To make this forward kinematic model useful to our GP, we need to create a mean function:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nl">MeanFWModel</span> <span class="p">:</span> <span class="n">mean</span><span class="o">::</span><span class="n">BaseMean</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">MeanFWModel</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">dim_out</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">GP</span><span class="o">&gt;</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">GP</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">pos</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="using-state-based-bayesian-optimization">
+<h2>Using State-based bayesian optimization<a class="headerlink" href="#using-state-based-bayesian-optimization" title="Permalink to this headline">¶</a></h2>
+<p>See the explanation of the meaning of <a class="reference internal" href="../guides/limbo_concepts.html#state-based-bo"><span class="std std-ref">State-based optimization</span></a>.</p>
+<p>Creating an Aggregator:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">DistanceToTarget</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">result_type</span> <span class="o">=</span> <span class="kt">double</span><span class="p">;</span>
+    <span class="n">DistanceToTarget</span><span class="p">(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span><span class="o">&amp;</span> <span class="n">target</span><span class="p">)</span> <span class="o">:</span> <span class="n">_target</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="p">{}</span>
+
+    <span class="kt">double</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">_target</span><span class="p">).</span><span class="n">norm</span><span class="p">();</span>
+    <span class="p">}</span>
+
+<span class="k">protected</span><span class="o">:</span>
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector2d</span> <span class="n">_target</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>Here, we are using a very simple aggregator that simply computes the distance between the end-effector and the target position.</p>
+</div>
+<div class="section" id="adding-custom-stop-criterion">
+<h2>Adding custom stop criterion<a class="headerlink" href="#adding-custom-stop-criterion" title="Permalink to this headline">¶</a></h2>
+<p>When our bayesian optimizer finds a solution that the end-effector of the arm is reasonably close to the target, we want it to stop. We can easily do this by creating our own stopping criterion:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">MinTolerance</span> <span class="p">{</span>
+    <span class="n">MinTolerance</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">BO</span><span class="p">,</span> <span class="k">typename</span> <span class="n">AggregatorFunction</span><span class="o">&gt;</span>
+    <span class="kt">bool</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">BO</span><span class="o">&amp;</span> <span class="n">bo</span><span class="p">,</span> <span class="k">const</span> <span class="n">AggregatorFunction</span><span class="o">&amp;</span> <span class="n">afun</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">afun</span><span class="p">(</span><span class="n">bo</span><span class="p">.</span><span class="n">best_observation</span><span class="p">(</span><span class="n">afun</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">Params</span><span class="o">::</span><span class="n">stop_mintolerance</span><span class="o">::</span><span class="n">tolerance</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="creating-the-evaluation-function">
+<h2>Creating the evaluation function<a class="headerlink" href="#creating-the-evaluation-function" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">eval_func</span> <span class="p">{</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_in</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+    <span class="n">eval_func</span><span class="p">()</span> <span class="p">{}</span>
+
+    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="c1">// blocked joint</span>
+        <span class="n">xx</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="n">grip_pos</span> <span class="o">=</span> <span class="n">forward_kinematics</span><span class="p">(</span><span class="n">xx</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">grip_pos</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="creating-the-experiment">
+<h2>Creating the experiment<a class="headerlink" href="#creating-the-experiment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-the-gp-model">
+<h3>Creating the GP model<a class="headerlink" href="#creating-the-gp-model" title="Permalink to this headline">¶</a></h3>
+<p><strong>Kernel alias:</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">kernel_t</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">::</span><span class="n">SquaredExpARD</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Mean alias:</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">mean_t</span> <span class="o">=</span> <span class="n">MeanFWModel</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Likelihood optimization alias:</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">gp_opt_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">gp</span><span class="o">::</span><span class="n">KernelLFOpt</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>GP alias:</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">gp_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">kernel_t</span><span class="p">,</span> <span class="n">mean_t</span><span class="p">,</span> <span class="n">gp_opt_t</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="acquisition-initialization-and-other-aliases">
+<h3>Acquisition, Initialization and other aliases<a class="headerlink" href="#acquisition-initialization-and-other-aliases" title="Permalink to this headline">¶</a></h3>
+<p><strong>Acquisition aliases:</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">acqui_t</span> <span class="o">=</span> <span class="n">acqui</span><span class="o">::</span><span class="n">EI</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">gp_t</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">acqui_opt_t</span> <span class="o">=</span> <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Initialization alias:</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">init_t</span> <span class="o">=</span> <span class="n">init</span><span class="o">::</span><span class="n">RandomSampling</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Stopping criteria alias:</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">stop_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stop</span><span class="o">::</span><span class="n">MaxIterations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">MinTolerance</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Statistics alias:</strong></p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">stat_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">Observations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="n">stat</span><span class="o">::</span><span class="n">AggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">GPAcquisitions</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="n">stat</span><span class="o">::</span><span class="n">BestAggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">GPKernelHParams</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-the-parameter-structure">
+<h3>Setting the parameter structure<a class="headerlink" href="#setting-the-parameter-structure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">hp_period</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">bayes_opt_bobase</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_bobase</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="n">stop_mintolerance</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="n">acqui_ei</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">jitter</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">kernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
+    <span class="p">};</span>
+    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">restarts</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">max_fun_evals</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="creating-and-running-the-bayesian-optimizer">
+<h3>Creating and running the Bayesian Optimizer<a class="headerlink" href="#creating-and-running-the-bayesian-optimizer" title="Permalink to this headline">¶</a></h3>
+<p>In your main function, you need to have something like the following:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="n">kernel_t</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">::</span><span class="n">SquaredExpARD</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">using</span> <span class="n">mean_t</span> <span class="o">=</span> <span class="n">MeanFWModel</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">using</span> <span class="n">gp_opt_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">gp</span><span class="o">::</span><span class="n">KernelLFOpt</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">using</span> <span class="n">gp_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">::</span><span class="n">GP</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">kernel_t</span><span class="p">,</span> <span class="n">mean_t</span><span class="p">,</span> <span class="n">gp_opt_t</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">using</span> <span class="n">acqui_t</span> <span class="o">=</span> <span class="n">acqui</span><span class="o">::</span><span class="n">EI</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">gp_t</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">acqui_opt_t</span> <span class="o">=</span> <span class="n">opt</span><span class="o">::</span><span class="n">Cmaes</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">using</span> <span class="n">init_t</span> <span class="o">=</span> <span class="n">init</span><span class="o">::</span><span class="n">RandomSampling</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">;</span>
+
+    <span class="k">using</span> <span class="n">stop_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stop</span><span class="o">::</span><span class="n">MaxIterations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">MinTolerance</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+    <span class="k">using</span> <span class="n">stat_t</span> <span class="o">=</span> <span class="n">boost</span><span class="o">::</span><span class="n">fusion</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">stat</span><span class="o">::</span><span class="n">ConsoleSummary</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">Samples</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">Observations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">AggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">GPAcquisitions</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">BestAggregatedObservations</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stat</span><span class="o">::</span><span class="n">GPKernelHParams</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="p">,</span> <span class="n">modelfun</span><span class="o">&lt;</span><span class="n">gp_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquifun</span><span class="o">&lt;</span><span class="n">acqui_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">acquiopt</span><span class="o">&lt;</span><span class="n">acqui_opt_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">initfun</span><span class="o">&lt;</span><span class="n">init_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">statsfun</span><span class="o">&lt;</span><span class="n">stat_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">stopcrit</span><span class="o">&lt;</span><span class="n">stop_t</span><span class="o">&gt;&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
+    <span class="c1">// Instantiate aggregator</span>
+    <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">aggregator</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
+    <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eval_func</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">aggregator</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;New target!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="n">aggregator</span> <span class="o">=</span> <span class="n">DistanceToTarget</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">({</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
+    <span class="c1">// Do not forget to pass `false` as the last parameter in `optimize`,</span>
+    <span class="c1">// so you do not reset the data in boptimizer</span>
+    <span class="c1">// i.e. keep all the previous data points in the Gaussian Process</span>
+    <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">eval_func</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">aggregator</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="running-the-experiment">
+<h3>Running the experiment<a class="headerlink" href="#running-the-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Finally, from the root of limbo, run a build command, with the additional switch <code class="docutils literal"><span class="pre">--exp</span> <span class="pre">arm_example</span></code>:</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">waf</span> <span class="n">configure</span> <span class="o">--</span><span class="n">exp</span> <span class="n">arm_example</span>
+<span class="p">.</span><span class="o">/</span><span class="n">waf</span> <span class="n">build</span> <span class="o">--</span><span class="n">exp</span> <span class="n">arm_example</span>
+</pre></div>
+</div>
+<p>Then, an executable named <code class="docutils literal"><span class="pre">arm_example</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/arm_example</span></code>. When running the experiment, you should expect something like the following:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>0 new point:  0.99374 0.999401 0.999716 0.532902 0.999337 0.648682 value: -0.73579 best:-0.73579
+1 new point: 0.00924137    0.52356   0.992816   0.591639   0.900581 0.00022477 value: -1.59172 best:-0.73579
+2 new point:  0.999114  0.303668 0.0132791  0.792124  0.391522  0.999149 value: -3.00304 best:-0.73579
+3 new point: 0.990481 0.981046 0.379883 0.999432 0.282599 0.291695 value: -0.824245 best:-0.73579
+4 new point: 0.00771956   0.949676   0.956241  0.0293142   0.244216  0.0891216 value: -2.68335 best:-0.73579
+5 new point:   0.972554 0.00021536   0.998559      0.808   0.346161 0.00134114 value: -3.7039 best:-0.73579
+6 new point: 0.00275069   0.495195 0.00167023   0.994612   0.631628   0.707545 value: -1.97244 best:-0.73579
+7 new point:  0.124159  0.262741  0.303586  0.999707  0.335987 0.0192833 value: -1.28697 best:-0.73579
+8 new point:  0.026011  0.307255  0.101375 0.0195426  0.562741 0.0400001 value: -2.31361 best:-0.73579
+9 new point:    0.153818  0.00117556 9.92801e-05    0.376417     0.18015  0.00215051 value: -1.00521 best:-0.73579
+10 new point:  0.107636  0.710152   0.41314 0.0703153  0.646439  0.606494 value: -0.685661 best:-0.685661
+11 new point: 0.282632 0.794559 0.940368 0.530688 0.113832 0.439228 value: -1.44821 best:-0.685661
+12 new point: 0.0110291  0.266178  0.576008  0.425873  0.120849  0.444479 value: -1.38147 best:-0.685661
+13 new point:  0.109448 0.0548453  0.458707  0.487198  0.739701  0.588758 value: -0.147514 best:-0.147514
+14 new point: 0.0877909 0.0481023  0.837642  0.438223  0.387531  0.649942 value: -0.150097 best:-0.147514
+15 new point: 0.111047 0.633206 0.509962 0.443725 0.359951 0.243446 value: -0.780535 best:-0.147514
+16 new point:  0.0827364   0.186448   0.333666   0.839036   0.536232 0.00476438 value: -0.575265 best:-0.147514
+17 new point:   0.123347 0.00377535   0.554967   0.103699   0.371233   0.233517 value: -0.00982979 best:-0.00982979
+New target!
+18 new point:    0.998604    0.984174    0.999353 0.000200245    0.356422    0.999792 value: -1.38941 best:-0.370924
+19 new point: 0.0189988  0.999921  0.942007  0.665937  0.999451  0.986427 value: -3.16331 best:-0.370924
+20 new point: 0.0688255  0.230665 0.0273747  0.270297  0.980095  0.990872 value: -2.89225 best:-0.370924
+21 new point: 0.997416 0.857708 0.998912 0.984197 0.391337 0.114332 value: -0.883913 best:-0.370924
+22 new point:    0.999982 0.000168928    0.999398    0.336817    0.258304    0.929625 value: -1.19557 best:-0.370924
+23 new point: 0.0700344  0.281842  0.919103 0.0183289  0.074567  0.970264 value: -4.17297 best:-0.370924
+24 new point: 7.78708e-05 2.18076e-06    0.983852     0.99996    0.825274    0.612332 value: -2.57724 best:-0.370924
+25 new point: 0.000101799    0.997473    0.797134    0.994634    0.377403 3.70205e-05 value: -2.33882 best:-0.370924
+26 new point: 0.0467502  0.327915  0.235275  0.966877 0.0363554  0.909477 value: -3.49153 best:-0.370924
+27 new point:    0.999615 0.000340133    0.637717    0.994796  0.00143888    0.464556 value: -2.75311 best:-0.370924
+28 new point:   0.998958 0.00509838   0.474495   0.667517   0.532318   0.520064 value: -0.038073 best:-0.038073
+</pre></div>
+</div>
+<p>Using state-based bayesian optimization, we can transfer what we learned during one task to achieve faster new tasks.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="statistics.html" class="btn btn-neutral float-right" title="Statistics / Writing results" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="basic_example.html" class="btn btn-neutral" title="Basic Example" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: release-2.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../v1.0.0/tutorials/advanced_example.html">v1.0.0</a></dd>
+            <dd><a href="../../v2.0.0/tutorials/advanced_example.html">v2.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../master/tutorials/advanced_example.html">master</a></dd>
+            <dd><a href="../../release-1.0/tutorials/advanced_example.html">release-1.0</a></dd>
+            <dd><a href="advanced_example.html">release-2.0</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
