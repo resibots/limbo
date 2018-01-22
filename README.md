@@ -23,7 +23,8 @@ In BibTex:
         title={Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization},
         author={Cully, A. and Chatzilygeroudis, K. and Allocati, F.  and Mouret, J.-B.},
         year={2016},
-        journal={Preprint}
+        journal={Preprint},
+        url={https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf}
     }
 
 
