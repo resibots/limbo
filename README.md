@@ -15,16 +15,15 @@ Citing Limbo
 If you use Limbo in a scientific paper, please cite:
 
 
-Cully, A., Chatzilygeroudis, K., Allocati, F., and Mouret J.-B., (2016). [Limbo: A Fast and Flexible Library for Bayesian Optimization](https://arxiv.org/abs/1611.07343). *arXiv preprint arXiv:1611.07343*.
+Cully, A., Chatzilygeroudis, K., Allocati, F., and Mouret J.-B., (2016). [Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization](https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf). *Preprint*.
 
 In BibTex:
   
     @article{cully_limbo_2016,
-        title={Limbo: A Fast and Flexible Library for Bayesian Optimization},
+        title={Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization},
         author={Cully, A. and Chatzilygeroudis, K. and Allocati, F.  and Mouret, J.-B.},
         year={2016},
-        journal={arXiv preprint},
-        pages={arxiv:1611.07343}
+        journal={Preprint}
     }
 
 
