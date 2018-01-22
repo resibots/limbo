@@ -8,7 +8,7 @@ Documentation & Versions
 The development branch is the [master](https://github.com/resibots/limbo/tree/master) branch. For the latest stable release, check the [release-2.0](https://github.com/resibots/limbo/tree/release-2.0) branch.
 Documentation is available at: http://www.resibots.eu/limbo
 
-A short paper that introduces the library is available on arxiv: https://arxiv.org/abs/1611.07343 
+A short paper that introduces the library is available here: https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf
 
 Citing Limbo
 ------------
