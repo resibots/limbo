@@ -1,39 +1,31 @@
 ---
 title: 'Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization'
 tags:
-  - Gaussian Processes
-  - Bayesian Optimization
-  - C++11
+ - Gaussian Processes
+ - Bayesian Optimization
+ - C++11
 authors:
-  - name: Antoine Cully
-	orcid: 0000-0002-3190-7073
-	affiliation: 1
-  - name: Konstantinos Chatzilygeroudis
-	orcid: 0000-0003-3585-1027
-	affiliation: 2, 3, 4
-  - name: Federico Allocati
-	orcid: 0000-0000-0000-0000
-	affiliation: 2, 3, 4
-  - name: Jean-Baptiste Mouret
-	orcid: 0000-0002-2513-027X
-	affiliation: 2, 3, 4
+ - name: Antoine Cully
+   orcid: 0000-0002-3190-7073
+   affiliation: 1
+ - name: Konstantinos Chatzilygeroudis
+   orcid: 0000-0003-3585-1027
+   affiliation: "2,3,4"
+ - name: Federico Allocati
+   orcid: 0000-0000-0000-0000
+   affiliation: "2,3,4"
+ - name: Jean-Baptiste Mouret
+   orcid: 0000-0002-2513-027X
+   affiliation: "2,3,4"
 affiliations:
-  - name: Personal Robotics Lab, Imperial College London, London, United Kingdom
-	index: 1
-  - name: Inria Nancy Grand - Est, Villers-lès-Nancy, France
-	index: 2
-  - name: CNRS, Loria, UMR 7503, Vandœuvre-lès-Nancy, France
-	index: 3
-  - name: Université de Lorraine, Loria, UMR 7503, Vandœuvre-lès-Nancy, France
-	index: 4
-formatted_doi:
-
-repository:
-  https://github.com/resibots/limbo
-archive_doi:
-
-paper_url:
-
+ - name: Personal Robotics Lab, Imperial College London, London, United Kingdom
+   index: 1
+ - name: Inria Nancy Grand - Est, Villers-lès-Nancy, France
+   index: 2
+ - name: CNRS, Loria, UMR 7503, Vandœuvre-lès-Nancy, France
+   index: 3
+ - name: Université de Lorraine, Loria, UMR 7503, Vandœuvre-lès-Nancy, France
+   index: 4
 date: 17th of January, 2018
 bibliography: paper.bib
 output: pdf_document
