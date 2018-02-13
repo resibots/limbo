@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -53,8 +53,8 @@
 
 #include <limbo/tools/macros.hpp>
 
-#include <limbo/experimental/bayes_opt/bo_multi.hpp>
 #include <limbo/experimental/acqui/ehvi.hpp>
+#include <limbo/experimental/bayes_opt/bo_multi.hpp>
 
 namespace limbo {
     namespace defaults {

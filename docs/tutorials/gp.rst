@@ -13,7 +13,7 @@ We assume that our samples are in a vector called ``samples`` and that our obser
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 77-86
+   :lines: 79-88
 
 Basic usage
 ------------
@@ -23,14 +23,14 @@ We first create a basic GP with an Exponential kernel (``kernel::Exp<Params>``) 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 59-72
+   :lines: 61-74
 
 The type of the GP is defined by the following lines:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 87-91
+   :lines: 89-93
 
 To use the GP, we need :
 
@@ -40,7 +40,7 @@ To use the GP, we need :
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 92-97
+   :lines: 94-99
 
 Here we assume that the noise is the same for all samples and that it is equal to 0.01.
 
@@ -57,7 +57,7 @@ To visualize the predictions of the GP, we can query it for many points and reco
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 101-110
+   :lines: 101-112
 
 
 Hyper-parameter optimization
@@ -71,21 +71,21 @@ A new GP type is defined as follows:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 112-116
+   :lines: 114-118
 
 It uses the default values for the parameters of ``SquaredExpARD``:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 64-67
+   :lines: 66-69
 
 After calling the ``compute()`` method, the hyper-parameters can be optimized by calling the ``optimize_hyperparams()`` function. The GP does not need to be recomputed and we pass ``false`` for the last parameter in ``compute()`` as we do not need to compute the kernel matrix again (it will be recomputed in the hyper-parameters optimization).
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 119-121
+   :lines: 121-123
 
 
 We can have a look at the difference between the two GPs:
@@ -105,4 +105,25 @@ Here is the complete ``main.cpp`` file of this tutorial:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
-   :lines: 48-
+   :lines: 46-
+
+Saving and Loading
+-------------------
+
+We can also save our optimized GP model:
+
+.. literalinclude:: ../../src/tutorials/gp.cpp
+   :language: c++
+   :linenos:
+   :lines: 140-141
+
+This will create a directory called ``myGP`` with several files (the GP data, kernel hyperparameters etc.). If we want a binary format (i.e., more compact), we can replace the ``TextArchive`` by ``BinaryArchive``.
+
+To the load a saved model, we can do the following:
+
+.. literalinclude:: ../../src/tutorials/gp.cpp
+   :language: c++
+   :linenos:
+   :lines: 143-144
+
+Note that we need to have the same kernel and mean function (i.e., the same GP type) as the one used for saving.

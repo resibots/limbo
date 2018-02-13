@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -71,11 +71,8 @@ struct Params {
         BO_PARAM(double, noise, 0.01);
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
-    };
-
-    struct kernel_maternfivehalves {
-        BO_PARAM(double, sigma, 1);
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
+        BO_PARAM(double, sigma_sq, 1);
         BO_PARAM(double, l, 0.25);
     };
 
@@ -119,6 +116,33 @@ BOOST_AUTO_TEST_CASE(no_init)
     BOOST_CHECK(opt.samples().size() == 0);
 }
 
+BOOST_AUTO_TEST_CASE(random_lhs)
+{
+    std::cout << "LHS" << std::endl;
+    struct MyParams : public Params {
+        struct init_lhs {
+            BO_PARAM(int, samples, 10);
+        };
+    };
+
+    using Init_t = init::LHS<MyParams>;
+    using Opt_t = bayes_opt::BOptimizer<MyParams, initfun<Init_t>>;
+
+    Opt_t opt;
+    opt.optimize(fit_eval());
+    BOOST_CHECK(opt.observations().size() == 10);
+    BOOST_CHECK(opt.samples().size() == 10);
+    for (size_t j = 0; j < opt.samples().size() - 1; ++j) {
+        const Eigen::VectorXd& x = opt.samples()[j];
+        std::cout << x.transpose() << std::endl;
+        for (int i = 0; i < x.size(); ++i) {
+            BOOST_CHECK(x[i] >= 0);
+            BOOST_CHECK(x[i] <= 1);
+            BOOST_CHECK(i == 0 || x[i] != x[0]);
+        }
+    }
+}
+
 BOOST_AUTO_TEST_CASE(random_sampling)
 {
     std::cout << "RandomSampling" << std::endl;
@@ -141,6 +165,7 @@ BOOST_AUTO_TEST_CASE(random_sampling)
         for (int i = 0; i < x.size(); ++i) {
             BOOST_CHECK(x[i] >= 0);
             BOOST_CHECK(x[i] <= 1);
+            BOOST_CHECK(i == 0 || x[i] != x[0]);
         }
     }
 }

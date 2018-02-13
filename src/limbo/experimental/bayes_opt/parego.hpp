@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -48,10 +48,10 @@
 
 #include <algorithm>
 
-#include <limbo/tools/macros.hpp>
-#include <limbo/experimental/model/gp_parego.hpp>
 #include <limbo/bayes_opt/bo_base.hpp>
 #include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/experimental/model/gp_parego.hpp>
+#include <limbo/tools/macros.hpp>
 
 namespace limbo {
     namespace experimental {

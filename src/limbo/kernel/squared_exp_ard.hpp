@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -56,7 +56,7 @@ namespace limbo {
             /// @ingroup kernel_defaults
             BO_PARAM(double, sigma_sq, 1);
         };
-    }
+    } // namespace defaults
 
     namespace kernel {
         /**
@@ -100,7 +100,7 @@ namespace limbo {
                     _ell(i) = std::exp(p(i));
                 for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j)
                     for (size_t i = 0; i < _input_dim; ++i)
-                        _A(i, j) = std::exp(p((j + 1) * _input_dim + i));
+                        _A(i, j) = p((j + 1) * _input_dim + i);
                 _sf2 = std::exp(2.0 * p(params_size() - 1));
             }
 
@@ -110,13 +110,15 @@ namespace limbo {
                     Eigen::VectorXd grad = Eigen::VectorXd::Zero(this->params_size());
                     Eigen::MatrixXd K = (_A * _A.transpose());
                     K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
-                    double z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();
+                    double z = ((x1 - x2).transpose() * K * (x1 - x2));
                     double k = _sf2 * std::exp(-0.5 * z);
 
                     grad.head(_input_dim) = (x1 - x2).cwiseQuotient(_ell).array().square() * k;
-                    Eigen::MatrixXd G = -k * (x1 - x2) * (x1 - x2).transpose() * _A;
-                    for (size_t j = 0; j < Params::kernel_squared_exp_ard::k(); ++j)
-                        grad.segment((1 + j) * _input_dim, _input_dim) = G.col(j);
+
+                    for (size_t j = 0; j < (unsigned int)Params::kernel_squared_exp_ard::k(); ++j) {
+                        Eigen::VectorXd G = -((x1 - x2).transpose() * _A.col(j))(0) * (x1 - x2) * k;
+                        grad.segment((j + 1) * _input_dim, _input_dim) = G;
+                    }
 
                     grad(grad.size() - 1) = 2 * k;
 
@@ -140,7 +142,7 @@ namespace limbo {
                 if (Params::kernel_squared_exp_ard::k() > 0) {
                     Eigen::MatrixXd K = (_A * _A.transpose());
                     K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
-                    z = ((x1 - x2).transpose() * K * (x1 - x2)).norm();
+                    z = ((x1 - x2).transpose() * K * (x1 - x2));
                 }
                 else {
                     z = (x1 - x2).cwiseQuotient(_ell).squaredNorm();
@@ -157,7 +159,7 @@ namespace limbo {
             size_t _input_dim;
             Eigen::VectorXd _h_params;
         };
-    }
-}
+    } // namespace kernel
+} // namespace limbo
 
 #endif

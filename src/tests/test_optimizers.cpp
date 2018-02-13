@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -49,11 +49,11 @@
 #include <boost/test/unit_test.hpp>
 
 #include <limbo/opt/chained.hpp>
-#include <limbo/opt/parallel_repeater.hpp>
 #include <limbo/opt/cmaes.hpp>
-#include <limbo/opt/rprop.hpp>
 #include <limbo/opt/grid_search.hpp>
+#include <limbo/opt/parallel_repeater.hpp>
 #include <limbo/opt/random_point.hpp>
+#include <limbo/opt/rprop.hpp>
 #include <limbo/tools/macros.hpp>
 
 using namespace limbo;

@@ -8,7 +8,7 @@
 #| Contributor(s):
 #|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 #|   - Antoine Cully (antoinecully@gmail.com)
-#|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+#|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 #|   - Federico Allocati (fede.allocati@gmail.com)
 #|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 #|   - Roberto Rama (bertoski@gmail.com)
@@ -288,6 +288,9 @@ def run_local_one(directory, s):
     retcode = subprocess.call(s, shell=True, env=None, stdout=std_out, stderr=std_err)
 
 def run_local(conf_file, serial = True):
+    if not json_ok:
+        Logs.pprint('RED', 'ERROR: simplejson is not installed and as such you cannot read the json configuration file for running your experiments.')
+        return
     fnames,arguments = _sub_script_local(conf_file)
     threads = []
     for (fname, directory) in fnames:
@@ -322,6 +325,9 @@ def qsub(conf_file):
 export LD_LIBRARY_PATH=@ld_lib_path
 exec @exec
 """
+    if not json_ok:
+        Logs.pprint('RED', 'ERROR: simplejson is not installed and as such you cannot read the json configuration file for running your experiments.')
+        return
     fnames = _sub_script(tpl, conf_file)
     for (fname, directory) in fnames:
         s = "qsub -d " + directory + " " + fname
@@ -339,6 +345,9 @@ def oar(conf_file):
 export LD_LIBRARY_PATH=@ld_lib_path
 exec @exec
 """
+    if not json_ok:
+        Logs.pprint('RED', 'ERROR: simplejson is not installed and as such you cannot read the json configuration file for running your experiments.')
+        return
     Logs.pprint('YELLOW', 'WARNING [oar]: MPI not supported yet')
     fnames = _sub_script(tpl, conf_file)
     for (fname, directory) in fnames:

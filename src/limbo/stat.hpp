@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -49,18 +49,18 @@
 ///@defgroup stat
 ///@defgroup stat_defaults
 
+#include <limbo/stat/aggregated_observations.hpp>
 #include <limbo/stat/best_aggregated_observations.hpp>
 #include <limbo/stat/best_observations.hpp>
 #include <limbo/stat/best_samples.hpp>
 #include <limbo/stat/console_summary.hpp>
-#include <limbo/stat/aggregated_observations.hpp>
-#include <limbo/stat/observations.hpp>
+#include <limbo/stat/gp.hpp>
 #include <limbo/stat/gp_acquisitions.hpp>
 #include <limbo/stat/gp_kernel_hparams.hpp>
 #include <limbo/stat/gp_likelihood.hpp>
 #include <limbo/stat/gp_mean_hparams.hpp>
 #include <limbo/stat/gp_prediction_differences.hpp>
+#include <limbo/stat/observations.hpp>
 #include <limbo/stat/samples.hpp>
-#include <limbo/stat/gp.hpp>
 
 #endif

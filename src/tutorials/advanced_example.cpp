@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -112,7 +112,7 @@ Eigen::Vector2d forward_kinematics(const Eigen::VectorXd& x)
 }
 
 template <typename Params>
-struct MeanFWModel {
+struct MeanFWModel : mean::BaseMean<Params> {
     MeanFWModel(size_t dim_out = 1) {}
 
     template <typename GP>

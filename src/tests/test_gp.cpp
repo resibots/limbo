@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -152,9 +152,9 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4 + 1));
-        test_samples_mean.push_back(tools::random_vector(6));
-        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4 + 1));
+        test_samples.push_back(tools::random_vector(gp.kernel_function().h_params_size()));
+        test_samples_mean.push_back(tools::random_vector(gp.mean_function().h_params_size()));
+        test_samples_kernel_mean.push_back(tools::random_vector(gp.kernel_function().h_params_size() + gp.mean_function().h_params_size()));
     }
 
     gp.compute(samples, observations);
@@ -244,8 +244,8 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4 + 2));
-        test_samples_kernel_mean.push_back(tools::random_vector(6 + 4 + 2));
+        test_samples.push_back(tools::random_vector(gp.kernel_function().h_params_size()));
+        test_samples_kernel_mean.push_back(tools::random_vector(gp.kernel_function().h_params_size() + gp.mean_function().h_params_size()));
     }
 
     gp.compute(samples, observations);
@@ -297,7 +297,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_loo_grad)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4 + 1));
+        test_samples.push_back(tools::random_vector(gp.kernel_function().h_params_size()));
     }
 
     gp.compute(samples, observations);
@@ -367,7 +367,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_loo_grad_noise)
     }
 
     for (int i = 0; i < M; i++) {
-        test_samples.push_back(tools::random_vector(4 + 2));
+        test_samples.push_back(tools::random_vector(gp.kernel_function().h_params_size()));
     }
 
     gp.compute(samples, observations);

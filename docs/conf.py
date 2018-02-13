@@ -178,6 +178,8 @@ html_static_path = ['_static']
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
 #html_last_updated_fmt = '%b %d, %Y'
+# remove timestamp to avoid too many commits
+html_last_updated_fmt = None
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
@@ -322,4 +324,4 @@ intersphinx_mapping = {
 }
 
 # for versioning
-scv_whitelist_branches = ('master', 'release-1.0')
+scv_whitelist_branches = ('master', 'release-1.0', 'new_benchmarks')

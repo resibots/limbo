@@ -341,7 +341,7 @@ Template
 .. code-block:: cpp
 
   template <typename Params>
-  struct MeanFunction {
+  struct MeanFunction : public BaseMean<Params> {
     MeanFunction(size_t dim_out = 1) : _dim_out(dim_out) {}
     template <typename GP>
     Eigen::VectorXd operator()(const Eigen::VectorXd& v, const GP&) const

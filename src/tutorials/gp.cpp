@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -43,14 +43,16 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#include <limbo/tools/macros.hpp>
+#include <fstream>
 #include <limbo/kernel/exp.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/data.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/tools.hpp>
-#include <fstream>
+#include <limbo/tools/macros.hpp>
+
+#include <limbo/serialize/text_archive.hpp>
 
 // this tutorials shows how to use a Gaussian process for regression
 
@@ -109,7 +111,7 @@ int main(int argc, char** argv)
         ofs << v.transpose() << " " << mu[0] << " " << sqrt(sigma) << std::endl;
     }
 
-    // an alternative is to optimize the hyper-paramerers
+    // an alternative is to optimize the hyper-parameters
     // in that case, we need a kernel with hyper-parameters that are designed to be optimized
     using Kernel2_t = kernel::SquaredExpARD<Params>;
     using Mean_t = mean::Data<Params>;
@@ -134,5 +136,11 @@ int main(int argc, char** argv)
     std::ofstream ofs_data("data.dat");
     for (size_t i = 0; i < samples.size(); ++i)
         ofs_data << samples[i].transpose() << " " << observations[i].transpose() << std::endl;
+
+    // Sometimes is useful to save an optimized GP
+    gp_ard.save<serialize::TextArchive>("myGP");
+
+    // Later we can load -- we need to make sure that the type is identical to the one saved
+    gp_ard.load<serialize::TextArchive>("myGP");
     return 0;
 }

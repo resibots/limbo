@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -46,14 +46,14 @@
 #ifndef LIMBO_MODEL_GP_PAREGO_HPP
 #define LIMBO_MODEL_GP_PAREGO_HPP
 
-#include <iostream>
 #include <cassert>
+#include <iostream>
 #include <limits>
 #include <vector>
 
+#include <Eigen/Cholesky>
 #include <Eigen/Core>
 #include <Eigen/LU>
-#include <Eigen/Cholesky>
 
 #include <limbo/model/gp/no_lf_opt.hpp>
 

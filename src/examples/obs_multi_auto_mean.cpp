@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -43,12 +43,12 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#include <limbo/tools/macros.hpp>
+#include <limbo/bayes_opt/boptimizer.hpp>
 #include <limbo/kernel/squared_exp_ard.hpp>
 #include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
-#include <limbo/bayes_opt/boptimizer.hpp>
+#include <limbo/tools/macros.hpp>
 
 using namespace limbo;
 
@@ -123,7 +123,7 @@ protected:
 };
 
 template <typename Params>
-struct MeanOffset {
+struct MeanOffset : public mean::BaseMean<Params> {
     MeanOffset(size_t dim_out = 1) {}
 
     template <typename GP>
@@ -142,7 +142,7 @@ struct MeanOffset {
 };
 
 template <typename Params>
-struct MeanRotation {
+struct MeanRotation : public mean::BaseMean<Params> {
     MeanRotation(size_t dim_out = 1) {}
 
     template <typename GP>
@@ -166,7 +166,7 @@ struct MeanRotation {
 };
 
 template <typename Params>
-struct MeanComplet {
+struct MeanComplet : public mean::BaseMean<Params> {
     MeanComplet(size_t dim_out = 1) {}
 
     template <typename GP>

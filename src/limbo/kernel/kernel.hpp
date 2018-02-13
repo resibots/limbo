@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -57,7 +57,7 @@ namespace limbo {
             BO_PARAM(double, noise, 0.01);
             BO_PARAM(bool, optimize_noise, false);
         };
-    }
+    } // namespace defaults
 
     namespace kernel {
         /**
@@ -128,8 +128,22 @@ namespace limbo {
         protected:
             double _noise;
             double _noise_p;
+
+            // Functions for compilation issues
+            // They should never be called like this
+            size_t params_size() const { return 0; }
+
+            Eigen::VectorXd params() const { return Eigen::VectorXd(); }
+
+            void set_params(const Eigen::VectorXd& p) {}
+
+            Eigen::VectorXd gradient(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const
+            {
+                // This should never be called!
+                assert(false);
+            }
         };
-    }
-}
+    } // namespace kernel
+} // namespace limbo
 
 #endif
