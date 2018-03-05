@@ -50,6 +50,8 @@
 ///@defgroup model_opt_defaults
 
 #include <limbo/model/gp.hpp>
+#include <limbo/model/sparse_gp.hpp>
+
 #include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
