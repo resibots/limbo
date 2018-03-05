@@ -119,16 +119,15 @@ namespace limbo {
 
         protected:
             /// get the denser point in a list of samples
-            int _get_denser_point(const std::vector<Eigen::VectorXd>& samples, const Eigen::MatrixXd& distances) const
+            int _get_denser_point(int D, int N, const Eigen::MatrixXd& distances) const
             {
                 std::mutex update_mutex;
-                int D = samples[0].size() + 2;
                 double min_dist = std::numeric_limits<double>::max();
                 int denser = -1;
 
-                tools::par::loop(0u, samples.size(), [&](size_t i) {
+                tools::par::loop(0u, N, [&](size_t i) {
                     double dist = 0.;
-                    std::vector<double> neighbors(samples.size());
+                    std::vector<double> neighbors(N);
                     Eigen::VectorXd::Map(neighbors.data(), neighbors.size()) = distances.row(i);
                     /// remove self distance
                     neighbors.erase(neighbors.begin() + i);
@@ -165,7 +164,7 @@ namespace limbo {
 
                 std::vector<Eigen::VectorXd> samp = samples, obs = observations;
                 while (samp.size() > Params::model_sparse_gp::max_points()) {
-                    int k = _get_denser_point(samp, distances);
+                    int k = _get_denser_point(samp[0].size(), samp.size(), distances);
                     /// sanity check
                     if (k < 0)
                         break;
