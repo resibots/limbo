@@ -92,7 +92,7 @@ The part to edit is between line 56 and line 63:
     return tools::make_vector(y);
   }
 
-By default limbo optimizes in :math:`[0,1]`. For more information, see the :ref:`Basic example <basic-example>`.
+Limbo always maximizes and by default in :math:`[0,1]`. For more information, see the :ref:`Basic example <basic-example>`.
 
 
 Build your experiment
@@ -100,6 +100,7 @@ Build your experiment
 
 ::
 
+  ./waf configure --exp test
   ./waf --exp test
 
 Run your experiment
