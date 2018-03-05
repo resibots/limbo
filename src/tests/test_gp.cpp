@@ -57,6 +57,7 @@
 #include <limbo/mean/constant.hpp>
 #include <limbo/mean/function_ard.hpp>
 #include <limbo/model/gp.hpp>
+#include <limbo/model/sparse_gp.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
@@ -594,7 +595,7 @@ BOOST_AUTO_TEST_CASE(test_gp_bw_inversion)
         GP_t gp;
         auto t1 = std::chrono::steady_clock::now();
         gp.compute(samples, observations);
-        auto time_init = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
+        // auto time_init = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
         // std::cout.precision(17);
         // std::cout << "Time running first batch: " << time_init << "us" << std::endl
         //           << std::endl;
@@ -757,4 +758,60 @@ BOOST_AUTO_TEST_CASE(test_gp_init_variance)
     sigma = gp4.sigma(tools::random_vector(1));
 
     BOOST_CHECK_CLOSE(sigma, 10.0, 1);
+}
+
+BOOST_AUTO_TEST_CASE(test_sparse_gp)
+{
+    using namespace limbo;
+    constexpr size_t N = 10;
+    constexpr size_t M = 100;
+    size_t failures = 0;
+
+    struct SparseParams {
+        struct mean_constant : public defaults::mean_constant {
+        };
+        struct kernel : public defaults::kernel {
+        };
+        struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+        };
+        struct opt_rprop : public defaults::opt_rprop {
+        };
+        struct model_sparse_gp {
+            BO_PARAM(int, max_points, M / 3);
+        };
+    };
+
+    using KF_t = kernel::SquaredExpARD<SparseParams>;
+    using MF_t = mean::Constant<SparseParams>;
+    using GP_t = model::GP<SparseParams, KF_t, MF_t, model::gp::KernelLFOpt<SparseParams, opt::Rprop<SparseParams>>>;
+    using SparseGP_t = model::SparseGP<SparseParams, KF_t, MF_t, model::gp::KernelLFOpt<SparseParams, opt::Rprop<SparseParams>>>;
+
+    for (size_t i = 0; i < N; i++) {
+
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+        tools::rgen_double_t rgen(0.0, 10);
+        for (size_t i = 0; i < M; i++) {
+            observations.push_back(make_v1(rgen.rand()));
+            samples.push_back(make_v1(rgen.rand()));
+        }
+
+        GP_t gp;
+        auto t1 = std::chrono::steady_clock::now();
+        gp.compute(samples, observations, false);
+        gp.optimize_hyperparams();
+        auto time_full = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
+
+
+        SparseGP_t sgp;
+        auto t2 = std::chrono::steady_clock::now();
+        sgp.compute(samples, observations, false);
+        sgp.optimize_hyperparams();
+        auto time_sparse = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t2).count();
+
+        if (time_full <= time_sparse)
+            failures++;
+    }
+
+    BOOST_CHECK(double(failures) / double(N) < 0.1);
 }
