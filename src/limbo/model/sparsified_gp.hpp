@@ -69,15 +69,15 @@ namespace limbo {
         /// A sparsification based on the density of points is performed
         /// until a desired number of points is reached
         template <typename Params, typename KernelFunction = kernel::MaternFiveHalves<Params>, typename MeanFunction = mean::Data<Params>, typename HyperParamsOptimizer = gp::NoLFOpt<Params>>
-        class SparseGP : public GP<Params, KernelFunction, MeanFunction, HyperParamsOptimizer> {
+        class SparsifiedGP : public GP<Params, KernelFunction, MeanFunction, HyperParamsOptimizer> {
         public:
             using base_gp_t = GP<Params, KernelFunction, MeanFunction, HyperParamsOptimizer>;
 
             /// useful because the model might be created before knowing anything about the process
-            SparseGP() : base_gp_t() {}
+            SparsifiedGP() : base_gp_t() {}
 
             /// useful because the model might be created  before having samples
-            SparseGP(int dim_in, int dim_out)
+            SparsifiedGP(int dim_in, int dim_out)
                 : base_gp_t(dim_in, dim_out) {}
 
             /// Compute the GP from samples and observations. This call needs to be explicit!

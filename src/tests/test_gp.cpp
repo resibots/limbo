@@ -61,7 +61,7 @@
 #include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
 #include <limbo/model/gp/mean_lf_opt.hpp>
-#include <limbo/model/sparse_gp.hpp>
+#include <limbo/model/sparsified_gp.hpp>
 #include <limbo/opt/grid_search.hpp>
 #include <limbo/tools/macros.hpp>
 
@@ -788,7 +788,7 @@ BOOST_AUTO_TEST_CASE(test_sparse_gp)
     using KF_t = kernel::SquaredExpARD<SparseParams>;
     using MF_t = mean::Constant<SparseParams>;
     using GP_t = model::GP<SparseParams, KF_t, MF_t, model::gp::KernelLFOpt<SparseParams, opt::Rprop<SparseParams>>>;
-    using SparseGP_t = model::SparseGP<SparseParams, KF_t, MF_t, model::gp::KernelLFOpt<SparseParams, opt::Rprop<SparseParams>>>;
+    using SparsifiedGP_t = model::SparsifiedGP<SparseParams, KF_t, MF_t, model::gp::KernelLFOpt<SparseParams, opt::Rprop<SparseParams>>>;
 
     for (size_t i = 0; i < N; i++) {
 
@@ -806,7 +806,7 @@ BOOST_AUTO_TEST_CASE(test_sparse_gp)
         gp.optimize_hyperparams();
         auto time_full = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - t1).count();
 
-        SparseGP_t sgp;
+        SparsifiedGP_t sgp;
         auto t2 = std::chrono::steady_clock::now();
         sgp.compute(samples, observations, false);
         sgp.optimize_hyperparams();
@@ -843,7 +843,7 @@ BOOST_AUTO_TEST_CASE(test_sparse_gp_accuracy)
     using KF_t = kernel::SquaredExpARD<SparseParams>;
     using MF_t = mean::Constant<SparseParams>;
     using GP_t = model::GP<SparseParams, KF_t, MF_t, model::gp::KernelLFOpt<SparseParams, opt::Rprop<SparseParams>>>;
-    using SparseGP_t = model::SparseGP<SparseParams, KF_t, MF_t, model::gp::KernelLFOpt<SparseParams, opt::Rprop<SparseParams>>>;
+    using SparsifiedGP_t = model::SparsifiedGP<SparseParams, KF_t, MF_t, model::gp::KernelLFOpt<SparseParams, opt::Rprop<SparseParams>>>;
 
     for (size_t i = 0; i < N; i++) {
 
@@ -866,7 +866,7 @@ BOOST_AUTO_TEST_CASE(test_sparse_gp_accuracy)
         gp.compute(samples, observations, false);
         gp.optimize_hyperparams();
 
-        SparseGP_t sgp;
+        SparsifiedGP_t sgp;
         sgp.compute(samples, observations, false);
         sgp.optimize_hyperparams();
 
