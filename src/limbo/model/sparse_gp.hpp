@@ -99,8 +99,8 @@ namespace limbo {
                 }
             }
 
-            /// add sample and update the GP. This code uses an incremental implementation of the Cholesky
-            /// decomposition. It is therefore much faster than a call to compute()
+            /// add sample and update the GP. If the number of samples is bigger than
+            /// the desired maximum points, we re-sparsify and re-compute the GP
             void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation)
             {
                 base_gp_t::add_sample(sample, observation);
@@ -118,8 +118,12 @@ namespace limbo {
             }
 
         protected:
-            /// get the denser point in a list of samples
-            int _get_denser_point(int D, int N, const Eigen::MatrixXd& distances) const
+            /// get the densest point in a list of samples
+            /// D is the dimensionality of the samples
+            /// N is the number of samples
+            /// distances is an NxN matrix where element (i,j) contains
+            /// the (pre)computed distance between the ith and the jth samples
+            int _get_most_dense_point(int D, int N, const Eigen::MatrixXd& distances) const
             {
                 std::mutex update_mutex;
                 double min_dist = std::numeric_limits<double>::max();
@@ -164,22 +168,22 @@ namespace limbo {
 
                 std::vector<Eigen::VectorXd> samp = samples, obs = observations;
                 while (samp.size() > Params::model_sparse_gp::max_points()) {
-                    int k = _get_denser_point(samp[0].size(), samp.size(), distances);
+                    int k = _get_most_dense_point(samp[0].size(), samp.size(), distances);
                     /// sanity check
                     if (k < 0)
                         break;
                     samp.erase(samp.begin() + k);
                     obs.erase(obs.begin() + k);
 
-                    _removeColumn(distances, k);
-                    _removeRow(distances, k);
+                    _remove_column(distances, k);
+                    _remove_row(distances, k);
                 }
 
                 return std::make_pair(samp, obs);
             }
 
             /// remove row from an Eigen matrix
-            void _removeRow(Eigen::MatrixXd& matrix, unsigned int rowToRemove) const
+            void _remove_row(Eigen::MatrixXd& matrix, unsigned int rowToRemove) const
             {
                 unsigned int numRows = matrix.rows() - 1;
                 unsigned int numCols = matrix.cols();
@@ -191,7 +195,7 @@ namespace limbo {
             }
 
             /// remove column from an Eigen matrix
-            void _removeColumn(Eigen::MatrixXd& matrix, unsigned int colToRemove) const
+            void _remove_column(Eigen::MatrixXd& matrix, unsigned int colToRemove) const
             {
                 unsigned int numRows = matrix.rows();
                 unsigned int numCols = matrix.cols() - 1;
