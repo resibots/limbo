@@ -73,7 +73,7 @@ namespace limbo {
         /// It is parametrized by:
         /// - a kernel function
         /// - a mean function
-        /// - [optionnal] an optimizer for the hyper-parameters
+        /// - [optional] an optimizer for the hyper-parameters
         template <typename Params, typename KernelFunction = kernel::MaternFiveHalves<Params>, typename MeanFunction = mean::Data<Params>, typename HyperParamsOptimizer = gp::NoLFOpt<Params>>
         class GP {
         public:
