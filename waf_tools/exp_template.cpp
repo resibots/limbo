@@ -14,11 +14,11 @@ struct Params {
     };
 
 // depending on which internal optimizer we use, we need to import different parameters
-#ifdef USE_LIBCMAES
-    struct opt_cmaes : public defaults::opt_cmaes {
-    };
-#elif defined(USE_NLOPT)
+#ifdef USE_NLOPT
     struct opt_nloptnograd : public defaults::opt_nloptnograd {
+    };
+#elif defined(USE_LIBCMAES)
+    struct opt_cmaes : public defaults::opt_cmaes {
     };
 #else
     struct opt_gridsearch : public defaults::opt_gridsearch {
