@@ -36,13 +36,19 @@ Next, copy the following content to the ``wscript`` file:
 
 For this example, we will optimize a simple function: :math:`-{(5 * x - 2.5)}^2 + 5`, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from 'uselib'.
 
-To begin, the ``main`` file has to include the necessary files, and declare the ``Parameter struct``:
+To begin, the ``main`` file has to include the necessary files:
+
+.. literalinclude:: ../../src/tutorials/basic_example.cpp
+   :language: c++
+   :linenos:
+   :lines: 48-53
+
+We also need to declare the ``Parameter struct``:
 
 .. literalinclude:: ../../src/tutorials/basic_example.cpp
    :language: c++
    :linenos:
    :lines: 55-97
-
 
 
 Here we are stating that the samples are observed without noise (which makes sense, because we are going to evaluate the function), that we want to output the stats (by setting stats_enabled to `true`), that the model has to be initialized with 10 samples (that will be selected randomly), and that the optimizer should run for 40 iterations. The rest of the values are taken from the defaults. **By default limbo optimizes in** :math:`[0,1]`, but you can optimize without bounds by setting ``BO_PARAM(bool, bounded, false)`` in ``bayes_opt_bobase`` parameters. If you do so, limbo outputs random numbers, wherever needed, sampled from a gaussian centered in zero with a standard deviation of :math:`10`, instead of uniform random numbers in :math:`[0,1]` (in the bounded case). Finally **limbo always maximizes**; this means that you have to update your objective function if you want to minimize.
