@@ -37,9 +37,7 @@ The basic layout of your ``main.cpp`` file should look like this:
 
 .. code-block:: c++
 
-    #include <iostream>
-    #include <limbo/bayes_opt/boptimizer.hpp>
-    // Here we have to include other needed limbo headers
+    #include <limbo/limbo.hpp>
 
     using namespace limbo;
 
@@ -93,14 +91,14 @@ To compute the forward kinematics of our simple planar arm we use the following 
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 85-113
+   :lines: 85-112
 
 To make this forward kinematic model useful to our GP, we need to create a mean function:
 
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 115-125
+   :lines: 114-124
 
 Using State-based bayesian optimization
 -----------------------------------------
@@ -111,7 +109,7 @@ Creating an Aggregator:
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 138-150
+   :lines: 137-149
 
 
 Here, we are using a very simple aggregator that simply computes the distance between the end-effector and the target position.
@@ -125,7 +123,7 @@ When our bayesian optimizer finds a solution that the end-effector of the arm is
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 127-136
+   :lines: 126-135
 
 Creating the evaluation function
 -----------------------------------------
@@ -133,7 +131,7 @@ Creating the evaluation function
 .. literalinclude:: ../../src/tutorials/advanced_example.cpp
    :language: c++
    :linenos:
-   :lines: 152-167
+   :lines: 151-166
 
 Creating the experiment
 -------------------------------------------------
@@ -242,3 +240,10 @@ Then, an executable named ``arm_example`` should be produced under the folder ``
 
 
 Using state-based bayesian optimization, we can transfer what we learned during one task to achieve faster new tasks.
+
+Full ``main.cpp``:
+
+.. literalinclude:: ../../src/tutorials/advanced_example.cpp
+   :language: c++
+   :linenos:
+   :lines: 47-
