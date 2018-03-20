@@ -98,6 +98,12 @@ def build(bld):
                 target='test_serialize',
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
+    bld.program(features='cxx test',
+                source='test_spt.cpp',
+                includes='. .. ../../',
+                target='test_spt',
+                uselib='BOOST EIGEN TBB',
+                use='limbo')
     if bld.env.DEFINES_NLOPT or bld.env.DEFINES_LIBCMAES:
         bld.program(features='cxx test',
                     source='test_boptimizer.cpp',
