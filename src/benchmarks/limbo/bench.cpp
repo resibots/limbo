@@ -99,7 +99,7 @@ struct Params {
     };
 #ifdef USE_LIBCMAES
     struct opt_cmaes : public defaults::opt_cmaes {
-        BO_PARAM(double, max_fun_evals, 500);
+        BO_PARAM(int, max_fun_evals, 500);
         BO_PARAM(double, fun_tolerance, 1e-6);
         BO_PARAM(double, xrel_tolerance, 1e-6);
     };
