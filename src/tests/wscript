@@ -93,6 +93,12 @@ def build(bld):
                 uselib='BOOST EIGEN TBB',
                 use='limbo')
     bld.program(features='cxx test',
+                source='test_poegp.cpp',
+                includes='. .. ../../',
+                target='test_poegp',
+                uselib='BOOST EIGEN TBB',
+                use='limbo')
+    bld.program(features='cxx test',
                 source='test_serialize.cpp',
                 includes='. .. ../../',
                 target='test_serialize',
