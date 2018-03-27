@@ -249,6 +249,9 @@ def compile_regression_benchmarks(bld, json_file):
                     NLOptIds.append(o)
             params += "};"
 
+            tab_str = ''
+            if m == 0:
+                tab_str = '            '
             gp_code =  'using GP_' + str(m) + '_t = ' + gp_type+'<Params'+str(m)+', '+kernel_type+'<Params'+str(m)+'>, '+mean_type+'<Params'+str(m)+'>, '+hp_opt+'<Params'+str(m)+', '
             opt = optimizer[0]
             opt_find = opt.rfind('::')
@@ -275,8 +278,8 @@ def compile_regression_benchmarks(bld, json_file):
             gp_code += '            std::cout << std::setprecision(std::numeric_limits<long double>::digits10 + 1);\n'
             gp_code += '            std::cout << "Time_' + str(m) + ' in secs: " << time_' + str(m) + '/ double(1000000.0) << std::endl;\n'
 
-            gp_query_code =  'start_' + str(m) + ' = std::chrono::high_resolution_clock::now();\n'
-            gp_query_code += '            std::vector<Eigen::VectorXd> predict_' + str(m) + '(N_test);\n'
+            gp_query_code  = '            std::vector<Eigen::VectorXd> predict_' + str(m) + '(N_test);\n'
+            gp_query_code += '            start_' + str(m) + ' = std::chrono::high_resolution_clock::now();\n'
             gp_query_code += '            for (int i = 0; i < N_test; i++) {\n'
             gp_query_code += '                double ss;\n'
             gp_query_code += '                std::tie(predict_' + str(m) +'[i], ss) = gp_' + str(m) + '.query(test_points[i]);\n'
@@ -317,7 +320,7 @@ def compile_regression_benchmarks(bld, json_file):
                     source=name + "_dir/" + name + ".cpp",
                     target=name,
                     includes='./src ./src/benchmarks/regression',
-                    uselib='BOOST EIGEN TBB SFERES LIBCMAES NLOPT MKL_TBB',
+                    uselib='BOOST EIGEN TBB SFERES LIBCMAES NLOPT MKL_TBB LIBGP',
                     cxxflags=bld.env['CXXFLAGS'],
                     use='limbo')
 

@@ -94,6 +94,9 @@ def load_data():
             if func[-4:] == '_gpy':
                 func = func[:-4]
                 var = 'GPy'
+            if func[-6:] == '_libgp':
+                func = func[:-6]
+                var = 'SEFull'
             exp = exp[4:]
 
             text_file = open(f, "r")
