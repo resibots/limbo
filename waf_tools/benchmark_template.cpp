@@ -138,9 +138,9 @@ void benchmark(const std::string& name, std::vector<int> dimensions, std::vector
             double deltamax = 50;
             double etaminus = 0.5;
             double etaplus = 1.2;
-            rprop_optimizer.init(1e-4, delta0, deltamin, deltamax, etaminus, etaplus);
+            rprop_optimizer.init(1e-2, delta0, deltamin, deltamax, etaminus, etaplus);
             auto start_libgp = std::chrono::high_resolution_clock::now();
-            rprop_optimizer.maximize(&libgp_gp, 300, false);
+            rprop_optimizer.maximize(&libgp_gp, 50, false);
             auto time_libgp = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - start_libgp).count();
             std::cout << std::setprecision(std::numeric_limits<long double>::digits10 + 1);
             std::cout << "Time of libGP in secs: " << time_libgp / double(1000000.0) << std::endl;
