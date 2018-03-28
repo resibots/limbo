@@ -121,6 +121,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#acqui-eci">acqui_eci</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bayes-opt-bobase">bayes_opt_bobase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-ucb-imgpo">acqui_ucb_imgpo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-sparse-gp">model_sparse_gp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#init-lhs">init_lhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#init-randomsamplinggrid">init_randomsamplinggrid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mean-constant">mean_constant</a></li>
@@ -239,6 +240,12 @@
 <li>double nu = 0.05 [defined in src/limbo/experimental/acqui/ucb_imgpo.hpp]</li>
 </ul>
 </div>
+<div class="section" id="model-sparse-gp">
+<h2>model_sparse_gp<a class="headerlink" href="#model-sparse-gp" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>int max_points = 200 [defined in src/limbo/model/sparsified_gp.hpp]</li>
+</ul>
+</div>
 <div class="section" id="init-lhs">
 <h2>init_lhs<a class="headerlink" href="#init-lhs" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -327,7 +334,7 @@
 <ul class="simple">
 <li>double xrel_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>bool verbose = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
-<li>double max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>int max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>int variant = aIPOP_CMAES [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>int elitism = 0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
@@ -335,8 +342,10 @@
 <li>int restarts = 1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>double fun_target = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>double ubound = 1.0 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>bool stochastic = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>double fun_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 <li>bool handle_uncertainty = false [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
+<li>int lambda = -1 [defined in src/limbo/opt/cmaes.hpp] [‘#ifdef USE_LIBCMAES’]</li>
 </ul>
 </div>
 <div class="section" id="opt-nloptgrad">

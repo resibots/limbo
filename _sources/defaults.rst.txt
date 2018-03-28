@@ -23,6 +23,10 @@ acqui_ucb_imgpo
 ^^^^^^^^^^^^^^^
 - double nu = 0.05 [defined in src/limbo/experimental/acqui/ucb_imgpo.hpp]
 
+model_sparse_gp
+^^^^^^^^^^^^^^^
+- int max_points = 200 [defined in src/limbo/model/sparsified_gp.hpp]
+
 init_lhs
 ^^^^^^^^
 - int samples = 10 [defined in src/limbo/init/lhs.hpp]
@@ -86,7 +90,7 @@ opt_cmaes
 ^^^^^^^^^
 - double xrel_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - bool verbose = false [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- double max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
+- int max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - int variant = aIPOP_CMAES [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - int elitism = 0 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
@@ -94,8 +98,10 @@ opt_cmaes
 - int restarts = 1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - double fun_target = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - double ubound = 1.0 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
+- bool stochastic = false [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - double fun_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 - bool handle_uncertainty = false [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
+- int lambda = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
 
 opt_nloptgrad
 ^^^^^^^^^^^^^

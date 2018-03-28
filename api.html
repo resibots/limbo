@@ -947,7 +947,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <li>int variant</li>
 <li>int elitism</li>
 <li>int restarts</li>
-<li>double max_fun_evals</li>
+<li>int max_fun_evals</li>
 <li>double fun_tolerance</li>
 <li>double xrel_tolerance</li>
 <li>double fun_target</li>
@@ -955,7 +955,9 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <li>bool handle_uncertainty</li>
 <li>bool verbose</li>
 <li>double lb (lower bounds)</li>
-<li>double ub (upper bounds) </li>
+<li>double ub (upper bounds)</li>
+<li>bool stochastic</li>
+<li>int lambda </li>
 </ul>
 </li>
 </ul>
@@ -1105,7 +1107,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="function">
 <dt>
-<span class="target" id="limbogroup__opt__defaults_1ga5130bd236acff913c59380059474ebab"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, max_fun_evals, - 1)</code></dt>
+<span class="target" id="limbogroup__opt__defaults_1ga99e3600ed9a87a1c48fce8b317957e4b"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(int, max_fun_evals, - 1)</code></dt>
 <dd><p>maximum number of calls to the function to be optimized </p>
 </dd></dl>
 
@@ -1167,6 +1169,18 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dt>
 <span class="target" id="limbogroup__opt__defaults_1ga4d61ad0b07412ab14a72c008a8f99455"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(double, ubound, 1. 0)</code></dt>
 <dd><p>upper bound (in input) for cmaes </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga59745552d26ced16891de637d83021fd"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(bool, stochastic, false)</code></dt>
+<dd><p>if stochastic, the mean of the last distribution is returned otherwise, the best ever candidate is returned. If handle_uncertainty is on, this is also enabled. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga21d86483ee1b2e6ce9c529ea315294fa"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(int, lambda, - 1)</code></dt>
+<dd><p>number of parent population -1 to automatically determine </p>
 </dd></dl>
 
 <dl class="function">
@@ -1239,9 +1253,10 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dd><p>A classic Gaussian process. It is parametrized by:<ul class="simple">
 <li>a kernel function</li>
 <li>a mean function</li>
-<li>[optionnal] an optimizer for the hyper-parameters </li>
+<li>[optional] an optimizer for the hyper-parameters </li>
 </ul>
 </p>
+<p>Subclassed by limbo::model::SparsifiedGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
