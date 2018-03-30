@@ -96,7 +96,7 @@ def load_data():
                 var = 'GPy'
             if func[-6:] == '_libgp':
                 func = func[:-6]
-                var = 'SEFull'
+                var = 'libGP'
             exp = exp[4:]
 
             text_file = open(f, "r")
@@ -235,7 +235,7 @@ def plot_all():
     node = platform.node()
     rst_file.write("*" + date + "* -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
 
-    rst_file.write("- We compare to GPy (https://github.com/SheffieldML/GPy) \n")
+    rst_file.write("- We compare to GPy (https://github.com/SheffieldML/GPy) and libGP (https://github.com/mblum/libgp)\n")
     rst_file.write("- Mean Squared Error: lower is better\n")
     rst_file.write("- Learning time: lower is better\n")
     rst_file.write("- Querying time (for 1 by 1 query points): lower is better\n\n")
@@ -246,8 +246,8 @@ def plot_all():
     rst_file.write("------------------\n\n")
 
     rst_file.write("- GP-SE-Full-Rprop: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo)\n")
-    rst_file.write("- GP-SE-Full-SLSQP: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the SLSQP optimizer (provided by NLOpt)\n")
     rst_file.write("- GP-SE-Rprop: Limbo with Squared Exponential kernel where the signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo) and where the signal noise is not optimized but set to a default value: 0.01\n")
+    rst_file.write("- libGP-SE-Full: libGP with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (the only one that libGP has)\n")
     rst_file.write("- GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation (with the L-BFGS-B optimizer --- `check scipy.optimize.fmin_l_bfgs_b= <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html>`_)\n\n")
 
     print('loading data...')

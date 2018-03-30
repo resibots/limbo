@@ -191,7 +191,7 @@ void benchmark(const std::string& name, std::vector<int> dimensions, std::vector
 
             // save results of libGP
             ofs_libgp << std::setprecision(std::numeric_limits<long double>::digits10 + 1);
-            ofs_libgp << time_libgp / double(1000000.0) << " " << time2_libgp * 1e-3 / double(N_test) << " " << err_libgp << " libGP" << std::endl;
+            ofs_libgp << time_libgp / double(1000000.0) << " " << time2_libgp * 1e-3 / double(N_test) << " " << err_libgp << " SE-Full" << std::endl;
 #endif
 
             // Prediction of the GPs code here
