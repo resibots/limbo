@@ -1,9 +1,9 @@
 Gaussian process regression benchmarks
 ======================================
 
-*March 28, 2018* -- hal19 (32 cores)
+*March 30, 2018* -- hal13 (32 cores)
 
-- We compare to GPy (https://github.com/SheffieldML/GPy) 
+- We compare to GPy (https://github.com/SheffieldML/GPy) and libGP (https://github.com/mblum/libgp)
 - Mean Squared Error: lower is better
 - Learning time: lower is better
 - Querying time (for 1 by 1 query points): lower is better
@@ -16,8 +16,8 @@ Naming convention
 ------------------
 
 - GP-SE-Full-Rprop: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo)
-- GP-SE-Full-SLSQP: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the SLSQP optimizer (provided by NLOpt)
 - GP-SE-Rprop: Limbo with Squared Exponential kernel where the signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo) and where the signal noise is not optimized but set to a default value: 0.01
+- libGP-SE-Full: libGP with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (the only one that libGP has)
 - GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation (with the L-BFGS-B optimizer --- `check scipy.optimize.fmin_l_bfgs_b= <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html>`_)
 
 Rastrigin in 8D

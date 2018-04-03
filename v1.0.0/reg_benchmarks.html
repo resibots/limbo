@@ -167,9 +167,9 @@
             
   <div class="section" id="gaussian-process-regression-benchmarks">
 <h1>Gaussian process regression benchmarks<a class="headerlink" href="#gaussian-process-regression-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>March 28, 2018</em> – hal19 (32 cores)</p>
+<p><em>March 30, 2018</em> – hal13 (32 cores)</p>
 <ul class="simple">
-<li>We compare to GPy (<a class="reference external" href="https://github.com/SheffieldML/GPy">https://github.com/SheffieldML/GPy</a>)</li>
+<li>We compare to GPy (<a class="reference external" href="https://github.com/SheffieldML/GPy">https://github.com/SheffieldML/GPy</a>) and libGP (<a class="reference external" href="https://github.com/mblum/libgp">https://github.com/mblum/libgp</a>)</li>
 <li>Mean Squared Error: lower is better</li>
 <li>Learning time: lower is better</li>
 <li>Querying time (for 1 by 1 query points): lower is better</li>
@@ -180,8 +180,8 @@
 <h2>Naming convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>GP-SE-Full-Rprop: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo)</li>
-<li>GP-SE-Full-SLSQP: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the SLSQP optimizer (provided by NLOpt)</li>
 <li>GP-SE-Rprop: Limbo with Squared Exponential kernel where the signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo) and where the signal noise is not optimized but set to a default value: 0.01</li>
+<li>libGP-SE-Full: libGP with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (the only one that libGP has)</li>
 <li>GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation (with the L-BFGS-B optimizer — <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html">check scipy.optimize.fmin_l_bfgs_b=</a>)</li>
 </ul>
 </div>
