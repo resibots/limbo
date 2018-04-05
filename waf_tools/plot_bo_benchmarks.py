@@ -107,7 +107,7 @@ def custom_ax(ax):
     ax.grid(axis='x', color="0.9", linestyle='-')
 
 def custom_boxes(ax, bp):
-    for i in range(len(bp['boxes'])):
+    for i in range(0, len(bp['boxes'])):
         box = bp['boxes'][i]
         box.set_linewidth(0)
         boxX = []
@@ -120,21 +120,17 @@ def custom_boxes(ax, bp):
             ax.add_patch(boxPolygon)
 
     for i in range(0, len(bp['boxes'])):
-        c_i = colors[i%len(colors)]
+        c_i = colors[i % len(colors)]
         bp['boxes'][i].set_color(c_i)
         # we have two whiskers!
-        bp['whiskers'][i*2].set_color(c_i)
-        bp['whiskers'][i*2 + 1].set_color(c_i)
-        bp['whiskers'][i*2].set_linewidth(2)
-        bp['whiskers'][i*2 + 1].set_linewidth(2)
-        # top and bottom fliers
-        if (i * 2 + 1 < len(bp['fliers'])):
-            bp['fliers'][i*2].set(markerfacecolor=c_i,
-                                  marker='o', alpha=0.75, markersize=6,
-                                  markeredgecolor='none')
-            bp['fliers'][i * 2 + 1].set(markerfacecolor=c_i,
-                                        marker='o', alpha=0.75, markersize=6,
-                                        markeredgecolor='none')
+        bp['whiskers'][i * 2].set_color(c_i)
+        bp['whiskers'][i * 2 + 1].set_color(c_i)
+        bp['whiskers'][i * 2].set_linewidth(2)
+        bp['whiskers'][i * 2 + 1].set_linewidth(2)
+        # ... and one set of fliers
+        bp['fliers'][i].set(markerfacecolor=c_i,
+                            marker='o', alpha=0.75, markersize=6,
+                            markeredgecolor='none')
         bp['medians'][i].set_color('black')
         bp['medians'][i].set_linewidth(2)
         # and 4 caps to remove
