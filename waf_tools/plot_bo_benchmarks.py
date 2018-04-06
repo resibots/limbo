@@ -217,6 +217,12 @@ def plot(func_name, data, rst_file):
     rst_file.write(str(len(da_acc[0])) + " replicates \n\n")
     rst_file.write(".. figure:: fig_benchmarks/" + name + ".png\n\n")
 
+
+# dst file is already open
+def include(src_file, dst_file):
+    for i in open(src_file):
+        dst_file.write(i)
+    
 def plot_all():
     if not plot_ok:
         print_log('YELLOW', "No plot")
@@ -235,23 +241,7 @@ def plot_all():
     node = platform.node()
     rst_file.write("*" + date + "* -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
 
-    rst_file.write("- We compare to BayesOpt (https://github.com/rmcantin/bayesopt) \n")
-    rst_file.write("- Accuracy: lower is better (difference with the optimum)\n")
-    rst_file.write("- Wall time: lower is better\n\n")
-    rst_file.write("- In each replicate, 10 random samples + 190 function evaluations\n")
-    rst_file.write("- see `src/benchmarks/limbo/bench.cpp` and `src/benchmarks/bayesopt/bench.cpp`\n\n")
-
-    rst_file.write("Naming convention\n")
-    rst_file.write("------------------\n\n")
-
-    rst_file.write("- limbo_def: default Limbo parameters\n\n")
-    rst_file.write("- opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function\n")
-    rst_file.write("- opt_direct: use DIRECT (from NLopt) to optimize the acquisition function\n")
-    rst_file.write("- acq_ucb: use UCB for the acquisition function\n")
-    rst_file.write("- acq_ei: use EI for the acquisition function\n")
-    rst_file.write("- hp_opt: use hyper-parameter optimization\n")
-    rst_file.write("- bayesopt_def: same parameters as default parameters in BayesOpt\n")
-    
+    include("docs/benchmark_res_bo.inc", rst_file)
     
     
     print('loading data...')
