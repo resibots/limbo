@@ -9,6 +9,6 @@ Details
 - Accuracy: lower is better (difference with the optimum)
 - Wall time: lower is better
 - In each replicate, 10 random samples + 190 function evaluations
- - see `src/benchmarks/limbo/bench.cpp` and `src/benchmarks/bayesopt/bench.cpp`
+- see `src/benchmarks/limbo/bench.cpp` and `src/benchmarks/bayesopt/bench.cpp`
 
 
