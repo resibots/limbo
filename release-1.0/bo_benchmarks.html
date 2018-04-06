@@ -167,25 +167,22 @@
             
   <div class="section" id="bayesian-optimization-benchmarks">
 <h1>Bayesian optimization benchmarks<a class="headerlink" href="#bayesian-optimization-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>March 28, 2018</em> – hal13 (32 cores)</p>
+<p><em>April 06, 2018</em> – hal01 (24 cores)</p>
+<p>This page presents benchmarks in which we compare the Bayesian optimization performance of LIMBO against BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a> , a state-of-the-art Bayesian Optimization library in C++). Each library is given 200 evaluations (10 random samples + 190 function evaluations) to find the optimum of the hidden function. We compare both the accuracy of the obtained solution (difference with the actual optimum solution) and the time (wall clock time) required by the library to run the optimization process. The results show that while the libraries generate solutions with similar accuracy (they are based on the same algorithm), LIMBO generates these solutions significantly faster than BayesOpt.</p>
+<p>In addition to comparing the performance of the libraries with their default parameter values (and evaluating LIMBO with the same parameters than BayesOpt, see variant: limbo/bench_bayes_def), we also evaluate the performance of multiple variants of LIMBO, including different acquisition functions (UCB or EI), different inner-optimizers (CMAES or DIRECT) and whether optimizing or not the hyper-parameters of the model. In all the these comparisons, we can observe that LIMBO is faster than BayesOpt, ebven when BayesOpt is not optimizing its hyper-parameters.</p>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>We compare to BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a>)</li>
 <li>Accuracy: lower is better (difference with the optimum)</li>
 <li>Wall time: lower is better</li>
 <li>In each replicate, 10 random samples + 190 function evaluations</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
 <li>see <cite>src/benchmarks/limbo/bench.cpp</cite> and <cite>src/benchmarks/bayesopt/bench.cpp</cite></li>
 </ul>
-<div class="section" id="naming-convention">
-<h2>Naming convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>limbo_def: default Limbo parameters</li>
-<li>opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function</li>
-<li>opt_direct: use DIRECT (from NLopt) to optimize the acquisition function</li>
-<li>acq_ucb: use UCB for the acquisition function</li>
-<li>acq_ei: use EI for the acquisition function</li>
-<li>hp_opt: use hyper-parameter optimization</li>
-<li>bayesopt_def: same parameters as default parameters in BayesOpt</li>
-</ul>
+</div></blockquote>
 </div>
 <div class="section" id="branin">
 <h2>branin<a class="headerlink" href="#branin" title="Permalink to this headline">¶</a></h2>
