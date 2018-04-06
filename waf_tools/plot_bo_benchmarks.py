@@ -137,6 +137,28 @@ def custom_boxes(ax, bp):
         for c in bp['caps']:
             c.set_linewidth(0)
 
+def clean_labels(k1, k2):
+    m = {'opt_cmaes': 'Acqu. opt.=CMA-ES, ',
+         'opt_direct' :'Acqu. opt.=DIRECT, ',
+         'bayesopt_hp_opt':'HP Opt.=yes',
+         '_hpopt' : 'HP Opt.=yes, ',
+         'acq_ucb': 'Acqu. fun=UCB, ',
+         'acq_ei':'Acqu. fun=EI',
+         'limbo_def': 'Limbo defaults, ',
+         'bayesopt_default':'BayesOpt defaults, ',
+         'bench_bayesopt_def':'BayesOpt defaults, ',
+         'bench_': '',
+         
+    }
+    m2 = { 'limbo': 'Limbo',
+           'bayesopt' : 'BayesOpt'}
+    k1 = m2[k1]
+    for i in m.keys():
+        k2 = k2.replace(i, m[i])
+    if k2[-2:len(k2)] == ', ':
+        k2 = k2[0:-2]
+    return k1, k2
+    
 # plot a single function
 def plot(func_name, data, rst_file):
     # set the figure size
@@ -145,9 +167,9 @@ def plot(func_name, data, rst_file):
         'text.fontsize' : 8,
         'axes.titlesize': 10,
         'legend.fontsize' : 10,
-        'xtick.labelsize': 5,
+        'xtick.labelsize': 7,
         'ytick.labelsize' : 10,
-        'figure.figsize' : [9, 2.5]
+        'figure.figsize' : [11, 2.5]
     }
     rcParams.update(params)
     
@@ -155,20 +177,32 @@ def plot(func_name, data, rst_file):
     d = data[func_name]
     da_acc = []
     da_time = []
-    labels = [] 
-    for k in d.iterkeys():
-        for k2 in d[k].iterkeys():
+    labels = []
+    def sort_fun(x, y):
+        if 'def' in x and 'def' in y and len(x) < len(y):
+            return 1
+        if 'def' in x and 'def' in y and len(x) > len(y):
+            return -1
+        if 'def' in x and 'def' not in y:
+            return 1
+        if 'def' in y and 'def' not in x:
+            return -1
+        return x < y
+        
+    for k in sorted(d.iterkeys()):
+        for k2 in sorted(d[k].iterkeys(), sort_fun):
             da_acc.append(d[k][k2][:, 0])
             da_time.append(d[k][k2][:, 1] / 1000.0)
-            labels.append(k + "/" + k2)
+            x, y = clean_labels(k, k2)
+            labels.append(x + " (" + y + ")")
     fig = figure()
-    fig.subplots_adjust(left=0.3)
+    fig.subplots_adjust(left=0.3, right=0.95)
     ax = fig.add_subplot(121)
     custom_ax(ax)
     bp = ax.boxplot(da_acc, 0, 'rs', 0)
     custom_boxes(ax, bp)
     ax.set_yticklabels(labels)
-    ax.set_title("Accuracy")
+    ax.set_title("Accuracy (difference with optimum cost)")
     ax = fig.add_subplot(122)
     custom_ax(ax)
     bp = ax.boxplot(da_time, 0, 'rs', 0)
