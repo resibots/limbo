@@ -1,28 +1,26 @@
 Bayesian optimization benchmarks
 ===============================
 
-*April 11, 2018* -- hal13 (32 cores)
+*April 16, 2018* -- hal01 (24 cores)
 
-- We compare to BayesOpt (https://github.com/rmcantin/bayesopt) 
+This page presents benchmarks in which we compare the Bayesian optimization performance of LIMBO against BayesOpt (https://github.com/rmcantin/bayesopt , a state-of-the-art Bayesian Optimization library in C++). Each library is given 200 evaluations (10 random samples + 190 function evaluations) to find the optimum of the hidden function. We compare both the accuracy of the obtained solution (difference with the actual optimum solution) and the time (wall clock time) required by the library to run the optimization process. The results show that while the libraries generate solutions with similar accuracy (they are based on the same algorithm), LIMBO generates these solutions significantly faster than BayesOpt.
+
+In addition to comparing the performance of the libraries with their default parameter values (and evaluating LIMBO with the same parameters than BayesOpt, see variant: limbo/bench_bayes_def), we also evaluate the performance of multiple variants of LIMBO, including different acquisition functions (UCB or EI), different inner-optimizers (CMAES or DIRECT) and whether optimizing or not the hyper-parameters of the model. In all the these comparisons, we can observe that LIMBO is faster than BayesOpt, ebven when BayesOpt is not optimizing its hyper-parameters.
+
+
+Details
+-------
+- We compare to BayesOpt (https://github.com/rmcantin/bayesopt)
 - Accuracy: lower is better (difference with the optimum)
 - Wall time: lower is better
-
 - In each replicate, 10 random samples + 190 function evaluations
 - see `src/benchmarks/limbo/bench.cpp` and `src/benchmarks/bayesopt/bench.cpp`
 
-Naming convention
-------------------
 
-- limbo_def: default Limbo parameters
-
-- opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function
-- opt_direct: use DIRECT (from NLopt) to optimize the acquisition function
-- acq_ucb: use UCB for the acquisition function
-- acq_ei: use EI for the acquisition function
-- hp_opt: use hyper-parameter optimization
-- bayesopt_def: same parameters as default parameters in BayesOpt
 branin
 -----------------
+
+Details about the function can be found `here <https://www.sfu.ca/~ssurjano/branin.html>`_. 
 
 30 replicates 
 
@@ -31,12 +29,16 @@ branin
 ellipsoid
 -----------------
 
+Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rothyp.html>`_. 
+
 30 replicates 
 
 .. figure:: fig_benchmarks/ellipsoid.png
 
 goldsteinprice
 -----------------
+
+Details about the function can be found `here <https://www.sfu.ca/~ssurjano/goldpr.html>`_. 
 
 30 replicates 
 
@@ -45,12 +47,16 @@ goldsteinprice
 hartmann3
 -----------------
 
+Details about the function can be found `here <https://www.sfu.ca/~ssurjano/hart3.html>`_. 
+
 30 replicates 
 
 .. figure:: fig_benchmarks/hartmann3.png
 
 hartmann6
 -----------------
+
+Details about the function can be found `here <https://www.sfu.ca/~ssurjano/hart6.html>`_. 
 
 30 replicates 
 
@@ -59,6 +65,8 @@ hartmann6
 rastrigin
 -----------------
 
+Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rastr.html>`_ (note, the input space has been rescaled and shifted to have the minimum at [1,1,1,1], instead of [0,0,0,0] 
+
 30 replicates 
 
 .. figure:: fig_benchmarks/rastrigin.png
@@ -66,12 +74,16 @@ rastrigin
 sixhumpcamel
 -----------------
 
+Details about the function can be found `here <https://www.sfu.ca/~ssurjano/camel6.html>`_. 
+
 30 replicates 
 
 .. figure:: fig_benchmarks/sixhumpcamel.png
 
 sphere
 -----------------
+
+Details about the function can be found `here <https://www.sfu.ca/~ssurjano/spheref.html>`_. 
 
 30 replicates 
 

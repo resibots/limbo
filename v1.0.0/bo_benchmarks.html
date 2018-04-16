@@ -167,7 +167,11 @@
             
   <div class="section" id="bayesian-optimization-benchmarks">
 <h1>Bayesian optimization benchmarks<a class="headerlink" href="#bayesian-optimization-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>April 11, 2018</em> – hal13 (32 cores)</p>
+<p><em>April 16, 2018</em> – hal01 (24 cores)</p>
+<p>This page presents benchmarks in which we compare the Bayesian optimization performance of LIMBO against BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a> , a state-of-the-art Bayesian Optimization library in C++). Each library is given 200 evaluations (10 random samples + 190 function evaluations) to find the optimum of the hidden function. We compare both the accuracy of the obtained solution (difference with the actual optimum solution) and the time (wall clock time) required by the library to run the optimization process. The results show that while the libraries generate solutions with similar accuracy (they are based on the same algorithm), LIMBO generates these solutions significantly faster than BayesOpt.</p>
+<p>In addition to comparing the performance of the libraries with their default parameter values (and evaluating LIMBO with the same parameters than BayesOpt, see variant: limbo/bench_bayes_def), we also evaluate the performance of multiple variants of LIMBO, including different acquisition functions (UCB or EI), different inner-optimizers (CMAES or DIRECT) and whether optimizing or not the hyper-parameters of the model. In all the these comparisons, we can observe that LIMBO is faster than BayesOpt, ebven when BayesOpt is not optimizing its hyper-parameters.</p>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>We compare to BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a>)</li>
 <li>Accuracy: lower is better (difference with the optimum)</li>
@@ -175,20 +179,10 @@
 <li>In each replicate, 10 random samples + 190 function evaluations</li>
 <li>see <cite>src/benchmarks/limbo/bench.cpp</cite> and <cite>src/benchmarks/bayesopt/bench.cpp</cite></li>
 </ul>
-<div class="section" id="naming-convention">
-<h2>Naming convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>limbo_def: default Limbo parameters</li>
-<li>opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function</li>
-<li>opt_direct: use DIRECT (from NLopt) to optimize the acquisition function</li>
-<li>acq_ucb: use UCB for the acquisition function</li>
-<li>acq_ei: use EI for the acquisition function</li>
-<li>hp_opt: use hyper-parameter optimization</li>
-<li>bayesopt_def: same parameters as default parameters in BayesOpt</li>
-</ul>
 </div>
 <div class="section" id="branin">
 <h2>branin<a class="headerlink" href="#branin" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/branin.html">here</a>.</p>
 <p>30 replicates</p>
 <div class="figure">
 <img alt="_images/branin.png" src="_images/branin.png" />
@@ -196,6 +190,7 @@
 </div>
 <div class="section" id="ellipsoid">
 <h2>ellipsoid<a class="headerlink" href="#ellipsoid" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/rothyp.html">here</a>.</p>
 <p>30 replicates</p>
 <div class="figure">
 <img alt="_images/ellipsoid.png" src="_images/ellipsoid.png" />
@@ -203,6 +198,7 @@
 </div>
 <div class="section" id="goldsteinprice">
 <h2>goldsteinprice<a class="headerlink" href="#goldsteinprice" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/goldpr.html">here</a>.</p>
 <p>30 replicates</p>
 <div class="figure">
 <img alt="_images/goldsteinprice.png" src="_images/goldsteinprice.png" />
@@ -210,6 +206,7 @@
 </div>
 <div class="section" id="hartmann3">
 <h2>hartmann3<a class="headerlink" href="#hartmann3" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/hart3.html">here</a>.</p>
 <p>30 replicates</p>
 <div class="figure">
 <img alt="_images/hartmann3.png" src="_images/hartmann3.png" />
@@ -217,6 +214,7 @@
 </div>
 <div class="section" id="hartmann6">
 <h2>hartmann6<a class="headerlink" href="#hartmann6" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/hart6.html">here</a>.</p>
 <p>30 replicates</p>
 <div class="figure">
 <img alt="_images/hartmann6.png" src="_images/hartmann6.png" />
@@ -224,6 +222,7 @@
 </div>
 <div class="section" id="rastrigin">
 <h2>rastrigin<a class="headerlink" href="#rastrigin" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/rastr.html">here</a> (note, the input space has been rescaled and shifted to have the minimum at [1,1,1,1], instead of [0,0,0,0]</p>
 <p>30 replicates</p>
 <div class="figure">
 <img alt="_images/rastrigin.png" src="_images/rastrigin.png" />
@@ -231,6 +230,7 @@
 </div>
 <div class="section" id="sixhumpcamel">
 <h2>sixhumpcamel<a class="headerlink" href="#sixhumpcamel" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/camel6.html">here</a>.</p>
 <p>30 replicates</p>
 <div class="figure">
 <img alt="_images/sixhumpcamel.png" src="_images/sixhumpcamel.png" />
@@ -238,6 +238,7 @@
 </div>
 <div class="section" id="sphere">
 <h2>sphere<a class="headerlink" href="#sphere" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/spheref.html">here</a>.</p>
 <p>30 replicates</p>
 <div class="figure">
 <img alt="_images/sphere.png" src="_images/sphere.png" />
