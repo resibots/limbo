@@ -188,6 +188,36 @@ def plot_ax(ax, data, points, labely, disp_legend=True, disp_xaxis=False):
 
     return replicates
 
+def get_notes():
+    notes={'Rastrigin':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rastr.html>`_.',
+           'Pistonsimulation':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/piston.html>`_.',
+           'Step':'Step function: for :math:`x\in[-2; 2]` :\n.. math::\n  f(x) = \\begin{cases} 0, &\\mbox{if x<=0} \\\\ 1, &\\mbox{otherwise} \\end{cases}',
+           'Robotarm':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/robot.html>`_.',
+           'Gramacylee':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/grlee12.html>`_.',
+           'Planarinversedynamicsii':'Approximation of the second motor\'s torque in the inverse dynamics of a Planar 2D Arm. Details are given at the bottom of this page.',
+           'Planarinversedynamicsi':'Approximation of the first motor\'s torque in the inverse dynamics of a Planar 2D Arm. Details are given at the bottom of this page.',
+           'Otlcircuit':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/otlcircuit.html>`_.'};
+    return notes
+
+def planarinversedynamics_math():
+    res="""Inverse Dynamics of a Planar 2D Arm (I \& II):  for :math:`\ddot{q}\in[-2\pi; 2\pi]^2`; :math:`\dot{q}\in[-2\pi; 2\pi]^2`; :math:`q\in[-pi; pi]^2`
+.. math::  
+  \\begin{gather}
+  \\tau (q,\dot{q},\\ddot{q})=\\textbf{M}(q)\\ddot{q}+ \\textbf{C}(q,\\dot{q})\\dot{q}\\\\
+  \\textrm{where:}\\\\
+  \\textbf{M}(q)=\\begin{bmatrix}
+  0.2083 + 0.1250\\cos(q_2)& 0.0417 + 0.0625\\cos(q_2))\\\\
+  0.0417 + 0.0625\\cos(q_2)& 0.0417
+  \\end{bmatrix}
+  \\\\
+  \\textbf{C}(q,\\dot{q})=\\begin{bmatrix}
+  -0.0625 \\sin(q_2) \\dot{q}_2& -0.0625 \\sin(q_2)(\\dot{q}_1 + \\dot{q}_2)\\\\
+  0.0625 \\sin(q_2)\\dot{q}_1& 0
+  \\end{bmatrix}
+  \\\\
+  \\end{gather}\n\n"""
+    return res
+
 def plot_data(bench, func, dim, mses, query_times, learning_times, points, rst_file):
     name = func+'_'+str(dim)
     fig, ax = plt.subplots(3, sharex=True)
@@ -199,9 +229,10 @@ def plot_data(bench, func, dim, mses, query_times, learning_times, points, rst_f
     fig.tight_layout()
     fig.savefig('regression_benchmark_results/'+bench+'_figs/'+name+'.png')
     close()
-
+    notes=get_notes()
     rst_file.write(func.title() + " in " + str(dim) + "D\n")
     rst_file.write("-----------------\n\n")
+    rst_file.write(notes[func.title()] + " \n\n")
     rst_file.write(str(replicates) + " replicates \n\n")
     rst_file.write(".. figure:: fig_benchmarks/" + bench + "_figs/" + name + ".png\n\n")
 
@@ -254,6 +285,7 @@ def plot_all():
     points,times_learn,times_query,mses = load_data()
     print('data loaded')
     plot(points,times_learn,times_query,mses,rst_file)
-
+    rst_file.write("------------------\n\n")
+    rst_file.write(planarinversedynamics_math())
 if __name__ == "__main__":
     plot_all()

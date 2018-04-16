@@ -53,6 +53,7 @@ import threading
 from waflib import Logs
 
 plotting_ok = True
+
 try:
     import plot_bo_benchmarks
     import plot_regression_benchmarks

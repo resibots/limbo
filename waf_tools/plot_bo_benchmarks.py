@@ -158,7 +158,19 @@ def clean_labels(k1, k2):
     if k2[-2:len(k2)] == ', ':
         k2 = k2[0:-2]
     return k1, k2
+
+def get_notes():
+    notes={'branin':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/branin.html>`_.',
+    'ellipsoid':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rothyp.html>`_.',
+    'goldsteinprice':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/goldpr.html>`_.',
+    'hartmann3':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/hart3.html>`_.',
+    'hartmann6':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/hart6.html>`_.',
+    'rastrigin':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rastr.html>`_ (note, the input space has been rescaled and shifted to have the minimum at [1,1,1,1], instead of [0,0,0,0]',
+    'sixhumpcamel':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/camel6.html>`_.',
+    'sphere':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/spheref.html>`_.'};
     
+    return notes
+
 # plot a single function
 def plot(func_name, data, rst_file):
     # set the figure size
@@ -210,10 +222,13 @@ def plot(func_name, data, rst_file):
     ax.set_yticklabels([])
     ax.set_title("Wall clock time (s)")
 
+    notes=get_notes()
+    
     name = func_name.split('.')[0]
     fig.savefig("benchmark_results/fig_benchmarks/" + name + ".png")    
     rst_file.write(name + "\n")
     rst_file.write("-----------------\n\n")
+    rst_file.write(notes[name] + " \n\n")
     rst_file.write(str(len(da_acc[0])) + " replicates \n\n")
     rst_file.write(".. figure:: fig_benchmarks/" + name + ".png\n\n")
 
