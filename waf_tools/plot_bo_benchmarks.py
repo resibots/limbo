@@ -222,11 +222,11 @@ def plot(func_name, data, rst_file):
     ax.set_yticklabels([])
     ax.set_title("Wall clock time (s)")
 
-    notes=get_notes()
+    notes = get_notes()
     
     name = func_name.split('.')[0]
     fig.savefig("benchmark_results/fig_benchmarks/" + name + ".png")    
-    rst_file.write(name + "\n")
+    rst_file.write(name.title() + " function\n")
     rst_file.write("-----------------\n\n")
     rst_file.write(notes[name] + " \n\n")
     rst_file.write(str(len(da_acc[0])) + " replicates \n\n")
