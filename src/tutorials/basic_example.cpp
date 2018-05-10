@@ -99,7 +99,7 @@ struct Params {
 struct Eval {
     // number of input dimension (x.size())
     BO_PARAM(size_t, dim_in, 1);
-    // number of dimenions of the result (res.size())
+    // number of dimensions of the result (res.size())
     BO_PARAM(size_t, dim_out, 1);
 
     // the function to be optimized
