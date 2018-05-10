@@ -66,7 +66,7 @@ except:
 
 try:
     import matplotlib
-    matplotlib.use('Agg') # for headless generation    
+    matplotlib.use('Agg') # for headless generation
     from pylab import *
     pylab_found = True
 except:
@@ -148,7 +148,7 @@ def clean_labels(k1, k2):
          'bayesopt_default':'BayesOpt defaults, ',
          'bench_bayesopt_def':'BayesOpt defaults, ',
          'bench_': '',
-         
+
     }
     m2 = { 'limbo': 'Limbo',
            'bayesopt' : 'BayesOpt'}
@@ -168,7 +168,7 @@ def get_notes():
     'rastrigin':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rastr.html>`_ (note, the input space has been rescaled and shifted to have the minimum at [1,1,1,1], instead of [0,0,0,0]',
     'sixhumpcamel':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/camel6.html>`_.',
     'sphere':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/spheref.html>`_.'};
-    
+
     return notes
 
 # plot a single function
@@ -184,7 +184,7 @@ def plot(func_name, data, rst_file):
         'figure.figsize' : [11, 2.5]
     }
     rcParams.update(params)
-    
+
     # plot
     d = data[func_name]
     da_acc = []
@@ -200,7 +200,7 @@ def plot(func_name, data, rst_file):
         if 'def' in y and 'def' not in x:
             return -1
         return x < y
-        
+
     for k in sorted(d.iterkeys()):
         for k2 in sorted(d[k].iterkeys(), sort_fun):
             da_acc.append(d[k][k2][:, 0])
@@ -223,12 +223,13 @@ def plot(func_name, data, rst_file):
     ax.set_title("Wall clock time (s)")
 
     notes = get_notes()
-    
+
     name = func_name.split('.')[0]
-    fig.savefig("benchmark_results/fig_benchmarks/" + name + ".png")    
+    fig.savefig("benchmark_results/fig_benchmarks/" + name + ".png")
     rst_file.write(name.title() + " function\n")
     rst_file.write("-----------------\n\n")
-    rst_file.write(notes[name] + " \n\n")
+    if name in notes:
+        rst_file.write(notes[name] + " \n\n")
     rst_file.write(str(len(da_acc[0])) + " replicates \n\n")
     rst_file.write(".. figure:: fig_benchmarks/" + name + ".png\n\n")
 
@@ -237,7 +238,7 @@ def plot(func_name, data, rst_file):
 def include(src_file, dst_file):
     for i in open(src_file):
         dst_file.write(i)
-    
+
 def plot_all():
     if not plot_ok:
         print_log('YELLOW', "No plot")
@@ -257,8 +258,7 @@ def plot_all():
     rst_file.write("*" + date + "* -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
 
     include("docs/benchmark_res_bo.inc", rst_file)
-    
-    
+
     print('loading data...')
     data = load_data()
     print('data loaded')
