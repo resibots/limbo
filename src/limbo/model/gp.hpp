@@ -115,7 +115,7 @@ namespace limbo {
                     this->_compute_full_kernel();
             }
 
-            /// Do not forget to call this if you use hyper-prameters optimization!!
+            /// Do not forget to call this if you use hyper-parameters optimization!!
             void optimize_hyperparams()
             {
                 _hp_optimize(*this);
@@ -271,12 +271,12 @@ namespace limbo {
                 // --- cholesky ---
                 // see:
                 // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
-                long double det = 2 * _matrixL.diagonal().array().log().sum();
+                long double logdet = 2 * _matrixL.diagonal().array().log().sum();
 
                 double a = (_obs_mean.transpose() * _alpha)
                                .trace(); // generalization for multi dimensional observation
 
-                _log_lik = -0.5 * a - 0.5 * det - 0.5 * n * std::log(2 * M_PI);
+                _log_lik = -0.5 * a - 0.5 * logdet - 0.5 * n * std::log(2 * M_PI);
 
                 return _log_lik;
             }
@@ -556,8 +556,8 @@ namespace limbo {
             void _compute_incremental_kernel()
             {
                 // Incremental LLT
-                // This part of the code is inpired from the Bayesopt Library (cholesky_add_row function).
-                // However, the mathematical fundations can be easily retrieved by detailling the equations of the
+                // This part of the code is inspired from the Bayesopt Library (cholesky_add_row function).
+                // However, the mathematical foundations can be easily retrieved by detailing the equations of the
                 // extended L matrix that produces the desired kernel.
 
                 size_t n = _samples.size();
