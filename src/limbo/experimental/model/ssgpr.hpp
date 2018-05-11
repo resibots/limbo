@@ -206,12 +206,12 @@ namespace limbo {
                 // this->_compute_incremental_kernel(); 
 
                 // Make Rtilde - [R, sample_phi]
-                Eigen::MatrixXd Rtilde(_dim_mapping+1, _dim_mapping);
-                Rtilde.topRows(_dim_mapping) = _L.transpose();
-                Rtilde.bottomRows<1>() = sample_phi;
+                _L.transposeInPlace();
+                _L.conservativeResize(_dim_mapping+1, _dim_mapping);
+                _L.bottomRows<1>() = sample_phi;
 
                 // Note: the Gijsberts paper uses Givens rotations. Is that a bit more efficient?
-                Eigen::HouseholderQR<Eigen::MatrixXd> qr_res2 = Rtilde.householderQr();
+                Eigen::HouseholderQR<Eigen::MatrixXd> qr_res2 = _L.householderQr();
                 _L = qr_res2.matrixQR().topRows(_dim_mapping).transpose();
 
                 _B += sample_phi * (observation -  _mean_function(sample, *this)).transpose();
