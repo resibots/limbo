@@ -36,13 +36,10 @@ namespace limbo {
                 static thread_local tools::rgen_gauss_t rgen(0.0, 1.0);
                 assert(_n > 0);
 
-                // std::cout << "Setting random Wf" << std::endl;
                 _Wf = Eigen::MatrixXd::Zero(_nproj, _n);
-                // std::cout << "init" << std::endl;
                 for (int i = 0; i < _nproj; i++)
                     for (int j = 0; j < _n; j++)
                         _Wf(i, j) = rgen.rand();
-                // std::cout << "Wow" << std::endl;
 
                 rescale();
             }
@@ -54,7 +51,6 @@ namespace limbo {
                 _W = _Wf;
                 Eigen::VectorXd inv = _l.array().inverse();
                 for (int i = 0; i < _W.rows(); i++) {
-                    // std::cout << _Wf.row(i).size() << " vs " << inv.size() << std::endl;
                     _W.row(i) = _Wf.row(i).array() * inv.transpose().array();
                 }
             }

@@ -2,6 +2,7 @@
 #define LIMBO_EXPERIMENTAL_MODEL_SSPGR_HPP
 
 #include <vector>
+#include <chrono>
 
 #include <Eigen/Cholesky>
 #include <Eigen/Core>
@@ -32,10 +33,10 @@ namespace limbo {
                 {
                     assert(_dim_in > 0 && _dim_out > 0);
 
-                    int n = _mapping.dim_out();
-                    _L = _sigma_n * _sigma_n * Eigen::MatrixXd::Identity(n, n);
-                    _B = Eigen::MatrixXd::Zero(n, _dim_out);
-                    _W = Eigen::MatrixXd::Zero(n, _dim_out);
+                    _dim_mapping = _mapping.dim_out();
+                    _L = _sigma_n * Eigen::MatrixXd::Identity(_dim_mapping, _dim_mapping);
+                    _B = Eigen::MatrixXd::Zero(_dim_mapping, _dim_out);
+                    _W = Eigen::MatrixXd::Zero(_dim_mapping, _dim_out);
                 }
 
                 std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& x) const
@@ -92,10 +93,10 @@ namespace limbo {
 
                     this->_compute_obs_mean();
                     if (compute_full)
-                        this->_full_compute();
+                        this->_compute_full_kernel();
                 }
 
-                /// Do not forget to call this if you use hyper-prameters optimization!!
+                /// Do not forget to call this if you use hyper-parameters optimization!!
                 void optimize_hyperparams()
                 {
                     _hp_optimize(*this);
@@ -109,7 +110,7 @@ namespace limbo {
                     if (update_obs_mean)
                         this->_compute_obs_mean();
 
-                    this->_full_compute();
+                    this->_compute_full_kernel();
                 }
 
                 /// return the number of samples used to compute the GP
@@ -169,8 +170,59 @@ namespace limbo {
                     _sigma_n = std::exp(p(0)); //p(0); //std::exp(p(0)) + 1e-6;
                 }
 
+            /// add sample and update the GP. This code uses an incremental implementation of the Cholesky
+            /// decomposition. It is therefore much faster than a call to compute()
+            void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation)
+            {
+                if (_samples.empty()) {
+                    if (_dim_in != sample.size()) {
+                        _dim_in = sample.size();
+                        _mapping = Mapping(_dim_in);
+                        reset();
+                    }
+                    if (_dim_out != observation.size()) {
+                        _dim_out = observation.size();
+                        _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                        reset();
+                    }
+                }
+                else {
+                    assert(sample.size() == _dim_in);
+                    assert(observation.size() == _dim_out);
+                }
+
+                _samples.push_back(sample);
+
+                _observations.conservativeResize(_observations.rows()+1, _dim_out);
+                _observations.bottomRows<1>() = observation.transpose();
+                // _mean_observation = _observations.colwise().mean();
+
+                this->_compute_obs_mean();
+
+                _Phi.conservativeResize(_Phi.rows()+1, _mapping.dim_out());
+                Eigen::VectorXd sample_phi = _mapping.evaluate(sample);
+                _Phi.bottomRows<1>() = sample_phi;
+
+                // this->_compute_incremental_kernel(); 
+
+                // Make Rtilde - [R, sample_phi]
+                _L.transposeInPlace();
+                _L.conservativeResize(_dim_mapping+1, _dim_mapping);
+                _L.bottomRows<1>() = sample_phi;
+
+                // Note: the Gijsberts paper uses Givens rotations. Is that a bit more efficient?
+                Eigen::HouseholderQR<Eigen::MatrixXd> qr_res2 = _L.householderQr();
+                _L = qr_res2.matrixQR().topRows(_dim_mapping).transpose();
+
+                _B += sample_phi * (observation -  _mean_function(sample, *this)).transpose();
+
+                // TODO Adapt to incremental? cost is O(_dim_mapping^2) which isn't that bad 
+                _LPhiY = _L.template triangularView<Eigen::Lower>().solve(_B);
+                _W = _L.template triangularView<Eigen::Lower>().adjoint().solve(_LPhiY);
+            }
+
             protected:
-                int _dim_in, _dim_out;
+                int _dim_in, _dim_out, _dim_mapping;
                 double _sigma_n;
                 Mapping _mapping;
                 MeanFunction _mean_function;
@@ -198,7 +250,7 @@ namespace limbo {
                     _obs_mean = _observations - _mean_vector;
                 }
 
-                void _full_compute()
+                void _compute_full_kernel()
                 {
                     double sigma_n_2 = _sigma_n * _sigma_n;
 
@@ -213,13 +265,15 @@ namespace limbo {
 
                     Eigen::LLT<Eigen::MatrixXd> llt(_L);
                     if (llt.info() == Eigen::NumericalIssue) {
-                        // std::cout << "Error" << std::endl;
-                        // there was an error
-                        // probably the matrix is not SPD
-                        // let's try to make it
+                        // There was an error; probably the matrix is not SPD
+                        // Let's try to make it SPD and take cholesky of that
                         // original MATLAB code: http://fr.mathworks.com/matlabcentral/fileexchange/42885-nearestspd
+                        // Note that at this point _L is not cholesky factor, but matrix to be factored
+
+                        // Symmetrize A into B
                         Eigen::MatrixXd B = (_L.array() + _L.transpose().array()) / 2.;
 
+                        // Compute the symmetric polar factor of B. Call it H. Clearly H is itself SPD.
                         Eigen::JacobiSVD<Eigen::MatrixXd> svd(B, Eigen::ComputeFullU | Eigen::ComputeFullV);
                         Eigen::MatrixXd V, Sigma, H, L_hat;
 
@@ -229,9 +283,13 @@ namespace limbo {
 
                         H = V * Sigma * V.transpose();
 
+                        // Get candidate for closest SPD matrix to _L
                         L_hat = (B.array() + H.array()) / 2.;
+
+                        // Ensure symmetry
                         L_hat = (L_hat.array() + L_hat.array()) / 2.;
 
+                        // Test that L_hat is in fact PD. if it is not so, then tweak it just a bit.
                         Eigen::LLT<Eigen::MatrixXd> llt_hat(L_hat);
                         int k = 0;
                         while (llt_hat.info() != Eigen::Success) {
@@ -239,19 +297,15 @@ namespace limbo {
                             Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> es(L_hat);
                             double min_eig = es.eigenvalues().minCoeff();
                             L_hat.diagonal().array() += (-min_eig * k * k + 1e-50);
-
                             llt_hat.compute(L_hat);
                         }
                         _L = llt_hat.matrixL();
-                        // if (llt_hat.info() == Eigen::Success)
-                        //     std::cout << "Fixed!" << std::endl;
                     }
-                    else
+                    else {
                         _L = llt.matrixL();
+                    }
 
                     _B = _Phi.transpose() * _obs_mean;
-
-                    // std::cout << _B << std::endl;
 
                     _LPhiY = _L.template triangularView<Eigen::Lower>().solve(_B);
                     _W = _L.template triangularView<Eigen::Lower>().adjoint().solve(_LPhiY);
@@ -259,7 +313,6 @@ namespace limbo {
 
                 Eigen::VectorXd _mu(const Eigen::VectorXd& x, const Eigen::VectorXd& PhiStar) const
                 {
-                    // std::cout << PhiStar.rows() << "x" << PhiStar.cols() << " " << _W.rows() << "x" << _W.cols() << std::endl;
                     Eigen::VectorXd mean = PhiStar.transpose() * _W;
 
                     return mean + _mean_function(x, *this);
