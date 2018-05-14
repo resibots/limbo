@@ -2,6 +2,8 @@
 
 Basic Example
 =================================================
+If you are not familiar with the main concepts of Bayesian Optimization, a quick introduction is available :ref:`here <bayesian_optimization>`.
+In this tutorial, we will explain how to create a new experiment in which a simple function ( :math:`-{(5 * x - 2.5)}^2 + 5`) is maximized.
 
 Let's say we want to create an experiment called "myExp". The first thing to do is to create the folder ``exp/myExp`` under the limbo root. Then add two files:
 
@@ -21,6 +23,8 @@ The file structure should look like this: ::
 Next, copy the following content to the ``wscript`` file:
 
 .. code:: python
+
+   from waflib.Configure import conf
 
     def options(opt):
         pass
@@ -70,16 +74,26 @@ With this, we can declare the main function:
    :linenos:
    :lines: 114-123
 
+The full ``main.cpp`` can be found `here <../../src/tutorials/basic_example.cpp>`_
 
 Finally, from the root of limbo, run a build command, with the additional switch ``--exp myExp``: ::
 
     ./waf build --exp myExp
 
 Then, an executable named ``myExp`` should be produced under the folder ``build/exp/myExp``.
+When running this executable, you should see something similar to this: 
 
-Full ``main.cpp``:
 
-.. literalinclude:: ../../src/tutorials/basic_example.cpp
-   :language: c++
-   :linenos:
-   :lines: 48-
+.. literalinclude:: ./example_run_basic_example/print_test.dat
+
+These lines show the result of each sample evaluation of the :math:`40` iterations (after the random initialization). In particular, we can see that algorithm progressively converges toward the maximum of the function (:math:`5`) and that the maximum found is located at :math:`x = 0.500014`.
+
+Running the executable also created a folder with a name composed of YOUCOMPUTERHOSTNAME-DATE-HOUR-PID. This folder should contain two files: ::
+  
+  limbo
+  |-- YOUCOMPUTERHOSTNAME-DATE-HOUR-PID
+     +-- samples.dat
+     +-- aggregated_observations.dat 
+
+
+The file ``samples.dat`` contains the coordinates of the samples that have been evaluated during each iteration, while the file ``aggregated_observations.dat`` contains the corresponding observed values. 
