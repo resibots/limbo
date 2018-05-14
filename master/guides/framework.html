@@ -193,7 +193,7 @@
 <p>The typical use case of Limbo for research in Bayesian Optimization is:</p>
 <ul class="simple">
 <li>we design an experiment that uses some components of Limbo</li>
-<li>we want to konw whether variant X of the experiment (e.g. with kernel XXX) is better than variant Y (e.g. with kernel YYY)</li>
+<li>we want to know whether variant X of the experiment (e.g. with kernel XXX) is better than variant Y (e.g. with kernel YYY)</li>
 <li>because the algorithms that we use have some stochastic components (initialization, inner optimization, …), we usually need to replicate each experiment (typically, we use 30 replicates) in order to do some statistics (see  <a class="reference external" href="http://www.github.com/jbmouret/matplotlib_for_papers">Matplotlib for Papers</a> for a tutorial about how to draw nice box plots with these statistics).</li>
 </ul>
 <p>Limbo provides basics tools to make these steps easier. They are mostly additions to <code class="docutils literal"><span class="pre">waf</span></code> (see our <a class="reference internal" href="../faq.html#faq-waf"><span class="std std-ref">FAQ about waf</span></a>). For users who are used to ROS, you can see these additions as our ‘catkin for Bayesian optimization’.</p>

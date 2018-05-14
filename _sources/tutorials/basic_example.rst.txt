@@ -6,7 +6,7 @@ Basic Example
 Let's say we want to create an experiment called "myExp". The first thing to do is to create the folder ``exp/myExp`` under the limbo root. Then add two files:
 
 * the ``main.cpp`` file
-* a pyhton file called ``wscript``, which will be used by ``waf`` to register the executable for building
+* a python file called ``wscript``, which will be used by ``waf`` to register the executable for building
 
 The file structure should look like this: ::
 

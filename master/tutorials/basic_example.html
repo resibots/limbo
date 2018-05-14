@@ -191,7 +191,7 @@
 <p>Let’s say we want to create an experiment called “myExp”. The first thing to do is to create the folder <code class="docutils literal"><span class="pre">exp/myExp</span></code> under the limbo root. Then add two files:</p>
 <ul class="simple">
 <li>the <code class="docutils literal"><span class="pre">main.cpp</span></code> file</li>
-<li>a pyhton file called <code class="docutils literal"><span class="pre">wscript</span></code>, which will be used by <code class="docutils literal"><span class="pre">waf</span></code> to register the executable for building</li>
+<li>a python file called <code class="docutils literal"><span class="pre">wscript</span></code>, which will be used by <code class="docutils literal"><span class="pre">waf</span></code> to register the executable for building</li>
 </ul>
 <p>The file structure should look like this:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">limbo</span>
@@ -324,7 +324,7 @@
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
     <span class="c1">// number of input dimension (x.size())</span>
     <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_in</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="c1">// number of dimenions of the result (res.size())</span>
+    <span class="c1">// number of dimensions of the result (res.size())</span>
     <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
     <span class="c1">// the function to be optimized</span>
@@ -496,7 +496,7 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
 <span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
     <span class="c1">// number of input dimension (x.size())</span>
     <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_in</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="c1">// number of dimenions of the result (res.size())</span>
+    <span class="c1">// number of dimensions of the result (res.size())</span>
     <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
     <span class="c1">// the function to be optimized</span>
