@@ -61,6 +61,7 @@ import limbo, benchmarks
 import inspect
 from waflib import Logs
 from waflib.Build import BuildContext
+from waflib.Errors import WafError
 
 def options(opt):
         opt.load('compiler_cxx boost waf_unit_test')
@@ -88,9 +89,17 @@ def options(opt):
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
 
+
+        opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
+
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
-                    opt.recurse(i)
+                    opt.start_msg('\ncommand-line options for [%s]' % i)
+                    try:
+                        opt.recurse(i)
+                        opt.end_msg(' -> OK')
+                    except WafError:
+                        opt.end_msg(' -> no options found')
 
         opt.recurse('src/benchmarks')
 
