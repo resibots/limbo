@@ -88,13 +88,14 @@ def options(opt):
         opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
+        opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
 
 
         opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
 
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
-                    opt.start_msg('\ncommand-line options for [%s]' % i)
+                    opt.start_msg('command-line options for [%s]' % i)
                     try:
                         opt.recurse(i)
                         opt.end_msg(' -> OK')
@@ -116,6 +117,12 @@ def configure(conf):
         conf.load('libcmaes')
 
         native_flags = "-march=native"
+
+        is_cpp14 = conf.options.cpp14
+        if is_cpp14:
+            is_cpp14 = conf.check_cxx(cxxflags="-std=c++14", mandatory=False, msg='Checking for C++14')
+            if not is_cpp14:
+                conf.msg('C++14 is requested, but your compiler does not support it!', 'Disabling it!', color='RED')
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
             opt_flags = " -O3 -xHost -g"
@@ -128,6 +135,9 @@ def configure(conf):
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
             opt_flags = " -O3 -g"
+
+        if is_cpp14:
+            common_flags = common_flags + " -std=c++14"
 
         native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
         if native:
