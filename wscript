@@ -91,7 +91,7 @@ def options(opt):
         opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
 
 
-        opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
+        opt.logger = Logs.make_logger(blddir + 'options.log', 'mylogger')
 
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
