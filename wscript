@@ -90,6 +90,10 @@ def options(opt):
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
 
 
+        try:
+                os.mkdir(blddir)# because this is not always created at that stage
+        except:
+                print("build dir not created (it probably already exists, this is fine)")
         opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
 
         for i in glob.glob('exp/*'):
