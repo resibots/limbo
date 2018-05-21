@@ -91,7 +91,11 @@ def options(opt):
         opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
 
 
-        opt.logger = Logs.make_logger(blddir + 'options.log', 'mylogger')
+        try:
+                os.mkdir(blddir)# because this is not always created at that stage
+        except:
+                print("build dir not created (it probably already exists, this is fine)")
+        opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
 
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
@@ -245,7 +249,7 @@ def write_default_params(ctx):
 
 def build_docs(ctx):
     Logs.pprint('NORMAL', "generating HTML doc with versioning...")
-    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(master|release-*)" docs docs/_build/html'
+    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(fix\_docs|master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
