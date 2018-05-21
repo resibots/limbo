@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building the documentation &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Guides" href="../guides/index.html"/>
+        <link rel="prev" title="Optimization Sub-API" href="opt.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compilation.html">Download and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_example.html">Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_example.html">Advanced Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics / Writing results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gp.html">Gaussian Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opt.html">Optimization Sub-API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building the documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Tutorials</a> &raquo;</li>
+    
+    <li>Building the documentation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/tutorials/building_docs.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-the-documentation">
+<h1>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section is only useful for developers who need to update the documentation.</p>
+</div>
+<p>We use:</p>
+<ul class="simple">
+<li><cite>Sphinx &lt;http://sphinx-doc.org/&gt;</cite> for generating the documentation</li>
+<li><cite>Doxygen &lt;http://www.stack.nl/~dimitri/doxygen/&gt;</cite> to extract information from the source code</li>
+<li><a class="reference external" href="https://breathe.readthedocs.org/en/latest/">Breathe</a> to link Sphinx and doxygen</li>
+<li><a class="reference external" href="https://robpol86.github.io/sphinxcontrib-versioning/">sphinx-versioning</a> (custom version) to generate a documentation for every version / branch</li>
+</ul>
+<p>Install sphinx via pip:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">Sphinx</span>
+<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">bibtex</span>
+<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">breathe</span>
+<span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">resibots</span><span class="o">/</span><span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">versioning</span><span class="o">.</span><span class="n">git</span><span class="nd">@resibots</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">On Mac OSX, do not use <cite>brew install sphinx</cite> because this is not the right sphinx</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For Python 3, use <cite>pip3</cite> instead of <cite>pip</cite></p>
+</div>
+<p>Install the Resibots theme for Sphinx:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">resibots</span><span class="o">/</span><span class="n">sphinx_resibots_theme</span>
+<span class="n">export</span> <span class="n">SPHINX_RESIBOTS_THEME</span><span class="o">=</span><span class="s2">&quot;/home/me/path/to/sphinx_resibots_theme&quot;</span>
+</pre></div>
+</div>
+<p>Install <a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a> via your package manager (e.g. apt-get / brew):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">doxygen</span>
+</pre></div>
+</div>
+<p>In the main limbo directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">waf</span> <span class="n">docs</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>About sphinx and ReStructuredText:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://sphinx-doc.org/tutorial.html">There is a tutorial</a>,</li>
+<li><a class="reference external" href="http://sphinx-doc.org/rest.html">Primer for ReStructuredText</a>, the markup language of Sphinx,</li>
+<li><a class="reference external" href="http://sphinx-doc.org/markup/index.html">markup specific to Sphinx</a>,</li>
+<li><a class="reference external" href="http://sphinx-doc.org/domains.html#id2">About C++ in Sphinx</a></li>
+<li><a class="reference external" href="https://breathe.readthedocs.org/en/latest/">Breathe (bridge between sphinx and doxygen)</a></li>
+<li><a class="reference external" href="https://robpol86.github.io/sphinxcontrib-versioning/">Sphinx-versioning</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../guides/index.html" class="btn btn-neutral float-right" title="Guides" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="opt.html" class="btn btn-neutral" title="Optimization Sub-API" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: fix_docs
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../v1.0.0/index.html">v1.0.0</a></dd>
+            <dd><a href="../../v2.0.0/tutorials/building_docs.html">v2.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="building_docs.html">fix_docs</a></dd>
+            <dd><a href="../../master/tutorials/building_docs.html">master</a></dd>
+            <dd><a href="../../release-1.0/index.html">release-1.0</a></dd>
+            <dd><a href="../../release-2.0/tutorials/building_docs.html">release-2.0</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
