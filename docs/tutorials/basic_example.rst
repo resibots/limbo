@@ -98,7 +98,7 @@ Running the executable also created a folder with a name composed of YOUCOMPUTER
 
 The file ``samples.dat`` contains the coordinates of the samples that have been evaluated during each iteration, while the file ``aggregated_observations.dat`` contains the corresponding observed values. 
 
-If you want to display the different observations in a graph, you can the python script ``print_aggregated_observations.py``.
+If you want to display the different observations in a graph, you can use the python script ``print_aggregated_observations.py`` (located in ``limbo_root/src/tutorials``).
 For instance, from the root of limbo you can run ::
   python src/tutorials/print_aggregated_observations.py YOUCOMPUTERHOSTNAME-DATE-HOUR-PID/aggregated_observations.dat
 
