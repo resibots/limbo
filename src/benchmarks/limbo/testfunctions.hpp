@@ -102,7 +102,7 @@ inline double c2(double x)
 inline vec_t t_osz(const vec_t& x)
 {
     vec_t r = x;
-    for (int i = 0; i < x.size(); i++)
+    for (size_t i = 0; i < static_cast<size_t>(x.size()); i++)
         r(i) = sign(x(i)) * std::exp(hat(x(i)) + 0.049 * std::sin(c1(x(i)) * hat(x(i))) + std::sin(c2(x(i)) * hat(x(i))));
     return r;
 }
@@ -161,7 +161,7 @@ struct Rastrigin {
     double operator()(const vec_t& xx) const
     {
         vec_t x = xx;
-        for (int i = 0; i < x.size(); i++)
+        for (size_t i = 0; i < static_cast<size_t>(x.size()); i++)
             x(i) = 2. * xx(i) - 1.;
         double f = 10. * dim_in();
         for (size_t i = 0; i < dim_in(); ++i)
@@ -176,7 +176,7 @@ struct Rastrigin {
 #else
         mat_t sols = boost::numeric::ublas::zero_matrix<double>(1, 4);
 #endif
-        for (int i = 0; i < 4; i++)
+        for (size_t i = 0; i < 4; i++)
             sols(0, i) = (sols(0, i) + 1.) / 2.;
         return sols;
     }
@@ -203,7 +203,7 @@ struct Hartmann3 {
         alpha ASSIGNMENT_OP 1.0, 1.2, 3.0, 3.2;
 
         double res = 0.;
-        for (int i = 0; i < 4; i++) {
+        for (size_t i = 0; i < 4; i++) {
             double s = 0.;
             for (size_t j = 0; j < 3; j++) {
                 s += a(i, j) * sqr(x(j) - p(i, j));
@@ -243,7 +243,7 @@ struct Hartmann6 {
         alpha ASSIGNMENT_OP 1.0, 1.2, 3.0, 3.2;
 
         double res = 0.;
-        for (int i = 0; i < 4; i++) {
+        for (size_t i = 0; i < 4; i++) {
             double s = 0.;
             for (size_t j = 0; j < 6; j++) {
                 s += a(i, j) * sqr(x(j) - p(i, j));
@@ -270,7 +270,7 @@ struct GoldsteinPrice {
     double operator()(const vec_t& xx) const
     {
         vec_t x = xx;
-        for (int i = 0; i < x.size(); i++)
+        for (size_t i = 0; i < static_cast<size_t>(x.size()); i++)
             x(i) = 4. * xx(i) - 2.;
 
         double fact1a = sqr(x(0) + x(1) + 1.);

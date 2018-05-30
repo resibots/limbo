@@ -28,7 +28,7 @@ Optional but highly recommended
 
 .. caution::
 
-  The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (`brew install homebrew/science/nlopt`).
+  The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (`brew install nlopt`).
 
 * `libcmaes <https://github.com/beniz/libcmaes>`_. We advise you to use our own `fork of libcmaes <https://github.com/resibots/libcmaes>`_ (branch **fix_flags_native**). Make sure that you install with **sudo** or configure the **LD_LIBRARY_PATH** accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled **even if you install it with your package manager** (e.g. apt-get): ::
 
