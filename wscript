@@ -61,6 +61,7 @@ import limbo, benchmarks
 import inspect
 from waflib import Logs
 from waflib.Build import BuildContext
+from waflib.Errors import WafError
 
 def options(opt):
         opt.load('compiler_cxx boost waf_unit_test')
@@ -87,10 +88,23 @@ def options(opt):
         opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
+        opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
+
+
+        try:
+                os.mkdir(blddir)# because this is not always created at that stage
+        except:
+                print("build dir not created (it probably already exists, this is fine)")
+        opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
 
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
-                    opt.recurse(i)
+                    opt.start_msg('command-line options for [%s]' % i)
+                    try:
+                        opt.recurse(i)
+                        opt.end_msg(' -> OK')
+                    except WafError:
+                        opt.end_msg(' -> no options found')
 
         opt.recurse('src/benchmarks')
 
@@ -107,6 +121,12 @@ def configure(conf):
         conf.load('libcmaes')
 
         native_flags = "-march=native"
+
+        is_cpp14 = conf.options.cpp14
+        if is_cpp14:
+            is_cpp14 = conf.check_cxx(cxxflags="-std=c++14", mandatory=False, msg='Checking for C++14')
+            if not is_cpp14:
+                conf.msg('C++14 is requested, but your compiler does not support it!', 'Disabling it!', color='RED')
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
             opt_flags = " -O3 -xHost -g"
@@ -119,6 +139,9 @@ def configure(conf):
             if conf.env.CXX_NAME in ["clang", "llvm"]:
                 common_flags += " -fdiagnostics-color"
             opt_flags = " -O3 -g"
+
+        if is_cpp14:
+            common_flags = common_flags + " -std=c++14"
 
         native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
         if native:
@@ -226,7 +249,7 @@ def write_default_params(ctx):
 
 def build_docs(ctx):
     Logs.pprint('NORMAL', "generating HTML doc with versioning...")
-    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(master|release-*)" docs docs/_build/html'
+    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(fix\_docs|master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
