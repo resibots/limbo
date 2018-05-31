@@ -77,6 +77,7 @@ namespace limbo {
         ///
         /// Parameters:
         /// - int iterations
+        /// - double eps_stop
         template <typename Params>
         struct Rprop {
             template <typename F>
