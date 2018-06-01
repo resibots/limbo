@@ -226,7 +226,7 @@ as a zip.</p>
 </ul>
 <div class="admonition caution">
 <p class="first admonition-title">Caution</p>
-<p class="last">The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (<cite>brew install homebrew/science/nlopt</cite>).</p>
+<p class="last">The Debian/Unbuntu NLOpt package does NOT come with C++ bindings. Therefore you need to compile NLOpt yourself. The brew package (OSX) comes with C++ bindings (<cite>brew install nlopt</cite>).</p>
 </div>
 <ul>
 <li><p class="first"><a class="reference external" href="https://github.com/beniz/libcmaes">libcmaes</a>. We advise you to use our own <a class="reference external" href="https://github.com/resibots/libcmaes">fork of libcmaes</a> (branch <strong>fix_flags_native</strong>). Make sure that you install with <strong>sudo</strong> or configure the <strong>LD_LIBRARY_PATH</strong> accordingly. Be careful that gtest (which is a dependency of libcmaes) needs to be manually compiled <strong>even if you install it with your package manager</strong> (e.g. apt-get):</p>
@@ -414,7 +414,6 @@ You can also specify a different compiler than the default, setting the environm
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../../fix_docs/tutorials/compilation.html">fix_docs</a></dd>
             <dd><a href="compilation.html">master</a></dd>
             <dd><a href="../../release-1.0/tutorials/compilation.html">release-1.0</a></dd>
             <dd><a href="../../release-2.0/tutorials/compilation.html">release-2.0</a></dd>

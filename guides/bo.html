@@ -188,7 +188,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="introduction-to-bayesian-optimization-bo">
-<h1>Introduction to Bayesian Optimization (BO)<a class="headerlink" href="#introduction-to-bayesian-optimization-bo" title="Permalink to this headline">¶</a></h1>
+<span id="bayesian-optimization"></span><h1>Introduction to Bayesian Optimization (BO)<a class="headerlink" href="#introduction-to-bayesian-optimization-bo" title="Permalink to this headline">¶</a></h1>
 <p>Bayesian optimization is a model-based, black-box optimization algorithm that is tailored for very expensive objective functions (a.k.a. cost functions) <a class="reference internal" href="#a-brochu2010tutorial" id="id1">[1]</a><a class="reference internal" href="#a-mockus2013" id="id2">[3]</a>. As a black-box optimization algorithm, Bayesian optimization searches for the maximum of an unknown objective function from which samples can be obtained (e.g., by measuring the performance of a robot). Like all model-based optimization algorithms (e.g. surrogate-based algorithms, kriging, or DACE), Bayesian optimization creates a model of the objective function with a regression method, uses this model to select the next point to acquire, then updates the model, etc. It is called <em>Bayesian</em> because, in its general formulation <a class="reference internal" href="#a-mockus2013" id="id3">[3]</a>, this algorithm chooses the next point by computing a posterior distribution of the objective function using the likelihood of the data already acquired and a prior on the type of function.</p>
 <div class="figure" id="id15">
 <img alt="concept of Bayesian optimization" src="../_images/bo_concept.png" />
@@ -364,7 +364,6 @@ exploitation/exploration trade-off of the algorithm.</p>
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../fix_docs/guides/bo.html">fix_docs</a></dd>
             <dd><a href="../master/guides/bo.html">master</a></dd>
             <dd><a href="../release-1.0/guides/bo.html">release-1.0</a></dd>
             <dd><a href="../release-2.0/guides/bo.html">release-2.0</a></dd>

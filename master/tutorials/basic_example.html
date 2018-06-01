@@ -188,6 +188,8 @@
             
   <div class="section" id="basic-example">
 <span id="id1"></span><h1>Basic Example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h1>
+<p>If you are not familiar with the main concepts of Bayesian Optimization, a quick introduction is available <a class="reference internal" href="../guides/bo.html#bayesian-optimization"><span class="std std-ref">here</span></a>.
+In this tutorial, we will explain how to create a new experiment in which a simple function ( <span class="math">\(-{(5 * x - 2.5)}^2 + 5\)</span>) is maximized.</p>
 <p>Let’s say we want to create an experiment called “myExp”. The first thing to do is to create the folder <code class="docutils literal"><span class="pre">exp/myExp</span></code> under the limbo root. Then add two files:</p>
 <ul class="simple">
 <li>the <code class="docutils literal"><span class="pre">main.cpp</span></code> file</li>
@@ -204,21 +206,37 @@
 </pre></div>
 </div>
 <p>Next, copy the following content to the <code class="docutils literal"><span class="pre">wscript</span></code> file:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
-    <span class="k">pass</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">waflib.Configure</span> <span class="k">import</span> <span class="n">conf</span>
+
+ <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+     <span class="k">pass</span>
 
 
-<span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
-    <span class="n">bld</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="s1">&#39;cxx cxxprogram&#39;</span><span class="p">,</span>
-        <span class="n">source</span><span class="o">=</span><span class="s1">&#39;main.cpp&#39;</span><span class="p">,</span>
-        <span class="n">includes</span><span class="o">=</span><span class="s1">&#39;. ../../src&#39;</span><span class="p">,</span>
-        <span class="n">target</span><span class="o">=</span><span class="s1">&#39;myExp&#39;</span><span class="p">,</span>
-        <span class="n">uselib</span><span class="o">=</span><span class="s1">&#39;BOOST EIGEN TBB LIBCMAES NLOPT&#39;</span><span class="p">,</span>
-        <span class="n">use</span><span class="o">=</span><span class="s1">&#39;limbo&#39;</span><span class="p">)</span>
+ <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">bld</span><span class="p">):</span>
+     <span class="n">bld</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="s1">&#39;cxx cxxprogram&#39;</span><span class="p">,</span>
+         <span class="n">source</span><span class="o">=</span><span class="s1">&#39;main.cpp&#39;</span><span class="p">,</span>
+         <span class="n">includes</span><span class="o">=</span><span class="s1">&#39;. ../../src&#39;</span><span class="p">,</span>
+         <span class="n">target</span><span class="o">=</span><span class="s1">&#39;myExp&#39;</span><span class="p">,</span>
+         <span class="n">uselib</span><span class="o">=</span><span class="s1">&#39;BOOST EIGEN TBB LIBCMAES NLOPT&#39;</span><span class="p">,</span>
+         <span class="n">use</span><span class="o">=</span><span class="s1">&#39;limbo&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For this example, we will optimize a simple function: <span class="math">\(-{(5 * x - 2.5)}^2 + 5\)</span>, using all default values and settings. If you did not compile with libcmaes and/or nlopt, remove LIBCMAES and/or NLOPT from ‘uselib’.</p>
-<p>To begin, the <code class="docutils literal"><span class="pre">main</span></code> file has to include the necessary files, and declare the <code class="docutils literal"><span class="pre">Parameter</span> <span class="pre">struct</span></code>:</p>
+<p>To begin, the <code class="docutils literal"><span class="pre">main</span></code> file has to include the necessary files:</p>
+<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="c1">// you can also include &lt;limbo/limbo.hpp&gt; but it will slow down the compilation</span>
+<span class="cp">#include</span> <span class="cpf">&lt;limbo/bayes_opt/boptimizer.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
+</pre></div>
+</td></tr></table></div>
+<p>We also need to declare the <code class="docutils literal"><span class="pre">Parameter</span> <span class="pre">struct</span></code>:</p>
 <div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -361,165 +379,70 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
+<p>The full <code class="docutils literal"><span class="pre">main.cpp</span></code> can be found <a class="reference external" href="../../src/tutorials/basic_example.cpp">here</a></p>
 <p>Finally, from the root of limbo, run a build command, with the additional switch <code class="docutils literal"><span class="pre">--exp</span> <span class="pre">myExp</span></code>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">waf</span> <span class="n">build</span> <span class="o">--</span><span class="n">exp</span> <span class="n">myExp</span>
 </pre></div>
 </div>
-<p>Then, an executable named <code class="docutils literal"><span class="pre">myExp</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/myExp</span></code>.</p>
-<p>Full <code class="docutils literal"><span class="pre">main.cpp</span></code>:</p>
-<div class="highlight-c++"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-
-<span class="c1">// you can also include &lt;limbo/limbo.hpp&gt; but it will slow down the compilation</span>
-<span class="cp">#include</span> <span class="cpf">&lt;limbo/bayes_opt/boptimizer.hpp&gt;</span><span class="cp"></span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">limbo</span><span class="p">;</span>
-
-<span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="nl">bayes_opt_boptimizer</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_boptimizer</span> <span class="p">{</span>
-    <span class="p">};</span>
-
-<span class="c1">// depending on which internal optimizer we use, we need to import different parameters</span>
-<span class="cp">#ifdef USE_NLOPT</span>
-    <span class="k">struct</span> <span class="nl">opt_nloptnograd</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_nloptnograd</span> <span class="p">{</span>
-    <span class="p">};</span>
-<span class="cp">#elif defined(USE_LIBCMAES)</span>
-    <span class="k">struct</span> <span class="nl">opt_cmaes</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_cmaes</span> <span class="p">{</span>
-    <span class="p">};</span>
-<span class="cp">#else</span>
-    <span class="k">struct</span> <span class="nl">opt_gridsearch</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_gridsearch</span> <span class="p">{</span>
-    <span class="p">};</span>
-<span class="cp">#endif</span>
-
-    <span class="c1">// enable / disable the writing of the result files</span>
-    <span class="k">struct</span> <span class="nl">bayes_opt_bobase</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">bayes_opt_bobase</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">stats_enabled</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-    <span class="p">};</span>
-
-    <span class="c1">// no noise</span>
-    <span class="k">struct</span> <span class="nl">kernel</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">);</span>
-    <span class="p">};</span>
-
-    <span class="k">struct</span> <span class="nl">kernel_maternfivehalves</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_maternfivehalves</span> <span class="p">{</span>
-    <span class="p">};</span>
-
-    <span class="c1">// we use 10 random samples to initialize the algorithm</span>
-    <span class="k">struct</span> <span class="n">init_randomsampling</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
-    <span class="p">};</span>
-
-    <span class="c1">// we stop after 40 iterations</span>
-    <span class="k">struct</span> <span class="n">stop_maxiterations</span> <span class="p">{</span>
-        <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
-    <span class="p">};</span>
-
-    <span class="c1">// we use the default parameters for acqui_ucb</span>
-    <span class="k">struct</span> <span class="nl">acqui_ucb</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">acqui_ucb</span> <span class="p">{</span>
-    <span class="p">};</span>
-<span class="p">};</span>
-
-<span class="k">struct</span> <span class="n">Eval</span> <span class="p">{</span>
-    <span class="c1">// number of input dimension (x.size())</span>
-    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_in</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="c1">// number of dimensions of the result (res.size())</span>
-    <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">dim_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-
-    <span class="c1">// the function to be optimized</span>
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span>
-    <span class="p">{</span>
-        <span class="kt">double</span> <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
-        <span class="c1">// we return a 1-dimensional vector</span>
-        <span class="k">return</span> <span class="n">tools</span><span class="o">::</span><span class="n">make_vector</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="c1">// we use the default acquisition function / model / stat / etc.</span>
-    <span class="n">bayes_opt</span><span class="o">::</span><span class="n">BOptimizer</span><span class="o">&lt;</span><span class="n">Params</span><span class="o">&gt;</span> <span class="n">boptimizer</span><span class="p">;</span>
-    <span class="c1">// run the evaluation</span>
-    <span class="n">boptimizer</span><span class="p">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">Eval</span><span class="p">());</span>
-    <span class="c1">// the best sample found</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Best sample: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_sample</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; - Best observation: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">boptimizer</span><span class="p">.</span><span class="n">best_observation</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<p>Then, an executable named <code class="docutils literal"><span class="pre">myExp</span></code> should be produced under the folder <code class="docutils literal"><span class="pre">build/exp/myExp</span></code>.
+When running this executable, you should see something similar to this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502378</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99986</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">1</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.503035</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99977</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">2</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502521</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99984</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">3</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502533</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99984</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">4</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502556</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99984</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">5</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502585</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99983</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">6</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502618</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99983</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">7</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502643</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99983</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">8</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502646</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99983</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">9</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502673</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99982</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">10</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502383</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99986</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99986</span>
+<span class="mi">11</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502262</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99987</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99987</span>
+<span class="mi">12</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.502111</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99989</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99989</span>
+<span class="mi">13</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.501921</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99991</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99991</span>
+<span class="mi">14</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.501679</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99993</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99993</span>
+<span class="mi">15</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.501383</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99995</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99995</span>
+<span class="mi">16</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.501055</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99997</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99997</span>
+<span class="mi">17</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500751</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99999</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99999</span>
+<span class="mi">18</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500517</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.99999</span> <span class="n">best</span><span class="p">:</span><span class="mf">4.99999</span>
+<span class="mi">19</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500358</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">20</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500256</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">21</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500189</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">22</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500145</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">23</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500114</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">24</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500092</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">25</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500075</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">26</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500063</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">27</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500054</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">28</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500046</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">29</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500039</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">30</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500035</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">31</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.50003</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">32</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500027</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">33</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500024</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">34</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500022</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">35</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.50002</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">36</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500018</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">37</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500016</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">38</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500015</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="mi">39</span> <span class="n">new</span> <span class="n">point</span><span class="p">:</span> <span class="mf">0.500014</span> <span class="n">value</span><span class="p">:</span> <span class="mi">5</span> <span class="n">best</span><span class="p">:</span><span class="mi">5</span>
+<span class="n">Best</span> <span class="n">sample</span><span class="p">:</span> <span class="mf">0.500014</span> <span class="o">-</span> <span class="n">Best</span> <span class="n">observation</span><span class="p">:</span> <span class="mi">5</span>
 </pre></div>
-</td></tr></table></div>
+</div>
+<p>These lines show the result of each sample evaluation of the <span class="math">\(40\)</span> iterations (after the random initialization). In particular, we can see that algorithm progressively converges toward the maximum of the function (<span class="math">\(5\)</span>) and that the maximum found is located at <span class="math">\(x = 0.500014\)</span>.</p>
+<p>Running the executable also created a folder with a name composed of YOUCOMPUTERHOSTNAME-DATE-HOUR-PID. This folder should contain two files:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">limbo</span>
+<span class="o">|--</span> <span class="n">YOUCOMPUTERHOSTNAME</span><span class="o">-</span><span class="n">DATE</span><span class="o">-</span><span class="n">HOUR</span><span class="o">-</span><span class="n">PID</span>
+   <span class="o">+--</span> <span class="n">samples</span><span class="o">.</span><span class="n">dat</span>
+   <span class="o">+--</span> <span class="n">aggregated_observations</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p>The file <code class="docutils literal"><span class="pre">samples.dat</span></code> contains the coordinates of the samples that have been evaluated during each iteration, while the file <code class="docutils literal"><span class="pre">aggregated_observations.dat</span></code> contains the corresponding observed values.</p>
+<p>If you want to display the different observations in a graph, you can use the python script <code class="docutils literal"><span class="pre">print_aggregated_observations.py</span></code> (located in <code class="docutils literal"><span class="pre">limbo_root/src/tutorials</span></code>).
+For instance, from the root of limbo you can run</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">src</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">print_aggregated_observations</span><span class="o">.</span><span class="n">py</span> <span class="n">YOUCOMPUTERHOSTNAME</span><span class="o">-</span><span class="n">DATE</span><span class="o">-</span><span class="n">HOUR</span><span class="o">-</span><span class="n">PID</span><span class="o">/</span><span class="n">aggregated_observations</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -589,7 +512,6 @@ Also, it should have the <code class="docutils literal"><span class="pre">operat
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="../../fix_docs/tutorials/basic_example.html">fix_docs</a></dd>
             <dd><a href="basic_example.html">master</a></dd>
             <dd><a href="../../release-1.0/tutorials/basic_example.html">release-1.0</a></dd>
             <dd><a href="../../release-2.0/tutorials/basic_example.html">release-2.0</a></dd>

@@ -1,5 +1,5 @@
 API
-============
+====
 .. highlight:: c++
 
 Limbo follows a  `policy-based design <https://en.wikipedia.org/wiki/Policy-based_design>`_, which allows users to combine high flexibility (almost every part of Limbo can be substituted by a user-defined part) with high performance (the abstraction do not add any overhead, contrary to classic OOP design). These two features are critical for researchers who want to experiment new ideas in Bayesian optimization. This means that changing a part of limbo (e.g. changing the kernel functions) usually corresponds to changing a template parameter of the optimizer.
@@ -46,7 +46,7 @@ However, there is no need to inherit from a particular 'abstract' class.
 Every class is parametrized by a :ref:`Params <params-guide>` class that contains all the parameters.
 
 Sequence diagram
----------------
+-----------------
 .. figure:: pics/limbo_sequence_diagram.png
    :alt: Sequence diagram
    :target: _images/limbo_sequence_diagram.png
@@ -56,7 +56,7 @@ Sequence diagram
 
 
 File Structure
---------------
+---------------
 (see below for a short explanation of the concepts)
 
 .. highlight:: none
@@ -149,7 +149,7 @@ Template
       }
 
 Available initializers
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: init
   :undoc-members:
 
@@ -272,7 +272,7 @@ Not all the algorithms support bounded optimization and/or initial point:
 
 
 Available optimizers
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: opt
    :undoc-members:
 
@@ -283,7 +283,7 @@ Default parameters
 
 
 Models / Gaussian processes (model)
----------------
+------------------------------------
 Currently, Limbo only includes Gaussian processes as models. More may come in the future.
 
 .. doxygenclass::  limbo::model::GP
@@ -304,7 +304,7 @@ Kernel functions (kernel)
 .. _kernel-api:
 
 Template
-^^^^^^^^
+^^^^^^^^^
 .. code-block:: cpp
 
   template <typename Params>
@@ -329,14 +329,14 @@ Default parameters
 
 
 Mean functions (mean)
---------------------------
+----------------------
 
 .. _mean-api:
 
 Mean functions capture the prior about the function to be optimized.
 
 Template
-^^^^^^^^
+^^^^^^^^^
 
 .. code-block:: cpp
 
@@ -353,7 +353,7 @@ Template
   };
 
 Available mean functions
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: mean
    :members:
 
@@ -370,12 +370,12 @@ Internals
 
 
 Stopping criteria (stop)
----------------------------------
+-------------------------
 Stopping criteria are used to stop the Bayesian optimizer algorithm.
 
 
 Template
-^^^^^^^^
+^^^^^^^^^
 .. code-block:: cpp
 
   template <typename Params>
@@ -388,7 +388,7 @@ Template
   };
 
 Available stopping criteria
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: stop
    :members:
 
@@ -406,12 +406,12 @@ Internals
 .. _statistics-stats:
 
 Statistics (stats)
---------------------------
+-------------------
 
 Statistics are used to report informations about the current state of the algorithm (e.g., the best observation for each iteration). They are typically chained in a `boost::fusion::vector<>`.
 
 Template
-^^^^^^^^
+^^^^^^^^^
 .. code-block:: cpp
 
   template <typename Params>
@@ -427,7 +427,7 @@ Template
 .. doxygenstruct:: limbo::stat::StatBase
 
 Available statistics
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 .. doxygengroup:: stat
    :members:
 
@@ -437,12 +437,12 @@ Default parameters
    :undoc-members:
 
 Parallel tools (par)
------------------------
+---------------------
 
-.. doxygennamespace:: limbo::tools::par
+.. doxygengroup:: par_tools
   :members:
 
 Misc tools (tools)
--------------------------------
-.. doxygennamespace:: limbo::tools
+-------------------
+.. doxygengroup:: tools
   :members:
