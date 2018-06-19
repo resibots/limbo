@@ -152,6 +152,10 @@ namespace limbo {
         template <typename Params>
         struct Cmaes {
         public:
+            using ProgressFunction = std::function<void(const libcmaes::CMASolutions&)>;
+            using ProgressFunctionUnbounded = std::function<int(const libcmaes::CMAParameters<libcmaes::GenoPheno<libcmaes::NoBoundStrategy>>&, const libcmaes::CMASolutions&)>;
+            using ProgressFunctionBounded = std::function<int(const libcmaes::CMAParameters<libcmaes::GenoPheno<libcmaes::pwqBoundStrategy>>&, const libcmaes::CMASolutions&)>;
+
             template <typename F>
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, double bounded) const
             {
@@ -170,7 +174,15 @@ namespace limbo {
                     return _opt_unbounded(f_cmaes, dim, init);
             }
 
+            void set_progress_function(const ProgressFunction& pfunc) { _pfunc = pfunc; }
+            void set_unbounded_progress_function(const ProgressFunctionUnbounded& pfunc) { _pfunc_unbounded = pfunc; }
+            void set_bounded_progress_function(const ProgressFunctionBounded& pfunc) { _pfunc_bounded = pfunc; }
+
         private:
+            ProgressFunction _pfunc;
+            ProgressFunctionUnbounded _pfunc_unbounded;
+            ProgressFunctionBounded _pfunc_bounded;
+
             // F is a CMA-ES style function, not our function
             template <typename F>
             Eigen::VectorXd _opt_unbounded(F& f_cmaes, int dim, const Eigen::VectorXd& init) const
@@ -183,8 +195,16 @@ namespace limbo {
                 CMAParameters<> cmaparams(x0, sigma, Params::opt_cmaes::lambda());
                 _set_common_params(cmaparams, dim);
 
+                auto pfunc = CMAStrategy<CovarianceUpdate, GenoPheno<NoBoundStrategy>>::_defaultPFunc;
+                if (_pfunc_unbounded) {
+                    pfunc = _pfunc_unbounded;
+                }
+                else if (_pfunc) {
+                    pfunc = [this](const CMAParameters<GenoPheno<NoBoundStrategy>>& params, const CMASolutions& sols) { _pfunc(sols); return 0; };
+                }
+
                 // the optimization itself
-                CMASolutions cmasols = cmaes<>(f_cmaes, cmaparams);
+                CMASolutions cmasols = cmaes<>(f_cmaes, cmaparams, pfunc);
                 if (Params::opt_cmaes::stochastic() || Params::opt_cmaes::handle_uncertainty())
                     return cmasols.xmean();
 
@@ -211,8 +231,16 @@ namespace limbo {
                 CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, Params::opt_cmaes::lambda(), 0, gp);
                 _set_common_params(cmaparams, dim);
 
+                auto pfunc = CMAStrategy<CovarianceUpdate, GenoPheno<pwqBoundStrategy>>::_defaultPFunc;
+                if (_pfunc_bounded) {
+                    pfunc = _pfunc_bounded;
+                }
+                else if (_pfunc) {
+                    pfunc = [this](const CMAParameters<GenoPheno<pwqBoundStrategy>>& params, const CMASolutions& sols) { _pfunc(sols); return 0; };
+                }
+
                 // the optimization itself
-                CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(f_cmaes, cmaparams);
+                CMASolutions cmasols = cmaes<GenoPheno<pwqBoundStrategy>>(f_cmaes, cmaparams, pfunc);
                 if (Params::opt_cmaes::stochastic() || Params::opt_cmaes::handle_uncertainty())
                     return gp.pheno(cmasols.xmean());
 
