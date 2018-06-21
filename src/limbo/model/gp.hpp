@@ -160,15 +160,15 @@ namespace limbo {
             {
                 if (_samples.size() == 0)
                     return std::make_tuple(_mean_function(v, *this),
-                        _kernel_function(v, v));
+                        _kernel_function(v, v) + _kernel_function.noise());
 
                 Eigen::VectorXd k = _compute_k(v);
-                return std::make_tuple(_mu(v, k), _sigma(v, k));
+                return std::make_tuple(_mu(v, k), _sigma(v, k) + _kernel_function.noise());
             }
 
             /**
              \\rst
-             return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
+             return :math:`\mu` (un-normalized). If there is no sample, return the value according to the mean function.
              \\endrst
             */
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
@@ -180,14 +180,14 @@ namespace limbo {
 
             /**
              \\rst
-             return :math:`\sigma^2` (unormalized). If there is no sample, return the max :math:`\sigma^2`.
+             return :math:`\sigma^2` (un-normalized). If there is no sample, return the max :math:`\sigma^2`.
              \\endrst
             */
             double sigma(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
-                    return _kernel_function(v, v);
-                return _sigma(v, _compute_k(v));
+                    return _kernel_function(v, v) + _kernel_function.noise();
+                return _sigma(v, _compute_k(v)) + _kernel_function.noise();
             }
 
             /// return the number of dimensions of the input
