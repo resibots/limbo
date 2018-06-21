@@ -474,7 +474,7 @@ BOOST_AUTO_TEST_CASE(test_gp_dim)
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(std::abs((mu(1) - 5)) < 1);
 
-    BOOST_CHECK(sigma <= Params::kernel::noise() + 1e-8);
+    BOOST_CHECK(sigma <= 2. * (Params::kernel::noise() + 1e-8));
 }
 
 BOOST_AUTO_TEST_CASE(test_gp)
@@ -496,15 +496,15 @@ BOOST_AUTO_TEST_CASE(test_gp)
     double sigma;
     std::tie(mu, sigma) = gp.query(make_v1(1));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-    BOOST_CHECK(sigma <= Params::kernel::noise() + 1e-8);
+    BOOST_CHECK(sigma <= 2. * (Params::kernel::noise() + 1e-8));
 
     std::tie(mu, sigma) = gp.query(make_v1(2));
     BOOST_CHECK(std::abs((mu(0) - 10)) < 1);
-    BOOST_CHECK(sigma <= Params::kernel::noise() + 1e-8);
+    BOOST_CHECK(sigma <= 2. * (Params::kernel::noise() + 1e-8));
 
     std::tie(mu, sigma) = gp.query(make_v1(3));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-    BOOST_CHECK(sigma <= Params::kernel::noise() + 1e-8);
+    BOOST_CHECK(sigma <= 2. * (Params::kernel::noise() + 1e-8));
 
     for (double x = 0; x < 4; x += 0.05) {
         Eigen::VectorXd mu;
@@ -690,15 +690,15 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     double sigma;
     std::tie(mu, sigma) = gp.query(make_v1(1));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-    BOOST_CHECK(sigma <= gp.kernel_function().noise() + 1e-8);
+    BOOST_CHECK(sigma <= 2. * (gp.kernel_function().noise() + 1e-8));
 
     std::tie(mu, sigma) = gp.query(make_v1(2));
     BOOST_CHECK(std::abs((mu(0) - 10)) < 1);
-    BOOST_CHECK(sigma <= gp.kernel_function().noise() + 1e-8);
+    BOOST_CHECK(sigma <= 2. * (gp.kernel_function().noise() + 1e-8));
 
     std::tie(mu, sigma) = gp.query(make_v1(3));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
-    BOOST_CHECK(sigma <= gp.kernel_function().noise() + 1e-8);
+    BOOST_CHECK(sigma <= 2. * (gp.kernel_function().noise() + 1e-8));
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_init_variance)
