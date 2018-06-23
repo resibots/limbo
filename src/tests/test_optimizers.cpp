@@ -48,8 +48,10 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <limbo/opt/adam.hpp>
 #include <limbo/opt/chained.hpp>
 #include <limbo/opt/cmaes.hpp>
+#include <limbo/opt/gradient_ascent.hpp>
 #include <limbo/opt/grid_search.hpp>
 #include <limbo/opt/parallel_repeater.hpp>
 #include <limbo/opt/random_point.hpp>
@@ -70,6 +72,16 @@ struct Params {
 
     struct opt_rprop : public defaults::opt_rprop {
         BO_PARAM(int, iterations, 150);
+    };
+
+    struct opt_gradient_ascent : public defaults::opt_gradient_ascent {
+        BO_PARAM(int, iterations, 150);
+        BO_PARAM(double, alpha, 0.1);
+    };
+
+    struct opt_adam : public defaults::opt_adam {
+        BO_PARAM(int, iterations, 150);
+        BO_PARAM(double, alpha, 0.1);
     };
 };
 
@@ -179,6 +191,84 @@ BOOST_AUTO_TEST_CASE(test_gradient)
     BOOST_CHECK_EQUAL(best_point.size(), 1);
     BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
     BOOST_CHECK_EQUAL(simple_calls, Params::opt_rprop::iterations());
+}
+
+BOOST_AUTO_TEST_CASE(test_classic_optimizers)
+{
+    using namespace limbo;
+
+    struct MomentumParams {
+        struct opt_gradient_ascent : public defaults::opt_gradient_ascent {
+            BO_PARAM(int, iterations, 150);
+            BO_PARAM(double, alpha, 0.1);
+            BO_PARAM(double, gamma, 0.8);
+        };
+    };
+
+    struct NesterovParams {
+        struct opt_gradient_ascent : public defaults::opt_gradient_ascent {
+            BO_PARAM(int, iterations, 150);
+            BO_PARAM(double, alpha, 0.1);
+            BO_PARAM(double, gamma, 0.8);
+            BO_PARAM(bool, nesterov, true);
+        };
+    };
+
+    opt::Rprop<Params> rprop;
+    opt::Adam<Params> adam;
+    opt::GradientAscent<Params> gradient_ascent;
+    opt::GradientAscent<MomentumParams> gradient_ascent_momentum;
+    opt::GradientAscent<NesterovParams> gradient_ascent_nesterov;
+
+    simple_calls = 0;
+    check_grad = true;
+    Eigen::VectorXd best_point = rprop(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
+    BOOST_CHECK_EQUAL(best_point.size(), 1);
+    BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
+    BOOST_CHECK_EQUAL(simple_calls, Params::opt_rprop::iterations());
+
+    double best_rprop = best_point(0);
+
+    simple_calls = 0;
+    check_grad = true;
+    best_point = gradient_ascent(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
+    BOOST_CHECK_EQUAL(best_point.size(), 1);
+    BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
+    BOOST_CHECK_EQUAL(simple_calls, Params::opt_gradient_ascent::iterations());
+
+    double best_gradient_ascent = best_point(0);
+
+    simple_calls = 0;
+    check_grad = true;
+    best_point = gradient_ascent_momentum(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
+    BOOST_CHECK_EQUAL(best_point.size(), 1);
+    BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
+    BOOST_CHECK_EQUAL(simple_calls, MomentumParams::opt_gradient_ascent::iterations());
+
+    double best_gradient_ascent_momentum = best_point(0);
+
+    simple_calls = 0;
+    check_grad = true;
+    best_point = gradient_ascent_nesterov(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
+    BOOST_CHECK_EQUAL(best_point.size(), 1);
+    BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
+    BOOST_CHECK_EQUAL(simple_calls, NesterovParams::opt_gradient_ascent::iterations());
+
+    double best_gradient_ascent_nesterov = best_point(0);
+
+    simple_calls = 0;
+    check_grad = true;
+    best_point = adam(simple_func, Eigen::VectorXd::Constant(1, 2.0), false);
+    BOOST_CHECK_EQUAL(best_point.size(), 1);
+    BOOST_CHECK(std::abs(best_point(0) + 1.) < 1e-3);
+    BOOST_CHECK_EQUAL(simple_calls, Params::opt_adam::iterations());
+
+    double best_adam = best_point(0);
+
+    BOOST_CHECK(std::abs(best_rprop - best_gradient_ascent) < 1e-3);
+    BOOST_CHECK(std::abs(best_rprop - best_gradient_ascent_momentum) < 1e-3);
+    BOOST_CHECK(std::abs(best_rprop - best_gradient_ascent_nesterov) < 1e-3);
+    BOOST_CHECK(std::abs(best_rprop - best_adam) < 1e-3);
 }
 
 BOOST_AUTO_TEST_CASE(test_parallel_repeater)

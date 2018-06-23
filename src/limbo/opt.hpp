@@ -61,6 +61,8 @@
 #include <limbo/opt/nlopt_grad.hpp>
 #include <limbo/opt/nlopt_no_grad.hpp>
 #endif
+#include <limbo/opt/adam.hpp>
+#include <limbo/opt/gradient_ascent.hpp>
 #include <limbo/opt/parallel_repeater.hpp>
 #include <limbo/opt/random_point.hpp>
 #include <limbo/opt/rprop.hpp>
