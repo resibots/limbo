@@ -43,20 +43,33 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_MODEL_HPP
-#define LIMBO_MODEL_HPP
+#ifndef LIMBO_MODEL_MULTI_GP_PARALLEL_LF_OPT_HPP
+#define LIMBO_MODEL_MULTI_GP_PARALLEL_LF_OPT_HPP
 
-///@defgroup model_opt
-///@defgroup model_opt_defaults
+#include <limbo/model/gp/hp_opt.hpp>
 
-#include <limbo/model/gp.hpp>
-#include <limbo/model/multi_gp.hpp>
-#include <limbo/model/sparsified_gp.hpp>
+namespace limbo {
+    namespace model {
+        namespace multi_gp {
+            ///@ingroup model_opt
+            ///optimize each GP independently in parallel using HyperParamsOptimizer
+            template <typename Params, typename HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
+            struct ParallelLFOpt : public limbo::model::gp::HPOpt<Params> {
+            public:
+                template <typename GP>
+                void operator()(GP& gp)
+                {
+                    this->_called = true;
+                    auto& gps = gp.gp_models();
+                    limbo::tools::par::loop(0, gps.size(), [&](size_t i) {
+                        HyperParamsOptimizer hp_optimize;
+                        hp_optimize(gps[i]);
+                    });
+                }
+            };
 
-#include <limbo/model/gp/kernel_lf_opt.hpp>
-#include <limbo/model/gp/kernel_loo_opt.hpp>
-#include <limbo/model/gp/kernel_mean_lf_opt.hpp>
-#include <limbo/model/gp/mean_lf_opt.hpp>
-#include <limbo/model/gp/no_lf_opt.hpp>
+        } // namespace multi_gp
+    } // namespace model
+} // namespace limbo
 
 #endif
