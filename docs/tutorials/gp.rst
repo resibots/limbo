@@ -13,7 +13,7 @@ We assume that our samples are in a vector called ``samples`` and that our obser
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 79-88
+   :lines: 77-86
 
 Basic usage
 ------------
@@ -23,14 +23,14 @@ We first create a basic GP with an Exponential kernel (``kernel::Exp<Params>``) 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 61-74
+   :lines: 61-72
 
 The type of the GP is defined by the following lines:
 
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 89-93
+   :lines: 87-91
 
 To use the GP, we need :
 
@@ -40,7 +40,7 @@ To use the GP, we need :
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 94-99
+   :lines: 92-97
 
 Here we assume that the noise is the same for all samples and that it is equal to 0.01.
 
@@ -57,7 +57,7 @@ To visualize the predictions of the GP, we can query it for many points and reco
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 101-112
+   :lines: 99-110
 
 
 Hyper-parameter optimization
@@ -71,7 +71,7 @@ A new GP type is defined as follows:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 114-118
+   :lines: 112-116
 
 It uses the default values for the parameters of ``SquaredExpARD``:
 
@@ -85,7 +85,7 @@ After calling the ``compute()`` method, the hyper-parameters can be optimized by
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 121-123
+   :lines: 119-121
 
 
 We can have a look at the difference between the two GPs:
@@ -115,7 +115,7 @@ We can also save our optimized GP model:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 140-141
+   :lines: 138-139
 
 This will create a directory called ``myGP`` with several files (the GP data, kernel hyperparameters etc.). If we want a binary format (i.e., more compact), we can replace the ``TextArchive`` by ``BinaryArchive``.
 
@@ -124,6 +124,6 @@ To the load a saved model, we can do the following:
 .. literalinclude:: ../../src/tutorials/gp.cpp
    :language: c++
    :linenos:
-   :lines: 143-144
+   :lines: 141-142
 
 Note that we need to have the same kernel and mean function (i.e., the same GP type) as the one used for saving.
