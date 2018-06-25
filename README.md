@@ -5,7 +5,7 @@ Limbo (LIbrary for Model-Based Optimization) is an open-source C++11 library for
 
 Documentation & Versions
 ------------------------
-The development branch is the [master](https://github.com/resibots/limbo/tree/master) branch. For the latest stable release, check the [release-2.0](https://github.com/resibots/limbo/tree/release-2.0) branch.
+The development branch is the [master](https://github.com/resibots/limbo/tree/master) branch. For the latest stable release, check the [release-2.1](https://github.com/resibots/limbo/tree/release-2.1) branch.
 Documentation is available at: http://www.resibots.eu/limbo
 
 A short paper that introduces the library is available here: https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf
@@ -15,15 +15,16 @@ Citing Limbo
 If you use Limbo in a scientific paper, please cite:
 
 
-Cully, A., Chatzilygeroudis, K., Allocati, F., and Mouret J.-B., (2016). [Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization](https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf). *Preprint*.
+Cully, A., Chatzilygeroudis, K., Allocati, F., and Mouret J.-B., (2018). [Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization](https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf). *The Journal of Open Source Software*.
 
 In BibTex:
-  
-    @article{cully_limbo_2016,
-        title={Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization},
+
+    @article{cully2018limbo,
+        title={{Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization}},
         author={Cully, A. and Chatzilygeroudis, K. and Allocati, F.  and Mouret, J.-B.},
-        year={2016},
-        journal={Preprint},
+        year={2018},
+        journal={{The Journal of Open Source Software}},
+        publisher={The Open Journal},
         url={https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf}
     }
 
@@ -49,7 +50,7 @@ Main features
 - Modern C++-11
 - Generic framework (template-based / policy-based design), which allows for easy customization, to test novel ideas
 - Experimental framework that allows user to easily test variants of experiments, compare treatments, submit jobs to clusters (OAR scheduler), etc.
-- High performance (in particular, Limbo can exploit multicore computers via Intel TBB and vectorize some operations via Eigen3)
+- High performance (in particular, Limbo can exploit multi-core computers via Intel TBB and vectorize some operations via [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page))
 - Purposely small to be easily maintained and quickly understood
 
 Scientific articles that use Limbo
