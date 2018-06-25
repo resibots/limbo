@@ -80,7 +80,7 @@ namespace limbo {
             /// useful because the model might be created before knowing anything about the process
             GP() : _dim_in(-1), _dim_out(-1), _inv_kernel_updated(false) {}
 
-            /// useful because the model might be created  before having samples
+            /// useful because the model might be created before having samples
             GP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out), _inv_kernel_updated(false) {}
 
@@ -153,7 +153,7 @@ namespace limbo {
 
             /**
              \\rst
-             return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
+             return :math:`\mu`, :math:`\sigma^2` (un-normalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
              \\endrst
             */
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
@@ -193,14 +193,14 @@ namespace limbo {
             /// return the number of dimensions of the input
             int dim_in() const
             {
-                assert(_dim_in != -1); // need to compute first !
+                assert(_dim_in != -1); // need to compute first!
                 return _dim_in;
             }
 
             /// return the number of dimensions of the output
             int dim_out() const
             {
-                assert(_dim_out != -1); // need to compute first !
+                assert(_dim_out != -1); // need to compute first!
                 return _dim_out;
             }
 

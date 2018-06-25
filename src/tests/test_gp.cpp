@@ -119,9 +119,6 @@ struct Params {
     struct opt_rprop : public defaults::opt_rprop {
     };
 
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-    };
-
     struct acqui_ucb : public defaults::acqui_ucb {
     };
 
@@ -213,9 +210,6 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
         };
 
         struct opt_rprop : public defaults::opt_rprop {
-        };
-
-        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
         };
 
         struct acqui_ucb : public defaults::acqui_ucb {
@@ -336,9 +330,6 @@ BOOST_AUTO_TEST_CASE(test_gp_check_loo_grad_noise)
         };
 
         struct opt_rprop : public defaults::opt_rprop {
-        };
-
-        struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
         };
 
         struct acqui_ucb : public defaults::acqui_ucb {

@@ -93,9 +93,6 @@ struct Params {
     struct stop_maxiterations {
         BO_PARAM(int, iterations, 100);
     };
-
-    struct opt_parallelrepeater : defaults::opt_parallelrepeater {
-    };
 };
 
 template <typename Params, typename Model>

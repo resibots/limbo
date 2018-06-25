@@ -47,14 +47,13 @@
 #define LIMBO_MODEL_GP_KERNEL_MEAN_LF_OPT_HPP
 
 #include <limbo/model/gp/hp_opt.hpp>
-#include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
     namespace model {
         namespace gp {
             ///@ingroup model_opt
             ///optimize the likelihood of both the kernel and the mean (try to align the mean function)
-            template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
+            template <typename Params, typename Optimizer = opt::Rprop<Params>>
             struct KernelMeanLFOpt : public HPOpt<Params, Optimizer> {
             public:
                 template <typename GP>
@@ -109,8 +108,8 @@ namespace limbo {
                     const GP& _original_gp;
                 };
             };
-        }
-    }
-}
+        } // namespace gp
+    } // namespace model
+} // namespace limbo
 
 #endif
