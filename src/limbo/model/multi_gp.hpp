@@ -54,8 +54,8 @@ namespace limbo {
         /// A wrapper for N-output Gaussian processes.
         /// It is parametrized by:
         /// - GP class
-        /// - a kernel function
-        /// - a mean function
+        /// - a kernel function (the same type for all GPs, but can have different parameters)
+        /// - a mean function (the same type and parameters for all GPs)
         /// - [optional] an optimizer for the hyper-parameters
         template <typename Params, template <typename, typename, typename, typename> class GPClass, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
         class MultiGP {
@@ -69,7 +69,6 @@ namespace limbo {
             MultiGP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _mean_function(dim_out)
             {
-
                 // initialize dim_in models with 1 output
                 _gp_models.resize(_dim_out);
                 for (int i = 0; i < _dim_out; i++) {

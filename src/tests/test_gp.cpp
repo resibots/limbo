@@ -1112,3 +1112,45 @@ BOOST_AUTO_TEST_CASE(test_multi_gp_auto)
     BOOST_CHECK(sigma(0) <= 2. * (gp.gp_models()[0].kernel_function().noise() + 1e-8));
     BOOST_CHECK(sigma(1) <= 2. * (gp.gp_models()[1].kernel_function().noise() + 1e-8));
 }
+
+BOOST_AUTO_TEST_CASE(test_multi_gp_recompute)
+{
+    using KF_t = kernel::SquaredExpARD<Params>;
+    using Mean_t = mean::Constant<Params>;
+    using MultiGP_t = model::MultiGP<Params, model::GP, KF_t, Mean_t>;
+
+    MultiGP_t gp;
+
+    gp.add_sample(make_v2(1, 1), make_v1(2));
+    gp.add_sample(make_v2(2, 2), make_v1(10));
+
+    // make sure that the observations are properly passed
+    BOOST_CHECK(gp._observations[0](0) == 2.);
+    BOOST_CHECK(gp._observations[1](0) == 10.);
+
+    // make sure the child GPs have the proper observations
+    BOOST_CHECK(gp.gp_models()[0]._observations.row(0)[0] == (2. - gp.mean_function().h_params()[0]));
+    BOOST_CHECK(gp.gp_models()[0]._observations.row(1)[0] == (10. - gp.mean_function().h_params()[0]));
+
+    // now change the mean function parameters
+    gp.mean_function().set_h_params(make_v1(2));
+
+    // make sure that the observations are properly passed
+    BOOST_CHECK(gp._observations[0](0) == 2.);
+    BOOST_CHECK(gp._observations[1](0) == 10.);
+
+    // make sure the child GPs do not have the proper observations
+    BOOST_CHECK(!(gp.gp_models()[0]._observations.row(0)[0] == (2. - gp.mean_function().h_params()[0])));
+    BOOST_CHECK(!(gp.gp_models()[0]._observations.row(1)[0] == (10. - gp.mean_function().h_params()[0])));
+
+    // recompute the GP
+    gp.recompute();
+
+    // make sure that the observations are properly passed
+    BOOST_CHECK(gp._observations[0](0) == 2.);
+    BOOST_CHECK(gp._observations[1](0) == 10.);
+
+    // make sure the child GPs have the proper observations
+    BOOST_CHECK(gp.gp_models()[0]._observations.row(0)[0] == (2. - gp.mean_function().h_params()[0]));
+    BOOST_CHECK(gp.gp_models()[0]._observations.row(1)[0] == (10. - gp.mean_function().h_params()[0]));
+}
