@@ -25,7 +25,10 @@ In BibTex:
         year={2018},
         journal={{The Journal of Open Source Software}},
         publisher={The Open Journal},
-        url={https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf}
+        volume={3},
+        number={26},
+        pages={545},
+        doi={10.21105/joss.00545}
     }
 
 
