@@ -315,7 +315,7 @@ namespace limbo {
                 }
 
                 for (int i = 0; i < _dim_out; i++) {
-                    _gp_models[i].save<A>(archive.directory() + "/gp_" + std::to_string(i));
+                    _gp_models[i].template save<A>(archive.directory() + "/gp_" + std::to_string(i));
                 }
             }
 
@@ -361,7 +361,7 @@ namespace limbo {
 
                 for (int i = 0; i < _dim_out; i++) {
                     // do not recompute the individual GPs on their own
-                    _gp_models[i].load<A>(archive.directory() + "/gp_" + std::to_string(i), false);
+                    _gp_models[i].template load<A>(archive.directory() + "/gp_" + std::to_string(i), false);
                 }
 
                 if (recompute)
