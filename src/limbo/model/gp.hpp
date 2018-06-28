@@ -225,7 +225,7 @@ namespace limbo {
             /// return the mean observation (only call this if the output of the GP is of dimension 1)
             Eigen::VectorXd mean_observation() const
             {
-                // TODO: Check if _dim_out is correct?!
+                assert(_dim_out > 0);
                 return _samples.size() > 0 ? _mean_observation
                                            : Eigen::VectorXd::Zero(_dim_out);
             }

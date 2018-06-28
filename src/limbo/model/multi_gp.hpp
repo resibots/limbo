@@ -106,6 +106,12 @@ namespace limbo {
                 // compute the new observations for the GPs
                 std::vector<std::vector<Eigen::VectorXd>> obs(_dim_out);
 
+                // compute mean observation
+                _mean_observation = Eigen::VectorXd::Zero(_dim_out);
+                for (size_t j = 0; j < _observations.size(); j++)
+                    _mean_observation.array() += _observations[j].array();
+                _mean_observation.array() /= static_cast<double>(_observations.size());
+
                 for (size_t j = 0; j < observations.size(); j++) {
                     Eigen::VectorXd mean_vector = _mean_function(samples[j], *this);
                     assert(mean_vector.size() == _dim_out);
@@ -153,6 +159,12 @@ namespace limbo {
                 }
 
                 _observations.push_back(observation);
+
+                // recompute mean observation
+                _mean_observation = Eigen::VectorXd::Zero(_dim_out);
+                for (size_t j = 0; j < _observations.size(); j++)
+                    _mean_observation.array() += _observations[j].array();
+                _mean_observation.array() /= static_cast<double>(_observations.size());
 
                 Eigen::VectorXd mean_vector = _mean_function(sample, *this);
                 assert(mean_vector.size() == _dim_out);
@@ -256,8 +268,15 @@ namespace limbo {
             /// return the list of samples that have been tested so far
             const std::vector<Eigen::VectorXd>& samples() const
             {
-                assert(_gp_models.size());
-                return _gp_models[0].samples();
+                return _observations.size();
+            }
+
+            /// return the mean observation
+            Eigen::VectorXd mean_observation() const
+            {
+                assert(_dim_out > 0);
+                return _observations.size() > 0 ? _mean_observation
+                                                : Eigen::VectorXd::Zero(_dim_out);
             }
 
             /// return the list of GPs
@@ -324,6 +343,12 @@ namespace limbo {
                 _dim_in = static_cast<int>(dims(0));
                 _dim_out = static_cast<int>(dims(1));
 
+                // recompute mean observation
+                _mean_observation = Eigen::VectorXd::Zero(_dim_out);
+                for (size_t j = 0; j < _observations.size(); j++)
+                    _mean_observation.array() += _observations[j].array();
+                _mean_observation.array() /= static_cast<double>(_observations.size());
+
                 _mean_function = MeanFunction(_dim_out);
 
                 if (_mean_function.h_params_size() > 0) {
@@ -348,6 +373,7 @@ namespace limbo {
             HyperParamsOptimizer _hp_optimize;
             MeanFunction _mean_function;
             std::vector<Eigen::VectorXd> _observations;
+            Eigen::VectorXd _mean_observation;
         };
     } // namespace model
 } // namespace limbo
