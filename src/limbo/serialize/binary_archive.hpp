@@ -124,6 +124,11 @@ namespace limbo {
                 return _dir_name + "/" + object_name + ".bin";
             }
 
+            const std::string& directory() const
+            {
+                return _dir_name;
+            }
+
         protected:
             std::string _dir_name;
 

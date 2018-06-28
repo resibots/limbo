@@ -113,6 +113,11 @@ namespace limbo {
                 return _dir_name + "/" + object_name + ".dat";
             }
 
+            const std::string& directory() const
+            {
+                return _dir_name;
+            }
+
         protected:
             std::string _dir_name;
             Eigen::IOFormat _fmt;
