@@ -8,14 +8,12 @@ Documentation & Versions
 The development branch is the [master](https://github.com/resibots/limbo/tree/master) branch. For the latest stable release, check the [release-2.1](https://github.com/resibots/limbo/tree/release-2.1) branch.
 Documentation is available at: http://www.resibots.eu/limbo
 
-A short paper that introduces the library is available here: https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf
-
 Citing Limbo
 ------------
 If you use Limbo in a scientific paper, please cite:
 
 
-Cully, A., Chatzilygeroudis, K., Allocati, F., and Mouret J.-B., (2018). [Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization](https://members.loria.fr/JBMouret/pdf/limbo_paper.pdf). *The Journal of Open Source Software*.
+Cully, A., Chatzilygeroudis, K., Allocati, F., and Mouret J.-B., (2018). [Limbo: A Flexible High-performance Library for Gaussian Processes modeling and Data-Efficient Optimization](http://joss.theoj.org/papers/10.21105/joss.00545). *The Journal of Open Source Software*.
 
 In BibTex:
 
