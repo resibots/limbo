@@ -247,7 +247,7 @@ namespace limbo {
             /// return the number of samples used to compute the GP
             int nb_samples() const
             {
-                return (_gp_models.size() > 0) ? _gp_models[0].nb_samples() : 0;
+                return _observations.size();
             }
 
             ///  recomputes the GPs
@@ -268,7 +268,8 @@ namespace limbo {
             /// return the list of samples that have been tested so far
             const std::vector<Eigen::VectorXd>& samples() const
             {
-                return _observations.size();
+                assert(_gp_models.size());
+                return _gp_models[0].samples();
             }
 
             /// return the mean observation
