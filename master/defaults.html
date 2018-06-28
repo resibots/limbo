@@ -119,10 +119,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#kernel">kernel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#kernel-maternthreehalves">kernel_maternthreehalves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-eci">acqui_eci</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#bayes-opt-bobase">bayes_opt_bobase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#init-gridsampling">init_gridsampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-ucb-imgpo">acqui_ucb_imgpo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#model-sparse-gp">model_sparse_gp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#init-lhs">init_lhs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-gridsearch">opt_gridsearch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#init-randomsamplinggrid">init_randomsamplinggrid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mean-constant">mean_constant</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#model-spgp">model_spgp</a></li>
@@ -140,12 +141,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#kernel-squared-exp-ard">kernel_squared_exp_ard</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bayes-opt-cboptimizer">bayes_opt_cboptimizer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-ucb">acqui_ucb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#init-gridsampling">init_gridsampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#opt-gridsearch">opt_gridsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bayes-opt-bobase">bayes_opt_bobase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-gradient-ascent">opt_gradient_ascent</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#kernel-exp">kernel_exp</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bayes-opt-ehvi">bayes_opt_ehvi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#model-gp-parego">model_gp_parego</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acqui-gpucb">acqui_gpucb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opt-adam">opt_adam</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#init-randomsampling">init_randomsampling</a></li>
 </ul>
 </li>
@@ -227,11 +229,10 @@
 <li>double jitter = 0.0 [defined in src/limbo/experimental/acqui/eci.hpp]</li>
 </ul>
 </div>
-<div class="section" id="bayes-opt-bobase">
-<h2>bayes_opt_bobase<a class="headerlink" href="#bayes-opt-bobase" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="init-gridsampling">
+<h2>init_gridsampling<a class="headerlink" href="#init-gridsampling" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]</li>
-<li>bool bounded = true [defined in src/limbo/bayes_opt/bo_base.hpp]</li>
+<li>int bins = 5 [defined in src/limbo/init/grid_sampling.hpp]</li>
 </ul>
 </div>
 <div class="section" id="acqui-ucb-imgpo">
@@ -250,6 +251,12 @@
 <h2>init_lhs<a class="headerlink" href="#init-lhs" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>int samples = 10 [defined in src/limbo/init/lhs.hpp]</li>
+</ul>
+</div>
+<div class="section" id="opt-gridsearch">
+<h2>opt_gridsearch<a class="headerlink" href="#opt-gridsearch" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>int bins = 5 [defined in src/limbo/opt/grid_search.hpp]</li>
 </ul>
 </div>
 <div class="section" id="init-randomsamplinggrid">
@@ -381,16 +388,21 @@
 <li>double alpha = 0.5 [defined in src/limbo/acqui/ucb.hpp]</li>
 </ul>
 </div>
-<div class="section" id="init-gridsampling">
-<h2>init_gridsampling<a class="headerlink" href="#init-gridsampling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bayes-opt-bobase">
+<h2>bayes_opt_bobase<a class="headerlink" href="#bayes-opt-bobase" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>int bins = 5 [defined in src/limbo/init/grid_sampling.hpp]</li>
+<li>bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]</li>
+<li>bool bounded = true [defined in src/limbo/bayes_opt/bo_base.hpp]</li>
 </ul>
 </div>
-<div class="section" id="opt-gridsearch">
-<h2>opt_gridsearch<a class="headerlink" href="#opt-gridsearch" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="opt-gradient-ascent">
+<h2>opt_gradient_ascent<a class="headerlink" href="#opt-gradient-ascent" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>int bins = 5 [defined in src/limbo/opt/grid_search.hpp]</li>
+<li>bool nesterov = false [defined in src/limbo/opt/gradient_ascent.hpp]</li>
+<li>double alpha = 0.001 [defined in src/limbo/opt/gradient_ascent.hpp]</li>
+<li>double gamma = 0.0 [defined in src/limbo/opt/gradient_ascent.hpp]</li>
+<li>int iterations = 300 [defined in src/limbo/opt/gradient_ascent.hpp]</li>
+<li>double eps_stop = 0.0 [defined in src/limbo/opt/gradient_ascent.hpp]</li>
 </ul>
 </div>
 <div class="section" id="kernel-exp">
@@ -417,6 +429,16 @@
 <h2>acqui_gpucb<a class="headerlink" href="#acqui-gpucb" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>double delta = 0.1 [defined in src/limbo/acqui/gp_ucb.hpp]</li>
+</ul>
+</div>
+<div class="section" id="opt-adam">
+<h2>opt_adam<a class="headerlink" href="#opt-adam" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>double alpha = 0.001 [defined in src/limbo/opt/adam.hpp]</li>
+<li>double b2 = 0.999 [defined in src/limbo/opt/adam.hpp]</li>
+<li>double b1 = 0.9 [defined in src/limbo/opt/adam.hpp]</li>
+<li>int iterations = 300 [defined in src/limbo/opt/adam.hpp]</li>
+<li>double eps_stop = 0.0 [defined in src/limbo/opt/adam.hpp]</li>
 </ul>
 </div>
 <div class="section" id="init-randomsampling">
@@ -491,12 +513,14 @@
             <dt>Tags</dt>
             <dd><a href="../v1.0.0/index.html">v1.0.0</a></dd>
             <dd><a href="../v2.0.0/defaults.html">v2.0.0</a></dd>
+            <dd><a href="../v2.1.0/defaults.html">v2.1.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="defaults.html">master</a></dd>
             <dd><a href="../release-1.0/index.html">release-1.0</a></dd>
             <dd><a href="../release-2.0/defaults.html">release-2.0</a></dd>
+            <dd><a href="../release-2.1/defaults.html">release-2.1</a></dd>
         </dl>
     </div>
 </div>

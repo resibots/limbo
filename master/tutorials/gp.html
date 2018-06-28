@@ -234,9 +234,7 @@
  9
 10
 11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">Params</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="n">kernel_exp</span> <span class="p">{</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">sigma_sq</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
         <span class="n">BO_PARAM</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">);</span>
@@ -246,8 +244,6 @@
     <span class="k">struct</span> <span class="nl">kernel_squared_exp_ard</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">kernel_squared_exp_ard</span> <span class="p">{</span>
     <span class="p">};</span>
     <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
-    <span class="p">};</span>
-    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
     <span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
@@ -493,8 +489,6 @@
     <span class="p">};</span>
     <span class="k">struct</span> <span class="nl">opt_rprop</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_rprop</span> <span class="p">{</span>
     <span class="p">};</span>
-    <span class="k">struct</span> <span class="nl">opt_parallelrepeater</span> <span class="p">:</span> <span class="k">public</span> <span class="n">defaults</span><span class="o">::</span><span class="n">opt_parallelrepeater</span> <span class="p">{</span>
-    <span class="p">};</span>
 <span class="p">};</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
@@ -654,12 +648,14 @@
             <dt>Tags</dt>
             <dd><a href="../../v1.0.0/tutorials/gp.html">v1.0.0</a></dd>
             <dd><a href="../../v2.0.0/tutorials/gp.html">v2.0.0</a></dd>
+            <dd><a href="../../v2.1.0/tutorials/gp.html">v2.1.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="gp.html">master</a></dd>
             <dd><a href="../../release-1.0/tutorials/gp.html">release-1.0</a></dd>
             <dd><a href="../../release-2.0/tutorials/gp.html">release-2.0</a></dd>
+            <dd><a href="../../release-2.1/tutorials/gp.html">release-2.1</a></dd>
         </dl>
     </div>
 </div>

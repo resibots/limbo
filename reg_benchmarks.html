@@ -188,7 +188,7 @@
             
   <div class="section" id="gaussian-process-regression-benchmarks">
 <h1>Gaussian process regression benchmarks<a class="headerlink" href="#gaussian-process-regression-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>May 30, 2018</em> – hal14 (32 cores)</p>
+<p><em>June 28, 2018</em> – hal30 (32 cores)</p>
 <p>This page presents benchmarks in which we compare the performance of the Gaussian Process regression in <strong>Limbo</strong> against two other libraries: GPy (<a class="reference external" href="https://github.com/SheffieldML/GPy">https://github.com/SheffieldML/GPy</a>) and libGP (<a class="reference external" href="https://github.com/mblum/libgp">https://github.com/mblum/libgp</a>).</p>
 <p>The quality of the produced model is evaluated according to the Mean Squared Error (lower is better) with respect to the ground truth function. We also quantify the amount of time required by the different libraries to learn the model and to query it. In both cases, lower is better. The evaluations are replicated 30 times and for each replicate, all the variants (see below for the available variants) are using exactly the same data. The data are uniformly sampled and some noise is added (according to the variance of the data).</p>
 <p>The comparison is done on 11 tasks to evaluate the performance of the libraries on functions of different complexity, and input/output spaces. The results show that the query time of Limbo’s Gaussian processes is several orders of magnitude better than the one of GPy and around twice better than libGP for a similar accuracy. The learning time of Limbo, which highly depends on the optimization algorithm chosen to optimize the hyper-parameters, is either equivalent or faster than the compared libraries.</p>
@@ -375,12 +375,14 @@
             <dt>Tags</dt>
             <dd><a href="v1.0.0/reg_benchmarks.html">v1.0.0</a></dd>
             <dd><a href="v2.0.0/reg_benchmarks.html">v2.0.0</a></dd>
+            <dd><a href="v2.1.0/reg_benchmarks.html">v2.1.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="master/reg_benchmarks.html">master</a></dd>
             <dd><a href="release-1.0/reg_benchmarks.html">release-1.0</a></dd>
             <dd><a href="release-2.0/reg_benchmarks.html">release-2.0</a></dd>
+            <dd><a href="release-2.1/reg_benchmarks.html">release-2.1</a></dd>
         </dl>
     </div>
 </div>

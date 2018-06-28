@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Limbo’s documentation &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="#"/>
+        <link rel="next" title="Tutorials" href="tutorials/index.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Limbo’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Limbo</a> &raquo;</li>
+    
+    <li>Limbo’s documentation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="limbo-s-documentation">
+<span id="limbo-doc"></span><h1>Limbo’s documentation<a class="headerlink" href="#limbo-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Limbo (LIbrary for Model-Based Optimization) is an open-source C++11 library for Gaussian Processes and data-efficient optimization (e.g., Bayesian optimization, see <a class="reference internal" href="#b-brochu2010tutorial" id="id1">[2]</a><a class="reference internal" href="#b-mockus2013" id="id2">[9]</a>) that is designed to be both highly flexible and very fast. It can be used as a state-of-the-art optimization library or to experiment with novel algorithms with “plugin” components. Limbo is currently mostly used for data-efficient policy search in robot learning <a class="reference internal" href="#b-lizotte2007automatic" id="id3">[2]</a> and online adaptation because computation time matters when using the low-power embedded computers of robots. For example, Limbo was the key library to develop a new algorithm that allows a legged robot to learn a new gait after a mechanical damage in about 10-15 trials (2 minutes) <a class="reference internal" href="#b-cully-robots-2015" id="id4">[1]</a>, and a 4-DOF manipulator to learn neural networks policies for goal reaching in about 5 trials <a class="reference internal" href="#b-chatzilygeroudis2017" id="id5">[4]</a>.</p>
+<p>The implementation of Limbo follows a policy-based design <a class="reference internal" href="#b-alexandrescu2001modern" id="id6">[1]</a> that leverages C++ templates: this allows it to be highly flexible without the cost induced by classic object-oriented designs (cost of virtual functions). <a class="reference external" href="http://www.resibots.eu/limbo/reg_benchmarks.html">The regression benchmarks</a> show that the query time of Limbo’s Gaussian processes is several orders of magnitude better than the one of GPy (a state-of-the-art <a class="reference external" href="https://sheffieldml.github.io/GPy/">Python library for Gaussian processes</a>) for a similar accuracy (the learning time highly depends on the optimization algorithm chosen to optimize the hyper-parameters). The <a class="reference external" href="http://www.resibots.eu/limbo/bo_benchmarks.html">black-box optimization benchmarks</a> demonstrate that Limbo is about 2 times faster than BayesOpt (a C++ library for data-efficient optimization, <a class="reference internal" href="#b-martinezcantin14a" id="id7">[8]</a>) for a similar accuracy and data-efficiency. In practice, changing one of the components of the algorithms in Limbo (e.g., changing the acquisition function) usually requires changing only a template definition in the source code. This design allows users to rapidly experiment and test new ideas while keeping the software as fast as specialized code.</p>
+<p>Limbo takes advantage of multi-core architectures to parallelize the internal optimization processes (optimization of the acquisition function, optimization of the hyper-parameters of a Gaussian process) and it vectorizes many of the linear algebra operations (via the <a class="reference external" href="http://eigen.tuxfamily.org/">Eigen 3 library</a> and optional bindings to Intel’s MKL).</p>
+<p>The library is distributed under the <a class="reference external" href="http://www.cecill.info/index.en.html">CeCILL-C license</a> via a <a class="reference external" href="http://github.com/resibots/limbo">Github repository</a>. The code is standard-compliant but it is currently mostly developed for GNU/Linux and Mac OS X with both the GCC and Clang compilers. New contributors can rely on a full API reference, while their developments are checked via a continuous integration platform (automatic unit-testing routines).</p>
+<p>Limbo is currently used in the <a class="reference external" href="http://www.resibots.eu">ERC project ResiBots</a>, which is focused on data-efficient trial-and-error learning for robot damage recovery, and in the <a class="reference external" href="http://www.pal4u.eu/">H2020 projet PAL</a>, which uses social robots to help coping with diabetes. It has been instrumental in many scientific publications since 2015 <a class="reference internal" href="#b-cully-robots-2015" id="id8">[1]</a><a class="reference internal" href="#b-chatzilygeroudis2018resetfree" id="id9">[5]</a><a class="reference internal" href="#b-tarapore2016" id="id10">[11]</a><a class="reference internal" href="#b-chatzilygeroudis2017" id="id11">[4]</a><a class="reference internal" href="#b-pautrat2018bayesian" id="id12">[10]</a><a class="reference internal" href="#b-chatzilygeroudis2018using" id="id13">[3]</a>.</p>
+<p>Limbo shares many ideas with <a class="reference external" href="http://github.com/sferes2">Sferes2</a>, a similar framework for evolutionary computation.</p>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Limbo’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/compilation.html">Download and Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/basic_example.html">Basic Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/advanced_example.html">Advanced Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/statistics.html">Statistics / Writing results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/external_libs.html">Add External Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/gp.html">Gaussian Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/opt.html">Optimization Sub-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/building_docs.html">Building the documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/bo.html">Introduction to Bayesian Optimization (BO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/limbo_concepts.html">Limbo-specific concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/framework.html">Using Limbo as an environment for scientific experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/parameters.html">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#class-structure">Class Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#sequence-diagram">Sequence diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#file-structure">File Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#bayesian-optimizers-bayes-opt">Bayesian optimizers (bayes_opt)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#acquisition-functions-acqui">Acquisition functions (acqui)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#init-functions-init">Init functions (init)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#optimization-functions-opt">Optimization functions (opt)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#models-gaussian-processes-model">Models / Gaussian processes (model)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#kernel-functions-kernel">Kernel functions (kernel)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#mean-functions-mean">Mean functions (mean)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#stopping-criteria-stop">Stopping criteria (stop)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#statistics-stats">Statistics (stats)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#parallel-tools-par">Parallel tools (par)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#misc-tools-tools">Misc tools (tools)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel">kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-maternthreehalves">kernel_maternthreehalves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-eci">acqui_eci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-gridsampling">init_gridsampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ucb-imgpo">acqui_ucb_imgpo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-sparse-gp">model_sparse_gp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-lhs">init_lhs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-gridsearch">opt_gridsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-randomsamplinggrid">init_randomsamplinggrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#mean-constant">mean_constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-spgp">model_spgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#stop-maxpredictedvalue">stop_maxpredictedvalue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#stop-maxiterations">stop_maxiterations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-rprop">opt_rprop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-boptimizer">bayes_opt_boptimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-maternfivehalves">kernel_maternfivehalves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-nloptnograd">opt_nloptnograd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-imgpo">bayes_opt_imgpo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-parallelrepeater">opt_parallelrepeater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-cmaes">opt_cmaes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-nloptgrad">opt_nloptgrad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ei">acqui_ei</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-squared-exp-ard">kernel_squared_exp_ard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-cboptimizer">bayes_opt_cboptimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ucb">acqui_ucb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-bobase">bayes_opt_bobase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-gradient-ascent">opt_gradient_ascent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-exp">kernel_exp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-ehvi">bayes_opt_ehvi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-gp-parego">model_gp_parego</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-gpucb">acqui_gpucb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-adam">opt_adam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-randomsampling">init_randomsampling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#variants">Variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#gramacy-lee-in-1d">Gramacy-Lee in 1D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#otl-circuit-in-6d">OTL Circuit in 6D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#piston-simulation-in-7d">Piston Simulation in 7D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#planar-inverse-dynamics-i-in-6d">Planar Inverse Dynamics I in 6D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#planar-inverse-dynamics-ii-in-6d">Planar Inverse Dynamics II in 6D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#rastrigin-in-1d">Rastrigin in 1D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#rastrigin-in-2d">Rastrigin in 2D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#rastrigin-in-4d">Rastrigin in 4D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#rastrigin-in-8d">Rastrigin in 8D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#robot-arm-in-8d">Robot Arm in 8D</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reg_benchmarks.html#step-in-1d">Step in 1D</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bo_benchmarks.html">Bayesian optimization benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#details">Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#branin-function">Branin function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#ellipsoid-function">Ellipsoid function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#goldsteinprice-function">Goldsteinprice function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#hartmann3-function">Hartmann3 function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#hartmann6-function">Hartmann6 function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#rastrigin-function">Rastrigin function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#sixhumpcamel-function">Sixhumpcamel function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bo_benchmarks.html#sphere-function">Sphere function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-waf-and-not-cmake-or-insert-your-favorite-build-system">Why waf (and not Cmake, or &lt;insert your favorite build system&gt;)?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#where-is-the-configuration-file">Where is the configuration file?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-am-i-getting-nolfopt-should-never-be-called-assertion-failure">Why am I getting “‘NoLFOpt’ should never be called!” assertion failure?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-am-i-getting-xxxlfopt-was-never-called-errors">Why am I getting “‘XXXLFOpt’ was never called!” errors?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-do-i-get-nloptnograd-nlopt-invalid-argument">Why do I get “[NLOptNoGrad]: nlopt invalid argument”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#why-c-11-and-not-insert-your-favorite-language">Why C++11? (and not &lt;insert your favorite language&gt;)?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<p id="bibtex-bibliography-index-0"><table class="docutils citation" frame="void" id="b-alexandrescu2001modern" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[1]</a></td><td>Andrei Alexandrescu. <em>Modern C++ design: generic programming and design patterns applied</em>. Addison-Wesley, 2001.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-brochu2010tutorial" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td>Eric Brochu, Vlad&nbsp;M Cora, and Nando De&nbsp;Freitas. A tutorial on bayesian optimization of expensive cost functions, with application to active user modeling and hierarchical reinforcement learning. <em>arXiv preprint arXiv:1012.2599</em>, 2010.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-chatzilygeroudis2018using" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13">[3]</a></td><td>Konstantinos Chatzilygeroudis and Jean-Baptiste Mouret. Using parameterized black-box priors to scale up model-based policy search for robotics. In <em>International Conference on Robotics and Automation (ICRA)</em>. 2018.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-chatzilygeroudis2017" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id11">2</a>)</em> Konstantinos Chatzilygeroudis, Roberto Rama, Rituraj Kaushik, Dorian Goepp, Vassilis Vassiliades, and Jean-Baptiste Mouret. Black-Box Data-efficient Policy Search for Robotics. In <em>IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</em>. Vancouver, Canada, September 2017. URL: <a class="reference external" href="https://hal.inria.fr/hal-01576683">https://hal.inria.fr/hal-01576683</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-chatzilygeroudis2018resetfree" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[5]</a></td><td>Konstantinos Chatzilygeroudis, Vassilis Vassiliades, and Jean-Baptiste Mouret. Reset-free Trial-and-Error Learning for Robot Damage Recovery. <em>Robotics and Autonomous Systems</em>, 2018.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-cully-robots-2015" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> Antoine Cully, Jeff Clune, Danesh Tarapore, and Jean-Baptiste Mouret. Robots that can adapt like animals. <em>Nature</em>, 521(7553):503–507, May 2015. URL: <a class="reference external" href="http://www.nature.com/doifinder/10.1038/nature14422">http://www.nature.com/doifinder/10.1038/nature14422</a>, <a class="reference external" href="https://doi.org/10.1038/nature14422">doi:10.1038/nature14422</a>.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-lizotte2007automatic" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Daniel&nbsp;J Lizotte, Tao Wang, Michael&nbsp;H Bowling, and Dale Schuurmans. Automatic gait optimization with gaussian process regression. In <em>Proceedings of the the International Joint Conference on Artificial Intelligence (IJCAI)</em>, volume&nbsp;7, 944–949. 2007.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-martinezcantin14a" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[8]</a></td><td>Ruben Martinez-Cantin. BayesOpt: a Bayesian optimization library for nonlinear optimization, experimental design and bandits. <em>Journal of Machine Learning Research</em>, 15:3915–3919, 2014.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-mockus2013" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[9]</a></td><td>J.&nbsp;Mockus. <em>Bayesian approach to global optimization: theory and applications</em>. Kluwer Academic, 2013.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-pautrat2018bayesian" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[10]</a></td><td>Rémi Pautrat, Konstantinos Chatzilygeroudis, and Jean-Baptiste Mouret. Bayesian optimization with automatic prior selection for data-efficient direct policy search. In <em>International Conference on Robotics and Automation (ICRA).</em> 2018.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="b-tarapore2016" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[11]</a></td><td>Danesh Tarapore, Jeff Clune, Antoine Cully, and Jean-Baptiste Mouret. How Do Different Encodings Influence the Performance of the MAP-Elites Algorithm? In <em>The 18th Annual conference on Genetic and evolutionary computation (GECCO‘14)</em>. ACM, 2016. URL: <a class="reference external" href="https://hal.inria.fr/hal-01302658">https://hal.inria.fr/hal-01302658</a>, <a class="reference external" href="https://doi.org/10.1145/2908812.2908875">doi:10.1145/2908812.2908875</a>.</td></tr>
+</tbody>
+</table>
+</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorials/index.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: release-2.1
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/index.html">v1.0.0</a></dd>
+            <dd><a href="../v2.0.0/index.html">v2.0.0</a></dd>
+            <dd><a href="../v2.1.0/index.html">v2.1.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/index.html">master</a></dd>
+            <dd><a href="../release-1.0/index.html">release-1.0</a></dd>
+            <dd><a href="../release-2.0/index.html">release-2.0</a></dd>
+            <dd><a href="index.html">release-2.1</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction to Bayesian Optimization (BO) &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Guides" href="index.html"/>
+        <link rel="next" title="Limbo-specific concepts" href="limbo_concepts.html"/>
+        <link rel="prev" title="Guides" href="index.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="../_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction to Bayesian Optimization (BO)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gaussian-process">Gaussian Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimizing-the-hyper-parameters-of-a-gaussian-process">Optimizing the hyper-parameters of a Gaussian process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#kernel-function">Kernel function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acquisition-function">Acquisition function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="limbo_concepts.html">Limbo-specific concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="framework.html">Using Limbo as an environment for scientific experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Limbo</a> &raquo;</li>
+    
+      <li><a href="index.html">Guides</a> &raquo;</li>
+    
+    <li>Introduction to Bayesian Optimization (BO)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/guides/bo.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction-to-bayesian-optimization-bo">
+<span id="bayesian-optimization"></span><h1>Introduction to Bayesian Optimization (BO)<a class="headerlink" href="#introduction-to-bayesian-optimization-bo" title="Permalink to this headline">¶</a></h1>
+<p>Bayesian optimization is a model-based, black-box optimization algorithm that is tailored for very expensive objective functions (a.k.a. cost functions) <a class="reference internal" href="#a-brochu2010tutorial" id="id1">[1]</a><a class="reference internal" href="#a-mockus2013" id="id2">[3]</a>. As a black-box optimization algorithm, Bayesian optimization searches for the maximum of an unknown objective function from which samples can be obtained (e.g., by measuring the performance of a robot). Like all model-based optimization algorithms (e.g. surrogate-based algorithms, kriging, or DACE), Bayesian optimization creates a model of the objective function with a regression method, uses this model to select the next point to acquire, then updates the model, etc. It is called <em>Bayesian</em> because, in its general formulation <a class="reference internal" href="#a-mockus2013" id="id3">[3]</a>, this algorithm chooses the next point by computing a posterior distribution of the objective function using the likelihood of the data already acquired and a prior on the type of function.</p>
+<div class="figure" id="id15">
+<img alt="concept of Bayesian optimization" src="../_images/bo_concept.png" />
+<p class="caption"><span class="caption-text"><strong>Bayesian Optimization of a toy problem.</strong> (A) The goal of this toy problem is to find the maximum of the unknown objective function. (B) The Gaussian process is initialized, as it is customary, with a constant mean and a constant variance. (C) The next potential solution is selected and evaluated. The model is then updated according to the acquired data. (D) Based on the new model, another potential solution is selected and evaluated. (E-G) This process repeats until the maximum is reached.</span></p>
+</div>
+<div class="section" id="gaussian-process">
+<span id="id4"></span><h2>Gaussian Process<a class="headerlink" href="#gaussian-process" title="Permalink to this headline">¶</a></h2>
+<p>Limbo uses Gaussian process regression to find a model <a class="reference internal" href="#a-rasmussen2006" id="id5">[4]</a>, which is a common choice for Bayesian optimization <a class="reference internal" href="#a-brochu2010tutorial" id="id6">[1]</a>. Gaussian processes are particularly interesting for regression because they not only model the cost function, but also the uncertainty associated with each prediction. For a cost function <span class="math">\(f\)</span>, usually unknown, a Gaussian process defines the probability distribution of the possible values <span class="math">\(f(\mathbf{x})\)</span> for each point <span class="math">\(\mathbf{x}\)</span>. These probability distributions are Gaussian, and are therefore defined by a mean (<span class="math">\(\mu\)</span>) and a standard deviation (<span class="math">\(\sigma\)</span>). However, <span class="math">\(\mu\)</span> and <span class="math">\(\sigma\)</span> can be different for each <span class="math">\(\mathbf{x}\)</span>; we therefore define a probability distribution <em>over functions</em>:</p>
+<div class="math">
+\[P(f(\mathbf{x})|\mathbf{x}) = \mathcal{N}(\mu(\mathbf{x}), \sigma^2(\mathbf{x}))\]</div>
+<p>where <span class="math">\(\mathcal{N}\)</span> denotes the standard normal distribution.</p>
+<p>To estimate <span class="math">\(\mu(\mathbf{x})\)</span> and <span class="math">\(\sigma(\mathbf{x})\)</span>, we need to fit the Gaussian process to the data. To do so, we assume that each observation <span class="math">\(f(\mathbf{\chi})\)</span> is a sample from a normal distribution. If we have a data set made of several observations, that is, <span class="math">\(f(\mathbf{\chi}_1), f(\mathbf{\chi}_2), ..., f(\mathbf{\chi}_t)\)</span>, then the vector <span class="math">\(\left[f(\mathbf{\chi}_1), f(\mathbf{\chi}_2), ..., f(\mathbf{\chi}_t)\right]\)</span> is a sample from a <em>multivariate</em> normal distribution, which is defined by a mean vector and a covariance matrix. A Gaussian process is therefore a generalization of a <span class="math">\(n\)</span>-variate normal distribution, where <span class="math">\(n\)</span> is the number of observations. The covariance matrix is what relates one observation to another: two observations that correspond to nearby values of <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> are likely to be correlated (this is a prior assumption based on the fact that functions tend to be smooth, and is injected into the algorithm via a prior on the likelihood of functions), two observations that correspond to distant values of <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> should not influence each other (i.e. their distributions are not correlated). Put differently, the covariance matrix represents that distant samples are almost uncorrelated and nearby samples are strongly correlated. This covariance matrix is defined via a <em>kernel function</em>, called <span class="math">\(k(\chi_1, \chi_2)\)</span>, which is usually based on the Euclidean distance between <span class="math">\(\chi_1\)</span> and <span class="math">\(\chi_2\)</span> (see the “kernel function” sub-section below).</p>
+<p>Given a set of observations <span class="math">\(\mathbf{P}_{1:t}=f(\mathbf{\chi}_{1:t})\)</span> and a sampling noise <span class="math">\(\sigma^2_{noise}\)</span> (which is a user-specified parameter), the Gaussian process is computed as follows <a class="reference internal" href="#a-brochu2010tutorial" id="id7">[1]</a><a class="reference internal" href="#a-rasmussen2006" id="id8">[4]</a>:</p>
+<div class="math">
+\[\begin{split}\begin{gathered}
+ P(f(\mathbf{x})|\mathbf{P}_{1:t},\mathbf{x}) = \mathcal{N}(\mu_{t}(\mathbf{x}), \sigma_{t}^2(\mathbf{x}))\\
+\begin{array}{l}
+ \mathrm{where:}\\
+ \mu_{t}(\mathbf{x})= \mathbf{k}^\intercal\mathbf{K}^{-1}\mathbf{P}_{1:t}\\
+ \sigma_{t}^2(\mathbf{x})=k(\mathbf{x},\mathbf{x}) - \mathbf{k}^\intercal\mathbf{K}^{-1}\mathbf{k}\\
+ \mathbf{K}=\left[ \begin{array}{ c c c}
+    k(\mathbf{\chi}_1,\mathbf{\chi}_1) &amp;\cdots &amp; k(\mathbf{\chi}_1,\mathbf{\chi}_{t}) \\
+    \vdots   &amp;  \ddots &amp;  \vdots  \\
+    k(\mathbf{\chi}_{t},\mathbf{\chi}_1) &amp;  \cdots &amp;  k(\mathbf{\chi}_{t},\mathbf{\chi}_{t})\end{array} \right]
++ \sigma_{noise}^2I\\
+ \mathbf{k}=\left[ \begin{array}{ c c c c }k(\mathbf{x},\mathbf{\chi}_1) &amp; k(\mathbf{x},\mathbf{\chi}_2) &amp; \cdots &amp; k(\mathbf{x},\mathbf{\chi}_{t}) \end{array} \right]
+ \end{array}
+\end{gathered}\end{split}\]</div>
+<p>Our implementation of Bayesian optimization uses this Gaussian process model to search for the maximum  of the unknown objective function <span class="math">\(f(\mathbf{x})\)</span>. It selects the next <span class="math">\(\chi\)</span> to test by selecting the maximum of the <em>acquisition function</em>, which balances exploration – improving the model in the less explored parts of the search space – and exploitation – favoring parts that the models predicts as promising. Once an observation is made, the algorithm updates the Gaussian process to take the new data into account. In classic Bayesian optimization, the Gaussian process is initialized with a constant mean because it is assumed that all the points of the search space are equally likely to be good. The model is progressively refined after each observation.</p>
+</div>
+<div class="section" id="optimizing-the-hyper-parameters-of-a-gaussian-process">
+<span id="likelihood"></span><h2>Optimizing the hyper-parameters of a Gaussian process<a class="headerlink" href="#optimizing-the-hyper-parameters-of-a-gaussian-process" title="Permalink to this headline">¶</a></h2>
+<p>A GP is fully specified by its mean function <span class="math">\(\mu(\mathbf{x})\)</span> and covariance function <span class="math">\(k(\chi_1, \chi_2)\)</span> (a.k.a. <em>kernell function</em>). Nevertheless, the kernel function often includes some parameters, called <em>hyperparameters</em>, that need to be tuned. For instance, one of the most common kernel is the Squared Exponential covariance function:</p>
+<div class="math">
+\[k_{SE}(\chi_1, \chi_2) = \sigma_f^2 \cdot \exp\left( -\frac{\left|\left|\chi_1 - \chi_2\right|\right|^2}{2 l^2}  \right)\]</div>
+<p>For some datasets, it makes sense to hand-tune these parameters (e.g., when there are very few samples). Ideally, our objective should be to learn <span class="math">\(l^2\)</span> (characteristic length scale) and <span class="math">\(\sigma_f^2\)</span> (overall variance).</p>
+<p>A classic way to do so is to maximize the probability of the data given the hyper-parameters <span class="math">\(\mathbf{\vartheta}\)</span> (there are other ways, e.g. cross-validation). We use a log because it makes the optimization simpler and does not change the result.</p>
+<p>The marginal likelihood can be computed as follows:</p>
+<div class="math">
+\[\log p(\mathbf{P}_{1:t}\mid\boldsymbol{\chi}_{1:t},\boldsymbol{\theta})= -\frac{1}{2}(\mathbf{P}_{1:t}-\mu_0)^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mu_0) - \frac{1}{2}\log\mid\mathbf{K}\mid - \frac{n}{2}\log2\pi\]</div>
+<p>where <span class="math">\(\mu_0\)</span> is the mean function (prior).</p>
+<p>Limbo provides many algorithms to optimize the likelihood. Some algorithms are gradient-free (e.g. CMA-ES), some others use the gradient of the log-likelihood (e.g. rprop), see <a class="reference internal" href="../tutorials/opt.html#opt-tutorial"><span class="std std-ref">Optimization Sub-API</span></a> and the <a class="reference internal" href="../api.html#opt-api"><span class="std std-ref">the Limbo implementation guide</span></a>.</p>
+<p>For more details, see <a class="reference internal" href="#a-rasmussen2006" id="id9">[4]</a> (chapter 5).</p>
+</div>
+<div class="section" id="kernel-function">
+<span id="kernel-functions"></span><h2>Kernel function<a class="headerlink" href="#kernel-function" title="Permalink to this headline">¶</a></h2>
+<p>The kernel function is the covariance function of the Gaussian
+process. It defines the influence of a solution’s performance on the performance and confidence estimations of
+not-yet-tested solutions that are nearby.</p>
+<p>The Squared Exponential covariance function and the Matern kernel are the most common kernels for Gaussian processes <a class="reference internal" href="#a-brochu2010tutorial" id="id10">[1]</a><a class="reference internal" href="#a-rasmussen2006" id="id11">[4]</a>. Both kernels are variants of the “bell curve”. The Matern kernel is more general (it includes the Squared Exponential function as a special case) and  allows us to control not only the distance at which effects become nearly zero (as a function of parameter <span class="math">\(\rho\)</span>), but also the rate at which distance effects decrease (as a function of parameter <span class="math">\(\nu\)</span>).</p>
+<p>The Matern kernel function is computed as follows <a class="reference internal" href="#a-matern1960spatial" id="id12">[2]</a><a class="reference internal" href="#a-stein1999interpolation" id="id13">[5]</a> (with <span class="math">\(\nu=5/2\)</span>):</p>
+<div class="math">
+\[\begin{split}\begin{array}{l}
+k(\mathbf{x}_1,\mathbf{x}_2)=\left(1+ \frac{\sqrt{5}d(\mathbf{x}_1,\mathbf{x}_2)}{\rho}+\frac{5d(\mathbf{x}_1,\mathbf{x}_2)^2}{3\rho^2}\right)\exp\left(-\frac{\sqrt{5}d(\mathbf{x}_1,\mathbf{x}_2)}{\rho}\right)\\
+\textrm{where }d(\mathbf{x}_1,\mathbf{x}_2) \textrm{ is the Euclidean distance.}
+\end{array}\end{split}\]</div>
+<p id="acqui-functions">There are other kernel functions in Limbo, and it is easy to define more. See <a class="reference internal" href="../api.html#kernel-api"><span class="std std-ref">the Limbo implementation guide</span></a> for the available kernel functions.</p>
+</div>
+<div class="section" id="acquisition-function">
+<h2>Acquisition function<a class="headerlink" href="#acquisition-function" title="Permalink to this headline">¶</a></h2>
+<p>In order to find the next point to evaluate, we optimize the acquisition function over the model. This step is another optimization problem, but does not require evaluating the objective function. In general, for this optimization problem we can derive the exact equation and find a solution with gradient-based optimization, or use any other optimizer (e.g. CMA-ES).</p>
+<p>Several different acquisition functions exist, such as the probability
+of improvement, the expected improvement, or the Upper Confidence
+Bound (UCB) <a class="reference internal" href="#a-brochu2010tutorial" id="id14">[1]</a>. For instance, the
+equation for the UCB is:</p>
+<div class="math">
+\[\mathbf{x}_{t+1}= \operatorname*{arg\,max}_\mathbf{x} (\mu_{t}(\mathbf{x})+ \kappa\sigma_t(\mathbf{x}))
+\label{ucb}\]</div>
+<p>where <span class="math">\(\kappa\)</span> is a user-defined parameter that tunes the tradeoff between exploration and exploitation.</p>
+<p>Here, the emphasis on exploitation vs. exploration is explicit and easy to adjust. The UCB function can be seen as the maximum value (argmax) across all solutions of the weighted sum of the expected performance (mean of the Gaussian, <span class="math">\(\mu_{t}(\mathbf{x})\)</span>) and of the uncertainty (standard deviation of the Gaussian, <span class="math">\(\sigma_t(\mathbf{x})\)</span>) of each solution. This sum is weighted by the <span class="math">\(\kappa\)</span> factor. With a low <span class="math">\(\kappa\)</span>, the algorithm will choose solutions that are expected to be high-performing. Conversely, with a high <span class="math">\(\kappa\)</span>, the algorithm will focus its search on unexplored areas of the search space that may have high-performing solutions. The
+<span class="math">\(\kappa\)</span> factor enables fine adjustments to the
+exploitation/exploration trade-off of the algorithm.</p>
+<p>There are other acquisition functions in Limbo, and it is easy to define more. See <a class="reference internal" href="../api.html#acqui-api"><span class="std std-ref">the Limbo implementation guide</span></a> for the available acquisition functions.</p>
+<hr class="docutils" />
+<p id="bibtex-bibliography-guides/bo-0"><table class="docutils citation" frame="void" id="a-brochu2010tutorial" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id7">3</a>, <a class="fn-backref" href="#id10">4</a>, <a class="fn-backref" href="#id14">5</a>)</em> Eric Brochu, Vlad&nbsp;M Cora, and Nando De&nbsp;Freitas. A tutorial on bayesian optimization of expensive cost functions, with application to active user modeling and hierarchical reinforcement learning. <em>arXiv preprint arXiv:1012.2599</em>, 2010.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="a-matern1960spatial" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[2]</a></td><td>Bertil Matérn and others. Spatial variation. stochastic models and their application to some problems in forest surveys and other sampling investigations. <em>Meddelanden fran statens Skogsforskningsinstitut</em>, 1960.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="a-mockus2013" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> J.&nbsp;Mockus. <em>Bayesian approach to global optimization: theory and applications</em>. Kluwer Academic, 2013.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="a-rasmussen2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id9">3</a>, <a class="fn-backref" href="#id11">4</a>)</em> C.&nbsp;E. Rasmussen and C.&nbsp;K.&nbsp;I. Williams. <em>Gaussian processes for machine learning</em>. MIT Press, 2006. ISBN 0-262-18253-X.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="a-stein1999interpolation" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13">[5]</a></td><td>Michael&nbsp;L Stein. <em>Interpolation of spatial data: some theory for kriging</em>. Springer, 1999.</td></tr>
+</tbody>
+</table>
+</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="limbo_concepts.html" class="btn btn-neutral float-right" title="Limbo-specific concepts" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Guides" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="../_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: release-2.1
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../v1.0.0/guides/bo.html">v1.0.0</a></dd>
+            <dd><a href="../../v2.0.0/guides/bo.html">v2.0.0</a></dd>
+            <dd><a href="../../v2.1.0/guides/bo.html">v2.1.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../master/guides/bo.html">master</a></dd>
+            <dd><a href="../../release-1.0/guides/bo.html">release-1.0</a></dd>
+            <dd><a href="../../release-2.0/guides/bo.html">release-2.0</a></dd>
+            <dd><a href="bo.html">release-2.1</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -936,6 +936,22 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <span class="target" id="limbogroup__opt"></span><em>group</em> <code class="descname">opt</code></dt>
 <dd><dl class="class">
 <dt>
+<span class="target" id="limbostructlimbo_1_1opt_1_1_adam"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
+<dt id="_CPPv2N5limbo3opt4AdamE">
+<span id="limbo::opt::Adam"></span><em class="property">struct </em><code class="descname">Adam</code><a class="headerlink" href="#_CPPv2N5limbo3opt4AdamE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;limbo/opt/adam.hpp&gt;</em><p><a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_adam"><span class="std std-ref">Adam</span></a> optimizer Equations from: <a class="reference external" href="http://ruder.io/optimizing-gradient-descent/index.html#gradientdescentoptimizationalgorithms">http://ruder.io/optimizing-gradient-descent/index.html#gradientdescentoptimizationalgorithms</a> (I changed a bit the notation; η to α)</p>
+<p>Parameters:<ul class="simple">
+<li>int iterations</li>
+<li>double alpha</li>
+<li>double b1</li>
+<li>double b2</li>
+<li>double eps_stop </li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
 <span class="target" id="limbostructlimbo_1_1opt_1_1_cmaes"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
 <dt id="_CPPv2N5limbo3opt5CmaesE">
 <span id="limbo::opt::Cmaes"></span><em class="property">struct </em><code class="descname">Cmaes</code><a class="headerlink" href="#_CPPv2N5limbo3opt5CmaesE" title="Permalink to this definition">¶</a><br /></dt>
@@ -960,6 +976,22 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <li>int lambda </li>
 </ul>
 </li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="limbostructlimbo_1_1opt_1_1_gradient_ascent"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params&gt;</dt>
+<dt id="_CPPv2N5limbo3opt14GradientAscentE">
+<span id="limbo::opt::GradientAscent"></span><em class="property">struct </em><code class="descname">GradientAscent</code><a class="headerlink" href="#_CPPv2N5limbo3opt14GradientAscentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;limbo/opt/gradient_ascent.hpp&gt;</em><p>Gradient Ascent with or without momentum (Nesterov or simple) Equations from: <a class="reference external" href="http://ruder.io/optimizing-gradient-descent/index.html#gradientdescentoptimizationalgorithms">http://ruder.io/optimizing-gradient-descent/index.html#gradientdescentoptimizationalgorithms</a> (I changed a bit the notation; η to α)</p>
+<p>Parameters:<ul class="simple">
+<li>int iterations</li>
+<li>double alpha</li>
+<li>double gamma</li>
+<li>bool nesterov</li>
+<li>double eps_stop </li>
 </ul>
 </p>
 </dd></dl>
@@ -1102,6 +1134,12 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <p class="breathe-sectiondef-title rubric">Functions</p>
 <dl class="function">
 <dt>
+<span class="target" id="limbogroup__opt__defaults_1ga2f08e57a4a6474fedf47e9f27027b623"></span><code class="descname">limbo::defaults::opt_adam::BO_PARAM(int, iterations, 300)</code></dt>
+<dd><p>number of max iterations </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
 <span class="target" id="limbogroup__opt__defaults_1gaba7127b5e591a72095bd6c3a4155828d"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(int, restarts, 1)</code></dt>
 <dd><p>number of restarts of CMA-ES </p>
 </dd></dl>
@@ -1182,6 +1220,12 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dt>
 <span class="target" id="limbogroup__opt__defaults_1ga21d86483ee1b2e6ce9c529ea315294fa"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(int, lambda, - 1)</code></dt>
 <dd><p>number of parent population -1 to automatically determine </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga71faf7a0f7ce65ca40d3219d0f3cebe9"></span><code class="descname">limbo::defaults::opt_gradient_ascent::BO_PARAM(int, iterations, 300)</code></dt>
+<dd><p>number of max iterations </p>
 </dd></dl>
 
 <dl class="function">
@@ -1293,19 +1337,19 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dl class="function">
 <dt id="_CPPv2NK5limbo5model2GP5queryERKN5Eigen8VectorXdE">
 <span id="limbo::model::GP::query__Eigen::VectorXdCRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a33937ff7df97c01fdd9bf8911e0a6159"></span>std::tuple&lt;Eigen::VectorXd, double&gt; <code class="descname">query</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP5queryERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\mu</span></code>, :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code> (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"><span class="std std-ref">mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"><span class="std std-ref">sigma()</span></a> is more efficient because some computations are shared between <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"><span class="std std-ref">mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"><span class="std std-ref">sigma()</span></a>. \endrst </p>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\mu</span></code>, :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code> (un-normalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"><span class="std std-ref">mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"><span class="std std-ref">sigma()</span></a> is more efficient because some computations are shared between <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"><span class="std std-ref">mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"><span class="std std-ref">sigma()</span></a>. \endrst </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2NK5limbo5model2GP2muERKN5Eigen8VectorXdE">
 <span id="limbo::model::GP::mu__Eigen::VectorXdCRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a5d26e30b8c53400cdf12058d83dc41f0"></span>Eigen::VectorXd <code class="descname">mu</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP2muERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\mu</span></code> (unormalized). If there is no sample, return the value according to the mean function. \endrst </p>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\mu</span></code> (un-normalized). If there is no sample, return the value according to the mean function. \endrst </p>
 </dd></dl>
 
 <dl class="function">
 <dt id="_CPPv2NK5limbo5model2GP5sigmaERKN5Eigen8VectorXdE">
 <span id="limbo::model::GP::sigma__Eigen::VectorXdCRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a2ea153c1de2021740235cfa10822395d"></span>double <code class="descname">sigma</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP5sigmaERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code> (unormalized). If there is no sample, return the max :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code>. \endrst </p>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code> (un-normalized). If there is no sample, return the max :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code>. \endrst </p>
 </dd></dl>
 
 <dl class="function">
@@ -1451,7 +1495,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <span class="target" id="limbogroup__model__opt"></span><em>group</em> <code class="descname">model_opt</code></dt>
 <dd><dl class="class">
 <dt>
-<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_parallel_repeater"><span class="std std-ref">opt::ParallelRepeater</span></a>&lt;Params, <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;&gt;</dt>
+<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"></span><em class="property">template </em>&lt;typename <em>Params</em>, typename <em>Optimizer</em> = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;</dt>
 <dt id="_CPPv2N5limbo5model2gp5HPOptE">
 <span id="limbo::model::gp::HPOpt"></span><em class="property">struct </em><code class="descname">HPOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp5HPOptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/model/gp/hp_opt.hpp&gt;</em><p>base class for optimization of the hyper-parameters of a <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> </p>
@@ -1469,7 +1513,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="class">
 <dt>
-<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_parallel_repeater"><span class="std std-ref">opt::ParallelRepeater</span></a>&lt;Params, <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;&gt;</dt>
+<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_kernel_l_f_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;</dt>
 <dt id="_CPPv2N5limbo5model2gp11KernelLFOptE">
 <span id="limbo::model::gp::KernelLFOpt"></span><em class="property">struct </em><code class="descname">KernelLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp11KernelLFOptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/model/gp/kernel_lf_opt.hpp&gt;</em><p>optimize the likelihood of the kernel only </p>
@@ -1478,7 +1522,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="class">
 <dt>
-<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_kernel_loo_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_parallel_repeater"><span class="std std-ref">opt::ParallelRepeater</span></a>&lt;Params, <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;&gt;</dt>
+<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_kernel_loo_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;</dt>
 <dt id="_CPPv2N5limbo5model2gp12KernelLooOptE">
 <span id="limbo::model::gp::KernelLooOpt"></span><em class="property">struct </em><code class="descname">KernelLooOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp12KernelLooOptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/model/gp/kernel_loo_opt.hpp&gt;</em><p>optimize the likelihood of the kernel only </p>
@@ -1487,7 +1531,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="class">
 <dt>
-<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_parallel_repeater"><span class="std std-ref">opt::ParallelRepeater</span></a>&lt;Params, <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;&gt;</dt>
+<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_kernel_mean_l_f_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;</dt>
 <dt id="_CPPv2N5limbo5model2gp15KernelMeanLFOptE">
 <span id="limbo::model::gp::KernelMeanLFOpt"></span><em class="property">struct </em><code class="descname">KernelMeanLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp15KernelMeanLFOptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/model/gp/kernel_mean_lf_opt.hpp&gt;</em><p>optimize the likelihood of both the kernel and the mean (try to align the mean function) </p>
@@ -1496,7 +1540,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="class">
 <dt>
-<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_parallel_repeater"><span class="std std-ref">opt::ParallelRepeater</span></a>&lt;Params, <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;&gt;</dt>
+<span class="target" id="limbostructlimbo_1_1model_1_1gp_1_1_mean_l_f_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> Optimizer = <a class="reference internal" href="#limbostructlimbo_1_1opt_1_1_rprop"><span class="std std-ref">opt::Rprop</span></a>&lt;Params&gt;&gt;</dt>
 <dt id="_CPPv2N5limbo5model2gp9MeanLFOptE">
 <span id="limbo::model::gp::MeanLFOpt"></span><em class="property">struct </em><code class="descname">MeanLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp9MeanLFOptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/model/gp/mean_lf_opt.hpp&gt;</em><p>optimize the likelihood of the mean only (try to align the mean function) </p>
@@ -1509,6 +1553,15 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dt id="_CPPv2N5limbo5model2gp7NoLFOptE">
 <span id="limbo::model::gp::NoLFOpt"></span><em class="property">struct </em><code class="descname">NoLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model2gp7NoLFOptE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><em>#include &lt;limbo/model/gp/no_lf_opt.hpp&gt;</em><p>do not optimize anything </p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="limbostructlimbo_1_1model_1_1multi__gp_1_1_parallel_l_f_opt"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> HyperParamsOptimizer = <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_no_l_f_opt"><span class="std std-ref">limbo::model::gp::NoLFOpt</span></a>&lt;Params&gt;&gt;</dt>
+<dt id="_CPPv2N5limbo5model8multi_gp13ParallelLFOptE">
+<span id="limbo::model::multi_gp::ParallelLFOpt"></span><em class="property">struct </em><code class="descname">ParallelLFOpt</code><a class="headerlink" href="#_CPPv2N5limbo5model8multi_gp13ParallelLFOptE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;limbo/model/multi_gp/parallel_lf_opt.hpp&gt;</em><p>optimize each <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> independently in parallel using HyperParamsOptimizer </p>
+<p>Inherits from <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_h_p_opt"><span class="std std-ref">limbo::model::gp::HPOpt&lt; Params &gt;</span></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -2305,12 +2358,14 @@ Computes the squared exponential covariance like this:</p>
             <dt>Tags</dt>
             <dd><a href="../v1.0.0/api.html">v1.0.0</a></dd>
             <dd><a href="../v2.0.0/api.html">v2.0.0</a></dd>
+            <dd><a href="../v2.1.0/api.html">v2.1.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="api.html">master</a></dd>
             <dd><a href="../release-1.0/api.html">release-1.0</a></dd>
             <dd><a href="../release-2.0/api.html">release-2.0</a></dd>
+            <dd><a href="../release-2.1/api.html">release-2.1</a></dd>
         </dl>
     </div>
 </div>

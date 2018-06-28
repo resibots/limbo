@@ -185,7 +185,7 @@
             
   <div class="section" id="bayesian-optimization-benchmarks">
 <h1>Bayesian optimization benchmarks<a class="headerlink" href="#bayesian-optimization-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>May 30, 2018</em> – hal13 (32 cores)</p>
+<p><em>June 27, 2018</em> – hal14 (32 cores)</p>
 <p>This page presents benchmarks in which we compare the Bayesian optimization performance of <strong>Limbo</strong> against BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a> , a state-of-the-art Bayesian Optimization library in C++).</p>
 <p>Each library is given 200 evaluations (10 random samples + 190 function evaluations) to find the optimum of the hidden function. We compare both the accuracy of the obtained solution (difference with the actual optimum solution) and the time (wall clock time) required by the library to run the optimization process. The results show that while the libraries generate solutions with similar accuracy (they are based on the same algorithm), <strong>Limbo</strong> generates these solutions significantly faster than BayesOpt.</p>
 <p>In addition to comparing the performance of the libraries with their default parameter values (and evaluating <strong>Limbo</strong> with the same parameters as BayesOpt, see variant: limbo/bench_bayes_def), we also evaluate the performance of multiple variants of <strong>Limbo</strong>, including different acquisition functions (UCB or EI), different inner-optimizers (CMAES or DIRECT) and whether optimizing or not the hyper-parameters of the model. In all the these comparisons, <strong>Limbo</strong> is faster than BayesOpt (for similar results), even when BayesOpt is not optimizing the hyper-parameters of the Gaussian processes.</p>
@@ -329,12 +329,14 @@
             <dt>Tags</dt>
             <dd><a href="../v1.0.0/bo_benchmarks.html">v1.0.0</a></dd>
             <dd><a href="../v2.0.0/bo_benchmarks.html">v2.0.0</a></dd>
+            <dd><a href="../v2.1.0/bo_benchmarks.html">v2.1.0</a></dd>
         </dl>
         <dl>
             <dt>Branches</dt>
             <dd><a href="bo_benchmarks.html">master</a></dd>
             <dd><a href="../release-1.0/bo_benchmarks.html">release-1.0</a></dd>
             <dd><a href="../release-2.0/bo_benchmarks.html">release-2.0</a></dd>
+            <dd><a href="../release-2.1/bo_benchmarks.html">release-2.1</a></dd>
         </dl>
     </div>
 </div>

@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bayesian optimization benchmarks &mdash; limbo 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Frequently Asked Questions" href="faq.html"/>
+        <link rel="prev" title="Gaussian process regression benchmarks" href="reg_benchmarks.html"/>
+<style type="text/css">
+/* This CSS displays small logos at the bottom of the page, on one line */
+
+.wy-footer-logo-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.wy-footer-logo {
+  display: inline-block;
+  width: 60px;
+}
+</style>
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+          
+
+          
+            <a href="http://www.resibots.eu">
+          
+
+          
+            
+            <img src="_static/resibots_logo_black_200px.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="resibots-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+                  <a class="caption" href="http://www.resibots.eu">Project's website</a>
+              
+            
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Limbo’s documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian optimization benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#details">Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#branin-function">Branin function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ellipsoid-function">Ellipsoid function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#goldsteinprice-function">Goldsteinprice function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hartmann3-function">Hartmann3 function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hartmann6-function">Hartmann6 function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rastrigin-function">Rastrigin function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sixhumpcamel-function">Sixhumpcamel function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sphere-function">Sphere function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+            
+
+            
+            
+              
+                <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
+              
+                <a class="caption" href="http://github.com/resibots">github</a>
+              
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">limbo</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Limbo</a> &raquo;</li>
+    
+    <li>Bayesian optimization benchmarks</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="_sources/bo_benchmarks.rst.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bayesian-optimization-benchmarks">
+<h1>Bayesian optimization benchmarks<a class="headerlink" href="#bayesian-optimization-benchmarks" title="Permalink to this headline">¶</a></h1>
+<p><em>June 27, 2018</em> – hal14 (32 cores)</p>
+<p>This page presents benchmarks in which we compare the Bayesian optimization performance of <strong>Limbo</strong> against BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a> , a state-of-the-art Bayesian Optimization library in C++).</p>
+<p>Each library is given 200 evaluations (10 random samples + 190 function evaluations) to find the optimum of the hidden function. We compare both the accuracy of the obtained solution (difference with the actual optimum solution) and the time (wall clock time) required by the library to run the optimization process. The results show that while the libraries generate solutions with similar accuracy (they are based on the same algorithm), <strong>Limbo</strong> generates these solutions significantly faster than BayesOpt.</p>
+<p>In addition to comparing the performance of the libraries with their default parameter values (and evaluating <strong>Limbo</strong> with the same parameters as BayesOpt, see variant: limbo/bench_bayes_def), we also evaluate the performance of multiple variants of <strong>Limbo</strong>, including different acquisition functions (UCB or EI), different inner-optimizers (CMAES or DIRECT) and whether optimizing or not the hyper-parameters of the model. In all the these comparisons, <strong>Limbo</strong> is faster than BayesOpt (for similar results), even when BayesOpt is not optimizing the hyper-parameters of the Gaussian processes.</p>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>We compare to BayesOpt (<a class="reference external" href="https://github.com/rmcantin/bayesopt">https://github.com/rmcantin/bayesopt</a>)</li>
+<li>Accuracy: lower is better (difference with the optimum)</li>
+<li>Wall time: lower is better</li>
+<li>In each replicate, 10 random samples + 190 function evaluations</li>
+<li>see <cite>src/benchmarks/limbo/bench.cpp</cite> and <cite>src/benchmarks/bayesopt/bench.cpp</cite></li>
+</ul>
+</div>
+<div class="section" id="branin-function">
+<h2>Branin function<a class="headerlink" href="#branin-function" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/branin.html">here</a>.</p>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="_images/branin.png" src="_images/branin.png" />
+</div>
+</div>
+<div class="section" id="ellipsoid-function">
+<h2>Ellipsoid function<a class="headerlink" href="#ellipsoid-function" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/rothyp.html">here</a>.</p>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="_images/ellipsoid.png" src="_images/ellipsoid.png" />
+</div>
+</div>
+<div class="section" id="goldsteinprice-function">
+<h2>Goldsteinprice function<a class="headerlink" href="#goldsteinprice-function" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/goldpr.html">here</a>.</p>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="_images/goldsteinprice.png" src="_images/goldsteinprice.png" />
+</div>
+</div>
+<div class="section" id="hartmann3-function">
+<h2>Hartmann3 function<a class="headerlink" href="#hartmann3-function" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/hart3.html">here</a>.</p>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="_images/hartmann3.png" src="_images/hartmann3.png" />
+</div>
+</div>
+<div class="section" id="hartmann6-function">
+<h2>Hartmann6 function<a class="headerlink" href="#hartmann6-function" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/hart6.html">here</a>.</p>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="_images/hartmann6.png" src="_images/hartmann6.png" />
+</div>
+</div>
+<div class="section" id="rastrigin-function">
+<h2>Rastrigin function<a class="headerlink" href="#rastrigin-function" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/rastr.html">here</a> (note, the input space has been rescaled and shifted to have the minimum at [1,1,1,1], instead of [0,0,0,0]</p>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="_images/rastrigin.png" src="_images/rastrigin.png" />
+</div>
+</div>
+<div class="section" id="sixhumpcamel-function">
+<h2>Sixhumpcamel function<a class="headerlink" href="#sixhumpcamel-function" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/camel6.html">here</a>.</p>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="_images/sixhumpcamel.png" src="_images/sixhumpcamel.png" />
+</div>
+</div>
+<div class="section" id="sphere-function">
+<h2>Sphere function<a class="headerlink" href="#sphere-function" title="Permalink to this headline">¶</a></h2>
+<p>Details about the function can be found <a class="reference external" href="https://www.sfu.ca/~ssurjano/spheref.html">here</a>.</p>
+<p>30 replicates</p>
+<div class="figure">
+<img alt="_images/sphere.png" src="_images/sphere.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reg_benchmarks.html" class="btn btn-neutral" title="Gaussian process regression benchmarks" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="wy-footer">
+    <div role="contentinfo">
+      <p>
+          &copy; Copyright 2014-2015, UPMC/Inria.
+
+      
+      
+        <br/>
+        <a href="mailto:jean-baptiste.mouret@inria.fr"> Contact us </a>
+      
+      </p>
+    </div>
+    <div class="wy-footer-aside">
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> modified for <a href="http://resibots.eu">Resibots</a>.
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+<div class="wy-footer-logo-container">
+  <div class="wy-footer-logo"><img src="_static/logos/logo_eu.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_erc_nonofficial.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_loria.jpg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo-inria.svg"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_cnrs.png"/></div>
+  <div class="wy-footer-logo"><img src="_static/logos/logo_universite_lorraine.jpg"/></div>
+</div>
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  +
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: release-2.1
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.0/bo_benchmarks.html">v1.0.0</a></dd>
+            <dd><a href="../v2.0.0/bo_benchmarks.html">v2.0.0</a></dd>
+            <dd><a href="../v2.1.0/bo_benchmarks.html">v2.1.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/bo_benchmarks.html">master</a></dd>
+            <dd><a href="../release-1.0/bo_benchmarks.html">release-1.0</a></dd>
+            <dd><a href="../release-2.0/bo_benchmarks.html">release-2.0</a></dd>
+            <dd><a href="bo_benchmarks.html">release-2.1</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxResibotsTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

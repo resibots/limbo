@@ -14,10 +14,9 @@ acqui_eci
 ^^^^^^^^^
 - double jitter = 0.0 [defined in src/limbo/experimental/acqui/eci.hpp]
 
-bayes_opt_bobase
-^^^^^^^^^^^^^^^^
-- bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]
-- bool bounded = true [defined in src/limbo/bayes_opt/bo_base.hpp]
+init_gridsampling
+^^^^^^^^^^^^^^^^^
+- int bins = 5 [defined in src/limbo/init/grid_sampling.hpp]
 
 acqui_ucb_imgpo
 ^^^^^^^^^^^^^^^
@@ -30,6 +29,10 @@ model_sparse_gp
 init_lhs
 ^^^^^^^^
 - int samples = 10 [defined in src/limbo/init/lhs.hpp]
+
+opt_gridsearch
+^^^^^^^^^^^^^^
+- int bins = 5 [defined in src/limbo/opt/grid_search.hpp]
 
 init_randomsamplinggrid
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -126,13 +129,18 @@ acqui_ucb
 ^^^^^^^^^
 - double alpha = 0.5 [defined in src/limbo/acqui/ucb.hpp]
 
-init_gridsampling
-^^^^^^^^^^^^^^^^^
-- int bins = 5 [defined in src/limbo/init/grid_sampling.hpp]
+bayes_opt_bobase
+^^^^^^^^^^^^^^^^
+- bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]
+- bool bounded = true [defined in src/limbo/bayes_opt/bo_base.hpp]
 
-opt_gridsearch
-^^^^^^^^^^^^^^
-- int bins = 5 [defined in src/limbo/opt/grid_search.hpp]
+opt_gradient_ascent
+^^^^^^^^^^^^^^^^^^^
+- bool nesterov = false [defined in src/limbo/opt/gradient_ascent.hpp]
+- double alpha = 0.001 [defined in src/limbo/opt/gradient_ascent.hpp]
+- double gamma = 0.0 [defined in src/limbo/opt/gradient_ascent.hpp]
+- int iterations = 300 [defined in src/limbo/opt/gradient_ascent.hpp]
+- double eps_stop = 0.0 [defined in src/limbo/opt/gradient_ascent.hpp]
 
 kernel_exp
 ^^^^^^^^^^
@@ -151,6 +159,14 @@ model_gp_parego
 acqui_gpucb
 ^^^^^^^^^^^
 - double delta = 0.1 [defined in src/limbo/acqui/gp_ucb.hpp]
+
+opt_adam
+^^^^^^^^
+- double alpha = 0.001 [defined in src/limbo/opt/adam.hpp]
+- double b2 = 0.999 [defined in src/limbo/opt/adam.hpp]
+- double b1 = 0.9 [defined in src/limbo/opt/adam.hpp]
+- int iterations = 300 [defined in src/limbo/opt/adam.hpp]
+- double eps_stop = 0.0 [defined in src/limbo/opt/adam.hpp]
 
 init_randomsampling
 ^^^^^^^^^^^^^^^^^^^
