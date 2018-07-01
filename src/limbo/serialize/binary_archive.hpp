@@ -135,7 +135,7 @@ namespace limbo {
             void _create_directory() const
             {
                 boost::filesystem::path my_path(_dir_name);
-                boost::filesystem::create_directory(my_path);
+                boost::filesystem::create_directories(my_path);
             }
 
             template <class Matrix, class Stream>

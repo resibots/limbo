@@ -125,7 +125,7 @@ namespace limbo {
             void _create_directory() const
             {
                 boost::filesystem::path my_path(_dir_name);
-                boost::filesystem::create_directory(my_path);
+                boost::filesystem::create_directories(my_path);
             }
 
             std::vector<std::vector<double>> _load(const std::string& object_name) const
