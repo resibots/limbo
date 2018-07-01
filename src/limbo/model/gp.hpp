@@ -420,7 +420,7 @@ namespace limbo {
 
             /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
-            void save(const std::string& directory)
+            void save(const std::string& directory) const
             {
                 A archive(directory);
                 save(archive);
@@ -428,7 +428,7 @@ namespace limbo {
 
             /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
-            void save(const A& archive)
+            void save(const A& archive) const
             {
                 if (_kernel_function.h_params_size() > 0) {
                     archive.save(_kernel_function.h_params(), "kernel_params");

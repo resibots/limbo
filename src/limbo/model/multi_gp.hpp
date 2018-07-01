@@ -294,7 +294,7 @@ namespace limbo {
 
             /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
-            void save(const std::string& directory)
+            void save(const std::string& directory) const
             {
                 A archive(directory);
                 save(archive);
@@ -302,7 +302,7 @@ namespace limbo {
 
             /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
-            void save(const A& archive)
+            void save(const A& archive) const
             {
                 Eigen::VectorXd dims(2);
                 dims << _dim_in, _dim_out;
