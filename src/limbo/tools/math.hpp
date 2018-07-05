@@ -61,7 +61,7 @@ namespace limbo {
 
         /// @ingroup tools
         /// make a 1-D vector from a double (useful when we need to return vectors)
-        Eigen::VectorXd make_vector(double x)
+        inline Eigen::VectorXd make_vector(double x)
         {
             Eigen::VectorXd res(1);
             res(0) = x;

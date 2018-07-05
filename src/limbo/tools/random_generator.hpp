@@ -104,7 +104,7 @@ namespace limbo {
         ///
         /// - this function is thread safe because we use a random generator for each thread
         /// - we use a C++11 random number generator
-        Eigen::VectorXd random_vector_bounded(int size)
+        inline Eigen::VectorXd random_vector_bounded(int size)
         {
             static thread_local rgen_double_t rgen(0.0, 1.0);
             Eigen::VectorXd res(size);
@@ -118,7 +118,7 @@ namespace limbo {
         ///
         /// - this function is thread safe because we use a random generator for each thread
         /// - we use a C++11 random number generator
-        Eigen::VectorXd random_vector_unbounded(int size)
+        inline Eigen::VectorXd random_vector_unbounded(int size)
         {
             static thread_local rgen_gauss_t rgen(0.0, 10.0);
             Eigen::VectorXd res(size);
@@ -138,7 +138,7 @@ namespace limbo {
 
         /// @ingroup tools
         /// generate n random samples with Latin Hypercube Sampling (LHS) in [0, 1]^dim
-        Eigen::MatrixXd random_lhs(int dim, int n)
+        inline Eigen::MatrixXd random_lhs(int dim, int n)
         {
             Eigen::VectorXd cut = Eigen::VectorXd::LinSpaced(n + 1, 0., 1.);
             Eigen::MatrixXd u = Eigen::MatrixXd::Zero(n, dim);
