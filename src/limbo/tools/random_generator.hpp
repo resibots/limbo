@@ -129,7 +129,7 @@ namespace limbo {
 
         /// @ingroup tools
         /// random vector wrapper for both bounded and unbounded versions
-        Eigen::VectorXd random_vector(int size, bool bounded = true)
+        inline Eigen::VectorXd random_vector(int size, bool bounded = true)
         {
             if (bounded)
                 return random_vector_bounded(size);
