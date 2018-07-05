@@ -62,7 +62,7 @@ namespace limbo {
 
         ///@ingroup opt_tools
         ///return with opt::no_grad(your_val) if no gradient is available (to be used in functions to be optimized)
-        eval_t no_grad(double x) { return eval_t{x, boost::optional<Eigen::VectorXd>{}}; }
+        inline eval_t no_grad(double x) { return eval_t{x, boost::optional<Eigen::VectorXd>{}}; }
 
         ///@ingroup opt_tools
         /// get the gradient from a function evaluation (eval_t)
