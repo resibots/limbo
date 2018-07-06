@@ -61,15 +61,19 @@ namespace limbo {
             /// number of max iterations
             BO_PARAM(int, iterations, 300);
 
+            /// @ingroup opt_defaults
             /// alpha - learning rate
             BO_PARAM(double, alpha, 0.001);
 
+            /// @ingroup opt_defaults
             /// β1
             BO_PARAM(double, b1, 0.9);
 
+            /// @ingroup opt_defaults
             /// β2
             BO_PARAM(double, b2, 0.999);
 
+            /// @ingroup opt_defaults
             /// norm epsilon for stopping
             BO_PARAM(double, eps_stop, 0.0);
         };
