@@ -408,13 +408,30 @@ namespace limbo {
             void set_log_loo_cv(double log_loo_cv) { _log_loo_cv = log_loo_cv; }
 
             /// LLT matrix (from Cholesky decomposition)
-            //const Eigen::LLT<Eigen::MatrixXd>& llt() const { return _llt; }
             const Eigen::MatrixXd& matrixL() const { return _matrixL; }
 
             const Eigen::MatrixXd& alpha() const { return _alpha; }
 
-            /// return the list of samples that have been tested so far
+            /// return the list of samples
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
+
+            /// return the list of observations
+            std::vector<Eigen::VectorXd> observations() const
+            {
+                std::vector<Eigen::VectorXd> observations;
+                for (int i = 0; i < _observations.rows(); i++) {
+                    observations.push_back(_observations.row(i));
+                }
+
+                return observations;
+            }
+
+            /// return the observations (in matrix form)
+            /// (NxD), where N is the number of points and D is the dimension output
+            const Eigen::MatrixXd& observations_matrix() const
+            {
+                return _observations;
+            }
 
             bool inv_kernel_computed() { return _inv_kernel_updated; }
 
