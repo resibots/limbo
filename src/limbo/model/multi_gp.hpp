@@ -265,11 +265,30 @@ namespace limbo {
                     });
             }
 
-            /// return the list of samples that have been tested so far
+            /// return the list of samples
             const std::vector<Eigen::VectorXd>& samples() const
             {
                 assert(_gp_models.size());
                 return _gp_models[0].samples();
+            }
+
+            /// return the list of observations
+            const std::vector<Eigen::VectorXd>& observations() const
+            {
+                return _observations;
+            }
+
+            /// return the observations (in matrix form)
+            /// (NxD), where N is the number of points and D is the dimension output
+            Eigen::MatrixXd observations_matrix() const
+            {
+                assert(_dim_out > 0);
+                Eigen::MatrixXd observations(_observations.size(), _dim_out);
+                for (int i = 0; i < _observations.size(); i++) {
+                    observations.row(i) = _observations[i];
+                }
+
+                return observations;
             }
 
             /// return the mean observation
