@@ -54,7 +54,7 @@ using namespace limbo;
 struct ParamsES {
     struct opt_es : public defaults::opt_es {
         /// size of population
-        BO_PARAM(int, population, 2);
+        BO_PARAM(int, population, 50);
 
         /// sigma_sq - exploration parameter
         BO_PARAM(double, sigma_sq, 0.01 * 0.01);
@@ -74,7 +74,7 @@ struct ParamsES {
         /// alpha - approximate gradient information, [0,1]
         /// if set to 1: only ES
         /// if set to 0: only gradient
-        BO_PARAM(double, alpha, 0.5);
+        BO_PARAM(double, alpha, 1.);
 
         /// k - number of previous approx. gradients
         /// for orthonomal basis
@@ -83,7 +83,7 @@ struct ParamsES {
 
     struct opt_adam {
         /// number of max iterations
-        BO_PARAM(int, iterations, 10000);
+        BO_PARAM(int, iterations, 2000);
 
         /// alpha - learning rate
         BO_PARAM(double, alpha, 0.01);

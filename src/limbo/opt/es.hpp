@@ -98,6 +98,8 @@ namespace limbo {
         /// @ingroup opt
         /// Simple Evolutionary Strategies
         /// very close to finite differences gradient approximation
+        /// It also implements "Guided evolutionary strategies" by Niru Maheswaranathan, Luke Metz, George Tucker, Jascha Sohl-Dickstein
+        /// https://arxiv.org/abs/1806.10230
         ///
         /// Parameters:
         /// - int population
@@ -108,6 +110,7 @@ namespace limbo {
         /// - double beta
         /// - double alpha
         /// - int k
+        /// - template parameter: Gradient-based optimizer
         template <typename Params, typename Optimizer>
         struct ES {
             template <typename F>
