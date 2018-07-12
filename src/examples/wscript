@@ -66,6 +66,12 @@ def build(bld):
                       target='obs_multi_auto_mean',
                       uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
                       use='limbo')
+    obj = bld.program(features='cxx',
+                      source='es.cpp',
+                      includes='. .. ../../',
+                      target='es',
+                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      use='limbo')
 
     if bld.options.experimental:
             bld.recurse('experimental/')
