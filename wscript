@@ -89,6 +89,7 @@ def options(opt):
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
         opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
+        opt.add_option('--no-native', action='store_true', default=False, help='disable -march=native, which can cause some troubles [--no-native]', dest='no_native')
 
 
         try:
@@ -144,10 +145,13 @@ def configure(conf):
             common_flags = common_flags + " -std=c++14"
 
         native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
-        if native:
+        if native and not conf.options.no_native:
             opt_flags = opt_flags + ' ' + native_flags
-        else:
+        elif not native:
             Logs.pprint('YELLOW', 'WARNING: Native flags not supported. The performance might be a bit deteriorated.')
+        else:
+            Logs.pprint('YELLOW', 'WARNING: Native flags not activated. The performance might be a bit deteriorated.')
+
 
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \
