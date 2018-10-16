@@ -112,7 +112,7 @@ namespace limbo {
                             gmm.weights()[k] = theta(k);
 
                             Eigen::VectorXd mu_k = Eigen::VectorXd::Zero(gmm.data().cols());
-                            Eigen::MatrixXd S_k = Eigen::MatrixXd::Identity(gmm.data().cols(), gmm.data().cols());
+                            Eigen::MatrixXd S_k = Eigen::MatrixXd::Zero(gmm.data().cols(), gmm.data().cols());
                             for (int i = 0; i < N; i++) {
                                 Eigen::VectorXd x = gmm.data().row(i);
 
@@ -145,12 +145,20 @@ namespace limbo {
                                 double pi_k = theta(k);
 
                                 prob += pi_k * gmm.models()[k].prob(x);
+                                if (std::isnan(prob)) {
+                                    std::cout << gmm.models()[k].prob(x) << std::endl;
+                                    std::cout << gmm.models()[k].mu().transpose() << std::endl;
+                                    std::cout << gmm.models()[k].sigma() << std::endl
+                                              << std::endl;
+                                    std::cout << x.transpose() << std::endl;
+                                    std::cin.get();
+                                }
                             }
 
                             log_lik += std::log(prob);
                         }
 
-                        std::cout << "loglik: " << log_lik << std::endl;
+                        // std::cout << "loglik: " << log_lik << std::endl;
 
                         if (std::abs(prev_lik - log_lik) < Params::opt_gmm_em::epsilon())
                             break;

@@ -53,6 +53,7 @@
 
 #include <Eigen/Cholesky>
 #include <Eigen/Core>
+#include <Eigen/Dense>
 #include <Eigen/LU>
 
 // Quick hack for definition of 'I' in <complex.h>
@@ -103,15 +104,68 @@ namespace limbo {
 
                 double prob(const Eigen::VectorXd& x) const
                 {
-                    Eigen::FullPivLU<Eigen::MatrixXd> PivLU(_sigma);
-                    int d = x.size();
-                    double det = PivLU.determinant();
-                    if (det < 0)
-                        det = 0.;
-                    Eigen::MatrixXd invS = PivLU.inverse();
+                    // Eigen::FullPivLU<Eigen::MatrixXd> PivLU(_sigma);
+                    // int d = x.size();
+                    // double det = PivLU.determinant();
+                    // if (det < 0)
+                    //     det = 0.;
+                    // Eigen::MatrixXd invS = PivLU.inverse();
 
-                    Eigen::VectorXd e = (-0.5 * ((x - _mu).transpose() * invS * (x - _mu)).array()).exp(); // this should always be 1-d
-                    return (1. / (std::pow(2. * M_PI, static_cast<double>(d / 2.)) * (std::sqrt(det) + 1e-50))) * e[0];
+                    // Eigen::VectorXd e = (-0.5 * ((x - _mu).transpose() * invS * (x - _mu)).array()).exp(); // this should always be 1-d
+                    // return (1. / (std::pow(2. * M_PI, static_cast<double>(d / 2.)) * (std::sqrt(det) + 1e-25))) * e[0];
+
+                    const double logSqrt2Pi = 0.5 * std::log(2 * M_PI);
+                    using Chol = Eigen::LLT<Eigen::MatrixXd>;
+                    Chol chol(_sigma);
+                    double det, quadform;
+
+                    if (chol.info() != Eigen::Success) {
+                        // There was an error; probably the matrix is not SPD
+                        // Let's try to make it SPD and take cholesky of that
+                        // original MATLAB code: http://fr.mathworks.com/matlabcentral/fileexchange/42885-nearestspd
+                        // Note that at this point _L is not cholesky factor, but matrix to be factored
+
+                        // Symmetrize A into B
+                        Eigen::MatrixXd B = (_sigma.array() + _sigma.transpose().array()) / 2.;
+
+                        // Compute the symmetric polar factor of B. Call it H. Clearly H is itself SPD.
+                        Eigen::JacobiSVD<Eigen::MatrixXd> svd(B, Eigen::ComputeFullU | Eigen::ComputeFullV);
+                        Eigen::MatrixXd V, Sigma, H, L_hat;
+
+                        Sigma = Eigen::MatrixXd::Identity(B.rows(), B.cols());
+                        Sigma.diagonal() = svd.singularValues();
+                        V = svd.matrixV();
+
+                        H = V * Sigma * V.transpose();
+
+                        // Get candidate for closest SPD matrix to _sigma
+                        L_hat = (B.array() + H.array()) / 2.;
+
+                        // Ensure symmetry
+                        L_hat = (L_hat.array() + L_hat.array()) / 2.;
+
+                        // Test that L_hat is in fact PD. if it is not so, then tweak it just a bit.
+                        Eigen::LLT<Eigen::MatrixXd> llt_hat(L_hat);
+                        int k = 0;
+                        while (llt_hat.info() != Eigen::Success) {
+                            k++;
+                            Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> es(L_hat);
+                            double min_eig = es.eigenvalues().minCoeff();
+                            L_hat.diagonal().array() += (-min_eig * k * k + 1e-50);
+                            llt_hat.compute(L_hat);
+                        }
+
+                        Chol::Traits::MatrixL& L = llt_hat.matrixL();
+                        quadform = (L.solve(x - _mu)).squaredNorm();
+                        det = L.determinant();
+                    }
+                    else {
+                        const Chol::Traits::MatrixL& L = chol.matrixL();
+                        quadform = (L.solve(x - _mu)).squaredNorm();
+                        det = L.determinant();
+                    }
+
+                    return std::exp(-x.rows() * logSqrt2Pi - 0.5 * quadform) / det;
                 }
 
             protected:
