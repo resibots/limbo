@@ -60,6 +60,7 @@
 #undef I
 
 #include <limbo/model/gmm/em_opt.hpp>
+#include <limbo/model/gmm/kmeans.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -211,9 +212,13 @@ namespace limbo {
                 }
 
                 // begin from random mean and unit covariances
+                std::vector<Eigen::MatrixXd> clusters = gmm::kmeans(_data, _K);
                 _weights = Eigen::VectorXd::Ones(_K) / static_cast<double>(_K);
                 for (int k = 0; k < _K; k++) {
-                    _models[k].mu() = Eigen::VectorXd::Random(D);
+                    // _models[k].mu() = Eigen::VectorXd::Random(D);
+                    _models[k].mu() = clusters[k].colwise().mean();
+                    if (clusters[k].size() == 0)
+                        _models[k].mu() = Eigen::VectorXd::Zero(D);
                     _models[k].sigma() = Eigen::MatrixXd::Identity(D, D);
                 }
 

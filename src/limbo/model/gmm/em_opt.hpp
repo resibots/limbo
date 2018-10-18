@@ -145,14 +145,14 @@ namespace limbo {
                                 double pi_k = theta(k);
 
                                 prob += pi_k * gmm.models()[k].prob(x);
-                                if (std::isnan(prob)) {
-                                    std::cout << gmm.models()[k].prob(x) << std::endl;
-                                    std::cout << gmm.models()[k].mu().transpose() << std::endl;
-                                    std::cout << gmm.models()[k].sigma() << std::endl
-                                              << std::endl;
-                                    std::cout << x.transpose() << std::endl;
-                                    std::cin.get();
-                                }
+                                // if (std::isnan(prob)) {
+                                //     std::cout << gmm.models()[k].prob(x) << std::endl;
+                                //     std::cout << gmm.models()[k].mu().transpose() << std::endl;
+                                //     std::cout << gmm.models()[k].sigma() << std::endl
+                                //               << std::endl;
+                                //     std::cout << x.transpose() << std::endl;
+                                //     std::cin.get();
+                                // }
                             }
 
                             log_lik += std::log(prob);
