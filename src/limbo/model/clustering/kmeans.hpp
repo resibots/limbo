@@ -131,8 +131,7 @@ namespace limbo {
             template <typename InitFunc = defaults::KMeansPlusPlus>
             class KMeans {
             public:
-                std::vector<Eigen::MatrixXd> fit(const Eigen::MatrixXd& data, const int K,
-                    const int num_init = 5, const int max_iter = 100)
+                std::vector<Eigen::MatrixXd> fit(const Eigen::MatrixXd& data, const int K, const int max_iter = 100)
                 {
 
                     _centroids = InitFunc()(data, K);
