@@ -43,8 +43,8 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_MODEL_GMM_KMEANS_HPP
-#define LIMBO_MODEL_GMM_KMEANS_HPP
+#ifndef LIMBO_MODEL_CLUSTERING_KMEANS_HPP
+#define LIMBO_MODEL_CLUSTERING_KMEANS_HPP
 
 #include <map>
 #include <vector>
