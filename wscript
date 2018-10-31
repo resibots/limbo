@@ -95,19 +95,19 @@ def options(opt):
 
 
         try:
-                os.mkdir(blddir)# because this is not always created at that stage
+            os.mkdir(blddir)# because this is not always created at that stage
         except:
-                print("build dir not created (it probably already exists, this is fine)")
+            print("build dir not created (it probably already exists, this is fine)")
         opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
 
         for i in glob.glob('exp/*'):
-                if os.path.isdir(i):
-                    opt.start_msg('command-line options for [%s]' % i)
-                    try:
-                        opt.recurse(i)
-                        opt.end_msg(' -> OK')
-                    except WafError:
-                        opt.end_msg(' -> no options found')
+            if os.path.isdir(i):
+                opt.start_msg('command-line options for [%s]' % i)
+                try:
+                    opt.recurse(i)
+                    opt.end_msg(' -> OK')
+                except WafError:
+                    opt.end_msg(' -> no options found')
 
         opt.recurse('src/benchmarks')
 

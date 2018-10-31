@@ -65,7 +65,7 @@ def check_pybind11(conf):
     conf.start_msg('Checking for Pybind11')
     includes_check = ['/usr/include/', '/usr/local/include/']
 
-    if conf.options.eigen:
+    if conf.options.pybind11:
         includes_check = [conf.options.pybind11]
     try:
         res = conf.find_file('pybind11/pybind11.h', includes_check)

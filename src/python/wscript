@@ -47,9 +47,9 @@
 #|
 
 def build(bld):
-   bld(features  = 'c cshlib pyext',
-        includes = '. .. ../../',
-        uselib   = 'EIGEN TBB BOOST PYBIND11',	
-        source   = 'limbo.cc',
-		target   = 'limbo')
-
+    if bld.options.pybind:
+        bld(features  = 'c cshlib pyext',
+            includes = '. .. ../../',
+            uselib   = 'EIGEN TBB BOOST PYBIND11',
+            source   = 'limbo.cc',
+            target   = 'limbo')
