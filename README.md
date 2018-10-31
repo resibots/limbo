@@ -3,6 +3,8 @@ limbo [![Build Status](https://travis-ci.org/resibots/limbo.svg?branch=master)](
 
 Limbo (LIbrary for Model-Based Optimization) is an open-source C++11 library for Gaussian Processes and data-efficient optimization (e.g., Bayesian optimization) that is designed to be both highly flexible and very fast. It can be used as a state-of-the-art optimization library or to experiment with novel algorithms with "plugin" components.
 
+![logo](./docs/logo/logo_limbo.png)
+
 Documentation & Versions
 ------------------------
 The development branch is the [master](https://github.com/resibots/limbo/tree/master) branch. For the latest stable release, check the [release-2.1](https://github.com/resibots/limbo/tree/release-2.1) branch.
