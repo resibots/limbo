@@ -84,7 +84,8 @@ void _set_params(py::kwargs kwargs)
     }
 }
 
-template <typename GP> GP make_gp(py::args args, py::kwargs kwargs)
+template <typename GP>
+GP make_gp(py::args args, py::kwargs kwargs)
 {
     auto train_x = py::cast<std::vector<Eigen::VectorXd>>(args[0]);
     auto train_y = py::cast<std::vector<Eigen::VectorXd>>(args[1]);
