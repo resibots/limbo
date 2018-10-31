@@ -90,6 +90,8 @@ def options(opt):
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
         opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
+        opt.add_option('--pybind', action='store_true', default=False, help='build python bindings [--pybind]', dest='pybind')
+
 
 
         try:
@@ -119,8 +121,9 @@ def configure(conf):
         conf.load('mkl')
         conf.load('nlopt')
         conf.load('libcmaes')
-        conf.load("python")
-        conf.load("pybind11")
+        if conf.options.pybind:
+            conf.load("python")
+            conf.load("pybind11")
 
         native_flags = "-march=native"
 
@@ -161,10 +164,11 @@ def configure(conf):
         conf.check_mkl()
         conf.check_nlopt()
         conf.check_libcmaes()
-        conf.check_python_version((3, 0))
-        conf.check_python_headers()
-        conf.check_python_module('numpy')
-        conf.check_pybind11()
+        if conf.options.pybind:
+            conf.check_python_version((3, 0))
+            conf.check_python_headers(features='pyext')
+            conf.check_python_module('numpy')
+            conf.check_pybind11()
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
 
