@@ -74,7 +74,8 @@ def options(opt):
         opt.load('openmp')
         opt.load('nlopt')
         opt.load('libcmaes')
-        opt.load('xcode')
+        opt.load("python")
+        opt.load("pybind11")
 
         opt.add_option('--create', type='string', help='create a new exp', dest='create_exp')
         limbo.add_create_options(opt)
@@ -116,9 +117,10 @@ def configure(conf):
         conf.load('sferes')
         conf.load('openmp')
         conf.load('mkl')
-        conf.load('xcode')
         conf.load('nlopt')
         conf.load('libcmaes')
+        conf.load("python")
+        conf.load("pybind11")
 
         native_flags = "-march=native"
 
@@ -159,12 +161,17 @@ def configure(conf):
         conf.check_mkl()
         conf.check_nlopt()
         conf.check_libcmaes()
+        conf.check_python_version((3, 0))
+        conf.check_python_headers()
+        conf.check_python_module('numpy')
+        conf.check_pybind11()
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
         Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
+        Logs.pprint('NORMAL', 'PYTHONDIR: %s' % conf.env['PYTHONDIR'])
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
