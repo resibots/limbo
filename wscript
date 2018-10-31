@@ -170,12 +170,15 @@ def configure(conf):
             conf.check_python_module('numpy')
             conf.check_pybind11()
 
+
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
         Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
-        Logs.pprint('NORMAL', 'PYTHONDIR: %s' % conf.env['PYTHONDIR'])
+        if conf.options.pybind:
+            Logs.pprint('NORMAL', 'PYTHONDIR: %s' % conf.env['PYTHONDIR'])
+            Logs.pprint('NORMAL', 'PYTHON_PYEXT_LDFLAGS %s' % conf.env['PYEXT_LDFLAGS'])
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
