@@ -46,7 +46,7 @@
 #| knowledge of the CeCILL-C license and that you accept its terms.
 #|
 #! /usr/bin/env python
-# JB Mouret - 2009
+# JB Mouret - 2018
 
 """
 Quick n dirty pybind11 detection
@@ -61,8 +61,10 @@ def options(opt):
     opt.add_option('--pybind11', type='string', help='path to pybind11', dest='pybind11')
 
 @conf
-def check_pybind11(conf):
-    conf.start_msg('Checking for Pybind11')
+def check_pybind11(conf, *k, **kw):
+    required = kw.get('required', False)
+
+    conf.start_msg('Checking for pybind11')
     includes_check = ['/usr/include/', '/usr/local/include/']
 
     if conf.options.pybind11:
@@ -73,5 +75,7 @@ def check_pybind11(conf):
         conf.env.INCLUDES_PYBIND11 = [incl]
         conf.end_msg(incl)
     except:
-        conf.fatal('Not found in %s' % str(includes_check))
+        if required:
+            conf.fatal('Not found in %s' % str(includes_check))
+        conf.end_msg('Not found in %s' % str(includes_check), 'RED')
     return 1

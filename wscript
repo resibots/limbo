@@ -183,9 +183,9 @@ def configure(conf):
             Logs.pprint('NORMAL', 'PYTHON_PYEXT_LDFLAGS %s' % conf.env['PYEXT_LDFLAGS'])
 
         if conf.options.exp:
-                for i in conf.options.exp.split(','):
-                        Logs.pprint('NORMAL', 'configuring for exp: %s' % i)
-                        conf.recurse('exp/' + i)
+            for i in conf.options.exp.split(','):
+                Logs.pprint('NORMAL', 'configuring for exp: %s' % i)
+                conf.recurse('exp/' + i)
         conf.recurse('src/benchmarks')
         Logs.pprint('NORMAL', '')
         Logs.pprint('NORMAL', 'WHAT TO DO NOW?')
