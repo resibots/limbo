@@ -170,7 +170,7 @@ def configure(conf):
             conf.check_python_version((3, 0))
             conf.check_python_headers(features='pyext')
             conf.check_python_module('numpy')
-            conf.check_pybind11()
+            conf.check_pybind11(required=True)
 
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
