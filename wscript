@@ -166,16 +166,18 @@ def configure(conf):
         conf.check_mkl()
         conf.check_nlopt()
         conf.check_libcmaes()
+        py_flags = ''
         if conf.options.pybind:
             conf.check_python_version((3, 0))
             conf.check_python_headers(features='pyext')
             conf.check_python_module('numpy')
             conf.check_pybind11(required=True)
+            py_flags = ' -fPIC' # we need -fPIC in some Linux/gcc combinations
 
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
 
-        all_flags = common_flags + opt_flags
+        all_flags = common_flags + opt_flags + py_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
         Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
         if conf.options.pybind:
