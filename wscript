@@ -172,7 +172,8 @@ def configure(conf):
             conf.check_python_headers(features='pyext')
             conf.check_python_module('numpy')
             conf.check_pybind11(required=True)
-            py_flags = ' -fPIC' # we need -fPIC in some Linux/gcc combinations
+            if conf.env.CXX_NAME in ["gcc", "g++"]:
+                py_flags = ' -fPIC' # we need -fPIC in some Linux/gcc combinations
 
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
