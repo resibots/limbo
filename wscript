@@ -74,7 +74,8 @@ def options(opt):
         opt.load('openmp')
         opt.load('nlopt')
         opt.load('libcmaes')
-        opt.load('xcode')
+        opt.load("python")
+        opt.load("pybind11")
 
         opt.add_option('--create', type='string', help='create a new exp', dest='create_exp')
         limbo.add_create_options(opt)
@@ -89,23 +90,23 @@ def options(opt):
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
         opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
+        opt.add_option('--pybind', action='store_true', default=False, help='build python bindings [--pybind]', dest='pybind')
         opt.add_option('--no-native', action='store_true', default=False, help='disable -march=native, which can cause some troubles [--no-native]', dest='no_native')
 
-
         try:
-                os.mkdir(blddir)# because this is not always created at that stage
+            os.mkdir(blddir) #because this is not always created at that stage
         except:
-                print("build dir not created (it probably already exists, this is fine)")
+            print("build dir not created (it probably already exists, this is fine)")
         opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
 
         for i in glob.glob('exp/*'):
-                if os.path.isdir(i):
-                    opt.start_msg('command-line options for [%s]' % i)
-                    try:
-                        opt.recurse(i)
-                        opt.end_msg(' -> OK')
-                    except WafError:
-                        opt.end_msg(' -> no options found')
+            if os.path.isdir(i):
+                opt.start_msg('command-line options for [%s]' % i)
+                try:
+                    opt.recurse(i)
+                    opt.end_msg(' -> OK')
+                except WafError:
+                    opt.end_msg(' -> no options found')
 
         opt.recurse('src/benchmarks')
 
@@ -117,9 +118,11 @@ def configure(conf):
         conf.load('sferes')
         conf.load('openmp')
         conf.load('mkl')
-        conf.load('xcode')
         conf.load('nlopt')
         conf.load('libcmaes')
+        if conf.options.pybind:
+            conf.load("python")
+            conf.load("pybind11")
 
         native_flags = "-march=native"
 
@@ -163,17 +166,29 @@ def configure(conf):
         conf.check_mkl()
         conf.check_nlopt()
         conf.check_libcmaes()
+        py_flags = ''
+        if conf.options.pybind:
+            conf.check_python_version((3, 0))
+            conf.check_python_headers(features='pyext')
+            conf.check_python_module('numpy')
+            conf.check_pybind11(required=True)
+            if conf.env.CXX_NAME in ["gcc", "g++"]:
+                py_flags = ' -fPIC' # we need -fPIC in some Linux/gcc combinations
+
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
 
-        all_flags = common_flags + opt_flags
+        all_flags = common_flags + opt_flags + py_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
         Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
+        if conf.options.pybind:
+            Logs.pprint('NORMAL', 'PYTHONDIR: %s' % conf.env['PYTHONDIR'])
+            Logs.pprint('NORMAL', 'PYTHON_PYEXT_LDFLAGS %s' % conf.env['PYEXT_LDFLAGS'])
 
         if conf.options.exp:
-                for i in conf.options.exp.split(','):
-                        Logs.pprint('NORMAL', 'configuring for exp: %s' % i)
-                        conf.recurse('exp/' + i)
+            for i in conf.options.exp.split(','):
+                Logs.pprint('NORMAL', 'configuring for exp: %s' % i)
+                conf.recurse('exp/' + i)
         conf.recurse('src/benchmarks')
         Logs.pprint('NORMAL', '')
         Logs.pprint('NORMAL', 'WHAT TO DO NOW?')

@@ -45,34 +45,37 @@
 #| The fact that you are presently reading this means that you have had
 #| knowledge of the CeCILL-C license and that you accept its terms.
 #|
+#! /usr/bin/env python
+# JB Mouret - 2018
+
+"""
+Quick n dirty pybind11 detection
+"""
+
+import os, glob, types
+import subprocess
+from waflib.Configure import conf
 
 
-def build(bld):
-    bld.recurse('examples')
-    bld.recurse('tutorials')
-    bld.recurse('python')
+def options(opt):
+    opt.add_option('--pybind11', type='string', help='path to pybind11', dest='pybind11')
 
-    if bld.options.tests:
-        bld.recurse('tests')
+@conf
+def check_pybind11(conf, *k, **kw):
+    required = kw.get('required', False)
 
-    bld.stlib(source=' \
-              ehvi/ehvi_calculations.cc \
-              ehvi/ehvi_montecarlo.cc \
-              ehvi/ehvi_sliceupdate.cc \
-              ehvi/ehvi_hvol.cc \
-              ehvi/ehvi_multi.cc \
-              ehvi/helper.cc \
-              hv/hypervol.c',
-              target='limbo')
+    conf.start_msg('Checking for pybind11')
+    includes_check = ['/usr/include/', '/usr/local/include/']
 
-
-def build_extensive_tests(bld):
-    bld.stlib(source=' \
-              ehvi/ehvi_calculations.cc \
-              ehvi/ehvi_montecarlo.cc \
-              ehvi/ehvi_sliceupdate.cc \
-              ehvi/ehvi_hvol.cc \
-              ehvi/ehvi_multi.cc \
-              ehvi/helper.cc \
-              hv/hypervol.c',
-              target='limbo')
+    if conf.options.pybind11:
+        includes_check = [conf.options.pybind11]
+    try:
+        res = conf.find_file('pybind11/pybind11.h', includes_check)
+        incl = res[:-len('pybind11/pybind11.h')-1]
+        conf.env.INCLUDES_PYBIND11 = [incl]
+        conf.end_msg(incl)
+    except:
+        if required:
+            conf.fatal('Not found in %s' % str(includes_check))
+        conf.end_msg('Not found in %s' % str(includes_check), 'RED')
+    return 1

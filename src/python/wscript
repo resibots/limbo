@@ -46,33 +46,10 @@
 #| knowledge of the CeCILL-C license and that you accept its terms.
 #|
 
-
 def build(bld):
-    bld.recurse('examples')
-    bld.recurse('tutorials')
-    bld.recurse('python')
-
-    if bld.options.tests:
-        bld.recurse('tests')
-
-    bld.stlib(source=' \
-              ehvi/ehvi_calculations.cc \
-              ehvi/ehvi_montecarlo.cc \
-              ehvi/ehvi_sliceupdate.cc \
-              ehvi/ehvi_hvol.cc \
-              ehvi/ehvi_multi.cc \
-              ehvi/helper.cc \
-              hv/hypervol.c',
-              target='limbo')
-
-
-def build_extensive_tests(bld):
-    bld.stlib(source=' \
-              ehvi/ehvi_calculations.cc \
-              ehvi/ehvi_montecarlo.cc \
-              ehvi/ehvi_sliceupdate.cc \
-              ehvi/ehvi_hvol.cc \
-              ehvi/ehvi_multi.cc \
-              ehvi/helper.cc \
-              hv/hypervol.c',
-              target='limbo')
+    if bld.options.pybind:
+        bld(features  = 'c cshlib pyext',
+            includes = '. .. ../../',
+            uselib   = 'EIGEN TBB BOOST PYBIND11',
+            source   = 'limbo.cc',
+            target   = 'limbo')
