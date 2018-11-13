@@ -63,6 +63,10 @@ namespace limbo {
 
     namespace opt {
         /// @ingroup opt
+        /// Trust Region CMA-ES
+        /// Abdolmaleki, A., Price, B., Lau, N., Reis, L.P. and Neumann, G.
+        /// "Deriving and improving CMA-ES with information geometric trust regions."
+        /// In Proceedings of the Genetic and Evolutionary Computation Conference (pp. 657-664). 2017.
         template <typename Params, typename Opt>
         struct TRCmaes {
         public:
