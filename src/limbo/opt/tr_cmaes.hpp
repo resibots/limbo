@@ -166,6 +166,8 @@ namespace limbo {
 
                     _weights /= w_sum;
 
+                    w_sum = _weights.sum();
+
                     _mu_eff = w_sum * w_sum / (_weights.array().square().sum());
                 }
 
@@ -278,13 +280,12 @@ namespace limbo {
                     Eigen::MatrixXd rank1 = _rank1_shape_mat;
                     Eigen::MatrixXd new_shape = (lambda * _old_shape_mat + ((_sample_cov + rank1) / (_old_step_size + _constant))).array() / (lambda + _c1 + 1.);
 
-                    Eigen::MatrixXd matrixL = Eigen::LLT<Eigen::MatrixXd>(new_shape).matrixL();
+                    Eigen::LLT<Eigen::MatrixXd> llt(new_shape);
+                    Eigen::MatrixXd matrixL = llt.matrixL();
                     double logdet = 2 * matrixL.diagonal().array().log().sum();
 
                     Eigen::MatrixXd tmp = _sample_cov + rank1 + lambda * _old_cov;
-                    Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> triang = matrixL.template triangularView<Eigen::Lower>();
-                    Eigen::MatrixXd sol = triang.solve(tmp);
-                    triang.adjoint().solveInPlace(sol);
+                    Eigen::MatrixXd sol = llt.solve(tmp);
                     double tr = sol.trace();
 
                     return -(1. + _c1 + lambda) * logdet - (1. / (_old_step_size + _constant)) * tr + lambda * (2. * _epsilon_shape + _logdet_old_shape_mat + _dim);
@@ -316,12 +317,11 @@ namespace limbo {
                     double lambda = params(0);
                     Eigen::MatrixXd rank1 = _rank1_step_size;
 
-                    Eigen::MatrixXd matrixL = Eigen::LLT<Eigen::MatrixXd>(_old_shape_mat).matrixL();
+                    Eigen::LLT<Eigen::MatrixXd> llt(_old_shape_mat);
+                    Eigen::MatrixXd matrixL = llt.matrixL();
 
                     Eigen::MatrixXd tmp = _sample_cov + rank1 + lambda * _old_cov;
-                    Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> triang = matrixL.template triangularView<Eigen::Lower>();
-                    Eigen::MatrixXd sol = triang.solve(tmp);
-                    triang.adjoint().solveInPlace(sol);
+                    Eigen::MatrixXd sol = llt.solve(tmp);
                     double tr = sol.trace();
 
                     double new_step_size = (tr / dim_double) / (1. + lambda + _rscoff);
@@ -345,12 +345,11 @@ namespace limbo {
                     double lambda = params(0);
 
                     Eigen::MatrixXd rank1 = _rank1_step_size;
-                    Eigen::MatrixXd matrixL = Eigen::LLT<Eigen::MatrixXd>(_old_shape_mat).matrixL();
+                    Eigen::LLT<Eigen::MatrixXd> llt(_old_shape_mat);
+                    Eigen::MatrixXd matrixL = llt.matrixL();
 
                     Eigen::MatrixXd tmp = rank1 + _sample_cov + lambda * _old_cov;
-                    Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> triang = matrixL.template triangularView<Eigen::Lower>();
-                    Eigen::MatrixXd sol = triang.solve(tmp);
-                    triang.adjoint().solveInPlace(sol);
+                    Eigen::MatrixXd sol = llt.solve(tmp);
                     double tr = sol.trace();
 
                     return (tr / dim_double) / (1. + lambda + _rscoff);
