@@ -107,6 +107,7 @@ namespace limbo {
                     // std::cout << "D: " << D.transpose() << std::endl
                     //           << std::endl;
                     // std::cout << "sigma: " << sigma << std::endl;
+                    // std::cin.get();
 
                     Eigen::MatrixXd pop(dim, lambda);
                     for (int i = 0; i < lambda; i++) {
@@ -234,7 +235,7 @@ namespace limbo {
                     _ps_step_size = ((1. - _cs) * _ps_step_size + std::sqrt(_cs * (2. - _cs) * _mu_eff) * (xmean - _old_mean));
 
                     _rscoff = 1.;
-                    _rank1_step_size = _rscoff * (_ps_step_size.transpose() * _ps_step_size);
+                    _rank1_step_size = _rscoff * (_ps_step_size * _ps_step_size.transpose());
                     _rank1_shape_mat = _c1 * _old_step_size * (_pc * _pc.transpose());
                     // std::cout << "_c1: " << _c1 << std::endl;
                     // std::cout << "_old_step_size: " << _old_step_size << std::endl;
@@ -313,7 +314,7 @@ namespace limbo {
                 {
                     double dim_double = _dim;
                     double lambda = params(0);
-                    Eigen::MatrixXd rank1 = _rank1_shape_mat;
+                    Eigen::MatrixXd rank1 = _rank1_step_size;
 
                     Eigen::MatrixXd matrixL = Eigen::LLT<Eigen::MatrixXd>(_old_shape_mat).matrixL();
 
@@ -325,7 +326,7 @@ namespace limbo {
 
                     double new_step_size = (tr / dim_double) / (1. + lambda + _rscoff);
 
-                    return -(1. + _rscoff + lambda) * (dim_double * std::log(new_step_size)) - (tr / (new_step_size + _constant)) + lambda * (2. * _epsilon_step_size + dim_double + dim_double * std::log(_old_step_size));
+                    return -(1. + _rscoff + lambda) * (dim_double * std::log(new_step_size + _constant)) - (tr / (new_step_size + _constant)) + lambda * (2. * _epsilon_step_size + dim_double + dim_double * std::log(_old_step_size + _constant));
                 }
 
                 double _optimize_step_size_dual_function() const
@@ -336,17 +337,17 @@ namespace limbo {
                     Opt opt;
                     params = opt([&](const Eigen::VectorXd& p, bool compute_grad) {
                         assert(!compute_grad);
-                        return opt::no_grad(-_dual_function_shape(p));
+                        return opt::no_grad(-_dual_function_step_size(p));
                     },
                         params, false); // no bounds
 
                     double dim_double = _dim;
                     double lambda = params(0);
 
-                    Eigen::MatrixXd rank1 = _rank1_shape_mat;
+                    Eigen::MatrixXd rank1 = _rank1_step_size;
                     Eigen::MatrixXd matrixL = Eigen::LLT<Eigen::MatrixXd>(_old_shape_mat).matrixL();
 
-                    Eigen::MatrixXd tmp = rank1 + _sample_cov + lambda * _old_step_size * _old_shape_mat;
+                    Eigen::MatrixXd tmp = rank1 + _sample_cov + lambda * _old_cov;
                     Eigen::TriangularView<Eigen::MatrixXd, Eigen::Lower> triang = matrixL.template triangularView<Eigen::Lower>();
                     Eigen::MatrixXd sol = triang.solve(tmp);
                     triang.adjoint().solveInPlace(sol);
