@@ -95,7 +95,7 @@ namespace limbo {
                 }
                 int evals = 0;
 
-                TRCmaesLearner learner(dim, xmean, C, sigma, lambda);
+                TRCmaesLearner learner(xmean, C, sigma, lambda);
 
                 while (evals < max_evals) {
                     // std::cout << "evals: " << evals << std::endl;
@@ -141,9 +141,9 @@ namespace limbo {
         protected:
             struct TRCmaesLearner {
             public:
-                TRCmaesLearner(int dim, const Eigen::VectorXd& xmean, const Eigen::MatrixXd& init_cov, double init_sigma, int lambda)
+                TRCmaesLearner(const Eigen::VectorXd& xmean, const Eigen::MatrixXd& init_cov, double init_sigma, int lambda)
                 {
-                    _dim = dim;
+                    _dim = xmean.size();
 
                     // obj.pc = zeros(1, obj.dimParameters);
                     _pc = Eigen::VectorXd::Zero(_dim); // usually close to 1
@@ -215,7 +215,7 @@ namespace limbo {
                     Eigen::VectorXd sample_mean = (_population.array().rowwise() * _weights.transpose().array()).rowwise().sum();
                     // std::cout << "sample_mean: " << sample_mean.transpose() << std::endl;
 
-                    // maybe vectorize difference computaiton?
+                    // maybe vectorize difference computation?
                     Eigen::MatrixXd difference(_population.rows(), _population.cols());
                     for (int i = 0; i < _population.cols(); i++) {
                         difference.col(i) = _population.col(i) - _old_mean;
