@@ -282,7 +282,7 @@ namespace limbo {
 
                 double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
 
-                return multi_sg;
+                return 1.0 / multi_sg;
             }
 
             double compute_log_lik() const
