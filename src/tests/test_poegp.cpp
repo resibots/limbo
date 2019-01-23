@@ -102,9 +102,6 @@ struct Params {
 
     struct opt_rprop : public limbo::defaults::opt_rprop {
     };
-
-    struct opt_parallelrepeater : public limbo::defaults::opt_parallelrepeater {
-    };
 };
 
 BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
