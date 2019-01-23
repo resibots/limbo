@@ -70,7 +70,7 @@ Create a new experiment
 
   ./waf --create test
 
-See the :ref:`Framework guide <framework-guide>`
+For more information about experiments in Limbo, see the :ref:`Framework guide <framework-guide>`
 
 Edit the "Eval" function to define the function that you want to optimized
 -------------------------------------------------------------------------

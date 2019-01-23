@@ -81,7 +81,7 @@ params = {
 rcParams.update(params)
 
 def load_data():
-    files = glob("regression_benchmark_results/*/*/*.dat")
+    files = sorted(glob("regression_benchmark_results/*/*/*.dat"))
     points = defaultdict(lambda : defaultdict(lambda : defaultdict(dict)))
     times_learn = defaultdict(lambda : defaultdict(lambda : defaultdict(dict)))
     times_query = defaultdict(lambda : defaultdict(lambda : defaultdict(dict)))
@@ -94,6 +94,9 @@ def load_data():
             if func[-4:] == '_gpy':
                 func = func[:-4]
                 var = 'GPy'
+            if func[-6:] == '_libgp':
+                func = func[:-6]
+                var = 'libGP'
             exp = exp[4:]
 
             text_file = open(f, "r")
@@ -156,7 +159,7 @@ def plot_ax(ax, data, points, labely, disp_legend=True, disp_xaxis=False):
             if var_p[i] not in pp:
                 pp[var_p[i]] = []
             pp[var_p[i]].append(var_data[i])
-        
+
         pp = OrderedDict(sorted(pp.items()))
 
         x_axis = pp.keys()
@@ -175,7 +178,7 @@ def plot_ax(ax, data, points, labely, disp_legend=True, disp_xaxis=False):
         ax.plot(x_axis, y_axis, '-o', color=c_kk, linewidth=3, markersize=5)
         ax.fill_between(x_axis, y_axis_75, y_axis_25, color=c_kk, alpha=0.15, linewidth=2)
         kk = kk + 1
-    
+
     if disp_legend:
         ax.legend(labels)
     if disp_xaxis:
@@ -184,6 +187,44 @@ def plot_ax(ax, data, points, labely, disp_legend=True, disp_xaxis=False):
     custom_ax(ax)
 
     return replicates
+
+def get_notes():
+    notes={'Rastrigin':"Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rastr.html>`_.",
+           'Pistonsimulation':"Details about the function can be found `here <https://www.sfu.ca/~ssurjano/piston.html>`_.",
+           'Step':"Step function: for :math:`x\in[-2; 2]` :\n\n.. math::\n  f(x) = \\begin{cases} 0, &\\mbox{if x<=0} \\\\ 1, &\\mbox{otherwise} \\end{cases}",
+           'Robotarm':"Details about the function can be found `here <https://www.sfu.ca/~ssurjano/robot.html>`_.",
+           'Gramacylee':"Details about the function can be found `here <https://www.sfu.ca/~ssurjano/grlee12.html>`_.",
+           'Planarinversedynamicsii':"Approximation of the second motor\'s torque in the inverse dynamics of a Planar 2D Arm. Details are given at the bottom of this page.",
+           'Planarinversedynamicsi':"Approximation of the first motor\'s torque in the inverse dynamics of a Planar 2D Arm. Details are given at the bottom of this page.",
+           'Otlcircuit':"Details about the function can be found `here <https://www.sfu.ca/~ssurjano/otlcircuit.html>`_."};
+    return notes
+
+def get_names():
+    names={'Pistonsimulation':'Piston Simulation',
+           'Gramacylee':'Gramacy-Lee',
+           'Robotarm':'Robot Arm',
+           'Planarinversedynamicsi':'Planar Inverse Dynamics I',
+           'Planarinversedynamicsii':'Planar Inverse Dynamics II',
+           'Otlcircuit':'OTL Circuit'}
+    return names
+
+def planarinversedynamics_math():
+    res="""Inverse Dynamics of a Planar 2D Arm (I \& II):  for :math:`\ddot{q}\in[-2\pi; 2\pi]^2`; :math:`\dot{q}\in[-2\pi; 2\pi]^2`; :math:`q\in[-pi; pi]^2`\n\n.. math::
+  \\begin{gather}
+  \\tau (q,\dot{q},\\ddot{q})=\\textbf{M}(q)\\ddot{q}+ \\textbf{C}(q,\\dot{q})\\dot{q}\\\\
+  \\textrm{where:}\\\\
+  \\textbf{M}(q)=\\begin{bmatrix}
+  0.2083 + 0.1250\\cos(q_2)& 0.0417 + 0.0625\\cos(q_2))\\\\
+  0.0417 + 0.0625\\cos(q_2)& 0.0417
+  \\end{bmatrix}
+  \\\\
+  \\textbf{C}(q,\\dot{q})=\\begin{bmatrix}
+  -0.0625 \\sin(q_2) \\dot{q}_2& -0.0625 \\sin(q_2)(\\dot{q}_1 + \\dot{q}_2)\\\\
+  0.0625 \\sin(q_2)\\dot{q}_1& 0
+  \\end{bmatrix}
+  \\\\
+  \\end{gather}\n\n"""
+    return res
 
 def plot_data(bench, func, dim, mses, query_times, learning_times, points, rst_file):
     name = func+'_'+str(dim)
@@ -196,9 +237,15 @@ def plot_data(bench, func, dim, mses, query_times, learning_times, points, rst_f
     fig.tight_layout()
     fig.savefig('regression_benchmark_results/'+bench+'_figs/'+name+'.png')
     close()
-
-    rst_file.write(func.title() + " in " + str(dim) + "D\n")
-    rst_file.write("-----------------\n\n")
+    notes=get_notes()
+    func_name = func.title()
+    names = get_names()
+    if func_name in names:
+        func_name = names[func_name]
+    rst_file.write(func_name + " in " + str(dim) + "D\n")
+    rst_file.write("----------------------------------\n\n")
+    if func.title() in notes:
+        rst_file.write(notes[func.title()] + " \n\n")
     rst_file.write(str(replicates) + " replicates \n\n")
     rst_file.write(".. figure:: fig_benchmarks/" + bench + "_figs/" + name + ".png\n\n")
 
@@ -212,13 +259,20 @@ def plot(points,times_learn,times_query,mses,rst_file):
         except:
             print('WARNING: directory \'%s\' could not be created! (it probably exists already)' % fig_dir)
         # for each function
-        for func in points[bench].keys():
+        functions = sorted(points[bench].keys())
+        for func in functions:
             # for each dimension
-            for dim in points[bench][func].keys():
+            dims = sorted(points[bench][func].keys())
+            for dim in dims:
                 print('plotting for benchmark: ' + bench + ', the function: ' + func + ' for dimension: ' + str(dim))
                 name = bench+'_'+func+'_'+str(dim)
 
                 plot_data(bench, func, dim, mses[bench][func][dim], times_query[bench][func][dim], times_learn[bench][func][dim], points[bench][func][dim], rst_file)
+
+# dst file is already open
+def include(src_file, dst_file):
+    for i in open(src_file):
+        dst_file.write(i)
 
 def plot_all():
     if not plot_ok:
@@ -232,25 +286,13 @@ def plot_all():
     node = platform.node()
     rst_file.write("*" + date + "* -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
 
-    rst_file.write("- We compare to GPy (https://github.com/SheffieldML/GPy) \n")
-    rst_file.write("- Mean Squared Error: lower is better\n")
-    rst_file.write("- Learning time: lower is better\n")
-    rst_file.write("- Querying time (for 1 by 1 query points): lower is better\n\n")
-    rst_file.write("- In each replicate, all the variants (see below for the variants available) are using exactly the same data\n\n")
-    rst_file.write("- The data are uniformly sampled and some noise is added (according to the variance of the data).\n\n")
-
-    rst_file.write("Naming convention\n")
-    rst_file.write("------------------\n\n")
-
-    rst_file.write("- GP-SE-Full-Rprop: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo)\n")
-    rst_file.write("- GP-SE-Full-SLSQP: Limbo with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the SLSQP optimizer (provided by NLOpt)\n")
-    rst_file.write("- GP-SE-Rprop: Limbo with Squared Exponential kernel where the signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation with the Rprop optimizer (default for limbo) and where the signal noise is not optimized but set to a default value: 0.01\n")
-    rst_file.write("- GPy: GPy with Squared Exponential kernel where the signal noise, signal variance and kernel lengthscales are optimized via Maximum Likelihood Estimation (with the L-BFGS-B optimizer --- `check scipy.optimize.fmin_l_bfgs_b= <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin_l_bfgs_b.html>`_)\n\n")
+    include("docs/benchmark_res_reg.inc", rst_file)
 
     print('loading data...')
     points,times_learn,times_query,mses = load_data()
     print('data loaded')
     plot(points,times_learn,times_query,mses,rst_file)
-
+    rst_file.write("------------------\n\n")
+    rst_file.write(planarinversedynamics_math())
 if __name__ == "__main__":
     plot_all()

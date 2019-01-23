@@ -66,7 +66,7 @@ except:
 
 try:
     import matplotlib
-    matplotlib.use('Agg') # for headless generation    
+    matplotlib.use('Agg') # for headless generation
     from pylab import *
     pylab_found = True
 except:
@@ -107,7 +107,7 @@ def custom_ax(ax):
     ax.grid(axis='x', color="0.9", linestyle='-')
 
 def custom_boxes(ax, bp):
-    for i in range(len(bp['boxes'])):
+    for i in range(0, len(bp['boxes'])):
         box = bp['boxes'][i]
         box.set_linewidth(0)
         boxX = []
@@ -120,26 +120,56 @@ def custom_boxes(ax, bp):
             ax.add_patch(boxPolygon)
 
     for i in range(0, len(bp['boxes'])):
-        c_i = colors[i%len(colors)]
+        c_i = colors[i % len(colors)]
         bp['boxes'][i].set_color(c_i)
         # we have two whiskers!
-        bp['whiskers'][i*2].set_color(c_i)
-        bp['whiskers'][i*2 + 1].set_color(c_i)
-        bp['whiskers'][i*2].set_linewidth(2)
-        bp['whiskers'][i*2 + 1].set_linewidth(2)
-        # top and bottom fliers
-        if (i * 2 + 1 < len(bp['fliers'])):
-            bp['fliers'][i*2].set(markerfacecolor=c_i,
-                                  marker='o', alpha=0.75, markersize=6,
-                                  markeredgecolor='none')
-            bp['fliers'][i * 2 + 1].set(markerfacecolor=c_i,
-                                        marker='o', alpha=0.75, markersize=6,
-                                        markeredgecolor='none')
+        bp['whiskers'][i * 2].set_color(c_i)
+        bp['whiskers'][i * 2 + 1].set_color(c_i)
+        bp['whiskers'][i * 2].set_linewidth(2)
+        bp['whiskers'][i * 2 + 1].set_linewidth(2)
+        # ... and one set of fliers
+        bp['fliers'][i].set(markerfacecolor=c_i,
+                            marker='o', alpha=0.75, markersize=6,
+                            markeredgecolor='none')
         bp['medians'][i].set_color('black')
         bp['medians'][i].set_linewidth(2)
         # and 4 caps to remove
         for c in bp['caps']:
             c.set_linewidth(0)
+
+def clean_labels(k1, k2):
+    m = {'opt_cmaes': 'Acqu. opt.=CMA-ES, ',
+         'opt_direct' :'Acqu. opt.=DIRECT, ',
+         'bayesopt_hp_opt':'HP Opt.=yes',
+         '_hpopt' : 'HP Opt.=yes, ',
+         'acq_ucb': 'Acqu. fun=UCB, ',
+         'acq_ei':'Acqu. fun=EI',
+         'limbo_def': 'Limbo defaults, ',
+         'bayesopt_default':'BayesOpt defaults, ',
+         'bench_bayesopt_def':'BayesOpt defaults, ',
+         'bench_': '',
+
+    }
+    m2 = { 'limbo': 'Limbo',
+           'bayesopt' : 'BayesOpt'}
+    k1 = m2[k1]
+    for i in m.keys():
+        k2 = k2.replace(i, m[i])
+    if k2[-2:len(k2)] == ', ':
+        k2 = k2[0:-2]
+    return k1, k2
+
+def get_notes():
+    notes={'branin':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/branin.html>`_.',
+    'ellipsoid':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rothyp.html>`_.',
+    'goldsteinprice':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/goldpr.html>`_.',
+    'hartmann3':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/hart3.html>`_.',
+    'hartmann6':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/hart6.html>`_.',
+    'rastrigin':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/rastr.html>`_ (note, the input space has been rescaled and shifted to have the minimum at [1,1,1,1], instead of [0,0,0,0]',
+    'sixhumpcamel':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/camel6.html>`_.',
+    'sphere':'Details about the function can be found `here <https://www.sfu.ca/~ssurjano/spheref.html>`_.'};
+
+    return notes
 
 # plot a single function
 def plot(func_name, data, rst_file):
@@ -149,30 +179,42 @@ def plot(func_name, data, rst_file):
         'text.fontsize' : 8,
         'axes.titlesize': 10,
         'legend.fontsize' : 10,
-        'xtick.labelsize': 5,
+        'xtick.labelsize': 7,
         'ytick.labelsize' : 10,
-        'figure.figsize' : [9, 2.5]
+        'figure.figsize' : [11, 2.5]
     }
     rcParams.update(params)
-    
+
     # plot
     d = data[func_name]
     da_acc = []
     da_time = []
-    labels = [] 
-    for k in d.iterkeys():
-        for k2 in d[k].iterkeys():
+    labels = []
+    def sort_fun(x, y):
+        if 'def' in x and 'def' in y and len(x) < len(y):
+            return 1
+        if 'def' in x and 'def' in y and len(x) > len(y):
+            return -1
+        if 'def' in x and 'def' not in y:
+            return 1
+        if 'def' in y and 'def' not in x:
+            return -1
+        return x < y
+
+    for k in sorted(d.iterkeys()):
+        for k2 in sorted(d[k].iterkeys(), sort_fun):
             da_acc.append(d[k][k2][:, 0])
             da_time.append(d[k][k2][:, 1] / 1000.0)
-            labels.append(k + "/" + k2)
+            x, y = clean_labels(k, k2)
+            labels.append(x + " (" + y + ")")
     fig = figure()
-    fig.subplots_adjust(left=0.3)
+    fig.subplots_adjust(left=0.3, right=0.95)
     ax = fig.add_subplot(121)
     custom_ax(ax)
     bp = ax.boxplot(da_acc, 0, 'rs', 0)
     custom_boxes(ax, bp)
     ax.set_yticklabels(labels)
-    ax.set_title("Accuracy")
+    ax.set_title("Accuracy (difference with optimum cost)")
     ax = fig.add_subplot(122)
     custom_ax(ax)
     bp = ax.boxplot(da_time, 0, 'rs', 0)
@@ -180,12 +222,22 @@ def plot(func_name, data, rst_file):
     ax.set_yticklabels([])
     ax.set_title("Wall clock time (s)")
 
+    notes = get_notes()
+
     name = func_name.split('.')[0]
-    fig.savefig("benchmark_results/fig_benchmarks/" + name + ".png")    
-    rst_file.write(name + "\n")
+    fig.savefig("benchmark_results/fig_benchmarks/" + name + ".png")
+    rst_file.write(name.title() + " function\n")
     rst_file.write("-----------------\n\n")
+    if name in notes:
+        rst_file.write(notes[name] + " \n\n")
     rst_file.write(str(len(da_acc[0])) + " replicates \n\n")
     rst_file.write(".. figure:: fig_benchmarks/" + name + ".png\n\n")
+
+
+# dst file is already open
+def include(src_file, dst_file):
+    for i in open(src_file):
+        dst_file.write(i)
 
 def plot_all():
     if not plot_ok:
@@ -205,25 +257,8 @@ def plot_all():
     node = platform.node()
     rst_file.write("*" + date + "* -- " + node + " (" + str(multiprocessing.cpu_count()) + " cores)\n\n")
 
-    rst_file.write("- We compare to BayesOpt (https://github.com/rmcantin/bayesopt) \n")
-    rst_file.write("- Accuracy: lower is better (difference with the optimum)\n")
-    rst_file.write("- Wall time: lower is better\n\n")
-    rst_file.write("- In each replicate, 10 random samples + 190 function evaluations\n")
-    rst_file.write("- see `src/benchmarks/limbo/bench.cpp` and `src/benchmarks/bayesopt/bench.cpp`\n\n")
+    include("docs/benchmark_res_bo.inc", rst_file)
 
-    rst_file.write("Naming convention\n")
-    rst_file.write("------------------\n\n")
-
-    rst_file.write("- limbo_def: default Limbo parameters\n\n")
-    rst_file.write("- opt_cmaes: use CMA-ES (from libcmaes) to optimize the acquisition function\n")
-    rst_file.write("- opt_direct: use DIRECT (from NLopt) to optimize the acquisition function\n")
-    rst_file.write("- acq_ucb: use UCB for the acquisition function\n")
-    rst_file.write("- acq_ei: use EI for the acquisition function\n")
-    rst_file.write("- hp_opt: use hyper-parameter optimization\n")
-    rst_file.write("- bayesopt_def: same parameters as default parameters in BayesOpt\n")
-    
-    
-    
     print('loading data...')
     data = load_data()
     print('data loaded')

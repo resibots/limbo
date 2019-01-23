@@ -1,3 +1,5 @@
+.. _bayesian_optimization:
+
 Introduction to Bayesian Optimization (BO)
 ==========================================
 

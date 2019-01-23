@@ -43,8 +43,8 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_OPT_RPROP_HPP
-#define LIMBO_OPT_RPROP_HPP
+#ifndef LIMBO_OPT_GRADIENT_ASCENT_HPP
+#define LIMBO_OPT_GRADIENT_ASCENT_HPP
 
 #include <algorithm>
 
@@ -56,45 +56,56 @@
 
 namespace limbo {
     namespace defaults {
-        struct opt_rprop {
+        struct opt_gradient_ascent {
             /// @ingroup opt_defaults
             /// number of max iterations
             BO_PARAM(int, iterations, 300);
 
-            /// gradient norm epsilon for stopping
+            /// @ingroup opt_defaults
+            /// alpha - learning rate
+            BO_PARAM(double, alpha, 0.001);
+
+            /// @ingroup opt_defaults
+            /// gamma - for momentum
+            BO_PARAM(double, gamma, 0.0);
+
+            /// @ingroup opt_defaults
+            /// nesterov momentum; turn on/off
+            BO_PARAM(bool, nesterov, false);
+
+            /// @ingroup opt_defaults
+            /// norm epsilon for stopping
             BO_PARAM(double, eps_stop, 0.0);
         };
-    }
+    } // namespace defaults
     namespace opt {
         /// @ingroup opt
-        /// Gradient-based optimization (rprop)
-        /// - partly inspired by libgp: https://github.com/mblum/libgp
-        /// - reference :
-        /// Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian
-        /// Process Hyperparameters using Rprop. In European Symposium
-        /// on Artificial Neural Networks, Computational Intelligence
-        /// and Machine Learning.
+        /// Gradient Ascent with or without momentum (Nesterov or simple)
+        /// Equations from: http://ruder.io/optimizing-gradient-descent/index.html#gradientdescentoptimizationalgorithms
+        /// (I changed a bit the notation; η to α)
         ///
         /// Parameters:
         /// - int iterations
+        /// - double alpha
+        /// - double gamma
+        /// - bool nesterov
         /// - double eps_stop
         template <typename Params>
-        struct Rprop {
+        struct GradientAscent {
             template <typename F>
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
-                assert(Params::opt_rprop::eps_stop() >= 0.);
+                assert(Params::opt_gradient_ascent::gamma() >= 0. && Params::opt_gradient_ascent::gamma() < 1.);
+                assert(Params::opt_gradient_ascent::alpha() >= 0.);
 
                 size_t param_dim = init.size();
-                double delta0 = 0.1;
-                double deltamin = 1e-6;
-                double deltamax = 50;
-                double etaminus = 0.5;
-                double etaplus = 1.2;
-                double eps_stop = Params::opt_rprop::eps_stop();
+                double gamma = Params::opt_gradient_ascent::gamma();
+                double alpha = Params::opt_gradient_ascent::alpha();
+                double stop = Params::opt_gradient_ascent::eps_stop();
+                bool is_nesterov = Params::opt_gradient_ascent::nesterov();
 
-                Eigen::VectorXd delta = Eigen::VectorXd::Ones(param_dim) * delta0;
-                Eigen::VectorXd grad_old = Eigen::VectorXd::Zero(param_dim);
+                Eigen::VectorXd v = Eigen::VectorXd::Zero(param_dim);
+
                 Eigen::VectorXd params = init;
 
                 if (bounded) {
@@ -106,44 +117,47 @@ namespace limbo {
                     }
                 }
 
-                Eigen::VectorXd best_params = params;
-                double best = log(0);
+                for (int i = 0; i < Params::opt_gradient_ascent::iterations(); ++i) {
+                    Eigen::VectorXd prev_params = params;
+                    Eigen::VectorXd query_params = params;
+                    // if Nesterov momentum, change query parameters
+                    if (is_nesterov) {
+                        query_params.array() += gamma * v.array();
 
-                for (int i = 0; i < Params::opt_rprop::iterations(); ++i) {
-                    auto perf = opt::eval_grad(f, params);
-                    double lik = opt::fun(perf);
-                    if (lik > best) {
-                        best = lik;
-                        best_params = params;
-                    }
-                    Eigen::VectorXd grad = -opt::grad(perf);
-                    grad_old = grad_old.cwiseProduct(grad);
-
-                    for (int j = 0; j < grad_old.size(); ++j) {
-                        if (grad_old(j) > 0) {
-                            delta(j) = std::min(delta(j) * etaplus, deltamax);
+                        // make sure that the parameters are still in bounds, if needed
+                        if (bounded) {
+                            for (int j = 0; j < query_params.size(); j++) {
+                                if (query_params(j) < 0)
+                                    query_params(j) = 0;
+                                if (query_params(j) > 1)
+                                    query_params(j) = 1;
+                            }
                         }
-                        else if (grad_old(j) < 0) {
-                            delta(j) = std::max(delta(j) * etaminus, deltamin);
-                            grad(j) = 0;
-                        }
-                        params(j) += -tools::signum(grad(j)) * delta(j);
+                    }
+                    auto perf = opt::eval_grad(f, query_params);
 
-                        if (bounded && params(j) < 0)
-                            params(j) = 0;
-                        if (bounded && params(j) > 1)
-                            params(j) = 1;
+                    Eigen::VectorXd grad = opt::grad(perf);
+                    v = gamma * v.array() + alpha * grad.array();
+
+                    params.array() += v.array();
+
+                    if (bounded) {
+                        for (int j = 0; j < params.size(); j++) {
+                            if (params(j) < 0)
+                                params(j) = 0;
+                            if (params(j) > 1)
+                                params(j) = 1;
+                        }
                     }
 
-                    grad_old = grad;
-                    if (grad_old.norm() < eps_stop)
+                    if ((prev_params - params).norm() < stop)
                         break;
                 }
 
-                return best_params;
+                return params;
             }
         };
-    }
-}
+    } // namespace opt
+} // namespace limbo
 
 #endif

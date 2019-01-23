@@ -105,9 +105,6 @@ BO_PARAMS(std::cout,
 
               struct opt_rprop : public defaults::opt_rprop {
               };
-
-              struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-              };
           };)
 
 struct fit_eval {

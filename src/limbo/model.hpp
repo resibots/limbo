@@ -50,6 +50,7 @@
 ///@defgroup model_opt_defaults
 
 #include <limbo/model/gp.hpp>
+#include <limbo/model/multi_gp.hpp>
 #include <limbo/model/sparsified_gp.hpp>
 
 #include <limbo/model/gp/kernel_lf_opt.hpp>

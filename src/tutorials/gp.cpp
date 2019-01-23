@@ -69,8 +69,6 @@ struct Params {
     };
     struct opt_rprop : public defaults::opt_rprop {
     };
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-    };
 };
 
 int main(int argc, char** argv)

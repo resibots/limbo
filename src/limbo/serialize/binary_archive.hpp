@@ -124,13 +124,18 @@ namespace limbo {
                 return _dir_name + "/" + object_name + ".bin";
             }
 
+            const std::string& directory() const
+            {
+                return _dir_name;
+            }
+
         protected:
             std::string _dir_name;
 
             void _create_directory() const
             {
                 boost::filesystem::path my_path(_dir_name);
-                boost::filesystem::create_directory(my_path);
+                boost::filesystem::create_directories(my_path);
             }
 
             template <class Matrix, class Stream>

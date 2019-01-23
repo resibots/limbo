@@ -80,7 +80,7 @@ namespace limbo {
             /// @ingroup par_tools
             /// convert a std::vector to something else (e.g. a std::list)
             template <typename V>
-            std::vector<typename V::value_type> convert_vector(const V& v)
+            inline std::vector<typename V::value_type> convert_vector(const V& v)
             {
                 std::vector<typename V::value_type> v2(v.size());
                 std::copy(v.begin(), v.end(), v2.begin());
@@ -99,7 +99,7 @@ namespace limbo {
 #endif
 
             template <typename V>
-            V convert_vector(const V& v)
+            inline V convert_vector(const V& v)
             {
                 return v;
             }
@@ -114,7 +114,7 @@ namespace limbo {
 #else
             /// @ingroup par_tools
             /// init TBB (if activated) for multi-core computing
-            void init()
+            inline void init()
             {
             }
 #endif
@@ -152,7 +152,7 @@ namespace limbo {
             /// @ingroup par_tools
             /// parallel max
             template <typename T, typename F, typename C>
-            T max(const T& init, int num_steps, const F& f, const C& comp)
+            inline T max(const T& init, int num_steps, const F& f, const C& comp)
             {
 #ifdef USE_TBB
                 auto body = [&](const tbb::blocked_range<size_t>& r, T current_max) -> T {

@@ -80,7 +80,7 @@ namespace limbo {
             /// useful because the model might be created before knowing anything about the process
             GP() : _dim_in(-1), _dim_out(-1), _inv_kernel_updated(false) {}
 
-            /// useful because the model might be created  before having samples
+            /// useful because the model might be created before having samples
             GP(int dim_in, int dim_out)
                 : _dim_in(dim_in), _dim_out(dim_out), _kernel_function(dim_in), _mean_function(dim_out), _inv_kernel_updated(false) {}
 
@@ -115,7 +115,7 @@ namespace limbo {
                     this->_compute_full_kernel();
             }
 
-            /// Do not forget to call this if you use hyper-prameters optimization!!
+            /// Do not forget to call this if you use hyper-parameters optimization!!
             void optimize_hyperparams()
             {
                 _hp_optimize(*this);
@@ -153,22 +153,22 @@ namespace limbo {
 
             /**
              \\rst
-             return :math:`\mu`, :math:`\sigma^2` (unormalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
+             return :math:`\mu`, :math:`\sigma^2` (un-normalized). If there is no sample, return the value according to the mean function. Using this method instead of separate calls to mu() and sigma() is more efficient because some computations are shared between mu() and sigma().
              \\endrst
             */
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
                     return std::make_tuple(_mean_function(v, *this),
-                        _kernel_function(v, v));
+                        _kernel_function(v, v) + _kernel_function.noise());
 
                 Eigen::VectorXd k = _compute_k(v);
-                return std::make_tuple(_mu(v, k), _sigma(v, k));
+                return std::make_tuple(_mu(v, k), _sigma(v, k) + _kernel_function.noise());
             }
 
             /**
              \\rst
-             return :math:`\mu` (unormalized). If there is no sample, return the value according to the mean function.
+             return :math:`\mu` (un-normalized). If there is no sample, return the value according to the mean function.
              \\endrst
             */
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
@@ -180,27 +180,27 @@ namespace limbo {
 
             /**
              \\rst
-             return :math:`\sigma^2` (unormalized). If there is no sample, return the max :math:`\sigma^2`.
+             return :math:`\sigma^2` (un-normalized). If there is no sample, return the max :math:`\sigma^2`.
              \\endrst
             */
             double sigma(const Eigen::VectorXd& v) const
             {
                 if (_samples.size() == 0)
-                    return _kernel_function(v, v);
-                return _sigma(v, _compute_k(v));
+                    return _kernel_function(v, v) + _kernel_function.noise();
+                return _sigma(v, _compute_k(v)) + _kernel_function.noise();
             }
 
             /// return the number of dimensions of the input
             int dim_in() const
             {
-                assert(_dim_in != -1); // need to compute first !
+                assert(_dim_in != -1); // need to compute first!
                 return _dim_in;
             }
 
             /// return the number of dimensions of the output
             int dim_out() const
             {
-                assert(_dim_out != -1); // need to compute first !
+                assert(_dim_out != -1); // need to compute first!
                 return _dim_out;
             }
 
@@ -225,7 +225,7 @@ namespace limbo {
             /// return the mean observation (only call this if the output of the GP is of dimension 1)
             Eigen::VectorXd mean_observation() const
             {
-                // TODO: Check if _dim_out is correct?!
+                assert(_dim_out > 0);
                 return _samples.size() > 0 ? _mean_observation
                                            : Eigen::VectorXd::Zero(_dim_out);
             }
@@ -271,12 +271,12 @@ namespace limbo {
                 // --- cholesky ---
                 // see:
                 // http://xcorr.net/2008/06/11/log-determinant-of-positive-definite-matrices-in-matlab/
-                long double det = 2 * _matrixL.diagonal().array().log().sum();
+                long double logdet = 2 * _matrixL.diagonal().array().log().sum();
 
                 double a = (_obs_mean.transpose() * _alpha)
                                .trace(); // generalization for multi dimensional observation
 
-                _log_lik = -0.5 * a - 0.5 * det - 0.5 * n * std::log(2 * M_PI);
+                _log_lik = -0.5 * a - 0.5 * logdet - 0.5 * n * std::log(2 * M_PI);
 
                 return _log_lik;
             }
@@ -408,19 +408,36 @@ namespace limbo {
             void set_log_loo_cv(double log_loo_cv) { _log_loo_cv = log_loo_cv; }
 
             /// LLT matrix (from Cholesky decomposition)
-            //const Eigen::LLT<Eigen::MatrixXd>& llt() const { return _llt; }
             const Eigen::MatrixXd& matrixL() const { return _matrixL; }
 
             const Eigen::MatrixXd& alpha() const { return _alpha; }
 
-            /// return the list of samples that have been tested so far
+            /// return the list of samples
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
+
+            /// return the list of observations
+            std::vector<Eigen::VectorXd> observations() const
+            {
+                std::vector<Eigen::VectorXd> observations;
+                for (int i = 0; i < _observations.rows(); i++) {
+                    observations.push_back(_observations.row(i));
+                }
+
+                return observations;
+            }
+
+            /// return the observations (in matrix form)
+            /// (NxD), where N is the number of points and D is the dimension output
+            const Eigen::MatrixXd& observations_matrix() const
+            {
+                return _observations;
+            }
 
             bool inv_kernel_computed() { return _inv_kernel_updated; }
 
             /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
-            void save(const std::string& directory)
+            void save(const std::string& directory) const
             {
                 A archive(directory);
                 save(archive);
@@ -428,7 +445,7 @@ namespace limbo {
 
             /// save the parameters and the data for the GP to the archive (text or binary)
             template <typename A>
-            void save(const A& archive)
+            void save(const A& archive) const
             {
                 if (_kernel_function.h_params_size() > 0) {
                     archive.save(_kernel_function.h_params(), "kernel_params");
@@ -556,8 +573,8 @@ namespace limbo {
             void _compute_incremental_kernel()
             {
                 // Incremental LLT
-                // This part of the code is inpired from the Bayesopt Library (cholesky_add_row function).
-                // However, the mathematical fundations can be easily retrieved by detailling the equations of the
+                // This part of the code is inspired from the Bayesopt Library (cholesky_add_row function).
+                // However, the mathematical foundations can be easily retrieved by detailing the equations of the
                 // extended L matrix that produces the desired kernel.
 
                 size_t n = _samples.size();

@@ -48,18 +48,19 @@
 
 #include <Eigen/Core>
 
-#include <limbo/opt/parallel_repeater.hpp>
 #include <limbo/opt/rprop.hpp>
 
 namespace limbo {
     namespace model {
         namespace gp {
             ///@ingroup model_opt
-            ///optimize the likelihood of the kernel only
-            template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
+            ///base class for optimization of the hyper-parameters of a GP
+            template <typename Params, typename Optimizer = opt::Rprop<Params>>
             struct HPOpt {
             public:
                 HPOpt() : _called(false) {}
+                /// to avoid stupid warnings
+                HPOpt(const HPOpt&) { _called = true; }
                 ~HPOpt()
                 {
                     if (!_called) {
@@ -70,8 +71,8 @@ namespace limbo {
             protected:
                 bool _called;
             };
-        }
-    }
-}
+        } // namespace gp
+    } // namespace model
+} // namespace limbo
 
 #endif

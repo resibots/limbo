@@ -43,8 +43,8 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#ifndef LIMBO_OPT_RPROP_HPP
-#define LIMBO_OPT_RPROP_HPP
+#ifndef LIMBO_OPT_ADAM_HPP
+#define LIMBO_OPT_ADAM_HPP
 
 #include <algorithm>
 
@@ -56,45 +56,61 @@
 
 namespace limbo {
     namespace defaults {
-        struct opt_rprop {
+        struct opt_adam {
             /// @ingroup opt_defaults
             /// number of max iterations
             BO_PARAM(int, iterations, 300);
 
-            /// gradient norm epsilon for stopping
+            /// @ingroup opt_defaults
+            /// alpha - learning rate
+            BO_PARAM(double, alpha, 0.001);
+
+            /// @ingroup opt_defaults
+            /// β1
+            BO_PARAM(double, b1, 0.9);
+
+            /// @ingroup opt_defaults
+            /// β2
+            BO_PARAM(double, b2, 0.999);
+
+            /// @ingroup opt_defaults
+            /// norm epsilon for stopping
             BO_PARAM(double, eps_stop, 0.0);
         };
-    }
+    } // namespace defaults
     namespace opt {
         /// @ingroup opt
-        /// Gradient-based optimization (rprop)
-        /// - partly inspired by libgp: https://github.com/mblum/libgp
-        /// - reference :
-        /// Blum, M., & Riedmiller, M. (2013). Optimization of Gaussian
-        /// Process Hyperparameters using Rprop. In European Symposium
-        /// on Artificial Neural Networks, Computational Intelligence
-        /// and Machine Learning.
+        /// Adam optimizer
+        /// Equations from: http://ruder.io/optimizing-gradient-descent/index.html#gradientdescentoptimizationalgorithms
+        /// (I changed a bit the notation; η to α)
         ///
         /// Parameters:
         /// - int iterations
+        /// - double alpha
+        /// - double b1
+        /// - double b2
         /// - double eps_stop
         template <typename Params>
-        struct Rprop {
+        struct Adam {
             template <typename F>
             Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
             {
-                assert(Params::opt_rprop::eps_stop() >= 0.);
+                assert(Params::opt_adam::b1() >= 0. && Params::opt_adam::b1() < 1.);
+                assert(Params::opt_adam::b2() >= 0. && Params::opt_adam::b2() < 1.);
+                assert(Params::opt_adam::alpha() >= 0.);
 
                 size_t param_dim = init.size();
-                double delta0 = 0.1;
-                double deltamin = 1e-6;
-                double deltamax = 50;
-                double etaminus = 0.5;
-                double etaplus = 1.2;
-                double eps_stop = Params::opt_rprop::eps_stop();
+                double b1 = Params::opt_adam::b1();
+                double b2 = Params::opt_adam::b2();
+                double b1_t = b1;
+                double b2_t = b2;
+                double alpha = Params::opt_adam::alpha();
+                double stop = Params::opt_adam::eps_stop();
+                double epsilon = 1e-8;
 
-                Eigen::VectorXd delta = Eigen::VectorXd::Ones(param_dim) * delta0;
-                Eigen::VectorXd grad_old = Eigen::VectorXd::Zero(param_dim);
+                Eigen::VectorXd m = Eigen::VectorXd::Zero(param_dim);
+                Eigen::VectorXd v = Eigen::VectorXd::Zero(param_dim);
+
                 Eigen::VectorXd params = init;
 
                 if (bounded) {
@@ -106,44 +122,39 @@ namespace limbo {
                     }
                 }
 
-                Eigen::VectorXd best_params = params;
-                double best = log(0);
-
-                for (int i = 0; i < Params::opt_rprop::iterations(); ++i) {
+                for (int i = 0; i < Params::opt_adam::iterations(); ++i) {
+                    Eigen::VectorXd prev_params = params;
                     auto perf = opt::eval_grad(f, params);
-                    double lik = opt::fun(perf);
-                    if (lik > best) {
-                        best = lik;
-                        best_params = params;
-                    }
-                    Eigen::VectorXd grad = -opt::grad(perf);
-                    grad_old = grad_old.cwiseProduct(grad);
 
-                    for (int j = 0; j < grad_old.size(); ++j) {
-                        if (grad_old(j) > 0) {
-                            delta(j) = std::min(delta(j) * etaplus, deltamax);
-                        }
-                        else if (grad_old(j) < 0) {
-                            delta(j) = std::max(delta(j) * etaminus, deltamin);
-                            grad(j) = 0;
-                        }
-                        params(j) += -tools::signum(grad(j)) * delta(j);
+                    Eigen::VectorXd grad = opt::grad(perf);
+                    m = b1 * m.array() + (1. - b1) * grad.array();
+                    v = b2 * v.array() + (1. - b2) * grad.array().square();
 
-                        if (bounded && params(j) < 0)
-                            params(j) = 0;
-                        if (bounded && params(j) > 1)
-                            params(j) = 1;
+                    Eigen::VectorXd m_hat = m.array() / (1. - b1_t);
+                    Eigen::VectorXd v_hat = v.array() / (1. - b2_t);
+
+                    params.array() += alpha * m_hat.array() / (v_hat.array().sqrt() + epsilon);
+
+                    b1_t *= b1;
+                    b2_t *= b2;
+
+                    if (bounded) {
+                        for (int j = 0; j < params.size(); j++) {
+                            if (params(j) < 0)
+                                params(j) = 0;
+                            if (params(j) > 1)
+                                params(j) = 1;
+                        }
                     }
 
-                    grad_old = grad;
-                    if (grad_old.norm() < eps_stop)
+                    if ((prev_params - params).norm() < stop)
                         break;
                 }
 
-                return best_params;
+                return params;
             }
         };
-    }
-}
+    } // namespace opt
+} // namespace limbo
 
 #endif
