@@ -90,6 +90,7 @@ def options(opt):
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
         opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
         opt.add_option('--no-native', action='store_true', default=False, help='disable -march=native, which can cause some troubles [--no-native]', dest='no_native')
+        opt.add_option('--openmp', action='store_true', default=False, help='enable OpenMP (if found)', dest='openmp')
 
 
         try:
@@ -115,7 +116,8 @@ def configure(conf):
         conf.load('eigen')
         conf.load('tbb')
         conf.load('sferes')
-        conf.load('openmp')
+        if conf.options.openmp:
+            conf.load('openmp')
         conf.load('mkl')
         conf.load('xcode')
         conf.load('nlopt')
@@ -159,16 +161,20 @@ def configure(conf):
         conf.check_eigen()
         conf.check_tbb()
         conf.check_sferes()
-        conf.check_openmp()
+        if conf.options.openmp:
+            conf.check_openmp()
         conf.check_mkl()
         conf.check_nlopt()
         conf.check_libcmaes()
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
+        conf.env.LIBRARIES = 'BOOST EIGEN TBB LIBCMAES NLOPT'
+        if conf.options.openmp:
+            conf.env.LIBRARIES = conf.env.LIBRARIES + ' OMP'
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
-        Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
+        Logs.pprint('NORMAL', 'CXXFLAGS: %s' % (conf.env['CXXFLAGS'] + conf.env['CXXFLAGS_OMP']))
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
