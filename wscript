@@ -122,39 +122,9 @@ def configure(conf):
         conf.load('xcode')
         conf.load('nlopt')
         conf.load('libcmaes')
+        conf.load('avx')
 
-        native_flags = "-march=native"
-
-        is_cpp14 = conf.options.cpp14
-        if is_cpp14:
-            is_cpp14 = conf.check_cxx(cxxflags="-std=c++14", mandatory=False, msg='Checking for C++14')
-            if not is_cpp14:
-                conf.msg('C++14 is requested, but your compiler does not support it!', 'Disabling it!', color='RED')
-        if conf.env.CXX_NAME in ["icc", "icpc"]:
-            common_flags = "-Wall -std=c++11"
-            opt_flags = " -O3 -xHost -g"
-            native_flags = "-mtune=native -unroll -fma"
-        else:
-            if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
-                common_flags = "-Wall -std=c++0x"
-            else:
-                common_flags = "-Wall -std=c++11"
-            if conf.env.CXX_NAME in ["clang", "llvm"]:
-                common_flags += " -fdiagnostics-color"
-            opt_flags = " -O3 -g"
-
-        if is_cpp14:
-            common_flags = common_flags + " -std=c++14"
-
-        native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
-        if native and not conf.options.no_native:
-            opt_flags = opt_flags + ' ' + native_flags
-        elif not native:
-            Logs.pprint('YELLOW', 'WARNING: Native flags not supported. The performance might be a bit deteriorated.')
-        else:
-            Logs.pprint('YELLOW', 'WARNING: Native flags not activated. The performance might be a bit deteriorated.')
-
-
+        # dependencies
         conf.check_boost(lib='serialization filesystem \
             system unit_test_framework program_options \
             thread', min_version='1.39')
@@ -171,6 +141,49 @@ def configure(conf):
         conf.env.LIBRARIES = 'BOOST EIGEN TBB LIBCMAES NLOPT'
         if conf.options.openmp:
             conf.env.LIBRARIES = conf.env.LIBRARIES + ' OMP'
+
+        
+        
+        # compiler
+        is_cpp14 = conf.options.cpp14
+        if is_cpp14:
+            is_cpp14 = conf.check_cxx(cxxflags="-std=c++14", mandatory=False, msg='Checking for C++14')
+            if not is_cpp14:
+                conf.msg('C++14 is requested, but your compiler does not support it!', 'Disabling it!', color='RED')
+        if conf.env.CXX_NAME in ["icc", "icpc"]:
+            common_flags = "-Wall -std=c++11"
+            opt_flags = " -O3 -xHost -g"
+            native_flags = "-mtune=native -unroll -fma"
+        else:
+            native_flags = '-march=native'
+            if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
+                common_flags += "-Wall -std=c++0x"
+            else:
+                common_flags = "-Wall -std=c++11"
+            if conf.env.CXX_NAME in ["clang", "llvm"]:
+                common_flags = " -fdiagnostics-color"
+            opt_flags = " -O3 -g"
+
+        if is_cpp14:
+            common_flags = common_flags + " -std=c++14"
+
+        # is libcmaes compiled with -march=native (avx instructions)?
+        cmaes_native = True
+        if conf.env.DEFINES_LIBCMAES: # if we have CMA-ES activated & found 
+            conf.start_msg('Checking for libcmaes AVX support (-march=native)')
+            cmaes_native = conf.check_avx('cmaes', 'cmaes')
+            if cmaes_native:
+                conf.end_msg('OK', 'GREEN')
+            else:
+                conf.end_msg('NO -> deactivate -march=native', 'YELLOW')
+
+        native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
+        if native and cmaes_native and not conf.options.no_native:
+            opt_flags = opt_flags + ' ' + native_flags
+        elif not native:
+            Logs.pprint('YELLOW', 'WARNING: Native flags not supported. The performance might be a bit deteriorated.')
+        else:
+            Logs.pprint('YELLOW', 'WARNING: Native flags not activated. The performance might be a bit deteriorated.')
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
