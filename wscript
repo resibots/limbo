@@ -157,11 +157,11 @@ def configure(conf):
         else:
             native_flags = '-march=native'
             if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
-                common_flags += "-Wall -std=c++0x"
+                common_flags = "-Wall -std=c++0x"
             else:
                 common_flags = "-Wall -std=c++11"
             if conf.env.CXX_NAME in ["clang", "llvm"]:
-                common_flags = " -fdiagnostics-color"
+                common_flags += " -fdiagnostics-color"
             opt_flags = " -O3 -g"
 
         if is_cpp14:
