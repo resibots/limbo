@@ -126,7 +126,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
@@ -190,12 +189,12 @@
 <p>Limbo extends the traditionnal Bayesian optimization algorithm with a few ideas developped in our group.</p>
 <div class="section" id="mean-function">
 <span id="mean-functions"></span><h2>Mean function<a class="headerlink" href="#mean-function" title="Permalink to this headline">¶</a></h2>
-<p>In classic Bayesian optimization, the Gaussian process is initialized with a constant mean because it is assumed that all the points of the search space are equally likely to be good. The model is then progressively refined after each observation. This constant mean is one of the main prior used to build the Gaussian process: setting its value is often critical for the performance of the algorithm (see <a class="reference internal" href="../index.html#b-lizotte2007automatic" id="id1">[2]</a>).</p>
-<p>Nevertheless, it can be useful to use more complex priors. This is, for instance, the case when we can use a low-fidelity simulator as a prior for physical experiments with a robot <a class="reference internal" href="../index.html#b-cully-robots-2015" id="id2">[1]</a>. To incorporate this idea into the Bayesian optimization, <em>limbo</em> models the <em>difference</em> between the prediction of the behavior-performance map and the actual performance on the real robot, instead of directly modeling the objective function. This idea is incorporated into the Gaussian process by modifying the update equation for the mean function (<span class="math">\(\mu_t(\mathbf{x})\)</span>):</p>
+<p>In classic Bayesian optimization, the Gaussian process is initialized with a constant mean because it is assumed that all the points of the search space are equally likely to be good. The model is then progressively refined after each observation. This constant mean is one of the main prior used to build the Gaussian process: setting its value is often critical for the performance of the algorithm (see <a class="reference internal" href="../index.html#b-lizotte2007automatic" id="id1">[7]</a>).</p>
+<p>Nevertheless, it can be useful to use more complex priors. This is, for instance, the case when we can use a low-fidelity simulator as a prior for physical experiments with a robot <a class="reference internal" href="../index.html#b-cully-robots-2015" id="id2">[6]</a>. To incorporate this idea into the Bayesian optimization, <em>limbo</em> models the <em>difference</em> between the prediction of the behavior-performance map and the actual performance on the real robot, instead of directly modeling the objective function. This idea is incorporated into the Gaussian process by modifying the update equation for the mean function (<span class="math">\(\mu_t(\mathbf{x})\)</span>):</p>
 <div class="math">
 \[\mu_{t}(\mathbf{x})= \mathcal{P}(\mathbf{x}) + \mathbf{k}^\intercal\mathbf{K}^{-1}(\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t}))\]</div>
 <p>where <span class="math">\(\mathcal{P}(\mathbf{x})\)</span> is the performance of <span class="math">\(\mathbf{x}\)</span> according to the mean function (<em>the prior</em>) and <span class="math">\(\mathcal{P}(\mathbf{\chi}_{1:t})\)</span> is the performance of all the previous observations, also according to the mean function (prior).</p>
-<p>Replacing <span class="math">\(\mathbf{P}_{1:t}\)</span> by <span class="math">\(\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t})\)</span> means that the Gaussian process models the difference between the actual performance <span class="math">\(\mathbf{P}_{1:t}\)</span> and the performance from the behavior-performance map <span class="math">\(\mathcal{P}(\mathbf{\chi}_{1:t})\)</span>. The term <span class="math">\(\mathcal{P}(\mathbf{x})\)</span> is the prediction given by the mean function (the behavior-performance map in <a class="reference internal" href="../index.html#b-cully-robots-2015" id="id3">[1]</a>).</p>
+<p>Replacing <span class="math">\(\mathbf{P}_{1:t}\)</span> by <span class="math">\(\mathbf{P}_{1:t}-\mathcal{P}(\mathbf{\chi}_{1:t})\)</span> means that the Gaussian process models the difference between the actual performance <span class="math">\(\mathbf{P}_{1:t}\)</span> and the performance from the behavior-performance map <span class="math">\(\mathcal{P}(\mathbf{\chi}_{1:t})\)</span>. The term <span class="math">\(\mathcal{P}(\mathbf{x})\)</span> is the prediction given by the mean function (the behavior-performance map in <a class="reference internal" href="../index.html#b-cully-robots-2015" id="id3">[6]</a>).</p>
 <p>See <a class="reference internal" href="../api.html#mean-api"><span class="std std-ref">the Limbo implementation guide</span></a> for the available mean functions.</p>
 </div>
 <div class="section" id="state-based-optimization">
@@ -207,13 +206,13 @@
 <p id="bibtex-bibliography-guides/limbo_concepts-0"><table class="docutils citation" frame="void" id="b-cully-robots-2015" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> Antoine Cully, Jeff Clune, Danesh Tarapore, and Jean-Baptiste Mouret. Robots that can adapt like animals. <em>Nature</em>, 521(7553):503–507, May 2015. URL: <a class="reference external" href="http://www.nature.com/doifinder/10.1038/nature14422">http://www.nature.com/doifinder/10.1038/nature14422</a>, <a class="reference external" href="https://doi.org/10.1038/nature14422">doi:10.1038/nature14422</a>.</td></tr>
+<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> Antoine Cully, Jeff Clune, Danesh Tarapore, and Jean-Baptiste Mouret. Robots that can adapt like animals. <em>Nature</em>, 521(7553):503–507, May 2015. URL: <a class="reference external" href="http://www.nature.com/doifinder/10.1038/nature14422">http://www.nature.com/doifinder/10.1038/nature14422</a>, <a class="reference external" href="https://doi.org/10.1038/nature14422">doi:10.1038/nature14422</a>.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="b-lizotte2007automatic" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td>Daniel&nbsp;J Lizotte, Tao Wang, Michael&nbsp;H Bowling, and Dale Schuurmans. Automatic gait optimization with gaussian process regression. In <em>Proceedings of the the International Joint Conference on Artificial Intelligence (IJCAI)</em>, volume&nbsp;7, 944–949. 2007.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[7]</a></td><td>Daniel&nbsp;J Lizotte, Tao Wang, Michael&nbsp;H Bowling, and Dale Schuurmans. Automatic gait optimization with gaussian process regression. In <em>Proceedings of the the International Joint Conference on Artificial Intelligence (IJCAI)</em>, volume&nbsp;7, 944–949. 2007.</td></tr>
 </tbody>
 </table>
 </p>

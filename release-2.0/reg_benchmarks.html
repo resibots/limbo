@@ -34,7 +34,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="limbo 0.1 documentation" href="index.html"/>
         <link rel="next" title="Bayesian optimization benchmarks" href="bo_benchmarks.html"/>
-        <link rel="prev" title="Default values" href="defaults.html"/>
+        <link rel="prev" title="API" href="api.html"/>
 <style type="text/css">
 /* This CSS displays small logos at the bottom of the page, on one line */
 
@@ -115,7 +115,6 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Gaussian process regression benchmarks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#variants">Variants</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#gramacy-lee-in-1d">Gramacy-Lee in 1D</a></li>
@@ -188,7 +187,7 @@
             
   <div class="section" id="gaussian-process-regression-benchmarks">
 <h1>Gaussian process regression benchmarks<a class="headerlink" href="#gaussian-process-regression-benchmarks" title="Permalink to this headline">¶</a></h1>
-<p><em>June 28, 2018</em> – hal30 (32 cores)</p>
+<p><em>April 24, 2019</em> – hal14 (32 cores)</p>
 <p>This page presents benchmarks in which we compare the performance of the Gaussian Process regression in <strong>Limbo</strong> against two other libraries: GPy (<a class="reference external" href="https://github.com/SheffieldML/GPy">https://github.com/SheffieldML/GPy</a>) and libGP (<a class="reference external" href="https://github.com/mblum/libgp">https://github.com/mblum/libgp</a>).</p>
 <p>The quality of the produced model is evaluated according to the Mean Squared Error (lower is better) with respect to the ground truth function. We also quantify the amount of time required by the different libraries to learn the model and to query it. In both cases, lower is better. The evaluations are replicated 30 times and for each replicate, all the variants (see below for the available variants) are using exactly the same data. The data are uniformly sampled and some noise is added (according to the variance of the data).</p>
 <p>The comparison is done on 11 tasks to evaluate the performance of the libraries on functions of different complexity, and input/output spaces. The results show that the query time of Limbo’s Gaussian processes is several orders of magnitude better than the one of GPy and around twice better than libGP for a similar accuracy. The learning time of Limbo, which highly depends on the optimization algorithm chosen to optimize the hyper-parameters, is either equivalent or faster than the compared libraries.</p>
@@ -321,7 +320,7 @@
         <a href="bo_benchmarks.html" class="btn btn-neutral float-right" title="Bayesian optimization benchmarks" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="defaults.html" class="btn btn-neutral" title="Default values" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral" title="API" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

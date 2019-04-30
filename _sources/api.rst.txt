@@ -289,6 +289,12 @@ Currently, Limbo only includes Gaussian processes as models. More may come in th
 .. doxygenclass::  limbo::model::GP
    :members:
 
+.. doxygenclass::  limbo::model::MultiGP
+   :members:
+
+.. doxygenclass::  limbo::model::SparsifiedGP
+   :members:
+
 .. _gp-hpopt:
 
 The hyper-parameters of the model (kernel, mean) can be optimized. The following options are possible:

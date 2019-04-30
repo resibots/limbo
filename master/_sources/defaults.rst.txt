@@ -1,174 +1,174 @@
 Default values
 ===============
-kernel
-^^^^^^
-- bool optimize_noise = false [defined in src/limbo/kernel/kernel.hpp]
-- double noise = 0.01 [defined in src/limbo/kernel/kernel.hpp]
-
-kernel_maternthreehalves
-^^^^^^^^^^^^^^^^^^^^^^^^
-- double sigma_sq = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]
-- double l = 1 [defined in src/limbo/kernel/matern_three_halves.hpp]
-
-acqui_eci
-^^^^^^^^^
-- double jitter = 0.0 [defined in src/limbo/experimental/acqui/eci.hpp]
-
-init_gridsampling
-^^^^^^^^^^^^^^^^^
-- int bins = 5 [defined in src/limbo/init/grid_sampling.hpp]
-
-acqui_ucb_imgpo
-^^^^^^^^^^^^^^^
-- double nu = 0.05 [defined in src/limbo/experimental/acqui/ucb_imgpo.hpp]
-
-model_sparse_gp
-^^^^^^^^^^^^^^^
-- int max_points = 200 [defined in src/limbo/model/sparsified_gp.hpp]
-
-init_lhs
-^^^^^^^^
-- int samples = 10 [defined in src/limbo/init/lhs.hpp]
-
-opt_gridsearch
-^^^^^^^^^^^^^^
-- int bins = 5 [defined in src/limbo/opt/grid_search.hpp]
-
-init_randomsamplinggrid
-^^^^^^^^^^^^^^^^^^^^^^^
-- int bins = 5 [defined in src/limbo/init/random_sampling_grid.hpp]
-- int samples = 10 [defined in src/limbo/init/random_sampling_grid.hpp]
-
-mean_constant
-^^^^^^^^^^^^^
-- double constant = 1 [defined in src/limbo/mean/constant.hpp]
-
-model_spgp
-^^^^^^^^^^
-- double jitter = 0.000001 [defined in src/limbo/experimental/model/spgp.hpp]
-- double samples_percent = 10 [defined in src/limbo/experimental/model/spgp.hpp]
-- int min_m = 1 [defined in src/limbo/experimental/model/spgp.hpp]
-- double pred_kernel_sigma_sq = 0.5 [defined in src/limbo/experimental/model/spgp.hpp]
-- double sig = 0.01 [defined in src/limbo/experimental/model/spgp.hpp]
-- double pred_kernel_l = 0.5 [defined in src/limbo/experimental/model/spgp.hpp]
-
-stop_maxpredictedvalue
-^^^^^^^^^^^^^^^^^^^^^^
-- double ratio = 0.9 [defined in src/limbo/stop/max_predicted_value.hpp]
-
-stop_maxiterations
-^^^^^^^^^^^^^^^^^^
-- int iterations = 190 [defined in src/limbo/stop/max_iterations.hpp]
-
-opt_rprop
-^^^^^^^^^
-- double eps_stop = 0.0 [defined in src/limbo/opt/rprop.hpp]
-- int iterations = 300 [defined in src/limbo/opt/rprop.hpp]
-
 bayes_opt_boptimizer
 ^^^^^^^^^^^^^^^^^^^^
-- int hp_period = -1 [defined in src/limbo/bayes_opt/boptimizer.hpp]
-
-kernel_maternfivehalves
-^^^^^^^^^^^^^^^^^^^^^^^
-- double sigma_sq = 1 [defined in src/limbo/kernel/matern_five_halves.hpp]
-- double l = 1 [defined in src/limbo/kernel/matern_five_halves.hpp]
-
-opt_nloptnograd
-^^^^^^^^^^^^^^^
-- double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] ['#ifdef USE_NLOPT']
-- double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] ['#ifdef USE_NLOPT']
-- int iterations = 500 [defined in src/limbo/opt/nlopt_no_grad.hpp] ['#ifdef USE_NLOPT']
-
-bayes_opt_imgpo
-^^^^^^^^^^^^^^^
-- bool hp_opt = false [defined in src/limbo/experimental/bayes_opt/imgpo.hpp]
-
-opt_parallelrepeater
-^^^^^^^^^^^^^^^^^^^^
-- double epsilon = 1e-2 [defined in src/limbo/opt/parallel_repeater.hpp]
-- int repeats = 10 [defined in src/limbo/opt/parallel_repeater.hpp]
-
-opt_cmaes
-^^^^^^^^^
-- double xrel_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- bool verbose = false [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- int max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- int variant = aIPOP_CMAES [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- int elitism = 0 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- bool fun_compute_initial = false [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- int restarts = 1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- double fun_target = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- double ubound = 1.0 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- bool stochastic = false [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- double fun_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- bool handle_uncertainty = false [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-- int lambda = -1 [defined in src/limbo/opt/cmaes.hpp] ['#ifdef USE_LIBCMAES']
-
-opt_nloptgrad
-^^^^^^^^^^^^^
-- double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] ['#ifdef USE_NLOPT']
-- double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] ['#ifdef USE_NLOPT']
-- int iterations = 500 [defined in src/limbo/opt/nlopt_grad.hpp] ['#ifdef USE_NLOPT']
-
-acqui_ei
-^^^^^^^^
-- double jitter = 0.0 [defined in src/limbo/acqui/ei.hpp]
-
-kernel_squared_exp_ard
-^^^^^^^^^^^^^^^^^^^^^^
-- double sigma_sq = 1 [defined in src/limbo/kernel/squared_exp_ard.hpp]
-
-bayes_opt_cboptimizer
-^^^^^^^^^^^^^^^^^^^^^
-- bool bounded = true [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]
-- int hp_period = -1 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp]
-
-acqui_ucb
-^^^^^^^^^
-- double alpha = 0.5 [defined in src/limbo/acqui/ucb.hpp]
+- int hp_period = -1 [defined in src/limbo/bayes_opt/boptimizer.hpp] <map object at 0x7fbca9fed710>
 
 bayes_opt_bobase
 ^^^^^^^^^^^^^^^^
-- bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp]
-- bool bounded = true [defined in src/limbo/bayes_opt/bo_base.hpp]
+- bool stats_enabled = true [defined in src/limbo/bayes_opt/bo_base.hpp] <map object at 0x7fbca9fed908>
+- bool bounded = true [defined in src/limbo/bayes_opt/bo_base.hpp] <map object at 0x7fbca9fedb70>
 
-opt_gradient_ascent
-^^^^^^^^^^^^^^^^^^^
-- bool nesterov = false [defined in src/limbo/opt/gradient_ascent.hpp]
-- double alpha = 0.001 [defined in src/limbo/opt/gradient_ascent.hpp]
-- double gamma = 0.0 [defined in src/limbo/opt/gradient_ascent.hpp]
-- int iterations = 300 [defined in src/limbo/opt/gradient_ascent.hpp]
-- double eps_stop = 0.0 [defined in src/limbo/opt/gradient_ascent.hpp]
+mean_constant
+^^^^^^^^^^^^^
+- double constant = 1 [defined in src/limbo/mean/constant.hpp] <map object at 0x7fbca9fedd30>
 
-kernel_exp
-^^^^^^^^^^
-- double sigma_sq = 1 [defined in src/limbo/kernel/exp.hpp]
-- double l = 1 [defined in src/limbo/kernel/exp.hpp]
+opt_cmaes
+^^^^^^^^^
+- int restarts = 1 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9fedf60>
+- int max_fun_evals = -1 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff21d0>
+- double fun_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff2400>
+- double xrel_tolerance = -1 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff2630>
+- double fun_target = -1 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff2860>
+- bool fun_compute_initial = false [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff2a90>
+- int variant = aIPOP_CMAES [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff2cc0>
+- int elitism = 0 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff2ef0>
+- bool handle_uncertainty = false [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff4160>
+- bool verbose = false [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff43c8>
+- double lbound = 0.0 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff4630>
+- double ubound = 1.0 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff4898>
+- bool stochastic = false [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff4ac8>
+- int lambda = -1 [defined in src/limbo/opt/cmaes.hpp] <map object at 0x7fbca9ff4d30>
 
-bayes_opt_ehvi
+opt_nloptgrad
+^^^^^^^^^^^^^
+- int iterations = 500 [defined in src/limbo/opt/nlopt_grad.hpp] <map object at 0x7fbca9ff4f60>
+- double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] <map object at 0x7fbca9ff61d0>
+- double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_grad.hpp] <map object at 0x7fbca9ff6400>
+
+opt_gridsearch
 ^^^^^^^^^^^^^^
-- double x_ref = -11 [defined in src/limbo/experimental/bayes_opt/ehvi.hpp]
-- double y_ref = -11 [defined in src/limbo/experimental/bayes_opt/ehvi.hpp]
-
-model_gp_parego
-^^^^^^^^^^^^^^^
-- double rho = 0.05 [defined in src/limbo/experimental/model/gp_parego.hpp]
-
-acqui_gpucb
-^^^^^^^^^^^
-- double delta = 0.1 [defined in src/limbo/acqui/gp_ucb.hpp]
+- int bins = 5 [defined in src/limbo/opt/grid_search.hpp] <map object at 0x7fbca9ff6630>
 
 opt_adam
 ^^^^^^^^
-- double alpha = 0.001 [defined in src/limbo/opt/adam.hpp]
-- double b2 = 0.999 [defined in src/limbo/opt/adam.hpp]
-- double b1 = 0.9 [defined in src/limbo/opt/adam.hpp]
-- int iterations = 300 [defined in src/limbo/opt/adam.hpp]
-- double eps_stop = 0.0 [defined in src/limbo/opt/adam.hpp]
+- int iterations = 300 [defined in src/limbo/opt/adam.hpp] <map object at 0x7fbca9ff6860>
+- double alpha = 0.001 [defined in src/limbo/opt/adam.hpp] <map object at 0x7fbca9ff6ac8>
+- double b1 = 0.9 [defined in src/limbo/opt/adam.hpp] <map object at 0x7fbca9ff6d30>
+- double b2 = 0.999 [defined in src/limbo/opt/adam.hpp] <map object at 0x7fbca9ff6f98>
+- double eps_stop = 0.0 [defined in src/limbo/opt/adam.hpp] <map object at 0x7fbca9ff8208>
+
+opt_gradient_ascent
+^^^^^^^^^^^^^^^^^^^
+- int iterations = 300 [defined in src/limbo/opt/gradient_ascent.hpp] <map object at 0x7fbca9ff8438>
+- double alpha = 0.001 [defined in src/limbo/opt/gradient_ascent.hpp] <map object at 0x7fbca9ff86a0>
+- double gamma = 0.0 [defined in src/limbo/opt/gradient_ascent.hpp] <map object at 0x7fbca9ff8908>
+- bool nesterov = false [defined in src/limbo/opt/gradient_ascent.hpp] <map object at 0x7fbca9ff8b38>
+- double eps_stop = 0.0 [defined in src/limbo/opt/gradient_ascent.hpp] <map object at 0x7fbca9ff8d68>
+
+opt_rprop
+^^^^^^^^^
+- int iterations = 300 [defined in src/limbo/opt/rprop.hpp] <map object at 0x7fbca9ff8f98>
+- double eps_stop = 0.0 [defined in src/limbo/opt/rprop.hpp] <map object at 0x7fbca9ffb208>
+
+opt_nloptnograd
+^^^^^^^^^^^^^^^
+- int iterations = 500 [defined in src/limbo/opt/nlopt_no_grad.hpp] <map object at 0x7fbca9ffb438>
+- double fun_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] <map object at 0x7fbca9ffb668>
+- double xrel_tolerance = -1 [defined in src/limbo/opt/nlopt_no_grad.hpp] <map object at 0x7fbca9ffb898>
+
+opt_parallelrepeater
+^^^^^^^^^^^^^^^^^^^^
+- int repeats = 10 [defined in src/limbo/opt/parallel_repeater.hpp] <map object at 0x7fbca9ffbb00>
+- double epsilon = 1e-2 [defined in src/limbo/opt/parallel_repeater.hpp] <map object at 0x7fbca9ffbd68>
+
+model_sparse_gp
+^^^^^^^^^^^^^^^
+- int max_points = 200 [defined in src/limbo/model/sparsified_gp.hpp] <map object at 0x7fbca9ffbf98>
+
+acqui_ei
+^^^^^^^^
+- double jitter = 0.0 [defined in src/limbo/acqui/ei.hpp] <map object at 0x7fbca9ffe240>
+
+acqui_ucb
+^^^^^^^^^
+- double alpha = 0.5 [defined in src/limbo/acqui/ucb.hpp] <map object at 0x7fbca9ffe4a8>
+
+acqui_gpucb
+^^^^^^^^^^^
+- double delta = 0.1 [defined in src/limbo/acqui/gp_ucb.hpp] <map object at 0x7fbca9ffe710>
+
+kernel_squared_exp_ard
+^^^^^^^^^^^^^^^^^^^^^^
+- double sigma_sq = 1 [defined in src/limbo/kernel/squared_exp_ard.hpp] <map object at 0x7fbca9ffe908>
+
+kernel_maternfivehalves
+^^^^^^^^^^^^^^^^^^^^^^^
+- double sigma_sq = 1 [defined in src/limbo/kernel/matern_five_halves.hpp] <map object at 0x7fbca9ffeb00>
+- double l = 1 [defined in src/limbo/kernel/matern_five_halves.hpp] <map object at 0x7fbca9ffecf8>
+
+kernel_maternthreehalves
+^^^^^^^^^^^^^^^^^^^^^^^^
+- double sigma_sq = 1 [defined in src/limbo/kernel/matern_three_halves.hpp] <map object at 0x7fbca9ffeef0>
+- double l = 1 [defined in src/limbo/kernel/matern_three_halves.hpp] <map object at 0x7fbca9fff128>
+
+kernel
+^^^^^^
+- double noise = 0.01 [defined in src/limbo/kernel/kernel.hpp] <map object at 0x7fbca9fff3c8>
+- bool optimize_noise = false [defined in src/limbo/kernel/kernel.hpp] <map object at 0x7fbca9fff630>
+
+kernel_exp
+^^^^^^^^^^
+- double sigma_sq = 1 [defined in src/limbo/kernel/exp.hpp] <map object at 0x7fbca9fff828>
+- double l = 1 [defined in src/limbo/kernel/exp.hpp] <map object at 0x7fbca9fffa20>
+
+stop_maxiterations
+^^^^^^^^^^^^^^^^^^
+- int iterations = 190 [defined in src/limbo/stop/max_iterations.hpp] <map object at 0x7fbca9fffc50>
+
+stop_maxpredictedvalue
+^^^^^^^^^^^^^^^^^^^^^^
+- double ratio = 0.9 [defined in src/limbo/stop/max_predicted_value.hpp] <map object at 0x7fbca9fffeb8>
 
 init_randomsampling
 ^^^^^^^^^^^^^^^^^^^
-- int samples = 10 [defined in src/limbo/init/random_sampling.hpp]
+- int samples = 10 [defined in src/limbo/init/random_sampling.hpp] <map object at 0x7fbcaa001160>
+
+init_gridsampling
+^^^^^^^^^^^^^^^^^
+- int bins = 5 [defined in src/limbo/init/grid_sampling.hpp] <map object at 0x7fbcaa001390>
+
+init_lhs
+^^^^^^^^
+- int samples = 10 [defined in src/limbo/init/lhs.hpp] <map object at 0x7fbcaa0015f8>
+
+init_randomsamplinggrid
+^^^^^^^^^^^^^^^^^^^^^^^
+- int samples = 10 [defined in src/limbo/init/random_sampling_grid.hpp] <map object at 0x7fbcaa001860>
+- int bins = 5 [defined in src/limbo/init/random_sampling_grid.hpp] <map object at 0x7fbcaa001a90>
+
+bayes_opt_cboptimizer
+^^^^^^^^^^^^^^^^^^^^^
+- int hp_period = -1 [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp] <map object at 0x7fbcaa001cc0>
+- bool bounded = true [defined in src/limbo/experimental/bayes_opt/cboptimizer.hpp] <map object at 0x7fbcaa001f28>
+
+bayes_opt_ehvi
+^^^^^^^^^^^^^^
+- double x_ref = -11 [defined in src/limbo/experimental/bayes_opt/ehvi.hpp] <map object at 0x7fbcaa0061d0>
+- double y_ref = -11 [defined in src/limbo/experimental/bayes_opt/ehvi.hpp] <map object at 0x7fbcaa006438>
+
+bayes_opt_imgpo
+^^^^^^^^^^^^^^^
+- bool hp_opt = false [defined in src/limbo/experimental/bayes_opt/imgpo.hpp] <map object at 0x7fbcaa0066d8>
+
+model_gp_parego
+^^^^^^^^^^^^^^^
+- double rho = 0.05 [defined in src/limbo/experimental/model/gp_parego.hpp] <map object at 0x7fbcaa006908>
+
+model_spgp
+^^^^^^^^^^
+- double jitter = 0.000001 [defined in src/limbo/experimental/model/spgp.hpp] <map object at 0x7fbcaa006b38>
+- double samples_percent = 10 [defined in src/limbo/experimental/model/spgp.hpp] <map object at 0x7fbcaa006d68>
+- int min_m = 1 [defined in src/limbo/experimental/model/spgp.hpp] <map object at 0x7fbcaa006f98>
+- double sig = 0.01 [defined in src/limbo/experimental/model/spgp.hpp] <map object at 0x7fbcaa008240>
+- double pred_kernel_sigma_sq = 0.5 [defined in src/limbo/experimental/model/spgp.hpp] <map object at 0x7fbcaa008470>
+- double pred_kernel_l = 0.5 [defined in src/limbo/experimental/model/spgp.hpp] <map object at 0x7fbcaa0086a0>
+
+acqui_ucb_imgpo
+^^^^^^^^^^^^^^^
+- double nu = 0.05 [defined in src/limbo/experimental/acqui/ucb_imgpo.hpp] <map object at 0x7fbcaa008908>
+
+acqui_eci
+^^^^^^^^^
+- double jitter = 0.0 [defined in src/limbo/experimental/acqui/eci.hpp] <map object at 0x7fbcaa008b70>
 

@@ -179,6 +179,8 @@
             
             
               
+                <a class="caption" href="http://sferes2.github.io/sferes2">Sferes2 (Evol. Comp. library)</a>
+              
                 <a class="caption" href="http://www.resibots.eu/libdynamixel/">Libdynamixel</a>
               
                 <a class="caption" href="http://github.com/resibots">github</a>
@@ -1140,6 +1142,30 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="function">
 <dt>
+<span class="target" id="limbogroup__opt__defaults_1ga4bd544b7fad446e9dbdfa9e3741f7301"></span><code class="descname">limbo::defaults::opt_adam::BO_PARAM(double, alpha, 0. 001)</code></dt>
+<dd><p>alpha - learning rate </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1gaf43ee625497aae8ed6ff88751a5f3971"></span><code class="descname">limbo::defaults::opt_adam::BO_PARAM(double, b1, 0. 9)</code></dt>
+<dd><p>β1 </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga86959f735b95190c21b416d10329bf48"></span><code class="descname">limbo::defaults::opt_adam::BO_PARAM(double, b2, 0. 999)</code></dt>
+<dd><p>β2 </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga8dc54c4ad95c210f7e2bd38a018a6f32"></span><code class="descname">limbo::defaults::opt_adam::BO_PARAM(double, eps_stop, 0. 0)</code></dt>
+<dd><p>norm epsilon for stopping </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
 <span class="target" id="limbogroup__opt__defaults_1gaba7127b5e591a72095bd6c3a4155828d"></span><code class="descname">limbo::defaults::opt_cmaes::BO_PARAM(int, restarts, 1)</code></dt>
 <dd><p>number of restarts of CMA-ES </p>
 </dd></dl>
@@ -1230,6 +1256,30 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 
 <dl class="function">
 <dt>
+<span class="target" id="limbogroup__opt__defaults_1ga8cdf6fb26682b68152c91e69745fbeae"></span><code class="descname">limbo::defaults::opt_gradient_ascent::BO_PARAM(double, alpha, 0. 001)</code></dt>
+<dd><p>alpha - learning rate </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1gaa722ecea4b2dff0ced7128eb97e41ad6"></span><code class="descname">limbo::defaults::opt_gradient_ascent::BO_PARAM(double, gamma, 0. 0)</code></dt>
+<dd><p>gamma - for momentum </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga4a365a240d50cb65329b76bddb0de019"></span><code class="descname">limbo::defaults::opt_gradient_ascent::BO_PARAM(bool, nesterov, false)</code></dt>
+<dd><p>nesterov momentum; turn on/off </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="limbogroup__opt__defaults_1ga4b1937162ade23edb7c89f824db5faf7"></span><code class="descname">limbo::defaults::opt_gradient_ascent::BO_PARAM(double, eps_stop, 0. 0)</code></dt>
+<dd><p>norm epsilon for stopping </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
 <span class="target" id="limbogroup__opt__defaults_1ga0ce56e9b25771d8a1b381b6ec132b8fe"></span><code class="descname">limbo::defaults::opt_gridsearch::BO_PARAM(int, bins, 5)</code></dt>
 <dd><p>number of bins for each dimension </p>
 </dd></dl>
@@ -1301,7 +1351,7 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <li>[optional] an optimizer for the hyper-parameters </li>
 </ul>
 </p>
-<p>Subclassed by limbo::model::SparsifiedGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;</p>
+<p>Subclassed by <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_sparsified_g_p"><span class="std std-ref">limbo::model::SparsifiedGP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
@@ -1451,22 +1501,34 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dl class="function">
 <dt id="_CPPv2NK5limbo5model2GP7samplesEv">
 <span id="limbo::model::GP::samplesC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1abaa15a2e503bac670dd1a35fb377aa23"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP7samplesEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>return the list of samples that have been tested so far </p>
+<dd><p>return the list of samples </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model2GP12observationsEv">
+<span id="limbo::model::GP::observationsC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a50435cf400e74f244cf0102210daf197"></span>std::vector&lt;Eigen::VectorXd&gt; <code class="descname">observations</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP12observationsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the list of observations </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model2GP19observations_matrixEv">
+<span id="limbo::model::GP::observations_matrixC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a838cb9b2a6ff16e05c5cdccc93f58ab6"></span><em class="property">const</em> Eigen::MatrixXd &amp;<code class="descname">observations_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP19observations_matrixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the observations (in matrix form) (NxD), where N is the number of points and D is the dimension output </p>
 </dd></dl>
 
 <dl class="function">
 <dt>
 <em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
-<dt id="_CPPv2N5limbo5model2GP4saveERKNSt6stringE">
-<span id="limbo::model::GP::save__ssCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a31f627d39b869fd2f9aad2feffa47142"></span>void <code class="descname">save</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>directory</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP4saveERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv2NK5limbo5model2GP4saveERKNSt6stringE">
+<span id="limbo::model::GP::save__ssCRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a5895131077cc6e8b5d80fa5879d979ce"></span>void <code class="descname">save</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>directory</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP4saveERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>save the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> to the archive (text or binary) </p>
 </dd></dl>
 
 <dl class="function">
 <dt>
 <em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
-<dt id="_CPPv2N5limbo5model2GP4saveERK1A">
-<span id="limbo::model::GP::save__ACR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1af67e1ec271464672e3bd8e164c069272"></span>void <code class="descname">save</code><span class="sig-paren">(</span><em class="property">const</em> A &amp;<em>archive</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP4saveERK1A" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv2NK5limbo5model2GP4saveERK1A">
+<span id="limbo::model::GP::save__ACRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1af1890e84ed3de5e4c258f2776ff26cd3"></span>void <code class="descname">save</code><span class="sig-paren">(</span><em class="property">const</em> A &amp;<em>archive</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model2GP4saveERK1A" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>save the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> to the archive (text or binary) </p>
 </dd></dl>
 
@@ -1484,6 +1546,204 @@ template&lt;&gt;<br /><span class="target" id="limboclasslimbo_1_1bayes__opt_1_1
 <dt id="_CPPv2N5limbo5model2GP4loadERK1Ab">
 <span id="limbo::model::GP::load__ACR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_g_p_1a1024c87e0369a6d7a198f12870ebac84"></span>void <code class="descname">load</code><span class="sig-paren">(</span><em class="property">const</em> A &amp;<em>archive</em>, bool <em>recompute</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model2GP4loadERK1Ab" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>load the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> from the archive (text or binary) if recompute is true, we do not read the kernel matrix but we recompute it given the data and the hyperparameters </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, template&lt; typename, typename, typename, typename &gt; class <em>GPClass</em>, <em class="property">typename</em> KernelFunction, <em class="property">typename</em> MeanFunction, <em class="property">class</em> HyperParamsOptimizer = <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_no_l_f_opt"><span class="std std-ref">limbo::model::gp::NoLFOpt</span></a>&lt;Params&gt;&gt;</dt>
+<dt id="_CPPv2N5limbo5model7MultiGPE">
+<span id="limbo::model::MultiGP"></span><em class="property">class </em><code class="descclassname">limbo::model::</code><code class="descname">MultiGP</code><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A wrapper for N-output Gaussian processes. It is parametrized by:<ul class="simple">
+<li><a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> class</li>
+<li>a kernel function (the same type for all GPs, but can have different parameters)</li>
+<li>a mean function (the same type and parameters for all GPs)</li>
+<li>[optional] an optimizer for the hyper-parameters </li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N5limbo5model7MultiGP7MultiGPEv">
+<span id="limbo::model::MultiGP::MultiGP"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a6fb4bb9446c6138b932b61e91a308355"></span><code class="descname">MultiGP</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP7MultiGPEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>useful because the model might be created before knowing anything about the process </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model7MultiGP7MultiGPEii">
+<span id="limbo::model::MultiGP::MultiGP__i.i"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1acca46b7aee81b2f18e9d0c01baa96563"></span><code class="descname">MultiGP</code><span class="sig-paren">(</span>int <em>dim_in</em>, int <em>dim_out</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP7MultiGPEii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>useful because the model might be created before having samples </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model7MultiGP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEEb">
+<span id="limbo::model::MultiGP::compute__std::vector:Eigen::VectorXd:CR.std::vector:Eigen::VectorXd:CR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1ab3e76809ac98a277bd6835591f60a665"></span>void <code class="descname">compute</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>samples</em>, <em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>observations</em>, bool <em>compute_kernel</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> from samples and observations. This call needs to be explicit! </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model7MultiGP20optimize_hyperparamsEv">
+<span id="limbo::model::MultiGP::optimize_hyperparams"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a6cc467e4c57235fec8d0bc03ec7a7bbc"></span>void <code class="descname">optimize_hyperparams</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP20optimize_hyperparamsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Do not forget to call this if you use hyper-parameters optimization!! </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model7MultiGP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE">
+<span id="limbo::model::MultiGP::add_sample__Eigen::VectorXdCR.Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a5676f3e76d83a7d611b837bbf8e55824"></span>void <code class="descname">add_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>sample</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>observation</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>add sample and update the GPs. This code uses an incremental implementation of the Cholesky decomposition. It is therefore much faster than a call to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_multi_g_p_1ab3e76809ac98a277bd6835591f60a665"><span class="std std-ref">compute()</span></a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP5queryERKN5Eigen8VectorXdE">
+<span id="limbo::model::MultiGP::query__Eigen::VectorXdCRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1ae253279eea3e7472b870d921b3247b27"></span>std::tuple&lt;Eigen::VectorXd, Eigen::VectorXd&gt; <code class="descname">query</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP5queryERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\mu</span></code>, :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code> (un-normalized; this will return a vector  one for each <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a>). Using this method instead of separate calls to <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_multi_g_p_1a6c4b014b5fae62ebb744ea6541741144"><span class="std std-ref">mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_multi_g_p_1ab05eed3439e07443c03b8ac1bf51883f"><span class="std std-ref">sigma()</span></a> is more efficient because some computations are shared between <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_multi_g_p_1a6c4b014b5fae62ebb744ea6541741144"><span class="std std-ref">mu()</span></a> and <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_multi_g_p_1ab05eed3439e07443c03b8ac1bf51883f"><span class="std std-ref">sigma()</span></a>. \endrst </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP2muERKN5Eigen8VectorXdE">
+<span id="limbo::model::MultiGP::mu__Eigen::VectorXdCRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a6c4b014b5fae62ebb744ea6541741144"></span>Eigen::VectorXd <code class="descname">mu</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP2muERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\mu</span></code> (un-normalized). If there is no sample, return the value according to the mean function. \endrst </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP5sigmaERKN5Eigen8VectorXdE">
+<span id="limbo::model::MultiGP::sigma__Eigen::VectorXdCRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1ab05eed3439e07443c03b8ac1bf51883f"></span>Eigen::VectorXd <code class="descname">sigma</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>v</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP5sigmaERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>\rst return :math:<code class="docutils literal"><span class="pre">\sigma^2</span></code> (un-normalized). This returns a vector; one value for each <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a>. \endrst </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP6dim_inEv">
+<span id="limbo::model::MultiGP::dim_inC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a0c53556e03ac88cfd54d6ebef5aed8fb"></span>int <code class="descname">dim_in</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP6dim_inEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the number of dimensions of the input </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP7dim_outEv">
+<span id="limbo::model::MultiGP::dim_outC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a630e41eb478d4f21198dfe1e8d79269d"></span>int <code class="descname">dim_out</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP7dim_outEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the number of dimensions of the output </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP10nb_samplesEv">
+<span id="limbo::model::MultiGP::nb_samplesC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a208a05c2093fd65eb9584e82ed5e729d"></span>int <code class="descname">nb_samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP10nb_samplesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the number of samples used to compute the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model7MultiGP9recomputeEbb">
+<span id="limbo::model::MultiGP::recompute__b.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a86cdd90050ed2ea9b6e7c73f22f19ec3"></span>void <code class="descname">recompute</code><span class="sig-paren">(</span>bool <em>update_obs_mean</em> = true, bool <em>update_full_kernel</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP9recomputeEbb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>recomputes the GPs </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP7samplesEv">
+<span id="limbo::model::MultiGP::samplesC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a537156fa457b00163050977f1499b7ca"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP7samplesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the list of samples </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP12observationsEv">
+<span id="limbo::model::MultiGP::observationsC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a0238c426685dbcdd8f11d7fb5086c9cd"></span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<code class="descname">observations</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP12observationsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the list of observations </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP19observations_matrixEv">
+<span id="limbo::model::MultiGP::observations_matrixC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a729c94eefb6c7ce70c61389ff89cc977"></span>Eigen::MatrixXd <code class="descname">observations_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP19observations_matrixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the observations (in matrix form) (NxD), where N is the number of points and D is the dimension output </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP16mean_observationEv">
+<span id="limbo::model::MultiGP::mean_observationC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a8a4541745f2bf728829e8087d06d70cf"></span>Eigen::VectorXd <code class="descname">mean_observation</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP16mean_observationEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the mean observation </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2NK5limbo5model7MultiGP9gp_modelsEv">
+<span id="limbo::model::MultiGP::gp_modelsC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a17cc24d624bcd581b57d19d7b8d735ca"></span>std::vector&lt;GP_t&gt; <code class="descname">gp_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP9gp_modelsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the list of GPs </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model7MultiGP9gp_modelsEv">
+<span id="limbo::model::MultiGP::gp_models"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a97896c68db6a512760c84347d99eb97e"></span>std::vector&lt;GP_t&gt; &amp;<code class="descname">gp_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP9gp_modelsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>return the list of GPs </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
+<dt id="_CPPv2NK5limbo5model7MultiGP4saveERKNSt6stringE">
+<span id="limbo::model::MultiGP::save__ssCRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1aba45be8c90f61746f76c1cc649e6f28c"></span>void <code class="descname">save</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>directory</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP4saveERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>save the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> to the archive (text or binary) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
+<dt id="_CPPv2NK5limbo5model7MultiGP4saveERK1A">
+<span id="limbo::model::MultiGP::save__ACRC"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a3fb32bef0e4f6f0cdf58a11167895550"></span>void <code class="descname">save</code><span class="sig-paren">(</span><em class="property">const</em> A &amp;<em>archive</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv2NK5limbo5model7MultiGP4saveERK1A" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>save the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> to the archive (text or binary) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
+<dt id="_CPPv2N5limbo5model7MultiGP4loadERKNSt6stringEb">
+<span id="limbo::model::MultiGP::load__ssCR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a1c8da32a037cf9f8d51bc2b3e287091e"></span>void <code class="descname">load</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>directory</em>, bool <em>recompute</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP4loadERKNSt6stringEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>load the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> from the archive (text or binary) if recompute is true, we do not read the kernel matrix but we recompute it given the data and the hyperparameters </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> A&gt;</dt>
+<dt id="_CPPv2N5limbo5model7MultiGP4loadERK1Ab">
+<span id="limbo::model::MultiGP::load__ACR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_multi_g_p_1a1cfc943e52bc5620be8576be008a90b1"></span>void <code class="descname">load</code><span class="sig-paren">(</span><em class="property">const</em> A &amp;<em>archive</em>, bool <em>recompute</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model7MultiGP4loadERK1Ab" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>load the parameters and the data for the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> from the archive (text or binary) if recompute is true, we do not read the kernel matrix but we recompute it given the data and the hyperparameters </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="limboclasslimbo_1_1model_1_1_sparsified_g_p"></span><em class="property">template </em>&lt;<em class="property">typename</em> Params, <em class="property">typename</em> KernelFunction = <a class="reference internal" href="#limbostructlimbo_1_1kernel_1_1_matern_five_halves"><span class="std std-ref">kernel::MaternFiveHalves</span></a>&lt;Params&gt;, <em class="property">typename</em> MeanFunction = <a class="reference internal" href="#limbostructlimbo_1_1mean_1_1_data"><span class="std std-ref">mean::Data</span></a>&lt;Params&gt;, <em class="property">typename</em> HyperParamsOptimizer = <a class="reference internal" href="#limbostructlimbo_1_1model_1_1gp_1_1_no_l_f_opt"><span class="std std-ref">gp::NoLFOpt</span></a>&lt;Params&gt;&gt;</dt>
+<dt id="_CPPv2N5limbo5model12SparsifiedGPE">
+<span id="limbo::model::SparsifiedGP"></span><em class="property">class </em><code class="descclassname">limbo::model::</code><code class="descname">SparsifiedGP</code><a class="headerlink" href="#_CPPv2N5limbo5model12SparsifiedGPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A sparse Gaussian process model. It is parametrized by:<ul class="simple">
+<li>a kernel function</li>
+<li>a mean function</li>
+<li>[optional] an optimizer for the hyper-parameters A sparsification based on the density of points is performed until a desired number of points is reached </li>
+</ul>
+</p>
+<p>Inherits from <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">limbo::model::GP&lt; Params, KernelFunction, MeanFunction, HyperParamsOptimizer &gt;</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N5limbo5model12SparsifiedGP12SparsifiedGPEv">
+<span id="limbo::model::SparsifiedGP::SparsifiedGP"></span><span class="target" id="limboclasslimbo_1_1model_1_1_sparsified_g_p_1aadae013b4678a4a53e7b24f3780e5672"></span><code class="descname">SparsifiedGP</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model12SparsifiedGP12SparsifiedGPEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>useful because the model might be created before knowing anything about the process </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model12SparsifiedGP12SparsifiedGPEii">
+<span id="limbo::model::SparsifiedGP::SparsifiedGP__i.i"></span><span class="target" id="limboclasslimbo_1_1model_1_1_sparsified_g_p_1a4a4aef9c07b79810cc0c18dc7f74942a"></span><code class="descname">SparsifiedGP</code><span class="sig-paren">(</span>int <em>dim_in</em>, int <em>dim_out</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model12SparsifiedGP12SparsifiedGPEii" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>useful because the model might be created before having samples </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model12SparsifiedGP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEEb">
+<span id="limbo::model::SparsifiedGP::compute__std::vector:Eigen::VectorXd:CR.std::vector:Eigen::VectorXd:CR.b"></span><span class="target" id="limboclasslimbo_1_1model_1_1_sparsified_g_p_1aaa76a48682d8561ec9fa9a542b6f5e7b"></span>void <code class="descname">compute</code><span class="sig-paren">(</span><em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>samples</em>, <em class="property">const</em> std::vector&lt;Eigen::VectorXd&gt; &amp;<em>observations</em>, bool <em>compute_kernel</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model12SparsifiedGP7computeERKNSt6vectorIN5Eigen8VectorXdEEERKNSt6vectorIN5Eigen8VectorXdEEEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Compute the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> from samples and observations. This call needs to be explicit! </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N5limbo5model12SparsifiedGP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE">
+<span id="limbo::model::SparsifiedGP::add_sample__Eigen::VectorXdCR.Eigen::VectorXdCR"></span><span class="target" id="limboclasslimbo_1_1model_1_1_sparsified_g_p_1aa223fd851595060be31fb54a93e6f268"></span>void <code class="descname">add_sample</code><span class="sig-paren">(</span><em class="property">const</em> Eigen::VectorXd &amp;<em>sample</em>, <em class="property">const</em> Eigen::VectorXd &amp;<em>observation</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5model12SparsifiedGP10add_sampleERKN5Eigen8VectorXdERKN5Eigen8VectorXdE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>add sample and update the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a>. If the number of samples is bigger than the desired maximum points, we re-sparsify and re-compute the <a class="reference internal" href="#limboclasslimbo_1_1model_1_1_g_p"><span class="std std-ref">GP</span></a> </p>
 </dd></dl>
 
 </div>
@@ -2224,9 +2484,17 @@ Computes the squared exponential covariance like this:</p>
 </dd></dl>
 
 <dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">typename</em> Rng&gt;</dt>
+<dt id="_CPPv2N5limbo5tools10random_vecEiR3Rng">
+<span id="limbo::tools::random_vec__i.RngR"></span><span class="target" id="limbogroup__tools_1gad4e65c66f5befbb05548b813b2f07cbf"></span>Eigen::VectorXd <code class="descname">random_vec</code><span class="sig-paren">(</span>int <em>size</em>, Rng &amp;<em>rng</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools10random_vecEiR3Rng" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>random vector by providing custom <a class="reference internal" href="#limboclasslimbo_1_1tools_1_1_random_generator"><span class="std std-ref">RandomGenerator</span></a> </p>
+</dd></dl>
+
+<dl class="function">
 <dt id="_CPPv2N5limbo5tools21random_vector_boundedEi">
 <span id="limbo::tools::random_vector_bounded__i"></span><span class="target" id="limbogroup__tools_1ga15dc04885b7309c7ca794db2429fb3f2"></span>Eigen::VectorXd <code class="descname">random_vector_bounded</code><span class="sig-paren">(</span>int <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools21random_vector_boundedEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>random vector in [0, 1.0]</p>
+<dd><p>random vector in [0, 1]</p>
 <p><ul class="simple">
 <li>this function is thread safe because we use a random generator for each thread</li>
 <li>we use a C++11 random number generator </li>
@@ -2237,7 +2505,7 @@ Computes the squared exponential covariance like this:</p>
 <dl class="function">
 <dt id="_CPPv2N5limbo5tools23random_vector_unboundedEi">
 <span id="limbo::tools::random_vector_unbounded__i"></span><span class="target" id="limbogroup__tools_1ga0f1d777d8e14733853ffc5df7068246f"></span>Eigen::VectorXd <code class="descname">random_vector_unbounded</code><span class="sig-paren">(</span>int <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N5limbo5tools23random_vector_unboundedEi" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>random vector generated with a normal distribution centered on 0, with standard deviation of 10.0</p>
+<dd><p>random vector generated with a normal distribution centered on 0, with standard deviation of 10</p>
 <p><ul class="simple">
 <li>this function is thread safe because we use a random generator for each thread</li>
 <li>we use a C++11 random number generator </li>

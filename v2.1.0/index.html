@@ -114,7 +114,6 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/index.html">Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bo_benchmarks.html">Bayesian optimization benchmarks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -173,11 +172,11 @@
             
   <div class="section" id="limbo-s-documentation">
 <span id="limbo-doc"></span><h1>Limbo’s documentation<a class="headerlink" href="#limbo-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Limbo (LIbrary for Model-Based Optimization) is an open-source C++11 library for Gaussian Processes and data-efficient optimization (e.g., Bayesian optimization, see <a class="reference internal" href="#b-brochu2010tutorial" id="id1">[2]</a><a class="reference internal" href="#b-mockus2013" id="id2">[9]</a>) that is designed to be both highly flexible and very fast. It can be used as a state-of-the-art optimization library or to experiment with novel algorithms with “plugin” components. Limbo is currently mostly used for data-efficient policy search in robot learning <a class="reference internal" href="#b-lizotte2007automatic" id="id3">[2]</a> and online adaptation because computation time matters when using the low-power embedded computers of robots. For example, Limbo was the key library to develop a new algorithm that allows a legged robot to learn a new gait after a mechanical damage in about 10-15 trials (2 minutes) <a class="reference internal" href="#b-cully-robots-2015" id="id4">[1]</a>, and a 4-DOF manipulator to learn neural networks policies for goal reaching in about 5 trials <a class="reference internal" href="#b-chatzilygeroudis2017" id="id5">[4]</a>.</p>
+<p>Limbo (LIbrary for Model-Based Optimization) is an open-source C++11 library for Gaussian Processes and data-efficient optimization (e.g., Bayesian optimization, see <a class="reference internal" href="#b-brochu2010tutorial" id="id1">[2]</a><a class="reference internal" href="#b-mockus2013" id="id2">[9]</a>) that is designed to be both highly flexible and very fast. It can be used as a state-of-the-art optimization library or to experiment with novel algorithms with “plugin” components. Limbo is currently mostly used for data-efficient policy search in robot learning <a class="reference internal" href="#b-lizotte2007automatic" id="id3">[7]</a> and online adaptation because computation time matters when using the low-power embedded computers of robots. For example, Limbo was the key library to develop a new algorithm that allows a legged robot to learn a new gait after a mechanical damage in about 10-15 trials (2 minutes) <a class="reference internal" href="#b-cully-robots-2015" id="id4">[6]</a>, and a 4-DOF manipulator to learn neural networks policies for goal reaching in about 5 trials <a class="reference internal" href="#b-chatzilygeroudis2017" id="id5">[4]</a>.</p>
 <p>The implementation of Limbo follows a policy-based design <a class="reference internal" href="#b-alexandrescu2001modern" id="id6">[1]</a> that leverages C++ templates: this allows it to be highly flexible without the cost induced by classic object-oriented designs (cost of virtual functions). <a class="reference external" href="http://www.resibots.eu/limbo/reg_benchmarks.html">The regression benchmarks</a> show that the query time of Limbo’s Gaussian processes is several orders of magnitude better than the one of GPy (a state-of-the-art <a class="reference external" href="https://sheffieldml.github.io/GPy/">Python library for Gaussian processes</a>) for a similar accuracy (the learning time highly depends on the optimization algorithm chosen to optimize the hyper-parameters). The <a class="reference external" href="http://www.resibots.eu/limbo/bo_benchmarks.html">black-box optimization benchmarks</a> demonstrate that Limbo is about 2 times faster than BayesOpt (a C++ library for data-efficient optimization, <a class="reference internal" href="#b-martinezcantin14a" id="id7">[8]</a>) for a similar accuracy and data-efficiency. In practice, changing one of the components of the algorithms in Limbo (e.g., changing the acquisition function) usually requires changing only a template definition in the source code. This design allows users to rapidly experiment and test new ideas while keeping the software as fast as specialized code.</p>
 <p>Limbo takes advantage of multi-core architectures to parallelize the internal optimization processes (optimization of the acquisition function, optimization of the hyper-parameters of a Gaussian process) and it vectorizes many of the linear algebra operations (via the <a class="reference external" href="http://eigen.tuxfamily.org/">Eigen 3 library</a> and optional bindings to Intel’s MKL).</p>
 <p>The library is distributed under the <a class="reference external" href="http://www.cecill.info/index.en.html">CeCILL-C license</a> via a <a class="reference external" href="http://github.com/resibots/limbo">Github repository</a>. The code is standard-compliant but it is currently mostly developed for GNU/Linux and Mac OS X with both the GCC and Clang compilers. New contributors can rely on a full API reference, while their developments are checked via a continuous integration platform (automatic unit-testing routines).</p>
-<p>Limbo is currently used in the <a class="reference external" href="http://www.resibots.eu">ERC project ResiBots</a>, which is focused on data-efficient trial-and-error learning for robot damage recovery, and in the <a class="reference external" href="http://www.pal4u.eu/">H2020 projet PAL</a>, which uses social robots to help coping with diabetes. It has been instrumental in many scientific publications since 2015 <a class="reference internal" href="#b-cully-robots-2015" id="id8">[1]</a><a class="reference internal" href="#b-chatzilygeroudis2018resetfree" id="id9">[5]</a><a class="reference internal" href="#b-tarapore2016" id="id10">[11]</a><a class="reference internal" href="#b-chatzilygeroudis2017" id="id11">[4]</a><a class="reference internal" href="#b-pautrat2018bayesian" id="id12">[10]</a><a class="reference internal" href="#b-chatzilygeroudis2018using" id="id13">[3]</a>.</p>
+<p>Limbo is currently used in the <a class="reference external" href="http://www.resibots.eu">ERC project ResiBots</a>, which is focused on data-efficient trial-and-error learning for robot damage recovery, and in the <a class="reference external" href="http://www.pal4u.eu/">H2020 projet PAL</a>, which uses social robots to help coping with diabetes. It has been instrumental in many scientific publications since 2015 <a class="reference internal" href="#b-cully-robots-2015" id="id8">[6]</a><a class="reference internal" href="#b-chatzilygeroudis2018resetfree" id="id9">[5]</a><a class="reference internal" href="#b-tarapore2016" id="id10">[11]</a><a class="reference internal" href="#b-chatzilygeroudis2017" id="id11">[4]</a><a class="reference internal" href="#b-pautrat2018bayesian" id="id12">[10]</a><a class="reference internal" href="#b-chatzilygeroudis2018using" id="id13">[3]</a>.</p>
 <p>Limbo shares many ideas with <a class="reference external" href="http://github.com/sferes2">Sferes2</a>, a similar framework for evolutionary computation.</p>
 <div class="section" id="contents">
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
@@ -220,42 +219,6 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#statistics-stats">Statistics (stats)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#parallel-tools-par">Parallel tools (par)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#misc-tools-tools">Misc tools (tools)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="defaults.html">Default values</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel">kernel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-maternthreehalves">kernel_maternthreehalves</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-eci">acqui_eci</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-gridsampling">init_gridsampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ucb-imgpo">acqui_ucb_imgpo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-sparse-gp">model_sparse_gp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-lhs">init_lhs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-gridsearch">opt_gridsearch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-randomsamplinggrid">init_randomsamplinggrid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#mean-constant">mean_constant</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-spgp">model_spgp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#stop-maxpredictedvalue">stop_maxpredictedvalue</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#stop-maxiterations">stop_maxiterations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-rprop">opt_rprop</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-boptimizer">bayes_opt_boptimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-maternfivehalves">kernel_maternfivehalves</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-nloptnograd">opt_nloptnograd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-imgpo">bayes_opt_imgpo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-parallelrepeater">opt_parallelrepeater</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-cmaes">opt_cmaes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-nloptgrad">opt_nloptgrad</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ei">acqui_ei</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-squared-exp-ard">kernel_squared_exp_ard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-cboptimizer">bayes_opt_cboptimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-ucb">acqui_ucb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-bobase">bayes_opt_bobase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-gradient-ascent">opt_gradient_ascent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#kernel-exp">kernel_exp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#bayes-opt-ehvi">bayes_opt_ehvi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#model-gp-parego">model_gp_parego</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#acqui-gpucb">acqui_gpucb</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#opt-adam">opt_adam</a></li>
-<li class="toctree-l2"><a class="reference internal" href="defaults.html#init-randomsampling">init_randomsampling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reg_benchmarks.html">Gaussian process regression benchmarks</a><ul>
@@ -330,13 +293,13 @@
 <table class="docutils citation" frame="void" id="b-cully-robots-2015" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> Antoine Cully, Jeff Clune, Danesh Tarapore, and Jean-Baptiste Mouret. Robots that can adapt like animals. <em>Nature</em>, 521(7553):503–507, May 2015. URL: <a class="reference external" href="http://www.nature.com/doifinder/10.1038/nature14422">http://www.nature.com/doifinder/10.1038/nature14422</a>, <a class="reference external" href="https://doi.org/10.1038/nature14422">doi:10.1038/nature14422</a>.</td></tr>
+<tr><td class="label">[6]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> Antoine Cully, Jeff Clune, Danesh Tarapore, and Jean-Baptiste Mouret. Robots that can adapt like animals. <em>Nature</em>, 521(7553):503–507, May 2015. URL: <a class="reference external" href="http://www.nature.com/doifinder/10.1038/nature14422">http://www.nature.com/doifinder/10.1038/nature14422</a>, <a class="reference external" href="https://doi.org/10.1038/nature14422">doi:10.1038/nature14422</a>.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="b-lizotte2007automatic" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Daniel&nbsp;J Lizotte, Tao Wang, Michael&nbsp;H Bowling, and Dale Schuurmans. Automatic gait optimization with gaussian process regression. In <em>Proceedings of the the International Joint Conference on Artificial Intelligence (IJCAI)</em>, volume&nbsp;7, 944–949. 2007.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[7]</a></td><td>Daniel&nbsp;J Lizotte, Tao Wang, Michael&nbsp;H Bowling, and Dale Schuurmans. Automatic gait optimization with gaussian process regression. In <em>Proceedings of the the International Joint Conference on Artificial Intelligence (IJCAI)</em>, volume&nbsp;7, 944–949. 2007.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="b-martinezcantin14a" rules="none">
