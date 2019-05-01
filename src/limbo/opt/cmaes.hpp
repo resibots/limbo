@@ -226,7 +226,8 @@ namespace limbo {
                 GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
                 // initial step-size, i.e. estimated initial parameter error.
                 double sigma = 0.5 * std::abs(Params::opt_cmaes::ubound() - Params::opt_cmaes::lbound());
-                std::vector<double> x0(init.data(), init.data() + init.size());
+                Eigen::VectorXd init_geno = gp.geno(init);
+                std::vector<double> x0(init_geno.data(), init_geno.data() + init_geno.size());
                 // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
                 CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, Params::opt_cmaes::lambda(), 0, gp);
                 _set_common_params(cmaparams, dim);
