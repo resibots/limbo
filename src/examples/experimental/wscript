@@ -48,41 +48,41 @@
 
 
 def build(bld):
-    obj = bld.program(features='cxx',
-                      source='imgpo.cpp',
-                      includes='. .. ../../',
-                      target='imgpo',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                      use='limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'imgpo.cpp',
+                      includes = '. .. ../../',
+                      target = 'imgpo',
+                      uselib = bld.env.LIBRARIES,
+                      use = 'limbo')
     obj = bld.program(features = 'cxx',
                       source = 'parego.cpp',
                       includes = '.. ../.. ../../../',
                       target = 'parego',
-                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      uselib = bld.env.LIBRARIES + ' SFERES',
                       use = 'limbo')
     obj = bld.program(features = 'cxx',
                       source = 'multi.cpp',
                       includes = '.. ../.. ../../../',
                       target = 'multi_ehvi',
-                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      uselib = bld.env.LIBRARIES + ' SFERES',
                       use = 'limbo')
     obj = bld.program(features = 'cxx',
                       source = 'multi.cpp',
                       includes = '.. ../.. ../../../',
                       target = 'multi_parego',
-                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      uselib = bld.env.LIBRARIES + ' SFERES',
                       defines = 'PAREGO',
                       use = 'limbo')
     obj = bld.program(features = 'cxx',
                       source = 'multi.cpp',
                       includes = '.. ../.. ../../../',
                       target = 'multi_nsbo',
-                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      uselib = bld.env.LIBRARIES + ' SFERES',
                       defines = 'NSBO',
                       use = 'limbo')
     obj = bld.program(features = 'cxx',
                       source = 'cbo.cpp',
                       includes = '.. ../.. ../../../',
                       target = 'cbo',
-                      uselib = 'BOOST EIGEN TBB SFERES LIBCMAES NLOPT',
+                      uselib = bld.env.LIBRARIES + ' SFERES',
                       use = 'limbo')

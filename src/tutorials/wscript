@@ -47,34 +47,34 @@
 #|
 
 def build(bld):
-    obj = bld.program(features='cxx',
-                      source='basic_example.cpp',
-                      includes='. .. ../../',
-                      target='basic_example',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                      use='limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'basic_example.cpp',
+                      includes = '. .. ../../',
+                      target = 'basic_example',
+                      uselib = bld.env.LIBRARIES,
+                      use = 'limbo')
     if bld.env.DEFINES_LIBCMAES == ['USE_LIBCMAES']:
-        obj = bld.program(features='cxx',
-                          source='advanced_example.cpp',
-                          includes='. .. ../../',
-                          target='advanced_example',
-                          uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                          use='limbo')
-    obj = bld.program(features='cxx',
-                      source='statistics.cpp',
-                      includes='. .. ../../',
-                      target='statistics',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                      use='limbo')
-    obj = bld.program(features='cxx',
-                      source='gp.cpp',
-                      includes='. .. ../../',
-                      target='gp',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                      use='limbo')
-    obj = bld.program(features='cxx',
-                      source='opt.cpp',
-                      includes='. .. ../../',
-                      target='opt',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                      use='limbo')
+        obj = bld.program(features = 'cxx',
+                          source = 'advanced_example.cpp',
+                          includes = '. .. ../../',
+                          target = 'advanced_example',
+                          uselib = bld.env.LIBRARIES,
+                          use = 'limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'statistics.cpp',
+                      includes = '. .. ../../',
+                      target = 'statistics',
+                      uselib = bld.env.LIBRARIES,
+                      use = 'limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'gp.cpp',
+                      includes = '. .. ../../',
+                      target = 'gp',
+                      uselib = bld.env.LIBRARIES,
+                      use = 'limbo')
+    obj = bld.program(features = 'cxx',
+                      source = 'opt.cpp',
+                      includes = '. .. ../../',
+                      target = 'opt',
+                      uselib = bld.env.LIBRARIES,
+                      use = 'limbo')
