@@ -61,6 +61,7 @@ namespace limbo {
         /// @ingroup model
         /// Gaussian process with product of experts.
         /// - Deisenroth, M.P. and Ng, J.W., 2015. Distributed gaussian processes. arXiv preprint arXiv:1502.02843.
+        ///   This implementation is the naive PoEGP: working to incorporate rBCM
         template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
         class POEGP {
         public:
@@ -79,6 +80,10 @@ namespace limbo {
             /// Compute the GP from samples and observations. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, bool compute_kernel = true)
             {
+                assert(samples.size() != 0);
+                assert(observations.size() != 0);
+                assert(samples.size() == observations.size());
+
                 // TO-DO: Make this selection a template
                 int n = Params::model_poegp::expert_size();
                 int N = samples.size();
@@ -97,12 +102,22 @@ namespace limbo {
                     mean_func = _gps[0].mean_function();
                 }
 
+                // save samples and observations
+                _samples = samples;
+                _observations = observations;
+
                 _gps.resize(leaves);
                 _gps[0].kernel_function() = kernel_func;
                 _gps[0].mean_function() = mean_func;
-                _update_kernel_and_mean_functions();
 
-                std::cout << "TEST#3" << std::endl;
+                // compute mean observation
+                _mean_observation = Eigen::VectorXd::Zero(_observations[0].size());
+                for (size_t j = 0; j < _observations.size(); j++)
+                    _mean_observation.array() += _observations[j].array();
+                _mean_observation.array() /= static_cast<double>(_observations.size());
+
+                // Update kernel and mean functions
+                _update_kernel_and_mean_functions();
 
                 limbo::tools::par::loop(0, leaves, [&](size_t i) {
                     std::vector<Eigen::VectorXd> s, o;
@@ -115,9 +130,6 @@ namespace limbo {
 
                     _gps[i].compute(s, o, compute_kernel);
                 });
-
-                _samples = samples;
-                _observations = observations;
             }
 
             /// Do not forget to call this if you use hyper-prameters optimization!!
@@ -252,6 +264,14 @@ namespace limbo {
                 limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
                     _gps[i].recompute(update_obs_mean, update_full_kernel);
                 });
+            }
+
+            /// return the mean observation
+            Eigen::VectorXd mean_observation() const
+            {
+                assert(_gps.size());
+                return _observations.size() > 0 ? _mean_observation
+                                                : Eigen::VectorXd::Zero(dim_out());
             }
 
             /// return the list of GPs
@@ -389,11 +409,10 @@ namespace limbo {
                 _gps.resize(static_cast<size_t>(s[0]));
 
                 // recompute mean observation
-                // _mean_observation = Eigen::VectorXd::Zero(_dim_out);
-                // for (size_t j = 0; j < _observations.size(); j++)
-                //     _mean_observation.array() += _observations[j].array();
-                // _mean_observation.array() /= static_cast<double>(_observations.size());
-                // TO-DO: Maybe compute mean_observation as well
+                _mean_observation = Eigen::VectorXd::Zero(_observations[0].size());
+                for (size_t j = 0; j < _observations.size(); j++)
+                    _mean_observation.array() += _observations[j].array();
+                _mean_observation.array() /= static_cast<double>(_observations.size());
 
                 for (size_t i = 0; i < _gps.size(); i++) {
                     // do not recompute the individual GPs on their own
@@ -410,6 +429,7 @@ namespace limbo {
             std::vector<GP_t> _gps;
             HyperParamsOptimizer _hp_optimize;
             std::vector<Eigen::VectorXd> _samples, _observations;
+            Eigen::VectorXd _mean_observation;
             double _log_lik = 0.;
 
             void _update_kernel_and_mean_functions()

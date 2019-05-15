@@ -54,7 +54,6 @@
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/kernel_lf_opt.hpp>
 #include <limbo/model/poegp.hpp>
-#include <limbo/model/poegp/poegp_lf_opt.hpp>
 
 // Check gradient via finite differences method
 template <typename F>
@@ -139,7 +138,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
 
     gp.compute(samples, observations);
 
-    model::poegp::POEKernelLFOpt<Params>::POEKernelLFOptimization<GP_t> kernel_optimization(gp);
+    model::gp::KernelLFOpt<Params>::KernelLFOptimization<GP_t> kernel_optimization(gp);
 
     Eigen::VectorXd results(M);
 
@@ -191,7 +190,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
 
     gp.compute(samples, observations);
 
-    model::poegp::POEKernelLFOpt<Params>::POEKernelLFOptimization<GP_t> kernel_optimization(gp);
+    model::gp::KernelLFOpt<Params>::KernelLFOptimization<GP_t> kernel_optimization(gp);
 
     Eigen::VectorXd results(M);
 
@@ -224,7 +223,7 @@ BOOST_AUTO_TEST_CASE(test_timing)
     using KF_t = kernel::SquaredExpARD<POEGPParams>;
     using MF_t = mean::Constant<POEGPParams>;
     using GP_t = model::GP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
-    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::poegp::POEKernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
+    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
 
     for (size_t i = 0; i < N; i++) {
         std::vector<Eigen::VectorXd> observations;
@@ -274,7 +273,7 @@ BOOST_AUTO_TEST_CASE(test_accuracy)
     using KF_t = kernel::SquaredExpARD<POEGPParams>;
     using MF_t = mean::Constant<POEGPParams>;
     using GP_t = model::GP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
-    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::poegp::POEKernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
+    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
 
     for (size_t i = 0; i < N; i++) {
 

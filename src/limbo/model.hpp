@@ -51,6 +51,7 @@
 
 #include <limbo/model/gp.hpp>
 #include <limbo/model/multi_gp.hpp>
+#include <limbo/model/poegp.hpp>
 #include <limbo/model/sparsified_gp.hpp>
 
 #include <limbo/model/gp/kernel_lf_opt.hpp>
