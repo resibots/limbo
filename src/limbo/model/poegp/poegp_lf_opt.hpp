@@ -63,8 +63,8 @@ namespace limbo {
                     this->_called = true;
                     POEKernelLFOptimization<GP> optimization(gp);
                     Optimizer optimizer;
-                    Eigen::VectorXd params = optimizer(optimization, gp.h_params(), false);
-                    gp.set_h_params(params);
+                    Eigen::VectorXd params = optimizer(optimization, gp.kernel_function().h_params(), false);
+                    gp.kernel_function().set_h_params(params);
                     gp.recompute(false);
                 }
 
@@ -77,26 +77,15 @@ namespace limbo {
                     opt::eval_t operator()(const Eigen::VectorXd& params, bool compute_grad) const
                     {
                         GP gp_all(this->_original_gp);
-                        gp_all.set_h_params(params);
+                        gp_all.kernel_function().set_h_params(params);
                         gp_all.recompute(false);
 
-                        double lik_all = 0.0;
-                        Eigen::VectorXd grad_all = Eigen::VectorXd::Zero(params.size());
-
-                        auto gps = gp_all.get_gps();
-
-                        for (auto gp : gps) {
-                            lik_all += gp.compute_log_lik();
-
-                            if (!compute_grad)
-                                continue;
-
-                            Eigen::VectorXd grad = gp.compute_kernel_grad_log_lik();
-                            grad_all.array() += grad.array();
-                        }
+                        double lik_all = gp_all.compute_log_lik();
 
                         if (!compute_grad)
                             return opt::no_grad(lik_all);
+
+                        Eigen::VectorXd grad_all = gp_all.compute_kernel_grad_log_lik();
 
                         return {lik_all, grad_all};
                     }

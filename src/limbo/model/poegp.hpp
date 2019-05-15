@@ -53,69 +53,43 @@ namespace limbo {
 
     namespace defaults {
         struct model_poegp {
-            BO_PARAM(int, leaf_size, 100);
-            BO_PARAM(double, tau, 0.05);
+            BO_PARAM(int, expert_size, 100);
         };
     } // namespace defaults
 
     namespace model {
         /// @ingroup model
         /// Gaussian process with product of experts.
-        /// A combination of:
         /// - Deisenroth, M.P. and Ng, J.W., 2015. Distributed gaussian processes. arXiv preprint arXiv:1502.02843.
-        /// - McFee, B. and Lanckriet, G.R., 2011. Large-scale music similarity search with spatial trees. In ISMIR (pp. 55-60).
-        /// for improving the learning and querying performance of GPs
-        /// Parameters:
-        /// - leaf_size: Max number of samples per leaf of the Spatial Tree
-        /// - tau: Percentage of overlap between neighboring (in space) leafs
-
         template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
         class POEGP {
         public:
             using GP_t = limbo::model::GP<Params, KernelFunction, MeanFunction, limbo::model::gp::NoLFOpt<Params>>;
 
+            /// useful because the model might be created before knowing anything about the process
             POEGP() {}
 
+            /// useful because the model might be created before having samples
             POEGP(int dim_in, int dim_out)
             {
                 _gps.resize(1);
                 _gps[0] = GP_t(dim_in, dim_out);
             }
 
+            /// Compute the GP from samples and observations. This call needs to be explicit!
             void compute(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, bool compute_kernel = true)
             {
-                int n = Params::model_poegp::leaf_size();
+                // TO-DO: Make this selection a template
+                int n = Params::model_poegp::expert_size();
                 int N = samples.size();
-                // int leaves = N / n;
-                int d = std::ceil(std::log(N / double(n)) / std::log(2.0));
+                int leaves = std::ceil(N / n);
 
-                // std::vector<int> ids(samples.size());
-                // for (int i = 0; i < ids.size(); i++)
-                //     ids[i] = i;
-                // std::random_shuffle(ids.begin(), ids.end());
-                //
-                // _gps.resize(leaves);
-                //
-                // limbo::tools::par::loop(0, leaves, [&](size_t i) {
-                //     std::vector<Eigen::VectorXd> s, o;
-                //     for (int j = 0; j < n; j++) {
-                //         s.push_back(samples[ids[i * n + j]]);
-                //         o.push_back(observations[ids[i * n + j]]);
-                //     }
-                //
-                //     _gps[i].compute(s, o, false);
-                //     // _gps[i].optimize_hyperparams();
-                // });
-                _samples = samples;
+                std::vector<int> ids(samples.size());
+                for (size_t i = 0; i < ids.size(); i++)
+                    ids[i] = i;
+                std::random_shuffle(ids.begin(), ids.end());
 
-                auto root = spt::make_spt(samples, observations, d, Params::model_poegp::tau());
-
-                auto leaves = spt::get_leaves(root);
-
-                _root = root;
-                _leaves = leaves;
-
-                KernelFunction kernel_func(_samples[0].size());
+                KernelFunction kernel_func(samples[0].size());
                 MeanFunction mean_func(observations[0].size());
 
                 if (_gps.size() > 0) {
@@ -123,33 +97,120 @@ namespace limbo {
                     mean_func = _gps[0].mean_function();
                 }
 
-                _gps.resize(leaves.size());
+                _gps.resize(leaves);
                 _gps[0].kernel_function() = kernel_func;
                 _gps[0].mean_function() = mean_func;
                 _update_kernel_and_mean_functions();
 
-                limbo::tools::par::loop(0, leaves.size(), [&](size_t i) {
-                    _gps[i].compute(leaves[i]->points(), leaves[i]->observations(), compute_kernel);
+                std::cout << "TEST#3" << std::endl;
+
+                limbo::tools::par::loop(0, leaves, [&](size_t i) {
+                    std::vector<Eigen::VectorXd> s, o;
+                    for (int j = 0; j < n; j++) {
+                        if ((i * n + j) >= ids.size()) // TO-DO: Check how to handle these cases
+                            break;
+                        s.push_back(samples[ids[i * n + j]]);
+                        o.push_back(observations[ids[i * n + j]]);
+                    }
+
+                    _gps[i].compute(s, o, compute_kernel);
                 });
 
-                if (!_h_params.size())
-                    _h_params = _gps[0].kernel_function().h_params();
+                _samples = samples;
+                _observations = observations;
             }
 
-            void set_h_params(const Eigen::VectorXd& params)
+            /// Do not forget to call this if you use hyper-prameters optimization!!
+            void optimize_hyperparams()
+            {
+                _hp_optimize(*this);
+            }
+
+            // TO-DO: Add add_sample function
+
+            /// Queries the POEGP and gets the mean and variance
+            std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
+            {
+                std::vector<double> mus(_gps.size());
+                std::vector<double> sigmas(_gps.size());
+                limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
+                    Eigen::VectorXd tmu;
+                    double ts;
+                    std::tie(tmu, ts) = _gps[i].query(v);
+
+                    mus[i] = tmu(0);
+                    sigmas[i] = 1.0 / (ts + 1e-12);
+                });
+
+                double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
+                double multi_mu = 0.0;
+                for (size_t i = 0; i < _gps.size(); i++) {
+                    multi_mu += mus[i] * sigmas[i];
+                }
+
+                Eigen::VectorXd mu(1);
+                mu << (multi_mu / multi_sg);
+
+                return std::make_tuple(mu, 1.0 / multi_sg);
+            }
+
+            /// Queries the POEGP and gets the mean
+            Eigen::VectorXd mu(const Eigen::VectorXd& v) const
+            {
+                std::vector<double> mus(_gps.size());
+                std::vector<double> sigmas(_gps.size());
+                limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
+                    Eigen::VectorXd tmu;
+                    double ts;
+                    std::tie(tmu, ts) = _gps[i].query(v);
+
+                    mus[i] = tmu(0);
+                    sigmas[i] = 1.0 / (ts + 1e-12);
+                });
+
+                double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
+                double multi_mu = 0.0;
+                for (size_t i = 0; i < _gps.size(); i++) {
+                    multi_mu += mus[i] * sigmas[i];
+                }
+
+                Eigen::VectorXd mu(1);
+                mu << (multi_mu / multi_sg);
+
+                return mu;
+            }
+
+            /// Queries the POEGP and gets the variance
+            double sigma(const Eigen::VectorXd& v) const
+            {
+                std::vector<double> mus(_gps.size());
+                std::vector<double> sigmas(_gps.size());
+                limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
+                    Eigen::VectorXd tmu;
+                    double ts;
+                    std::tie(tmu, ts) = _gps[i].query(v);
+
+                    mus[i] = tmu(0);
+                    sigmas[i] = 1.0 / (ts + 1e-12);
+                });
+
+                double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
+
+                return 1.0 / multi_sg;
+            }
+
+            /// return the number of dimensions of the input
+            int dim_in() const
             {
                 assert(_gps.size());
-                // limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
-                //     _gps[i].kernel_function().set_h_params(params);
-                // });
-                _gps[0].kernel_function().set_h_params(params);
-
-                _h_params = params;
+                return _gps[0].dim_in();
             }
 
-            Eigen::VectorXd h_params() const
+            /// return the number of dimensions of the output
+            int dim_out() const
             {
-                return _h_params;
+                assert(_gps.size());
+                return _gps[0].dim_out();
             }
 
             const KernelFunction& kernel_function() const
@@ -176,9 +237,16 @@ namespace limbo {
                 return _gps[0].mean_function();
             }
 
+            // TO-DO: Add helper functions: max_observation, mean_observation, mean_vector, obs_mean
+
+            /// return the number of samples used to compute the GP
+            int nb_samples() const { return _samples.size(); }
+
             ///  recomputes the GP
             void recompute(bool update_obs_mean = true, bool update_full_kernel = true)
             {
+                assert(!_samples.empty() && _gps.size());
+
                 _update_kernel_and_mean_functions();
 
                 limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
@@ -186,126 +254,163 @@ namespace limbo {
                 });
             }
 
-            std::vector<GP_t> get_gps()
+            /// return the list of GPs
+            std::vector<GP_t> gp_models() const
             {
                 return _gps;
             }
 
-            /// Do not forget to call this if you use hyper-prameters optimization!!
-            void optimize_hyperparams()
+            /// return the list of GPs
+            std::vector<GP_t>& gp_models()
             {
-                _hp_optimize(*this);
+                return _gps;
             }
 
-            std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
+            /// compute and return the log likelihood
+            double compute_log_lik()
             {
-                // std::vector<int> ids = _find_gps(_root, v);
-                // assert(ids.size());
-                //
-                // if (ids.size() == 1)
-                //     return _gps[ids[0]].query(v);
+                assert(_gps.size());
 
-                std::vector<double> mus(_gps.size());
-                std::vector<double> sigmas(_gps.size());
-                limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
-                    Eigen::VectorXd tmu;
-                    double ts;
-                    std::tie(tmu, ts) = _gps[i].query(v); //_gps[ids[i]].query(v);
-
-                    mus[i] = tmu(0);
-                    sigmas[i] = 1.0 / (ts + 1e-12);
-                });
-
-                // double multi_mu = std::accumulate(mus.begin(), mus.end(), 1, std::multiplies<double>());
-                double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
-                double multi_mu = 0.0;
-                for (size_t i = 0; i < _gps.size(); i++) {
-                    multi_mu += mus[i] * sigmas[i];
-                }
-
-                Eigen::VectorXd mu(1);
-                mu << (multi_mu / multi_sg);
-
-                return std::make_tuple(mu, 1.0 / multi_sg);
-            }
-
-            Eigen::VectorXd mu(const Eigen::VectorXd& v) const
-            {
-                // std::vector<int> ids = _find_gps(_root, v);
-                // assert(ids.size());
-                //
-                // if (ids.size() == 1)
-                //     return _gps[ids[0]].mu(v);
-
-                std::vector<double> mus(_gps.size());
-                std::vector<double> sigmas(_gps.size());
-                limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
-                    Eigen::VectorXd tmu;
-                    double ts;
-                    std::tie(tmu, ts) = _gps[i].query(v); //_gps[ids[i]].query(v);
-
-                    mus[i] = tmu(0);
-                    sigmas[i] = 1.0 / (ts + 1e-12);
-                });
-
-                double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
-                double multi_mu = 0.0;
-                for (size_t i = 0; i < _gps.size(); i++) {
-                    multi_mu += mus[i] * sigmas[i];
-                }
-
-                Eigen::VectorXd mu(1);
-                mu << (multi_mu / multi_sg);
-
-                return mu;
-            }
-
-            double sigma(const Eigen::VectorXd& v) const
-            {
-                // std::vector<int> ids = _find_gps(_root, v);
-                // assert(ids.size());
-                //
-                // if (ids.size() == 1)
-                //     return _gps[ids[0]].sigma(v);
-
-                std::vector<double> mus(_gps.size());
-                std::vector<double> sigmas(_gps.size());
-                // for (int i = 0; i < _gps.size(); i++)
-                limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
-                    Eigen::VectorXd tmu;
-                    double ts;
-                    std::tie(tmu, ts) = _gps[i].query(v); //_gps[ids[i]].query(v);
-
-                    mus[i] = tmu(0);
-                    sigmas[i] = 1.0 / (ts + 1e-12);
-                });
-
-                double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
-
-                return 1.0 / multi_sg;
-            }
-
-            double compute_log_lik() const
-            {
-                double lik_all = 0.0;
+                _log_lik = 0.0;
                 for (auto gp : _gps) {
-                    lik_all += gp.compute_log_lik();
+                    _log_lik += gp.compute_log_lik();
                 }
 
-                return lik_all;
+                return _log_lik;
             }
 
-            /// return the list of samples that have been tested so far
+            /// compute and return the gradient of the log likelihood wrt to the kernel parameters
+            Eigen::VectorXd compute_kernel_grad_log_lik()
+            {
+                assert(_gps.size());
+
+                Eigen::VectorXd grad = _gps[0].compute_kernel_grad_log_lik();
+                for (size_t i = 1; i < _gps.size(); i++) {
+                    grad.array() += _gps[i].compute_kernel_grad_log_lik().array();
+                }
+
+                return grad;
+            }
+
+            /// compute and return the gradient of the log likelihood wrt to the mean parameters
+            Eigen::VectorXd compute_mean_grad_log_lik()
+            {
+                assert(_gps.size());
+
+                Eigen::VectorXd grad = _gps[0].compute_mean_grad_log_lik();
+                for (size_t i = 1; i < _gps.size(); i++) {
+                    grad.array() += _gps[i].compute_mean_grad_log_lik();
+                }
+
+                return grad;
+            }
+
+            /// return the likelihood (do not compute it -- return last computed)
+            double get_log_lik() const { return _log_lik; }
+
+            /// set the log likelihood (e.g. computed from outside)
+            void set_log_lik(double log_lik) { _log_lik = log_lik; }
+
+            // TO-DO: Add log LOO-CV and gradients
+
+            /// return the list of samples
             const std::vector<Eigen::VectorXd>& samples() const { return _samples; }
+
+            /// return the list of observations
+            const std::vector<Eigen::VectorXd>& observations() const
+            {
+                return _observations;
+            }
+
+            /// return the observations (in matrix form)
+            /// (NxD), where N is the number of points and D is the dimension output
+            Eigen::MatrixXd observations_matrix() const
+            {
+                Eigen::MatrixXd obs(_observations.size(), dim_out());
+                for (size_t i = 0; i < _observations.size(); i++) {
+                    obs.row(i) = _observations[i];
+                }
+
+                return obs;
+            }
+
+            /// save the parameters and the data for the GP to the archive (text or binary)
+            template <typename A>
+            void save(const std::string& directory) const
+            {
+                A archive(directory);
+                save(archive);
+            }
+
+            /// save the parameters and the data for the GP to the archive (text or binary)
+            template <typename A>
+            void save(const A& archive) const
+            {
+                // Eigen::VectorXd dims(2);
+                // dims << dim_in(), dim_out();
+                // archive.save(dims, "dims");
+
+                size_t size = _gps.size();
+                Eigen::VectorXd s(1);
+                s << size;
+                archive.save(s, "size");
+
+                archive.save(_observations, "observations");
+
+                for (size_t i = 0; i < size; i++) {
+                    _gps[i].template save<A>(archive.directory() + "/gp_" + std::to_string(i));
+                }
+            }
+
+            /// load the parameters and the data for the GP from the archive (text or binary)
+            /// if recompute is true, we do not read the kernel matrix
+            /// but we recompute it given the data and the hyperparameters
+            template <typename A>
+            void load(const std::string& directory, bool recompute = true)
+            {
+                A archive(directory);
+                load(archive, recompute);
+            }
+
+            /// load the parameters and the data for the GP from the archive (text or binary)
+            /// if recompute is true, we do not read the kernel matrix
+            /// but we recompute it given the data and the hyperparameters
+            template <typename A>
+            void load(const A& archive, bool recompute = true)
+            {
+                _observations.clear();
+                archive.load(_observations, "observations");
+
+                // Eigen::VectorXd dims;
+                // archive.load(dims, "dims");
+
+                Eigen::VectorXd s;
+                archive.load(s, "size");
+                _gps.resize(static_cast<size_t>(s[0]));
+
+                // recompute mean observation
+                // _mean_observation = Eigen::VectorXd::Zero(_dim_out);
+                // for (size_t j = 0; j < _observations.size(); j++)
+                //     _mean_observation.array() += _observations[j].array();
+                // _mean_observation.array() /= static_cast<double>(_observations.size());
+                // TO-DO: Maybe compute mean_observation as well
+
+                for (size_t i = 0; i < _gps.size(); i++) {
+                    // do not recompute the individual GPs on their own
+                    _gps[i].template load<A>(archive.directory() + "/gp_" + std::to_string(i), false);
+                }
+
+                if (recompute)
+                    this->recompute(true, true);
+                else // if we do not wish to recompute, update the kernel and mean
+                    _update_kernel_and_mean_functions();
+            }
 
         protected:
             std::vector<GP_t> _gps;
             HyperParamsOptimizer _hp_optimize;
-            Eigen::VectorXd _h_params;
-
-            std::shared_ptr<spt::SpatialTreeNode> _root;
-            std::vector<std::shared_ptr<spt::SpatialTreeNode>> _leaves;
-            std::vector<Eigen::VectorXd> _samples;
+            std::vector<Eigen::VectorXd> _samples, _observations;
+            double _log_lik = 0.;
 
             void _update_kernel_and_mean_functions()
             {
@@ -315,38 +420,6 @@ namespace limbo {
                     _gps[i].kernel_function() = _gps[0].kernel_function();
                     _gps[i].mean_function() = _gps[0].mean_function();
                 });
-            }
-
-            std::vector<int> _find_gps(const std::shared_ptr<spt::SpatialTreeNode>& node, const Eigen::VectorXd& v) const
-            {
-                std::vector<int> ids;
-                if (!node->right() || !node->left()) {
-                    int i = 0;
-                    for (; i < _leaves.size(); i++)
-                        if (node == _leaves[i])
-                            break;
-                    ids.push_back(i);
-                }
-                else {
-                    std::vector<int> left_ids, right_ids;
-
-                    Eigen::VectorXd split_dir = node->split_dir();
-                    double val = split_dir.dot(v);
-                    if (val <= node->split_median_left()) {
-                        left_ids = _find_gps(node->left(), v);
-                    }
-
-                    if (val > node->split_median_right()) {
-                        right_ids = _find_gps(node->right(), v);
-                    }
-
-                    for (int i = 0; i < left_ids.size(); i++)
-                        ids.push_back(left_ids[i]);
-                    for (int i = 0; i < right_ids.size(); i++)
-                        ids.push_back(right_ids[i]);
-                }
-
-                return ids;
             }
         };
     } // namespace model

@@ -110,8 +110,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad)
 
     struct POEGPParams : public Params {
         struct model_poegp {
-            BO_PARAM(int, leaf_size, 20);
-            BO_PARAM(double, tau, 0.05);
+            BO_PARAM(int, expert_size, 20);
         };
     };
 
@@ -163,8 +162,7 @@ BOOST_AUTO_TEST_CASE(test_gp_check_lf_grad_noise)
         };
 
         struct model_poegp {
-            BO_PARAM(int, leaf_size, 20);
-            BO_PARAM(double, tau, 0.05);
+            BO_PARAM(int, expert_size, 20);
         };
     };
 
@@ -219,8 +217,7 @@ BOOST_AUTO_TEST_CASE(test_timing)
         };
 
         struct model_poegp {
-            BO_PARAM(int, leaf_size, 20);
-            BO_PARAM(double, tau, 0.05);
+            BO_PARAM(int, expert_size, 20);
         };
     };
 
@@ -270,8 +267,7 @@ BOOST_AUTO_TEST_CASE(test_accuracy)
         };
 
         struct model_poegp {
-            BO_PARAM(int, leaf_size, 20);
-            BO_PARAM(double, tau, 0.05);
+            BO_PARAM(int, expert_size, 20);
         };
     };
 
