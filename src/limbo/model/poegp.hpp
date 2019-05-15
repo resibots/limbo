@@ -46,13 +46,13 @@
 #ifndef LIMBO_MODEL_POEGP_HPP
 #define LIMBO_MODEL_POEGP_HPP
 
-#include <limbo/model.hpp>
-#include <limbo/spt/spt.hpp>
+#include <limbo/model/gp.hpp>
+#include <limbo/model/poegp/random_split.hpp>
 
 namespace limbo {
-
     namespace defaults {
         struct model_poegp {
+            // max size of each expert
             BO_PARAM(int, expert_size, 100);
         };
     } // namespace defaults
@@ -62,7 +62,7 @@ namespace limbo {
         /// Gaussian process with product of experts.
         /// - Deisenroth, M.P. and Ng, J.W., 2015. Distributed gaussian processes. arXiv preprint arXiv:1502.02843.
         ///   This implementation is the naive PoEGP: working to incorporate rBCM
-        template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
+        template <typename Params, typename KernelFunction, typename MeanFunction, typename Split = limbo::model::poegp::RandomSplit<Params>, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
         class POEGP {
         public:
             using GP_t = limbo::model::GP<Params, KernelFunction, MeanFunction, limbo::model::gp::NoLFOpt<Params>>;
@@ -84,15 +84,9 @@ namespace limbo {
                 assert(observations.size() != 0);
                 assert(samples.size() == observations.size());
 
-                // TO-DO: Make this selection a template
                 int n = Params::model_poegp::expert_size();
-                int N = samples.size();
-                int leaves = std::ceil(N / n);
-
-                std::vector<int> ids(samples.size());
-                for (size_t i = 0; i < ids.size(); i++)
-                    ids[i] = i;
-                std::random_shuffle(ids.begin(), ids.end());
+                size_t N = samples.size();
+                size_t K = std::ceil(N / static_cast<double>(n));
 
                 KernelFunction kernel_func(samples[0].size());
                 MeanFunction mean_func(observations[0].size());
@@ -106,7 +100,7 @@ namespace limbo {
                 _samples = samples;
                 _observations = observations;
 
-                _gps.resize(leaves);
+                _gps.resize(K);
                 _gps[0].kernel_function() = kernel_func;
                 _gps[0].mean_function() = mean_func;
 
@@ -119,16 +113,13 @@ namespace limbo {
                 // Update kernel and mean functions
                 _update_kernel_and_mean_functions();
 
-                limbo::tools::par::loop(0, leaves, [&](size_t i) {
-                    std::vector<Eigen::VectorXd> s, o;
-                    for (int j = 0; j < n; j++) {
-                        if ((i * n + j) >= ids.size()) // TO-DO: Check how to handle these cases
-                            break;
-                        s.push_back(samples[ids[i * n + j]]);
-                        o.push_back(observations[ids[i * n + j]]);
-                    }
+                std::vector<std::vector<Eigen::VectorXd>> split_samples, split_obs;
+                std::tie(split_samples, split_obs) = _split(samples, observations, K);
+                assert(split_samples.size() == K);
+                assert(split_obs.size() == K);
 
-                    _gps[i].compute(s, o, compute_kernel);
+                limbo::tools::par::loop(0, K, [&](size_t i) {
+                    _gps[i].compute(split_samples[i], split_obs[i], compute_kernel);
                 });
             }
 
@@ -428,6 +419,7 @@ namespace limbo {
         protected:
             std::vector<GP_t> _gps;
             HyperParamsOptimizer _hp_optimize;
+            Split _split;
             std::vector<Eigen::VectorXd> _samples, _observations;
             Eigen::VectorXd _mean_observation;
             double _log_lik = 0.;

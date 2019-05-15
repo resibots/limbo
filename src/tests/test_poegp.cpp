@@ -223,7 +223,7 @@ BOOST_AUTO_TEST_CASE(test_timing)
     using KF_t = kernel::SquaredExpARD<POEGPParams>;
     using MF_t = mean::Constant<POEGPParams>;
     using GP_t = model::GP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
-    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
+    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::poegp::RandomSplit<POEGPParams>, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
 
     for (size_t i = 0; i < N; i++) {
         std::vector<Eigen::VectorXd> observations;
@@ -273,7 +273,7 @@ BOOST_AUTO_TEST_CASE(test_accuracy)
     using KF_t = kernel::SquaredExpARD<POEGPParams>;
     using MF_t = mean::Constant<POEGPParams>;
     using GP_t = model::GP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
-    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
+    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::poegp::RandomSplit<POEGPParams>, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
 
     for (size_t i = 0; i < N; i++) {
 
