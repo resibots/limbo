@@ -134,66 +134,53 @@ namespace limbo {
             /// Queries the POEGP and gets the mean and variance
             std::tuple<Eigen::VectorXd, double> query(const Eigen::VectorXd& v) const
             {
-                std::vector<double> mus(_gps.size());
+                assert(_gps.size()); // TO-DO: Maybe check for no sample
+                std::vector<Eigen::VectorXd> mus(_gps.size());
                 std::vector<double> sigmas(_gps.size());
                 limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
-                    Eigen::VectorXd tmu;
                     double ts;
-                    std::tie(tmu, ts) = _gps[i].query(v);
-
-                    mus[i] = tmu(0);
+                    std::tie(mus[i], ts) = _gps[i].query(v);
                     sigmas[i] = 1.0 / (ts + 1e-12);
                 });
 
                 double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
-                double multi_mu = 0.0;
+                Eigen::VectorXd multi_mu = Eigen::VectorXd::Zero(mus[0].size());
                 for (size_t i = 0; i < _gps.size(); i++) {
                     multi_mu += mus[i] * sigmas[i];
                 }
 
-                Eigen::VectorXd mu(1);
-                mu << (multi_mu / multi_sg);
-
-                return std::make_tuple(mu, 1.0 / multi_sg);
+                return std::make_tuple(multi_mu / multi_sg, 1.0 / multi_sg);
             }
 
             /// Queries the POEGP and gets the mean
             Eigen::VectorXd mu(const Eigen::VectorXd& v) const
             {
-                std::vector<double> mus(_gps.size());
+                assert(_gps.size()); // TO-DO: Maybe check for no sample
+                std::vector<Eigen::VectorXd> mus(_gps.size());
                 std::vector<double> sigmas(_gps.size());
                 limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
-                    Eigen::VectorXd tmu;
                     double ts;
-                    std::tie(tmu, ts) = _gps[i].query(v);
-
-                    mus[i] = tmu(0);
+                    std::tie(mus[i], ts) = _gps[i].query(v);
                     sigmas[i] = 1.0 / (ts + 1e-12);
                 });
 
                 double multi_sg = std::accumulate(sigmas.begin(), sigmas.end(), 0.0, std::plus<double>());
-                double multi_mu = 0.0;
+                Eigen::VectorXd multi_mu = Eigen::VectorXd::Zero(mus[0].size());
                 for (size_t i = 0; i < _gps.size(); i++) {
                     multi_mu += mus[i] * sigmas[i];
                 }
 
-                Eigen::VectorXd mu(1);
-                mu << (multi_mu / multi_sg);
-
-                return mu;
+                return multi_mu / multi_sg;
             }
 
             /// Queries the POEGP and gets the variance
             double sigma(const Eigen::VectorXd& v) const
             {
-                std::vector<double> mus(_gps.size());
+                assert(_gps.size()); // TO-DO: Maybe check for no sample
                 std::vector<double> sigmas(_gps.size());
                 limbo::tools::par::loop(0, _gps.size(), [&](size_t i) {
-                    Eigen::VectorXd tmu;
-                    double ts;
-                    std::tie(tmu, ts) = _gps[i].query(v);
+                    double ts = _gps[i].sigma(v);
 
-                    mus[i] = tmu(0);
                     sigmas[i] = 1.0 / (ts + 1e-12);
                 });
 

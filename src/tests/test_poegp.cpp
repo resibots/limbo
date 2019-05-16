@@ -345,3 +345,96 @@ BOOST_AUTO_TEST_CASE(test_accuracy)
 
     BOOST_CHECK(double(failures) / double(N) < 0.1);
 }
+
+BOOST_AUTO_TEST_CASE(test_multi)
+{
+    using namespace limbo;
+    constexpr size_t N = 10;
+    constexpr size_t M = 100;
+    size_t failures = 0;
+
+    struct POEGPParams : public Params {
+        struct kernel : public defaults::kernel {
+            BO_PARAM(bool, optimize_noise, true);
+        };
+
+        struct model_poegp {
+            BO_PARAM(int, expert_size, 20);
+        };
+    };
+
+    using KF_t = kernel::SquaredExpARD<POEGPParams>;
+    using MF_t = mean::Constant<POEGPParams>;
+    using GP_t = model::GP<POEGPParams, KF_t, MF_t, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
+    using POEGP_t = model::POEGP<POEGPParams, KF_t, MF_t, model::poegp::RandomSplit<POEGPParams>, model::gp::KernelLFOpt<POEGPParams, opt::Rprop<POEGPParams>>>;
+
+    for (size_t i = 0; i < N; i++) {
+
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+        tools::rgen_double_t rgen(-2., 2.);
+        for (size_t i = 0; i < M; i++) {
+            samples.push_back(make_v2(rgen.rand(), rgen.rand()));
+            observations.push_back(make_v2(std::cos(samples.back()[0]), std::cos(samples.back()[1])));
+        }
+
+        std::vector<Eigen::VectorXd> test_observations;
+        std::vector<Eigen::VectorXd> test_samples;
+        for (size_t i = 0; i < M; i++) {
+            test_samples.push_back(make_v2(rgen.rand(), rgen.rand()));
+            test_observations.push_back(make_v2(std::cos(test_samples.back()[0]), std::cos(test_samples.back()[1])));
+        }
+
+        GP_t gp;
+        gp.compute(samples, observations, false);
+        gp.optimize_hyperparams();
+
+        POEGP_t sgp;
+        sgp.compute(samples, observations, false);
+        sgp.optimize_hyperparams();
+
+        bool failed = false;
+
+        // check if normal GP and sparse GP produce very similar results
+        // in the learned points
+        for (size_t i = 0; i < M; i++) {
+            Eigen::VectorXd gp_val, sgp_val;
+            double gp_sigma, sgp_sigma;
+            std::tie(gp_val, gp_sigma) = gp.query(samples[i]);
+            std::tie(sgp_val, sgp_sigma) = sgp.query(samples[i]);
+
+            if (std::abs(gp_val[0] - sgp_val[0]) > 1e-2 || std::abs(gp_val[1] - sgp_val[1]) > 1e-2 || std::abs(gp_sigma - sgp_sigma) > 1e-2)
+                failed = true;
+        }
+
+        // check if normal GP and sparse GP produce very similar results
+        // in the test points
+        for (size_t i = 0; i < M; i++) {
+            Eigen::VectorXd gp_val, sgp_val;
+            double gp_sigma, sgp_sigma;
+            std::tie(gp_val, gp_sigma) = gp.query(test_samples[i]);
+            std::tie(sgp_val, sgp_sigma) = sgp.query(test_samples[i]);
+
+            if (std::abs(gp_val[0] - sgp_val[0]) > 1e-1 || std::abs(gp_val[1] - sgp_val[1]) > 1e-1 || std::abs(gp_sigma - sgp_sigma) > 1e-2)
+                failed = true;
+        }
+
+        // check if normal GP and sparse GP produce very similar errors
+        // in the test points
+        for (size_t i = 0; i < M; i++) {
+            Eigen::VectorXd gp_val = gp.mu(test_samples[i]);
+            Eigen::VectorXd sgp_val = sgp.mu(test_samples[i]);
+
+            double gp_error_val = (gp_val - test_observations[i]).norm();
+            double sgp_error_val = (sgp_val - test_observations[i]).norm();
+
+            if (std::abs(gp_error_val - sgp_error_val) > 1e-1)
+                failed = true;
+        }
+
+        if (failed)
+            failures++;
+    }
+
+    BOOST_CHECK(double(failures) / double(N) < 0.1);
+}
