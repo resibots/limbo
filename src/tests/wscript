@@ -98,6 +98,12 @@ def build(bld):
                 target='test_poegp',
                 uselib = bld.env.LIBRARIES,
                 use='limbo')
+    bld.program(features='cxx test',
+                source='test_spt.cpp',
+                includes='. .. ../../',
+                target='test_spt',
+                uselib = bld.env.LIBRARIES,
+                use='limbo')
     bld.program(features = 'cxx test',
                 source = 'test_serialize.cpp',
                 includes = '. .. ../../',

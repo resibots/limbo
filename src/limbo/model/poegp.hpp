@@ -100,6 +100,11 @@ namespace limbo {
                 _samples = samples;
                 _observations = observations;
 
+                std::vector<std::vector<Eigen::VectorXd>> split_samples, split_obs;
+                std::tie(split_samples, split_obs) = _split(samples, observations, K);
+                assert(split_samples.size() == split_obs.size());
+                K = split_samples.size(); // the splitting algorithm might give a different number of partitions than requested
+
                 _gps.resize(K);
                 _gps[0].kernel_function() = kernel_func;
                 _gps[0].mean_function() = mean_func;
@@ -112,11 +117,6 @@ namespace limbo {
 
                 // Update kernel and mean functions
                 _update_kernel_and_mean_functions();
-
-                std::vector<std::vector<Eigen::VectorXd>> split_samples, split_obs;
-                std::tie(split_samples, split_obs) = _split(samples, observations, K);
-                assert(split_samples.size() == K);
-                assert(split_obs.size() == K);
 
                 limbo::tools::par::loop(0, K, [&](size_t i) {
                     _gps[i].compute(split_samples[i], split_obs[i], compute_kernel);

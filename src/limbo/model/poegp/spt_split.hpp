@@ -43,82 +43,43 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE test_spt
-
-#include <boost/test/unit_test.hpp>
+#ifndef LIMBO_MODEL_POEGP_SPT_SPLIT_HPP
+#define LIMBO_MODEL_POEGP_SPT_SPLIT_HPP
 
 #include <limbo/model/poegp/spt/spt.hpp>
-#include <limbo/tools/random_generator.hpp>
 
-BOOST_AUTO_TEST_CASE(test_spt)
-{
-    using namespace limbo;
-    using namespace limbo::model::poegp;
-    // generate data
-    std::vector<Eigen::VectorXd> samples, observations;
-    size_t N = 200;
-    for (size_t i = 0; i < N; i++) {
-        Eigen::VectorXd s = tools::random_vector(2);
-        samples.push_back(s);
-        observations.push_back(s.array() * 2.);
-    }
+namespace limbo {
+    namespace defaults {
+        struct model_poegp_spt_split {
+            BO_PARAM(double, tau, 0.);
+        };
+    } // namespace defaults
 
-    // test with no overlap
-    {
-        // create tree
-        auto root = spt::make_spt(samples, observations, 2, 0.);
-        // get leaves
-        auto leaves = spt::get_leaves(root);
+    namespace model {
+        namespace poegp {
+            template <typename Params>
+            struct SPTSplit {
+            public:
+                std::pair<std::vector<std::vector<Eigen::VectorXd>>, std::vector<std::vector<Eigen::VectorXd>>> operator()(const std::vector<Eigen::VectorXd>& samples, const std::vector<Eigen::VectorXd>& observations, size_t K)
+                {
+                    size_t d = std::ceil(std::log(static_cast<double>(K)) / std::log(2.0));
 
-        // check if points are split correctly
-        size_t n = 0;
-        for (size_t i = 0; i < leaves.size(); i++) {
-            n += leaves[i]->points().size();
-        }
-        BOOST_CHECK(N == n);
+                    // Make spatial tree with max depth d
+                    auto root = spt::make_spt(samples, observations, d, Params::model_poegp_spt_split::tau());
+                    auto leaves = spt::get_leaves(root);
 
-        // check if no point overlaps other regions
-        for (size_t i = 0; i < leaves.size(); i++) {
-            auto points = leaves[i]->points();
-            for (size_t j = 0; j < leaves.size(); j++) {
-                if (i == j)
-                    continue;
-                for (auto& p : points) {
-                    BOOST_CHECK(!spt::in_bounds(leaves[j], p));
+                    // Return the points
+                    std::vector<std::vector<Eigen::VectorXd>> split_samples, split_obs;
+                    for (size_t i = 0; i < leaves.size(); i++) {
+                        split_samples.push_back(leaves[i]->points());
+                        split_obs.push_back(leaves[i]->observations());
+                    }
+
+                    return {split_samples, split_obs};
                 }
-            }
-        }
-    }
+            };
+        } // namespace poegp
+    } // namespace model
+} // namespace limbo
 
-    // test with overlap
-    {
-        // create tree
-        auto root = spt::make_spt(samples, observations, 2, 0.1);
-        // get leaves
-        auto leaves = spt::get_leaves(root);
-
-        // check if points are split correctly
-        size_t n = 0;
-        for (size_t i = 0; i < leaves.size(); i++) {
-            n += leaves[i]->points().size();
-        }
-        BOOST_CHECK(n > N);
-
-        // check if the overlapping points are as many as they should
-        size_t overlapping = 0;
-        for (size_t i = 0; i < leaves.size(); i++) {
-            auto points = leaves[i]->points();
-            for (size_t j = 0; j < leaves.size(); j++) {
-                if (i == j)
-                    continue;
-                for (auto& p : points) {
-                    if (spt::in_bounds(leaves[j], p))
-                        overlapping++;
-                }
-            }
-        }
-
-        BOOST_CHECK(overlapping == (n - N));
-    }
-}
+#endif
