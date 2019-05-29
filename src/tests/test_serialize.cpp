@@ -51,10 +51,13 @@
 
 #include <boost/test/unit_test.hpp>
 
+#include <limbo/kernel/exp.hpp>
 #include <limbo/mean/constant.hpp>
 #include <limbo/mean/function_ard.hpp>
+#include <limbo/mean/null_function.hpp>
 #include <limbo/model/gp.hpp>
 #include <limbo/model/gp/mean_lf_opt.hpp>
+#include <limbo/model/multi_gp.hpp>
 #include <limbo/serialize/binary_archive.hpp>
 #include <limbo/serialize/text_archive.hpp>
 
@@ -104,6 +107,16 @@ struct LoadParams {
     };
 };
 
+double get_diff(double a, double b)
+{
+    return std::abs(a - b);
+}
+
+double get_diff(const Eigen::VectorXd& a, const Eigen::VectorXd& b)
+{
+    return (a - b).norm();
+}
+
 template <typename GP, typename GPLoad, typename Archive>
 void test_gp(const std::string& name, bool optimize_hp = true)
 {
@@ -143,12 +156,13 @@ void test_gp(const std::string& name, bool optimize_hp = true)
         Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
         auto v1 = gp.query(s);
         auto v2 = gp2.query(s);
-        BOOST_CHECK_SMALL(std::abs(std::get<0>(v1)[0] - std::get<0>(v2)[0]), 1e-10);
-        BOOST_CHECK_SMALL(std::abs(std::get<1>(v1) - std::get<1>(v2)), 1e-10);
+        BOOST_CHECK_SMALL(get_diff(std::get<0>(v1), std::get<0>(v2)), 1e-10);
+        BOOST_CHECK_SMALL(get_diff(std::get<1>(v1), std::get<1>(v2)), 1e-10);
     }
 
     // attempt to load without recomputing
-    GPLoad gp3(3, 1);
+    // and without knowing the dimensions
+    GPLoad gp3;
     Archive a3(name);
     gp3.load(a3, false);
 
@@ -159,8 +173,8 @@ void test_gp(const std::string& name, bool optimize_hp = true)
         Eigen::VectorXd s = tools::random_vector(3).array() * 4.0 - 2.0;
         auto v1 = gp.query(s);
         auto v2 = gp3.query(s);
-        BOOST_CHECK_SMALL(std::abs(std::get<0>(v1)[0] - std::get<0>(v2)[0]), 1e-10);
-        BOOST_CHECK_SMALL(std::abs(std::get<1>(v1) - std::get<1>(v2)), 1e-10);
+        BOOST_CHECK_SMALL(get_diff(std::get<0>(v1), std::get<0>(v2)), 1e-10);
+        BOOST_CHECK_SMALL(get_diff(std::get<1>(v1), std::get<1>(v2)), 1e-10);
     }
 }
 
@@ -182,4 +196,10 @@ BOOST_AUTO_TEST_CASE(test_bin_archive)
     using GPMean = limbo::model::GP<Params, limbo::kernel::MaternFiveHalves<Params>, limbo::mean::Constant<Params>, limbo::model::gp::MeanLFOpt<Params>>;
     using GPMeanLoad = limbo::model::GP<LoadParams, limbo::kernel::MaternFiveHalves<LoadParams>, limbo::mean::Constant<LoadParams>, limbo::model::gp::MeanLFOpt<LoadParams>>;
     test_gp<GPMean, GPMeanLoad, limbo::serialize::BinaryArchive>("/tmp/gp_mean_bin");
+}
+
+BOOST_AUTO_TEST_CASE(test_multi_gp_save)
+{
+    using GP_Multi_t = limbo::model::MultiGP<Params, limbo::model::GP, limbo::kernel::Exp<Params>, limbo::mean::NullFunction<Params>>;
+    test_gp<GP_Multi_t, GP_Multi_t, limbo::serialize::TextArchive>("/tmp/gp_multi_text", false);
 }
