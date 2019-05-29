@@ -378,6 +378,8 @@ namespace limbo {
                     _mean_function.set_h_params(h_params);
                 }
 
+                _gp_models.resize(_dim_out);
+
                 for (int i = 0; i < _dim_out; i++) {
                     // do not recompute the individual GPs on their own
                     _gp_models[i].template load<A>(archive.directory() + "/gp_" + std::to_string(i), false);
