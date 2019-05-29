@@ -57,10 +57,10 @@ namespace limbo {
         /// - a kernel function (the same type for all GPs, but can have different parameters)
         /// - a mean function (the same type and parameters for all GPs)
         /// - [optional] an optimizer for the hyper-parameters
-        template <typename Params, template <typename, typename, typename, typename> class GPClass, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
+        template <typename Params, template <typename, typename, typename, typename, typename...> class GPClass, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>, typename... GPArgs>
         class MultiGP {
         public:
-            using GP_t = GPClass<Params, KernelFunction, limbo::mean::NullFunction<Params>, limbo::model::gp::NoLFOpt<Params>>;
+            using GP_t = GPClass<Params, KernelFunction, limbo::mean::NullFunction<Params>, limbo::model::gp::NoLFOpt<Params>, GPArgs...>;
 
             /// useful because the model might be created before knowing anything about the process
             MultiGP() : _dim_in(-1), _dim_out(-1) {}

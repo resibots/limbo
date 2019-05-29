@@ -62,7 +62,7 @@ namespace limbo {
         /// Gaussian process with product of experts.
         /// - Deisenroth, M.P. and Ng, J.W., 2015. Distributed gaussian processes. arXiv preprint arXiv:1502.02843.
         ///   This implementation is the naive PoEGP: working to incorporate rBCM
-        template <typename Params, typename KernelFunction, typename MeanFunction, typename Split = limbo::model::poegp::RandomSplit<Params>, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>>
+        template <typename Params, typename KernelFunction, typename MeanFunction, class HyperParamsOptimizer = limbo::model::gp::NoLFOpt<Params>, typename Split = limbo::model::poegp::RandomSplit<Params>>
         class POEGP {
         public:
             using GP_t = limbo::model::GP<Params, KernelFunction, MeanFunction, limbo::model::gp::NoLFOpt<Params>>;
@@ -120,6 +120,52 @@ namespace limbo {
 
                 limbo::tools::par::loop(0, K, [&](size_t i) {
                     _gps[i].compute(split_samples[i], split_obs[i], compute_kernel);
+                });
+            }
+
+            /// Compute the GP from already split samples and observations
+            void compute(const std::vector<std::vector<Eigen::VectorXd>>& samples, const std::vector<std::vector<Eigen::VectorXd>>& observations, bool compute_kernel = true)
+            {
+                assert(samples.size() != 0);
+                assert(observations.size() != 0);
+                assert(samples.size() == observations.size());
+                assert(samples[0].size() != 0);
+                assert(observations[0].size() != 0);
+
+                // We already have the samples and observations split
+                size_t K = samples.size();
+
+                KernelFunction kernel_func(samples[0][0].size());
+                MeanFunction mean_func(observations[0][0].size());
+
+                if (_gps.size() > 0) {
+                    kernel_func = _gps[0].kernel_function();
+                    mean_func = _gps[0].mean_function();
+                }
+
+                // save samples and observations
+                _samples.clear();
+                _observations.clear();
+                for (size_t i = 0; i < samples.size(); i++) {
+                    std::copy(samples[i].begin(), samples[i].end(), std::back_inserter(_samples));
+                    std::copy(observations[i].begin(), observations[i].end(), std::back_inserter(_observations));
+                }
+
+                _gps.resize(K);
+                _gps[0].kernel_function() = kernel_func;
+                _gps[0].mean_function() = mean_func;
+
+                // compute mean observation
+                _mean_observation = Eigen::VectorXd::Zero(_observations[0].size());
+                for (size_t j = 0; j < _observations.size(); j++)
+                    _mean_observation.array() += _observations[j].array();
+                _mean_observation.array() /= static_cast<double>(_observations.size());
+
+                // Update kernel and mean functions
+                _update_kernel_and_mean_functions();
+
+                limbo::tools::par::loop(0, K, [&](size_t i) {
+                    _gps[i].compute(samples[i], observations[i], compute_kernel);
                 });
             }
 
