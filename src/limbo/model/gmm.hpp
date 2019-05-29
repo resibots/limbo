@@ -105,16 +105,6 @@ namespace limbo {
 
                 double prob(const Eigen::VectorXd& x) const
                 {
-                    // Eigen::FullPivLU<Eigen::MatrixXd> PivLU(_sigma);
-                    // int d = x.size();
-                    // double det = PivLU.determinant();
-                    // if (det < 0)
-                    //     det = 0.;
-                    // Eigen::MatrixXd invS = PivLU.inverse();
-
-                    // Eigen::VectorXd e = (-0.5 * ((x - _mu).transpose() * invS * (x - _mu)).array()).exp(); // this should always be 1-d
-                    // return (1. / (std::pow(2. * M_PI, static_cast<double>(d / 2.)) * (std::sqrt(det) + 1e-25))) * e[0];
-
                     const double logSqrt2Pi = 0.5 * std::log(2 * M_PI);
                     using Chol = Eigen::LLT<Eigen::MatrixXd>;
                     Chol chol(_sigma);
@@ -198,9 +188,15 @@ namespace limbo {
                 }
 
                 if (K > 0) {
-                    if (K != _K)
+                    if (K != _K || _models.size() != K)
                         _models.resize(K);
                     _K = K;
+                }
+
+                // fail-safe
+                if (_models.size() == 0) {
+                    _K = 3;
+                    _models.resize(_K);
                 }
 
                 // store data
@@ -211,20 +207,23 @@ namespace limbo {
                     _data.row(i).tail(_dim_out) = observations[i];
                 }
 
-                // begin from random mean and unit covariances
+                // initialize means from K-Means and covariances to identity
                 std::vector<Eigen::MatrixXd> clusters = gmm::kmeans(_data, _K);
                 _weights = Eigen::VectorXd::Ones(_K) / static_cast<double>(_K);
                 for (int k = 0; k < _K; k++) {
-                    // _models[k].mu() = Eigen::VectorXd::Random(D);
-                    _models[k].mu() = clusters[k].colwise().mean();
                     if (clusters[k].size() == 0)
                         _models[k].mu() = Eigen::VectorXd::Zero(D);
+                    else
+                        _models[k].mu() = clusters[k].colwise().mean();
                     _models[k].sigma() = Eigen::MatrixXd::Identity(D, D);
                 }
 
+                std::cout << "Initialized" << std::endl;
+
                 _optimizer(*this);
 
-                std::cout << "---------------------" << std::endl;
+                std::cout << "Optimized" << std::endl;
+
                 std::cout << "---------------------" << std::endl;
                 std::cout << "---------------------" << std::endl;
                 for (int k = 0; k < _K; k++) {
@@ -237,6 +236,8 @@ namespace limbo {
                     std::cout << S << std::endl;
                     std::cout << "---------------------" << std::endl;
                 }
+                std::cout << _weights.sum() << std::endl;
+                std::cout << "---------------------" << std::endl;
             }
 
             /// return the prediction at point x
@@ -268,7 +269,7 @@ namespace limbo {
 
                     Eigen::MatrixXd res = sigma_yx * inv_sigma_x * (x - _models[k].mu().head(D));
 
-                    out.array() += probs(k) / probs.sum() * (_models[k].mu().tail(d).array() + res.array());
+                    out.array() += (probs(k) / probs.sum()) * (_models[k].mu().tail(d).array() + res.array());
                 }
 
                 return out;
@@ -382,39 +383,6 @@ namespace limbo {
             Eigen::VectorXd _weights;
             std::vector<GM> _models;
             Optimization _optimizer;
-
-            // double _gaussian_pdf(const Eigen::VectorXd& x, const Eigen::VectorXd& mu, const Eigen::MatrixXd& S) const
-            // {
-            //     Eigen::FullPivLU<Eigen::MatrixXd> PivLU(S);
-            //     int d = x.size();
-            //     double det = PivLU.determinant();
-            //     if (det < 0)
-            //         det = 0.;
-            //     Eigen::MatrixXd invS = PivLU.inverse();
-
-            //     Eigen::VectorXd e = (-0.5 * ((x - mu).transpose() * invS * (x - mu)).array()).exp(); // this should always be 1-d
-            //     return (1. / (std::pow(M_PI, static_cast<double>(d / 2.)) * std::sqrt(det) + 1e-25)) * e[0];
-            // }
-
-            // Eigen::VectorXd _to_params(const Eigen::VectorXd& mu, const Eigen::MatrixXd& S) const
-            // {
-            //     Eigen::VectorXd th = Eigen::VectorXd::Zero(mu.size() + S.size());
-
-            //     th.head(mu.size()) = mu;
-            //     th.tail(S.size()) = Eigen::VectorXd::Map(S.data(), S.size());
-
-            //     return th;
-            // }
-
-            // std::tuple<Eigen::VectorXd, Eigen::MatrixXd> _to_dist(const Eigen::VectorXd& th) const
-            // {
-            //     int d = 0.5 * (std::sqrt(4 * th.size() + 1) - 1);
-
-            //     Eigen::VectorXd mu = th.head(d);
-            //     Eigen::MatrixXd S = Eigen::MatrixXd::Map(th.tail(d * d).data(), d, d);
-
-            //     return std::make_tuple(mu, S);
-            // }
         };
     } // namespace model
 } // namespace limbo

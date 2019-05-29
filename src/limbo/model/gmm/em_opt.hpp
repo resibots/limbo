@@ -81,28 +81,22 @@ namespace limbo {
                     double prev_lik = -std::numeric_limits<double>::max();
 
                     for (int n = 0; n < N_iters; n++) {
+                        // std::cout << n << " " << std::flush;
                         Eigen::VectorXd theta = gmm.params();
                         // calculate weights
                         Eigen::MatrixXd w = Eigen::MatrixXd::Zero(N, K);
                         // for each sample
                         for (int i = 0; i < N; i++) {
                             // for each mixture
+                            Eigen::VectorXd x = gmm.data().row(i);
                             for (int k = 0; k < K; k++) {
-                                double pi_k = theta(k);
-
-                                Eigen::VectorXd x = gmm.data().row(i);
-                                double w_ik = pi_k * gmm.models()[k].prob(x);
-
-                                double w_all = w_ik;
-                                for (int j = 0; j < K; j++) {
-                                    if (j == k)
-                                        continue;
-                                    double pi_j = theta(j);
-                                    w_all += pi_j * gmm.models()[j].prob(x);
-                                }
-
-                                w(i, k) = w_ik / w_all;
+                                w(i, k) = theta(k) * gmm.models()[k].prob(x);
                             }
+
+                            double divide = w.row(i).sum();
+                            if (divide < 1e-16)
+                                divide = 1.;
+                            w.row(i) = w.row(i) / divide;
                         }
 
                         // update parameters
@@ -129,8 +123,7 @@ namespace limbo {
 
                             S_k.array() /= (N_k + 1e-50);
 
-                            // update theta vector
-                            // theta.segment(K + k * n_params, n_params) = _to_params(mu_k, S_k);
+                            // update the mixture models
                             gmm.models()[k].mu() = mu_k;
                             gmm.models()[k].sigma() = S_k;
                         }
@@ -145,26 +138,17 @@ namespace limbo {
                                 double pi_k = theta(k);
 
                                 prob += pi_k * gmm.models()[k].prob(x);
-                                // if (std::isnan(prob)) {
-                                //     std::cout << gmm.models()[k].prob(x) << std::endl;
-                                //     std::cout << gmm.models()[k].mu().transpose() << std::endl;
-                                //     std::cout << gmm.models()[k].sigma() << std::endl
-                                //               << std::endl;
-                                //     std::cout << x.transpose() << std::endl;
-                                //     std::cin.get();
-                                // }
                             }
 
                             log_lik += std::log(prob);
                         }
-
-                        // std::cout << "loglik: " << log_lik << std::endl;
 
                         if (std::abs(prev_lik - log_lik) < Params::opt_gmm_em::epsilon())
                             break;
 
                         prev_lik = log_lik;
                     }
+                    // std::cout << std::endl;
                 }
             };
 
