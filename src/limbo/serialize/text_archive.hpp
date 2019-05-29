@@ -43,6 +43,9 @@
 //| The fact that you are presently reading this means that you have had
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
+#ifndef LIMBO_SERIALIZE_TEXT_ARCHIVE_HPP
+#define LIMBO_SERIALIZE_TEXT_ARCHIVE_HPP
+
 #include <cassert>
 #include <iostream>
 #include <sstream>
@@ -148,3 +151,5 @@ namespace limbo {
         };
     } // namespace serialize
 } // namespace limbo
+
+#endif
