@@ -47,6 +47,8 @@
 #ifndef LIMBO_TOOLS_RANDOM_GENERATOR_HPP
 #define LIMBO_TOOLS_RANDOM_GENERATOR_HPP
 
+#include <Eigen/Core>
+
 #include <cmath>
 #include <cstdlib>
 #include <ctime>

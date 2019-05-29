@@ -90,6 +90,7 @@ def options(opt):
         opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
         opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
         opt.add_option('--no-native', action='store_true', default=False, help='disable -march=native, which can cause some troubles [--no-native]', dest='no_native')
+        opt.add_option('--openmp', action='store_true', default=False, help='enable OpenMP (if found)', dest='openmp')
 
 
         try:
@@ -115,14 +116,35 @@ def configure(conf):
         conf.load('eigen')
         conf.load('tbb')
         conf.load('sferes')
-        conf.load('openmp')
+        if conf.options.openmp:
+            conf.load('openmp')
         conf.load('mkl')
         conf.load('xcode')
         conf.load('nlopt')
         conf.load('libcmaes')
+        conf.load('avx')
 
-        native_flags = "-march=native"
+        # dependencies
+        conf.check_boost(lib='serialization filesystem \
+            system unit_test_framework program_options \
+            thread', min_version='1.39')
+        conf.check_eigen()
+        conf.check_tbb()
+        conf.check_sferes()
+        if conf.options.openmp:
+            conf.check_openmp()
+        conf.check_mkl()
+        conf.check_nlopt()
+        conf.check_libcmaes()
 
+        conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
+        conf.env.LIBRARIES = 'BOOST EIGEN TBB LIBCMAES NLOPT'
+        if conf.options.openmp:
+            conf.env.LIBRARIES = conf.env.LIBRARIES + ' OMP'
+
+        
+        
+        # compiler
         is_cpp14 = conf.options.cpp14
         if is_cpp14:
             is_cpp14 = conf.check_cxx(cxxflags="-std=c++14", mandatory=False, msg='Checking for C++14')
@@ -133,6 +155,7 @@ def configure(conf):
             opt_flags = " -O3 -xHost -g"
             native_flags = "-mtune=native -unroll -fma"
         else:
+            native_flags = '-march=native'
             if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
                 common_flags = "-Wall -std=c++0x"
             else:
@@ -144,31 +167,27 @@ def configure(conf):
         if is_cpp14:
             common_flags = common_flags + " -std=c++14"
 
+        # is libcmaes compiled with -march=native (avx instructions)?
+        cmaes_native = True
+        if conf.env.DEFINES_LIBCMAES: # if we have CMA-ES activated & found 
+            conf.start_msg('Checking for libcmaes AVX support (-march=native)')
+            cmaes_native = conf.check_avx('cmaes', 'cmaes')
+            if cmaes_native:
+                conf.end_msg('OK', 'GREEN')
+            else:
+                conf.end_msg('NO -> deactivate -march=native', 'YELLOW')
+
         native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
-        if native and not conf.options.no_native:
+        if native and cmaes_native and not conf.options.no_native:
             opt_flags = opt_flags + ' ' + native_flags
         elif not native:
             Logs.pprint('YELLOW', 'WARNING: Native flags not supported. The performance might be a bit deteriorated.')
         else:
             Logs.pprint('YELLOW', 'WARNING: Native flags not activated. The performance might be a bit deteriorated.')
 
-
-        conf.check_boost(lib='serialization filesystem \
-            system unit_test_framework program_options \
-            thread', min_version='1.39')
-        conf.check_eigen()
-        conf.check_tbb()
-        conf.check_sferes()
-        conf.check_openmp()
-        conf.check_mkl()
-        conf.check_nlopt()
-        conf.check_libcmaes()
-
-        conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
-
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
-        Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
+        Logs.pprint('NORMAL', 'CXXFLAGS: %s' % (conf.env['CXXFLAGS'] + conf.env['CXXFLAGS_OMP']))
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
