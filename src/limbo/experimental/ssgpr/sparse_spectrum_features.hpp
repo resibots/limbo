@@ -16,7 +16,7 @@ namespace limbo {
             BO_PARAM(double, sigma_o, 0.1);
             BO_PARAM(bool, fixed, true);
         };
-    }
+    } // namespace defaults
 
     namespace experimental {
 
@@ -116,7 +116,7 @@ namespace limbo {
 
             Eigen::MatrixXd _Wf, _W;
         };
-    }
-}
+    } // namespace experimental
+} // namespace limbo
 
 #endif

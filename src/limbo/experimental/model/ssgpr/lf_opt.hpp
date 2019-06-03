@@ -67,7 +67,7 @@ namespace limbo {
                         // For now the optimization is bounded
                         // the user should define meaningful bounds
                         // TO-DO: Improve bounds for CMA-ES
-                        Eigen::VectorXd params = optimizer(optimization, gp.params(), true);
+                        Eigen::VectorXd params = optimizer(optimization, gp.params(), false);
                         gp.set_params(params);
                         gp.recompute(false);
                         gp.compute_log_lik();

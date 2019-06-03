@@ -1,8 +1,8 @@
 #ifndef LIMBO_EXPERIMENTAL_MODEL_SSPGR_HPP
 #define LIMBO_EXPERIMENTAL_MODEL_SSPGR_HPP
 
-#include <vector>
 #include <chrono>
+#include <vector>
 
 #include <Eigen/Cholesky>
 #include <Eigen/Core>
@@ -124,9 +124,9 @@ namespace limbo {
                     assert(_samples.size() > 0);
 
                     Eigen::MatrixXd tmp = (_obs_mean.transpose() * _obs_mean);
-                    double y_T_y = tmp(0, 0);
+                    double y_T_y = tmp.trace();
                     tmp = _obs_mean.transpose() * _Phi * _W;
-                    double big = tmp(0, 0);
+                    double big = tmp.trace();
 
                     double sigma_n_2 = _sigma_n * _sigma_n;
 
@@ -170,56 +170,56 @@ namespace limbo {
                     _sigma_n = std::exp(p(0)); //p(0); //std::exp(p(0)) + 1e-6;
                 }
 
-            /// add sample and update the GP. This code uses an incremental implementation of the Cholesky
-            /// decomposition. It is therefore much faster than a call to compute()
-            void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation)
-            {
-                if (_samples.empty()) {
-                    if (_dim_in != sample.size()) {
-                        _dim_in = sample.size();
-                        _mapping = Mapping(_dim_in);
-                        reset();
+                /// add sample and update the GP. This code uses an incremental implementation of the Cholesky
+                /// decomposition. It is therefore much faster than a call to compute()
+                void add_sample(const Eigen::VectorXd& sample, const Eigen::VectorXd& observation)
+                {
+                    if (_samples.empty()) {
+                        if (_dim_in != sample.size()) {
+                            _dim_in = sample.size();
+                            _mapping = Mapping(_dim_in);
+                            reset();
+                        }
+                        if (_dim_out != observation.size()) {
+                            _dim_out = observation.size();
+                            _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
+                            reset();
+                        }
                     }
-                    if (_dim_out != observation.size()) {
-                        _dim_out = observation.size();
-                        _mean_function = MeanFunction(_dim_out); // the cost of building a functor should be relatively low
-                        reset();
+                    else {
+                        assert(sample.size() == _dim_in);
+                        assert(observation.size() == _dim_out);
                     }
+
+                    _samples.push_back(sample);
+
+                    _observations.conservativeResize(_observations.rows() + 1, _dim_out);
+                    _observations.bottomRows<1>() = observation.transpose();
+                    // _mean_observation = _observations.colwise().mean();
+
+                    this->_compute_obs_mean();
+
+                    _Phi.conservativeResize(_Phi.rows() + 1, _mapping.dim_out());
+                    Eigen::VectorXd sample_phi = _mapping.evaluate(sample);
+                    _Phi.bottomRows<1>() = sample_phi;
+
+                    // this->_compute_incremental_kernel();
+
+                    // Make Rtilde - [R, sample_phi]
+                    _L.transposeInPlace();
+                    _L.conservativeResize(_dim_mapping + 1, _dim_mapping);
+                    _L.bottomRows<1>() = sample_phi;
+
+                    // Note: the Gijsberts paper uses Givens rotations. Is that a bit more efficient?
+                    Eigen::HouseholderQR<Eigen::MatrixXd> qr_res2 = _L.householderQr();
+                    _L = qr_res2.matrixQR().topRows(_dim_mapping).transpose();
+
+                    _B += sample_phi * (observation - _mean_function(sample, *this)).transpose();
+
+                    // TODO Adapt to incremental? cost is O(_dim_mapping^2) which isn't that bad
+                    _LPhiY = _L.template triangularView<Eigen::Lower>().solve(_B);
+                    _W = _L.template triangularView<Eigen::Lower>().adjoint().solve(_LPhiY);
                 }
-                else {
-                    assert(sample.size() == _dim_in);
-                    assert(observation.size() == _dim_out);
-                }
-
-                _samples.push_back(sample);
-
-                _observations.conservativeResize(_observations.rows()+1, _dim_out);
-                _observations.bottomRows<1>() = observation.transpose();
-                // _mean_observation = _observations.colwise().mean();
-
-                this->_compute_obs_mean();
-
-                _Phi.conservativeResize(_Phi.rows()+1, _mapping.dim_out());
-                Eigen::VectorXd sample_phi = _mapping.evaluate(sample);
-                _Phi.bottomRows<1>() = sample_phi;
-
-                // this->_compute_incremental_kernel(); 
-
-                // Make Rtilde - [R, sample_phi]
-                _L.transposeInPlace();
-                _L.conservativeResize(_dim_mapping+1, _dim_mapping);
-                _L.bottomRows<1>() = sample_phi;
-
-                // Note: the Gijsberts paper uses Givens rotations. Is that a bit more efficient?
-                Eigen::HouseholderQR<Eigen::MatrixXd> qr_res2 = _L.householderQr();
-                _L = qr_res2.matrixQR().topRows(_dim_mapping).transpose();
-
-                _B += sample_phi * (observation -  _mean_function(sample, *this)).transpose();
-
-                // TODO Adapt to incremental? cost is O(_dim_mapping^2) which isn't that bad 
-                _LPhiY = _L.template triangularView<Eigen::Lower>().solve(_B);
-                _W = _L.template triangularView<Eigen::Lower>().adjoint().solve(_LPhiY);
-            }
 
             protected:
                 int _dim_in, _dim_out, _dim_mapping;
@@ -327,8 +327,8 @@ namespace limbo {
                     return sigma_n_2 * (1. + sol.array().square().sum());
                 }
             };
-        }
-    }
-}
+        } // namespace model
+    } // namespace experimental
+} // namespace limbo
 
 #endif
