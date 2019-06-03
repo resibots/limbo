@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -50,8 +50,11 @@
 ///@defgroup model_opt_defaults
 
 #include <limbo/model/gp.hpp>
-#include <limbo/model/gp/kernel_loo_opt.hpp>
+#include <limbo/model/multi_gp.hpp>
+#include <limbo/model/sparsified_gp.hpp>
+
 #include <limbo/model/gp/kernel_lf_opt.hpp>
+#include <limbo/model/gp/kernel_loo_opt.hpp>
 #include <limbo/model/gp/kernel_mean_lf_opt.hpp>
 #include <limbo/model/gp/mean_lf_opt.hpp>
 #include <limbo/model/gp/no_lf_opt.hpp>

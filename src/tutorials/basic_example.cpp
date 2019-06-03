@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -78,7 +78,7 @@ struct Params {
         BO_PARAM(double, noise, 1e-10);
     };
 
-    struct kernel_exp : public defaults::kernel_exp {
+    struct kernel_maternfivehalves : public defaults::kernel_maternfivehalves {
     };
 
     // we use 10 random samples to initialize the algorithm
@@ -99,7 +99,7 @@ struct Params {
 struct Eval {
     // number of input dimension (x.size())
     BO_PARAM(size_t, dim_in, 1);
-    // number of dimenions of the result (res.size())
+    // number of dimensions of the result (res.size())
     BO_PARAM(size_t, dim_out, 1);
 
     // the function to be optimized

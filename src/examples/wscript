@@ -8,7 +8,7 @@
 #| Contributor(s):
 #|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 #|   - Antoine Cully (antoinecully@gmail.com)
-#|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+#|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 #|   - Federico Allocati (fede.allocati@gmail.com)
 #|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 #|   - Roberto Rama (bertoski@gmail.com)
@@ -52,19 +52,19 @@ def build(bld):
                       source='mono_dim.cpp',
                       includes='. .. ../../',
                       target='mono_dim',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      uselib=bld.env.LIBRARIES,
                       use='limbo')
     obj = bld.program(features='cxx',
                       source='obs_multi.cpp',
                       includes='. .. ../../',
                       target='obs_multi',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      uselib=bld.env.LIBRARIES,
                       use='limbo')
     obj = bld.program(features='cxx',
                       source='obs_multi_auto_mean.cpp',
                       includes='. .. ../../',
                       target='obs_multi_auto_mean',
-                      uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
+                      uselib=bld.env.LIBRARIES,
                       use='limbo')
 
     if bld.options.experimental:

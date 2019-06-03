@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -46,19 +46,19 @@
 #ifndef LIMBO_TOOLS_PARALLEL_HPP
 #define LIMBO_TOOLS_PARALLEL_HPP
 
-#include <vector>
 #include <algorithm>
+#include <vector>
 
 #ifdef USE_TBB
 // Quick hack for definition of 'I' in <complex.h>
 #undef I
+#include <tbb/blocked_range.h>
 #include <tbb/concurrent_vector.h>
-#include <tbb/task_scheduler_init.h>
 #include <tbb/parallel_for.h>
 #include <tbb/parallel_for_each.h>
-#include <tbb/parallel_sort.h>
 #include <tbb/parallel_reduce.h>
-#include <tbb/blocked_range.h>
+#include <tbb/parallel_sort.h>
+#include <tbb/task_scheduler_init.h>
 #endif
 
 ///@defgroup par_tools
@@ -80,7 +80,7 @@ namespace limbo {
             /// @ingroup par_tools
             /// convert a std::vector to something else (e.g. a std::list)
             template <typename V>
-            std::vector<typename V::value_type> convert_vector(const V& v)
+            inline std::vector<typename V::value_type> convert_vector(const V& v)
             {
                 std::vector<typename V::value_type> v2(v.size());
                 std::copy(v.begin(), v.end(), v2.begin());
@@ -99,7 +99,7 @@ namespace limbo {
 #endif
 
             template <typename V>
-            V convert_vector(const V& v)
+            inline V convert_vector(const V& v)
             {
                 return v;
             }
@@ -114,7 +114,7 @@ namespace limbo {
 #else
             /// @ingroup par_tools
             /// init TBB (if activated) for multi-core computing
-            void init()
+            inline void init()
             {
             }
 #endif
@@ -126,7 +126,7 @@ namespace limbo {
             {
 #ifdef USE_TBB
                 tbb::parallel_for(size_t(begin), end, size_t(1), [&](size_t i) {
-                  // clang-format off
+                    // clang-format off
                 f(i);
                     // clang-format on
                 });
@@ -152,11 +152,11 @@ namespace limbo {
             /// @ingroup par_tools
             /// parallel max
             template <typename T, typename F, typename C>
-            T max(const T& init, int num_steps, const F& f, const C& comp)
+            inline T max(const T& init, int num_steps, const F& f, const C& comp)
             {
 #ifdef USE_TBB
                 auto body = [&](const tbb::blocked_range<size_t>& r, T current_max) -> T {
-    // clang-format off
+                    // clang-format off
             for (size_t i = r.begin(); i != r.end(); ++i)
             {
                 T v = f(i);
@@ -167,7 +167,7 @@ namespace limbo {
                     // clang-format on
                 };
                 auto joint = [&](const T& p1, const T& p2) -> T {
-    // clang-format off
+                    // clang-format off
             if (comp(p1, p2))
                 return p1;
             return p2;

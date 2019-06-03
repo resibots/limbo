@@ -69,10 +69,6 @@ struct Params {
     struct opt_rprop : public limbo::defaults::opt_rprop {
     };
 
-    struct opt_parallelrepeater : public limbo::defaults::opt_parallelrepeater {
-        BO_PARAM(int, repeats, 3);
-    };
-
     struct model_poegp : public limbo::defaults::model_poegp {
         BO_PARAM(int, leaf_size, 10);
         BO_PARAM(double, tau, 0.0);

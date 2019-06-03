@@ -8,7 +8,7 @@
 #| Contributor(s):
 #|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 #|   - Antoine Cully (antoinecully@gmail.com)
-#|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+#|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 #|   - Federico Allocati (fede.allocati@gmail.com)
 #|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 #|   - Roberto Rama (bertoski@gmail.com)
@@ -92,11 +92,11 @@ def check_mkl(conf):
     conf.env.LIBPATH_MKL_TBB = libpath_mkl
     conf.env.LIBPATH_MKL_OMP = libpath_mkl
     conf.env.CXXFLAGS_MKL_SEQ = ["-m64",  "-DEIGEN_USE_MKL_ALL", "-DMKL_BLAS=MKL_DOMAIN_BLAS"]
-    conf.env.LINKFLAGS_MKL_SEQ = [ "-Wl,--no-as-needed" ]
+    #conf.env.LINKFLAGS_MKL_SEQ = [ "-Wl,--no-as-needed" ]
     conf.env.CXXFLAGS_MKL_TBB = ["-m64",  "-DEIGEN_USE_MKL_ALL" , "-DMKL_BLAS=MKL_DOMAIN_BLAS"]
-    conf.env.LINKFLAGS_MKL_TBB = [ "-Wl,--no-as-needed" ]
+    #conf.env.LINKFLAGS_MKL_TBB = [ "-Wl,--no-as-needed" ]
     if  conf.env.CXX_NAME in ["icc", "icpc"]:
         conf.env.CXXFLAGS_MKL_OMP = ["-qopenmp", "-m64",  "-DEIGEN_USE_MKL_ALL", "-DMKL_BLAS=MKL_DOMAIN_BLAS" ]
     else:
         conf.env.CXXFLAGS_MKL_OMP = ["-fopenmp", "-m64",  "-DEIGEN_USE_MKL_ALL", "-DMKL_BLAS=MKL_DOMAIN_BLAS"]
-    conf.env.LINKFLAGS_MKL_OMP = [ "-Wl,--no-as-needed" ]
+    #conf.env.LINKFLAGS_MKL_OMP = [ "-Wl,--no-as-needed" ]

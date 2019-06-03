@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -47,15 +47,17 @@
 #ifndef LIMBO_TOOLS_RANDOM_GENERATOR_HPP
 #define LIMBO_TOOLS_RANDOM_GENERATOR_HPP
 
-#include <cstdlib>
+#include <Eigen/Core>
+
 #include <cmath>
+#include <cstdlib>
 #include <ctime>
-#include <list>
-#include <stdlib.h>
-#include <random>
-#include <utility>
-#include <mutex>
 #include <external/rand_utils.hpp>
+#include <list>
+#include <mutex>
+#include <random>
+#include <stdlib.h>
+#include <utility>
 
 namespace limbo {
     namespace tools {
@@ -69,11 +71,21 @@ namespace limbo {
         class RandomGenerator {
         public:
             using result_type = typename D::result_type;
-            RandomGenerator(result_type a, result_type b) : _dist(a, b), _rgen(randutils::auto_seed_128{}.base()) {}
-            result_type rand()
+            RandomGenerator(result_type a, result_type b, int seed = -1) : _dist(a, b) { this->seed(seed); }
+
+            result_type rand() { return _dist(_rgen); }
+
+            void seed(int seed = -1)
             {
-                return _dist(_rgen);
+                if (seed >= 0)
+                    _rgen.seed(seed);
+                else
+                    _rgen.seed(randutils::auto_seed_128{}.base());
             }
+
+            void reset() { _dist.reset(); }
+
+            void param(const typename D::param_type& param) { _dist.param(param); }
 
         private:
             D _dist;
@@ -95,47 +107,84 @@ namespace limbo {
         /// Double random number generator (gaussian)
         using rgen_gauss_t = RandomGenerator<rdist_gauss_t>;
 
-        ///@ingroup tools
-        ///integer random number generator
+        /// @ingroup tools
+        /// integer random number generator
         using rgen_int_t = RandomGenerator<rdist_int_t>;
 
         /// @ingroup tools
-        /// random vector in [0, 1.0]
-        ///
-        /// - this function is thread safe because we use a random generator for each thread
-        /// - we use a C++11 random number generator
-        Eigen::VectorXd random_vector_bounded(int size)
+        /// random vector by providing custom RandomGenerator
+        template <typename Rng>
+        inline Eigen::VectorXd random_vec(int size, Rng& rng)
         {
-            static thread_local rgen_double_t rgen(0.0, 1.0);
             Eigen::VectorXd res(size);
             for (int i = 0; i < size; ++i)
-                res[i] = rgen.rand();
+                res[i] = rng.rand();
             return res;
         }
 
         /// @ingroup tools
-        /// random vector generated with a normal distribution centered on 0, with standard deviation of 10.0
+        /// random vector in [0, 1]
         ///
         /// - this function is thread safe because we use a random generator for each thread
         /// - we use a C++11 random number generator
-        Eigen::VectorXd random_vector_unbounded(int size)
+        inline Eigen::VectorXd random_vector_bounded(int size)
+        {
+            static thread_local rgen_double_t rgen(0.0, 1.0);
+            return random_vec(size, rgen);
+        }
+
+        /// @ingroup tools
+        /// random vector generated with a normal distribution centered on 0, with standard deviation of 10
+        ///
+        /// - this function is thread safe because we use a random generator for each thread
+        /// - we use a C++11 random number generator
+        inline Eigen::VectorXd random_vector_unbounded(int size)
         {
             static thread_local rgen_gauss_t rgen(0.0, 10.0);
-            Eigen::VectorXd res(size);
-            for (int i = 0; i < size; ++i)
-                res[i] = rgen.rand();
-            return res;
+            return random_vec(size, rgen);
         }
 
         /// @ingroup tools
         /// random vector wrapper for both bounded and unbounded versions
-        Eigen::VectorXd random_vector(int size, bool bounded = true)
+        inline Eigen::VectorXd random_vector(int size, bool bounded = true)
         {
             if (bounded)
                 return random_vector_bounded(size);
             return random_vector_unbounded(size);
         }
-    }
-}
+
+        /// @ingroup tools
+        /// generate n random samples with Latin Hypercube Sampling (LHS) in [0, 1]^dim
+        inline Eigen::MatrixXd random_lhs(int dim, int n)
+        {
+            Eigen::VectorXd cut = Eigen::VectorXd::LinSpaced(n + 1, 0., 1.);
+            Eigen::MatrixXd u = Eigen::MatrixXd::Zero(n, dim);
+
+            for (int i = 0; i < n; i++) {
+                u.row(i) = tools::random_vector(dim, true);
+            }
+
+            Eigen::VectorXd a = cut.head(n);
+            Eigen::VectorXd b = cut.tail(n);
+
+            Eigen::MatrixXd rdpoints = Eigen::MatrixXd::Zero(n, dim);
+            for (int i = 0; i < dim; i++) {
+                rdpoints.col(i) = u.col(i).array() * (b - a).array() + a.array();
+            }
+
+            Eigen::MatrixXd H = Eigen::MatrixXd::Zero(n, dim);
+            Eigen::PermutationMatrix<Eigen::Dynamic, Eigen::Dynamic> perm(n);
+            static thread_local std::mt19937 rgen(randutils::auto_seed_128{}.base());
+            for (int i = 0; i < dim; i++) {
+                perm.setIdentity();
+                std::shuffle(perm.indices().data(), perm.indices().data() + perm.indices().size(), rgen);
+                Eigen::MatrixXd tmp = perm * rdpoints;
+                H.col(i) = tmp.col(i);
+            }
+
+            return H;
+        }
+    } // namespace tools
+} // namespace limbo
 
 #endif

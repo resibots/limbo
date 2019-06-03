@@ -55,7 +55,7 @@ namespace limbo {
             namespace poegp {
                 ///@ingroup model_opt
                 ///optimize the likelihood of the kernel only
-                template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
+                template <typename Params, typename Optimizer = opt::Rprop<Params>>
                 struct POEKernelLFOpt : public limbo::model::gp::HPOpt<Params, Optimizer> {
                 public:
                     template <typename GP>
@@ -106,9 +106,9 @@ namespace limbo {
                         const GP& _original_gp;
                     };
                 };
-            }
-        }
-    }
-}
+            } // namespace poegp
+        } // namespace model
+    } // namespace experimental
+} // namespace limbo
 
 #endif

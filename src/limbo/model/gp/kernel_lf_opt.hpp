@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -47,14 +47,13 @@
 #define LIMBO_MODEL_GP_KERNEL_LF_OPT_HPP
 
 #include <limbo/model/gp/hp_opt.hpp>
-#include <limbo/tools/random_generator.hpp>
 
 namespace limbo {
     namespace model {
         namespace gp {
             ///@ingroup model_opt
             ///optimize the likelihood of the kernel only
-            template <typename Params, typename Optimizer = opt::ParallelRepeater<Params, opt::Rprop<Params>>>
+            template <typename Params, typename Optimizer = opt::Rprop<Params>>
             struct KernelLFOpt : public HPOpt<Params, Optimizer> {
             public:
                 template <typename GP>
@@ -96,8 +95,8 @@ namespace limbo {
                     const GP& _original_gp;
                 };
             };
-        }
-    }
-}
+        } // namespace gp
+    } // namespace model
+} // namespace limbo
 
 #endif

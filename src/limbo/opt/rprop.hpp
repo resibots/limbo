@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -50,9 +50,9 @@
 
 #include <Eigen/Core>
 
+#include <limbo/opt/optimizer.hpp>
 #include <limbo/tools/macros.hpp>
 #include <limbo/tools/math.hpp>
-#include <limbo/opt/optimizer.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -77,6 +77,7 @@ namespace limbo {
         ///
         /// Parameters:
         /// - int iterations
+        /// - double eps_stop
         template <typename Params>
         struct Rprop {
             template <typename F>

@@ -65,8 +65,6 @@ struct Params {
     };
     struct opt_rprop : public defaults::opt_rprop {
     };
-    struct opt_parallelrepeater : public defaults::opt_parallelrepeater {
-    };
 
     struct opt_cmaes : public defaults::opt_cmaes {
         BO_PARAM(int, restarts, 5);

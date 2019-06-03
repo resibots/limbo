@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -46,8 +46,8 @@
 #ifndef LIMBO_STAT_PARETO_FRONT_HPP
 #define LIMBO_STAT_PARETO_FRONT_HPP
 
-#include <limbo/stat/stat_base.hpp>
 #include <limbo/experimental/tools/pareto.hpp>
+#include <limbo/stat/stat_base.hpp>
 
 namespace limbo {
     namespace experimental {
@@ -90,7 +90,7 @@ namespace limbo {
                     assert(sigma.size() == objs.size());
                     pareto_t p(points.size());
                     tools::par::loop(0, p.size(), [&](size_t k) {
-                    // clang-format off
+                        // clang-format off
                     p[k] = std::make_tuple(points[k], objs[k], sigma[k]);
                         // clang-format on
                     });

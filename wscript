@@ -8,7 +8,7 @@
 #| Contributor(s):
 #|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 #|   - Antoine Cully (antoinecully@gmail.com)
-#|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+#|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 #|   - Federico Allocati (fede.allocati@gmail.com)
 #|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 #|   - Roberto Rama (bertoski@gmail.com)
@@ -57,10 +57,11 @@ blddir = 'build'
 import glob
 import os
 import subprocess
-import limbo
+import limbo, benchmarks
 import inspect
 from waflib import Logs
 from waflib.Build import BuildContext
+from waflib.Errors import WafError
 
 def options(opt):
         opt.load('compiler_cxx boost waf_unit_test')
@@ -86,10 +87,26 @@ def options(opt):
         opt.add_option('--nb_replicates', type='int', help='number of replicates performed during the benchmark', dest='nb_rep')
         opt.add_option('--tests', action='store_true', help='compile tests or not', dest='tests')
         opt.add_option('--write_params', type='string', help='write all the default values of parameters in a file (used by the documentation system)', dest='write_params')
+        opt.add_option('--regression_benchmarks', type='string', help='config file (json) to compile benchmark for regression', dest='regression_benchmarks')
+        opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
+        opt.add_option('--no-native', action='store_true', default=False, help='disable -march=native, which can cause some troubles [--no-native]', dest='no_native')
+        opt.add_option('--openmp', action='store_true', default=False, help='enable OpenMP (if found)', dest='openmp')
+
+
+        try:
+                os.mkdir(blddir)# because this is not always created at that stage
+        except:
+                print("build dir not created (it probably already exists, this is fine)")
+        opt.logger = Logs.make_logger(blddir + '/options.log', 'mylogger')
 
         for i in glob.glob('exp/*'):
                 if os.path.isdir(i):
-                    opt.recurse(i)
+                    opt.start_msg('command-line options for [%s]' % i)
+                    try:
+                        opt.recurse(i)
+                        opt.end_msg(' -> OK')
+                    except WafError:
+                        opt.end_msg(' -> no options found')
 
         opt.recurse('src/benchmarks')
 
@@ -99,18 +116,46 @@ def configure(conf):
         conf.load('eigen')
         conf.load('tbb')
         conf.load('sferes')
-        conf.load('openmp')
+        if conf.options.openmp:
+            conf.load('openmp')
         conf.load('mkl')
         conf.load('xcode')
         conf.load('nlopt')
         conf.load('libcmaes')
+        conf.load('avx')
 
-        native_flags = "-march=native"
+        # dependencies
+        conf.check_boost(lib='serialization filesystem \
+            system unit_test_framework program_options \
+            thread', min_version='1.39')
+        conf.check_eigen()
+        conf.check_tbb()
+        conf.check_sferes()
+        if conf.options.openmp:
+            conf.check_openmp()
+        conf.check_mkl()
+        conf.check_nlopt()
+        conf.check_libcmaes()
+
+        conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
+        conf.env.LIBRARIES = 'BOOST EIGEN TBB LIBCMAES NLOPT'
+        if conf.options.openmp:
+            conf.env.LIBRARIES = conf.env.LIBRARIES + ' OMP'
+
+        
+        
+        # compiler
+        is_cpp14 = conf.options.cpp14
+        if is_cpp14:
+            is_cpp14 = conf.check_cxx(cxxflags="-std=c++14", mandatory=False, msg='Checking for C++14')
+            if not is_cpp14:
+                conf.msg('C++14 is requested, but your compiler does not support it!', 'Disabling it!', color='RED')
         if conf.env.CXX_NAME in ["icc", "icpc"]:
             common_flags = "-Wall -std=c++11"
             opt_flags = " -O3 -xHost -g"
             native_flags = "-mtune=native -unroll -fma"
         else:
+            native_flags = '-march=native'
             if conf.env.CXX_NAME in ["gcc", "g++"] and int(conf.env['CC_VERSION'][0]+conf.env['CC_VERSION'][1]) < 47:
                 common_flags = "-Wall -std=c++0x"
             else:
@@ -119,28 +164,30 @@ def configure(conf):
                 common_flags += " -fdiagnostics-color"
             opt_flags = " -O3 -g"
 
+        if is_cpp14:
+            common_flags = common_flags + " -std=c++14"
+
+        # is libcmaes compiled with -march=native (avx instructions)?
+        cmaes_native = True
+        if conf.env.DEFINES_LIBCMAES: # if we have CMA-ES activated & found 
+            conf.start_msg('Checking for libcmaes AVX support (-march=native)')
+            cmaes_native = conf.check_avx('cmaes', 'cmaes')
+            if cmaes_native:
+                conf.end_msg('OK', 'GREEN')
+            else:
+                conf.end_msg('NO -> deactivate -march=native', 'YELLOW')
+
         native = conf.check_cxx(cxxflags=native_flags, mandatory=False, msg='Checking for compiler flags \"'+native_flags+'\"')
-        if native:
+        if native and cmaes_native and not conf.options.no_native:
             opt_flags = opt_flags + ' ' + native_flags
-        else:
+        elif not native:
             Logs.pprint('YELLOW', 'WARNING: Native flags not supported. The performance might be a bit deteriorated.')
-
-        conf.check_boost(lib='serialization filesystem \
-            system unit_test_framework program_options \
-            thread', min_version='1.39')
-        conf.check_eigen()
-        conf.check_tbb()
-        conf.check_sferes()
-        conf.check_openmp()
-        conf.check_mkl()
-        conf.check_nlopt()
-        conf.check_libcmaes()
-
-        conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
+        else:
+            Logs.pprint('YELLOW', 'WARNING: Native flags not activated. The performance might be a bit deteriorated.')
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
-        Logs.pprint('NORMAL', 'CXXFLAGS: %s' % conf.env['CXXFLAGS'])
+        Logs.pprint('NORMAL', 'CXXFLAGS: %s' % (conf.env['CXXFLAGS'] + conf.env['CXXFLAGS_OMP']))
 
         if conf.options.exp:
                 for i in conf.options.exp.split(','):
@@ -154,7 +201,10 @@ def configure(conf):
         Logs.pprint('NORMAL', '[users] To compile and run unit tests: ./waf --tests')
         Logs.pprint('NORMAL', '[users] Read the documentation (inc. tutorials) on http://www.resibots.eu/limbo')
         Logs.pprint('NORMAL', '[developers] To compile the HTML documentation (this requires sphinx and the resibots theme): ./waf docs')
-        Logs.pprint('NORMAL', '[developers] To compile the benchmarks: ./waf build_benchmark')
+        Logs.pprint('NORMAL', '[developers] To compile the BO benchmarks: ./waf build_bo_benchmarks')
+        Logs.pprint('NORMAL', '[developers] To run the BO benchmarks: ./waf run_bo_benchmarks')
+        Logs.pprint('NORMAL', '[developers] To compile the regression benchmarks (requires a json file with the setup): ./waf --regression_benchmarks file.json')
+        Logs.pprint('NORMAL', '[developers] To run the regression benchmarks: ./waf run_regression_benchmarks --regression_benchmarks file.json')
         Logs.pprint('NORMAL', '[developers] To compile the extensive tests: ./waf build_extensive_tests')
 
 
@@ -168,13 +218,15 @@ def build(bld):
             Logs.pprint('NORMAL', 'Building exp: %s' % i)
             bld.recurse('exp/' + i)
             limbo.output_params('exp/'+i)
+    if bld.options.regression_benchmarks:
+        benchmarks.compile_regression_benchmarks(bld, bld.options.regression_benchmarks)
     bld.add_post_fun(limbo.summary)
 
 def build_extensive_tests(ctx):
     ctx.recurse('src/')
     ctx.recurse('src/tests')
 
-def build_benchmark(ctx):
+def build_bo_benchmarks(ctx):
     ctx.recurse('src/benchmarks')
 
 def run_extensive_tests(ctx):
@@ -193,32 +245,11 @@ def submit_extensive_tests(ctx):
             retcode = subprocess.call(s, shell=True, env=None)
             Logs.pprint('NORMAL', 'oarsub returned: %s' % str(retcode))
 
-def run_benchmark(ctx):
-    HEADER='\033[95m'
-    NC='\033[0m'
-    res_dir=os.getcwd()+"/benchmark_results/"
-    try:
-        os.makedirs(res_dir)
-    except:
-        Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created!' % res_dir)
-    for fullname in glob.glob('build/src/benchmarks/*'):
-        if os.path.isfile(fullname) and os.access(fullname, os.X_OK):
-            fpath, fname = os.path.split(fullname)
-            directory = res_dir + "/" + fname
-            try:
-                os.makedirs(directory)
-            except:
-                Logs.pprint('YELLOW', 'WARNING: directory \'%s\' could not be created, the new results will be concatenated to the old ones' % directory)
-            s = "cp " + fullname + " " + directory
-            retcode = subprocess.call(s, shell=True, env=None)
-            if ctx.options.nb_rep:
-                nb_rep = ctx.options.nb_rep
-            else:
-                nb_rep = 10
-            for i in range(0,nb_rep):
-                Logs.pprint('NORMAL', '%s Running: %s for the %s th time %s' % (HEADER, fname, str(i), NC))
-                s="cd " + directory +";./" + fname
-                retcode = subprocess.call(s, shell=True, env=None)
+def run_bo_benchmarks(ctx):
+    benchmarks.run_bo_benchmarks(ctx)
+
+def run_regression_benchmarks(ctx):
+    benchmarks.run_regression_benchmarks(ctx)
 
 def shutdown(ctx):
     if ctx.options.create_exp:
@@ -241,7 +272,7 @@ def write_default_params(ctx):
 
 def build_docs(ctx):
     Logs.pprint('NORMAL', "generating HTML doc with versioning...")
-    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(new_benchmarks|master|release-*)" docs docs/_build/html'
+    s = 'sphinx-versioning -v build -f docs/pre_script.sh --whitelist-branches "(master|release-*)" docs docs/_build/html'
     retcode = subprocess.call(s, shell=True, env=None)
 
 class BuildExtensiveTestsContext(BuildContext):
@@ -249,8 +280,8 @@ class BuildExtensiveTestsContext(BuildContext):
     fun = 'build_extensive_tests'
 
 class BuildBenchmark(BuildContext):
-    cmd = 'build_benchmark'
-    fun = 'build_benchmark'
+    cmd = 'build_bo_benchmarks'
+    fun = 'build_bo_benchmarks'
 
 class InsertLicense(BuildContext):
     cmd = 'insert_license'

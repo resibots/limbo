@@ -8,7 +8,7 @@
 #| Contributor(s):
 #|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 #|   - Antoine Cully (antoinecully@gmail.com)
-#|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+#|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 #|   - Federico Allocati (fede.allocati@gmail.com)
 #|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 #|   - Roberto Rama (bertoski@gmail.com)
@@ -50,62 +50,74 @@ import create_all_combinations_test
 
 
 def build(bld):
-    bld.program(features='cxx',
-                source='bo_functions.cpp',
-                includes='. .. ../../',
-                target='bo_functions',
-                uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                use='limbo')
-    bld.program(features='cxx test',
-                source='test_gp.cpp',
-                includes='. .. ../../',
-                target='test_gp',
-                uselib='BOOST EIGEN TBB',
-                use='limbo')
-    bld.program(features='cxx test',
-                source='test_kernel.cpp',
-                includes='. .. ../../',
-                target='test_kernel',
-                uselib='BOOST EIGEN TBB',
-                use='limbo')
-    bld.program(features='cxx test',
-                source='test_init_functions.cpp',
-                includes='. .. ../../',
-                target='test_init_functions',
-                uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                use='limbo')
-    bld.program(features='cxx test',
-                source='test_optimizers.cpp',
-                includes='. .. ../../',
-                target='test_optimizers',
-                uselib='BOOST EIGEN TBB LIBCMAES',
-                use='limbo')
-    bld.program(features='cxx test',
-                source='test_macros.cpp',
-                includes='. .. ../../',
-                target='test_macros',
-                uselib='BOOST EIGEN TBB',
-                use='limbo')
+    bld.program(features = 'cxx',
+                source = 'bo_functions.cpp',
+                includes = '. .. ../../',
+                target = 'bo_functions',
+                uselib = bld.env.LIBRARIES,
+                use = 'limbo')
+    bld.program(features = 'cxx test',
+                source = 'test_gp.cpp',
+                includes = '. .. ../../',
+                target = 'test_gp',
+                uselib = bld.env.LIBRARIES,
+                use = 'limbo')
+    bld.program(features = 'cxx test',
+                source = 'test_kernel.cpp',
+                includes = '. .. ../../',
+                target = 'test_kernel',
+                uselib = bld.env.LIBRARIES,
+                use = 'limbo')
+    bld.program(features = 'cxx test',
+                source = 'test_mean.cpp',
+                includes = '. .. ../../',
+                target = 'test_mean',
+                uselib = bld.env.LIBRARIES,
+                use = 'limbo')
+    bld.program(features = 'cxx test',
+                source = 'test_init_functions.cpp',
+                includes = '. .. ../../',
+                target = 'test_init_functions',
+                uselib = bld.env.LIBRARIES,
+                use = 'limbo')
+    bld.program(features = 'cxx test',
+                source = 'test_optimizers.cpp',
+                includes = '. .. ../../',
+                target = 'test_optimizers',
+                uselib = bld.env.LIBRARIES,
+                use = 'limbo')
+    bld.program(features = 'cxx test',
+                source = 'test_macros.cpp',
+                includes = '. .. ../../',
+                target = 'test_macros',
+                uselib = bld.env.LIBRARIES,
+                use = 'limbo')
+    bld.program(features = 'cxx test',
+                source = 'test_serialize.cpp',
+                includes = '. .. ../../',
+                target = 'test_serialize',
+                uselib = bld.env.LIBRARIES,
+                use = 'limbo')
     if bld.env.DEFINES_NLOPT or bld.env.DEFINES_LIBCMAES:
-        bld.program(features='cxx test',
-                    source='test_boptimizer.cpp',
-                    includes='. .. ../../',
-                    target='test_boptimizer',
-                    uselib='BOOST EIGEN TBB LIBCMAES NLOPT',
-                    use='limbo')
+        bld.program(features = 'cxx test',
+                    source = 'test_boptimizer.cpp',
+                    includes = '. .. ../../',
+                    target = 'test_boptimizer',
+                    uselib = bld.env.LIBRARIES,
+                    use = 'limbo')
     if bld.env.DEFINES_NLOPT:
-        bld.program(features='cxx test',
-                    source='test_nlopt.cpp',
-                    includes='. .. ../../',
-                    target='test_nlopt',
-                    uselib='BOOST EIGEN TBB NLOPT',
-                    use='limbo')
+        bld.program(features = 'cxx test',
+                    source = 'test_nlopt.cpp',
+                    includes = '. .. ../../',
+                    target = 'test_nlopt',
+                    uselib = bld.env.LIBRARIES,
+                    use = 'limbo')
     if bld.env.DEFINES_LIBCMAES:
         bld.program(features='cxx test',
                     source='test_cmaes.cpp',
                     includes='. .. ../../',
                     target='test_cmaes',
-                    uselib='BOOST EIGEN TBB LIBCMAES',
+                    uselib=bld.env.LIBRARIES,
                     use='limbo')
 
 

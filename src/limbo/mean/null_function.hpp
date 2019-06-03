@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -46,14 +46,14 @@
 #ifndef LIMBO_MEAN_NULL_FUNCTION_HPP
 #define LIMBO_MEAN_NULL_FUNCTION_HPP
 
-#include <Eigen/Core>
+#include <limbo/mean/mean.hpp>
 
 namespace limbo {
     namespace mean {
         /// @ingroup mean
         /// Constant with m=0
         template <typename Params>
-        struct NullFunction {
+        struct NullFunction : public BaseMean<Params> {
             NullFunction(size_t dim_out = 1) : _dim_out(dim_out) {}
 
             template <typename GP>

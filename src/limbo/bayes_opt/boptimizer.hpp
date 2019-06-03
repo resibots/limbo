@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -138,7 +138,6 @@ namespace limbo {
             template <typename StateFunction, typename AggregatorFunction = FirstElem>
             void optimize(const StateFunction& sfun, const AggregatorFunction& afun = AggregatorFunction(), bool reset = true)
             {
-
                 this->_init(sfun, afun, reset);
 
                 if (!this->_observations.empty())
@@ -210,7 +209,7 @@ namespace limbo {
             class A2 = boost::parameter::void_,
             class A3 = boost::parameter::void_,
             class A4 = boost::parameter::void_>
-        using BOptimizerHPOpt = BOptimizer<Params, A1, A2, A3, A4, modelfun<_default_hp::model_t<Params>>, acquifun<_default_hp::acqui_t<Params>>>;
+        using BOptimizerHPOpt = BOptimizer<Params, modelfun<_default_hp::model_t<Params>>, acquifun<_default_hp::acqui_t<Params>>, A1, A2, A3, A4>;
     }
 }
 #endif

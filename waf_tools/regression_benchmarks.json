@@ -1,0 +1,9 @@
+[{ "name" : "regression_benchmark",
+  "functions" : ["Rastrigin", "GramacyLee", "Step", "RobotArm", "OTLCircuit", "PistonSimulation", "PlanarInverseDynamicsI", "PlanarInverseDynamicsII"],
+  "dimensions" : [[1,2,4,8], [1], [1], [8], [6], [7], [6], [6]],
+  "points" : [50, 100, 200, 400, 600],
+  "randomness": ["uniform"],
+  "noise" : "true",
+  "models" : [{"name" : "GP-SE-Full-Rprop", "type" : "GP", "kernel" : {"type": "SquaredExpARD", "optimize_noise" : "true", "params" : {"sigma_sq" : ["double", 1.0]}}, "mean" : {"type": "NullFunction", "has_defaults" : "false"}, "hp_opt" : {"type" : "KernelLFOpt", "optimizer" : "Rprop", "params" : {"iterations" : ["int", 50], "eps_stop" : ["double", 1e-2]}}},
+        {"name" : "GP-SE-Rprop", "type" : "GP", "kernel" : {"type": "SquaredExpARD", "optimize_noise" : "false", "params" : {"sigma_sq" : ["double", 1.0]}}, "mean" : {"type": "NullFunction", "has_defaults" : "false"}, "hp_opt" : {"type" : "KernelLFOpt", "optimizer" : "Rprop", "params" : {"iterations" : ["int", 50], "eps_stop" : ["double", 1e-2]}}}]
+}]

@@ -6,7 +6,7 @@
 //| Contributor(s):
 //|   - Jean-Baptiste Mouret (jean-baptiste.mouret@inria.fr)
 //|   - Antoine Cully (antoinecully@gmail.com)
-//|   - Kontantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
+//|   - Konstantinos Chatzilygeroudis (konstantinos.chatzilygeroudis@inria.fr)
 //|   - Federico Allocati (fede.allocati@gmail.com)
 //|   - Vaios Papaspyros (b.papaspyros@gmail.com)
 //|   - Roberto Rama (bertoski@gmail.com)
@@ -44,25 +44,24 @@
 //| knowledge of the CeCILL-C license and that you accept its terms.
 //|
 
-
 #ifndef LIMBO_TOOLS_MATH_HPP
 #define LIMBO_TOOLS_MATH_HPP
 
-#include <cstdlib>
 #include <cmath>
+#include <cstdlib>
 #include <ctime>
 #include <list>
-#include <stdlib.h>
-#include <random>
-#include <utility>
 #include <mutex>
+#include <random>
+#include <stdlib.h>
+#include <utility>
 
 namespace limbo {
     namespace tools {
 
         /// @ingroup tools
         /// make a 1-D vector from a double (useful when we need to return vectors)
-        Eigen::VectorXd make_vector(double x)
+        inline Eigen::VectorXd make_vector(double x)
         {
             Eigen::VectorXd res(1);
             res(0) = x;
