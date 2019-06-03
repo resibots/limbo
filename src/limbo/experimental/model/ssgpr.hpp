@@ -125,7 +125,8 @@ namespace limbo {
 
                     Eigen::MatrixXd tmp = (_obs_mean.transpose() * _obs_mean);
                     double y_T_y = tmp.trace();
-                    tmp = _obs_mean.transpose() * _Phi * _W;
+                    tmp = _obs_mean.transpose() * _Phi * _W; // This should be wrong, but works better than the line below
+                    // tmp = _obs_mean.transpose() * _Phi * _LPhiY;
                     double big = tmp.trace();
 
                     double sigma_n_2 = _sigma_n * _sigma_n;
