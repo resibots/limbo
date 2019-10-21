@@ -83,10 +83,12 @@ def check_nlopt(conf):
 		return 1
 	conf.start_msg('Checking for NLOpt C++ libs (optional)')
 	lib_path = ''
-	for lib in ['libnlopt_cxx.so', 'libnlopt_cxx.a', 'libnlopt_cxx.dylib']:
+	lib_name = ''
+	for lib in ['libnlopt_cxx.so', 'libnlopt_cxx.a', 'libnlopt_cxx.dylib', 'libnlopt.so', 'libnlopt.a', 'libnlopt.dylib']:
 		try:
 			res = conf.find_file(lib, libs_check)
 			lib_path = res[:-len(lib)-1]
+			lib_name = os.path.splitext(lib)[0][3:]
 		except:
 			continue
 	if lib_path == '':
@@ -97,5 +99,5 @@ def check_nlopt(conf):
 		conf.env.INCLUDES_NLOPT = [incl]
 		conf.env.LIBPATH_NLOPT = [lib_path]
 		conf.env.DEFINES_NLOPT = ['USE_NLOPT']
-		conf.env.LIB_NLOPT = ['nlopt_cxx']
+		conf.env.LIB_NLOPT = [lib_name]
 	return 1

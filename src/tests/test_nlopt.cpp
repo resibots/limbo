@@ -56,11 +56,11 @@ using namespace limbo;
 
 struct Params {
     struct opt_nloptgrad : public defaults::opt_nloptgrad {
-        BO_PARAM(int, iterations, 80);
+        BO_PARAM(int, iterations, 200);
     };
 
     struct opt_nloptnograd : public defaults::opt_nloptnograd {
-        BO_PARAM(int, iterations, 80);
+        BO_PARAM(int, iterations, 200);
     };
 };
 
@@ -72,6 +72,28 @@ opt::eval_t my_function(const Eigen::VectorXd& params, bool eval_grad)
     Eigen::VectorXd grad(2);
     grad(0) = -2 * params(0);
     grad(1) = -2 * params(1);
+    return {v, grad};
+}
+
+opt::eval_t my_constraint(const Eigen::VectorXd& params, bool eval_grad)
+{
+    double v = params(0) + 3. * params(1) - 10.;
+    if (!eval_grad)
+        return opt::no_grad(v);
+    Eigen::VectorXd grad(2);
+    grad(0) = 1.;
+    grad(1) = 3.;
+    return {v, grad};
+}
+
+opt::eval_t my_inequality_constraint(const Eigen::VectorXd& params, bool eval_grad)
+{
+    double v = -params(0) - 3. * params(1) + 10.;
+    if (!eval_grad)
+        return opt::no_grad(v);
+    Eigen::VectorXd grad(2);
+    grad(0) = -1.;
+    grad(1) = -3.;
     return {v, grad};
 }
 
@@ -99,4 +121,46 @@ BOOST_AUTO_TEST_CASE(test_nlopt_no_grad_simple)
 
     BOOST_CHECK_SMALL(best(0), 0.00000001);
     BOOST_CHECK_SMALL(best(1), 0.00000001);
+}
+
+BOOST_AUTO_TEST_CASE(test_nlopt_no_grad_constraint)
+{
+    opt::NLOptNoGrad<Params, nlopt::LN_COBYLA> optimizer;
+    optimizer.initialize(2);
+    optimizer.add_equality_constraint(my_constraint);
+
+    Eigen::VectorXd best = tools::random_vector(2).array() * 50.; // some random big value
+    Eigen::VectorXd target(2);
+    target << 1., 3.;
+    size_t N = 10;
+    for (size_t i = 0; i < N; i++) {
+        Eigen::VectorXd g = optimizer(my_function, tools::random_vector(2), false);
+        if ((g - target).norm() < (best - target).norm()) {
+            best = g;
+        }
+    }
+
+    BOOST_CHECK_SMALL(std::abs(1. - best(0)), 0.000001);
+    BOOST_CHECK_SMALL(std::abs(3. - best(1)), 0.000001);
+}
+
+BOOST_AUTO_TEST_CASE(test_nlopt_grad_constraint)
+{
+    opt::NLOptGrad<Params, nlopt::LD_AUGLAG_EQ> optimizer;
+    optimizer.initialize(2);
+    optimizer.add_inequality_constraint(my_inequality_constraint);
+
+    Eigen::VectorXd best = tools::random_vector(2).array() * 50.; // some random big value
+    Eigen::VectorXd target(2);
+    target << 1., 3.;
+    size_t N = 10;
+    for (size_t i = 0; i < N; i++) {
+        Eigen::VectorXd g = optimizer(my_function, tools::random_vector(2), false);
+        if ((g - target).norm() < (best - target).norm()) {
+            best = g;
+        }
+    }
+
+    BOOST_CHECK_SMALL(std::abs(1. - best(0)), 0.0001);
+    BOOST_CHECK_SMALL(std::abs(3. - best(1)), 0.0001);
 }
