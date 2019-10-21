@@ -119,7 +119,7 @@ namespace limbo {
                     Algorithm == nlopt::LD_VAR1 || Algorithm == nlopt::GD_STOGO ||
                     Algorithm == nlopt::GD_STOGO_RAND || Algorithm == nlopt::LD_LBFGS_NOCEDAL ||
                     Algorithm == nlopt::LD_AUGLAG || Algorithm == nlopt::LD_AUGLAG_EQ ||
-                    Algorithm == nlopt::LD_CCSAQ || Algorithm == nlopt::GN_AGS, "NLOptGrad accepts gradient-based nlopt algorithms only");
+                    Algorithm == nlopt::LD_CCSAQ, "NLOptGrad accepts gradient-based nlopt algorithms only");
                 // clang-format on
 
                 NLOptBase<Params, Algorithm>::initialize(dim);

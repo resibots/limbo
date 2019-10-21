@@ -63,11 +63,6 @@ namespace limbo {
         /**
           @ingroup opt
         Base class for NLOpt wrappers
-
-        Parameters:
-         - int iterations
-         - double fun_tolerance
-         - double xrel_tolerance
         */
         template <typename Params, nlopt::algorithm Algorithm>
         struct NLOptBase {
