@@ -141,8 +141,6 @@ def configure(conf):
         conf.env.LIBRARIES = 'BOOST EIGEN TBB LIBCMAES NLOPT'
         if conf.options.openmp:
             conf.env.LIBRARIES = conf.env.LIBRARIES + ' OMP'
-
-        
         
         # compiler
         is_cpp14 = conf.options.cpp14
@@ -171,7 +169,7 @@ def configure(conf):
         cmaes_native = True
         if conf.env.DEFINES_LIBCMAES: # if we have CMA-ES activated & found 
             conf.start_msg('Checking for libcmaes AVX support (-march=native)')
-            cmaes_native = conf.check_avx('cmaes', 'cmaes')
+            cmaes_native = conf.check_avx('libcmaes', 'cmaes')
             if cmaes_native:
                 conf.end_msg('OK', 'GREEN')
             else:
