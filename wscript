@@ -173,7 +173,9 @@ def configure(conf):
             conf.check_python_module('numpy')
             conf.check_pybind11(required=True)
             if conf.env.CXX_NAME in ["gcc", "g++"]:
-                py_flags = ' -fPIC' # we need -fPIC in some Linux/gcc combinations
+                # we need -fPIC in some Linux/gcc combinations
+                # also -undefined dynamic_lookup to work with Anaconda in macOS
+                py_flags = ' -fPIC -undefined dynamic_lookup'
 
 
         conf.env.INCLUDES_LIMBO = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + "/src"
