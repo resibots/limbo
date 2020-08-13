@@ -91,6 +91,7 @@ def options(opt):
         opt.add_option('--cpp14', action='store_true', default=False, help='force c++-14 compilation [--cpp14]', dest='cpp14')
         opt.add_option('--no-native', action='store_true', default=False, help='disable -march=native, which can cause some troubles [--no-native]', dest='no_native')
         opt.add_option('--openmp', action='store_true', default=False, help='enable OpenMP (if found)', dest='openmp')
+        opt.add_option('--nowarnings', action='store_true', default=False, help='disable all warnings (used by the CI)', dest='nowarnings')
 
 
         try:
@@ -141,7 +142,7 @@ def configure(conf):
         conf.env.LIBRARIES = 'BOOST EIGEN TBB LIBCMAES NLOPT'
         if conf.options.openmp:
             conf.env.LIBRARIES = conf.env.LIBRARIES + ' OMP'
-        
+
         # compiler
         is_cpp14 = conf.options.cpp14
         if is_cpp14:
@@ -167,7 +168,7 @@ def configure(conf):
 
         # is libcmaes compiled with -march=native (avx instructions)?
         cmaes_native = True
-        if conf.env.DEFINES_LIBCMAES: # if we have CMA-ES activated & found 
+        if conf.env.DEFINES_LIBCMAES: # if we have CMA-ES activated & found
             conf.start_msg('Checking for libcmaes AVX support (-march=native)')
             cmaes_native = conf.check_avx('libcmaes', 'cmaes')
             if cmaes_native:
@@ -185,6 +186,9 @@ def configure(conf):
 
         all_flags = common_flags + opt_flags
         conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + all_flags.split(' ')
+
+        if conf.options.nowarnings:
+            conf.env['CXXFLAGS'] = conf.env['CXXFLAGS'] + ['-w']
         Logs.pprint('NORMAL', 'CXXFLAGS: %s' % (conf.env['CXXFLAGS'] + conf.env['CXXFLAGS_OMP']))
 
         if conf.options.exp:

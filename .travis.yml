@@ -76,5 +76,5 @@ install:
 
 # Change this to your needs
 script:
-  - if [ "$SFERES" = "OFF" ]; then $PYTHON ./waf configure $LAPACKE ; else $PYTHON ./waf configure --sferes=$CI_HOME/sferes2 ; fi
+  - if [ "$SFERES" = "OFF" ]; then $PYTHON ./waf configure --nowarnings $LAPACKE ; else $PYTHON ./waf configure --sferes=$CI_HOME/sferes2 --nowarnings ; fi
   - if [ "$EXPERIMENTAL" = "OFF" ]; then $PYTHON ./waf --tests --alltests -v ; else $PYTHON ./waf --experimental ; fi
