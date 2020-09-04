@@ -406,7 +406,7 @@ namespace limbo {
 
                         Eigen::VectorXd sigma = log_sigma.array().exp();
 
-                        Eigen::VectorXd diff = mu - _obs_mean.row(i);
+                        Eigen::VectorXd diff = mu - _obs_mean.row(i).transpose();
                         Eigen::VectorXd diff_sq = diff.array().square();
                         Eigen::VectorXd inv_sigma = 1. / (sigma.array() + 1e-20);
                         double logdet_sigma = log_sigma.sum();
