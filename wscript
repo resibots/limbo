@@ -224,6 +224,10 @@ def build(bld):
         benchmarks.compile_regression_benchmarks(bld, bld.options.regression_benchmarks)
     bld.add_post_fun(limbo.summary)
 
+    #  installation (waf install)
+    start_dir = bld.path.find_dir('src/limbo')
+    bld.install_files('${PREFIX}/include/limbo/', start_dir.ant_glob('**/*.hpp'), cwd=start_dir, relative_trick=True)
+
 def build_extensive_tests(ctx):
     ctx.recurse('src/')
     ctx.recurse('src/tests')
