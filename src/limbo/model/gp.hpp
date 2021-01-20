@@ -423,7 +423,7 @@ namespace limbo {
                         grad.col(j) += k_g.row(i) * _alpha.col(j)(i);
                 }
 
-                return grad;
+                return grad + _mean_function.grad_input(v, *this);
             }
 
             /// return the list of samples

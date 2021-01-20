@@ -73,6 +73,12 @@ namespace limbo {
                 // This should never be called!
                 assert(false);
             }
+
+            template <typename GP>
+            Eigen::MatrixXd grad_input(const Eigen::VectorXd& x, const GP& gp) const
+            {
+                return Eigen::MatrixXd::Zero(x.size(), gp.dim_out());
+            }
         };
     } // namespace mean
 } // namespace limbo

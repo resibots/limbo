@@ -119,6 +119,17 @@ namespace limbo {
                 return _tr * m_1;
             }
 
+            template <typename GP>
+            Eigen::MatrixXd grad_input(const Eigen::VectorXd& x, const GP& gp) const
+            {
+                int d = gp.dim_out();
+                Eigen::MatrixXd grad = Eigen::MatrixXd::Zero(x.size(), d);
+                Eigen::MatrixXd mg = _mean_function.grad_input(x, gp); // Dxd
+                // _tr: dx(d+1)
+                grad = _tr.block(0, 0, d, d) * mg.transpose();
+                return grad.transpose();
+            }
+
         protected:
             MeanFunction _mean_function;
             Eigen::MatrixXd _tr;

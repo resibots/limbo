@@ -277,7 +277,7 @@ namespace limbo {
                     grad.col(i) = _gp_models[i].gradient(v).col(0); // we assume 1-D base GPs
                 }
 
-                return grad;
+                return grad + _mean_function.grad_input(v, *this);
             }
 
             /// return the list of samples
