@@ -46,6 +46,8 @@
 #ifndef LIMBO_KERNEL_KERNEL_HPP
 #define LIMBO_KERNEL_KERNEL_HPP
 
+#include <vector>
+
 #include <Eigen/Core>
 
 #include <limbo/tools/macros.hpp>
@@ -93,6 +95,11 @@ namespace limbo {
                 }
 
                 return g;
+            }
+
+            Eigen::MatrixXd grad_input(const Eigen::VectorXd& x, const std::vector<Eigen::VectorXd>& X) const
+            {
+                return static_cast<const Kernel*>(this)->gradient_input(x, X);
             }
 
             // Get the hyper parameters size

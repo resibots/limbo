@@ -110,6 +110,17 @@ namespace limbo {
                 return grad;
             }
 
+            Eigen::MatrixXd gradient_input(const Eigen::VectorXd& x, const std::vector<Eigen::VectorXd>& X) const
+            {
+                double l_sq = _l * _l;
+                Eigen::MatrixXd g(X.size(), x.size());
+                for (size_t i = 0; i < X.size(); i++) {
+                    g.row(i) = -1. / l_sq * (x - X[i]) * this->operator()(x, X[i]);
+                }
+
+                return g;
+            }
+
         protected:
             double _sf2, _l;
 
