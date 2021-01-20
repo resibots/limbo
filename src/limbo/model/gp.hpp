@@ -412,14 +412,15 @@ namespace limbo {
 
             const Eigen::MatrixXd& alpha() const { return _alpha; }
 
-            Eigen::VectorXd gradient(const Eigen::VectorXd& v) const
+            Eigen::MatrixXd gradient(const Eigen::VectorXd& v) const
             {
                 Eigen::MatrixXd k_g = _kernel_function.grad_input(v, _samples);
 
-                Eigen::VectorXd grad = Eigen::VectorXd::Zero(v.size());
+                Eigen::MatrixXd grad = Eigen::MatrixXd::Zero(v.size(), _dim_out);
 
                 for (size_t i = 0; i < _samples.size(); i++) {
-                    grad += k_g.row(i) * _alpha(i);
+                    for (int j = 0; j < _dim_out; j++)
+                        grad.col(j) += k_g.row(i) * _alpha.col(j)(i);
                 }
 
                 return grad;

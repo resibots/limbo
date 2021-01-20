@@ -76,11 +76,11 @@ struct Params {
 template <typename GP>
 void check_grad(GP& gp, const Eigen::VectorXd& v, double e = 1e-4)
 {
-    Eigen::VectorXd analytic_result, finite_diff_result;
+    Eigen::MatrixXd analytic_result, finite_diff_result;
 
     analytic_result = gp.gradient(v);
 
-    finite_diff_result = Eigen::VectorXd::Zero(v.size());
+    finite_diff_result = Eigen::MatrixXd::Zero(v.size(), gp.dim_out());
     for (int j = 0; j < v.size(); j++) {
         Eigen::VectorXd test1 = v, test2 = v;
         test1[j] -= e;
@@ -88,7 +88,8 @@ void check_grad(GP& gp, const Eigen::VectorXd& v, double e = 1e-4)
         Eigen::VectorXd mu1, mu2;
         mu1 = gp.mu(test1);
         mu2 = gp.mu(test2);
-        finite_diff_result[j] = (mu2[0] - mu1[0]) / (2.0 * e);
+        for (int i = 0; i < gp.dim_out(); i++)
+            finite_diff_result.col(i)[j] = (mu2[i] - mu1[i]) / (2.0 * e);
     }
 
     // return std::make_tuple((analytic_result - finite_diff_result).norm(), analytic_result, finite_diff_result);
@@ -126,13 +127,14 @@ int main(int argc, char** argv)
     // linearize around 0
     Eigen::VectorXd v0 = tools::make_vector(-0.3);
     Eigen::VectorXd fv0 = gp.mu(v0);
-    Eigen::VectorXd gv0 = gp.gradient(v0);
+    Eigen::VectorXd gv0 = gp.gradient(v0).col(0);
 
     // write the predicted data in a file (e.g. to be plotted)
     std::ofstream ofs("gp.dat");
     for (int i = 0; i < 100; ++i) {
         Eigen::VectorXd v = tools::make_vector(i / 100.0).array() * 4.0 - 2.0;
-        Eigen::VectorXd mu, grad;
+        Eigen::VectorXd mu;
+        Eigen::MatrixXd grad;
         double sigma;
         std::tie(mu, sigma) = gp.query(v);
         grad = gp.gradient(v);
@@ -143,7 +145,7 @@ int main(int argc, char** argv)
         // an alternative (slower) is to query mu and sigma separately:
         //  double mu = gp.mu(v)[0]; // mu() returns a 1-D vector
         //  double s2 = gp.sigma(v);
-        ofs << v.transpose() << " " << mu[0] << " " << sqrt(sigma) << " " << grad[0] << " " << lin[0] << std::endl;
+        ofs << v.transpose() << " " << mu[0] << " " << sqrt(sigma) << " " << grad(0, 0) << " " << lin[0] << std::endl;
     }
 
     // an alternative is to optimize the hyper-parameters
@@ -158,13 +160,14 @@ int main(int argc, char** argv)
     gp_ard.optimize_hyperparams();
 
     fv0 = gp_ard.mu(v0);
-    gv0 = gp_ard.gradient(v0);
+    gv0 = gp_ard.gradient(v0).col(0);
 
     // write the predicted data in a file (e.g. to be plotted)
     std::ofstream ofs_ard("gp_ard.dat");
     for (int i = 0; i < 100; ++i) {
         Eigen::VectorXd v = tools::make_vector(i / 100.0).array() * 4.0 - 2.0;
-        Eigen::VectorXd mu, grad;
+        Eigen::VectorXd mu;
+        Eigen::MatrixXd grad;
         double sigma;
         std::tie(mu, sigma) = gp_ard.query(v);
         grad = gp_ard.gradient(v);
@@ -173,7 +176,7 @@ int main(int argc, char** argv)
 
         Eigen::VectorXd lin = fv0.array() + gv0.array() * (v - v0).array();
 
-        ofs_ard << v.transpose() << " " << mu[0] << " " << sqrt(sigma) << " " << grad[0] << " " << lin[0] << std::endl;
+        ofs_ard << v.transpose() << " " << mu[0] << " " << sqrt(sigma) << " " << grad(0, 0) << " " << lin[0] << std::endl;
     }
 
     // write the data to a file (useful for plotting)
