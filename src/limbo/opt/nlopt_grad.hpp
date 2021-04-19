@@ -49,14 +49,7 @@
 #ifndef USE_NLOPT
 #warning No NLOpt
 #else
-#include <Eigen/Core>
-
-#include <vector>
-
-#include <nlopt.hpp>
-
-#include <limbo/opt/optimizer.hpp>
-#include <limbo/tools/macros.hpp>
+#include <limbo/opt/nlopt_base.hpp>
 
 namespace limbo {
     namespace defaults {
@@ -79,7 +72,7 @@ namespace limbo {
             /// IGNORED if negative
             BO_PARAM(double, xrel_tolerance, -1);
         };
-    }
+    } // namespace defaults
     namespace opt {
         /**
         @ingroup opt
@@ -104,6 +97,7 @@ namespace limbo {
          - LD_AUGLAG_EQ
          - LD_SLSQP
          - LD_CCSAQ
+         - GN_AGS
 
          Parameters :
          - int iterations
@@ -111,14 +105,12 @@ namespace limbo {
          - double xrel_tolerance
         */
         template <typename Params, nlopt::algorithm Algorithm = nlopt::LD_LBFGS>
-        struct NLOptGrad {
+        struct NLOptGrad : public NLOptBase<Params, Algorithm> {
         public:
-            template <typename F>
-            Eigen::VectorXd operator()(const F& f, const Eigen::VectorXd& init, bool bounded) const
+            void initialize(int dim) override
             {
                 // Assert that the algorithm is gradient-based
                 // TO-DO: Add support for MLSL (Multi-Level Single-Linkage)
-                // TO-DO: Add better support for AUGLAG and AUGLAG_EQ
                 // clang-format off
                 static_assert(Algorithm == nlopt::LD_MMA || Algorithm == nlopt::LD_SLSQP ||
                     Algorithm == nlopt::LD_LBFGS || Algorithm == nlopt::LD_TNEWTON_PRECOND_RESTART ||
@@ -129,65 +121,16 @@ namespace limbo {
                     Algorithm == nlopt::LD_AUGLAG || Algorithm == nlopt::LD_AUGLAG_EQ ||
                     Algorithm == nlopt::LD_CCSAQ, "NLOptGrad accepts gradient-based nlopt algorithms only");
                 // clang-format on
-                int dim = init.size();
-                nlopt::opt opt(Algorithm, dim);
 
-                opt.set_max_objective(nlopt_func<F>, (void*)&f);
+                NLOptBase<Params, Algorithm>::initialize(dim);
 
-                std::vector<double> x(dim);
-                Eigen::VectorXd::Map(&x[0], dim) = init;
-
-                opt.set_maxeval(Params::opt_nloptgrad::iterations());
-                opt.set_ftol_rel(Params::opt_nloptgrad::fun_tolerance());
-                opt.set_xtol_rel(Params::opt_nloptgrad::xrel_tolerance());
-
-                if (bounded) {
-                    opt.set_lower_bounds(std::vector<double>(dim, 0));
-                    opt.set_upper_bounds(std::vector<double>(dim, 1));
-                }
-
-                double max;
-
-                try {
-                    opt.optimize(x, max);
-                }
-                catch (nlopt::roundoff_limited& e) {
-                    // In theory it's ok to ignore this error
-                    std::cerr << "[NLOptGrad]: " << e.what() << std::endl;
-                }
-                catch (std::invalid_argument& e) {
-                    // In theory it's ok to ignore this error
-                    std::cerr << "[NLOptGrad]: " << e.what() << std::endl;
-                }
-                catch (std::runtime_error& e) {
-                    // In theory it's ok to ignore this error
-                    std::cerr << "[NLOptGrad]: " << e.what() << std::endl;
-                }
-
-                return Eigen::VectorXd::Map(x.data(), x.size());
-            }
-
-        protected:
-            template <typename F>
-            static double nlopt_func(const std::vector<double>& x, std::vector<double>& grad, void* my_func_data)
-            {
-                F* f = (F*)(my_func_data);
-                Eigen::VectorXd params = Eigen::VectorXd::Map(x.data(), x.size());
-                double v;
-                if (!grad.empty()) {
-                    auto r = eval_grad(*f, params);
-                    v = opt::fun(r);
-                    Eigen::VectorXd g = opt::grad(r);
-                    Eigen::VectorXd::Map(&grad[0], g.size()) = g;
-                }
-                else {
-                    v = eval(*f, params);
-                }
-                return v;
+                this->_opt.set_maxeval(Params::opt_nloptgrad::iterations());
+                this->_opt.set_ftol_rel(Params::opt_nloptgrad::fun_tolerance());
+                this->_opt.set_xtol_rel(Params::opt_nloptgrad::xrel_tolerance());
             }
         };
-    }
-}
+    } // namespace opt
+} // namespace limbo
 
 #endif
 #endif

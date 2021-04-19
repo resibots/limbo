@@ -70,6 +70,17 @@ namespace limbo {
             /// maximum number of calls to the function to be optimized
             BO_PARAM(int, max_fun_evals, -1);
             /// @ingroup opt_defaults
+            /// maximum number of iterations to be optimized
+            BO_PARAM(int, max_iters, -1);
+            /// @ingroup opt_defaults
+            /// enable/disable automatic max iterations
+            BO_PARAM(bool, auto_max_iters, true);
+            /// @ingroup opt_defaults
+            /// enable/disable stopping if getting the same function value repeatedly
+            BO_PARAM(bool, equal_fun_evals, true);
+            /// @ingroup opt_defaults
+            BO_PARAM(bool, stagnation, true);
+            /// @ingroup opt_defaults
             /// threshold based on the difference in value of a fixed number
             /// of trials: if bigger than 0, it enables the tolerance criteria
             /// for stopping based in the history of rewards.
@@ -139,6 +150,10 @@ namespace limbo {
         ///   - int elitism
         ///   - int restarts
         ///   - int max_fun_evals
+        ///   - int max_iters
+        ///   - bool auto_max_iters
+        ///   - bool equal_fun_evals
+        ///   - bool stagnation
         ///   - double fun_tolerance
         ///   - double xrel_tolerance
         ///   - double fun_target
@@ -226,7 +241,8 @@ namespace limbo {
                 GenoPheno<pwqBoundStrategy> gp(lbounds, ubounds, dim);
                 // initial step-size, i.e. estimated initial parameter error.
                 double sigma = 0.5 * std::abs(Params::opt_cmaes::ubound() - Params::opt_cmaes::lbound());
-                std::vector<double> x0(init.data(), init.data() + init.size());
+                Eigen::VectorXd init_geno = gp.geno(init);
+                std::vector<double> x0(init_geno.data(), init_geno.data() + init_geno.size());
                 // -1 for automatically decided lambda, 0 is for random seeding of the internal generator.
                 CMAParameters<GenoPheno<pwqBoundStrategy>> cmaparams(dim, &x0.front(), sigma, Params::opt_cmaes::lambda(), 0, gp);
                 _set_common_params(cmaparams, dim);
@@ -266,17 +282,24 @@ namespace limbo {
                     ? (900.0 * (dim + 3.0) * (dim + 3.0))
                     : Params::opt_cmaes::max_fun_evals();
                 cmaparams.set_max_fevals(max_evals);
-                // max iteration is here only for security
-                cmaparams.set_max_iter(100000);
+                cmaparams.set_stopping_criteria(MAXFEVALS, true);
+
+                // if no max iters provided, we put a safety limit (to not take forever)
+                size_t max_iters = Params::opt_cmaes::max_iters() < 0
+                    ? 1000000
+                    : Params::opt_cmaes::max_iters();
+                cmaparams.set_max_iter(max_iters);
+                cmaparams.set_stopping_criteria(MAXITER, true);
+
+                // enable/disable automatic max iterations
+                cmaparams.set_stopping_criteria(AUTOMAXITER, Params::opt_cmaes::auto_max_iters());
 
                 if (Params::opt_cmaes::fun_tolerance() < 0) {
-                    // we do not know if what is the actual maximum / minimum of the function
-                    // therefore we deactivate this stopping criterion
-                    cmaparams.set_stopping_criteria(FTARGET, false);
+                    cmaparams.set_stopping_criteria(TOLHISTFUN, false);
                 }
                 else {
                     // the FTARGET criteria also allows us to enable ftolerance
-                    cmaparams.set_stopping_criteria(FTARGET, true);
+                    cmaparams.set_stopping_criteria(TOLHISTFUN, true);
                     cmaparams.set_ftolerance(Params::opt_cmaes::fun_tolerance());
                 }
 
@@ -285,18 +308,34 @@ namespace limbo {
                     cmaparams.set_stopping_criteria(FTARGET, true);
                     cmaparams.set_ftarget(-Params::opt_cmaes::fun_target());
                 }
+                else {
+                    // we do not know what is the actual maximum / minimum of the function
+                    // therefore we deactivate this stopping criterion
+                    cmaparams.set_stopping_criteria(FTARGET, false);
+                }
 
-                // enable stopping criteria by several equalfunvals and maxfevals
-                cmaparams.set_stopping_criteria(EQUALFUNVALS, true);
-                cmaparams.set_stopping_criteria(MAXFEVALS, true);
+                // enable stopping criteria by several equalfunvals
+                cmaparams.set_stopping_criteria(EQUALFUNVALS, Params::opt_cmaes::equal_fun_evals());
 
                 // enable additional criteria to stop
-                cmaparams.set_stopping_criteria(TOLX, true);
                 // set different tolerance if available
                 if (Params::opt_cmaes::xrel_tolerance() > 0) {
+                    cmaparams.set_stopping_criteria(TOLX, true);
                     cmaparams.set_xtolerance(Params::opt_cmaes::xrel_tolerance());
                 }
+                else {
+                    cmaparams.set_stopping_criteria(TOLX, false);
+                }
+
+                // enable stopping criteria because of mal-conditions
                 cmaparams.set_stopping_criteria(CONDITIONCOV, true);
+                cmaparams.set_stopping_criteria(TOLUPSIGMA, true);
+
+                // disable stopping criteria for partial success
+                cmaparams.set_stopping_criteria(NOEFFECTAXIS, false);
+                cmaparams.set_stopping_criteria(NOEFFECTCOOR, false);
+
+                cmaparams.set_stopping_criteria(STAGNATION, Params::opt_cmaes::stagnation());
 
                 // enable or disable different parameters
                 cmaparams.set_initial_fvalue(Params::opt_cmaes::fun_compute_initial());

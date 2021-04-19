@@ -10,8 +10,8 @@ cd libcmaes
 git checkout fix_flags_native
 mkdir build
 cd build
-cmake -DUSE_TBB=ON -DUSE_OPENMP=OFF ..
-make
+cmake -E env CXXFLAGS="-w" cmake -DUSE_TBB=ON -DUSE_OPENMP=OFF -DBUILD_PYTHON=OFF -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF -DLINK_PYTHON=OFF ..
+make CXXFLAGS="-w"
 sudo make install
 sudo ldconfig
 cd $CI_HOME
