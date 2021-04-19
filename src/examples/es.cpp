@@ -48,16 +48,15 @@
 
 #include <limbo/opt/es.hpp>
 
-// this short tutorial shows how to use the optimization api of limbo (opt::)
 using namespace limbo;
 
 struct ParamsES {
     struct opt_es : public defaults::opt_es {
         /// size of population
-        BO_PARAM(int, population, 50);
+        BO_PARAM(int, population, 2);
 
         /// sigma_sq - exploration parameter
-        BO_PARAM(double, sigma_sq, 0.01 * 0.01);
+        BO_PARAM(double, sigma_sq, 0.1 * 0.1);
 
         /// antithetic - turn on/off antithetic sampling
         BO_PARAM(bool, antithetic, true);
@@ -69,7 +68,55 @@ struct ParamsES {
         BO_PARAM(bool, normalize_fitness, false);
 
         /// beta - gradient estimate multiplier
-        BO_PARAM(double, beta, 2.);
+        BO_PARAM(double, beta, 1.);
+
+        /// alpha - approximate gradient information, [0,1]
+        /// if set to 1: only ES
+        /// if set to 0: only gradient
+        BO_PARAM(double, alpha, 0.5);
+
+        /// k - number of previous approx. gradients
+        /// for orthonomal basis
+        BO_PARAM(int, k, 3);
+    };
+
+    struct opt_adam {
+        /// number of max iterations
+        BO_PARAM(int, iterations, 10000);
+
+        /// alpha - learning rate
+        BO_PARAM(double, alpha, 0.01);
+
+        /// β1
+        BO_PARAM(double, b1, 0.9);
+
+        /// β2
+        BO_PARAM(double, b2, 0.999);
+
+        /// norm epsilon for stopping
+        BO_PARAM(double, eps_stop, 0.0);
+    };
+};
+
+struct ParamsSimpleES {
+    struct opt_es : public defaults::opt_es {
+        /// size of population
+        BO_PARAM(int, population, 2);
+
+        /// sigma_sq - exploration parameter
+        BO_PARAM(double, sigma_sq, 0.1 * 0.1);
+
+        /// antithetic - turn on/off antithetic sampling
+        BO_PARAM(bool, antithetic, true);
+
+        /// rank_fitness - use ranking as fitness instead of true fitness
+        BO_PARAM(bool, rank_fitness, false);
+
+        /// normalize_fitness - normalize fitness (i.e., zero-mean, unit-variance)
+        BO_PARAM(bool, normalize_fitness, false);
+
+        /// beta - gradient estimate multiplier
+        BO_PARAM(double, beta, 1.);
 
         /// alpha - approximate gradient information, [0,1]
         /// if set to 1: only ES
@@ -78,15 +125,17 @@ struct ParamsES {
 
         /// k - number of previous approx. gradients
         /// for orthonomal basis
-        BO_PARAM(int, k, 2);
+        BO_PARAM(int, k, 1);
     };
+};
 
+struct ParamsSGD {
     struct opt_adam {
         /// number of max iterations
-        BO_PARAM(int, iterations, 2000);
+        BO_PARAM(int, iterations, 10000);
 
         /// alpha - learning rate
-        BO_PARAM(double, alpha, 0.01);
+        BO_PARAM(double, alpha, 1e-4);
 
         /// β1
         BO_PARAM(double, b1, 0.9);
@@ -127,19 +176,25 @@ opt::eval_t my_function(const Eigen::VectorXd& params, bool eval_grad = false)
 
 int main(int argc, char** argv)
 {
+    size_t D = 100;
     // generate random bias
-    global::bias = Eigen::VectorXd::Zero(1000);
+    global::bias = Eigen::VectorXd::Zero(D);
     for (int i = 0; i < global::bias.size(); i++)
         global::bias(i) = global::gaussian(global::gen);
     global::bias.normalize();
 
-    opt::Adam<ParamsES> adam;
-    Eigen::VectorXd res_adam = adam(my_function, tools::random_vector(1000).array() * 2. - 1., false);
+    opt::Adam<ParamsSGD> adam;
+    Eigen::VectorXd res_adam = adam(my_function, tools::random_vector(D).array() * 2. - 1., false);
     std::cout << "Result with Adam:\t" //<< res_lbfgs.transpose()
               << " -> " << my_function(res_adam).first << std::endl;
 
+    opt::ES<ParamsSimpleES, opt::Adam<ParamsES>> es_simple;
+    Eigen::VectorXd res_simple_es = es_simple(my_function, tools::random_vector(D).array() * 2. - 1., false);
+    std::cout << "Result with Simple ES:\t" // << res_es.transpose()
+              << " -> " << my_function(res_simple_es).first << std::endl;
+
     opt::ES<ParamsES, opt::Adam<ParamsES>> es;
-    Eigen::VectorXd res_es = es(my_function, tools::random_vector(1000).array() * 2. - 1., false);
+    Eigen::VectorXd res_es = es(my_function, tools::random_vector(D).array() * 2. - 1., false);
     std::cout << "Result with ES:\t" // << res_es.transpose()
               << " -> " << my_function(res_es).first << std::endl;
 

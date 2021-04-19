@@ -49,6 +49,7 @@
 #include <algorithm>
 
 #include <Eigen/Core>
+#include <Eigen/Dense>
 
 #include <limbo/opt/optimizer.hpp>
 #include <limbo/tools/macros.hpp>
@@ -130,6 +131,9 @@ namespace limbo {
                 bool normalize_fitness = Params::opt_es::normalize_fitness();
                 double beta = Params::opt_es::beta();
                 double alpha = Params::opt_es::alpha();
+                double normalizer = population;
+                if (!antithetic)
+                    normalizer = 2. * population;
                 int K = Params::opt_es::k();
 
                 Eigen::MatrixXd approx_gradient = Eigen::MatrixXd::Zero(param_dim, K);
@@ -154,7 +158,7 @@ namespace limbo {
                         }
 
                         if (previous_grads.cols() == K) {
-                            approx_gradient = _gram_schmidt(previous_grads);
+                            approx_gradient = previous_grads.fullPivHouseholderQr().matrixQ().block(0, 0, param_dim, K);
                         }
                     }
 
@@ -194,7 +198,7 @@ namespace limbo {
                         vals = _normalize(vals);
 
                     // update the parameters
-                    Eigen::VectorXd grad = beta * (epsilons.transpose() * vals).array() / (population * Params::opt_es::sigma_sq());
+                    Eigen::VectorXd grad = beta * (epsilons.transpose() * vals).array() / (normalizer * Params::opt_es::sigma_sq());
                     return std::make_pair(vals.mean(), grad);
                 };
 
@@ -238,30 +242,32 @@ namespace limbo {
                 return result;
             }
 
-            Eigen::MatrixXd _gram_schmidt(const Eigen::MatrixXd& vectors) const
-            {
-                Eigen::MatrixXd v = Eigen::MatrixXd::Zero(vectors.rows(), vectors.cols());
+            /** NOT USED
+                Eigen::MatrixXd _gram_schmidt(const Eigen::MatrixXd& vectors) const
+                {
+                    Eigen::MatrixXd v = Eigen::MatrixXd::Zero(vectors.rows(), vectors.cols());
 
-                v.col(0) = vectors.col(0);
+                    v.col(0) = vectors.col(0);
 
-                for (int i = 1; i < v.cols(); i++) {
-                    v.col(i) = vectors.col(i);
-                    for (int j = 0; j < i; j++) {
-                        v.col(i) -= _proj(vectors.col(i), v.col(j));
+                    for (int i = 1; i < v.cols(); i++) {
+                        v.col(i) = vectors.col(i);
+                        for (int j = 0; j < i; j++) {
+                            v.col(i) -= _proj(vectors.col(i), v.col(j));
+                        }
                     }
+
+                    for (int i = 0; i < v.cols(); i++) {
+                        v.col(i) = v.col(i).normalized();
+                    }
+
+                    return v;
                 }
 
-                for (int i = 0; i < v.cols(); i++) {
-                    v.col(i) = v.col(i).normalized();
+                Eigen::VectorXd _proj(const Eigen::VectorXd& v, const Eigen::VectorXd& u) const
+                {
+                    return u.dot(v) / u.squaredNorm() * u;
                 }
-
-                return v;
-            }
-
-            Eigen::VectorXd _proj(const Eigen::VectorXd& v, const Eigen::VectorXd& u) const
-            {
-                return u.dot(v) / u.squaredNorm() * u;
-            }
+            **/
 
             void _remove_column(Eigen::MatrixXd& matrix, unsigned int colToRemove) const
             {
