@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>limbo</name>
+  <version>2.1.0</version>
+  <description>A lightweight framework for Gaussian processes and Bayesian optimization of black-box functions (C++-11)</description>
+
+  <author>Antoine Cully</author>
+  <author>Jean Baptiste Mouret</author>
+  <author>Konstantinos Chatzilygeroudis</author>
+  <author>Federico Allocati</author>
+
+  <maintainer email="jean-baptiste.mouret@inria.fr">Jean Baptiste Mouret</maintainer>
+  <license>CeCILL-C</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <build_depend>boost</build_depend>
+  <build_depend>eigen</build_depend>
+  <build_depend>tbb</build_depend>
+
+  <export>
+    <!-- Specify that this is not really a Catkin package-->
+    <build_type>cmake</build_type>
+  </export>
+</package>
