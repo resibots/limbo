@@ -148,7 +148,7 @@ def create_exp(name, opt):
         cpp_params['CODE_RES_RETURN'] = '// return a 1-dimensional vector\n        return tools::make_vector(y);'
         cpp_params['CODE_BEST_OBS'] = 'boptimizer.best_observation()(0)'
 
-    for key, value in cpp_params.iteritems():
+    for key, value in cpp_params.items():
         cpp_tpl = cpp_tpl.replace('@' + key, value)
 
     cpp = open('exp/' + name + "/" + name + ".cpp", "w")
