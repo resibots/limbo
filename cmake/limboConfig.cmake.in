@@ -8,21 +8,31 @@ set_and_check(limbo_LIB_DIR "@PACKAGE_LIB_INSTALL_DIR@")
 
 check_required_components(Eigen)
 check_required_components(Boost)
+check_required_components(Tbb)
+check_required_components(NLopt)
 
+# Compiler options
+# add_compile_options(-Wall)
+
+# Dependencies
+# Eigen
 find_package(Eigen3 REQUIRED)
-find_package(Boost REQUIRED)
-# find_package(TBB REQUIRED)
-# find_package(NLopt REQUIRED)
 
-# add_library(_limbo INTERFACE)
-# set_target_properties(_limbo PROPERTIES
-#   INTERFACE_INCLUDE_DIRECTORIES ${limbo_INCLUDE_DIR}
-# )
+# Boost
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost 1.45.0 REQUIRED COMPONENTS system filesystem thread unit_test_framework)
+if(Boost_FOUND)
+  include_directories(${Boost_INCLUDE_DIRS})
+endif()
 
-add_library(_limbo STATIC IMPORTED GLOBAL)
-set_target_properties(_limbo PROPERTIES
-  IMPORTED_LOCATION ${limbo_LIB_DIR}/liblimbo.a
-  INTERFACE_INCLUDE_DIRECTORIES ${limbo_INCLUDE_DIR}
-)
-target_link_libraries(_limbo INTERFACE Eigen Boost)
-add_library(limbo::limbo ALIAS _limbo)
+# TBB
+find_package(TBB REQUIRED)
+
+# # NLOpt
+find_package(NLopt REQUIRED)
+if(NLopt_FOUND)
+  include_directories(${NLOPT_INCLUDE_DIRS})
+  add_definitions(-DUSE_NLOPT)
+endif()
