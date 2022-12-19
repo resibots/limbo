@@ -49,7 +49,11 @@
 
 #include <ctime>
 #include <string>
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <unistd.h>
+#endif
 
 namespace limbo {
     namespace tools {
@@ -69,7 +73,12 @@ namespace limbo {
         inline std::string hostname()
         {
             char hostname[50];
+#ifdef _WIN32
+            DWORD buffCharCount = 50;
+            int res = GetComputerNameA(hostname, &buffCharCount);
+#else
             int res = gethostname(hostname, 50);
+#endif
             assert(res == 0);
             res = 0; // avoid a warning in opt mode
             return std::string(hostname);
