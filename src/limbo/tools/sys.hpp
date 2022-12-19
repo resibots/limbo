@@ -75,12 +75,14 @@ namespace limbo {
             char hostname[50];
 #ifdef _WIN32
             DWORD buffCharCount = 50;
-            int res = GetComputerNameA(hostname, &buffCharCount);
+            bool ok = GetComputerNameA(hostname, &buffCharCount);
+            assert(ok);
 #else
             int res = gethostname(hostname, 50);
-#endif
             assert(res == 0);
             res = 0; // avoid a warning in opt mode
+#endif
+           
             return std::string(hostname);
         }
 
