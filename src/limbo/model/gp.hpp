@@ -46,10 +46,6 @@
 #ifndef LIMBO_MODEL_GP_HPP
 #define LIMBO_MODEL_GP_HPP
 
-#ifdef _WIN32
-#include <corecrt_math_defines.h> // This brings in the M_PI define which is not in the C or C++ standard.
-#endif
-
 #include <cassert>
 #include <iostream>
 #include <limits>

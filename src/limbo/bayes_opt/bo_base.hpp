@@ -63,6 +63,7 @@
 #include <Eigen/Core>
 
 // we need everything to have the defaults
+#define _USE_MATH_DEFINES // This makes sure to bring in the M_PI define which is not in the C or C++ standard and is not defined by default on Windows.
 #include <limbo/acqui/ucb.hpp>
 #include <limbo/init/random_sampling.hpp>
 #include <limbo/kernel/exp.hpp>
