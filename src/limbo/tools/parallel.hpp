@@ -58,7 +58,9 @@
 #include <tbb/parallel_for_each.h>
 #include <tbb/parallel_reduce.h>
 #include <tbb/parallel_sort.h>
+#if TBB_INTERFACE_VERSION_MAJOR <= 11
 #include <tbb/task_scheduler_init.h>
+#endif
 #endif
 
 ///@defgroup par_tools
@@ -106,7 +108,7 @@ namespace limbo {
 
 #endif
 
-#ifdef USE_TBB
+#if defined(USE_TBB) && TBB_INTERFACE_VERSION_MAJOR <= 11
             inline void init()
             {
                 static tbb::task_scheduler_init init;
