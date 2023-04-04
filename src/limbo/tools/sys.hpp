@@ -51,6 +51,10 @@
 #include <string>
 #include <unistd.h>
 
+#ifdef __MINGW32__
+#include <winsock2.h>
+#endif
+
 namespace limbo {
     namespace tools {
         /// @ingroup tools
