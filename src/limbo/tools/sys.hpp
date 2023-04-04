@@ -51,8 +51,10 @@
 #include <string>
 #include <unistd.h>
 
-#ifdef __MINGW32__
+#if defined(__MINGW32__) || defined(_MSC_VER)
 #include <winsock2.h>
+#else
+#include <unistd.h>
 #endif
 
 namespace limbo {
