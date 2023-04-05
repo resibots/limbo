@@ -49,7 +49,6 @@
 
 #include <ctime>
 #include <string>
-#include <unistd.h>
 
 #if defined(__MINGW32__) || defined(_MSC_VER)
 #include <winsock2.h>
