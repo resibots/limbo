@@ -8,8 +8,6 @@ set_and_check(limbo_LIB_DIR "@PACKAGE_LIB_INSTALL_DIR@")
 
 check_required_components(Eigen)
 check_required_components(Boost)
-check_required_components(Tbb)
-check_required_components(NLopt)
 
 # Compiler options
 # add_compile_options(-Wall)
@@ -28,10 +26,14 @@ if(Boost_FOUND)
 endif()
 
 # TBB
-find_package(TBB REQUIRED)
+find_package(TBB)
+if(TBB_FOUND)
+  include_directories(${TBB_INCLUDE_DIRS})
+  add_definitions(-DUSE_TBB)
+endif()
 
 # # NLOpt
-find_package(NLopt REQUIRED)
+find_package(NLopt)
 if(NLopt_FOUND)
   include_directories(${NLOPT_INCLUDE_DIRS})
   add_definitions(-DUSE_NLOPT)
