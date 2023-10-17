@@ -58,7 +58,14 @@
 #include <tbb/parallel_for_each.h>
 #include <tbb/parallel_reduce.h>
 #include <tbb/parallel_sort.h>
+
+#ifndef USE_TBB_ONEAPI
 #include <tbb/task_scheduler_init.h>
+#else
+#include <oneapi/tbb/global_control.h>
+using namespace oneapi;
+#endif
+
 #endif
 
 ///@defgroup par_tools
@@ -107,14 +114,21 @@ namespace limbo {
 #endif
 
 #ifdef USE_TBB
-            inline void init()
+            inline void init(int threads = -1)
             {
-                static tbb::task_scheduler_init init;
+#ifndef USE_TBB_ONEAPI
+            static tbb::task_scheduler_init init(threads);
+#else
+            if (threads < 0)
+                threads = tbb::info::default_concurrency();
+            static tbb::global_control global_limit(tbb::global_control::max_allowed_parallelism, threads);
+
+#endif
             }
 #else
             /// @ingroup par_tools
             /// init TBB (if activated) for multi-core computing
-            inline void init()
+            inline void init(int threads = -1)
             {
             }
 #endif
