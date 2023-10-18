@@ -1,0 +1,40 @@
+set(limbo_VERSION 0.0.0)
+
+@PACKAGE_INIT@
+
+set_and_check(limbo_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
+set_and_check(limbo_INCLUDE_DIRS "@PACKAGE_INCLUDE_INSTALL_DIR@")
+set_and_check(limbo_LIB_DIR "@PACKAGE_LIB_INSTALL_DIR@")
+
+check_required_components(Eigen)
+check_required_components(Boost)
+
+# Compiler options
+# add_compile_options(-Wall)
+
+# Dependencies
+# Eigen
+find_package(Eigen3 REQUIRED)
+
+# Boost
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost 1.45.0 REQUIRED COMPONENTS system filesystem thread unit_test_framework)
+if(Boost_FOUND)
+  include_directories(${Boost_INCLUDE_DIRS})
+endif()
+
+# TBB
+find_package(TBB)
+if(TBB_FOUND)
+  include_directories(${TBB_INCLUDE_DIRS})
+  add_definitions(-DUSE_TBB)
+endif()
+
+# # NLOpt
+find_package(NLopt)
+if(NLopt_FOUND)
+  include_directories(${NLOPT_INCLUDE_DIRS})
+  add_definitions(-DUSE_NLOPT)
+endif()

@@ -72,6 +72,7 @@ namespace limbo {
             {
                 // This should never be called!
                 assert(false);
+                return Eigen::VectorXd();
             }
         };
     } // namespace mean
