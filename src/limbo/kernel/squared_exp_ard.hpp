@@ -48,6 +48,8 @@
 
 #include <limbo/kernel/kernel.hpp>
 
+#include <Eigen/Cholesky>
+
 namespace limbo {
     namespace defaults {
         struct kernel_squared_exp_ard {
@@ -133,6 +135,34 @@ namespace limbo {
                     grad(grad.size() - 1) = 2 * k;
                     return grad;
                 }
+            }
+
+            Eigen::MatrixXd gradient_input(const Eigen::VectorXd& x, const std::vector<Eigen::VectorXd>& X) const
+            {
+                Eigen::MatrixXd L_minus_one;
+                if (Params::kernel_squared_exp_ard::k() > 0) {
+                    Eigen::MatrixXd K = (_A * _A.transpose());
+                    K.diagonal() += (Eigen::MatrixXd)(_ell.array().inverse().square());
+
+                    Eigen::MatrixXd matrixL = Eigen::LLT<Eigen::MatrixXd>(K).matrixL();
+
+                    // inverse using Cholesky
+                    L_minus_one = Eigen::MatrixXd::Identity(K.rows(), K.cols());
+
+                    matrixL.template triangularView<Eigen::Lower>().solveInPlace(L_minus_one);
+                    matrixL.template triangularView<Eigen::Lower>().transpose().solveInPlace(L_minus_one);
+                }
+                else {
+                    L_minus_one = Eigen::MatrixXd::Zero(x.size(), x.size());
+                    L_minus_one.diagonal() = (Eigen::MatrixXd)(_ell.array().inverse().square());
+                }
+
+                Eigen::MatrixXd g(X.size(), x.size());
+                for (size_t i = 0; i < X.size(); i++) {
+                    g.row(i) = -L_minus_one * (x - X[i]) * this->operator()(x, X[i]);
+                }
+
+                return g;
             }
 
             double kernel(const Eigen::VectorXd& x1, const Eigen::VectorXd& x2) const

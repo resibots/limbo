@@ -265,6 +265,21 @@ namespace limbo {
                     });
             }
 
+            Eigen::MatrixXd gradient(const Eigen::VectorXd& v) const
+            {
+                // if there are no GPs, there's nothing to recompute
+                if (_gp_models.size() == 0)
+                    return Eigen::MatrixXd();
+
+                Eigen::MatrixXd grad(_dim_in, _dim_out);
+
+                for (int i = 0; i < _dim_out; i++) {
+                    grad.col(i) = _gp_models[i].gradient(v).col(0); // we assume 1-D base GPs
+                }
+
+                return grad + _mean_function.grad_input(v, *this);
+            }
+
             /// return the list of samples
             const std::vector<Eigen::VectorXd>& samples() const
             {

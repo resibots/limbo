@@ -91,6 +91,29 @@ std::tuple<double, Eigen::VectorXd, Eigen::VectorXd> check_grad(const F& f, cons
     return std::make_tuple((analytic_result - finite_diff_result).norm(), analytic_result, finite_diff_result);
 }
 
+// Check GP gradient with finite diffences
+template <typename GP>
+std::tuple<double, Eigen::MatrixXd, Eigen::MatrixXd> check_gp_grad(GP& gp, const Eigen::VectorXd& v, double e = 1e-3)
+{
+    Eigen::MatrixXd analytic_result, finite_diff_result;
+
+    analytic_result = gp.gradient(v);
+
+    finite_diff_result = Eigen::MatrixXd::Zero(v.size(), gp.dim_out());
+    for (int j = 0; j < v.size(); j++) {
+        Eigen::VectorXd test1 = v, test2 = v;
+        test1[j] -= e;
+        test2[j] += e;
+        Eigen::VectorXd mu1, mu2;
+        mu1 = gp.mu(test1);
+        mu2 = gp.mu(test2);
+        for (int i = 0; i < gp.dim_out(); i++)
+            finite_diff_result.col(i)[j] = (mu2[i] - mu1[i]) / (2.0 * e);
+    }
+
+    return std::make_tuple((analytic_result - finite_diff_result).norm(), analytic_result, finite_diff_result);
+}
+
 Eigen::VectorXd make_v1(double x)
 {
     return tools::make_vector(x);
@@ -108,6 +131,8 @@ struct Params {
     };
 
     struct kernel_squared_exp_ard : public defaults::kernel_squared_exp_ard {
+    };
+    struct kernel_exp : public defaults::kernel_exp {
     };
 
     struct kernel_maternfivehalves {
@@ -692,6 +717,210 @@ BOOST_AUTO_TEST_CASE(test_gp_auto)
     std::tie(mu, sigma) = gp.query(make_v1(3));
     BOOST_CHECK(std::abs((mu(0) - 5)) < 1);
     BOOST_CHECK(sigma <= 2. * (gp.kernel_function().noise() + 1e-8));
+}
+
+BOOST_AUTO_TEST_CASE(test_gp_gradient)
+{
+    // 1D-input, 1D-output (exp)
+    {
+        using KF_t = kernel::Exp<Params>;
+        using Mean_t = mean::Constant<Params>;
+        using GP_t = model::GP<Params, KF_t, Mean_t>;
+
+        GP_t gp;
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            samples.push_back(make_v1(val));
+            observations.push_back(make_v1(val * val));
+        }
+
+        gp.compute(samples, observations);
+
+        size_t failures = 0;
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            double diff;
+            std::tie(diff, std::ignore, std::ignore) = check_gp_grad(gp, make_v1(val));
+            if (diff > 1e-5) {
+                // std::cout << "diff: " << diff << std::endl;
+                failures++;
+            }
+        }
+
+        BOOST_CHECK(double(failures) / 100. < 0.1);
+    }
+
+    // 1D-input, 1D-output
+    {
+        using KF_t = kernel::SquaredExpARD<Params>;
+        using Mean_t = mean::Constant<Params>;
+        using GP_t = model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>>;
+
+        GP_t gp;
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            samples.push_back(make_v1(val));
+            observations.push_back(make_v1(val * val));
+        }
+
+        gp.compute(samples, observations, false);
+        gp.optimize_hyperparams();
+
+        size_t failures = 0;
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            double diff;
+            std::tie(diff, std::ignore, std::ignore) = check_gp_grad(gp, make_v1(val));
+            if (diff > 1e-5) {
+                // std::cout << "diff: " << diff << std::endl;
+                failures++;
+            }
+        }
+
+        BOOST_CHECK(double(failures) / 100. < 0.1);
+    }
+
+    // 2D-input, 1D-output
+    {
+        using KF_t = kernel::SquaredExpARD<Params>;
+        using Mean_t = mean::Constant<Params>;
+        using GP_t = model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>>;
+
+        GP_t gp;
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            double val2 = (100 - i) / 100. * 10. - 5.;
+            samples.push_back(make_v2(val, val2));
+            observations.push_back(make_v1(val * val2));
+        }
+
+        gp.compute(samples, observations, false);
+        gp.optimize_hyperparams();
+
+        size_t failures = 0;
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            double val2 = (100 - i) / 100. * 10. - 5.;
+            double diff;
+            std::tie(diff, std::ignore, std::ignore) = check_gp_grad(gp, make_v2(val, val2));
+            if (diff > 1e-5) {
+                // std::cout << "diff: " << diff << std::endl;
+                failures++;
+            }
+        }
+
+        BOOST_CHECK(double(failures) / 100. < 0.1);
+    }
+
+    // 1D-input, 2D-output
+    {
+        using KF_t = kernel::SquaredExpARD<Params>;
+        using Mean_t = mean::Constant<Params>;
+        using GP_t = model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>>;
+
+        GP_t gp;
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            samples.push_back(make_v1(val));
+            observations.push_back(make_v2(val * val, 2. * val));
+        }
+
+        gp.compute(samples, observations, false);
+        gp.optimize_hyperparams();
+
+        size_t failures = 0;
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            double diff;
+            std::tie(diff, std::ignore, std::ignore) = check_gp_grad(gp, make_v1(val));
+            if (diff > 1e-5) {
+                // std::cout << "diff: " << diff << std::endl;
+                failures++;
+            }
+        }
+
+        BOOST_CHECK(double(failures) / 100. < 0.1);
+    }
+
+    // 2D-input, 2D-output
+    {
+        using KF_t = kernel::SquaredExpARD<Params>;
+        using Mean_t = mean::Constant<Params>;
+        using GP_t = model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>>;
+
+        GP_t gp;
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            double val2 = (100 - i) / 100. * 10. - 5.;
+            samples.push_back(make_v2(val, val2));
+            observations.push_back(make_v2(val * val2, val + val2));
+        }
+
+        gp.compute(samples, observations, false);
+        gp.optimize_hyperparams();
+
+        size_t failures = 0;
+        for (size_t i = 0; i < 100; i++) {
+            double val = i / 100. * 10. - 5.;
+            double val2 = (100 - i) / 100. * 10. - 5.;
+            double diff;
+            std::tie(diff, std::ignore, std::ignore) = check_gp_grad(gp, make_v2(val, val2));
+            if (diff > 1e-5) {
+                // std::cout << "diff: " << diff << std::endl;
+                failures++;
+            }
+        }
+
+        BOOST_CHECK(double(failures) / 100. < 0.1);
+    }
+
+    // 10D-input, 2D-output
+    {
+        using KF_t = kernel::SquaredExpARD<Params>;
+        using Mean_t = mean::Constant<Params>;
+        using GP_t = model::GP<Params, KF_t, Mean_t, model::gp::KernelLFOpt<Params>>;
+
+        GP_t gp;
+        std::vector<Eigen::VectorXd> observations;
+        std::vector<Eigen::VectorXd> samples;
+
+        for (size_t i = 0; i < 20; i++) {
+            Eigen::VectorXd v = tools::random_vector(10).array() * 10. - 5.;
+            samples.push_back(v);
+            observations.push_back(make_v2(v.sum(), v.prod()));
+        }
+
+        gp.compute(samples, observations, false);
+        gp.optimize_hyperparams();
+
+        size_t failures = 0;
+        for (size_t i = 0; i < 20; i++) {
+            Eigen::VectorXd v = tools::random_vector(10).array() * 10. - 5.;
+            double diff;
+            std::tie(diff, std::ignore, std::ignore) = check_gp_grad(gp, v, 1e-4);
+            if (diff > 1e-4) {
+                // std::cout << "diff: " << diff << std::endl;
+                failures++;
+            }
+        }
+
+        BOOST_CHECK(double(failures) / 20. < 0.2);
+    }
 }
 
 BOOST_AUTO_TEST_CASE(test_gp_init_variance)

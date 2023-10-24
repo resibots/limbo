@@ -73,6 +73,12 @@ def build(bld):
                       uselib = bld.env.LIBRARIES,
                       use = 'limbo')
     obj = bld.program(features = 'cxx',
+                      source = 'gp_grad.cpp',
+                      includes = '. .. ../../',
+                      target = 'gp_grad',
+                      uselib = bld.env.LIBRARIES,
+                      use = 'limbo')
+    obj = bld.program(features = 'cxx',
                       source = 'opt.cpp',
                       includes = '. .. ../../',
                       target = 'opt',
